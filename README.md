@@ -1,4 +1,4 @@
-# Remote Ideas Student Handoff
+# Hippo project
 
 This repository contains the code needed to run segmentation baselines, build
 datasets, and try the semantic constraint experiments.
