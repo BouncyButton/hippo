@@ -51,20 +51,33 @@ def evaluate(model, val_loader, device, num_classes):
     return soft_score.cpu().item(), hard_score.cpu().item()
 
 
-def build_optimizer_and_scheduler(mode, model, num_epochs, adamw_gamma=0.5, step_size=10):
+def build_optimizer_and_scheduler(
+    mode,
+    model,
+    num_epochs,
+    adamw_gamma=0.5,
+    step_size=10,
+    learning_rate=None,
+    weight_decay=None,
+):
     if mode == "adamw_0.01":
-        optimizer = torch.optim.AdamW(model.parameters(), lr=1e-2, weight_decay=1e-5)
+        optimizer = torch.optim.AdamW(
+            model.parameters(),
+            lr=1e-2 if learning_rate is None else learning_rate,
+            weight_decay=1e-5 if weight_decay is None else weight_decay,
+        )
         scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=step_size, gamma=adamw_gamma)
         return optimizer, scheduler
     if mode == "nnunetv2":
+        learning_rate = 1e-2 if learning_rate is None else learning_rate
         optimizer = torch.optim.SGD(
             model.parameters(),
-            lr=1e-2,
+            lr=learning_rate,
             momentum=0.99,
             nesterov=True,
-            weight_decay=3e-5,
+            weight_decay=3e-5 if weight_decay is None else weight_decay,
         )
-        scheduler = PolyLRScheduler(optimizer, initial_lr=1e-2, max_epochs=num_epochs, exponent=0.9)
+        scheduler = PolyLRScheduler(optimizer, initial_lr=learning_rate, max_epochs=num_epochs, exponent=0.9)
         return optimizer, scheduler
     raise ValueError(f"Unknown optimizer mode: {mode}")
 
@@ -284,6 +297,18 @@ def main():
     parser.add_argument("--num-classes", type=int, default=None, help="Override inferred number of classes")
     parser.add_argument("--step-size", type=int, default=10, help="StepLR step size for adamw_0.01 mode")
     parser.add_argument(
+        "--learning-rate",
+        type=float,
+        default=None,
+        help="Override the optimizer preset learning rate (default: 0.01 for both presets)",
+    )
+    parser.add_argument(
+        "--weight-decay",
+        type=float,
+        default=None,
+        help="Override weight decay (default: 1e-5 for AdamW; 3e-5 for nnunetv2)",
+    )
+    parser.add_argument(
         "--optim-mode",
         default="adamw_0.01",
         choices=["adamw_0.01", "nnunetv2"],
@@ -333,6 +358,8 @@ def main():
     optimizer, scheduler = build_optimizer_and_scheduler(
         args.optim_mode, model, args.epochs, adamw_gamma=args.adamw_gamma,
         step_size=args.step_size if args.optim_mode == "adamw_0.01" else None,
+        learning_rate=args.learning_rate,
+        weight_decay=args.weight_decay,
     )
     wandb_run = None
     if args.wandb:
@@ -347,6 +374,8 @@ def main():
                 "epochs": args.epochs,
                 "batch_size": args.batch_size,
                 "optim_mode": args.optim_mode,
+                "learning_rate": args.learning_rate,
+                "weight_decay": args.weight_decay,
                 "adamw_gamma": args.adamw_gamma,
                 "num_classes": num_classes,
             },

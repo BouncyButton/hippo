@@ -31,6 +31,7 @@ Options:
   --entity NAME                     W&B entity
   --skip-dataset-create             Do not run dataset creation script
   --skip-train                      Do not train (still can evaluate existing artifacts)
+  --skip-upload                     Do not upload model or metadata artifacts to W&B
   --skip-eval                       Skip evaluation/evaluate.py
   --max-cases N                     Optional evaluate.py --max-cases
 
@@ -58,6 +59,7 @@ PROJECT="hippopotamus-project"
 ENTITY="hippopotamus"
 SKIP_DATASET_CREATE="1"
 SKIP_TRAIN="0"
+SKIP_UPLOAD="0"
 SKIP_EVAL="0"
 MAX_CASES=""
 
@@ -79,6 +81,7 @@ while [[ $# -gt 0 ]]; do
     --entity) ENTITY="$2"; shift 2 ;;
     --skip-dataset-create) SKIP_DATASET_CREATE="1"; shift ;;
     --skip-train) SKIP_TRAIN="1"; shift ;;
+    --skip-upload) SKIP_UPLOAD="1"; shift ;;
     --skip-eval) SKIP_EVAL="1"; shift ;;
     --max-cases) MAX_CASES="$2"; shift 2 ;;
     -h|--help) usage; exit 0 ;;
@@ -337,29 +340,33 @@ if [[ "${SKIP_TRAIN}" != "1" ]]; then
     echo "[INFO] Training fold ${fold} with ${TRAINER}"
     nnUNetv2_train "${DATASET_ID}" "${CONFIGURATION}" "${fold}" -tr "${TRAINER}"
 
-    MODEL_PATH="${RESULTS_ROOT}/${DATASET}/${TRAINER}__nnUNetPlans__${CONFIGURATION}/fold_${fold}"
-    echo "[INFO] Uploading fold ${fold} model artifact from ${MODEL_PATH}"
-    SAVE_ARTIFACT_CMD=(
-      python3 "${REPO_ROOT}/baselines/save_nnunet_run.py" \
-      --model-path "${MODEL_PATH}" \
-      --fold "${fold}" \
-      --dataset "${DATASET_CODE}" \
-      --seed "${SEED}"
-    )
-    if [[ "${SPLIT_SCHEME}" == "nested" ]]; then
-      SAVE_ARTIFACT_CMD+=(--outer-fold-idx "${OUTER_FOLD_IDX}")
+    if [[ "${SKIP_UPLOAD}" != "1" ]]; then
+      MODEL_PATH="${RESULTS_ROOT}/${DATASET}/${TRAINER}__nnUNetPlans__${CONFIGURATION}/fold_${fold}"
+      echo "[INFO] Uploading fold ${fold} model artifact from ${MODEL_PATH}"
+      SAVE_ARTIFACT_CMD=(
+        python3 "${REPO_ROOT}/baselines/save_nnunet_run.py" \
+        --model-path "${MODEL_PATH}" \
+        --fold "${fold}" \
+        --dataset "${DATASET_CODE}" \
+        --seed "${SEED}"
+      )
+      if [[ "${SPLIT_SCHEME}" == "nested" ]]; then
+        SAVE_ARTIFACT_CMD+=(--outer-fold-idx "${OUTER_FOLD_IDX}")
+      fi
+      "${SAVE_ARTIFACT_CMD[@]}"
     fi
-    "${SAVE_ARTIFACT_CMD[@]}"
   done
 
-  echo "[INFO] Packaging nnUNet metadata artifact"
-  python3 "${REPO_ROOT}/evaluation/create_nnunet_metadata.py" \
-    --dataset-id "${DATASET_ID}" \
-    --dataset-name "${DATASET}" \
-    --dataset-code "${DATASET_CODE}" \
-    --root "${RUN_ROOT}" \
-    --project "${PROJECT}" \
-    --entity "${ENTITY}"
+  if [[ "${SKIP_UPLOAD}" != "1" ]]; then
+    echo "[INFO] Packaging nnUNet metadata artifact"
+    python3 "${REPO_ROOT}/evaluation/create_nnunet_metadata.py" \
+      --dataset-id "${DATASET_ID}" \
+      --dataset-name "${DATASET}" \
+      --dataset-code "${DATASET_CODE}" \
+      --root "${RUN_ROOT}" \
+      --project "${PROJECT}" \
+      --entity "${ENTITY}"
+  fi
 fi
 
 if [[ "${SKIP_EVAL}" != "1" ]]; then
