@@ -27,12 +27,19 @@ def main() -> None:
     groups: dict[tuple[float, str], list[dict[str, Any]]] = defaultdict(list)
     manifests: set[str] = set()
     for config_path in sorted(args.runs_root.glob("*/config.json")):
+        if config_path.parent.name.startswith("epsilon_"):
+            continue
         metrics_path = config_path.parent / "final_metrics.json"
         if not metrics_path.is_file():
             continue
         config = json.loads(config_path.read_text(encoding="utf-8"))
         metrics = json.loads(metrics_path.read_text(encoding="utf-8"))
         run = config["run"]
+        if (
+            float(run.get("volume_epsilon", 5000.0)) != 5000.0
+            or run.get("volume_grounding", "paper-hard") != "paper-hard"
+        ):
+            continue
         manifest_path = config_path.parent / "dataset_manifest.json"
         if not manifest_path.is_file():
             raise FileNotFoundError(f"Missing dataset manifest for {config_path.parent}")

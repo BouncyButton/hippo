@@ -36,6 +36,9 @@ from sklearn.model_selection import KFold
 
 
 PAPER_FRACTIONS = (1.0, 0.25, 0.05)
+PAPER_VOLUME_EPSILON = 5000.0
+PAPER_VOLUME_GAMMA = 0.0001
+VOLUME_GROUNDINGS = ("paper-hard", "soft-probability")
 
 
 @dataclass(frozen=True)
@@ -50,6 +53,9 @@ class RunSpec:
     weight_decay: float
     spacing: tuple[float, float, float]
     spatial_size: tuple[int, int, int]
+    volume_epsilon: float
+    volume_gamma: float
+    volume_grounding: str
 
 
 def parse_args() -> argparse.Namespace:
@@ -74,13 +80,34 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--seed", type=int, default=42, help="Model/data-loader seed; notebook did not report it.")
     parser.add_argument("--spacing", type=float, nargs=3, default=(1.5, 1.5, 1.5))
     parser.add_argument("--spatial-size", type=int, nargs=3, default=(64, 64, 64))
+    parser.add_argument(
+        "--volume-epsilon",
+        type=float,
+        default=PAPER_VOLUME_EPSILON,
+        help="Allowed anterior/posterior volume gap in voxels; the paper uses 5000.",
+    )
+    parser.add_argument(
+        "--volume-gamma",
+        type=float,
+        default=PAPER_VOLUME_GAMMA,
+        help="Volume-similarity sharpness; the paper uses 0.0001.",
+    )
+    parser.add_argument(
+        "--volume-grounding",
+        choices=VOLUME_GROUNDINGS,
+        default="paper-hard",
+        help=(
+            "paper-hard reproduces the notebook's non-differentiable argmax grounding; "
+            "soft-probability uses differentiable expected class volumes."
+        ),
+    )
     parser.add_argument("--expected-samples", type=int, default=0,
                         help="Fail if Decathlon sample count differs; 0 records the count without asserting it.")
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--resume", action="store_true", help="Resume from checkpoint_latest.pt in --output-dir.")
     parser.add_argument("--wandb", action="store_true", help="Log configuration and epoch metrics to Weights & Biases.")
     parser.add_argument("--wandb-project", default="hippopotamus-project")
-    parser.add_argument("--wandb-entity", default="hippopotamus")
+    parser.add_argument("--wandb-entity", default="focacciafilippo-bocconi-university")
     parser.add_argument("--wandb-run-name", default=None)
     parser.add_argument("--device", choices=("auto", "cuda", "cpu"), default="auto")
     return parser.parse_args()
@@ -151,16 +178,50 @@ def hard_masks(logits: torch.Tensor) -> torch.Tensor:
     return torch.argmax(logits, dim=1)
 
 
-def paper_dimension(hard: torch.Tensor, gamma: float = 0.0001, epsilon: float = 5000.0) -> torch.Tensor:
+def volume_similarity(
+    difference: torch.Tensor,
+    gamma: float = PAPER_VOLUME_GAMMA,
+    epsilon: float = PAPER_VOLUME_EPSILON,
+) -> torch.Tensor:
+    """Equation 7 evaluated from an absolute anterior/posterior volume gap."""
+    excess = torch.clamp(difference - epsilon, min=0.0)
+    return torch.exp(-gamma * excess.square())
+
+
+def hard_volume_difference(hard: torch.Tensor) -> torch.Tensor:
+    """Absolute class-volume gap for integer segmentation masks."""
+    spatial_dimensions = tuple(range(1, hard.ndim))
+    anterior = (hard == 1).sum(dim=spatial_dimensions)
+    posterior = (hard == 2).sum(dim=spatial_dimensions)
+    return (anterior - posterior).abs().float()
+
+
+def paper_dimension(
+    hard: torch.Tensor,
+    gamma: float = PAPER_VOLUME_GAMMA,
+    epsilon: float = PAPER_VOLUME_EPSILON,
+) -> torch.Tensor:
     """Notebook's anterior/posterior volume-similarity grounding."""
-    mask_1 = hard == 1
-    mask_2 = hard == 2
-    values = []
-    for index in range(hard.shape[0]):
-        difference = (mask_1[index].sum() - mask_2[index].sum()).abs().float()
-        excess = torch.clamp(difference - epsilon, min=0.0)
-        values.append(torch.exp(-gamma * excess.square()))
-    return torch.stack(values)
+    return volume_similarity(hard_volume_difference(hard), gamma=gamma, epsilon=epsilon)
+
+
+def soft_volume_similarity(
+    logits: torch.Tensor,
+    gamma: float = PAPER_VOLUME_GAMMA,
+    epsilon: float = PAPER_VOLUME_EPSILON,
+) -> torch.Tensor:
+    """Differentiable Equation 7 using expected class volumes from softmax."""
+    return volume_similarity(soft_volume_difference(logits), gamma=gamma, epsilon=epsilon)
+
+
+def soft_volume_difference(logits: torch.Tensor) -> torch.Tensor:
+    """Absolute expected anterior/posterior volume gap from softmax probabilities."""
+    probabilities = torch.softmax(logits, dim=1)
+    # Class is dimension 1, so sum over all spatial dimensions after selecting it.
+    spatial_dimensions = tuple(range(1, probabilities[:, 1].ndim))
+    anterior = probabilities[:, 1].sum(dim=spatial_dimensions)
+    posterior = probabilities[:, 2].sum(dim=spatial_dimensions)
+    return (anterior - posterior).abs()
 
 
 def directional_chamfer_minima(source: torch.Tensor, target: torch.Tensor, chunk_size: int = 1024) -> torch.Tensor:
@@ -209,13 +270,22 @@ def paper_nested(hard: torch.Tensor, pairs: int = 20, interpolation_points: int 
 class PaperLTNObjective:
     """The notebook's LTN knowledge base, retained for protocol fidelity."""
 
-    def __init__(self, model: SwinUNETR) -> None:
+    def __init__(
+        self,
+        model: SwinUNETR,
+        volume_epsilon: float = PAPER_VOLUME_EPSILON,
+        volume_gamma: float = PAPER_VOLUME_GAMMA,
+        volume_grounding: str = "paper-hard",
+    ) -> None:
         try:
             import ltn
         except ImportError as error:
             raise RuntimeError("LTNtorch is required for --method ltn. Install requirements.txt in the cluster environment.") from error
+        if volume_grounding not in VOLUME_GROUNDINGS:
+            raise ValueError(f"Unknown volume grounding: {volume_grounding}")
 
         self.ltn = ltn
+        self.volume_grounding = volume_grounding
         self.segmentator = ltn.Function(model)
         self.forall = ltn.Quantifier(ltn.fuzzy_ops.AggregPMeanError(p=2), quantifier="f")
         self.sat_agg = ltn.fuzzy_ops.SatAgg()
@@ -223,7 +293,8 @@ class PaperLTNObjective:
         dice_loss = DiceLoss(to_onehot_y=True, softmax=True, reduction="none")
 
         def dice_truth(outputs: torch.Tensor, labels: torch.Tensor) -> torch.Tensor:
-            return 1.0 - dice_loss(outputs, labels).mean(dim=1)
+            per_class_loss = dice_loss(outputs, labels).reshape(outputs.shape[0], -1)
+            return 1.0 - per_class_loss.mean(dim=1)
 
         def equality(left: torch.Tensor, right: torch.Tensor, alpha: float = 1e-3) -> torch.Tensor:
             return torch.exp(-alpha * torch.sqrt(torch.square(left - right)))
@@ -231,48 +302,90 @@ class PaperLTNObjective:
         self.dice_predicate = ltn.Predicate(func=dice_truth)
         self.equal_predicate = ltn.Predicate(func=equality)
         self.min_distance = ltn.Function(func=paper_chamfer_distance)
-        self.similar_volume = ltn.Function(func=paper_dimension)
+        volume_function = paper_dimension if volume_grounding == "paper-hard" else soft_volume_similarity
+
+        def configured_volume(value: torch.Tensor) -> torch.Tensor:
+            return volume_function(value, gamma=volume_gamma, epsilon=volume_epsilon)
+
+        self.similar_volume = ltn.Function(func=configured_volume)
         self.nested = ltn.Function(func=paper_nested)
 
-    def __call__(self, images: torch.Tensor, labels: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor]:
+    def __call__(
+        self, images: torch.Tensor, labels: torch.Tensor
+    ) -> tuple[torch.Tensor, torch.Tensor, dict[str, torch.Tensor]]:
         ltn = self.ltn
         x = ltn.Variable("x", images)
         y = ltn.Variable("y", labels)
+        x, y = ltn.diag(x, y)
         outputs = self.segmentator(x)
         logits = outputs.value
         prediction = ltn.Variable("prediction", hard_masks(logits))
+        soft_prediction = ltn.Variable("soft_prediction", logits)
         zero = ltn.Constant(torch.zeros((), device=images.device))
-        satisfaction = self.sat_agg(
-            self.forall(ltn.diag(x, y), self.dice_predicate(outputs, y)).value,
-            self.forall(prediction, self.equal_predicate(self.min_distance(prediction), zero)).value,
-            self.forall(prediction, self.similar_volume(prediction)).value,
-            self.forall(prediction, self.not_(self.nested(prediction))).value,
-        )
-        return logits, 1.0 - satisfaction
+        volume_input = prediction if self.volume_grounding == "paper-hard" else soft_prediction
+        formula_truths = {
+            "dice_truth": self.forall([x, y], self.dice_predicate(outputs, y)).value,
+            "connectedness_truth": self.forall(
+                prediction, self.equal_predicate(self.min_distance(prediction), zero)
+            ).value,
+            "volume_truth": self.forall(volume_input, self.similar_volume(volume_input)).value,
+            "nesting_truth": self.forall(prediction, self.not_(self.nested(prediction))).value,
+        }
+        satisfaction = self.sat_agg(*formula_truths.values())
+        diagnostics = {
+            "constraint_satisfaction": satisfaction,
+            **formula_truths,
+            "hard_volume_gap_voxels": hard_volume_difference(prediction.value).float().mean().detach(),
+            "soft_volume_gap_voxels": soft_volume_difference(logits).mean().detach(),
+        }
+        return logits, 1.0 - satisfaction, diagnostics
 
 
-def structural_metrics(hard: torch.Tensor) -> dict[str, torch.Tensor]:
+def structural_metrics(
+    hard: torch.Tensor,
+    volume_epsilon: float = PAPER_VOLUME_EPSILON,
+    volume_gamma: float = PAPER_VOLUME_GAMMA,
+) -> dict[str, torch.Tensor]:
     distance = paper_chamfer_distance(hard)
+    volume_gap = hard_volume_difference(hard)
     return {
         "connectedness": torch.exp(-0.001 * distance.square()),
         "nested": paper_nested(hard),
         "volume_similarity": paper_dimension(hard),
+        "volume_similarity_configured": volume_similarity(
+            volume_gap, gamma=volume_gamma, epsilon=volume_epsilon
+        ),
+        "volume_gap_voxels": volume_gap,
+        "volume_violation_configured": (volume_gap > volume_epsilon).float(),
     }
 
 
-def deterministic_structural_metrics(hard: torch.Tensor, seed: int) -> dict[str, torch.Tensor]:
+def deterministic_structural_metrics(
+    hard: torch.Tensor,
+    seed: int,
+    volume_epsilon: float = PAPER_VOLUME_EPSILON,
+    volume_gamma: float = PAPER_VOLUME_GAMMA,
+) -> dict[str, torch.Tensor]:
     """Isolate notebook nesting randomness from model-dependent predictions."""
     saved_rng = rng_state()
     try:
         seed_everything(seed)
-        return structural_metrics(hard)
+        return structural_metrics(hard, volume_epsilon=volume_epsilon, volume_gamma=volume_gamma)
     finally:
         restore_rng_state(saved_rng)
 
 
-def evaluate(model: SwinUNETR, loader: DataLoader, device: torch.device, include_structure: bool = False) -> dict[str, float]:
+def evaluate(
+    model: SwinUNETR,
+    loader: DataLoader,
+    device: torch.device,
+    include_structure: bool = False,
+    volume_epsilon: float = PAPER_VOLUME_EPSILON,
+    volume_gamma: float = PAPER_VOLUME_GAMMA,
+) -> dict[str, float]:
     all_class_metric = DiceMetric(include_background=True, reduction="mean", get_not_nans=True)
     foreground_metric = DiceMetric(include_background=False, reduction="mean", get_not_nans=True)
+    classwise_metric = DiceMetric(include_background=True, reduction="mean_batch", get_not_nans=True)
     structure_totals: dict[str, float] = {}
     sample_count = 0
     model.eval()
@@ -285,18 +398,33 @@ def evaluate(model: SwinUNETR, loader: DataLoader, device: torch.device, include
             labels_oh = one_hot(labels)
             all_class_metric(prediction_oh, labels_oh)
             foreground_metric(prediction_oh, labels_oh)
+            classwise_metric(prediction_oh, labels_oh)
             if include_structure:
                 for prefix, masks, seed in (
                     ("prediction", prediction, 20250722 + batch_index),
                     ("ground_truth", labels.squeeze(1), 30250722 + batch_index),
                 ):
-                    for name, values in deterministic_structural_metrics(masks, seed).items():
+                    for name, values in deterministic_structural_metrics(
+                        masks,
+                        seed,
+                        volume_epsilon=volume_epsilon,
+                        volume_gamma=volume_gamma,
+                    ).items():
                         key = f"{prefix}_{name}"
                         structure_totals[key] = structure_totals.get(key, 0.0) + float(values.sum().cpu())
                 sample_count += images.shape[0]
     all_dice, _ = all_class_metric.aggregate()
     foreground_dice, _ = foreground_metric.aggregate()
-    result = {"dice_all_classes": float(all_dice.cpu()), "dice_foreground": float(foreground_dice.cpu())}
+    classwise_dice, _ = classwise_metric.aggregate()
+    if classwise_dice.numel() != 3:
+        raise RuntimeError(f"Expected three Dice classes, received shape {tuple(classwise_dice.shape)}.")
+    result = {
+        "dice_all_classes": float(all_dice.cpu()),
+        "dice_foreground": float(foreground_dice.cpu()),
+        "dice_background": float(classwise_dice[0].cpu()),
+        "dice_anterior": float(classwise_dice[1].cpu()),
+        "dice_posterior": float(classwise_dice[2].cpu()),
+    }
     if include_structure:
         result.update({key: value / sample_count for key, value in structure_totals.items()})
     return result
@@ -373,11 +501,24 @@ def rng_state() -> dict[str, Any]:
 
 
 def restore_rng_state(payload: dict[str, Any]) -> None:
-    torch.set_rng_state(payload["torch"])
+    # Checkpoints are loaded with map_location=device.  That also moves the CPU
+    # RNG state to CUDA, but torch.set_rng_state requires a CPU ByteTensor.
+    # Keep RNG restoration device-independent so an interrupted CUDA run can
+    # resume deterministically.
+    torch_state = payload["torch"]
+    if not isinstance(torch_state, torch.Tensor):
+        raise TypeError("Checkpoint CPU RNG state must be a torch.Tensor.")
+    torch.set_rng_state(torch_state.detach().to(device="cpu", dtype=torch.uint8))
     np.random.set_state(payload["numpy"])
     random.setstate(payload["python"])
     if "cuda" in payload and torch.cuda.is_available():
-        torch.cuda.set_rng_state_all(payload["cuda"])
+        cuda_states = [
+            state.detach().to(device="cpu", dtype=torch.uint8)
+            if isinstance(state, torch.Tensor)
+            else state
+            for state in payload["cuda"]
+        ]
+        torch.cuda.set_rng_state_all(cuda_states)
 
 
 def save_checkpoint(path: Path, epoch: int, model: SwinUNETR, optimizer: torch.optim.Optimizer, scheduler: Any, best_dice: float) -> None:
@@ -400,6 +541,10 @@ def main() -> None:
     args = parse_args()
     if args.train_fraction not in PAPER_FRACTIONS:
         raise ValueError(f"Use one of the paper fractions: {PAPER_FRACTIONS}.")
+    if args.volume_epsilon < 0:
+        raise ValueError("--volume-epsilon must be non-negative.")
+    if args.volume_gamma <= 0:
+        raise ValueError("--volume-gamma must be positive.")
     seed_everything(args.seed)
     device = resolve_device(args.device)
     output_dir = args.output_dir
@@ -437,6 +582,9 @@ def main() -> None:
         weight_decay=args.weight_decay,
         spacing=tuple(args.spacing),
         spatial_size=tuple(args.spatial_size),
+        volume_epsilon=args.volume_epsilon,
+        volume_gamma=args.volume_gamma,
+        volume_grounding=args.volume_grounding,
     )
     if args.resume:
         previous_config = json.loads((output_dir / "config.json").read_text(encoding="utf-8"))
@@ -484,7 +632,16 @@ def main() -> None:
     optimizer = torch.optim.AdamW(model.parameters(), lr=args.learning_rate, weight_decay=args.weight_decay)
     scheduler = WarmupCosineSchedule(optimizer, warmup_steps=args.warmup_steps, t_total=args.total_scheduler_steps)
     dice_loss = DiceLoss(to_onehot_y=True, softmax=True)
-    ltn_objective = PaperLTNObjective(model) if args.method == "ltn" else None
+    ltn_objective = (
+        PaperLTNObjective(
+            model,
+            volume_epsilon=args.volume_epsilon,
+            volume_gamma=args.volume_gamma,
+            volume_grounding=args.volume_grounding,
+        )
+        if args.method == "ltn"
+        else None
+    )
     start_epoch = 1
     best_dice = -float("inf")
     if args.resume:
@@ -498,13 +655,31 @@ def main() -> None:
 
     metrics_path = output_dir / "metrics.csv"
     mode = "a" if args.resume else "w"
+    metric_fields = [
+        "epoch",
+        "train_loss",
+        "learning_rate",
+        "train_constraint_satisfaction",
+        "train_dice_truth",
+        "train_connectedness_truth",
+        "train_volume_truth",
+        "train_nesting_truth",
+        "train_hard_volume_gap_voxels",
+        "train_soft_volume_gap_voxels",
+        "dice_all_classes",
+        "dice_foreground",
+        "dice_background",
+        "dice_anterior",
+        "dice_posterior",
+    ]
     with metrics_path.open(mode, newline="", encoding="utf-8") as handle:
-        writer = csv.DictWriter(handle, fieldnames=["epoch", "train_loss", "learning_rate", "dice_all_classes", "dice_foreground"])
+        writer = csv.DictWriter(handle, fieldnames=metric_fields)
         if not args.resume:
             writer.writeheader()
         for epoch in range(start_epoch, args.epochs + 1):
             model.train()
             total_loss = 0.0
+            component_totals: dict[str, float] = {}
             for batch in train_loader:
                 images = batch["image"].to(device)
                 labels = batch["label"].to(device)
@@ -512,16 +687,23 @@ def main() -> None:
                 if ltn_objective is None:
                     logits = model(images)
                     loss = dice_loss(logits, labels)
+                    components = {"dice_truth": 1.0 - loss.detach()}
                 else:
-                    _, loss = ltn_objective(images, labels)
+                    _, loss, components = ltn_objective(images, labels)
                 loss.backward()
                 optimizer.step()
                 total_loss += float(loss.detach().cpu())
+                for name, value in components.items():
+                    component_totals[name] = component_totals.get(name, 0.0) + float(value.detach().cpu())
             metrics = evaluate(model, validation_loader, device)
             row = {
                 "epoch": epoch,
                 "train_loss": total_loss / max(1, len(train_loader)),
                 "learning_rate": optimizer.param_groups[0]["lr"],
+                **{
+                    f"train_{name}": value / max(1, len(train_loader))
+                    for name, value in component_totals.items()
+                },
                 **metrics,
             }
             writer.writerow(row)
@@ -537,7 +719,14 @@ def main() -> None:
             save_checkpoint(output_dir / "checkpoint_latest.pt", epoch, model, optimizer, scheduler, best_dice)
 
     torch.save(model.state_dict(), output_dir / "model_final.pt")
-    final_metrics = evaluate(model, validation_loader, device, include_structure=True)
+    final_metrics = evaluate(
+        model,
+        validation_loader,
+        device,
+        include_structure=True,
+        volume_epsilon=args.volume_epsilon,
+        volume_gamma=args.volume_gamma,
+    )
     write_json(output_dir / "final_metrics.json", final_metrics)
     if wandb_run is not None:
         wandb_run.log({f"final/{name}": value for name, value in final_metrics.items()}, step=args.epochs)
