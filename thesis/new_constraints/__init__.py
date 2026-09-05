@@ -9,12 +9,14 @@ from .equivariance import (
     translation_valid_mask,
 )
 from .objective import NewConstraintConfig, NewConstraintObjective
+from .onecut import OuterOneCutLogLTNLoss
 
 __all__ = [
     "ConstraintResult",
     "NewConstraintConfig",
     "NewConstraintObjective",
     "OuterBoundaryBandLoss",
+    "OuterOneCutLogLTNLoss",
     "TranslationEquivarianceLoss",
     "build_boundary_bands",
     "foreground_log_odds",
