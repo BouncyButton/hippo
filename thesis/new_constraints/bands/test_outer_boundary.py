@@ -1,8 +1,13 @@
 """Morphology, numerical, and gradient tests for the outer-boundary bands."""
 
 import csv
+import inspect
 import json
+import os
+import subprocess
+import sys
 from dataclasses import asdict
+from pathlib import Path
 from types import SimpleNamespace
 
 import numpy as np
@@ -12,6 +17,7 @@ from monai.losses import DiceLoss
 
 from thesis.new_constraints import NewConstraintConfig, NewConstraintObjective
 from thesis.new_constraints.bands import (
+    ClassAwareBoundaryTverskyLoss,
     OuterBoundaryBandLoss,
     build_boundary_bands,
     foreground_log_odds,
@@ -26,22 +32,81 @@ from thesis.new_constraints.bands.calibrate_weight import (
     validate_checkpoint_provenance,
     validate_split_integrity,
 )
+from thesis.new_constraints.source_bootstrap import source_digest
 from thesis.new_constraints.train_swinunetr_constraints import resolve_constraint_config
 from thesis.new_constraints.train_swinunetr_constraints import (
     RunSpec,
+    _main,
+    backfill_wandb_history,
+    canonical_sha256,
+    collect_execution_provenance,
+    collect_runtime_provenance,
     collect_source_provenance,
     evaluate_constraint_metrics,
     evaluate_validation_metrics,
     file_sha256,
     reconcile_metrics_for_resume,
     reconcile_best_checkpoint,
+    restore_resume_checkpoint,
+    save_csv,
+    save_json,
+    save_torch_payload,
     snapshot_file,
+    validate_bands_calibration_report,
+    validate_image_label_samples,
     validate_optimizer_hyperparameters,
     validate_epoch_metrics,
     validate_input_file_provenance,
     validate_resume_checkpoint,
+    validate_metrics_for_resume,
     validate_three_class_labels,
 )
+
+
+def test_class_aware_tversky_exposes_grouped_foreground_swaps() -> None:
+    labels = torch.zeros((1, 1, 10, 10, 10), dtype=torch.long)
+    labels[:, :, 2:5, 2:8, 2:8] = 1
+    labels[:, :, 5:8, 2:8, 2:8] = 2
+    correct = torch.full((1, 3, 10, 10, 10), -4.0)
+    correct[:, 0] = 4.0
+    for class_id in (1, 2):
+        mask = labels[:, 0] == class_id
+        correct[:, 0][mask] = -4.0
+        correct[:, class_id][mask] = 4.0
+    swapped = correct.clone()
+    foreground = labels[:, 0] != 0
+    swapped[:, 1][foreground] = correct[:, 2][foreground]
+    swapped[:, 2][foreground] = correct[:, 1][foreground]
+
+    grouped = OuterBoundaryBandLoss()
+    grouped_correct = grouped(correct, labels).loss
+    grouped_swapped = grouped(swapped, labels).loss
+    class_aware = ClassAwareBoundaryTverskyLoss(
+        false_positive_weight=0.60,
+        false_negative_weight=0.40,
+    )
+    class_correct = class_aware(correct, labels).loss
+    class_swapped = class_aware(swapped, labels).loss
+
+    assert torch.allclose(grouped_correct, grouped_swapped)
+    assert class_swapped > class_correct + 0.5
+
+
+def test_class_aware_tversky_has_finite_boundary_gradients() -> None:
+    labels = torch.zeros((1, 1, 8, 8, 8), dtype=torch.long)
+    labels[:, :, 2:4, 2:6, 2:6] = 1
+    labels[:, :, 4:6, 2:6, 2:6] = 2
+    logits = torch.randn((1, 3, 8, 8, 8), requires_grad=True)
+    result = ClassAwareBoundaryTverskyLoss()(logits, labels)
+    gradient = torch.autograd.grad(result.loss, logits)[0]
+
+    assert result.details["component_labels"] == (
+        "class_1_tversky",
+        "class_2_tversky",
+    )
+    assert torch.isfinite(result.loss)
+    assert torch.isfinite(gradient).all()
+    assert gradient.abs().sum() > 0
 
 
 class UnusedModel(nn.Module):
@@ -103,6 +168,28 @@ def _test_run_spec() -> RunSpec:
     )
 
 
+def _valid_adamw_checkpoint_states(
+    run_spec: RunSpec, epoch: int
+) -> tuple[dict, dict]:
+    parameter = nn.Parameter(torch.tensor(1.0))
+    optimizer = torch.optim.AdamW(
+        [parameter],
+        lr=float(run_spec.learning_rate),
+        weight_decay=float(run_spec.weight_decay),
+    )
+    scheduler = torch.optim.lr_scheduler.StepLR(
+        optimizer,
+        step_size=run_spec.step_size,
+        gamma=run_spec.adamw_gamma,
+    )
+    for _ in range(epoch):
+        optimizer.zero_grad(set_to_none=True)
+        parameter.grad = torch.zeros_like(parameter)
+        optimizer.step()
+        scheduler.step()
+    return optimizer.state_dict(), scheduler.state_dict()
+
+
 def test_public_band_loss_rejects_noncanonical_step_count() -> None:
     try:
         OuterBoundaryBandLoss(steps=1)
@@ -110,6 +197,16 @@ def test_public_band_loss_rejects_noncanonical_step_count() -> None:
         assert "exactly 2 steps" in str(error)
     else:
         raise AssertionError("Direct construction bypassed the two-step contract.")
+
+
+def test_public_band_loss_rejects_invalid_focal_gamma() -> None:
+    for gamma in (-1.0, float("nan"), float("inf")):
+        try:
+            OuterBoundaryBandLoss(focal_gamma=gamma)
+        except ValueError as error:
+            assert "focal_gamma" in str(error)
+        else:
+            raise AssertionError(f"Invalid focal gamma was accepted: {gamma}")
 
 
 def test_file_snapshot_binds_digest_to_consumed_bytes(tmp_path) -> None:
@@ -123,6 +220,27 @@ def test_file_snapshot_binds_digest_to_consumed_bytes(tmp_path) -> None:
         assert snapshot.sha256 != file_sha256(source)
     finally:
         snapshot.cleanup()
+
+
+def test_json_publication_is_atomic_and_strict(tmp_path) -> None:
+    path = tmp_path / "config.json"
+    save_json(path, {"version": 1})
+    assert json.loads(path.read_text(encoding="utf-8")) == {"version": 1}
+    try:
+        save_json(path, {"invalid": float("nan")})
+    except ValueError:
+        pass
+    else:
+        raise AssertionError("Non-standard NaN JSON was published.")
+    assert json.loads(path.read_text(encoding="utf-8")) == {"version": 1}
+    assert not list(tmp_path.glob(".config.json.*.tmp"))
+
+    csv_path = tmp_path / "details.csv"
+    save_csv(csv_path, ["value"], [{"value": 1}])
+    assert csv_path.read_text(encoding="utf-8").splitlines() == ["value", "1"]
+    torch_path = tmp_path / "model.pt"
+    save_torch_payload(torch_path, {"weight": torch.ones(1)})
+    assert torch.load(torch_path, weights_only=True)["weight"].item() == 1
 
 
 def test_three_class_schema_rejects_corrupt_labels() -> None:
@@ -140,6 +258,41 @@ def test_three_class_schema_rejects_corrupt_labels() -> None:
     validate_three_class_labels(
         [{"case_name": "valid", "label": np.asarray([0.0, 1.0, 2.0])}]
     )
+
+
+def test_raw_image_label_validation_rejects_hidden_shape_and_finiteness_defects() -> None:
+    valid = {
+        "case_name": "valid",
+        "image": np.zeros((3, 4, 5), dtype=np.float32),
+        "label": np.zeros((3, 4, 5), dtype=np.int16),
+    }
+    validate_image_label_samples([valid])
+    invalid = (
+        {**valid, "image": np.zeros((3, 4, 6), dtype=np.float32)},
+        {**valid, "image": np.full((3, 4, 5), np.nan, dtype=np.float32)},
+        {**valid, "image": np.zeros((3, 4), dtype=np.float32), "label": np.zeros((3, 4))},
+    )
+    for sample in invalid:
+        try:
+            validate_image_label_samples([sample])
+        except ValueError:
+            pass
+        else:
+            raise AssertionError("A corrupt raw image/label sample was accepted.")
+
+
+def test_snapshot_context_cleans_up_after_downstream_exception(tmp_path) -> None:
+    source = tmp_path / "input.bin"
+    source.write_bytes(b"payload")
+    snapshot_path = None
+    try:
+        with snapshot_file(source) as snapshot:
+            snapshot_path = snapshot.path
+            raise RuntimeError("downstream failure")
+    except RuntimeError:
+        pass
+    assert snapshot_path is not None
+    assert not snapshot_path.exists()
 
 
 def test_initializer_snapshot_changes_when_same_path_is_overwritten(tmp_path) -> None:
@@ -165,6 +318,26 @@ def test_source_provenance_records_manifest_commit_and_aggregate_digest() -> Non
     ]
     assert "baselines/swin_unetr/swin_unetr.py" in provenance["files"]
     assert provenance["git_commit"] is None or len(provenance["git_commit"]) == 40
+    assert provenance["sha256"] == source_digest()
+
+
+def test_bootstrap_digest_mismatch_aborts_module_import() -> None:
+    environment = os.environ.copy()
+    environment["HIPPO_EXPECTED_SOURCE_SHA256"] = "0" * 64
+    result = subprocess.run(
+        [
+            sys.executable,
+            "-c",
+            "import thesis.new_constraints.train_swinunetr_constraints",
+        ],
+        cwd=Path(__file__).resolve().parents[3],
+        env=environment,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    assert result.returncode != 0
+    assert "changed between pre-launch hashing and import" in result.stderr
 
 
 def test_two_step_bands_are_disjoint_and_on_the_correct_gt_side() -> None:
@@ -309,6 +482,31 @@ def test_band_numerics_remain_float32_under_autocast() -> None:
         result = OuterBoundaryBandLoss()(logits, labels)
 
     assert result.loss.dtype == torch.float32
+
+
+def test_cuda_fp16_autocast_band_backward_is_finite_and_local() -> None:
+    if not torch.cuda.is_available():
+        return
+    labels = _cube_labels().cuda()
+    logits = torch.zeros(
+        1,
+        3,
+        *labels.shape[-3:],
+        device="cuda",
+        dtype=torch.float16,
+        requires_grad=True,
+    )
+    with torch.cuda.amp.autocast(enabled=True):
+        result = OuterBoundaryBandLoss()(logits, labels)
+    assert result.loss.dtype == torch.float32
+    result.loss.backward()
+    assert logits.grad is not None
+    assert torch.isfinite(logits.grad).all()
+    foreground = labels > 0
+    inner, outer = build_boundary_bands(foreground, steps=2)
+    active = (inner | outer).expand_as(logits.grad)
+    assert torch.count_nonzero(logits.grad[active]) > 0
+    assert torch.count_nonzero(logits.grad[~active]) == 0
     assert result.details["inner_loss"].dtype == torch.float32
     assert result.details["outer_loss"].dtype == torch.float32
 
@@ -339,6 +537,69 @@ def test_side_reductions_use_count_plus_epsilon() -> None:
     assert torch.allclose(result.details["outer_loss"], expected_outer)
 
 
+def test_focal_one_applies_truth_probability_factor_before_side_reduction() -> None:
+    labels = _cube_labels()
+    logits = torch.zeros(1, 3, 13, 13, 13)
+    result = OuterBoundaryBandLoss(focal_gamma=1.0)(logits, labels)
+    inner_count = result.details["inner_voxels"]
+    outer_count = result.details["outer_voxels"]
+    epsilon = 1e-6
+    expected_inner = (
+        torch.log(torch.tensor(1.5))
+        * (1.0 / 3.0)
+        * inner_count
+        / (inner_count + epsilon)
+    )
+    expected_outer = (
+        torch.log(torch.tensor(3.0))
+        * (2.0 / 3.0)
+        * outer_count
+        / (outer_count + epsilon)
+    )
+
+    assert torch.allclose(result.details["inner_loss"], expected_inner, atol=1e-6)
+    assert torch.allclose(result.details["outer_loss"], expected_outer, atol=1e-6)
+
+
+def test_inner_focal_outer_bce_hybrid_preserves_outer_stabilization() -> None:
+    labels = _cube_labels()
+    logits = torch.zeros(1, 3, 13, 13, 13)
+    result = OuterBoundaryBandLoss(
+        focal_gamma=0.0,
+        inner_focal_gamma=1.0,
+        outer_focal_gamma=0.0,
+    )(logits, labels)
+    inner_count = result.details["inner_voxels"]
+    outer_count = result.details["outer_voxels"]
+    epsilon = 1e-6
+    expected_inner = (
+        torch.log(torch.tensor(1.5))
+        * (1.0 / 3.0)
+        * inner_count
+        / (inner_count + epsilon)
+    )
+    expected_outer = (
+        torch.log(torch.tensor(3.0))
+        * outer_count
+        / (outer_count + epsilon)
+    )
+
+    assert torch.allclose(result.details["inner_loss"], expected_inner, atol=1e-6)
+    assert torch.allclose(result.details["outer_loss"], expected_outer, atol=1e-6)
+
+
+def test_fractional_focal_gamma_has_finite_saturated_gradients() -> None:
+    labels = _cube_labels()
+    logits = torch.full((1, 3, 13, 13, 13), -100.0)
+    logits[:, 0] = 100.0
+    logits.requires_grad_()
+    loss = OuterBoundaryBandLoss(focal_gamma=0.5)(logits, labels).loss
+    gradient = torch.autograd.grad(loss, logits)[0]
+
+    assert torch.isfinite(loss)
+    assert torch.isfinite(gradient).all()
+
+
 def test_bands_objective_requires_labels_and_applies_weight() -> None:
     labels = _cube_labels()
     logits = torch.zeros(1, 3, 13, 13, 13, requires_grad=True)
@@ -363,6 +624,8 @@ def test_constraint_flags_resolve_none_equivariance_and_bands() -> None:
         "translation_size": 2,
         "equivariance_max_samples": 1,
         "band_steps": 2,
+        "bands_focal_gamma": 0.0,
+        "amp": False,
         "foreground_class_ids": (1, 2),
         "complement_class_ids": (0,),
     }
@@ -392,10 +655,11 @@ def test_constraint_flags_resolve_none_equivariance_and_bands() -> None:
     )
     bands = resolve_constraint_config(
         SimpleNamespace(
-            **base,
+            **{**base, "bands_focal_gamma": 1.0},
             constraint_set="bands",
             equivariance_weight=None,
             bands_weight=0.04,
+            bands_calibration_json="calibration.json",
         )
     )
 
@@ -404,6 +668,7 @@ def test_constraint_flags_resolve_none_equivariance_and_bands() -> None:
     assert equivariance.equivariance_weight == 0.10
     assert bands.equivariance_weight == 0.0
     assert bands.bands_weight == 0.04
+    assert bands.bands_focal_gamma == 1.0
 
 
 def test_canonical_bands_preset_rejects_non_two_step_geometry() -> None:
@@ -450,6 +715,160 @@ def test_gradient_calibration_uses_target_and_safety_cap() -> None:
     assert target == 0.05
     assert cap < target
     assert final == cap
+
+
+def test_bands_training_requires_exact_completed_calibration_artifact(tmp_path) -> None:
+    pkl_path = tmp_path / "dataset.pkl"
+    splits_path = tmp_path / "splits.json"
+    report_path = tmp_path / "calibration.json"
+    checkpoint_path = tmp_path / "checkpoint_latest.pt"
+    checkpoint_config_path = tmp_path / "config.json"
+    pkl_path.write_bytes(b"dataset")
+    splits_path.write_text(
+        json.dumps([{"train": ["case-a", "case-b"], "val": ["case-c"]}]),
+        encoding="utf-8",
+    )
+    source = collect_source_provenance()
+    runtime = collect_runtime_provenance()
+    execution = collect_execution_provenance(torch.device("cpu"))
+    source_run = {
+        "constraint_set": "none",
+        "dataset": "MSD",
+        "fold": 0,
+        "epochs": 5,
+        "amp": False,
+        "pkl_sha256": file_sha256(pkl_path),
+        "splits_json_sha256": file_sha256(splits_path),
+        "source_sha256": source["sha256"],
+        "runtime_sha256": canonical_sha256(runtime),
+        "execution_sha256": canonical_sha256(execution),
+    }
+    checkpoint_config_path.write_text(
+        json.dumps({"run": source_run, "source_provenance": source}),
+        encoding="utf-8",
+    )
+    torch.save({"epoch": 5, "run": source_run, "model": {}}, checkpoint_path)
+    dice_rms = [2.0, 4.0]
+    band_rms = [10.0, 20.0]
+    weight, target, cap = calibrated_weight(dice_rms, band_rms)
+    report = {
+        "status": "complete",
+        "constraint_set": "bands",
+        "dataset": "MSD",
+        "fold": 0,
+        "seed": 0,
+        "max_cases": 2,
+        "band_steps": 2,
+        "bands_focal_gamma": 0.0,
+        "amp": False,
+        "foreground_class_ids": [1, 2],
+        "complement_class_ids": [0],
+        "recommended_bands_weight": weight,
+        "target_weight": target,
+        "cap_weight": cap,
+        "target_ratio": 0.10,
+        "safety_ratio": 0.50,
+        "checkpoint": str(checkpoint_path.resolve()),
+        "checkpoint_epoch": 5,
+        "checkpoint_constraint_set": "none",
+        "checkpoint_sha256": file_sha256(checkpoint_path),
+        "checkpoint_source_provenance": source,
+        "checkpoint_source_sha256": source["sha256"],
+        "checkpoint_config": str(checkpoint_config_path.resolve()),
+        "checkpoint_config_sha256": file_sha256(checkpoint_config_path),
+        "pkl": str(pkl_path.resolve()),
+        "pkl_sha256": file_sha256(pkl_path),
+        "splits_json": str(splits_path.resolve()),
+        "splits_json_sha256": file_sha256(splits_path),
+        "source_provenance": source,
+        "runtime_provenance": runtime,
+        "execution_provenance": execution,
+        "training_cases": [
+            {"case_name": "case-a", "patient_id": "case-a"},
+            {"case_name": "case-b", "patient_id": "case-b"},
+        ],
+        "training_case_ids": ["case-a", "case-b"],
+        "training_patient_ids": ["case-a", "case-b"],
+        "valid_case_fraction": 1.0,
+        "valid_case_count": 2,
+        "skipped_case_count": 0,
+        "dice_gradient_rms": _summary(dice_rms),
+        "band_gradient_rms_unconditional": _summary(band_rms),
+        "band_gradient_rms_conditional": _summary(band_rms),
+        "cases": [
+            {
+                "case_name": case_name,
+                "patient_id": case_name,
+                "valid": True,
+                "dice_gradient_rms": dice,
+                "band_gradient_rms_unconditional": band,
+                "band_gradient_rms_conditional": band,
+                "inner_voxels": 10,
+                "outer_voxels": 12,
+                "edge_touching": False,
+            }
+            for case_name, dice, band in zip(
+                ("case-a", "case-b"), dice_rms, band_rms
+            )
+        ],
+    }
+    report_path.write_text(json.dumps(report), encoding="utf-8")
+    arguments = SimpleNamespace(
+        dataset="MSD",
+        fold=0,
+        band_steps=2,
+        bands_focal_gamma=0.0,
+        foreground_class_ids=(1, 2),
+        complement_class_ids=(0,),
+        bands_weight=weight,
+        amp=False,
+        pkl=pkl_path,
+        splits_json=splits_path,
+    )
+    with snapshot_file(report_path) as snapshot:
+        def validate(candidate: dict) -> None:
+            validate_bands_calibration_report(
+                candidate,
+                arguments,
+                report_snapshot=snapshot,
+                pkl_digest=file_sha256(pkl_path),
+                splits_digest=file_sha256(splits_path),
+                source_provenance=source,
+                runtime_provenance=runtime,
+                execution_provenance=execution,
+            )
+
+        validate(report)
+        mutations = (
+            ({**report, "status": "failed"}, "complete"),
+            ({**report, "fold": 1}, "dataset/fold"),
+            ({**report, "amp": True}, "AMP mode"),
+            ({**report, "bands_focal_gamma": 1.0}, "focal gamma"),
+            (
+                {**report, "source_provenance": {**source, "sha256": "e" * 64}},
+                "source code",
+            ),
+            ({**report, "recommended_bands_weight": weight / 2}, "exactly match"),
+            ({**report, "target_weight": target / 2}, "case data"),
+            ({**report, "checkpoint_epoch": 999}, "checkpoint"),
+            (
+                {
+                    **report,
+                    "cases": [
+                        {**report["cases"][0], "inner_voxels": -1},
+                        report["cases"][1],
+                    ],
+                },
+                "non-negative",
+            ),
+        )
+        for mutated, message in mutations:
+            try:
+                validate(mutated)
+            except ValueError as error:
+                assert message in str(error)
+            else:
+                raise AssertionError(f"Invalid calibration report passed: {message}")
 
 
 def test_calibration_rejects_nonfinite_ratios_and_noncanonical_scope() -> None:
@@ -502,17 +921,22 @@ def test_checkpoint_provenance_requires_matching_dice_only_epoch_five(tmp_path) 
     pkl_path.write_bytes(b"placeholder")
     split_path.write_text("[]", encoding="utf-8")
     source_provenance = collect_source_provenance()
+    runtime_provenance = collect_runtime_provenance()
+    execution_provenance = collect_execution_provenance(torch.device("cpu"))
     run = {
         "dataset": "MSD",
         "fold": 0,
         "epochs": CALIBRATION_CHECKPOINT_EPOCH,
         "spatial_size": [64, 64, 64],
         "resize": False,
+        "amp": False,
         "constraint_set": "none",
         "initial_checkpoint": None,
         "pkl_sha256": file_sha256(pkl_path),
         "splits_json_sha256": file_sha256(split_path),
         "source_sha256": source_provenance["sha256"],
+        "runtime_sha256": canonical_sha256(runtime_provenance),
+        "execution_sha256": canonical_sha256(execution_provenance),
         "constraint_config": {
             "equivariance_weight": 0.0,
             "bands_weight": 0.0,
@@ -525,6 +949,8 @@ def test_checkpoint_provenance_requires_matching_dice_only_epoch_five(tmp_path) 
         "splits_json": str(split_path.resolve()),
         "splits_json_sha256": file_sha256(split_path),
         "source_provenance": source_provenance,
+        "runtime_provenance": runtime_provenance,
+        "execution_provenance": execution_provenance,
     }
     config_path.write_text(json.dumps(config), encoding="utf-8")
     checkpoint_run = {**run, "spatial_size": (64, 64, 64)}
@@ -544,6 +970,7 @@ def test_checkpoint_provenance_requires_matching_dice_only_epoch_five(tmp_path) 
         fold=0,
         spatial_size=(64, 64, 64),
         resize=False,
+        amp=False,
         pkl=pkl_path,
         splits_json=split_path,
     )
@@ -559,6 +986,8 @@ def test_checkpoint_provenance_requires_matching_dice_only_epoch_five(tmp_path) 
                 splits_digest=splits_snapshot.sha256,
                 checkpoint_path=checkpoint_snapshot.path,
                 source_provenance=source_provenance,
+                runtime_provenance=runtime_provenance,
+                execution_provenance=execution_provenance,
             )
         finally:
             pkl_snapshot.cleanup()
@@ -570,6 +999,42 @@ def test_checkpoint_provenance_requires_matching_dice_only_epoch_five(tmp_path) 
     assert checkpoint["epoch"] == 5
     assert "optimizer" not in checkpoint
     assert resolved_config == config_path.resolve()
+
+    legacy_source = {
+        **source_provenance,
+        "sha256": "1" * 64,
+        "files": dict(source_provenance["files"]),
+    }
+    legacy_run = {**run, "source_sha256": legacy_source["sha256"]}
+    config["run"] = legacy_run
+    config["source_provenance"] = legacy_source
+    config_path.write_text(json.dumps(config), encoding="utf-8")
+    torch.save(
+        {
+            "epoch": CALIBRATION_CHECKPOINT_EPOCH,
+            "model": {},
+            "run": {**legacy_run, "spatial_size": (64, 64, 64)},
+        },
+        checkpoint_path,
+    )
+    arguments.bands_focal_gamma = 1.0
+    validate()
+
+    legacy_source["files"]["baselines/swin_unetr/swin_unetr.py"] = "2" * 64
+    config["source_provenance"] = legacy_source
+    config_path.write_text(json.dumps(config), encoding="utf-8")
+    try:
+        validate()
+    except ValueError as error:
+        assert "exact model/data-pipeline source" in str(error)
+    else:
+        raise AssertionError("Focal calibration accepted incompatible model source.")
+
+    arguments.bands_focal_gamma = 0.0
+    config["source_provenance"] = source_provenance
+    config["run"] = run
+    config_path.write_text(json.dumps(config), encoding="utf-8")
+    torch.save(checkpoint, checkpoint_path)
 
     initialized_run = {**run, "initial_checkpoint": "/models/unverified.pt"}
     config["run"] = initialized_run
@@ -638,11 +1103,12 @@ def test_checkpoint_provenance_requires_matching_dice_only_epoch_five(tmp_path) 
 
 def test_resume_checkpoint_must_match_embedded_run_provenance() -> None:
     run_spec = _test_run_spec()
+    optimizer_state, scheduler_state = _valid_adamw_checkpoint_states(run_spec, 3)
     checkpoint = {
         "epoch": 3,
         "model": {},
-        "optimizer": {},
-        "scheduler": {"last_epoch": 3},
+        "optimizer": optimizer_state,
+        "scheduler": scheduler_state,
         "scaler": {},
         "best_hard_dice": 0.5,
         "best_epoch": 2,
@@ -662,11 +1128,12 @@ def test_resume_checkpoint_must_match_embedded_run_provenance() -> None:
 
 def test_resume_rejects_scheduler_chronology_and_nonfinite_metrics() -> None:
     run_spec = _test_run_spec()
+    optimizer_state, scheduler_state = _valid_adamw_checkpoint_states(run_spec, 3)
     base = {
         "epoch": 3,
         "model": {},
-        "optimizer": {},
-        "scheduler": {"last_epoch": 3},
+        "optimizer": optimizer_state,
+        "scheduler": scheduler_state,
         "scaler": {},
         "best_hard_dice": 0.5,
         "best_epoch": 2,
@@ -676,7 +1143,13 @@ def test_resume_rejects_scheduler_chronology_and_nonfinite_metrics() -> None:
     invalid_cases = (
         ({**base, "scheduler": None}, "scheduler"),
         ({**base, "epoch": 999}, "outside"),
+        ({**base, "epoch": 3.9}, "exact integer"),
+        ({**base, "best_epoch": True}, "exact integer"),
         ({**base, "best_epoch": 4}, "best_epoch"),
+        (
+            {**base, "scheduler": {**scheduler_state, "last_epoch": 999}},
+            "chronology",
+        ),
         ({**base, "best_hard_dice": float("nan")}, "finite"),
     )
     for checkpoint, message in invalid_cases:
@@ -725,6 +1198,41 @@ def test_nonfinite_epoch_metrics_are_rejected_before_checkpointing() -> None:
         raise AssertionError("A nonfinite epoch metric was accepted.")
 
 
+def test_wandb_steps_follow_durable_checkpoints_and_final_uses_new_step() -> None:
+    source = inspect.getsource(_main)
+    checkpoint_position = source.index("save_checkpoint(\n                output_dir")
+    wandb_position = source.index("wandb_run.log(printable, step=epoch)")
+    assert checkpoint_position < wandb_position
+    assert "step=args.epochs + 1" in source
+
+
+def test_wandb_resume_replays_all_durable_epochs_in_order(tmp_path) -> None:
+    metrics_path = tmp_path / "metrics.csv"
+    metrics_path.write_text(
+        "epoch,train_loss\n1,0.9\n2,0.8\n",
+        encoding="utf-8",
+    )
+    class FakeRun:
+        def __init__(self) -> None:
+            self.calls: list[tuple[dict, int]] = []
+
+        def log(self, payload: dict, *, step: int) -> None:
+            self.calls.append((payload, step))
+
+    run = FakeRun()
+    backfill_wandb_history(
+        run,
+        metrics_path,
+        checkpoint_epoch=2,
+        fieldnames=["epoch", "train_loss"],
+    )
+
+    assert run.calls == [
+        ({"epoch": 1, "train_loss": 0.9}, 1),
+        ({"epoch": 2, "train_loss": 0.8}, 2),
+    ]
+
+
 def test_resume_repairs_best_checkpoint_from_durable_latest(tmp_path) -> None:
     run_spec = _test_run_spec()
     latest = {
@@ -748,6 +1256,56 @@ def test_resume_repairs_best_checkpoint_from_durable_latest(tmp_path) -> None:
     )
     assert repaired["epoch"] == 3
     assert repaired["best_epoch"] == 3
+
+
+def test_failed_state_restore_cannot_overwrite_existing_best_checkpoint(tmp_path) -> None:
+    run_spec = _test_run_spec()
+    optimizer_state, scheduler_state = _valid_adamw_checkpoint_states(run_spec, 3)
+    checkpoint = {
+        "epoch": 3,
+        "model": {},
+        "optimizer": optimizer_state,
+        "scheduler": scheduler_state,
+        "scaler": {},
+        "best_hard_dice": 0.7,
+        "best_epoch": 3,
+        "rng": {},
+        "run": asdict(run_spec),
+    }
+    best_path = tmp_path / "checkpoint_best.pt"
+    best_path.write_bytes(b"known-good-best")
+    model = nn.Linear(1, 1)
+    optimizer = torch.optim.AdamW(
+        model.parameters(),
+        lr=float(run_spec.learning_rate),
+        weight_decay=float(run_spec.weight_decay),
+    )
+    scheduler = torch.optim.lr_scheduler.StepLR(
+        optimizer,
+        step_size=run_spec.step_size,
+        gamma=run_spec.adamw_gamma,
+    )
+    scaler = torch.cuda.amp.GradScaler(enabled=False)
+    data_generator = torch.Generator().manual_seed(0)
+    translation_generator = torch.Generator().manual_seed(1)
+
+    try:
+        restore_resume_checkpoint(
+            checkpoint,
+            run_spec,
+            tmp_path,
+            model,
+            optimizer,
+            scheduler,
+            scaler,
+            data_generator,
+            translation_generator,
+        )
+    except RuntimeError:
+        pass
+    else:
+        raise AssertionError("An unloadable model state was accepted.")
+    assert best_path.read_bytes() == b"known-good-best"
 
 
 def test_resume_input_provenance_checks_file_contents(tmp_path) -> None:
@@ -793,6 +1351,44 @@ def test_resume_reconciles_uncheckpointed_metric_row(tmp_path) -> None:
     assert [int(row["epoch"]) for row in rows] == [1, 2]
 
 
+def test_resume_rejects_corrupt_durable_metric_cells_without_mutation(tmp_path) -> None:
+    fieldnames = ["epoch", "train_loss"]
+    for corrupt_value in ("nan", "inf", "garbage", ""):
+        path = tmp_path / f"metrics-{corrupt_value}.csv"
+        original = f"epoch,train_loss\n1,{corrupt_value}\n"
+        path.write_text(original, encoding="utf-8")
+        try:
+            validate_metrics_for_resume(path, 1, fieldnames)
+        except ValueError:
+            pass
+        else:
+            raise AssertionError(f"Corrupt metric {corrupt_value} was accepted.")
+        assert path.read_text(encoding="utf-8") == original
+
+    extra = tmp_path / "metrics-extra.csv"
+    original = "epoch,train_loss\n1,0.5,unexpected\n"
+    extra.write_text(original, encoding="utf-8")
+    try:
+        validate_metrics_for_resume(extra, 1, fieldnames)
+    except ValueError as error:
+        assert "outside" in str(error)
+    else:
+        raise AssertionError("An unexpected metric column was accepted.")
+    assert extra.read_text(encoding="utf-8") == original
+
+    reversed_path = tmp_path / "metrics-reversed.csv"
+    reversed_path.write_text(
+        "epoch,train_loss\n2,0.8\n1,0.9\n",
+        encoding="utf-8",
+    )
+    try:
+        validate_metrics_for_resume(reversed_path, 2, fieldnames)
+    except ValueError as error:
+        assert "strictly ordered" in str(error)
+    else:
+        raise AssertionError("Out-of-order durable metric rows were accepted.")
+
+
 def test_degenerate_calibration_writes_failure_report(tmp_path) -> None:
     output = tmp_path / "calibration.json"
     payload = {
@@ -832,6 +1428,27 @@ def test_calibration_detaches_model_graph_before_logit_gradients() -> None:
     assert torch.isfinite(dice_gradient).all()
     assert torch.isfinite(band_gradient).all()
     assert all(parameter.grad is None for parameter in model.parameters())
+
+
+def test_cuda_amp_calibration_forward_produces_finite_logit_gradients() -> None:
+    if not torch.cuda.is_available():
+        return
+    model = nn.Conv3d(1, 3, kernel_size=1).cuda()
+    images = torch.randn(1, 1, 13, 13, 13, device="cuda")
+    labels = _cube_labels().cuda()
+
+    logits, dice_gradient, band_gradient, _ = compute_logit_gradients(
+        model,
+        images,
+        labels,
+        DiceLoss(to_onehot_y=True, softmax=True),
+        OuterBoundaryBandLoss().cuda(),
+        amp=True,
+    )
+
+    assert logits.dtype == torch.float32
+    assert torch.isfinite(dice_gradient).all()
+    assert torch.isfinite(band_gradient).all()
 
 
 def test_validation_pipeline_reports_band_diagnostics_without_extra_forward() -> None:

@@ -33,21 +33,21 @@ For foreground class `c` and the valid overlap region after translating and rest
 
 The differentiable optimization satisfaction is the squared-denominator soft Dice:
 
-\[
+$$
 S_{\mathrm{pure},c}(s) =
 \frac{2\sum_{x \in \Omega_s} p_c(x)q_{s,c}(x)+\epsilon}
 {\sum_{x \in \Omega_s}p_c(x)^2+\sum_{x \in \Omega_s}q_{s,c}(x)^2+\epsilon}.
-\]
+$$
 
 It is averaged over the two foreground classes. Identical probability maps score exactly `1.0`, irrespective of their confidence, so this is the primary pure equivariance measurement.
 
 The separately reported confidence-weighted agreement uses a linear denominator:
 
-\[
+$$
 S_{\mathrm{conf},c}(s) =
 \frac{2\sum_{x \in \Omega_s} p_c(x)q_{s,c}(x)}
 {\max\!\left(\sum_{x \in \Omega_s}p_c(x)+\sum_{x \in \Omega_s}q_{s,c}(x),\epsilon\right)}.
-\]
+$$
 
 This score is also averaged over the two foreground classes. It measures agreement and prediction confidence together; identical uncertain maps can score below `1.0`. The reporting threshold `0.90` is applied to this confidence-weighted case-direction score. It is not applied to the pure optimization satisfaction and it is not part of checkpoint selection.
 

@@ -119,7 +119,14 @@ def _edge_touching(foreground: torch.Tensor) -> torch.Tensor:
 
 
 class OuterBoundaryBandLoss(nn.Module):
-    """Balanced BCE on two morphological steps around the GT contour."""
+    """Balanced focal BCE on two morphological steps around the GT contour.
+
+    ``focal_gamma=0`` preserves the original BCE objective exactly. Positive
+    gamma applies the standard focal factor ``(1 - p_t) ** gamma`` to each
+    voxel before the existing side-balanced and patient-balanced reductions.
+    Optional side-specific exponents support mechanistic ablations while the
+    shared ``focal_gamma`` remains the backwards-compatible default.
+    """
 
     def __init__(
         self,
@@ -127,6 +134,9 @@ class OuterBoundaryBandLoss(nn.Module):
         foreground_class_ids: Sequence[int] = (1, 2),
         complement_class_ids: Sequence[int] = (0,),
         steps: int = 2,
+        focal_gamma: float = 0.0,
+        inner_focal_gamma: float | None = None,
+        outer_focal_gamma: float | None = None,
         adherence_threshold: float = 0.90,
         epsilon: float = 1e-6,
     ) -> None:
@@ -139,11 +149,27 @@ class OuterBoundaryBandLoss(nn.Module):
             raise ValueError("foreground and complement class IDs must be disjoint.")
         if steps != 2:
             raise ValueError("The canonical outer-boundary loss requires exactly 2 steps.")
+        effective_inner_gamma = (
+            focal_gamma if inner_focal_gamma is None else inner_focal_gamma
+        )
+        effective_outer_gamma = (
+            focal_gamma if outer_focal_gamma is None else outer_focal_gamma
+        )
+        for name, gamma in (
+            ("focal_gamma", focal_gamma),
+            ("inner_focal_gamma", effective_inner_gamma),
+            ("outer_focal_gamma", effective_outer_gamma),
+        ):
+            if not math.isfinite(gamma) or gamma < 0:
+                raise ValueError(f"{name} must be finite and non-negative.")
         if not 0.0 <= adherence_threshold <= 1.0:
             raise ValueError("adherence_threshold must be between zero and one.")
         if not math.isfinite(epsilon) or epsilon <= 0:
             raise ValueError("epsilon must be finite and positive.")
         self.steps = int(steps)
+        self.focal_gamma = float(focal_gamma)
+        self.inner_focal_gamma = float(effective_inner_gamma)
+        self.outer_focal_gamma = float(effective_outer_gamma)
         self.adherence_threshold = float(adherence_threshold)
         self.epsilon = float(epsilon)
 
@@ -161,20 +187,40 @@ class OuterBoundaryBandLoss(nn.Module):
                 self.complement_class_ids,
             )
             target = foreground[:, 0].float()
-            voxel_loss = F.binary_cross_entropy_with_logits(
+            voxel_bce = F.binary_cross_entropy_with_logits(
                 log_odds,
                 target,
                 reduction="none",
             )
-            spatial_dimensions = tuple(range(1, voxel_loss.ndim))
+            if self.inner_focal_gamma == 0.0 and self.outer_focal_gamma == 0.0:
+                inner_voxel_loss = outer_voxel_loss = voxel_bce
+            else:
+                probability = torch.sigmoid(log_odds)
+                truth_probability = torch.where(
+                    target.bool(), probability, 1.0 - probability
+                )
+                focal_base = (1.0 - truth_probability).clamp_min(
+                    torch.finfo(truth_probability.dtype).eps
+                )
+                inner_voxel_loss = (
+                    voxel_bce
+                    if self.inner_focal_gamma == 0.0
+                    else focal_base.pow(self.inner_focal_gamma) * voxel_bce
+                )
+                outer_voxel_loss = (
+                    voxel_bce
+                    if self.outer_focal_gamma == 0.0
+                    else focal_base.pow(self.outer_focal_gamma) * voxel_bce
+                )
+            spatial_dimensions = tuple(range(1, voxel_bce.ndim))
             inner_float = inner[:, 0].float()
             outer_float = outer[:, 0].float()
             inner_count = inner_float.sum(spatial_dimensions)
             outer_count = outer_float.sum(spatial_dimensions)
-            inner_loss = (voxel_loss * inner_float).sum(
+            inner_loss = (inner_voxel_loss * inner_float).sum(
                 spatial_dimensions
             ) / (inner_count + self.epsilon)
-            outer_loss = (voxel_loss * outer_float).sum(
+            outer_loss = (outer_voxel_loss * outer_float).sum(
                 spatial_dimensions
             ) / (outer_count + self.epsilon)
             valid = (inner_count > 0) & (outer_count > 0)

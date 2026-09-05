@@ -641,6 +641,6 @@ def test_checkpoint_embeds_run_provenance(tmp_path) -> None:
         run_spec=run_spec,
     )
 
-    payload = torch.load(path, map_location="cpu", weights_only=False)
+    payload = torch.load(path, map_location="cpu", weights_only=True)
     assert payload["run"]["constraint_set"] == "none"
     assert payload["run"]["spatial_size"] == (64, 64, 64)
