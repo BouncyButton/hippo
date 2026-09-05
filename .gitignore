@@ -1,24 +1,38 @@
+# ---------------------------------------------------------------
 # Python
+# ---------------------------------------------------------------
 __pycache__/
 *.py[cod]
 .venv/
 venv/
 py39/
+.pytest_cache/
+.ipynb_checkpoints/
 
-# macOS
+# ---------------------------------------------------------------
+# OS / editor / tooling
+# ---------------------------------------------------------------
 .DS_Store
 ._*
+.idea/
+.claude/worktrees/
 
-# Experiment outputs
+# ---------------------------------------------------------------
+# Experiment outputs (generated, never source)
+# ---------------------------------------------------------------
 wandb/
 runs/
+thesis/runs/
 probe_outputs/
 probe_outputs_200e/
 toy_constraint_grokking_results/
 hippopotamus_runs/
 evaluation_output/
 
-# Model and data artifacts
+# ---------------------------------------------------------------
+# Model weights and data artifacts
+# ---------------------------------------------------------------
+weights/
 *.pth
 *.pt
 *.onnx
@@ -35,19 +49,64 @@ evaluation_output/
 *.tar.bz2
 *.zip
 
-# Baseline generated folders
+# ---------------------------------------------------------------
+# Datasets (large; keep out of git entirely)
+# ---------------------------------------------------------------
+mni-hisub25/
+mri_dataset/
+thesis/data/
+Integrating_Background_Knowledge_in_Medical_Semantic_Segmentation_with_Logic_Tensor_Networks.pdf
+
+# ---------------------------------------------------------------
+# Baseline framework generated folders
+# ---------------------------------------------------------------
 nnUNet_raw/
 preprocessed/
 results/
 unetr_pp_raw_data/
 unetr_pp_cropped_data/
 model_path/
-
 /.venv-unetrpp-py38/
-Integrating_Background_Knowledge_in_Medical_Semantic_Segmentation_with_Logic_Tensor_Networks.pdf
+
+# ---------------------------------------------------------------
+# Agent scratch
+# ---------------------------------------------------------------
 AGENTS.md
 REPO_GUIDE.md
-mni-hisub25/
-utils/
-thesis/data/
-thesis/runs/
+
+# ---------------------------------------------------------------
+# Cluster protocol / experiment directories
+#
+# These hold SOURCE, not outputs: 26 .sbatch, 6 .py, 9 protocol .md, plus
+# ~1.1 MB of small .json/.csv result artifacts that are the evidence trail
+# for the thesis. They are tracked deliberately.
+#
+# Only genuinely generated output is excluded below. These rules are
+# prospective -- no such files exist yet -- so that a future Slurm run cannot
+# drag logs or checkpoints into git.
+# ---------------------------------------------------------------
+experiments/**/logs/
+experiments/**/checkpoints/
+cluster_protocol_*/**/logs/
+cluster_protocol_*/**/checkpoints/
+*.out
+*.err
+slurm-*.out
+
+# ---------------------------------------------------------------
+# NO-OP LINES -- kept for the record, deliberately left for you to decide.
+#
+# Git ignores .gitignore for paths that are already tracked, so each of these
+# does nothing today. To make any of them real you must first untrack it:
+#     git rm --cached -r <path>
+#
+#   evaluation/            5 files tracked
+#   semantic_constraints/  15 files tracked
+#   allenamenti.md         tracked
+#   .idea/                 6 files tracked (also listed above)
+#
+# Left as-is because untracking 27 files is your call, not mine.
+# ---------------------------------------------------------------
+evaluation/
+semantic_constraints/
+allenamenti.md

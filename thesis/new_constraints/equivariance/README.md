@@ -2,8 +2,8 @@
 
 The implementation previously stored at
 `thesis/new_constraints/translation_equivariance.py` now lives in this package.
-The old module remains as a compatibility import so existing analysis scripts
-and checkpoints continue to work.
+That compatibility shim has been removed; no caller in the repository imported
+it. Import from `thesis.new_constraints.equivariance` instead.
 
 Use the canonical training flag:
 
