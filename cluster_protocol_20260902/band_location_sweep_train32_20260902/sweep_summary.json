@@ -1,0 +1,2373 @@
+{
+  "schema_version": 1,
+  "decision": {
+    "verdict": "NO_GO",
+    "selected_location_share": null,
+    "selection_rule": "smallest share passing at least the required number of update magnitudes",
+    "ratio_results": {
+      "rho_05": {
+        "location_share": 0.05,
+        "passing_update_count": 0,
+        "required_passing_update_count": 2,
+        "updates": {
+          "0.02": {
+            "passed": false,
+            "gates": {
+              "surface_dice_1mm_improved": true,
+              "union_dice_within_limit": true,
+              "assd_not_worse": false,
+              "total_errors_not_worse": false
+            }
+          },
+          "0.05": {
+            "passed": false,
+            "gates": {
+              "surface_dice_1mm_improved": true,
+              "union_dice_within_limit": true,
+              "assd_not_worse": false,
+              "total_errors_not_worse": false
+            }
+          },
+          "0.1": {
+            "passed": false,
+            "gates": {
+              "surface_dice_1mm_improved": true,
+              "union_dice_within_limit": true,
+              "assd_not_worse": false,
+              "total_errors_not_worse": false
+            }
+          }
+        }
+      },
+      "rho_10": {
+        "location_share": 0.1,
+        "passing_update_count": 0,
+        "required_passing_update_count": 2,
+        "updates": {
+          "0.02": {
+            "passed": false,
+            "gates": {
+              "surface_dice_1mm_improved": true,
+              "union_dice_within_limit": true,
+              "assd_not_worse": false,
+              "total_errors_not_worse": false
+            }
+          },
+          "0.05": {
+            "passed": false,
+            "gates": {
+              "surface_dice_1mm_improved": true,
+              "union_dice_within_limit": true,
+              "assd_not_worse": false,
+              "total_errors_not_worse": false
+            }
+          },
+          "0.1": {
+            "passed": false,
+            "gates": {
+              "surface_dice_1mm_improved": true,
+              "union_dice_within_limit": true,
+              "assd_not_worse": false,
+              "total_errors_not_worse": false
+            }
+          }
+        }
+      },
+      "rho_20": {
+        "location_share": 0.2,
+        "passing_update_count": 0,
+        "required_passing_update_count": 2,
+        "updates": {
+          "0.02": {
+            "passed": false,
+            "gates": {
+              "surface_dice_1mm_improved": true,
+              "union_dice_within_limit": true,
+              "assd_not_worse": false,
+              "total_errors_not_worse": false
+            }
+          },
+          "0.05": {
+            "passed": false,
+            "gates": {
+              "surface_dice_1mm_improved": true,
+              "union_dice_within_limit": true,
+              "assd_not_worse": false,
+              "total_errors_not_worse": false
+            }
+          },
+          "0.1": {
+            "passed": false,
+            "gates": {
+              "surface_dice_1mm_improved": true,
+              "union_dice_within_limit": true,
+              "assd_not_worse": false,
+              "total_errors_not_worse": false
+            }
+          }
+        }
+      },
+      "rho_30": {
+        "location_share": 0.3,
+        "passing_update_count": 0,
+        "required_passing_update_count": 2,
+        "updates": {
+          "0.02": {
+            "passed": false,
+            "gates": {
+              "surface_dice_1mm_improved": true,
+              "union_dice_within_limit": true,
+              "assd_not_worse": false,
+              "total_errors_not_worse": false
+            }
+          },
+          "0.05": {
+            "passed": false,
+            "gates": {
+              "surface_dice_1mm_improved": true,
+              "union_dice_within_limit": true,
+              "assd_not_worse": false,
+              "total_errors_not_worse": false
+            }
+          },
+          "0.1": {
+            "passed": false,
+            "gates": {
+              "surface_dice_1mm_improved": true,
+              "union_dice_within_limit": true,
+              "assd_not_worse": false,
+              "total_errors_not_worse": false
+            }
+          }
+        }
+      }
+    }
+  },
+  "config": {
+    "input_dir": "/mnt/beegfsstudents/home/3160552/onecut_protocol_20260902/hybrid_train32_bundles",
+    "output_dir": "/mnt/beegfsstudents/home/3160552/onecut_protocol_20260902/band_location_sweep_train32_20260902",
+    "location_shares": [
+      0.05,
+      0.1,
+      0.2,
+      0.3
+    ],
+    "radius_mm": 3.0,
+    "ray_step_mm": 0.5,
+    "tolerance_mm": 1.0,
+    "margin": 0.0,
+    "temperature": 1.0,
+    "max_surface_points": 4096,
+    "max_cases": 32,
+    "seed": 0,
+    "device": "cuda",
+    "target_aux_gradient_ratio": 0.1,
+    "high_gradient_cap_ratio": 0.5,
+    "repair_update_rms": [
+      0.02,
+      0.05,
+      0.1
+    ],
+    "max_union_dice_drop": 0.0005,
+    "minimum_passing_update_count": 2
+  },
+  "runtime": {
+    "python": "3.11.15 (main, Jun 11 2026, 15:20:16) [GCC 14.3.0]",
+    "platform": "Linux-5.14.0-687.5.3.el9_8.x86_64-x86_64-with-glibc2.34",
+    "numpy": "2.4.6",
+    "torch": "2.12.1+cu130",
+    "device": "cuda"
+  },
+  "source": {
+    "files": {
+      "run_band_location_sweep.py": "838cbad336e0d6ce477b30d3301fbb063338ccefe1f51428a1e228d1b3020f75",
+      "run_hybrid_feasibility.py": "32d5263718f813f31ca59a95e63db0e790e6e4a05e14205fbc30931c8adf1e78",
+      "surface_normal_ordinal/counterfactual.py": "d03e70d4bc9dba8c0e4c76c82287af122495dcbe0b63b5836c66dca27cd0f3ee",
+      "surface_normal_ordinal/geometry.py": "357259f1fd1c92b13dab1baf18f6db12015182793f91031fccbdf0aa4a022dfc",
+      "surface_normal_ordinal/hybrid.py": "6d5cff066e503919084ec6e42f8090d37c7f946665d92b681995b053e019ea44",
+      "surface_normal_ordinal/io.py": "82d6662dfdaf465a12da8307385a9c037751e7e49a671a372f9df96b3a9efdbf",
+      "surface_normal_ordinal/metrics.py": "125653a64612a2bb7a90ff88b5346a3369a4f00d7d7ce88d0ebaba16b0125533",
+      "surface_normal_ordinal/objective.py": "a40e67192012dc046b75ab16b9ae7b579ab4eb2aba38eab8f688ae29d7b72929"
+    }
+  },
+  "input": {
+    "directory": "/mnt/beegfsstudents/home/3160552/onecut_protocol_20260902/hybrid_train32_bundles",
+    "manifest": "/mnt/beegfsstudents/home/3160552/onecut_protocol_20260902/hybrid_train32_bundles/manifest.json",
+    "manifest_sha256": "33883ff5552968d9ad7f978bd7dff6b6e1a534a28ea33a023887a0f026e7be8a",
+    "case_count": 32
+  },
+  "gradient_summary": {
+    "valid_case_count": 32,
+    "skipped_case_count": 0,
+    "band_location_cosine": {
+      "mean": 0.4436869189269427,
+      "median": 0.45261135142988734,
+      "q25": 0.4250190974936572,
+      "q75": 0.4711512342578651,
+      "q95": 0.4995479081211291,
+      "minimum": 0.32858122636384884,
+      "maximum": 0.5349767439655265
+    },
+    "location_residual_after_band": {
+      "mean": 0.8949673883616924,
+      "median": 0.891707718372345,
+      "q25": 0.8820524215698242,
+      "q75": 0.9051644653081894,
+      "q95": 0.9321832537651062,
+      "minimum": 0.8448668122291565,
+      "maximum": 0.9444757103919983
+    },
+    "band_location_voxel_overlap_fraction": {
+      "mean": 0.02241206169128418,
+      "median": 0.022500991821289062,
+      "q25": 0.02122211456298828,
+      "q75": 0.023805618286132812,
+      "q95": 0.02456378936767578,
+      "minimum": 0.01911163330078125,
+      "maximum": 0.02532958984375
+    },
+    "band_location_conflict_fraction": {
+      "mean": 0.2740115486085415,
+      "median": 0.2715938538312912,
+      "q25": 0.26322372257709503,
+      "q75": 0.283123642206192,
+      "q95": 0.2998078182339668,
+      "minimum": 0.24617764353752136,
+      "maximum": 0.3125517964363098
+    },
+    "band_location_conflict_mass_fraction": {
+      "mean": 0.006466572830504447,
+      "median": 0.003231663256883621,
+      "q25": 0.0014662016183137894,
+      "q75": 0.011674569454044104,
+      "q95": 0.017772772535681724,
+      "minimum": 0.00015310091839637607,
+      "maximum": 0.02298041060566902
+    }
+  },
+  "calibration": {
+    "band": {
+      "median_gradient_rms": 6.398620826075785e-06,
+      "q95_gradient_rms": 7.463493625436968e-06,
+      "target_weight": 0.0118059868097686,
+      "cap_weight": 0.050607689149689994,
+      "selected_weight": 0.0118059868097686
+    },
+    "rho_05": {
+      "median_gradient_rms": 0.9726889733866606,
+      "q95_gradient_rms": 1.1427131709033485,
+      "target_weight": 7.766309184151934e-08,
+      "cap_weight": 3.3053803437674205e-07,
+      "selected_weight": 7.766309184151934e-08
+    },
+    "rho_10": {
+      "median_gradient_rms": 0.9471544489560693,
+      "q95_gradient_rms": 1.122011435664065,
+      "target_weight": 7.975682652034415e-08,
+      "cap_weight": 3.3663664501178486e-07,
+      "selected_weight": 7.975682652034415e-08
+    },
+    "rho_20": {
+      "median_gradient_rms": 0.9015634055684252,
+      "q95_gradient_rms": 1.0902935057647345,
+      "target_weight": 8.379003917725899e-08,
+      "cap_weight": 3.4642980387366434e-07,
+      "selected_weight": 8.379003917725899e-08
+    },
+    "rho_30": {
+      "median_gradient_rms": 0.876652397115486,
+      "q95_gradient_rms": 1.0860807486667843,
+      "target_weight": 8.617102208574676e-08,
+      "cap_weight": 3.4777355719679596e-07,
+      "selected_weight": 8.617102208574676e-08
+    }
+  },
+  "candidate_coefficients": {
+    "band": {
+      "band": 0.0118059868097686
+    },
+    "rho_05": {
+      "band": 0.01153059999254432,
+      "location": 0.00015873895097946495
+    },
+    "rho_10": {
+      "band": 0.011218221210387371,
+      "location": 0.0003260368516135275
+    },
+    "rho_20": {
+      "band": 0.0104760124351543,
+      "location": 0.0006850483340873468
+    },
+    "rho_30": {
+      "band": 0.00942698701792215,
+      "location": 0.0010567720645451046
+    }
+  },
+  "counterfactual_summary": {
+    "0.02": {
+      "comparisons_vs_band": {
+        "rho_05": {
+          "observation_count": 32,
+          "union_dice": {
+            "mean": -8.075216774688226e-06,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 0.0,
+            "minimum": -0.0001443771740337052,
+            "maximum": 0.00013987932529502256,
+            "positive_fraction": 0.03125,
+            "negative_fraction": 0.09375,
+            "unchanged_fraction": 0.875
+          },
+          "anterior_dice": {
+            "mean": -7.338389549846336e-06,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 0.0,
+            "minimum": -0.00023482846559508275,
+            "maximum": 0.0,
+            "positive_fraction": 0.0,
+            "negative_fraction": 0.03125,
+            "unchanged_fraction": 0.96875
+          },
+          "posterior_dice": {
+            "mean": -8.719987248911876e-06,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 0.00010746114013817626,
+            "minimum": -0.0002998050854368106,
+            "maximum": 0.0002702927863298399,
+            "positive_fraction": 0.0625,
+            "negative_fraction": 0.09375,
+            "unchanged_fraction": 0.84375
+          },
+          "surface_dice_1mm": {
+            "mean": 2.018185463278574e-05,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 0.00014499373079384625,
+            "minimum": -3.022241706274187e-05,
+            "maximum": 0.00035383347465889337,
+            "positive_fraction": 0.0625,
+            "negative_fraction": 0.03125,
+            "unchanged_fraction": 0.90625
+          },
+          "surface_dice_2mm": {
+            "mean": -1.0691648321195513e-07,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 0.0,
+            "minimum": -2.1033916637325234e-06,
+            "maximum": 0.0,
+            "positive_fraction": 0.0,
+            "negative_fraction": 0.09375,
+            "unchanged_fraction": 0.90625
+          },
+          "assd_mm": {
+            "mean": 1.814096648753913e-05,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 0.0005808081332188768,
+            "minimum": -0.0009131230653985911,
+            "maximum": 0.0006691201070592179,
+            "positive_fraction": 0.09375,
+            "negative_fraction": 0.0625,
+            "unchanged_fraction": 0.84375
+          },
+          "hd95_mm": {
+            "mean": 0.0,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 0.0,
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "positive_fraction": 0.0,
+            "negative_fraction": 0.0,
+            "unchanged_fraction": 1.0
+          },
+          "soft_dice_score": {
+            "mean": -4.7497451305389404e-07,
+            "median": -3.8743019104003906e-07,
+            "q25": -8.493661880493164e-07,
+            "q75": -2.2351741790771484e-07,
+            "q95": 4.440546035766601e-07,
+            "minimum": -1.430511474609375e-06,
+            "maximum": 4.76837158203125e-07,
+            "positive_fraction": 0.09375,
+            "negative_fraction": 0.875,
+            "unchanged_fraction": 0.03125
+          },
+          "foreground_fp": {
+            "mean": 0.0,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 0.0,
+            "minimum": -1.0,
+            "maximum": 1.0,
+            "positive_fraction": 0.03125,
+            "negative_fraction": 0.03125,
+            "unchanged_fraction": 0.9375
+          },
+          "foreground_fn": {
+            "mean": 0.0625,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 0.4499999999999993,
+            "minimum": 0.0,
+            "maximum": 1.0,
+            "positive_fraction": 0.0625,
+            "negative_fraction": 0.0,
+            "unchanged_fraction": 0.9375
+          },
+          "ap_swaps": {
+            "mean": 0.0,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 0.0,
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "positive_fraction": 0.0,
+            "negative_fraction": 0.0,
+            "unchanged_fraction": 1.0
+          },
+          "predicted_foreground_voxels": {
+            "mean": -0.0625,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 0.0,
+            "minimum": -1.0,
+            "maximum": 1.0,
+            "positive_fraction": 0.03125,
+            "negative_fraction": 0.09375,
+            "unchanged_fraction": 0.875
+          },
+          "predicted_components": {
+            "mean": 0.0,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 0.0,
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "positive_fraction": 0.0,
+            "negative_fraction": 0.0,
+            "unchanged_fraction": 1.0
+          },
+          "total_errors": {
+            "mean": 0.0625,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 1.0,
+            "minimum": -1.0,
+            "maximum": 1.0,
+            "positive_fraction": 0.09375,
+            "negative_fraction": 0.03125,
+            "unchanged_fraction": 0.875
+          }
+        },
+        "rho_10": {
+          "observation_count": 32,
+          "union_dice": {
+            "mean": -1.2017747283363245e-05,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 0.00013030793453318033,
+            "minimum": -0.0002614720878545418,
+            "maximum": 0.00014499689946356753,
+            "positive_fraction": 0.09375,
+            "negative_fraction": 0.15625,
+            "unchanged_fraction": 0.75
+          },
+          "anterior_dice": {
+            "mean": -6.511827536720416e-06,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 0.0,
+            "minimum": -0.00023482846559508275,
+            "maximum": 0.0002589281335132476,
+            "positive_fraction": 0.03125,
+            "negative_fraction": 0.0625,
+            "unchanged_fraction": 0.90625
+          },
+          "posterior_dice": {
+            "mean": 1.849694968573956e-06,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 0.00026092450557281267,
+            "minimum": -0.0002998050854368106,
+            "maximum": 0.0003477097699707832,
+            "positive_fraction": 0.15625,
+            "negative_fraction": 0.15625,
+            "unchanged_fraction": 0.6875
+          },
+          "surface_dice_1mm": {
+            "mean": 4.2237571569077315e-05,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 0.0003516393475023083,
+            "minimum": -3.022241706274187e-05,
+            "maximum": 0.0003626456925226451,
+            "positive_fraction": 0.125,
+            "negative_fraction": 0.0625,
+            "unchanged_fraction": 0.8125
+          },
+          "surface_dice_2mm": {
+            "mean": 1.161050448242329e-05,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 1.2849650522617197e-06,
+            "minimum": -2.1033916637325234e-06,
+            "maximum": 0.00037222619491594777,
+            "positive_fraction": 0.0625,
+            "negative_fraction": 0.125,
+            "unchanged_fraction": 0.8125
+          },
+          "assd_mm": {
+            "mean": 3.1238904705259765e-05,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 0.0007194153419173038,
+            "minimum": -0.0009131230653985911,
+            "maximum": 0.0013382402141184357,
+            "positive_fraction": 0.15625,
+            "negative_fraction": 0.125,
+            "unchanged_fraction": 0.71875
+          },
+          "hd95_mm": {
+            "mean": 0.0,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 0.0,
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "positive_fraction": 0.0,
+            "negative_fraction": 0.0,
+            "unchanged_fraction": 1.0
+          },
+          "soft_dice_score": {
+            "mean": -1.253560185432434e-06,
+            "median": -1.0132789611816406e-06,
+            "q25": -1.8775463104248047e-06,
+            "q75": -7.003545761108398e-07,
+            "q95": 6.22868537902832e-07,
+            "minimum": -3.337860107421875e-06,
+            "maximum": 7.748603820800781e-07,
+            "positive_fraction": 0.09375,
+            "negative_fraction": 0.90625,
+            "unchanged_fraction": 0.0
+          },
+          "foreground_fp": {
+            "mean": 0.03125,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 1.0,
+            "minimum": -1.0,
+            "maximum": 1.0,
+            "positive_fraction": 0.09375,
+            "negative_fraction": 0.0625,
+            "unchanged_fraction": 0.84375
+          },
+          "foreground_fn": {
+            "mean": 0.0625,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 1.0,
+            "minimum": -1.0,
+            "maximum": 1.0,
+            "positive_fraction": 0.09375,
+            "negative_fraction": 0.03125,
+            "unchanged_fraction": 0.875
+          },
+          "ap_swaps": {
+            "mean": -0.03125,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 0.0,
+            "minimum": -1.0,
+            "maximum": 0.0,
+            "positive_fraction": 0.0,
+            "negative_fraction": 0.03125,
+            "unchanged_fraction": 0.96875
+          },
+          "predicted_foreground_voxels": {
+            "mean": -0.03125,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 1.0,
+            "minimum": -1.0,
+            "maximum": 1.0,
+            "positive_fraction": 0.09375,
+            "negative_fraction": 0.125,
+            "unchanged_fraction": 0.78125
+          },
+          "predicted_components": {
+            "mean": 0.0,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 0.0,
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "positive_fraction": 0.0,
+            "negative_fraction": 0.0,
+            "unchanged_fraction": 1.0
+          },
+          "total_errors": {
+            "mean": 0.0625,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 1.0,
+            "minimum": -1.0,
+            "maximum": 2.0,
+            "positive_fraction": 0.15625,
+            "negative_fraction": 0.125,
+            "unchanged_fraction": 0.71875
+          }
+        },
+        "rho_20": {
+          "observation_count": 32,
+          "union_dice": {
+            "mean": -2.080305027717458e-05,
+            "median": 0.0,
+            "q25": -0.00012220415873473445,
+            "q75": 0.0,
+            "q95": 0.00017827170027229217,
+            "minimum": -0.0002614720878545418,
+            "maximum": 0.0002449867533654837,
+            "positive_fraction": 0.15625,
+            "negative_fraction": 0.3125,
+            "unchanged_fraction": 0.53125
+          },
+          "anterior_dice": {
+            "mean": -2.7646224677876224e-05,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 0.0001233526456438315,
+            "minimum": -0.000274714207060045,
+            "maximum": 0.00028245347347299887,
+            "positive_fraction": 0.09375,
+            "negative_fraction": 0.1875,
+            "unchanged_fraction": 0.71875
+          },
+          "posterior_dice": {
+            "mean": 7.5477202833365564e-06,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 0.0003614030218775264,
+            "minimum": -0.0002998050854368106,
+            "maximum": 0.0005955926146515855,
+            "positive_fraction": 0.1875,
+            "negative_fraction": 0.21875,
+            "unchanged_fraction": 0.59375
+          },
+          "surface_dice_1mm": {
+            "mean": 0.00012133570386663184,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 2.703121772085204e-06,
+            "q95": 0.0008634271481553321,
+            "minimum": -3.022241706274187e-05,
+            "maximum": 0.0011325028312570984,
+            "positive_fraction": 0.25,
+            "negative_fraction": 0.09375,
+            "unchanged_fraction": 0.65625
+          },
+          "surface_dice_2mm": {
+            "mean": 2.3700761920555924e-05,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 3.864221323751636e-06,
+            "minimum": -2.1033916637325234e-06,
+            "maximum": 0.0007550018875046582,
+            "positive_fraction": 0.15625,
+            "negative_fraction": 0.1875,
+            "unchanged_fraction": 0.65625
+          },
+          "assd_mm": {
+            "mean": 0.00011277625205650954,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0004716980488190248,
+            "q95": 0.0010275226494970893,
+            "minimum": -0.0010895996668072727,
+            "maximum": 0.0013382402141184357,
+            "positive_fraction": 0.34375,
+            "negative_fraction": 0.1875,
+            "unchanged_fraction": 0.46875
+          },
+          "hd95_mm": {
+            "mean": 0.0,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 0.0,
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "positive_fraction": 0.0,
+            "negative_fraction": 0.0,
+            "unchanged_fraction": 1.0
+          },
+          "soft_dice_score": {
+            "mean": -3.766268491744995e-06,
+            "median": -3.427267074584961e-06,
+            "q25": -4.976987838745117e-06,
+            "q75": -2.115964889526367e-06,
+            "q95": 0.0,
+            "minimum": -9.775161743164062e-06,
+            "maximum": 1.7881393432617188e-07,
+            "positive_fraction": 0.03125,
+            "negative_fraction": 0.90625,
+            "unchanged_fraction": 0.0625
+          },
+          "foreground_fp": {
+            "mean": 0.0625,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 1.0,
+            "minimum": -2.0,
+            "maximum": 2.0,
+            "positive_fraction": 0.21875,
+            "negative_fraction": 0.125,
+            "unchanged_fraction": 0.65625
+          },
+          "foreground_fn": {
+            "mean": 0.09375,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 1.0,
+            "minimum": -1.0,
+            "maximum": 1.0,
+            "positive_fraction": 0.125,
+            "negative_fraction": 0.03125,
+            "unchanged_fraction": 0.84375
+          },
+          "ap_swaps": {
+            "mean": -0.03125,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 0.0,
+            "minimum": -1.0,
+            "maximum": 0.0,
+            "positive_fraction": 0.0,
+            "negative_fraction": 0.03125,
+            "unchanged_fraction": 0.96875
+          },
+          "predicted_foreground_voxels": {
+            "mean": -0.03125,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 1.0,
+            "minimum": -2.0,
+            "maximum": 2.0,
+            "positive_fraction": 0.21875,
+            "negative_fraction": 0.21875,
+            "unchanged_fraction": 0.5625
+          },
+          "predicted_components": {
+            "mean": 0.0,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 0.0,
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "positive_fraction": 0.0,
+            "negative_fraction": 0.0,
+            "unchanged_fraction": 1.0
+          },
+          "total_errors": {
+            "mean": 0.125,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 1.0,
+            "q95": 1.4499999999999993,
+            "minimum": -2.0,
+            "maximum": 2.0,
+            "positive_fraction": 0.28125,
+            "negative_fraction": 0.15625,
+            "unchanged_fraction": 0.5625
+          }
+        },
+        "rho_30": {
+          "observation_count": 32,
+          "union_dice": {
+            "mean": -3.054409498360819e-05,
+            "median": 0.0,
+            "q25": -0.00011979557847061062,
+            "q75": 0.0,
+            "q95": 0.00023066153470787109,
+            "minimum": -0.0003586009622499331,
+            "maximum": 0.00027799027236952156,
+            "positive_fraction": 0.15625,
+            "negative_fraction": 0.375,
+            "unchanged_fraction": 0.46875
+          },
+          "anterior_dice": {
+            "mean": -9.554906071691793e-05,
+            "median": 0.0,
+            "q25": -0.00022130447262128095,
+            "q75": 0.0,
+            "q95": 1.5324791668558357e-05,
+            "minimum": -0.000592066311426942,
+            "maximum": 0.00023249409936798582,
+            "positive_fraction": 0.0625,
+            "negative_fraction": 0.34375,
+            "unchanged_fraction": 0.59375
+          },
+          "posterior_dice": {
+            "mean": 5.376001319561813e-05,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.00021486077071619647,
+            "q95": 0.0004895235517576368,
+            "minimum": -0.0004723665564477786,
+            "maximum": 0.0005955926146515855,
+            "positive_fraction": 0.28125,
+            "negative_fraction": 0.15625,
+            "unchanged_fraction": 0.5625
+          },
+          "surface_dice_1mm": {
+            "mean": 0.0001785056632936377,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.00030923192125464904,
+            "q95": 0.0010984099803192815,
+            "minimum": -0.00033972399028259215,
+            "maximum": 0.0011625172777280923,
+            "positive_fraction": 0.34375,
+            "negative_fraction": 0.09375,
+            "unchanged_fraction": 0.5625
+          },
+          "surface_dice_2mm": {
+            "mean": 5.754782911097933e-05,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 5.751322920688473e-08,
+            "q95": 0.00038053053531073575,
+            "minimum": -2.1033916637325234e-06,
+            "maximum": 0.0007550018875046582,
+            "positive_fraction": 0.25,
+            "negative_fraction": 0.15625,
+            "unchanged_fraction": 0.59375
+          },
+          "assd_mm": {
+            "mean": 0.00022749405387078106,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0006569528092686266,
+            "q95": 0.0014176039961140696,
+            "minimum": -0.0010895996668072727,
+            "maximum": 0.001981505944517792,
+            "positive_fraction": 0.4375,
+            "negative_fraction": 0.21875,
+            "unchanged_fraction": 0.34375
+          },
+          "hd95_mm": {
+            "mean": 0.0,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 0.0,
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "positive_fraction": 0.0,
+            "negative_fraction": 0.0,
+            "unchanged_fraction": 1.0
+          },
+          "soft_dice_score": {
+            "mean": -8.007511496543884e-06,
+            "median": -7.927417755126953e-06,
+            "q25": -9.924173355102539e-06,
+            "q75": -4.380941390991211e-06,
+            "q95": -2.3096799850463867e-06,
+            "minimum": -1.9311904907226562e-05,
+            "maximum": -1.0132789611816406e-06,
+            "positive_fraction": 0.0,
+            "negative_fraction": 1.0,
+            "unchanged_fraction": 0.0
+          },
+          "foreground_fp": {
+            "mean": 0.03125,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 1.0,
+            "q95": 1.0,
+            "minimum": -2.0,
+            "maximum": 2.0,
+            "positive_fraction": 0.28125,
+            "negative_fraction": 0.15625,
+            "unchanged_fraction": 0.5625
+          },
+          "foreground_fn": {
+            "mean": 0.1875,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 1.0,
+            "minimum": -1.0,
+            "maximum": 1.0,
+            "positive_fraction": 0.21875,
+            "negative_fraction": 0.03125,
+            "unchanged_fraction": 0.75
+          },
+          "ap_swaps": {
+            "mean": -0.03125,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 0.0,
+            "minimum": -1.0,
+            "maximum": 0.0,
+            "positive_fraction": 0.0,
+            "negative_fraction": 0.03125,
+            "unchanged_fraction": 0.96875
+          },
+          "predicted_foreground_voxels": {
+            "mean": -0.15625,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 1.0,
+            "minimum": -2.0,
+            "maximum": 1.0,
+            "positive_fraction": 0.21875,
+            "negative_fraction": 0.21875,
+            "unchanged_fraction": 0.5625
+          },
+          "predicted_components": {
+            "mean": 0.0,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 0.0,
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "positive_fraction": 0.0,
+            "negative_fraction": 0.0,
+            "unchanged_fraction": 1.0
+          },
+          "total_errors": {
+            "mean": 0.1875,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 1.0,
+            "q95": 2.0,
+            "minimum": -2.0,
+            "maximum": 3.0,
+            "positive_fraction": 0.3125,
+            "negative_fraction": 0.15625,
+            "unchanged_fraction": 0.53125
+          }
+        }
+      }
+    },
+    "0.05": {
+      "comparisons_vs_band": {
+        "rho_05": {
+          "observation_count": 32,
+          "union_dice": {
+            "mean": -1.975915028348818e-05,
+            "median": 0.0,
+            "q25": -0.00011102628254464064,
+            "q75": 0.0,
+            "q95": 0.00012470163189618467,
+            "minimum": -0.00014599824396643868,
+            "maximum": 0.00013208447294399406,
+            "positive_fraction": 0.15625,
+            "negative_fraction": 0.3125,
+            "unchanged_fraction": 0.53125
+          },
+          "anterior_dice": {
+            "mean": -4.563131260413092e-05,
+            "median": 0.0,
+            "q25": -5.138265045520618e-05,
+            "q75": 0.0,
+            "q95": 0.00010047756640123012,
+            "minimum": -0.00033842061239319765,
+            "maximum": 0.00024456944963036076,
+            "positive_fraction": 0.0625,
+            "negative_fraction": 0.25,
+            "unchanged_fraction": 0.6875
+          },
+          "posterior_dice": {
+            "mean": 5.3461135972807106e-06,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 0.00024012608498728548,
+            "minimum": -0.0002792238502566935,
+            "maximum": 0.00026199294298279163,
+            "positive_fraction": 0.09375,
+            "negative_fraction": 0.09375,
+            "unchanged_fraction": 0.8125
+          },
+          "surface_dice_1mm": {
+            "mean": 9.918712601631949e-05,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 0.0007050940751985368,
+            "minimum": -2.296097846699041e-05,
+            "maximum": 0.001060004748821286,
+            "positive_fraction": 0.21875,
+            "negative_fraction": 0.03125,
+            "unchanged_fraction": 0.75
+          },
+          "surface_dice_2mm": {
+            "mean": 1.0888094901847362e-05,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 3.084992831703381e-06,
+            "minimum": -3.7546254096909593e-06,
+            "maximum": 0.00034482758620690834,
+            "positive_fraction": 0.1875,
+            "negative_fraction": 0.03125,
+            "unchanged_fraction": 0.78125
+          },
+          "assd_mm": {
+            "mean": 0.00016366376645186864,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0004202578209945296,
+            "q95": 0.0007264647827251335,
+            "minimum": -0.00032055978939043994,
+            "maximum": 0.0007552870090634101,
+            "positive_fraction": 0.34375,
+            "negative_fraction": 0.15625,
+            "unchanged_fraction": 0.5
+          },
+          "hd95_mm": {
+            "mean": 0.0,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 0.0,
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "positive_fraction": 0.0,
+            "negative_fraction": 0.0,
+            "unchanged_fraction": 1.0
+          },
+          "soft_dice_score": {
+            "mean": -1.9762665033340454e-06,
+            "median": -1.996755599975586e-06,
+            "q25": -3.7401914596557617e-06,
+            "q75": -5.811452865600586e-07,
+            "q95": 2.1606683731079093e-06,
+            "minimum": -7.152557373046875e-06,
+            "maximum": 6.198883056640625e-06,
+            "positive_fraction": 0.21875,
+            "negative_fraction": 0.75,
+            "unchanged_fraction": 0.03125
+          },
+          "foreground_fp": {
+            "mean": 0.125,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 1.0,
+            "q95": 1.0,
+            "minimum": -1.0,
+            "maximum": 1.0,
+            "positive_fraction": 0.28125,
+            "negative_fraction": 0.15625,
+            "unchanged_fraction": 0.5625
+          },
+          "foreground_fn": {
+            "mean": 0.03125,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 0.0,
+            "minimum": 0.0,
+            "maximum": 1.0,
+            "positive_fraction": 0.03125,
+            "negative_fraction": 0.0,
+            "unchanged_fraction": 0.96875
+          },
+          "ap_swaps": {
+            "mean": 0.0,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 0.0,
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "positive_fraction": 0.0,
+            "negative_fraction": 0.0,
+            "unchanged_fraction": 1.0
+          },
+          "predicted_foreground_voxels": {
+            "mean": 0.09375,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 1.0,
+            "q95": 1.0,
+            "minimum": -1.0,
+            "maximum": 1.0,
+            "positive_fraction": 0.28125,
+            "negative_fraction": 0.1875,
+            "unchanged_fraction": 0.53125
+          },
+          "predicted_components": {
+            "mean": 0.0,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 0.0,
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "positive_fraction": 0.0,
+            "negative_fraction": 0.0,
+            "unchanged_fraction": 1.0
+          },
+          "total_errors": {
+            "mean": 0.15625,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 1.0,
+            "q95": 1.0,
+            "minimum": -1.0,
+            "maximum": 1.0,
+            "positive_fraction": 0.3125,
+            "negative_fraction": 0.15625,
+            "unchanged_fraction": 0.53125
+          }
+        },
+        "rho_10": {
+          "observation_count": 32,
+          "union_dice": {
+            "mean": -4.1445150827788824e-05,
+            "median": 0.0,
+            "q25": -0.0001286545943371964,
+            "q75": 0.0,
+            "q95": 0.00012480860561217,
+            "minimum": -0.0002189358841407918,
+            "maximum": 0.00013208447294399406,
+            "positive_fraction": 0.15625,
+            "negative_fraction": 0.46875,
+            "unchanged_fraction": 0.375
+          },
+          "anterior_dice": {
+            "mean": -6.953739596166422e-05,
+            "median": 0.0,
+            "q25": -0.00021798468241959745,
+            "q75": 0.0,
+            "q95": 0.00010047756640123012,
+            "minimum": -0.0004364906154517012,
+            "maximum": 0.00024456944963036076,
+            "positive_fraction": 0.0625,
+            "negative_fraction": 0.3125,
+            "unchanged_fraction": 0.625
+          },
+          "posterior_dice": {
+            "mean": -1.3982394690737615e-05,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 0.00023134580893624523,
+            "minimum": -0.00031979070137777565,
+            "maximum": 0.00026199294298279163,
+            "positive_fraction": 0.15625,
+            "negative_fraction": 0.21875,
+            "unchanged_fraction": 0.625
+          },
+          "surface_dice_1mm": {
+            "mean": 0.00019488842784274457,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.00035070172096274277,
+            "q95": 0.0007277251549688335,
+            "minimum": 0.0,
+            "maximum": 0.001060004748821286,
+            "positive_fraction": 0.375,
+            "negative_fraction": 0.0,
+            "unchanged_fraction": 0.625
+          },
+          "surface_dice_2mm": {
+            "mean": 2.2460350489850872e-05,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 0.00015712775341782367,
+            "minimum": -1.7665718238246697e-06,
+            "maximum": 0.00036832412523024605,
+            "positive_fraction": 0.21875,
+            "negative_fraction": 0.03125,
+            "unchanged_fraction": 0.75
+          },
+          "assd_mm": {
+            "mean": 0.0002636052769702784,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0006900009558930276,
+            "q95": 0.0009034423560159597,
+            "minimum": -0.0006139846889645084,
+            "maximum": 0.0012745064909035486,
+            "positive_fraction": 0.46875,
+            "negative_fraction": 0.1875,
+            "unchanged_fraction": 0.34375
+          },
+          "hd95_mm": {
+            "mean": 0.0,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 0.0,
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "positive_fraction": 0.0,
+            "negative_fraction": 0.0,
+            "unchanged_fraction": 1.0
+          },
+          "soft_dice_score": {
+            "mean": -5.044043064117432e-06,
+            "median": -5.185604095458984e-06,
+            "q25": -8.702278137207031e-06,
+            "q75": -2.175569534301758e-06,
+            "q95": 3.495812416076658e-06,
+            "minimum": -1.5556812286376953e-05,
+            "maximum": 1.1444091796875e-05,
+            "positive_fraction": 0.15625,
+            "negative_fraction": 0.8125,
+            "unchanged_fraction": 0.03125
+          },
+          "foreground_fp": {
+            "mean": 0.15625,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 1.0,
+            "q95": 1.0,
+            "minimum": -1.0,
+            "maximum": 2.0,
+            "positive_fraction": 0.3125,
+            "negative_fraction": 0.1875,
+            "unchanged_fraction": 0.5
+          },
+          "foreground_fn": {
+            "mean": 0.15625,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 1.0,
+            "minimum": 0.0,
+            "maximum": 1.0,
+            "positive_fraction": 0.15625,
+            "negative_fraction": 0.0,
+            "unchanged_fraction": 0.84375
+          },
+          "ap_swaps": {
+            "mean": 0.0,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 0.0,
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "positive_fraction": 0.0,
+            "negative_fraction": 0.0,
+            "unchanged_fraction": 1.0
+          },
+          "predicted_foreground_voxels": {
+            "mean": 0.0,
+            "median": 0.0,
+            "q25": -1.0,
+            "q75": 1.0,
+            "q95": 1.0,
+            "minimum": -2.0,
+            "maximum": 2.0,
+            "positive_fraction": 0.3125,
+            "negative_fraction": 0.3125,
+            "unchanged_fraction": 0.375
+          },
+          "predicted_components": {
+            "mean": 0.0,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 0.0,
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "positive_fraction": 0.0,
+            "negative_fraction": 0.0,
+            "unchanged_fraction": 1.0
+          },
+          "total_errors": {
+            "mean": 0.3125,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 1.0,
+            "q95": 1.0,
+            "minimum": -1.0,
+            "maximum": 2.0,
+            "positive_fraction": 0.4375,
+            "negative_fraction": 0.15625,
+            "unchanged_fraction": 0.40625
+          }
+        },
+        "rho_20": {
+          "observation_count": 32,
+          "union_dice": {
+            "mean": -8.239049525721881e-05,
+            "median": -0.00011342918221574072,
+            "q25": -0.00016877796446920779,
+            "q75": 0.0,
+            "q95": 0.00018927272352757253,
+            "minimum": -0.0004781795068509176,
+            "maximum": 0.0002852956300670728,
+            "positive_fraction": 0.21875,
+            "negative_fraction": 0.5625,
+            "unchanged_fraction": 0.21875
+          },
+          "anterior_dice": {
+            "mean": -0.00016587710783711254,
+            "median": -0.00010647586192208403,
+            "q25": -0.00029600071884772206,
+            "q75": 0.0,
+            "q95": 0.00010564640031721068,
+            "minimum": -0.0007170156114802984,
+            "maximum": 0.00024456944963036076,
+            "positive_fraction": 0.0625,
+            "negative_fraction": 0.5,
+            "unchanged_fraction": 0.4375
+          },
+          "posterior_dice": {
+            "mean": 9.729734248321853e-07,
+            "median": 0.0,
+            "q25": -0.00021740149710405832,
+            "q75": 5.162485528548144e-05,
+            "q95": 0.0004785506069757972,
+            "minimum": -0.0006397638796179494,
+            "maximum": 0.0005272836010531412,
+            "positive_fraction": 0.25,
+            "negative_fraction": 0.3125,
+            "unchanged_fraction": 0.4375
+          },
+          "surface_dice_1mm": {
+            "mean": 0.00036505341760226934,
+            "median": 0.00018074712024546136,
+            "q25": 0.0,
+            "q75": 0.0006848016395687717,
+            "q95": 0.0011819620443696331,
+            "minimum": -0.0003937007874016407,
+            "maximum": 0.0013193535653658328,
+            "positive_fraction": 0.5625,
+            "negative_fraction": 0.0625,
+            "unchanged_fraction": 0.375
+          },
+          "surface_dice_2mm": {
+            "mean": 5.67377339024365e-05,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 4.2741305242288696e-07,
+            "q95": 0.0003632443417333264,
+            "minimum": -2.3981133336903326e-06,
+            "maximum": 0.0007366482504604921,
+            "positive_fraction": 0.34375,
+            "negative_fraction": 0.125,
+            "unchanged_fraction": 0.53125
+          },
+          "assd_mm": {
+            "mean": 0.0006493334625972697,
+            "median": 0.0006183063470783234,
+            "q25": -8.536495942694511e-05,
+            "q75": 0.0013827577352418102,
+            "q95": 0.0025409190487434476,
+            "minimum": -0.000806223356353386,
+            "maximum": 0.00314147995934444,
+            "positive_fraction": 0.53125,
+            "negative_fraction": 0.3125,
+            "unchanged_fraction": 0.15625
+          },
+          "hd95_mm": {
+            "mean": 0.0,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 0.0,
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "positive_fraction": 0.0,
+            "negative_fraction": 0.0,
+            "unchanged_fraction": 1.0
+          },
+          "soft_dice_score": {
+            "mean": -1.4854595065116882e-05,
+            "median": -1.6510486602783203e-05,
+            "q25": -2.205371856689453e-05,
+            "q75": -8.717179298400879e-06,
+            "q95": 3.0726194381713806e-06,
+            "minimum": -3.653764724731445e-05,
+            "maximum": 1.8596649169921875e-05,
+            "positive_fraction": 0.0625,
+            "negative_fraction": 0.9375,
+            "unchanged_fraction": 0.0
+          },
+          "foreground_fp": {
+            "mean": 0.4375,
+            "median": 0.5,
+            "q25": -0.25,
+            "q75": 1.0,
+            "q95": 2.4499999999999993,
+            "minimum": -2.0,
+            "maximum": 4.0,
+            "positive_fraction": 0.5,
+            "negative_fraction": 0.25,
+            "unchanged_fraction": 0.25
+          },
+          "foreground_fn": {
+            "mean": 0.21875,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 1.0,
+            "minimum": 0.0,
+            "maximum": 2.0,
+            "positive_fraction": 0.1875,
+            "negative_fraction": 0.0,
+            "unchanged_fraction": 0.8125
+          },
+          "ap_swaps": {
+            "mean": 0.0,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 0.0,
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "positive_fraction": 0.0,
+            "negative_fraction": 0.0,
+            "unchanged_fraction": 1.0
+          },
+          "predicted_foreground_voxels": {
+            "mean": 0.21875,
+            "median": 0.0,
+            "q25": -1.0,
+            "q75": 1.0,
+            "q95": 2.4499999999999993,
+            "minimum": -2.0,
+            "maximum": 4.0,
+            "positive_fraction": 0.40625,
+            "negative_fraction": 0.3125,
+            "unchanged_fraction": 0.28125
+          },
+          "predicted_components": {
+            "mean": 0.0,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 0.0,
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "positive_fraction": 0.0,
+            "negative_fraction": 0.0,
+            "unchanged_fraction": 1.0
+          },
+          "total_errors": {
+            "mean": 0.65625,
+            "median": 1.0,
+            "q25": 0.0,
+            "q75": 1.25,
+            "q95": 3.0,
+            "minimum": -2.0,
+            "maximum": 4.0,
+            "positive_fraction": 0.53125,
+            "negative_fraction": 0.21875,
+            "unchanged_fraction": 0.25
+          }
+        },
+        "rho_30": {
+          "observation_count": 32,
+          "union_dice": {
+            "mean": -0.00017288842698439527,
+            "median": -0.00014714653171460368,
+            "q25": -0.0003626277376754805,
+            "q75": 0.0,
+            "q95": 0.00013392969753077131,
+            "minimum": -0.0006078566858604972,
+            "maximum": 0.0002852956300670728,
+            "positive_fraction": 0.21875,
+            "negative_fraction": 0.71875,
+            "unchanged_fraction": 0.0625
+          },
+          "anterior_dice": {
+            "mean": -0.00026672707835450477,
+            "median": -0.00025783444155319524,
+            "q25": -0.00046946069558592707,
+            "q75": 0.0,
+            "q95": 0.00010564640031721068,
+            "minimum": -0.0010573618821041464,
+            "maximum": 0.00024456944963036076,
+            "positive_fraction": 0.0625,
+            "negative_fraction": 0.6875,
+            "unchanged_fraction": 0.25
+          },
+          "posterior_dice": {
+            "mean": -7.460814956947864e-05,
+            "median": 0.0,
+            "q25": -0.000266538484280765,
+            "q75": 0.0001822091978752327,
+            "q95": 0.0004785506069757972,
+            "minimum": -0.0008104045279845318,
+            "maximum": 0.0005272836010531412,
+            "positive_fraction": 0.28125,
+            "negative_fraction": 0.46875,
+            "unchanged_fraction": 0.25
+          },
+          "surface_dice_1mm": {
+            "mean": 0.00046557132333695586,
+            "median": 0.00035776804726977973,
+            "q25": 0.0,
+            "q75": 0.0007456184314433567,
+            "q95": 0.0012979965370092828,
+            "minimum": -0.0004295199610486744,
+            "maximum": 0.0017311287230178385,
+            "positive_fraction": 0.65625,
+            "negative_fraction": 0.125,
+            "unchanged_fraction": 0.21875
+          },
+          "surface_dice_2mm": {
+            "mean": 7.76854780323924e-05,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 7.668871249699727e-07,
+            "q95": 0.0005138873078894433,
+            "minimum": -2.3981133336903326e-06,
+            "maximum": 0.0007350196986908308,
+            "positive_fraction": 0.4375,
+            "negative_fraction": 0.125,
+            "unchanged_fraction": 0.4375
+          },
+          "assd_mm": {
+            "mean": 0.001035513121799522,
+            "median": 0.0008007511199208395,
+            "q25": 4.717087019574795e-05,
+            "q75": 0.0017201272862998052,
+            "q95": 0.003193608917713264,
+            "minimum": -0.0006139846889645084,
+            "maximum": 0.0036687383228729553,
+            "positive_fraction": 0.75,
+            "negative_fraction": 0.25,
+            "unchanged_fraction": 0.0
+          },
+          "hd95_mm": {
+            "mean": 0.0,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 0.0,
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "positive_fraction": 0.0,
+            "negative_fraction": 0.0,
+            "unchanged_fraction": 1.0
+          },
+          "soft_dice_score": {
+            "mean": -3.509409725666046e-05,
+            "median": -3.847479820251465e-05,
+            "q25": -4.690885543823242e-05,
+            "q75": -2.6464462280273438e-05,
+            "q95": -4.774332046508799e-06,
+            "minimum": -6.943941116333008e-05,
+            "maximum": 1.3172626495361328e-05,
+            "positive_fraction": 0.0625,
+            "negative_fraction": 0.9375,
+            "unchanged_fraction": 0.0
+          },
+          "foreground_fp": {
+            "mean": 0.78125,
+            "median": 1.0,
+            "q25": -1.0,
+            "q75": 2.0,
+            "q95": 3.4499999999999993,
+            "minimum": -2.0,
+            "maximum": 5.0,
+            "positive_fraction": 0.53125,
+            "negative_fraction": 0.28125,
+            "unchanged_fraction": 0.1875
+          },
+          "foreground_fn": {
+            "mean": 0.53125,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 1.0,
+            "q95": 2.0,
+            "minimum": -1.0,
+            "maximum": 2.0,
+            "positive_fraction": 0.46875,
+            "negative_fraction": 0.03125,
+            "unchanged_fraction": 0.5
+          },
+          "ap_swaps": {
+            "mean": 0.0,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 0.0,
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "positive_fraction": 0.0,
+            "negative_fraction": 0.0,
+            "unchanged_fraction": 1.0
+          },
+          "predicted_foreground_voxels": {
+            "mean": 0.25,
+            "median": 0.0,
+            "q25": -1.0,
+            "q75": 1.0,
+            "q95": 2.8999999999999986,
+            "minimum": -2.0,
+            "maximum": 6.0,
+            "positive_fraction": 0.40625,
+            "negative_fraction": 0.4375,
+            "unchanged_fraction": 0.15625
+          },
+          "predicted_components": {
+            "mean": 0.0,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 0.0,
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "positive_fraction": 0.0,
+            "negative_fraction": 0.0,
+            "unchanged_fraction": 1.0
+          },
+          "total_errors": {
+            "mean": 1.3125,
+            "median": 1.0,
+            "q25": 0.0,
+            "q75": 3.0,
+            "q95": 4.0,
+            "minimum": -2.0,
+            "maximum": 4.0,
+            "positive_fraction": 0.65625,
+            "negative_fraction": 0.21875,
+            "unchanged_fraction": 0.125
+          }
+        }
+      }
+    },
+    "0.1": {
+      "comparisons_vs_band": {
+        "rho_05": {
+          "observation_count": 32,
+          "union_dice": {
+            "mean": -1.4335284823484978e-05,
+            "median": 0.0,
+            "q25": -0.00011450398413342944,
+            "q75": 0.0,
+            "q95": 0.0001349134024404841,
+            "minimum": -0.00014487113125560835,
+            "maximum": 0.0002477393781741277,
+            "positive_fraction": 0.15625,
+            "negative_fraction": 0.3125,
+            "unchanged_fraction": 0.53125
+          },
+          "anterior_dice": {
+            "mean": 6.940921268017153e-07,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 0.0002339485313231134,
+            "minimum": -0.0004656377012448587,
+            "maximum": 0.000528525177013961,
+            "positive_fraction": 0.0625,
+            "negative_fraction": 0.09375,
+            "unchanged_fraction": 0.84375
+          },
+          "posterior_dice": {
+            "mean": -2.6432647430650602e-05,
+            "median": 0.0,
+            "q25": -1.396277775142507e-05,
+            "q75": 0.0,
+            "q95": 0.0002663186498161052,
+            "minimum": -0.0003018096651318247,
+            "maximum": 0.00029101553819943504,
+            "positive_fraction": 0.125,
+            "negative_fraction": 0.25,
+            "unchanged_fraction": 0.625
+          },
+          "surface_dice_1mm": {
+            "mean": 0.00010984451930424327,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 0.0007343511428438698,
+            "minimum": -3.0045036419901194e-05,
+            "maximum": 0.0009993337774817368,
+            "positive_fraction": 0.21875,
+            "negative_fraction": 0.03125,
+            "unchanged_fraction": 0.75
+          },
+          "surface_dice_2mm": {
+            "mean": 1.1329022262609317e-05,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 1.9445197226020096e-06,
+            "minimum": -1.5602327867458854e-06,
+            "maximum": 0.00036035697029423996,
+            "positive_fraction": 0.09375,
+            "negative_fraction": 0.0625,
+            "unchanged_fraction": 0.84375
+          },
+          "assd_mm": {
+            "mean": 0.00010436438755062009,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0003062335290195811,
+            "q95": 0.0007440778299557915,
+            "minimum": -0.0010544782965368205,
+            "maximum": 0.0013591423758116394,
+            "positive_fraction": 0.28125,
+            "negative_fraction": 0.15625,
+            "unchanged_fraction": 0.5625
+          },
+          "hd95_mm": {
+            "mean": 0.0,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 0.0,
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "positive_fraction": 0.0,
+            "negative_fraction": 0.0,
+            "unchanged_fraction": 1.0
+          },
+          "soft_dice_score": {
+            "mean": -4.017725586891174e-06,
+            "median": -5.27501106262207e-06,
+            "q25": -9.015202522277832e-06,
+            "q75": 9.834766387939453e-07,
+            "q95": 5.501508712768554e-06,
+            "minimum": -1.6868114471435547e-05,
+            "maximum": 1.6033649444580078e-05,
+            "positive_fraction": 0.28125,
+            "negative_fraction": 0.71875,
+            "unchanged_fraction": 0.0
+          },
+          "foreground_fp": {
+            "mean": 0.03125,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 1.0,
+            "minimum": -1.0,
+            "maximum": 1.0,
+            "positive_fraction": 0.21875,
+            "negative_fraction": 0.1875,
+            "unchanged_fraction": 0.59375
+          },
+          "foreground_fn": {
+            "mean": 0.0625,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 1.0,
+            "minimum": -1.0,
+            "maximum": 1.0,
+            "positive_fraction": 0.09375,
+            "negative_fraction": 0.03125,
+            "unchanged_fraction": 0.875
+          },
+          "ap_swaps": {
+            "mean": 0.0,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 0.0,
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "positive_fraction": 0.0,
+            "negative_fraction": 0.0,
+            "unchanged_fraction": 1.0
+          },
+          "predicted_foreground_voxels": {
+            "mean": -0.03125,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 1.0,
+            "minimum": -2.0,
+            "maximum": 1.0,
+            "positive_fraction": 0.21875,
+            "negative_fraction": 0.21875,
+            "unchanged_fraction": 0.5625
+          },
+          "predicted_components": {
+            "mean": 0.0,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 0.0,
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "positive_fraction": 0.0,
+            "negative_fraction": 0.0,
+            "unchanged_fraction": 1.0
+          },
+          "total_errors": {
+            "mean": 0.09375,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 1.0,
+            "q95": 1.0,
+            "minimum": -2.0,
+            "maximum": 1.0,
+            "positive_fraction": 0.28125,
+            "negative_fraction": 0.15625,
+            "unchanged_fraction": 0.5625
+          }
+        },
+        "rho_10": {
+          "observation_count": 32,
+          "union_dice": {
+            "mean": -5.969040715053664e-05,
+            "median": 0.0,
+            "q25": -0.0001243769466716116,
+            "q75": 0.0,
+            "q95": 0.00013380246699341015,
+            "minimum": -0.00042945384261738884,
+            "maximum": 0.0002477393781741277,
+            "positive_fraction": 0.15625,
+            "negative_fraction": 0.4375,
+            "unchanged_fraction": 0.40625
+          },
+          "anterior_dice": {
+            "mean": -5.4628049817762037e-05,
+            "median": 0.0,
+            "q25": -0.00022549673602412224,
+            "q75": 0.0,
+            "q95": 0.0002339485313231134,
+            "minimum": -0.0004656377012448587,
+            "maximum": 0.000528525177013961,
+            "positive_fraction": 0.0625,
+            "negative_fraction": 0.3125,
+            "unchanged_fraction": 0.625
+          },
+          "posterior_dice": {
+            "mean": -5.931007603244415e-05,
+            "median": 0.0,
+            "q25": -0.00010062924260723083,
+            "q75": 0.0,
+            "q95": 0.00025534611786172113,
+            "minimum": -0.0005715918833952838,
+            "maximum": 0.0005822266513573204,
+            "positive_fraction": 0.125,
+            "negative_fraction": 0.28125,
+            "unchanged_fraction": 0.59375
+          },
+          "surface_dice_1mm": {
+            "mean": 0.0001469639754639665,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0001287682066300755,
+            "q95": 0.0008415655397717324,
+            "minimum": -3.0045036419901194e-05,
+            "maximum": 0.0011123470522803602,
+            "positive_fraction": 0.34375,
+            "negative_fraction": 0.03125,
+            "unchanged_fraction": 0.625
+          },
+          "surface_dice_2mm": {
+            "mean": 1.1607060735267793e-05,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 6.4733592087584655e-06,
+            "minimum": -1.5602327867458854e-06,
+            "maximum": 0.00036035697029423996,
+            "positive_fraction": 0.09375,
+            "negative_fraction": 0.0625,
+            "unchanged_fraction": 0.84375
+          },
+          "assd_mm": {
+            "mean": 0.00027314481509033064,
+            "median": 2.2559292267160247e-05,
+            "q25": 0.0,
+            "q75": 0.0006626357560384766,
+            "q95": 0.0015795917676752077,
+            "minimum": -0.0014125050798763361,
+            "maximum": 0.0023598915411084387,
+            "positive_fraction": 0.5,
+            "negative_fraction": 0.1875,
+            "unchanged_fraction": 0.3125
+          },
+          "hd95_mm": {
+            "mean": 0.0,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 0.0,
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "positive_fraction": 0.0,
+            "negative_fraction": 0.0,
+            "unchanged_fraction": 1.0
+          },
+          "soft_dice_score": {
+            "mean": -1.0212883353233337e-05,
+            "median": -1.3113021850585938e-05,
+            "q25": -2.072751522064209e-05,
+            "q75": -5.960464477539062e-07,
+            "q95": 9.730458259582518e-06,
+            "minimum": -3.647804260253906e-05,
+            "maximum": 3.0338764190673828e-05,
+            "positive_fraction": 0.25,
+            "negative_fraction": 0.75,
+            "unchanged_fraction": 0.0
+          },
+          "foreground_fp": {
+            "mean": 0.28125,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 1.0,
+            "q95": 2.0,
+            "minimum": -1.0,
+            "maximum": 2.0,
+            "positive_fraction": 0.375,
+            "negative_fraction": 0.1875,
+            "unchanged_fraction": 0.4375
+          },
+          "foreground_fn": {
+            "mean": 0.15625,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 1.0,
+            "minimum": -1.0,
+            "maximum": 2.0,
+            "positive_fraction": 0.15625,
+            "negative_fraction": 0.03125,
+            "unchanged_fraction": 0.8125
+          },
+          "ap_swaps": {
+            "mean": 0.0,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 0.0,
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "positive_fraction": 0.0,
+            "negative_fraction": 0.0,
+            "unchanged_fraction": 1.0
+          },
+          "predicted_foreground_voxels": {
+            "mean": 0.125,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 1.0,
+            "q95": 1.4499999999999993,
+            "minimum": -2.0,
+            "maximum": 2.0,
+            "positive_fraction": 0.3125,
+            "negative_fraction": 0.21875,
+            "unchanged_fraction": 0.46875
+          },
+          "predicted_components": {
+            "mean": 0.0,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 0.0,
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "positive_fraction": 0.0,
+            "negative_fraction": 0.0,
+            "unchanged_fraction": 1.0
+          },
+          "total_errors": {
+            "mean": 0.4375,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 1.0,
+            "q95": 2.4499999999999993,
+            "minimum": -2.0,
+            "maximum": 3.0,
+            "positive_fraction": 0.40625,
+            "negative_fraction": 0.15625,
+            "unchanged_fraction": 0.4375
+          }
+        },
+        "rho_20": {
+          "observation_count": 32,
+          "union_dice": {
+            "mean": -0.00011150119841721665,
+            "median": -0.00012702348635862393,
+            "q25": -0.00026734186726284914,
+            "q75": 0.0,
+            "q95": 0.00027443283356708424,
+            "minimum": -0.0006127450500637011,
+            "maximum": 0.0002935390188302245,
+            "positive_fraction": 0.1875,
+            "negative_fraction": 0.625,
+            "unchanged_fraction": 0.1875
+          },
+          "anterior_dice": {
+            "mean": -9.128442602902159e-05,
+            "median": 0.0,
+            "q25": -0.0002887390818998026,
+            "q75": 5.561806293408189e-06,
+            "q95": 0.0005359421907832173,
+            "minimum": -0.0009561944831923963,
+            "maximum": 0.0010576430371532775,
+            "positive_fraction": 0.25,
+            "negative_fraction": 0.4375,
+            "unchanged_fraction": 0.3125
+          },
+          "posterior_dice": {
+            "mean": -0.00010977010331930659,
+            "median": 0.0,
+            "q25": -0.0003772862293997814,
+            "q75": 0.0,
+            "q95": 0.0003936962776135754,
+            "minimum": -0.0008542850935909785,
+            "maximum": 0.00087363353669212,
+            "positive_fraction": 0.21875,
+            "negative_fraction": 0.40625,
+            "unchanged_fraction": 0.375
+          },
+          "surface_dice_1mm": {
+            "mean": 0.00042477779184285636,
+            "median": 0.0003532054816393071,
+            "q25": 0.0,
+            "q75": 0.0006651962507802367,
+            "q95": 0.0014514223580785412,
+            "minimum": -6.011379572679054e-05,
+            "maximum": 0.0015145778114350472,
+            "positive_fraction": 0.6875,
+            "negative_fraction": 0.03125,
+            "unchanged_fraction": 0.28125
+          },
+          "surface_dice_2mm": {
+            "mean": 8.903867736955937e-05,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 1.2718190318672384e-06,
+            "q95": 0.0005272399216061261,
+            "minimum": -3.1215078132307283e-06,
+            "maximum": 0.0007209745966247905,
+            "positive_fraction": 0.28125,
+            "negative_fraction": 0.125,
+            "unchanged_fraction": 0.59375
+          },
+          "assd_mm": {
+            "mean": 0.0006198756541707763,
+            "median": 0.0006166376105518345,
+            "q25": -2.398362630808004e-05,
+            "q75": 0.0014054847217263577,
+            "q95": 0.0017768436830045142,
+            "minimum": -0.001040006761472978,
+            "maximum": 0.0037205021498126767,
+            "positive_fraction": 0.625,
+            "negative_fraction": 0.28125,
+            "unchanged_fraction": 0.09375
+          },
+          "hd95_mm": {
+            "mean": 0.0,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 0.0,
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "positive_fraction": 0.0,
+            "negative_fraction": 0.0,
+            "unchanged_fraction": 1.0
+          },
+          "soft_dice_score": {
+            "mean": -3.0007213354110718e-05,
+            "median": -3.674626350402832e-05,
+            "q25": -5.385279655456543e-05,
+            "q75": -9.8496675491333e-06,
+            "q95": 1.3235211372375486e-05,
+            "minimum": -8.541345596313477e-05,
+            "maximum": 5.27501106262207e-05,
+            "positive_fraction": 0.15625,
+            "negative_fraction": 0.84375,
+            "unchanged_fraction": 0.0
+          },
+          "foreground_fp": {
+            "mean": 0.5,
+            "median": 0.0,
+            "q25": -0.25,
+            "q75": 1.25,
+            "q95": 3.0,
+            "minimum": -2.0,
+            "maximum": 3.0,
+            "positive_fraction": 0.46875,
+            "negative_fraction": 0.25,
+            "unchanged_fraction": 0.28125
+          },
+          "foreground_fn": {
+            "mean": 0.3125,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 1.0,
+            "q95": 2.0,
+            "minimum": -1.0,
+            "maximum": 2.0,
+            "positive_fraction": 0.28125,
+            "negative_fraction": 0.09375,
+            "unchanged_fraction": 0.625
+          },
+          "ap_swaps": {
+            "mean": -0.03125,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 0.0,
+            "minimum": -1.0,
+            "maximum": 0.0,
+            "positive_fraction": 0.0,
+            "negative_fraction": 0.03125,
+            "unchanged_fraction": 0.96875
+          },
+          "predicted_foreground_voxels": {
+            "mean": 0.1875,
+            "median": 0.0,
+            "q25": -1.0,
+            "q75": 1.0,
+            "q95": 2.4499999999999993,
+            "minimum": -3.0,
+            "maximum": 3.0,
+            "positive_fraction": 0.4375,
+            "negative_fraction": 0.3125,
+            "unchanged_fraction": 0.25
+          },
+          "predicted_components": {
+            "mean": 0.0,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 0.0,
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "positive_fraction": 0.0,
+            "negative_fraction": 0.0,
+            "unchanged_fraction": 1.0
+          },
+          "total_errors": {
+            "mean": 0.78125,
+            "median": 1.0,
+            "q25": 0.0,
+            "q75": 2.0,
+            "q95": 3.0,
+            "minimum": -2.0,
+            "maximum": 4.0,
+            "positive_fraction": 0.53125,
+            "negative_fraction": 0.1875,
+            "unchanged_fraction": 0.28125
+          }
+        },
+        "rho_30": {
+          "observation_count": 32,
+          "union_dice": {
+            "mean": -0.00025611333253238236,
+            "median": -0.0002527698334820472,
+            "q25": -0.0005462039825101239,
+            "q75": 0.0,
+            "q95": 0.00027475502255269176,
+            "minimum": -0.0008066844530891792,
+            "maximum": 0.00029454515892124444,
+            "positive_fraction": 0.1875,
+            "negative_fraction": 0.71875,
+            "unchanged_fraction": 0.09375
+          },
+          "anterior_dice": {
+            "mean": -0.00021701628796312947,
+            "median": -0.0002565474543698709,
+            "q25": -0.0004572567373639924,
+            "q75": 0.0,
+            "q95": 0.0004051202998015755,
+            "minimum": -0.0009466307899305137,
+            "maximum": 0.0007930099594013473,
+            "positive_fraction": 0.21875,
+            "negative_fraction": 0.6875,
+            "unchanged_fraction": 0.09375
+          },
+          "posterior_dice": {
+            "mean": -0.00026031180446509095,
+            "median": -0.0002815522245000479,
+            "q25": -0.0005727031291363482,
+            "q75": 0.00023096748812687085,
+            "q95": 0.000551107458623451,
+            "minimum": -0.0012030795970364716,
+            "maximum": 0.0007564476664048136,
+            "positive_fraction": 0.3125,
+            "negative_fraction": 0.625,
+            "unchanged_fraction": 0.0625
+          },
+          "surface_dice_1mm": {
+            "mean": 0.0007835179136557319,
+            "median": 0.000708625497512827,
+            "q25": 0.0003524492188565209,
+            "q75": 0.001095697004698054,
+            "q95": 0.001859217356679565,
+            "minimum": -6.011379572679054e-05,
+            "maximum": 0.002473270491645252,
+            "positive_fraction": 0.84375,
+            "negative_fraction": 0.0625,
+            "unchanged_fraction": 0.09375
+          },
+          "surface_dice_2mm": {
+            "mean": 0.00016410523014407513,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 8.689165117875541e-05,
+            "q95": 0.0009962278626940097,
+            "minimum": -2.12235459118304e-06,
+            "maximum": 0.0013986013986013734,
+            "positive_fraction": 0.4375,
+            "negative_fraction": 0.15625,
+            "unchanged_fraction": 0.40625
+          },
+          "assd_mm": {
+            "mean": 0.0014161569893963956,
+            "median": 0.001110856923373288,
+            "q25": 3.0421064573182832e-05,
+            "q75": 0.002287391167746039,
+            "q95": 0.004146752760887006,
+            "minimum": -0.0009295194995450617,
+            "maximum": 0.005068395384069835,
+            "positive_fraction": 0.78125,
+            "negative_fraction": 0.1875,
+            "unchanged_fraction": 0.03125
+          },
+          "hd95_mm": {
+            "mean": 0.0,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 0.0,
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "positive_fraction": 0.0,
+            "negative_fraction": 0.0,
+            "unchanged_fraction": 1.0
+          },
+          "soft_dice_score": {
+            "mean": -7.45188444852829e-05,
+            "median": -8.630752563476562e-05,
+            "q25": -0.00011174380779266357,
+            "q75": -4.45246696472168e-05,
+            "q95": -3.853440284729008e-06,
+            "minimum": -0.00016123056411743164,
+            "maximum": 4.690885543823242e-05,
+            "positive_fraction": 0.03125,
+            "negative_fraction": 0.96875,
+            "unchanged_fraction": 0.0
+          },
+          "foreground_fp": {
+            "mean": 1.25,
+            "median": 1.0,
+            "q25": -0.25,
+            "q75": 3.0,
+            "q95": 5.0,
+            "minimum": -3.0,
+            "maximum": 6.0,
+            "positive_fraction": 0.59375,
+            "negative_fraction": 0.25,
+            "unchanged_fraction": 0.15625
+          },
+          "foreground_fn": {
+            "mean": 0.625,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 1.0,
+            "q95": 3.4499999999999993,
+            "minimum": -3.0,
+            "maximum": 4.0,
+            "positive_fraction": 0.46875,
+            "negative_fraction": 0.125,
+            "unchanged_fraction": 0.40625
+          },
+          "ap_swaps": {
+            "mean": -0.0625,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 0.0,
+            "minimum": -1.0,
+            "maximum": 0.0,
+            "positive_fraction": 0.0,
+            "negative_fraction": 0.0625,
+            "unchanged_fraction": 0.9375
+          },
+          "predicted_foreground_voxels": {
+            "mean": 0.625,
+            "median": 0.5,
+            "q25": -1.0,
+            "q75": 2.25,
+            "q95": 5.0,
+            "minimum": -4.0,
+            "maximum": 5.0,
+            "positive_fraction": 0.5,
+            "negative_fraction": 0.34375,
+            "unchanged_fraction": 0.15625
+          },
+          "predicted_components": {
+            "mean": 0.0,
+            "median": 0.0,
+            "q25": 0.0,
+            "q75": 0.0,
+            "q95": 0.0,
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "positive_fraction": 0.0,
+            "negative_fraction": 0.0,
+            "unchanged_fraction": 1.0
+          },
+          "total_errors": {
+            "mean": 1.8125,
+            "median": 2.0,
+            "q25": 0.0,
+            "q75": 4.0,
+            "q95": 5.0,
+            "minimum": -2.0,
+            "maximum": 7.0,
+            "positive_fraction": 0.65625,
+            "negative_fraction": 0.1875,
+            "unchanged_fraction": 0.15625
+          }
+        }
+      }
+    }
+  },
+  "skipped": []
+}

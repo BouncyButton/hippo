@@ -1,0 +1,548 @@
+{
+  "completion": {
+    "status": "complete",
+    "reports": [
+      {
+        "path": "/mnt/beegfsstudents/home/3160552/loss_audit_official_20260905_01/results/teacher_full_dice.json",
+        "sha256": "ba82e6b2268759303b29d0b2346df944eaa1071e5b8e87ce766da3499c46d30b",
+        "valid_cases": 52
+      },
+      {
+        "path": "/mnt/beegfsstudents/home/3160552/loss_audit_official_20260905_01/results/teacher_full_dice_ce.json",
+        "sha256": "82e9b19f1bf926608c798abdf3e8fad8310cca5cd1a44563be880058b86a76fc",
+        "valid_cases": 52
+      },
+      {
+        "path": "/mnt/beegfsstudents/home/3160552/loss_audit_official_20260905_01/results/teacher_two_dice.json",
+        "sha256": "925aa9b45728dc490a88a9adc316f0d820357cd1621168c3e0bc157bbada1f61",
+        "valid_cases": 52
+      },
+      {
+        "path": "/mnt/beegfsstudents/home/3160552/loss_audit_official_20260905_01/results/ap_dice_ce.json",
+        "sha256": "3231b2571a8025b417e2e0bb2ef90565452d917fff766a9b547cf68b13cc3be0",
+        "valid_cases": 41
+      }
+    ],
+    "export_manifest_sha256": "96518907784b475aaba65f8d9ff3543af61065c4f159a2b516bd9461d23b1905",
+    "elapsed_seconds": 180.06932512798812,
+    "source_sha256": "a05fd1134a90b3f318008e84593a62e1a4b04955411e2b80998baa4f78c1c141"
+  },
+  "reproduction": {
+    "expected": 0.8747624709055974,
+    "actual": 0.874765946314885,
+    "absolute_difference": 0.0000034754092875788345,
+    "pass": true
+  },
+  "job_id": "650074",
+  "gpu": "NVIDIA A100 80GB PCIe MIG 4g.40gb",
+  "model_sha256": "8c66f93525145be4efce4eb3578ffab39d1ede8035f728684d0355a62298d7f9",
+  "prediction_summary": {
+    "baseline": {
+      "case_count": 52,
+      "per_case_mean_macro_dice": 0.8747659439783377,
+      "per_case_mean_union_dice": 0.8967473778146811,
+      "voxel_pooled_macro_dice": 0.8753614608456759,
+      "voxel_pooled_union_dice": 0.8976146471063879,
+      "fp": 16517,
+      "fn": 18937,
+      "swaps": 3788,
+      "total_errors": 39242
+    },
+    "teacher_full": {
+      "case_count": 52,
+      "per_case_mean_macro_dice": 0.8817120126932638,
+      "per_case_mean_union_dice": 0.9034533566873352,
+      "voxel_pooled_macro_dice": 0.8818965313716827,
+      "voxel_pooled_union_dice": 0.9042255068959832,
+      "fp": 15099,
+      "fn": 18018,
+      "swaps": 3796,
+      "total_errors": 36913
+    },
+    "teacher_two": {
+      "case_count": 52,
+      "per_case_mean_macro_dice": 0.8761866858918885,
+      "per_case_mean_union_dice": 0.8999713227584552,
+      "voxel_pooled_macro_dice": 0.8764250202401158,
+      "voxel_pooled_union_dice": 0.9006014405588325,
+      "fp": 15299,
+      "fn": 18994,
+      "swaps": 4108,
+      "total_errors": 38401
+    },
+    "tta_13": {
+      "case_count": 52,
+      "per_case_mean_macro_dice": 0.8816024548900636,
+      "per_case_mean_union_dice": 0.903263843191249,
+      "voxel_pooled_macro_dice": 0.8818752879550658,
+      "voxel_pooled_union_dice": 0.904053651525361,
+      "fp": 15132,
+      "fn": 18045,
+      "swaps": 3772,
+      "total_errors": 36949
+    }
+  },
+  "pickle_geometry": {
+    "train": {
+      "nonplanar_cases": 47,
+      "minority_voxels": 1104
+    },
+    "val": {
+      "nonplanar_cases": 11,
+      "minority_voxels": 284
+    }
+  },
+  "comparisons": {
+    "teacher_full": {
+      "delta_case_mean_macro": 0.00694606871492609,
+      "delta_case_mean_union": 0.006705978872654117,
+      "better_cases": 41,
+      "worse_cases": 11,
+      "median_case_delta": 0.0069939284682728475,
+      "delta_fp": -1418,
+      "delta_fn": -919,
+      "delta_swaps": 8,
+      "delta_total_errors": -2329
+    },
+    "teacher_two": {
+      "delta_case_mean_macro": 0.0014207419135507937,
+      "delta_case_mean_union": 0.003223944943774093,
+      "better_cases": 29,
+      "worse_cases": 23,
+      "median_case_delta": 0.001673404235214948,
+      "delta_fp": -1218,
+      "delta_fn": 57,
+      "delta_swaps": 320,
+      "delta_total_errors": -841
+    },
+    "tta_13": {
+      "delta_case_mean_macro": 0.006836510911725879,
+      "delta_case_mean_union": 0.006516465376567915,
+      "better_cases": 43,
+      "worse_cases": 9,
+      "median_case_delta": 0.0068766019037152515,
+      "delta_fp": -1385,
+      "delta_fn": -892,
+      "delta_swaps": -16,
+      "delta_total_errors": -2293
+    }
+  },
+  "ap_confidence": {
+    "foreground_voxels": 174350,
+    "saturated_fraction": 0.9450645324963022,
+    "wrong_voxels": 4924,
+    "wrong_saturated_fraction": 0.6742485783915516
+  },
+  "calibration_pooled": {
+    "whole": {
+      "voxel_count": 13631488,
+      "nll": 0.03270300133870198,
+      "brier": 0.0054935466793652335,
+      "saturation_fraction": 0.9986988214346079,
+      "confidence": 0.9997871586909661,
+      "accuracy": 0.9971212240365835
+    },
+    "gt_foreground": {
+      "voxel_count": 174350,
+      "nll": 1.6284377786577824,
+      "brier": 0.2495286290065108,
+      "saturation_fraction": 0.9464410668196157,
+      "confidence": 0.9919174736073272,
+      "accuracy": 0.8696587324347577
+    },
+    "gt_boundary": {
+      "voxel_count": 160757,
+      "nll": 2.575240101811274,
+      "brier": 0.4252027572118992,
+      "saturation_fraction": 0.9072326554986719,
+      "confidence": 0.9860252246014171,
+      "accuracy": 0.7776893074640606
+    },
+    "incorrect": {
+      "voxel_count": 39242,
+      "nll": 11.312883400697116,
+      "brier": 1.8895692715956636,
+      "saturation_fraction": 0.7906579685031344,
+      "confidence": 0.9669133001593577,
+      "accuracy": 0
+    }
+  },
+  "audit_reports": {
+    "teacher_full_dice.json": {
+      "runtime": {
+        "device": "cuda",
+        "evaluation_dtype": "float32",
+        "gpu": "NVIDIA A100 80GB PCIe MIG 4g.40gb",
+        "monai": "1.6.0",
+        "numpy": "2.4.6",
+        "python": "3.11.15",
+        "torch": "2.12.1+cu130"
+      },
+      "valid": 52,
+      "skipped": 0,
+      "baseline_case_mean_macro": 0.8747659439783377,
+      "diagnostic_weight": {
+        "calibration_valid": false,
+        "median_auxiliary_over_supervised_rms": 0.1663583551380075,
+        "median_target": 0.1,
+        "median_target_weight": 0.6011119785179533,
+        "p95_auxiliary_over_supervised_rms": 0.20803709426392492,
+        "p95_cap": 0.5,
+        "p95_cap_weight": 2.403417533633104,
+        "reason": "diagnostic cohort; no verified training-fold/checkpoint calibration protocol",
+        "valid_cases": 52,
+        "value": 0.6011119785179533
+      },
+      "gradient_medians": {
+        "supervised_rms": 4.333604678160228e-7,
+        "auxiliary_rms": 7.242446404725614e-8,
+        "cosine": 0.07264986907011975,
+        "auxiliary_over_supervised_rms": 0.1663583551380075
+      },
+      "repairs": {
+        "auxiliary": {
+          "0.25": {
+            "delta_case_mean_macro": 0.0002491700183193668,
+            "fp": 16457,
+            "fn": 18919,
+            "swaps": 3783
+          },
+          "1.0": {
+            "delta_case_mean_macro": 0.0014309670724907964,
+            "fp": 16223,
+            "fn": 18792,
+            "swaps": 3752
+          },
+          "4.0": {
+            "delta_case_mean_macro": 0.004738566844152303,
+            "fp": 15478,
+            "fn": 18350,
+            "swaps": 3784
+          }
+        },
+        "combined_diagnostic_weight": {
+          "0.25": {
+            "delta_case_mean_macro": 0.0019015272366491587,
+            "fp": 16303,
+            "fn": 18682,
+            "swaps": 3699
+          },
+          "1.0": {
+            "delta_case_mean_macro": 0.005854195798519313,
+            "fp": 15782,
+            "fn": 18138,
+            "swaps": 3552
+          },
+          "4.0": {
+            "delta_case_mean_macro": 0.01184867838957493,
+            "fp": 14956,
+            "fn": 17339,
+            "swaps": 3328
+          }
+        },
+        "supervised": {
+          "0.25": {
+            "delta_case_mean_macro": 0.0018812062186408518,
+            "fp": 16309,
+            "fn": 18682,
+            "swaps": 3700
+          },
+          "1.0": {
+            "delta_case_mean_macro": 0.005782940022350469,
+            "fp": 15794,
+            "fn": 18151,
+            "swaps": 3552
+          },
+          "4.0": {
+            "delta_case_mean_macro": 0.011508080036555124,
+            "fp": 15017,
+            "fn": 17381,
+            "swaps": 3338
+          }
+        }
+      }
+    },
+    "teacher_full_dice_ce.json": {
+      "runtime": {
+        "device": "cuda",
+        "evaluation_dtype": "float32",
+        "gpu": "NVIDIA A100 80GB PCIe MIG 4g.40gb",
+        "monai": "1.6.0",
+        "numpy": "2.4.6",
+        "python": "3.11.15",
+        "torch": "2.12.1+cu130"
+      },
+      "valid": 52,
+      "skipped": 0,
+      "baseline_case_mean_macro": 0.8747659439783377,
+      "diagnostic_weight": {
+        "calibration_valid": false,
+        "median_auxiliary_over_supervised_rms": 0.1443986962491839,
+        "median_target": 0.1,
+        "median_target_weight": 0.6925270282733954,
+        "p95_auxiliary_over_supervised_rms": 0.16843471621306214,
+        "p95_cap": 0.5,
+        "p95_cap_weight": 2.968509172227435,
+        "reason": "diagnostic cohort; no verified training-fold/checkpoint calibration protocol",
+        "valid_cases": 52,
+        "value": 0.6925270282733954
+      },
+      "gradient_medians": {
+        "supervised_rms": 4.967411502736171e-7,
+        "auxiliary_rms": 7.242446404725614e-8,
+        "cosine": 0.21235026031251136,
+        "auxiliary_over_supervised_rms": 0.1443986962491839
+      },
+      "repairs": {
+        "auxiliary": {
+          "0.25": {
+            "delta_case_mean_macro": 0.0002491700183193668,
+            "fp": 16457,
+            "fn": 18919,
+            "swaps": 3783
+          },
+          "1.0": {
+            "delta_case_mean_macro": 0.0014309670724907964,
+            "fp": 16223,
+            "fn": 18792,
+            "swaps": 3752
+          },
+          "4.0": {
+            "delta_case_mean_macro": 0.004738566844152303,
+            "fp": 15478,
+            "fn": 18350,
+            "swaps": 3784
+          }
+        },
+        "combined_diagnostic_weight": {
+          "0.25": {
+            "delta_case_mean_macro": 0.001965274932684502,
+            "fp": 16294,
+            "fn": 18670,
+            "swaps": 3698
+          },
+          "1.0": {
+            "delta_case_mean_macro": 0.006192104479348037,
+            "fp": 15721,
+            "fn": 18089,
+            "swaps": 3547
+          },
+          "4.0": {
+            "delta_case_mean_macro": 0.013077713576108096,
+            "fp": 14768,
+            "fn": 17148,
+            "swaps": 3303
+          }
+        },
+        "supervised": {
+          "0.25": {
+            "delta_case_mean_macro": 0.0019371057167519856,
+            "fp": 16298,
+            "fn": 18674,
+            "swaps": 3699
+          },
+          "1.0": {
+            "delta_case_mean_macro": 0.0060904263677384884,
+            "fp": 15745,
+            "fn": 18102,
+            "swaps": 3548
+          },
+          "4.0": {
+            "delta_case_mean_macro": 0.012638208085729241,
+            "fp": 14831,
+            "fn": 17221,
+            "swaps": 3313
+          }
+        }
+      }
+    },
+    "teacher_two_dice.json": {
+      "runtime": {
+        "device": "cuda",
+        "evaluation_dtype": "float32",
+        "gpu": "NVIDIA A100 80GB PCIe MIG 4g.40gb",
+        "monai": "1.6.0",
+        "numpy": "2.4.6",
+        "python": "3.11.15",
+        "torch": "2.12.1+cu130"
+      },
+      "valid": 52,
+      "skipped": 0,
+      "baseline_case_mean_macro": 0.8747659439783377,
+      "diagnostic_weight": {
+        "calibration_valid": false,
+        "median_auxiliary_over_supervised_rms": 0.20194242982144028,
+        "median_target": 0.1,
+        "median_target_weight": 0.49519063471911823,
+        "p95_auxiliary_over_supervised_rms": 0.2696572941186884,
+        "p95_cap": 0.5,
+        "p95_cap_weight": 1.8542053595625245,
+        "reason": "diagnostic cohort; no verified training-fold/checkpoint calibration protocol",
+        "valid_cases": 52,
+        "value": 0.49519063471911823
+      },
+      "gradient_medians": {
+        "supervised_rms": 4.333604678160228e-7,
+        "auxiliary_rms": 8.909296813309902e-8,
+        "cosine": 0.07272736082980948,
+        "auxiliary_over_supervised_rms": 0.20194242982144028
+      },
+      "repairs": {
+        "auxiliary": {
+          "0.25": {
+            "delta_case_mean_macro": 0.0003039472572007318,
+            "fp": 16447,
+            "fn": 18908,
+            "swaps": 3785
+          },
+          "1.0": {
+            "delta_case_mean_macro": 0.0015341279064339242,
+            "fp": 16224,
+            "fn": 18769,
+            "swaps": 3751
+          },
+          "4.0": {
+            "delta_case_mean_macro": 0.002921235899254082,
+            "fp": 15793,
+            "fn": 18544,
+            "swaps": 3857
+          }
+        },
+        "combined_diagnostic_weight": {
+          "0.25": {
+            "delta_case_mean_macro": 0.0018896668895006519,
+            "fp": 16307,
+            "fn": 18683,
+            "swaps": 3699
+          },
+          "1.0": {
+            "delta_case_mean_macro": 0.005845095735511507,
+            "fp": 15783,
+            "fn": 18140,
+            "swaps": 3552
+          },
+          "4.0": {
+            "delta_case_mean_macro": 0.011767265590383769,
+            "fp": 14974,
+            "fn": 17341,
+            "swaps": 3333
+          }
+        },
+        "supervised": {
+          "0.25": {
+            "delta_case_mean_macro": 0.0018812062186408518,
+            "fp": 16309,
+            "fn": 18682,
+            "swaps": 3700
+          },
+          "1.0": {
+            "delta_case_mean_macro": 0.005782940022350469,
+            "fp": 15794,
+            "fn": 18151,
+            "swaps": 3552
+          },
+          "4.0": {
+            "delta_case_mean_macro": 0.011508080036555124,
+            "fp": 15017,
+            "fn": 17381,
+            "swaps": 3338
+          }
+        }
+      }
+    },
+    "ap_dice_ce.json": {
+      "runtime": {
+        "device": "cuda",
+        "evaluation_dtype": "float32",
+        "gpu": "NVIDIA A100 80GB PCIe MIG 4g.40gb",
+        "monai": "1.6.0",
+        "numpy": "2.4.6",
+        "python": "3.11.15",
+        "torch": "2.12.1+cu130"
+      },
+      "valid": 41,
+      "skipped": 11,
+      "baseline_case_mean_macro": 0.8825225104752288,
+      "diagnostic_weight": {
+        "calibration_valid": false,
+        "median_auxiliary_over_supervised_rms": 8.096193868048914,
+        "median_target": 0.1,
+        "median_target_weight": 0.012351482885636336,
+        "p95_auxiliary_over_supervised_rms": 9.837108998211685,
+        "p95_cap": 0.5,
+        "p95_cap_weight": 0.05082794142983436,
+        "reason": "diagnostic cohort; no verified training-fold/checkpoint calibration protocol",
+        "valid_cases": 41,
+        "value": 0.012351482885636336
+      },
+      "gradient_medians": {
+        "supervised_rms": 5.009207533854832e-7,
+        "auxiliary_rms": 0.0000040508901255799636,
+        "cosine": 0.19811937066738938,
+        "auxiliary_over_supervised_rms": 8.096193868048914
+      },
+      "repairs": {
+        "auxiliary": {
+          "0.25": {
+            "delta_case_mean_macro": 0.0005734302443730632,
+            "fp": 12390,
+            "fn": 14338,
+            "swaps": 2720
+          },
+          "1.0": {
+            "delta_case_mean_macro": 0.0021488912114654424,
+            "fp": 12390,
+            "fn": 14279,
+            "swaps": 2537
+          },
+          "4.0": {
+            "delta_case_mean_macro": 0.00798955568275983,
+            "fp": 12390,
+            "fn": 14059,
+            "swaps": 1858
+          }
+        },
+        "combined_diagnostic_weight": {
+          "0.25": {
+            "delta_case_mean_macro": 0.0018457887830486408,
+            "fp": 12220,
+            "fn": 14158,
+            "swaps": 2720
+          },
+          "1.0": {
+            "delta_case_mean_macro": 0.006045361716172204,
+            "fp": 11773,
+            "fn": 13700,
+            "swaps": 2600
+          },
+          "4.0": {
+            "delta_case_mean_macro": 0.012726304384423348,
+            "fp": 11045,
+            "fn": 12992,
+            "swaps": 2400
+          }
+        },
+        "supervised": {
+          "0.25": {
+            "delta_case_mean_macro": 0.0018644677377613883,
+            "fp": 12216,
+            "fn": 14157,
+            "swaps": 2720
+          },
+          "1.0": {
+            "delta_case_mean_macro": 0.006126629581334808,
+            "fp": 11762,
+            "fn": 13689,
+            "swaps": 2600
+          },
+          "4.0": {
+            "delta_case_mean_macro": 0.012812506302286142,
+            "fp": 11021,
+            "fn": 12974,
+            "swaps": 2409
+          }
+        }
+      }
+    }
+  }
+}

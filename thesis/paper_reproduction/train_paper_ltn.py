@@ -14,6 +14,7 @@ import argparse
 import csv
 import hashlib
 import importlib.metadata
+import inspect
 import json
 import platform
 import random
@@ -169,9 +170,19 @@ def one_hot(labels: torch.Tensor, classes: int = 3) -> torch.Tensor:
     return F.one_hot(labels.long(), num_classes=classes).movedim(-1, 1).float()
 
 
-def build_model(device: torch.device) -> SwinUNETR:
+def build_model(
+    device: torch.device,
+    spatial_size: tuple[int, int, int] = (64, 64, 64),
+) -> SwinUNETR:
     # feature_size, num_heads and depths are MONAI's paper/notebook defaults.
-    return SwinUNETR(in_channels=1, out_channels=3, use_checkpoint=True).to(device)
+    kwargs: dict[str, Any] = {
+        "in_channels": 1,
+        "out_channels": 3,
+        "use_checkpoint": True,
+    }
+    if "img_size" in inspect.signature(SwinUNETR).parameters:
+        kwargs["img_size"] = spatial_size
+    return SwinUNETR(**kwargs).to(device)
 
 
 def hard_masks(logits: torch.Tensor) -> torch.Tensor:
@@ -628,7 +639,7 @@ def main() -> None:
             resume="allow" if args.resume else None,
         )
 
-    model = build_model(device)
+    model = build_model(device, tuple(args.spatial_size))
     optimizer = torch.optim.AdamW(model.parameters(), lr=args.learning_rate, weight_decay=args.weight_decay)
     scheduler = WarmupCosineSchedule(optimizer, warmup_steps=args.warmup_steps, t_total=args.total_scheduler_steps)
     dice_loss = DiceLoss(to_onehot_y=True, softmax=True)

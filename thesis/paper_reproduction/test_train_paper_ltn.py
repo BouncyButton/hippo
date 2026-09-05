@@ -9,6 +9,7 @@ import torch
 
 from train_paper_ltn import (
     PaperLTNObjective,
+    build_model,
     evaluate,
     hard_masks,
     hard_volume_difference,
@@ -38,6 +39,10 @@ class IdentityLabelSegmentator(torch.nn.Module):
 
 
 class VolumeGroundingTests(unittest.TestCase):
+    def test_real_swinunetr_constructor_matches_installed_monai(self) -> None:
+        model = build_model(torch.device("cpu"), (64, 64, 64))
+        self.assertEqual(model.out.conv.out_channels, 3)
+
     def test_hard_volume_formula_matches_equation_7(self) -> None:
         hard = torch.tensor(
             [
