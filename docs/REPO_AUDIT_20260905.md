@@ -24,7 +24,7 @@ The 54 untracked files are not scattered debris. They are a handful of coherent 
 | Loose `new_constraints/` modules + their tests | 11 | Telemetry, supervised losses, audits |
 | `bands/` additions | 3 | `class_aware_tversky.py` + 2 rationale docs |
 | `equivariance/` additions | 2 | `closure_metrics.py` + its test |
-| `RESEARCH_CRITIQUE_20260905.md` | 1 | Root-level dated critique |
+| `docs/RESEARCH_CRITIQUE_20260905.md` | 1 | Root-level dated critique |
 | **Total** | **54** | |
 
 Every one of `onecut/`, `teacher/`, `ap_cut/` ships an `__init__.py`, a `README.md`
@@ -113,7 +113,7 @@ experiments/
 ```
 
 **Three of them are no-ops.** `semantic_constraints/` (15 files),
-`evaluation/` (5 files) and `allenamenti.md` are already tracked. Git ignores
+`evaluation/` (5 files) and `docs/allenamenti.md` are already tracked. Git ignores
 `.gitignore` for tracked paths. Those lines do nothing today and will confuse
 you later. To make them real you would need:
 
@@ -193,7 +193,7 @@ All of the following is applied in the working tree and committed on
   (`experiments/**/logs/`, `**/checkpoints/`, `*.out`, `*.err`, `slurm-*.out`).
   No such files exist yet; the rules exist so a future Slurm run cannot drag
   logs or checkpoints into git.
-- **Kept** `evaluation/`, `semantic_constraints/` and `allenamenti.md` under a
+- **Kept** `evaluation/`, `semantic_constraints/` and `docs/allenamenti.md` under a
   comment block naming them as no-ops. Untracking those 27 files is a
   judgement call about your intent, so it is left to you:
   `git rm --cached -r <path>`. The same applies to `.idea/` (6 tracked files).
@@ -205,14 +205,14 @@ All of the following is applied in the working tree and committed on
 
 Recover either with `git checkout d20d01c -- <path>`.
 
-Both `thesis/new_constraints/README.md` and
-`thesis/new_constraints/equivariance/README.md` described the shim as live;
+Both `docs/thesis/new_constraints/README.md` and
+`docs/thesis/new_constraints/equivariance/README.md` described the shim as live;
 both were corrected.
 
 ## 5. Left for you
 
 1. Decide whether to untrack `evaluation/`, `semantic_constraints/`,
-   `allenamenti.md`, `.idea/` (see above). Until then those `.gitignore` lines
+   `docs/allenamenti.md`, `.idea/` (see above). Until then those `.gitignore` lines
    do nothing.
 2. Optional refactor: extract the shared calibration harness out of
    `bands/calibrate_weight.py`, `onecut/calibrate_weight.py` and

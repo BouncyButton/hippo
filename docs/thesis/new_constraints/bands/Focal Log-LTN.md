@@ -4,7 +4,7 @@
 
 This document gives the precise Logic Tensor Network (LTN) interpretation of
 the two-band hippocampus boundary constraint implemented in
-[`outer_boundary.py`](outer_boundary.py). It separates:
+[`outer_boundary.py`](../../../../thesis/new_constraints/bands/outer_boundary.py). It separates:
 
 1. the logical statements being imposed;
 2. their grounding in the SwinUNETR outputs;
@@ -1178,12 +1178,12 @@ universal statements.
 | $L_{\mathrm{case}}$ | `0.5 * (inner_loss + outer_loss)` |
 | $L_{\mathrm{band}}$ | mean of `case_loss[valid]` |
 | $S_{\mathrm{case}}$ diagnostic | `torch.exp(-valid_case_loss)` |
-| $\lambda_{\mathrm{band}}L_{\mathrm{band}}$ | weighted result in [`objective.py`](../objective.py) |
-| $L_{\mathrm{Dice}}+s(e)\lambda L_{\mathrm{band}}$ | training loop in [`train_swinunetr_constraints.py`](../train_swinunetr_constraints.py) |
+| $\lambda_{\mathrm{band}}L_{\mathrm{band}}$ | weighted result in [`objective.py`](../../../../thesis/new_constraints/objective.py) |
+| $L_{\mathrm{Dice}}+s(e)\lambda L_{\mathrm{band}}$ | training loop in [`train_swinunetr_constraints.py`](../../../../thesis/new_constraints/train_swinunetr_constraints.py) |
 
 The morphology and logit grouping are tested in
-[`test_outer_boundary.py`](test_outer_boundary.py), and the gradient-scale
-weight is produced by [`calibrate_weight.py`](calibrate_weight.py).
+[`test_outer_boundary.py`](../../../../thesis/new_constraints/bands/test_outer_boundary.py), and the gradient-scale
+weight is produced by [`calibrate_weight.py`](../../../../thesis/new_constraints/bands/calibrate_weight.py).
 
 ## 21. Compact final formulation
 

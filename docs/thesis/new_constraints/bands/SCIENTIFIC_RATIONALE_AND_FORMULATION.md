@@ -84,7 +84,7 @@ coordinates. They include all error types, including anterior/posterior swaps.
 They therefore motivate, but do not mathematically equal, the 6-connected
 morphological bands defined later.
 
-![Baseline boundary proximity](../../../evaluation/fold0_voxel_error_results/plots/03_boundary_proximity.png)
+![Baseline boundary proximity](../../../../evaluation/fold0_voxel_error_results/plots/03_boundary_proximity.png)
 
 The errors also have structured slice locations in the 64-cubed model space.
 The "central 80%" columns give the smallest reported slice interval containing
@@ -609,12 +609,12 @@ setting.
 
 ## 11. Evidence and code references
 
-- [Baseline aggregate analysis](../../../evaluation/fold0_voxel_error_results/README.md)
-- [Baseline machine-readable summary](../../../evaluation/fold0_voxel_error_results/summary.json)
-- [Translation-equivariance aggregate analysis](../../../evaluation/fold0_voxel_error_results_translation/README.md)
-- [Exact paired comparison](../../../evaluation/fold0_voxel_error_comparison_translation_vs_none/comparison.json)
-- [Band construction and loss](outer_boundary.py)
-- [Gradient calibration](calibrate_weight.py)
-- [Tests of geometry, gradients, numerical behavior, calibration, and integration](test_outer_boundary.py)
-- [Shared constraint objective](../objective.py)
-- [Training and validation pipeline](../train_swinunetr_constraints.py)
+- [Baseline aggregate analysis](../../../../evaluation/fold0_voxel_error_results/README.md)
+- [Baseline machine-readable summary](../../../../evaluation/fold0_voxel_error_results/summary.json)
+- [Translation-equivariance aggregate analysis](../../../../evaluation/fold0_voxel_error_results_translation/README.md)
+- [Exact paired comparison](../../../../evaluation/fold0_voxel_error_comparison_translation_vs_none/comparison.json)
+- [Band construction and loss](../../../../thesis/new_constraints/bands/outer_boundary.py)
+- [Gradient calibration](../../../../thesis/new_constraints/bands/calibrate_weight.py)
+- [Tests of geometry, gradients, numerical behavior, calibration, and integration](../../../../thesis/new_constraints/bands/test_outer_boundary.py)
+- [Shared constraint objective](../../../../thesis/new_constraints/objective.py)
+- [Training and validation pipeline](../../../../thesis/new_constraints/train_swinunetr_constraints.py)

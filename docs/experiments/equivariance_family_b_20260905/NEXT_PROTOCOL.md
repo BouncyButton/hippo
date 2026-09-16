@@ -1,12 +1,15 @@
 # Translation experiments, 2026-09-05
 
-## Submitted replication
+## Active queue
 
 Seed 0: Slurm **650078**. Seed 1: **650080**. Cluster root:
 `/mnt/beegfsstudents/home/3160552/equivariance_family_b_20260905_01`.
-The account currently allows two submitted jobs and one running job. Seed 1
-therefore waits for seed 0. Pending continuation 650079 was cancelled to make
-room for seed 1; there are no automatic continuations reserved.
+Seed 0 completed successfully. At the 2026-09-06 12:16 CEST check, seed 1 was
+healthy at epoch 9 and running on gnode02. The augmentation-only seed-0 control
+was initially submitted as Slurm **650672**, then cancelled while still pending:
+its identity-with-probability-one-half schedule did not exactly match Family B's
+shifted-view exposure. The final compute-matched replacement is Slurm **650680**,
+pending behind seed 1 from a new frozen source snapshot.
 
 The immutable source copy matches **every file** in both official control
 manifests, aggregate digest
@@ -64,15 +67,15 @@ and [transformation-consistent medical segmentation](https://arxiv.org/abs/1903.
 
 ## Implemented next experiments
 
-`--translation-augmentation` applies identity with probability 1/2, otherwise
-one of six +/-2 axis translations uniformly. Images and labels move together
-with zero padding; spatial cropping is the ordinary translation transform.
-Validation remains unaugmented. Sampling is a stateless function of
-seed/epoch/batch, separate from both data-order and constraint RNG. Enabling a
-constraint therefore cannot change the augmentation sequence. This is a
-one-forward augmentation control; it matches optimizer steps, **not** GPU work
-or the two-view input exposure of equivariance. A later compute-matched paired
-supervision control is needed for a claim about compute efficiency.
+`--translation-augmentation` now implements the compute-matched paired control.
+Every batch retains the identity image/label and adds one uniformly sampled
+translation from the exact Family-B set: +/-2 voxels along one of the three
+axes. Images and labels receive the same zero-padded transform. The two
+supervised Dice losses are averaged. The sampler consumes the same seed+1
+translation-generator stream as Family B, so matched seeds receive the same
+shift sequence. The augmentation-plus-equivariance arm reuses the shifted
+logits for consistency and therefore also takes exactly two forwards, rather
+than adding a third. Validation remains unaugmented.
 
 `--teacher-support common` intersects valid overlap across the entire configured
 12-shift set (+/-1, +/-2 per axis). For 64-cubed inputs this is the central
@@ -80,6 +83,11 @@ supervision control is needed for a claim about compute efficiency.
 ordinary supervised Dice; it receives no teacher KL. Common overlap guarantees
 valid coordinate correspondence, **not identical receptive-field context**.
 The older union-support behavior remains the default for reproducibility.
+
+The A/P-adjacent loss branch is now closed by F1–F7. Do not add cut, slab-focal,
+or cut-distribution terms to this translation study. If teacher KL is evaluated,
+its claim remains translation consistency and outer-boundary correction; the
+official full teacher increased A/P swaps by 8 and supplies no positive A/P claim.
 
 For detached teacher q and student p, the KL student-logit gradient at T=1 is
 `(p-q)/N`. On fixed support N, uniform distinct two-view sampling gives the
@@ -101,21 +109,22 @@ scales, not network-parameter calibration or evidence of efficacy. This report
 must be inspected before teacher submission, particularly negative cosines or
 high sampling noise. A new shape/temperature/view policy requires recalibration.
 
-## Prepared launch commands — not yet submitted
+## Follow-up launches
 
-The development source is staged separately at
-`/mnt/beegfsstudents/home/3160552/translation_followup_20260905_01/source`.
-Run from that directory. The running replication source is never edited.
-The account's queue is currently full; these commands need a free slot.
+The corrected paired-augmentation source is staged separately at
+`/mnt/beegfsstudents/home/3160552/translation_followup_matched_20260906_02/source`.
+Its source digest is
+`f168bb27b7e61f6d0dcf03479407f795e8878f7730b17520c8f194699f3c5c50`.
+The running replication source was never edited. The account's queue is full.
 
 ```bash
-# Next recommended training: augmentation-only, seed 0 (then seed 1).
+# Submitted as Slurm 650680. Earlier mismatched jobs were cancelled before start.
 sbatch experiments/equivariance_family_b_20260905/next_training.sbatch \
-  augmentation 0 /mnt/beegfsstudents/home/3160552/translation_followup_20260905_01/augmentation_seed0
+  augmentation 0 /mnt/beegfsstudents/home/3160552/translation_followup_matched_20260906_02/augmentation_seed0
 
 # Same augmentation + original equivariance, only as a matched comparison.
 sbatch experiments/equivariance_family_b_20260905/next_training.sbatch \
-  augmentation_equivariance 0 /mnt/beegfsstudents/home/3160552/translation_followup_20260905_01/augmentation_equivariance_seed0
+  augmentation_equivariance 0 /mnt/beegfsstudents/home/3160552/translation_followup_matched_20260906_02/augmentation_equivariance_seed0
 
 # Bounded GPU calibration, no optimizer and no validation cases.
 sbatch experiments/equivariance_family_b_20260905/calibrate_teacher.sbatch \
@@ -133,3 +142,38 @@ for this new source needs an explicit bridge; augmentation versus augmentation
 plus equivariance uses the same new source for both arms. New training scripts
 accept `RESUME_RUN=1` for an interrupted run, with the same immutable arguments.
 Prepared commands are not a submitted sweep or automatic training chain.
+
+## Evidence-based decision sequence
+
+The current Dice-only runs form a small factorial block rather than a model
+search:
+
+| Arm | Translation augmentation | Equivariance | Status |
+|---|---:|---:|---|
+| Official control | no | no | complete, seeds 0/1 |
+| Family B | no | yes | seed 0 complete; seed 1 running |
+| Augmentation control | yes | no | seed 0 queued as 650680 |
+| Matched combined arm | yes | yes | submit next if Family B replicates |
+
+The combined arm is necessary even if augmentation-only matches the Family-B
+gain. Its paired comparison against augmentation-only measures whether the
+consistency loss adds value after translated-label exposure is controlled. Use
+the observed 0.001207 matched-control seed gap as a materiality reference, not
+as a formal significance threshold. A combined-arm gain clearly above that
+scale would support an independent constraint effect; a change near zero would
+show that the two mechanisms are largely redundant.
+
+Dice+CE is the next supervised objective, but do not launch Dice+CE plus
+equivariance as an isolated arm. First train Dice+CE with no constraint under
+the selected augmentation exposure. CE changes the supervised gradient scale,
+so calibrate the equivariance coefficient on deterministic training cases from
+that checkpoint, freeze it, and then train the matched Dice+CE plus
+equivariance arm. This produces two interpretable deltas: Dice+CE versus Dice,
+and equivariance versus its own Dice+CE control.
+
+The seed-0 error audit does not supply a reason to reject equivariance on A/P
+safety grounds. Its eight additional swaps are 0.20% of 3,993 baseline swaps,
+with a paired interval spanning improvements and deteriorations. Treat swaps as
+a monitored secondary endpoint and inspect their directional and case-tail
+distribution; the positive constraint claim is outer-boundary recovery, not
+A/P repair.

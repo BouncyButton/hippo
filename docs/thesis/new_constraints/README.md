@@ -159,8 +159,9 @@ Two experimental, mutually exclusive presets are available:
   teacher with a stable logit KL objective. See [teacher/README.md](teacher/README.md).
 - `ap_cut --ap-cut-weight WEIGHT --ap-axis 1 --ap-anterior-side high`:
   training-label-anchored cut posterior. See [ap_cut/README.md](ap_cut/README.md).
-  The strict all-case planar assumption **fails on current MSD labels**; do not
-  launch this preset without addressing that falsifier in a new protocol.
+  The strict all-case planar assumption fails, and subsequent official-logit
+  F1–F7 audits close the tolerance-aware aggregate family too. Keep this preset
+  for negative-result reproduction; do not launch it as a training candidate.
 
 Weights require a training-only audit under the selected supervised loss.
 `audit_followup.py` is a diagnostic frozen-logit tool, not a training-calibration
@@ -171,6 +172,8 @@ directories must not be modified.
 The [follow-up protocol](../../experiments/loss_constraint_followup_20260905/PROTOCOL.md)
 contains the comparison matrix, endpoints, CPU falsifiers and proposed control
 commands. No long training job has been launched by this follow-up.
+The [A/P closure record](../../../experiments/loss_constraint_followup_20260905/A_P_BRANCH_CLOSURE_20260905.md)
+supersedes earlier suggestions to develop a tolerant planar constraint.
 
 ## Tests
 

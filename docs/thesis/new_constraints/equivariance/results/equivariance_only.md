@@ -19,11 +19,11 @@ The arms are matched on the fold-0 split (`208` training and `52` validation cas
 | Best validation hard Dice | `0.87452` (epoch 21) | **`0.88249`** (epoch 25) | **`+0.00797`** (`+0.80` percentage points) |
 | Final soft Dice, epoch 50 | `0.86362` | **`0.87223`** | **`+0.00860`** (`+0.86` percentage points) |
 
-![Fold-0 hard and soft Dice learning curves](plots/01_dice_learning_curves.png)
+![Fold-0 hard and soft Dice learning curves](../../../../../thesis/new_constraints/equivariance/results/plots/01_dice_learning_curves.png)
 
-![Final and best segmentation comparison](plots/02_segmentation_endpoint_comparison.png)
+![Final and best segmentation comparison](../../../../../thesis/new_constraints/equivariance/results/plots/02_segmentation_endpoint_comparison.png)
 
-The historical fold-0 SwinUNETR inference result in `allenamenti.md` was hard Dice `0.8729` (training-log hard Dice `0.8737`). The corrected translation run is `+0.0070`, or `+0.70` percentage points, above that historical inference value. However, the matched `none` arm is the scientifically relevant causal comparison because it uses the same corrected runner and all other run conditions.
+The historical fold-0 SwinUNETR inference result in `docs/allenamenti.md` was hard Dice `0.8729` (training-log hard Dice `0.8737`). The corrected translation run is `+0.0070`, or `+0.70` percentage points, above that historical inference value. However, the matched `none` arm is the scientifically relevant causal comparison because it uses the same corrected runner and all other run conditions.
 
 The final-epoch values are the conservative primary comparison. The best-epoch values are validation-selected on the same 52 cases and are descriptive, not independent test estimates.
 
@@ -60,7 +60,7 @@ This score is also averaged over the two foreground classes. It measures agreeme
 
 Here, `312 = 52 patients × 6 directions`. A patient passes the strict all-directions criterion only if each of its six case-direction confidence-weighted agreement values is at least `0.90`.
 
-![Summary of pure and confidence-weighted equivariance measurements](plots/03_equivariance_summary.png)
+![Summary of pure and confidence-weighted equivariance measurements](../../../../../thesis/new_constraints/equivariance/results/plots/03_equivariance_summary.png)
 
 ### Results by direction
 
@@ -73,7 +73,7 @@ Here, `312 = 52 patients × 6 directions`. A patient passes the strict all-direc
 | `z −2` | `0.93859` | **`0.95749`** | `0.90721` | **`0.92331`** | `40/52` | **`50/52`** |
 | `z +2` | `0.93275` | **`0.95695`** | `0.90174` | **`0.92204`** | `30/52` | **`47/52`** |
 
-![Equivariance and threshold adherence for all six translations](plots/04_directional_equivariance.png)
+![Equivariance and threshold adherence for all six translations](../../../../../thesis/new_constraints/equivariance/results/plots/04_directional_equivariance.png)
 
 ### Patient-level threshold behavior
 
@@ -90,7 +90,7 @@ All `17` patients that passed all six directions in the `none` run also passed i
 | `hippocampus_123` | `0.89818` | `1` |
 | `hippocampus_349` | `0.89869` | `1` |
 
-![Paired patient-level threshold analysis](plots/05_patient_threshold_analysis.png)
+![Paired patient-level threshold analysis](../../../../../thesis/new_constraints/equivariance/results/plots/05_patient_threshold_analysis.png)
 
 ## Independent MSD test cohort — 130 images
 

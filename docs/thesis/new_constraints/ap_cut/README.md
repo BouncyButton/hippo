@@ -67,8 +67,18 @@ unverified. See the machine-readable evidence and reproducible audit at
 `audit_gt_geometry.py`.
 
 Do not launch the strict all-case candidate on this dataset. Do not silently turn
-these annotations into planes. A future tolerance-aware formulation would need
-its own target definition and pre-registered comparison.
+these annotations into planes. The later F1–F7 investigation also closed the
+tolerance-aware aggregate family on the official checkpoint. Conditional A/P
+log-odds are so saturated that slice pooling becomes a hard signed vote, matching
+the argmax localizer in 52/52 cases. Predicted cut positions also show appropriate
+shrinkage toward the population mean under weak image evidence; forcing their
+spread toward the label distribution is predicted to increase error. The closure
+record is [A_P_BRANCH_CLOSURE_20260905.md](../../../../experiments/loss_constraint_followup_20260905/A_P_BRANCH_CLOSURE_20260905.md).
+
+Keep this implementation to reproduce the negative mechanism audit and its
+mathematical gradient checks. A new A/P training proposal would need evidence not
+contained in these logits, such as an independently annotated landmark target;
+renaming or lightly smoothing the same aggregate is not a new mechanism.
 
 ## API and validation
 

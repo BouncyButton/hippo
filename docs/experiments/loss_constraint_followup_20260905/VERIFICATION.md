@@ -38,7 +38,7 @@ their historical Dice-only interpretation.
 
 `bash -n thesis/new_constraints/run_new_constraints_cluster.sh` passed.
 `git diff --check -- thesis/new_constraints` passed. A full-worktree diff check
-finds pre-existing trailing whitespace in `allenamenti.md` lines 67–68, which was
+finds pre-existing trailing whitespace in `docs/allenamenti.md` lines 67–68, which was
 left untouched. Broad equivariance test discovery also finds a pre-existing
 missing `equivariance.evaluate_closure` import; the explicit core suite above
 does not include that unrelated broken collection target.

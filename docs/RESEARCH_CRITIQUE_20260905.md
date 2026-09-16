@@ -121,11 +121,20 @@ to a specific earlier bug.
 
 The strict candidate must therefore fail its geometry gate on the current arrays.
 It should not silently project labels to a plane or omit exceptions. An explicit
-skip policy would define a different, partial-cohort experiment; a tolerance-aware
-target would be a different hypothesis requiring its own preregistration. Evidence,
+skip policy would define a different, partial-cohort experiment. A subsequent
+preregistered F1–F7 investigation tested the tolerance-aware direction and closed
+it on the official checkpoint: slice-pooled conditional A/P log-odds degenerate
+to the hard vote count, while predicted cut shrinkage is appropriate under weak
+image evidence. Evidence,
 case IDs, exact conflicting coordinates, source hashes and a reproducible CPU
 audit are in `experiments/loss_constraint_followup_20260905/gt_geometry_audit.json`
 and `audit_gt_geometry.py`.
+
+The closure and corrected official-pool statistics are recorded in
+`experiments/loss_constraint_followup_20260905/A_P_BRANCH_CLOSURE_20260905.md`.
+This empirical closure does not restore the handoff's original universal claim:
+stable logit-space losses still have corrective gradients on confident errors.
+The failure is that the tested aggregate reads no additional localization signal.
 
 ## 6. Statistical and causal limits
 

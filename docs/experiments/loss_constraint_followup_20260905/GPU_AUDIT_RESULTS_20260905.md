@@ -89,6 +89,9 @@ full teacher's +0.00695 prediction improvement.
 
 On this checkpoint, max-class confidence >=0.99 occurs in **99.87% of the whole
 crop**, **94.64% of GT foreground**, and **90.72% of the multiclass GT boundary**.
+The whole-crop number is a frame artifact: later in-pool analysis measured 75.8%
+zero padding, saturated at effectively 100%. Quote the **94.7% GT-foreground**
+figure when discussing model saturation; retain 99.87% only with its denominator.
 Among incorrectly decoded voxels, **79.07%** are saturated, and average
 confidence is **96.69%**. Foreground accuracy is only **86.97%** against mean
 confidence **99.19%**. Conditional A/P confidence on GT foreground is saturated
@@ -114,12 +117,11 @@ the incremental deltas versus supervised alone are approximately -0.000019,
 use GT, making these oracle diagnostics. The compatible subset also starts
 at a higher baseline, 0.882523; never compare its result with the all-case mean.
 
-This rejects the implemented strict all-case formulation. It does not reject
-every approximate planar or cut-localization objective. The exceptions are
-small (about 0.16% of foreground), so a tolerance-aware formulation remains
-conceivable, but its incremental utility must be demonstrated before GPU
-training. It should be a secondary research question rather than the next
-expensive experiment.
+This rejects the implemented strict all-case formulation. Subsequent F1–F7
+audits also reject the tolerance-aware aggregate family for this checkpoint:
+conditional A/P log-odds pooling degenerates to the hard vote count in 52/52
+cases, and forcing the cut distribution's spread would remove beneficial
+shrinkage under weak image evidence. See `A_P_BRANCH_CLOSURE_20260905.md`.
 
 ## My recommendation
 

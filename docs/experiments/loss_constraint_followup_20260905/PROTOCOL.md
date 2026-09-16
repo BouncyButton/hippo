@@ -1,13 +1,13 @@
 # Loss-constraint follow-up, 2026-09-05
 
-Status: the official-baseline GPU audit completed (650074). The user subsequently authorized the original Family-B equivariance replication: seeds 0/1 are submitted as **650078/650080** from exact frozen baseline source. The current launch order and implemented augmentation/common-support follow-up are in [NEXT_PROTOCOL.md](../equivariance_family_b_20260905/NEXT_PROTOCOL.md), which supersedes the proposed launch order below. See [GPU_AUDIT_RESULTS_20260905.md](GPU_AUDIT_RESULTS_20260905.md) for audit evidence. No teacher, A/P or Dice+CE training has been submitted.
+Status: the official-baseline GPU audit completed (650074), and the original Family-B equivariance replication completed successfully as **650078/650080**. Dice+CE seed 0 was submitted as **651089** on 2026-09-07 from a frozen source copy; it is pending behind augmentation-only job 650680. No teacher, A/P, Dice+CE seed-1, or Dice+CE-plus-constraint training has been submitted. The current launch order and implemented augmentation/common-support follow-up are in [NEXT_PROTOCOL.md](../equivariance_family_b_20260905/NEXT_PROTOCOL.md). See [GPU_AUDIT_RESULTS_20260905.md](GPU_AUDIT_RESULTS_20260905.md) and [DICE_CE_SUBMISSION_20260907.json](../../../experiments/loss_constraint_followup_20260905/DICE_CE_SUBMISSION_20260907.json) for evidence.
 
 ## Decisions
 
 1. Add an explicit Dice+CE control. Treat improved calibration or Dice as hypotheses, not consequences guaranteed by CE. Preserve the original Dice loss as the default.
 2. Implement translation-teacher KL as the next trainable constraint candidate. It has a corrective logit gradient when teacher and student disagree, including when the student is confident. It can still converge to an equally wrong, translation-invariant fixed point.
-3. Implement a supervised A/P cut-posterior candidate and test its ground-truth assumptions before training. **The strict all-case planar formulation fails the current label audit.** Keep it on hold; do not silently exclude incompatible cases or change labels to make the rule true.
-4. Treat entropy-only cut sharpening as an insufficient objective: it can sharpen the wrong answer without changing its rank. The implemented A/P objective uses the training label to identify the target cut.
+3. Preserve the supervised A/P cut-posterior implementation as a negative-result artifact. The strict formulation fails label geometry, and the later F1–F7 investigation closes the tolerance-aware aggregate family on the official checkpoint. Do not train it.
+4. Treat entropy-only cut sharpening as an insufficient objective: it can sharpen the wrong answer without changing its rank.
 
 These changes are proposed mechanisms, not measured segmentation improvements.
 
@@ -51,7 +51,7 @@ The teacher defaults to two distinct sampled views from 12 nonzero shifts (±1 a
 
 Before a 50-epoch teacher submission, time a bounded step/epoch sample: two extra teacher forwards can exceed the 24h10m Slurm limit. Do not assume the control's 18.5h runtime applies. If a continuation protocol is needed, design and freeze it first. Validate two seeds at converged exposure before a quality claim.
 
-Do not queue strict `ap_cut` on this dataset. The audit found mixed A/P slices in 47/208 training cases and 11/52 validation cases; all current validation GT exports match the NIfTI data exactly. A future approximate-plane formulation needs its own specification and falsifier. The current API's explicit `invalid_policy='skip'` is useful for diagnostic coverage counts; it is not permission to silently change the training cohort.
+Do not queue `ap_cut` on this dataset. The audit found mixed A/P slices in 47/208 training cases and 11/52 validation cases; all current validation GT exports match the NIfTI data exactly. F1–F7 subsequently rejected the tolerant aggregate family because it contains no additional cut-localization information at the official checkpoint. The current API's explicit `invalid_policy='skip'` remains useful for diagnostic coverage counts; it is not permission to silently change the training cohort.
 
 ## Concrete control commands
 

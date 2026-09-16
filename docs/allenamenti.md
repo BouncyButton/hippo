@@ -220,11 +220,11 @@ A targeted experiment using soft/differentiable volume grounding is justified if
 
 ### Analysis artifacts
 
-- [Full written analysis](thesis/runs/paper_reproduction/full_fraction_epsilon_sweep_analysis_20260729/thesis_progress_update.md)
-- [Dice versus epsilon](thesis/runs/paper_reproduction/full_fraction_epsilon_sweep_analysis_20260729/01_dice_vs_epsilon.png)
-- [Paired Dice changes versus ε=5000](thesis/runs/paper_reproduction/full_fraction_epsilon_sweep_analysis_20260729/02_paired_dice_change_vs_5000.png)
-- [Classwise Dice](thesis/runs/paper_reproduction/full_fraction_epsilon_sweep_analysis_20260729/03_classwise_dice_vs_epsilon.png)
-- [Volume and constraint behavior](thesis/runs/paper_reproduction/full_fraction_epsilon_sweep_analysis_20260729/04_volume_constraint_behavior.png)
-- [Equation 7 dead zones](thesis/runs/paper_reproduction/full_fraction_epsilon_sweep_analysis_20260729/05_equation7_dead_zones.png)
-- [Learning curves and truth trajectories](thesis/runs/paper_reproduction/full_fraction_epsilon_sweep_analysis_20260729/06_learning_curves.png)
-- [Dice/constraint selection trade-off](thesis/runs/paper_reproduction/full_fraction_epsilon_sweep_analysis_20260729/07_selection_tradeoff.png)
+- [Full written analysis](../thesis/runs/paper_reproduction/full_fraction_epsilon_sweep_analysis_20260729/thesis_progress_update.md)
+- [Dice versus epsilon](../thesis/runs/paper_reproduction/full_fraction_epsilon_sweep_analysis_20260729/01_dice_vs_epsilon.png)
+- [Paired Dice changes versus ε=5000](../thesis/runs/paper_reproduction/full_fraction_epsilon_sweep_analysis_20260729/02_paired_dice_change_vs_5000.png)
+- [Classwise Dice](../thesis/runs/paper_reproduction/full_fraction_epsilon_sweep_analysis_20260729/03_classwise_dice_vs_epsilon.png)
+- [Volume and constraint behavior](../thesis/runs/paper_reproduction/full_fraction_epsilon_sweep_analysis_20260729/04_volume_constraint_behavior.png)
+- [Equation 7 dead zones](../thesis/runs/paper_reproduction/full_fraction_epsilon_sweep_analysis_20260729/05_equation7_dead_zones.png)
+- [Learning curves and truth trajectories](../thesis/runs/paper_reproduction/full_fraction_epsilon_sweep_analysis_20260729/06_learning_curves.png)
+- [Dice/constraint selection trade-off](../thesis/runs/paper_reproduction/full_fraction_epsilon_sweep_analysis_20260729/07_selection_tradeoff.png)
