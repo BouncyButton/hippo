@@ -15,15 +15,58 @@ def test_augmentation_preserves_image_label_alignment_and_global_rng():
     images = labels.float().repeat(2, 1, 1, 1, 1)
     labels = labels.repeat(2, 1, 1, 1, 1)
     before = torch.get_rng_state().clone()
+    generator = torch.Generator().manual_seed(1)
+    initial_state = generator.get_state()
     seen = set()
-    for batch in range(40):
-        a, b, shifts = augment_translation(images, labels, seed=0, epoch=2, batch_index=batch)
+    first = None
+    for _ in range(40):
+        a, b, shift = augment_translation(images, labels, generator=generator)
+        if first is None:
+            first = (a.clone(), b.clone(), shift)
         assert torch.equal(a, b.float())
-        replay = augment_translation(images, labels, seed=0, epoch=2, batch_index=batch)
-        assert torch.equal(a, replay[0]) and shifts == replay[2]
-        seen.update(shifts)
-    assert len(seen) == 7
+        assert shift != (0, 0, 0)
+        seen.add(shift)
+    assert len(seen) == 6
+    replay_generator = torch.Generator()
+    replay_generator.set_state(initial_state)
+    replay = augment_translation(images, labels, generator=replay_generator)
+    assert torch.equal(first[0], replay[0])
+    assert torch.equal(first[1], replay[1])
+    assert first[2] == replay[2]
     assert torch.equal(before, torch.get_rng_state())
+
+
+def test_cached_shifted_logits_match_direct_equivariance_and_avoid_forward():
+    from thesis.new_constraints.equivariance import TranslationEquivarianceLoss
+
+    class CountingModel(torch.nn.Module):
+        def __init__(self):
+            super().__init__()
+            self.calls = 0
+
+        def forward(self, images):
+            self.calls += 1
+            return torch.cat((images, -images, images * 0.5), dim=1)
+
+    images = torch.randn(1, 1, 8, 8, 8)
+    shift = (2, 0, 0)
+    direct_model = CountingModel()
+    base = direct_model(images)
+    direct = TranslationEquivarianceLoss()(direct_model, images, base, shift=shift)
+    assert direct_model.calls == 2
+
+    cached_model = CountingModel()
+    cached_base = cached_model(images)
+    cached_shifted = cached_model(translate_3d(images, shift))
+    cached = TranslationEquivarianceLoss()(
+        cached_model,
+        images,
+        cached_base,
+        shift=shift,
+        transformed_logits=cached_shifted,
+    )
+    assert cached_model.calls == 2
+    assert torch.equal(direct.loss, cached.loss)
 
 
 def test_common_support_is_fixed_across_draws_and_excludes_all_padding():

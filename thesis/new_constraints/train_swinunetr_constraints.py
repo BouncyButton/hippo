@@ -16,6 +16,7 @@ import re
 import subprocess
 import sys
 import tempfile
+import time
 import uuid
 from contextlib import ExitStack
 from dataclasses import asdict, dataclass, replace
@@ -57,9 +58,15 @@ from thesis.new_constraints import (  # noqa: E402
     NewConstraintObjective,
 )
 from thesis.new_constraints.constraint_result import ConstraintResult  # noqa: E402
+from thesis.new_constraints.early_stopping import EarlyStopping  # noqa: E402
 from thesis.new_constraints.ap_cut import AP_CUT_METRICS  # noqa: E402
+from thesis.new_constraints.ap_plane import (  # noqa: E402
+    AP_CONDITIONAL_CE_METRICS,
+    AP_PLANE_LOCATION_METRICS,
+)
 from thesis.new_constraints.teacher import TEACHER_METRICS  # noqa: E402
 from thesis.new_constraints.translation_augmentation import augment_translation  # noqa: E402
+from thesis.new_constraints.training_augmentation import MILD_V1, augment_mild  # noqa: E402
 from thesis.new_constraints.supervised import (  # noqa: E402
     CalibrationDiagnostics,
     build_supervised_loss,
@@ -74,7 +81,11 @@ from thesis.new_constraints.training_telemetry import (  # noqa: E402
 )
 
 CONSTRAINT_WEIGHTS = {"none": 0.0, "equivariance": 0.10, "translation": 0.10}
-CONSTRAINT_CHOICES = ("none", "equivariance", "bands", "onecut", "translation", "teacher", "ap_cut")
+CONSTRAINT_CHOICES = (
+    "none", "equivariance", "bands", "onecut", "translation", "teacher", "ap_cut",
+    "ap_plane", "ap_plane_location", "ap_plane_ce_control", "perimeter_profile",
+    "ray_moment",
+)
 AGREEMENT_CONSTRAINT_NAMES = (
     "translation_equivariance", "translation_teacher_kl", "ap_cut_posterior",
 )
@@ -101,6 +112,15 @@ ONECUT_METRICS = (
     "skipped_patient",
     "edge_touching",
 )
+AP_PLANE_METRICS = (
+    "raw_loss",
+    "selected_cut",
+    "candidate_count",
+    "valid_patient",
+    "skipped_patient",
+)
+PERIMETER_PROFILE_METRICS = ("raw_loss",)
+RAY_MOMENT_METRICS = ("raw_loss",)
 
 
 def file_sha256(path: Path) -> str:
@@ -345,12 +365,18 @@ def build_swinunetr(
     spatial_size: tuple[int, int, int],
     num_classes: int,
     device: torch.device,
+    *,
+    drop_rate: float = 0.0,
+    activation_checkpointing: bool = True,
 ) -> SwinUNETR:
     """Build SwinUNETR across MONAI versions with and without ``img_size``."""
+    if not math.isfinite(drop_rate) or not 0 <= drop_rate < 1:
+        raise ValueError("--drop-rate must be finite and in [0, 1).")
     kwargs: dict[str, Any] = {
         "in_channels": 1,
         "out_channels": num_classes,
-        "use_checkpoint": True,
+        "use_checkpoint": activation_checkpointing,
+        "drop_rate": drop_rate,
     }
     if "img_size" in inspect.signature(SwinUNETR).parameters:
         kwargs["img_size"] = spatial_size
@@ -375,6 +401,7 @@ class RunSpec:
     constraint_set: str
     constraint_config: dict[str, Any]
     constraint_warmup_epochs: int
+    constraint_scale_knots: tuple[tuple[int, float], ...]
     constraint_eval_every: int
     amp: bool
     initial_checkpoint: str | None
@@ -388,6 +415,8 @@ class RunSpec:
     bands_calibration_sha256: str | None = None
     onecut_calibration: str | None = None
     onecut_calibration_sha256: str | None = None
+    ap_plane_calibration: str | None = None
+    ap_plane_calibration_sha256: str | None = None
     telemetry: bool = False
     telemetry_probe_epochs: tuple[int, ...] = ()
     telemetry_probe_cases: int = 0
@@ -396,6 +425,13 @@ class RunSpec:
     ce_weight: float = 0.0
     calibration_diagnostics: bool = False
     translation_augmentation: bool = False
+    early_stopping_patience: int = 0
+    early_stopping_min_delta: float = 0.0005
+    early_stopping_min_epochs: int = 25
+    drop_rate: float = 0.0
+    activation_checkpointing: bool = True
+    plain_tensors: bool = False
+    training_augmentation: str = "none"
 
 
 def parse_args() -> argparse.Namespace:
@@ -405,12 +441,22 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--splits-json", type=Path, required=True)
     parser.add_argument("--fold", type=int, default=0)
     parser.add_argument("--epochs", type=int, default=50)
+    parser.add_argument("--early-stopping-patience", type=int, default=0,
+                        help="Validation hard-Dice patience; 0 disables early stopping.")
+    parser.add_argument("--early-stopping-min-delta", type=float, default=0.0005)
+    parser.add_argument("--early-stopping-min-epochs", type=int, default=25)
     parser.add_argument("--batch-size", type=int, default=1)
     parser.add_argument("--num-workers", type=int, default=0)
     parser.add_argument("--spatial-size", type=int, nargs=3, default=(64, 64, 64))
     parser.add_argument("--resize", action="store_true")
     parser.add_argument("--num-classes", type=int, default=None)
     parser.add_argument("--seed", type=int, default=0)
+    parser.add_argument("--drop-rate", type=float, default=0.0,
+                        help="Swin embedding/MLP/projection dropout; attention dropout and stochastic depth stay zero.")
+    parser.add_argument("--activation-checkpointing", action=argparse.BooleanOptionalAction,
+                        default=True, help="Recompute activations to save GPU memory.")
+    parser.add_argument("--plain-tensors", action="store_true",
+                        help="Discard transform metadata after preprocessing to avoid model dispatch overhead.")
     parser.add_argument("--optim-mode", choices=("adamw_0.01", "nnunetv2"), default="adamw_0.01")
     parser.add_argument("--learning-rate", type=float, default=1e-4)
     parser.add_argument("--weight-decay", type=float, default=1e-5)
@@ -435,13 +481,53 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--teacher-temperature", type=float, default=1.0)
     parser.add_argument("--teacher-support", choices=("union", "common"), default="union")
     parser.add_argument("--translation-augmentation", action="store_true",
-                        help="Supervised +/-2 axis translations with probability 1/2; training only.")
+                        help="Compute-matched identity plus one supervised uniform +/-2 axis view; training only.")
+    parser.add_argument("--training-augmentation", choices=("none", "mild_v1"), default="none",
+                        help="Single-view spatial/intensity augmentation; training only, constraint-set none, batch 1.")
     parser.add_argument("--ap-cut-weight", type=float, default=None,
                         help="Experimental structured A/P posterior weight, chosen by a training-only audit.")
     parser.add_argument("--ap-axis", type=int, choices=(0, 1, 2), default=None,
                         help="Explicit spatial tensor axis; verify against transformed training labels.")
     parser.add_argument("--ap-anterior-side", choices=("low", "high"), default=None)
     parser.add_argument("--ap-temperature", type=float, default=1.0)
+    parser.add_argument(
+        "--ap-plane-weight",
+        type=float,
+        default=None,
+        help="Positive weight from the selected training-only A/P-plane calibration.",
+    )
+    parser.add_argument(
+        "--ap-plane-calibration-json",
+        type=Path,
+        default=None,
+        help="Completed calibration required by ap_plane or ap_plane_location.",
+    )
+    parser.add_argument(
+        "--ap-plane-axis",
+        type=int,
+        choices=(0, 1, 2),
+        default=None,
+        help="Stored coronal tensor axis; Task04 uses axis 1.",
+    )
+    parser.add_argument(
+        "--ap-plane-anterior-side",
+        choices=("low", "high"),
+        default=None,
+        help="Stored anterior direction; Task04 uses high.",
+    )
+    parser.add_argument("--ap-plane-margin", type=float, default=0.0)
+    parser.add_argument(
+        "--perimeter-profile-weight",
+        type=float,
+        default=None,
+        help="Classwise multi-axis perimeter-profile weight from a training-only audit.",
+    )
+    parser.add_argument(
+        "--ray-moment-weight",
+        type=float,
+        default=None,
+        help="Three-view M0 ray-thickness weight from a training-only audit.",
+    )
     parser.add_argument("--translation-size", type=int, default=2)
     parser.add_argument("--equivariance-max-samples", type=int, default=1,
                         help="Maximum transformed samples per training batch; 0 uses the whole batch.")
@@ -511,6 +597,18 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--onecut-temperature", type=float, default=1.0)
     parser.add_argument("--onecut-max-surface-points", type=int, default=4096)
     parser.add_argument("--constraint-warmup-epochs", type=int, default=5)
+    parser.add_argument(
+        "--constraint-scale-knots",
+        type=float,
+        nargs="+",
+        default=None,
+        metavar=("EPOCH", "SCALE"),
+        help=(
+            "Optional piecewise-linear constraint multiplier as EPOCH SCALE pairs. "
+            "Requires --constraint-warmup-epochs 0; the endpoint scales are held "
+            "before the first and after the last knot."
+        ),
+    )
     parser.add_argument("--constraint-eval-every", type=int, default=5,
                         help="Evaluate validation constraint metrics every N epochs; 0 means final only.")
     parser.add_argument(
@@ -625,11 +723,28 @@ def resolve_constraint_config(args: argparse.Namespace) -> NewConstraintConfig:
     selected = "equivariance" if args.constraint_set == "translation" else args.constraint_set
     teacher_override = getattr(args, "teacher_weight", None)
     ap_override = getattr(args, "ap_cut_weight", None)
+    ap_plane_override = getattr(args, "ap_plane_weight", None)
+    ap_plane_calibration = getattr(args, "ap_plane_calibration_json", None)
+    perimeter_profile_override = getattr(args, "perimeter_profile_weight", None)
+    ray_moment_override = getattr(args, "ray_moment_weight", None)
     if getattr(args, "translation_augmentation", False) and selected not in {"none", "equivariance", "teacher"}:
         raise ValueError("Translation augmentation supports none, equivariance, or teacher only.")
+    if (
+        getattr(args, "translation_augmentation", False)
+        and selected == "equivariance"
+        and getattr(args, "translation_size", 2) != 2
+    ):
+        raise ValueError("Translation augmentation with equivariance requires --translation-size 2.")
+    plane_presets = {"ap_plane", "ap_plane_location", "ap_plane_ce_control"}
     for preset, override, flag in (
         ("teacher", teacher_override, "--teacher-weight"),
         ("ap_cut", ap_override, "--ap-cut-weight"),
+        (
+            "perimeter_profile",
+            perimeter_profile_override,
+            "--perimeter-profile-weight",
+        ),
+        ("ray_moment", ray_moment_override, "--ray-moment-weight"),
     ):
         if selected != preset and override not in (None, 0.0):
             raise ValueError(f"{flag} requires --constraint-set {preset}.")
@@ -637,7 +752,19 @@ def resolve_constraint_config(args: argparse.Namespace) -> NewConstraintConfig:
             override is None or not math.isfinite(override) or override <= 0
         ):
             raise ValueError(f"--constraint-set {preset} requires a finite positive {flag}.")
-    if selected in {"bands", "onecut"} and getattr(args, "supervised_loss", "dice") != "dice":
+    if selected not in plane_presets and ap_plane_override not in (None, 0.0):
+        raise ValueError(
+            "--ap-plane-weight requires an A/P-plane constraint preset."
+        )
+    if selected in plane_presets and (
+        ap_plane_override is None
+        or not math.isfinite(ap_plane_override)
+        or ap_plane_override <= 0
+    ):
+        raise ValueError(
+            f"--constraint-set {selected} requires a finite positive --ap-plane-weight."
+        )
+    if selected in {"bands", "onecut", *plane_presets} and getattr(args, "supervised_loss", "dice") != "dice":
         raise ValueError(
             "Existing bands/onecut calibration reports use Dice-only gradients; "
             "they cannot authorize a Dice+CE constraint run."
@@ -647,6 +774,20 @@ def resolve_constraint_config(args: argparse.Namespace) -> NewConstraintConfig:
         or getattr(args, "ap_anterior_side", None) is None
     ):
         raise ValueError("ap_cut requires explicit --ap-axis and --ap-anterior-side.")
+    if selected in plane_presets and (
+        getattr(args, "ap_plane_axis", None) is None
+        or getattr(args, "ap_plane_anterior_side", None) is None
+    ):
+        raise ValueError(
+            f"{selected} requires explicit --ap-plane-axis and "
+            "--ap-plane-anterior-side."
+        )
+    if selected in plane_presets and ap_plane_calibration is None:
+        raise ValueError(f"{selected} requires --ap-plane-calibration-json.")
+    if selected not in plane_presets and ap_plane_calibration is not None:
+        raise ValueError(
+            "--ap-plane-calibration-json requires an A/P-plane constraint preset."
+        )
     equivariance_override = getattr(args, "equivariance_weight", None)
     bands_override = getattr(args, "bands_weight", None)
     bands_calibration = getattr(args, "bands_calibration_json", None)
@@ -689,7 +830,11 @@ def resolve_constraint_config(args: argparse.Namespace) -> NewConstraintConfig:
         abs_tol=1e-12,
     ):
         raise ValueError("Tversky FP and FN weights must sum to 1.")
-    if selected in {"none", "teacher", "ap_cut"}:
+    if selected in {
+        "none", "teacher", "ap_cut", "ap_plane", "ap_plane_location",
+        "ap_plane_ce_control",
+        "perimeter_profile", "ray_moment"
+    }:
         if (
             equivariance_override not in (None, 0.0)
             or bands_override not in (None, 0.0)
@@ -816,6 +961,32 @@ def resolve_constraint_config(args: argparse.Namespace) -> NewConstraintConfig:
         ap_axis=getattr(args, "ap_axis", None) if selected == "ap_cut" else 1,
         ap_anterior_low=getattr(args, "ap_anterior_side", "low") == "low",
         ap_temperature=float(getattr(args, "ap_temperature", 1.0)),
+        ap_plane_weight=(
+            float(ap_plane_override) if selected in plane_presets else 0.0
+        ),
+        ap_plane_axis=(
+            int(getattr(args, "ap_plane_axis")) if selected in plane_presets else 1
+        ),
+        ap_plane_anterior_high=(
+            getattr(args, "ap_plane_anterior_side", "high") == "high"
+        ),
+        ap_plane_margin=float(getattr(args, "ap_plane_margin", 0.0)),
+        ap_plane_require_both=True,
+        ap_plane_mode=(
+            "location"
+            if selected == "ap_plane_location"
+            else "conditional_ce"
+            if selected == "ap_plane_ce_control"
+            else "existential"
+        ),
+        perimeter_profile_weight=(
+            float(perimeter_profile_override)
+            if selected == "perimeter_profile"
+            else 0.0
+        ),
+        ray_moment_weight=(
+            float(ray_moment_override) if selected == "ray_moment" else 0.0
+        ),
     )
 
 
@@ -829,6 +1000,52 @@ def constraint_warmup_scale(epoch: int, warmup_epochs: int) -> float:
     if warmup_epochs == 0:
         return 1.0
     return min(1.0, epoch / warmup_epochs)
+
+
+def parse_constraint_scale_knots(
+    raw_values: list[float] | tuple[float, ...] | None,
+) -> tuple[tuple[int, float], ...]:
+    """Validate CLI epoch/scale pairs and return an immutable schedule."""
+
+    if raw_values is None:
+        return ()
+    if len(raw_values) < 2 or len(raw_values) % 2:
+        raise ValueError(
+            "--constraint-scale-knots requires one or more EPOCH SCALE pairs."
+        )
+    knots: list[tuple[int, float]] = []
+    previous_epoch = 0
+    for epoch_value, scale_value in zip(raw_values[::2], raw_values[1::2]):
+        if not math.isfinite(epoch_value) or epoch_value < 1 or not float(epoch_value).is_integer():
+            raise ValueError("Constraint scale knot epochs must be finite positive integers.")
+        epoch = int(epoch_value)
+        if epoch <= previous_epoch:
+            raise ValueError("Constraint scale knot epochs must be strictly increasing.")
+        if not math.isfinite(scale_value) or scale_value < 0:
+            raise ValueError("Constraint scale knot values must be finite and non-negative.")
+        knots.append((epoch, float(scale_value)))
+        previous_epoch = epoch
+    return tuple(knots)
+
+
+def constraint_scale_for_epoch(
+    epoch: int,
+    warmup_epochs: int,
+    knots: tuple[tuple[int, float], ...] = (),
+) -> float:
+    """Return the legacy warmup or an explicit piecewise-linear multiplier."""
+
+    if not knots:
+        return constraint_warmup_scale(epoch, warmup_epochs)
+    if epoch < 1:
+        raise ValueError("epoch must be positive.")
+    if epoch <= knots[0][0]:
+        return knots[0][1]
+    for (left_epoch, left_scale), (right_epoch, right_scale) in zip(knots, knots[1:]):
+        if epoch <= right_epoch:
+            fraction = (epoch - left_epoch) / (right_epoch - left_epoch)
+            return left_scale + fraction * (right_scale - left_scale)
+    return knots[-1][1]
 
 
 def validate_three_class_labels(items: list[dict[str, Any]]) -> None:
@@ -885,6 +1102,20 @@ def validate_image_label_samples(items: list[dict[str, Any]]) -> None:
             raise ValueError(f"Case {case_name} has invalid image values.") from error
         if not image_is_finite:
             raise ValueError(f"Case {case_name} has nonfinite image values.")
+
+
+class PlainTensorTransform:
+    """Keep preprocessing unchanged, then discard metadata unused by this trainer."""
+
+    def __init__(self, transform):
+        self.transform = transform
+
+    def __call__(self, sample):
+        result = self.transform(sample)
+        for key in ("image", "label"):
+            if hasattr(result[key], "as_tensor"):
+                result[key] = result[key].as_tensor()
+        return result
 
 
 def build_data(
@@ -948,10 +1179,12 @@ def build_data(
         raise ValueError("Duplicate case names in the dataframe make the split ambiguous.")
     validate_image_label_samples(train_items + validation_items)
 
-    train_dataset = MonaiDataset(data=train_items, transform=dataset.transform)
+    transform = (PlainTensorTransform(dataset.transform)
+                 if getattr(args, "plain_tensors", False) else dataset.transform)
+    train_dataset = MonaiDataset(data=train_items, transform=transform)
     validation_dataset = MonaiDataset(
         data=validation_items,
-        transform=dataset.transform,
+        transform=transform,
     )
     loader_options = {
         "batch_size": args.batch_size,
@@ -1146,6 +1379,138 @@ def _update_validation_constraint_batch(
                     "ap_gt_cut_probability": float(result.truth[index].detach().cpu()),
                 })
 
+    if objective.config.ap_plane_weight > 0:
+        result = objective.ap_plane(logits, labels)
+        result_name = {
+            "existential": "existential_ap_plane",
+            "location": "ap_plane_location",
+            "conditional_ce": "ap_conditional_ce_control",
+        }[objective.config.ap_plane_mode]
+        update_constraint_totals(totals, {result_name: result})
+        if detail_rows is not None:
+            details = result.details
+            for index, case_name in enumerate(case_names):
+                if objective.config.ap_plane_mode == "conditional_ce":
+                    detail_rows.append({
+                        "constraint_name": result_name,
+                        "case_name": case_name,
+                        "ap_plane_valid": int(details["valid"][index].detach().cpu()),
+                        "ap_plane_loss": float(
+                            details["case_loss"][index].detach().cpu()
+                        ),
+                    })
+                    continue
+                row = {
+                    "constraint_name": result_name,
+                    "case_name": case_name,
+                    "ap_plane_valid": int(details["valid"][index].detach().cpu()),
+                    "ap_plane_loss": float(details["case_loss"][index].detach().cpu()),
+                    "ap_plane_selected_cut": int(
+                        details["selected_cut"][index].detach().cpu()
+                    ),
+                    "ap_plane_candidate_count": int(
+                        details["candidate_count"][index].detach().cpu()
+                    ),
+                }
+                if objective.config.ap_plane_mode == "location":
+                    row.update({
+                        "ap_plane_target_cut": int(
+                            details["target_cut"][index].detach().cpu()
+                        ),
+                        "ap_plane_cut_abs_error": float(
+                            details["cut_abs_error"][index].detach().cpu()
+                        ),
+                        "ap_plane_gt_disagreement_fraction": float(
+                            details["gt_plane_disagreement_fraction"][index]
+                            .detach()
+                            .cpu()
+                        ),
+                        "ap_plane_target_cost": float(
+                            details["target_cost"][index].detach().cpu()
+                        ),
+                        "ap_plane_target_cost_gap": float(
+                            details["target_cost_gap"][index].detach().cpu()
+                        ),
+                        "ap_plane_target_cost_gap_fraction": float(
+                            details["target_cost_gap_fraction"][index].detach().cpu()
+                        ),
+                        "ap_plane_raw_selected_cut": int(
+                            details["raw_selected_cut"][index].detach().cpu()
+                        ),
+                        "ap_plane_raw_cut_abs_error": float(
+                            details["raw_cut_abs_error"][index].detach().cpu()
+                        ),
+                        "ap_plane_raw_exact_cut": float(
+                            details["raw_exact_cut"][index].detach().cpu()
+                        ),
+                        "ap_plane_raw_within_one_cut": float(
+                            details["raw_within_one_cut"][index].detach().cpu()
+                        ),
+                        "ap_plane_raw_disagreement_fraction": float(
+                            details["raw_plane_disagreement_fraction"][index]
+                            .detach()
+                            .cpu()
+                        ),
+                        "ap_plane_raw_has_both_ap_classes": int(
+                            details["raw_has_both_ap_classes"][index].detach().cpu()
+                        ),
+                        "ap_plane_raw_cut_valid": int(
+                            details["raw_cut_valid"][index].detach().cpu()
+                        ),
+                        "foreground_union_dice": float(
+                            details["foreground_union_dice"][index].detach().cpu()
+                        ),
+                        "ap_swap_voxels": int(
+                            details["ap_swap_voxels"][index].detach().cpu()
+                        ),
+                        "ap_swap_fraction": float(
+                            details["ap_swap_fraction"][index].detach().cpu()
+                        ),
+                        "displaced_slab_swap_voxels": int(
+                            details["displaced_slab_swap_voxels"][index].detach().cpu()
+                        ),
+                        "displaced_slab_swap_fraction": float(
+                            details["displaced_slab_swap_fraction"][index]
+                            .detach()
+                            .cpu()
+                        ),
+                    })
+                detail_rows.append(row)
+
+    if objective.config.perimeter_profile_weight > 0:
+        result = objective.perimeter_profile(logits, labels)
+        update_constraint_totals(totals, {"perimeter_profile": result})
+        if detail_rows is not None:
+            axis_losses = result.details["axis_loss"].detach().cpu()
+            for index, case_name in enumerate(case_names):
+                detail_rows.append({
+                    "constraint_name": "perimeter_profile",
+                    "case_name": case_name,
+                    "raw_loss": float(result.details["case_loss"][index].detach().cpu()),
+                    "axis_0_loss": float(axis_losses[index, 0]),
+                    "axis_1_loss": float(axis_losses[index, 1]),
+                    "axis_2_loss": float(axis_losses[index, 2]),
+                })
+
+    if objective.config.ray_moment_weight > 0:
+        result = objective.ray_moment(logits, labels)
+        update_constraint_totals(totals, {"ray_moment": result})
+        if detail_rows is not None:
+            axis_losses = result.details["axis_loss"].detach().cpu()
+            group_losses = result.details["group_loss"].detach().cpu()
+            for index, case_name in enumerate(case_names):
+                detail_rows.append({
+                    "constraint_name": "ray_moment",
+                    "case_name": case_name,
+                    "raw_loss": float(result.details["case_loss"][index].detach().cpu()),
+                    "axis_0_loss": float(axis_losses[index, 0]),
+                    "axis_1_loss": float(axis_losses[index, 1]),
+                    "axis_2_loss": float(axis_losses[index, 2]),
+                    "foreground_loss": float(group_losses[index, 0]),
+                    "anterior_loss": float(group_losses[index, 1]),
+                    "posterior_loss": float(group_losses[index, 2]),
+                })
+
     if objective.config.teacher_weight > 0:
         shifts = objective.teacher.shifts
         if not all_translation_shifts:
@@ -1243,6 +1608,9 @@ def evaluate_constraint_metrics(
         and objective.config.onecut_weight == 0
         and objective.config.teacher_weight == 0
         and objective.config.ap_cut_weight == 0
+        and objective.config.ap_plane_weight == 0
+        and objective.config.perimeter_profile_weight == 0
+        and objective.config.ray_moment_weight == 0
     ):
         return {}
     totals: dict[str, dict[str, Any]] = {}
@@ -1373,6 +1741,9 @@ def evaluate_validation_metrics(
         or objective.config.onecut_weight > 0
         or objective.config.teacher_weight > 0
         or objective.config.ap_cut_weight > 0
+        or objective.config.ap_plane_weight > 0
+        or objective.config.perimeter_profile_weight > 0
+        or objective.config.ray_moment_weight > 0
     )
     calibration = CalibrationDiagnostics(num_classes) if calibration_diagnostics else None
     model.eval()
@@ -1580,8 +1951,18 @@ def metric_fieldnames(calibration_diagnostics: bool = False, num_classes: int = 
             fields.append(f"{prefix}_outer_onecut_{statistic}")
         for statistic in AP_CUT_METRICS:
             fields.append(f"{prefix}_ap_cut_posterior_{statistic}")
+        for statistic in AP_PLANE_METRICS:
+            fields.append(f"{prefix}_existential_ap_plane_{statistic}")
+        for statistic in AP_PLANE_LOCATION_METRICS:
+            fields.append(f"{prefix}_ap_plane_location_{statistic}")
+        for statistic in AP_CONDITIONAL_CE_METRICS:
+            fields.append(f"{prefix}_ap_conditional_ce_control_{statistic}")
         for statistic in TEACHER_METRICS:
             fields.append(f"{prefix}_translation_teacher_kl_{statistic}")
+        for statistic in PERIMETER_PROFILE_METRICS:
+            fields.append(f"{prefix}_perimeter_profile_{statistic}")
+        for statistic in RAY_MOMENT_METRICS:
+            fields.append(f"{prefix}_ray_moment_{statistic}")
     if calibration_diagnostics:
         fields.extend(CalibrationDiagnostics(num_classes).summary())
     return fields
@@ -2105,6 +2486,166 @@ def validate_onecut_calibration_report(
         raise ValueError("One-cut calibration report digest is malformed.")
 
 
+def validate_ap_plane_calibration_report(
+    report: dict[str, Any],
+    args: argparse.Namespace,
+    *,
+    report_snapshot: FileSnapshot,
+    pkl_digest: str,
+    splits_digest: str,
+    source_provenance: dict[str, Any],
+    runtime_provenance: dict[str, Any],
+    execution_provenance: dict[str, Any],
+    splits_path: Path | None = None,
+) -> None:
+    """Bind an A/P-plane run to its training-only gradient calibration."""
+
+    if not isinstance(report, dict) or report.get("status") != "complete":
+        raise ValueError("A/P-plane calibration report is not complete.")
+    expected_constraint_set = args.constraint_set
+    if report.get("constraint_set") != expected_constraint_set:
+        raise ValueError("A/P-plane calibration report has the wrong constraint set.")
+    if report.get("dataset") != args.dataset or report.get("fold") != args.fold:
+        raise ValueError("A/P-plane calibration dataset/fold does not match this run.")
+    expected_geometry = {
+        "axis": int(args.ap_plane_axis),
+        "anterior_side": str(args.ap_plane_anterior_side),
+        "margin": float(args.ap_plane_margin),
+        "require_both": True,
+    }
+    if expected_constraint_set == "ap_plane_location":
+        expected_geometry["objective"] = "location"
+    elif expected_constraint_set == "ap_plane_ce_control":
+        expected_geometry["objective"] = "conditional_ce"
+    if report.get("ap_plane") != expected_geometry:
+        raise ValueError("A/P-plane calibration geometry does not match this run.")
+    if report.get("amp") is not bool(args.amp):
+        raise ValueError("A/P-plane calibration AMP mode does not match this run.")
+    weight = report.get("recommended_ap_plane_weight")
+    if (
+        isinstance(weight, bool)
+        or not isinstance(weight, (int, float))
+        or not math.isfinite(float(weight))
+        or float(weight) <= 0
+        or float(weight) != float(args.ap_plane_weight)
+    ):
+        raise ValueError("--ap-plane-weight must exactly match the calibration report.")
+    if report.get("target_ratio") != 0.10 or report.get("safety_ratio") != 0.50:
+        raise ValueError("A/P-plane calibration uses a noncanonical gradient policy.")
+
+    cases = report.get("cases")
+    if not isinstance(cases, list) or not 1 <= len(cases) <= 32:
+        raise ValueError("A/P-plane calibration must contain 1..32 case records.")
+    case_names = [row.get("case_name") if isinstance(row, dict) else None for row in cases]
+    if any(not isinstance(name, str) or not name for name in case_names):
+        raise ValueError("A/P-plane calibration case identities are malformed.")
+    splits = _load_splits_json(splits_path or args.splits_json)
+    training_names = set(splits[args.fold]["train"])
+    seed = _exact_int(report.get("seed"), "A/P-plane calibration seed")
+    max_cases = _exact_int(
+        report.get("max_cases"), "A/P-plane calibration max_cases"
+    )
+    expected_names = sorted(
+        random.Random(seed).sample(
+            sorted(training_names), min(max_cases, len(training_names))
+        )
+    )
+    if case_names != expected_names or report.get("training_case_ids") != expected_names:
+        raise ValueError("A/P-plane calibration is not the deterministic training sample.")
+
+    dice_rms: list[float] = []
+    plane_rms: list[float] = []
+    for row in cases:
+        if not isinstance(row, dict):
+            raise ValueError("A/P-plane calibration contains a malformed case record.")
+        valid = row.get("valid") is True and row.get("finite_positive_gradients") is True
+        if valid:
+            dice_rms.append(
+                _finite_float(row.get("dice_gradient_rms"), "plane calibration Dice RMS")
+            )
+            plane_rms.append(
+                _finite_float(row.get("plane_gradient_rms"), "plane calibration RMS")
+            )
+    if not dice_rms or len(dice_rms) != len(plane_rms):
+        raise ValueError("A/P-plane calibration has no valid gradient pairs.")
+    if (
+        report.get("valid_case_count") != len(dice_rms)
+        or report.get("skipped_case_count") != len(cases) - len(dice_rms)
+        or report.get("dice_gradient_rms") != _calibration_summary(dice_rms)
+        or report.get("plane_gradient_rms") != _calibration_summary(plane_rms)
+    ):
+        raise ValueError("A/P-plane calibration summaries disagree with case data.")
+    dice_median = float(np.median(np.asarray(dice_rms, dtype=np.float64)))
+    plane_array = np.asarray(plane_rms, dtype=np.float64)
+    target = 0.10 * dice_median / float(np.median(plane_array))
+    cap = 0.50 * dice_median / float(np.quantile(plane_array, 0.95))
+    recommended = min(target, cap)
+    for key, expected in (
+        ("target_weight", target),
+        ("cap_weight", cap),
+        ("recommended_ap_plane_weight", recommended),
+    ):
+        actual = _finite_float(report.get(key), f"plane calibration {key}")
+        if not math.isclose(actual, expected, rel_tol=1e-12, abs_tol=0.0):
+            raise ValueError(f"A/P-plane calibration {key} is inconsistent.")
+    if report.get("source_provenance") != source_provenance:
+        raise ValueError("A/P-plane calibration source differs from this run.")
+    if canonical_sha256(report.get("runtime_provenance")) != canonical_sha256(
+        runtime_provenance
+    ):
+        raise ValueError("A/P-plane calibration runtime differs from this run.")
+    report_execution = report.get("execution_provenance")
+    compatible_execution_fields = (
+        "device_type",
+        "deterministic_algorithms",
+        "cudnn_benchmark",
+        "cudnn_deterministic",
+        "float32_matmul_precision",
+        "cuda_compute_capability",
+    )
+    if not isinstance(report_execution, dict) or any(
+        report_execution.get(field) != execution_provenance.get(field)
+        for field in compatible_execution_fields
+    ):
+        raise ValueError(
+            "A/P-plane calibration numerical backend differs from this run."
+        )
+    for path_key, current_path, digest_key, current_digest in (
+        ("pkl", args.pkl, "pkl_sha256", pkl_digest),
+        ("splits_json", args.splits_json, "splits_json_sha256", splits_digest),
+    ):
+        recorded = report.get(path_key)
+        if not isinstance(recorded, str) or Path(recorded).resolve() != current_path.resolve():
+            raise ValueError(f"A/P-plane calibration {path_key} differs from this run.")
+        if report.get(digest_key) != current_digest:
+            raise ValueError(
+                f"A/P-plane calibration {path_key} contents differ from this run."
+            )
+    checkpoint_path = Path(str(report.get("checkpoint", ""))).expanduser()
+    if not checkpoint_path.is_file():
+        raise ValueError("A/P-plane calibration source checkpoint is unavailable.")
+    with snapshot_file(checkpoint_path) as checkpoint_snapshot:
+        if checkpoint_snapshot.sha256 != report.get("checkpoint_sha256"):
+            raise ValueError("A/P-plane calibration checkpoint changed.")
+        checkpoint = torch.load(checkpoint_snapshot.path, map_location="cpu", weights_only=True)
+        source_run = checkpoint.get("run") if isinstance(checkpoint, dict) else None
+        if not isinstance(source_run, dict):
+            raise ValueError("A/P-plane calibration checkpoint lacks preprocessing provenance.")
+        # Older reports omit preprocessing; recover it from the verified source
+        # checkpoint, whose geometry the calibration command already checked.
+        for field, expected in (
+            ("spatial_size", list(args.spatial_size)),
+            ("resize", bool(args.resize)),
+        ):
+            recorded = source_run.get(field)
+            if field == "spatial_size" and isinstance(recorded, (list, tuple)):
+                recorded = list(recorded)
+            if recorded != expected or report.get(field, recorded) != recorded:
+                raise ValueError(f"A/P-plane calibration {field} does not match this run.")
+    if not _valid_sha256(report_snapshot.sha256):
+        raise ValueError("A/P-plane calibration report digest is malformed.")
+
+
 def _exact_int(value: Any, field: str) -> int:
     if isinstance(value, bool) or not isinstance(value, int):
         raise ValueError(f"Resume checkpoint {field} must be an exact integer.")
@@ -2400,11 +2941,30 @@ def validate_epoch_metrics(row: dict[str, Any]) -> None:
 
 def _main(snapshot_stack: ExitStack) -> None:
     args = parse_args()
+    if args.training_augmentation != "none" and (
+        args.translation_augmentation or args.constraint_set != "none" or args.batch_size != 1
+    ):
+        raise ValueError("mild_v1 requires constraint-set none, batch size 1, and no translation augmentation.")
+    if not math.isfinite(args.drop_rate) or not 0 <= args.drop_rate < 1:
+        raise ValueError("--drop-rate must be finite and in [0, 1).")
+    stopping = EarlyStopping(
+        patience=args.early_stopping_patience,
+        min_delta=args.early_stopping_min_delta,
+        min_epochs=args.early_stopping_min_epochs,
+    )
+    if stopping.patience and stopping.min_epochs > args.epochs:
+        raise ValueError("Early-stopping min epochs cannot exceed the maximum epochs.")
     loss_spec = supervised_loss_config(args.supervised_loss, args.ce_weight)
+    constraint_scale_knots = parse_constraint_scale_knots(args.constraint_scale_knots)
     if args.epochs < 1 or args.batch_size < 1:
         raise ValueError("--epochs and --batch-size must be positive.")
     if args.constraint_warmup_epochs < 0 or args.constraint_eval_every < 0:
         raise ValueError("Constraint warmup/evaluation intervals must be non-negative.")
+    if constraint_scale_knots and args.constraint_warmup_epochs != 0:
+        raise ValueError(
+            "--constraint-scale-knots requires --constraint-warmup-epochs 0 "
+            "so only one scheduling rule is active."
+        )
     if args.equivariance_max_samples < 0:
         raise ValueError("--equivariance-max-samples must be non-negative.")
     if args.band_steps < 1:
@@ -2439,6 +2999,8 @@ def _main(snapshot_stack: ExitStack) -> None:
         raise FileNotFoundError(args.bands_calibration_json)
     if args.onecut_calibration_json is not None and not args.onecut_calibration_json.is_file():
         raise FileNotFoundError(args.onecut_calibration_json)
+    if args.ap_plane_calibration_json is not None and not args.ap_plane_calibration_json.is_file():
+        raise FileNotFoundError(args.ap_plane_calibration_json)
     validate_optimizer_hyperparameters(
         step_size=args.step_size,
         learning_rate=args.learning_rate,
@@ -2463,6 +3025,11 @@ def _main(snapshot_stack: ExitStack) -> None:
     onecut_calibration_snapshot = (
         snapshot_stack.enter_context(snapshot_file(args.onecut_calibration_json))
         if args.onecut_calibration_json is not None
+        else None
+    )
+    ap_plane_calibration_snapshot = (
+        snapshot_stack.enter_context(snapshot_file(args.ap_plane_calibration_json))
+        if args.ap_plane_calibration_json is not None
         else None
     )
     pkl_digest = pkl_snapshot.sha256
@@ -2504,6 +3071,21 @@ def _main(snapshot_stack: ExitStack) -> None:
             execution_provenance=execution_provenance,
             splits_path=splits_snapshot.path,
         )
+    elif ap_plane_calibration_snapshot is not None:
+        calibration_report = load_bands_calibration_report(
+            ap_plane_calibration_snapshot
+        )
+        validate_ap_plane_calibration_report(
+            calibration_report,
+            args,
+            report_snapshot=ap_plane_calibration_snapshot,
+            pkl_digest=pkl_digest,
+            splits_digest=splits_digest,
+            source_provenance=source_provenance,
+            runtime_provenance=runtime_provenance,
+            execution_provenance=execution_provenance,
+            splits_path=splits_snapshot.path,
+        )
     # Constructing the objective also validates all constraint hyperparameters.
     objective = NewConstraintObjective(config).to(device)
     evaluation_objective = NewConstraintObjective(
@@ -2530,6 +3112,7 @@ def _main(snapshot_stack: ExitStack) -> None:
         ),
         constraint_config=asdict(config),
         constraint_warmup_epochs=args.constraint_warmup_epochs,
+        constraint_scale_knots=constraint_scale_knots,
         constraint_eval_every=args.constraint_eval_every,
         amp=args.amp,
         initial_checkpoint=(
@@ -2563,6 +3146,16 @@ def _main(snapshot_stack: ExitStack) -> None:
             if onecut_calibration_snapshot is not None
             else None
         ),
+        ap_plane_calibration=(
+            str(ap_plane_calibration_snapshot.original_path)
+            if ap_plane_calibration_snapshot is not None
+            else None
+        ),
+        ap_plane_calibration_sha256=(
+            ap_plane_calibration_snapshot.sha256
+            if ap_plane_calibration_snapshot is not None
+            else None
+        ),
         telemetry=bool(args.telemetry),
         telemetry_probe_epochs=(
             tuple(args.telemetry_probe_epochs) if args.telemetry else ()
@@ -2572,6 +3165,13 @@ def _main(snapshot_stack: ExitStack) -> None:
         supervised_loss=args.supervised_loss,
         ce_weight=float(loss_spec["ce_weight"]),
         calibration_diagnostics=bool(args.calibration_diagnostics),
+        early_stopping_patience=stopping.patience,
+        early_stopping_min_delta=stopping.min_delta,
+        early_stopping_min_epochs=stopping.min_epochs,
+        drop_rate=args.drop_rate,
+        activation_checkpointing=args.activation_checkpointing,
+        plain_tensors=args.plain_tensors,
+        training_augmentation=args.training_augmentation,
     )
 
     output_dir = args.output_dir.resolve()
@@ -2643,7 +3243,10 @@ def _main(snapshot_stack: ExitStack) -> None:
     pkl_snapshot.cleanup()
     splits_snapshot.cleanup()
 
-    model = build_swinunetr(run_spec.spatial_size, num_classes, device)
+    model = build_swinunetr(
+        run_spec.spatial_size, num_classes, device, drop_rate=run_spec.drop_rate,
+        activation_checkpointing=run_spec.activation_checkpointing,
+    )
     if initial_snapshot is not None:
         load_initial_weights(model, initial_snapshot.path)
         initial_snapshot.cleanup()
@@ -2651,6 +3254,8 @@ def _main(snapshot_stack: ExitStack) -> None:
         bands_calibration_snapshot.cleanup()
     if onecut_calibration_snapshot is not None:
         onecut_calibration_snapshot.cleanup()
+    if ap_plane_calibration_snapshot is not None:
+        ap_plane_calibration_snapshot.cleanup()
     optimizer, scheduler = build_optimizer_and_scheduler(
         args.optim_mode,
         model,
@@ -2667,6 +3272,7 @@ def _main(snapshot_stack: ExitStack) -> None:
     config_payload = {
         "run": asdict(run_spec),
         "supervised_loss": loss_spec,
+        "training_augmentation": dict(MILD_V1) if args.training_augmentation == "mild_v1" else None,
         "calibration_diagnostics": (
             calibration_diagnostics_config() if args.calibration_diagnostics else None
         ),
@@ -2699,6 +3305,18 @@ def _main(snapshot_stack: ExitStack) -> None:
         "onecut_calibration_checkpoint_sha256": (
             calibration_report.get("checkpoint_sha256")
             if calibration_report is not None and args.onecut_calibration_json is not None
+            else None
+        ),
+        "ap_plane_calibration": (
+            str(args.ap_plane_calibration_json.resolve())
+            if args.ap_plane_calibration_json is not None
+            else None
+        ),
+        "ap_plane_calibration_sha256": run_spec.ap_plane_calibration_sha256,
+        "ap_plane_calibration_checkpoint_sha256": (
+            calibration_report.get("checkpoint_sha256")
+            if calibration_report is not None
+            and args.ap_plane_calibration_json is not None
             else None
         ),
         "wandb": wandb_config,
@@ -2747,6 +3365,8 @@ def _main(snapshot_stack: ExitStack) -> None:
         best_hard_dice = float(checkpoint["best_hard_dice"])
         best_epoch = int(checkpoint["best_epoch"])
         save_csv(output_dir / "metrics.csv", fields, retained_metrics)
+        for metric_row in retained_metrics:
+            stopping.update(int(metric_row["epoch"]), float(metric_row["val_dice_hard"]))
 
     wandb_run = None
     if args.wandb:
@@ -2804,31 +3424,63 @@ def _main(snapshot_stack: ExitStack) -> None:
             writer.writeheader()
 
         for epoch in range(start_epoch, args.epochs + 1):
+            if stopping.should_stop:
+                break
+            epoch_started = time.perf_counter()
             model.train()
             loss_totals = {"total": 0.0, "supervised": 0.0, "constraint": 0.0}
             constraint_totals: dict[str, dict[str, Any]] = {}
-            constraint_scale = constraint_warmup_scale(
+            augmentation_totals: dict[str, int] = {}
+            constraint_scale = constraint_scale_for_epoch(
                 epoch,
                 args.constraint_warmup_epochs,
+                run_spec.constraint_scale_knots,
             )
 
             for batch_index, batch in enumerate(train_loader):
                 images = batch["image"].to(device, non_blocking=True)
                 labels = batch["label"].to(device, non_blocking=True)
-                if run_spec.translation_augmentation:
-                    images, labels, _ = augment_translation(
-                        images, labels, seed=args.seed, epoch=epoch, batch_index=batch_index,
+                if run_spec.training_augmentation == "mild_v1":
+                    images, labels, augmentation_stats = augment_mild(
+                        images, labels, generator=translation_generator,
                     )
+                    for key, value in augmentation_stats.items():
+                        augmentation_totals[key] = augmentation_totals.get(key, 0) + value
                 optimizer.zero_grad(set_to_none=True)
                 with torch.cuda.amp.autocast(enabled=args.amp):
                     logits = model(images)
-                    supervised_loss = supervised_loss_function(logits, labels)
+                    shifted_logits = None
+                    selected_shift = None
+                    identity_supervised_loss = supervised_loss_function(logits, labels)
+                    if run_spec.translation_augmentation:
+                        shifted_images, shifted_labels, selected_shift = augment_translation(
+                            images, labels, generator=translation_generator,
+                        )
+                        shifted_logits = model(shifted_images)
+                        shifted_supervised_loss = supervised_loss_function(
+                            shifted_logits, shifted_labels
+                        )
+                        supervised_loss = 0.5 * (
+                            identity_supervised_loss + shifted_supervised_loss
+                        )
+                    else:
+                        supervised_loss = identity_supervised_loss
                     constraint_output = objective(
                         model,
                         images,
                         logits,
                         labels,
+                        shift=(
+                            selected_shift
+                            if objective.config.equivariance_weight > 0
+                            else None
+                        ),
                         generator=translation_generator,
+                        transformed_logits=(
+                            shifted_logits
+                            if objective.config.equivariance_weight > 0
+                            else None
+                        ),
                     )
                     constraint_loss = constraint_output["loss"]
                     loss = supervised_loss + constraint_scale * constraint_loss
@@ -2844,6 +3496,8 @@ def _main(snapshot_stack: ExitStack) -> None:
                     constraint_output["results"],
                 )
 
+            training_seconds = time.perf_counter() - epoch_started
+            validation_started = time.perf_counter()
             batches = max(1, len(train_loader))
             learning_rate = optimizer.param_groups[0]["lr"]
             should_evaluate_constraints = (
@@ -2931,6 +3585,7 @@ def _main(snapshot_stack: ExitStack) -> None:
                         / f"focus_epoch_{epoch:03d}_case_{case_index:02d}.pt",
                         payload,
                     )
+            validation_seconds = time.perf_counter() - validation_started
             soft_dice = validation_metrics["val_dice_soft"]
             hard_dice = validation_metrics["val_dice_hard"]
             row: dict[str, Any] = {
@@ -2964,6 +3619,7 @@ def _main(snapshot_stack: ExitStack) -> None:
             if improved:
                 best_hard_dice = hard_dice
                 best_epoch = epoch
+            checkpoint_started = time.perf_counter()
             validate_source_provenance_unchanged(source_provenance)
             save_checkpoint(
                 output_dir / "checkpoint_latest.pt",
@@ -2992,6 +3648,12 @@ def _main(snapshot_stack: ExitStack) -> None:
                     translation_generator=translation_generator,
                     run_spec=run_spec,
                 )
+            if augmentation_totals:
+                print(json.dumps({"augmentation_epoch": epoch, **augmentation_totals}), flush=True)
+            print(json.dumps({"timing_epoch": epoch, "training_seconds": training_seconds,
+                              "validation_seconds": validation_seconds,
+                              "checkpoint_seconds": time.perf_counter() - checkpoint_started,
+                              "epoch_seconds": time.perf_counter() - epoch_started}), flush=True)
             if wandb_run is not None:
                 wandb_run.log(printable, step=epoch)
                 if telemetry_epoch_row is not None:
@@ -3021,6 +3683,23 @@ def _main(snapshot_stack: ExitStack) -> None:
                         step=epoch,
                     )
 
+            stopping.update(epoch, hard_dice)
+            if stopping.should_stop:
+                print(json.dumps({"status": "early_stopping", **stopping.summary()}), flush=True)
+                break
+
+    selected_epoch = stopping.epoch
+    if stopping.patience:
+        # Latest remains a complete resume checkpoint at the stopping epoch.
+        # The exported model and final evaluation use the best raw Dice epoch.
+        selected = torch.load(output_dir / "checkpoint_best.pt", map_location="cpu", weights_only=True)
+        validate_resume_checkpoint(selected, run_spec)
+        if int(selected["epoch"]) != best_epoch:
+            raise ValueError("Best checkpoint epoch disagrees with the training history.")
+        model.load_state_dict(selected["model"])
+        selected_epoch = best_epoch
+        del selected
+
     model_dir = output_dir / f"{args.dataset}_fold{args.fold}"
     model_dir.mkdir(parents=True, exist_ok=True)
     model_path = model_dir / "model.pt"
@@ -3039,12 +3718,14 @@ def _main(snapshot_stack: ExitStack) -> None:
         calibration_diagnostics=args.calibration_diagnostics,
     )
     final_metrics = {
-        "epoch": args.epochs,
-        "checkpoint": "final",
+        "epoch": selected_epoch,
+        "checkpoint": "best" if stopping.patience else "final",
         "best_epoch": best_epoch,
         "best_val_dice_hard": best_hard_dice,
         **final_validation_metrics,
     }
+    if stopping.patience:
+        final_metrics["early_stopping"] = stopping.summary()
     validate_source_provenance_unchanged(source_provenance)
     final_metrics_path = output_dir / "final_metrics.json"
     save_json(final_metrics_path, final_metrics)
@@ -3077,9 +3758,37 @@ def _main(snapshot_stack: ExitStack) -> None:
         "onecut_ray_count",
         "edge_touching",
         "raw_loss",
+        "axis_0_loss",
+        "axis_1_loss",
+        "axis_2_loss",
+        "foreground_loss",
+        "anterior_loss",
+        "posterior_loss",
         "teacher_views",
         "ap_cut_abs_error",
         "ap_gt_cut_probability",
+        "ap_plane_valid",
+        "ap_plane_loss",
+        "ap_plane_selected_cut",
+        "ap_plane_candidate_count",
+        "ap_plane_target_cut",
+        "ap_plane_cut_abs_error",
+        "ap_plane_gt_disagreement_fraction",
+        "ap_plane_target_cost",
+        "ap_plane_target_cost_gap",
+        "ap_plane_target_cost_gap_fraction",
+        "ap_plane_raw_selected_cut",
+        "ap_plane_raw_cut_abs_error",
+        "ap_plane_raw_exact_cut",
+        "ap_plane_raw_within_one_cut",
+        "ap_plane_raw_disagreement_fraction",
+        "ap_plane_raw_has_both_ap_classes",
+        "ap_plane_raw_cut_valid",
+        "foreground_union_dice",
+        "ap_swap_voxels",
+        "ap_swap_fraction",
+        "displaced_slab_swap_voxels",
+        "displaced_slab_swap_fraction",
     ]
     save_csv(detail_path, detail_fieldnames, final_constraint_details)
     completion_artifacts = {
@@ -3102,7 +3811,8 @@ def _main(snapshot_stack: ExitStack) -> None:
         output_dir / "completion_manifest.json",
         {
             "status": "complete",
-            "epoch": args.epochs,
+            "epoch": stopping.epoch,
+            "selected_epoch": selected_epoch,
             "run": asdict(run_spec),
             "artifacts": completion_artifacts,
         },
@@ -3110,7 +3820,7 @@ def _main(snapshot_stack: ExitStack) -> None:
     if wandb_run is not None:
         wandb_run.log(
             {f"final/{name}": value for name, value in final_metrics.items()},
-            step=args.epochs + 1,
+            step=stopping.epoch + 1,
         )
         artifact = wandb.Artifact(
             name=f"swinunetr-new-constraints-{args.constraint_set}-{args.dataset}-fold{args.fold}",

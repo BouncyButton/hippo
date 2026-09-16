@@ -5,7 +5,7 @@
 #SBATCH --mem=64G
 #SBATCH --time=1-00:00:00
 set -euo pipefail
-# Run from a fresh, frozen source snapshot. This file is prepared, not submitted.
+# Run from a fresh, frozen source snapshot.
 MODE="${1:?augmentation, augmentation_equivariance, or teacher}"
 SEED="${2:?seed required}"
 OUTPUT="${3:?new absolute output directory required}"

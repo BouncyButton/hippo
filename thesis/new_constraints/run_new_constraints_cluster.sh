@@ -25,7 +25,9 @@ Usage:
   sbatch thesis/new_constraints/run_new_constraints_cluster.sh [options]
 
 Options:
-  --constraint-set SET          none, equivariance, bands, onecut, teacher, or ap_cut
+  --constraint-set SET          none, equivariance, bands, onecut, teacher, ap_cut,
+                                 ap_plane, ap_plane_location, ap_plane_ce_control,
+                                 or perimeter_profile
                                  (default: equivariance; translation remains an alias)
   --equivariance-weight FLOAT   Override the selected preset
   --supervised-loss NAME        dice (default) or dice_ce
@@ -40,6 +42,12 @@ Options:
   --ap-axis N                   Verified spatial tensor axis, required for ap_cut
   --ap-anterior-side low|high   Verified orientation, required for ap_cut
   --ap-temperature FLOAT        Cut-score temperature (default: 1)
+  --ap-plane-weight FLOAT       Calibrated A/P-plane weight
+  --ap-plane-calibration-json P Completed training-only plane calibration
+  --ap-plane-axis N             Stored coronal axis (Task04: 1)
+  --ap-plane-anterior-side S    low or high (Task04: high)
+  --ap-plane-margin FLOAT       A/P logit margin (default: 0)
+  --perimeter-profile-weight F  Weight selected by the training-only gradient audit
   --translation-size N          Integer translation in voxels (default: 2)
   --equivariance-max-samples N  Extra translated samples per batch; 0 means all
                                  (default: 1)
@@ -137,6 +145,12 @@ AP_CUT_WEIGHT=""
 AP_AXIS=""
 AP_ANTERIOR_SIDE=""
 AP_TEMPERATURE="1"
+AP_PLANE_WEIGHT=""
+AP_PLANE_CALIBRATION_JSON=""
+AP_PLANE_AXIS=""
+AP_PLANE_ANTERIOR_SIDE=""
+AP_PLANE_MARGIN="0"
+PERIMETER_PROFILE_WEIGHT=""
 
 CONSTRAINT_SET="equivariance"
 EQUIVARIANCE_WEIGHT=""
@@ -191,6 +205,12 @@ while [[ $# -gt 0 ]]; do
     --ap-axis) AP_AXIS="$2"; shift 2 ;;
     --ap-anterior-side) AP_ANTERIOR_SIDE="$2"; shift 2 ;;
     --ap-temperature) AP_TEMPERATURE="$2"; shift 2 ;;
+    --ap-plane-weight) AP_PLANE_WEIGHT="$2"; shift 2 ;;
+    --ap-plane-calibration-json) AP_PLANE_CALIBRATION_JSON="$2"; shift 2 ;;
+    --ap-plane-axis) AP_PLANE_AXIS="$2"; shift 2 ;;
+    --ap-plane-anterior-side) AP_PLANE_ANTERIOR_SIDE="$2"; shift 2 ;;
+    --ap-plane-margin) AP_PLANE_MARGIN="$2"; shift 2 ;;
+    --perimeter-profile-weight) PERIMETER_PROFILE_WEIGHT="$2"; shift 2 ;;
     --equivariance-weight) EQUIVARIANCE_WEIGHT="$2"; shift 2 ;;
     --translation-size) TRANSLATION_SIZE="$2"; shift 2 ;;
     --equivariance-max-samples) EQUIVARIANCE_MAX_SAMPLES="$2"; shift 2 ;;
@@ -251,8 +271,12 @@ if [[ ! "${DATASET}" =~ ^(MSD|MNI|ADNI|COBRA)$ ]]; then
   echo "[ERROR] Invalid --dataset: ${DATASET}" >&2
   exit 2
 fi
-if [[ ! "${CONSTRAINT_SET}" =~ ^(none|equivariance|bands|onecut|translation|teacher|ap_cut)$ ]]; then
+if [[ ! "${CONSTRAINT_SET}" =~ ^(none|equivariance|bands|onecut|translation|teacher|ap_cut|ap_plane|ap_plane_location|ap_plane_ce_control|perimeter_profile)$ ]]; then
   echo "[ERROR] Invalid --constraint-set: ${CONSTRAINT_SET}" >&2
+  exit 2
+fi
+if [[ "${CONSTRAINT_SET}" =~ ^(ap_plane|ap_plane_location|ap_plane_ce_control)$ && ( -z "${AP_PLANE_WEIGHT}" || -z "${AP_PLANE_CALIBRATION_JSON}" || -z "${AP_PLANE_AXIS}" || -z "${AP_PLANE_ANTERIOR_SIDE}" ) ]]; then
+  echo "[ERROR] A/P-plane runs require their weight, calibration JSON, axis and anterior side." >&2
   exit 2
 fi
 if [[ ! "${SUPERVISED_LOSS}" =~ ^(dice|dice_ce)$ ]]; then
@@ -267,8 +291,12 @@ if [[ "${CONSTRAINT_SET}" == "ap_cut" && ( -z "${AP_CUT_WEIGHT}" || -z "${AP_AXI
   echo "[ERROR] ap_cut requires --ap-cut-weight, --ap-axis and --ap-anterior-side." >&2
   exit 2
 fi
-if [[ "${SUPERVISED_LOSS}" != "dice" && "${CONSTRAINT_SET}" =~ ^(bands|onecut)$ ]]; then
-  echo "[ERROR] Legacy bands/onecut calibration is bound to Dice-only supervision." >&2
+if [[ "${CONSTRAINT_SET}" == "perimeter_profile" && -z "${PERIMETER_PROFILE_WEIGHT}" ]]; then
+  echo "[ERROR] perimeter_profile requires --perimeter-profile-weight." >&2
+  exit 2
+fi
+if [[ "${SUPERVISED_LOSS}" != "dice" && "${CONSTRAINT_SET}" =~ ^(bands|onecut|ap_plane|ap_plane_location|ap_plane_ce_control)$ ]]; then
+  echo "[ERROR] calibrated constraint runs are bound to Dice-only supervision." >&2
   exit 2
 fi
 if [[ "${CONSTRAINT_SET}" == "onecut" && -z "${ONECUT_WEIGHT}" ]]; then
@@ -317,6 +345,10 @@ if [[ -n "${BANDS_CALIBRATION_JSON}" && ! -f "${BANDS_CALIBRATION_JSON}" ]]; the
 fi
 if [[ -n "${ONECUT_CALIBRATION_JSON}" && ! -f "${ONECUT_CALIBRATION_JSON}" ]]; then
   echo "[ERROR] One-cut calibration report not found: ${ONECUT_CALIBRATION_JSON}" >&2
+  exit 2
+fi
+if [[ -n "${AP_PLANE_CALIBRATION_JSON}" && ! -f "${AP_PLANE_CALIBRATION_JSON}" ]]; then
+  echo "[ERROR] A/P-plane calibration report not found: ${AP_PLANE_CALIBRATION_JSON}" >&2
   exit 2
 fi
 if [[ "${RESUME}" == "1" && -z "${OUTPUT_DIR}" ]]; then
@@ -393,6 +425,7 @@ COMMAND=(
   --teacher-temperature "${TEACHER_TEMPERATURE}"
   --teacher-support "${TEACHER_SUPPORT}"
   --ap-temperature "${AP_TEMPERATURE}"
+  --ap-plane-margin "${AP_PLANE_MARGIN}"
   --translation-size "${TRANSLATION_SIZE}"
   --equivariance-max-samples "${EQUIVARIANCE_MAX_SAMPLES}"
   --band-steps "${BAND_STEPS}"
@@ -423,6 +456,21 @@ if [[ -n "${TEACHER_WEIGHT}" ]]; then
 fi
 if [[ -n "${AP_CUT_WEIGHT}" ]]; then
   COMMAND+=(--ap-cut-weight "${AP_CUT_WEIGHT}")
+fi
+if [[ -n "${AP_PLANE_WEIGHT}" ]]; then
+  COMMAND+=(--ap-plane-weight "${AP_PLANE_WEIGHT}")
+fi
+if [[ -n "${AP_PLANE_CALIBRATION_JSON}" ]]; then
+  COMMAND+=(--ap-plane-calibration-json "${AP_PLANE_CALIBRATION_JSON}")
+fi
+if [[ -n "${AP_PLANE_AXIS}" ]]; then
+  COMMAND+=(--ap-plane-axis "${AP_PLANE_AXIS}")
+fi
+if [[ -n "${AP_PLANE_ANTERIOR_SIDE}" ]]; then
+  COMMAND+=(--ap-plane-anterior-side "${AP_PLANE_ANTERIOR_SIDE}")
+fi
+if [[ -n "${PERIMETER_PROFILE_WEIGHT}" ]]; then
+  COMMAND+=(--perimeter-profile-weight "${PERIMETER_PROFILE_WEIGHT}")
 fi
 if [[ -n "${AP_AXIS}" ]]; then
   COMMAND+=(--ap-axis "${AP_AXIS}")

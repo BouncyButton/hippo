@@ -107,14 +107,14 @@ def test_swinunetr_constructor_supports_both_monai_signatures() -> None:
     calls: list[dict[str, object]] = []
 
     class LegacySwinUNETR:
-        def __init__(self, img_size, in_channels, out_channels, use_checkpoint):
+        def __init__(self, img_size, in_channels, out_channels, use_checkpoint, drop_rate=0.0):
             calls.append(locals())
 
         def to(self, device):
             return self
 
     class ModernSwinUNETR:
-        def __init__(self, in_channels, out_channels, use_checkpoint):
+        def __init__(self, in_channels, out_channels, use_checkpoint, drop_rate=0.0):
             calls.append(locals())
 
         def to(self, device):
@@ -129,6 +129,7 @@ def test_swinunetr_constructor_supports_both_monai_signatures() -> None:
         trainer.SwinUNETR = ModernSwinUNETR
         trainer.build_swinunetr((64, 64, 64), 3, torch.device("cpu"))
         assert "img_size" not in calls[-1]
+        assert calls[-1]["drop_rate"] == 0.0
     finally:
         trainer.SwinUNETR = installed_constructor
 
@@ -544,6 +545,7 @@ def test_resume_restores_initial_checkpoint_provenance() -> None:
         constraint_set="bands",
         constraint_config={"equivariance_weight": 0.0, "bands_weight": 0.04},
         constraint_warmup_epochs=5,
+        constraint_scale_knots=(),
         constraint_eval_every=5,
         amp=False,
         initial_checkpoint=None,
@@ -579,6 +581,7 @@ def test_resume_still_rejects_real_configuration_changes() -> None:
         constraint_set="none",
         constraint_config={"equivariance_weight": 0.0, "bands_weight": 0.0},
         constraint_warmup_epochs=5,
+        constraint_scale_knots=(),
         constraint_eval_every=5,
         amp=False,
         initial_checkpoint=None,
@@ -621,6 +624,7 @@ def test_checkpoint_embeds_run_provenance(tmp_path) -> None:
         constraint_set="none",
         constraint_config={"equivariance_weight": 0.0, "bands_weight": 0.0},
         constraint_warmup_epochs=5,
+        constraint_scale_knots=(),
         constraint_eval_every=5,
         amp=False,
         initial_checkpoint=None,

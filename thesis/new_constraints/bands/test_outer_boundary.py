@@ -158,6 +158,7 @@ def _test_run_spec() -> RunSpec:
         constraint_set="none",
         constraint_config={"equivariance_weight": 0.0, "bands_weight": 0.0},
         constraint_warmup_epochs=5,
+        constraint_scale_knots=(),
         constraint_eval_every=5,
         amp=False,
         initial_checkpoint=None,
@@ -1203,7 +1204,7 @@ def test_wandb_steps_follow_durable_checkpoints_and_final_uses_new_step() -> Non
     checkpoint_position = source.index("save_checkpoint(\n                output_dir")
     wandb_position = source.index("wandb_run.log(printable, step=epoch)")
     assert checkpoint_position < wandb_position
-    assert "step=args.epochs + 1" in source
+    assert "step=stopping.epoch + 1" in source
 
 
 def test_wandb_resume_replays_all_durable_epochs_in_order(tmp_path) -> None:

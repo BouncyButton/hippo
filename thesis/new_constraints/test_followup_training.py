@@ -43,6 +43,35 @@ def test_parser_keeps_dice_default_and_opt_in_diagnostics(monkeypatch, tmp_path)
     assert args.teacher_views == 2
     assert args.teacher_weight is None and args.ap_cut_weight is None
     assert args.ap_axis is None and args.ap_anterior_side is None
+    assert args.ap_plane_weight is None
+    assert args.ap_plane_calibration_json is None
+    assert args.ap_plane_axis is None and args.ap_plane_anterior_side is None
+    assert args.constraint_scale_knots is None
+
+
+def test_constraint_scale_schedule_preserves_legacy_and_interpolates() -> None:
+    assert trainer.constraint_scale_for_epoch(2, 5) == pytest.approx(0.4)
+    knots = trainer.parse_constraint_scale_knots([1, 0.2, 2, 0.4, 4, 0.1, 10, 0.0])
+    assert knots == ((1, 0.2), (2, 0.4), (4, 0.1), (10, 0.0))
+    assert trainer.constraint_scale_for_epoch(1, 0, knots) == pytest.approx(0.2)
+    assert trainer.constraint_scale_for_epoch(3, 0, knots) == pytest.approx(0.25)
+    assert trainer.constraint_scale_for_epoch(7, 0, knots) == pytest.approx(0.05)
+    assert trainer.constraint_scale_for_epoch(12, 0, knots) == pytest.approx(0.0)
+
+
+@pytest.mark.parametrize(
+    "raw, message",
+    [
+        ([1], "EPOCH SCALE pairs"),
+        ([1.5, 0.2], "positive integers"),
+        ([2, 0.2, 1, 0.1], "strictly increasing"),
+        ([1, -0.1], "non-negative"),
+        ([1, float("nan")], "finite"),
+    ],
+)
+def test_constraint_scale_schedule_rejects_invalid_knots(raw, message) -> None:
+    with pytest.raises(ValueError, match=message):
+        trainer.parse_constraint_scale_knots(raw)
 
 
 @pytest.mark.parametrize("preset, extra", [
@@ -60,7 +89,16 @@ def test_constraint_config_rejects_mixed_presets(monkeypatch, tmp_path, preset, 
         trainer.resolve_constraint_config(args)
 
 
-@pytest.mark.parametrize("preset, flag", [("teacher", "--teacher-weight"), ("ap_cut", "--ap-cut-weight")])
+@pytest.mark.parametrize(
+    "preset, flag",
+    [
+        ("teacher", "--teacher-weight"),
+        ("ap_cut", "--ap-cut-weight"),
+        ("ap_plane", "--ap-plane-weight"),
+        ("ap_plane_location", "--ap-plane-weight"),
+        ("ap_plane_ce_control", "--ap-plane-weight"),
+    ],
+)
 @pytest.mark.parametrize("weight", [None, "0", "-0.1", "nan", "inf"])
 def test_new_presets_require_positive_finite_explicit_weight(monkeypatch, tmp_path, preset, flag, weight) -> None:
     extra = (flag, weight) if weight is not None else ()
@@ -73,6 +111,144 @@ def test_new_presets_require_positive_finite_explicit_weight(monkeypatch, tmp_pa
 def test_ap_cut_requires_both_orientation_arguments(monkeypatch, tmp_path, orientation) -> None:
     args = _parse(monkeypatch, tmp_path, "--constraint-set", "ap_cut", "--ap-cut-weight", "0.1", *orientation)
     with pytest.raises(ValueError, match="explicit --ap-axis and --ap-anterior-side"):
+        trainer.resolve_constraint_config(args)
+
+
+def test_ap_plane_configuration_reaches_literal_objective(monkeypatch, tmp_path) -> None:
+    calibration = tmp_path / "plane_calibration.json"
+    args = _parse(
+        monkeypatch,
+        tmp_path,
+        "--constraint-set",
+        "ap_plane",
+        "--ap-plane-weight",
+        "0.25",
+        "--ap-plane-calibration-json",
+        str(calibration),
+        "--ap-plane-axis",
+        "1",
+        "--ap-plane-anterior-side",
+        "high",
+    )
+    config = trainer.resolve_constraint_config(args)
+    objective = NewConstraintObjective(config)
+    assert config.ap_plane_weight == 0.25
+    assert config.ap_plane_axis == 1
+    assert config.ap_plane_anterior_high is True
+    assert objective.ap_plane.axis == 1
+    assert objective.ap_plane.anterior_high is True
+    assert config.equivariance_weight == 0.0
+
+
+def test_ap_plane_location_configuration_reaches_anchored_objective(
+    monkeypatch, tmp_path
+) -> None:
+    args = _parse(
+        monkeypatch,
+        tmp_path,
+        "--constraint-set",
+        "ap_plane_location",
+        "--ap-plane-weight",
+        "0.15",
+        "--ap-plane-calibration-json",
+        str(tmp_path / "location_calibration.json"),
+        "--ap-plane-axis",
+        "1",
+        "--ap-plane-anterior-side",
+        "high",
+    )
+    config = trainer.resolve_constraint_config(args)
+    objective = NewConstraintObjective(config)
+
+    assert config.ap_plane_weight == 0.15
+    assert config.ap_plane_mode == "location"
+    assert objective.ap_plane.axis == 1
+    assert objective.ap_plane.anterior_high is True
+    assert objective.ap_plane.__class__.__name__ == "BestFitAPPlaneLocationLoss"
+
+
+def test_ap_plane_ce_control_configuration_reaches_original_label_objective(
+    monkeypatch, tmp_path
+) -> None:
+    args = _parse(
+        monkeypatch,
+        tmp_path,
+        "--constraint-set",
+        "ap_plane_ce_control",
+        "--ap-plane-weight",
+        "0.15",
+        "--ap-plane-calibration-json",
+        str(tmp_path / "control_calibration.json"),
+        "--ap-plane-axis",
+        "1",
+        "--ap-plane-anterior-side",
+        "high",
+    )
+    config = trainer.resolve_constraint_config(args)
+    objective = NewConstraintObjective(config)
+
+    assert config.ap_plane_mode == "conditional_ce"
+    assert objective.ap_plane.__class__.__name__ == "OriginalLabelAPConditionalCELoss"
+
+
+@pytest.mark.parametrize(
+    "extra",
+    [
+        ("--ap-plane-axis", "1"),
+        ("--ap-plane-anterior-side", "high"),
+    ],
+)
+def test_ap_plane_requires_orientation_and_calibration(
+    monkeypatch, tmp_path, extra
+) -> None:
+    args = _parse(
+        monkeypatch,
+        tmp_path,
+        "--constraint-set",
+        "ap_plane",
+        "--ap-plane-weight",
+        "0.25",
+        "--ap-plane-calibration-json",
+        str(tmp_path / "calibration.json"),
+        *extra,
+    )
+    with pytest.raises(ValueError, match="requires explicit"):
+        trainer.resolve_constraint_config(args)
+
+    args = _parse(
+        monkeypatch,
+        tmp_path,
+        "--constraint-set",
+        "ap_plane",
+        "--ap-plane-weight",
+        "0.25",
+        "--ap-plane-axis",
+        "1",
+        "--ap-plane-anterior-side",
+        "high",
+    )
+    with pytest.raises(ValueError, match="calibration-json"):
+        trainer.resolve_constraint_config(args)
+
+
+def test_ap_plane_rejects_dice_ce(monkeypatch, tmp_path) -> None:
+    args = _parse(
+        monkeypatch,
+        tmp_path,
+        "--constraint-set",
+        "ap_plane",
+        "--ap-plane-weight",
+        "0.25",
+        "--ap-plane-calibration-json",
+        str(tmp_path / "calibration.json"),
+        "--ap-plane-axis",
+        "1",
+        "--ap-plane-anterior-side",
+        "high",
+        "--supervised-loss",
+        "dice_ce",
+    )
+    with pytest.raises(ValueError, match="Dice-only gradients"):
         trainer.resolve_constraint_config(args)
 
 
@@ -91,6 +267,32 @@ def test_ap_high_orientation_and_teacher_configuration_reach_objective(monkeypat
     config = trainer.resolve_constraint_config(args)
     objective = NewConstraintObjective(config)
     assert objective.teacher.num_views == 3 and objective.teacher.temperature == 1.5
+
+
+def test_ray_moment_configuration_reaches_m0_objective(monkeypatch, tmp_path) -> None:
+    args = _parse(
+        monkeypatch,
+        tmp_path,
+        "--constraint-set",
+        "ray_moment",
+        "--ray-moment-weight",
+        "7.5",
+    )
+    config = trainer.resolve_constraint_config(args)
+    objective = NewConstraintObjective(config)
+    assert config.ray_moment_weight == 7.5
+    assert config.equivariance_weight == 0.0
+    assert objective.ray_moment.orders == (0,)
+
+
+@pytest.mark.parametrize("weight", [None, "0", "-0.1", "nan", "inf"])
+def test_ray_moment_requires_positive_finite_explicit_weight(
+    monkeypatch, tmp_path, weight
+) -> None:
+    extra = ("--ray-moment-weight", weight) if weight is not None else ()
+    args = _parse(monkeypatch, tmp_path, "--constraint-set", "ray_moment", *extra)
+    with pytest.raises(ValueError, match="finite positive"):
+        trainer.resolve_constraint_config(args)
 
 
 @pytest.mark.parametrize("preset", ["bands", "onecut"])
@@ -148,12 +350,31 @@ def _records(prefix: str) -> list[dict[str, Any]]:
     ]
 
 
-@pytest.mark.parametrize("preset", ["none", "teacher", "ap_cut"])
+@pytest.mark.parametrize(
+    "preset",
+    [
+        "none", "teacher", "ap_cut", "ap_plane", "ap_plane_location",
+        "ap_plane_ce_control", "ray_moment",
+    ],
+)
 def test_metric_headers_cover_evaluation_outputs_and_have_no_duplicates(preset) -> None:
     config = NewConstraintConfig(
         equivariance_weight=0.0,
         teacher_weight=0.03 if preset == "teacher" else 0.0,
         ap_cut_weight=0.05 if preset == "ap_cut" else 0.0,
+        ap_plane_weight=(
+            0.05
+            if preset in {"ap_plane", "ap_plane_location", "ap_plane_ce_control"}
+            else 0.0
+        ),
+        ap_plane_mode=(
+            "location"
+            if preset == "ap_plane_location"
+            else "conditional_ce"
+            if preset == "ap_plane_ce_control"
+            else "existential"
+        ),
+        ray_moment_weight=0.07 if preset == "ray_moment" else 0.0,
         ap_axis=1, ap_anterior_low=False,
     )
     objective = NewConstraintObjective(config)
@@ -171,7 +392,14 @@ def test_metric_headers_cover_evaluation_outputs_and_have_no_duplicates(preset) 
     assert set(CalibrationDiagnostics(3).summary()) <= set(fields)
     assert evaluation["calibration/case_count"] == 2
     if preset != "none":
-        name = "translation_teacher_kl" if preset == "teacher" else "ap_cut_posterior"
+        name = {
+            "teacher": "translation_teacher_kl",
+            "ap_cut": "ap_cut_posterior",
+            "ap_plane": "existential_ap_plane",
+            "ap_plane_location": "ap_plane_location",
+            "ap_plane_ce_control": "ap_conditional_ce_control",
+            "ray_moment": "ray_moment",
+        }[preset]
         assert f"val_{name}_raw_loss" in evaluation
         assert len(details) == 2
         assert {row["constraint_name"] for row in details} == {name}
@@ -184,18 +412,19 @@ def _strict_json(path: Path) -> Any:
     return json.loads(path.read_text(encoding="utf-8"), parse_constant=reject_constant)
 
 
-@pytest.mark.parametrize("preset", ["none", "teacher", "ap_cut"])
+@pytest.mark.parametrize("preset", ["none", "teacher", "ap_cut", "ray_moment"])
 @pytest.mark.parametrize("augmentation", [False, True])
 def test_small_cpu_training_checkpoint_metrics_and_resume(monkeypatch, tmp_path, preset, augmentation) -> None:
-    if augmentation and preset == "ap_cut":
-        pytest.skip("A/P cut geometry is not an augmentation experiment.")
+    if augmentation and preset in {"ap_cut", "ray_moment"}:
+        pytest.skip("Geometry constraints are not augmentation experiments.")
     pkl = tmp_path / "dataset.pkl.gz"
     pkl.write_bytes(b"synthetic dataset bytes: hash and snapshot remain real")
     splits = tmp_path / "splits.json"
     splits.write_text(json.dumps([{"train": ["train_0", "train_1"], "val": ["val_0", "val_1"]}]), encoding="utf-8")
     created_models: list[_TinySegmentationModel] = []
 
-    def build_small_model(spatial_size, num_classes, device):
+    def build_small_model(spatial_size, num_classes, device, *, drop_rate=0.0, activation_checkpointing=True):
+        assert drop_rate == 0.0
         assert spatial_size == (8, 8, 8) and num_classes == 3
         model = _TinySegmentationModel().to(device)
         created_models.append(model)
@@ -225,8 +454,11 @@ def test_small_cpu_training_checkpoint_metrics_and_resume(monkeypatch, tmp_path,
         extra.append("--calibration-diagnostics")
     elif preset == "teacher":
         extra += ["--teacher-weight", "0.03", "--teacher-views", "2"]
-    else:
+    elif preset == "ap_cut":
         extra += ["--ap-cut-weight", "0.05", "--ap-axis", "1", "--ap-anterior-side", "high"]
+    else:
+        extra += ["--ray-moment-weight", "0.07"]
+        extra += ["--constraint-scale-knots", "1", "0.25", "2", "0"]
     if augmentation:
         extra.append("--translation-augmentation")
         if preset == "teacher":
@@ -268,6 +500,8 @@ def test_small_cpu_training_checkpoint_metrics_and_resume(monkeypatch, tmp_path,
     assert all(None not in row for row in rows)
     assert all(math.isfinite(float(value)) for row in rows for value in row.values() if value != "")
     assert all(float(row["train_supervised_loss"]) > 0.0 for row in rows)
+    if preset == "ray_moment":
+        assert [float(row["constraint_scale"]) for row in rows] == [0.25, 0.0]
     if preset == "none":
         assert config["calibration_diagnostics"]["num_bins"] == 15
         assert final_metrics["calibration/case_count"] == 2
