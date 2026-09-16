@@ -15,7 +15,7 @@ import torch.nn.functional as F
 from scipy import ndimage
 
 from ..bands.outer_boundary import _normalise_labels, foreground_log_odds
-from ..constraint_result import ConstraintResult
+from ..constraint_result import ConstraintResult, differentiable_zero
 
 
 @dataclass(frozen=True)
@@ -267,7 +267,7 @@ class OuterOneCutLogLTNLoss(nn.Module):
             edge_touching.append(cached.edge_touching)
             valid.append(count > 0)
             if count == 0:
-                zero = fields[batch_index].reshape(-1)[0] * 0.0
+                zero = differentiable_zero(fields[batch_index])
                 case_losses.append(zero)
                 case_truths.append(zero)
                 case_masses.append(zero)
@@ -296,7 +296,7 @@ class OuterOneCutLogLTNLoss(nn.Module):
             truth = case_truth[valid_tensor]
             value = torch.stack((case_truth[valid_tensor], allowed_mass[valid_tensor]), dim=1)
         else:
-            loss = logits.float().reshape(-1)[0] * 0.0
+            loss = differentiable_zero(logits.float())
             truth = case_truth[valid_tensor]
             value = torch.empty((0, 2), device=logits.device, dtype=torch.float32)
         ray_count_tensor = torch.as_tensor(ray_counts, device=logits.device, dtype=torch.float32)

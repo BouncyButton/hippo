@@ -8,7 +8,7 @@ from collections.abc import Sequence
 import torch
 import torch.nn as nn
 
-from ..constraint_result import ConstraintResult
+from ..constraint_result import ConstraintResult, differentiable_zero
 from .outer_boundary import _edge_touching, _normalise_labels, build_boundary_bands
 
 
@@ -134,7 +134,7 @@ class ClassAwareBoundaryTverskyLoss(nn.Module):
             if bool(valid.any()):
                 loss = case_loss[valid].mean()
             else:
-                loss = logits.float().reshape(-1)[0] * 0.0
+                loss = differentiable_zero(logits.float())
 
         truth = scores[valid].mean(dim=1)
         foreground = torch.zeros_like(labels, dtype=torch.bool)

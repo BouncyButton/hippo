@@ -8,11 +8,18 @@ import torch
 import torch.nn as nn
 
 from .bands import ClassAwareBoundaryTverskyLoss, OuterBoundaryBandLoss
-from .constraint_result import ConstraintResult
+from .constraint_result import ConstraintResult, differentiable_zero
 from .equivariance import Shift3D, TranslationEquivarianceLoss
 from .onecut import OuterOneCutLogLTNLoss
 from .teacher import TranslationTeacherKLLoss
 from .ap_cut import APCutPosteriorLoss
+from .ap_plane import (
+    BestFitAPPlaneLocationLoss,
+    ExistentialAPPlaneLoss,
+    OriginalLabelAPConditionalCELoss,
+)
+from .perimeter_profile import PerimeterProfileLoss
+from .ray_moments import RayMomentLoss
 
 
 @dataclass(frozen=True)
@@ -49,6 +56,14 @@ class NewConstraintConfig:
     ap_axis: int = 1
     ap_anterior_low: bool = True
     ap_temperature: float = 1.0
+    ap_plane_weight: float = 0.0
+    ap_plane_axis: int = 1
+    ap_plane_anterior_high: bool = True
+    ap_plane_margin: float = 0.0
+    ap_plane_require_both: bool = True
+    ap_plane_mode: str = "existential"
+    perimeter_profile_weight: float = 0.0
+    ray_moment_weight: float = 0.0
 
 
 class NewConstraintObjective(nn.Module):
@@ -63,6 +78,9 @@ class NewConstraintObjective(nn.Module):
             ("onecut_weight", self.config.onecut_weight),
             ("teacher_weight", self.config.teacher_weight),
             ("ap_cut_weight", self.config.ap_cut_weight),
+            ("ap_plane_weight", self.config.ap_plane_weight),
+            ("perimeter_profile_weight", self.config.perimeter_profile_weight),
+            ("ray_moment_weight", self.config.ray_moment_weight),
         ):
             if not math.isfinite(weight) or weight < 0:
                 raise ValueError(f"{name} must be finite and non-negative.")
@@ -74,11 +92,18 @@ class NewConstraintObjective(nn.Module):
                 self.config.onecut_weight,
                 self.config.teacher_weight,
                 self.config.ap_cut_weight,
+                self.config.ap_plane_weight,
+                self.config.perimeter_profile_weight,
+                self.config.ray_moment_weight,
             )
         )
         if active_weights > 1:
             raise ValueError(
                 "Only one auxiliary constraint weight may be positive in a run."
+            )
+        if self.config.ap_plane_mode not in {"existential", "location", "conditional_ce"}:
+            raise ValueError(
+                "ap_plane_mode must be existential, location, or conditional_ce."
             )
         if self.config.translation_size < 1:
             raise ValueError("translation_size must be positive.")
@@ -169,6 +194,21 @@ class NewConstraintObjective(nn.Module):
             temperature=self.config.ap_temperature,
             invalid_policy="error",
         )
+        plane_class = {
+            "existential": ExistentialAPPlaneLoss,
+            "location": BestFitAPPlaneLocationLoss,
+            "conditional_ce": OriginalLabelAPConditionalCELoss,
+        }[self.config.ap_plane_mode]
+        self.ap_plane = plane_class(
+            axis=self.config.ap_plane_axis,
+            anterior_high=self.config.ap_plane_anterior_high,
+            margin=self.config.ap_plane_margin,
+            require_both=self.config.ap_plane_require_both,
+        )
+        self.perimeter_profile = PerimeterProfileLoss(
+            class_ids=self.config.foreground_class_ids,
+        )
+        self.ray_moment = RayMomentLoss(orders=(0,))
 
     def forward(
         self,
@@ -179,12 +219,13 @@ class NewConstraintObjective(nn.Module):
         *,
         shift: Shift3D | None = None,
         generator: torch.Generator | None = None,
+        transformed_logits: torch.Tensor | None = None,
     ) -> dict[str, Any]:
         """Return the weighted scalar loss and component diagnostics."""
 
         if logits is None:
             logits = model(images)
-        total_loss = logits.float().reshape(-1)[0] * 0.0
+        total_loss = differentiable_zero(logits.float())
         results: dict[str, ConstraintResult] = {}
 
         if self.config.equivariance_weight > 0:
@@ -200,6 +241,11 @@ class NewConstraintObjective(nn.Module):
                 equivariance_logits,
                 shift=shift,
                 generator=generator,
+                transformed_logits=(
+                    transformed_logits[: equivariance_images.shape[0]]
+                    if transformed_logits is not None
+                    else None
+                ),
             )
             results["translation_equivariance"] = result
             total_loss = total_loss + self.config.equivariance_weight * result.loss
@@ -229,6 +275,34 @@ class NewConstraintObjective(nn.Module):
             result = self.ap_cut(logits, labels)
             results["ap_cut_posterior"] = result
             total_loss = total_loss + self.config.ap_cut_weight * result.loss
+
+        if self.config.ap_plane_weight > 0:
+            if labels is None:
+                raise ValueError(
+                    "The existential A/P plane constraint requires transformed labels."
+                )
+            result = self.ap_plane(logits, labels)
+            result_name = {
+                "existential": "existential_ap_plane",
+                "location": "ap_plane_location",
+                "conditional_ce": "ap_conditional_ce_control",
+            }[self.config.ap_plane_mode]
+            results[result_name] = result
+            total_loss = total_loss + self.config.ap_plane_weight * result.loss
+
+        if self.config.perimeter_profile_weight > 0:
+            if labels is None:
+                raise ValueError("The perimeter-profile constraint requires transformed labels.")
+            result = self.perimeter_profile(logits, labels)
+            results["perimeter_profile"] = result
+            total_loss = total_loss + self.config.perimeter_profile_weight * result.loss
+
+        if self.config.ray_moment_weight > 0:
+            if labels is None:
+                raise ValueError("The ray-moment constraint requires transformed labels.")
+            result = self.ray_moment(logits, labels)
+            results["ray_moment"] = result
+            total_loss = total_loss + self.config.ray_moment_weight * result.loss
 
         return {
             "loss": total_loss,

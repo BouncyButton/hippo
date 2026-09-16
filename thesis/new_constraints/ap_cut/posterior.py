@@ -9,7 +9,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-from ..constraint_result import ConstraintResult
+from ..constraint_result import ConstraintResult, differentiable_zero
 
 
 AP_CUT_METRICS = (
@@ -173,7 +173,7 @@ class APCutPosteriorLoss(nn.Module):
         posteriors = compute_ap_cut_posterior(logits, labels, self.config)
         # A zero connected only to the A/P channels preserves a valid backward
         # call even for an audit batch with no usable geometry.
-        zero = logits[:, 1:3].float().reshape(-1)[0] * 0.0
+        zero = differentiable_zero(logits[:, 1:3].float())
         losses, probabilities, errors, exact = [], [], [], []
         for posterior in posteriors:
             if not posterior.valid:

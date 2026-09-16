@@ -7,7 +7,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-from ..constraint_result import ConstraintResult
+from ..constraint_result import ConstraintResult, differentiable_zero
 
 
 def _normalise_labels(labels: torch.Tensor, logits: torch.Tensor) -> torch.Tensor:
@@ -228,7 +228,7 @@ class OuterBoundaryBandLoss(nn.Module):
             if bool(valid.any()):
                 loss = case_loss[valid].mean()
             else:
-                loss = logits.float().reshape(-1)[0] * 0.0
+                loss = differentiable_zero(logits.float())
 
         valid_case_loss = case_loss[valid]
         truth = torch.exp(-valid_case_loss).clamp(0.0, 1.0)

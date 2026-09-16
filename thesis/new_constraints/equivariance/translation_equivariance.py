@@ -138,8 +138,14 @@ class TranslationEquivarianceLoss(nn.Module):
         *,
         shift: Shift3D | None = None,
         generator: torch.Generator | None = None,
+        transformed_logits: torch.Tensor | None = None,
     ) -> ConstraintResult:
-        """Evaluate a sampled or explicitly supplied translation."""
+        """Evaluate a sampled or explicitly supplied translation.
+
+        A caller that already evaluated the shifted supervised view may provide
+        its logits. This prevents a third forward pass in the compute-matched
+        augmentation-plus-equivariance arm.
+        """
 
         if base_logits is None:
             base_logits = model(images)
@@ -151,7 +157,10 @@ class TranslationEquivarianceLoss(nn.Module):
                 "The selected class_ids are incompatible with the model output."
             )
 
-        transformed_logits = model(translate_3d(images, selected_shift))
+        if transformed_logits is None:
+            transformed_logits = model(translate_3d(images, selected_shift))
+        elif transformed_logits.shape != base_logits.shape:
+            raise ValueError("transformed_logits must match base_logits shape.")
         base_probabilities = torch.softmax(base_logits, dim=1)
         restored_probabilities = restore_translation(
             torch.softmax(transformed_logits, dim=1),
