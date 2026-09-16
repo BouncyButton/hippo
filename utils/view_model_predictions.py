@@ -1,21 +1,33 @@
 #!/usr/bin/env python3
-"""Interactively inspect baseline predictions on MSD train or test cases."""
+"""Interactively inspect baseline predictions on an exact MSD validation fold."""
 
 from __future__ import annotations
 
 import argparse
+import json
 import sys
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Sequence
+from typing import Callable, Sequence
 
 import numpy as np
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_PKL = REPOSITORY_ROOT / "datasets" / "Dataset101_MSD" / "msd_hippocampus_full.pkl"
-DEFAULT_WEIGHTS = REPOSITORY_ROOT / "weights" / "baseline_weights.pt"
-MSD_ROOT = REPOSITORY_ROOT / "datasets" / "Dataset101_MSD"
+DEFAULT_SPLITS = REPOSITORY_ROOT / "datasets" / "Dataset101_MSD" / "splits_final.json"
+DEFAULT_WEIGHTS_BY_SEED = {
+    0: REPOSITORY_ROOT
+    / "experiments"
+    / "augmentation_family_b_20260907"
+    / "checkpoints"
+    / "baseline_seed0_checkpoint_latest.pt",
+    1: REPOSITORY_ROOT
+    / "experiments"
+    / "augmentation_family_b_20260907"
+    / "checkpoints"
+    / "baseline_seed1_checkpoint_latest.pt",
+}
 
 if str(REPOSITORY_ROOT) not in sys.path:
     sys.path.insert(0, str(REPOSITORY_ROOT))
@@ -34,26 +46,33 @@ class PredictionCase:
 def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description=(
-            "Run the baseline SwinUNETR on one MSD training or official test case "
-            "and interactively inspect its prediction."
+            "Run a seeded baseline SwinUNETR on one case from its exact MSD "
+            "validation fold. Eligible patient IDs are selected interactively."
         )
     )
     parser.add_argument(
-        "--patient",
-        required=True,
-        help="MSD case ID, for example 001 or hippocampus_001.",
+        "--split",
+        choices=("val",),
+        default="val",
+        help="Validation is the only supported split (default: val).",
     )
     parser.add_argument(
-        "--split",
-        choices=("train", "test"),
-        default="train",
+        "--seed",
+        type=int,
+        required=True,
         help=(
-            "Use a labeled imagesTr case or an unlabeled official imagesTs case. "
-            "Default: train."
+            "Training seed of the model checkpoint. This selects the default "
+            "checkpoint and is checked against checkpoint metadata."
         ),
     )
-    parser.add_argument("--weights", type=Path, default=DEFAULT_WEIGHTS)
+    parser.add_argument(
+        "--weights",
+        type=Path,
+        default=None,
+        help="Optional full training checkpoint; defaults to the local baseline for --seed.",
+    )
     parser.add_argument("--pkl", type=Path, default=DEFAULT_PKL)
+    parser.add_argument("--splits-json", type=Path, default=DEFAULT_SPLITS)
     parser.add_argument(
         "--device",
         choices=("auto", "cpu", "cuda"),
@@ -70,10 +89,7 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser.add_argument(
         "--show-errors",
         action="store_true",
-        help=(
-            "For labeled training cases, add a third row showing each directed "
-            "GT-to-prediction error."
-        ),
+        help="Add a third row showing each directed GT-to-prediction error.",
     )
     parser.add_argument(
         "--save",
@@ -99,6 +115,106 @@ def _normalise_case_name(patient: str) -> str:
             "--patient must be an MSD numeric ID such as 001 or hippocampus_001."
         )
     return f"hippocampus_{suffix.zfill(3)}"
+
+
+def _resolve_weights(seed: int, supplied: Path | None) -> Path:
+    if seed < 0:
+        raise ValueError("--seed must be non-negative.")
+    path = supplied
+    if path is None:
+        path = DEFAULT_WEIGHTS_BY_SEED.get(seed)
+        if path is None:
+            available = ", ".join(str(value) for value in sorted(DEFAULT_WEIGHTS_BY_SEED))
+            raise ValueError(
+                f"No default checkpoint is registered for seed {seed}; "
+                f"registered seeds: {available}. Pass --weights explicitly."
+            )
+    path = path.expanduser().resolve()
+    if not path.is_file():
+        source = "default " if supplied is None else ""
+        raise FileNotFoundError(
+            f"The {source}seed-{seed} model checkpoint was not found: {path}. "
+            "Use --weights with a persistent full checkpoint path."
+        )
+    return path
+
+
+def _checkpoint_selection(
+    checkpoint: object,
+    *,
+    requested_seed: int,
+) -> tuple[dict[str, object], int]:
+    if not isinstance(checkpoint, dict) or not isinstance(checkpoint.get("model"), dict):
+        raise ValueError(
+            "Validation selection requires a full training checkpoint containing "
+            "both 'model' weights and embedded 'run' metadata."
+        )
+    run = checkpoint.get("run")
+    if not isinstance(run, dict):
+        raise ValueError("Checkpoint lacks embedded run metadata for fold selection.")
+    try:
+        checkpoint_seed = int(run["seed"])
+        fold = int(run["fold"])
+    except (KeyError, TypeError, ValueError) as exc:
+        raise ValueError("Checkpoint run metadata lacks a valid seed or fold.") from exc
+    if checkpoint_seed != requested_seed:
+        raise ValueError(
+            f"Requested seed {requested_seed}, but the checkpoint records seed "
+            f"{checkpoint_seed}."
+        )
+    if run.get("dataset") != "MSD":
+        raise ValueError("The selected checkpoint is not an MSD run.")
+    return checkpoint["model"], fold
+
+
+def _validation_case_names(splits_path: Path, fold: int) -> list[str]:
+    if not splits_path.is_file():
+        raise FileNotFoundError(f"MSD split file not found: {splits_path}")
+    try:
+        splits = json.loads(splits_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise ValueError(f"Could not read split file: {splits_path}") from exc
+    if not isinstance(splits, list) or not 0 <= fold < len(splits):
+        raise ValueError(f"Checkpoint fold {fold} is unavailable in {splits_path}.")
+    validation = splits[fold].get("val") if isinstance(splits[fold], dict) else None
+    if not isinstance(validation, list) or not validation:
+        raise ValueError(f"Fold {fold} has no validation cases in {splits_path}.")
+    names = sorted(str(name) for name in validation)
+    if len(names) != len(set(names)):
+        raise ValueError(f"Fold {fold} validation list contains duplicate case names.")
+    return names
+
+
+def _prompt_validation_case(
+    validation_names: Sequence[str],
+    *,
+    seed: int,
+    fold: int,
+    input_fn: Callable[[str], str] | None = None,
+) -> str:
+    read_input = input if input_fn is None else input_fn
+    patient_ids = [name.removeprefix("hippocampus_") for name in validation_names]
+    print(f"Validation patients for checkpoint seed {seed}, fold {fold}:")
+    for start in range(0, len(patient_ids), 13):
+        print("  " + "  ".join(patient_ids[start : start + 13]))
+    allowed = set(validation_names)
+    while True:
+        try:
+            raw = read_input("Choose a validation patient ID: ").strip()
+        except (EOFError, KeyboardInterrupt) as exc:
+            raise ValueError("Patient selection was cancelled.") from exc
+        try:
+            case_name = _normalise_case_name(raw)
+        except ValueError as exc:
+            print(f"Invalid selection: {exc}", file=sys.stderr)
+            continue
+        if case_name in allowed:
+            return case_name
+        print(
+            f"Patient {case_name.removeprefix('hippocampus_')} is not in fold-{fold} "
+            "validation. Choose one of the IDs listed above.",
+            file=sys.stderr,
+        )
 
 
 def _resolve_device(requested: str):
@@ -148,102 +264,49 @@ def load_prediction_case(args: argparse.Namespace) -> PredictionCase:
     )
     from thesis.new_constraints.train_swinunetr_constraints import build_swinunetr
 
-    if not args.weights.is_file():
-        raise FileNotFoundError(f"Model weights not found: {args.weights}")
     if not 0.0 <= args.opacity <= 1.0:
         raise ValueError("--opacity must be between 0 and 1.")
+    weights_path = _resolve_weights(args.seed, args.weights)
+    checkpoint = torch.load(weights_path, map_location="cpu", weights_only=False)
+    state_dict, fold = _checkpoint_selection(
+        checkpoint,
+        requested_seed=args.seed,
+    )
+    validation_names = _validation_case_names(args.splits_json, fold)
+    case_name = _prompt_validation_case(
+        validation_names,
+        seed=args.seed,
+        fold=fold,
+    )
 
-    case_name = _normalise_case_name(args.patient)
     num_classes = 3
-    if args.split == "train":
-        if not args.pkl.is_file():
-            raise FileNotFoundError(f"MSD dataframe not found: {args.pkl}")
-        dataframe = _load_pkl_dataframe(args.pkl)
-        inferred_classes = _infer_num_classes(dataframe, "MSD")
-        if inferred_classes != num_classes:
-            raise ValueError(
-                f"The baseline expects three classes, found {inferred_classes}."
-            )
-        dataset = _build_monai_dataset_from_pkl(
-            dataframe,
-            "MSD",
-            num_classes,
-            spatial_size=tuple(args.spatial_size),
-            do_resize=args.resize,
-        )
-        matching_indices = [
-            index
-            for index, item in enumerate(dataset.data)
-            if item["case_name"] == case_name
-        ]
-        if len(matching_indices) != 1:
-            available = sorted(item["case_name"] for item in dataset.data)
-            preview = ", ".join(
-                name.removeprefix("hippocampus_") for name in available[:20]
-            )
-            raise ValueError(
-                f"MSD training case {case_name} was not found. "
-                f"Available IDs begin: {preview} ..."
-            )
-        sample = dataset[matching_indices[0]]
-        has_ground_truth = True
-    else:
-        try:
-            import nibabel as nib
-            import pandas as pd
-        except ImportError as exc:
-            raise RuntimeError(
-                "nibabel and pandas are required to load MSD test images."
-            ) from exc
-
-        image_path = MSD_ROOT / "imagesTs" / f"{case_name}_0000.nii.gz"
-        if not image_path.is_file():
-            available = sorted(
-                path.name.removeprefix("hippocampus_").removesuffix("_0000.nii.gz")
-                for path in (MSD_ROOT / "imagesTs").glob("hippocampus_*_0000.nii.gz")
-            )
-            preview = ", ".join(available[:20])
-            raise ValueError(
-                f"MSD test case {case_name} was not found. "
-                f"Available test IDs begin: {preview} ..."
-            )
-        image_data = np.asarray(nib.load(image_path).dataobj, dtype=np.float32)
-        # The shared preprocessing function expects an image/label pair.  A
-        # zero placeholder lets us reuse the exact image normalization and
-        # center crop/pad used by the baseline; it is never treated as GT.
-        test_dataframe = pd.DataFrame(
-            [
-                {
-                    "subject_id": case_name,
-                    "image_data": image_data,
-                    "label_data": np.zeros_like(image_data, dtype=np.uint8),
-                }
-            ]
-        )
-        dataset = _build_monai_dataset_from_pkl(
-            test_dataframe,
-            "MSD",
-            num_classes,
-            spatial_size=tuple(args.spatial_size),
-            do_resize=args.resize,
-        )
-        sample = dataset[0]
-        has_ground_truth = False
+    if not args.pkl.is_file():
+        raise FileNotFoundError(f"MSD dataframe not found: {args.pkl}")
+    dataframe = _load_pkl_dataframe(args.pkl)
+    inferred_classes = _infer_num_classes(dataframe, "MSD")
+    if inferred_classes != num_classes:
+        raise ValueError(f"The baseline expects three classes, found {inferred_classes}.")
+    dataset = _build_monai_dataset_from_pkl(
+        dataframe,
+        "MSD",
+        num_classes,
+        spatial_size=tuple(args.spatial_size),
+        do_resize=args.resize,
+    )
+    matching_indices = [
+        index
+        for index, item in enumerate(dataset.data)
+        if item["case_name"] == case_name
+    ]
+    if len(matching_indices) != 1:
+        raise ValueError(f"Validation case {case_name} is unavailable in the MSD dataframe.")
+    sample = dataset[matching_indices[0]]
 
     image_tensor = sample["image"].float()
-    label_tensor = sample["label"].long() if has_ground_truth else None
+    label_tensor = sample["label"].long()
 
     device = _resolve_device(args.device)
     model = build_swinunetr(tuple(args.spatial_size), num_classes, device)
-    checkpoint = torch.load(args.weights, map_location="cpu", weights_only=False)
-    if isinstance(checkpoint, dict) and "model" in checkpoint:
-        state_dict = checkpoint["model"]
-    elif isinstance(checkpoint, dict) and "state_dict" in checkpoint:
-        state_dict = checkpoint["state_dict"]
-    else:
-        state_dict = checkpoint
-    if not isinstance(state_dict, dict):
-        raise ValueError(f"Unsupported checkpoint format: {args.weights}")
     model.load_state_dict(state_dict, strict=True)
     model.eval()
 
@@ -252,22 +315,15 @@ def load_prediction_case(args: argparse.Namespace) -> PredictionCase:
         prediction = torch.argmax(logits, dim=1)[0].cpu().numpy().astype(np.uint8)
 
     image = image_tensor[0].cpu().numpy().astype(np.float32, copy=False)
-    if label_tensor is not None:
-        ground_truth = label_tensor[0].cpu().numpy().astype(np.uint8, copy=False)
-        dice_anterior = _dice(ground_truth == 1, prediction == 1)
-        dice_posterior = _dice(ground_truth == 2, prediction == 2)
-    else:
-        ground_truth = None
-        dice_anterior = None
-        dice_posterior = None
+    ground_truth = label_tensor[0].cpu().numpy().astype(np.uint8, copy=False)
+    dice_anterior = _dice(ground_truth == 1, prediction == 1)
+    dice_posterior = _dice(ground_truth == 2, prediction == 2)
     return PredictionCase(
         image=image,
         ground_truth=ground_truth,
         prediction=prediction,
-        title=(
-            f"Baseline prediction | MSD {args.split} "
-            f"{case_name.removeprefix('hippocampus_')}"
-        ),
+        title=(f"Baseline seed {args.seed} | MSD fold-{fold} validation "
+               f"{case_name.removeprefix('hippocampus_')}"),
         dice_anterior=dice_anterior,
         dice_posterior=dice_posterior,
     )
@@ -324,7 +380,7 @@ def show_prediction_case(
 
     axis_names = ("Sagittal", "Coronal", "Axial")
     if show_errors and case.ground_truth is None:
-        raise ValueError("--show-errors requires a labeled --split train case.")
+        raise ValueError("--show-errors requires a labeled validation case.")
     indices = _initial_indices(case)
     vmin, vmax = _intensity_window(case.image)
     class_colors = {1: "#e63946", 2: "#3a86ff"}
