@@ -21,7 +21,7 @@ From the union foreground label y*_z ∈ {0,1} on each ray:
 
 For fixed x, L*(y) and U*(y) are already exact integer step functions. Fitting a step model to them would erase the valid upward jumps (12/52 references).
 
-Rays enter the losses only inside a dilated slice bounding box, so that thousands of trivially empty rays do not dominate.
+`L_resp` and the edge terms use rays inside a dilated slice bounding box, so that thousands of trivially empty rays do not dominate. The **presence** term is the exception: it is trained on all rays, with out-of-box rays down-weighted or subsampled (§2).
 
 ## 1. Differentiable first- and last-hit distributions (voxel path, not detached)
 
