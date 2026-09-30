@@ -1,0 +1,9 @@
+# Generalization analysis status
+
+**Complete.** Selected-checkpoint edge/Dice analysis, original bands recomputation, temporal audit analysis, and supplementary historical Dice-only baseline verification are finished. Plots were generated and visually inspected.
+
+Exact original bands BCE, fuzzy truth, and predefined case-confidence adherence were recovered by **inference-only job 676160**, completed successfully in 2m04 after PCGrad training job 676122 finished. The audit read retained original checkpoints and frozen source, verified hashes and runtime versions, and wrote only to a separate output directory. This report concerns the old pooled/separated experiment; it contains no PCGrad outcomes. No training or checkpoint selection was performed by this analysis.
+
+A local CPU benchmark used a different Torch/MONAI runtime and did not faithfully reproduce the saved predictions. Its outputs are retained for diagnostics and explicitly excluded from quantitative conclusions. The local inference attempt was stopped. Final tables use original saved edge/Dice audits and verified original CUDA-runtime bands recomputation. CUDA reproduction is close but not bitwise identical: mean absolute macro-Dice difference 0.000678 percentage points, maximum individual-case difference 0.034318 percentage points. All six downloaded CUDA result-file hashes were verified.
+
+Outputs: `REPORT.md` (full report including both per-seed tables), `INTERPRETATION.md` (focused conclusions), `SUMMARY.json` (full precision summaries), `cases.json` (372 selected-checkpoint case records), `temporal_cases.json` (intermediate evidence), `HISTORICAL_BASELINE.json/.md` (verified supplementary context), and PNG/PDF trajectory figures. `NUMERICAL_REPRODUCTION.json` and `VERIFICATION.json` record checks. Existing experiment results and selected checkpoints were unchanged.

@@ -1,0 +1,3 @@
+# Conditional fixed-policy inference replication
+
+The completed seed0 augmented checkpoints show positive Dice and shell-error effects from the predeclared13-view policy, with no nonzero-input or GT clipping. Identity-repeat differences are at most2shellvoxels/case, far below the632/634net effects. Repeat EXACTLY the same policy and audit source on selected seed1 Dice_aug and Dice checkpoints after training676401 completes. No tuning, no new training, no labels in predictions. Report both seeds separately, including regressions and training deterioration. Inference cost is13forward passes; do not present this as a learned semantic constraint or a new untouched-cohort test. Preserve all MedSAM3 artifacts.
