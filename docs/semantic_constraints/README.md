@@ -29,6 +29,7 @@ For more detail, read `ARCHITECTURE.md`.
 | `train_with_constraints.py` | Fine-tunes a model with or without constraint losses. |
 | `final_evaluate.py` | Compares trained checkpoints on the reserved holdout fold. |
 | `on_grokking_behavior.py` | Separate toy experiment. It is not part of the segmentation pipeline. |
+| `cst_teacher/` | Experimental coordinate-aware 2.5-D CST teachers for MRI-conditioned descriptor, slice-profile, and mask-anomaly constraints. |
 
 ## Expected Inputs
 
