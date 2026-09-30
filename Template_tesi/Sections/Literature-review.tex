@@ -1,0 +1,23 @@
+\section{Background and Related Work}\label{sec:literature}
+\subsection{Segmentation models and annotated benchmarks}
+SwinUNETR combines a hierarchical Swin Transformer encoder with a convolutional decoder and skip connections across resolutions \cite{hatamizadeh2022swin}. In this thesis it supplies the three-class segmentation model for the low-data study. The experiment concerns changes to its training objective, rather than a proposed replacement architecture.
+
+The Medical Segmentation Decathlon supplies annotated medical segmentation tasks, including the hippocampus dataset used here \cite{simpson2019dataset}. The local task distinguishes background, anterior hippocampus and posterior hippocampus. An important consequence is that correctly detecting the union of the two foreground classes does not guarantee correctly locating their internal division. The class-specific and whole-foreground evaluations therefore answer different questions.
+
+\subsection{Logic Tensor Networks}
+LTNs ground logical expressions in differentiable numerical operations. Predicates take values in $[0,1]$, and selected fuzzy connectives and aggregation operators determine how compound expressions are evaluated \cite{badreddine2022logic}. Model parameters can then be optimized using a loss derived from the satisfaction of the grounded statements. A specification must include both the symbolic statement and the actual operators: a formula alone does not uniquely define its gradients.
+
+This thesis uses that perspective to describe boundary membership requirements. It explicitly derives their implemented loss, including its equivalence to familiar supervised objectives. The edge term is a relational penalty on neighbouring residuals; it should not be presented as an independently novel LTN calculus. The empirical contribution is the evaluation of these numerical objectives under controlled training conditions.
+
+\subsection{Logical constraints for hippocampus segmentation}
+Bergamin, Dimitri and Aiolli investigate background-knowledge constraints in an LTN framework coupled with SwinUNETR for hippocampus segmentation. Their work motivates studying the benefit of constraints when training data are scarce \cite{bergamin2025integrating}. The present study follows that broad research direction while examining different auxiliary supervision and training policies. It is an extension of the research question, rather than an exact reproduction of their experimental protocol.
+
+The distinction between independently supplied anatomical knowledge and annotation-derived supervision is central. A relationship specified without the segmentation labels may introduce external information. A band built from the existing labels instead reorganizes supervision already present in the dataset. Both can be valuable, but they justify different explanations for any improvement.
+
+\subsection{Pretrained medical models and efficient adaptation}
+MedSAM3 adapts the SAM3 architecture to medical concept segmentation using text descriptions \cite{liu2025medsam3}. This provides a second setting for investigating additional supervision: adaptation begins from released medical weights rather than learning the target task solely through the local training set. The experiment in this thesis uses the text prompt \emph{hippocampus} and evaluates the union of the predicted foreground.
+
+Low-Rank Adaptation (LoRA) freezes base weights and learns a restricted update through trainable low-rank matrices \cite{hu2021lora}. For a weight matrix $W_0$, a simplified expression is $W=W_0+BA$, with the rank of $BA$ constrained by the smaller inner dimension. Here, only the existing medical LoRA parameters are fine-tuned. The central comparison is whether additional boundary losses help this restricted adaptation, not whether LoRA is superior to full fine-tuning.
+
+\subsection{Position of the present study}
+The experimental design connects three levels: an interpretable constraint description, its differentiable implementation, and the accuracy reached under a specified training policy. Keeping these levels separate prevents a positive Dice difference from being treated as proof of an unmeasured mechanism. In particular, improved validation accuracy, faster early learning, lower annotation requirements and lower computation cost are separate outcomes. The following sections report the outcomes actually measured and identify the controls needed for the remaining claims.

@@ -1,0 +1,22 @@
+\section{Limitations and Future Research Directions}\label{sec:limitations}
+\subsection{Selection and independence}
+The SwinUNETR results use validation for checkpoint selection, stopping and research decisions. Independent recomputation verifies their arithmetic but does not turn them into independent test results. The MedSAM3 pilot uses final adapters, yet its cases also belong to the project's development data. A frozen protocol evaluated on a separate cohort is needed for a stronger generalization claim.
+
+Case filenames identify volumes, not verified patients. Without the original subject mapping, left/right crops or other repeated observations cannot be conclusively grouped by person. This is an unresolved limitation, not evidence that leakage has occurred. The released MedSAM3 checkpoint's complete pretraining overlap with the study data is also unverified. Five local fine-tuning volumes describe the adaptation budget, not the total amount of data involved in constructing the pretrained model.
+
+\subsection{Training resources and mechanisms}
+Equal maximum epochs do not necessarily mean equal actual epochs, optimizer updates across different subset sizes, or elapsed computation time. The original band procedure adds a calibration source run and gradient measurements. A computation-efficiency claim requires comparable hardware and complete timing, including these costs. A sample-efficiency claim requires learning curves over multiple training subsets and a specified performance target.
+
+The band objective is conventional boundary BCE under the stated grounding. Demonstrating superiority over Dice alone does not isolate an advantage specific to LTN semantics. Useful controls include Dice plus ordinary cross-entropy and Dice plus globally applied grouped-foreground BCE with comparable calibration. An exactly equivalent loss implementation serves as an equivalence check, not as a scientifically distinct competitor.
+
+A gain in Dice also does not identify its causal mechanism. It can accompany changes in false positives, false negatives, class confusion or optimization trajectory. Claims about improved surface accuracy, topology or anatomical plausibility require direct measurements of those properties. The union-based constraints do not directly identify the anterior/posterior interface.
+
+\subsection{Replication and uncertainty}
+The MedSAM3 pilot has only one seed and five validation volumes. The planned three-fold replication is broader but still has few fold-level units. Its conservative fold-block sign-flip analysis has a minimum possible two-sided $p$-value of 0.25 with three blocks. Bootstrap intervals are therefore exploratory and cannot remove the limitations of the study's sampling design. All planned comparisons must remain visible, including failures and negative effects.
+
+The longer SwinUNETR controls should also be extended across folds and newly sampled support sets using a policy fixed before observing outcomes. The adaptively extended seed-2 result is informative but cannot substitute for applying one common long-training policy to every seed.
+
+\subsection{Next empirical steps}
+The immediate priority is to complete and audit the locked MedSAM3 replication, then replace the partial status with all nine matched comparisons. The next controlled study should preserve the limited-policy endpoint while adding a common longer schedule and conventional auxiliary-loss controls. Multiple support sets would help distinguish an effect of the selected examples from optimization-seed variability.
+
+A later evaluation should add surface-distance and boundary-error measures, with physical spacing and empty-mask handling specified, alongside the existing Dice scores. Qualitative examples should include improvements, failures and unchanged cases selected by an explicit rule. Together with subject-level separation and an external cohort, these steps would test whether the present conditional benefit extends beyond the development settings studied here.

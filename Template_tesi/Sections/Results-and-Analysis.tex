@@ -1,0 +1,47 @@
+\section{Results and Analysis}\label{sec:results}
+\subsection{Status and provenance}
+The measurements below are an evidence snapshot of the local reports available on 28 September 2026. The low-data tables are transcribed from an audit that reconstructed Dice from archived confusion counts. MedSAM3 pilot values are checked against the saved per-case results. No new training runs were performed for this draft. Appendix~\ref{sec:evidence} maps the claims to their local records.
+
+\subsection{Low-data performance under a limited schedule}
+With ten training volumes per fold, the maximum-75-epoch SwinUNETR comparison favours bands in all twelve paired fold--seed configurations. Mean validation-selected Dice increases from 72.507\% to 76.388\%, with a mean paired improvement of 3.882 percentage points. The corresponding actual-stop improvement is 3.840 points \cite{localLowDataAudit}.
+
+\begin{table}[htbp]
+\centering\small
+\begin{tabularx}{\linewidth}{Xrrr}
+\toprule
+Training policy and scope & Baseline (\%) & Bands (\%) & Gain (pp)\\
+\midrule
+Maximum 75, four folds & 72.507 & 76.388 & +3.882\\
+Maximum 75, fold 0 & 73.146 & 77.081 & +3.935\\
+Maximum 200, fold 0 & 79.285 & 80.024 & +0.739\\
+Mixed 200/200/400, fold 0 & 80.051 & 80.358 & +0.308\\
+\bottomrule
+\end{tabularx}
+\caption{Validation-selected anterior/posterior macro Dice, with three seeds per listed fold. Gains are computed before rounding. The mixed schedule includes an adaptive extension for seed 2 and is exploratory.}\label{tab:swin}
+\end{table}
+
+The consistency of direction supports the usefulness of boundary supervision under the tested policy. It does not make the twelve comparisons independent datasets: seeds within a fold share a training subset and validation cases. The result establishes neither a population-level effect of this size nor the amount of annotation that could be saved at a fixed target accuracy.
+
+\subsection{Dependence on training duration}
+On fold 0, the improvement is smaller under longer schedules: 0.739 points with the common maximum-200 policy and 0.308 points in the mixed longer-training summary. The longer controls change both duration and decay timing; some comparisons also involve a different hardware slice. They therefore demonstrate schedule sensitivity without providing a clean decomposition of the gain into optimization and generalization components.
+
+The archived curves also show earlier attainment of selected Dice levels. For example, with the maximum-200 policy, seed 0 first reaches 79\% validation Dice at epoch 66 for the baseline and epoch 59 for bands. Seed 1 reaches that level at epochs 51 and 37, respectively. These are retrospective crossings of validation curves, not prespecified sustained-accuracy targets. They support earlier progress in epochs but do not establish an end-to-end time saving after calibration overhead.
+
+The remaining positive difference in the long controls should be retained rather than declared zero. Conversely, three seeds on one fold, especially with one adaptively extended schedule, cannot establish a robust residual population advantage or prove that either model has reached its best attainable performance.
+
+\subsection{Five-volume MedSAM3 pilot}
+Table~\ref{tab:medsam} reports whole-hippocampus union Dice on the five development-validation volumes. All objectives receive the same 200 updates. Bands improve the mean by 0.542 percentage points, and bands plus edge improve it by 1.252 points relative to the native baseline. Edge adds a further 0.710 points relative to bands. Bands improve four of the five cases; the combined objective improves all five \cite{localMedSAMpilot}.
+
+\input{Tables/medsam-pilot}
+
+These observations show that the selected constraints can improve a pretrained model's five-volume adaptation under the tested protocol. Their contribution is made through backpropagation during fine-tuning, rather than a correction of masks after inference. The finding remains a pilot result from one optimization seed and five validation volumes. It is not a statistically conclusive claim about MedSAM3 generally or about unseen patients.
+
+\subsection{Boundary supervision is not uniformly beneficial}
+A separate, larger-training-set SwinUNETR audit provides a useful counterpoint. With 208 training and 52 validation cases, the selected Dice, Dice-plus-bands and Dice-plus-bands-plus-edge checkpoints obtain validation macro Dice of 0.887664, 0.887689 and 0.887571, respectively. The edge model fits the training cases better, but this improvement does not produce an overall validation Dice benefit in that experiment \cite{localEdgeAudit}.
+
+This comparison uses a different data regime and validation-selected epochs, and does not contradict the five-volume adaptation result. It instead cautions against treating an auxiliary loss as universally beneficial. The relevant question is which objective, data regime, model and training policy produce a useful change.
+
+\subsection{Replication status and synthesis}
+The saved MedSAM3 replication status records one verified comparison out of nine: fold 0, seed 17, with 46 evaluation volumes. Its mean Dice values are 0.83545 for baseline, 0.84911 for bands and 0.86545 for bands plus edge. This partial result is reported only as progress; it is not the aggregate outcome of the locked study. The overall replication conclusion remains pending \cite{localMedSAMreplication}.
+
+Taken together, the available evidence supports a conditional claim: boundary-focused constraints can increase the segmentation accuracy reached with scarce labels under specified, limited training policies, including a five-volume MedSAM3 pilot. The evidence also shows why the training policy belongs in the claim. Longer optimization reduces the observed SwinUNETR advantage on the tested fold, and a separate larger-data experiment does not show an overall validation gain from edge supervision.

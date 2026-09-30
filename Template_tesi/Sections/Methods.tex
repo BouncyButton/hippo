@@ -1,0 +1,80 @@
+\section{Methods}\label{sec:methods}
+\subsection{Task and notation}
+Let $x_i$ be a three-dimensional image on a voxel domain $\Omega_i$, and let $y_i(v)\in\{0,A,P\}$ denote its reference label at voxel $v$. The foreground indicator is $h_i(v)=\mathbf{1}[y_i(v)\ne0]$. For SwinUNETR, $p_\theta(c\mid x_i,v)$ is the softmax probability of class $c$, and the grouped foreground probability is
+\begin{equation}
+p_H(v)=p_\theta(A\mid x_i,v)+p_\theta(P\mid x_i,v).
+\end{equation}
+The volume index is omitted below when it is unambiguous. Grouping is appropriate for outer-boundary supervision, but cannot directly penalize an anterior/posterior swap within correctly predicted foreground.
+
+\subsection{Boundary-band constraint}
+Let $H=\{v:h(v)=1\}$. Two successive six-connected erosion and dilation operations, denoted $E_2$ and $D_2$, define the inner and outer bands:
+\begin{equation}
+B_{\mathrm{in}}=H\setminus E_2(H),\qquad
+B_{\mathrm{out}}=D_2(H)\setminus H.
+\end{equation}
+These are voxel-grid constructions, not a claim of a constant two-millimetre thickness. In the SwinUNETR pipeline, they are constructed from the final transformed training label; the MedSAM3 protocol constructs them on the native canonical volume.
+
+The desired statements are that every inner-band voxel belongs to foreground and every outer-band voxel belongs to background:
+\begin{equation}
+\forall v\in B_{\mathrm{in}}:\ H_\theta(v),\qquad
+\forall v\in B_{\mathrm{out}}:\ \neg H_\theta(v).
+\end{equation}
+Ground $H_\theta(v)$ as $p_H(v)$ and negation as $1-p_H(v)$. A side-balanced geometric aggregation, with negative logarithm as the penalty, yields
+\begin{equation}\label{eq:bands}
+\mathcal{L}_{\mathrm{bands}}=
+-\frac{1}{2|B_{\mathrm{in}}|}\sum_{v\in B_{\mathrm{in}}}\log p_H(v)
+-\frac{1}{2|B_{\mathrm{out}}|}\sum_{v\in B_{\mathrm{out}}}\log(1-p_H(v)).
+\end{equation}
+The two sides receive equal weight regardless of their different voxel counts. Losses are subsequently averaged over valid case volumes. Volumes lacking one side are excluded from this band reduction; the implementation handles an all-invalid batch with a differentiable zero.
+
+Equation~\ref{eq:bands} is balanced binary cross-entropy restricted to the boundary bands. Its logical interpretation and conventional loss interpretation describe the same computation. For three-class logits, stable computation uses grouped log-odds
+\begin{equation}
+r_H(v)=\operatorname{logsumexp}(z_A(v),z_P(v))-z_0(v),
+\end{equation}
+so that $p_H(v)=\operatorname{sigmoid}(r_H(v))$. The experiments summarized here concern the original, non-focal band objective. Focal and other weighting variants must be identified separately if included in later versions.
+
+\subsection{Edge-consistency extension}
+Let $B=B_{\mathrm{in}}\cup B_{\mathrm{out}}$, and let $\mathcal{E}_B$ contain adjacent voxel pairs along the three positive coordinate directions for which both endpoints lie in $B$. Each face is counted once, with no wraparound. Define the signed foreground residual as $e(v)=p_H(v)-h(v)$. The edge penalty is
+\begin{equation}\label{eq:edge}
+\mathcal{L}_{\mathrm{edge}}=
+\frac{1}{|\mathcal{E}_B|}\sum_{(u,v)\in\mathcal{E}_B}
+\bigl(e(u)-e(v)\bigr)^2.
+\end{equation}
+The implementation averages the face mean over valid volumes. This term matches local foreground differences to the reference differences. It is not simply a penalty that makes the prediction smooth: across a true foreground/background interface, it encourages the corresponding probability transition. Nor does it guarantee global connectivity or anatomical topology.
+
+\subsection{Combined objective and calibration}
+The general training objective is
+\begin{equation}\label{eq:total}
+\mathcal{L}(t)=\mathcal{L}_{\mathrm{base}}+
+\alpha(t)\bigl(\lambda_B\mathcal{L}_{\mathrm{bands}}+
+\lambda_E\mathcal{L}_{\mathrm{edge}}\bigr),
+\end{equation}
+with non-negative calibrated weights and a ramp $\alpha(t)$. Unused terms have zero coefficient. In the original SwinUNETR study the baseline is the existing three-class Dice objective and $\lambda_E=0$. Its five-epoch ramp takes values $0.2,0.4,0.6,0.8,1.0$.
+
+SwinUNETR band calibration uses gradients with respect to logits from a separate five-epoch Dice-only source checkpoint and training cases only. It targets a median auxiliary-to-supervised gradient ratio of $0.10$, subject to a high-gradient safety ratio of $0.50$. Calibration provenance binds the subset, checkpoint and numerical settings. Its extra training and calibration cost must be included in any runtime comparison.
+
+MedSAM3 calibration instead uses LoRA parameter gradients at the initial adapter, without updating the model. Bands are calibrated relative to the native objective; edge is calibrated relative to the native objective plus weighted bands, accounting for their gradient inner product. A safety cap may lower the achieved median ratio below its target. Both terms ramp over 20 updates, and the band coefficient is identical in the two constrained arms.
+
+\subsection{SwinUNETR low-data comparison}
+The principal archived comparison uses ten labelled case volumes per fold, four folds and three optimization seeds. Each paired comparison holds the training subset and base training settings fixed. The audited policy uses a maximum of 75 epochs, batch size one, initial learning rate $10^{-4}$, StepLR scheduling and no augmentation. Checkpoint selection and stopping use validation information. Therefore, \emph{maximum-75-epoch policy} is more accurate than asserting that every arm receives exactly 75 epochs \cite{localLowDataAudit}.
+
+Longer-training follow-ups use the same fold-0 ten-case subset. All three seeds have a maximum-200-epoch comparison with a stretched decay schedule. An additional maximum-400-epoch comparison was run for seed 2 after its poor optimization was observed. The mixed 200/200/400 aggregate is exploratory and must be distinguished from the common maximum-200 policy.
+
+\subsection{Five-volume MedSAM3 adaptation}
+The pilot compares the native SAM3 training objective, native plus bands, and native plus bands plus edge. All arms start independently from the same released medical LoRA weights with the backbone frozen. Each receives exactly 200 AdamW updates and 800 slice presentations drawn from the same five support volumes. Learning rate rises to $5\times10^{-5}$ over 20 updates and follows cosine decay to $5\times10^{-6}$. The final adapter is evaluated without validation-selected stopping \cite{localMedSAMpilot}.
+
+Training uses axial slice pairs while retaining the volumetric definition of the constraints. Uniform volume and anchor sampling, paired with depth scaling of the band and face contributions, provides the stochastic estimator specified in the archived protocol. Anatomical wraparound faces are excluded. Thus five-shot refers to five labelled volumes, not five slices or five verified patients.
+
+To apply semantic losses to instance outputs, the implementation forms a differentiable foreground field by taking the maximum over native-size sigmoid mask probabilities multiplied by query and presence probabilities. No ground-truth instance matching or threshold enters this auxiliary field. The native SAM3 loss retains its own matching procedure. At inference, all arms use images and the same text prompt, \emph{hippocampus}, with the same confidence, NMS and mask settings. Constraints affect training; no post-inference mask refinement is applied.
+
+\subsection{Evaluation and replication}
+For a predicted binary region $P$ and reference region $G$, Dice is
+\begin{equation}
+\operatorname{Dice}(P,G)=\frac{2|P\cap G|}{|P|+|G|}
+=\frac{2\mathrm{TP}}{2\mathrm{TP}+\mathrm{FP}+\mathrm{FN}}.
+\end{equation}
+The SwinUNETR endpoint averages hard anterior and posterior Dice within each case, then over validation cases, excluding background. MedSAM3 uses three-dimensional whole-hippocampus union Dice. These scores must not be combined into one model ranking.
+
+All improvements are paired differences on matched evaluation cases, expressed in percentage points as $100(D_{\mathrm{constraint}}-D_{\mathrm{baseline}})$. Best-checkpoint and actual-stop results are separate endpoints. In the MedSAM3 pilot, all predictions are saved before evaluation labels are opened by the scoring procedure. The cohort nevertheless remains development-validation data because it has been used within the wider project.
+
+The locked MedSAM3 replication comprises three folds, three optimization seeds and three objectives: nine matched comparisons and 27 training arms. It excludes the original pilot cases and all selected support volumes from evaluation, leaving 145 unique evaluation volumes. Its primary contrast is bands plus edge minus baseline, averaged equally across folds and seeds. The saved protocol includes exploratory crossed fold/seed bootstrap intervals and a fold-block sign-flip sensitivity analysis. Patient identity mapping is unavailable, so volume separation cannot certify patient separation \cite{localMedSAMreplication}.

@@ -1,0 +1,26 @@
+\section{Introduction}\label{sec:introduction}
+\subsection{Motivation}
+Medical image segmentation assigns anatomical labels to image locations. A learned segmenter must connect local image appearance with the spatial organization of the target structure. When only a small labelled training set is available, this connection must be estimated from relatively few examples. A limited training schedule adds a second restriction: the model has only a specified opportunity to fit those examples. The present thesis studies these two restrictions together through hippocampus segmentation.
+
+A segmentation annotation contains more than a collection of independent class labels. It also describes an interface between foreground and background and the changes in class membership across neighbouring voxels. A training objective can make this information explicit. For example, it can require that voxels just inside the annotated contour receive high foreground probability, while voxels just outside receive low foreground probability. Such requirements reuse the available annotations and direct additional training pressure toward a selected spatial region.
+
+Logic Tensor Networks provide a language for expressing predicates and quantified statements through differentiable computations \cite{badreddine2022logic}. This motivates the central approach: formulate desired segmentation properties as constraints, specify their numerical realization, and add the resulting penalties to the model's original objective. A logical description is useful only insofar as its grounding and optimization behaviour are made explicit. The same formula can lead to different losses depending on the chosen connectives, quantifiers and reductions.
+
+\subsection{Research question and scope}
+The principal research question is:
+\begin{quote}
+To what extent can LTN-inspired constraints improve hippocampus segmentation with few labelled training volumes under a specified, limited training schedule, and does this benefit extend to five-volume fine-tuning of MedSAM3?
+\end{quote}
+Three questions organize the empirical analysis. First, does adding boundary supervision improve validation Dice relative to the original objective when the training subset and policy are matched? Second, how does the observed advantage change under longer schedules? Third, can related constraints improve the adaptation of a pretrained medical segmentation model while updating only its low-rank parameters?
+
+The phrase \emph{fixed training budget} needs a precise definition. The SwinUNETR experiments use matched maximum-epoch policies with checkpoint selection and stopping; they do not all end at the same epoch. The MedSAM3 pilot instead uses exactly 200 updates and evaluates the final adapter. Neither design alone establishes equal elapsed computation time, because constraint evaluation and calibration introduce additional work.
+
+\subsection{Working hypothesis}
+The working hypothesis is that boundary-focused constraints provide a useful inductive bias when the supervised objective has limited data and optimization steps from which to learn. They may improve the accuracy reached early in training, alter the balance of foreground errors, or improve the final performance available under a chosen policy. These possibilities are related but empirically distinct. An early advantage remains relevant even if a longer-running baseline subsequently catches up; it should then be described as a benefit under restricted training rather than evidence of a universal generalization improvement.
+
+The pretrained-model experiment tests whether this approach remains useful after substantial prior learning. Large-scale pretraining does not logically imply that an additional task-specific objective will be redundant. Equally, a positive result for one adaptation protocol cannot establish that all large models benefit from the same constraints.
+
+\subsection{Contributions and organization}
+The thesis develops a mathematical account of the implemented boundary and edge objectives, presents audited low-data comparisons, and uses schedule-sensitivity controls to delimit their interpretation. It also studies transfer of these objectives to a five-volume MedSAM3 fine-tuning protocol with matched initialization and sample exposure. A further contribution is the explicit separation of class-specific segmentation, whole-foreground segmentation, optimization progress and independent generalization.
+
+Section~\ref{sec:literature} introduces the relevant model and constraint frameworks. Section~\ref{sec:methods} specifies the objectives and experimental contracts. Section~\ref{sec:results} presents the available measurements. Section~\ref{sec:limitations} discusses unresolved controls and the remaining evaluation work, before Section~\ref{sec:conclusion} summarizes the conclusions supported by the current evidence.
