@@ -1,0 +1,32 @@
+.....s...                                                                [100%]
+=============================== warnings summary ===============================
+thesis/new_constraints/test_pcgrad.py::test_backward_sum_matches_joint_loss_and_unused_parameters
+  /mnt/beegfsstudents/home/3160552/pcgrad_edge_20260929_01/source/thesis/new_constraints/test_pcgrad.py:61: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+    scaler=torch.cuda.amp.GradScaler(enabled=False)
+
+thesis/new_constraints/test_pcgrad.py::test_nonfinite_gradients_are_not_silently_projected
+  /mnt/beegfsstudents/home/3160552/pcgrad_edge_20260929_01/source/thesis/new_constraints/test_pcgrad.py:72: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+    backward_tasks([x.sum()*float('inf')],(x,),torch.cuda.amp.GradScaler(enabled=False),
+
+scripts/test_train_pcgrad_edge.py::test_training_and_exact_midrun_resume[sum]
+scripts/test_train_pcgrad_edge.py::test_training_and_exact_midrun_resume[sum]
+  /home/3160552/.conda/envs/hippocampus/lib/python3.11/site-packages/torch/jit/_script.py:1640: DeprecationWarning: `torch.jit.interface` is deprecated. Please use `torch.compile` instead.
+    warnings.warn(
+
+scripts/test_train_pcgrad_edge.py::test_training_and_exact_midrun_resume[sum]
+scripts/test_train_pcgrad_edge.py::test_training_and_exact_midrun_resume[pcgrad]
+  /mnt/beegfsstudents/home/3160552/pcgrad_edge_20260929_01/source/scripts/train_pcgrad_edge.py:107: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+    scaler = torch.cuda.amp.GradScaler(enabled=run['amp'])
+
+scripts/test_train_pcgrad_edge.py::test_training_and_exact_midrun_resume[sum]
+scripts/test_train_pcgrad_edge.py::test_training_and_exact_midrun_resume[pcgrad]
+  /mnt/beegfsstudents/home/3160552/pcgrad_edge_20260929_01/source/scripts/train_pcgrad_edge.py:139: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+    with torch.cuda.amp.autocast(enabled=run['amp']):
+
+scripts/test_train_pcgrad_edge.py::test_training_and_exact_midrun_resume[sum]
+scripts/test_train_pcgrad_edge.py::test_training_and_exact_midrun_resume[pcgrad]
+  /mnt/beegfsstudents/home/3160552/pcgrad_edge_20260929_01/source/thesis/new_constraints/train_swinunetr_constraints.py:1852: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+    with torch.cuda.amp.autocast(enabled=amp):
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+8 passed, 1 skipped, 10 warnings in 161.52s (0:02:41)

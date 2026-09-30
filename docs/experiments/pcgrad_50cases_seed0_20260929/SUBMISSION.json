@@ -1,0 +1,37 @@
+{
+  "job_id": "676272",
+  "status": "submitted",
+  "fold": 0,
+  "seeds": [
+    0
+  ],
+  "arms": [
+    "pcgrad"
+  ],
+  "new_models": 1,
+  "training_cases": 50,
+  "validation_cases": 52,
+  "epoch_cap": 75,
+  "early_stopping": {
+    "min_epochs": 60,
+    "patience": 8,
+    "min_delta": 0.0005
+  },
+  "lr_policy": {
+    "name": "ReduceLROnPlateau",
+    "initial_lr": 0.0001,
+    "factor": 0.5,
+    "patience": 3,
+    "min_lr": 1e-06
+  },
+  "quota_free_gib": 2.8999999994412065,
+  "submitted_utc": "2026-09-29T15:33:06.669240+00:00",
+  "command": [
+    "sbatch",
+    "--parsable",
+    "--output=/mnt/beegfsstudents/home/3160552/pcgrad_50cases_seed0_20260929_01/logs/%j.out",
+    "--error=/mnt/beegfsstudents/home/3160552/pcgrad_50cases_seed0_20260929_01/logs/%j.err",
+    "/mnt/beegfsstudents/home/3160552/pcgrad_50cases_seed0_20260929_01/run.sh",
+    "/mnt/beegfsstudents/home/3160552/pcgrad_50cases_seed0_20260929_01"
+  ]
+}

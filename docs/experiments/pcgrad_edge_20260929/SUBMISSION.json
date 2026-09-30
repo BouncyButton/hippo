@@ -1,0 +1,34 @@
+{
+  "status": "submitted",
+  "job_id": "676122",
+  "folds": [
+    0
+  ],
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "arms": [
+    "sum",
+    "pcgrad"
+  ],
+  "new_models": 6,
+  "epoch_cap": 75,
+  "automatic_fold_expansion": false,
+  "quota_free_gib": 3.739999999292195,
+  "submitted_utc": "2026-09-29T14:15:28.751925+00:00",
+  "command": [
+    "sbatch",
+    "--parsable",
+    "--output=/mnt/beegfsstudents/home/3160552/pcgrad_edge_20260929_01/logs/%j.out",
+    "--error=/mnt/beegfsstudents/home/3160552/pcgrad_edge_20260929_01/logs/%j.err",
+    "/mnt/beegfsstudents/home/3160552/pcgrad_edge_20260929_01/source/scripts/run_pcgrad_edge.sh",
+    "/mnt/beegfsstudents/home/3160552/pcgrad_edge_20260929_01"
+  ],
+  "hashes": {
+    "source/PAYLOAD.json": "6655b23f385fc46b9c9e0892fa478440601c5ddc84c0f2b3d451500c61536828",
+    "PROTOCOL.md": "7e3602d636fa2a8e9557688d446d8c3d26649b9566e7fdaab7becf118ce98aa3"
+  },
+  "training_gate": "GPU tests pass, then inner/cross conflict in at least 6/10 training cases in every seed."
+}
