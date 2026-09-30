@@ -1,0 +1,1268 @@
+{
+  "scope": "Local archived artifacts only; no independent GPU training/inference or current cluster check.",
+  "checks": {
+    "hashes": [
+      {
+        "archive": "final_four_fold_report_20260918",
+        "verified_files": 1278
+      },
+      {
+        "archive": "low_data_noaug_25pct_fold0_seed0_20260918",
+        "verified_files": 193
+      },
+      {
+        "archive": "low_data_noaug_12p5pct_fold0_seed0_20260918",
+        "verified_files": 193
+      },
+      {
+        "archive": "low_data_noaug_5pct_200ep_es_fold0_seed0_20260918",
+        "verified_files": 192
+      },
+      {
+        "archive": "low_data_noaug_5pct_200ep_es_fold0_seeds12_20260918",
+        "verified_files": 226
+      },
+      {
+        "archive": "low_data_noaug_5pct_400ep_es_fold0_seed2_20260918",
+        "verified_files": 192
+      }
+    ],
+    "evaluations": 72,
+    "case_scores": 4696,
+    "max_case_dice_error": 5.9240731098419985e-08,
+    "runs": 36,
+    "calibrations": 18,
+    "long_baseline_config_changes_only_schedule_and_execution_provenance": true,
+    "same_frozen_source_digest_all_production_runs": true,
+    "nested_fraction_subsets_and_constant_validation": true,
+    "long_runs_use_same_ten_case_subset": true
+  },
+  "pairs": [
+    {
+      "experiment": "final_four_fold_report_20260918",
+      "fold": 0,
+      "seed": 0,
+      "cases": 10,
+      "schedule": 75,
+      "step_size": 20,
+      "pair_config_differences": [
+        "constraint_set",
+        "constraint_config",
+        "bands_calibration",
+        "bands_calibration_sha256"
+      ],
+      "arms": {
+        "baseline": {
+          "best_dice_pct": 74.13661635319967,
+          "final_dice_pct": 74.1366965631499,
+          "best_epoch": 73,
+          "stop_epoch": 75,
+          "updates": 750,
+          "lr_sum_normalized": 368.75,
+          "final_train_loss": 0.5762741208076477,
+          "first_reach_epoch": {
+            "74": 73,
+            "76": null,
+            "78": null,
+            "79": null,
+            "80": null
+          },
+          "device": "NVIDIA A100 80GB PCIe MIG 4g.40gb"
+        },
+        "bands": {
+          "best_dice_pct": 76.85551110095328,
+          "final_dice_pct": 76.77164877101484,
+          "best_epoch": 68,
+          "stop_epoch": 75,
+          "updates": 750,
+          "lr_sum_normalized": 368.75,
+          "final_train_loss": 0.5767493605613708,
+          "first_reach_epoch": {
+            "74": 36,
+            "76": 48,
+            "78": null,
+            "79": null,
+            "80": null
+          },
+          "device": "NVIDIA A100 80GB PCIe MIG 4g.40gb"
+        }
+      },
+      "best_gain_pp": 2.7188947477536076,
+      "best_improved_cases": 52,
+      "latest_gain_pp": 2.6349522078649446,
+      "latest_improved_cases": 52
+    },
+    {
+      "experiment": "final_four_fold_report_20260918",
+      "fold": 0,
+      "seed": 1,
+      "cases": 10,
+      "schedule": 75,
+      "step_size": 20,
+      "pair_config_differences": [
+        "constraint_set",
+        "constraint_config",
+        "bands_calibration",
+        "bands_calibration_sha256"
+      ],
+      "arms": {
+        "baseline": {
+          "best_dice_pct": 77.28676359603625,
+          "final_dice_pct": 77.14974364512503,
+          "best_epoch": 74,
+          "stop_epoch": 75,
+          "updates": 750,
+          "lr_sum_normalized": 368.75,
+          "final_train_loss": 0.5294583916664124,
+          "first_reach_epoch": {
+            "74": 33,
+            "76": 45,
+            "78": null,
+            "79": null,
+            "80": null
+          },
+          "device": "NVIDIA A100 80GB PCIe MIG 4g.40gb"
+        },
+        "bands": {
+          "best_dice_pct": 79.1438302281295,
+          "final_dice_pct": 79.11221673371178,
+          "best_epoch": 74,
+          "stop_epoch": 75,
+          "updates": 750,
+          "lr_sum_normalized": 368.75,
+          "final_train_loss": 0.5304826080799103,
+          "first_reach_epoch": {
+            "74": 16,
+            "76": 24,
+            "78": 37,
+            "79": 63,
+            "80": null
+          },
+          "device": "NVIDIA A100 80GB PCIe MIG 4g.40gb"
+        }
+      },
+      "best_gain_pp": 1.8570666320932585,
+      "best_improved_cases": 51,
+      "latest_gain_pp": 1.9624730885867345,
+      "latest_improved_cases": 51
+    },
+    {
+      "experiment": "final_four_fold_report_20260918",
+      "fold": 0,
+      "seed": 2,
+      "cases": 10,
+      "schedule": 75,
+      "step_size": 20,
+      "pair_config_differences": [
+        "constraint_set",
+        "constraint_config",
+        "bands_calibration",
+        "bands_calibration_sha256"
+      ],
+      "arms": {
+        "baseline": {
+          "best_dice_pct": 68.01597033453871,
+          "final_dice_pct": 67.61912387571226,
+          "best_epoch": 71,
+          "stop_epoch": 75,
+          "updates": 750,
+          "lr_sum_normalized": 368.75,
+          "final_train_loss": 0.6722446262836457,
+          "first_reach_epoch": {
+            "74": null,
+            "76": null,
+            "78": null,
+            "79": null,
+            "80": null
+          },
+          "device": "NVIDIA A100 80GB PCIe MIG 4g.40gb"
+        },
+        "bands": {
+          "best_dice_pct": 75.2440343004741,
+          "final_dice_pct": 75.03106215423709,
+          "best_epoch": 74,
+          "stop_epoch": 75,
+          "updates": 750,
+          "lr_sum_normalized": 368.75,
+          "final_train_loss": 0.6733605146408081,
+          "first_reach_epoch": {
+            "74": 44,
+            "76": null,
+            "78": null,
+            "79": null,
+            "80": null
+          },
+          "device": "NVIDIA A100 80GB PCIe MIG 4g.40gb"
+        }
+      },
+      "best_gain_pp": 7.228063965935388,
+      "best_improved_cases": 52,
+      "latest_gain_pp": 7.411938278524841,
+      "latest_improved_cases": 52
+    },
+    {
+      "experiment": "final_four_fold_report_20260918",
+      "fold": 1,
+      "seed": 0,
+      "cases": 10,
+      "schedule": 75,
+      "step_size": 20,
+      "pair_config_differences": [
+        "constraint_set",
+        "constraint_config",
+        "bands_calibration",
+        "bands_calibration_sha256"
+      ],
+      "arms": {
+        "baseline": {
+          "best_dice_pct": 73.54596186564928,
+          "final_dice_pct": 73.37177450782268,
+          "best_epoch": 73,
+          "stop_epoch": 75,
+          "updates": 750,
+          "lr_sum_normalized": 368.75,
+          "final_train_loss": 0.5673864245414734,
+          "first_reach_epoch": {
+            "74": null,
+            "76": null,
+            "78": null,
+            "79": null,
+            "80": null
+          },
+          "device": "NVIDIA A100 80GB PCIe MIG 4g.40gb"
+        },
+        "bands": {
+          "best_dice_pct": 76.18177409619594,
+          "final_dice_pct": 76.15185069104733,
+          "best_epoch": 69,
+          "stop_epoch": 75,
+          "updates": 750,
+          "lr_sum_normalized": 368.75,
+          "final_train_loss": 0.5695625424385071,
+          "first_reach_epoch": {
+            "74": 42,
+            "76": 67,
+            "78": null,
+            "79": null,
+            "80": null
+          },
+          "device": "NVIDIA A100 80GB PCIe MIG 4g.40gb"
+        }
+      },
+      "best_gain_pp": 2.6358122305466565,
+      "best_improved_cases": 52,
+      "latest_gain_pp": 2.7800761832246645,
+      "latest_improved_cases": 51
+    },
+    {
+      "experiment": "final_four_fold_report_20260918",
+      "fold": 1,
+      "seed": 1,
+      "cases": 10,
+      "schedule": 75,
+      "step_size": 20,
+      "pair_config_differences": [
+        "constraint_set",
+        "constraint_config",
+        "bands_calibration",
+        "bands_calibration_sha256"
+      ],
+      "arms": {
+        "baseline": {
+          "best_dice_pct": 75.99621564166272,
+          "final_dice_pct": 75.99603186393725,
+          "best_epoch": 75,
+          "stop_epoch": 75,
+          "updates": 750,
+          "lr_sum_normalized": 368.75,
+          "final_train_loss": 0.522768497467041,
+          "first_reach_epoch": {
+            "74": 45,
+            "76": null,
+            "78": null,
+            "79": null,
+            "80": null
+          },
+          "device": "NVIDIA A100 80GB PCIe MIG 4g.40gb"
+        },
+        "bands": {
+          "best_dice_pct": 77.80941674813961,
+          "final_dice_pct": 77.80941674813961,
+          "best_epoch": 75,
+          "stop_epoch": 75,
+          "updates": 750,
+          "lr_sum_normalized": 368.75,
+          "final_train_loss": 0.5234767019748687,
+          "first_reach_epoch": {
+            "74": 18,
+            "76": 38,
+            "78": null,
+            "79": null,
+            "80": null
+          },
+          "device": "NVIDIA A100 80GB PCIe MIG 4g.40gb"
+        }
+      },
+      "best_gain_pp": 1.8132011064769007,
+      "best_improved_cases": 51,
+      "latest_gain_pp": 1.8133848842023645,
+      "latest_improved_cases": 51
+    },
+    {
+      "experiment": "final_four_fold_report_20260918",
+      "fold": 1,
+      "seed": 2,
+      "cases": 10,
+      "schedule": 75,
+      "step_size": 20,
+      "pair_config_differences": [
+        "constraint_set",
+        "constraint_config",
+        "bands_calibration",
+        "bands_calibration_sha256"
+      ],
+      "arms": {
+        "baseline": {
+          "best_dice_pct": 65.81144938600796,
+          "final_dice_pct": 65.74610277135122,
+          "best_epoch": 74,
+          "stop_epoch": 75,
+          "updates": 750,
+          "lr_sum_normalized": 368.75,
+          "final_train_loss": 0.6676336228847504,
+          "first_reach_epoch": {
+            "74": null,
+            "76": null,
+            "78": null,
+            "79": null,
+            "80": null
+          },
+          "device": "NVIDIA A100 80GB PCIe MIG 4g.40gb"
+        },
+        "bands": {
+          "best_dice_pct": 72.61037223790348,
+          "final_dice_pct": 71.9345215024732,
+          "best_epoch": 51,
+          "stop_epoch": 60,
+          "updates": 600,
+          "lr_sum_normalized": 350.0,
+          "final_train_loss": 0.6737131357192994,
+          "first_reach_epoch": {
+            "74": null,
+            "76": null,
+            "78": null,
+            "79": null,
+            "80": null
+          },
+          "device": "NVIDIA A100 80GB PCIe MIG 4g.40gb"
+        }
+      },
+      "best_gain_pp": 6.798922851895512,
+      "best_improved_cases": 52,
+      "latest_gain_pp": 6.188418731121981,
+      "latest_improved_cases": 52
+    },
+    {
+      "experiment": "final_four_fold_report_20260918",
+      "fold": 2,
+      "seed": 0,
+      "cases": 10,
+      "schedule": 75,
+      "step_size": 20,
+      "pair_config_differences": [
+        "constraint_set",
+        "constraint_config",
+        "bands_calibration",
+        "bands_calibration_sha256"
+      ],
+      "arms": {
+        "baseline": {
+          "best_dice_pct": 75.45977102791232,
+          "final_dice_pct": 75.42738456111076,
+          "best_epoch": 72,
+          "stop_epoch": 75,
+          "updates": 750,
+          "lr_sum_normalized": 368.75,
+          "final_train_loss": 0.5722406268119812,
+          "first_reach_epoch": {
+            "74": 57,
+            "76": null,
+            "78": null,
+            "79": null,
+            "80": null
+          },
+          "device": "NVIDIA A100 80GB PCIe MIG 4g.40gb"
+        },
+        "bands": {
+          "best_dice_pct": 77.75143801040058,
+          "final_dice_pct": 77.69882151204939,
+          "best_epoch": 74,
+          "stop_epoch": 75,
+          "updates": 750,
+          "lr_sum_normalized": 368.75,
+          "final_train_loss": 0.5718748986721038,
+          "first_reach_epoch": {
+            "74": 31,
+            "76": 45,
+            "78": null,
+            "79": null,
+            "80": null
+          },
+          "device": "NVIDIA A100 80GB PCIe MIG 4g.40gb"
+        }
+      },
+      "best_gain_pp": 2.2916669824882576,
+      "best_improved_cases": 52,
+      "latest_gain_pp": 2.2714369509386336,
+      "latest_improved_cases": 52
+    },
+    {
+      "experiment": "final_four_fold_report_20260918",
+      "fold": 2,
+      "seed": 1,
+      "cases": 10,
+      "schedule": 75,
+      "step_size": 20,
+      "pair_config_differences": [
+        "constraint_set",
+        "constraint_config",
+        "bands_calibration",
+        "bands_calibration_sha256"
+      ],
+      "arms": {
+        "baseline": {
+          "best_dice_pct": 76.92377497997231,
+          "final_dice_pct": 76.92305227153696,
+          "best_epoch": 75,
+          "stop_epoch": 75,
+          "updates": 750,
+          "lr_sum_normalized": 368.75,
+          "final_train_loss": 0.5290245562791824,
+          "first_reach_epoch": {
+            "74": 40,
+            "76": 56,
+            "78": null,
+            "79": null,
+            "80": null
+          },
+          "device": "NVIDIA A100 80GB PCIe MIG 4g.40gb"
+        },
+        "bands": {
+          "best_dice_pct": 78.73711211565183,
+          "final_dice_pct": 78.67224367814505,
+          "best_epoch": 74,
+          "stop_epoch": 75,
+          "updates": 750,
+          "lr_sum_normalized": 368.75,
+          "final_train_loss": 0.5303282558917999,
+          "first_reach_epoch": {
+            "74": 16,
+            "76": 17,
+            "78": 45,
+            "79": null,
+            "80": null
+          },
+          "device": "NVIDIA A100 80GB PCIe MIG 4g.40gb"
+        }
+      },
+      "best_gain_pp": 1.8133371356795343,
+      "best_improved_cases": 51,
+      "latest_gain_pp": 1.749191406608084,
+      "latest_improved_cases": 51
+    },
+    {
+      "experiment": "final_four_fold_report_20260918",
+      "fold": 2,
+      "seed": 2,
+      "cases": 10,
+      "schedule": 75,
+      "step_size": 20,
+      "pair_config_differences": [
+        "constraint_set",
+        "constraint_config",
+        "bands_calibration",
+        "bands_calibration_sha256"
+      ],
+      "arms": {
+        "baseline": {
+          "best_dice_pct": 66.52449023791675,
+          "final_dice_pct": 66.50319891513169,
+          "best_epoch": 74,
+          "stop_epoch": 75,
+          "updates": 750,
+          "lr_sum_normalized": 368.75,
+          "final_train_loss": 0.6716606318950653,
+          "first_reach_epoch": {
+            "74": null,
+            "76": null,
+            "78": null,
+            "79": null,
+            "80": null
+          },
+          "device": "NVIDIA A100 80GB PCIe MIG 4g.40gb"
+        },
+        "bands": {
+          "best_dice_pct": 73.82267619002457,
+          "final_dice_pct": 73.71961020909546,
+          "best_epoch": 59,
+          "stop_epoch": 67,
+          "updates": 670,
+          "lr_sum_normalized": 358.75,
+          "final_train_loss": 0.6751942455768585,
+          "first_reach_epoch": {
+            "74": null,
+            "76": null,
+            "78": null,
+            "79": null,
+            "80": null
+          },
+          "device": "NVIDIA A100 80GB PCIe MIG 4g.40gb"
+        }
+      },
+      "best_gain_pp": 7.298185952107825,
+      "best_improved_cases": 52,
+      "latest_gain_pp": 7.216411293963776,
+      "latest_improved_cases": 52
+    },
+    {
+      "experiment": "final_four_fold_report_20260918",
+      "fold": 3,
+      "seed": 0,
+      "cases": 10,
+      "schedule": 75,
+      "step_size": 20,
+      "pair_config_differences": [
+        "constraint_set",
+        "constraint_config",
+        "bands_calibration",
+        "bands_calibration_sha256"
+      ],
+      "arms": {
+        "baseline": {
+          "best_dice_pct": 74.24513793516311,
+          "final_dice_pct": 74.15445259134532,
+          "best_epoch": 74,
+          "stop_epoch": 75,
+          "updates": 750,
+          "lr_sum_normalized": 368.75,
+          "final_train_loss": 0.5706698775291443,
+          "first_reach_epoch": {
+            "74": 73,
+            "76": null,
+            "78": null,
+            "79": null,
+            "80": null
+          },
+          "device": "NVIDIA A100 80GB PCIe MIG 4g.40gb"
+        },
+        "bands": {
+          "best_dice_pct": 76.506885307907,
+          "final_dice_pct": 76.30608168917603,
+          "best_epoch": 73,
+          "stop_epoch": 75,
+          "updates": 750,
+          "lr_sum_normalized": 368.75,
+          "final_train_loss": 0.5708007216453552,
+          "first_reach_epoch": {
+            "74": 38,
+            "76": 62,
+            "78": null,
+            "79": null,
+            "80": null
+          },
+          "device": "NVIDIA A100 80GB PCIe MIG 4g.40gb"
+        }
+      },
+      "best_gain_pp": 2.2617473727438964,
+      "best_improved_cases": 52,
+      "latest_gain_pp": 2.151629097830715,
+      "latest_improved_cases": 52
+    },
+    {
+      "experiment": "final_four_fold_report_20260918",
+      "fold": 3,
+      "seed": 1,
+      "cases": 10,
+      "schedule": 75,
+      "step_size": 20,
+      "pair_config_differences": [
+        "constraint_set",
+        "constraint_config",
+        "bands_calibration",
+        "bands_calibration_sha256"
+      ],
+      "arms": {
+        "baseline": {
+          "best_dice_pct": 76.34403479278409,
+          "final_dice_pct": 76.34403479278409,
+          "best_epoch": 75,
+          "stop_epoch": 75,
+          "updates": 750,
+          "lr_sum_normalized": 368.75,
+          "final_train_loss": 0.5207927405834198,
+          "first_reach_epoch": {
+            "74": 44,
+            "76": 66,
+            "78": null,
+            "79": null,
+            "80": null
+          },
+          "device": "NVIDIA A100 80GB PCIe MIG 4g.40gb"
+        },
+        "bands": {
+          "best_dice_pct": 78.1319483262716,
+          "final_dice_pct": 78.10550033892815,
+          "best_epoch": 66,
+          "stop_epoch": 70,
+          "updates": 700,
+          "lr_sum_normalized": 362.5,
+          "final_train_loss": 0.5255806565284729,
+          "first_reach_epoch": {
+            "74": 19,
+            "76": 31,
+            "78": 62,
+            "79": null,
+            "80": null
+          },
+          "device": "NVIDIA A100 80GB PCIe MIG 4g.40gb"
+        }
+      },
+      "best_gain_pp": 1.787913533487505,
+      "best_improved_cases": 52,
+      "latest_gain_pp": 1.761465546144075,
+      "latest_improved_cases": 52
+    },
+    {
+      "experiment": "final_four_fold_report_20260918",
+      "fold": 3,
+      "seed": 2,
+      "cases": 10,
+      "schedule": 75,
+      "step_size": 20,
+      "pair_config_differences": [
+        "constraint_set",
+        "constraint_config",
+        "bands_calibration",
+        "bands_calibration_sha256"
+      ],
+      "arms": {
+        "baseline": {
+          "best_dice_pct": 65.78827566208165,
+          "final_dice_pct": 65.72621097609213,
+          "best_epoch": 71,
+          "stop_epoch": 75,
+          "updates": 750,
+          "lr_sum_normalized": 368.75,
+          "final_train_loss": 0.6691186666488648,
+          "first_reach_epoch": {
+            "74": null,
+            "76": null,
+            "78": null,
+            "79": null,
+            "80": null
+          },
+          "device": "NVIDIA A100 80GB PCIe MIG 4g.40gb"
+        },
+        "bands": {
+          "best_dice_pct": 73.86221033515741,
+          "final_dice_pct": 73.86221033515741,
+          "best_epoch": 75,
+          "stop_epoch": 75,
+          "updates": 750,
+          "lr_sum_normalized": 368.75,
+          "final_train_loss": 0.6703375279903412,
+          "first_reach_epoch": {
+            "74": null,
+            "76": null,
+            "78": null,
+            "79": null,
+            "80": null
+          },
+          "device": "NVIDIA A100 80GB PCIe MIG 4g.40gb"
+        }
+      },
+      "best_gain_pp": 8.07393467307576,
+      "best_improved_cases": 52,
+      "latest_gain_pp": 8.135999359065279,
+      "latest_improved_cases": 52
+    },
+    {
+      "experiment": "low_data_noaug_25pct_fold0_seed0_20260918",
+      "fold": 0,
+      "seed": 0,
+      "cases": 52,
+      "schedule": 75,
+      "step_size": 20,
+      "pair_config_differences": [
+        "constraint_set",
+        "constraint_config",
+        "bands_calibration",
+        "bands_calibration_sha256"
+      ],
+      "arms": {
+        "baseline": {
+          "best_dice_pct": 85.52739314464974,
+          "final_dice_pct": 85.1236771878785,
+          "best_epoch": 26,
+          "stop_epoch": 60,
+          "updates": 3120,
+          "lr_sum_normalized": 1820.0,
+          "final_train_loss": 0.047365739583395995,
+          "first_reach_epoch": {
+            "74": 10,
+            "76": 13,
+            "78": 13,
+            "79": 13,
+            "80": 13
+          },
+          "device": "NVIDIA A100 80GB PCIe MIG 4g.40gb"
+        },
+        "bands": {
+          "best_dice_pct": 85.58833154765887,
+          "final_dice_pct": 85.21040771898409,
+          "best_epoch": 22,
+          "stop_epoch": 60,
+          "updates": 3120,
+          "lr_sum_normalized": 1820.0,
+          "final_train_loss": 0.04354085622785183,
+          "first_reach_epoch": {
+            "74": 8,
+            "76": 9,
+            "78": 10,
+            "79": 10,
+            "80": 11
+          },
+          "device": "NVIDIA A100 80GB PCIe MIG 4g.40gb"
+        }
+      },
+      "best_gain_pp": 0.060938403009141356,
+      "best_improved_cases": 25,
+      "latest_gain_pp": 0.08673053110559266,
+      "latest_improved_cases": 27
+    },
+    {
+      "experiment": "low_data_noaug_12p5pct_fold0_seed0_20260918",
+      "fold": 0,
+      "seed": 0,
+      "cases": 26,
+      "schedule": 75,
+      "step_size": 20,
+      "pair_config_differences": [
+        "constraint_set",
+        "constraint_config",
+        "bands_calibration",
+        "bands_calibration_sha256"
+      ],
+      "arms": {
+        "baseline": {
+          "best_dice_pct": 83.44399515022764,
+          "final_dice_pct": 83.39374132194794,
+          "best_epoch": 57,
+          "stop_epoch": 60,
+          "updates": 1560,
+          "lr_sum_normalized": 910.0,
+          "final_train_loss": 0.20711021182628778,
+          "first_reach_epoch": {
+            "74": 16,
+            "76": 18,
+            "78": 21,
+            "79": 21,
+            "80": 23
+          },
+          "device": "NVIDIA A100 80GB PCIe MIG 4g.40gb"
+        },
+        "bands": {
+          "best_dice_pct": 83.65468107577928,
+          "final_dice_pct": 83.48759995950263,
+          "best_epoch": 43,
+          "stop_epoch": 60,
+          "updates": 1560,
+          "lr_sum_normalized": 910.0,
+          "final_train_loss": 0.20694675525793663,
+          "first_reach_epoch": {
+            "74": 14,
+            "76": 16,
+            "78": 17,
+            "79": 19,
+            "80": 21
+          },
+          "device": "NVIDIA A100 80GB PCIe MIG 4g.40gb"
+        }
+      },
+      "best_gain_pp": 0.2106859255516366,
+      "best_improved_cases": 33,
+      "latest_gain_pp": 0.09385863755469268,
+      "latest_improved_cases": 26
+    },
+    {
+      "experiment": "low_data_noaug_5pct_200ep_es_fold0_seed0_20260918",
+      "fold": 0,
+      "seed": 0,
+      "cases": 10,
+      "schedule": 200,
+      "step_size": 53,
+      "pair_config_differences": [
+        "constraint_set",
+        "constraint_config",
+        "bands_calibration",
+        "bands_calibration_sha256"
+      ],
+      "arms": {
+        "baseline": {
+          "best_dice_pct": 80.35854342848167,
+          "final_dice_pct": 79.77155045099276,
+          "best_epoch": 107,
+          "stop_epoch": 160,
+          "updates": 1600,
+          "lr_sum_normalized": 928.75,
+          "final_train_loss": 0.1867363467812538,
+          "first_reach_epoch": {
+            "74": 42,
+            "76": 47,
+            "78": 56,
+            "79": 66,
+            "80": 82
+          },
+          "device": "NVIDIA A100 80GB PCIe MIG 3g.40gb"
+        },
+        "bands": {
+          "best_dice_pct": 80.53203954571832,
+          "final_dice_pct": 79.63255187072184,
+          "best_epoch": 93,
+          "stop_epoch": 160,
+          "updates": 1600,
+          "lr_sum_normalized": 928.75,
+          "final_train_loss": 0.1899022102355957,
+          "first_reach_epoch": {
+            "74": 28,
+            "76": 36,
+            "78": 47,
+            "79": 59,
+            "80": 81
+          },
+          "device": "NVIDIA A100 80GB PCIe MIG 3g.40gb"
+        }
+      },
+      "best_gain_pp": 0.17349611723665875,
+      "best_improved_cases": 32,
+      "latest_gain_pp": -0.13899858027092704,
+      "latest_improved_cases": 24
+    },
+    {
+      "experiment": "low_data_noaug_5pct_200ep_es_fold0_seeds12_20260918",
+      "fold": 0,
+      "seed": 1,
+      "cases": 10,
+      "schedule": 200,
+      "step_size": 53,
+      "pair_config_differences": [
+        "constraint_set",
+        "constraint_config",
+        "bands_calibration",
+        "bands_calibration_sha256"
+      ],
+      "arms": {
+        "baseline": {
+          "best_dice_pct": 80.27516878120257,
+          "final_dice_pct": 79.91361477272027,
+          "best_epoch": 99,
+          "stop_epoch": 160,
+          "updates": 1600,
+          "lr_sum_normalized": 928.75,
+          "final_train_loss": 0.14892749786376952,
+          "first_reach_epoch": {
+            "74": 28,
+            "76": 33,
+            "78": 42,
+            "79": 51,
+            "80": 73
+          },
+          "device": "NVIDIA A100 80GB PCIe MIG 3g.40gb"
+        },
+        "bands": {
+          "best_dice_pct": 80.66881853911273,
+          "final_dice_pct": 80.21758306690717,
+          "best_epoch": 76,
+          "stop_epoch": 160,
+          "updates": 1600,
+          "lr_sum_normalized": 928.75,
+          "final_train_loss": 0.14863269329071044,
+          "first_reach_epoch": {
+            "74": 16,
+            "76": 23,
+            "78": 33,
+            "79": 37,
+            "80": 53
+          },
+          "device": "NVIDIA A100 80GB PCIe MIG 3g.40gb"
+        }
+      },
+      "best_gain_pp": 0.3936497579101748,
+      "best_improved_cases": 37,
+      "latest_gain_pp": 0.3039682941869054,
+      "latest_improved_cases": 31
+    },
+    {
+      "experiment": "low_data_noaug_5pct_200ep_es_fold0_seeds12_20260918",
+      "fold": 0,
+      "seed": 2,
+      "cases": 10,
+      "schedule": 200,
+      "step_size": 53,
+      "pair_config_differences": [
+        "constraint_set",
+        "constraint_config",
+        "bands_calibration",
+        "bands_calibration_sha256"
+      ],
+      "arms": {
+        "baseline": {
+          "best_dice_pct": 77.22038731926746,
+          "final_dice_pct": 77.20085506565077,
+          "best_epoch": 167,
+          "stop_epoch": 169,
+          "updates": 1690,
+          "lr_sum_normalized": 940.0,
+          "final_train_loss": 0.505141282081604,
+          "first_reach_epoch": {
+            "74": 83,
+            "76": 106,
+            "78": null,
+            "79": null,
+            "80": null
+          },
+          "device": "NVIDIA A100 80GB PCIe MIG 3g.40gb"
+        },
+        "bands": {
+          "best_dice_pct": 78.87097234607656,
+          "final_dice_pct": 78.87097234607656,
+          "best_epoch": 160,
+          "stop_epoch": 160,
+          "updates": 1600,
+          "lr_sum_normalized": 928.75,
+          "final_train_loss": 0.4941474974155426,
+          "first_reach_epoch": {
+            "74": 34,
+            "76": 54,
+            "78": 98,
+            "79": null,
+            "80": null
+          },
+          "device": "NVIDIA A100 80GB PCIe MIG 3g.40gb"
+        }
+      },
+      "best_gain_pp": 1.6505850268091076,
+      "best_improved_cases": 51,
+      "latest_gain_pp": 1.6701172804257984,
+      "latest_improved_cases": 51
+    },
+    {
+      "experiment": "low_data_noaug_5pct_400ep_es_fold0_seed2_20260918",
+      "fold": 0,
+      "seed": 2,
+      "cases": 10,
+      "schedule": 400,
+      "step_size": 106,
+      "pair_config_differences": [
+        "constraint_set",
+        "constraint_config",
+        "bands_calibration",
+        "bands_calibration_sha256"
+      ],
+      "arms": {
+        "baseline": {
+          "best_dice_pct": 79.51867988584661,
+          "final_dice_pct": 79.18968928228917,
+          "best_epoch": 193,
+          "stop_epoch": 320,
+          "updates": 3200,
+          "lr_sum_normalized": 1857.5,
+          "final_train_loss": 0.12194249033927917,
+          "first_reach_epoch": {
+            "74": 71,
+            "76": 83,
+            "78": 100,
+            "79": 115,
+            "80": null
+          },
+          "device": "NVIDIA A100 80GB PCIe MIG 3g.40gb"
+        },
+        "bands": {
+          "best_dice_pct": 79.87424908657971,
+          "final_dice_pct": 79.33390743385279,
+          "best_epoch": 156,
+          "stop_epoch": 320,
+          "updates": 3200,
+          "lr_sum_normalized": 1857.5,
+          "final_train_loss": 0.10937504470348358,
+          "first_reach_epoch": {
+            "74": 34,
+            "76": 54,
+            "78": 83,
+            "79": 95,
+            "80": null
+          },
+          "device": "NVIDIA A100 80GB PCIe MIG 3g.40gb"
+        }
+      },
+      "best_gain_pp": 0.35556920073309517,
+      "best_improved_cases": 35,
+      "latest_gain_pp": 0.1442181515636153,
+      "latest_improved_cases": 30
+    }
+  ],
+  "matched_budget_windows": [
+    {
+      "label": "10 cases at end of training (epochs 71-75)",
+      "cases": 10,
+      "center_epoch": 73,
+      "updates": 730,
+      "lr_budget": 366.25,
+      "mean_gain_pp": 2.7172374266844512,
+      "window_epochs": [
+        71,
+        75
+      ],
+      "window_update_range": [
+        710,
+        750
+      ]
+    },
+    {
+      "label": "26 cases at matched LR budget (~364)",
+      "cases": 26,
+      "center_epoch": 14,
+      "updates": 364,
+      "lr_budget": 364.0,
+      "mean_gain_pp": 3.6407643098097564,
+      "window_epochs": [
+        12,
+        16
+      ],
+      "window_update_range": [
+        312,
+        416
+      ]
+    },
+    {
+      "label": "52 cases at matched LR budget (~364)",
+      "cases": 52,
+      "center_epoch": 7,
+      "updates": 364,
+      "lr_budget": 364.0,
+      "mean_gain_pp": 9.724691510200504,
+      "window_epochs": [
+        5,
+        9
+      ],
+      "window_update_range": [
+        260,
+        468
+      ]
+    },
+    {
+      "label": "26 cases at matched update count (~754)",
+      "cases": 26,
+      "center_epoch": 29,
+      "updates": 754,
+      "lr_budget": 637.0,
+      "mean_gain_pp": 0.5162974045826862,
+      "window_epochs": [
+        27,
+        31
+      ],
+      "window_update_range": [
+        702,
+        806
+      ]
+    },
+    {
+      "label": "52 cases at matched update count (~728)",
+      "cases": 52,
+      "center_epoch": 14,
+      "updates": 728,
+      "lr_budget": 728.0,
+      "mean_gain_pp": 3.1630127017314624,
+      "window_epochs": [
+        12,
+        16
+      ],
+      "window_update_range": [
+        624,
+        832
+      ]
+    }
+  ],
+  "exploratory_timings": [
+    {
+      "experiment": "low_data_noaug_5pct_200ep_es_fold0_seed0_20260918",
+      "seed": 0,
+      "log": "/Users/filippofocaccia/.codex/worktrees/5063/hippo/experiments/low_data_noaug_5pct_200ep_es_fold0_seed0_20260918/verified/results/low_data_noaug_5pct_200ep_es_fold0_seed0_20260918_01/pair-662685.out",
+      "calibration_source_epoch_seconds": 21.62323550367728,
+      "limitation": "Epoch timings only: excludes startup, gradient calibration, final evaluation, and queue time.",
+      "arms": {
+        "baseline": {
+          "median_training_seconds_after_epoch1": 0.6157533719670027,
+          "logged_epoch_seconds_to_target": {
+            "74": 162.5216758393217,
+            "76": 181.04202033672482,
+            "78": 214.02174152992666,
+            "79": 250.81778829474933,
+            "80": 306.8399732699618
+          }
+        },
+        "bands": {
+          "median_training_seconds_after_epoch1": 0.6417196018155664,
+          "logged_epoch_seconds_to_target": {
+            "74": 108.70358129404485,
+            "76": 137.956368324114,
+            "78": 177.46804051916115,
+            "79": 221.2984960244503,
+            "80": 298.8356493297033
+          }
+        }
+      }
+    },
+    {
+      "experiment": "low_data_noaug_5pct_200ep_es_fold0_seeds12_20260918",
+      "seed": 1,
+      "log": "/Users/filippofocaccia/.codex/worktrees/5063/hippo/experiments/low_data_noaug_5pct_200ep_es_fold0_seeds12_20260918/verified/results/low_data_noaug_5pct_200ep_es_fold0_seeds12_20260918_01/seed1-662808.out",
+      "calibration_source_epoch_seconds": 21.59158149920404,
+      "limitation": "Epoch timings only: excludes startup, gradient calibration, final evaluation, and queue time.",
+      "arms": {
+        "baseline": {
+          "median_training_seconds_after_epoch1": 0.6171165669802576,
+          "logged_epoch_seconds_to_target": {
+            "74": 108.96389855071902,
+            "76": 127.58686770079657,
+            "78": 160.44536636956036,
+            "79": 193.18838762072846,
+            "80": 272.5942728058435
+          }
+        },
+        "bands": {
+          "median_training_seconds_after_epoch1": 0.6393023640848696,
+          "logged_epoch_seconds_to_target": {
+            "74": 62.72361526452005,
+            "76": 89.10013783420436,
+            "78": 125.73939472949132,
+            "79": 140.5101014696993,
+            "80": 196.49982895655558
+          }
+        }
+      }
+    },
+    {
+      "experiment": "low_data_noaug_5pct_200ep_es_fold0_seeds12_20260918",
+      "seed": 2,
+      "log": "/Users/filippofocaccia/.codex/worktrees/5063/hippo/experiments/low_data_noaug_5pct_200ep_es_fold0_seeds12_20260918/verified/results/low_data_noaug_5pct_200ep_es_fold0_seeds12_20260918_01/seed2-662807.out",
+      "calibration_source_epoch_seconds": 21.65294882073067,
+      "limitation": "Epoch timings only: excludes startup, gradient calibration, final evaluation, and queue time.",
+      "arms": {
+        "baseline": {
+          "median_training_seconds_after_epoch1": 0.615582859958522,
+          "logged_epoch_seconds_to_target": {
+            "74": 309.8788151515182,
+            "76": 393.0290440064855,
+            "78": null,
+            "79": null,
+            "80": null
+          }
+        },
+        "bands": {
+          "median_training_seconds_after_epoch1": 0.6409750969614834,
+          "logged_epoch_seconds_to_target": {
+            "74": 133.2184920355212,
+            "76": 203.49706483422779,
+            "78": 360.9894792228006,
+            "79": null,
+            "80": null
+          }
+        }
+      }
+    },
+    {
+      "experiment": "low_data_noaug_5pct_400ep_es_fold0_seed2_20260918",
+      "seed": 2,
+      "log": "/Users/filippofocaccia/.codex/worktrees/5063/hippo/experiments/low_data_noaug_5pct_400ep_es_fold0_seed2_20260918/verified/results/low_data_noaug_5pct_400ep_es_fold0_seed2_20260918_01/seed2-662965.out",
+      "calibration_source_epoch_seconds": 21.852422260912135,
+      "limitation": "Epoch timings only: excludes startup, gradient calibration, final evaluation, and queue time.",
+      "arms": {
+        "baseline": {
+          "median_training_seconds_after_epoch1": 0.6178347419481725,
+          "logged_epoch_seconds_to_target": {
+            "74": 267.7414657645859,
+            "76": 310.9733947843779,
+            "78": 369.6873877369799,
+            "79": 424.0992528847419,
+            "80": null
+          }
+        },
+        "bands": {
+          "median_training_seconds_after_epoch1": 0.6451946028973907,
+          "logged_epoch_seconds_to_target": {
+            "74": 132.6641166433692,
+            "76": 202.57536741462536,
+            "78": 306.0644816607237,
+            "79": 350.3384461803362,
+            "80": null
+          }
+        }
+      }
+    }
+  ],
+  "aggregate": {
+    "four_fold_75": {
+      "pairs": 12,
+      "best_gain_pp": 3.8815622653570085,
+      "final_gain_pp": 3.839781419006341,
+      "baseline": {
+        "best_mean_pct": 72.5065384844104,
+        "best_descriptive_sd_across_pairs_pp": 4.579182114363412
+      },
+      "bands": {
+        "best_mean_pct": 76.3881007497674,
+        "best_descriptive_sd_across_pairs_pp": 2.1073147623160757
+      }
+    },
+    "fold0_75": {
+      "pairs": 3,
+      "best_gain_pp": 3.9346751152607515,
+      "final_gain_pp": 4.00312119165884,
+      "baseline": {
+        "best_mean_pct": 73.14645009459154,
+        "best_descriptive_sd_across_pairs_pp": 4.714045379408389
+      },
+      "bands": {
+        "best_mean_pct": 77.08112520985229,
+        "best_descriptive_sd_across_pairs_pp": 1.9596628189410903
+      }
+    },
+    "fold0_uniform_200": {
+      "pairs": 3,
+      "best_gain_pp": 0.7392436339853137,
+      "final_gain_pp": 0.6116956647805922,
+      "baseline": {
+        "best_mean_pct": 79.2846998429839,
+        "best_descriptive_sd_across_pairs_pp": 1.7882330607702193
+      },
+      "bands": {
+        "best_mean_pct": 80.02394347696921,
+        "best_descriptive_sd_across_pairs_pp": 1.0008416182205855
+      }
+    },
+    "fold0_adaptive_200_200_400": {
+      "pairs": 3,
+      "best_gain_pp": 0.30757169195997625,
+      "final_gain_pp": 0.10306262182653123,
+      "baseline": {
+        "best_mean_pct": 80.05079736517695,
+        "best_descriptive_sd_across_pairs_pp": 0.4627089709621843
+      },
+      "bands": {
+        "best_mean_pct": 80.35836905713693,
+        "best_descriptive_sd_across_pairs_pp": 0.42480140380857273
+      }
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "observed_at": "2026-09-24T10:33:10.132166+00:00",
+  "submission": {
+    "timestamp": "2026-09-24T10:31:00.933233+00:00",
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--chdir=/mnt/beegfsstudents/home/3160552/degree_bands_ab_20260924_02_3g",
+      "--output=/mnt/beegfsstudents/home/3160552/degree_bands_ab_20260924_02_3g/job-%j.out",
+      "--error=/mnt/beegfsstudents/home/3160552/degree_bands_ab_20260924_02_3g/job-%j.err",
+      "/mnt/beegfsstudents/home/3160552/degree_bands_ab_20260924_02_3g/source/scripts/run_degree_bands_ab_20260924.sh",
+      "/mnt/beegfsstudents/home/3160552/degree_bands_ab_20260924_02_3g"
+    ],
+    "returncode": 0,
+    "stdout": "667630",
+    "stderr": "",
+    "replaces_cancelled_job": "667506",
+    "gpu": "3g.40gb",
+    "cpus": 4,
+    "reason": "User requested available 3g profile; preserve A/B training settings and record calibration-source device transfer.",
+    "job_id": "667630"
+  },
+  "quota": {
+    "output": "NAME     ID    TYPE   POOL       SPACE              INODE      \n1009     1009  group  pool_home  9.93TiB/\u221e          38.76M/\u221e   \n3160552  1395  user   pool_home  86.28GiB/93.13GiB  169.57k/\u221e  \n\n",
+    "free_bytes": 7355131494,
+    "minimum_free_gib": 3.5,
+    "passed": true
+  },
+  "squeue": "             JOBID        STATE         TIME               NODELIST(REASON)\n            667630      RUNNING         2:09                        gnode02\n",
+  "logs": {
+    "job-667630.out": "{\"phase\": \"calibrate_A\", \"command\": [\"/home/3160552/.conda/envs/hippocampus/bin/python\", \"/mnt/beegfsstudents/home/3160552/degree_bands_ab_20260924_02_3g/source/thesis/new_constraints/bands/calibrate_weight.py\", \"--pkl\", \"/mnt/beegfsstudents/home/3160552/hippo/datasets/Dataset101_MSD/msd_hippocampus_full.pkl\", \"--splits-json\", \"/mnt/beegfsstudents/home/3160552/hippo/datasets/Dataset101_MSD/splits_final.json\", \"--checkpoint\", \"/mnt/beegfsstudents/home/3160552/bands_augmented_20260916_04/calibration_source/checkpoint_latest.pt\", \"--output\", \"/mnt/beegfsstudents/home/3160552/degree_bands_ab_20260924_02_3g/calibration_A.json\", \"--dataset\", \"MSD\", \"--fold\", \"0\", \"--seed\", \"0\", \"--max-cases\", \"32\", \"--spatial-size\", \"64\", \"64\", \"64\", \"--training-augmentation\", \"mild_v1\", \"--bands-degree-alpha\", \"2.0\", \"--bands-degree-normalization\", \"inner\", \"--device\", \"cuda\", \"--amp\", \"--allow-calibration-mig-profile-change\"]}\n",
+    "job-667630.err": "",
+    "calibration_device_transfer.json": "{\n  \"checkpoint_execution\": {\n    \"device_type\": \"cuda\",\n    \"deterministic_algorithms\": false,\n    \"cudnn_benchmark\": false,\n    \"cudnn_deterministic\": true,\n    \"float32_matmul_precision\": \"highest\",\n    \"cuda_device_index\": 0,\n    \"cuda_device_name\": \"NVIDIA A100 80GB PCIe MIG 4g.40gb\",\n    \"cuda_compute_capability\": [\n      8,\n      0\n    ],\n    \"cuda_total_memory\": 42144366592\n  },\n  \"current_execution\": {\n    \"device_type\": \"cuda\",\n    \"deterministic_algorithms\": false,\n    \"cudnn_benchmark\": false,\n    \"cudnn_deterministic\": true,\n    \"float32_matmul_precision\": \"highest\",\n    \"cuda_device_index\": 0,\n    \"cuda_device_name\": \"NVIDIA A100 80GB PCIe MIG 3g.40gb\",\n    \"cuda_compute_capability\": [\n      8,\n      0\n    ],\n    \"cuda_total_memory\": 42144366592\n  },\n  \"allow_mig_profile_change\": true\n}\n",
+    "calibrate_A.log": ""
+  }
+}

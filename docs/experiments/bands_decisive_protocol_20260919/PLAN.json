@@ -1,0 +1,134 @@
+{
+  "version": "draft-1",
+  "date": "2026-09-19",
+  "authorization": "Planning only; do not submit jobs",
+  "proposed_budget_slice_hours": [
+    30,
+    50
+  ],
+  "training_jobs_submitted": 0,
+  "source_audit": "/Users/filippofocaccia/Desktop/hippo/docs/experiments/low_data_independent_audit_20260919/AUDIT.json",
+  "observed_timing_summaries": [
+    {
+      "source_log": "/Users/filippofocaccia/.codex/worktrees/5063/hippo/experiments/low_data_noaug_5pct_200ep_es_fold0_seed0_20260918/verified/results/low_data_noaug_5pct_200ep_es_fold0_seed0_20260918_01/pair-662685.out",
+      "arm": "dice",
+      "seconds_per_update": 0.061575337196700275,
+      "seconds_per_52_case_validation": 1.8670363111887127,
+      "seconds_per_checkpoint_event": 0.8643126799724996
+    },
+    {
+      "source_log": "/Users/filippofocaccia/.codex/worktrees/5063/hippo/experiments/low_data_noaug_5pct_200ep_es_fold0_seed0_20260918/verified/results/low_data_noaug_5pct_200ep_es_fold0_seed0_20260918_01/pair-662685.out",
+      "arm": "bands",
+      "seconds_per_update": 0.06417196018155664,
+      "seconds_per_52_case_validation": 1.8754281040746719,
+      "seconds_per_checkpoint_event": 0.8715837420895696
+    },
+    {
+      "source_log": "/Users/filippofocaccia/.codex/worktrees/5063/hippo/experiments/low_data_noaug_5pct_200ep_es_fold0_seeds12_20260918/verified/results/low_data_noaug_5pct_200ep_es_fold0_seeds12_20260918_01/seed1-662808.out",
+      "arm": "dice",
+      "seconds_per_update": 0.061711656698025766,
+      "seconds_per_52_case_validation": 1.8826544431503862,
+      "seconds_per_checkpoint_event": 0.8892081070225686
+    },
+    {
+      "source_log": "/Users/filippofocaccia/.codex/worktrees/5063/hippo/experiments/low_data_noaug_5pct_200ep_es_fold0_seeds12_20260918/verified/results/low_data_noaug_5pct_200ep_es_fold0_seeds12_20260918_01/seed1-662808.out",
+      "arm": "bands",
+      "seconds_per_update": 0.06393023640848697,
+      "seconds_per_52_case_validation": 1.8679424971342087,
+      "seconds_per_checkpoint_event": 0.8850363038945943
+    },
+    {
+      "source_log": "/Users/filippofocaccia/.codex/worktrees/5063/hippo/experiments/low_data_noaug_5pct_200ep_es_fold0_seeds12_20260918/verified/results/low_data_noaug_5pct_200ep_es_fold0_seeds12_20260918_01/seed2-662807.out",
+      "arm": "dice",
+      "seconds_per_update": 0.061558285995852204,
+      "seconds_per_52_case_validation": 1.8398042239714414,
+      "seconds_per_checkpoint_event": 0.8994636290008202
+    },
+    {
+      "source_log": "/Users/filippofocaccia/.codex/worktrees/5063/hippo/experiments/low_data_noaug_5pct_200ep_es_fold0_seeds12_20260918/verified/results/low_data_noaug_5pct_200ep_es_fold0_seeds12_20260918_01/seed2-662807.out",
+      "arm": "bands",
+      "seconds_per_update": 0.06409750969614833,
+      "seconds_per_52_case_validation": 1.8413372519426048,
+      "seconds_per_checkpoint_event": 0.8853278649039567
+    },
+    {
+      "source_log": "/Users/filippofocaccia/.codex/worktrees/5063/hippo/experiments/low_data_noaug_5pct_400ep_es_fold0_seed2_20260918/verified/results/low_data_noaug_5pct_400ep_es_fold0_seed2_20260918_01/seed2-662965.out",
+      "arm": "dice",
+      "seconds_per_update": 0.061783474194817244,
+      "seconds_per_52_case_validation": 1.88016725378111,
+      "seconds_per_checkpoint_event": 0.8665137910284102
+    },
+    {
+      "source_log": "/Users/filippofocaccia/.codex/worktrees/5063/hippo/experiments/low_data_noaug_5pct_400ep_es_fold0_seed2_20260918/verified/results/low_data_noaug_5pct_400ep_es_fold0_seed2_20260918_01/seed2-662965.out",
+      "arm": "bands",
+      "seconds_per_update": 0.06451946028973907,
+      "seconds_per_52_case_validation": 1.8941379440948367,
+      "seconds_per_checkpoint_event": 0.8739075071644038
+    }
+  ],
+  "budget_assumptions": {
+    "gpu": "A100 MIG 3g.40gb, same environment as archived timings",
+    "seconds_per_update": 0.06451946028973907,
+    "seconds_per_52_case_validation": 1.8941379440948367,
+    "seconds_per_checkpoint_event": 0.8994636290008202,
+    "checkpoint_multiplier_per_validation": 2,
+    "startup_and_final_evaluation_seconds_per_production_run": 120,
+    "shared_calibration_seconds_per_subset_seed_fraction": 120,
+    "reserve_multiplier": 1.25,
+    "reference_validation_case_count": 52,
+    "limitations": [
+      "Novel loss timing unmeasured",
+      "Subject grouping and validation sizes unresolved",
+      "New update-based loop not implemented",
+      "Queue time excluded",
+      "Storage/input startup may differ",
+      "No statistical power guarantee"
+    ]
+  },
+  "production_runs_by_stage": {
+    "development_horizon": 24,
+    "legacy_anchor": 6,
+    "development_ce_sensitivity": 3,
+    "development_fraction_check": 5,
+    "replication_10": 48,
+    "fraction_52": 24,
+    "boundary_placement_control": 12
+  },
+  "shared_calibration_source_runs": 28,
+  "stage_production_slice_hours": {
+    "development_horizon": 6.335230573266744,
+    "legacy_anchor": 0.7422824756242334,
+    "development_ce_sensitivity": 1.0225384288777908,
+    "development_fraction_check": 1.704230714796318,
+    "replication_10": 16.360614862044653,
+    "fraction_52": 8.180307431022326,
+    "boundary_placement_control": 4.090153715511163
+  },
+  "shared_calibration_slice_hours": 0.9333333333333333,
+  "total_slice_hours_nominal": 39.36869153447656,
+  "total_slice_hours_with_reserve": 49.2108644180957,
+  "four_arm_plan_slice_hours_with_reserve": 44.09817227370675,
+  "reduced_27_run_development_slice_hours_with_reserve": 9.322211252680669,
+  "primary_contrast": "bands minus global_fg_bce at 10 cases, development-selected checkpoint on held-out evaluation",
+  "supporting_contrasts": [
+    "bands minus dice",
+    "bands minus dice_ce_selected",
+    "bands minus random_matched_fg_bce"
+  ],
+  "primary_speed_target_foreground_dice": 0.78,
+  "secondary_speed_targets_foreground_dice": [
+    0.76,
+    0.8
+  ],
+  "sustained_target_consecutive_evaluations": 3,
+  "proposed_practical_margin_dice_percentage_points": 0.5,
+  "margin_status": "Scientific planning threshold; not clinically validated or a power claim",
+  "unresolved_before_execution": [
+    "Verified case-to-subject mapping or explicitly case-level scope",
+    "Actual disjoint training/development/evaluation manifests",
+    "Independent external or demonstrably untouched evaluation availability",
+    "Frozen source; current working tree contains unrelated user edits",
+    "Update-based loop, global BCE and general calibration implementation",
+    "Preflight timings, storage capacity and chosen CE policy"
+  ]
+}

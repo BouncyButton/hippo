@@ -1,0 +1,48 @@
+{
+  "SUBMISSION.json": {
+    "timestamp": "2026-09-24T08:45:19.405854+00:00",
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--chdir=/mnt/beegfsstudents/home/3160552/degree_bands_ab_20260924_01",
+      "--output=/mnt/beegfsstudents/home/3160552/degree_bands_ab_20260924_01/job-%j.out",
+      "--error=/mnt/beegfsstudents/home/3160552/degree_bands_ab_20260924_01/job-%j.err",
+      "/mnt/beegfsstudents/home/3160552/degree_bands_ab_20260924_01/source/scripts/run_degree_bands_ab_20260924.sh",
+      "/mnt/beegfsstudents/home/3160552/degree_bands_ab_20260924_01"
+    ],
+    "returncode": 0,
+    "stdout": "667480",
+    "stderr": "",
+    "job_id": "667480"
+  },
+  "quota_preflight.json": {
+    "output": "NAME     ID    TYPE   POOL       SPACE              INODE      \n1009     1009  group  pool_home  9.92TiB/\u221e          38.76M/\u221e   \n3160552  1395  user   pool_home  86.28GiB/93.13GiB  169.33k/\u221e  \n\n",
+    "free_bytes": 7355131494,
+    "minimum_free_gib": 3.5,
+    "passed": true
+  },
+  "reference_bindings.json": {
+    "dice": {
+      "directory": "/mnt/beegfsstudents/home/3160552/regularization_round1_20260916_01/runs/augmentation_seed0",
+      "config_sha256": "eb2d12a45ac9b71516e36a8bef14869bc333ce8f14eaae88749164d5c1a71ce0",
+      "best_checkpoint_sha256": "31d9186aace968d12bada17878b276c0d44314d18f59dbc41f274a4dc8b91843",
+      "selected_model_sha256": "90d9fc7f6f9361049b1f2f010e5394ce49c4c135877fa8c6da64e96922f93c9e"
+    },
+    "bands": {
+      "directory": "/mnt/beegfsstudents/home/3160552/bands_augmented_20260916_04/runs/bands_augmented_seed0",
+      "config_sha256": "af6d005f76f2ce90351fd85aa27bf50a9f6a46e2c6503702bb63a287ba3e0d20",
+      "best_checkpoint_sha256": "4a23da703eb8241086e8f903b0792df90ca79cc487a9b90ba0c677b61acc603b",
+      "selected_model_sha256": "d5c2377f7986465320da89c70888c3324d9100c81fb00e0864c553e655f0f392"
+    },
+    "calibration": {
+      "checkpoint": "/mnt/beegfsstudents/home/3160552/bands_augmented_20260916_04/calibration_source/checkpoint_latest.pt",
+      "sha256": "6bc18542b09b76a57edc708cc8dc3ffe1f8e8c90490642232db312ab1f970564"
+    }
+  },
+  "UPLOAD.json": {
+    "archive_sha256": "39a260c57c03b39a5304c25fcd4c8420c25cc87d1b35336f0a85498b4e795aaf",
+    "archive_bytes": 311389
+  },
+  "observed_at": "2026-09-24T08:46:09.028255+00:00",
+  "squeue": "             JOBID        STATE         TIME               NODELIST(REASON)\n            667480      PENDING         0:00                    (Resources)\n"
+}

@@ -1,0 +1,128 @@
+{
+  "observed_at": "2026-09-24T11:07:34.784712+00:00",
+  "sacct": "JobID|State|Elapsed|ExitCode\n667718|FAILED|00:01:55|1:0\n667718.batch|FAILED|00:01:55|1:0\n",
+  "results/failure.json": {
+    "traceback": "Traceback (most recent call last):\n  File \"/mnt/beegfsstudents/home/3160552/degree_bands_ab_20260924_02_3g/boundary_audit_20260924/audit_degree_boundary.py\", line 264, in main\n    assert result['pooled_regions']['all'][key] == existing[name][old_key], (name, key)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: ('A', 'fn')\n"
+  },
+  "results/manifest.json": {
+    "job_id": "667718",
+    "models": {
+      "dice": {
+        "directory": "/mnt/beegfsstudents/home/3160552/regularization_round1_20260916_01/runs/augmentation_seed0",
+        "checkpoint_sha256": "31d9186aace968d12bada17878b276c0d44314d18f59dbc41f274a4dc8b91843",
+        "selected_epoch": 24,
+        "stopped_epoch": 32,
+        "training_execution": {
+          "device_type": "cuda",
+          "deterministic_algorithms": false,
+          "cudnn_benchmark": false,
+          "cudnn_deterministic": true,
+          "float32_matmul_precision": "highest",
+          "cuda_device_index": 0,
+          "cuda_device_name": "NVIDIA A100 80GB PCIe MIG 4g.40gb",
+          "cuda_compute_capability": [
+            8,
+            0
+          ],
+          "cuda_total_memory": 42144366592
+        }
+      },
+      "bands": {
+        "directory": "/mnt/beegfsstudents/home/3160552/bands_augmented_20260916_04/runs/bands_augmented_seed0",
+        "checkpoint_sha256": "4a23da703eb8241086e8f903b0792df90ca79cc487a9b90ba0c677b61acc603b",
+        "selected_epoch": 21,
+        "stopped_epoch": 29,
+        "training_execution": {
+          "device_type": "cuda",
+          "deterministic_algorithms": false,
+          "cudnn_benchmark": false,
+          "cudnn_deterministic": true,
+          "float32_matmul_precision": "highest",
+          "cuda_device_index": 0,
+          "cuda_device_name": "NVIDIA A100 80GB PCIe MIG 4g.40gb",
+          "cuda_compute_capability": [
+            8,
+            0
+          ],
+          "cuda_total_memory": 42144366592
+        }
+      },
+      "A": {
+        "directory": "/mnt/beegfsstudents/home/3160552/degree_bands_ab_20260924_02_3g/runs/A",
+        "checkpoint_sha256": "054ae98078429d56f53942ee0c46764683fb01b68d2196d284116cb21bc0ea5b",
+        "selected_epoch": 22,
+        "stopped_epoch": 30,
+        "training_execution": {
+          "device_type": "cuda",
+          "deterministic_algorithms": false,
+          "cudnn_benchmark": false,
+          "cudnn_deterministic": true,
+          "float32_matmul_precision": "highest",
+          "cuda_device_index": 0,
+          "cuda_device_name": "NVIDIA A100 80GB PCIe MIG 3g.40gb",
+          "cuda_compute_capability": [
+            8,
+            0
+          ],
+          "cuda_total_memory": 42144366592
+        }
+      },
+      "B": {
+        "directory": "/mnt/beegfsstudents/home/3160552/degree_bands_ab_20260924_02_3g/runs/B",
+        "checkpoint_sha256": "fe566e2ff1b34a7ffae29fb7366672a06d088064eac1394e3edd7deca82cb0b2",
+        "selected_epoch": 30,
+        "stopped_epoch": 38,
+        "training_execution": {
+          "device_type": "cuda",
+          "deterministic_algorithms": false,
+          "cudnn_benchmark": false,
+          "cudnn_deterministic": true,
+          "float32_matmul_precision": "highest",
+          "cuda_device_index": 0,
+          "cuda_device_name": "NVIDIA A100 80GB PCIe MIG 3g.40gb",
+          "cuda_compute_capability": [
+            8,
+            0
+          ],
+          "cuda_total_memory": 42144366592
+        }
+      }
+    },
+    "audit_script_sha256": "3cc8cba706a7583b576394131c41ddbdd30e6f7c13549480e40dd1dadaa8f08d",
+    "runtime": {
+      "python": "3.11.15",
+      "platform": "Linux-5.14.0-687.5.3.el9_8.x86_64-x86_64-with-glibc2.34",
+      "numpy": "2.4.6",
+      "torch": "2.12.1+cu130",
+      "monai": "1.6.0",
+      "cuda_runtime": "13.0",
+      "cudnn": 92000,
+      "cuda_available": true
+    },
+    "execution": {
+      "device_type": "cuda",
+      "deterministic_algorithms": false,
+      "cudnn_benchmark": false,
+      "cudnn_deterministic": true,
+      "float32_matmul_precision": "highest",
+      "cuda_device_index": 0,
+      "cuda_device_name": "NVIDIA A100 80GB PCIe MIG 3g.40gb",
+      "cuda_compute_capability": [
+        8,
+        0
+      ],
+      "cuda_total_memory": 42144366592
+    },
+    "state_order": [
+      "correct",
+      "fn",
+      "fp",
+      "ap_swap"
+    ],
+    "band_definition": "GT whole foreground, 2 iterations, 6-face connectivity; same as training",
+    "surface_definition": "6-face surface voxels; pooled bidirectional distances, 1-mm isotropic",
+    "scope": "One seed, reused 52-case development fold; descriptive bootstrap, no independent-test claim."
+  },
+  "job-667718.out": "{\"inference_complete\": \"dice\", \"cases\": 52}\n{\"inference_complete\": \"bands\", \"cases\": 52}\n{\"inference_complete\": \"A\", \"cases\": 52}\n{\"inference_complete\": \"B\", \"cases\": 52}\n",
+  "job-667718.err": "Traceback (most recent call last):\n  File \"/mnt/beegfsstudents/home/3160552/degree_bands_ab_20260924_02_3g/boundary_audit_20260924/audit_degree_boundary.py\", line 281, in <module>\n    main()\n  File \"/mnt/beegfsstudents/home/3160552/degree_bands_ab_20260924_02_3g/boundary_audit_20260924/audit_degree_boundary.py\", line 264, in main\n    assert result['pooled_regions']['all'][key] == existing[name][old_key], (name, key)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: ('A', 'fn')\n"
+}

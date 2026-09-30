@@ -1,0 +1,179 @@
+{
+  "observed_at": "2026-09-24T11:33:12.795057+00:00",
+  "sacct": "JobID|State|Elapsed|ExitCode\n667752|COMPLETED|00:01:28|0:0\n667752.batch|COMPLETED|00:01:28|0:0\n",
+  "probe/summary.json": {
+    "status": "complete",
+    "job_id": "667752",
+    "cases": 32,
+    "calibration": {
+      "edge_weight": 0.03137547415201203,
+      "band_weight": 0.01114736174580409,
+      "median_edge_over_base_rms": 3.187202829684958,
+      "p95_edge_over_base_rms": 3.5876321149842627,
+      "target_ratio": 0.1,
+      "cap_ratio": 0.5
+    },
+    "mean_gradient_cosine": 0.6930699534714222,
+    "error_direction": {
+      "fn": {
+        "count": 8341,
+        "helpful": 8304,
+        "zero_gradient": 8
+      },
+      "fp": {
+        "count": 11886,
+        "helpful": 11668,
+        "zero_gradient": 67
+      }
+    },
+    "original": {
+      "inner_fn": 8333,
+      "outer_fp": 11819,
+      "all_fn": 8341,
+      "all_fp": 11886,
+      "ap_swaps": 1226,
+      "class_errors": 21453
+    },
+    "logit_interventions": {
+      "0.25": {
+        "base": {
+          "inner_fn": 7888,
+          "outer_fp": 11344,
+          "all_fn": 7895,
+          "all_fp": 11401,
+          "ap_swaps": 1156,
+          "class_errors": 20452
+        },
+        "combined": {
+          "inner_fn": 7848,
+          "outer_fp": 11301,
+          "all_fn": 7855,
+          "all_fp": 11358,
+          "ap_swaps": 1157,
+          "class_errors": 20370
+        },
+        "edge_only": {
+          "inner_fn": 8304,
+          "outer_fp": 11773,
+          "all_fn": 8312,
+          "all_fp": 11840,
+          "ap_swaps": 1228,
+          "class_errors": 21380
+        }
+      },
+      "1.0": {
+        "base": {
+          "inner_fn": 7012,
+          "outer_fp": 10260,
+          "all_fn": 7017,
+          "all_fp": 10304,
+          "ap_swaps": 999,
+          "class_errors": 18320
+        },
+        "combined": {
+          "inner_fn": 6901,
+          "outer_fp": 10115,
+          "all_fn": 6906,
+          "all_fp": 10159,
+          "ap_swaps": 999,
+          "class_errors": 18064
+        },
+        "edge_only": {
+          "inner_fn": 8183,
+          "outer_fp": 11631,
+          "all_fn": 8191,
+          "all_fp": 11698,
+          "ap_swaps": 1230,
+          "class_errors": 21119
+        }
+      },
+      "4.0": {
+        "base": {
+          "inner_fn": 5719,
+          "outer_fp": 8479,
+          "all_fn": 5723,
+          "all_fp": 8508,
+          "ap_swaps": 841,
+          "class_errors": 15072
+        },
+        "combined": {
+          "inner_fn": 5569,
+          "outer_fp": 8274,
+          "all_fn": 5573,
+          "all_fp": 8303,
+          "ap_swaps": 841,
+          "class_errors": 14717
+        },
+        "edge_only": {
+          "inner_fn": 7636,
+          "outer_fp": 11024,
+          "all_fn": 7644,
+          "all_fp": 11091,
+          "ap_swaps": 1238,
+          "class_errors": 19973
+        }
+      }
+    },
+    "gate": {
+      "passed": true,
+      "checks": {
+        "finite_nonzero_gradients": true,
+        "mean_gradient_cosine_nonnegative": true,
+        "no_inner_or_outer_regression_at_both_small_steps": true,
+        "strict_boundary_improvement_at_a_small_step": true,
+        "no_total_class_error_regression_at_both_small_steps": true
+      },
+      "candidate_minus_base": {
+        "0.25": {
+          "inner_fn": -40,
+          "outer_fp": -43,
+          "all_fn": -40,
+          "all_fp": -43,
+          "ap_swaps": 1,
+          "class_errors": -82,
+          "boundary_errors": -83
+        },
+        "1.0": {
+          "inner_fn": -111,
+          "outer_fp": -145,
+          "all_fn": -111,
+          "all_fp": -145,
+          "ap_swaps": 0,
+          "class_errors": -256,
+          "boundary_errors": -256
+        }
+      },
+      "scope": "Training-only logit intervention; neither parameter-update evidence nor validation improvement."
+    },
+    "case_report_sha256": "751bb6f5a1adb5777f38428a6c3ecd946dd2d9b6923653e1422fe97bc250b31a",
+    "calibration_checkpoint_sha256": "6bc18542b09b76a57edc708cc8dc3ffe1f8e8c90490642232db312ab1f970564",
+    "converged_checkpoint_sha256": "4a23da703eb8241086e8f903b0792df90ca79cc487a9b90ba0c677b61acc603b",
+    "runtime": {
+      "python": "3.11.15",
+      "platform": "Linux-5.14.0-687.5.3.el9_8.x86_64-x86_64-with-glibc2.34",
+      "numpy": "2.4.6",
+      "torch": "2.12.1+cu130",
+      "monai": "1.6.0",
+      "cuda_runtime": "13.0",
+      "cudnn": 92000,
+      "cuda_available": true
+    },
+    "execution": {
+      "device_type": "cuda",
+      "deterministic_algorithms": false,
+      "cudnn_benchmark": false,
+      "cudnn_deterministic": true,
+      "float32_matmul_precision": "highest",
+      "cuda_device_index": 0,
+      "cuda_device_name": "NVIDIA A100 80GB PCIe MIG 3g.40gb",
+      "cuda_compute_capability": [
+        8,
+        0
+      ],
+      "cuda_total_memory": 42144366592
+    },
+    "scope": "Training-only augmented cases. Paired logit steps share base max-gradient normalization; step 4 is stress-only, excluded from gate."
+  },
+  "job-667752.out": "{\"stage\": \"calibration\", \"edge_weight\": 0.03137547415201203, \"band_weight\": 0.01114736174580409}\n{\"stage\": \"converged\", \"gate\": {\"passed\": true, \"checks\": {\"finite_nonzero_gradients\": true, \"mean_gradient_cosine_nonnegative\": true, \"no_inner_or_outer_regression_at_both_small_steps\": true, \"strict_boundary_improvement_at_a_small_step\": true, \"no_total_class_error_regression_at_both_small_steps\": true}, \"candidate_minus_base\": {\"0.25\": {\"inner_fn\": -40, \"outer_fp\": -43, \"all_fn\": -40, \"all_fp\": -43, \"ap_swaps\": 1, \"class_errors\": -82, \"boundary_errors\": -83}, \"1.0\": {\"inner_fn\": -111, \"outer_fp\": -145, \"all_fn\": -111, \"all_fp\": -145, \"ap_swaps\": 0, \"class_errors\": -256, \"boundary_errors\": -256}}, \"scope\": \"Training-only logit intervention; neither parameter-update evidence nor validation improvement.\"}}\n",
+  "job-667752.err": ""
+}

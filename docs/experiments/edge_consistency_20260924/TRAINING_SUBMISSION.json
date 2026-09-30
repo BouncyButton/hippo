@@ -1,0 +1,21 @@
+{
+  "sacct": "JobID|State|Elapsed|NodeList|ExitCode\n667767|RUNNING|00:01:41|gnode02|0:0\n667767.batch|RUNNING|00:01:41|gnode02|0:0\n",
+  "submission": {
+    "job_id": "667767",
+    "root": "/mnt/beegfsstudents/home/3160552/edge_consistency_training_20260924_01",
+    "quota_free_gib": 5.089999999850988,
+    "payload_sha256": "1ebdd67e812068c5b39c960ec3cd74bba5cf2b5dc801bdcf2439d0a3a0bda5e9",
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--output=/mnt/beegfsstudents/home/3160552/edge_consistency_training_20260924_01/slurm-%j.out",
+      "--error=/mnt/beegfsstudents/home/3160552/edge_consistency_training_20260924_01/slurm-%j.err",
+      "/mnt/beegfsstudents/home/3160552/edge_consistency_training_20260924_01/source/scripts/run_edge_consistency_training.sh",
+      "/mnt/beegfsstudents/home/3160552/edge_consistency_training_20260924_01"
+    ]
+  },
+  "slurm-667767.out": "",
+  "slurm-667767.err": "/mnt/beegfsstudents/home/3160552/edge_consistency_training_20260924_01/source/scripts/train_edge_consistency_experiment.py:165: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.\n  scaler = torch.cuda.amp.GradScaler(enabled=run['amp'])\n/mnt/beegfsstudents/home/3160552/edge_consistency_training_20260924_01/source/scripts/train_edge_consistency_experiment.py:185: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.\n  with torch.cuda.amp.autocast(enabled=run['amp']):\n",
+  "training/run/metrics.csv": "",
+  "training/quota_training_start.json": "{\n  \"output\": \"NAME     ID    TYPE   POOL       SPACE              INODE      \\n1009     1009  group  pool_home  9.95TiB/\\u221e          38.79M/\\u221e   \\n3160552  1395  user   pool_home  88.05GiB/93.13GiB  170.25k/\\u221e  \\n\\n\",\n  \"free_bytes\": 5454608465,\n  \"minimum_free_gib\": 2.0,\n  \"passed\": true\n}\n"
+}

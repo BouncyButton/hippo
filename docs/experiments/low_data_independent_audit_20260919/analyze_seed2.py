@@ -1,0 +1,161 @@
+"""Reconstruct the seed-2 interpretation from archived scores and histories.
+
+Read-only with respect to all original experiments. No training or inference.
+"""
+import csv
+import json
+import statistics as st
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+EXP = Path('/Users/filippofocaccia/.codex/worktrees/5063/hippo/experiments')
+AUDIT = json.loads((HERE/'AUDIT.json').read_text())
+OLD = EXP/'final_four_fold_report_20260918/verified/results'
+N0 = 'low_data_noaug_5pct_200ep_es_fold0_seed0_20260918'
+N12 = 'low_data_noaug_5pct_200ep_es_fold0_seeds12_20260918'
+N400 = 'low_data_noaug_5pct_400ep_es_fold0_seed2_20260918'
+
+
+def root(name):
+    return EXP/name/'verified/results'/(name+'_01')
+
+
+def read(p):
+    return json.loads(p.read_text())
+
+
+def rows(p):
+    with p.open() as f:
+        return list(csv.DictReader(f))
+
+
+histories = {(s,a):rows(root(N0 if s==0 else N12)/f'runs/{a}_seed{s}/metrics.csv')
+             for s in (0,1,2) for a in ('baseline','bands')}
+four_fold = {}
+for seed in (0,1,2):
+    rr=[r for r in AUDIT['pairs'] if r['cases']==10 and r['schedule']==75 and r['seed']==seed]
+    assert len(rr)==4
+    four_fold[seed]={'baseline':st.mean(r['arms']['baseline']['best_dice_pct'] for r in rr),
+                     'bands':st.mean(r['arms']['bands']['best_dice_pct'] for r in rr),
+                     'gain':st.mean(r['best_gain_pp'] for r in rr)}
+
+errors=[]
+for budget,base,sub in [(75,OLD/'low_data_noaug_seed2_20260917_01','bands_audit'),
+                        (200,root(N12),'audits/seed2'),(400,root(N400),'audits/seed2')]:
+    for arm in ('baseline','bands'):
+        p=base/sub/f'{arm}_best.json'
+        d=read(p);v=d['validation'];cm=v['confusion']
+        fp=cm[0][1]+cm[0][2];fn=cm[1][0]+cm[2][0];sw=cm[1][2]+cm[2][1]
+        assert fp+fn+sw==v['mislabeled_voxels']
+        errors.append({'schedule':budget,'arm':arm,'epoch':d['epoch'],
+                       'dice_pct':100*v['dice_hard'],'fp':fp,'fn':fn,'swaps':sw,
+                       'total_errors':fp+fn+sw,'source':str(p)})
+
+trajectory=[]
+for epoch in (1,5,10,20,40,53,75,100,106,160):
+    pair={}
+    for arm in ('baseline','bands'):
+        r=histories[2,arm][epoch-1]
+        # Union(GT foreground, predicted foreground) = GT foreground + FP.
+        fp=int(r['calibration/foreground_union/voxel_count'])-int(r['calibration/gt_foreground/voxel_count'])
+        pair[arm]={'dice_pct':100*float(r['val_dice_hard']),
+                   'supervised_train_loss':float(r['train_supervised_loss']), 'logged_fp':fp}
+    trajectory.append({'epoch':epoch,**pair})
+
+schedule_comparison={}
+for arm in ('baseline','bands'):
+    h200=histories[2,arm]
+    h400=rows(root(N400)/f'runs/{arm}_seed2/metrics.csv')
+    fields=('train_supervised_loss','val_dice_hard','learning_rate')
+    differences={k:max(abs(float(x[k])-float(y[k])) for x,y in zip(h200[:53],h400[:53])) for k in fields}
+    assert all(v==0 for v in differences.values())
+    ece_keys=[k for k in h200[0] if k.endswith('/ece')]
+    schedule_comparison[arm]={
+        'first53_max_absolute_difference':differences,
+        'ece_note':'Some ECE diagnostics differ; identical tracked loss/Dice/LR does not assert bitwise-identical full model state.',
+        'max_first53_ece_difference':max(abs(float(x[k])-float(y[k])) for x,y in zip(h200[:53],h400[:53]) for k in ece_keys),
+        'epochs':{str(e):{'200_dice_pct':100*float(h200[e-1]['val_dice_hard']),
+                         '400_dice_pct':100*float(h400[e-1]['val_dice_hard']),
+                         '200_lr':float(h200[e-1]['learning_rate']),
+                         '400_lr':float(h400[e-1]['learning_rate'])} for e in (53,54,75,100,106,160)}}
+
+weights={s:read(root(N0 if s==0 else N12)/f'calibrations/seed{s}.json')['recommended_bands_weight'] for s in (0,1,2)}
+out={'four_fold_75_epoch_means':four_fold,'seed2_best_errors':errors,
+     'seed2_200_epoch_logged_trajectory':trajectory,'seed2_schedule_comparison':schedule_comparison,
+     '200_epoch_calibrated_weights':weights,
+     'scope':'Archived arithmetic and code inspection; no new training, epoch-zero inference or spatial prediction analysis.'}
+(HERE/'SEED2_ANALYSIS.json').write_text(json.dumps(out,indent=2)+'\n')
+mean_table='\n'.join(f'| {s} | {v["baseline"]:.3f} | {v["bands"]:.3f} | +{v["gain"]:.3f} |' for s,v in four_fold.items())
+error_table='\n'.join(f'| {r["schedule"]} | {r["arm"]} | {r["epoch"]} | {r["dice_pct"]:.3f} | {r["fp"]:,} | {r["fn"]:,} | {r["swaps"]:,} |' for r in errors)
+curve_table='\n'.join(f'| {r["epoch"]} | {r["baseline"]["dice_pct"]:.3f} | {r["bands"]["dice_pct"]:.3f} | {r["baseline"]["logged_fp"]:,} | {r["bands"]["logged_fp"]:,} | {r["baseline"]["supervised_train_loss"]:.4f} / {r["bands"]["supervised_train_loss"]:.4f} |' for r in trajectory if r['epoch'] in (20,40,75,160))
+b100=schedule_comparison['baseline']['epochs']['100']
+doc=f'''# Why seed 2 shows the largest bands advantage
+
+19 September 2026. Generated by analyze_seed2.py from the previously audited archive.
+
+Seed 2 has the largest **difference between bands and baseline**, not the highest absolute segmentation Dice. It has the weakest original baseline in every audited fold. Bands partially compensates for that weakness. The evidence supports an interaction between the seed-dependent optimization trajectory, the schedule, and foreground suppression. It does not identify the initial weights alone as the cause.
+
+## The pattern is repeated across folds
+
+Mean best-checkpoint Dice across four folds in the original maximum-75 schedule:
+
+| Seed | Baseline (%) | Bands (%) | Gain (pp) |
+|---|---:|---:|---:|
+{mean_table}
+
+All seeds use the same ten-case subset within each fold. Seed 2's pattern therefore is not explained by assigning seed 2 a different low-data subset within a fold. Its repetition across different fold subsets supports a seed-dependent learning explanation, but seeds jointly change initialization and data order. The four folds are not independent experiments in the statistical sense.
+
+## What seed 2 predicts
+
+Counts over the same 52 fold-0 validation cases at each model's own best checkpoint. FP is any GT-background voxel assigned anterior or posterior, not necessarily a voxel within the narrow outer band. FN is GT foreground assigned background. Swaps are anterior/posterior confusions.
+
+| Maximum schedule | Arm | Best epoch | Dice (%) | FP | FN | A/P swaps |
+|---|---|---:|---:|---:|---:|---:|
+{error_table}
+
+The original baseline grossly over-segments. Bands removes many more outside-foreground predictions than it adds misses, yielding the large Dice improvement. At 200 epochs, the same pattern remains but is smaller. At 400 epochs, bands has slightly MORE false positives and fewer misses than baseline: the earlier large suppression advantage has disappeared. The residual is not the same large-FP-removal pattern persisting unchanged.
+
+## The trajectory, not just selected checkpoints
+
+Seed 2, common 200-epoch schedule:
+
+| Epoch | Baseline hard Dice (%) | Bands hard Dice (%) | Baseline logged FP | Bands logged FP | Baseline / bands supervised training loss |
+|---|---:|---:|---:|---:|---:|
+{curve_table}
+
+Logged FP is reconstructed from the exact diagnostic count identity: foreground-union voxels minus GT-foreground voxels. The archived diagnostics explicitly define the union as GT foreground OR argmax foreground. These are training-time validation passes. Separate saved-checkpoint evaluation can differ by a handful of voxels under GPU/AMP inference; do not substitute one for the other without identifying the source.
+
+The two supervised-loss curves are very close even where hard Dice differs substantially. It is therefore too simple to say that bands merely makes the original Dice loss decrease faster. The auxiliary objective changes the resulting categorical decisions and the precision/recall tradeoff. Hard argmax decisions can change substantially without a comparably large change in a smooth average loss. This supports foreground-decision correction as a description of the observed behavior; it does not prove a post-hoc threshold shift or show which anatomical features were learned. Spatial maps or full logits would be needed for those claims.
+
+Bands is not better at every early epoch: seed 2 initially has slightly worse Dice with bands. The marked advantage emerges later as excess-foreground predictions are reduced. Thus the result is not simply a better first-epoch draw for the bands arm.
+
+## A stronger schedule comparison
+
+For both seed-2 arms, the 200- and 400-epoch histories have exactly identical **recorded supervised training loss, hard validation Dice and learning rate** for the first 53 epochs. Some ECE diagnostics differ; this is not a claim that every diagnostic or every parameter is bitwise identical. Both schedules use MIG 3g.40gb.
+
+From epoch 54, the 200-epoch schedule halves the LR to 5e-5 while the 400-epoch schedule retains 1e-4 through epoch 106. At epoch 100 the baseline reaches **{b100['400_dice_pct']:.3f}% versus {b100['200_dice_pct']:.3f}%**, a **{b100['400_dice_pct']-b100['200_dice_pct']:.3f}-point** difference at the same epoch and update count.
+
+This is strong within-seed evidence that the decay schedule affects learning progress; it does not require comparing the older 4g run with the newer 3g runs. It is also more specific than “more epochs helped”: the benefit appears at the same epoch after changing earlier learning rates. The later stopping floor cannot explain an epoch-100 difference because neither run has stopped then.
+
+The best seed-2 gain falls from +7.228 pp at the original schedule to +1.651 at maximum 200 and +0.356 at maximum 400. Longer and later-decaying training brings the baseline much closer. The differing schedules still prevent a claim that training duration alone causes the entire reduction, or that a global optimum has been reached.
+
+## Alternative explanations checked
+
+- **More favorable cases for seed 2:** not supported. Within a fold, seeds reuse the same training and validation cases.
+- **A larger calibrated bands weight:** not supported. At 200 epochs, weights are seed 0 = {weights[0]:.8f}, seed 1 = {weights[1]:.8f}, seed 2 = {weights[2]:.8f}. Seed 1 has the largest scalar. All target a 0.10 ratio of median auxiliary to Dice logit-gradient magnitudes at calibration; this does not ensure equal influence later in training.
+- **Only a best-checkpoint selection artifact:** not supported. Large differences appear at shared epochs and in final-checkpoint comparisons too.
+- **Only overfitting to the ten cases:** a poor complete explanation for the original seed-2 baseline. Its best-checkpoint training hard Dice is also low (about 70.4% at maximum 75), and training performance rises substantially with the longer schedules. Overfitting can coexist later; this is not proof of its absence.
+- **Initialization alone:** plausible but unproven. Frozen code uses the same model seed for torch initialization and for the independent data-order generator; changing the seed changes both. Epoch-1 scores already include ten training updates and cannot establish the untrained class bias.
+- **Boundary location of all removed FP:** unknown. Confusion counts establish class errors, not their distances from the surface.
+
+## Most likely interpretation and the minimal causal check
+
+The most supported account is that seed 2 follows a trajectory with more persistent excess foreground and poorer supervised optimization under the early-decaying low-data schedule. The boundary auxiliary signal helps correct the hard foreground/background decisions sooner, leaving more room for improvement than in the stronger seeds. With a later-decaying schedule, the baseline corrects much of that error itself. This describes the observations and a plausible mechanism; it does not isolate all causes of the seed effect.
+
+To distinguish initialization from data order, use a crossed 2×2 diagnostic: initialization seed in {{0,2}} and shuffle seed in {{0,2}}, holding subset, schedule, calibration rule and hardware fixed. The current diagonal combinations alone cannot separate them. First compare Dice baselines; apply bands to the same four combinations if the interaction with the auxiliary loss is needed. Record epoch-zero class predictions, per-class probability summaries and early FP/FN/AP counts. Dependence on initialization with order fixed implicates initialization; dependence on order with initialization fixed implicates order; joint dependence indicates interaction. This is a proposed diagnostic only; no new runs were started.
+
+Machine-readable evidence: SEED2_ANALYSIS.json. Frozen seed control is in the archived train_swinunetr_constraints.py functions seed_everything and build_experiment_generators (around lines 642–659); the bands loss uses grouped foreground BCE on GT-derived guards. Analysis makes no claim about superiority of LTN notation over that numerically identical loss.
+'''
+(HERE/'SEED2_ANALYSIS.md').write_text(doc)
+print(f'Wrote seed-2 analysis; {len(errors)} checkpoint profiles; {len(trajectory)} shared-epoch comparisons.')
+print(json.dumps(schedule_comparison,indent=2))
