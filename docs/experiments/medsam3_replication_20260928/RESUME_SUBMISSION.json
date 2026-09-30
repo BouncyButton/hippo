@@ -1,0 +1,40 @@
+{
+  "job_id": "673784",
+  "previous_job_id": "673549",
+  "submitted_utc": "2026-09-28T13:32:35.217383+00:00",
+  "reason": "Audit-only floating-point precision correction; completed comparison passed full independent audit",
+  "completed_runs": [
+    "fold0_seed17"
+  ],
+  "remaining_runs": [
+    "fold0_seed83",
+    "fold0_seed191",
+    "fold1_seed17",
+    "fold1_seed83",
+    "fold1_seed191",
+    "fold2_seed17",
+    "fold2_seed83",
+    "fold2_seed191"
+  ],
+  "command": [
+    "sbatch",
+    "--parsable",
+    "--output",
+    "/mnt/beegfsstudents/home/3160552/medsam3_replication_20260928/logs/%j.out",
+    "--error",
+    "/mnt/beegfsstudents/home/3160552/medsam3_replication_20260928/logs/%j.err",
+    "/mnt/beegfsstudents/home/3160552/medsam3_replication_20260928/source/scripts/run_medsam3_replication.sh",
+    "/mnt/beegfsstudents/home/3160552/medsam3_replication_20260928"
+  ],
+  "preflight": {
+    "quota_output": "NAME     ID    TYPE   POOL       SPACE              INODE      \n1009     1009  group  pool_home  9.67TiB/\u221e          38.84M/\u221e   \n3160552  1395  user   pool_home  87.07GiB/93.13GiB  179.50k/\u221e  \n\n",
+    "free_gib": 6.060000000000002,
+    "minimum_free_gib": 5.653194051235914,
+    "missing": [],
+    "base_access_error": null,
+    "status": "passed"
+  },
+  "study_sha256": "dd9940d36862508f56e2f90d94bfccfd99b13b47679a5158ca1849b590d7b7ae",
+  "source_manifest_sha256": "69c5ad8aa63e5140bec340a3552d166f4a9134272a30e681c02cf7c96456f5b4",
+  "monitoring": "manual; no automation"
+}

@@ -1,0 +1,33 @@
+{
+  "train_cases": [
+    "hippocampus_011",
+    "hippocampus_056",
+    "hippocampus_146",
+    "hippocampus_319",
+    "hippocampus_363"
+  ],
+  "evaluation_cases": [
+    "hippocampus_017",
+    "hippocampus_019",
+    "hippocampus_033",
+    "hippocampus_035",
+    "hippocampus_037"
+  ],
+  "split_sha256": "1d6a3fe993359ad85e9c28a29901162251c3359449b710c09cb9e92d66dda472",
+  "base_sha256": "9999e2341ceef5e136daa386eecb55cb414446a00ac2b55eb2dfd2f7c3cf8c9e",
+  "seed": 42,
+  "updates": 200,
+  "accumulation": 2,
+  "warmup_updates": 20,
+  "learning_rate": 5e-05,
+  "final_learning_rate": 5e-06,
+  "arms": [
+    "baseline",
+    "bands",
+    "bands_edge"
+  ],
+  "calibration_slabs_per_volume": 4,
+  "constraint_warmup_updates": 20,
+  "gradient_ratio_target": 0.1,
+  "gradient_ratio_p95_cap": 0.5
+}
