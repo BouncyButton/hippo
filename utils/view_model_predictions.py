@@ -21,7 +21,7 @@ DEFAULT_WEIGHTS_BY_SEED = {
     / "experiments"
     / "augmentation_family_b_20260907"
     / "checkpoints"
-    / "baseline_seed0_checkpoint_latest.pt",
+    / "baseline_seed0_checkpoint_best.pt",
     1: REPOSITORY_ROOT
     / "experiments"
     / "augmentation_family_b_20260907"

@@ -291,15 +291,17 @@ Interactive MRI, prediction, and directed-error viewer for a labeled case:
 ```bash
 rtk proxy .venv/bin/python utils/view_model_predictions.py \
   --patient 017 \
-  --split train \
-  --weights experiments/augmentation_family_b_20260907/checkpoints/baseline_seed0_checkpoint_latest.pt \
+  --split val \
+  --weights experiments/augmentation_family_b_20260907/checkpoints/baseline_seed0_checkpoint_best.pt \
   --device cpu \
   --show-errors
 ```
 
-Change `--weights` to the equivariance or augmentation checkpoint in the same
-directory. The viewer shows ground truth, prediction, six directed error types,
-and synchronized sagittal/coronal/axial sliders.
+For the matched early-stopped augmented baseline, use
+`augmentation_seed0_checkpoint_best.pt` in the same directory. The canonical
+pair and hashes are recorded in `CANONICAL_BASELINES.json`. The viewer shows
+ground truth, prediction, six directed error types, and synchronized
+sagittal/coronal/axial sliders.
 
 Key code:
 

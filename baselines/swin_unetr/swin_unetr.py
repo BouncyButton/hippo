@@ -104,9 +104,16 @@ def train_with_optimizer(
         optimizer,
         scheduler,
         wandb_run=None,
+        best_model_path=None,
+        early_stopping_patience=0,
+        early_stopping_min_delta=0.0,
 ):
     device = next(model.parameters()).device
     loss_fn = DiceLoss(to_onehot_y=True, softmax=True)
+    best_hard_dice = float("-inf")
+    best_epoch = 0
+    epochs_without_improvement = 0
+    final_epoch = 0
 
     for epoch in range(num_epochs):
         model.train()
@@ -129,6 +136,16 @@ def train_with_optimizer(
         soft_dice, hard_dice = evaluate(model, val_loader, device, num_classes=num_classes)
         print(f"Val Dice (soft): {soft_dice:.4f}")
         print(f"Val Dice (hard): {hard_dice:.4f}")
+        final_epoch = epoch + 1
+        if hard_dice > best_hard_dice + early_stopping_min_delta:
+            best_hard_dice = hard_dice
+            best_epoch = final_epoch
+            epochs_without_improvement = 0
+            if best_model_path is not None:
+                torch.save(model.state_dict(), best_model_path)
+                print(f"Saved best checkpoint: {best_model_path}")
+        else:
+            epochs_without_improvement += 1
         if wandb_run is not None:
             wandb_run.log(
                 {
@@ -139,6 +156,22 @@ def train_with_optimizer(
                 },
                 step=epoch + 1,
             )
+        if early_stopping_patience > 0 and epochs_without_improvement >= early_stopping_patience:
+            print(
+                f"Early stopping at epoch {final_epoch}; best epoch {best_epoch} "
+                f"with validation hard Dice {best_hard_dice:.4f}"
+            )
+            break
+
+    return {
+        "requested_epochs": num_epochs,
+        "completed_epochs": final_epoch,
+        "best_epoch": best_epoch,
+        "best_validation_hard_dice": best_hard_dice,
+        "early_stopping_patience": early_stopping_patience,
+        "early_stopping_min_delta": early_stopping_min_delta,
+        "stopped_early": final_epoch < num_epochs,
+    }
 
 
 def _case_name_from_row(row, dataset):
@@ -317,7 +350,30 @@ def main():
     parser.add_argument("--adamw-gamma", type=float, default=0.5, help="StepLR gamma for adamw_0.01")
     parser.add_argument("--wandb", action=argparse.BooleanOptionalAction, default=True)
     parser.add_argument("--model-out-dir", default="models/swin_unetr")
+    parser.add_argument(
+        "--save-best",
+        action=argparse.BooleanOptionalAction,
+        default=False,
+        help="Save the checkpoint with the highest validation hard Dice as model_best.pt",
+    )
+    parser.add_argument(
+        "--early-stopping-patience",
+        type=int,
+        default=0,
+        help="Stop after this many epochs without validation hard-Dice improvement; 0 disables",
+    )
+    parser.add_argument(
+        "--early-stopping-min-delta",
+        type=float,
+        default=0.0,
+        help="Minimum validation hard-Dice improvement that resets early-stopping patience",
+    )
     args = parser.parse_args()
+
+    if args.early_stopping_patience < 0:
+        parser.error("--early-stopping-patience must be non-negative")
+    if args.early_stopping_min_delta < 0:
+        parser.error("--early-stopping-min-delta must be non-negative")
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -381,7 +437,11 @@ def main():
             },
             allow_val_change=True,
         )
-    train_with_optimizer(
+    os.makedirs(args.model_out_dir, exist_ok=True)
+    fold_dir = os.path.join(args.model_out_dir, f"{args.dataset}_fold{args.fold}")
+    os.makedirs(fold_dir, exist_ok=True)
+    best_model_path = os.path.join(fold_dir, "model_best.pt") if args.save_best else None
+    training_summary = train_with_optimizer(
         model,
         train_loader,
         val_loader,
@@ -390,13 +450,16 @@ def main():
         optimizer=optimizer,
         scheduler=scheduler,
         wandb_run=wandb_run,
+        best_model_path=best_model_path,
+        early_stopping_patience=args.early_stopping_patience,
+        early_stopping_min_delta=args.early_stopping_min_delta,
     )
 
-    os.makedirs(args.model_out_dir, exist_ok=True)
-    fold_dir = os.path.join(args.model_out_dir, f"{args.dataset}_fold{args.fold}")
-    os.makedirs(fold_dir, exist_ok=True)
     model_path = os.path.join(fold_dir, "model.pt")
     torch.save(model.state_dict(), model_path)
+    summary_path = os.path.join(fold_dir, "training_summary.json")
+    with open(summary_path, "w") as handle:
+        json.dump(training_summary, handle, indent=2)
 
     if wandb_run is not None:
         artifact = wandb.Artifact(
@@ -404,6 +467,9 @@ def main():
             type="model",
         )
         artifact.add_file(model_path, name="model.pt")
+        if best_model_path is not None:
+            artifact.add_file(best_model_path, name="model_best.pt")
+        artifact.add_file(summary_path, name="training_summary.json")
         wandb_run.log_artifact(artifact)
         wandb_run.finish()
 

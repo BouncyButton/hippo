@@ -16,6 +16,11 @@ import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument('--target', type=str, default='Dataset103_ADNI', help='Target folder name')
 parser.add_argument('--rebuild', action='store_true', help='Force download from ADNI and rebuild pkl', default=False)
+parser.add_argument(
+    '--skip-wandb-upload',
+    action='store_true',
+    help='Build the dataset locally without uploading it to W&B',
+)
 args = parser.parse_args()
 
 TARGET_FOLDER = args.target
@@ -275,14 +280,15 @@ if __name__ == '__main__':
 
     print(f"Successfully saved {len(df)} image and label files.")
 
-    # save all into a private wandb to avoid re-downloading
-    wandb.init(project="hippopotamus-project", entity='hippopotamus')
+    # Optionally save into a private W&B project to avoid re-downloading.
+    if not args.skip_wandb_upload:
+        wandb.init(project="hippopotamus-project", entity='hippopotamus')
 
-    artifact = wandb.Artifact("Dataset103_ADNI", type="dataset")
-    artifact.add_dir(TARGET_FOLDER)
+        artifact = wandb.Artifact("Dataset103_ADNI", type="dataset")
+        artifact.add_dir(TARGET_FOLDER)
 
-    wandb.log_artifact(artifact)
-    wandb.finish()
+        wandb.log_artifact(artifact)
+        wandb.finish()
 
     # ok ignore this
 

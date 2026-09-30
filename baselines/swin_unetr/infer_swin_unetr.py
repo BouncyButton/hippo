@@ -34,6 +34,11 @@ def main() -> None:
     parser.add_argument("--spatial-size", type=int, nargs=3, default=[64, 64, 64])
     parser.add_argument("--resize", action="store_true")
     parser.add_argument("--num-classes", type=int, default=None)
+    parser.add_argument(
+        "--metrics-only",
+        action="store_true",
+        help="Compute metrics without writing per-case prediction/probability arrays",
+    )
     parser.add_argument("--output-dir", required=True)
     args = parser.parse_args()
 
@@ -42,8 +47,9 @@ def main() -> None:
     if not checkpoint.is_file():
         raise FileNotFoundError(f"Checkpoint not found: {checkpoint}")
     output_dir.mkdir(parents=True, exist_ok=True)
-    prediction_dir = output_dir / "predictions"
-    prediction_dir.mkdir(parents=True, exist_ok=True)
+    prediction_dir = None if args.metrics_only else output_dir / "predictions"
+    if prediction_dir is not None:
+        prediction_dir.mkdir(parents=True, exist_ok=True)
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     if device.type != "cuda":
@@ -99,7 +105,10 @@ def main() -> None:
         json.dump(summary, handle, indent=2)
 
     print(json.dumps(summary, indent=2))
-    print(f"Saved {result.n_cases} predictions and probabilities to {prediction_dir}")
+    if prediction_dir is None:
+        print(f"Evaluated {result.n_cases} cases in metrics-only mode")
+    else:
+        print(f"Saved {result.n_cases} predictions and probabilities to {prediction_dir}")
 
 
 if __name__ == "__main__":
