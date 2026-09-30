@@ -116,6 +116,15 @@ allenamenti.md
 *.sbatch
 experiments/
 
+# New CST teacher source and documentation are repository code, not run output.
+!semantic_constraints/
+semantic_constraints/*
+!semantic_constraints/cst_teacher/
+!semantic_constraints/cst_teacher/**
+semantic_constraints/cst_teacher/runs/
+!semantic_constraints/ap_cut_head/
+!semantic_constraints/ap_cut_head/**
+
 # Keep centralized project documentation trackable.
 !/docs/
 !/docs/**/
@@ -124,3 +133,67 @@ experiments/
 
 # Local paper downloads and rendered scratch artifacts.
 /tmp/
+
+# Keep the A/P partition feasibility audit reproducible without tracking outputs.
+!/evaluation/
+/evaluation/*
+!/evaluation/audit_ap_partition_topology.py
+!/evaluation/test_audit_ap_partition_topology.py
+!/evaluation/pilot_harmonic_ap.py
+!/evaluation/probe_context_increment.py
+!/evaluation/test_probe_context_increment.py
+!/evaluation/graph_partition_probe.py
+!/evaluation/test_graph_partition_probe.py
+!/evaluation/voxel_graph_anatomy.py
+!/evaluation/test_voxel_graph_anatomy.py
+!/evaluation/plot_voxel_graph_anatomy.py
+!/evaluation/verify_voxel_graph_anatomy.py
+!/evaluation/atlas_registration.py
+!/evaluation/atlas_model_cache.py
+!/evaluation/atlas_pilot.py
+!/evaluation/test_atlas_pilot.py
+!/evaluation/report_atlas_pilot.py
+!/evaluation/audit_graph_property_inventory.py
+!/evaluation/test_graph_property_inventory.py
+!/evaluation/summarize_graph_property_inventory.py
+!/evaluation/probe_graph_landmark.py
+!/evaluation/test_probe_graph_landmark.py
+!/evaluation/plot_graph_landmark.py
+!/evaluation/explain_graph_landmark.py
+!/evaluation/medsam3_zero_shot.py
+!/evaluation/test_medsam3_zero_shot.py
+
+# Downloaded foundation-model weights remain local.
+/MedSam3_weights/
+
+# Local downloads, raw data, and stale Git-lock recovery files.
+/Released_ACPC_brainScans_MNC.zip*.tmp
+/adni_data/
+/_to_delete/
+/segementation.pdf
+/summary.docx
+
+# Preserve report sources and written evidence, not runtime copies or renders.
+!/reports/
+!/reports/**/
+!/reports/**/*.md
+/reports/**/results/
+/reports/**/results_*/
+/reports/**/local_mirror/
+/reports/**/archive/
+/reports/storage_archive_*/
+/reports/**/checkpoints/
+/reports/**/__pycache__/
+/reports/**/.matplotlib/
+/reports/**/render/
+/reports/**/render_v2/
+/reports/**/*.pdf
+/reports/**/*.docx
+/reports/**/*.log
+/reports/**/GPU_TESTS.txt
+/reports/**/CPU_TESTS.txt
+
+# Per-case runtime output remains local; curated summaries stay versioned.
+/docs/experiments/**/results_*/
+/docs/experiments/**/case_metrics/
+/docs/experiments/**/registrations/
