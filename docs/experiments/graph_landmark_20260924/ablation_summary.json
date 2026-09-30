@@ -1,0 +1,586 @@
+{
+  "methods": {
+    "full": {
+      "cases": 208,
+      "mae_mm": 1.0048076923076923,
+      "median_mm": 1.0,
+      "p95_mm": 3.0,
+      "exact_cases": 62,
+      "within1_cases": 163,
+      "within2_cases": 195
+    },
+    "intrinsic_only": {
+      "cases": 208,
+      "mae_mm": 1.2307692307692308,
+      "median_mm": 1.0,
+      "p95_mm": 3.0,
+      "exact_cases": 50,
+      "within1_cases": 142,
+      "within2_cases": 191
+    },
+    "without_branching": {
+      "cases": 208,
+      "mae_mm": 1.0,
+      "median_mm": 1.0,
+      "p95_mm": 3.0,
+      "exact_cases": 64,
+      "within1_cases": 162,
+      "within2_cases": 195
+    },
+    "without_degree_depth_thickness": {
+      "cases": 208,
+      "mae_mm": 1.0721153846153846,
+      "median_mm": 1.0,
+      "p95_mm": 3.0,
+      "exact_cases": 56,
+      "within1_cases": 159,
+      "within2_cases": 192
+    },
+    "without_geodesic_profiles": {
+      "cases": 208,
+      "mae_mm": 1.0576923076923077,
+      "median_mm": 1.0,
+      "p95_mm": 3.0,
+      "exact_cases": 60,
+      "within1_cases": 162,
+      "within2_cases": 194
+    },
+    "without_intrinsic_positions": {
+      "cases": 208,
+      "mae_mm": 1.0096153846153846,
+      "median_mm": 1.0,
+      "p95_mm": 3.0,
+      "exact_cases": 59,
+      "within1_cases": 164,
+      "within2_cases": 194
+    },
+    "without_traffic_eccentricity": {
+      "cases": 208,
+      "mae_mm": 0.9951923076923077,
+      "median_mm": 1.0,
+      "p95_mm": 3.0,
+      "exact_cases": 64,
+      "within1_cases": 162,
+      "within2_cases": 194
+    }
+  },
+  "removal_minus_full": {
+    "intrinsic_only": {
+      "mae_delta_mm": 0.22596153846153846,
+      "ci95": [
+        0.09615384615384616,
+        0.3557692307692308
+      ],
+      "improved": 39,
+      "worsened": 77,
+      "tied": 92
+    },
+    "without_branching": {
+      "mae_delta_mm": -0.004807692307692308,
+      "ci95": [
+        -0.028846153846153848,
+        0.014423076923076924
+      ],
+      "improved": 3,
+      "worsened": 2,
+      "tied": 203
+    },
+    "without_degree_depth_thickness": {
+      "mae_delta_mm": 0.0673076923076923,
+      "ci95": [
+        -0.019230769230769232,
+        0.15384615384615385
+      ],
+      "improved": 29,
+      "worsened": 42,
+      "tied": 137
+    },
+    "without_geodesic_profiles": {
+      "mae_delta_mm": 0.052884615384615384,
+      "ci95": [
+        -0.03365384615384615,
+        0.15384615384615385
+      ],
+      "improved": 15,
+      "worsened": 18,
+      "tied": 175
+    },
+    "without_intrinsic_positions": {
+      "mae_delta_mm": 0.004807692307692308,
+      "ci95": [
+        -0.07211538461538461,
+        0.0625
+      ],
+      "improved": 4,
+      "worsened": 8,
+      "tied": 196
+    },
+    "without_traffic_eccentricity": {
+      "mae_delta_mm": -0.009615384615384616,
+      "ci95": [
+        -0.09615384615384616,
+        0.0673076923076923
+      ],
+      "improved": 15,
+      "worsened": 18,
+      "tied": 175
+    }
+  },
+  "priors": {
+    "median_position": 0.5775240384615384,
+    "median_volume": 0.4819492358350401
+  },
+  "groups": {
+    "branching": [
+      "components_value",
+      "components_derivative",
+      "components_change",
+      "branch_mass_value",
+      "branch_mass_derivative",
+      "branch_mass_change",
+      "geodesic_components_value",
+      "geodesic_components_derivative",
+      "geodesic_components_change",
+      "geodesic_branch_mass_value",
+      "geodesic_branch_mass_derivative",
+      "geodesic_branch_mass_change"
+    ],
+    "degree_depth_thickness": [
+      "degree0_value",
+      "degree0_derivative",
+      "degree0_change",
+      "degree1_value",
+      "degree1_derivative",
+      "degree1_change",
+      "degree2_value",
+      "degree2_derivative",
+      "degree2_change",
+      "degree3_value",
+      "degree3_derivative",
+      "degree3_change",
+      "degree4_value",
+      "degree4_derivative",
+      "degree4_change",
+      "degree5_value",
+      "degree5_derivative",
+      "degree5_change",
+      "degree6_value",
+      "degree6_derivative",
+      "degree6_change",
+      "depth_value",
+      "depth_derivative",
+      "depth_change",
+      "thickness_value",
+      "thickness_derivative",
+      "thickness_change"
+    ],
+    "geodesic_profiles": [
+      "geodesic_occupancy_value",
+      "geodesic_occupancy_derivative",
+      "geodesic_occupancy_change",
+      "geodesic_thickness_value",
+      "geodesic_thickness_derivative",
+      "geodesic_thickness_change",
+      "geodesic_core_fraction_value",
+      "geodesic_core_fraction_derivative",
+      "geodesic_core_fraction_change",
+      "geodesic_ncut_value",
+      "geodesic_ncut_derivative",
+      "geodesic_ncut_change"
+    ],
+    "intrinsic_positions": [
+      "harmonic_value",
+      "harmonic_derivative",
+      "harmonic_change",
+      "fiedler01_value",
+      "fiedler01_derivative",
+      "fiedler01_change",
+      "geodesic_u_value",
+      "geodesic_u_derivative",
+      "geodesic_u_change",
+      "intrinsic_valid_fraction_value",
+      "intrinsic_valid_fraction_derivative",
+      "intrinsic_valid_fraction_change"
+    ],
+    "traffic_eccentricity": [
+      "betweenness_value",
+      "betweenness_derivative",
+      "betweenness_change",
+      "eccentricity_value",
+      "eccentricity_derivative",
+      "eccentricity_change"
+    ]
+  },
+  "coefficients": [
+    {
+      "feature": "eccentricity_change",
+      "standardized_coefficient": 0.30284221400426964
+    },
+    {
+      "feature": "eccentricity_derivative",
+      "standardized_coefficient": 0.285049027153014
+    },
+    {
+      "feature": "thickness_change",
+      "standardized_coefficient": 0.2745506000403481
+    },
+    {
+      "feature": "thickness_derivative",
+      "standardized_coefficient": 0.2687273233972253
+    },
+    {
+      "feature": "ncut_value",
+      "standardized_coefficient": -0.262347469909522
+    },
+    {
+      "feature": "betweenness_value",
+      "standardized_coefficient": 0.2621900809531169
+    },
+    {
+      "feature": "area_change",
+      "standardized_coefficient": 0.2569589132518487
+    },
+    {
+      "feature": "area_derivative",
+      "standardized_coefficient": 0.2540444797289051
+    },
+    {
+      "feature": "lr_width_derivative",
+      "standardized_coefficient": 0.24578780769684783
+    },
+    {
+      "feature": "lr_width_value",
+      "standardized_coefficient": -0.23640221198272413
+    },
+    {
+      "feature": "betweenness_derivative",
+      "standardized_coefficient": -0.22735780035274314
+    },
+    {
+      "feature": "thickness_value",
+      "standardized_coefficient": 0.2180107221948644
+    },
+    {
+      "feature": "fiedler01_derivative",
+      "standardized_coefficient": 0.21241525636979408
+    },
+    {
+      "feature": "betweenness_change",
+      "standardized_coefficient": -0.2102861917513363
+    },
+    {
+      "feature": "degree6_derivative",
+      "standardized_coefficient": -0.20420647366481412
+    },
+    {
+      "feature": "area_value",
+      "standardized_coefficient": -0.20403132032172594
+    },
+    {
+      "feature": "geodesic_core_fraction_value",
+      "standardized_coefficient": 0.20259755848720337
+    },
+    {
+      "feature": "perimeter_area_change",
+      "standardized_coefficient": -0.199565576173803
+    },
+    {
+      "feature": "depth_derivative",
+      "standardized_coefficient": -0.19565623229061832
+    },
+    {
+      "feature": "geodesic_thickness_value",
+      "standardized_coefficient": 0.183269137036814
+    },
+    {
+      "feature": "geodesic_core_fraction_change",
+      "standardized_coefficient": 0.18229673731327553
+    },
+    {
+      "feature": "geodesic_occupancy_value",
+      "standardized_coefficient": 0.1770943075870042
+    },
+    {
+      "feature": "lr_width_change",
+      "standardized_coefficient": 0.16319888774602256
+    },
+    {
+      "feature": "fiedler01_change",
+      "standardized_coefficient": 0.16094100662816938
+    },
+    {
+      "feature": "geodesic_ncut_value",
+      "standardized_coefficient": -0.14943505861533807
+    },
+    {
+      "feature": "geodesic_core_fraction_derivative",
+      "standardized_coefficient": 0.14083219167966868
+    },
+    {
+      "feature": "degree4_derivative",
+      "standardized_coefficient": 0.13652629811557065
+    },
+    {
+      "feature": "degree3_derivative",
+      "standardized_coefficient": 0.13303807527599382
+    },
+    {
+      "feature": "perimeter_area_derivative",
+      "standardized_coefficient": -0.13226994295857586
+    },
+    {
+      "feature": "fiedler01_value",
+      "standardized_coefficient": 0.12444593897162909
+    },
+    {
+      "feature": "position_3",
+      "standardized_coefficient": 0.10908907318421747
+    },
+    {
+      "feature": "degree2_value",
+      "standardized_coefficient": 0.0941874060546737
+    },
+    {
+      "feature": "position_0",
+      "standardized_coefficient": 0.09029088385689191
+    },
+    {
+      "feature": "harmonic_derivative",
+      "standardized_coefficient": 0.08829734007801184
+    },
+    {
+      "feature": "geodesic_occupancy_change",
+      "standardized_coefficient": 0.08602459784644599
+    },
+    {
+      "feature": "degree5_derivative",
+      "standardized_coefficient": 0.06906061002492152
+    },
+    {
+      "feature": "depth_change",
+      "standardized_coefficient": -0.06896950961964243
+    },
+    {
+      "feature": "degree2_derivative",
+      "standardized_coefficient": -0.06883814367397802
+    },
+    {
+      "feature": "degree5_change",
+      "standardized_coefficient": 0.06561033184629404
+    },
+    {
+      "feature": "degree6_change",
+      "standardized_coefficient": -0.06252830330984814
+    },
+    {
+      "feature": "si_width_derivative",
+      "standardized_coefficient": -0.059109571668104266
+    },
+    {
+      "feature": "harmonic_value",
+      "standardized_coefficient": 0.056279673569774015
+    },
+    {
+      "feature": "degree2_change",
+      "standardized_coefficient": -0.05474278658251448
+    },
+    {
+      "feature": "geodesic_thickness_change",
+      "standardized_coefficient": 0.05460718907450375
+    },
+    {
+      "feature": "degree5_value",
+      "standardized_coefficient": 0.050718222782325746
+    },
+    {
+      "feature": "degree1_change",
+      "standardized_coefficient": -0.05071552591022203
+    },
+    {
+      "feature": "degree3_value",
+      "standardized_coefficient": -0.04907533942368381
+    },
+    {
+      "feature": "position_2",
+      "standardized_coefficient": -0.04818248227910186
+    },
+    {
+      "feature": "geodesic_branch_mass_value",
+      "standardized_coefficient": 0.0460019073875795
+    },
+    {
+      "feature": "position_5",
+      "standardized_coefficient": -0.04049988319213181
+    },
+    {
+      "feature": "degree3_change",
+      "standardized_coefficient": 0.03735782340916987
+    },
+    {
+      "feature": "harmonic_change",
+      "standardized_coefficient": 0.03313910994055937
+    },
+    {
+      "feature": "geodesic_components_change",
+      "standardized_coefficient": -0.030945902589970712
+    },
+    {
+      "feature": "geodesic_branch_mass_derivative",
+      "standardized_coefficient": -0.03016680963258869
+    },
+    {
+      "feature": "geodesic_u_change",
+      "standardized_coefficient": -0.02948474971373449
+    },
+    {
+      "feature": "branch_mass_value",
+      "standardized_coefficient": 0.027861414168655237
+    },
+    {
+      "feature": "components_value",
+      "standardized_coefficient": 0.02761575350338981
+    },
+    {
+      "feature": "position_4",
+      "standardized_coefficient": 0.027077878814279234
+    },
+    {
+      "feature": "degree0_derivative",
+      "standardized_coefficient": -0.027029796066729582
+    },
+    {
+      "feature": "degree4_change",
+      "standardized_coefficient": 0.02694259068803087
+    },
+    {
+      "feature": "components_change",
+      "standardized_coefficient": -0.02674749179330201
+    },
+    {
+      "feature": "geodesic_branch_mass_change",
+      "standardized_coefficient": 0.026585987002777582
+    },
+    {
+      "feature": "geodesic_u_derivative",
+      "standardized_coefficient": -0.025620121452591314
+    },
+    {
+      "feature": "geodesic_occupancy_derivative",
+      "standardized_coefficient": 0.02552464483381367
+    },
+    {
+      "feature": "degree1_derivative",
+      "standardized_coefficient": -0.025335325069500224
+    },
+    {
+      "feature": "perimeter_area_value",
+      "standardized_coefficient": 0.02387108660695701
+    },
+    {
+      "feature": "geodesic_components_value",
+      "standardized_coefficient": 0.023837692931470287
+    },
+    {
+      "feature": "degree6_value",
+      "standardized_coefficient": -0.023523598294244455
+    },
+    {
+      "feature": "geodesic_thickness_derivative",
+      "standardized_coefficient": 0.023439970767617644
+    },
+    {
+      "feature": "branch_mass_derivative",
+      "standardized_coefficient": -0.0218821695359164
+    },
+    {
+      "feature": "position_1",
+      "standardized_coefficient": 0.021552553969360094
+    },
+    {
+      "feature": "ncut_derivative",
+      "standardized_coefficient": -0.021535907900674868
+    },
+    {
+      "feature": "depth_value",
+      "standardized_coefficient": -0.02046683909112367
+    },
+    {
+      "feature": "geodesic_ncut_derivative",
+      "standardized_coefficient": -0.01976836684920032
+    },
+    {
+      "feature": "ncut_change",
+      "standardized_coefficient": -0.019264404332575237
+    },
+    {
+      "feature": "eccentricity_value",
+      "standardized_coefficient": -0.017452340137954103
+    },
+    {
+      "feature": "degree0_change",
+      "standardized_coefficient": -0.015782288652093357
+    },
+    {
+      "feature": "components_derivative",
+      "standardized_coefficient": 0.015033844533931242
+    },
+    {
+      "feature": "geodesic_ncut_change",
+      "standardized_coefficient": -0.014557673004121877
+    },
+    {
+      "feature": "geodesic_u_value",
+      "standardized_coefficient": 0.0143501727468338
+    },
+    {
+      "feature": "geodesic_components_derivative",
+      "standardized_coefficient": 0.01311702919431811
+    },
+    {
+      "feature": "intrinsic_valid_fraction_derivative",
+      "standardized_coefficient": 0.008782919808020618
+    },
+    {
+      "feature": "degree4_value",
+      "standardized_coefficient": -0.008148006513550174
+    },
+    {
+      "feature": "intrinsic_valid_fraction_value",
+      "standardized_coefficient": 0.007547989995694089
+    },
+    {
+      "feature": "si_width_change",
+      "standardized_coefficient": 0.006925443072423355
+    },
+    {
+      "feature": "degree1_value",
+      "standardized_coefficient": 0.004157284052515241
+    },
+    {
+      "feature": "si_width_value",
+      "standardized_coefficient": 0.002466864370481924
+    },
+    {
+      "feature": "degree0_value",
+      "standardized_coefficient": 0.0009659031505609176
+    },
+    {
+      "feature": "branch_mass_change",
+      "standardized_coefficient": -0.0008824742759734356
+    },
+    {
+      "feature": "intrinsic_valid_fraction_change",
+      "standardized_coefficient": 0.00020077971359843292
+    }
+  ],
+  "primary_combined_vs_median_position": {
+    "mae_delta_mm": -0.16826923076923078,
+    "ci95": [
+      -0.33653846153846156,
+      0.004807692307692308
+    ],
+    "improved": 83,
+    "worsened": 56,
+    "tied": 69
+  }
+}

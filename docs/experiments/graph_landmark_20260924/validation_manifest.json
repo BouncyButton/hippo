@@ -1,0 +1,800 @@
+{
+  "files": {
+    "evaluation/probe_graph_landmark.py": "97f8e6cfc9a4fe9c4534ae1b33bc83b11081b539e9e817e15cff268933cf9113",
+    "docs/experiments/graph_landmark_20260924/PROTOCOL.md": "1bb44b1b8a2df3f6c6782e94e736a6d9e5973d8b5df9fa839e322fcd3331dca5",
+    "datasets/Dataset101_MSD/splits_final.json": "1d6a3fe993359ad85e9c28a29901162251c3359449b710c09cb9e92d66dda472",
+    "evaluation/voxel_graph_anatomy.py": "a1ac6484ba21e4491e2c828b1df45d03b175d6fb85065f3638de2172e18569d6",
+    "evaluation/audit_graph_property_inventory.py": "30b152b441233d6e922b3cbf5b95ce0fec33f8d9d2dc6bf219993b0fda43fc9c",
+    "docs/experiments/graph_property_inventory_20260923/manifest.json": "2d57d10ba91f9bd206c652ad4b5121133a37d90db2bebd124c27e88cad455163"
+  },
+  "versions": {
+    "numpy": "1.26.4",
+    "scipy": "1.17.1",
+    "sklearn": "1.9.0",
+    "nibabel": "5.4.2"
+  },
+  "seed": 20260924,
+  "inputs": {
+    "reference/hippocampus_017": {
+      "input_sha256": "94ab2748b5fbbc40b469ad71fa2534c8e940f037fd46e6cf6fb4074a526f4e58",
+      "whole_map_sha256": "a7e2586372ceae9e2c121d55955f0a5346fab83ec22647c3d4821e678e004789",
+      "scalar_sha256": "697da2262b70ff3603cc14958284936bbc5d213be06b003c51646ad7ee6b2437"
+    },
+    "reference/hippocampus_019": {
+      "input_sha256": "cf4ae2be9020c848a3d811cc7855e854c6583c000083c95eb23e0f86b2e99e63",
+      "whole_map_sha256": "feec16b573f3b44686d4801be6e17962406741a312c3254c678f1570ad6b9866",
+      "scalar_sha256": "057c937b1be42ce9f314e98e5d9f274098ad0c6f9fa91311c846bd67bf773e34"
+    },
+    "reference/hippocampus_033": {
+      "input_sha256": "16cb4fc2ad1138bb3cfb70e9bf529bce2d204d3ca2e241c391f6c5df5894b1ea",
+      "whole_map_sha256": "cd05f912f580b94a10b300bebe75dd09d0ac8e25d5f23db2d0a9263796edce97",
+      "scalar_sha256": "69a780374bf98469e0e95b5fdcb83185eb04e0404b6c86d885de103718ba32cf"
+    },
+    "reference/hippocampus_035": {
+      "input_sha256": "0ce65924198d7cb7e2764de099f8f97132a25750171563931ba6d6b94cfb4f4d",
+      "whole_map_sha256": "4e9de6e81d8dc567aa64ef779cf348e18d1e458261d0a42f9c3e39099d543893",
+      "scalar_sha256": "c8822f992c3070a47cf935a034244800ccce34536211eadb9778858e51606179"
+    },
+    "reference/hippocampus_037": {
+      "input_sha256": "4a58deec5b269b129d9b311b16daf5bab04cdce91477824d21015801bdd96a42",
+      "whole_map_sha256": "776a7978195d71b130d09df180a31e5bb35f46f0b21f2c8bab76a14ee1574748",
+      "scalar_sha256": "9d7f0eb3bfbbc877e6383e42c78637b7f968e242fe747a5389c1addb5e4f0bd0"
+    },
+    "reference/hippocampus_049": {
+      "input_sha256": "49a08eb1db1624b96b695bdf11a12cfcc03ba5da7250254a17d8ba546ae71fb5",
+      "whole_map_sha256": "1b6ec4605372b0d6ec20a2a85039d05f5667392a50adebe5a6003072db4a14a0",
+      "scalar_sha256": "d4c93af39f8cbcb3909d1996e37d9b8063d52cc36c21cc2695949fd3bd9636b7"
+    },
+    "reference/hippocampus_052": {
+      "input_sha256": "77ec4c3c022328fedf999254d830440e8f058594c94d86cc549d16ff93ae4948",
+      "whole_map_sha256": "2b67b39ef32b8590a2fd52b45e21426edb944e5a8684aaadebede009563cd79c",
+      "scalar_sha256": "7ba7b5b73b2f9d748f5defd5916330e9194767d96259cb90a2637317d108e779"
+    },
+    "reference/hippocampus_065": {
+      "input_sha256": "64b7843a3d508d21aa7ac921f993469573cbb39e674c5aae2150ee9e11e74af7",
+      "whole_map_sha256": "ddb9cadb5214d4aa2c1ac6b1e72b9c66826b0853ea7b45cf03cd2f473ab32503",
+      "scalar_sha256": "6ca03725f1469404b52b563c10406378ed86aee5c7f7dbfedda108e88356f8a6"
+    },
+    "reference/hippocampus_083": {
+      "input_sha256": "1d477fec159d5d7dc2518642bab1e939b505c9334049a1c5ce3dfd95f7fe6ff5",
+      "whole_map_sha256": "6d8a0bcfbeee6c35ee6c1d559c77b686173d277413ffa7e7cfee28e5ce33118d",
+      "scalar_sha256": "1621237b0ab7e368c6454b78f4c45ee0fbcb789f464daed60b54a64533930625"
+    },
+    "reference/hippocampus_088": {
+      "input_sha256": "d05c8e1b5587959e307a53813e3c29b3d1e469a9653760e8e968340547045eff",
+      "whole_map_sha256": "eb7b803872eae3a8c1a6e9aa483b588d699374db0cdbd91dc19216257eafef12",
+      "scalar_sha256": "5c25c493a6e37036fd01e6d73e6f3ce5e60f2e094cb9225eec25ff859b4dea46"
+    },
+    "reference/hippocampus_090": {
+      "input_sha256": "d24e81f22528570dbeb7d66251adf6823f4e27b0ac2fe46e8784d4b1a62962b2",
+      "whole_map_sha256": "9cc11194fedcbc3136bfea0f9734fa1f54ef0e15c95cf6e7174a02a2d03735a9",
+      "scalar_sha256": "d5891686a26bccf34bbc8309e1cc5aa06c7b61b3c727c3dffb4094fcd6dbd889"
+    },
+    "reference/hippocampus_092": {
+      "input_sha256": "543f03fe2297fb4526ec59534326e99e4ba888763e874b43b8bb7b4e73b9df49",
+      "whole_map_sha256": "af4f189980d3bca7c565ceb65c8f11625c130f7d8e9dbbf8bab58ad01d5dde8a",
+      "scalar_sha256": "bbb6513fcafe801dfdd33981cdc48518664ed8c818534ad8e7f902c8d4b2bfca"
+    },
+    "reference/hippocampus_095": {
+      "input_sha256": "da334814945515c32a51c634a8b2a8468966cfd38b2ef9d137a15988eca3449e",
+      "whole_map_sha256": "5cceaa5f24dcc442807a0b33c1a3d2e360e1b104609f176783696ac663dddc53",
+      "scalar_sha256": "24a83b479189b9fa94bbd9bbd4541da1a05bf677a1800247b17b3631e9cb0d98"
+    },
+    "reference/hippocampus_107": {
+      "input_sha256": "4ae9986560d1153f8a107dee49a8fb77698eb6be8b236ba9f12d055c71bc2847",
+      "whole_map_sha256": "4b462246c5c46c8509e3032b33428ae8d2222d9b4581933977568307242efa5c",
+      "scalar_sha256": "56a06c103218fddb2f580dace94ea868264b3231b5a7a9dc722628fa7174a315"
+    },
+    "reference/hippocampus_108": {
+      "input_sha256": "5e439ff23fbc4aa3155ada8c5366d007605664ff502145204a814b746e560676",
+      "whole_map_sha256": "e991f469491b064c515297b495a244f33eb41bcaaa9ee01d935ec0af8608600f",
+      "scalar_sha256": "d80abbb2cea36b8e0c0f94847f76ff0a755dc0f062fb5f47d7e5d632be0f0678"
+    },
+    "reference/hippocampus_123": {
+      "input_sha256": "bb3da30509efa4d7165edf527fb151449ace19deb09718f055653ac998daf97d",
+      "whole_map_sha256": "9e5b26c6125de40ae5f6b8718ce6274389f13673f677b543ada68aa10b2e735d",
+      "scalar_sha256": "d6bb1cf8e6dc59ed497c43141170104cf2df78b008a467ffdf82e6c0b3701f86"
+    },
+    "reference/hippocampus_125": {
+      "input_sha256": "af4a79bd60813bf61c4de7f320fe46f7372d3ac8a92eb9cab51cc24d418b879b",
+      "whole_map_sha256": "3c24d673e2e54c87a9853df146fe31e9db520411d7f7130da0619003d763ce17",
+      "scalar_sha256": "1d89aea487b9eed6e17fd3f076a557553b065df3b2bc13aed25bf56fce48507f"
+    },
+    "reference/hippocampus_157": {
+      "input_sha256": "100cadf693c82dd757a748bdec0db8204394bcbd2652c9f91c4e3b8a2a48b907",
+      "whole_map_sha256": "9cc59b28055271fc72882181c992d5879f533e5ad8dafbf39582216388014985",
+      "scalar_sha256": "86386264a03f30420c66e4af0e84a544c1ee659c0116fead416b3cc85f78f7e8"
+    },
+    "reference/hippocampus_164": {
+      "input_sha256": "039b495d5abceb530b99aad1d557f28d8ae732fc012e2c3243aafebaf78f6db2",
+      "whole_map_sha256": "f6551cb713eca0f67a15974ff20dc226a0f7859f800f249759e799780fdc85d9",
+      "scalar_sha256": "a63068c81517377b16ee6a01f1448205ad82c225a7af138989408bb79f631cda"
+    },
+    "reference/hippocampus_169": {
+      "input_sha256": "bab66b107ab5adc1dd06ff316211081e7949bc34a900ccdaad4f552f55b88eb2",
+      "whole_map_sha256": "99872e77a5b7c3d1e50f22d874ee9d4e1815d35aa633aec7b92da395b7d4547c",
+      "scalar_sha256": "2d469a1818b8ca29ca8f30217c1c4c6e041a1240d936904290515483990e32db"
+    },
+    "reference/hippocampus_175": {
+      "input_sha256": "2fb81b0747e1fd99e7121e69ffe3d940f5a68c4c5fdcec6c0efba490b1c36c7a",
+      "whole_map_sha256": "a33c02129cced4c0671ede81d239edb417f93fd57761d8b2b1fa6bc0866740f8",
+      "scalar_sha256": "5867f087bc0fad8fc776239a91afaf386207f50b4d2672eed9565c73fb6bfeb8"
+    },
+    "reference/hippocampus_185": {
+      "input_sha256": "ebfac7522100e6b38c64b3c62d3e47b8a5429bcef01f21a86a68e35702f9b212",
+      "whole_map_sha256": "6da9401aff27637aeaba2e6644a344887a63a37e5c34f508ba79ce79f663aa6f",
+      "scalar_sha256": "f436bd83f1142ab5a7c19efedb574d403452c8ce5e7a6a912d4f76f378cb782d"
+    },
+    "reference/hippocampus_190": {
+      "input_sha256": "5316c962586306ed3f3e3e891860b1593a5f3b612beefe49018ae82505791c6f",
+      "whole_map_sha256": "0ab199a6ad8d0197ab6d784fc56c6c6cefd67a24f813c36a95141797abf0a917",
+      "scalar_sha256": "39f531017fcf89db6701fa3dda57757d21a90fba9addb8d54baa9ed25f353c24"
+    },
+    "reference/hippocampus_194": {
+      "input_sha256": "0005b6c30d63ea8e9614611abb54d0a9c851d958c9752f5cc9c53a784e9382d0",
+      "whole_map_sha256": "f9c682be28fcd9867a1a8f6b25503569db01f3cf85ab304243081e55b93c326d",
+      "scalar_sha256": "35fe7f55f109ee60c2b1fbc8b7e4c367678bd70ec3b8ffdace47b11bc0e03d70"
+    },
+    "reference/hippocampus_204": {
+      "input_sha256": "c4565febb290e3859b246b8f0831d084426885a33e20c2e28aaeedf2aed52c78",
+      "whole_map_sha256": "8c77e45e4f3913b1aa89e984b27da59a49077bd8bef8bee64273b3aad513dedc",
+      "scalar_sha256": "6ea51ded80c6ea872cce9e30536c2a0c2e7905ee7e1ad849f044f87a287ceb15"
+    },
+    "reference/hippocampus_205": {
+      "input_sha256": "12f439cdc42f4f52c75d9c2a766af6fb49a63bff73ec96b9160ad81f868fa64f",
+      "whole_map_sha256": "3b6877270645173d423b003540da12f92656b16790e8c0e7beca97679294d580",
+      "scalar_sha256": "79b461deca94d5084dd7574431f687297a2fa53dccf02efb413b6826e2e9d9e2"
+    },
+    "reference/hippocampus_210": {
+      "input_sha256": "1d2232cbfb45202e17af2226f1583ad0cd0048d877dce46a8d66616e2d244b48",
+      "whole_map_sha256": "de00b57dd93ec2dbd42e15e56c76592b77c0e01fece8ed92b66fccad9db43f3f",
+      "scalar_sha256": "a4f4cff2a9765ae4a876ae8ec83f4b555d71be8f8c24dd271106c2794d6eb63f"
+    },
+    "reference/hippocampus_217": {
+      "input_sha256": "eeec12f83e84e019ea800e4addab580c3914f32556916407b75e215551e48c3e",
+      "whole_map_sha256": "4e5e2a67a3071fcda303b9df92107a405a1bbaa335d0d2e1be358ccf186cf47b",
+      "scalar_sha256": "630bec4e476326e596a45fd8c407ccf3598196f95114947aaf47398185c2470c"
+    },
+    "reference/hippocampus_219": {
+      "input_sha256": "a9e16b4d06705e7bfcefcb15702c7a9251a6c80b961189e6b080e1164b6b018f",
+      "whole_map_sha256": "27b18cde909b688884d3abb3cb3de13fa2f0a330e22d2ad77ba0f5aa8e710410",
+      "scalar_sha256": "aecaf5caecb1af7738c541503037914002a756c87fcdf5f25a0037602c09b896"
+    },
+    "reference/hippocampus_229": {
+      "input_sha256": "657c444e9670d1245257ad83bad4abd71fc6f4603b40b15b32b0b3e3960532ac",
+      "whole_map_sha256": "d83cf1dce9be332691f22fbb03bb38acba084a3b8b30d5901379d95867d63cb4",
+      "scalar_sha256": "6b1206020e07aec4a66c42b6c772dbc1918f5f23a421afc4f1ccf2ed1fadf52a"
+    },
+    "reference/hippocampus_244": {
+      "input_sha256": "deb950902847ba8ba045257337fdde15f51aa8a031de03b8f4007e71a868799a",
+      "whole_map_sha256": "06c244c1acdb0831d90a1c6d3f4b6eae0654c5b40f6612d2c97e106d7be23fd2",
+      "scalar_sha256": "89f42fed7a03cc1e2c4b62d04f0e0a2aa564a7558774ce0546e4e819df489444"
+    },
+    "reference/hippocampus_261": {
+      "input_sha256": "72942cb6c7c7d7831d3cb9fe7c7e7e57a7f5aed0f5cd225a52ef42d085664c87",
+      "whole_map_sha256": "b3f1b4592d77ed3f9593a16732f6a6a0b6f20311c48b048057fe53f50cf25b61",
+      "scalar_sha256": "79fb2307f96d575d592f91997e5b3b84ce0d61ed01ab9f13b6b2958059f772dc"
+    },
+    "reference/hippocampus_264": {
+      "input_sha256": "cc2c53bc08837188fcef0e87380c5b49b451340ba6f8a1807675c1233b093c7e",
+      "whole_map_sha256": "dee99d840512221b635520ba72d71c8f5c79e3f8d4dac10d726c9b7407044ea9",
+      "scalar_sha256": "3d06a22faa89c4039c07c2cd4f5da857a45159689f14d545b4bf29cf44dfbfe5"
+    },
+    "reference/hippocampus_277": {
+      "input_sha256": "649913afb2fd811e142a6e75922d971eafe92edfb3725b12d7b36e9f5655ab23",
+      "whole_map_sha256": "2f95c1ceb4b913f001119f3061d547a387578dbdb124c1984a7f128d555b7f41",
+      "scalar_sha256": "bd96045a252ce712f7da0ccd73e359c2ceba773fb985acdaf97e76c467a490fa"
+    },
+    "reference/hippocampus_280": {
+      "input_sha256": "9218d22d7056f903bb938c5a44d7c1167bdc3a4b641c39d0190859d990c60d9d",
+      "whole_map_sha256": "4bd99130c98bedb3aa7b19d40080b22740e9fc7a2705f4b8cbedcc19bdb5b656",
+      "scalar_sha256": "60d87819cd4b50e987487d21f35f547815f35045d5ad48cc76e5db2e0a764fdc"
+    },
+    "reference/hippocampus_286": {
+      "input_sha256": "b5620fd18863b208b9d2fb65437cbd1882ce33a8de9691378f72f6270f230613",
+      "whole_map_sha256": "9f0fc337482a8a53a003bcae371783bc87c031189dc0174a17eda5295b14ca63",
+      "scalar_sha256": "8516a966c627f7e8f4c78a8346ea04a92c19ea1178b92e00ccfeaea11f3fb62f"
+    },
+    "reference/hippocampus_288": {
+      "input_sha256": "498838cd9b9554f44c4e1bf753bd8c4a50e8f562c7f9a5bb35ff0f03d13f24cd",
+      "whole_map_sha256": "0a39d6124b2c4818f57764203d25c8f7fab8ef4bb28c8616469e4eb5e0a23885",
+      "scalar_sha256": "7dd1e5738d598a22596fa74058812b53b774c7a5cf4a837a6b36103cc2115163"
+    },
+    "reference/hippocampus_289": {
+      "input_sha256": "e2e0c3549e4e1ee1a5d2211bc36d6f5dfa8f875cf9b311a455aab13f1c63d56d",
+      "whole_map_sha256": "7e5591530ed456bedc3f4657810c11cf74e1f6f65c544f25998639a0ee1a50f2",
+      "scalar_sha256": "120fffe8cf69be8b2319b199a15bec905a400b678958ec3fc801fa3e0956c71f"
+    },
+    "reference/hippocampus_296": {
+      "input_sha256": "dc8b16ff4e8c08a88b9b5df4ecf3ce159d83161875d406d382e4887f13371718",
+      "whole_map_sha256": "80ef6e4d088acae1a2c8fc53422ebd872c38d87c27a20a0eb82626a0d9af09bf",
+      "scalar_sha256": "0722846b7cf4f54cb778db06b86548083c13d345d6da2d550152190389317c52"
+    },
+    "reference/hippocampus_305": {
+      "input_sha256": "761ad364305dface0d64c3df1eda2993fa17469708f071688c5694476f747ce3",
+      "whole_map_sha256": "23ae5fa88ac0ae2b274df81113e46c8c6148d6d68a320630ac64da3cd683ff47",
+      "scalar_sha256": "6cd19b32bf142f1de2d0503bacb8e2e8d31e7e6a63122187d1169c0baf0f6d3f"
+    },
+    "reference/hippocampus_308": {
+      "input_sha256": "7d83498813483e2d83e95943e7f58faed46fd30b30140d45a10ff417b727d7ef",
+      "whole_map_sha256": "05f34639a2836c1ef885010cc0eb907cb2ef1113a9f71fcb4253f9a1857cee7c",
+      "scalar_sha256": "61c9f021bf83f948bdbd0c83189b775e5f0cf82e2fb7ec605c71584b0e2a8c88"
+    },
+    "reference/hippocampus_317": {
+      "input_sha256": "6cd2e60aefd9d1a1c98055b9d481c42376c54d64a5939c2bab56e56bf20f8cbc",
+      "whole_map_sha256": "5641dc2e1a5edde68b7f157df9f3dc80b63bbbb1be7badd8bae92a0008ae21fd",
+      "scalar_sha256": "5e8a9aac500d9d29d0001ef6ed16c6e1ae82bf4d80dba129799805b17be1a6e7"
+    },
+    "reference/hippocampus_327": {
+      "input_sha256": "d59a4fcae4b340d068eb0bfc8fba82ec8856dfc831740548d4d5e2d687f43ddd",
+      "whole_map_sha256": "22e11f5a6e9cb762908002cd784415c1c8fe60f2c41de39d983112e15c4ebcae",
+      "scalar_sha256": "3b8026789ee770a34cd18ed75959aef8271ac7a8c560291dd0aa48a2aa180fee"
+    },
+    "reference/hippocampus_330": {
+      "input_sha256": "117101286fcb3f2bb7ea8e8450fc728daf72f5d255dae7ef3d7c4ad6c4069047",
+      "whole_map_sha256": "9c38ec1973d2bd2e059d893bcbafac87af32354c45742fa5c6d920581839cd78",
+      "scalar_sha256": "037f3b697a98f633800b4f8b067cf3cb43dc0e65d587b8af5b1f20b749c7ac37"
+    },
+    "reference/hippocampus_332": {
+      "input_sha256": "4ec5f551b48a1c3230f0cec08236ab96371da6b4ec2d7eb499b7ac0cde16978f",
+      "whole_map_sha256": "73fca111d73afa2e9c8329d3f8d749e77751f50092b53311e8161a057e98e039",
+      "scalar_sha256": "fa252836ac480c37032f31cf5ced404d55b2ce57c35730116bf8c4c93b8cf1de"
+    },
+    "reference/hippocampus_338": {
+      "input_sha256": "8a11b88a06277421aa75d9e30b30e00e1054293fbdb95067e8f1e919dc652642",
+      "whole_map_sha256": "fdc7f6d6e80ba59d109047b14443bb499389fa5fd3bc7404f0a4bc5991627400",
+      "scalar_sha256": "e728fce9a3b3607f1dfa1c4cba022e6d44395e5666cb8bd77878df8bffb84fe6"
+    },
+    "reference/hippocampus_349": {
+      "input_sha256": "2ac7999f40a4bf037c68f074e016739080d2abbc8ff8ce2cf6e3988dba21320c",
+      "whole_map_sha256": "ed8d1053be17813fd24d92620d54f6703d18c47696d5aba55b81b467b5f6802a",
+      "scalar_sha256": "bce3304e2bb5a2fd217b416cfda78b8d76815a0c161c7c74ff4b7b2340a29263"
+    },
+    "reference/hippocampus_350": {
+      "input_sha256": "e32025a63b943c4400be28e30cf3d2c39e3189c0b0c12328e2ae8ae4752eba44",
+      "whole_map_sha256": "cbc9c3dc2e53a509e11f50223f35f71be10ff8dcfa04f2a0dd5f9e8c4e9827b2",
+      "scalar_sha256": "180a1513eadbfa107069755c65ff33781bc91f6869998875d4a66ff61cacb58d"
+    },
+    "reference/hippocampus_356": {
+      "input_sha256": "8bfaf48d4a05e26938f8488b7b2606f52517d26899e24a27fd3a38595159e8bb",
+      "whole_map_sha256": "35bda232227c91d161e3798b367505fac4b76f58c6c2f2784d1fa61570b412c4",
+      "scalar_sha256": "7a48fa7ece7c9f9743f56a4017c111af19a9654e11f6a904eae00fb8f940681d"
+    },
+    "reference/hippocampus_358": {
+      "input_sha256": "8c74932792bbbec3b198a736138f09333758e3872385e8d864bdf2e14144d503",
+      "whole_map_sha256": "ac9a576523611a8701628403fc40f662e6c7ed52cf927e44e14bca18b51cf3d4",
+      "scalar_sha256": "3c06c73de3c9615b393278f34dbf9ccba59011a5e91867cda5cd9278f91629e8"
+    },
+    "reference/hippocampus_374": {
+      "input_sha256": "2bbc503cbba6bdb337cdbc51de862c39d31719eed4294e353a42e794669c8775",
+      "whole_map_sha256": "01aa039ebefc984b7a7aa9b09490cd50d667f4b9a3cbdaf51f7e587eef6b30a3",
+      "scalar_sha256": "07bc55a7d5a3778f7c405c8d4a159f0f5e91745fdced27ffa38f476a1b4c49e3"
+    },
+    "reference/hippocampus_394": {
+      "input_sha256": "2d560070208150bafe544356866f45aa0122a8050b583292e0f25818afcd7026",
+      "whole_map_sha256": "4338e68f80b46d081de2691d49c726bd4f44c32d3cf63224fc76c66ab95abf72",
+      "scalar_sha256": "ea6b9095a9e77d82f7d92b88ae9ef926325d54e4aeeee6e3eee2cd184628e151"
+    },
+    "baseline_seed0/hippocampus_017": {
+      "input_sha256": "5af5e5d2cf4811cd46faa6be2f827409500aba616b3938ed395d2c74bdeaa0da",
+      "whole_map_sha256": "d1c4d3f4b569689dd24b23a23dfbb23c30d459e6c4eeeb9d46f2e99a3c7375a3",
+      "scalar_sha256": "2ff51cac75711311da6951aafe26553d2ac63766b4a0988ea959467ce1251783"
+    },
+    "baseline_seed0/hippocampus_019": {
+      "input_sha256": "4da8605ae8a9c3d13d2e6846a6a6ea05758b24eda977d7a8c474ce9079219cf8",
+      "whole_map_sha256": "e7a5ea89cac535db76f8f23eef568dbe03a2d5e22351af91d53e98effaee2a43",
+      "scalar_sha256": "8d267b77c869a28be55402ec7ebe8a85993f12cdf71e2217447439713bfbb97f"
+    },
+    "baseline_seed0/hippocampus_033": {
+      "input_sha256": "413573b94bd1cfa20c30cbc3407cbc2899e67fa30d954c807e72900474269892",
+      "whole_map_sha256": "061f6a28eec6044058e600fdea73b8db35a0dd0747517bb9ac1bf6fbb4e29014",
+      "scalar_sha256": "a0f9d2ef4f2242658c90fd2f2518dfb8783fc1aa6b6022e606015e36139a8045"
+    },
+    "baseline_seed0/hippocampus_035": {
+      "input_sha256": "ea9d702f372a2fd5179fcf7b65ce350c77947b89b3a60a6a4afda428c16e81e0",
+      "whole_map_sha256": "19e66f091db02958f02c0f4e30b8b37ffe59afefbb47b1abce0f090d041a5839",
+      "scalar_sha256": "11928f18f011bb0da5d3646db4c0802147ed83eb20b899d0e73dbdeee960326b"
+    },
+    "baseline_seed0/hippocampus_037": {
+      "input_sha256": "381c5c014f4dbe253e182c0ed0e5f867eb2173a3fdc291e2d7c9fe561621462c",
+      "whole_map_sha256": "5e060ac59705897d0f79ca45bb403cd9c5468afa2be2ec302b2a7663fbf43d11",
+      "scalar_sha256": "5130e891826b9be986015932affc026965ac1cea8bd9bae455abb20b6ae4c57c"
+    },
+    "baseline_seed0/hippocampus_049": {
+      "input_sha256": "cb38f484a15e36cfd2f23496eff65ab184616c50c5ecd002a0df9e51e3d17c1a",
+      "whole_map_sha256": "a2918a4af2faed360e06231176a75951f155b0f2c9ff9f379a8db170bd47ac4e",
+      "scalar_sha256": "71e2febbfb39ac66c59a59877343a676b813fd106dba43a033a688c1a8aa3e0f"
+    },
+    "baseline_seed0/hippocampus_052": {
+      "input_sha256": "5fc383d29ff02216d5e6b00b78fd3ae78b36795be3bcbfb7b8db8ba2aa4ca7f0",
+      "whole_map_sha256": "ac03fb8255d5ef70d386480e7b7ffe7247197c7ec4ce93e9614f239d91a2494a",
+      "scalar_sha256": "bcdea8b9635891440f8e56df02e2c8405a431329c730ff936403d990fa633774"
+    },
+    "baseline_seed0/hippocampus_065": {
+      "input_sha256": "c1539182a8a97c26e2f9e8351d5e52d02d4bf9c2bbd3d9a16a4d267d1f3dd40e",
+      "whole_map_sha256": "2937ac1349291b6b4c0d812b45ac6844caae93e04e39471e5bd63af20768875e",
+      "scalar_sha256": "110a502073b05d001b7dd4c9ca923b921e09a504c32f449ba23a6c911e1b74b1"
+    },
+    "baseline_seed0/hippocampus_083": {
+      "input_sha256": "0751d44cac68862024c8ed4aa714ebdb9cdd3e2feb26256787491bc1446e1693",
+      "whole_map_sha256": "17a827ac433c7a646c352f4d86f88fd644e2c1dba519d9c15e94784c6068f463",
+      "scalar_sha256": "c4cf30ebc124ff4909645d3409b9ee82ac92c96bde088c9df184038563a2c1d9"
+    },
+    "baseline_seed0/hippocampus_088": {
+      "input_sha256": "af5306d7d1306eac439727a51257eff4151374e7c70cf822e0a96e4d818f5f5f",
+      "whole_map_sha256": "7b68b104b7216b20f54a44489652bf4c92a2db672ae8ab913c4e502f99373953",
+      "scalar_sha256": "7a6058747cbbf1568e5039a0c10bc74c72e9646937b732df4938c4e15534a468"
+    },
+    "baseline_seed0/hippocampus_090": {
+      "input_sha256": "e71b7ada95c46032bfb7b2498423786b0a9b04ef660b0c9ac7efd94d052d2779",
+      "whole_map_sha256": "f0748b5d6f83df7c55588897270370268b5cdc71a1f3854d316162dc10abd58b",
+      "scalar_sha256": "8f09bc0a221f62a2576903775e1d742af8e43b182ecc39dbfe1b8bdc4d047193"
+    },
+    "baseline_seed0/hippocampus_092": {
+      "input_sha256": "13684c425284acc5ee5d053ba2a64c7e37ad7ec4bb478944159133869b37e45f",
+      "whole_map_sha256": "a8fc12fd239a8795b9de583bd1914b57d6dece1f842220476e84774d13c66e33",
+      "scalar_sha256": "613f7499e1ab065a2346b1ed7dd08cd6000db5b5d1a729f656359dab0ea3070d"
+    },
+    "baseline_seed0/hippocampus_095": {
+      "input_sha256": "9aee6c5ca25f93e6ccf6d692ea2c6f48cc64d1b1a040ea06be678a2ec0757133",
+      "whole_map_sha256": "3d925fd3eae4a9f31c84dcdffb3bb3d74977d53cbebe737af014563d6646b1ba",
+      "scalar_sha256": "9ae89bc3fa3eda4101b0b85cfa51ba17d0732440d31a3d3513ed2262cfcca21d"
+    },
+    "baseline_seed0/hippocampus_107": {
+      "input_sha256": "6b5dff10e4124011703f1f160db03eec5060a4970eb892b7529e2265be3a6b08",
+      "whole_map_sha256": "0d7ddfb01a9ac4c537c65ab08a981ae945f732c67b7de2ccb1d8e1145f723199",
+      "scalar_sha256": "905a6dbae795a0456da57284b39c85790d1ebea9998c3d70abe70154be107588"
+    },
+    "baseline_seed0/hippocampus_108": {
+      "input_sha256": "896c8637281e63522667e3e252682e333382368919f96e7a9cb05d64c7fcf35a",
+      "whole_map_sha256": "109075e11692a2b9ff493d0dea832a0f8badb222a8fcd09e6bfeb87429c6c358",
+      "scalar_sha256": "23c5f40d4b36997803cc0323e35dfe0998892a8c199af71ebdadbb8c3bff228e"
+    },
+    "baseline_seed0/hippocampus_123": {
+      "input_sha256": "1af8524320c4b4490b775252a76fbdf1657404bc067517409f61b545e47197ab",
+      "whole_map_sha256": "ddf3ab80970d333665659a0d1fd4f79c97991868e6101b7055a1badba2d58837",
+      "scalar_sha256": "021b80da57f8a2005290d03af80cf857b78289b615975c3b8ce2dcecff53feec"
+    },
+    "baseline_seed0/hippocampus_125": {
+      "input_sha256": "da5b446a66464bac23ad2d26f73e8d4c0bc7564e23d9753e16c68085591810bf",
+      "whole_map_sha256": "7f49baeb43af2139c9d8b35d51390e69c373916dff9509068cbd3ab06e611668",
+      "scalar_sha256": "dc802b6c49bc3021385cc66918ee0869ed6b2c57189f74f1998313678452e9c9"
+    },
+    "baseline_seed0/hippocampus_157": {
+      "input_sha256": "5a1cbb221bdefe1744a91b560db3701a3fa13ed041fce88bd884d0021dbde750",
+      "whole_map_sha256": "383d92d82feefc1018f3e53affe891bc7f81f9ad4502fb3a4e7ea3dd40f0d8b9",
+      "scalar_sha256": "2a063c41d9d6476e819fad832712b41ba8188d1040666f2b9da4f54ca250bc6d"
+    },
+    "baseline_seed0/hippocampus_164": {
+      "input_sha256": "6bad4615fe03a6956e7a1c0528babae7c41fb4ac826744c56a3b45d3de06d117",
+      "whole_map_sha256": "9518b4247b890d845f3f85d237e29ec8b8413f9ef5ba1f5772851f4adc34b15c",
+      "scalar_sha256": "e818004ab96f31b556c51d6d0d4bac7dd72ca109f078b11aedc9482aedf16eea"
+    },
+    "baseline_seed0/hippocampus_169": {
+      "input_sha256": "af6348eb52655db0b1c7e2efc7c1c8942f87021968b7aa7f00cc1bf26464c222",
+      "whole_map_sha256": "e62c299a8511bd11ccbc1f9b1232c43b0f5fb369acac1a76afbf7ec0d4317a2d",
+      "scalar_sha256": "ba2cf2be950d9290d0e55585c7946831f71b116f61a67c52d8aa8b12b918dd84"
+    },
+    "baseline_seed0/hippocampus_175": {
+      "input_sha256": "497ae25ffb9669cc2dd46241e0c1929506115dab9330d63655ea624bf2ecc480",
+      "whole_map_sha256": "673afb6aa6da098d4766bea64d4c00ad6d82368f9e6f32e981e1c6e85039a95c",
+      "scalar_sha256": "48c15d7c2eaca2f07cba56d17b8ce7212ce2bb878cb00614b8cf0056372231b1"
+    },
+    "baseline_seed0/hippocampus_185": {
+      "input_sha256": "1a1d5a33318251634feef5b93e9e4b4c3afb533a8f8d4ee5a2ba91cb15561d71",
+      "whole_map_sha256": "4543fb6e828186170151a3d1eda59753822c2788790070eadb991f0f4f749441",
+      "scalar_sha256": "27b042095088847a6dd416a2eb669fd476ac679220b626bc42a8f063ba996af9"
+    },
+    "baseline_seed0/hippocampus_190": {
+      "input_sha256": "330c993f770e81f59d3efb57f5be57008eb2ad085162ded0bf796251a04b9432",
+      "whole_map_sha256": "3f384470828d2b4acb4fc2522084039e314e1fe75648aa69a28b01a882cf99e2",
+      "scalar_sha256": "1c1596db10b1542a6530ad4b966e0319866fb19e22e5e58c5349c4f9cea388dd"
+    },
+    "baseline_seed0/hippocampus_194": {
+      "input_sha256": "54161fdfb7bb536f14d5c77796ea1176095fe9c137e048526f20da3076b3aa5e",
+      "whole_map_sha256": "aa9568b315fb916ae44c805072edf4c5631ed0456749637faa19bb112be943f3",
+      "scalar_sha256": "3e2bba0c10488c5e117a344626ed56866af8ff0070028224ec1a75f189589363"
+    },
+    "baseline_seed0/hippocampus_204": {
+      "input_sha256": "8662d0cfdf3b2bdd0f0c54d71b6b839281bd559f0e0ac41484771e0e19a2aa9e",
+      "whole_map_sha256": "ce1d19a018168b23d2e95a43a372975ed4d4f202b09178cdbe0bdbdca02e5756",
+      "scalar_sha256": "29a0425f33e58546eff7c71fcc24cb67ef9e0ed41fca1c15373cfe3e244f04d6"
+    },
+    "baseline_seed0/hippocampus_205": {
+      "input_sha256": "725d466326eacd68969574d6807ac6283ae56bbfab1e2ba6793ec24a9b7ea4cd",
+      "whole_map_sha256": "d0fed6b46564c5551a9e2eee6f52204630f62bf18b46576b65c619ab789fc11f",
+      "scalar_sha256": "08f6ff9b5287f66f701ee309e0b8422d06869d6cb28c790846f2894f67b80eee"
+    },
+    "baseline_seed0/hippocampus_210": {
+      "input_sha256": "d49a22d222e7f9c42eb5436aa13cefe3c9d818c2d1974a583e56d09fe6e27e8e",
+      "whole_map_sha256": "f5f59c7ba8200da5c1834a21e69dfc3de847a0418df4f21732761aace2da641e",
+      "scalar_sha256": "c836e523d7c7bd162aa8875689372f51a57bb8747e00da4f312f1f8b9f478a89"
+    },
+    "baseline_seed0/hippocampus_217": {
+      "input_sha256": "36abf04dbe634e9afccb535495a9d3ac1908b77ac19b3d81a6074c0c84126d7f",
+      "whole_map_sha256": "274b8d2ef2c2dd1825a76538d9d8b368bfd1446dc0edcab4dbee9be0001a5f83",
+      "scalar_sha256": "76245ead4c3a950ed35de0075925881eea931080ce54d2e22cece2d86ce83238"
+    },
+    "baseline_seed0/hippocampus_219": {
+      "input_sha256": "a9c72a29d5bbd7289a6c32fd7e605dbcb8307283a77a28281542ef22cfe6830d",
+      "whole_map_sha256": "30aa0da04968ff91024883f554b7abcc9d0dac99622cf72f596612f8bfd41dd7",
+      "scalar_sha256": "afd66992ef1226331fc88f8647d07352a6786208bfb4b020bb40cdf9334ada63"
+    },
+    "baseline_seed0/hippocampus_229": {
+      "input_sha256": "c2a674602bca743c82b9a29d33b771d3812f2fca47ef67a4368092a100788140",
+      "whole_map_sha256": "4f62d5a897344d4d74d9ff66c9319f770d3af746d20d277cc61677a656dd9a42",
+      "scalar_sha256": "4d5dc2c782b1e9095ffcf8b727e0ccd59782b478bf465c06df475e27f2899027"
+    },
+    "baseline_seed0/hippocampus_244": {
+      "input_sha256": "acaa139133d3a350feeac6b9dfcd598da911dc6b74f337f2fcc14d4f818b4022",
+      "whole_map_sha256": "d508544428cde32eb63cce94094e4615404448a49935eca00591d1971dcff793",
+      "scalar_sha256": "0d3e0be76253d3c2a5555719bd8870052994b5bc5d7deea25c0f8101adef52da"
+    },
+    "baseline_seed0/hippocampus_261": {
+      "input_sha256": "ad877c880889e7455470888f6e5ec293e4a54b8ff4caa3f91352df5e7f9fe22f",
+      "whole_map_sha256": "e2d805e9a2febbeae06af8c5eaeff1ad4fd01b8ddde4f725f5c4b919c0929fc2",
+      "scalar_sha256": "56616533037cbe66d5ae5ccadc976fdcdfe5130f610a3b201676899050c351d6"
+    },
+    "baseline_seed0/hippocampus_264": {
+      "input_sha256": "94dc1e7d63dfd28974e012429b67e4d91d8bf5fed02c96d6a59c68e88e06fbc1",
+      "whole_map_sha256": "9d154bec03f8a60d8fabbf595ebfdeb47533464d5a152e0de0fbec5a0b3b19cf",
+      "scalar_sha256": "9ba8e4a08e698c96327a9faefaad12421731dfe0a851ee941bc798791409ad11"
+    },
+    "baseline_seed0/hippocampus_277": {
+      "input_sha256": "0931a206411e4e11d304d3c88e3f4968551e521463d94f86a75e74b3c783fbf7",
+      "whole_map_sha256": "beae8a5488eb2acff3af2587b87f05e7b058715022b488b437243735336b0a5e",
+      "scalar_sha256": "36fcf5741700cea119c1b410bfb39ebca1f059b03cdf118edff7118b54f91bab"
+    },
+    "baseline_seed0/hippocampus_280": {
+      "input_sha256": "3dc4608abf91996290d4932ddac2a38548fd6114e844fda33a27e6dec73dc130",
+      "whole_map_sha256": "89e6478364e14bf02737a14d7e29635de2c19e202f133d491dd6f1a9508038da",
+      "scalar_sha256": "448a458928be634f30e60d03f7c21fe23cb0c6da3f1f3865d4b2a5a3cde335b1"
+    },
+    "baseline_seed0/hippocampus_286": {
+      "input_sha256": "ea38d009401789b39006cef0773e65c87cd9960e6ab60ba2f087816fd33b83bd",
+      "whole_map_sha256": "e6b65e644196fb57a9711a02be3936b49d9ac6b2b70e186e991d3150bb63415c",
+      "scalar_sha256": "c1e679ab95a807bb8d11ce4b72a6074ada7cf46d15121e86ebb407d27267cbc0"
+    },
+    "baseline_seed0/hippocampus_288": {
+      "input_sha256": "bebd55343e7489514f3f56dd847c993dbc752271ddd1748e0d459ace6069f7d6",
+      "whole_map_sha256": "18b876e8213b89b7f54e76ea8da4e771b846eb47cf8d1bd6377fb07bfd4d02fa",
+      "scalar_sha256": "fcef551cd3d267325bdd4fba1eb8087f0f8ed3c73bec354e0b483c55b73aed71"
+    },
+    "baseline_seed0/hippocampus_289": {
+      "input_sha256": "09c03834b6425688beff678adc2c0635598810e4747ce56a76d7644fcb3ddb89",
+      "whole_map_sha256": "a0f1249306b0959ae758f8be870aa710f662228682d8991461a4c3fd8e8693fe",
+      "scalar_sha256": "37b7734505e7718e1a96a3af69db0e74a248ac8e64e61f69cf5e7d4344337091"
+    },
+    "baseline_seed0/hippocampus_296": {
+      "input_sha256": "b8d4db371a79f0dd742d46b566f7531c8c3f15ebfd507f7a8ae0ad72b59c8775",
+      "whole_map_sha256": "17ebb1a4f9fb1b4d7f907e0f152e53b5c290bd63faa731a8c9f266931011730c",
+      "scalar_sha256": "4d8cfa75fb465a5af129e8b5836851a41945aa9ca2e4bd4c0c0ed5b4aa57c317"
+    },
+    "baseline_seed0/hippocampus_305": {
+      "input_sha256": "d6892618a88d3d53ccd991a318849c7919a4a37f9cc114f7c043be3abf314d8c",
+      "whole_map_sha256": "b9676ad536214f25853ba05c0ddd653ba8c77df6e40c18d8c7f54066f1fcc54b",
+      "scalar_sha256": "cbce027e54a3f957f13d89b2ae5dd39a96ed4287ed87f62aaa3bb2cbf646621e"
+    },
+    "baseline_seed0/hippocampus_308": {
+      "input_sha256": "88a758fab66be1fc70c736ca4ddfec2690412d374f4ff303001db9747d179ee7",
+      "whole_map_sha256": "5146fb394035296544ffc0c8cfb836f14347c2dd7e6330451486aab2849962b3",
+      "scalar_sha256": "576a1cd0ba18917350c2a0aa023618fdda860bb3fd6aa50028dc2d0d806bb074"
+    },
+    "baseline_seed0/hippocampus_317": {
+      "input_sha256": "0fba442aadfb4f45ef5d46e26367ae8f179f7221ffe836cff80410f9c5e3bcf6",
+      "whole_map_sha256": "b973d309d576c57961617c0778286d3bdc3a0f5fa88b274ed9eec11f527fcebd",
+      "scalar_sha256": "1e2bbc2f9c22a67552df6f9370bc881def11e5e87c5c44c55916c1744a0e63f4"
+    },
+    "baseline_seed0/hippocampus_327": {
+      "input_sha256": "23145c44c33d32db09ffcb1104ffbf88200c29acd159fccf83abde2926def85b",
+      "whole_map_sha256": "cba7ffa20189df3871d43b2fc8cda0f1bafce5598813bfb91655edb47d927b1d",
+      "scalar_sha256": "6f6946cea4796737a717021a862ce63dda650ed39ab914fa937163a39c0b5c9f"
+    },
+    "baseline_seed0/hippocampus_330": {
+      "input_sha256": "b4d11aab14246d6bd6e65c6ca2129dd399fce429a67d8dc1a8f74c5af26ca6c1",
+      "whole_map_sha256": "7ca2eb1b8e7d8fb495bbcc41c3051d6c90b464a6a9b06e9de03274e56f35e1c6",
+      "scalar_sha256": "3fec8443ac1022b95c91edf008aec6f00aa47c48f36540a221f3c5e128421d42"
+    },
+    "baseline_seed0/hippocampus_332": {
+      "input_sha256": "47cba3fc4ad4c0a176588401029510381d96dde77a1b75ccf98ca97dc065174e",
+      "whole_map_sha256": "3f5cee607ea7877ea6441b7fc4786575299b1417d5fe368116a9ebef8d6b85d9",
+      "scalar_sha256": "feced51edda020bc099580259d8c64f2b2c1289ead0f956f427e5db3416eb24e"
+    },
+    "baseline_seed0/hippocampus_338": {
+      "input_sha256": "58f8909e9a2f9abeb0030a5899371a7dae40671493fea0a7d976716bf2fc4128",
+      "whole_map_sha256": "b7c3eb4c48892203b653891f35f8333a15b705ba79beea47da9aacfed5f873b4",
+      "scalar_sha256": "57acb174c5931b3a4f93ef64edc6543c85462fd06d60f60927cc63a83e573604"
+    },
+    "baseline_seed0/hippocampus_349": {
+      "input_sha256": "aacd9f0bf564e483a8e55508db3cacf22cc755b11de6e6529fb1e3df5d4740ca",
+      "whole_map_sha256": "7e798f862037cdaff8b9c2bbe3d7136de4d2979cbf3075c4bc1e28713f12893e",
+      "scalar_sha256": "24e8f910751df8261214ff182fb91d7ae8654ab25575f89417d2c0a3d8fe26e3"
+    },
+    "baseline_seed0/hippocampus_350": {
+      "input_sha256": "7eae3efd85f3d2ea2fae9e7d83d2dce4de2213c9600094f4e46da5ef71f4d1cc",
+      "whole_map_sha256": "e1856a4ea2c0caad027dab203bd48220ab99036101f9d9852d5141bf93f40a97",
+      "scalar_sha256": "74f01ff5b3e644f119a16d644cc6e5675a9bdb45240392396e6e78faacaa7b80"
+    },
+    "baseline_seed0/hippocampus_356": {
+      "input_sha256": "d36ba804735a20bf1791cd33770e409b189204abc0f6a39dc86d7a9b5154b842",
+      "whole_map_sha256": "0975b185d32c30994f4e61e68395b33d5b6f62d0c66c95fdad6b73c3d3a5e659",
+      "scalar_sha256": "51f241679bca247d7cfed56fa5b4dcaf5d93248f868efcfc48ddac1ec598597c"
+    },
+    "baseline_seed0/hippocampus_358": {
+      "input_sha256": "760b429e33348f710e69a16ed7840e70034cdf9f5bfa5a5f6472feea18ad4391",
+      "whole_map_sha256": "482a526ae87089f64b00347b733db9044ccf8e8bf7cb0b0ce292f2cebd3c5903",
+      "scalar_sha256": "13bd8907dea753656b46a578bcefafa7e1290ab7980ad9c6f5f53558530eeeda"
+    },
+    "baseline_seed0/hippocampus_374": {
+      "input_sha256": "5b10e2682b15bcaf9019d07c426773767916a8e6c845c2b6fb88304088c5eee2",
+      "whole_map_sha256": "f3e7adb50bccd2d048086fbdffa1853cd300c8139ba20bf25bb35b4a7db4e067",
+      "scalar_sha256": "93942d9e92b138cafd95f77402feb0f9d4abfe8f37b4e1362954f07da6c3a10e"
+    },
+    "baseline_seed0/hippocampus_394": {
+      "input_sha256": "e3a01cbdb04a70f2d9a2225bc408c32b5d843ae9d73577f87f7ce5884d183f25",
+      "whole_map_sha256": "9099127631df7355010bac16f590533f8670e86ca5d335edbff4bea6327b3899",
+      "scalar_sha256": "1b4b718ea3d4fb5495bef389a983f402b78f41c4742d3541fac5d00b8a2646b3"
+    },
+    "augmentation_seed0/hippocampus_017": {
+      "input_sha256": "6cbe83ea4f24a60fa488f42ceef83d66817b4886348f2c957faab3d782c7c4e3",
+      "whole_map_sha256": "82a9c16169aa9ff253187a4dd8640cf6a2d3b5511e4d4ebaa0d356d8f917d1a1",
+      "scalar_sha256": "b05e9823df74dfd6fb1ff55f4c22294e069819f67ba7226feae345956d1c7a65"
+    },
+    "augmentation_seed0/hippocampus_019": {
+      "input_sha256": "4f2c9111e4b43ce1a278ce51028eb6190bb21a71a5adb0b8696dbd7b548844d0",
+      "whole_map_sha256": "aac864e3c51b2b71610170aa4446f2d65e4a9995a769fb424934a4520007afd0",
+      "scalar_sha256": "036eda0130d324ca95be276a7c38274d1058dbbc4115bbd2bacc5121f16bf8d6"
+    },
+    "augmentation_seed0/hippocampus_033": {
+      "input_sha256": "2c36e04ebfac3e839caec24126fca0083c323895e39dd44ebf899315afd007fe",
+      "whole_map_sha256": "e331df711e4dc5d3647e72f980201272d47f3fcf0f44bcafca5620f3bb406f25",
+      "scalar_sha256": "802c1aabb6553fbfb87ff1cccb66466e176bbeda8b54886d5e5e6c67bfdf446a"
+    },
+    "augmentation_seed0/hippocampus_035": {
+      "input_sha256": "539ae11635641c6d406eb98b505793066f1f899f064edeb0afb1870547a41a0e",
+      "whole_map_sha256": "5d568cd5232cab753dfdcc29e6d7d3f9ad6648d402837524e2a4ef7d5e4817d4",
+      "scalar_sha256": "3000a7400b131008ffe94822d37fa41c42383598bb65f2636419ddea36d31197"
+    },
+    "augmentation_seed0/hippocampus_037": {
+      "input_sha256": "9153d9bf53228a45263dfcfe3b366ff5f3e86248e6b6302e5f427b64aa699613",
+      "whole_map_sha256": "0c13d5ac37f85b6dd0c5c2e4299cc301abf3fe3af9663e2c25b00ee6262d6ca5",
+      "scalar_sha256": "c41a615718f1646e37ec4fe6f4576cfb8ab01767c8fe0e425be53dcfbeed78a5"
+    },
+    "augmentation_seed0/hippocampus_049": {
+      "input_sha256": "67bbbab3f7513d880cb261f8659a02d6e7ad1e51cfc825931aa3e6d8bdef20da",
+      "whole_map_sha256": "f886218430eb360dbb335cc3fad343dbc889bd691bd89272bc0cb79587d29fc0",
+      "scalar_sha256": "6af6504bcf39f58160330caed9550ce18bdb3f4ebaf2c1406a5f601607182016"
+    },
+    "augmentation_seed0/hippocampus_052": {
+      "input_sha256": "5ccafb2ffdf96f92e709696d14a9f21da899eba0cd4ecb686cd230f0e9591597",
+      "whole_map_sha256": "4b93e08b2bca182c92624071c0a1e029148a6e6507b8e996aa010de6c97638d3",
+      "scalar_sha256": "9a2b079c9b3d681a888758c3baa7ed9d8a722284fd6679f77e13ae6dfba86bf2"
+    },
+    "augmentation_seed0/hippocampus_065": {
+      "input_sha256": "294a588296156a0a6724db9c5631a495640a9b4cfb6cd005f5158b866e7a3ef6",
+      "whole_map_sha256": "1edb3f07006451a910cda9dfeb3d512c308513e5b6e22385a44a6c7db1f9ad7f",
+      "scalar_sha256": "51ef0b68da3d235e05639a1cab6a0c974a153debc842a1ec0f4babd1e12d822d"
+    },
+    "augmentation_seed0/hippocampus_083": {
+      "input_sha256": "bac87a1818fc1cd37ede66a1af73cb4e99dd82168aba8b421773bf88ba5d3ab5",
+      "whole_map_sha256": "3e5badffc6a2779868ea6f4e8754794d575cb4713c9532e89d43b05fca027e40",
+      "scalar_sha256": "24213e57cd6b8fcc368527ad03afeb06568ed93e8efa38815d5a9a959d9d61e3"
+    },
+    "augmentation_seed0/hippocampus_088": {
+      "input_sha256": "a3f6d2c804d974bb60d934a15c49be346d8abd1a80b533e456547ac5dfd3ac57",
+      "whole_map_sha256": "f7afdcf5540f87c2c709424f6f3307a075c9d09cb539d44bf34851e84c8d8d18",
+      "scalar_sha256": "851a4c3677fad51f926ca986b54eb3068db1767e2ed433af95eef966add47ece"
+    },
+    "augmentation_seed0/hippocampus_090": {
+      "input_sha256": "f13d08ba02e3fe48292bc0cdbce4b741c73d939f26f5eba9d6048a1cce14b6a2",
+      "whole_map_sha256": "112bd470f99c3c9ba8d6a29a29f6132a55e19c15573eb99d5409bfd142d470bc",
+      "scalar_sha256": "ceb3fe0c781bccf5af7f28229db4e15457098c8c094b12cc1dad97b9b70c7931"
+    },
+    "augmentation_seed0/hippocampus_092": {
+      "input_sha256": "2a70b882cc9a5057022208ab544a178011ee6120f8110fd2d9dc3341871061e0",
+      "whole_map_sha256": "712e01547810a4a60fcc95c57f537cd263735e73ef9edc2e85d6556b548e281a",
+      "scalar_sha256": "6ead18a7e067340f55b1857f7aa38e35827a0edb2b8e83eb0443ce5c21d84b83"
+    },
+    "augmentation_seed0/hippocampus_095": {
+      "input_sha256": "888bc9f752dc9018fcce1ce837f2f532f36dc8d40c05a13900a5d1748fa666d6",
+      "whole_map_sha256": "b54b8d17904a2a2260dd5598a477119f5779878d337c642734b0228cdcde5c61",
+      "scalar_sha256": "0ac3b61251fffd4b66b3efefc7c53b21288c25843daac8c9029894d768347776"
+    },
+    "augmentation_seed0/hippocampus_107": {
+      "input_sha256": "aceb493885de415fc85ddae4db2008d420b6f418b4b03eee1bf2f369716940e6",
+      "whole_map_sha256": "3bdb6e256b8d2b7de8ca8b8ce0e279a8a68dfa851c82a7f878705ce375f94baf",
+      "scalar_sha256": "c995f2d5bfc999e9b28b9a1efe69b90ac4da15e1fd1b06829eabde27792a8fee"
+    },
+    "augmentation_seed0/hippocampus_108": {
+      "input_sha256": "f8b8ba575cea72a4d353247d96addf0cdf49a2213e20201619a2dfd0059b2480",
+      "whole_map_sha256": "6a8bb9fd1019cd4eeae2cb1953baf707bd5e8451cc687c3b38f69e353f9cb5a5",
+      "scalar_sha256": "526eb601b4b263cbccffd1a5a1d5de89574a5bf2aa591135573bb70da5f6d049"
+    },
+    "augmentation_seed0/hippocampus_123": {
+      "input_sha256": "59fe6057845d501b6664786f0a8f017159a07e7d41b7b236e0f47f9c97b897b6",
+      "whole_map_sha256": "d47b5b23114df4887968594b0c27e8363e98e821d192d400547ab90138871974",
+      "scalar_sha256": "15829d927029722d40b24f4b7d52aaba1d830f5f59e12052a2fa7bcb83910c67"
+    },
+    "augmentation_seed0/hippocampus_125": {
+      "input_sha256": "1798cd3be0f0ab6da8168e322fc726caefd0a8786cd0549ac3bcf819e2e9d692",
+      "whole_map_sha256": "5de5470ccc6010facb22098c5dfbe123c1a7b9311463b18e4dc298587cf83917",
+      "scalar_sha256": "56909f0bed385a4e186ecb1b50e5f6d78ee0251e0bf37f59d41b52027610355f"
+    },
+    "augmentation_seed0/hippocampus_157": {
+      "input_sha256": "95bdd15398de823e9d059d9726dae878f8d334502a8a0e63f2e6c7dad2521ead",
+      "whole_map_sha256": "9ea32b508e8ec6d08c93276b7749de9d3cd773e5c7c8e2cc3e3954cd768fbe47",
+      "scalar_sha256": "4786ee9e6047800b1d690c0d9e2957ae089ae6da4778d9a9047b8f8f3b13c3a2"
+    },
+    "augmentation_seed0/hippocampus_164": {
+      "input_sha256": "132f518f7a49398ef7ed240279061dcce6760a7b76ca95453f726a81e60dad75",
+      "whole_map_sha256": "0c4c9956615d657ca726d8537acefec3bcec726493589f47b5ba15795e723ae2",
+      "scalar_sha256": "40c522019290bd719237eff9a9970d08906c7ebc9a4f365bef86c78c9be68651"
+    },
+    "augmentation_seed0/hippocampus_169": {
+      "input_sha256": "420dd0b2436781a4ac1417de7f4dcdeff0487d80ec5a3e5cece1a60f1b5f5f28",
+      "whole_map_sha256": "1b96de02ddc011a615f35b91933acf653a2d95588cd8ba0ec6d6d1da8e6a62dc",
+      "scalar_sha256": "1dbe9bf95a24dba27c8a52f74592c20b3901bd5df14562f86e7becbc1682d925"
+    },
+    "augmentation_seed0/hippocampus_175": {
+      "input_sha256": "b61d3b869b490173c615e00f99e2594b06e98b424e944741e64f27bd3a839b0e",
+      "whole_map_sha256": "b2c7dc7d5c1c2b8f265e27e044e2a7c4eda29ae8bff4a1ce8314c9295f241496",
+      "scalar_sha256": "b3051dc60dbcbbc4e9af49612d5ccbeea18c2cef6c405e8eb9a37065e5274e54"
+    },
+    "augmentation_seed0/hippocampus_185": {
+      "input_sha256": "44240faf1a4819a28a095233627cb13de085108ab352376aa9f9854f2b90eb45",
+      "whole_map_sha256": "ded4897b5aa96fe1b07e5b7dea907b0eafe37a26204e760c9d542d5c889ae6c6",
+      "scalar_sha256": "3583e771c44847d8f2a90db411529e21a86662ac36e3249f0c849d808af560bf"
+    },
+    "augmentation_seed0/hippocampus_190": {
+      "input_sha256": "6399bc86c39536c34a044ea1eee097c3971750653bef93fd8c8a0f5e2741f8c3",
+      "whole_map_sha256": "5d5abcf8c6f8536b98c5d586fde847f4b7a18906a356479ecd7fc654d0478068",
+      "scalar_sha256": "fa3c706730a9957a8989010cfe72979d9d7316334a5f52c8014b14d71b8caa6f"
+    },
+    "augmentation_seed0/hippocampus_194": {
+      "input_sha256": "6c034814a35238ae55a0734801356aa2313fbfb7bfb9bfecd2dd00247d1284fb",
+      "whole_map_sha256": "f6e0a08b2ca172f794f112fc26f51513705cfb401d3d21aba5cb92d102225516",
+      "scalar_sha256": "297e11e219378eb92c408ffb12aab741d146aafdefd0921a65cdd6eac1c2658e"
+    },
+    "augmentation_seed0/hippocampus_204": {
+      "input_sha256": "09e1360a82ccc914a711bcc9d020e3abc9f7f3ef46edb4214c715b9f1ce81918",
+      "whole_map_sha256": "e9aa2f0d568e47b5bde97fc2e87296deaa2fdfcd4f6cb233bab877ef4c67695c",
+      "scalar_sha256": "734ae3ba490cf3074345c36d256462019b08ff417c7eb3146e3aaccc861d4fdb"
+    },
+    "augmentation_seed0/hippocampus_205": {
+      "input_sha256": "40b07988eeb02a8a60deddf5acd81353b1a5ac4c3feb396c389805d40628048f",
+      "whole_map_sha256": "0dbb7b9238983cbd58a9ceafbb37b92a3bdad9b742377889682aac8e13321437",
+      "scalar_sha256": "a8d8598abafc481bb7dc42ed06854a7ce6b9f72b5dc354a958d62019abe8225b"
+    },
+    "augmentation_seed0/hippocampus_210": {
+      "input_sha256": "5f8baa7bda38e054314dc4aab9fe0417d5d05349ac6dd89e162e0b2cd44d6c57",
+      "whole_map_sha256": "a42d322ad9c440438d937b4b889c74fe2a6409ab0e538c56612b8c794fae2d28",
+      "scalar_sha256": "f09538740c425929ea29d31ae57041204e545f829100cb4b75feed322724122b"
+    },
+    "augmentation_seed0/hippocampus_217": {
+      "input_sha256": "93d31b21a6935ba578770ece35c4c47e3bf8aa50644c9427727d78c4604a06fc",
+      "whole_map_sha256": "010b9c43c1124c318ce614ad720ce1af4d2b592990dc1a1a83ebc2b396e91dd2",
+      "scalar_sha256": "09a596a45f2793264b15fab63f60e48720f7d1f1662dc725f1576b850eec3262"
+    },
+    "augmentation_seed0/hippocampus_219": {
+      "input_sha256": "79c8307aad91c4fde248a2d089828450bf5d7efe2a10fdf25433f69b4531d21a",
+      "whole_map_sha256": "f90dbaf066a8b31fcbed4190f2450afddbd687160a73e3ef7dddd463f1b15a9b",
+      "scalar_sha256": "5bb6cf23a1bba26034250b8b9fc7548bc9afe92b0bd6571c3c6133b5ebc04a02"
+    },
+    "augmentation_seed0/hippocampus_229": {
+      "input_sha256": "8aac65c3daebd174b98778784d4ca98a72067324ca81dc00fbd388610bc524a0",
+      "whole_map_sha256": "7327cff25409467b7cabf5d9a1645b06abef6decf4e97806ea0851187895ce64",
+      "scalar_sha256": "d30ea7fc4c184824039dbf7db73ab2a34344e20f2332ace0f519be9db9a8cba6"
+    },
+    "augmentation_seed0/hippocampus_244": {
+      "input_sha256": "3ad3dd3f1773fa1704db001439b76aa49f8ded10a44c620ef997daedf78ceb13",
+      "whole_map_sha256": "b033818090b6313e27753420c9d34ef848c60ffc7a43597405df27cbfd4b507b",
+      "scalar_sha256": "8dbc5e63a6f9f35c73eab7ec783d0bc3c26bdc612260c9ac7e9f5b01110d7f22"
+    },
+    "augmentation_seed0/hippocampus_261": {
+      "input_sha256": "32eaea75eb0e336d5148d9215e528b719070e3ff91103c31d9b9322184cb810e",
+      "whole_map_sha256": "2ddc91738e723df7ed5f71f586c0ed750476dcd0905a7541bed4b7ae1d26f6a1",
+      "scalar_sha256": "a3a37f1e23e5353ca1abeaef88e4e7cd2eb9f7e4b793ac54f6d1860be7b46ed6"
+    },
+    "augmentation_seed0/hippocampus_264": {
+      "input_sha256": "af4b75e995152400f26e0a63a3e775e4863b2ed95f3b5904b07e76bf274fd1c2",
+      "whole_map_sha256": "7bc352a300b92fc069216629ed9d0c688f8a615dae00b6518ada522d6ca9e7f9",
+      "scalar_sha256": "680732368338f3b146dc81910c6c9cdca1761943ecd00985dec814cf6d1f6f1a"
+    },
+    "augmentation_seed0/hippocampus_277": {
+      "input_sha256": "8d42251681ff92c872eec3d32a7c8887b8375768bcfe9dc1907916261f5c8edd",
+      "whole_map_sha256": "6fa4f442cb00b3afde96725842c8b9f1be9fe38cfc2fba0d47f3e94c163efdaf",
+      "scalar_sha256": "3d1adc5c8e5f1ba2bb3efa38d2ea4083ee2ece8aaf65a9076694b1ae54a74163"
+    },
+    "augmentation_seed0/hippocampus_280": {
+      "input_sha256": "7d39f2390c01e6f2ce3de108c71c05ce5eff2959f526cfae96e2b6cc476a85a4",
+      "whole_map_sha256": "73482b58d2a33537dee55c7db17ac44396b935267c82746ab5e5874cc1811db1",
+      "scalar_sha256": "ccf435c736bd221b84d65f7238321365e835d963e7e29095ce2514c346aac2c7"
+    },
+    "augmentation_seed0/hippocampus_286": {
+      "input_sha256": "a968eda246e88a580ac8fc5f414f5e96fdd64d29549c6bdc1bc982f3e357eeb6",
+      "whole_map_sha256": "9a4e97de1903137e4fb58e9f8346c93e1fec49f5b01a89a593774b19907e6c4f",
+      "scalar_sha256": "5bb9bc550be30af22eb9d73b17f4ddc907c15c59ce181d3c8137bd8eb9d41505"
+    },
+    "augmentation_seed0/hippocampus_288": {
+      "input_sha256": "1e23d3b803266fbf41816922b3d49ed854b15ff10eebad499d4ce1c112e1253e",
+      "whole_map_sha256": "00a6c9a7e4316c9c7f5534d588d14c167882ba022129e75073c706e6fd358129",
+      "scalar_sha256": "e22d58035b9ba32f08ae92968c223a4f8f45c88744a015587ccdd1f625a30f74"
+    },
+    "augmentation_seed0/hippocampus_289": {
+      "input_sha256": "abd2d9e49d29be978a40f211e69c56f870f2c5e8f0d9d15cb4bc1fb4ab2aa325",
+      "whole_map_sha256": "16e10cf81d8eb33f5acea37b4c3c62f769d6d40b1c04009a6abb5cdcd0ee2584",
+      "scalar_sha256": "46e2b470a326c09c0fe47fae3150c721ac5d91c24e1012add4e92b12e4ca4507"
+    },
+    "augmentation_seed0/hippocampus_296": {
+      "input_sha256": "16d6c4a96787e7aeac5e66bb55f72707d03a5d00a520b358c1df3af888c10c4b",
+      "whole_map_sha256": "3b27d2e5d7c4ae44e087f05b886fe9b725f96ed52846cfede90092feaedeff1c",
+      "scalar_sha256": "63b13e1506a8b927f4d87623b187525e9942c042658008a8ee3f0c7b12d7d296"
+    },
+    "augmentation_seed0/hippocampus_305": {
+      "input_sha256": "f0d6b1ffd26648f19e3fba30c33d69d54fe7278981f9ba1c81cdeb13c41ad3fc",
+      "whole_map_sha256": "250fb0229a0d601910dd4fa926e69fb7cb1ba3523067d0c9df9f5009261df12a",
+      "scalar_sha256": "6f1791f1ae76488088bdbd69eaaf90194f077160f4141909fc51ad29a6243112"
+    },
+    "augmentation_seed0/hippocampus_308": {
+      "input_sha256": "2cb16fcd8621c569f0031d834004d03f9fa0d5c79cca48c4467c9fff224a3a49",
+      "whole_map_sha256": "58cabf5f6074fc5d375dfadc98456db4307800d8bcfd2e82922212fc7967a2dc",
+      "scalar_sha256": "0655e33e216855b31cbef77fed25d5a500cc68267ec9ca601537216c7462ac63"
+    },
+    "augmentation_seed0/hippocampus_317": {
+      "input_sha256": "b17647be3b341200472f90371af6bac3a9a620e924fc9c1c1ef23fb49172bd61",
+      "whole_map_sha256": "38d21c1d00a3682713854d0cf433d0e106ce929c248e1756411fc8ae87698368",
+      "scalar_sha256": "a1b098a37ea670308385e430d25329e8c9f7d411f10628503c73778ac05986c2"
+    },
+    "augmentation_seed0/hippocampus_327": {
+      "input_sha256": "fc1c5672480acb533a6b913683a5282b9c5077827418f55a12409aa70f866474",
+      "whole_map_sha256": "506b44b743e671dbce3336be08944346e3c5824eb8033a9324fd6897ac386ab7",
+      "scalar_sha256": "efb8ae244426681bc5a9071f8126184e87a96353240b667ed68215f7d7a86703"
+    },
+    "augmentation_seed0/hippocampus_330": {
+      "input_sha256": "0a8cfcabef9ffb7c9694494f96350d510df3cad24c9c069fb202b3ba18cb12ec",
+      "whole_map_sha256": "cd1b7da5d1d8683b5e7726a0987de86b6bdce519a03d746329877f66a11d46ad",
+      "scalar_sha256": "72248836fb60d4176d3f242141b32302dadd82443503767839aa8d6f9cefb524"
+    },
+    "augmentation_seed0/hippocampus_332": {
+      "input_sha256": "4d798d9a50e4c24980cea94b24c3db5cca2b8038b63b29f77266782154fcc77c",
+      "whole_map_sha256": "a09fccb2574bc16864d34ac497a58e9e4a638d96c7f961f6dd0566b12938dc54",
+      "scalar_sha256": "a686db4de6bb3fbd73af45a979b4b98d872bc22d9837e71a66692ed25a003e2e"
+    },
+    "augmentation_seed0/hippocampus_338": {
+      "input_sha256": "7e9758862e550baef55ebafe11013f77dd45fc3017499d7f4ef274eb83f3be97",
+      "whole_map_sha256": "13e67a564156da0a1fb8a2d2aa20d7c1a2003f4a160fdacd8c54fa31028c8c19",
+      "scalar_sha256": "ae75ce910e3f62153d087ea89c1807db604a33b502193b29f446c40e46984572"
+    },
+    "augmentation_seed0/hippocampus_349": {
+      "input_sha256": "852c8795de9f60a25ed8092cf3f3f809a7fd292adc6ecae96c51c973982e511e",
+      "whole_map_sha256": "fb1551f5e6151342fdd04a110e1d62561d451398b64cb9150ef643db821914db",
+      "scalar_sha256": "f647c358757616721c4247d9eb4ac91f473deba06b3146943d5cc689bd5b567f"
+    },
+    "augmentation_seed0/hippocampus_350": {
+      "input_sha256": "ab4d22930f0cf29a3a2244b679b69ab5845412df7bb2782d6ef55ea72741ff92",
+      "whole_map_sha256": "e023fff79b098c9ee09bdb24e4802fc0bbe56d7bf92999da8de832428afd0aeb",
+      "scalar_sha256": "1d28ea36896362071add1c9481d0191b643d7120f09baddc498d8b6ac9270e75"
+    },
+    "augmentation_seed0/hippocampus_356": {
+      "input_sha256": "8fb4536ee1765347b784cfe05951fa6dbd45d95604ccc6325bb51cbdf3effe22",
+      "whole_map_sha256": "1cc24a215d0763ab5b9894ef5ade28ca821f12c48f67abbe5ebb646576bb7f23",
+      "scalar_sha256": "77645d39adc811ef45049dcd7410d5f7531395a8014c02b8d3d836a2f6e29dcb"
+    },
+    "augmentation_seed0/hippocampus_358": {
+      "input_sha256": "20879ab89655090ce44b46d3dcaf9f93de8a1b8e89491994b2a179dc160a1aa5",
+      "whole_map_sha256": "a8c3228a4811343b19f2a738e2e97c406225d5163f21b999fd51b2d4a4670138",
+      "scalar_sha256": "0ba517e5e8ebac5885eb5557be207653860c7fff483cc188afa43b7c9cc81bb7"
+    },
+    "augmentation_seed0/hippocampus_374": {
+      "input_sha256": "d90f332e552321dd6ff21eb3e15716ae80693b9d8f302cf8160e31c244085297",
+      "whole_map_sha256": "b5e002843d7a633ec43c7345bbeb9f0be2104f5bae50bb63bf6e3759663cf670",
+      "scalar_sha256": "096e95ca7a16de3f53ac017ab0e727ef387b5b8d771dacc5b854de5a09127e20"
+    },
+    "augmentation_seed0/hippocampus_394": {
+      "input_sha256": "5e6d8c7135c3c24074b5740fff26f02d9a84e6d7982a3dc495aa47e2e6a1d212",
+      "whole_map_sha256": "f3ee76907228b7ecd68325640878a80d715566ec4613e93b56d76bd2e7e1ee64",
+      "scalar_sha256": "c3900ece183ca6e67257720f5267d276992c1ff5d17f61ea31315bfa47c2bc01"
+    }
+  },
+  "training_manifest_sha256": "110b5921560830076ed730c0a015c2864e022ccfbd394f4f589be2cded0eec4c"
+}

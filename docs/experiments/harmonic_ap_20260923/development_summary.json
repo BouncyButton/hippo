@@ -1,0 +1,627 @@
+{
+  "provenance": {
+    "fold": 0,
+    "split_sha256": "1d6a3fe993359ad85e9c28a29901162251c3359449b710c09cb9e92d66dda472",
+    "solver_sha256": "7d8e3ad39f51e84f4e6c6d17783688fb0e7d5abf2a6411108b50555ba5a913e8",
+    "pilot_sha256": "85ddff9b9e045127ae7f1292e3b575ae584bbc24b37fedf082e2e6fc04d0c56f",
+    "metrics_sha256": "89e78d3548e6366dbdaf3ca89ef83af9965be61e2e826aeee36246d1c1118860",
+    "protocol_sha256": "7aaa24522edd51d24b3622fcccde949538507372b24dbcf5c35d168a6e2c38db",
+    "python": "3.12.1",
+    "numpy": "1.26.4",
+    "scipy": "1.17.1"
+  },
+  "selection_sha256": "13dcf168acdbcf3c1cc420d87d7d32fbe9c470b7b07a95227e1a09b1253c2555",
+  "chosen": {
+    "mode": "band",
+    "beta": 10.0
+  },
+  "interpretation": "Exploratory repeated-use fold-0 local CPU caches; no new model training or inference. Cores do not see validation labels; labels only score predictions. Case-bootstrap intervals do not imply participant independence. Raw-field Dice is primary; planes secondary.",
+  "models": {
+    "baseline_seed0": {
+      "cases": 52,
+      "methods": {
+        "baseline": {
+          "macro_dice": 0.8714428444744952,
+          "cut_mae": 1.0192307692307692,
+          "ap_swaps": 4292,
+          "dice_delta_vs_baseline": {
+            "mean": 0.0,
+            "case_bootstrap_95": [
+              0.0,
+              0.0
+            ],
+            "positive_zero_negative": [
+              0,
+              52,
+              0
+            ]
+          }
+        },
+        "baseline_plane": {
+          "macro_dice": 0.8718842358891419,
+          "cut_mae": 1.0192307692307692,
+          "ap_swaps": 4214,
+          "dice_delta_vs_baseline": {
+            "mean": 0.0004413914146466187,
+            "case_bootstrap_95": [
+              -0.0014695868914905367,
+              0.0022037236834146164
+            ],
+            "positive_zero_negative": [
+              28,
+              6,
+              18
+            ]
+          }
+        },
+        "uniform_raw": {
+          "macro_dice": 0.8693596418576326,
+          "cut_mae": 1.0769230769230769,
+          "ap_swaps": 4669,
+          "dice_delta_vs_baseline": {
+            "mean": -0.0020832026168626696,
+            "case_bootstrap_95": [
+              -0.005225119243488535,
+              0.0009660872802974269
+            ],
+            "positive_zero_negative": [
+              24,
+              0,
+              28
+            ]
+          }
+        },
+        "uniform_plane": {
+          "macro_dice": 0.871026387250948,
+          "cut_mae": 1.0769230769230769,
+          "ap_swaps": 4403,
+          "dice_delta_vs_baseline": {
+            "mean": -0.0004164572235474523,
+            "case_bootstrap_95": [
+              -0.005029094263146517,
+              0.00418094842386202
+            ],
+            "positive_zero_negative": [
+              25,
+              4,
+              23
+            ]
+          }
+        },
+        "image_raw": {
+          "macro_dice": 0.8664457721693432,
+          "cut_mae": 1.0576923076923077,
+          "ap_swaps": 5200,
+          "dice_delta_vs_baseline": {
+            "mean": -0.004997072305152044,
+            "case_bootstrap_95": [
+              -0.008640093979395908,
+              -0.00130352890254841
+            ],
+            "positive_zero_negative": [
+              16,
+              0,
+              36
+            ]
+          }
+        },
+        "image_plane": {
+          "macro_dice": 0.871853773874201,
+          "cut_mae": 1.0576923076923077,
+          "ap_swaps": 4266,
+          "dice_delta_vs_baseline": {
+            "mean": 0.00041092939970572797,
+            "case_bootstrap_95": [
+              -0.004827901889702278,
+              0.005559317503781664
+            ],
+            "positive_zero_negative": [
+              30,
+              1,
+              21
+            ]
+          }
+        },
+        "shuffled_raw": {
+          "macro_dice": 0.8631916276939511,
+          "cut_mae": 1.0961538461538463,
+          "ap_swaps": 5781,
+          "dice_delta_vs_baseline": {
+            "mean": -0.008251216780544123,
+            "case_bootstrap_95": [
+              -0.012642048362131264,
+              -0.00355447572530952
+            ],
+            "positive_zero_negative": [
+              15,
+              0,
+              37
+            ]
+          }
+        },
+        "shuffled_plane": {
+          "macro_dice": 0.8708782518677103,
+          "cut_mae": 1.0961538461538463,
+          "ap_swaps": 4461,
+          "dice_delta_vs_baseline": {
+            "mean": -0.0005645926067849113,
+            "case_bootstrap_95": [
+              -0.006064172894829932,
+              0.005030393507235896
+            ],
+            "positive_zero_negative": [
+              25,
+              3,
+              24
+            ]
+          }
+        }
+      },
+      "image_minus_uniform_raw_dice": {
+        "mean": -0.0029138696882893746,
+        "case_bootstrap_95": [
+          -0.004613427814154005,
+          -0.0012115625424435085
+        ],
+        "positive_zero_negative": [
+          16,
+          0,
+          36
+        ]
+      },
+      "image_minus_shuffled_raw_dice": {
+        "mean": 0.0032541444753920777,
+        "case_bootstrap_95": [
+          6.882170472248453e-05,
+          0.006294497064649789
+        ],
+        "positive_zero_negative": [
+          31,
+          0,
+          21
+        ]
+      },
+      "image_field_diagnostics": {
+        "max_linear_residual": 3.552713678800501e-15,
+        "seed_wrong_ap": 41,
+        "seed_on_background": 1732,
+        "active_seed_voxels": 83743,
+        "proposed_seed_voxels": 83744,
+        "solved_voxels": 178042,
+        "support_voxels": 178070,
+        "components": 58,
+        "solved_components": 52,
+        "changed": 5136,
+        "corrected": 1708,
+        "introduced": 2616
+      },
+      "source_cache_config": {
+        "pkl": "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/msd_hippocampus_full.pkl",
+        "splits_json": "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/splits_final.json",
+        "checkpoint": "/Users/filippofocaccia/Desktop/hippo/experiments/augmentation_family_b_20260907/checkpoints/baseline_seed0_checkpoint_best.pt",
+        "fold": 0,
+        "spatial_size": [
+          64,
+          64,
+          64
+        ],
+        "resize": false,
+        "device": "cpu",
+        "axis_names": [
+          "sagittal",
+          "coronal_ap",
+          "axial"
+        ]
+      }
+    },
+    "augmentation_seed0": {
+      "cases": 52,
+      "methods": {
+        "baseline": {
+          "macro_dice": 0.8865568305828914,
+          "cut_mae": 0.9038461538461539,
+          "ap_swaps": 3702,
+          "dice_delta_vs_baseline": {
+            "mean": 0.0,
+            "case_bootstrap_95": [
+              0.0,
+              0.0
+            ],
+            "positive_zero_negative": [
+              0,
+              52,
+              0
+            ]
+          }
+        },
+        "baseline_plane": {
+          "macro_dice": 0.8871864215780587,
+          "cut_mae": 0.9038461538461539,
+          "ap_swaps": 3592,
+          "dice_delta_vs_baseline": {
+            "mean": 0.0006295909951674275,
+            "case_bootstrap_95": [
+              -0.00030495374535445606,
+              0.0016336589194775766
+            ],
+            "positive_zero_negative": [
+              23,
+              13,
+              16
+            ]
+          }
+        },
+        "uniform_raw": {
+          "macro_dice": 0.8806357924483141,
+          "cut_mae": 1.1153846153846154,
+          "ap_swaps": 4697,
+          "dice_delta_vs_baseline": {
+            "mean": -0.005921038134577206,
+            "case_bootstrap_95": [
+              -0.008882099647545445,
+              -0.002890503945075785
+            ],
+            "positive_zero_negative": [
+              15,
+              0,
+              37
+            ]
+          }
+        },
+        "uniform_plane": {
+          "macro_dice": 0.8816013834847266,
+          "cut_mae": 1.1153846153846154,
+          "ap_swaps": 4513,
+          "dice_delta_vs_baseline": {
+            "mean": -0.004955447098164634,
+            "case_bootstrap_95": [
+              -0.008801563618554395,
+              -0.0012806880790666724
+            ],
+            "positive_zero_negative": [
+              17,
+              7,
+              28
+            ]
+          }
+        },
+        "image_raw": {
+          "macro_dice": 0.8761862706788734,
+          "cut_mae": 0.9807692307692307,
+          "ap_swaps": 5470,
+          "dice_delta_vs_baseline": {
+            "mean": -0.010370559904017949,
+            "case_bootstrap_95": [
+              -0.013860572306580865,
+              -0.006809210185920973
+            ],
+            "positive_zero_negative": [
+              12,
+              0,
+              40
+            ]
+          }
+        },
+        "image_plane": {
+          "macro_dice": 0.884963591923196,
+          "cut_mae": 0.9807692307692307,
+          "ap_swaps": 3930,
+          "dice_delta_vs_baseline": {
+            "mean": -0.0015932386596951222,
+            "case_bootstrap_95": [
+              -0.006232755620764771,
+              0.0030413129757863003
+            ],
+            "positive_zero_negative": [
+              25,
+              5,
+              22
+            ]
+          }
+        },
+        "shuffled_raw": {
+          "macro_dice": 0.8726596200605639,
+          "cut_mae": 1.1923076923076923,
+          "ap_swaps": 6043,
+          "dice_delta_vs_baseline": {
+            "mean": -0.01389721052232761,
+            "case_bootstrap_95": [
+              -0.017507973504910124,
+              -0.010203313432247089
+            ],
+            "positive_zero_negative": [
+              9,
+              0,
+              43
+            ]
+          }
+        },
+        "shuffled_plane": {
+          "macro_dice": 0.8805295945287119,
+          "cut_mae": 1.1923076923076923,
+          "ap_swaps": 4721,
+          "dice_delta_vs_baseline": {
+            "mean": -0.006027236054179242,
+            "case_bootstrap_95": [
+              -0.010336474509868175,
+              -0.0016704446243234348
+            ],
+            "positive_zero_negative": [
+              20,
+              6,
+              26
+            ]
+          }
+        }
+      },
+      "image_minus_uniform_raw_dice": {
+        "mean": -0.0044495217694407434,
+        "case_bootstrap_95": [
+          -0.006346004108949934,
+          -0.0025051143625588767
+        ],
+        "positive_zero_negative": [
+          12,
+          0,
+          40
+        ]
+      },
+      "image_minus_shuffled_raw_dice": {
+        "mean": 0.0035266506183096605,
+        "case_bootstrap_95": [
+          0.0007748671581914221,
+          0.0063693251046902585
+        ],
+        "positive_zero_negative": [
+          35,
+          0,
+          17
+        ]
+      },
+      "image_field_diagnostics": {
+        "max_linear_residual": 3.1086244689504383e-15,
+        "seed_wrong_ap": 0,
+        "seed_on_background": 1157,
+        "active_seed_voxels": 82576,
+        "proposed_seed_voxels": 82576,
+        "solved_voxels": 175229,
+        "support_voxels": 175248,
+        "components": 58,
+        "solved_components": 52,
+        "changed": 4114,
+        "corrected": 991,
+        "introduced": 2759
+      },
+      "source_cache_config": {
+        "pkl": "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/msd_hippocampus_full.pkl",
+        "splits_json": "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/splits_final.json",
+        "checkpoint": "/Users/filippofocaccia/Desktop/hippo/experiments/augmentation_family_b_20260907/checkpoints/augmentation_seed0_checkpoint_best.pt",
+        "fold": 0,
+        "spatial_size": [
+          64,
+          64,
+          64
+        ],
+        "resize": false,
+        "device": "cpu",
+        "axis_names": [
+          "sagittal",
+          "coronal_ap",
+          "axial"
+        ]
+      }
+    }
+  },
+  "input_hashes": {
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/imagesTr/hippocampus_017_0000.nii.gz": "6157d1fe1d4a18ee2ac0fd8386d9b7b2c8d551032d214d21a8d68e65656c5856",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/labelsTr/hippocampus_017.nii.gz": "94ab2748b5fbbc40b469ad71fa2534c8e940f037fd46e6cf6fb4074a526f4e58",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/baseline_seed0/error_maps/hippocampus_017.npz": "5af5e5d2cf4811cd46faa6be2f827409500aba616b3938ed395d2c74bdeaa0da",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/imagesTr/hippocampus_019_0000.nii.gz": "c78f2fb12964e9aee54c2c52c34375090be6309c61a5e2843514e9eb672401d6",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/labelsTr/hippocampus_019.nii.gz": "cf4ae2be9020c848a3d811cc7855e854c6583c000083c95eb23e0f86b2e99e63",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/baseline_seed0/error_maps/hippocampus_019.npz": "4da8605ae8a9c3d13d2e6846a6a6ea05758b24eda977d7a8c474ce9079219cf8",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/imagesTr/hippocampus_033_0000.nii.gz": "d138d08bcf818012945363a41aa8f5a288679fe73c8c145848f24bc8d5bf0d28",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/labelsTr/hippocampus_033.nii.gz": "16cb4fc2ad1138bb3cfb70e9bf529bce2d204d3ca2e241c391f6c5df5894b1ea",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/baseline_seed0/error_maps/hippocampus_033.npz": "413573b94bd1cfa20c30cbc3407cbc2899e67fa30d954c807e72900474269892",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/imagesTr/hippocampus_035_0000.nii.gz": "0405309530698179fbe411c24dad376a82f5e3fda347e8ca39f8a5850656ffbe",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/labelsTr/hippocampus_035.nii.gz": "0ce65924198d7cb7e2764de099f8f97132a25750171563931ba6d6b94cfb4f4d",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/baseline_seed0/error_maps/hippocampus_035.npz": "ea9d702f372a2fd5179fcf7b65ce350c77947b89b3a60a6a4afda428c16e81e0",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/imagesTr/hippocampus_037_0000.nii.gz": "1b4a05828ea3f81ac9c6910e8a5fc2825fb0638fe691a8c8e27b13b3c8e737c2",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/labelsTr/hippocampus_037.nii.gz": "4a58deec5b269b129d9b311b16daf5bab04cdce91477824d21015801bdd96a42",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/baseline_seed0/error_maps/hippocampus_037.npz": "381c5c014f4dbe253e182c0ed0e5f867eb2173a3fdc291e2d7c9fe561621462c",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/imagesTr/hippocampus_049_0000.nii.gz": "675495b88bc5f89a38fe530d973d5ee074fcc12ba7fb8c6b75f9dc553c18f8f1",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/labelsTr/hippocampus_049.nii.gz": "49a08eb1db1624b96b695bdf11a12cfcc03ba5da7250254a17d8ba546ae71fb5",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/baseline_seed0/error_maps/hippocampus_049.npz": "cb38f484a15e36cfd2f23496eff65ab184616c50c5ecd002a0df9e51e3d17c1a",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/imagesTr/hippocampus_052_0000.nii.gz": "312e7ca5227682207799bf8d827996851ae9b5c6c8defd4b72935b8e74fb98f1",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/labelsTr/hippocampus_052.nii.gz": "77ec4c3c022328fedf999254d830440e8f058594c94d86cc549d16ff93ae4948",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/baseline_seed0/error_maps/hippocampus_052.npz": "5fc383d29ff02216d5e6b00b78fd3ae78b36795be3bcbfb7b8db8ba2aa4ca7f0",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/imagesTr/hippocampus_065_0000.nii.gz": "fce0dd132da330f46f7635f2eb74b6eb3ff8b0011774ae149d3b4f09964c5b3a",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/labelsTr/hippocampus_065.nii.gz": "64b7843a3d508d21aa7ac921f993469573cbb39e674c5aae2150ee9e11e74af7",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/baseline_seed0/error_maps/hippocampus_065.npz": "c1539182a8a97c26e2f9e8351d5e52d02d4bf9c2bbd3d9a16a4d267d1f3dd40e",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/imagesTr/hippocampus_083_0000.nii.gz": "ab7051ddb0f105419294d92338cb25d78c070dc6b37f2b64d775f803e6bcf5fd",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/labelsTr/hippocampus_083.nii.gz": "1d477fec159d5d7dc2518642bab1e939b505c9334049a1c5ce3dfd95f7fe6ff5",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/baseline_seed0/error_maps/hippocampus_083.npz": "0751d44cac68862024c8ed4aa714ebdb9cdd3e2feb26256787491bc1446e1693",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/imagesTr/hippocampus_088_0000.nii.gz": "67137cd1afa36848af6c20e9c816af8abfdc06c71fa812d0344096765e2d5710",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/labelsTr/hippocampus_088.nii.gz": "d05c8e1b5587959e307a53813e3c29b3d1e469a9653760e8e968340547045eff",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/baseline_seed0/error_maps/hippocampus_088.npz": "af5306d7d1306eac439727a51257eff4151374e7c70cf822e0a96e4d818f5f5f",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/imagesTr/hippocampus_090_0000.nii.gz": "c7610f764dc837f0a671b6397d2c6f20cb4d69cf0fa3691d102cee4f6801f6e1",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/labelsTr/hippocampus_090.nii.gz": "d24e81f22528570dbeb7d66251adf6823f4e27b0ac2fe46e8784d4b1a62962b2",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/baseline_seed0/error_maps/hippocampus_090.npz": "e71b7ada95c46032bfb7b2498423786b0a9b04ef660b0c9ac7efd94d052d2779",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/imagesTr/hippocampus_092_0000.nii.gz": "72b86e4d9ca87a94c18e501ae02ac1e570b682be3104398aec3823ff3738e38b",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/labelsTr/hippocampus_092.nii.gz": "543f03fe2297fb4526ec59534326e99e4ba888763e874b43b8bb7b4e73b9df49",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/baseline_seed0/error_maps/hippocampus_092.npz": "13684c425284acc5ee5d053ba2a64c7e37ad7ec4bb478944159133869b37e45f",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/imagesTr/hippocampus_095_0000.nii.gz": "e5543396cf10bf75098a0600e37ac45ae1fd77f0fdca988339aeeede077ac325",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/labelsTr/hippocampus_095.nii.gz": "da334814945515c32a51c634a8b2a8468966cfd38b2ef9d137a15988eca3449e",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/baseline_seed0/error_maps/hippocampus_095.npz": "9aee6c5ca25f93e6ccf6d692ea2c6f48cc64d1b1a040ea06be678a2ec0757133",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/imagesTr/hippocampus_107_0000.nii.gz": "28f0498b15b53b66b19c70f067b971e484e2369779379362960a310ed7eb8874",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/labelsTr/hippocampus_107.nii.gz": "4ae9986560d1153f8a107dee49a8fb77698eb6be8b236ba9f12d055c71bc2847",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/baseline_seed0/error_maps/hippocampus_107.npz": "6b5dff10e4124011703f1f160db03eec5060a4970eb892b7529e2265be3a6b08",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/imagesTr/hippocampus_108_0000.nii.gz": "f5b454e0d8fb6deb2e36af32305059ef735f0fcf9da24a508c2d071ab7fd044d",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/labelsTr/hippocampus_108.nii.gz": "5e439ff23fbc4aa3155ada8c5366d007605664ff502145204a814b746e560676",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/baseline_seed0/error_maps/hippocampus_108.npz": "896c8637281e63522667e3e252682e333382368919f96e7a9cb05d64c7fcf35a",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/imagesTr/hippocampus_123_0000.nii.gz": "2ed648043b780cec73d8cb9c5146f3b7fdcd17c1f314f5ac96ce5fdf469e493b",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/labelsTr/hippocampus_123.nii.gz": "bb3da30509efa4d7165edf527fb151449ace19deb09718f055653ac998daf97d",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/baseline_seed0/error_maps/hippocampus_123.npz": "1af8524320c4b4490b775252a76fbdf1657404bc067517409f61b545e47197ab",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/imagesTr/hippocampus_125_0000.nii.gz": "67f96ea0f31403cf1ff491d882b09788b2508af332670ba0721d7ab8153bb006",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/labelsTr/hippocampus_125.nii.gz": "af4a79bd60813bf61c4de7f320fe46f7372d3ac8a92eb9cab51cc24d418b879b",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/baseline_seed0/error_maps/hippocampus_125.npz": "da5b446a66464bac23ad2d26f73e8d4c0bc7564e23d9753e16c68085591810bf",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/imagesTr/hippocampus_157_0000.nii.gz": "940f6e3b01832c56a79b36687736420d5c680a58d8e67c37c2a8293cd7537a2d",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/labelsTr/hippocampus_157.nii.gz": "100cadf693c82dd757a748bdec0db8204394bcbd2652c9f91c4e3b8a2a48b907",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/baseline_seed0/error_maps/hippocampus_157.npz": "5a1cbb221bdefe1744a91b560db3701a3fa13ed041fce88bd884d0021dbde750",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/imagesTr/hippocampus_164_0000.nii.gz": "7072eceb5195adc41398f8b7bbdce47afd760de79b907becfe77148bb207f959",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/labelsTr/hippocampus_164.nii.gz": "039b495d5abceb530b99aad1d557f28d8ae732fc012e2c3243aafebaf78f6db2",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/baseline_seed0/error_maps/hippocampus_164.npz": "6bad4615fe03a6956e7a1c0528babae7c41fb4ac826744c56a3b45d3de06d117",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/imagesTr/hippocampus_169_0000.nii.gz": "b0039fc7e3955275351d39a36193cde7b0e623821431a88dc6ed0df4ae6008a2",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/labelsTr/hippocampus_169.nii.gz": "bab66b107ab5adc1dd06ff316211081e7949bc34a900ccdaad4f552f55b88eb2",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/baseline_seed0/error_maps/hippocampus_169.npz": "af6348eb52655db0b1c7e2efc7c1c8942f87021968b7aa7f00cc1bf26464c222",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/imagesTr/hippocampus_175_0000.nii.gz": "f397e2594fa3de1b85ad35c88a7ea2dd899293c528ab1d65bb702bc7bbaa9dd4",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/labelsTr/hippocampus_175.nii.gz": "2fb81b0747e1fd99e7121e69ffe3d940f5a68c4c5fdcec6c0efba490b1c36c7a",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/baseline_seed0/error_maps/hippocampus_175.npz": "497ae25ffb9669cc2dd46241e0c1929506115dab9330d63655ea624bf2ecc480",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/imagesTr/hippocampus_185_0000.nii.gz": "af30134c171dd3202945ed05cf317c5ed48a03bd22f42fbc1e60bc287d173907",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/labelsTr/hippocampus_185.nii.gz": "ebfac7522100e6b38c64b3c62d3e47b8a5429bcef01f21a86a68e35702f9b212",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/baseline_seed0/error_maps/hippocampus_185.npz": "1a1d5a33318251634feef5b93e9e4b4c3afb533a8f8d4ee5a2ba91cb15561d71",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/imagesTr/hippocampus_190_0000.nii.gz": "96d22d22adbff37dc1770f1efa4d405788553cfb6697c6827f69481b37463ac3",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/labelsTr/hippocampus_190.nii.gz": "5316c962586306ed3f3e3e891860b1593a5f3b612beefe49018ae82505791c6f",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/baseline_seed0/error_maps/hippocampus_190.npz": "330c993f770e81f59d3efb57f5be57008eb2ad085162ded0bf796251a04b9432",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/imagesTr/hippocampus_194_0000.nii.gz": "1d11d1069b8e90f0db3cba8be97acfa3ef072e407dd342c1064d867a217a0ebf",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/labelsTr/hippocampus_194.nii.gz": "0005b6c30d63ea8e9614611abb54d0a9c851d958c9752f5cc9c53a784e9382d0",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/baseline_seed0/error_maps/hippocampus_194.npz": "54161fdfb7bb536f14d5c77796ea1176095fe9c137e048526f20da3076b3aa5e",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/imagesTr/hippocampus_204_0000.nii.gz": "117e4c9a3e9050f06b0379740b0c0a28dd8663c1059e89c9a156b941d296e518",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/labelsTr/hippocampus_204.nii.gz": "c4565febb290e3859b246b8f0831d084426885a33e20c2e28aaeedf2aed52c78",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/baseline_seed0/error_maps/hippocampus_204.npz": "8662d0cfdf3b2bdd0f0c54d71b6b839281bd559f0e0ac41484771e0e19a2aa9e",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/imagesTr/hippocampus_205_0000.nii.gz": "de86376fd7856e18ba54f88ec7841a1050a80ca0c4105fb7cbc14e46d9da80ac",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/labelsTr/hippocampus_205.nii.gz": "12f439cdc42f4f52c75d9c2a766af6fb49a63bff73ec96b9160ad81f868fa64f",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/baseline_seed0/error_maps/hippocampus_205.npz": "725d466326eacd68969574d6807ac6283ae56bbfab1e2ba6793ec24a9b7ea4cd",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/imagesTr/hippocampus_210_0000.nii.gz": "3612804ad257900c06996d2be41242c5c7696e3dbec7cd54faeae65a1c335292",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/labelsTr/hippocampus_210.nii.gz": "1d2232cbfb45202e17af2226f1583ad0cd0048d877dce46a8d66616e2d244b48",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/baseline_seed0/error_maps/hippocampus_210.npz": "d49a22d222e7f9c42eb5436aa13cefe3c9d818c2d1974a583e56d09fe6e27e8e",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/imagesTr/hippocampus_217_0000.nii.gz": "d2b8098e76e1535fcf225a7ac56daf53df8d3c8ffbc6328605735ce5f6c1a40e",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/labelsTr/hippocampus_217.nii.gz": "eeec12f83e84e019ea800e4addab580c3914f32556916407b75e215551e48c3e",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/baseline_seed0/error_maps/hippocampus_217.npz": "36abf04dbe634e9afccb535495a9d3ac1908b77ac19b3d81a6074c0c84126d7f",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/imagesTr/hippocampus_219_0000.nii.gz": "34830536eb1fd9ff09790d1a59c3882e91e4d8a1a13a8c6357c7392b86f52611",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/labelsTr/hippocampus_219.nii.gz": "a9e16b4d06705e7bfcefcb15702c7a9251a6c80b961189e6b080e1164b6b018f",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/baseline_seed0/error_maps/hippocampus_219.npz": "a9c72a29d5bbd7289a6c32fd7e605dbcb8307283a77a28281542ef22cfe6830d",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/imagesTr/hippocampus_229_0000.nii.gz": "88d208ff6028a42d066cb76b6609853e56e33b87c2d6954fcc87c00642abf83a",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/labelsTr/hippocampus_229.nii.gz": "657c444e9670d1245257ad83bad4abd71fc6f4603b40b15b32b0b3e3960532ac",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/baseline_seed0/error_maps/hippocampus_229.npz": "c2a674602bca743c82b9a29d33b771d3812f2fca47ef67a4368092a100788140",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/imagesTr/hippocampus_244_0000.nii.gz": "e2618998819ab603299d2ed015823773ee9a37a6f20b82f90404e3d0f2da2b92",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/labelsTr/hippocampus_244.nii.gz": "deb950902847ba8ba045257337fdde15f51aa8a031de03b8f4007e71a868799a",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/baseline_seed0/error_maps/hippocampus_244.npz": "acaa139133d3a350feeac6b9dfcd598da911dc6b74f337f2fcc14d4f818b4022",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/imagesTr/hippocampus_261_0000.nii.gz": "9fa044faea6fdd6dcca962ecbcf4ee55e04f52f2a0158bc561aeaafe6b2b7205",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/labelsTr/hippocampus_261.nii.gz": "72942cb6c7c7d7831d3cb9fe7c7e7e57a7f5aed0f5cd225a52ef42d085664c87",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/baseline_seed0/error_maps/hippocampus_261.npz": "ad877c880889e7455470888f6e5ec293e4a54b8ff4caa3f91352df5e7f9fe22f",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/imagesTr/hippocampus_264_0000.nii.gz": "249c14fc764fb0e486948465935feac1fcdf1028beb16574dddc40c77b7a971a",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/labelsTr/hippocampus_264.nii.gz": "cc2c53bc08837188fcef0e87380c5b49b451340ba6f8a1807675c1233b093c7e",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/baseline_seed0/error_maps/hippocampus_264.npz": "94dc1e7d63dfd28974e012429b67e4d91d8bf5fed02c96d6a59c68e88e06fbc1",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/imagesTr/hippocampus_277_0000.nii.gz": "143002d22ccab56ac5146744c61140c771b156e88918db6b004dc53f62be94e8",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/labelsTr/hippocampus_277.nii.gz": "649913afb2fd811e142a6e75922d971eafe92edfb3725b12d7b36e9f5655ab23",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/baseline_seed0/error_maps/hippocampus_277.npz": "0931a206411e4e11d304d3c88e3f4968551e521463d94f86a75e74b3c783fbf7",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/imagesTr/hippocampus_280_0000.nii.gz": "66fe12da050f9d37951b69ee3014efb8162a0be303622d49e76b59a907429138",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/labelsTr/hippocampus_280.nii.gz": "9218d22d7056f903bb938c5a44d7c1167bdc3a4b641c39d0190859d990c60d9d",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/baseline_seed0/error_maps/hippocampus_280.npz": "3dc4608abf91996290d4932ddac2a38548fd6114e844fda33a27e6dec73dc130",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/imagesTr/hippocampus_286_0000.nii.gz": "0f926268c1cbc7e37a27bd713e31ee25ee0858c39146c220d91d26c531a114cc",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/labelsTr/hippocampus_286.nii.gz": "b5620fd18863b208b9d2fb65437cbd1882ce33a8de9691378f72f6270f230613",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/baseline_seed0/error_maps/hippocampus_286.npz": "ea38d009401789b39006cef0773e65c87cd9960e6ab60ba2f087816fd33b83bd",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/imagesTr/hippocampus_288_0000.nii.gz": "d4eec9dddf2655a0f0c90e19e3353cf4a3340bee9e80b3da1bbc0a54abe5f7b4",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/labelsTr/hippocampus_288.nii.gz": "498838cd9b9554f44c4e1bf753bd8c4a50e8f562c7f9a5bb35ff0f03d13f24cd",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/baseline_seed0/error_maps/hippocampus_288.npz": "bebd55343e7489514f3f56dd847c993dbc752271ddd1748e0d459ace6069f7d6",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/imagesTr/hippocampus_289_0000.nii.gz": "5f809aa43feedbcabb23a380ed5b81c13b9339378f0b6247b3880fe728f96f99",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/labelsTr/hippocampus_289.nii.gz": "e2e0c3549e4e1ee1a5d2211bc36d6f5dfa8f875cf9b311a455aab13f1c63d56d",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/baseline_seed0/error_maps/hippocampus_289.npz": "09c03834b6425688beff678adc2c0635598810e4747ce56a76d7644fcb3ddb89",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/imagesTr/hippocampus_296_0000.nii.gz": "b1314e836e1e331958931f9506aa256cfa038b1dd340a763213314391ee5bf6b",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/labelsTr/hippocampus_296.nii.gz": "dc8b16ff4e8c08a88b9b5df4ecf3ce159d83161875d406d382e4887f13371718",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/baseline_seed0/error_maps/hippocampus_296.npz": "b8d4db371a79f0dd742d46b566f7531c8c3f15ebfd507f7a8ae0ad72b59c8775",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/imagesTr/hippocampus_305_0000.nii.gz": "5c11dffcc73e37cefcb0ce5feb763c830cb514830f3660eaab2a587afba50b8e",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/labelsTr/hippocampus_305.nii.gz": "761ad364305dface0d64c3df1eda2993fa17469708f071688c5694476f747ce3",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/baseline_seed0/error_maps/hippocampus_305.npz": "d6892618a88d3d53ccd991a318849c7919a4a37f9cc114f7c043be3abf314d8c",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/imagesTr/hippocampus_308_0000.nii.gz": "928e88d8ba5f12a9aaf2ff4c91f4c7c8310486b79ec5f03a1d9b43b59d91fad5",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/labelsTr/hippocampus_308.nii.gz": "7d83498813483e2d83e95943e7f58faed46fd30b30140d45a10ff417b727d7ef",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/baseline_seed0/error_maps/hippocampus_308.npz": "88a758fab66be1fc70c736ca4ddfec2690412d374f4ff303001db9747d179ee7",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/imagesTr/hippocampus_317_0000.nii.gz": "a6234e710e01df37e0cae12aade2ddd9a47401ce7fa8711f28a0e30062580c5e",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/labelsTr/hippocampus_317.nii.gz": "6cd2e60aefd9d1a1c98055b9d481c42376c54d64a5939c2bab56e56bf20f8cbc",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/baseline_seed0/error_maps/hippocampus_317.npz": "0fba442aadfb4f45ef5d46e26367ae8f179f7221ffe836cff80410f9c5e3bcf6",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/imagesTr/hippocampus_327_0000.nii.gz": "baa8d6c814fef2cccbfe886c6d98ec3fa3cb4266dad4222c625d0377038b14a9",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/labelsTr/hippocampus_327.nii.gz": "d59a4fcae4b340d068eb0bfc8fba82ec8856dfc831740548d4d5e2d687f43ddd",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/baseline_seed0/error_maps/hippocampus_327.npz": "23145c44c33d32db09ffcb1104ffbf88200c29acd159fccf83abde2926def85b",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/imagesTr/hippocampus_330_0000.nii.gz": "be1b337fe41f50779e14044bea650de715681495d6e936a905af62bd315b90c4",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/labelsTr/hippocampus_330.nii.gz": "117101286fcb3f2bb7ea8e8450fc728daf72f5d255dae7ef3d7c4ad6c4069047",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/baseline_seed0/error_maps/hippocampus_330.npz": "b4d11aab14246d6bd6e65c6ca2129dd399fce429a67d8dc1a8f74c5af26ca6c1",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/imagesTr/hippocampus_332_0000.nii.gz": "068b421bbfc0a78f9b3121358e72f728411949acf40da27d528915fa10ef5176",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/labelsTr/hippocampus_332.nii.gz": "4ec5f551b48a1c3230f0cec08236ab96371da6b4ec2d7eb499b7ac0cde16978f",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/baseline_seed0/error_maps/hippocampus_332.npz": "47cba3fc4ad4c0a176588401029510381d96dde77a1b75ccf98ca97dc065174e",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/imagesTr/hippocampus_338_0000.nii.gz": "081fae4be2b1c2c643dfb1205d8f2326f37c338bfe5016de331330a17fa5f6fe",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/labelsTr/hippocampus_338.nii.gz": "8a11b88a06277421aa75d9e30b30e00e1054293fbdb95067e8f1e919dc652642",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/baseline_seed0/error_maps/hippocampus_338.npz": "58f8909e9a2f9abeb0030a5899371a7dae40671493fea0a7d976716bf2fc4128",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/imagesTr/hippocampus_349_0000.nii.gz": "bd6528ad47280c76e5de9d911af4b02f88cb4329678e64b5f5b26a80afda0887",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/labelsTr/hippocampus_349.nii.gz": "2ac7999f40a4bf037c68f074e016739080d2abbc8ff8ce2cf6e3988dba21320c",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/baseline_seed0/error_maps/hippocampus_349.npz": "aacd9f0bf564e483a8e55508db3cacf22cc755b11de6e6529fb1e3df5d4740ca",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/imagesTr/hippocampus_350_0000.nii.gz": "2cf305fe8e707931144c17f622e64ebc092f408e9b3b313395afacaa743a66cc",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/labelsTr/hippocampus_350.nii.gz": "e32025a63b943c4400be28e30cf3d2c39e3189c0b0c12328e2ae8ae4752eba44",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/baseline_seed0/error_maps/hippocampus_350.npz": "7eae3efd85f3d2ea2fae9e7d83d2dce4de2213c9600094f4e46da5ef71f4d1cc",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/imagesTr/hippocampus_356_0000.nii.gz": "39f30b38deb74d75dd11f063217c574f31f2d2c288093191965ced993ce59543",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/labelsTr/hippocampus_356.nii.gz": "8bfaf48d4a05e26938f8488b7b2606f52517d26899e24a27fd3a38595159e8bb",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/baseline_seed0/error_maps/hippocampus_356.npz": "d36ba804735a20bf1791cd33770e409b189204abc0f6a39dc86d7a9b5154b842",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/imagesTr/hippocampus_358_0000.nii.gz": "99ffeb1e93ef43ef9bfcbbe108340f71ec8cfc234cb584becaa72c1633319845",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/labelsTr/hippocampus_358.nii.gz": "8c74932792bbbec3b198a736138f09333758e3872385e8d864bdf2e14144d503",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/baseline_seed0/error_maps/hippocampus_358.npz": "760b429e33348f710e69a16ed7840e70034cdf9f5bfa5a5f6472feea18ad4391",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/imagesTr/hippocampus_374_0000.nii.gz": "52184e81f99ad59a5b84f73cd975d3c3d4c4d541639e0af40dd2b5175ff74382",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/labelsTr/hippocampus_374.nii.gz": "2bbc503cbba6bdb337cdbc51de862c39d31719eed4294e353a42e794669c8775",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/baseline_seed0/error_maps/hippocampus_374.npz": "5b10e2682b15bcaf9019d07c426773767916a8e6c845c2b6fb88304088c5eee2",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/imagesTr/hippocampus_394_0000.nii.gz": "00890d60760091cbc99be6419c39f69c71473e69fae1cc6c412120c5c8454503",
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset101_MSD/labelsTr/hippocampus_394.nii.gz": "2d560070208150bafe544356866f45aa0122a8050b583292e0f25818afcd7026",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/baseline_seed0/error_maps/hippocampus_394.npz": "e3a01cbdb04a70f2d9a2225bc408c32b5d843ae9d73577f87f7ce5884d183f25",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/baseline_seed0/summary.json": "340801e23ae031df6277a5319d0871919771317bf7e5db772dfdb7d4659e64b0",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/augmentation_seed0/error_maps/hippocampus_017.npz": "6cbe83ea4f24a60fa488f42ceef83d66817b4886348f2c957faab3d782c7c4e3",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/augmentation_seed0/error_maps/hippocampus_019.npz": "4f2c9111e4b43ce1a278ce51028eb6190bb21a71a5adb0b8696dbd7b548844d0",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/augmentation_seed0/error_maps/hippocampus_033.npz": "2c36e04ebfac3e839caec24126fca0083c323895e39dd44ebf899315afd007fe",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/augmentation_seed0/error_maps/hippocampus_035.npz": "539ae11635641c6d406eb98b505793066f1f899f064edeb0afb1870547a41a0e",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/augmentation_seed0/error_maps/hippocampus_037.npz": "9153d9bf53228a45263dfcfe3b366ff5f3e86248e6b6302e5f427b64aa699613",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/augmentation_seed0/error_maps/hippocampus_049.npz": "67bbbab3f7513d880cb261f8659a02d6e7ad1e51cfc825931aa3e6d8bdef20da",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/augmentation_seed0/error_maps/hippocampus_052.npz": "5ccafb2ffdf96f92e709696d14a9f21da899eba0cd4ecb686cd230f0e9591597",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/augmentation_seed0/error_maps/hippocampus_065.npz": "294a588296156a0a6724db9c5631a495640a9b4cfb6cd005f5158b866e7a3ef6",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/augmentation_seed0/error_maps/hippocampus_083.npz": "bac87a1818fc1cd37ede66a1af73cb4e99dd82168aba8b421773bf88ba5d3ab5",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/augmentation_seed0/error_maps/hippocampus_088.npz": "a3f6d2c804d974bb60d934a15c49be346d8abd1a80b533e456547ac5dfd3ac57",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/augmentation_seed0/error_maps/hippocampus_090.npz": "f13d08ba02e3fe48292bc0cdbce4b741c73d939f26f5eba9d6048a1cce14b6a2",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/augmentation_seed0/error_maps/hippocampus_092.npz": "2a70b882cc9a5057022208ab544a178011ee6120f8110fd2d9dc3341871061e0",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/augmentation_seed0/error_maps/hippocampus_095.npz": "888bc9f752dc9018fcce1ce837f2f532f36dc8d40c05a13900a5d1748fa666d6",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/augmentation_seed0/error_maps/hippocampus_107.npz": "aceb493885de415fc85ddae4db2008d420b6f418b4b03eee1bf2f369716940e6",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/augmentation_seed0/error_maps/hippocampus_108.npz": "f8b8ba575cea72a4d353247d96addf0cdf49a2213e20201619a2dfd0059b2480",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/augmentation_seed0/error_maps/hippocampus_123.npz": "59fe6057845d501b6664786f0a8f017159a07e7d41b7b236e0f47f9c97b897b6",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/augmentation_seed0/error_maps/hippocampus_125.npz": "1798cd3be0f0ab6da8168e322fc726caefd0a8786cd0549ac3bcf819e2e9d692",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/augmentation_seed0/error_maps/hippocampus_157.npz": "95bdd15398de823e9d059d9726dae878f8d334502a8a0e63f2e6c7dad2521ead",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/augmentation_seed0/error_maps/hippocampus_164.npz": "132f518f7a49398ef7ed240279061dcce6760a7b76ca95453f726a81e60dad75",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/augmentation_seed0/error_maps/hippocampus_169.npz": "420dd0b2436781a4ac1417de7f4dcdeff0487d80ec5a3e5cece1a60f1b5f5f28",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/augmentation_seed0/error_maps/hippocampus_175.npz": "b61d3b869b490173c615e00f99e2594b06e98b424e944741e64f27bd3a839b0e",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/augmentation_seed0/error_maps/hippocampus_185.npz": "44240faf1a4819a28a095233627cb13de085108ab352376aa9f9854f2b90eb45",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/augmentation_seed0/error_maps/hippocampus_190.npz": "6399bc86c39536c34a044ea1eee097c3971750653bef93fd8c8a0f5e2741f8c3",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/augmentation_seed0/error_maps/hippocampus_194.npz": "6c034814a35238ae55a0734801356aa2313fbfb7bfb9bfecd2dd00247d1284fb",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/augmentation_seed0/error_maps/hippocampus_204.npz": "09e1360a82ccc914a711bcc9d020e3abc9f7f3ef46edb4214c715b9f1ce81918",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/augmentation_seed0/error_maps/hippocampus_205.npz": "40b07988eeb02a8a60deddf5acd81353b1a5ac4c3feb396c389805d40628048f",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/augmentation_seed0/error_maps/hippocampus_210.npz": "5f8baa7bda38e054314dc4aab9fe0417d5d05349ac6dd89e162e0b2cd44d6c57",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/augmentation_seed0/error_maps/hippocampus_217.npz": "93d31b21a6935ba578770ece35c4c47e3bf8aa50644c9427727d78c4604a06fc",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/augmentation_seed0/error_maps/hippocampus_219.npz": "79c8307aad91c4fde248a2d089828450bf5d7efe2a10fdf25433f69b4531d21a",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/augmentation_seed0/error_maps/hippocampus_229.npz": "8aac65c3daebd174b98778784d4ca98a72067324ca81dc00fbd388610bc524a0",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/augmentation_seed0/error_maps/hippocampus_244.npz": "3ad3dd3f1773fa1704db001439b76aa49f8ded10a44c620ef997daedf78ceb13",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/augmentation_seed0/error_maps/hippocampus_261.npz": "32eaea75eb0e336d5148d9215e528b719070e3ff91103c31d9b9322184cb810e",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/augmentation_seed0/error_maps/hippocampus_264.npz": "af4b75e995152400f26e0a63a3e775e4863b2ed95f3b5904b07e76bf274fd1c2",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/augmentation_seed0/error_maps/hippocampus_277.npz": "8d42251681ff92c872eec3d32a7c8887b8375768bcfe9dc1907916261f5c8edd",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/augmentation_seed0/error_maps/hippocampus_280.npz": "7d39f2390c01e6f2ce3de108c71c05ce5eff2959f526cfae96e2b6cc476a85a4",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/augmentation_seed0/error_maps/hippocampus_286.npz": "a968eda246e88a580ac8fc5f414f5e96fdd64d29549c6bdc1bc982f3e357eeb6",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/augmentation_seed0/error_maps/hippocampus_288.npz": "1e23d3b803266fbf41816922b3d49ed854b15ff10eebad499d4ce1c112e1253e",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/augmentation_seed0/error_maps/hippocampus_289.npz": "abd2d9e49d29be978a40f211e69c56f870f2c5e8f0d9d15cb4bc1fb4ab2aa325",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/augmentation_seed0/error_maps/hippocampus_296.npz": "16d6c4a96787e7aeac5e66bb55f72707d03a5d00a520b358c1df3af888c10c4b",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/augmentation_seed0/error_maps/hippocampus_305.npz": "f0d6b1ffd26648f19e3fba30c33d69d54fe7278981f9ba1c81cdeb13c41ad3fc",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/augmentation_seed0/error_maps/hippocampus_308.npz": "2cb16fcd8621c569f0031d834004d03f9fa0d5c79cca48c4467c9fff224a3a49",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/augmentation_seed0/error_maps/hippocampus_317.npz": "b17647be3b341200472f90371af6bac3a9a620e924fc9c1c1ef23fb49172bd61",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/augmentation_seed0/error_maps/hippocampus_327.npz": "fc1c5672480acb533a6b913683a5282b9c5077827418f55a12409aa70f866474",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/augmentation_seed0/error_maps/hippocampus_330.npz": "0a8cfcabef9ffb7c9694494f96350d510df3cad24c9c069fb202b3ba18cb12ec",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/augmentation_seed0/error_maps/hippocampus_332.npz": "4d798d9a50e4c24980cea94b24c3db5cca2b8038b63b29f77266782154fcc77c",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/augmentation_seed0/error_maps/hippocampus_338.npz": "7e9758862e550baef55ebafe11013f77dd45fc3017499d7f4ef274eb83f3be97",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/augmentation_seed0/error_maps/hippocampus_349.npz": "852c8795de9f60a25ed8092cf3f3f809a7fd292adc6ecae96c51c973982e511e",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/augmentation_seed0/error_maps/hippocampus_350.npz": "ab4d22930f0cf29a3a2244b679b69ab5845412df7bb2782d6ef55ea72741ff92",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/augmentation_seed0/error_maps/hippocampus_356.npz": "8fb4536ee1765347b784cfe05951fa6dbd45d95604ccc6325bb51cbdf3effe22",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/augmentation_seed0/error_maps/hippocampus_358.npz": "20879ab89655090ce44b46d3dcaf9f93de8a1b8e89491994b2a179dc160a1aa5",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/augmentation_seed0/error_maps/hippocampus_374.npz": "d90f332e552321dd6ff21eb3e15716ae80693b9d8f302cf8160e31c244085297",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/augmentation_seed0/error_maps/hippocampus_394.npz": "5e6d8c7135c3c24074b5740fff26f02d9a84e6d7982a3dc495aa47e2e6a1d212",
+    "/Users/filippofocaccia/Desktop/hippo/experiments/uncal_fold_early_stopping_20260921/voxel_audit/augmentation_seed0/summary.json": "eeb8ea03ca92b0cdef7ce53665ce91744d7206ae28305547089068d72daa41c9"
+  }
+}
