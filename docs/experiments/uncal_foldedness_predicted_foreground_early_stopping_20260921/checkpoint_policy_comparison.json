@@ -1,0 +1,140 @@
+{
+  "schema": "uncal_fold.checkpoint_policy_comparison.v1",
+  "locator_coefficients_identical": true,
+  "fixed50_cut_metrics": {
+    "ground_truth_union": {
+      "count": 52,
+      "mae_slices": 0.7692307692307693,
+      "median_absolute_error": 0.0,
+      "exact_fraction": 0.5576923076923077,
+      "within_1_fraction": 0.8076923076923077,
+      "within_2_fraction": 0.9038461538461539,
+      "p90_absolute_error": 2.0,
+      "maximum_absolute_error": 4
+    },
+    "unaugmented_prediction": {
+      "count": 52,
+      "mae_slices": 1.2307692307692308,
+      "median_absolute_error": 1.0,
+      "exact_fraction": 0.34615384615384615,
+      "within_1_fraction": 0.7307692307692307,
+      "within_2_fraction": 0.8461538461538461,
+      "p90_absolute_error": 3.0,
+      "maximum_absolute_error": 6
+    },
+    "augmented_prediction": {
+      "count": 52,
+      "mae_slices": 0.9615384615384616,
+      "median_absolute_error": 1.0,
+      "exact_fraction": 0.40384615384615385,
+      "within_1_fraction": 0.7692307692307693,
+      "within_2_fraction": 0.9230769230769231,
+      "p90_absolute_error": 2.0,
+      "maximum_absolute_error": 5
+    }
+  },
+  "early_stopping_cut_metrics": {
+    "ground_truth_union": {
+      "count": 52,
+      "mae_slices": 0.7692307692307693,
+      "median_absolute_error": 0.0,
+      "exact_fraction": 0.5576923076923077,
+      "within_1_fraction": 0.8076923076923077,
+      "within_2_fraction": 0.9038461538461539,
+      "p90_absolute_error": 2.0,
+      "maximum_absolute_error": 4
+    },
+    "unaugmented_prediction": {
+      "count": 52,
+      "mae_slices": 1.2115384615384615,
+      "median_absolute_error": 1.0,
+      "exact_fraction": 0.38461538461538464,
+      "within_1_fraction": 0.75,
+      "within_2_fraction": 0.8653846153846154,
+      "p90_absolute_error": 4.0,
+      "maximum_absolute_error": 6
+    },
+    "augmented_prediction": {
+      "count": 52,
+      "mae_slices": 1.1153846153846154,
+      "median_absolute_error": 1.0,
+      "exact_fraction": 0.46153846153846156,
+      "within_1_fraction": 0.8653846153846154,
+      "within_2_fraction": 0.9230769230769231,
+      "p90_absolute_error": 2.0,
+      "maximum_absolute_error": 19
+    }
+  },
+  "fixed50_prediction_support": {
+    "unaugmented_prediction": {
+      "mean_foreground_dice": 0.891214633865063,
+      "median_foreground_dice": 0.9000757507887278,
+      "cases_with_disconnected_islands": 20,
+      "total_removed_island_voxels": 151,
+      "maximum_removed_island_voxels_in_one_case": 66
+    },
+    "augmented_prediction": {
+      "mean_foreground_dice": 0.9002633215723589,
+      "median_foreground_dice": 0.9108713778294908,
+      "cases_with_disconnected_islands": 5,
+      "total_removed_island_voxels": 24,
+      "maximum_removed_island_voxels_in_one_case": 10
+    }
+  },
+  "early_stopping_prediction_support": {
+    "unaugmented_prediction": {
+      "mean_foreground_dice": 0.8962160790115751,
+      "median_foreground_dice": 0.9066121704731589,
+      "cases_with_disconnected_islands": 3,
+      "total_removed_island_voxels": 27,
+      "maximum_removed_island_voxels_in_one_case": 18
+    },
+    "augmented_prediction": {
+      "mean_foreground_dice": 0.9080086105783582,
+      "median_foreground_dice": 0.9190120821334262,
+      "cases_with_disconnected_islands": 3,
+      "total_removed_island_voxels": 16,
+      "maximum_removed_island_voxels_in_one_case": 10
+    }
+  },
+  "paired_early_stopping_vs_fixed50": {
+    "unaugmented": {
+      "second_better": 11,
+      "equal": 31,
+      "second_worse": 10,
+      "mean_change": -0.019230769230769232,
+      "wilcoxon_two_sided_p_value_exploratory": 0.8673390264654888,
+      "cut_agreement_fraction": 0.5961538461538461
+    },
+    "augmented": {
+      "second_better": 11,
+      "equal": 37,
+      "second_worse": 4,
+      "mean_change": 0.15384615384615385,
+      "wilcoxon_two_sided_p_value_exploratory": 0.15729920705028516,
+      "cut_agreement_fraction": 0.6923076923076923
+    }
+  },
+  "early_stopping_augmented_vs_unaugmented": {
+    "second_better_cases": 17,
+    "equal_cases": 30,
+    "second_worse_cases": 5,
+    "mean_absolute_error_change_second_minus_first": -0.09615384615384616,
+    "wilcoxon_two_sided_p_value_exploratory": 0.02080203876459104,
+    "cut_agreement_fraction": 0.5769230769230769
+  },
+  "largest_early_stopping_augmented_outlier": {
+    "case_name": "hippocampus_317",
+    "target_cut": 25,
+    "predicted_cut": 6,
+    "absolute_error": 19,
+    "foreground_dice": 0.8811777076761304
+  },
+  "augmented_sensitivity_without_largest_outlier": {
+    "excluded_case": "hippocampus_317",
+    "excluded_error": 19,
+    "early_stopping_unaugmented_mae_without_case": 1.1568627450980393,
+    "fixed50_mae_without_case": 0.9215686274509803,
+    "early_stopping_mae_without_case": 0.7647058823529411
+  }
+}

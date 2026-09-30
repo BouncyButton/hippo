@@ -1,0 +1,4746 @@
+{
+  "schema": "uncal_cluster_phenotypes.v1",
+  "case_count": 260,
+  "cluster_input": {
+    "foreground": "ground-truth union of anterior and posterior labels",
+    "image": "local native T1 features within and around foreground",
+    "ap_labels_visible_to_clustering": false,
+    "sequence_points": 16,
+    "case_feature_names": [
+      "clear_shape_delta__area",
+      "clear_shape_next_delta__area",
+      "clear_shape_delta__superior_notch_depth",
+      "clear_shape_current__multirun_side_max",
+      "transition__superior_boundary_rise_max",
+      "transition__novel_superior_side_difference",
+      "transition__slice_dice",
+      "image_current__superior_band_left_right_difference_abs",
+      "image_current__superior_band_intensity_mean",
+      "image_current__superior_band_intensity_std",
+      "image_current__central_superior_band_intensity_mean",
+      "image_delta__superior_band_intensity_mean",
+      "image_current__mask_gradient_p90"
+    ]
+  },
+  "selection": "2-5 clusters selected independently per outer fold by training silhouette",
+  "metrics": {
+    "global_median": {
+      "count": 260,
+      "mae_slices": 1.1615384615384616,
+      "exact_fraction": 0.25769230769230766,
+      "within_1_fraction": 0.7,
+      "within_2_fraction": 0.9038461538461539,
+      "p90_absolute_error": 2.0
+    },
+    "cluster_median": {
+      "count": 260,
+      "mae_slices": 1.1807692307692308,
+      "exact_fraction": 0.25,
+      "within_1_fraction": 0.6884615384615385,
+      "within_2_fraction": 0.9038461538461539,
+      "p90_absolute_error": 2.0
+    },
+    "global_compact": {
+      "count": 260,
+      "mae_slices": 0.9692307692307692,
+      "exact_fraction": 0.4,
+      "within_1_fraction": 0.7923076923076923,
+      "within_2_fraction": 0.8923076923076924,
+      "p90_absolute_error": 3.0
+    },
+    "cluster_compact": {
+      "count": 260,
+      "mae_slices": 1.1538461538461537,
+      "exact_fraction": 0.38076923076923075,
+      "within_1_fraction": 0.7884615384615384,
+      "within_2_fraction": 0.8961538461538462,
+      "p90_absolute_error": 3.0
+    }
+  },
+  "paired_compact_comparison": {
+    "cluster_minus_global_mae": 0.18461538461538463,
+    "bootstrap_95_ci": [
+      -0.015384615384615385,
+      0.4423076923076923
+    ],
+    "cluster_better_cases": 20,
+    "equal_cases": 218,
+    "cluster_worse_cases": 22
+  },
+  "folds": [
+    {
+      "fold": 0,
+      "selected_clusters": 2,
+      "silhouette_by_count": {
+        "2": 0.11489181606456533,
+        "3": 0.10112405128497663,
+        "4": 0.0880134450033377,
+        "5": 0.08843689280170171
+      },
+      "pca_explained_variance": 0.32731145793712546,
+      "bootstrap_stability": {
+        "mean_adjusted_rand": 0.7999420954602604,
+        "median_adjusted_rand": 0.8424832977267888,
+        "p10_adjusted_rand": 0.5604454733775973
+      },
+      "training_clusters": [
+        {
+          "cluster": 0,
+          "size": 108,
+          "relative_cut_median": 0.5917467948717949,
+          "relative_cut_iqr": [
+            0.5741071428571428,
+            0.6209226467847158
+          ],
+          "representative_cases": [
+            "hippocampus_366",
+            "hippocampus_162",
+            "hippocampus_300"
+          ]
+        },
+        {
+          "cluster": 1,
+          "size": 100,
+          "relative_cut_median": 0.5903263403263403,
+          "relative_cut_iqr": [
+            0.5706168831168831,
+            0.625
+          ],
+          "representative_cases": [
+            "hippocampus_023",
+            "hippocampus_331",
+            "hippocampus_135"
+          ]
+        }
+      ],
+      "validation_cluster_sizes": {
+        "0": 31,
+        "1": 21
+      }
+    },
+    {
+      "fold": 1,
+      "selected_clusters": 2,
+      "silhouette_by_count": {
+        "2": 0.12489008116732157,
+        "3": 0.09924752835317159,
+        "4": 0.09626893102970135,
+        "5": 0.08632423239101925
+      },
+      "pca_explained_variance": 0.32616143733325254,
+      "bootstrap_stability": {
+        "mean_adjusted_rand": 0.7929239125764143,
+        "median_adjusted_rand": 0.7986185850822757,
+        "p10_adjusted_rand": 0.6663702999872366
+      },
+      "training_clusters": [
+        {
+          "cluster": 0,
+          "size": 92,
+          "relative_cut_median": 0.5941722972972974,
+          "relative_cut_iqr": [
+            0.5714285714285714,
+            0.6190476190476191
+          ],
+          "representative_cases": [
+            "hippocampus_023",
+            "hippocampus_135",
+            "hippocampus_212"
+          ]
+        },
+        {
+          "cluster": 1,
+          "size": 116,
+          "relative_cut_median": 0.5882352941176471,
+          "relative_cut_iqr": [
+            0.5675675675675675,
+            0.6216216216216216
+          ],
+          "representative_cases": [
+            "hippocampus_052",
+            "hippocampus_366",
+            "hippocampus_308"
+          ]
+        }
+      ],
+      "validation_cluster_sizes": {
+        "0": 23,
+        "1": 29
+      }
+    },
+    {
+      "fold": 2,
+      "selected_clusters": 2,
+      "silhouette_by_count": {
+        "2": 0.12244704304757527,
+        "3": 0.09626838764086823,
+        "4": 0.09634930442199917,
+        "5": 0.08701446110877303
+      },
+      "pca_explained_variance": 0.32316203121514864,
+      "bootstrap_stability": {
+        "mean_adjusted_rand": 0.8543575081484536,
+        "median_adjusted_rand": 0.8874019239517961,
+        "p10_adjusted_rand": 0.6491621666008782
+      },
+      "training_clusters": [
+        {
+          "cluster": 0,
+          "size": 110,
+          "relative_cut_median": 0.6,
+          "relative_cut_iqr": [
+            0.5789473684210527,
+            0.6241554054054054
+          ],
+          "representative_cases": [
+            "hippocampus_052",
+            "hippocampus_308",
+            "hippocampus_107"
+          ]
+        },
+        {
+          "cluster": 1,
+          "size": 98,
+          "relative_cut_median": 0.5897435897435898,
+          "relative_cut_iqr": [
+            0.5675675675675675,
+            0.6153846153846154
+          ],
+          "representative_cases": [
+            "hippocampus_023",
+            "hippocampus_331",
+            "hippocampus_212"
+          ]
+        }
+      ],
+      "validation_cluster_sizes": {
+        "0": 26,
+        "1": 26
+      }
+    },
+    {
+      "fold": 3,
+      "selected_clusters": 2,
+      "silhouette_by_count": {
+        "2": 0.11922803472631491,
+        "3": 0.08910357445113065,
+        "4": 0.08302339474443292,
+        "5": 0.08293193903418056
+      },
+      "pca_explained_variance": 0.32843059053436807,
+      "bootstrap_stability": {
+        "mean_adjusted_rand": 0.8144781319203034,
+        "median_adjusted_rand": 0.8336156072462214,
+        "p10_adjusted_rand": 0.682276157721089
+      },
+      "training_clusters": [
+        {
+          "cluster": 0,
+          "size": 99,
+          "relative_cut_median": 0.5897435897435898,
+          "relative_cut_iqr": [
+            0.5675675675675675,
+            0.6153846153846154
+          ],
+          "representative_cases": [
+            "hippocampus_135",
+            "hippocampus_368",
+            "hippocampus_212"
+          ]
+        },
+        {
+          "cluster": 1,
+          "size": 109,
+          "relative_cut_median": 0.6,
+          "relative_cut_iqr": [
+            0.5789473684210527,
+            0.625
+          ],
+          "representative_cases": [
+            "hippocampus_052",
+            "hippocampus_366",
+            "hippocampus_300"
+          ]
+        }
+      ],
+      "validation_cluster_sizes": {
+        "0": 25,
+        "1": 27
+      }
+    },
+    {
+      "fold": 4,
+      "selected_clusters": 2,
+      "silhouette_by_count": {
+        "2": 0.12031281639990678,
+        "3": 0.07873839069057981,
+        "4": 0.0936966656422678,
+        "5": 0.08124261780099663
+      },
+      "pca_explained_variance": 0.3287847165699423,
+      "bootstrap_stability": {
+        "mean_adjusted_rand": 0.8008126612654027,
+        "median_adjusted_rand": 0.8160491297571256,
+        "p10_adjusted_rand": 0.6473613802090018
+      },
+      "training_clusters": [
+        {
+          "cluster": 0,
+          "size": 92,
+          "relative_cut_median": 0.5941722972972974,
+          "relative_cut_iqr": [
+            0.5706168831168831,
+            0.6224662162162162
+          ],
+          "representative_cases": [
+            "hippocampus_135",
+            "hippocampus_174",
+            "hippocampus_023"
+          ]
+        },
+        {
+          "cluster": 1,
+          "size": 116,
+          "relative_cut_median": 0.5972972972972973,
+          "relative_cut_iqr": [
+            0.5741071428571428,
+            0.6224662162162162
+          ],
+          "representative_cases": [
+            "hippocampus_308",
+            "hippocampus_024",
+            "hippocampus_107"
+          ]
+        }
+      ],
+      "validation_cluster_sizes": {
+        "0": 24,
+        "1": 28
+      }
+    }
+  ],
+  "held_out_assignments": {
+    "hippocampus_017": {
+      "validation_fold": 0,
+      "cluster": 1
+    },
+    "hippocampus_019": {
+      "validation_fold": 0,
+      "cluster": 0
+    },
+    "hippocampus_033": {
+      "validation_fold": 0,
+      "cluster": 1
+    },
+    "hippocampus_035": {
+      "validation_fold": 0,
+      "cluster": 0
+    },
+    "hippocampus_037": {
+      "validation_fold": 0,
+      "cluster": 1
+    },
+    "hippocampus_049": {
+      "validation_fold": 0,
+      "cluster": 0
+    },
+    "hippocampus_052": {
+      "validation_fold": 0,
+      "cluster": 0
+    },
+    "hippocampus_065": {
+      "validation_fold": 0,
+      "cluster": 0
+    },
+    "hippocampus_083": {
+      "validation_fold": 0,
+      "cluster": 1
+    },
+    "hippocampus_088": {
+      "validation_fold": 0,
+      "cluster": 0
+    },
+    "hippocampus_090": {
+      "validation_fold": 0,
+      "cluster": 0
+    },
+    "hippocampus_092": {
+      "validation_fold": 0,
+      "cluster": 0
+    },
+    "hippocampus_095": {
+      "validation_fold": 0,
+      "cluster": 0
+    },
+    "hippocampus_107": {
+      "validation_fold": 0,
+      "cluster": 0
+    },
+    "hippocampus_108": {
+      "validation_fold": 0,
+      "cluster": 0
+    },
+    "hippocampus_123": {
+      "validation_fold": 0,
+      "cluster": 1
+    },
+    "hippocampus_125": {
+      "validation_fold": 0,
+      "cluster": 0
+    },
+    "hippocampus_157": {
+      "validation_fold": 0,
+      "cluster": 1
+    },
+    "hippocampus_164": {
+      "validation_fold": 0,
+      "cluster": 0
+    },
+    "hippocampus_169": {
+      "validation_fold": 0,
+      "cluster": 0
+    },
+    "hippocampus_175": {
+      "validation_fold": 0,
+      "cluster": 1
+    },
+    "hippocampus_185": {
+      "validation_fold": 0,
+      "cluster": 1
+    },
+    "hippocampus_190": {
+      "validation_fold": 0,
+      "cluster": 0
+    },
+    "hippocampus_194": {
+      "validation_fold": 0,
+      "cluster": 0
+    },
+    "hippocampus_204": {
+      "validation_fold": 0,
+      "cluster": 0
+    },
+    "hippocampus_205": {
+      "validation_fold": 0,
+      "cluster": 1
+    },
+    "hippocampus_210": {
+      "validation_fold": 0,
+      "cluster": 1
+    },
+    "hippocampus_217": {
+      "validation_fold": 0,
+      "cluster": 0
+    },
+    "hippocampus_219": {
+      "validation_fold": 0,
+      "cluster": 1
+    },
+    "hippocampus_229": {
+      "validation_fold": 0,
+      "cluster": 1
+    },
+    "hippocampus_244": {
+      "validation_fold": 0,
+      "cluster": 1
+    },
+    "hippocampus_261": {
+      "validation_fold": 0,
+      "cluster": 0
+    },
+    "hippocampus_264": {
+      "validation_fold": 0,
+      "cluster": 0
+    },
+    "hippocampus_277": {
+      "validation_fold": 0,
+      "cluster": 1
+    },
+    "hippocampus_280": {
+      "validation_fold": 0,
+      "cluster": 1
+    },
+    "hippocampus_286": {
+      "validation_fold": 0,
+      "cluster": 0
+    },
+    "hippocampus_288": {
+      "validation_fold": 0,
+      "cluster": 0
+    },
+    "hippocampus_289": {
+      "validation_fold": 0,
+      "cluster": 0
+    },
+    "hippocampus_296": {
+      "validation_fold": 0,
+      "cluster": 1
+    },
+    "hippocampus_305": {
+      "validation_fold": 0,
+      "cluster": 0
+    },
+    "hippocampus_308": {
+      "validation_fold": 0,
+      "cluster": 0
+    },
+    "hippocampus_317": {
+      "validation_fold": 0,
+      "cluster": 1
+    },
+    "hippocampus_327": {
+      "validation_fold": 0,
+      "cluster": 0
+    },
+    "hippocampus_330": {
+      "validation_fold": 0,
+      "cluster": 0
+    },
+    "hippocampus_332": {
+      "validation_fold": 0,
+      "cluster": 1
+    },
+    "hippocampus_338": {
+      "validation_fold": 0,
+      "cluster": 1
+    },
+    "hippocampus_349": {
+      "validation_fold": 0,
+      "cluster": 0
+    },
+    "hippocampus_350": {
+      "validation_fold": 0,
+      "cluster": 0
+    },
+    "hippocampus_356": {
+      "validation_fold": 0,
+      "cluster": 1
+    },
+    "hippocampus_358": {
+      "validation_fold": 0,
+      "cluster": 0
+    },
+    "hippocampus_374": {
+      "validation_fold": 0,
+      "cluster": 1
+    },
+    "hippocampus_394": {
+      "validation_fold": 0,
+      "cluster": 0
+    },
+    "hippocampus_003": {
+      "validation_fold": 1,
+      "cluster": 1
+    },
+    "hippocampus_025": {
+      "validation_fold": 1,
+      "cluster": 0
+    },
+    "hippocampus_026": {
+      "validation_fold": 1,
+      "cluster": 0
+    },
+    "hippocampus_034": {
+      "validation_fold": 1,
+      "cluster": 1
+    },
+    "hippocampus_036": {
+      "validation_fold": 1,
+      "cluster": 1
+    },
+    "hippocampus_044": {
+      "validation_fold": 1,
+      "cluster": 1
+    },
+    "hippocampus_045": {
+      "validation_fold": 1,
+      "cluster": 1
+    },
+    "hippocampus_064": {
+      "validation_fold": 1,
+      "cluster": 0
+    },
+    "hippocampus_087": {
+      "validation_fold": 1,
+      "cluster": 0
+    },
+    "hippocampus_093": {
+      "validation_fold": 1,
+      "cluster": 1
+    },
+    "hippocampus_094": {
+      "validation_fold": 1,
+      "cluster": 1
+    },
+    "hippocampus_106": {
+      "validation_fold": 1,
+      "cluster": 0
+    },
+    "hippocampus_114": {
+      "validation_fold": 1,
+      "cluster": 0
+    },
+    "hippocampus_144": {
+      "validation_fold": 1,
+      "cluster": 1
+    },
+    "hippocampus_149": {
+      "validation_fold": 1,
+      "cluster": 1
+    },
+    "hippocampus_154": {
+      "validation_fold": 1,
+      "cluster": 1
+    },
+    "hippocampus_155": {
+      "validation_fold": 1,
+      "cluster": 0
+    },
+    "hippocampus_162": {
+      "validation_fold": 1,
+      "cluster": 1
+    },
+    "hippocampus_163": {
+      "validation_fold": 1,
+      "cluster": 0
+    },
+    "hippocampus_166": {
+      "validation_fold": 1,
+      "cluster": 1
+    },
+    "hippocampus_171": {
+      "validation_fold": 1,
+      "cluster": 1
+    },
+    "hippocampus_177": {
+      "validation_fold": 1,
+      "cluster": 1
+    },
+    "hippocampus_203": {
+      "validation_fold": 1,
+      "cluster": 1
+    },
+    "hippocampus_215": {
+      "validation_fold": 1,
+      "cluster": 0
+    },
+    "hippocampus_223": {
+      "validation_fold": 1,
+      "cluster": 0
+    },
+    "hippocampus_228": {
+      "validation_fold": 1,
+      "cluster": 1
+    },
+    "hippocampus_231": {
+      "validation_fold": 1,
+      "cluster": 1
+    },
+    "hippocampus_234": {
+      "validation_fold": 1,
+      "cluster": 1
+    },
+    "hippocampus_235": {
+      "validation_fold": 1,
+      "cluster": 1
+    },
+    "hippocampus_236": {
+      "validation_fold": 1,
+      "cluster": 1
+    },
+    "hippocampus_238": {
+      "validation_fold": 1,
+      "cluster": 0
+    },
+    "hippocampus_245": {
+      "validation_fold": 1,
+      "cluster": 1
+    },
+    "hippocampus_250": {
+      "validation_fold": 1,
+      "cluster": 1
+    },
+    "hippocampus_263": {
+      "validation_fold": 1,
+      "cluster": 1
+    },
+    "hippocampus_274": {
+      "validation_fold": 1,
+      "cluster": 0
+    },
+    "hippocampus_287": {
+      "validation_fold": 1,
+      "cluster": 1
+    },
+    "hippocampus_295": {
+      "validation_fold": 1,
+      "cluster": 0
+    },
+    "hippocampus_299": {
+      "validation_fold": 1,
+      "cluster": 0
+    },
+    "hippocampus_300": {
+      "validation_fold": 1,
+      "cluster": 1
+    },
+    "hippocampus_309": {
+      "validation_fold": 1,
+      "cluster": 0
+    },
+    "hippocampus_316": {
+      "validation_fold": 1,
+      "cluster": 1
+    },
+    "hippocampus_321": {
+      "validation_fold": 1,
+      "cluster": 0
+    },
+    "hippocampus_328": {
+      "validation_fold": 1,
+      "cluster": 1
+    },
+    "hippocampus_329": {
+      "validation_fold": 1,
+      "cluster": 0
+    },
+    "hippocampus_336": {
+      "validation_fold": 1,
+      "cluster": 1
+    },
+    "hippocampus_337": {
+      "validation_fold": 1,
+      "cluster": 0
+    },
+    "hippocampus_345": {
+      "validation_fold": 1,
+      "cluster": 0
+    },
+    "hippocampus_351": {
+      "validation_fold": 1,
+      "cluster": 0
+    },
+    "hippocampus_352": {
+      "validation_fold": 1,
+      "cluster": 0
+    },
+    "hippocampus_354": {
+      "validation_fold": 1,
+      "cluster": 1
+    },
+    "hippocampus_355": {
+      "validation_fold": 1,
+      "cluster": 0
+    },
+    "hippocampus_360": {
+      "validation_fold": 1,
+      "cluster": 0
+    },
+    "hippocampus_004": {
+      "validation_fold": 2,
+      "cluster": 0
+    },
+    "hippocampus_007": {
+      "validation_fold": 2,
+      "cluster": 0
+    },
+    "hippocampus_015": {
+      "validation_fold": 2,
+      "cluster": 1
+    },
+    "hippocampus_024": {
+      "validation_fold": 2,
+      "cluster": 0
+    },
+    "hippocampus_041": {
+      "validation_fold": 2,
+      "cluster": 1
+    },
+    "hippocampus_042": {
+      "validation_fold": 2,
+      "cluster": 1
+    },
+    "hippocampus_046": {
+      "validation_fold": 2,
+      "cluster": 1
+    },
+    "hippocampus_056": {
+      "validation_fold": 2,
+      "cluster": 0
+    },
+    "hippocampus_068": {
+      "validation_fold": 2,
+      "cluster": 0
+    },
+    "hippocampus_074": {
+      "validation_fold": 2,
+      "cluster": 0
+    },
+    "hippocampus_084": {
+      "validation_fold": 2,
+      "cluster": 1
+    },
+    "hippocampus_089": {
+      "validation_fold": 2,
+      "cluster": 0
+    },
+    "hippocampus_098": {
+      "validation_fold": 2,
+      "cluster": 1
+    },
+    "hippocampus_099": {
+      "validation_fold": 2,
+      "cluster": 1
+    },
+    "hippocampus_133": {
+      "validation_fold": 2,
+      "cluster": 0
+    },
+    "hippocampus_135": {
+      "validation_fold": 2,
+      "cluster": 1
+    },
+    "hippocampus_143": {
+      "validation_fold": 2,
+      "cluster": 0
+    },
+    "hippocampus_145": {
+      "validation_fold": 2,
+      "cluster": 1
+    },
+    "hippocampus_150": {
+      "validation_fold": 2,
+      "cluster": 0
+    },
+    "hippocampus_156": {
+      "validation_fold": 2,
+      "cluster": 1
+    },
+    "hippocampus_158": {
+      "validation_fold": 2,
+      "cluster": 0
+    },
+    "hippocampus_161": {
+      "validation_fold": 2,
+      "cluster": 0
+    },
+    "hippocampus_165": {
+      "validation_fold": 2,
+      "cluster": 0
+    },
+    "hippocampus_174": {
+      "validation_fold": 2,
+      "cluster": 1
+    },
+    "hippocampus_176": {
+      "validation_fold": 2,
+      "cluster": 1
+    },
+    "hippocampus_199": {
+      "validation_fold": 2,
+      "cluster": 1
+    },
+    "hippocampus_220": {
+      "validation_fold": 2,
+      "cluster": 0
+    },
+    "hippocampus_221": {
+      "validation_fold": 2,
+      "cluster": 1
+    },
+    "hippocampus_224": {
+      "validation_fold": 2,
+      "cluster": 1
+    },
+    "hippocampus_225": {
+      "validation_fold": 2,
+      "cluster": 0
+    },
+    "hippocampus_232": {
+      "validation_fold": 2,
+      "cluster": 1
+    },
+    "hippocampus_251": {
+      "validation_fold": 2,
+      "cluster": 1
+    },
+    "hippocampus_252": {
+      "validation_fold": 2,
+      "cluster": 0
+    },
+    "hippocampus_257": {
+      "validation_fold": 2,
+      "cluster": 0
+    },
+    "hippocampus_259": {
+      "validation_fold": 2,
+      "cluster": 1
+    },
+    "hippocampus_265": {
+      "validation_fold": 2,
+      "cluster": 1
+    },
+    "hippocampus_276": {
+      "validation_fold": 2,
+      "cluster": 0
+    },
+    "hippocampus_279": {
+      "validation_fold": 2,
+      "cluster": 0
+    },
+    "hippocampus_297": {
+      "validation_fold": 2,
+      "cluster": 1
+    },
+    "hippocampus_302": {
+      "validation_fold": 2,
+      "cluster": 1
+    },
+    "hippocampus_304": {
+      "validation_fold": 2,
+      "cluster": 1
+    },
+    "hippocampus_311": {
+      "validation_fold": 2,
+      "cluster": 0
+    },
+    "hippocampus_320": {
+      "validation_fold": 2,
+      "cluster": 1
+    },
+    "hippocampus_325": {
+      "validation_fold": 2,
+      "cluster": 0
+    },
+    "hippocampus_343": {
+      "validation_fold": 2,
+      "cluster": 1
+    },
+    "hippocampus_366": {
+      "validation_fold": 2,
+      "cluster": 0
+    },
+    "hippocampus_370": {
+      "validation_fold": 2,
+      "cluster": 0
+    },
+    "hippocampus_372": {
+      "validation_fold": 2,
+      "cluster": 1
+    },
+    "hippocampus_373": {
+      "validation_fold": 2,
+      "cluster": 1
+    },
+    "hippocampus_378": {
+      "validation_fold": 2,
+      "cluster": 0
+    },
+    "hippocampus_383": {
+      "validation_fold": 2,
+      "cluster": 0
+    },
+    "hippocampus_387": {
+      "validation_fold": 2,
+      "cluster": 0
+    },
+    "hippocampus_001": {
+      "validation_fold": 3,
+      "cluster": 0
+    },
+    "hippocampus_006": {
+      "validation_fold": 3,
+      "cluster": 1
+    },
+    "hippocampus_011": {
+      "validation_fold": 3,
+      "cluster": 1
+    },
+    "hippocampus_023": {
+      "validation_fold": 3,
+      "cluster": 0
+    },
+    "hippocampus_038": {
+      "validation_fold": 3,
+      "cluster": 0
+    },
+    "hippocampus_039": {
+      "validation_fold": 3,
+      "cluster": 0
+    },
+    "hippocampus_051": {
+      "validation_fold": 3,
+      "cluster": 1
+    },
+    "hippocampus_058": {
+      "validation_fold": 3,
+      "cluster": 0
+    },
+    "hippocampus_060": {
+      "validation_fold": 3,
+      "cluster": 1
+    },
+    "hippocampus_067": {
+      "validation_fold": 3,
+      "cluster": 1
+    },
+    "hippocampus_075": {
+      "validation_fold": 3,
+      "cluster": 1
+    },
+    "hippocampus_077": {
+      "validation_fold": 3,
+      "cluster": 1
+    },
+    "hippocampus_096": {
+      "validation_fold": 3,
+      "cluster": 1
+    },
+    "hippocampus_101": {
+      "validation_fold": 3,
+      "cluster": 1
+    },
+    "hippocampus_102": {
+      "validation_fold": 3,
+      "cluster": 0
+    },
+    "hippocampus_105": {
+      "validation_fold": 3,
+      "cluster": 0
+    },
+    "hippocampus_109": {
+      "validation_fold": 3,
+      "cluster": 1
+    },
+    "hippocampus_126": {
+      "validation_fold": 3,
+      "cluster": 0
+    },
+    "hippocampus_130": {
+      "validation_fold": 3,
+      "cluster": 1
+    },
+    "hippocampus_136": {
+      "validation_fold": 3,
+      "cluster": 0
+    },
+    "hippocampus_141": {
+      "validation_fold": 3,
+      "cluster": 1
+    },
+    "hippocampus_142": {
+      "validation_fold": 3,
+      "cluster": 1
+    },
+    "hippocampus_148": {
+      "validation_fold": 3,
+      "cluster": 0
+    },
+    "hippocampus_184": {
+      "validation_fold": 3,
+      "cluster": 1
+    },
+    "hippocampus_193": {
+      "validation_fold": 3,
+      "cluster": 1
+    },
+    "hippocampus_195": {
+      "validation_fold": 3,
+      "cluster": 0
+    },
+    "hippocampus_230": {
+      "validation_fold": 3,
+      "cluster": 0
+    },
+    "hippocampus_233": {
+      "validation_fold": 3,
+      "cluster": 1
+    },
+    "hippocampus_242": {
+      "validation_fold": 3,
+      "cluster": 1
+    },
+    "hippocampus_243": {
+      "validation_fold": 3,
+      "cluster": 0
+    },
+    "hippocampus_248": {
+      "validation_fold": 3,
+      "cluster": 0
+    },
+    "hippocampus_249": {
+      "validation_fold": 3,
+      "cluster": 1
+    },
+    "hippocampus_253": {
+      "validation_fold": 3,
+      "cluster": 1
+    },
+    "hippocampus_268": {
+      "validation_fold": 3,
+      "cluster": 1
+    },
+    "hippocampus_269": {
+      "validation_fold": 3,
+      "cluster": 1
+    },
+    "hippocampus_282": {
+      "validation_fold": 3,
+      "cluster": 0
+    },
+    "hippocampus_294": {
+      "validation_fold": 3,
+      "cluster": 1
+    },
+    "hippocampus_301": {
+      "validation_fold": 3,
+      "cluster": 0
+    },
+    "hippocampus_303": {
+      "validation_fold": 3,
+      "cluster": 0
+    },
+    "hippocampus_310": {
+      "validation_fold": 3,
+      "cluster": 0
+    },
+    "hippocampus_318": {
+      "validation_fold": 3,
+      "cluster": 0
+    },
+    "hippocampus_319": {
+      "validation_fold": 3,
+      "cluster": 0
+    },
+    "hippocampus_331": {
+      "validation_fold": 3,
+      "cluster": 0
+    },
+    "hippocampus_333": {
+      "validation_fold": 3,
+      "cluster": 1
+    },
+    "hippocampus_335": {
+      "validation_fold": 3,
+      "cluster": 1
+    },
+    "hippocampus_341": {
+      "validation_fold": 3,
+      "cluster": 1
+    },
+    "hippocampus_359": {
+      "validation_fold": 3,
+      "cluster": 1
+    },
+    "hippocampus_361": {
+      "validation_fold": 3,
+      "cluster": 0
+    },
+    "hippocampus_363": {
+      "validation_fold": 3,
+      "cluster": 0
+    },
+    "hippocampus_376": {
+      "validation_fold": 3,
+      "cluster": 0
+    },
+    "hippocampus_380": {
+      "validation_fold": 3,
+      "cluster": 0
+    },
+    "hippocampus_386": {
+      "validation_fold": 3,
+      "cluster": 1
+    },
+    "hippocampus_008": {
+      "validation_fold": 4,
+      "cluster": 1
+    },
+    "hippocampus_014": {
+      "validation_fold": 4,
+      "cluster": 1
+    },
+    "hippocampus_020": {
+      "validation_fold": 4,
+      "cluster": 1
+    },
+    "hippocampus_040": {
+      "validation_fold": 4,
+      "cluster": 0
+    },
+    "hippocampus_048": {
+      "validation_fold": 4,
+      "cluster": 0
+    },
+    "hippocampus_050": {
+      "validation_fold": 4,
+      "cluster": 1
+    },
+    "hippocampus_053": {
+      "validation_fold": 4,
+      "cluster": 1
+    },
+    "hippocampus_057": {
+      "validation_fold": 4,
+      "cluster": 0
+    },
+    "hippocampus_070": {
+      "validation_fold": 4,
+      "cluster": 1
+    },
+    "hippocampus_091": {
+      "validation_fold": 4,
+      "cluster": 1
+    },
+    "hippocampus_097": {
+      "validation_fold": 4,
+      "cluster": 0
+    },
+    "hippocampus_104": {
+      "validation_fold": 4,
+      "cluster": 1
+    },
+    "hippocampus_124": {
+      "validation_fold": 4,
+      "cluster": 0
+    },
+    "hippocampus_127": {
+      "validation_fold": 4,
+      "cluster": 1
+    },
+    "hippocampus_132": {
+      "validation_fold": 4,
+      "cluster": 1
+    },
+    "hippocampus_138": {
+      "validation_fold": 4,
+      "cluster": 1
+    },
+    "hippocampus_146": {
+      "validation_fold": 4,
+      "cluster": 0
+    },
+    "hippocampus_152": {
+      "validation_fold": 4,
+      "cluster": 1
+    },
+    "hippocampus_160": {
+      "validation_fold": 4,
+      "cluster": 0
+    },
+    "hippocampus_170": {
+      "validation_fold": 4,
+      "cluster": 1
+    },
+    "hippocampus_172": {
+      "validation_fold": 4,
+      "cluster": 0
+    },
+    "hippocampus_173": {
+      "validation_fold": 4,
+      "cluster": 0
+    },
+    "hippocampus_178": {
+      "validation_fold": 4,
+      "cluster": 1
+    },
+    "hippocampus_180": {
+      "validation_fold": 4,
+      "cluster": 1
+    },
+    "hippocampus_181": {
+      "validation_fold": 4,
+      "cluster": 1
+    },
+    "hippocampus_188": {
+      "validation_fold": 4,
+      "cluster": 0
+    },
+    "hippocampus_189": {
+      "validation_fold": 4,
+      "cluster": 1
+    },
+    "hippocampus_197": {
+      "validation_fold": 4,
+      "cluster": 1
+    },
+    "hippocampus_207": {
+      "validation_fold": 4,
+      "cluster": 0
+    },
+    "hippocampus_212": {
+      "validation_fold": 4,
+      "cluster": 0
+    },
+    "hippocampus_216": {
+      "validation_fold": 4,
+      "cluster": 0
+    },
+    "hippocampus_222": {
+      "validation_fold": 4,
+      "cluster": 0
+    },
+    "hippocampus_226": {
+      "validation_fold": 4,
+      "cluster": 1
+    },
+    "hippocampus_227": {
+      "validation_fold": 4,
+      "cluster": 1
+    },
+    "hippocampus_260": {
+      "validation_fold": 4,
+      "cluster": 0
+    },
+    "hippocampus_290": {
+      "validation_fold": 4,
+      "cluster": 1
+    },
+    "hippocampus_292": {
+      "validation_fold": 4,
+      "cluster": 1
+    },
+    "hippocampus_298": {
+      "validation_fold": 4,
+      "cluster": 1
+    },
+    "hippocampus_314": {
+      "validation_fold": 4,
+      "cluster": 0
+    },
+    "hippocampus_322": {
+      "validation_fold": 4,
+      "cluster": 0
+    },
+    "hippocampus_326": {
+      "validation_fold": 4,
+      "cluster": 0
+    },
+    "hippocampus_334": {
+      "validation_fold": 4,
+      "cluster": 1
+    },
+    "hippocampus_340": {
+      "validation_fold": 4,
+      "cluster": 1
+    },
+    "hippocampus_353": {
+      "validation_fold": 4,
+      "cluster": 1
+    },
+    "hippocampus_367": {
+      "validation_fold": 4,
+      "cluster": 1
+    },
+    "hippocampus_368": {
+      "validation_fold": 4,
+      "cluster": 0
+    },
+    "hippocampus_375": {
+      "validation_fold": 4,
+      "cluster": 0
+    },
+    "hippocampus_381": {
+      "validation_fold": 4,
+      "cluster": 0
+    },
+    "hippocampus_385": {
+      "validation_fold": 4,
+      "cluster": 1
+    },
+    "hippocampus_389": {
+      "validation_fold": 4,
+      "cluster": 0
+    },
+    "hippocampus_390": {
+      "validation_fold": 4,
+      "cluster": 0
+    },
+    "hippocampus_393": {
+      "validation_fold": 4,
+      "cluster": 0
+    }
+  },
+  "held_out_predictions": {
+    "hippocampus_001": {
+      "global_median": 29,
+      "cluster_median": 29,
+      "global_compact": 31,
+      "cluster_compact": 31,
+      "target": 31,
+      "absolute_errors": {
+        "global_median": 2,
+        "cluster_median": 2,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_003": {
+      "global_median": 30,
+      "cluster_median": 30,
+      "global_compact": 30,
+      "cluster_compact": 30,
+      "target": 31,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_004": {
+      "global_median": 30,
+      "cluster_median": 30,
+      "global_compact": 31,
+      "cluster_compact": 30,
+      "target": 30,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 0,
+        "global_compact": 1,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_006": {
+      "global_median": 29,
+      "cluster_median": 29,
+      "global_compact": 29,
+      "cluster_compact": 29,
+      "target": 28,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_007": {
+      "global_median": 25,
+      "cluster_median": 26,
+      "global_compact": 25,
+      "cluster_compact": 25,
+      "target": 25,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 1,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_008": {
+      "global_median": 26,
+      "cluster_median": 26,
+      "global_compact": 25,
+      "cluster_compact": 25,
+      "target": 26,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 0,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_011": {
+      "global_median": 27,
+      "cluster_median": 28,
+      "global_compact": 29,
+      "cluster_compact": 27,
+      "target": 27,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 1,
+        "global_compact": 2,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_014": {
+      "global_median": 28,
+      "cluster_median": 28,
+      "global_compact": 27,
+      "cluster_compact": 27,
+      "target": 29,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 2,
+        "cluster_compact": 2
+      }
+    },
+    "hippocampus_015": {
+      "global_median": 28,
+      "cluster_median": 28,
+      "global_compact": 27,
+      "cluster_compact": 27,
+      "target": 27,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_017": {
+      "global_median": 27,
+      "cluster_median": 27,
+      "global_compact": 26,
+      "cluster_compact": 26,
+      "target": 26,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_019": {
+      "global_median": 26,
+      "cluster_median": 26,
+      "global_compact": 28,
+      "cluster_compact": 28,
+      "target": 27,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_020": {
+      "global_median": 26,
+      "cluster_median": 26,
+      "global_compact": 25,
+      "cluster_compact": 25,
+      "target": 24,
+      "absolute_errors": {
+        "global_median": 2,
+        "cluster_median": 2,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_023": {
+      "global_median": 29,
+      "cluster_median": 29,
+      "global_compact": 29,
+      "cluster_compact": 29,
+      "target": 29,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 0,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_024": {
+      "global_median": 29,
+      "cluster_median": 29,
+      "global_compact": 29,
+      "cluster_compact": 29,
+      "target": 30,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_025": {
+      "global_median": 27,
+      "cluster_median": 27,
+      "global_compact": 18,
+      "cluster_compact": 27,
+      "target": 25,
+      "absolute_errors": {
+        "global_median": 2,
+        "cluster_median": 2,
+        "global_compact": 7,
+        "cluster_compact": 2
+      }
+    },
+    "hippocampus_026": {
+      "global_median": 27,
+      "cluster_median": 28,
+      "global_compact": 27,
+      "cluster_compact": 27,
+      "target": 27,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 1,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_033": {
+      "global_median": 27,
+      "cluster_median": 27,
+      "global_compact": 26,
+      "cluster_compact": 26,
+      "target": 26,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_034": {
+      "global_median": 27,
+      "cluster_median": 27,
+      "global_compact": 27,
+      "cluster_compact": 27,
+      "target": 26,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_035": {
+      "global_median": 26,
+      "cluster_median": 26,
+      "global_compact": 27,
+      "cluster_compact": 27,
+      "target": 27,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_036": {
+      "global_median": 26,
+      "cluster_median": 26,
+      "global_compact": 27,
+      "cluster_compact": 25,
+      "target": 26,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 0,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_037": {
+      "global_median": 28,
+      "cluster_median": 28,
+      "global_compact": 27,
+      "cluster_compact": 27,
+      "target": 26,
+      "absolute_errors": {
+        "global_median": 2,
+        "cluster_median": 2,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_038": {
+      "global_median": 29,
+      "cluster_median": 28,
+      "global_compact": 27,
+      "cluster_compact": 7,
+      "target": 28,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 0,
+        "global_compact": 1,
+        "cluster_compact": 21
+      }
+    },
+    "hippocampus_039": {
+      "global_median": 31,
+      "cluster_median": 30,
+      "global_compact": 31,
+      "cluster_compact": 31,
+      "target": 30,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 0,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_040": {
+      "global_median": 30,
+      "cluster_median": 30,
+      "global_compact": 28,
+      "cluster_compact": 28,
+      "target": 29,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_041": {
+      "global_median": 28,
+      "cluster_median": 28,
+      "global_compact": 31,
+      "cluster_compact": 31,
+      "target": 28,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 0,
+        "global_compact": 3,
+        "cluster_compact": 3
+      }
+    },
+    "hippocampus_042": {
+      "global_median": 30,
+      "cluster_median": 30,
+      "global_compact": 27,
+      "cluster_compact": 30,
+      "target": 30,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 0,
+        "global_compact": 3,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_044": {
+      "global_median": 27,
+      "cluster_median": 27,
+      "global_compact": 28,
+      "cluster_compact": 28,
+      "target": 28,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_045": {
+      "global_median": 27,
+      "cluster_median": 27,
+      "global_compact": 31,
+      "cluster_compact": 31,
+      "target": 28,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 3,
+        "cluster_compact": 3
+      }
+    },
+    "hippocampus_046": {
+      "global_median": 28,
+      "cluster_median": 27,
+      "global_compact": 28,
+      "cluster_compact": 31,
+      "target": 27,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 0,
+        "global_compact": 1,
+        "cluster_compact": 4
+      }
+    },
+    "hippocampus_048": {
+      "global_median": 29,
+      "cluster_median": 29,
+      "global_compact": 29,
+      "cluster_compact": 30,
+      "target": 29,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 0,
+        "global_compact": 0,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_049": {
+      "global_median": 27,
+      "cluster_median": 27,
+      "global_compact": 29,
+      "cluster_compact": 27,
+      "target": 29,
+      "absolute_errors": {
+        "global_median": 2,
+        "cluster_median": 2,
+        "global_compact": 0,
+        "cluster_compact": 2
+      }
+    },
+    "hippocampus_050": {
+      "global_median": 26,
+      "cluster_median": 27,
+      "global_compact": 26,
+      "cluster_compact": 26,
+      "target": 27,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 0,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_051": {
+      "global_median": 30,
+      "cluster_median": 30,
+      "global_compact": 33,
+      "cluster_compact": 33,
+      "target": 31,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 2,
+        "cluster_compact": 2
+      }
+    },
+    "hippocampus_052": {
+      "global_median": 29,
+      "cluster_median": 29,
+      "global_compact": 30,
+      "cluster_compact": 29,
+      "target": 28,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 2,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_053": {
+      "global_median": 27,
+      "cluster_median": 27,
+      "global_compact": 28,
+      "cluster_compact": 28,
+      "target": 29,
+      "absolute_errors": {
+        "global_median": 2,
+        "cluster_median": 2,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_056": {
+      "global_median": 27,
+      "cluster_median": 28,
+      "global_compact": 26,
+      "cluster_compact": 26,
+      "target": 27,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 1,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_057": {
+      "global_median": 28,
+      "cluster_median": 28,
+      "global_compact": 29,
+      "cluster_compact": 30,
+      "target": 30,
+      "absolute_errors": {
+        "global_median": 2,
+        "cluster_median": 2,
+        "global_compact": 1,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_058": {
+      "global_median": 29,
+      "cluster_median": 29,
+      "global_compact": 31,
+      "cluster_compact": 31,
+      "target": 32,
+      "absolute_errors": {
+        "global_median": 3,
+        "cluster_median": 3,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_060": {
+      "global_median": 29,
+      "cluster_median": 30,
+      "global_compact": 29,
+      "cluster_compact": 29,
+      "target": 30,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 0,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_064": {
+      "global_median": 30,
+      "cluster_median": 30,
+      "global_compact": 30,
+      "cluster_compact": 30,
+      "target": 29,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_065": {
+      "global_median": 28,
+      "cluster_median": 28,
+      "global_compact": 30,
+      "cluster_compact": 30,
+      "target": 30,
+      "absolute_errors": {
+        "global_median": 2,
+        "cluster_median": 2,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_067": {
+      "global_median": 22,
+      "cluster_median": 22,
+      "global_compact": 21,
+      "cluster_compact": 21,
+      "target": 21,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_068": {
+      "global_median": 22,
+      "cluster_median": 22,
+      "global_compact": 21,
+      "cluster_compact": 21,
+      "target": 21,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_070": {
+      "global_median": 28,
+      "cluster_median": 28,
+      "global_compact": 27,
+      "cluster_compact": 27,
+      "target": 27,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_074": {
+      "global_median": 24,
+      "cluster_median": 24,
+      "global_compact": 23,
+      "cluster_compact": 23,
+      "target": 23,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_075": {
+      "global_median": 26,
+      "cluster_median": 26,
+      "global_compact": 28,
+      "cluster_compact": 28,
+      "target": 28,
+      "absolute_errors": {
+        "global_median": 2,
+        "cluster_median": 2,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_077": {
+      "global_median": 26,
+      "cluster_median": 27,
+      "global_compact": 26,
+      "cluster_compact": 26,
+      "target": 26,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 1,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_083": {
+      "global_median": 29,
+      "cluster_median": 29,
+      "global_compact": 29,
+      "cluster_compact": 29,
+      "target": 30,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_084": {
+      "global_median": 28,
+      "cluster_median": 28,
+      "global_compact": 30,
+      "cluster_compact": 30,
+      "target": 31,
+      "absolute_errors": {
+        "global_median": 3,
+        "cluster_median": 3,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_087": {
+      "global_median": 30,
+      "cluster_median": 31,
+      "global_compact": 31,
+      "cluster_compact": 31,
+      "target": 31,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 0,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_088": {
+      "global_median": 29,
+      "cluster_median": 29,
+      "global_compact": 30,
+      "cluster_compact": 30,
+      "target": 30,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_089": {
+      "global_median": 27,
+      "cluster_median": 27,
+      "global_compact": 26,
+      "cluster_compact": 26,
+      "target": 26,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_090": {
+      "global_median": 27,
+      "cluster_median": 27,
+      "global_compact": 26,
+      "cluster_compact": 26,
+      "target": 26,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_091": {
+      "global_median": 27,
+      "cluster_median": 27,
+      "global_compact": 28,
+      "cluster_compact": 28,
+      "target": 28,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_092": {
+      "global_median": 27,
+      "cluster_median": 27,
+      "global_compact": 28,
+      "cluster_compact": 28,
+      "target": 28,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_093": {
+      "global_median": 30,
+      "cluster_median": 30,
+      "global_compact": 32,
+      "cluster_compact": 32,
+      "target": 32,
+      "absolute_errors": {
+        "global_median": 2,
+        "cluster_median": 2,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_094": {
+      "global_median": 27,
+      "cluster_median": 27,
+      "global_compact": 28,
+      "cluster_compact": 28,
+      "target": 27,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 0,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_095": {
+      "global_median": 27,
+      "cluster_median": 27,
+      "global_compact": 25,
+      "cluster_compact": 25,
+      "target": 25,
+      "absolute_errors": {
+        "global_median": 2,
+        "cluster_median": 2,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_096": {
+      "global_median": 25,
+      "cluster_median": 26,
+      "global_compact": 25,
+      "cluster_compact": 25,
+      "target": 25,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 1,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_097": {
+      "global_median": 27,
+      "cluster_median": 27,
+      "global_compact": 29,
+      "cluster_compact": 29,
+      "target": 28,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_098": {
+      "global_median": 26,
+      "cluster_median": 26,
+      "global_compact": 26,
+      "cluster_compact": 26,
+      "target": 25,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_099": {
+      "global_median": 29,
+      "cluster_median": 29,
+      "global_compact": 31,
+      "cluster_compact": 31,
+      "target": 30,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_101": {
+      "global_median": 29,
+      "cluster_median": 29,
+      "global_compact": 28,
+      "cluster_compact": 28,
+      "target": 27,
+      "absolute_errors": {
+        "global_median": 2,
+        "cluster_median": 2,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_102": {
+      "global_median": 31,
+      "cluster_median": 31,
+      "global_compact": 31,
+      "cluster_compact": 31,
+      "target": 28,
+      "absolute_errors": {
+        "global_median": 3,
+        "cluster_median": 3,
+        "global_compact": 3,
+        "cluster_compact": 3
+      }
+    },
+    "hippocampus_104": {
+      "global_median": 29,
+      "cluster_median": 29,
+      "global_compact": 28,
+      "cluster_compact": 28,
+      "target": 27,
+      "absolute_errors": {
+        "global_median": 2,
+        "cluster_median": 2,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_105": {
+      "global_median": 26,
+      "cluster_median": 26,
+      "global_compact": 25,
+      "cluster_compact": 25,
+      "target": 24,
+      "absolute_errors": {
+        "global_median": 2,
+        "cluster_median": 2,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_106": {
+      "global_median": 26,
+      "cluster_median": 26,
+      "global_compact": 25,
+      "cluster_compact": 25,
+      "target": 25,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_107": {
+      "global_median": 30,
+      "cluster_median": 30,
+      "global_compact": 31,
+      "cluster_compact": 31,
+      "target": 32,
+      "absolute_errors": {
+        "global_median": 2,
+        "cluster_median": 2,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_108": {
+      "global_median": 29,
+      "cluster_median": 29,
+      "global_compact": 29,
+      "cluster_compact": 29,
+      "target": 30,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_109": {
+      "global_median": 26,
+      "cluster_median": 27,
+      "global_compact": 27,
+      "cluster_compact": 27,
+      "target": 28,
+      "absolute_errors": {
+        "global_median": 2,
+        "cluster_median": 1,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_114": {
+      "global_median": 29,
+      "cluster_median": 29,
+      "global_compact": 27,
+      "cluster_compact": 27,
+      "target": 25,
+      "absolute_errors": {
+        "global_median": 4,
+        "cluster_median": 4,
+        "global_compact": 2,
+        "cluster_compact": 2
+      }
+    },
+    "hippocampus_123": {
+      "global_median": 30,
+      "cluster_median": 30,
+      "global_compact": 32,
+      "cluster_compact": 32,
+      "target": 30,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 0,
+        "global_compact": 2,
+        "cluster_compact": 2
+      }
+    },
+    "hippocampus_124": {
+      "global_median": 30,
+      "cluster_median": 30,
+      "global_compact": 34,
+      "cluster_compact": 34,
+      "target": 31,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 3,
+        "cluster_compact": 3
+      }
+    },
+    "hippocampus_125": {
+      "global_median": 23,
+      "cluster_median": 23,
+      "global_compact": 21,
+      "cluster_compact": 20,
+      "target": 21,
+      "absolute_errors": {
+        "global_median": 2,
+        "cluster_median": 2,
+        "global_compact": 0,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_126": {
+      "global_median": 24,
+      "cluster_median": 24,
+      "global_compact": 24,
+      "cluster_compact": 25,
+      "target": 25,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 1,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_127": {
+      "global_median": 32,
+      "cluster_median": 32,
+      "global_compact": 30,
+      "cluster_compact": 30,
+      "target": 30,
+      "absolute_errors": {
+        "global_median": 2,
+        "cluster_median": 2,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_130": {
+      "global_median": 28,
+      "cluster_median": 28,
+      "global_compact": 30,
+      "cluster_compact": 29,
+      "target": 28,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 0,
+        "global_compact": 2,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_132": {
+      "global_median": 28,
+      "cluster_median": 28,
+      "global_compact": 29,
+      "cluster_compact": 29,
+      "target": 28,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 0,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_133": {
+      "global_median": 23,
+      "cluster_median": 23,
+      "global_compact": 22,
+      "cluster_compact": 22,
+      "target": 22,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_135": {
+      "global_median": 27,
+      "cluster_median": 27,
+      "global_compact": 27,
+      "cluster_compact": 27,
+      "target": 27,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 0,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_136": {
+      "global_median": 27,
+      "cluster_median": 27,
+      "global_compact": 27,
+      "cluster_compact": 27,
+      "target": 28,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_138": {
+      "global_median": 24,
+      "cluster_median": 24,
+      "global_compact": 26,
+      "cluster_compact": 25,
+      "target": 26,
+      "absolute_errors": {
+        "global_median": 2,
+        "cluster_median": 2,
+        "global_compact": 0,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_141": {
+      "global_median": 23,
+      "cluster_median": 23,
+      "global_compact": 24,
+      "cluster_compact": 24,
+      "target": 24,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_142": {
+      "global_median": 22,
+      "cluster_median": 22,
+      "global_compact": 23,
+      "cluster_compact": 23,
+      "target": 23,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_143": {
+      "global_median": 24,
+      "cluster_median": 25,
+      "global_compact": 25,
+      "cluster_compact": 24,
+      "target": 25,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 0,
+        "global_compact": 0,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_144": {
+      "global_median": 25,
+      "cluster_median": 25,
+      "global_compact": 26,
+      "cluster_compact": 25,
+      "target": 25,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 0,
+        "global_compact": 1,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_145": {
+      "global_median": 29,
+      "cluster_median": 29,
+      "global_compact": 29,
+      "cluster_compact": 29,
+      "target": 29,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 0,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_146": {
+      "global_median": 29,
+      "cluster_median": 29,
+      "global_compact": 27,
+      "cluster_compact": 28,
+      "target": 28,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 1,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_148": {
+      "global_median": 26,
+      "cluster_median": 26,
+      "global_compact": 26,
+      "cluster_compact": 26,
+      "target": 26,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 0,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_149": {
+      "global_median": 27,
+      "cluster_median": 27,
+      "global_compact": 26,
+      "cluster_compact": 26,
+      "target": 25,
+      "absolute_errors": {
+        "global_median": 2,
+        "cluster_median": 2,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_150": {
+      "global_median": 26,
+      "cluster_median": 27,
+      "global_compact": 25,
+      "cluster_compact": 25,
+      "target": 26,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 1,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_152": {
+      "global_median": 29,
+      "cluster_median": 29,
+      "global_compact": 31,
+      "cluster_compact": 30,
+      "target": 29,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 0,
+        "global_compact": 2,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_154": {
+      "global_median": 26,
+      "cluster_median": 26,
+      "global_compact": 27,
+      "cluster_compact": 27,
+      "target": 28,
+      "absolute_errors": {
+        "global_median": 2,
+        "cluster_median": 2,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_155": {
+      "global_median": 30,
+      "cluster_median": 30,
+      "global_compact": 32,
+      "cluster_compact": 32,
+      "target": 29,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 3,
+        "cluster_compact": 3
+      }
+    },
+    "hippocampus_156": {
+      "global_median": 29,
+      "cluster_median": 29,
+      "global_compact": 31,
+      "cluster_compact": 31,
+      "target": 28,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 3,
+        "cluster_compact": 3
+      }
+    },
+    "hippocampus_157": {
+      "global_median": 28,
+      "cluster_median": 28,
+      "global_compact": 29,
+      "cluster_compact": 29,
+      "target": 29,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_158": {
+      "global_median": 29,
+      "cluster_median": 29,
+      "global_compact": 28,
+      "cluster_compact": 28,
+      "target": 29,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 0,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_160": {
+      "global_median": 31,
+      "cluster_median": 31,
+      "global_compact": 29,
+      "cluster_compact": 29,
+      "target": 29,
+      "absolute_errors": {
+        "global_median": 2,
+        "cluster_median": 2,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_161": {
+      "global_median": 28,
+      "cluster_median": 28,
+      "global_compact": 29,
+      "cluster_compact": 29,
+      "target": 30,
+      "absolute_errors": {
+        "global_median": 2,
+        "cluster_median": 2,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_162": {
+      "global_median": 28,
+      "cluster_median": 28,
+      "global_compact": 28,
+      "cluster_compact": 28,
+      "target": 28,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 0,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_163": {
+      "global_median": 26,
+      "cluster_median": 26,
+      "global_compact": 28,
+      "cluster_compact": 28,
+      "target": 30,
+      "absolute_errors": {
+        "global_median": 4,
+        "cluster_median": 4,
+        "global_compact": 2,
+        "cluster_compact": 2
+      }
+    },
+    "hippocampus_164": {
+      "global_median": 27,
+      "cluster_median": 27,
+      "global_compact": 27,
+      "cluster_compact": 27,
+      "target": 31,
+      "absolute_errors": {
+        "global_median": 4,
+        "cluster_median": 4,
+        "global_compact": 4,
+        "cluster_compact": 4
+      }
+    },
+    "hippocampus_165": {
+      "global_median": 27,
+      "cluster_median": 27,
+      "global_compact": 27,
+      "cluster_compact": 26,
+      "target": 28,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 1,
+        "cluster_compact": 2
+      }
+    },
+    "hippocampus_166": {
+      "global_median": 26,
+      "cluster_median": 26,
+      "global_compact": 28,
+      "cluster_compact": 28,
+      "target": 29,
+      "absolute_errors": {
+        "global_median": 3,
+        "cluster_median": 3,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_169": {
+      "global_median": 24,
+      "cluster_median": 25,
+      "global_compact": 25,
+      "cluster_compact": 25,
+      "target": 25,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 0,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_170": {
+      "global_median": 26,
+      "cluster_median": 26,
+      "global_compact": 28,
+      "cluster_compact": 25,
+      "target": 28,
+      "absolute_errors": {
+        "global_median": 2,
+        "cluster_median": 2,
+        "global_compact": 0,
+        "cluster_compact": 3
+      }
+    },
+    "hippocampus_171": {
+      "global_median": 31,
+      "cluster_median": 31,
+      "global_compact": 32,
+      "cluster_compact": 32,
+      "target": 32,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_172": {
+      "global_median": 32,
+      "cluster_median": 32,
+      "global_compact": 33,
+      "cluster_compact": 33,
+      "target": 33,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_173": {
+      "global_median": 30,
+      "cluster_median": 30,
+      "global_compact": 37,
+      "cluster_compact": 37,
+      "target": 32,
+      "absolute_errors": {
+        "global_median": 2,
+        "cluster_median": 2,
+        "global_compact": 5,
+        "cluster_compact": 5
+      }
+    },
+    "hippocampus_174": {
+      "global_median": 31,
+      "cluster_median": 30,
+      "global_compact": 38,
+      "cluster_compact": 37,
+      "target": 32,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 2,
+        "global_compact": 6,
+        "cluster_compact": 5
+      }
+    },
+    "hippocampus_175": {
+      "global_median": 26,
+      "cluster_median": 26,
+      "global_compact": 27,
+      "cluster_compact": 27,
+      "target": 26,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 0,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_176": {
+      "global_median": 28,
+      "cluster_median": 27,
+      "global_compact": 27,
+      "cluster_compact": 27,
+      "target": 26,
+      "absolute_errors": {
+        "global_median": 2,
+        "cluster_median": 1,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_177": {
+      "global_median": 24,
+      "cluster_median": 24,
+      "global_compact": 26,
+      "cluster_compact": 25,
+      "target": 26,
+      "absolute_errors": {
+        "global_median": 2,
+        "cluster_median": 2,
+        "global_compact": 0,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_178": {
+      "global_median": 24,
+      "cluster_median": 24,
+      "global_compact": 25,
+      "cluster_compact": 25,
+      "target": 25,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_180": {
+      "global_median": 25,
+      "cluster_median": 25,
+      "global_compact": 25,
+      "cluster_compact": 24,
+      "target": 25,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 0,
+        "global_compact": 0,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_181": {
+      "global_median": 27,
+      "cluster_median": 27,
+      "global_compact": 28,
+      "cluster_compact": 28,
+      "target": 27,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 0,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_184": {
+      "global_median": 28,
+      "cluster_median": 28,
+      "global_compact": 28,
+      "cluster_compact": 28,
+      "target": 28,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 0,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_185": {
+      "global_median": 27,
+      "cluster_median": 27,
+      "global_compact": 27,
+      "cluster_compact": 27,
+      "target": 27,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 0,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_188": {
+      "global_median": 31,
+      "cluster_median": 31,
+      "global_compact": 34,
+      "cluster_compact": 34,
+      "target": 34,
+      "absolute_errors": {
+        "global_median": 3,
+        "cluster_median": 3,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_189": {
+      "global_median": 29,
+      "cluster_median": 29,
+      "global_compact": 29,
+      "cluster_compact": 29,
+      "target": 29,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 0,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_190": {
+      "global_median": 28,
+      "cluster_median": 28,
+      "global_compact": 29,
+      "cluster_compact": 28,
+      "target": 29,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 0,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_193": {
+      "global_median": 27,
+      "cluster_median": 28,
+      "global_compact": 27,
+      "cluster_compact": 27,
+      "target": 27,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 1,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_194": {
+      "global_median": 27,
+      "cluster_median": 27,
+      "global_compact": 29,
+      "cluster_compact": 29,
+      "target": 29,
+      "absolute_errors": {
+        "global_median": 2,
+        "cluster_median": 2,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_195": {
+      "global_median": 31,
+      "cluster_median": 30,
+      "global_compact": 29,
+      "cluster_compact": 29,
+      "target": 30,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 0,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_197": {
+      "global_median": 26,
+      "cluster_median": 26,
+      "global_compact": 26,
+      "cluster_compact": 26,
+      "target": 25,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_199": {
+      "global_median": 29,
+      "cluster_median": 29,
+      "global_compact": 33,
+      "cluster_compact": 33,
+      "target": 33,
+      "absolute_errors": {
+        "global_median": 4,
+        "cluster_median": 4,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_203": {
+      "global_median": 27,
+      "cluster_median": 27,
+      "global_compact": 26,
+      "cluster_compact": 25,
+      "target": 26,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 0,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_204": {
+      "global_median": 26,
+      "cluster_median": 26,
+      "global_compact": 25,
+      "cluster_compact": 25,
+      "target": 26,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 0,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_205": {
+      "global_median": 26,
+      "cluster_median": 26,
+      "global_compact": 27,
+      "cluster_compact": 27,
+      "target": 27,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_207": {
+      "global_median": 28,
+      "cluster_median": 28,
+      "global_compact": 28,
+      "cluster_compact": 28,
+      "target": 29,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_210": {
+      "global_median": 26,
+      "cluster_median": 26,
+      "global_compact": 27,
+      "cluster_compact": 27,
+      "target": 27,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_212": {
+      "global_median": 32,
+      "cluster_median": 32,
+      "global_compact": 31,
+      "cluster_compact": 33,
+      "target": 33,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 2,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_215": {
+      "global_median": 27,
+      "cluster_median": 27,
+      "global_compact": 28,
+      "cluster_compact": 28,
+      "target": 28,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_216": {
+      "global_median": 27,
+      "cluster_median": 27,
+      "global_compact": 27,
+      "cluster_compact": 27,
+      "target": 27,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 0,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_217": {
+      "global_median": 27,
+      "cluster_median": 27,
+      "global_compact": 27,
+      "cluster_compact": 27,
+      "target": 26,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_219": {
+      "global_median": 25,
+      "cluster_median": 25,
+      "global_compact": 25,
+      "cluster_compact": 26,
+      "target": 25,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 0,
+        "global_compact": 0,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_220": {
+      "global_median": 25,
+      "cluster_median": 25,
+      "global_compact": 24,
+      "cluster_compact": 24,
+      "target": 24,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_221": {
+      "global_median": 26,
+      "cluster_median": 26,
+      "global_compact": 23,
+      "cluster_compact": 25,
+      "target": 26,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 0,
+        "global_compact": 3,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_222": {
+      "global_median": 27,
+      "cluster_median": 27,
+      "global_compact": 25,
+      "cluster_compact": 29,
+      "target": 25,
+      "absolute_errors": {
+        "global_median": 2,
+        "cluster_median": 2,
+        "global_compact": 0,
+        "cluster_compact": 4
+      }
+    },
+    "hippocampus_223": {
+      "global_median": 29,
+      "cluster_median": 29,
+      "global_compact": 31,
+      "cluster_compact": 31,
+      "target": 32,
+      "absolute_errors": {
+        "global_median": 3,
+        "cluster_median": 3,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_224": {
+      "global_median": 27,
+      "cluster_median": 27,
+      "global_compact": 25,
+      "cluster_compact": 25,
+      "target": 26,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_225": {
+      "global_median": 29,
+      "cluster_median": 29,
+      "global_compact": 33,
+      "cluster_compact": 33,
+      "target": 32,
+      "absolute_errors": {
+        "global_median": 3,
+        "cluster_median": 3,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_226": {
+      "global_median": 28,
+      "cluster_median": 28,
+      "global_compact": 30,
+      "cluster_compact": 30,
+      "target": 27,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 3,
+        "cluster_compact": 3
+      }
+    },
+    "hippocampus_227": {
+      "global_median": 25,
+      "cluster_median": 26,
+      "global_compact": 25,
+      "cluster_compact": 25,
+      "target": 25,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 1,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_228": {
+      "global_median": 26,
+      "cluster_median": 26,
+      "global_compact": 26,
+      "cluster_compact": 26,
+      "target": 27,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_229": {
+      "global_median": 28,
+      "cluster_median": 28,
+      "global_compact": 28,
+      "cluster_compact": 28,
+      "target": 29,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_230": {
+      "global_median": 28,
+      "cluster_median": 27,
+      "global_compact": 29,
+      "cluster_compact": 29,
+      "target": 29,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 2,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_231": {
+      "global_median": 26,
+      "cluster_median": 26,
+      "global_compact": 27,
+      "cluster_compact": 27,
+      "target": 27,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_232": {
+      "global_median": 24,
+      "cluster_median": 24,
+      "global_compact": 24,
+      "cluster_compact": 24,
+      "target": 24,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 0,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_233": {
+      "global_median": 28,
+      "cluster_median": 28,
+      "global_compact": 29,
+      "cluster_compact": 28,
+      "target": 27,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 2,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_234": {
+      "global_median": 26,
+      "cluster_median": 26,
+      "global_compact": 27,
+      "cluster_compact": 27,
+      "target": 28,
+      "absolute_errors": {
+        "global_median": 2,
+        "cluster_median": 2,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_235": {
+      "global_median": 31,
+      "cluster_median": 31,
+      "global_compact": 33,
+      "cluster_compact": 33,
+      "target": 32,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_236": {
+      "global_median": 32,
+      "cluster_median": 32,
+      "global_compact": 30,
+      "cluster_compact": 26,
+      "target": 33,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 3,
+        "cluster_compact": 7
+      }
+    },
+    "hippocampus_238": {
+      "global_median": 32,
+      "cluster_median": 32,
+      "global_compact": 31,
+      "cluster_compact": 31,
+      "target": 31,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_242": {
+      "global_median": 28,
+      "cluster_median": 28,
+      "global_compact": 27,
+      "cluster_compact": 27,
+      "target": 28,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 0,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_243": {
+      "global_median": 29,
+      "cluster_median": 29,
+      "global_compact": 31,
+      "cluster_compact": 31,
+      "target": 32,
+      "absolute_errors": {
+        "global_median": 3,
+        "cluster_median": 3,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_244": {
+      "global_median": 28,
+      "cluster_median": 28,
+      "global_compact": 29,
+      "cluster_compact": 29,
+      "target": 29,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_245": {
+      "global_median": 28,
+      "cluster_median": 28,
+      "global_compact": 30,
+      "cluster_compact": 30,
+      "target": 30,
+      "absolute_errors": {
+        "global_median": 2,
+        "cluster_median": 2,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_248": {
+      "global_median": 28,
+      "cluster_median": 28,
+      "global_compact": 28,
+      "cluster_compact": 28,
+      "target": 27,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_249": {
+      "global_median": 29,
+      "cluster_median": 30,
+      "global_compact": 30,
+      "cluster_compact": 30,
+      "target": 29,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 1,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_250": {
+      "global_median": 28,
+      "cluster_median": 28,
+      "global_compact": 31,
+      "cluster_compact": 30,
+      "target": 28,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 0,
+        "global_compact": 3,
+        "cluster_compact": 2
+      }
+    },
+    "hippocampus_251": {
+      "global_median": 32,
+      "cluster_median": 32,
+      "global_compact": 31,
+      "cluster_compact": 31,
+      "target": 30,
+      "absolute_errors": {
+        "global_median": 2,
+        "cluster_median": 2,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_252": {
+      "global_median": 30,
+      "cluster_median": 30,
+      "global_compact": 30,
+      "cluster_compact": 30,
+      "target": 29,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_253": {
+      "global_median": 28,
+      "cluster_median": 28,
+      "global_compact": 26,
+      "cluster_compact": 26,
+      "target": 25,
+      "absolute_errors": {
+        "global_median": 3,
+        "cluster_median": 3,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_257": {
+      "global_median": 29,
+      "cluster_median": 29,
+      "global_compact": 31,
+      "cluster_compact": 31,
+      "target": 31,
+      "absolute_errors": {
+        "global_median": 2,
+        "cluster_median": 2,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_259": {
+      "global_median": 29,
+      "cluster_median": 29,
+      "global_compact": 31,
+      "cluster_compact": 31,
+      "target": 32,
+      "absolute_errors": {
+        "global_median": 3,
+        "cluster_median": 3,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_260": {
+      "global_median": 28,
+      "cluster_median": 28,
+      "global_compact": 31,
+      "cluster_compact": 31,
+      "target": 31,
+      "absolute_errors": {
+        "global_median": 3,
+        "cluster_median": 3,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_261": {
+      "global_median": 32,
+      "cluster_median": 32,
+      "global_compact": 31,
+      "cluster_compact": 31,
+      "target": 30,
+      "absolute_errors": {
+        "global_median": 2,
+        "cluster_median": 2,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_263": {
+      "global_median": 27,
+      "cluster_median": 27,
+      "global_compact": 27,
+      "cluster_compact": 27,
+      "target": 28,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_264": {
+      "global_median": 28,
+      "cluster_median": 28,
+      "global_compact": 29,
+      "cluster_compact": 29,
+      "target": 30,
+      "absolute_errors": {
+        "global_median": 2,
+        "cluster_median": 2,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_265": {
+      "global_median": 30,
+      "cluster_median": 30,
+      "global_compact": 31,
+      "cluster_compact": 31,
+      "target": 30,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 0,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_268": {
+      "global_median": 28,
+      "cluster_median": 28,
+      "global_compact": 30,
+      "cluster_compact": 30,
+      "target": 28,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 0,
+        "global_compact": 2,
+        "cluster_compact": 2
+      }
+    },
+    "hippocampus_269": {
+      "global_median": 28,
+      "cluster_median": 28,
+      "global_compact": 27,
+      "cluster_compact": 27,
+      "target": 27,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_274": {
+      "global_median": 22,
+      "cluster_median": 22,
+      "global_compact": 22,
+      "cluster_compact": 22,
+      "target": 20,
+      "absolute_errors": {
+        "global_median": 2,
+        "cluster_median": 2,
+        "global_compact": 2,
+        "cluster_compact": 2
+      }
+    },
+    "hippocampus_276": {
+      "global_median": 28,
+      "cluster_median": 28,
+      "global_compact": 27,
+      "cluster_compact": 27,
+      "target": 26,
+      "absolute_errors": {
+        "global_median": 2,
+        "cluster_median": 2,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_277": {
+      "global_median": 33,
+      "cluster_median": 33,
+      "global_compact": 34,
+      "cluster_compact": 34,
+      "target": 32,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 2,
+        "cluster_compact": 2
+      }
+    },
+    "hippocampus_279": {
+      "global_median": 25,
+      "cluster_median": 25,
+      "global_compact": 26,
+      "cluster_compact": 26,
+      "target": 25,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 0,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_280": {
+      "global_median": 26,
+      "cluster_median": 26,
+      "global_compact": 26,
+      "cluster_compact": 28,
+      "target": 26,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 0,
+        "global_compact": 0,
+        "cluster_compact": 2
+      }
+    },
+    "hippocampus_282": {
+      "global_median": 29,
+      "cluster_median": 29,
+      "global_compact": 30,
+      "cluster_compact": 30,
+      "target": 30,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_286": {
+      "global_median": 24,
+      "cluster_median": 25,
+      "global_compact": 25,
+      "cluster_compact": 25,
+      "target": 25,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 0,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_287": {
+      "global_median": 28,
+      "cluster_median": 28,
+      "global_compact": 30,
+      "cluster_compact": 29,
+      "target": 29,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 1,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_288": {
+      "global_median": 27,
+      "cluster_median": 27,
+      "global_compact": 30,
+      "cluster_compact": 30,
+      "target": 30,
+      "absolute_errors": {
+        "global_median": 3,
+        "cluster_median": 3,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_289": {
+      "global_median": 27,
+      "cluster_median": 27,
+      "global_compact": 28,
+      "cluster_compact": 28,
+      "target": 28,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_290": {
+      "global_median": 27,
+      "cluster_median": 27,
+      "global_compact": 27,
+      "cluster_compact": 27,
+      "target": 28,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_292": {
+      "global_median": 29,
+      "cluster_median": 29,
+      "global_compact": 29,
+      "cluster_compact": 28,
+      "target": 29,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 0,
+        "global_compact": 0,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_294": {
+      "global_median": 24,
+      "cluster_median": 25,
+      "global_compact": 24,
+      "cluster_compact": 7,
+      "target": 23,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 2,
+        "global_compact": 1,
+        "cluster_compact": 16
+      }
+    },
+    "hippocampus_295": {
+      "global_median": 29,
+      "cluster_median": 29,
+      "global_compact": 29,
+      "cluster_compact": 29,
+      "target": 28,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_296": {
+      "global_median": 30,
+      "cluster_median": 30,
+      "global_compact": 30,
+      "cluster_compact": 30,
+      "target": 32,
+      "absolute_errors": {
+        "global_median": 2,
+        "cluster_median": 2,
+        "global_compact": 2,
+        "cluster_compact": 2
+      }
+    },
+    "hippocampus_297": {
+      "global_median": 29,
+      "cluster_median": 29,
+      "global_compact": 30,
+      "cluster_compact": 30,
+      "target": 30,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_298": {
+      "global_median": 28,
+      "cluster_median": 28,
+      "global_compact": 29,
+      "cluster_compact": 29,
+      "target": 27,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 2,
+        "cluster_compact": 2
+      }
+    },
+    "hippocampus_299": {
+      "global_median": 30,
+      "cluster_median": 30,
+      "global_compact": 31,
+      "cluster_compact": 31,
+      "target": 29,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 2,
+        "cluster_compact": 2
+      }
+    },
+    "hippocampus_300": {
+      "global_median": 29,
+      "cluster_median": 29,
+      "global_compact": 29,
+      "cluster_compact": 29,
+      "target": 29,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 0,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_301": {
+      "global_median": 28,
+      "cluster_median": 28,
+      "global_compact": 33,
+      "cluster_compact": 33,
+      "target": 31,
+      "absolute_errors": {
+        "global_median": 3,
+        "cluster_median": 3,
+        "global_compact": 2,
+        "cluster_compact": 2
+      }
+    },
+    "hippocampus_302": {
+      "global_median": 26,
+      "cluster_median": 26,
+      "global_compact": 26,
+      "cluster_compact": 26,
+      "target": 25,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_303": {
+      "global_median": 28,
+      "cluster_median": 28,
+      "global_compact": 29,
+      "cluster_compact": 29,
+      "target": 28,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 0,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_304": {
+      "global_median": 28,
+      "cluster_median": 28,
+      "global_compact": 29,
+      "cluster_compact": 29,
+      "target": 26,
+      "absolute_errors": {
+        "global_median": 2,
+        "cluster_median": 2,
+        "global_compact": 3,
+        "cluster_compact": 3
+      }
+    },
+    "hippocampus_305": {
+      "global_median": 27,
+      "cluster_median": 27,
+      "global_compact": 29,
+      "cluster_compact": 29,
+      "target": 26,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 3,
+        "cluster_compact": 3
+      }
+    },
+    "hippocampus_308": {
+      "global_median": 26,
+      "cluster_median": 26,
+      "global_compact": 26,
+      "cluster_compact": 26,
+      "target": 26,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 0,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_309": {
+      "global_median": 30,
+      "cluster_median": 30,
+      "global_compact": 30,
+      "cluster_compact": 32,
+      "target": 30,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 0,
+        "global_compact": 0,
+        "cluster_compact": 2
+      }
+    },
+    "hippocampus_310": {
+      "global_median": 28,
+      "cluster_median": 28,
+      "global_compact": 32,
+      "cluster_compact": 32,
+      "target": 30,
+      "absolute_errors": {
+        "global_median": 2,
+        "cluster_median": 2,
+        "global_compact": 2,
+        "cluster_compact": 2
+      }
+    },
+    "hippocampus_311": {
+      "global_median": 28,
+      "cluster_median": 28,
+      "global_compact": 29,
+      "cluster_compact": 29,
+      "target": 27,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 2,
+        "cluster_compact": 2
+      }
+    },
+    "hippocampus_314": {
+      "global_median": 30,
+      "cluster_median": 30,
+      "global_compact": 29,
+      "cluster_compact": 29,
+      "target": 29,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_316": {
+      "global_median": 29,
+      "cluster_median": 29,
+      "global_compact": 29,
+      "cluster_compact": 29,
+      "target": 30,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_317": {
+      "global_median": 29,
+      "cluster_median": 29,
+      "global_compact": 26,
+      "cluster_compact": 26,
+      "target": 25,
+      "absolute_errors": {
+        "global_median": 4,
+        "cluster_median": 4,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_318": {
+      "global_median": 28,
+      "cluster_median": 28,
+      "global_compact": 26,
+      "cluster_compact": 26,
+      "target": 24,
+      "absolute_errors": {
+        "global_median": 4,
+        "cluster_median": 4,
+        "global_compact": 2,
+        "cluster_compact": 2
+      }
+    },
+    "hippocampus_319": {
+      "global_median": 26,
+      "cluster_median": 26,
+      "global_compact": 29,
+      "cluster_compact": 29,
+      "target": 26,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 0,
+        "global_compact": 3,
+        "cluster_compact": 3
+      }
+    },
+    "hippocampus_320": {
+      "global_median": 26,
+      "cluster_median": 26,
+      "global_compact": 26,
+      "cluster_compact": 26,
+      "target": 28,
+      "absolute_errors": {
+        "global_median": 2,
+        "cluster_median": 2,
+        "global_compact": 2,
+        "cluster_compact": 2
+      }
+    },
+    "hippocampus_321": {
+      "global_median": 25,
+      "cluster_median": 25,
+      "global_compact": 24,
+      "cluster_compact": 24,
+      "target": 23,
+      "absolute_errors": {
+        "global_median": 2,
+        "cluster_median": 2,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_322": {
+      "global_median": 26,
+      "cluster_median": 26,
+      "global_compact": 26,
+      "cluster_compact": 26,
+      "target": 23,
+      "absolute_errors": {
+        "global_median": 3,
+        "cluster_median": 3,
+        "global_compact": 3,
+        "cluster_compact": 3
+      }
+    },
+    "hippocampus_325": {
+      "global_median": 27,
+      "cluster_median": 27,
+      "global_compact": 30,
+      "cluster_compact": 30,
+      "target": 29,
+      "absolute_errors": {
+        "global_median": 2,
+        "cluster_median": 2,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_326": {
+      "global_median": 28,
+      "cluster_median": 28,
+      "global_compact": 26,
+      "cluster_compact": 26,
+      "target": 27,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_327": {
+      "global_median": 29,
+      "cluster_median": 29,
+      "global_compact": 27,
+      "cluster_compact": 27,
+      "target": 27,
+      "absolute_errors": {
+        "global_median": 2,
+        "cluster_median": 2,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_328": {
+      "global_median": 30,
+      "cluster_median": 30,
+      "global_compact": 29,
+      "cluster_compact": 29,
+      "target": 28,
+      "absolute_errors": {
+        "global_median": 2,
+        "cluster_median": 2,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_329": {
+      "global_median": 29,
+      "cluster_median": 29,
+      "global_compact": 30,
+      "cluster_compact": 30,
+      "target": 30,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_330": {
+      "global_median": 30,
+      "cluster_median": 30,
+      "global_compact": 30,
+      "cluster_compact": 30,
+      "target": 30,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 0,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_331": {
+      "global_median": 29,
+      "cluster_median": 29,
+      "global_compact": 29,
+      "cluster_compact": 29,
+      "target": 30,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_332": {
+      "global_median": 29,
+      "cluster_median": 29,
+      "global_compact": 29,
+      "cluster_compact": 29,
+      "target": 29,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 0,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_333": {
+      "global_median": 25,
+      "cluster_median": 25,
+      "global_compact": 26,
+      "cluster_compact": 26,
+      "target": 25,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 0,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_334": {
+      "global_median": 24,
+      "cluster_median": 24,
+      "global_compact": 24,
+      "cluster_compact": 24,
+      "target": 23,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_335": {
+      "global_median": 25,
+      "cluster_median": 25,
+      "global_compact": 25,
+      "cluster_compact": 6,
+      "target": 22,
+      "absolute_errors": {
+        "global_median": 3,
+        "cluster_median": 3,
+        "global_compact": 3,
+        "cluster_compact": 16
+      }
+    },
+    "hippocampus_336": {
+      "global_median": 23,
+      "cluster_median": 23,
+      "global_compact": 26,
+      "cluster_compact": 26,
+      "target": 24,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 2,
+        "cluster_compact": 2
+      }
+    },
+    "hippocampus_337": {
+      "global_median": 24,
+      "cluster_median": 24,
+      "global_compact": 25,
+      "cluster_compact": 25,
+      "target": 25,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_338": {
+      "global_median": 24,
+      "cluster_median": 24,
+      "global_compact": 21,
+      "cluster_compact": 21,
+      "target": 23,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 2,
+        "cluster_compact": 2
+      }
+    },
+    "hippocampus_340": {
+      "global_median": 25,
+      "cluster_median": 26,
+      "global_compact": 26,
+      "cluster_compact": 26,
+      "target": 26,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 0,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_341": {
+      "global_median": 27,
+      "cluster_median": 27,
+      "global_compact": 27,
+      "cluster_compact": 27,
+      "target": 26,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_343": {
+      "global_median": 25,
+      "cluster_median": 24,
+      "global_compact": 25,
+      "cluster_compact": 25,
+      "target": 25,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 1,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_345": {
+      "global_median": 27,
+      "cluster_median": 27,
+      "global_compact": 26,
+      "cluster_compact": 26,
+      "target": 27,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 0,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_349": {
+      "global_median": 27,
+      "cluster_median": 27,
+      "global_compact": 31,
+      "cluster_compact": 31,
+      "target": 27,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 0,
+        "global_compact": 4,
+        "cluster_compact": 4
+      }
+    },
+    "hippocampus_350": {
+      "global_median": 28,
+      "cluster_median": 28,
+      "global_compact": 30,
+      "cluster_compact": 30,
+      "target": 27,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 3,
+        "cluster_compact": 3
+      }
+    },
+    "hippocampus_351": {
+      "global_median": 29,
+      "cluster_median": 29,
+      "global_compact": 31,
+      "cluster_compact": 31,
+      "target": 31,
+      "absolute_errors": {
+        "global_median": 2,
+        "cluster_median": 2,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_352": {
+      "global_median": 29,
+      "cluster_median": 29,
+      "global_compact": 30,
+      "cluster_compact": 30,
+      "target": 30,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_353": {
+      "global_median": 28,
+      "cluster_median": 28,
+      "global_compact": 30,
+      "cluster_compact": 30,
+      "target": 28,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 0,
+        "global_compact": 2,
+        "cluster_compact": 2
+      }
+    },
+    "hippocampus_354": {
+      "global_median": 27,
+      "cluster_median": 27,
+      "global_compact": 28,
+      "cluster_compact": 28,
+      "target": 28,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_355": {
+      "global_median": 25,
+      "cluster_median": 26,
+      "global_compact": 26,
+      "cluster_compact": 26,
+      "target": 25,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 1,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_356": {
+      "global_median": 30,
+      "cluster_median": 30,
+      "global_compact": 30,
+      "cluster_compact": 30,
+      "target": 30,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 0,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_358": {
+      "global_median": 26,
+      "cluster_median": 26,
+      "global_compact": 26,
+      "cluster_compact": 26,
+      "target": 23,
+      "absolute_errors": {
+        "global_median": 3,
+        "cluster_median": 3,
+        "global_compact": 3,
+        "cluster_compact": 3
+      }
+    },
+    "hippocampus_359": {
+      "global_median": 26,
+      "cluster_median": 26,
+      "global_compact": 26,
+      "cluster_compact": 26,
+      "target": 27,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_360": {
+      "global_median": 27,
+      "cluster_median": 27,
+      "global_compact": 28,
+      "cluster_compact": 29,
+      "target": 29,
+      "absolute_errors": {
+        "global_median": 2,
+        "cluster_median": 2,
+        "global_compact": 1,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_361": {
+      "global_median": 28,
+      "cluster_median": 28,
+      "global_compact": 29,
+      "cluster_compact": 29,
+      "target": 25,
+      "absolute_errors": {
+        "global_median": 3,
+        "cluster_median": 3,
+        "global_compact": 4,
+        "cluster_compact": 4
+      }
+    },
+    "hippocampus_363": {
+      "global_median": 29,
+      "cluster_median": 29,
+      "global_compact": 29,
+      "cluster_compact": 29,
+      "target": 27,
+      "absolute_errors": {
+        "global_median": 2,
+        "cluster_median": 2,
+        "global_compact": 2,
+        "cluster_compact": 2
+      }
+    },
+    "hippocampus_366": {
+      "global_median": 25,
+      "cluster_median": 26,
+      "global_compact": 24,
+      "cluster_compact": 24,
+      "target": 24,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 2,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_367": {
+      "global_median": 33,
+      "cluster_median": 33,
+      "global_compact": 30,
+      "cluster_compact": 30,
+      "target": 33,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 0,
+        "global_compact": 3,
+        "cluster_compact": 3
+      }
+    },
+    "hippocampus_368": {
+      "global_median": 32,
+      "cluster_median": 32,
+      "global_compact": 37,
+      "cluster_compact": 33,
+      "target": 32,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 0,
+        "global_compact": 5,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_370": {
+      "global_median": 28,
+      "cluster_median": 28,
+      "global_compact": 28,
+      "cluster_compact": 28,
+      "target": 28,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 0,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_372": {
+      "global_median": 27,
+      "cluster_median": 27,
+      "global_compact": 28,
+      "cluster_compact": 28,
+      "target": 28,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_373": {
+      "global_median": 27,
+      "cluster_median": 26,
+      "global_compact": 28,
+      "cluster_compact": 28,
+      "target": 28,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 2,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_374": {
+      "global_median": 26,
+      "cluster_median": 26,
+      "global_compact": 28,
+      "cluster_compact": 29,
+      "target": 27,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 1,
+        "cluster_compact": 2
+      }
+    },
+    "hippocampus_375": {
+      "global_median": 32,
+      "cluster_median": 32,
+      "global_compact": 32,
+      "cluster_compact": 32,
+      "target": 32,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 0,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_376": {
+      "global_median": 32,
+      "cluster_median": 32,
+      "global_compact": 34,
+      "cluster_compact": 34,
+      "target": 35,
+      "absolute_errors": {
+        "global_median": 3,
+        "cluster_median": 3,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_378": {
+      "global_median": 28,
+      "cluster_median": 28,
+      "global_compact": 27,
+      "cluster_compact": 28,
+      "target": 30,
+      "absolute_errors": {
+        "global_median": 2,
+        "cluster_median": 2,
+        "global_compact": 3,
+        "cluster_compact": 2
+      }
+    },
+    "hippocampus_380": {
+      "global_median": 27,
+      "cluster_median": 27,
+      "global_compact": 26,
+      "cluster_compact": 26,
+      "target": 26,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_381": {
+      "global_median": 28,
+      "cluster_median": 28,
+      "global_compact": 27,
+      "cluster_compact": 27,
+      "target": 28,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 0,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_383": {
+      "global_median": 29,
+      "cluster_median": 30,
+      "global_compact": 30,
+      "cluster_compact": 30,
+      "target": 29,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 1,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_385": {
+      "global_median": 26,
+      "cluster_median": 26,
+      "global_compact": 25,
+      "cluster_compact": 25,
+      "target": 24,
+      "absolute_errors": {
+        "global_median": 2,
+        "cluster_median": 2,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_386": {
+      "global_median": 26,
+      "cluster_median": 26,
+      "global_compact": 25,
+      "cluster_compact": 25,
+      "target": 24,
+      "absolute_errors": {
+        "global_median": 2,
+        "cluster_median": 2,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_387": {
+      "global_median": 28,
+      "cluster_median": 28,
+      "global_compact": 29,
+      "cluster_compact": 29,
+      "target": 26,
+      "absolute_errors": {
+        "global_median": 2,
+        "cluster_median": 2,
+        "global_compact": 3,
+        "cluster_compact": 3
+      }
+    },
+    "hippocampus_389": {
+      "global_median": 27,
+      "cluster_median": 27,
+      "global_compact": 24,
+      "cluster_compact": 24,
+      "target": 24,
+      "absolute_errors": {
+        "global_median": 3,
+        "cluster_median": 3,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    },
+    "hippocampus_390": {
+      "global_median": 28,
+      "cluster_median": 28,
+      "global_compact": 27,
+      "cluster_compact": 27,
+      "target": 26,
+      "absolute_errors": {
+        "global_median": 2,
+        "cluster_median": 2,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_393": {
+      "global_median": 28,
+      "cluster_median": 28,
+      "global_compact": 28,
+      "cluster_compact": 28,
+      "target": 27,
+      "absolute_errors": {
+        "global_median": 1,
+        "cluster_median": 1,
+        "global_compact": 1,
+        "cluster_compact": 1
+      }
+    },
+    "hippocampus_394": {
+      "global_median": 29,
+      "cluster_median": 29,
+      "global_compact": 29,
+      "cluster_compact": 29,
+      "target": 29,
+      "absolute_errors": {
+        "global_median": 0,
+        "cluster_median": 0,
+        "global_compact": 0,
+        "cluster_compact": 0
+      }
+    }
+  }
+}
