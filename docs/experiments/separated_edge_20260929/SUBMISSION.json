@@ -1,0 +1,36 @@
+{
+  "status": "submitted",
+  "job_id": "675451",
+  "dependency": "afterany:675308",
+  "folds": [
+    0
+  ],
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "arms": [
+    "pooled",
+    "separated"
+  ],
+  "new_training_runs": 6,
+  "epoch_cap": 75,
+  "automatic_fold_expansion": false,
+  "quota_free_gib": 5.379999999888241,
+  "submitted_utc": "2026-09-29T09:18:02.909661+00:00",
+  "command": [
+    "sbatch",
+    "--parsable",
+    "--dependency=afterany:675308",
+    "--output=/mnt/beegfsstudents/home/3160552/separated_edge_20260929_01/logs/%j.out",
+    "--error=/mnt/beegfsstudents/home/3160552/separated_edge_20260929_01/logs/%j.err",
+    "/mnt/beegfsstudents/home/3160552/separated_edge_20260929_01/source/scripts/run_separated_edge.sh",
+    "/mnt/beegfsstudents/home/3160552/separated_edge_20260929_01"
+  ],
+  "hashes": {
+    "source/PAYLOAD.json": "0aeeb1dc6f6fad33fa61c9eeb61a06d4afa6404abfc10c5a85ca19902bb041f9",
+    "original_coherence.json": "ef4b2cf6ecaf95b313ec5419bee4077c6abaceb2f858ae279d7759d749291fa7",
+    "PROTOCOL.md": "9366e4e1ca9e24a181134063e9739f28a5b436a964cc45fe3158ab96fa499824"
+  }
+}
