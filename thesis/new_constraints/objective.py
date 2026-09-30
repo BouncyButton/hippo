@@ -8,6 +8,7 @@ import torch
 import torch.nn as nn
 
 from .bands import ClassAwareBoundaryTverskyLoss, OuterBoundaryBandLoss
+from .bands.outer_boundary import validate_degree_weighting
 from .constraint_result import ConstraintResult, differentiable_zero
 from .equivariance import Shift3D, TranslationEquivarianceLoss
 from .onecut import OuterOneCutLogLTNLoss
@@ -20,6 +21,7 @@ from .ap_plane import (
 )
 from .perimeter_profile import PerimeterProfileLoss
 from .ray_moments import RayMomentLoss
+from .sagittal_step_fit import SagittalStepContourLoss
 
 
 @dataclass(frozen=True)
@@ -35,6 +37,8 @@ class NewConstraintConfig:
     bands_inner_focal_gamma: float | None = None
     bands_outer_focal_gamma: float | None = None
     bands_loss_type: str = "focal_bce"
+    bands_degree_alpha: float = 0.0
+    bands_degree_normalization: str = "inner"
     tversky_false_positive_weight: float = 0.60
     tversky_false_negative_weight: float = 0.40
     foreground_class_ids: tuple[int, ...] = (1, 2)
@@ -64,6 +68,8 @@ class NewConstraintConfig:
     ap_plane_mode: str = "existential"
     perimeter_profile_weight: float = 0.0
     ray_moment_weight: float = 0.0
+    sagittal_step_weight: float = 0.0
+    sagittal_step_transition_weight: float = 0.0
 
 
 class NewConstraintObjective(nn.Module):
@@ -72,6 +78,11 @@ class NewConstraintObjective(nn.Module):
     def __init__(self, config: NewConstraintConfig | None = None) -> None:
         super().__init__()
         self.config = config or NewConstraintConfig()
+        validate_degree_weighting(self.config.bands_degree_alpha, self.config.bands_degree_normalization)
+        if self.config.bands_degree_alpha > 0 and (
+            self.config.bands_weight <= 0 or self.config.bands_loss_type != "focal_bce"
+        ):
+            raise ValueError("Degree weighting requires a positive focal_bce bands objective.")
         for name, weight in (
             ("equivariance_weight", self.config.equivariance_weight),
             ("bands_weight", self.config.bands_weight),
@@ -81,6 +92,7 @@ class NewConstraintObjective(nn.Module):
             ("ap_plane_weight", self.config.ap_plane_weight),
             ("perimeter_profile_weight", self.config.perimeter_profile_weight),
             ("ray_moment_weight", self.config.ray_moment_weight),
+            ("sagittal_step_weight", self.config.sagittal_step_weight),
         ):
             if not math.isfinite(weight) or weight < 0:
                 raise ValueError(f"{name} must be finite and non-negative.")
@@ -95,6 +107,7 @@ class NewConstraintObjective(nn.Module):
                 self.config.ap_plane_weight,
                 self.config.perimeter_profile_weight,
                 self.config.ray_moment_weight,
+                self.config.sagittal_step_weight,
             )
         )
         if active_weights > 1:
@@ -170,6 +183,8 @@ class NewConstraintObjective(nn.Module):
                 focal_gamma=self.config.bands_focal_gamma,
                 inner_focal_gamma=self.config.bands_inner_focal_gamma,
                 outer_focal_gamma=self.config.bands_outer_focal_gamma,
+                degree_alpha=self.config.bands_degree_alpha,
+                degree_normalization=self.config.bands_degree_normalization,
             )
         self.onecut = OuterOneCutLogLTNLoss(
             foreground_class_ids=self.config.foreground_class_ids,
@@ -209,6 +224,9 @@ class NewConstraintObjective(nn.Module):
             class_ids=self.config.foreground_class_ids,
         )
         self.ray_moment = RayMomentLoss(orders=(0,))
+        self.sagittal_step = SagittalStepContourLoss(
+            transition_weight=self.config.sagittal_step_transition_weight,
+        )
 
     def forward(
         self,
@@ -303,6 +321,13 @@ class NewConstraintObjective(nn.Module):
             result = self.ray_moment(logits, labels)
             results["ray_moment"] = result
             total_loss = total_loss + self.config.ray_moment_weight * result.loss
+
+        if self.config.sagittal_step_weight > 0:
+            if labels is None:
+                raise ValueError("The sagittal-step constraint requires transformed labels.")
+            result = self.sagittal_step(logits, labels)
+            results["sagittal_step"] = result
+            total_loss = total_loss + self.config.sagittal_step_weight * result.loss
 
         return {
             "loss": total_loss,

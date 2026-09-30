@@ -44,6 +44,8 @@ from thesis.new_constraints.bands import (  # noqa: E402
     OuterBoundaryBandLoss,
     build_boundary_bands,
 )
+from thesis.new_constraints.training_augmentation import MILD_V1, augment_mild  # noqa: E402
+from thesis.new_constraints.bands.outer_boundary import validate_degree_weighting  # noqa: E402
 from thesis.new_constraints.train_swinunetr_constraints import (  # noqa: E402
     build_swinunetr,
     canonical_sha256,
@@ -57,6 +59,7 @@ from thesis.new_constraints.train_swinunetr_constraints import (  # noqa: E402
     snapshot_file,
     validate_image_label_samples,
     validate_source_provenance_unchanged,
+    validate_calibration_execution,
 )
 
 MAX_CALIBRATION_CASES = 32
@@ -85,7 +88,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--seed", type=int, default=0)
     parser.add_argument("--spatial-size", type=int, nargs=3, default=(64, 64, 64))
     parser.add_argument("--resize", action="store_true")
+    parser.add_argument("--training-augmentation", choices=("none", "mild_v1"), default="none")
     parser.add_argument("--band-steps", type=int, default=CANONICAL_BAND_STEPS)
+    parser.add_argument("--bands-degree-alpha", type=float, default=0.0)
+    parser.add_argument("--allow-calibration-mig-profile-change", action="store_true")
+    parser.add_argument("--bands-degree-normalization", choices=("inner", "surface"), default="inner")
     parser.add_argument(
         "--bands-focal-gamma",
         type=float,
@@ -327,6 +334,8 @@ def validate_checkpoint_provenance(
         raise ValueError("Checkpoint spatial size does not match calibration arguments.")
     if bool(run.get("resize", False)) != bool(args.resize):
         raise ValueError("Checkpoint resize mode does not match calibration arguments.")
+    if run.get("training_augmentation", "none") != getattr(args, "training_augmentation", "none"):
+        raise ValueError("Checkpoint training augmentation does not match calibration arguments.")
     if bool(run.get("amp")) != bool(args.amp):
         raise ValueError("Checkpoint AMP mode does not match calibration arguments.")
     if _resolved_from_json(run_config.get("pkl")) != args.pkl.resolve():
@@ -357,7 +366,9 @@ def validate_checkpoint_provenance(
         raise ValueError("Checkpoint run metadata does not bind source provenance.")
     _, inner_gamma, outer_gamma = effective_focal_gammas(args)
     loss_type = str(getattr(args, "bands_loss_type", "focal_bce"))
-    if loss_type == "focal_bce" and inner_gamma == 0.0 and outer_gamma == 0.0:
+    degree_alpha = float(getattr(args, "bands_degree_alpha", 0.0))
+    validate_degree_weighting(degree_alpha, getattr(args, "bands_degree_normalization", "inner"))
+    if loss_type == "focal_bce" and inner_gamma == 0.0 and outer_gamma == 0.0 and degree_alpha == 0.0:
         if checkpoint_source_sha256 != source_provenance.get("sha256"):
             raise ValueError("Calibration source code differs from the checkpoint run.")
     else:
@@ -366,7 +377,7 @@ def validate_checkpoint_provenance(
             "files", {}
         ).get(model_source):
             raise ValueError(
-                "Focal calibration requires the checkpoint's exact model/data-pipeline source."
+                "Modified bands calibration requires the checkpoint's exact model/data-pipeline source."
             )
     current_runtime = runtime_provenance or collect_runtime_provenance()
     recorded_runtime = run_config.get("runtime_provenance")
@@ -380,11 +391,11 @@ def validate_checkpoint_provenance(
     recorded_execution = run_config.get("execution_provenance")
     if current_execution is None:
         raise ValueError("Calibration execution provenance was not provided.")
-    if not isinstance(recorded_execution, dict) or canonical_sha256(
-        recorded_execution
-    ) != canonical_sha256(current_execution):
-        raise ValueError("Calibration compute device differs from the checkpoint run.")
-    if run.get("execution_sha256") != canonical_sha256(current_execution):
+    validate_calibration_execution(
+        recorded_execution, current_execution,
+        allow_mig_profile_change=bool(getattr(args, "allow_calibration_mig_profile_change", False)),
+    )
+    if run.get("execution_sha256") != canonical_sha256(recorded_execution):
         raise ValueError("Checkpoint run metadata does not bind execution provenance.")
 
     checkpoint = torch.load(checkpoint_path, map_location="cpu", weights_only=True)
@@ -501,6 +512,17 @@ def compute_logit_gradients(
     return logits, dice_gradient, band_gradient, result
 
 
+def prepare_calibration_view(images, labels, *, device, augmentation, generator):
+    """Use the production augmentation on a single shared image/label view."""
+    images = (images.as_tensor() if hasattr(images, "as_tensor") else images).to(device)
+    labels = (labels.as_tensor() if hasattr(labels, "as_tensor") else labels).to(device)
+    if augmentation == "mild_v1":
+        return augment_mild(images, labels, generator=generator)
+    if augmentation != "none":
+        raise ValueError("Unknown calibration training augmentation.")
+    return images, labels, None
+
+
 def finalize_calibration_report(
     output: Path,
     payload: dict[str, Any],
@@ -543,6 +565,9 @@ def main() -> None:
     args = parse_args()
     validate_calibration_protocol(args.max_cases, args.band_steps)
     shared_gamma, inner_gamma, outer_gamma = effective_focal_gammas(args)
+    validate_degree_weighting(args.bands_degree_alpha, args.bands_degree_normalization)
+    if args.bands_degree_alpha > 0 and args.bands_loss_type != "focal_bce":
+        raise ValueError("Degree weighting is supported only for focal_bce bands calibration.")
     if args.bands_loss_type == "class_tversky" and (
         inner_gamma != 0.0 or outer_gamma != 0.0
     ):
@@ -596,7 +621,11 @@ def main() -> None:
         pkl_digest = pkl_snapshot.sha256
         splits_digest = splits_snapshot.sha256
     validate_source_provenance_unchanged(source_provenance)
-    model = build_swinunetr(tuple(args.spatial_size), num_classes, device)
+    model = build_swinunetr(
+        tuple(args.spatial_size), num_classes, device,
+        drop_rate=source_config["run"].get("drop_rate", 0.0),
+        activation_checkpointing=source_config["run"].get("activation_checkpointing", True),
+    )
     model.load_state_dict(checkpoint["model"], strict=True)
     model.eval()
     dice_loss = DiceLoss(to_onehot_y=True, softmax=True)
@@ -616,18 +645,23 @@ def main() -> None:
             focal_gamma=shared_gamma,
             inner_focal_gamma=inner_gamma,
             outer_focal_gamma=outer_gamma,
+            degree_alpha=args.bands_degree_alpha,
+            degree_normalization=args.bands_degree_normalization,
         ).to(device)
 
     records: list[dict[str, Any]] = []
     dice_rms: list[float] = []
     band_rms: list[float] = []
     conditional_band_rms: list[float] = []
+    augmentation_generator = torch.Generator().manual_seed(args.seed + 1)
     for selected, batch in zip(selected_cases, loader):
         actual_case_name = str(batch["case_name"][0])
         if actual_case_name != selected["case_name"]:
             raise RuntimeError("Calibration loader case order changed unexpectedly.")
-        images = batch["image"].to(device)
-        labels = batch["label"].to(device)
+        images, labels, augmentation_stats = prepare_calibration_view(
+            batch["image"], batch["label"], device=device,
+            augmentation=args.training_augmentation, generator=augmentation_generator,
+        )
         logits, dice_gradient, band_gradient, result = compute_logit_gradients(
             model,
             images,
@@ -671,6 +705,7 @@ def main() -> None:
         records.append(
             {
                 **selected,
+                "augmentation": augmentation_stats,
                 "valid": valid,
                 "dice_gradient_rms": _finite_or_none(current_dice_rms),
                 "band_gradient_rms_unconditional": _finite_or_none(
@@ -691,6 +726,11 @@ def main() -> None:
         "seed": args.seed,
         "max_cases": args.max_cases,
         "amp": args.amp,
+        "spatial_size": list(args.spatial_size),
+        "resize": bool(args.resize),
+        "training_augmentation": args.training_augmentation,
+        "augmentation_policy": dict(MILD_V1) if args.training_augmentation == "mild_v1" else None,
+        "augmentation_seed": args.seed + 1 if args.training_augmentation == "mild_v1" else None,
         "checkpoint": str(args.checkpoint.resolve()),
         "checkpoint_config": str(config_path),
         "checkpoint_config_sha256": checkpoint_config_digest,
@@ -706,6 +746,7 @@ def main() -> None:
         "source_provenance": source_provenance,
         "runtime_provenance": runtime_provenance,
         "execution_provenance": execution_provenance,
+        "allow_calibration_mig_profile_change": args.allow_calibration_mig_profile_change,
         "training_cases": selected_cases,
         "training_case_ids": [item["case_name"] for item in selected_cases],
         "training_patient_ids": sorted(
@@ -713,6 +754,8 @@ def main() -> None:
         ),
         "band_steps": CANONICAL_BAND_STEPS,
         "bands_loss_type": args.bands_loss_type,
+        "bands_degree_alpha": args.bands_degree_alpha,
+        "bands_degree_normalization": args.bands_degree_normalization,
         "tversky_false_positive_weight": args.tversky_fp_weight,
         "tversky_false_negative_weight": args.tversky_fn_weight,
         "bands_focal_gamma": shared_gamma,

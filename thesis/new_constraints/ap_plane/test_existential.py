@@ -1,11 +1,43 @@
 """Tests for the literal protocol-derived A/P plane constraint."""
 
+import pytest
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
 from .existential import ExistentialAPPlaneLoss, hard_project_ap_plane
 from .conditional_ce import OriginalLabelAPConditionalCELoss
+
+
+@pytest.mark.parametrize('require_both', [False, True])
+@pytest.mark.parametrize('margin', [0.0, 0.3])
+def test_vectorized_conditional_ce_matches_voxel_reference_and_empty_gradients(require_both, margin):
+    generator = torch.Generator().manual_seed(42)
+    labels = torch.randint(0, 3, (4, 1, 6, 7, 8), generator=generator)
+    labels[1] = 0
+    labels[2] = 1
+    logits = torch.randn(4, 3, 6, 7, 8, generator=generator, requires_grad=True)
+    reference_logits = logits.detach().clone().requires_grad_(True)
+    result = OriginalLabelAPConditionalCELoss(require_both=require_both, margin=margin)(logits, labels)
+    losses = []
+    for z, y in zip(reference_logits, labels[:, 0]):
+        support = y != 0
+        valid = bool(support.any()) and (not require_both or bool((y == 1).any() & (y == 2).any()))
+        if valid:
+            gap = z[1] - z[2]
+            costs = torch.where(y == 1, torch.nn.functional.softplus(margin-gap),
+                                torch.nn.functional.softplus(margin+gap))
+            losses.append(costs[support].mean())
+    expected = torch.stack(losses).mean()
+    torch.testing.assert_close(result.loss, expected)
+    result.loss.backward()
+    expected.backward()
+    torch.testing.assert_close(logits.grad, reference_logits.grad)
+    assert torch.count_nonzero(logits.grad[1]) == 0
+    empty_logits = logits.detach().clone().requires_grad_(True)
+    empty = OriginalLabelAPConditionalCELoss(require_both=require_both)(empty_logits, torch.zeros_like(labels))
+    empty.loss.backward()
+    assert empty.loss.item() == 0 and torch.count_nonzero(empty_logits.grad) == 0
 from .location import BestFitAPPlaneLocationLoss
 from ..objective import NewConstraintConfig, NewConstraintObjective
 

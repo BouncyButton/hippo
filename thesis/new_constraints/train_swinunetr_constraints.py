@@ -59,6 +59,7 @@ from thesis.new_constraints import (  # noqa: E402
 )
 from thesis.new_constraints.constraint_result import ConstraintResult  # noqa: E402
 from thesis.new_constraints.early_stopping import EarlyStopping  # noqa: E402
+from thesis.new_constraints.bands.outer_boundary import validate_degree_weighting  # noqa: E402
 from thesis.new_constraints.ap_cut import AP_CUT_METRICS  # noqa: E402
 from thesis.new_constraints.ap_plane import (  # noqa: E402
     AP_CONDITIONAL_CE_METRICS,
@@ -84,7 +85,7 @@ CONSTRAINT_WEIGHTS = {"none": 0.0, "equivariance": 0.10, "translation": 0.10}
 CONSTRAINT_CHOICES = (
     "none", "equivariance", "bands", "onecut", "translation", "teacher", "ap_cut",
     "ap_plane", "ap_plane_location", "ap_plane_ce_control", "perimeter_profile",
-    "ray_moment",
+    "ray_moment", "sagittal_step",
 )
 AGREEMENT_CONSTRAINT_NAMES = (
     "translation_equivariance", "translation_teacher_kl", "ap_cut_posterior",
@@ -121,6 +122,7 @@ AP_PLANE_METRICS = (
 )
 PERIMETER_PROFILE_METRICS = ("raw_loss",)
 RAY_MOMENT_METRICS = ("raw_loss",)
+SAGITTAL_STEP_METRICS = ("raw_loss",)
 
 
 def file_sha256(path: Path) -> str:
@@ -322,6 +324,31 @@ def collect_execution_provenance(device: torch.device) -> dict[str, Any]:
     return payload
 
 
+def validate_calibration_execution(
+    recorded: dict[str, Any], current: dict[str, Any], *, allow_mig_profile_change: bool = False,
+) -> None:
+    """Permit only an explicit A100 80GB PCIe 4g/3g 40GB calibration transfer."""
+    if not isinstance(recorded, dict) or not isinstance(current, dict):
+        raise ValueError("Calibration compute device provenance is missing.")
+    if recorded == current:
+        return
+    profiles = {"NVIDIA A100 80GB PCIe MIG 4g.40gb", "NVIDIA A100 80GB PCIe MIG 3g.40gb"}
+    hardware_fields = {"cuda_device_name", "cuda_total_memory"}
+    compatible = (
+        allow_mig_profile_change
+        and {recorded.get("cuda_device_name"), current.get("cuda_device_name")} == profiles
+        and recorded.get("device_type") == current.get("device_type") == "cuda"
+        and recorded.get("cuda_compute_capability") == current.get("cuda_compute_capability") == [8, 0]
+        and {k: v for k, v in recorded.items() if k not in hardware_fields}
+        == {k: v for k, v in current.items() if k not in hardware_fields}
+        and all(isinstance(p.get("cuda_total_memory"), int)
+                and 39 * 1024**3 <= p["cuda_total_memory"] <= 41 * 1024**3
+                for p in (recorded, current))
+    )
+    if not compatible:
+        raise ValueError("Calibration compute device differs from the checkpoint run.")
+
+
 def canonical_sha256(payload: Any) -> str:
     """Hash a JSON-compatible identity with stable ordering and no NaN values."""
 
@@ -432,6 +459,7 @@ class RunSpec:
     activation_checkpointing: bool = True
     plain_tensors: bool = False
     training_augmentation: str = "none"
+    allow_calibration_mig_profile_change: bool = False
 
 
 def parse_args() -> argparse.Namespace:
@@ -444,6 +472,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--early-stopping-patience", type=int, default=0,
                         help="Validation hard-Dice patience; 0 disables early stopping.")
     parser.add_argument("--early-stopping-min-delta", type=float, default=0.0005)
+    parser.add_argument("--bands-degree-alpha", type=float, default=0.0,
+                        help="Inner-band GT face-exposure weighting; 0 preserves existing bands.")
+    parser.add_argument("--allow-calibration-mig-profile-change", action="store_true",
+                        help="Allow the epoch-five source to use the other A100 3g/4g 40GB profile.")
+    parser.add_argument("--bands-degree-normalization", choices=("inner", "surface"), default="inner",
+                        help="Normalize across the inner band (A) or immediate surface only (B).")
     parser.add_argument("--early-stopping-min-epochs", type=int, default=25)
     parser.add_argument("--batch-size", type=int, default=1)
     parser.add_argument("--num-workers", type=int, default=0)
@@ -527,6 +561,18 @@ def parse_args() -> argparse.Namespace:
         type=float,
         default=None,
         help="Three-view M0 ray-thickness weight from a training-only audit.",
+    )
+    parser.add_argument(
+        "--sagittal-step-weight",
+        type=float,
+        default=None,
+        help="Patient-specific sagittal contour step-fit weight, calibrated on training data.",
+    )
+    parser.add_argument(
+        "--sagittal-step-transition-weight",
+        type=float,
+        default=0.0,
+        help="Relative weight for aligning step transitions along posterior-to-anterior y.",
     )
     parser.add_argument("--translation-size", type=int, default=2)
     parser.add_argument("--equivariance-max-samples", type=int, default=1,
@@ -727,6 +773,7 @@ def resolve_constraint_config(args: argparse.Namespace) -> NewConstraintConfig:
     ap_plane_calibration = getattr(args, "ap_plane_calibration_json", None)
     perimeter_profile_override = getattr(args, "perimeter_profile_weight", None)
     ray_moment_override = getattr(args, "ray_moment_weight", None)
+    sagittal_step_override = getattr(args, "sagittal_step_weight", None)
     if getattr(args, "translation_augmentation", False) and selected not in {"none", "equivariance", "teacher"}:
         raise ValueError("Translation augmentation supports none, equivariance, or teacher only.")
     if (
@@ -745,6 +792,7 @@ def resolve_constraint_config(args: argparse.Namespace) -> NewConstraintConfig:
             "--perimeter-profile-weight",
         ),
         ("ray_moment", ray_moment_override, "--ray-moment-weight"),
+        ("sagittal_step", sagittal_step_override, "--sagittal-step-weight"),
     ):
         if selected != preset and override not in (None, 0.0):
             raise ValueError(f"{flag} requires --constraint-set {preset}.")
@@ -764,9 +812,9 @@ def resolve_constraint_config(args: argparse.Namespace) -> NewConstraintConfig:
         raise ValueError(
             f"--constraint-set {selected} requires a finite positive --ap-plane-weight."
         )
-    if selected in {"bands", "onecut", *plane_presets} and getattr(args, "supervised_loss", "dice") != "dice":
+    if selected in {"bands", "onecut", "sagittal_step", *plane_presets} and getattr(args, "supervised_loss", "dice") != "dice":
         raise ValueError(
-            "Existing bands/onecut calibration reports use Dice-only gradients; "
+            "The selected constraint calibration uses Dice-only gradients; "
             "they cannot authorize a Dice+CE constraint run."
         )
     if selected == "ap_cut" and (
@@ -794,6 +842,11 @@ def resolve_constraint_config(args: argparse.Namespace) -> NewConstraintConfig:
     onecut_override = getattr(args, "onecut_weight", None)
     onecut_calibration = getattr(args, "onecut_calibration_json", None)
     bands_loss_type = str(getattr(args, "bands_loss_type", "focal_bce"))
+    bands_degree_alpha = float(getattr(args, "bands_degree_alpha", 0.0))
+    bands_degree_normalization = str(getattr(args, "bands_degree_normalization", "inner"))
+    validate_degree_weighting(bands_degree_alpha, bands_degree_normalization)
+    if bands_degree_alpha > 0 and (selected != "bands" or bands_loss_type != "focal_bce"):
+        raise ValueError("Degree weighting requires --constraint-set bands and --bands-loss-type focal_bce.")
     tversky_fp_weight = float(getattr(args, "tversky_fp_weight", 0.60))
     tversky_fn_weight = float(getattr(args, "tversky_fn_weight", 0.40))
     bands_focal_gamma = float(getattr(args, "bands_focal_gamma", 0.0))
@@ -833,7 +886,7 @@ def resolve_constraint_config(args: argparse.Namespace) -> NewConstraintConfig:
     if selected in {
         "none", "teacher", "ap_cut", "ap_plane", "ap_plane_location",
         "ap_plane_ce_control",
-        "perimeter_profile", "ray_moment"
+        "perimeter_profile", "ray_moment", "sagittal_step"
     }:
         if (
             equivariance_override not in (None, 0.0)
@@ -938,6 +991,8 @@ def resolve_constraint_config(args: argparse.Namespace) -> NewConstraintConfig:
         bands_inner_focal_gamma=bands_inner_focal_gamma,
         bands_outer_focal_gamma=bands_outer_focal_gamma,
         bands_loss_type=bands_loss_type,
+        bands_degree_alpha=bands_degree_alpha,
+        bands_degree_normalization=bands_degree_normalization,
         tversky_false_positive_weight=tversky_fp_weight,
         tversky_false_negative_weight=tversky_fn_weight,
         foreground_class_ids=tuple(getattr(args, "foreground_class_ids", (1, 2))),
@@ -986,6 +1041,12 @@ def resolve_constraint_config(args: argparse.Namespace) -> NewConstraintConfig:
         ),
         ray_moment_weight=(
             float(ray_moment_override) if selected == "ray_moment" else 0.0
+        ),
+        sagittal_step_weight=(
+            float(sagittal_step_override) if selected == "sagittal_step" else 0.0
+        ),
+        sagittal_step_transition_weight=float(
+            getattr(args, "sagittal_step_transition_weight", 0.0)
         ),
     )
 
@@ -1236,17 +1297,31 @@ def update_constraint_totals(
                 "metric_counts": {},
             },
         )
-        entry["truth"] += float(truth.sum().cpu())
-        entry["confidence_weighted_agreement"] += float(
-            confidence_weighted_agreement.sum().cpu()
-        )
-        entry["confidence_adherent"] += float(confidence_adherent.sum().cpu())
+        metric_values = [
+            (metric_name, torch.as_tensor(metric_value).detach().float())
+            for metric_name, metric_value in result.details.get("metrics", {}).items()
+        ]
+        # One device-to-host transfer per constraint, instead of synchronizing
+        # separately for every scalar. Preserve the original float32 reductions
+        # and Python float accumulation exactly.
+        def summarize(values: torch.Tensor) -> torch.Tensor:
+            # Batch-one diagnostics are already scalars; launching a reduction
+            # kernel for each of them adds cost without changing their value.
+            return values.reshape(()) if values.numel() == 1 else values.sum()
+
+        summaries = torch.stack([
+            summarize(truth), summarize(confidence_weighted_agreement).to(truth.device),
+            summarize(confidence_adherent).to(truth.device),
+            *(summarize(values).to(truth.device) for _, values in metric_values),
+        ]).cpu().tolist()
+        entry["truth"] += summaries[0]
+        entry["confidence_weighted_agreement"] += summaries[1]
+        entry["confidence_adherent"] += summaries[2]
         entry["count"] += float(truth.numel())
-        for metric_name, metric_value in result.details.get("metrics", {}).items():
-            values = torch.as_tensor(metric_value).detach().float()
+        for (metric_name, values), total in zip(metric_values, summaries[3:], strict=True):
             entry["metric_sums"][metric_name] = entry["metric_sums"].get(
                 metric_name, 0.0
-            ) + float(values.sum().cpu())
+            ) + total
             entry["metric_counts"][metric_name] = entry["metric_counts"].get(
                 metric_name, 0.0
             ) + float(values.numel())
@@ -1511,6 +1586,23 @@ def _update_validation_constraint_batch(
                     "posterior_loss": float(group_losses[index, 2]),
                 })
 
+    if objective.config.sagittal_step_weight > 0:
+        result = objective.sagittal_step(logits, labels)
+        update_constraint_totals(totals, {"sagittal_step": result})
+        if detail_rows is not None:
+            height_losses = result.details["height_loss"].detach().cpu()
+            transition_losses = result.details["transition_loss"].detach().cpu()
+            presence_losses = result.details["presence_loss"].detach().cpu()
+            for index, case_name in enumerate(case_names):
+                detail_rows.append({
+                    "constraint_name": "sagittal_step",
+                    "case_name": case_name,
+                    "raw_loss": float(result.details["case_loss"][index].detach().cpu()),
+                    "height_loss": float(height_losses[index]),
+                    "transition_loss": float(transition_losses[index]),
+                    "presence_loss": float(presence_losses[index]),
+                })
+
     if objective.config.teacher_weight > 0:
         shifts = objective.teacher.shifts
         if not all_translation_shifts:
@@ -1611,6 +1703,7 @@ def evaluate_constraint_metrics(
         and objective.config.ap_plane_weight == 0
         and objective.config.perimeter_profile_weight == 0
         and objective.config.ray_moment_weight == 0
+        and objective.config.sagittal_step_weight == 0
     ):
         return {}
     totals: dict[str, dict[str, Any]] = {}
@@ -1744,6 +1837,7 @@ def evaluate_validation_metrics(
         or objective.config.ap_plane_weight > 0
         or objective.config.perimeter_profile_weight > 0
         or objective.config.ray_moment_weight > 0
+        or objective.config.sagittal_step_weight > 0
     )
     calibration = CalibrationDiagnostics(num_classes) if calibration_diagnostics else None
     model.eval()
@@ -1963,6 +2057,8 @@ def metric_fieldnames(calibration_diagnostics: bool = False, num_classes: int = 
             fields.append(f"{prefix}_perimeter_profile_{statistic}")
         for statistic in RAY_MOMENT_METRICS:
             fields.append(f"{prefix}_ray_moment_{statistic}")
+        for statistic in SAGITTAL_STEP_METRICS:
+            fields.append(f"{prefix}_sagittal_step_{statistic}")
     if calibration_diagnostics:
         fields.extend(CalibrationDiagnostics(num_classes).summary())
     return fields
@@ -2069,8 +2165,19 @@ def validate_bands_calibration_report(
         raise ValueError("Bands calibration report has the wrong constraint set.")
     if report.get("dataset") != args.dataset or report.get("fold") != args.fold:
         raise ValueError("Bands calibration dataset/fold does not match this run.")
+    augmentation = getattr(args, "training_augmentation", "none")
+    if report.get("training_augmentation", "none") != augmentation:
+        raise ValueError("Bands calibration training_augmentation does not match this run.")
+    if augmentation == "mild_v1" and (
+        report.get("augmentation_policy") != MILD_V1
+        or report.get("augmentation_seed") != report.get("seed", -1) + 1
+    ):
+        raise ValueError("Bands calibration augmentation policy/RNG does not match.")
     if report.get("band_steps") != args.band_steps:
         raise ValueError("Bands calibration step count does not match this run.")
+    for field, default in (("bands_degree_alpha", 0.0), ("bands_degree_normalization", "inner")):
+        if report.get(field, default) != getattr(args, field, default):
+            raise ValueError(f"Bands calibration {field} does not match this run.")
     if report.get("bands_loss_type", "focal_bce") != getattr(
         args, "bands_loss_type", "focal_bce"
     ):
@@ -2270,6 +2377,13 @@ def validate_bands_calibration_report(
             raise ValueError("Bands calibration checkpoint_config contents changed.")
         source_config = load_bands_calibration_report(config_snapshot)
         source_run = source_config.get("run")
+        allow_mig = bool(getattr(args, "allow_calibration_mig_profile_change", False))
+        source_execution = source_config.get(
+            "execution_provenance", None if allow_mig else execution_provenance)
+        if bool(report.get("allow_calibration_mig_profile_change", False)) != allow_mig:
+            raise ValueError("Bands calibration MIG transfer policy differs from this run.")
+        validate_calibration_execution(source_execution, execution_provenance,
+                                       allow_mig_profile_change=allow_mig)
         if (
             not isinstance(source_run, dict)
             or source_run.get("constraint_set") != "none"
@@ -2279,14 +2393,24 @@ def validate_bands_calibration_report(
             or source_run.get("fold") != args.fold
             or source_run.get("epochs") != 5
             or source_run.get("amp") is not bool(args.amp)
+            or source_run.get("training_augmentation", "none") != augmentation
             or source_run.get("pkl_sha256") != pkl_digest
             or source_run.get("splits_json_sha256") != splits_digest
             or source_run.get("source_sha256") != checkpoint_source_sha256
             or source_run.get("runtime_sha256") != canonical_sha256(runtime_provenance)
             or source_run.get("execution_sha256")
-            != canonical_sha256(execution_provenance)
+            != canonical_sha256(source_execution)
         ):
             raise ValueError("Bands calibration source run configuration is inconsistent.")
+        # Legacy reports use their verified source configuration for preprocessing.
+        for field, expected in (
+            ("spatial_size", list(args.spatial_size)), ("resize", bool(args.resize)),
+        ):
+            recorded = source_run.get(field, False if field == "resize" else None)
+            if field == "spatial_size" and recorded is not None:
+                recorded = list(recorded)
+            if recorded != expected or report.get(field, recorded) != expected:
+                raise ValueError(f"Bands calibration {field} does not match this run.")
         if source_config.get("source_provenance") != checkpoint_source:
             raise ValueError("Bands calibration checkpoint source provenance changed.")
         source_checkpoint = torch.load(
@@ -2507,6 +2631,14 @@ def validate_ap_plane_calibration_report(
         raise ValueError("A/P-plane calibration report has the wrong constraint set.")
     if report.get("dataset") != args.dataset or report.get("fold") != args.fold:
         raise ValueError("A/P-plane calibration dataset/fold does not match this run.")
+    augmentation = getattr(args, "training_augmentation", "none")
+    if report.get("training_augmentation", "none") != augmentation:
+        raise ValueError("A/P-plane calibration training_augmentation does not match this run.")
+    if augmentation == "mild_v1" and (
+        report.get("augmentation_policy") != MILD_V1
+        or report.get("augmentation_seed") != report.get("seed", -1) + 1
+    ):
+        raise ValueError("A/P-plane calibration augmentation policy/RNG does not match.")
     expected_geometry = {
         "axis": int(args.ap_plane_axis),
         "anterior_side": str(args.ap_plane_anterior_side),
@@ -2942,9 +3074,11 @@ def validate_epoch_metrics(row: dict[str, Any]) -> None:
 def _main(snapshot_stack: ExitStack) -> None:
     args = parse_args()
     if args.training_augmentation != "none" and (
-        args.translation_augmentation or args.constraint_set != "none" or args.batch_size != 1
+        args.translation_augmentation
+        or args.constraint_set not in {"none", "ap_plane_ce_control", "bands"}
+        or args.batch_size != 1
     ):
-        raise ValueError("mild_v1 requires constraint-set none, batch size 1, and no translation augmentation.")
+        raise ValueError("mild_v1 requires constraint-set none, ap_plane_ce_control or bands, batch size 1, and no translation augmentation.")
     if not math.isfinite(args.drop_rate) or not 0 <= args.drop_rate < 1:
         raise ValueError("--drop-rate must be finite and in [0, 1).")
     stopping = EarlyStopping(
@@ -3172,6 +3306,7 @@ def _main(snapshot_stack: ExitStack) -> None:
         activation_checkpointing=args.activation_checkpointing,
         plain_tensors=args.plain_tensors,
         training_augmentation=args.training_augmentation,
+        allow_calibration_mig_profile_change=args.allow_calibration_mig_profile_change,
     )
 
     output_dir = args.output_dir.resolve()

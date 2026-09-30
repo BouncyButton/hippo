@@ -11,6 +11,7 @@ from pathlib import Path
 from types import SimpleNamespace
 
 import numpy as np
+import pytest
 import torch
 import torch.nn as nn
 from monai.losses import DiceLoss
@@ -718,7 +719,10 @@ def test_gradient_calibration_uses_target_and_safety_cap() -> None:
     assert final == cap
 
 
-def test_bands_training_requires_exact_completed_calibration_artifact(tmp_path) -> None:
+@pytest.mark.parametrize("augmentation", ["none", "mild_v1"])
+@pytest.mark.parametrize("mig_transfer", [False, True])
+def test_bands_training_requires_exact_completed_calibration_artifact(tmp_path, augmentation, mig_transfer) -> None:
+    from thesis.new_constraints.training_augmentation import MILD_V1
     pkl_path = tmp_path / "dataset.pkl"
     splits_path = tmp_path / "splits.json"
     report_path = tmp_path / "calibration.json"
@@ -732,8 +736,16 @@ def test_bands_training_requires_exact_completed_calibration_artifact(tmp_path) 
     source = collect_source_provenance()
     runtime = collect_runtime_provenance()
     execution = collect_execution_provenance(torch.device("cpu"))
+    source_execution = execution
+    if mig_transfer:
+        from thesis.new_constraints.test_calibration_mig_transfer import execution as gpu_execution
+        execution = gpu_execution("3g")
+        source_execution = gpu_execution("4g")
     source_run = {
         "constraint_set": "none",
+        "training_augmentation": augmentation,
+        "spatial_size": [64, 64, 64],
+        "resize": False,
         "dataset": "MSD",
         "fold": 0,
         "epochs": 5,
@@ -742,10 +754,11 @@ def test_bands_training_requires_exact_completed_calibration_artifact(tmp_path) 
         "splits_json_sha256": file_sha256(splits_path),
         "source_sha256": source["sha256"],
         "runtime_sha256": canonical_sha256(runtime),
-        "execution_sha256": canonical_sha256(execution),
+        "execution_sha256": canonical_sha256(source_execution),
     }
     checkpoint_config_path.write_text(
-        json.dumps({"run": source_run, "source_provenance": source}),
+        json.dumps({"run": source_run, "source_provenance": source,
+                    **({"execution_provenance": source_execution} if mig_transfer else {})}),
         encoding="utf-8",
     )
     torch.save({"epoch": 5, "run": source_run, "model": {}}, checkpoint_path)
@@ -754,6 +767,9 @@ def test_bands_training_requires_exact_completed_calibration_artifact(tmp_path) 
     weight, target, cap = calibrated_weight(dice_rms, band_rms)
     report = {
         "status": "complete",
+        "training_augmentation": augmentation,
+        "augmentation_policy": dict(MILD_V1) if augmentation == "mild_v1" else None,
+        "augmentation_seed": 1 if augmentation == "mild_v1" else None,
         "constraint_set": "bands",
         "dataset": "MSD",
         "fold": 0,
@@ -784,6 +800,7 @@ def test_bands_training_requires_exact_completed_calibration_artifact(tmp_path) 
         "source_provenance": source,
         "runtime_provenance": runtime,
         "execution_provenance": execution,
+        "allow_calibration_mig_profile_change": mig_transfer,
         "training_cases": [
             {"case_name": "case-a", "patient_id": "case-a"},
             {"case_name": "case-b", "patient_id": "case-b"},
@@ -816,12 +833,16 @@ def test_bands_training_requires_exact_completed_calibration_artifact(tmp_path) 
     report_path.write_text(json.dumps(report), encoding="utf-8")
     arguments = SimpleNamespace(
         dataset="MSD",
+        training_augmentation=augmentation,
+        spatial_size=(64, 64, 64),
+        resize=False,
         fold=0,
         band_steps=2,
         bands_focal_gamma=0.0,
         foreground_class_ids=(1, 2),
         complement_class_ids=(0,),
         bands_weight=weight,
+        allow_calibration_mig_profile_change=mig_transfer,
         amp=False,
         pkl=pkl_path,
         splits_json=splits_path,
@@ -842,9 +863,14 @@ def test_bands_training_requires_exact_completed_calibration_artifact(tmp_path) 
         validate(report)
         mutations = (
             ({**report, "status": "failed"}, "complete"),
+            ({**report, "training_augmentation": "none" if augmentation == "mild_v1" else "mild_v1"}, "training_augmentation"),
+            ({**report, "spatial_size": [96, 96, 96]}, "spatial_size"),
+            ({**report, "resize": True}, "resize"),
             ({**report, "fold": 1}, "dataset/fold"),
             ({**report, "amp": True}, "AMP mode"),
             ({**report, "bands_focal_gamma": 1.0}, "focal gamma"),
+            ({**report, "bands_degree_alpha": 2.0}, "bands_degree_alpha"),
+            ({**report, "bands_degree_normalization": "surface"}, "bands_degree_normalization"),
             (
                 {**report, "source_provenance": {**source, "sha256": "e" * 64}},
                 "source code",
@@ -863,6 +889,11 @@ def test_bands_training_requires_exact_completed_calibration_artifact(tmp_path) 
                 "non-negative",
             ),
         )
+        if augmentation == "mild_v1":
+            mutations += (
+                ({**report, "augmentation_policy": {}}, "policy/RNG"),
+                ({**report, "augmentation_seed": 2}, "policy/RNG"),
+            )
         for mutated, message in mutations:
             try:
                 validate(mutated)
@@ -1020,6 +1051,12 @@ def test_checkpoint_provenance_requires_matching_dice_only_epoch_five(tmp_path) 
     )
     arguments.bands_focal_gamma = 1.0
     validate()
+    arguments.bands_focal_gamma = 0.0
+    arguments.bands_degree_alpha = 2.0
+    arguments.bands_degree_normalization = "surface"
+    validate()
+    arguments.bands_degree_alpha = 0.0
+    arguments.bands_focal_gamma = 1.0
 
     legacy_source["files"]["baselines/swin_unetr/swin_unetr.py"] = "2" * 64
     config["source_provenance"] = legacy_source

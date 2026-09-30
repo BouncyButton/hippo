@@ -72,6 +72,24 @@ def test_plane_report_preprocessing_must_match_verified_checkpoint(plane_report,
         trainer.validate_ap_plane_calibration_report(report, args, **kwargs)
 
 
+def test_augmented_run_rejects_identity_calibration(plane_report):
+    report, args, kwargs = plane_report
+    args.training_augmentation = 'mild_v1'
+    with pytest.raises(ValueError, match='training_augmentation'):
+        trainer.validate_ap_plane_calibration_report(report, args, **kwargs)
+
+
+def test_augmented_calibration_binds_policy_and_rng(plane_report):
+    report, args, kwargs = plane_report
+    args.training_augmentation = 'mild_v1'
+    report.update(training_augmentation='mild_v1', augmentation_policy=dict(trainer.MILD_V1),
+                  augmentation_seed=1)
+    trainer.validate_ap_plane_calibration_report(report, args, **kwargs)
+    report['augmentation_seed'] = 2
+    with pytest.raises(ValueError, match='policy/RNG'):
+        trainer.validate_ap_plane_calibration_report(report, args, **kwargs)
+
+
 @pytest.mark.parametrize("preset", ["equivariance", "translation"])
 @pytest.mark.parametrize("size", [1, 2, 3])
 def test_shared_translation_view_requires_matching_shift(monkeypatch, tmp_path, preset, size):

@@ -55,6 +55,8 @@ Options:
   --bands-calibration-json PATH Completed calibration report required for bands
   --band-steps N                Fixed at 2 for the canonical bands experiment
   --bands-focal-gamma FLOAT     Focal exponent for bands (default: 0, exact BCE)
+  --bands-degree-alpha FLOAT    GT face-exposure weighting (default: 0, disabled)
+  --bands-degree-normalization inner|surface  Entire inner band (A) or surface only (B)
   --bands-inner-focal-gamma F   Optional inner exponent (defaults to shared gamma)
   --bands-outer-focal-gamma F   Optional outer exponent (defaults to shared gamma)
   --bands-loss-type TYPE        focal_bce or class_tversky (default: focal_bce)
@@ -160,6 +162,8 @@ BANDS_WEIGHT=""
 BANDS_CALIBRATION_JSON=""
 BAND_STEPS="2"
 BANDS_FOCAL_GAMMA="0"
+BANDS_DEGREE_ALPHA="0"
+BANDS_DEGREE_NORMALIZATION="inner"
 BANDS_INNER_FOCAL_GAMMA=""
 BANDS_OUTER_FOCAL_GAMMA=""
 BANDS_LOSS_TYPE="focal_bce"
@@ -218,6 +222,8 @@ while [[ $# -gt 0 ]]; do
     --bands-calibration-json) BANDS_CALIBRATION_JSON="$2"; shift 2 ;;
     --band-steps) BAND_STEPS="$2"; shift 2 ;;
     --bands-focal-gamma) BANDS_FOCAL_GAMMA="$2"; shift 2 ;;
+    --bands-degree-alpha) BANDS_DEGREE_ALPHA="$2"; shift 2 ;;
+    --bands-degree-normalization) BANDS_DEGREE_NORMALIZATION="$2"; shift 2 ;;
     --bands-inner-focal-gamma) BANDS_INNER_FOCAL_GAMMA="$2"; shift 2 ;;
     --bands-outer-focal-gamma) BANDS_OUTER_FOCAL_GAMMA="$2"; shift 2 ;;
     --bands-loss-type) BANDS_LOSS_TYPE="$2"; shift 2 ;;
@@ -430,6 +436,8 @@ COMMAND=(
   --equivariance-max-samples "${EQUIVARIANCE_MAX_SAMPLES}"
   --band-steps "${BAND_STEPS}"
   --bands-focal-gamma "${BANDS_FOCAL_GAMMA}"
+  --bands-degree-alpha "${BANDS_DEGREE_ALPHA}"
+  --bands-degree-normalization "${BANDS_DEGREE_NORMALIZATION}"
   --bands-loss-type "${BANDS_LOSS_TYPE}"
   --tversky-fp-weight "${TVERSKY_FP_WEIGHT}"
   --tversky-fn-weight "${TVERSKY_FN_WEIGHT}"

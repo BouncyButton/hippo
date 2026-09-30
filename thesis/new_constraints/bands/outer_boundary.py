@@ -2,6 +2,7 @@
 
 import math
 from collections.abc import Sequence
+from functools import lru_cache
 
 import torch
 import torch.nn as nn
@@ -20,7 +21,9 @@ def _normalise_labels(labels: torch.Tensor, logits: torch.Tensor) -> torch.Tenso
     return labels.long()
 
 
+@lru_cache(maxsize=8)
 def _cross_kernel(device: torch.device) -> torch.Tensor:
+    """Reuse the immutable morphology kernel on each device."""
     kernel = torch.zeros((1, 1, 3, 3, 3), device=device, dtype=torch.float32)
     kernel[0, 0, 1, 1, 1] = 1.0
     kernel[0, 0, 0, 1, 1] = 1.0
@@ -102,20 +105,69 @@ def foreground_log_odds(
             "foreground and complement class IDs must partition every output class."
         )
     logits32 = logits.float()
+    if len(foreground_ids) == 2 and len(complement_ids) == 1:
+        # The canonical three-class task has two foreground logits and one
+        # background logit. Avoid generic gathers and singleton reductions.
+        return torch.logaddexp(
+            logits32[:, foreground_ids[0]], logits32[:, foreground_ids[1]],
+        ) - logits32[:, complement_ids[0]]
     return torch.logsumexp(logits32[:, foreground_ids], dim=1) - torch.logsumexp(
         logits32[:, complement_ids], dim=1
     )
 
 
 def _edge_touching(foreground: torch.Tensor) -> torch.Tensor:
-    return (
-        foreground[:, :, 0].flatten(1).any(1)
-        | foreground[:, :, -1].flatten(1).any(1)
-        | foreground[:, :, :, 0].flatten(1).any(1)
-        | foreground[:, :, :, -1].flatten(1).any(1)
-        | foreground[:, :, :, :, 0].flatten(1).any(1)
-        | foreground[:, :, :, :, -1].flatten(1).any(1)
+    faces = (
+        foreground[:, :, 0].flatten(1),
+        foreground[:, :, -1].flatten(1),
+        foreground[:, :, :, 0].flatten(1),
+        foreground[:, :, :, -1].flatten(1),
+        foreground[:, :, :, :, 0].flatten(1),
+        foreground[:, :, :, :, -1].flatten(1),
     )
+    return torch.cat(faces, dim=1).any(1)
+
+
+def validate_degree_weighting(alpha: float, normalization: str) -> None:
+    if not math.isfinite(alpha) or alpha < 0:
+        raise ValueError("degree_alpha must be finite and non-negative.")
+    if normalization not in {"inner", "surface"}:
+        raise ValueError("degree_normalization must be 'inner' (A) or 'surface' (B).")
+
+
+@torch.no_grad()
+def inner_degree_weights(
+    foreground: torch.Tensor,
+    inner: torch.Tensor,
+    *,
+    alpha: float,
+    normalization: str,
+) -> torch.Tensor:
+    """Return case-normalized weights [B, 1, X, Y, Z] for the inner band.
+
+    A (inner) redistributes mass over the entire inner band. B (surface)
+    redistributes only within its degree<6 surface and leaves deeper weights
+    at one. Foreground must include a background halo: cropped foreground
+    faces do not define anatomical exposure. No predicted mask enters weights.
+    """
+    validate_degree_weighting(alpha, normalization)
+    if foreground.ndim != 5 or foreground.shape[1] != 1 or inner.shape != foreground.shape:
+        raise ValueError("foreground and inner must have matching [B, 1, X, Y, Z] shapes.")
+    if alpha == 0:
+        return torch.ones_like(foreground, dtype=torch.float32)
+    if bool(_edge_touching(foreground).any()):
+        raise ValueError("Degree weighting requires a background halo; foreground touches the crop edge.")
+    foreground_float = foreground.float()
+    degree = F.conv3d(foreground_float, _cross_kernel(foreground.device), padding=1) - foreground_float
+    surface = foreground.bool() & (degree < 6)
+    raw = 1.0 + alpha * (6.0 - degree) / 6.0
+    support = inner.bool() if normalization == "inner" else surface
+    dimensions = (1, 2, 3, 4)
+    count = support.sum(dimensions, keepdim=True)
+    mean = (raw * support).sum(dimensions, keepdim=True) / count.clamp_min(1)
+    mean = torch.where(count > 0, mean, torch.ones_like(mean))
+    weights = raw / mean
+    return torch.where(support, weights, torch.ones_like(weights))
 
 
 class OuterBoundaryBandLoss(nn.Module):
@@ -126,6 +178,8 @@ class OuterBoundaryBandLoss(nn.Module):
     voxel before the existing side-balanced and patient-balanced reductions.
     Optional side-specific exponents support mechanistic ablations while the
     shared ``focal_gamma`` remains the backwards-compatible default.
+    Degree weighting is disabled at ``degree_alpha=0``. Positive alpha uses
+    whole-foreground face degree and either inner (A) or surface (B) normalization.
     """
 
     def __init__(
@@ -137,10 +191,15 @@ class OuterBoundaryBandLoss(nn.Module):
         focal_gamma: float = 0.0,
         inner_focal_gamma: float | None = None,
         outer_focal_gamma: float | None = None,
+        degree_alpha: float = 0.0,
+        degree_normalization: str = "inner",
         adherence_threshold: float = 0.90,
         epsilon: float = 1e-6,
     ) -> None:
         super().__init__()
+        validate_degree_weighting(degree_alpha, degree_normalization)
+        self.degree_alpha = float(degree_alpha)
+        self.degree_normalization = degree_normalization
         self.foreground_class_ids = tuple(int(v) for v in foreground_class_ids)
         self.complement_class_ids = tuple(int(v) for v in complement_class_ids)
         if not self.foreground_class_ids or not self.complement_class_ids:
@@ -217,6 +276,12 @@ class OuterBoundaryBandLoss(nn.Module):
             outer_float = outer[:, 0].float()
             inner_count = inner_float.sum(spatial_dimensions)
             outer_count = outer_float.sum(spatial_dimensions)
+            if self.degree_alpha > 0:
+                weights = inner_degree_weights(
+                    foreground, inner, alpha=self.degree_alpha,
+                    normalization=self.degree_normalization,
+                )[:, 0]
+                inner_voxel_loss = inner_voxel_loss * weights
             inner_loss = (inner_voxel_loss * inner_float).sum(
                 spatial_dimensions
             ) / (inner_count + self.epsilon)
@@ -225,15 +290,20 @@ class OuterBoundaryBandLoss(nn.Module):
             ) / (outer_count + self.epsilon)
             valid = (inner_count > 0) & (outer_count > 0)
             case_loss = 0.5 * (inner_loss + outer_loss)
-            if bool(valid.any()):
-                loss = case_loss[valid].mean()
+            # Resolve the valid rows once. Repeated CUDA boolean indexing forces
+            # repeated dynamic-size synchronization for the same tiny batch.
+            valid_indices = valid.nonzero(as_tuple=False).flatten()
+            valid_case_loss = case_loss.index_select(0, valid_indices)
+            valid_inner_loss = inner_loss.index_select(0, valid_indices)
+            valid_outer_loss = outer_loss.index_select(0, valid_indices)
+            if valid_indices.numel():
+                loss = valid_case_loss.mean()
             else:
                 loss = differentiable_zero(logits.float())
 
-        valid_case_loss = case_loss[valid]
         truth = torch.exp(-valid_case_loss).clamp(0.0, 1.0)
         value = torch.stack(
-            (torch.exp(-inner_loss[valid]), torch.exp(-outer_loss[valid])),
+            (torch.exp(-valid_inner_loss), torch.exp(-valid_outer_loss)),
             dim=1,
         )
         edge_touching = _edge_touching(foreground)
@@ -252,9 +322,9 @@ class OuterBoundaryBandLoss(nn.Module):
                 "outer_voxels": outer_count,
                 "edge_touching": edge_touching,
                 "metrics": {
-                    "raw_loss": case_loss[valid],
-                    "inner_loss": inner_loss[valid],
-                    "outer_loss": outer_loss[valid],
+                    "raw_loss": valid_case_loss,
+                    "inner_loss": valid_inner_loss,
+                    "outer_loss": valid_outer_loss,
                     "inner_voxels": inner_count,
                     "outer_voxels": outer_count,
                     "valid_patient": valid.float(),

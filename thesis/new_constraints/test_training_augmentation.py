@@ -60,6 +60,8 @@ def test_augmentation_rng_replay_global_isolation_and_valid_labels():
 
 @pytest.mark.parametrize('extra', [
     ['--batch-size', '2'], ['--translation-augmentation'], ['--constraint-set', 'equivariance'],
+    ['--constraint-set', 'ap_plane'], ['--constraint-set', 'ap_plane_location'],
+    ['--constraint-set', 'onecut'],
 ])
 def test_augmentation_rejects_unsupported_combinations(monkeypatch, tmp_path, extra):
     monkeypatch.setattr(sys, 'argv', ['train', '--pkl', 'unused', '--splits-json', 'unused',
@@ -67,6 +69,39 @@ def test_augmentation_rejects_unsupported_combinations(monkeypatch, tmp_path, ex
     with pytest.raises(ValueError, match='mild_v1 requires'):
         with ExitStack() as stack:
             trainer._main(stack)
+
+
+@pytest.mark.parametrize('preset', ['ap_plane_ce_control', 'bands'])
+def test_label_constraint_augmentation_passes_guard_but_still_checks_inputs(monkeypatch, tmp_path, preset):
+    monkeypatch.setattr(sys, 'argv', ['train', '--pkl', 'unused', '--splits-json', 'unused',
+        '--output-dir', str(tmp_path), '--constraint-set', preset,
+        '--training-augmentation', 'mild_v1'])
+    with pytest.raises(FileNotFoundError, match='dataset pickle'):
+        with ExitStack() as stack:
+            trainer._main(stack)
+
+
+def test_rotated_conditional_ce_uses_transformed_targets_and_no_extra_forward():
+    from thesis.new_constraints.objective import NewConstraintConfig, NewConstraintObjective
+    images, labels = pair(32)
+    images, labels, applied = warp_pair(images, labels, angles=(0, 0, 0.17), scale=1,
+                                      translation_xyz=(0, 0, 0))
+    assert applied
+    # Deliberately reverse every foreground A/P prediction.
+    logits = torch.zeros(1, 3, 32, 32, 32, requires_grad=True)
+    with torch.no_grad():
+        logits[:, 1] = torch.where(labels[:, 0] == 2, 5., -5.)
+        logits[:, 2] = -logits[:, 1]
+    class NoForward(torch.nn.Module):
+        def forward(self, *args, **kwargs):
+            raise AssertionError('Auxiliary must reuse existing logits')
+    objective = NewConstraintObjective(NewConstraintConfig(equivariance_weight=0, ap_plane_weight=0.1, ap_plane_mode='conditional_ce'))
+    result = objective(NoForward(), images, logits, labels)
+    result['loss'].backward()
+    assert torch.isfinite(logits.grad).all()
+    assert torch.count_nonzero(logits.grad[:, 0]) == 0
+    assert (logits.grad[:, 1][labels[:, 0] == 1] < 0).all()
+    assert (logits.grad[:, 2][labels[:, 0] == 2] < 0).all()
 
 
 def test_augmented_training_resume_matches_uninterrupted_and_validation_is_clean(monkeypatch, tmp_path):

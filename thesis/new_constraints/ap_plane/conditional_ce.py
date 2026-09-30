@@ -8,7 +8,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-from ..constraint_result import ConstraintResult, differentiable_zero
+from ..constraint_result import ConstraintResult
 from .existential import _normalise_labels, _validate_logits
 
 
@@ -61,42 +61,35 @@ class OriginalLabelAPConditionalCELoss(nn.Module):
         _validate_logits(logits, self.axis)
         labels = _normalise_labels(labels, logits)
         ap_margin = (logits[:, 1] - logits[:, 2]).float()
-        zero = differentiable_zero(ap_margin)
-        losses: list[torch.Tensor] = []
-        valid: list[bool] = []
-        for case_index in range(logits.shape[0]):
-            case_labels = labels[case_index]
-            support = case_labels != 0
-            has_both = bool((case_labels == 1).any()) and bool((case_labels == 2).any())
-            is_valid = bool(support.any()) and (has_both or not self.require_both)
-            valid.append(is_valid)
-            if not is_valid:
-                losses.append(zero)
-                continue
-            margin = ap_margin[case_index]
-            voxel_losses = torch.where(
-                case_labels == 1,
-                F.softplus(self.margin - margin),
-                F.softplus(self.margin + margin),
-            )
-            losses.append(voxel_losses[support].mean())
-
-        case_loss = torch.stack(losses)
-        valid_tensor = torch.tensor(valid, dtype=torch.bool, device=logits.device)
-        loss = case_loss[valid_tensor].mean() if bool(valid_tensor.any()) else zero
+        support = labels != 0
+        counts = support.flatten(1).sum(1)
+        valid_tensor = counts > 0
+        if self.require_both:
+            valid_tensor = valid_tensor & (labels == 1).flatten(1).any(1) & (labels == 2).flatten(1).any(1)
+        # Fixed-shape reductions keep validity decisions on the GPU. Python bool
+        # tests and foreground boolean indexing previously synchronized every case.
+        voxel_losses = torch.where(
+            labels == 1,
+            F.softplus(self.margin - ap_margin),
+            F.softplus(self.margin + ap_margin),
+        )
+        case_loss = torch.where(support, voxel_losses, 0.0).flatten(1).sum(1) / counts.clamp_min(1)
+        case_loss = case_loss * valid_tensor
+        loss = case_loss.sum() / valid_tensor.sum().clamp_min(1)
         truth_all = torch.exp(-case_loss).clamp(0.0, 1.0)
         truth = truth_all[valid_tensor]
+        valid_losses = case_loss[valid_tensor]
         return ConstraintResult(
             loss=loss,
             truth=truth,
-            value=case_loss[valid_tensor],
+            value=valid_losses,
             details={
                 "confidence_weighted_agreement": truth,
                 "confidence_adherent": truth >= self.adherence_threshold,
                 "valid": valid_tensor,
                 "case_loss": case_loss,
                 "metrics": {
-                    "raw_loss": case_loss[valid_tensor],
+                    "raw_loss": valid_losses,
                     "valid_patient": valid_tensor.float(),
                     "skipped_patient": (~valid_tensor).float(),
                 },

@@ -8,6 +8,34 @@ from thesis.new_constraints.objective import NewConstraintConfig, NewConstraintO
 from thesis.new_constraints.constraint_result import differentiable_zero
 
 
+@pytest.mark.parametrize('size', [0, 1, 3])
+def test_constraint_logging_batches_transfers_and_preserves_totals(monkeypatch, size):
+    from thesis.new_constraints.constraint_result import ConstraintResult
+    values = torch.linspace(0.1, 0.9, steps=max(size, 1))[:size].requires_grad_(True)
+    result = ConstraintResult(loss=values.sum(), truth=values, value=values, details={
+        'confidence_weighted_agreement': values,
+        'confidence_adherent': values > 0.5,
+        'metrics': {'raw_loss': values, 'valid_patient': torch.ones(size)},
+    })
+    calls = []
+    original = torch.Tensor.cpu
+    def counted(tensor, *args, **kwargs):
+        calls.append(tensor.numel())
+        return original(tensor, *args, **kwargs)
+    monkeypatch.setattr(torch.Tensor, 'cpu', counted)
+    totals = {}
+    trainer.update_constraint_totals(totals, {'test': result})
+    trainer.update_constraint_totals(totals, {'test': result})
+    assert calls == [5, 5]
+    row = totals['test']
+    expected = float(values.detach().sum()) * 2
+    assert row['truth'] == expected == row['confidence_weighted_agreement']
+    assert row['confidence_adherent'] == float((values > 0.5).float().sum()) * 2
+    assert row['count'] == 2 * size
+    assert row['metric_sums'] == {'raw_loss': expected, 'valid_patient': float(2 * size)}
+    assert row['metric_counts'] == {'raw_loss': float(2 * size), 'valid_patient': float(2 * size)}
+
+
 def test_plain_transform_preserves_values_names_and_rng():
     image = MetaTensor(torch.randn(1, 8, 8, 8), meta={"example": "retained until preprocessing ends"})
     label = MetaTensor(torch.ones(1, 8, 8, 8, dtype=torch.long))

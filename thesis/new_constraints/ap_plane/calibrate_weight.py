@@ -56,6 +56,7 @@ from thesis.new_constraints.train_swinunetr_constraints import (  # noqa: E402
     snapshot_file,
     validate_source_provenance_unchanged,
 )
+from thesis.new_constraints.training_augmentation import MILD_V1, augment_mild  # noqa: E402
 
 
 def parse_args() -> argparse.Namespace:
@@ -72,6 +73,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--seed", type=int, default=0)
     parser.add_argument("--spatial-size", type=int, nargs=3, default=(64, 64, 64))
     parser.add_argument("--resize", action="store_true")
+    parser.add_argument("--training-augmentation", choices=("none", "mild_v1"), default="none")
     parser.add_argument("--ap-plane-axis", type=int, choices=(0, 1, 2), required=True)
     parser.add_argument(
         "--ap-plane-anterior-side", choices=("low", "high"), required=True
@@ -120,6 +122,8 @@ def _validate_source_checkpoint(
         raise ValueError("Calibration checkpoint spatial size does not match.")
     if bool(run.get("resize", False)) != bool(args.resize):
         raise ValueError("Calibration checkpoint resize mode does not match.")
+    if run.get("training_augmentation", "none") != getattr(args, "training_augmentation", "none"):
+        raise ValueError("Calibration checkpoint training augmentation does not match.")
     if run.get("pkl_sha256") != pkl_sha256:
         raise ValueError("Dataset pickle differs from the checkpoint input.")
     if run.get("splits_json_sha256") != splits_sha256:
@@ -132,6 +136,8 @@ def _validate_source_checkpoint(
 
 def main() -> None:
     args = parse_args()
+    if args.training_augmentation != "none" and args.ap_plane_objective != "conditional_ce":
+        raise ValueError("Spatial augmentation is supported only for original-label conditional_ce.")
     if not 1 <= args.max_cases <= MAX_CALIBRATION_CASES:
         raise ValueError(f"--max-cases must be in 1..{MAX_CALIBRATION_CASES}.")
     if not math.isfinite(args.ap_plane_margin) or args.ap_plane_margin < 0:
@@ -188,9 +194,17 @@ def main() -> None:
     records: list[dict[str, Any]] = []
     dice_rms_values: list[float] = []
     plane_rms_values: list[float] = []
+    augmentation_generator = torch.Generator().manual_seed(args.seed + 1)
     for selected, batch in zip(selected_cases, loader, strict=True):
-        images = batch["image"].to(device)
-        labels = batch["label"].to(device)
+        # Match the fast production path and avoid MetaTensor metadata work.
+        images, labels = batch["image"], batch["label"]
+        images = (images.as_tensor() if hasattr(images, "as_tensor") else images).to(device)
+        labels = (labels.as_tensor() if hasattr(labels, "as_tensor") else labels).to(device)
+        augmentation_stats = None
+        if args.training_augmentation == "mild_v1":
+            images, labels, augmentation_stats = augment_mild(
+                images, labels, generator=augmentation_generator,
+            )
         with torch.no_grad(), torch.cuda.amp.autocast(enabled=args.amp):
             model_logits = model(images)
         logits = model_logits.detach().float().requires_grad_(True)
@@ -210,6 +224,7 @@ def main() -> None:
         records.append(
             {
                 **selected,
+                "augmentation": augmentation_stats,
                 "valid": valid,
                 "finite_positive_gradients": finite
                 and dice_rms > 0
@@ -265,6 +280,9 @@ def main() -> None:
         "seed": args.seed,
         "spatial_size": list(args.spatial_size),
         "resize": bool(args.resize),
+        "training_augmentation": args.training_augmentation,
+        "augmentation_policy": dict(MILD_V1) if args.training_augmentation == "mild_v1" else None,
+        "augmentation_seed": args.seed + 1 if args.training_augmentation == "mild_v1" else None,
         "max_cases": args.max_cases,
         "amp": args.amp,
         "checkpoint": str(args.checkpoint.resolve()),
