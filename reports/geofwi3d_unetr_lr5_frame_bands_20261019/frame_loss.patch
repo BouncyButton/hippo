@@ -1,0 +1,14 @@
+--- original/outer_boundary.py
++++ frame2/outer_boundary.py
+@@ -75,6 +75,11 @@
+     dilated = _dilate_6(foreground, steps)
+     inner = foreground & ~eroded
+     outer = dilated & ~foreground
++    # Seismic observation faces are crop boundaries, not observed salt surfaces.
++    valid_frame = torch.zeros_like(foreground, dtype=torch.bool)
++    valid_frame[:, :, 2:-2, 2:-2, 2:-2] = True
++    inner = inner & valid_frame
++    outer = outer & valid_frame
+     return inner, outer
+ 
+ 

@@ -1,0 +1,29 @@
+ADNI: 3 folds x 3 seeds, no augmentation
+
+1. Create My Drive/hippo_adni_3fold_3seed/input/ in Google Drive.
+2. Upload adni_data_verified.zip and adni_replication_code.zip there. Keep them zipped.
+3. Open ADNI_3fold_3seed_no_augmentation.ipynb using Colab > File > Upload notebook.
+4. Choose A100 or H100 (native BF16). Run cells in order; required GPU preflight blocks training on failure.
+5. Results and resumable checkpoints go to My Drive/hippo_adni_3fold_3seed/results_noaug_v1/.
+
+504 fresh runs = 4 models x 14 original conditions x folds 0/1/2 x seeds 0/1/2.
+Each saved fold: 5 training subjects (10 L/R crops), 27 validation subjects (54 crops).
+No augmentation or test-time augmentation. Deterministic normalization/padding is unchanged.
+nnUNet: native foreground Dice+CE, deep supervision, SGD; 60% targets and 75% p95 ceiling.
+SwinUNETR / UNETR / 3D U-Net: original Dice including background, AdamW; 10% targets and 50% p95 ceiling.
+Optimization budget: 31,976,450,667,090 FLOPs per run. Calibration counted separately.
+
+Do not replace or interrupt the running MSD notebook. You may upload ADNI while MSD runs;
+start ADNI after MSD finishes if reusing its Colab runtime. ADNI uses separate code/data/results paths.
+
+Drive should have at least 8 GiB free; the runtime SSD should have at least 20 GiB free at setup.
+Use one notebook at a time for this results folder. Completed metrics are archived and verified
+before that run's generated checkpoints are removed. Datasets and source ZIPs remain on Drive.
+The notebook uses a 22-hour clean-stop target for Pro+; runtime and compute units are not guaranteed.
+To stop cleanly, interrupt the training cell once and wait for checkpoint upload to finish.
+Rerun the setup/preflight/run cells on the same GPU/software to continue verified work.
+Abrupt loss of a runtime with updates newer than the durable checkpoint requires a recovery audit;
+those charged updates are never silently erased or replayed as fresh work.
+
+Local packaging, original loss graph, saved subject split and data checks are recorded beside
+these files. The actual GPU preflight is executed in your authenticated Colab runtime.

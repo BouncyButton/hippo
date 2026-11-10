@@ -1,0 +1,91 @@
+{
+  "job_id": "700232",
+  "dependency": "700231",
+  "status_at_last_check": "paused",
+  "exploration_experiments": 50,
+  "augmentation": "none",
+  "conventional_loss": "Dice-only",
+  "seismic_budget_flops": 182178126543160,
+  "seismic_baseline_updates": {
+    "nnunet": 152,
+    "swinunetr": 362,
+    "unetr_vit_b16": 414,
+    "basic_unet16": 952
+  },
+  "medical_budget_flops": 31976450667090,
+  "foundation_updates": 200,
+  "full_sweep_cells": 1863,
+  "full_sweep_submitted": false,
+  "personal_quota": {
+    "used_gib": 80.65,
+    "limit_gib": 93.13,
+    "free_gib": 12.47999999999999,
+    "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  80.65GiB/93.13GiB  207.48k/\u221e  \n\n",
+    "checked_at": 1791972924.3595679
+  },
+  "completed_results": 3,
+  "cleanup_released_bytes": 1576029494,
+  "estimates": {
+    "exploration_gpu_hours": [
+      4,
+      8
+    ],
+    "full_sweep_gpu_hours": [
+      220,
+      400
+    ],
+    "excludes": "queue waits; replace using measured pilot timings"
+  },
+  "validation": "Seven cluster preflight tests passed; first real GPU experiment and verified archive/cleanup cycle completed",
+  "archive_service": "Running locally; Mac must remain reachable. GPU worker waits for verified archive acknowledgments.",
+  "controls": "rtk proxy .venv/bin/python -m scripts.cross_dataset_campaign.manage {status,pause,resume,collect}",
+  "updated_at": "2026-10-14T11:34:39.493803",
+  "active": null,
+  "continuation_job": "700235",
+  "runs": [
+    {
+      "id": "MSD_nnunet_dice_target10_f0s0",
+      "kind": "conventional",
+      "dataset": "MSD",
+      "model": "nnunet",
+      "fold": 0,
+      "seed": 0,
+      "arm": "dice",
+      "protocol": "MSD_nnunet_target10",
+      "target": 0.1,
+      "final_dice": 0.11219298590063866,
+      "best_dice": 0.11219298590063866,
+      "released_bytes": 525343058
+    },
+    {
+      "id": "MSD_nnunet_dice_bands_target10_f0s0",
+      "kind": "conventional",
+      "dataset": "MSD",
+      "model": "nnunet",
+      "fold": 0,
+      "seed": 0,
+      "arm": "dice_bands",
+      "protocol": "MSD_nnunet_target10",
+      "target": 0.1,
+      "final_dice": 0.11679707171243886,
+      "best_dice": 0.11679707171243886,
+      "released_bytes": 525343250
+    },
+    {
+      "id": "MSD_nnunet_dice_sdf_target10_f0s0",
+      "kind": "conventional",
+      "dataset": "MSD",
+      "model": "nnunet",
+      "fold": 0,
+      "seed": 0,
+      "arm": "dice_sdf",
+      "protocol": "MSD_nnunet_target10",
+      "target": 0.1,
+      "final_dice": 0.11389291290151635,
+      "best_dice": 0.11389291290151635,
+      "released_bytes": 525343186
+    }
+  ],
+  "user_instruction": "Stopped at user request. Do not resume automatically; run separate native MSD Dice+CE diagnostic for nine updates only.",
+  "replacement_diagnostic": "msd_nnunet_native_dice_ce_9updates_20261014"
+}

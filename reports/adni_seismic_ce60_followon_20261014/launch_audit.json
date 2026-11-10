@@ -1,0 +1,166 @@
+{
+  "submission.json": {
+    "job_id": "700973",
+    "dependency": "700918",
+    "quota": {
+      "used_gib": 30.47,
+      "limit_gib": 93.13,
+      "free_gib": 62.66,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  30.47GiB/93.13GiB  188.59k/\u221e  \n\n",
+      "checked_at": 1791998252.6282148
+    },
+    "submitted_at": 1791998252.844194,
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--chdir=/mnt/beegfsstudents/home/3160552/adni_seismic_ce60_followon_20261014",
+      "--output=/mnt/beegfsstudents/home/3160552/adni_seismic_ce60_followon_20261014/slurm-%j.out",
+      "--error=/mnt/beegfsstudents/home/3160552/adni_seismic_ce60_followon_20261014/slurm-%j.err",
+      "--dependency=afterany:700918",
+      "/mnt/beegfsstudents/home/3160552/adni_seismic_ce60_followon_20261014/run.sbatch",
+      "/mnt/beegfsstudents/home/3160552/adni_seismic_ce60_followon_20261014"
+    ],
+    "manifest_sha256": "e7e7c7b0701e68dfc6c247d505ac721603ddf3aafc8fd702ccc5e5b1779d8bb8"
+  },
+  "handoff.json": {
+    "status": "queued",
+    "predecessor_stage": "/mnt/beegfsstudents/home/3160552/msd_four_models_ce_target60_20261014",
+    "replaced_continuation": "700919",
+    "submission": {
+      "job_id": "700973",
+      "dependency": "700918",
+      "quota": {
+        "used_gib": 30.47,
+        "limit_gib": 93.13,
+        "free_gib": 62.66,
+        "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  30.47GiB/93.13GiB  188.59k/\u221e  \n\n",
+        "checked_at": 1791998252.6282148
+      },
+      "submitted_at": 1791998252.844194,
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--chdir=/mnt/beegfsstudents/home/3160552/adni_seismic_ce60_followon_20261014",
+        "--output=/mnt/beegfsstudents/home/3160552/adni_seismic_ce60_followon_20261014/slurm-%j.out",
+        "--error=/mnt/beegfsstudents/home/3160552/adni_seismic_ce60_followon_20261014/slurm-%j.err",
+        "--dependency=afterany:700918",
+        "/mnt/beegfsstudents/home/3160552/adni_seismic_ce60_followon_20261014/run.sbatch",
+        "/mnt/beegfsstudents/home/3160552/adni_seismic_ce60_followon_20261014"
+      ],
+      "manifest_sha256": "e7e7c7b0701e68dfc6c247d505ac721603ddf3aafc8fd702ccc5e5b1779d8bb8"
+    },
+    "policy": "Resume exact frozen MSD trainers if needed; only then start the follow-on; one queued continuation for the whole chain"
+  },
+  "preflight.json": {
+    "status": "passed",
+    "manifest_sha256": "e7e7c7b0701e68dfc6c247d505ac721603ddf3aafc8fd702ccc5e5b1779d8bb8",
+    "runs": 126,
+    "checked_protocols": [
+      "ADNI_MedSAM3",
+      "ADNI_basic_unet16",
+      "ADNI_nnunet",
+      "ADNI_swinunetr",
+      "ADNI_unetr_vit_b16",
+      "GeoFWI3D_basic_unet16",
+      "GeoFWI3D_nnunet",
+      "GeoFWI3D_swinunetr",
+      "GeoFWI3D_unetr_vit_b16"
+    ],
+    "checks": [
+      "Binary 64/96 loss and gradient checks",
+      "Exact split and data hashes",
+      "All profile/source identities",
+      "Optimizer/RNG/sampling resume equivalence",
+      "Archive corruption protection",
+      "MSD-before-follow-on and shared allocation deadline",
+      "Five-crop foundation geometry and sampling"
+    ],
+    "gpu_validation": "Actual MedSAM3 forward/backward checked in allocated baseline; not claimed as GPU-tested before submission"
+  },
+  "foundation_cpu_preflight.json": {
+    "status": "passed",
+    "inventory": [
+      {
+        "case": "hippocampus_adni_147119_L",
+        "shape": [
+          32,
+          48,
+          40
+        ],
+        "image_array_sha256": "09c685452e9e5912a61b3534e4f87309269d6dddaba21f4f69f598667a97403f",
+        "label_array_sha256": "c242082188d4273d669e84fc0b9c9cf0b3bd5677f95352d6f3eb54158e967b26",
+        "class_voxels": {
+          "background": 58013,
+          "hippocampus": 3427
+        }
+      },
+      {
+        "case": "hippocampus_adni_257270_R",
+        "shape": [
+          32,
+          48,
+          40
+        ],
+        "image_array_sha256": "193cdc36104b0bd2a0158f5a8b08b80a4cc897e897268395a669031a528ac0fd",
+        "label_array_sha256": "ed85e297f521bd8eac4fd9f91e2f5b71422f6079bab6c2c2fa35b58e40333a06",
+        "class_voxels": {
+          "background": 57527,
+          "hippocampus": 3913
+        }
+      },
+      {
+        "case": "hippocampus_adni_258594_L",
+        "shape": [
+          32,
+          48,
+          40
+        ],
+        "image_array_sha256": "296d6d00f8c7eaa26bc93312458685b1d409c62af61573f90d08b9db1865d6d9",
+        "label_array_sha256": "41e6b0a97b6ae8bd74955eb69d7aa41981083b3599a6e917f0ea13a7c48c0374",
+        "class_voxels": {
+          "background": 59019,
+          "hippocampus": 2421
+        }
+      },
+      {
+        "case": "hippocampus_adni_10365_R",
+        "shape": [
+          32,
+          48,
+          40
+        ],
+        "image_array_sha256": "925f5e5d9920e575808782e9352e5693755413fe2a39697a1ee8af5b2d7c5d5a",
+        "label_array_sha256": "2a89feea75cf4c29adb873db94f08db5fa9d5b2ac2d53f1c1b42079adaf5a7f6",
+        "class_voxels": {
+          "background": 58240,
+          "hippocampus": 3200
+        }
+      },
+      {
+        "case": "hippocampus_adni_141468_L",
+        "shape": [
+          32,
+          48,
+          40
+        ],
+        "image_array_sha256": "d5039b32f1e75159c3f16a9be724cf503a965cb53eea6f0bd14ae744d6547bd2",
+        "label_array_sha256": "239d501260023f74092c640ec51ec194b582947fa29f27afd1400046e08a4f85",
+        "class_voxels": {
+          "background": 59389,
+          "hippocampus": 2051
+        }
+      }
+    ],
+    "slab_samples": 400,
+    "calibration_samples": 20,
+    "gpu": "Actual SAM3 forward/backward checked in allocated baseline; not executed on login node"
+  },
+  "queue": "700973|PENDING|hippo-adni-seismic-ce60|afterany:700918(unfulfilled)\n700918|RUNNING|hippo-msd-four-ce60|(null)\n",
+  "job_details": "JobId=700973 JobName=hippo-adni-seismic-ce60\n   UserId=3160552(1395) GroupId=grp_hpcclusterstudentsbocconiusers(1009) MCS_label=N/A\n   Priority=3470 Nice=0 Account=3160552 QOS=stud\n   JobState=PENDING Reason=Dependency Dependency=afterany:700918(unfulfilled)\n   Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0\n   RunTime=00:00:00 TimeLimit=1-00:00:00 TimeMin=N/A\n   SubmitTime=2026-10-14T19:17:32 EligibleTime=Unknown\n   AccrueTime=Unknown\n   StartTime=Unknown EndTime=Unknown Deadline=N/A\n   SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-14T19:17:32 Scheduler=Main\n   Partition=stud AllocNode:Sid=slnode01:2773702\n   ReqNodeList=(null) ExcNodeList=(null)\n   NodeList=\n   NumNodes=1 NumCPUs=4 NumTasks=1 CPUs/Task=4 ReqB:S:C:T=0:0:*:*\n   ReqTRES=cpu=4,mem=40G,node=1,billing=8,gres/gpu=1\n   AllocTRES=(null)\n   Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=*\n   MinCPUsNode=4 MinMemoryNode=40G MinTmpDiskNode=0\n   Features=(null) DelayBoot=00:00:00\n   OverSubscribe=OK Contiguous=0 Licenses=(null) LicensesAlloc=(null) Network=(null)\n   Command=/mnt/beegfsstudents/home/3160552/adni_seismic_ce60_followon_20261014/run.sbatch\n   WorkDir=/mnt/beegfsstudents/home/3160552/adni_seismic_ce60_followon_20261014\n   StdErr=/mnt/beegfsstudents/home/3160552/adni_seismic_ce60_followon_20261014/slurm-700973.err\n   StdIn=/dev/null\n   StdOut=/mnt/beegfsstudents/home/3160552/adni_seismic_ce60_followon_20261014/slurm-700973.out\n   TresPerNode=gres/gpu:4g.40gb:1\n   TresPerTask=cpu=4\n   \n\n",
+  "predecessor_control": {
+    "pause": false,
+    "disabled_tasks": [],
+    "full_submission_enabled": false,
+    "automatic_continuation_owner": "/mnt/beegfsstudents/home/3160552/adni_seismic_ce60_followon_20261014"
+  }
+}

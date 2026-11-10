@@ -1,0 +1,37 @@
+{
+  "status": "passed",
+  "dataset": "ADNI",
+  "evidence": {
+    "nnunet": {
+      "pilot_baseline_id": "ADNI_nnunet_dicece_dice_target60_f0s0",
+      "pilot_initialization_sha256": "f924aa9137bf5d3e3e81e919b351e632e6e82f87c4d2744371296aa62140f17c",
+      "seed0_matches": true
+    },
+    "swinunetr": {
+      "pilot_baseline_id": "ADNI_swinunetr_diceonly_dice_target10_f0s0",
+      "pilot_initialization_sha256": "942dd57204dfe9dc6c5e046caef3946bb3b61b9a438ad77d2162403cf743b3fb",
+      "seed0_matches": true
+    },
+    "unetr_vit_b16": {
+      "pilot_baseline_id": "ADNI_unetr_vit_b16_diceonly_dice_target10_f0s0",
+      "pilot_initialization_sha256": "9a0c2cc2939f42c6e28732cf17f9b3a94b41647a881a0896ee4724fdfe8c619e",
+      "seed0_matches": true
+    },
+    "basic_unet16": {
+      "pilot_baseline_id": "ADNI_basic_unet16_diceonly_dice_target10_f0s0",
+      "pilot_initialization_sha256": "356695d7fd38b445d9af5e389e17b114c75c4e36e4b4c552e3c350bf93f5c0d4",
+      "seed0_matches": true
+    }
+  },
+  "reference_sha256": "801404cf047caf0527f56cee0a3619a750c1cf9f04dd7341a483c3e9a61d9890",
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "cpu_export": {
+    "python": "3.11.15",
+    "torch": "2.12.1+cu130",
+    "monai": "1.6.0"
+  }
+}

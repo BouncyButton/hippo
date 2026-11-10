@@ -1,0 +1,441 @@
+{
+  "status": "passed",
+  "manifest_sha256": "371e7fe4690bb7d23dffa9f650155f95673c9973b3a0b18b2741b7deef5b76b7",
+  "smoke_sha256": "f5863477c1cdeb62382a4dcae928ad63805a0b125f1407a4d565926c8411fe97",
+  "smoke": {
+    "status": "passed",
+    "runs": [
+      {
+        "model": "basic_unet16",
+        "status": "passed",
+        "updates": 3,
+        "augmented_calls": 0,
+        "calibrated_terms": [
+          "bands",
+          "edge",
+          "sdf",
+          "depth"
+        ]
+      },
+      {
+        "model": "nnunet",
+        "status": "passed",
+        "updates": 3,
+        "augmented_calls": 0,
+        "calibrated_terms": [
+          "bands",
+          "edge",
+          "sdf",
+          "depth"
+        ]
+      }
+    ],
+    "warning": "Smoke uses artificial tiny accounting and shortened ramps; never production results"
+  },
+  "conditions": 56,
+  "augmentation": "none",
+  "checks": [
+    "Binary bands/edge values and gradients match the original grouped-foreground losses",
+    "Signed-distance gradients have the correct inside/outside direction",
+    "Depth weights are finite and normalized on every unaugmented training crop",
+    "Real optimizer/calibration smoke passed for MONAI and native nnU-Net losses; augmentation calls forbidden",
+    "Real forward/loss/backward/optimizer arithmetic measured for four models and every arm on two geometries",
+    "Binary baseline costs reproduce completed pilot profiles",
+    "All 56 schedules exhaust but never exceed optimization cap; 20 validation checkpoints each",
+    "Identical subject subset, architectures, optimization and LR trajectories; no augmentation"
+  ],
+  "schedules": [
+    {
+      "model": "swinunetr",
+      "objective": "dice",
+      "updates": 206,
+      "validation_points": 20,
+      "optimization_gflops": 31923.805675378
+    },
+    {
+      "model": "swinunetr",
+      "objective": "dice_bands",
+      "updates": 206,
+      "validation_points": 20,
+      "optimization_gflops": 31934.520027598
+    },
+    {
+      "model": "swinunetr",
+      "objective": "dice_sdf",
+      "updates": 206,
+      "validation_points": 20,
+      "optimization_gflops": 31924.664459902
+    },
+    {
+      "model": "swinunetr",
+      "objective": "dice_bands_sdf",
+      "updates": 206,
+      "validation_points": 20,
+      "optimization_gflops": 31935.378812122
+    },
+    {
+      "model": "swinunetr",
+      "objective": "dice_bands_edge",
+      "updates": 206,
+      "validation_points": 20,
+      "optimization_gflops": 31945.421598694
+    },
+    {
+      "model": "swinunetr",
+      "objective": "dice_bands_edge_sdf",
+      "updates": 206,
+      "validation_points": 20,
+      "optimization_gflops": 31946.280383218
+    },
+    {
+      "model": "swinunetr",
+      "objective": "dice_depth",
+      "updates": 206,
+      "validation_points": 20,
+      "optimization_gflops": 31924.787142982
+    },
+    {
+      "model": "swinunetr",
+      "objective": "dice_bands_depth",
+      "updates": 206,
+      "validation_points": 20,
+      "optimization_gflops": 31935.501495202
+    },
+    {
+      "model": "swinunetr",
+      "objective": "dice_edge_depth",
+      "updates": 206,
+      "validation_points": 20,
+      "optimization_gflops": 31935.688714078
+    },
+    {
+      "model": "swinunetr",
+      "objective": "dice_sdf_depth",
+      "updates": 206,
+      "validation_points": 20,
+      "optimization_gflops": 31925.288100621
+    },
+    {
+      "model": "swinunetr",
+      "objective": "dice_bands_edge_depth",
+      "updates": 206,
+      "validation_points": 20,
+      "optimization_gflops": 31946.403066298
+    },
+    {
+      "model": "swinunetr",
+      "objective": "dice_bands_sdf_depth",
+      "updates": 206,
+      "validation_points": 20,
+      "optimization_gflops": 31936.002452841
+    },
+    {
+      "model": "swinunetr",
+      "objective": "dice_edge_sdf_depth",
+      "updates": 206,
+      "validation_points": 20,
+      "optimization_gflops": 31936.189671717
+    },
+    {
+      "model": "swinunetr",
+      "objective": "dice_bands_edge_sdf_depth",
+      "updates": 206,
+      "validation_points": 20,
+      "optimization_gflops": 31946.904023937
+    },
+    {
+      "model": "unetr_vit_b16",
+      "objective": "dice",
+      "updates": 245,
+      "validation_points": 20,
+      "optimization_gflops": 31857.754370785
+    },
+    {
+      "model": "unetr_vit_b16",
+      "objective": "dice_bands",
+      "updates": 245,
+      "validation_points": 20,
+      "optimization_gflops": 31871.14731106
+    },
+    {
+      "model": "unetr_vit_b16",
+      "objective": "dice_sdf",
+      "updates": 245,
+      "validation_points": 20,
+      "optimization_gflops": 31858.82785144
+    },
+    {
+      "model": "unetr_vit_b16",
+      "objective": "dice_bands_sdf",
+      "updates": 245,
+      "validation_points": 20,
+      "optimization_gflops": 31872.220791715
+    },
+    {
+      "model": "unetr_vit_b16",
+      "objective": "dice_bands_edge",
+      "updates": 245,
+      "validation_points": 20,
+      "optimization_gflops": 31884.77427493
+    },
+    {
+      "model": "unetr_vit_b16",
+      "objective": "dice_bands_edge_sdf",
+      "updates": 245,
+      "validation_points": 20,
+      "optimization_gflops": 31885.847755585
+    },
+    {
+      "model": "unetr_vit_b16",
+      "objective": "dice_depth",
+      "updates": 245,
+      "validation_points": 20,
+      "optimization_gflops": 31858.98120529
+    },
+    {
+      "model": "unetr_vit_b16",
+      "objective": "dice_bands_depth",
+      "updates": 245,
+      "validation_points": 20,
+      "optimization_gflops": 31872.374145565
+    },
+    {
+      "model": "unetr_vit_b16",
+      "objective": "dice_edge_depth",
+      "updates": 245,
+      "validation_points": 20,
+      "optimization_gflops": 31872.60816916
+    },
+    {
+      "model": "unetr_vit_b16",
+      "objective": "dice_sdf_depth",
+      "updates": 245,
+      "validation_points": 20,
+      "optimization_gflops": 31859.575748422
+    },
+    {
+      "model": "unetr_vit_b16",
+      "objective": "dice_bands_edge_depth",
+      "updates": 245,
+      "validation_points": 20,
+      "optimization_gflops": 31886.001109435
+    },
+    {
+      "model": "unetr_vit_b16",
+      "objective": "dice_bands_sdf_depth",
+      "updates": 245,
+      "validation_points": 20,
+      "optimization_gflops": 31872.968688697
+    },
+    {
+      "model": "unetr_vit_b16",
+      "objective": "dice_edge_sdf_depth",
+      "updates": 245,
+      "validation_points": 20,
+      "optimization_gflops": 31873.202712292
+    },
+    {
+      "model": "unetr_vit_b16",
+      "objective": "dice_bands_edge_sdf_depth",
+      "updates": 245,
+      "validation_points": 20,
+      "optimization_gflops": 31886.595652567
+    },
+    {
+      "model": "basic_unet16",
+      "objective": "dice",
+      "updates": 563,
+      "validation_points": 20,
+      "optimization_gflops": 31920.671478143
+    },
+    {
+      "model": "basic_unet16",
+      "objective": "dice_bands",
+      "updates": 563,
+      "validation_points": 20,
+      "optimization_gflops": 31955.905213328
+    },
+    {
+      "model": "basic_unet16",
+      "objective": "dice_sdf",
+      "updates": 563,
+      "validation_points": 20,
+      "optimization_gflops": 31922.047735393
+    },
+    {
+      "model": "basic_unet16",
+      "objective": "dice_bands_sdf",
+      "updates": 563,
+      "validation_points": 20,
+      "optimization_gflops": 31958.729293205
+    },
+    {
+      "model": "basic_unet16",
+      "objective": "dice_bands_edge",
+      "updates": 562,
+      "validation_points": 20,
+      "optimization_gflops": 31934.918584314
+    },
+    {
+      "model": "basic_unet16",
+      "objective": "dice_bands_edge_sdf",
+      "updates": 562,
+      "validation_points": 20,
+      "optimization_gflops": 31936.289336535
+    },
+    {
+      "model": "basic_unet16",
+      "objective": "dice_depth",
+      "updates": 563,
+      "validation_points": 20,
+      "optimization_gflops": 31923.89899661
+    },
+    {
+      "model": "basic_unet16",
+      "objective": "dice_bands_depth",
+      "updates": 563,
+      "validation_points": 20,
+      "optimization_gflops": 31959.132731795
+    },
+    {
+      "model": "basic_unet16",
+      "objective": "dice_edge_depth",
+      "updates": 563,
+      "validation_points": 20,
+      "optimization_gflops": 31959.748393868
+    },
+    {
+      "model": "basic_unet16",
+      "objective": "dice_sdf_depth",
+      "updates": 563,
+      "validation_points": 20,
+      "optimization_gflops": 31925.27525386
+    },
+    {
+      "model": "basic_unet16",
+      "objective": "dice_bands_edge_depth",
+      "updates": 562,
+      "validation_points": 20,
+      "optimization_gflops": 31938.139811322
+    },
+    {
+      "model": "basic_unet16",
+      "objective": "dice_bands_sdf_depth",
+      "updates": 563,
+      "validation_points": 20,
+      "optimization_gflops": 31960.508989045
+    },
+    {
+      "model": "basic_unet16",
+      "objective": "dice_edge_sdf_depth",
+      "updates": 563,
+      "validation_points": 20,
+      "optimization_gflops": 31961.124651118
+    },
+    {
+      "model": "basic_unet16",
+      "objective": "dice_bands_edge_sdf_depth",
+      "updates": 562,
+      "validation_points": 20,
+      "optimization_gflops": 31939.510563543
+    },
+    {
+      "model": "nnunet",
+      "objective": "dice",
+      "updates": 90,
+      "validation_points": 20,
+      "optimization_gflops": 31969.83557871
+    },
+    {
+      "model": "nnunet",
+      "objective": "dice_bands",
+      "updates": 90,
+      "validation_points": 20,
+      "optimization_gflops": 31975.441267788
+    },
+    {
+      "model": "nnunet",
+      "objective": "dice_sdf",
+      "updates": 90,
+      "validation_points": 20,
+      "optimization_gflops": 31970.07675159
+    },
+    {
+      "model": "nnunet",
+      "objective": "dice_bands_sdf",
+      "updates": 90,
+      "validation_points": 20,
+      "optimization_gflops": 31975.661468948
+    },
+    {
+      "model": "nnunet",
+      "objective": "dice_bands_edge",
+      "updates": 89,
+      "validation_points": 20,
+      "optimization_gflops": 31625.742215711
+    },
+    {
+      "model": "nnunet",
+      "objective": "dice_bands_edge_sdf",
+      "updates": 89,
+      "validation_points": 20,
+      "optimization_gflops": 31625.956911842
+    },
+    {
+      "model": "nnunet",
+      "objective": "dice_depth",
+      "updates": 90,
+      "validation_points": 20,
+      "optimization_gflops": 31970.345186889
+    },
+    {
+      "model": "nnunet",
+      "objective": "dice_bands_depth",
+      "updates": 90,
+      "validation_points": 20,
+      "optimization_gflops": 31975.950875967
+    },
+    {
+      "model": "nnunet",
+      "objective": "dice_edge_depth",
+      "updates": 90,
+      "validation_points": 20,
+      "optimization_gflops": 31976.048085768
+    },
+    {
+      "model": "nnunet",
+      "objective": "dice_sdf_depth",
+      "updates": 90,
+      "validation_points": 20,
+      "optimization_gflops": 31970.586359769
+    },
+    {
+      "model": "nnunet",
+      "objective": "dice_bands_edge_depth",
+      "updates": 89,
+      "validation_points": 20,
+      "optimization_gflops": 31626.245532431
+    },
+    {
+      "model": "nnunet",
+      "objective": "dice_bands_sdf_depth",
+      "updates": 90,
+      "validation_points": 20,
+      "optimization_gflops": 31976.171077127
+    },
+    {
+      "model": "nnunet",
+      "objective": "dice_edge_sdf_depth",
+      "updates": 90,
+      "validation_points": 20,
+      "optimization_gflops": 31976.268286928
+    },
+    {
+      "model": "nnunet",
+      "objective": "dice_bands_edge_sdf_depth",
+      "updates": 89,
+      "validation_points": 20,
+      "optimization_gflops": 31626.460228562
+    }
+  ]
+}

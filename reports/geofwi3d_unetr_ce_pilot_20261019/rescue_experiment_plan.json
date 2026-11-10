@@ -1,0 +1,58 @@
+{
+  "status": "designed_not_launched",
+  "purpose": "Find a stronger UNETR training recipe under the existing data, no-augmentation and per-run compute constraints; this is recipe development, not baseline replication.",
+  "fixed": {
+    "model": "unetr_vit_b16",
+    "parameters": 92802274,
+    "training_volumes": 19,
+    "validation_volumes": 96,
+    "fold": 0,
+    "seed": 0,
+    "augmentation": "none",
+    "spatial_size": [96, 96, 96],
+    "batch_size": 1,
+    "precision": "CUDA BF16 autocast, FP32 parameters/optimizer",
+    "optimizer": "AdamW",
+    "weight_decay": 0.00001,
+    "initialization": "Fresh seed-0 initialization in each arm; require identical parameter hashes across arms and the archived control. Do not resume a completed Dice or Dice+CE model.",
+    "lr_schedule": "Keep original warmup/cosine trajectory and horizon 477; scale its peak per arm. Screening must not compress the schedule.",
+    "per_arm_cap_flops": 182178126543160
+  },
+  "shared_intervention": {
+    "dropout_rate": 0.1,
+    "loss": "Foreground-only squared-denominator soft Dice plus unweighted voxel cross-entropy, coefficients 1:1",
+    "monai_loss_arguments": {
+      "include_background": false,
+      "to_onehot_y": true,
+      "softmax": true,
+      "squared_pred": true,
+      "smooth_nr": 0.0,
+      "smooth_dr": 0.000001,
+      "lambda_dice": 1.0,
+      "lambda_ce": 1.0
+    },
+    "rationale": "Test regularization and an explicitly foreground-focused objective together, rather than spending separate full runs identifying individual effects. Squared Dice+CE follows the loss family used by the official UNETR training code; foreground-only Dice and dropout 0.1 are hypotheses for this dataset, not official defaults or validated remedies.",
+    "source": "https://github.com/Project-MONAI/research-contributions/blob/main/UNETR/BTCV/main.py"
+  },
+  "arms": [
+    {"id": "rescue_standard_lr", "peak_learning_rate": 0.0001},
+    {"id": "rescue_lower_lr", "peak_learning_rate": 0.00003}
+  ],
+  "execution": {
+    "sequential": true,
+    "stage_1": "Train each arm to at most 50% of its full-run FLOPs cap. Evaluate at predeclared 10%, 20%, 30%, 40%, and 50% budget checkpoints.",
+    "selection": "Select the arm with the highest mean foreground hard validation Dice over its 30%, 40%, and 50% checkpoints. On an exact tie select rescue_standard_lr. Record the losing arm as pruned, not failed at full budget.",
+    "stage_2": "Resume the selected arm with its model, optimizer and RNG state intact to at most the full per-run cap. No restart and no reuse of the losing arm's remaining budget.",
+    "maximum_optimization_flops_total": 273267189814740,
+    "preflight_and_validation": "Outside the optimization cap; measure and report separately. Do not silently mix these with optimization FLOPs.",
+    "profiling": "Reprofile the new dropout and loss graph before training. Derive integer update limits by flooring each cap divided by the measured update cost; do not assume the old 414-update limit remains exact.",
+    "recovery": "Retain both coherent checkpoints through selection. Archive and verify all required metrics/config/source/curves before retiring a pruned or completed arm's checkpoints.",
+    "limitations": "A half-budget race can prune a slower-learning recipe. This design favors a bounded development budget, not exhaustive optimizer comparison. Multiple simultaneous recipe changes prevent individual causal attribution."
+  },
+  "success": {
+    "primary": "Selected arm's final-budget mean per-volume foreground hard validation Dice must be strictly greater than 0.50; best-checkpoint Dice is secondary.",
+    "not_success": "Winning the race, fitting the training set, or exceeding the previous 35.08% peak does not count as reaching the goal.",
+    "after_pass": "Freeze the recipe, then evaluate predeclared additional seed/fold cells before a full three-fold/three-seed campaign. Do not mix the development result with an unbiased consistency estimate.",
+    "after_failure": "Stop this search. No automatic extra seeds, larger caps, architecture changes, augmentation, or additional training data. Reconsider the constrained protocol explicitly."
+  }
+}

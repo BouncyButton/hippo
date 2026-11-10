@@ -1,0 +1,22 @@
+{
+  "dataset": "ADNI",
+  "model": "basic_unet16",
+  "objective": "dice_bands_edge_depth",
+  "weight_dice": 1,
+  "weight_ce": 0,
+  "dice_include_background": true,
+  "native_deep_supervision": false,
+  "augmentation": "none",
+  "constraints": [
+    "bands",
+    "edge",
+    "depth"
+  ],
+  "calibration_base": "Dice",
+  "target": 0.1,
+  "p95_cap": 0.5,
+  "sdf_policy": "not_applicable",
+  "primary_checkpoint": "final_budget",
+  "ap_swaps_applicable": false,
+  "protocol_sha256": "689e9371686b158203a5058718124acde8dfdbdf2278305eff5c124daf832c39"
+}

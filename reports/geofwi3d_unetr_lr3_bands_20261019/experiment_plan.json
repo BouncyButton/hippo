@@ -1,0 +1,96 @@
+{
+  "status": "authorized",
+  "dataset": "GeoFWI3D",
+  "models": [
+    "unetr_vit_b16"
+  ],
+  "folds": [
+    0
+  ],
+  "seeds": [
+    0
+  ],
+  "augmentation": "xy_d4_v1",
+  "threshold": 0.5,
+  "budget_flops": 182178126543160,
+  "maximum_optimization_flops_total": 546534379629480,
+  "schedules": {
+    "dice": {
+      "prefix_updates": 0,
+      "sdf_prefix_updates": 0,
+      "baseline_flops_per_update": 439528930661,
+      "early_flops_per_update": 439528930661,
+      "flops_per_update": 439528930661,
+      "calibration_flops": 0,
+      "constraint_warmup_updates": 50,
+      "sdf_warmup_updates": 50,
+      "budget_scope": "optimization_only",
+      "max_steps": 414,
+      "consumed_training_flops": 181964977293654,
+      "consumed_flops": 181964977293654,
+      "consumed_total_flops": 181964977293654,
+      "unused_flops": 213149249506,
+      "patient_pass_epochs": 21.789473684210527
+    },
+    "dice_bands": {
+      "prefix_updates": 50,
+      "sdf_prefix_updates": 50,
+      "baseline_flops_per_update": 439528930661,
+      "early_flops_per_update": 439760731512,
+      "flops_per_update": 439760731512,
+      "calibration_flops": 2796124590582,
+      "constraint_warmup_updates": 50,
+      "sdf_warmup_updates": 50,
+      "budget_scope": "optimization_only",
+      "max_steps": 407,
+      "consumed_training_flops": 178971027682834,
+      "consumed_flops": 178971027682834,
+      "consumed_total_flops": 181767152273416,
+      "unused_flops": 410974269744,
+      "patient_pass_epochs": 21.42105263157895
+    }
+  },
+  "order": [
+    "lr3",
+    "xy_bands",
+    "lr3_bands"
+  ],
+  "learning_rates": {
+    "lr3": 0.0003,
+    "xy_bands": 0.0001,
+    "lr3_bands": 0.0003
+  },
+  "hypothesis": "Higher LR may improve learning within the short capped schedule. CE2 did not improve the half-budget gate.",
+  "loss_weights": {
+    "dice": 1,
+    "ce": 1
+  },
+  "fixed": "ViT-B/16, same seed-0 init, XY D4/order, dropout .1, AdamW wd 1e-5, 477-update LR horizon, BF16, batch1, native96cubed",
+  "gate": {
+    "threshold": 0.46,
+    "rule": "Mean validation Dice at 40% and 50% of total capped arithmetic >= .46",
+    "applies_to": [
+      "lr3",
+      "xy_bands",
+      "lr3_bands"
+    ],
+    "limitation": "May reject late improvers; pruned runs are not final-budget results"
+  },
+  "bands_prefix_updates": 50,
+  "bands_ramp_updates": 50,
+  "calibration": "Training-only base-loss logit-gradient RMS target .10, p95 cap .50; calibrated arithmetic reserved inside cap",
+  "xy_bands": {
+    "authorized": true,
+    "reference_final": 0.4482058253085583,
+    "initialization": "Fresh seed-0, not finetuning; archived control is not retrained",
+    "trigger": "Unconditional user authorization, even if lr3 pruned"
+  },
+  "lr3_bands": {
+    "authorized": true,
+    "trigger": "Verified full-budget lr3 final validation Dice strictly > .50",
+    "initialization": "Fresh seed-0"
+  },
+  "maximum_new_runs": 3,
+  "diagnostics": "Three separately reported preflight steps per launched arm; established convention",
+  "scope": "Development pilots only, not completion of 3 seeds / 3 folds"
+}

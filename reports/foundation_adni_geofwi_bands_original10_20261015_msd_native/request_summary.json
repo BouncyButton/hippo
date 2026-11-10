@@ -1,0 +1,55 @@
+{
+  "status": "training",
+  "runs": 6,
+  "fold": 0,
+  "seed": 0,
+  "augmentation": "none",
+  "arms": [
+    "baseline",
+    "bands",
+    "bands+edge"
+  ],
+  "models": {
+    "ADNI": "MedSAM3",
+    "GeoFWI3D": "SAM3"
+  },
+  "support_volumes": 5,
+  "validation_volumes": {
+    "ADNI": 54,
+    "GeoFWI3D": 96
+  },
+  "recipe": {
+    "base_sha256": "9999e2341ceef5e136daa386eecb55cb414446a00ac2b55eb2dfd2f7c3cf8c9e",
+    "updates": 200,
+    "accumulation": 2,
+    "warmup_updates": 20,
+    "learning_rate": 5e-05,
+    "final_learning_rate": 5e-06,
+    "calibration_slabs_per_volume": 4,
+    "constraint_warmup_updates": 20,
+    "gradient_ratio_target": 0.1,
+    "gradient_ratio_p95_cap": 0.5,
+    "calibration_seed": 20260929
+  },
+  "original_recipe_path": "docs/experiments/medsam3_multiclass_replication_20260930/protocols/fold0_seed17.json",
+  "original_recipe_sha256": "808eb47ca2e532a6b8e5ecc49e7b0d2cc5f81b05de6526c339d58be58970d36a",
+  "manifest_sha256": "7badba27bdbe00ae18f63dc553be5a256d9546dde3b2ac53b5d0a00b4def2edf",
+  "monitoring": "No chat heartbeat requested or created",
+  "queued_handoff": "Current ADNI sweep finishes first, including verified per-run archives and cleanup",
+  "gpu_validation": "Passed original native/bands/edge full-model backward checks",
+  "job_id": "702047",
+  "dependency": "ADNI complete; no pending predecessor",
+  "completed": 0,
+  "training_updates": 25,
+  "campaign": "foundation_adni_geofwi_bands_original10_20261015_msd_native",
+  "previous_jobs": [
+    "701718",
+    "701972",
+    "701991"
+  ],
+  "repair": "Emulate verified successful MSD full native/bands/edge graph, preserve resumable original optimizer; disable compiler buffer donation for repeated calibration backward",
+  "fallback": "If isolated numerical validation fails, emulate verified MSD MedSAM3 training path, preserving original fine-tuning recipe; explicitly authorized by user.",
+  "collector_pid": 53378,
+  "active": "ADNI_MedSAM3_dice_target10_f0s0",
+  "continuation_job_id": "702048"
+}

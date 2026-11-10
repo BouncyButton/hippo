@@ -1,0 +1,105 @@
+{
+  "name": "foundation_adni_geofwi_bands_original10_20261015_r1",
+  "tasks": [
+    {
+      "id": "ADNI_MedSAM3_dice_target10_f0s0",
+      "kind": "foundation",
+      "dataset": "ADNI",
+      "model": "MedSAM3",
+      "fold": 0,
+      "seed": 0,
+      "arm": "dice",
+      "target": 0.1,
+      "protocol": "ADNI"
+    },
+    {
+      "id": "ADNI_MedSAM3_dice_bands_target10_f0s0",
+      "kind": "foundation",
+      "dataset": "ADNI",
+      "model": "MedSAM3",
+      "fold": 0,
+      "seed": 0,
+      "arm": "dice_bands",
+      "target": 0.1,
+      "protocol": "ADNI"
+    },
+    {
+      "id": "ADNI_MedSAM3_dice_bands_edge_target10_f0s0",
+      "kind": "foundation",
+      "dataset": "ADNI",
+      "model": "MedSAM3",
+      "fold": 0,
+      "seed": 0,
+      "arm": "dice_bands_edge",
+      "target": 0.1,
+      "protocol": "ADNI"
+    },
+    {
+      "id": "GeoFWI3D_SAM3_dice_target10_f0s0",
+      "kind": "foundation",
+      "dataset": "GeoFWI3D",
+      "model": "SAM3",
+      "fold": 0,
+      "seed": 0,
+      "arm": "dice",
+      "target": 0.1,
+      "protocol": "GeoFWI3D"
+    },
+    {
+      "id": "GeoFWI3D_SAM3_dice_bands_target10_f0s0",
+      "kind": "foundation",
+      "dataset": "GeoFWI3D",
+      "model": "SAM3",
+      "fold": 0,
+      "seed": 0,
+      "arm": "dice_bands",
+      "target": 0.1,
+      "protocol": "GeoFWI3D"
+    },
+    {
+      "id": "GeoFWI3D_SAM3_dice_bands_edge_target10_f0s0",
+      "kind": "foundation",
+      "dataset": "GeoFWI3D",
+      "model": "SAM3",
+      "fold": 0,
+      "seed": 0,
+      "arm": "dice_bands_edge",
+      "target": 0.1,
+      "protocol": "GeoFWI3D"
+    }
+  ],
+  "num_runs": 6,
+  "augmentation": "none",
+  "budget_flops_by_dataset": {
+    "ADNI": 31976450667090
+  },
+  "conventional_python": "/mnt/beegfsstudents/home/3160552/.conda/envs/hippocampus/bin/python",
+  "foundation_python": "/mnt/beegfsstudents/home/3160552/medsam3_runtime_20260928/venv/bin/python",
+  "storage": {
+    "minimum_free_gib": 6,
+    "estimated_peak_logical_gib": 2,
+    "mirrored_peak_gib": 4,
+    "reserve_gib": 2,
+    "archive": "/Users/filippofocaccia/Desktop/hippo/reports/foundation_adni_geofwi_bands_original10_20261015_r1",
+    "policy": "Archive and verify each run outside BeeGFS before deleting its generated bulky artifacts"
+  },
+  "base_staging": "/tmp/hippo-cross-dataset-3160552/sam3.pt",
+  "base_sha256": "9999e2341ceef5e136daa386eecb55cb414446a00ac2b55eb2dfd2f7c3cf8c9e",
+  "max_job_hours": 24,
+  "graceful_stop_seconds": 85200,
+  "exploration_followup": "Only these six foundation runs; old broad follow-on and replicated campaigns remain held",
+  "authorization": "User requests original-recipe MedSAM3 ADNI and SAM3 nonmedical GeoFWI3D fine-tuning, baseline/bands/bands+edge only, fold0 single seed0 no augmentation, optimization before submission.",
+  "archive_wait_timeout_seconds": 300,
+  "archive_resume_module": "scripts.cross_dataset_campaign.foundation_checks_job",
+  "comparison_policy": "200 updates per arm; same initialization, support, sampling, native loss and schedule within dataset; 10% sequential auxiliary targets, 50% p95 ceiling. Final checkpoint primary.",
+  "calibration_policy": "Sequential targets: each auxiliary relative to the accumulated baseline and earlier auxiliaries; 60%/75% ceiling for nnUNet,10%/50% ceiling for others",
+  "archive_dependency_stages": [
+    "/mnt/beegfsstudents/home/3160552/adni_mixed_losses_nnunet60_others10_20261014"
+  ],
+  "predecessor": {
+    "name": "adni_mixed_losses_nnunet60_others10_20261014",
+    "stage": "/mnt/beegfsstudents/home/3160552/adni_mixed_losses_nnunet60_others10_20261014",
+    "manifest_sha256": "4c7fd7f05a1e46a4fc74f2d192da3a9f2868e75b8494d48d67d761ba4d0915f7"
+  },
+  "recovery_of": "foundation_adni_geofwi_bands_original10_20261015"
+}

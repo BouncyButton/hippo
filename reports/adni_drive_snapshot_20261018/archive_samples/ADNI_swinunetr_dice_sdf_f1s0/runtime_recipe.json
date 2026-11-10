@@ -1,0 +1,20 @@
+{
+  "dataset": "ADNI",
+  "model": "swinunetr",
+  "objective": "dice_sdf",
+  "weight_dice": 1,
+  "weight_ce": 0,
+  "dice_include_background": true,
+  "native_deep_supervision": false,
+  "augmentation": "none",
+  "constraints": [
+    "sdf"
+  ],
+  "calibration_base": "Dice",
+  "target": 0.1,
+  "p95_cap": 0.5,
+  "sdf_policy": "original_shared_ramp",
+  "primary_checkpoint": "final_budget",
+  "ap_swaps_applicable": false,
+  "protocol_sha256": "162a326726a7ffb22c2795c9f19743294db53ee47b461e7a3550cb2f0d201351"
+}

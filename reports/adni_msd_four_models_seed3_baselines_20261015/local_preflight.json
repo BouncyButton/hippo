@@ -1,0 +1,33 @@
+{
+  "status": "passed",
+  "runs": 24,
+  "workers": 2,
+  "baseline_only": true,
+  "folds": [
+    0,
+    1,
+    2
+  ],
+  "seed": 3,
+  "budget_flops": 31976450667090,
+  "checks": [
+    "Exact source hashes from both original replication bundles",
+    "All24 protocols and saved splits verified",
+    "Eight seed3 CPU initialization references",
+    "Unique model/dataset/fold baseline commands",
+    "Baseline cap and zero calibration charge",
+    "Shell/Python syntax"
+  ],
+  "scheduling_tests": {
+    "command": "python3 -m unittest scripts.cross_dataset_campaign.test_seed3_baselines -v",
+    "passed": 6,
+    "coverage": [
+      "Two simultaneous isolated GPU workers",
+      "Per-dataset run ordering after verified cleanup",
+      "Archive outage preserves files",
+      "Pause preserves checkpoints",
+      "Worker failure halts further launches",
+      "Duplicate GPU bindings rejected"
+    ]
+  }
+}

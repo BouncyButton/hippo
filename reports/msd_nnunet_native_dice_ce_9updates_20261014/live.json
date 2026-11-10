@@ -1,0 +1,81 @@
+{
+  "status.json": {
+    "status": "complete",
+    "active": null,
+    "completed": 1,
+    "total": 1,
+    "runs": [
+      {
+        "id": "MSD_nnunet_native_dice_ce_9updates_f0s0",
+        "kind": "conventional",
+        "dataset": "MSD",
+        "model": "nnunet",
+        "fold": 0,
+        "seed": 0,
+        "arm": "dice",
+        "protocol": "MSD_nnunet_native_dice_ce",
+        "final_dice": 0.02509462388964331,
+        "best_dice": 0.02681801315365862,
+        "released_bytes": 525364178
+      }
+    ],
+    "job_id": "700304",
+    "updated_at": 1791973500.621481,
+    "quota": {
+      "used_gib": 80.91,
+      "limit_gib": 93.13,
+      "free_gib": 12.219999999999999,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  80.91GiB/93.13GiB  208.37k/\u221e  \n\n",
+      "checked_at": 1791973500.6543243
+    }
+  },
+  "submission.json": {
+    "job_id": "700304",
+    "dependency": null,
+    "quota": {
+      "used_gib": 79.69,
+      "limit_gib": 93.13,
+      "free_gib": 13.439999999999998,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  79.69GiB/93.13GiB  208.33k/\u221e  \n\n",
+      "checked_at": 1791973275.3854516
+    },
+    "submitted_at": 1791973275.6109686,
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--chdir=/mnt/beegfsstudents/home/3160552/msd_nnunet_native_dice_ce_9updates_20261014",
+      "--output=/mnt/beegfsstudents/home/3160552/msd_nnunet_native_dice_ce_9updates_20261014/slurm-%j.out",
+      "--error=/mnt/beegfsstudents/home/3160552/msd_nnunet_native_dice_ce_9updates_20261014/slurm-%j.err",
+      "/mnt/beegfsstudents/home/3160552/msd_nnunet_native_dice_ce_9updates_20261014/run.sbatch",
+      "/mnt/beegfsstudents/home/3160552/msd_nnunet_native_dice_ce_9updates_20261014"
+    ],
+    "manifest_sha256": "8c22486b206994edb7a2c38bd78d25928af99ed8476c3a6a8ed8e9dfc97629db"
+  },
+  "successor.json": {
+    "job_id": "700306",
+    "dependency": "700304",
+    "quota": {
+      "used_gib": 79.69,
+      "limit_gib": 93.13,
+      "free_gib": 13.439999999999998,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  79.69GiB/93.13GiB  208.33k/\u221e  \n\n",
+      "checked_at": 1791973293.901347
+    },
+    "submitted_at": 1791973294.0395174,
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--chdir=/mnt/beegfsstudents/home/3160552/msd_nnunet_native_dice_ce_9updates_20261014",
+      "--output=/mnt/beegfsstudents/home/3160552/msd_nnunet_native_dice_ce_9updates_20261014/slurm-%j.out",
+      "--error=/mnt/beegfsstudents/home/3160552/msd_nnunet_native_dice_ce_9updates_20261014/slurm-%j.err",
+      "--dependency=afterany:700304",
+      "/mnt/beegfsstudents/home/3160552/msd_nnunet_native_dice_ce_9updates_20261014/run.sbatch",
+      "/mnt/beegfsstudents/home/3160552/msd_nnunet_native_dice_ce_9updates_20261014"
+    ],
+    "manifest_sha256": "8c22486b206994edb7a2c38bd78d25928af99ed8476c3a6a8ed8e9dfc97629db"
+  },
+  "ready": [],
+  "cleanup": [
+    "runs/MSD_nnunet_native_dice_ce_9updates_f0s0/cleanup.json"
+  ]
+}

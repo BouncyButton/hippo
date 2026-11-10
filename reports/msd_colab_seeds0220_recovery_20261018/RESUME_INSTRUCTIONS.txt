@@ -1,0 +1,14 @@
+MSD recovery: seeds 0/2/20, folds 0/1/2, no augmentation
+
+1. Keep all original Drive folders and files. The prior VM was confirmed terminated.
+2. Download MSD_SEEDS_0_2_20_SERVER_VERIFIED_RESUME.ipynb and msd_seeds0220_server_verified_resume.zip.
+3. Open the notebook in Colab, use focacciafilippo@gmail.com and the original A100-SXM4-80GB environment. Run sections 1 through 4 in order.
+4. Section 1 asks you to select the ZIP directly from your computer if it is absent from the Drive input folder. No data re-upload is needed.
+5. Section 2 checks a real server write and independent download before any training. If Google still refuses saves, stop there until saving is available.
+6. Recovery preserves 180 completed results. Three damaged completion archives need rerunning. Seven interrupted tasks are audited; the available checkpoint is resumed only if its bytes, contents and compute ledger validate.
+7. New results use hippo_msd_3fold_3seed/results_seeds0220_server_verified_v2. Old folders remain unchanged.
+8. On a later restart, rerun sections 1 through 4. Confirm TERMINATED only if prompted and the prior runtime really has ended. Do not run duplicate controllers.
+
+The cap is unchanged per scientific trajectory. Calibration and failed/replayed work are accounted for separately; some old truncated ledgers leave historical totals as lower bounds. Hard VM termination can still lose the latest uncommitted tail. For a clean stop, interrupt once and wait for verified uploads.
+
+Local checks: 23 storage/recovery tests plus 65 existing campaign/scheduler/archive tests passed. GPU/Colab execution remains untested here; the notebook keeps the required original preflight.

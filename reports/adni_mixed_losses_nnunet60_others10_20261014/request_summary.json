@@ -1,0 +1,120 @@
+{
+  "name": "adni_mixed_losses_nnunet60_others10_20261014",
+  "status": "complete",
+  "requested_fraction": 0.05,
+  "fold": 0,
+  "seed": 0,
+  "augmentation": "none",
+  "training_subjects": 5,
+  "training_crops": 10,
+  "validation_subjects": 27,
+  "validation_crops": 54,
+  "runs": 56,
+  "first_eight": [
+    "ADNI_nnunet_dicece_dice_target60_f0s0",
+    "ADNI_swinunetr_diceonly_dice_target10_f0s0",
+    "ADNI_unetr_vit_b16_diceonly_dice_target10_f0s0",
+    "ADNI_basic_unet16_diceonly_dice_target10_f0s0",
+    "ADNI_nnunet_dicece_dice_bands_target60_f0s0",
+    "ADNI_swinunetr_diceonly_dice_bands_target10_f0s0",
+    "ADNI_unetr_vit_b16_diceonly_dice_bands_target10_f0s0",
+    "ADNI_basic_unet16_diceonly_dice_bands_target10_f0s0"
+  ],
+  "predecessor": {
+    "name": "msd_mixed_losses_nnunet60_others10_20261014",
+    "stage": "/mnt/beegfsstudents/home/3160552/msd_mixed_losses_nnunet60_others10_20261014",
+    "manifest_sha256": "e9cd3a60fd42a15d63fa04df28e9c952662b36f17364608464ecdc3e89cedf52"
+  },
+  "manifest_sha256": "4c7fd7f05a1e46a4fc74f2d192da3a9f2868e75b8494d48d67d761ba4d0915f7",
+  "model_recipes": {
+    "nnunet": {
+      "loss": "Dice+CE",
+      "target": 0.6,
+      "p95_cap": 0.75,
+      "updates": {
+        "dice": 90,
+        "dice_bands": 90,
+        "dice_sdf": 90,
+        "dice_bands_sdf": 90,
+        "dice_bands_edge": 89,
+        "dice_bands_edge_sdf": 89,
+        "dice_depth": 90,
+        "dice_bands_depth": 90,
+        "dice_edge_depth": 90,
+        "dice_sdf_depth": 90,
+        "dice_bands_edge_depth": 89,
+        "dice_bands_sdf_depth": 90,
+        "dice_edge_sdf_depth": 90,
+        "dice_bands_edge_sdf_depth": 89
+      }
+    },
+    "swinunetr": {
+      "loss": "Dice",
+      "target": 0.1,
+      "p95_cap": 0.5,
+      "updates": {
+        "dice": 206,
+        "dice_bands": 206,
+        "dice_sdf": 206,
+        "dice_bands_sdf": 206,
+        "dice_bands_edge": 206,
+        "dice_bands_edge_sdf": 206,
+        "dice_depth": 206,
+        "dice_bands_depth": 206,
+        "dice_edge_depth": 206,
+        "dice_sdf_depth": 206,
+        "dice_bands_edge_depth": 206,
+        "dice_bands_sdf_depth": 206,
+        "dice_edge_sdf_depth": 206,
+        "dice_bands_edge_sdf_depth": 206
+      }
+    },
+    "unetr_vit_b16": {
+      "loss": "Dice",
+      "target": 0.1,
+      "p95_cap": 0.5,
+      "updates": {
+        "dice": 245,
+        "dice_bands": 245,
+        "dice_sdf": 245,
+        "dice_bands_sdf": 245,
+        "dice_bands_edge": 245,
+        "dice_bands_edge_sdf": 245,
+        "dice_depth": 245,
+        "dice_bands_depth": 245,
+        "dice_edge_depth": 245,
+        "dice_sdf_depth": 245,
+        "dice_bands_edge_depth": 245,
+        "dice_bands_sdf_depth": 245,
+        "dice_edge_sdf_depth": 245,
+        "dice_bands_edge_sdf_depth": 245
+      }
+    },
+    "basic_unet16": {
+      "loss": "Dice",
+      "target": 0.1,
+      "p95_cap": 0.5,
+      "updates": {
+        "dice": 563,
+        "dice_bands": 563,
+        "dice_sdf": 563,
+        "dice_bands_sdf": 563,
+        "dice_bands_edge": 562,
+        "dice_bands_edge_sdf": 562,
+        "dice_depth": 563,
+        "dice_bands_depth": 563,
+        "dice_edge_depth": 563,
+        "dice_sdf_depth": 563,
+        "dice_bands_edge_depth": 562,
+        "dice_bands_sdf_depth": 563,
+        "dice_edge_sdf_depth": 563,
+        "dice_bands_edge_sdf_depth": 562
+      }
+    }
+  },
+  "job_id": "701702",
+  "successor_job_id": "701703",
+  "completed": 56,
+  "cleanup": "complete",
+  "final_report": "final_summary.html"
+}

@@ -1,0 +1,35 @@
+{
+  "training_change": "BANDS support excludes observation frame2; recalibrate at unchanged target .10 and p95 .50",
+  "parent_bundle_sha256": "92dcadf14974b1b50b60573d7900c979ee59729a325f44b15c63a35af9ed9d14",
+  "changed_files": {
+    "plan.json": {
+      "parent_sha256": "40a543a46710082febf5297fa15b5aefd50e6804dcdc937338ef95462af6c262",
+      "new_sha256": "2cb57ae33350d4fdf31140296296aeeee392c594057b89315d97706a9fc3f4a4"
+    },
+    "lr3_runtime.py": {
+      "parent_sha256": "1471cdcc56d62b2bcbeedbb34b11819ec8e12d52b04118c2401ba9305aa606a2",
+      "new_sha256": "d9ff4e6906f0b78d75dafcc8a057daf9f1c46bb6ef49664a25635e7465ded5b0"
+    },
+    "rescue_profile.json": {
+      "parent_sha256": "c2d4545a5779340dc6c852684375c0ad94b8ec9b2b2516ca2633db28c43d8294",
+      "new_sha256": "ae6769e6070b4e636ef09d2fb07b903c0da37ea391de00ab124e450bffe7f3fd"
+    },
+    "source/source_manifest.json": {
+      "parent_sha256": "baf62ae08066d0b78216c67ce5771365672f27c72aba32c30cc6f6de270b451e",
+      "new_sha256": "697a9780e821a4c7566c15b129eea3516d64e2682749812a1e6fc49ea6ab4d9b"
+    },
+    "source/thesis/new_constraints/bands/outer_boundary.py": {
+      "parent_sha256": "bdaf5b99d4c07bae80191292b2161740886086faeb7b79b54ffabbadfa7bb68a",
+      "new_sha256": "82863bb0d781a9ab2202b272d53ed8e1e5160ca527453f25eccfd31b4bcb4a19"
+    },
+    "templates/unetr_vit_b16/protocol.json": {
+      "parent_sha256": "38cc12c9c056ecaedbb15f4d6adf7d0bf6ddb4a28cbf73dd42234fe45e93691a",
+      "new_sha256": "b6dd0e60163714e50b5ffc656c2c94c7d69b18043049d2e3f80d304e3aab7fec"
+    }
+  },
+  "peak_lr": 0.0005,
+  "cap": 182178126543160,
+  "updates": 407,
+  "halfway_gate": false,
+  "non_training_repair": "worker.py GPU preflight permits scalar-loss FP32 roundoff; still requires bitwise model, optimizer and RNG replay."
+}

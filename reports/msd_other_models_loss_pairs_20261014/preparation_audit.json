@@ -1,0 +1,78 @@
+{
+  "status": "awaiting_cluster_preflight",
+  "manifest_sha256": "3d528736ee8d69a18abe5c1f07b4109362dc834993030d7f4b1954567e5c1961",
+  "dataset": "MSD",
+  "fold": 0,
+  "seed": 0,
+  "train_volumes": 10,
+  "validation_volumes": 52,
+  "augmentation": "none",
+  "budget_flops_each": 31976450667090,
+  "comparison": "Keep each model's original MONAI Dice and AdamW; only toggle CE coefficient 0/1",
+  "tasks": [
+    {
+      "task": "MSD_swinunetr_dice_f0s0",
+      "model": "swinunetr",
+      "weight_ce": 0,
+      "updates": 206,
+      "training_flops": 31932500020532,
+      "initial_lr": 0.0001,
+      "lr_horizon": 610
+    },
+    {
+      "task": "MSD_swinunetr_dice_ce_f0s0",
+      "model": "swinunetr",
+      "weight_ce": 1,
+      "updates": 206,
+      "training_flops": 31934120070658,
+      "initial_lr": 0.0001,
+      "lr_horizon": 610
+    },
+    {
+      "task": "MSD_unetr_vit_b16_dice_f0s0",
+      "model": "unetr_vit_b16",
+      "weight_ce": 0,
+      "updates": 245,
+      "training_flops": 31865011891860,
+      "initial_lr": 0.0001,
+      "lr_horizon": 477
+    },
+    {
+      "task": "MSD_unetr_vit_b16_dice_ce_f0s0",
+      "model": "unetr_vit_b16",
+      "weight_ce": 1,
+      "updates": 245,
+      "training_flops": 31866938650505,
+      "initial_lr": 0.0001,
+      "lr_horizon": 477
+    },
+    {
+      "task": "MSD_basic_unet16_dice_f0s0",
+      "model": "basic_unet16",
+      "weight_ce": 0,
+      "updates": 563,
+      "training_flops": 31937348965348,
+      "initial_lr": 0.0003,
+      "lr_horizon": 1095
+    },
+    {
+      "task": "MSD_basic_unet16_dice_ce_f0s0",
+      "model": "basic_unet16",
+      "weight_ce": 1,
+      "updates": 563,
+      "training_flops": 31941776578071,
+      "initial_lr": 0.0003,
+      "lr_horizon": 1095
+    }
+  ],
+  "storage": {
+    "minimum_free_gib": 12,
+    "estimated_peak_logical_gib": 5,
+    "mirrored_peak_gib": 10,
+    "reserve_gib": 2,
+    "archive": "/Users/filippofocaccia/Desktop/hippo/reports/msd_other_models_loss_pairs_20261014",
+    "policy": "Archive and verify each run outside BeeGFS before deleting its generated bulky artifacts"
+  },
+  "exploration": "paused; full sweep unsubmitted",
+  "created_at": 1791975090.840445
+}

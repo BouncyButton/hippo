@@ -1,0 +1,64 @@
+{
+  "status": "ready_for_automatic_start_after_msd",
+  "manifest_sha256": "4c7fd7f05a1e46a4fc74f2d192da3a9f2868e75b8494d48d67d761ba4d0915f7",
+  "original_adni_source_files_verified": 361,
+  "local_preflight": {
+    "status": "passed",
+    "manifest_sha256": "4c7fd7f05a1e46a4fc74f2d192da3a9f2868e75b8494d48d67d761ba4d0915f7",
+    "checks": [
+      "56 fresh ADNI runs, four models by14 conditions, fold0 seed0, no augmentation",
+      "Saved5% subject split: five training subjects/ten crops;27 validation subjects/54 crops; no subject overlap",
+      "Native nnUNet foreground Dice+CE, original deep supervision and SGD",
+      "Other models use established MONAI Dice including background and AdamW",
+      "All13 auxiliary combinations, SDF timing and binary graph checked numerically",
+      "Sequential60%/10% auxiliary-gradient targets and75%/50% p95 ceilings checked directly",
+      "Existing measured profiles and original ADNI scientific source hashes verified; schedules recomputed",
+      "Dataset hash check deferred to cluster",
+      "MSD completion/archive/cleanup submission gate; original24h resume and per-run archive policy",
+      "Shell syntax passed"
+    ],
+    "scheduling_guard_tests": "5 passed"
+  },
+  "scheduling_tests": {
+    "status": "passed",
+    "tests": 5,
+    "checks": [
+      "Waits for all56 MSD results and cleanup",
+      "Rejects altered archive manifest",
+      "Never starts while MSD paused or partial",
+      "Repeated start reuses existing job",
+      "ADNI command preserves fold0 seed0 resume"
+    ],
+    "source": {
+      "adni_mixed_losses.py": "09bebb41bcb7da4bef83f37d665274736403b50b4e520d82662295420b2ef8f9",
+      "adni_mixed_losses_job.py": "af7db818a0c289a85c9569e13799149558e4e8b86bcc7e8bfcc592fef3700b6a",
+      "preflight_adni_mixed_losses.py": "ab6d7024388c0e3ddc8bd19282715d008f522c65b3f537a13ece6f25c759ee78",
+      "report_adni_mixed_losses.py": "79232ae1de968f6dab6cb3d2400142ff9a639211437353a32c54380908c7eb3c",
+      "manage_adni_mixed_losses.py": "631e81f49d949065d8d290e98cbc669681c46299a32b9144753c346b19c89702",
+      "test_adni_mixed_losses.py": "29e4d326823b11dc5a8120762abf10c5483c7ce1a0441eb0f68f3291e8e33fbd"
+    }
+  },
+  "submission_gate": "All56 MSD scientific runs, archive acknowledgments and cleanup must be complete both locally and remotely",
+  "held_campaigns_unchanged": true,
+  "source_archive": "/Users/filippofocaccia/Desktop/hippo/reports/adni_mixed_losses_nnunet60_others10_20261014/frozen",
+  "cluster_preflight": {
+    "status": "passed",
+    "manifest_sha256": "4c7fd7f05a1e46a4fc74f2d192da3a9f2868e75b8494d48d67d761ba4d0915f7",
+    "checks": [
+      "56 fresh ADNI runs, four models by14 conditions, fold0 seed0, no augmentation",
+      "Saved5% subject split: five training subjects/ten crops;27 validation subjects/54 crops; no subject overlap",
+      "Native nnUNet foreground Dice+CE, original deep supervision and SGD",
+      "Other models use established MONAI Dice including background and AdamW",
+      "All13 auxiliary combinations, SDF timing and binary graph checked numerically",
+      "Sequential60%/10% auxiliary-gradient targets and75%/50% p95 ceilings checked directly",
+      "Existing measured profiles and original ADNI scientific source hashes verified; schedules recomputed",
+      "Actual ADNI dataset hash verified",
+      "MSD completion/archive/cleanup submission gate; original24h resume and per-run archive policy",
+      "Shell syntax passed"
+    ]
+  },
+  "automation_id": "report-msd-four-model-60-constraints",
+  "automation_status": "ACTIVE",
+  "armed_at": 1792012910.117221,
+  "submission_status": "not_submitted_waiting_for_msd"
+}

@@ -1,0 +1,83 @@
+{
+  "status": "selected_not_launched",
+  "name": "GeoFWI3D_UNETR_XY_D4_Dice_2CE_f0s0",
+  "objective": "Improve final-budget validation Dice beyond 0.50 with one predeclared change",
+  "hypothesis": "Increasing CE relative to foreground squared Dice may suppress false-positive salt predictions while retaining useful recall.",
+  "change": {
+    "lambda_dice": 1.0,
+    "lambda_ce": 2.0,
+    "control_lambda_ce": 1.0
+  },
+  "fixed": {
+    "model": "UNETR ViT-B/16",
+    "parameters": 92802274,
+    "fold": 0,
+    "seed": 0,
+    "initialization_sha256": "1215193efc51fc67a9da9cb1ef0bca0e6e8019d4af8146d9efcb85b94bb051f3",
+    "augmentation": "xy_d4_v1, same transform and case sequence",
+    "train_volumes": 19,
+    "validation_volumes": 96,
+    "spatial_size": [
+      96,
+      96,
+      96
+    ],
+    "batch_size": 1,
+    "dropout": 0.1,
+    "initial_lr": 0.0001,
+    "lr_horizon_updates": 477,
+    "optimizer": "AdamW",
+    "weight_decay": 1e-05,
+    "precision": "BF16 autocast, FP32 parameters/optimizer",
+    "loss": "Foreground-only squared Dice + voxelwise unweighted CE",
+    "validation": "Unaugmented native volumes, argmax, mean per-volume foreground hard Dice; no threshold tuning or TTA"
+  },
+  "budget": {
+    "cap_flops_per_arm": 182178126543160,
+    "cap_gflops_per_arm": 182178.12654316,
+    "baseline_expected_updates": 414,
+    "baseline_reference_update_flops": 439528930661,
+    "pre_execution_requirement": "Verify new recipe arithmetic cost; floor(cap / measured update cost), never silently enlarge cap. Diagnostics separately logged under established convention."
+  },
+  "gate": {
+    "stage": "half optimization budget",
+    "expected_steps": [
+      165,
+      207
+    ],
+    "continue_if": "mean validation Dice at 40% and 50% budget >= 0.46",
+    "otherwise": "Archive and stop; no automatic seed or hyperparameter sweep",
+    "limitation": "A cost-saving futility rule, not a validated predictor of final success; may reject a late improver."
+  },
+  "success": {
+    "metric": "final_budget_validation_dice",
+    "comparison": "strictly_greater",
+    "threshold": 0.5,
+    "best_checkpoint_does_not_trigger": true
+  },
+  "bands_followup": {
+    "user_authorized": true,
+    "status": "conditional_not_submitted",
+    "trigger": "Verified full-budget baseline final validation Dice > 0.50; no technical failure",
+    "runs": 1,
+    "initialization": "Fresh identical original seed-0 initialization, not continued from the trained baseline",
+    "fixed": "Exact successful baseline model, data split, augmentation/order, optimizer, learning-rate schedule and base loss",
+    "only_added_term": "lambda * existing binary salt BANDS inner/outer boundary loss, 2-voxel 6-connected morphology on augmented training labels",
+    "calibration": "Training-only gradient-RMS calibration against the actual successful base loss; target ratio 0.10, p95 cap 0.50; preserve calibration RNG; record lambda",
+    "compute": "Remeasure BANDS cost; <= same cap per arm; report and budget calibration overhead explicitly; use fewer updates if required",
+    "comparison": "Paired final-budget validation Dice delta, per-case deltas, FP/FN and salt-size quartiles; no claim of three-fold/three-seed consistency",
+    "maximum_total_new_training_flops_two_arms": 364356253086320
+  },
+  "alternatives_deferred": {
+    "seed_sweep": "Current failure has a specific systematic size/false-positive pattern",
+    "higher_lr": "Could improve short-budget fitting, but less directly targets observed errors",
+    "more_augmentation_or_dropout": "Already helped generalization; next change targets remaining precision deficit",
+    "longer_training": "Would exceed the established cap"
+  },
+  "prelaunch_checks": [
+    "Loss value/gradient and accounting",
+    "Correct augmentation-aware archive validator end-to-end, including completion/retirement",
+    "Resume identity and no duplicate updates",
+    "Conditional BANDS trigger must use final result and remain false at current 44.82%"
+  ]
+}

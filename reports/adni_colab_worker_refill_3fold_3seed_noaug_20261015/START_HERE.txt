@@ -1,0 +1,88 @@
+ADNI Colab v3: preserve worker capacity across completed runs, 3 folds x 3 seeds, NO AUGMENTATION
+
+FILES TO USE
+1. Open ADNI_adaptive_refill_3fold_3seed_no_augmentation.ipynb in Colab instead of the old notebook.
+2. Upload adni_adaptive_control_v3.zip, still zipped, to:
+   My Drive/hippo_adni_3fold_3seed/input/
+   Keep adni_data_verified.zip and adni_replication_code.zip there unchanged.
+   No dataset upload or replacement scientific code bundle is needed.
+3. Start this notebook only after your existing controller has ended cleanly and finished its recovery uploads.
+   Nothing in this delivery interrupts it or launches a job. Do not run two notebooks against the same results.
+4. Run the full notebook in order, in the same supported GPU/software environment as the existing results.
+   Keep RESULTS = /content/drive/MyDrive/hippo_adni_3fold_3seed/results_noaug_v1.
+   An existing local bundle is verified in place, including all work/checkpoints.
+   A fresh VM stages the already-uploaded original ZIPs and restores verified recovery.
+5. MAX_WORKERS=0 is automatic, not a two-worker limit. SESSION_HOURS defaults to 8 remaining hours.
+   Choose less than the actual remaining Colab allowance. 22 is appropriate only for a fresh allocation
+   with sufficient allowance; this does not guarantee Colab runtime availability.
+
+UNCHANGED STUDY
+Exactly the existing 504 identities: four models x 14 conditions x folds 0/1/2 x seeds 0/1/2.
+Same saved subject splits, initializations, losses, calibration, BF16, batch size, optimizer,
+LR/update schedules and 31,976,450,667,090 optimization FLOPs per run. Calibration is separate.
+No augmentation, new benchmark, duplicated completed experiment or accounting reset is introduced.
+Environment and preflight gates remain mandatory; an identical passed preflight is reused.
+
+WHAT YOU WILL SEE
+Startup prints its phase before slow work. It lists actual run/recovery folders once, rather than
+checking hundreds of absent paths. Each existing archive is copied once to a session-local SSD cache;
+the original verifier checks its hashes, sizes, readability, identity, source binding and cleanup.
+Results and matched baseline metadata are then read from that verified cache. The cache is verified
+anew each session and never replaces a durable archive. Completed Drive archives are not rewritten.
+
+A heartbeat every 30 seconds distinguishes progress from still waiting. It shows startup archive
+checked/verified counts, completed count, run IDs, worker count, successful and charged updates,
+GPU utilization, VRAM, CPU load and RAM available. GPU VRAM is capacity, not GPU activity.
+Each worker reports loading, initialization, calibration, training, evaluation, checkpointing,
+Drive ledger wait and recovery upload. Timing and memory peaks are saved with run metadata.
+Wall-clock timings overlap; they are not synchronized CUDA kernel timings.
+
+Live status is local, independent of Drive:
+ /content/hippo_adni_bundle/parallel_status/<session>/status.json
+ /content/hippo_adni_bundle/parallel_status/<session>/timing.jsonl
+ /content/hippo_adni_bundle/parallel_status/<run-id>.json
+Setup/preflight status: /content/hippo_adni_setup_status.json
+Notebook logs: /content/hippo_adni_run.log and /content/hippo_adni_preflight.log
+Session telemetry is copied under results_noaug_v1/parallel/<session>/ at clean completion.
+A hard VM loss may lose local telemetry; the original durable accounting/recovery still governs resume.
+
+WHAT V3 FIXES
+The pasted v2 log reached two nnUNet workers, then reset its target to one immediately when the first
+run finished. The controller incorrectly required the original worker IDs to remain active during
+its throughput comparison. Short runs repeatedly discarded the evidence needed to increase further.
+V3 compares the model/condition cohort across replacement IDs, counts the final completed updates
+before removing workers, and retains elapsed startup/checkpoint/archive time in its rate calculation.
+It preserves the target on normal completion and refills eligible slots. A genuinely different
+model/condition invalidates the comparison; measured regression still reduces future launches.
+Verified compatible v2 memory profiles are reused; no extra experiment or profiling trial is added.
+The heartbeat explicitly reports why another worker is waiting to launch.
+This removes the erroneous reset. It does not establish that five workers will be faster on your GPU.
+
+CONCURRENCY
+Unknown model/condition memory requirements are measured by that condition's first pending real run,
+which runs alone through training and evaluation. No additional experiment is used.
+With known full-run peaks, low GPU utilization, CPU/RAM/VRAM/storage headroom and a stable window of
+completed-update throughput, one further pending scientific run may be admitted provisionally.
+A further increase requires a measured gain of at least 5%; otherwise future launches reduce.
+Running work is not cancelled to tune throughput. Short runs or insufficient measurements can keep
+concurrency at one. The worker ceiling derives from available CPU cores; each trainer keeps two threads.
+No data, annotation, model or gradient cache changes were added to the scientific implementation.
+
+STOP AND RESUME
+Interrupt the run cell once and wait for all workers to finish verified recovery uploads. Do not
+restart/delete the VM while uploads are pending. Completed runs are verified and skipped; interrupted
+work is audited and scheduled before fresh work. Existing STOP files remain in effect until you
+intentionally resume. A worker/archive failure stops new launches and drains the other workers.
+A checkpoint behind the durable charge ledger blocks resumption instead of silently repeating compute.
+Local locks and a persistent Drive ownership marker reject visible competing controllers. Drive FUSE
+is not a distributed lock service: never start controllers simultaneously from separate VMs. After
+an unclean VM loss a leftover .adni_controller_lock requires ownership/recovery inspection; it has
+no automatic expiry. Do not remove it merely to make a run proceed.
+
+VALIDATION AND LIMITS
+See local_validation.json for the test record and artifact hashes. Tests use CPU models, temporary
+local files and fake scientific subprocesses; they cover scheduling, archive proofs, preservation,
+recovery, failure/stop behavior, heartbeat independence and unchanged CPU optimizer/RNG results.
+No A100/H100 execution, live Colab Drive mount or throughput benchmark was performed for this update.
+Actual speedup, peak GPU memory across pending conditions and live Drive latency are not yet measured.
+Your current Colab runtime and cluster jobs were not accessed, interrupted or started.

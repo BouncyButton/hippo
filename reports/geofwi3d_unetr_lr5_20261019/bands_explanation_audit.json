@@ -1,0 +1,62 @@
+{
+  "swin_replication": {
+    "baseline_mean": 0.715283535794787,
+    "bands_mean": 0.7304555348229951,
+    "improved_pairs": 8,
+    "pairs": 9,
+    "fold0_seed0": [
+      {
+        "fold": "0",
+        "seed": "0",
+        "method": "baseline",
+        "mean_dice": "0.7373735060951487",
+        "origin": "reused pilot",
+        "gain_vs_baseline_pp": "0.0"
+      },
+      {
+        "fold": "0",
+        "seed": "0",
+        "method": "bands",
+        "mean_dice": "0.7684393823681154",
+        "origin": "reused pilot",
+        "gain_vs_baseline_pp": "3.106587627296664"
+      }
+    ],
+    "policy": "500 updates each, selected best validation; fixed band coefficient 0.1 ramped over all 500 updates, omit outer two-voxel frame"
+  },
+  "unetr_current": {
+    "improved_validation_cases": 52,
+    "worsened_validation_cases": 44,
+    "total_cases": 96,
+    "mean_delta_pp": -0.012754361233981767,
+    "median_delta_pp": 0.2402763346351977,
+    "minimum_delta_pp": -8.399736489437432,
+    "maximum_delta_pp": 7.750183361285884,
+    "training_dice_baseline": 0.5539878545219811,
+    "training_dice_bands": 0.5847535878052681,
+    "baseline_mean_fp": 11084.510416666666,
+    "baseline_mean_fn": 50580.697916666664,
+    "bands_mean_fp": 10932.375,
+    "bands_mean_fn": 50422.104166666664
+  },
+  "frame_audit": {
+    "train": {
+      "cases": 19,
+      "face_touching_cases": 19,
+      "mean_inner_band_fraction_in_frame": 0.15764222174328152,
+      "mean_outer_band_fraction_in_frame": 0.06906774680211433
+    },
+    "val": {
+      "cases": 96,
+      "face_touching_cases": 96,
+      "mean_inner_band_fraction_in_frame": 0.18515012297819503,
+      "mean_outer_band_fraction_in_frame": 0.07441518238943044
+    }
+  },
+  "limitations": [
+    "No causal explanation isolated by current runs.",
+    "No claim that removing the frame will necessarily improve Dice.",
+    "No parameter-gradient alignment or boundary-specific evaluation available in these summaries.",
+    "Only one paired UNETR seed/fold at LR5."
+  ]
+}

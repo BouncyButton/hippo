@@ -1,0 +1,15 @@
+{
+  "reference_campaign": "msd_unet_ce_constraints_20261014",
+  "reference_manifest_sha256": "1ed1eae234824740076d09ca2421beee12718924193740f30a0ab339ddc2f79f",
+  "reference_comparison_sha256": "9630fdc4a995c76c2871317341d495a7dfa3dcc5da4ddea0b95d19a0b1232673",
+  "unchanged_graph_hashes": {
+    "scripts/cross_dataset_campaign/probe_unet_constraints.py": "59e7ff7f096be750132bd24442381c664271e052e45bb8ac21a3b0933e76662a",
+    "scripts/cross_dataset_campaign/conventional.py": "d8614bf91365e8a1d71f67365a8663a76b49fe3fd52cfdfb7d4bcd243ca25f29",
+    "scripts/capped_depth_delay/objectives.py": "89d3de62d8f819b081fc55172e079f80f92fdb1734bc6cc0744cf9f12db2ff92",
+    "baselines/simple_segmentation.py": "9208a11e429a6be4b7d4abb99149fbac55724a235d4c76100166adc407e8ede0"
+  },
+  "target_to_p95_ratio": 1.25,
+  "rationale": "Preserve the 60% arm margin, allowing actual 80% and 100% medians instead of clipping both to the old 75% ceiling.",
+  "profile_sha256": "05428b340c8cc1ab933a3c77baf5f509d0b91f05e3b119bb9b792b4595d19a42",
+  "profile_reuse": "Only positive scalar coefficient magnitudes differ; tensor shapes and operation graphs are identical."
+}

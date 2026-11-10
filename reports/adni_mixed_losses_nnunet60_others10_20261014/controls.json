@@ -1,0 +1,18 @@
+{
+  "campaign": "adni_mixed_losses_nnunet60_others10_20261014",
+  "start": "rtk proxy python3 -m scripts.cross_dataset_campaign.manage_adni_mixed_losses start",
+  "status": "rtk proxy python3 -m scripts.cross_dataset_campaign.manage_adni_mixed_losses status",
+  "pause": "rtk proxy python3 -m scripts.cross_dataset_campaign.manage_adni_mixed_losses pause",
+  "resume": "rtk proxy python3 -m scripts.cross_dataset_campaign.manage_adni_mixed_losses resume",
+  "collect": "rtk proxy python3 -m scripts.cross_dataset_campaign.manage_adni_mixed_losses collect",
+  "report": "rtk proxy python3 -m scripts.cross_dataset_campaign.manage_adni_mixed_losses report",
+  "start_policy": "Requires all56 MSD runs complete, locally verified archives and cleanup; remote gate rechecks. Does not replace or cancel the current MSD continuation.",
+  "pause_policy": "Pauses ADNI only and preserves optimizer/RNG/sampling state; never clears a user pause automatically.",
+  "archive_policy": "Finish Dice/FN/FP evaluation, archive and verify locally, then delete only completed generated bulky artifacts. ADNI has no anterior/posterior labels.",
+  "offline_policy": "After300 seconds waiting for local archive, release GPU and retain recovery; collector resumes after archive returns unless manually paused.",
+  "held_exclusions": [
+    "msd_four_models_ce_target60_20261014",
+    "adni_seismic_ce60_followon_20261014",
+    "cross_dataset_full_20261014"
+  ]
+}

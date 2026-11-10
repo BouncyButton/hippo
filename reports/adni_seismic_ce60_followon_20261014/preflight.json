@@ -1,0 +1,26 @@
+{
+  "status": "passed",
+  "manifest_sha256": "e7e7c7b0701e68dfc6c247d505ac721603ddf3aafc8fd702ccc5e5b1779d8bb8",
+  "runs": 126,
+  "checked_protocols": [
+    "ADNI_MedSAM3",
+    "ADNI_basic_unet16",
+    "ADNI_nnunet",
+    "ADNI_swinunetr",
+    "ADNI_unetr_vit_b16",
+    "GeoFWI3D_basic_unet16",
+    "GeoFWI3D_nnunet",
+    "GeoFWI3D_swinunetr",
+    "GeoFWI3D_unetr_vit_b16"
+  ],
+  "checks": [
+    "Binary 64/96 loss and gradient checks",
+    "Exact split and data hashes",
+    "All profile/source identities",
+    "Optimizer/RNG/sampling resume equivalence",
+    "Archive corruption protection",
+    "MSD-before-follow-on and shared allocation deadline",
+    "Five-crop foundation geometry and sampling"
+  ],
+  "gpu_validation": "Actual MedSAM3 forward/backward checked in allocated baseline; not claimed as GPU-tested before submission"
+}

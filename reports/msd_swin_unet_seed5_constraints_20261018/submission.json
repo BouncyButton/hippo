@@ -1,0 +1,23 @@
+{
+  "job_id": "706344",
+  "dependency": "706250",
+  "quota": {
+    "used_gib": 28.81,
+    "limit_gib": 93.13,
+    "free_gib": 64.32,
+    "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  28.81GiB/93.13GiB  216.88k/\u221e  \n\n",
+    "checked_at": 1792319395.8787193
+  },
+  "submitted_at": 1792319396.0724454,
+  "command": [
+    "sbatch",
+    "--parsable",
+    "--chdir=/mnt/beegfsstudents/home/3160552/msd_swin_unet_seed5_constraints_20261018",
+    "--output=/mnt/beegfsstudents/home/3160552/msd_swin_unet_seed5_constraints_20261018/slurm-%j.out",
+    "--error=/mnt/beegfsstudents/home/3160552/msd_swin_unet_seed5_constraints_20261018/slurm-%j.err",
+    "--dependency=afterany:706250",
+    "/mnt/beegfsstudents/home/3160552/msd_swin_unet_seed5_constraints_20261018/run.sbatch",
+    "/mnt/beegfsstudents/home/3160552/msd_swin_unet_seed5_constraints_20261018"
+  ],
+  "manifest_sha256": "421bf11e33ce3b4a2a0e60a93760b80c7a458ceef97ec7c659975a9e170c60f9"
+}

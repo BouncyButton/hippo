@@ -1,0 +1,39 @@
+{
+  "status": "passed",
+  "checked_at": "2026-10-15T17:41:14.056798+00:00",
+  "distinct_tests_passed": 49,
+  "full_suite": {
+    "command": "python -m unittest scripts.colab_msd_parallel.test_scheduler scripts.colab_msd_parallel.test_archive_verification -v",
+    "tests": 48,
+    "seconds": 33.301
+  },
+  "final_guard_recheck": {
+    "command": "python -m unittest scripts.colab_msd_parallel.test_scheduler.IntegrationTests scripts.colab_msd_parallel.test_scheduler.PackageTests -v",
+    "tests": 20,
+    "seconds": 15.74,
+    "includes_new_test": true
+  },
+  "scientific_bundle_sha256": "3b9d0c30f71873b6f834ae3b1fd989bf33e37bef7682fdda094b656daff3620b",
+  "control_zip_sha256": "aab553e34014bc4556f808c57e03c5932f600a8dba8f4147546654ad8287ed04",
+  "notebook_sha256": "901d6ed82aecf99d941d787d43d2213ebe271125c4920f5a9ec2a693869fb18b",
+  "policy": "Immediately fill CPU-supported target, subject to memory/storage and matched-baseline dependencies",
+  "solo_memory_profiling": false,
+  "throughput_backoff": false,
+  "unknown_memory_allowances": {
+    "gpu_gib": 12,
+    "ram_gib": 8,
+    "interpretation": "Provisional scheduling allowances, not guaranteed peak bounds"
+  },
+  "concurrency_validation": "Five previously unmeasured constraint tasks launched before any completion; refill and unique archives verified with actual CPU subprocesses",
+  "preservation": "Existing completed archives unchanged; interrupted tasks launch first with other slots filled; no lost-charge reset or automatic replay",
+  "failure_validation": "Worker failure, archive failure, manual STOP, signal during recovery and worker exit during recovery prevent new training and preserve remaining work",
+  "scientific_code": "All frozen manifest entries checked; no augmentation or loss-calibration/FLOP-cap changes",
+  "unchanged_companions": [
+    "worker.py",
+    "local_storage.py",
+    "archive_verification.py"
+  ],
+  "notebook_validation": "ZIP/source hashes match; generated run/report/verify/preflight dispatch executed with recording launcher; all cells parse",
+  "actual_colab_gpu_validation": "Not executed locally; throughput and concurrent GPU peaks remain to be measured during authorized pending runs",
+  "extra_scientific_runs": 0
+}

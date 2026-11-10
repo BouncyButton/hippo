@@ -1,0 +1,91 @@
+<!doctype html><html lang="en"><meta charset="utf-8">
+<title>MSD — final 504-run analysis</title><style>
+body{font:16px/1.6 system-ui,sans-serif;color:#182332;background:#f5f7fa;margin:0}
+main{max-width:1140px;margin:auto;padding:48px 32px;background:white}
+h1{font-size:38px;line-height:1.15}h2{margin-top:44px;font-size:24px}.eyebrow{letter-spacing:.12em;font-size:12px;color:#526777;font-weight:700}
+.lead{font-size:20px;max-width:960px}.note{padding:18px 22px;background:#eef4fa;border-left:4px solid #0072B2}small{color:#5b6574}
+table{border-collapse:collapse;width:100%;font-size:14px}th{background:#edf2f7;text-align:left}td,th{padding:10px 12px;border-bottom:1px solid #dee5ed;vertical-align:top}
+.table-wrap{overflow-x:auto}img{width:100%;height:auto}a{color:#0067a0}li{margin:.6em 0}
+@media print{main{padding:15px}h2{break-after:avoid}table,img{break-inside:avoid}body{background:white}}
+</style><main><div class="eyebrow">MSD · FINAL VALIDATION ANALYSIS · 20 OCTOBER 2026</div>
+<h1>Bands help every model.<br>The best combination depends on the architecture.</h1>
+<p class="lead">All 504 planned cells are present: four models × 14 conditions × folds 0/1/2 × seeds 0/2/20.
+Bands beat each matched baseline in all 36 model/fold/seed comparisons. The highest overall mean is
+3D U-Net with bands+edge+depth: 80.00% Dice, up 6.17 percentage points.</p>
+<p class="note"><b>Interpretation:</b> This is an exploratory, post-selection analysis. Seed 20 replaced seed 1 after results were inspected.
+The old seed-1 results remain separate. These are validation results, not an independent test set; selecting the best of 14
+conditions on the same validation data also favors the reported winners.</p>
+<h2>Main comparison</h2><div class='table-wrap'><table><thead><tr><th>Model</th><th>Baseline</th><th>Best observed mean</th><th>Dice ± fold SD</th><th>Gain (pp)</th><th>Positive pairs</th></tr></thead><tbody><tr><td>nnUNet</td><td>62.52</td><td>Bands + SDF + Depth</td><td>72.67 ± 2.55</td><td>+10.15</td><td>9/9</td></tr><tr><td>SwinUNETR</td><td>54.04</td><td>Bands + Edge + SDF + Depth</td><td>66.00 ± 1.02</td><td>+11.97</td><td>9/9</td></tr><tr><td>UNETR</td><td>54.71</td><td>Bands + Edge + SDF</td><td>60.07 ± 0.33</td><td>+5.35</td><td>9/9</td></tr><tr><td>3D U-Net</td><td>73.83</td><td>Bands + Edge + Depth</td><td>80.00 ± 0.64</td><td>+6.17</td><td>9/9</td></tr></tbody></table></div>
+<p>“Best” means the highest observed mean, not proven superiority over nearby combinations.
+The gap to the runner-up is only 0.17 pp for nnUNet, 0.30 pp for SwinUNETR, 0.21 pp for UNETR,
+and 0.10 pp for 3D U-Net. Each selected winner improves all nine matched baseline pairs.</p>
+<h2>All 14 conditions</h2>
+<p>Each cell shows final validation Dice (%) and the change from the same model’s baseline.
+Average three seeds within each fold, then average the three folds equally. Reported SD is the sample
+SD of three fold means; it is not a confidence interval and does not describe seed variability.</p>
+<div class='table-wrap'><table><thead><tr><th>Added constraints</th><th>nnUNet</th><th>SwinUNETR</th><th>UNETR</th><th>3D U-Net</th></tr></thead><tbody><tr><td>Baseline</td><td>62.52<br><small>+0.00 pp</small></td><td>54.04<br><small>+0.00 pp</small></td><td>54.71<br><small>+0.00 pp</small></td><td>73.83<br><small>+0.00 pp</small></td></tr><tr><td>Bands</td><td>70.07<br><small>+7.55 pp</small></td><td>57.89<br><small>+3.85 pp</small></td><td>58.60<br><small>+3.89 pp</small></td><td>78.66<br><small>+4.83 pp</small></td></tr><tr><td>SDF</td><td>60.48<br><small>-2.04 pp</small></td><td>54.30<br><small>+0.26 pp</small></td><td>55.49<br><small>+0.78 pp</small></td><td>73.66<br><small>-0.17 pp</small></td></tr><tr><td>Bands + SDF</td><td>70.12<br><small>+7.59 pp</small></td><td>59.01<br><small>+4.97 pp</small></td><td>59.86<br><small>+5.14 pp</small></td><td>78.68<br><small>+4.85 pp</small></td></tr><tr><td>Bands + Edge</td><td>68.97<br><small>+6.45 pp</small></td><td>58.03<br><small>+4.00 pp</small></td><td>58.85<br><small>+4.13 pp</small></td><td>79.54<br><small>+5.71 pp</small></td></tr><tr><td>Bands + Edge + SDF</td><td>69.00<br><small>+6.47 pp</small></td><td>59.20<br><small>+5.16 pp</small></td><td>60.07<br><small>+5.35 pp</small></td><td>79.36<br><small>+5.53 pp</small></td></tr><tr><td>Depth</td><td>64.13<br><small>+1.61 pp</small></td><td>62.28<br><small>+8.24 pp</small></td><td>56.47<br><small>+1.76 pp</small></td><td>76.13<br><small>+2.30 pp</small></td></tr><tr><td>Bands + Depth</td><td>71.90<br><small>+9.38 pp</small></td><td>65.07<br><small>+11.04 pp</small></td><td>58.42<br><small>+3.70 pp</small></td><td>78.85<br><small>+5.02 pp</small></td></tr><tr><td>Edge + Depth</td><td>62.98<br><small>+0.46 pp</small></td><td>63.00<br><small>+8.97 pp</small></td><td>56.92<br><small>+2.21 pp</small></td><td>77.02<br><small>+3.19 pp</small></td></tr><tr><td>SDF + Depth</td><td>65.52<br><small>+3.00 pp</small></td><td>62.48<br><small>+8.44 pp</small></td><td>57.08<br><small>+2.37 pp</small></td><td>76.19<br><small>+2.36 pp</small></td></tr><tr><td>Bands + Edge + Depth</td><td>71.61<br><small>+9.09 pp</small></td><td>65.59<br><small>+11.55 pp</small></td><td>58.52<br><small>+3.80 pp</small></td><td>80.00<br><small>+6.17 pp</small></td></tr><tr><td>Bands + SDF + Depth</td><td>72.67<br><small>+10.15 pp</small></td><td>65.70<br><small>+11.67 pp</small></td><td>59.41<br><small>+4.70 pp</small></td><td>78.78<br><small>+4.95 pp</small></td></tr><tr><td>Edge + SDF + Depth</td><td>64.91<br><small>+2.39 pp</small></td><td>63.16<br><small>+9.12 pp</small></td><td>57.42<br><small>+2.71 pp</small></td><td>77.16<br><small>+3.33 pp</small></td></tr><tr><td>Bands + Edge + SDF + Depth</td><td>72.50<br><small>+9.98 pp</small></td><td>66.00<br><small>+11.97 pp</small></td><td>59.60<br><small>+4.89 pp</small></td><td>79.89<br><small>+6.07 pp</small></td></tr></tbody></table></div><img src="constraint_gains.png" alt="Heatmap of all matched constraint gains">
+<h2>What the constraints are doing</h2><ul>
+<li><b>nnUNet:</b> bands provide +7.55 pp. Bands+SDF+depth reaches +10.15 pp. Adding edge to bands reduces
+Dice in every pair (−1.09 pp on average). SDF alone reduces Dice by 2.04 pp.</li>
+<li><b>SwinUNETR:</b> depth is the strongest single tested addition (+8.24 pp); bands add +3.85 pp.
+The full combination reaches +11.97 pp, although much of that gain comes from the weak seed-0 baseline.</li>
+<li><b>UNETR:</b> bands help in all nine pairs (+3.89 pp). Bands+edge+SDF reaches +5.35 pp.
+Adding depth to that combination lowers the mean by 0.47 pp, so more constraints are not automatically better.</li>
+<li><b>3D U-Net:</b> bands add +4.83 pp and bands+edge adds +5.71 pp. Bands+edge+depth reaches +6.17 pp.
+The full combination is essentially tied at −0.10 pp relative to that best mean.</li></ul>
+<p>The edge effect is small and model dependent:</p><div class='table-wrap'><table><thead><tr><th>Model</th><th>Bands+edge minus bands (pp)</th><th>Positive pairs</th></tr></thead><tbody><tr><td>nnUNet</td><td>-1.094</td><td>0/9</td></tr><tr><td>SwinUNETR</td><td>+0.144</td><td>6/9</td></tr><tr><td>UNETR</td><td>+0.246</td><td>8/9</td></tr><tr><td>3D U-Net</td><td>+0.875</td><td>9/9</td></tr></tbody></table></div>
+<h2>Seed and fold consistency</h2>
+<p>Bands and each model’s best-mean condition improve every fold mean and every individual pair.
+However, averaging seeds hides substantial initialization variability, especially for nnUNet and SwinUNETR.</p>
+<div class='table-wrap'><table><thead><tr><th>Model</th><th>Condition</th><th>Seed 0</th><th>Seed 2</th><th>Seed 20</th></tr></thead><tbody><tr><td>nnUNet</td><td>Baseline</td><td>69.93</td><td>48.96</td><td>68.68</td></tr><tr><td>nnUNet</td><td>Bands + SDF + Depth</td><td>76.50</td><td>62.98</td><td>78.54</td></tr><tr><td>SwinUNETR</td><td>Baseline</td><td>44.01</td><td>53.34</td><td>64.76</td></tr><tr><td>SwinUNETR</td><td>Bands + Edge + SDF + Depth</td><td>69.95</td><td>54.98</td><td>73.08</td></tr><tr><td>UNETR</td><td>Baseline</td><td>50.80</td><td>56.56</td><td>56.78</td></tr><tr><td>UNETR</td><td>Bands + Edge + SDF</td><td>54.23</td><td>63.82</td><td>62.15</td></tr><tr><td>3D U-Net</td><td>Baseline</td><td>72.88</td><td>70.69</td><td>77.91</td></tr><tr><td>3D U-Net</td><td>Bands + Edge + Depth</td><td>80.32</td><td>79.46</td><td>80.21</td></tr></tbody></table></div>
+<p>Seed-2 nnUNet remains weaker (48.96% baseline, 62.98% with the best-mean condition).
+Swin’s best-mean gain is +25.93 pp for seed 0, +1.64 pp for seed 2, and +8.32 pp for seed 20.
+By contrast, 3D U-Net’s best condition averages 80.32%, 79.46%, and 80.21% across seeds.
+Keep all three selected seeds in the reported analysis; these differences are evidence about robustness.</p>
+<img src="replicate_variation.png" alt="Individual results and fold means for baseline, bands, bands plus edge, and best condition">
+<h2>Training versus validation</h2><div class='table-wrap'><table><thead><tr><th>Model</th><th>Condition</th><th>Training Dice</th><th>Validation Dice</th><th>Gap (pp)</th></tr></thead><tbody><tr><td>nnUNet</td><td>Baseline</td><td>66.74</td><td>62.52</td><td>4.22</td></tr><tr><td>nnUNet</td><td>Bands</td><td>74.24</td><td>70.07</td><td>4.17</td></tr><tr><td>nnUNet</td><td>Bands + SDF + Depth</td><td>77.11</td><td>72.67</td><td>4.43</td></tr><tr><td>SwinUNETR</td><td>Baseline</td><td>57.07</td><td>54.04</td><td>3.04</td></tr><tr><td>SwinUNETR</td><td>Bands</td><td>62.27</td><td>57.89</td><td>4.38</td></tr><tr><td>SwinUNETR</td><td>Bands + Edge + SDF + Depth</td><td>71.15</td><td>66.00</td><td>5.15</td></tr><tr><td>UNETR</td><td>Baseline</td><td>62.07</td><td>54.71</td><td>7.36</td></tr><tr><td>UNETR</td><td>Bands</td><td>68.68</td><td>58.60</td><td>10.08</td></tr><tr><td>UNETR</td><td>Bands + Edge + SDF</td><td>70.31</td><td>60.07</td><td>10.25</td></tr><tr><td>3D U-Net</td><td>Baseline</td><td>78.50</td><td>73.83</td><td>4.67</td></tr><tr><td>3D U-Net</td><td>Bands</td><td>85.59</td><td>78.66</td><td>6.93</td></tr><tr><td>3D U-Net</td><td>Bands + Edge + Depth</td><td>87.66</td><td>80.00</td><td>7.66</td></tr></tbody></table></div>
+<img src="training_validation.png" alt="Final training and validation Dice by model and condition">
+<p>The improvements are present on validation data. nnUNet’s gap stays close to 4 pp.
+UNETR’s gap grows from 7.36 to 10.25 pp, and 3D U-Net’s from 4.67 to 7.66 pp at their best conditions:
+the constraints improve validation performance but do not eliminate the generalization gap.
+These are final endpoint comparisons, not longitudinal training curves.</p>
+<h2>False negatives, false positives and anterior/posterior swaps</h2>
+<p>Counts below are average voxel totals per 52-case validation run. Percent changes compare summed counts
+across the same nine matched runs; they are <b>not</b> false-positive/false-negative rates.
+Foreground FN means hippocampus predicted as background; FP means background predicted as hippocampus.
+Anterior/posterior confusion is counted separately.</p><div class='table-wrap'><table><thead><tr><th>Model</th><th>Condition</th><th>FN voxels</th><th>FP voxels</th><th>A/P swaps</th><th>FN change</th><th>FP change</th><th>A/P change</th></tr></thead><tbody><tr><td>nnUNet</td><td>Baseline</td><td>51,247</td><td>28,966</td><td>14,123</td><td>+0.0%</td><td>+0.0%</td><td>+0.0%</td></tr><tr><td>nnUNet</td><td>Bands</td><td>36,753</td><td>31,578</td><td>14,056</td><td>-28.3%</td><td>+9.0%</td><td>-0.5%</td></tr><tr><td>nnUNet</td><td>Bands + SDF + Depth</td><td>34,087</td><td>30,264</td><td>12,598</td><td>-33.5%</td><td>+4.5%</td><td>-10.8%</td></tr><tr><td>SwinUNETR</td><td>Baseline</td><td>1,493</td><td>388,342</td><td>6,360</td><td>+0.0%</td><td>+0.0%</td><td>+0.0%</td></tr><tr><td>SwinUNETR</td><td>Bands</td><td>4,417</td><td>324,199</td><td>5,952</td><td>+195.9%</td><td>-16.5%</td><td>-6.4%</td></tr><tr><td>SwinUNETR</td><td>Bands + Edge + SDF + Depth</td><td>5,357</td><td>155,792</td><td>5,963</td><td>+258.8%</td><td>-59.9%</td><td>-6.2%</td></tr><tr><td>UNETR</td><td>Baseline</td><td>6,741</td><td>270,605</td><td>6,731</td><td>+0.0%</td><td>+0.0%</td><td>+0.0%</td></tr><tr><td>UNETR</td><td>Bands</td><td>12,060</td><td>227,372</td><td>6,226</td><td>+78.9%</td><td>-16.0%</td><td>-7.5%</td></tr><tr><td>UNETR</td><td>Bands + Edge + SDF</td><td>12,268</td><td>206,135</td><td>6,182</td><td>+82.0%</td><td>-23.8%</td><td>-8.2%</td></tr><tr><td>3D U-Net</td><td>Baseline</td><td>4,962</td><td>99,432</td><td>4,993</td><td>+0.0%</td><td>+0.0%</td><td>+0.0%</td></tr><tr><td>3D U-Net</td><td>Bands</td><td>8,674</td><td>66,059</td><td>5,066</td><td>+74.8%</td><td>-33.6%</td><td>+1.5%</td></tr><tr><td>3D U-Net</td><td>Bands + Edge + Depth</td><td>10,257</td><td>57,466</td><td>4,862</td><td>+106.7%</td><td>-42.2%</td><td>-2.6%</td></tr></tbody></table></div>
+<p>nnUNet’s improvement primarily reduces missed foreground (−33.5% at its best mean), with FP increasing 4.5%.
+SwinUNETR, UNETR and 3D U-Net chiefly reduce excess foreground predictions (FP −59.9%, −23.8%, −42.2%),
+at the cost of increased FN. Dice improves because this tradeoff is favorable overall.
+The large relative FN increases for Swin start from a very small baseline count.
+A/P swaps improve much less than FP, so the results do not establish a dramatic improvement in anatomical subregion separation.</p>
+<h2>Scientific settings and compute audit</h2>
+<p>All rows match their frozen protocol’s exact update count, optimization FLOPs and calibration FLOPs.
+All protocols specify <b>no augmentation</b>, ten training volumes and 52 validation volumes per fold,
+64³ inputs and batch size one. The primary metric uses the final budget checkpoint, not the best validation checkpoint.</p>
+<div class='table-wrap'><table><thead><tr><th>Model</th><th>Updates per run</th><th>Optimization cap used</th></tr></thead><tbody><tr><td>nnUNet</td><td>89–90</td><td>98.89–100.00%</td></tr><tr><td>SwinUNETR</td><td>206–206</td><td>99.86–99.94%</td></tr><tr><td>UNETR</td><td>245–245</td><td>99.65–99.75%</td></tr><tr><td>3D U-Net</td><td>562–563</td><td>99.82–99.99%</td></tr></tbody></table></div>
+<p>The optimization cap is 31,976,450,667,090 FLOPs (31.98 TFLOPs) per trajectory.
+Completed trajectories total 16.0548 PFLOPs of optimization plus 0.2732 PFLOPs of separately charged calibration.
+The recovery report for the 324-run continuation additionally records at least 0.2073 PFLOPs of optimization overhead
+and 0.0036 PFLOPs of calibration overhead. Seven old truncated ledgers prevent exact recovery-cost totals.
+There are zero unfinished compute charges. A completed trajectory’s cap does not include recovery/replay or calibration.</p>
+<p>nnUNet uses native foreground Dice+CE, deep supervision and SGD with 60% auxiliary-gradient targets
+and a 75% p95 ceiling. The other three use MONAI Dice including background and AdamW, with 10% targets
+and a 50% p95 ceiling. Architecture, baseline loss, optimizer, and constraint strength are therefore confounded:
+the within-model comparisons are stronger evidence than a claim that one architecture is intrinsically superior.</p>
+<h2>Verification and provenance</h2>
+<p>The signed-content hashes of all downloaded reports match their filenames. The combined report contains 504 unique,
+complete grid cells; all 56 aggregate rows were independently recalculated. The 180 reused summaries exactly match
+the fixed prior audit, and the continuation contributes all 324 missing results. One final raw archive was independently
+checked against its hashes, saved configuration and metric files; its server archive acknowledgment is verified and its
+local generated-checkpoint cleanup is complete. This analysis does not claim a fresh re-download of all 504 raw archives.</p>
+<p><a href="https://drive.google.com/file/d/1f0-S6phDP7LuTHCprp50rmlhKOWDfzG4/view">Final combined report on Drive</a> ·
+<a href="https://drive.google.com/file/d/1f_atLAmltRJ7Gpx-fumJtBtqmHzbvPkj/view">Recovery accounting on Drive</a> ·
+<a href="https://drive.google.com/drive/folders/1ABBWxmuJIB-7CvoAF6iPe3bz75bI3zuL">Original archives</a></p>
+<h2>Download the analysis</h2><ul>
+<li><a href="all_56_condition_summaries.csv">All 56 condition summaries, error counts and paired wins</a></li>
+<li><a href="all_504_runs.csv">All 504 individual runs and matched gains</a></li>
+<li><a href="fold_means_and_gains.csv">Fold means and gains</a> · <a href="seed_means_and_gains.csv">Seed means and gains</a></li>
+<li><a href="analysis_audit.json">Machine-readable audit</a> · <a href="analyze.py">Reproducible analysis script</a></li>
+<li><a href="constraint_gains.pdf">Gain heatmap PDF</a> · <a href="replicate_variation.pdf">Variation plot PDF</a></li></ul>
+</main></html>

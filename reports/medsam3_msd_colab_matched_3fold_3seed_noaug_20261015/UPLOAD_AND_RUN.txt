@@ -1,0 +1,34 @@
+MSD MedSAM3 — fresh matched Colab study, 126 runs
+
+Why: the frozen original forward path reproduces the extension's Colab losses, but those losses differ from the historical cluster calibration. Fold 1's historical bands coefficient produces p95 67.36%, above the original 50% calibration rule. The user authorized the most rigorous choice on 2026-10-15: recalibrate on this runtime and use fresh matched controls. No guard or gradient tolerance is relaxed.
+
+1. Upload medsam3_msd_matched_code.zip to the existing Drive folder:
+   MyDrive/hippo_medsam3_msd_extension/input
+   Keep the name exactly as shown. Keep the older ZIP as historical source.
+   The existing medsam3_msd_data.zip and sam3.pt are unchanged; do not reupload them.
+
+2. To preserve the current A100 session, paste ALL of SWITCH_CURRENT_RUNTIME_CELL.py into a new cell in the existing Colab notebook and run it.
+   This stages a separate bundle, uses the existing virtual environment and imports verified previous preflight evidence without deleting/moving the old files. It performs no scientific optimizer updates.
+   Otherwise, open MedSAM3_MSD_matched_constraints_3fold_3seed.ipynb in Colab, choose the A100 High-RAM runtime and execute cells in order.
+
+3. On the current notebook run this new cell (do not rerun its old setup or old 99-run cell):
+
+   campaign('preflight')
+
+   Expected on the same environment: fold 0 and fold 1 reuse passed deterministic audits and 20 saved measurements per fold. All weights are recalculated using the original sequential 10% median target/50% p95 ceiling. Fold 3 still needs its GPU audit and calibration. Reused evidence is validated against the exact old manifest, unchanged code dependencies, model weights, data, environment, complete sample schedule and source hashes. A different GPU/software environment runs all checks anew. Preflight must finish successfully before training is allowed.
+
+4. Then run:
+
+   campaign('run', '--max-runs', 126, '--hours', 22)
+
+   The new results folder is:
+   MyDrive/hippo_medsam3_msd_extension/results_matched200_noaug_v2
+   Original results_original200_noaug_v1 stays intact. A deliberate STOP is carried over; remove it only to resume intentionally. Interrupt a running training cell once and wait for recovery upload before closing the VM.
+
+5. For results use campaign('report'). Existing cluster results appear only as historical_reference. All primary gains use the new baseline at the same fold/seed; incomplete baseline comparisons remain blank.
+
+Preserved recipe: folds 0/1/3, seeds 17/83/191, five original training volumes per fold, no augmentation, original pretrained medical LoRA and frozen SAM3, native SAM3 loss, 200 optimizer updates, accumulation 2, AdamW, original learning-rate schedule, BF16, constraint ramp, sampling, final-update evaluation and resume/accounting semantics. This is update matched; it is NOT the 31.98-TFLOP-capped four-model study. The 50% ceiling applies to calibration p95, not a guarantee for every later training gradient.
+
+Scientific scope: 14 established arms, 9 runs each = 126 fresh runs. Baseline, bands and bands+edge controls run first (27 runs); remaining constraints follow (99 runs). Historical 27 controls remain available for reference only. No new arms, seeds, folds or validation tuning were added. Selected folds are exploratory rather than full cross-validation.
+
+Local regression tests and package hashes are checked. A full new GPU preflight and scientific training have not been run from this Mac.

@@ -1,0 +1,45 @@
+{
+  "status": "passed_local_tests_gpu_not_tested",
+  "checked_at": "2026-10-15T17:50:30.580283+00:00",
+  "tests_passed": 55,
+  "full_suite_seconds": 75.089,
+  "command": "MPLCONFIGDIR=/private/tmp/hippo_parallel_matplotlib .venv/bin/python -m unittest scripts.colab_adni_parallel.test_scheduler scripts.colab_adni.test_runtime -q",
+  "python": "3.12.1",
+  "platform": "macOS-15.7.9-x86_64-i386-64bit",
+  "root_cause": "v2 reset provisional concurrency when a reference task ID completed, discarding the measurement window and reducing target from 2 to 1 during normal short-run turnover",
+  "regression_coverage": [
+    "same-condition completion/refill retains worker target",
+    "short pending-task simulation grows beyond two without duplicate IDs or added tasks",
+    "terminal completed updates are counted before removing a worker",
+    "old resume charges and stale status are not counted as new throughput",
+    "different model/condition cannot falsely validate a previous workload speedup",
+    "measured contention still reduces future launches",
+    "verified compatible observer profiles reused, unrelated profiles rejected",
+    "archive preservation, identity, hashes, readability and cleanup",
+    "durable recovery restores first and lost charges cannot be reset",
+    "concurrent subprocesses, failure drains, STOP and ownership",
+    "CPU SGD/AdamW loss, optimizer and RNG equivalence",
+    "all original frozen file hashes and original binary ADNI preflight regression checks"
+  ],
+  "artifact_sha256": {
+    "ADNI_adaptive_refill_3fold_3seed_no_augmentation.ipynb": "a5ab1810dfbae0e543acb358b473f1569324e03106bb9ef9b12a9a1b5a7ef524",
+    "adni_adaptive_control_v3.zip": "ba40b9636905f02572de55d85ff77eb638e4becb6e815eaf994a37b18d0677e5",
+    "START_HERE.txt": "b5fad18a94ed1ff33b3aa8cb97c2b2b9bcace4bea1c1c0912570c7ec2395b8e7"
+  },
+  "scientific_bundle_sha256": "e0b87c00231bb355aa66531f6684c361a632b3f8e393f6afbfb4939a37d0caeb",
+  "compatible_profile_control_sha256": [
+    "b8f31f1665b7406c438db9a29ba75822e6047102731701e12d9a641bf8aa446e"
+  ],
+  "frozen_files_verified": 649,
+  "total_runs": 504,
+  "extra_experiments": 0,
+  "augmentation": "none",
+  "results_directory": "/content/drive/MyDrive/hippo_adni_3fold_3seed/results_noaug_v1",
+  "not_tested": [
+    "CUDA or live Colab execution",
+    "actual throughput at 3-5 workers",
+    "live Drive contention"
+  ],
+  "current_runtime_accessed": false,
+  "jobs_launched": 0
+}

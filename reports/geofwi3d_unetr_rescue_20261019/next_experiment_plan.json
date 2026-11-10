@@ -1,0 +1,62 @@
+{
+  "status": "proposed_not_launched",
+  "name": "GeoFWI3D_UNETR_XY_D4_augmentation_f0s0",
+  "objective": "Test whether horizontal spatial augmentation improves generalization of fixed UNETR ViT-B/16 within the existing cap",
+  "hypothesis": "Repeated exposure to 19 unaugmented volumes encourages memorization; horizontal symmetry augmentation may improve generalization. This mechanism is not established by the existing metrics.",
+  "frozen": {
+    "model": "unetr_vit_b16",
+    "parameters": 92802274,
+    "fold": 0,
+    "seed": 0,
+    "train_volumes": 19,
+    "validation_volumes": 96,
+    "spatial_shape": [
+      96,
+      96,
+      96
+    ],
+    "batch_size": 1,
+    "dropout": 0.1,
+    "loss": "Foreground-only squared Dice + CE, weights 1:1, unchanged from rescue",
+    "optimizer": "AdamW",
+    "weight_decay": 1e-05,
+    "peak_lr": 0.0001,
+    "lr_horizon_updates": 477,
+    "primary_metric": "final_budget_validation_mean_case_hard_foreground_dice"
+  },
+  "only_change": {
+    "augmentation": "XY D4: four quarter-turn rotations, optionally composed with one horizontal reflection; uniform over eight group elements",
+    "image_mask_synchronized": true,
+    "preserve_z_depth": true,
+    "interpolation": false,
+    "intensity_changes": false,
+    "crops": false,
+    "validation_augmentation": false,
+    "test_time_augmentation": false,
+    "rng": "Dedicated stateless per-update RNG; do not alter model initialization or case order"
+  },
+  "initialization": "Fresh seed-0 initialization matching archived controls; no reuse of retired checkpoint",
+  "comparison": "Archived standard_lr rescue; do not retrain control",
+  "accounting": {
+    "original_cap_flops": 182178126543160,
+    "reference_profile_flops_per_update": 439528930661,
+    "expected_max_steps": 414,
+    "expected_half_steps": 207,
+    "expected_screen_flops": 90982488646827,
+    "maximum_total_training_flops": 182178126543160,
+    "validation_and_diagnostic_costs": "Separate from optimization cap; report explicitly",
+    "condition": "Verify unchanged model/loss operation counts before launch; no arithmetic interpolation in transforms"
+  },
+  "futility_gate": {
+    "at_update": 207,
+    "metric": "Mean unaugmented validation Dice at updates 165 and 207",
+    "continue_if_at_least": 0.4,
+    "otherwise": "Archive as pruned at half budget; no automatic seed or recipe retries",
+    "rationale": "Pragmatic compute triage, not a statistically established boundary; may reject a slower learner"
+  },
+  "success": "Final-budget Dice strictly greater than 0.50; a peak alone is insufficient",
+  "followup": "Only after passing, verify the fixed recipe on a second fold with the same seed before any broad seed search; predeclare seeds and retain failures",
+  "comparability": "Separate augmented protocol. Existing no-augmentation results remain intact. If adopted for a matched four-model comparison, evaluate the common augmentation policy for all models.",
+  "evidence": "next_experiment_analysis.json",
+  "no_new_gpu_training_started": true
+}

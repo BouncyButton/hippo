@@ -1,0 +1,110 @@
+{
+  "source_folder": "https://drive.google.com/drive/folders/1xTu2bLi5YU7wTVPDLQeeVFrf6QIZmeVM",
+  "status": {
+    "status": "complete",
+    "native_updates": 10,
+    "probe_backwards": 45,
+    "probe_slabs": 15,
+    "training_volumes": 5,
+    "validation_volumes_evaluated": 0,
+    "elapsed_seconds_this_session": 147.5664312839508,
+    "initial": {
+      "frozen": "a6ee8b75984a10ba912137dfe2b39398c252c2a26c6bbec5239f3699644a7bae",
+      "adapter": "7ea035d0d74fb7549e7d79bbdf2b89f6587cc05c45959696c1f76ad05abc701d"
+    },
+    "final_adapter_sha256": "aa2957cd764d75ec82d3e4dcde30284bae49a807e68425ac34f1776175cd09f1",
+    "interpretation": "Ratios track a native-only adaptation trajectory. Full-strength ratios are hypothetical fixed-weight comparisons. Five-slab candidate weights are diagnostic, not production calibration. Head gradients are output-logit derivatives, not additive LoRA-gradient shares."
+  },
+  "archive_verification": "All seven manifest SHA-256 hashes matched downloaded files.",
+  "original_weights": {
+    "bands": 5.078932100766348,
+    "edge": 3082.0237895015457
+  },
+  "summary": [
+    {
+      "update": 0,
+      "slabs": 5,
+      "edge_ratio_median": 0.023223930747245217,
+      "edge_ratio_p95": 0.04430813445136424,
+      "edge_ratio_max": 0.04745388955104563,
+      "conflicting_slabs": 2,
+      "candidate_edge_weight_with_fixed_bands": 13270.896400115775,
+      "mean_foreground_probability": 0.0193269086885266,
+      "mean_presence_probability": 0.059377363650128245,
+      "edge_presence_gradient_sum": -0.00009057521820068359,
+      "edge_query_gradient_sum": -0.00014505882281810046
+    },
+    {
+      "update": 5,
+      "slabs": 5,
+      "edge_ratio_median": 6.521554010863372,
+      "edge_ratio_p95": 13.689928021402087,
+      "edge_ratio_max": 15.3285146083618,
+      "conflicting_slabs": 2,
+      "candidate_edge_weight_with_fixed_bands": 47.25903955357298,
+      "mean_foreground_probability": 0.3777655951678753,
+      "mean_presence_probability": 0.9432087659835815,
+      "edge_presence_gradient_sum": 0.0002877235412597656,
+      "edge_query_gradient_sum": -0.0003694511950016022
+    },
+    {
+      "update": 10,
+      "slabs": 5,
+      "edge_ratio_median": 3.9468459321047096,
+      "edge_ratio_p95": 7.692588001452916,
+      "edge_ratio_max": 8.265454676356562,
+      "conflicting_slabs": 1,
+      "candidate_edge_weight_with_fixed_bands": 78.0882720663488,
+      "mean_foreground_probability": 0.3449768587946892,
+      "mean_presence_probability": 0.8997969210147858,
+      "edge_presence_gradient_sum": -0.0000179290771484375,
+      "edge_query_gradient_sum": -0.0000999152660369873
+    }
+  ],
+  "derived": [
+    {
+      "update": 0,
+      "ramped_edge_ratio_median": 0.0012262457992110248,
+      "ramped_edge_ratio_max": 0.002479008023061772,
+      "bands_over_native_median": 0.05378648399987421,
+      "original_edge_weight_divided_by_candidate": 0.23223930747245214,
+      "edge_presence_positive_planes": 4,
+      "edge_presence_negative_planes": 6
+    },
+    {
+      "update": 5,
+      "ramped_edge_ratio_median": 2.0103830510823957,
+      "ramped_edge_ratio_max": 4.342453884498943,
+      "bands_over_native_median": 0.05966002843230425,
+      "original_edge_weight_divided_by_candidate": 65.2155401086337,
+      "edge_presence_positive_planes": 6,
+      "edge_presence_negative_planes": 4
+    },
+    {
+      "update": 10,
+      "ramped_edge_ratio_median": 2.2017027412353403,
+      "ramped_edge_ratio_max": 4.660812761571936,
+      "bands_over_native_median": 0.05708264336902701,
+      "original_edge_weight_divided_by_candidate": 39.4684593210471,
+      "edge_presence_positive_planes": 6,
+      "edge_presence_negative_planes": 4
+    }
+  ],
+  "findings": [
+    "Fixed initial edge calibration is highly unstable along native-only adaptation: full-strength median relative gradient rises from 2.32% to 652.16% after five updates and 394.68% after ten.",
+    "The original 20-update linear constraint ramp is insufficient on this trajectory: median ratios at the next update are 201.04% and 220.17%, respectively.",
+    "Raw edge gradient norms rise in all five probes, while native gradient norms fall in all five. This is not only a change in scalar loss values.",
+    "Bands remain much more stable: median bands/native gradient ratio is 5.38%, 5.97%, 5.71%.",
+    "Conflict is present on two, two, then one of five probes. The most oversized edge gradient at update five (model_0103, ratio15.33) is opposed to native+bands (cosine -0.417).",
+    "Direct confidence-head derivative signs are mixed. The data do not establish uniform suppression of presence or query confidence.",
+    "Probe-based edge coefficients near47-78 after adaptation indicate the original3082 is far too large on these states. These are five-slab estimates, not replacement production calibrations."
+  ],
+  "limitations": [
+    "Only five fixed training slabs, with probes at0,5,10.",
+    "Ten native-only optimization updates; neither bands nor edge contributed to this diagnostic trajectory.",
+    "No validation was performed and no new Dice score was measured.",
+    "Gradient ratios are per-slab LoRA parameter-gradient norms, not optimizer-step shares after accumulation, clipping and AdamW.",
+    "Cold calibration drift is directly observed; its causal role in the earlier validation collapse still requires a controlled retry."
+  ],
+  "recommended_next_test": "One bands+edge run within the same25-update budget: use a short bands-only prefix, then calibrate edge on the adapted model with the original production calibration set, retain the established bands weight, and monitor effective edge ratios. Reuse saved baseline and bands results. Do not hardcode a coefficient from the five probes."
+}

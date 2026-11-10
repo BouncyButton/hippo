@@ -1,0 +1,174 @@
+{
+  "checked_at": 1792001171.1159208,
+  "queue": "701093|PENDING|hippo-transformer-bands-low|(Dependency)\n701092|RUNNING|hippo-transformer-bands-low|gnode03\n",
+  "status.json": {
+    "status": "running",
+    "active": "MSD_swinunetr_ce_dice_bands_target10_f0s0",
+    "completed": 0,
+    "total": 4,
+    "runs": [],
+    "job_id": "701092",
+    "updated_at": 1792000935.4523766,
+    "quota": {
+      "used_gib": 24.3,
+      "limit_gib": 93.13,
+      "free_gib": 68.83,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  24.30GiB/93.13GiB  189.65k/\u221e  \n\n",
+      "checked_at": 1792000935.4892
+    }
+  },
+  "control.json": {
+    "pause": false,
+    "disabled_tasks": [],
+    "full_submission_enabled": false
+  },
+  "successor.json": {
+    "job_id": "701093",
+    "dependency": "701092",
+    "quota": {
+      "used_gib": 24.3,
+      "limit_gib": 93.13,
+      "free_gib": 68.83,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  24.30GiB/93.13GiB  189.65k/\u221e  \n\n",
+      "checked_at": 1792000935.2080271
+    },
+    "submitted_at": 1792000935.3476324,
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--chdir=/mnt/beegfsstudents/home/3160552/msd_transformer_ce_bands_target10_20_20261014",
+      "--output=/mnt/beegfsstudents/home/3160552/msd_transformer_ce_bands_target10_20_20261014/slurm-%j.out",
+      "--error=/mnt/beegfsstudents/home/3160552/msd_transformer_ce_bands_target10_20_20261014/slurm-%j.err",
+      "--dependency=afterany:701092",
+      "/mnt/beegfsstudents/home/3160552/msd_transformer_ce_bands_target10_20_20261014/run.sbatch",
+      "/mnt/beegfsstudents/home/3160552/msd_transformer_ce_bands_target10_20_20261014"
+    ],
+    "manifest_sha256": "9bf03e19fa23eb16569129cbf810204a237625688c8b55436f363c8b18510179"
+  },
+  "runs": {
+    "MSD_swinunetr_ce_dice_bands_target10_f0s0": {
+      "runtime_recipe.json": {
+        "dataset": "MSD",
+        "model": "swinunetr",
+        "objective": "dice_bands",
+        "weight_dice": 1,
+        "weight_ce": 1,
+        "dice_include_background": true,
+        "augmentation": "none",
+        "constraints": [
+          "bands"
+        ],
+        "calibration_base": "Dice+CE",
+        "target": 0.1,
+        "p95_cap": 0.75,
+        "sdf_policy": "not_applicable",
+        "baseline_reference": {
+          "campaign": "msd_four_models_ce_target60_20261014",
+          "run": "MSD_swinunetr_ce_dice_target60_f0s0",
+          "initialization_sha256": "8d7d717c9669bfbe02e2ad48e5cb3b84cb60ca89f96623f1b14804068d7fb2a4",
+          "validation_sha256": "bedb6931dd2e79ede002b83872551812ab0da38d8b211418f4ac9c555b58db5a",
+          "validation_dice": 0.7022862054445298
+        },
+        "primary_checkpoint": "final_budget",
+        "protocol_sha256": "e62e3660a8f854fe143cae4cc742dfa69912dac06f490a7d95cad183314579fb",
+        "matched_60_percent_reference": {
+          "campaign": "msd_four_models_ce_target60_20261014",
+          "run": "MSD_swinunetr_ce_dice_bands_target60_f0s0",
+          "archive_manifest_sha256": "3e41364647d2dd3fa3a95306d916edf86b9c033410cfa031c59bdfd93df508bd",
+          "calibration_anchor_sha256": "27d32d90534f6e811fcec06400ca11321eb300f6164d86e9cd8a4ea50048016e"
+        }
+      },
+      "calibration.json": {
+        "status": "complete",
+        "weights": {
+          "bands": 0.01723956032031856
+        },
+        "statistics": {
+          "bands": {
+            "median_raw_ratio": 5.800611972808838,
+            "p95_raw_ratio": 6.2288618087768555,
+            "weighted_median_ratio": 0.1,
+            "weighted_p95_ratio": 0.10738283887933718
+          }
+        },
+        "cases": [
+          {
+            "dice_rms": 1.5337055856434745e-06,
+            "bands_rms": 8.341175089299213e-06,
+            "bands_over_dice": 5.4385762214660645,
+            "case_name": "hippocampus_093"
+          },
+          {
+            "dice_rms": 1.5190615840765531e-06,
+            "bands_rms": 9.663510354585014e-06,
+            "bands_over_dice": 6.361500263214111,
+            "case_name": "hippocampus_097"
+          },
+          {
+            "dice_rms": 1.5234074908221373e-06,
+            "bands_rms": 8.804814569884911e-06,
+            "bands_over_dice": 5.779684543609619,
+            "case_name": "hippocampus_197"
+          },
+          {
+            "dice_rms": 1.5181487924564863e-06,
+            "bands_rms": 8.837962923280429e-06,
+            "bands_over_dice": 5.821539402008057,
+            "case_name": "hippocampus_287"
+          },
+          {
+            "dice_rms": 1.5271464235411258e-06,
+            "bands_rms": 9.26481243368471e-06,
+            "bands_over_dice": 6.066748142242432,
+            "case_name": "hippocampus_311"
+          },
+          {
+            "dice_rms": 1.5116775102796964e-06,
+            "bands_rms": 8.866294592735358e-06,
+            "bands_over_dice": 5.8652024269104,
+            "case_name": "hippocampus_314"
+          },
+          {
+            "dice_rms": 1.55432167048275e-06,
+            "bands_rms": 9.361088814330287e-06,
+            "bands_over_dice": 6.02262020111084,
+            "case_name": "hippocampus_353"
+          },
+          {
+            "dice_rms": 1.5490186342503875e-06,
+            "bands_rms": 8.722613529243972e-06,
+            "bands_over_dice": 5.6310577392578125,
+            "case_name": "hippocampus_361"
+          },
+          {
+            "dice_rms": 1.5409482330142055e-06,
+            "bands_rms": 8.658555088914e-06,
+            "bands_over_dice": 5.618978500366211,
+            "case_name": "hippocampus_373"
+          },
+          {
+            "dice_rms": 1.5353147091445862e-06,
+            "bands_rms": 8.743773832975421e-06,
+            "bands_over_dice": 5.695101737976074,
+            "case_name": "hippocampus_390"
+          }
+        ],
+        "anchor_model_sha256": "27d32d90534f6e811fcec06400ca11321eb300f6164d86e9cd8a4ea50048016e",
+        "target_ratio": 0.1,
+        "p95_cap": 0.75,
+        "scope": "All ten training crops only; same calibration graph and prefix as the matched 60% bands run",
+        "base_gradient": "Dice+CE",
+        "legacy_dice_rms_means": "Joint Dice+CE logit-gradient RMS",
+        "config_sha256": "97d969025237054015e2c67d3cf512c15dd97b803746d026cbaadb34bd5fd217",
+        "anchor_successful_updates": 50,
+        "anchor_training_attempts": 50,
+        "charged_flops": 521654695204
+      },
+      "train.log": " \"step\": 154, \"charged_attempts\": 154, \"patient_passes\": 15.4, \"estimated_training_flops\": 23880277480254, \"calibration_flops\": 521654695204, \"total_flops\": 24401932175458, \"compute_fraction\": 0.7468082598933177, \"mean_train_loss\": 1.12783545255661, \"learning_rate\": 8.951021294170211e-05, \"macro_hard_dice\": 0.5225260955062292, \"anterior_hard_dice\": 0.625998338296596, \"anterior_soft_dice\": 0.03576289984182669, \"posterior_hard_dice\": 0.41905385271586226, \"posterior_soft_dice\": 0.023278467679539554, \"macro_soft_dice\": 0.029520683760683123}\n{\"model\": \"swinunetr\", \"objective\": \"dice_bands\", \"fold\": 0, \"seed\": 0, \"step\": 164, \"charged_attempts\": 164, \"patient_passes\": 16.4, \"estimated_training_flops\": 25431169544014, \"calibration_flops\": 521654695204, \"total_flops\": 25952824239218, \"compute_fraction\": 0.795309329630747, \"mean_train_loss\": 1.1054300546646119, \"learning_rate\": 8.77972607814957e-05, \"macro_hard_dice\": 0.5641401084897997, \"anterior_hard_dice\": 0.6115129054444925, \"anterior_soft_dice\": 0.03732710281530252, \"posterior_hard_dice\": 0.516767311535107, \"posterior_soft_dice\": 0.025614439868010007, \"macro_soft_dice\": 0.03147077134165626}\n{\"model\": \"swinunetr\", \"objective\": \"dice_bands\", \"fold\": 0, \"seed\": 0, \"step\": 175, \"charged_attempts\": 175, \"patient_passes\": 17.5, \"estimated_training_flops\": 27137150814150, \"calibration_flops\": 521654695204, \"total_flops\": 27658805509354, \"compute_fraction\": 0.8486605063419193, \"mean_train_loss\": 1.0897965322841296, \"learning_rate\": 8.578598605933105e-05, \"macro_hard_dice\": 0.6265651373555792, \"anterior_hard_dice\": 0.631190899674981, \"anterior_soft_dice\": 0.04171522964651768, \"posterior_hard_dice\": 0.6219393750361774, \"posterior_soft_dice\": 0.028917216660025027, \"macro_soft_dice\": 0.035316223153271355}\n{\"model\": \"swinunetr\", \"objective\": \"dice_bands\", \"fold\": 0, \"seed\": 0, \"step\": 185, \"charged_attempts\": 185, \"patient_passes\": 18.5, \"estimated_training_flops\": 28688042877910, \"calibration_flops\": 521654695204, \"total_flops\": 29209697573114, \"compute_fraction\": 0.8971615760793485, \"mean_train_loss\": 1.0689214706420898, \"learning_rate\": 8.384793436050459e-05, \"macro_hard_dice\": 0.6593171900317322, \"anterior_hard_dice\": 0.6471403996149196, \"anterior_soft_dice\": 0.045362722056989484, \"posterior_hard_dice\": 0.6714939804485447, \"posterior_soft_dice\": 0.032589068779578574, \"macro_soft_dice\": 0.03897589541828403}\n{\"model\": \"swinunetr\", \"objective\": \"dice_bands\", \"fold\": 0, \"seed\": 0, \"step\": 195, \"charged_attempts\": 195, \"patient_passes\": 19.5, \"estimated_training_flops\": 30238934941670, \"calibration_flops\": 521654695204, \"total_flops\": 30760589636874, \"compute_fraction\": 0.9456626458167778, \"mean_train_loss\": 1.0536466479301452, \"learning_rate\": 8.181138949816698e-05, \"macro_hard_dice\": 0.6936948952354205, \"anterior_hard_dice\": 0.6664336339728523, \"anterior_soft_dice\": 0.04929884738073899, \"posterior_hard_dice\": 0.7209561564979889, \"posterior_soft_dice\": 0.03762769545070254, \"macro_soft_dice\": 0.04346327141572077}\n",
+      "metrics.csv": "4617252626,0.34909948804639734,1.3485433838584207,9.883472640180082e-05,0.07213495892771818,0.09777335143615208,0.016252333781896874,0.046496566419284284,0.017570571651538976,0.016911452716717925\n82,82,8.2,12713854621182,521654695204,13235509316386,0.39760055778382664,1.3076871514320374,9.818329376715063e-05,0.11370654592091324,0.15994541441690596,0.01806529016735462,0.0674676774249206,0.017795349256350443,0.017930319711852532\n92,92,9.2,14264746684942,521654695204,14786401380146,0.446101627521256,1.2806579709053039,9.739102846805448e-05,0.19350381178615741,0.26577990299065496,0.02047898285449124,0.1212277205816598,0.01831817849037739,0.019398580672434315\n103,103,10.3,15970727955078,521654695204,16492382650282,0.4994528042324282,1.247853322462602,9.635967989594865e-05,0.27633679471800643,0.38980822138568916,0.02297566102172893,0.16286536805032378,0.01878320244857325,0.02087943173515109\n113,113,11.3,17521620018838,521654695204,18043274714042,0.5479538739698575,1.223256230354309,9.527977051136259e-05,0.352664115118707,0.531635456507389,0.026005248467509564,0.17369277373002504,0.019143008412076876,0.02257412843979322\n123,123,12.3,19072512082598,521654695204,19594166777802,0.5964549437072868,1.1918771982192993,9.40676040216951e-05,0.4074150530857963,0.5823471699384116,0.028433695937005374,0.23248293623318095,0.01972134866250249,0.02407752229975393\n134,134,13.4,20778493352734,521654695204,21300148047938,0.6498061204184591,1.1734601692719893,9.258574821861591e-05,0.4543976069258384,0.6427515799852951,0.03163918627139468,0.2660436338663817,0.02063598956626195,0.026137587918828312\n144,144,14.4,22329385416494,521654695204,22851040111698,0.6983071901558884,1.1453490257263184,9.11079483919218e-05,0.4851652551322424,0.6276183821069645,0.033394789681411706,0.34271212815752045,0.021790633604933437,0.02759271164317257\n154,154,15.4,23880277480254,521654695204,24401932175458,0.7468082598933177,1.12783545255661,8.951021294170211e-05,0.5225260955062292,0.625998338296596,0.03576289984182669,0.41905385271586226,0.023278467679539554,0.029520683760683123\n164,164,16.4,25431169544014,521654695204,25952824239218,0.795309329630747,1.1054300546646119,8.77972607814957e-05,0.5641401084897997,0.6115129054444925,0.03732710281530252,0.516767311535107,0.025614439868010007,0.03147077134165626\n175,175,17.5,27137150814150,521654695204,27658805509354,0.8486605063419193,1.0897965322841296,8.578598605933105e-05,0.6265651373555792,0.631190899674981,0.04171522964651768,0.6219393750361774,0.028917216660025027,0.035316223153271355\n185,185,18.5,28688042877910,521654695204,29209697573114,0.8971615760793485,1.0689214706420898,8.384793436050459e-05,0.6593171900317322,0.6471403996149196,0.045362722056989484,0.6714939804485447,0.032589068779578574,0.03897589541828403\n195,195,19.5,30238934941670,521654695204,30760589636874,0.9456626458167778,1.0536466479301452,8.181138949816698e-05,0.6936948952354205,0.6664336339728523,0.04929884738073899,0.7209561564979889,0.03762769545070254,0.04346327141572077\n"
+    }
+  },
+  "stderr": {
+    "slurm-701092.err": "INFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\n"
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "status.json": {
+    "status": "running",
+    "active": [
+      "MSD_nnunet_dice_f0s7",
+      "MSD_swinunetr_dice_f0s7"
+    ],
+    "completed": 0,
+    "total": 36,
+    "runs": [],
+    "job_id": "706250",
+    "updated_at": 1792315911.8706038,
+    "quota": {
+      "used_gib": 25.46,
+      "limit_gib": 93.13,
+      "free_gib": 67.66999999999999,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  25.46GiB/93.13GiB  213.81k/\u221e  \n\n",
+      "checked_at": 1792315911.909607
+    }
+  },
+  "parallel_status.json": {
+    "status": "running",
+    "job_id": "706250",
+    "updated_at": 1792315911.9203968,
+    "workers": {
+      "0": {
+        "task": "MSD_nnunet_dice_f0s7",
+        "phase": "running"
+      },
+      "1": {
+        "task": "MSD_swinunetr_dice_f0s7",
+        "phase": "running"
+      }
+    }
+  },
+  "gpu_allocation.json": {
+    "status": "passed",
+    "workers": [
+      {
+        "status": "passed",
+        "device_uuid": "96a03b24-6b6f-ecc9-6702-893cf37ac7b5",
+        "visible_devices": 1,
+        "cuda_visible_devices": "0",
+        "slurm_step_gpus": "0",
+        "slurm_job_id": "706250",
+        "slurm_step_id": "0",
+        "rank": "0",
+        "worker": null,
+        "gpu_name": "NVIDIA A100 80GB PCIe MIG 4g.40gb",
+        "total_memory": 42144366592,
+        "cpu_affinity": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "host": "gnode01",
+        "time": 1792315910.4477856
+      },
+      {
+        "status": "passed",
+        "device_uuid": "79d06021-72ed-7661-e4b6-edf1ceab6994",
+        "visible_devices": 1,
+        "cuda_visible_devices": "0",
+        "slurm_step_gpus": "0",
+        "slurm_job_id": "706250",
+        "slurm_step_id": "0",
+        "rank": "1",
+        "worker": null,
+        "gpu_name": "NVIDIA A100 80GB PCIe MIG 4g.40gb",
+        "total_memory": 42144366592,
+        "cpu_affinity": [
+          16,
+          17,
+          18,
+          19
+        ],
+        "host": "gnode01",
+        "time": 1792315910.4477863
+      }
+    ],
+    "manifest_sha256": "e5f30b022882dffcda908dc775eac3013e10e5a84f8e432d7c539d99990942b0",
+    "job_id": "706250"
+  },
+  "slurm-706250.err": "INFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\n",
+  "slurm-706250.out": "",
+  "queue": "706250|RUNNING|hippo-msd-seeds789|gnode01\n"
+}

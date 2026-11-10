@@ -1,0 +1,73 @@
+{
+  "status": "complete",
+  "scope": "Two-recipe development experiment; not three-seed baseline completion",
+  "screening": [
+    {
+      "arm": "standard_lr",
+      "status": "screened",
+      "updates": 207,
+      "training_flops": 90982488646827,
+      "selection_score": 0.32284620442281625,
+      "selection_steps": [
+        124,
+        165,
+        207
+      ],
+      "selection_scores": [
+        0.322803544057551,
+        0.3205410850793406,
+        0.32519398413155715
+      ],
+      "half_budget_dice": 0.32519398413155715
+    },
+    {
+      "arm": "lower_lr",
+      "status": "screened",
+      "updates": 207,
+      "training_flops": 90982488646827,
+      "selection_score": 0.29027984646079674,
+      "selection_steps": [
+        124,
+        165,
+        207
+      ],
+      "selection_scores": [
+        0.26797494933070465,
+        0.29800072531909266,
+        0.3048638647325929
+      ],
+      "half_budget_dice": 0.3048638647325929
+    }
+  ],
+  "selection": {
+    "winner": "standard_lr",
+    "rule": "Mean validation Dice at 30%, 40%, 50%; tie -> standard_lr",
+    "scores": {
+      "standard_lr": 0.32284620442281625,
+      "lower_lr": 0.29027984646079674
+    }
+  },
+  "final": {
+    "id": "GeoFWI3D_unetr_rescue_standard_lr_f0s0",
+    "kind": "conventional",
+    "dataset": "GeoFWI3D",
+    "model": "unetr_vit_b16",
+    "fold": 0,
+    "seed": 0,
+    "arm": "dice",
+    "protocol": "standard_lr",
+    "final_dice": 0.2747085905276259,
+    "best_dice": 0.32519398413155715,
+    "training_dice": 0.8439942085248006,
+    "updates": 414,
+    "training_flops": 181964977293654,
+    "initialization_sha256": "1215193efc51fc67a9da9cb1ef0bca0e6e8019d4af8146d9efcb85b94bb051f3"
+  },
+  "training_flops_by_arm": {
+    "standard_lr": 181964977293654,
+    "lower_lr": 90982488646827
+  },
+  "total_training_flops": 272947465940481,
+  "maximum_training_flops": 273267189814740,
+  "threshold_passed": false
+}

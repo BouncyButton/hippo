@@ -1,0 +1,31 @@
+{
+  "status": "passed",
+  "verified_at": 1792397111.29197,
+  "regression_tests_passed": 104,
+  "real_local_http_chunk_test_passed": 1,
+  "gpu_training_performed": false,
+  "drive_account": "filippofocaccia2@gmail.com",
+  "notebook_id": "15VOVc2RRROzfqTFZmIdU-z9isZ92zDkB",
+  "code_zip_id": "17nlfSghDBvBOYCRl6Zw8ixqU0N9XKf_q",
+  "data_unchanged": true,
+  "scope_unchanged": true,
+  "completed_unetr_archive_verified": true,
+  "checks": {
+    "msd_missing_324_code.zip": {
+      "local_sha256": "5b2db486a5b4a817c32c00c84d0fa8281f5be97359d1c223dc690642672bbdcc",
+      "drive_readback_sha256": "5b2db486a5b4a817c32c00c84d0fa8281f5be97359d1c223dc690642672bbdcc"
+    },
+    "MSD_MISSING_324_NO_AUGMENTATION.ipynb": {
+      "local_sha256": "15b786ca44bcff4d4d66ebd4faed7039e0616666a9e234bd863cb3d278357df3",
+      "drive_readback_sha256": "15b786ca44bcff4d4d66ebd4faed7039e0616666a9e234bd863cb3d278357df3"
+    }
+  },
+  "fixes": [
+    "Snapshot live logs before archive hashing; archive final shutdown log after worker exit",
+    "Accept only append-only repair of old train.log with original prefix hash intact",
+    "Use Google HTTP transport which handles Drive 308 as Resume Incomplete",
+    "17MiB multi-chunk save and independent download must pass before new training",
+    "Pace worker writes and reuse exact server-acknowledged duplicate charge bytes"
+  ],
+  "scientific_settings": "Unchanged frozen manifests, no augmentation, folds0/1/2 seeds0/2/20, 31,976,450,667,090 optimization FLOPs per trajectory; calibration and recovery overhead separate"
+}

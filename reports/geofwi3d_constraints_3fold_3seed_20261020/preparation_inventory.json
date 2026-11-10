@@ -1,0 +1,77 @@
+{
+  "status": "scope_choice_pending",
+  "created_at": 1792480423.751819,
+  "baselines_rerun": false,
+  "baseline_reference": "/Users/filippofocaccia/Desktop/hippo/reports/geofwi3d_frozen_3fold_3seed_20261020/final_results.json",
+  "baseline_reference_sha256": "40d2ab9c2fe380885175e8d4c5b6666af1321c2c49c8ebc14ac17ba5a36c220d",
+  "folds": [
+    0,
+    1,
+    2
+  ],
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "models": [
+    "nnunet",
+    "swinunetr",
+    "unetr_vit_b16",
+    "basic_unet16"
+  ],
+  "workers": 2,
+  "cap_flops_per_run": 182178126543160,
+  "verified_reusable_constraints": [
+    {
+      "model": "unetr_vit_b16",
+      "arm": "dice_bands",
+      "fold": 0,
+      "seed": 0,
+      "source": "/Users/filippofocaccia/Desktop/hippo/reports/geofwi3d_unetr_lr6_20261019/bands_completed_evidence",
+      "archive_manifest_sha256": "15b11679c3b8ef2aa60197b89c1be1e3090fe7269089e5251d0ebbb5fba381a2",
+      "final_dice": 0.5170694649012774
+    }
+  ],
+  "suite_options": {
+    "current": {
+      "arms": [
+        "dice_bands",
+        "dice_sdf",
+        "dice_bands_sdf",
+        "dice_bands_edge",
+        "dice_bands_edge_sdf",
+        "dice_depth",
+        "dice_bands_depth",
+        "dice_edge_depth",
+        "dice_sdf_depth",
+        "dice_bands_edge_depth",
+        "dice_bands_sdf_depth",
+        "dice_edge_sdf_depth",
+        "dice_bands_edge_sdf_depth"
+      ],
+      "total_constraint_cells": 468,
+      "new_cells_before_further_deduplication": 467
+    },
+    "earlier": {
+      "arms": [
+        "dice_bands",
+        "dice_sdf",
+        "dice_bands_sdf",
+        "dice_bands_edge",
+        "dice_bands_edge_sdf"
+      ],
+      "total_constraint_cells": 180,
+      "new_cells_before_further_deduplication": 179
+    }
+  },
+  "submission": null,
+  "remaining_preflight": [
+    "Resolve suite selection",
+    "Audit compatible previously completed constraint cells",
+    "Profile latest UNETR base loss with requested auxiliaries",
+    "Reserve calibration inside per-run total cap",
+    "Verify geometry under UNETR XY D4 for DEPTH if selected",
+    "Run constraint GPU preflight before production"
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "status": "running",
+  "instruction": "Test frame-excluded BANDS using the highest-Dice LR5 recipe",
+  "only_training_change": "Exclude outer two-voxel frame from BANDS support; recalibrate this loss",
+  "peak_lr": 0.0005,
+  "halfway_gate": false,
+  "frame_width": 2,
+  "cap_flops": 182178126543160,
+  "maximum_new_runs": 1,
+  "target_updates": 407,
+  "references": {
+    "baseline": {
+      "id": "GeoFWI3D_unetr_lr5_f0s0",
+      "kind": "conventional",
+      "dataset": "GeoFWI3D",
+      "model": "unetr_vit_b16",
+      "fold": 0,
+      "seed": 0,
+      "arm": "dice",
+      "protocol": "lr5",
+      "augmentation": "xy_d4_v1",
+      "final_dice": 0.5061980031645187,
+      "best_dice": 0.5118019597109141,
+      "training_dice": 0.5539878545219811,
+      "updates": 414,
+      "training_flops": 181964977293654,
+      "calibration_flops": 0,
+      "total_flops": 181964977293654,
+      "initialization_sha256": "1215193efc51fc67a9da9cb1ef0bca0e6e8019d4af8146d9efcb85b94bb051f3"
+    },
+    "original_bands": {
+      "id": "GeoFWI3D_unetr_lr5_bands_f0s0",
+      "kind": "conventional",
+      "dataset": "GeoFWI3D",
+      "model": "unetr_vit_b16",
+      "fold": 0,
+      "seed": 0,
+      "arm": "dice_bands",
+      "protocol": "lr5_bands",
+      "augmentation": "xy_d4_v1",
+      "final_dice": 0.5060704595521789,
+      "best_dice": 0.5122931532713706,
+      "training_dice": 0.5847535878052681,
+      "updates": 407,
+      "training_flops": 178971027682834,
+      "calibration_flops": 2796124590582,
+      "total_flops": 181767152273416,
+      "initialization_sha256": "1215193efc51fc67a9da9cb1ef0bca0e6e8019d4af8146d9efcb85b94bb051f3"
+    }
+  },
+  "driver_sha256": "7a9901c69c61a9c17326cd106f60e8499b1682fdfec3a82d9dfe7ccc18bada8d",
+  "diagnostic_preflight": "Three separately reported updates, established convention"
+}

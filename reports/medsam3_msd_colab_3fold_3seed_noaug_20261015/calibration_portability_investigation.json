@@ -1,0 +1,282 @@
+{
+  "status": "portability_policy_decision_required",
+  "campaign_bundle_sha256": "26f4f23962fb7dd1931f70c2e672e8f76d8c5f4cd983ce980b2dc041c994f20a",
+  "source_log_sha256": "9b0addbd348232fbf0938a07ed096d0db509e5ca822a2f4b1ad50b3ff5b004c1",
+  "fold0": "passed audit and calibration per log",
+  "fold1": "passed strict audit; 20/20 calibration rows saved; imported bands coefficient guard failed",
+  "fold3": "not yet started",
+  "scientific_updates": 0,
+  "original_recipe_modified": false,
+  "guard_modified": false,
+  "fold1_bands": {
+    "original_weight": 12.906762993482202,
+    "original_weighted_quantiles": [
+      0.002857800845605071,
+      0.05130840140439401,
+      0.5000000000000001,
+      1.316650622697403
+    ],
+    "colab_weighted_quantiles": [
+      0.0043397236324511255,
+      0.052680930513412404,
+      0.6736139612372511,
+      1.241518252521983
+    ],
+    "guard_p95": 0.525,
+    "illustrative_weight_for_local_p95_50pct": 9.580237150797679,
+    "illustrative_only_not_applied": true
+  },
+  "fold1_edge": {
+    "original_weight": 142.75874580967613,
+    "original_weighted_quantiles": [
+      0.0015741774116447998,
+      0.02049273646218146,
+      0.49999999999999994,
+      1.0784148577113648
+    ],
+    "colab_weighted_quantiles": [
+      0.0013601335345296548,
+      0.019746610233267844,
+      0.11348707370551836,
+      0.43524591138312146
+    ]
+  },
+  "hardware": {
+    "original_request": "gpu:3g.40gb:1",
+    "original_source": "original/source/scripts/run_medsam3_multiclass_combined.sh",
+    "colab_observed": "NVIDIA A100-SXM4-80GB",
+    "colab_multiprocessors": 108
+  },
+  "hypothesis": "Cross-runtime stochastic/numerical differences; first-sample direct code-equivalence and within-Colab strict audits pass. Historical target ratios do not imply identical measured ratios on a new device.",
+  "sources": [
+    "https://docs.pytorch.org/docs/2.12/notes/randomness.html",
+    "https://raw.githubusercontent.com/pytorch/pytorch/main/aten/src/ATen/native/cuda/Dropout.cu"
+  ],
+  "historical_weight_formula_reproduces_all_folds": true,
+  "fold1_reconstructed_band_samples": [
+    {
+      "case": "hippocampus_130",
+      "anchor": 0,
+      "original_band_gradient_ratio": 0.006445704643547143,
+      "colab_band_gradient_ratio": 0.007912712937086048,
+      "squared_gradient_factors": [
+        0.7228604256966269,
+        1.0893425492397253
+      ]
+    },
+    {
+      "case": "hippocampus_130",
+      "anchor": 13,
+      "original_band_gradient_ratio": 0.42867315265862177,
+      "colab_band_gradient_ratio": 0.4126083189190505,
+      "squared_gradient_factors": [
+        1.4882160372690072,
+        1.3787622055775892
+      ]
+    },
+    {
+      "case": "hippocampus_130",
+      "anchor": 26,
+      "original_band_gradient_ratio": 0.13173353042763244,
+      "colab_band_gradient_ratio": 0.08581941796667547,
+      "squared_gradient_factors": [
+        1.9039825920420768,
+        0.80805596583956
+      ]
+    },
+    {
+      "case": "hippocampus_130",
+      "anchor": 39,
+      "original_band_gradient_ratio": 0.014971509093662808,
+      "colab_band_gradient_ratio": 0.00957986659643077,
+      "squared_gradient_factors": [
+        1.2206813003710832,
+        0.4997928715536919
+      ]
+    },
+    {
+      "case": "hippocampus_221",
+      "anchor": 0,
+      "original_band_gradient_ratio": 0.004889041644422918,
+      "colab_band_gradient_ratio": 0.0043397236324511255,
+      "squared_gradient_factors": [
+        1.4875170932510595,
+        1.1720297565692241
+      ]
+    },
+    {
+      "case": "hippocampus_221",
+      "anchor": 11,
+      "original_band_gradient_ratio": 1.316650622697403,
+      "colab_band_gradient_ratio": 1.2415182525219828,
+      "squared_gradient_factors": [
+        1.1328700582100724,
+        1.0072684208270726
+      ]
+    },
+    {
+      "case": "hippocampus_221",
+      "anchor": 22,
+      "original_band_gradient_ratio": 0.1819677613549995,
+      "colab_band_gradient_ratio": 0.30364326370073574,
+      "squared_gradient_factors": [
+        0.45888702743645804,
+        1.2777449630348068
+      ]
+    },
+    {
+      "case": "hippocampus_221",
+      "anchor": 33,
+      "original_band_gradient_ratio": 0.007145495792940523,
+      "colab_band_gradient_ratio": 0.00934850022712375,
+      "squared_gradient_factors": [
+        0.8431165893470992,
+        1.443134418920365
+      ]
+    },
+    {
+      "case": "hippocampus_251",
+      "anchor": 0,
+      "original_band_gradient_ratio": 0.002857800845605071,
+      "colab_band_gradient_ratio": 0.00619027902190826,
+      "squared_gradient_factors": [
+        1.3240045164415888,
+        6.2122081016031245
+      ]
+    },
+    {
+      "case": "hippocampus_251",
+      "anchor": 9,
+      "original_band_gradient_ratio": 0.16342581136909015,
+      "colab_band_gradient_ratio": 0.358834960330283,
+      "squared_gradient_factors": [
+        0.5013717950018574,
+        2.4171750138836714
+      ]
+    },
+    {
+      "case": "hippocampus_251",
+      "anchor": 18,
+      "original_band_gradient_ratio": 0.07566502654321258,
+      "colab_band_gradient_ratio": 0.08667688708747162,
+      "squared_gradient_factors": [
+        0.6159581972625648,
+        0.8082904974239498
+      ]
+    },
+    {
+      "case": "hippocampus_251",
+      "anchor": 27,
+      "original_band_gradient_ratio": 0.011233346134160974,
+      "colab_band_gradient_ratio": 0.00992060640218663,
+      "squared_gradient_factors": [
+        1.132830895889629,
+        0.8835339496925925
+      ]
+    },
+    {
+      "case": "hippocampus_333",
+      "anchor": 0,
+      "original_band_gradient_ratio": 0.005217594331795771,
+      "colab_band_gradient_ratio": 0.004514411414666506,
+      "squared_gradient_factors": [
+        0.9775131083027666,
+        0.731786243880857
+      ]
+    },
+    {
+      "case": "hippocampus_333",
+      "anchor": 12,
+      "original_band_gradient_ratio": 0.4570183882790835,
+      "colab_band_gradient_ratio": 0.643724261695949,
+      "squared_gradient_factors": [
+        0.55775972246609,
+        1.1065716923573388
+      ]
+    },
+    {
+      "case": "hippocampus_333",
+      "anchor": 25,
+      "original_band_gradient_ratio": 0.2811954154429581,
+      "colab_band_gradient_ratio": 0.2132352055034584,
+      "squared_gradient_factors": [
+        1.3850691633333911,
+        0.796476207513202
+      ]
+    },
+    {
+      "case": "hippocampus_333",
+      "anchor": 37,
+      "original_band_gradient_ratio": 0.008791130266666735,
+      "colab_band_gradient_ratio": 0.010620473519783187,
+      "squared_gradient_factors": [
+        0.6287744069062894,
+        0.9176840558606318
+      ]
+    },
+    {
+      "case": "hippocampus_385",
+      "anchor": 0,
+      "original_band_gradient_ratio": 0.02695177626557544,
+      "colab_band_gradient_ratio": 0.019542443060149312,
+      "squared_gradient_factors": [
+        0.4374532138349838,
+        0.2299929567208893
+      ]
+    },
+    {
+      "case": "hippocampus_385",
+      "anchor": 13,
+      "original_band_gradient_ratio": 0.16850199418489722,
+      "colab_band_gradient_ratio": 0.10346717195619388,
+      "squared_gradient_factors": [
+        1.3001774749512187,
+        0.49022753990973067
+      ]
+    },
+    {
+      "case": "hippocampus_385",
+      "anchor": 26,
+      "original_band_gradient_ratio": 0.2433458870322539,
+      "colab_band_gradient_ratio": 0.24870707733883818,
+      "squared_gradient_factors": [
+        1.0648502116048586,
+        1.1122868141789972
+      ]
+    },
+    {
+      "case": "hippocampus_385",
+      "anchor": 39,
+      "original_band_gradient_ratio": 0.012210794811948898,
+      "colab_band_gradient_ratio": 0.008681822217258148,
+      "squared_gradient_factors": [
+        1.249246728555901,
+        0.631512760454693
+      ]
+    }
+  ],
+  "original_startup_check": "original code and extension match exactly on first fold1 calibration sample, including original eval warm-up",
+  "startup_probe": "gpu_original_startup_forward_comparison.json",
+  "conclusion": "Observed historical-to-Colab calibration drift also occurs with the frozen original forward path; latest probe rules out the omitted startup eval as the cause for the tested sample. Specific hardware/kernel/RNG contribution was not separately isolated.",
+  "options": {
+    "preserve_frozen_coefficients": {
+      "new_runs": 99,
+      "reused_runs": 27,
+      "fold1_bands_weight": 12.906762993482202,
+      "fold1_edge_weight": 142.75874580967613,
+      "observed_fold1_bands_p95": 0.6736139612372511,
+      "change": "Treat imported coefficients as frozen historical calibration and record measured Colab portability deviations instead of enforcing the current imported-coefficient p95 guard. Keep strict numerical audit and 10%/50% calibration for new coefficients.",
+      "limitation": "Cannot claim every imported constraint meets a 50% p95 ceiling on Colab; comparisons to old controls remain confounded by hardware/runtime.",
+      "implemented": false
+    },
+    "fresh_matched_colab_study": {
+      "new_runs": 126,
+      "fresh_control_runs": 27,
+      "historical_results": "Retain for context; fresh Colab controls become the matched reference",
+      "fold1_bands_weight_from_current_samples": 9.580237150797679,
+      "change": "Recalibrate all constraints by the original 10% median-target/50% p95 procedure on Colab, then use the newly frozen coefficients across seeds and arms.",
+      "limitation": "Changes coefficients and duplicates the 27 original control conditions, contrary to current reuse instruction unless user changes scope.",
+      "implemented": false
+    }
+  }
+}

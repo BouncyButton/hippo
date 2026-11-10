@@ -1,0 +1,68 @@
+def prepare_preflight_upgrade(bundle, results, expected_manifest):
+    """Preserve a known failed preflight before staging the corrected package."""
+    import hashlib
+    import json
+    from pathlib import Path
+    import shutil
+    import tempfile
+    bundle, results = Path(bundle), Path(results)
+    manifest = bundle/'bundle_manifest.json'
+    if not manifest.exists(): return
+    previous = hashlib.sha256(manifest.read_bytes()).hexdigest()
+    if previous == expected_manifest: return
+    if previous != '92b387c59ce409c5700e6e9b84f4bcf27069d9cb43f29f0fd8ce67ceb84d543d':
+        raise RuntimeError('Unrecognized existing bundle; preserve its work before changing it.')
+    work = [bundle/'work', results/'runs', results/'recovery']
+    if any(p.is_file() for folder in work for p in folder.rglob('*')):
+        raise RuntimeError('Scientific work or recovery exists. This preflight-only upgrade cannot proceed.')
+    # Preserve all old preflight evidence, including an interrupted calibration.
+    backup_root = results/'preflight_migrations'; backup_root.mkdir(parents=True, exist_ok=True)
+    backup = Path(tempfile.mkdtemp(prefix='original_preflight_', dir=backup_root))
+    for name in ('engine.py', 'runtime.py', 'bundle_manifest.json'):
+        shutil.copyfile(bundle/name, backup/name)
+    for name in ('environment_binding.json', 'source_binding.json', 'preflight.json'):
+        if (results/name).exists(): shutil.copyfile(results/name, backup/name)
+    if (results/'calibration').exists():
+        (results/'calibration').rename(backup/'calibration')
+    (backup/'migration.json').write_text(json.dumps(dict(
+        previous_manifest=previous, next_manifest=expected_manifest,
+        reason='Correct strict GPU equivalence audit before any scientific training'), indent=2))
+    print('Preserved previous preflight evidence:', backup)
+
+
+EXPECTED_UPLOADS = {'medsam3_msd_code.zip': '1e4ec443e1f6f7d169a49f444ae6e1400bdc51132a65840e5a6d5266d8946ad4', 'medsam3_msd_data.zip': 'ad869cf8c8862697b41bda740e91cae91bea6fcfdadca364b6f3ec5e6acf95e4', 'sam3.pt': '9999e2341ceef5e136daa386eecb55cb414446a00ac2b55eb2dfd2f7c3cf8c9e'}
+EXPECTED_MANIFEST = '26f4f23962fb7dd1931f70c2e672e8f76d8c5f4cd983ce980b2dc041c994f20a'
+def sha256(path):
+    h = hashlib.sha256()
+    with Path(path).open('rb') as stream:
+        for block in iter(lambda: stream.read(8*1024**2), b''): h.update(block)
+    return h.hexdigest()
+def checked_copy(source, target, expected):
+    if target.exists() and sha256(target) == expected: return
+    target.parent.mkdir(parents=True, exist_ok=True)
+    temporary = target.with_name(target.name+'.copying')
+    shutil.copyfile(source, temporary)
+    if sha256(temporary) != expected: raise ValueError('Copy failed verification: '+str(target))
+    temporary.replace(target)
+def safe_extract(path, destination):
+    with zipfile.ZipFile(path) as archive:
+        for item in archive.infolist():
+            name = Path(item.filename)
+            if name.is_absolute() or '..' in name.parts or (item.external_attr >> 16) & 0o170000 == 0o120000:
+                raise ValueError('Unsafe ZIP member')
+        archive.extractall(destination)
+for name, expected in EXPECTED_UPLOADS.items():
+    path = INPUT/name
+    if not path.exists(): raise FileNotFoundError('Upload '+name+' into '+str(INPUT))
+    if sha256(path) != expected: raise ValueError('Upload hash mismatch: '+name)
+    print('Verified', name, flush=True)
+if shutil.disk_usage('/content').free < 16*1024**3:
+    raise RuntimeError('Need 16 GiB free on the runtime disk before staging')
+prepare_preflight_upgrade(BUNDLE, RESULTS, EXPECTED_MANIFEST)
+BUNDLE.mkdir(exist_ok=True)
+safe_extract(INPUT/'medsam3_msd_code.zip', BUNDLE)
+safe_extract(INPUT/'medsam3_msd_data.zip', BUNDLE)
+checked_copy(INPUT/'sam3.pt', BUNDLE/'weights/sam3.pt', EXPECTED_UPLOADS['sam3.pt'])
+if sha256(BUNDLE/'bundle_manifest.json') != EXPECTED_MANIFEST: raise ValueError('Bundle manifest differs')
+(RESULTS/'source_binding.json').write_text(json.dumps(dict(uploads=EXPECTED_UPLOADS, manifest=EXPECTED_MANIFEST), indent=2))
+print('Staged on the local SSD. No training has started.')

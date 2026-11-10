@@ -1,0 +1,25 @@
+{
+  "request": "Replace queued two-volume SAM3 job with six runs: SAM3 GeoFWI3D and MedSAM3 ADNI, each baseline/bands/bands+edge, two training samples, 200 updates, fold0 seed0 no augmentation; use multiple GPUs concurrently.",
+  "adni_baseline_explicitly_authorized": true,
+  "parallelism": "Two independent GPU workers in one allocation; no distributed optimizer or model changes",
+  "adni_samples": "First two existing crops, one per subject",
+  "sam3_validation_volumes": 96,
+  "adni_validation_crops": 54,
+  "queued_job_being_revised": "702445",
+  "queued_job_held_for_revision": true,
+  "manifest_sha256": "9c40972644c2bee57f2dd597e6b8c8201e6b3f9fa484d4c7ec5ef6b683e46b54",
+  "workers": 2,
+  "account_gpu_maximum": 2,
+  "cpus": 8,
+  "memory_gib": 80,
+  "train_cases": {
+    "GeoFWI3D": [
+      "model_0546",
+      "model_0093"
+    ],
+    "ADNI": [
+      "hippocampus_adni_147119_L",
+      "hippocampus_adni_257270_R"
+    ]
+  }
+}

@@ -1,0 +1,16 @@
+MSD: replace seed 1 with seed 20; retain seeds 0 and 2.
+
+1. If the previous MSD run cell is active, interrupt it once. Wait for all workers to stop and finish verified recovery uploads. Do not delete the runtime or use two notebooks against these results simultaneously.
+2. Upload msd_seeds0220_resume_noaug_code.zip to My Drive/hippo_msd_3fold_3seed/input/. Keep the original msd_replication_code.zip, msd_data_verified.zip and results_noaug_v1 folder. No dataset reupload is needed.
+3. Open MSD_SEEDS_0_2_20_RESUME_NO_AUGMENTATION.ipynb in Colab. Use the same Google account, GPU model and software as the original environment binding. Run its cells from the top, including the separate seed-20 preflight.
+4. The run cell first verifies and resumes missing seed-0/2 tasks, then runs seed-20 tasks. Set SESSION_HOURS below the remaining lifetime of your current runtime (default 8 hours; a fresh runtime may use 22). MAX_WORKERS=0 fills the CPU-supported worker target subject to resource limits.
+
+The combined target remains 504 results, not 504 additional runs. If seeds 0 and 2 are already complete, only 168 seed-20 runs remain. The cluster search baselines are provenance and are not substituted for fresh matched Colab controls.
+
+Seeds 0/2 and original seed-1 results/recovery stay in results_noaug_v1 without migration or rewriting completed archives. New seed-20 results/recovery and the combined seeds-0/2/20 comparison go to results_seeds0220_noaug_v1. The old comparison.json stays unchanged. Seed 1 is never launched by this notebook, and its existing work is not deleted.
+
+No augmentation. Same models, splits, losses, optimization cap 31,976,450,667,090 FLOPs per run, update schedules, optimizers, precision, calibration, SDF timing and resume/accounting semantics. Maximum eligible worker occupancy, NVMe work storage, single-read archive verification and original evaluation acceleration remain enabled.
+
+The report identifies this as exploratory seed selection after observing validation scores. Preserve the original seed-0/1/2 results alongside it.
+
+Local package/recovery tests and cluster CPU initialization hash checks do not replace the required Colab GPU preflight. A mismatched environment or failed preflight blocks launches without resetting saved results.

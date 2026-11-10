@@ -1,0 +1,53 @@
+{
+  "job_id": "702843",
+  "status": "running",
+  "host": "gnode02",
+  "total_runs": 24,
+  "seed": 3,
+  "folds": [
+    0,
+    1,
+    2
+  ],
+  "datasets": [
+    "ADNI",
+    "MSD"
+  ],
+  "models": [
+    "nnunet",
+    "swinunetr",
+    "unetr_vit_b16",
+    "basic_unet16"
+  ],
+  "baseline_only": true,
+  "workers": {
+    "0": {
+      "task": "ADNI_nnunet_dice_f0s3",
+      "phase": "running"
+    },
+    "1": {
+      "task": "MSD_nnunet_dice_f0s3",
+      "phase": "running"
+    }
+  },
+  "gpu_isolation": "passed",
+  "manifest_sha256": "469af1dd0bfc7cdb902c57f961b7384ff3cf1601c85da16f3a700e83f6925188",
+  "submission_quota": {
+    "used_gib": 24.73,
+    "limit_gib": 93.13,
+    "free_gib": 68.39999999999999,
+    "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  24.73GiB/93.13GiB  204.57k/\u221e  \n\n",
+    "checked_at": 1792092753.194154
+  },
+  "replaced_job": "702776",
+  "scheduler_preflight": "passed",
+  "cpu_preflight": "passed",
+  "archive_collector": {
+    "pid": 37450,
+    "caffeinate_pid": 37451,
+    "started_at": 1792092213.6718059,
+    "python": "/Library/Frameworks/Python.framework/Versions/3.12/bin/python3",
+    "log": "/Users/filippofocaccia/Desktop/hippo/reports/adni_msd_four_models_seed3_baselines_20261015/collector.log"
+  },
+  "recorded_at": "2026-10-15T21:34:17.179123+02:00"
+}

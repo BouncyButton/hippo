@@ -1,0 +1,163 @@
+{
+  "status.json": {
+    "status": "complete",
+    "active": [],
+    "completed": 6,
+    "total": 6,
+    "runs": [
+      {
+        "id": "GeoFWI3D_SAM3_2sample_dice_f0s0",
+        "kind": "foundation",
+        "dataset": "GeoFWI3D",
+        "model": "SAM3",
+        "fold": 0,
+        "seed": 0,
+        "arm": "dice",
+        "target": 0.1,
+        "protocol": "GeoFWI3D",
+        "final_dice": 0.8346616168597668,
+        "best_dice": 0.8346616168597668,
+        "released_bytes": 223134773
+      },
+      {
+        "id": "ADNI_MedSAM3_2sample_dice_f0s0",
+        "kind": "foundation",
+        "dataset": "ADNI",
+        "model": "MedSAM3",
+        "fold": 0,
+        "seed": 0,
+        "arm": "dice",
+        "target": 0.1,
+        "protocol": "ADNI",
+        "final_dice": 0.7583022995465932,
+        "best_dice": 0.7583022995465932,
+        "released_bytes": 223134773
+      },
+      {
+        "id": "GeoFWI3D_SAM3_2sample_dice_bands_f0s0",
+        "kind": "foundation",
+        "dataset": "GeoFWI3D",
+        "model": "SAM3",
+        "fold": 0,
+        "seed": 0,
+        "arm": "dice_bands",
+        "target": 0.1,
+        "protocol": "GeoFWI3D",
+        "final_dice": 0.8286660560261684,
+        "best_dice": 0.8286660560261684,
+        "released_bytes": 223134773
+      },
+      {
+        "id": "ADNI_MedSAM3_2sample_dice_bands_f0s0",
+        "kind": "foundation",
+        "dataset": "ADNI",
+        "model": "MedSAM3",
+        "fold": 0,
+        "seed": 0,
+        "arm": "dice_bands",
+        "target": 0.1,
+        "protocol": "ADNI",
+        "final_dice": 0.7655302416296833,
+        "best_dice": 0.7655302416296833,
+        "released_bytes": 223134773
+      },
+      {
+        "id": "GeoFWI3D_SAM3_2sample_dice_bands_edge_f0s0",
+        "kind": "foundation",
+        "dataset": "GeoFWI3D",
+        "model": "SAM3",
+        "fold": 0,
+        "seed": 0,
+        "arm": "dice_bands_edge",
+        "target": 0.1,
+        "protocol": "GeoFWI3D",
+        "final_dice": 0.8017913677736916,
+        "best_dice": 0.8017913677736916,
+        "released_bytes": 223134773
+      },
+      {
+        "id": "ADNI_MedSAM3_2sample_dice_bands_edge_f0s0",
+        "kind": "foundation",
+        "dataset": "ADNI",
+        "model": "MedSAM3",
+        "fold": 0,
+        "seed": 0,
+        "arm": "dice_bands_edge",
+        "target": 0.1,
+        "protocol": "ADNI",
+        "final_dice": 0.78292778671572,
+        "best_dice": 0.78292778671572,
+        "released_bytes": 223134773
+      }
+    ],
+    "job_id": "702517",
+    "updated_at": 1792092733.5752354,
+    "quota": {
+      "used_gib": 25.15,
+      "limit_gib": 93.13,
+      "free_gib": 67.97999999999999,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  25.15GiB/93.13GiB  204.57k/\u221e  \n\n",
+      "checked_at": 1792092733.6100483
+    }
+  },
+  "submission.json": {
+    "job_id": "702517",
+    "dependency": "702047",
+    "quota": {
+      "used_gib": 25.17,
+      "limit_gib": 93.13,
+      "free_gib": 67.96,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  25.17GiB/93.13GiB  201.81k/\u221e  \n\n",
+      "checked_at": 1792080719.832614
+    },
+    "submitted_at": 1792080720.1171927,
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--chdir=/mnt/beegfsstudents/home/3160552/foundation_two_sample_2gpu_20261015",
+      "--output=/mnt/beegfsstudents/home/3160552/foundation_two_sample_2gpu_20261015/slurm-%j.out",
+      "--error=/mnt/beegfsstudents/home/3160552/foundation_two_sample_2gpu_20261015/slurm-%j.err",
+      "--dependency=afterany:702047",
+      "/mnt/beegfsstudents/home/3160552/foundation_two_sample_2gpu_20261015/run.sbatch",
+      "/mnt/beegfsstudents/home/3160552/foundation_two_sample_2gpu_20261015"
+    ],
+    "manifest_sha256": "9c40972644c2bee57f2dd597e6b8c8201e6b3f9fa484d4c7ec5ef6b683e46b54"
+  },
+  "successor.json": {
+    "job_id": "702580",
+    "dependency": "702517",
+    "quota": {
+      "used_gib": 24.92,
+      "limit_gib": 93.13,
+      "free_gib": 68.21,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  24.92GiB/93.13GiB  201.82k/\u221e  \n\n",
+      "checked_at": 1792082657.9671128
+    },
+    "submitted_at": 1792082658.0864315,
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--chdir=/mnt/beegfsstudents/home/3160552/foundation_two_sample_2gpu_20261015",
+      "--output=/mnt/beegfsstudents/home/3160552/foundation_two_sample_2gpu_20261015/slurm-%j.out",
+      "--error=/mnt/beegfsstudents/home/3160552/foundation_two_sample_2gpu_20261015/slurm-%j.err",
+      "--dependency=afterany:702517",
+      "/mnt/beegfsstudents/home/3160552/foundation_two_sample_2gpu_20261015/run.sbatch",
+      "/mnt/beegfsstudents/home/3160552/foundation_two_sample_2gpu_20261015"
+    ],
+    "manifest_sha256": "9c40972644c2bee57f2dd597e6b8c8201e6b3f9fa484d4c7ec5ef6b683e46b54"
+  },
+  "base_request.json": {
+    "job_id": "702517",
+    "destination": "/tmp/hippo-sam3-1395-702517.pt",
+    "expected_sha256": "9999e2341ceef5e136daa386eecb55cb414446a00ac2b55eb2dfd2f7c3cf8c9e"
+  },
+  "ready": [],
+  "cleanup": [
+    "runs/ADNI_MedSAM3_2sample_dice_bands_edge_f0s0/cleanup.json",
+    "runs/GeoFWI3D_SAM3_2sample_dice_bands_edge_f0s0/cleanup.json",
+    "runs/GeoFWI3D_SAM3_2sample_dice_bands_f0s0/cleanup.json",
+    "runs/GeoFWI3D_SAM3_2sample_dice_f0s0/cleanup.json",
+    "runs/ADNI_MedSAM3_2sample_dice_f0s0/cleanup.json",
+    "runs/ADNI_MedSAM3_2sample_dice_bands_f0s0/cleanup.json"
+  ]
+}

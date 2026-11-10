@@ -1,0 +1,64 @@
+{
+  "cause": "The worker waited for a durable-archive acknowledgment produced by a collector on the user laptop. Loss of laptop connectivity blocked subsequent runs while retaining the GPU allocation.",
+  "scope": "Operational orchestration issue; frozen scientific protocols and completed results unchanged.",
+  "runs": [
+    {
+      "id": "MSD_basic_unet16_ce_dice_bands_edge_depth_target40_f0s0",
+      "archive_ready": 1791992465.5681226,
+      "archive_verified": 1791992509.452884,
+      "archive_wait_seconds": 43.884761333465576,
+      "training_seconds": 85.23046508798143,
+      "released_bytes": 28985552
+    },
+    {
+      "id": "MSD_basic_unet16_ce_dice_bands_edge_depth_target60_f0s0",
+      "archive_ready": 1791992720.7239463,
+      "archive_verified": 1791992757.796098,
+      "archive_wait_seconds": 37.07215166091919,
+      "training_seconds": 79.57188649999443,
+      "released_bytes": 28985552
+    },
+    {
+      "id": "MSD_basic_unet16_ce_dice_bands_target60_f0s0",
+      "archive_ready": 1791983985.039957,
+      "archive_verified": 1791992019.624717,
+      "archive_wait_seconds": 8034.584759950638,
+      "training_seconds": 61.265557756996714,
+      "released_bytes": 28985552
+    },
+    {
+      "id": "MSD_basic_unet16_ce_dice_bands_target40_f0s0",
+      "archive_ready": 1791979197.3075948,
+      "archive_verified": 1791983817.369226,
+      "archive_wait_seconds": 4620.061631202698,
+      "training_seconds": 60.55918187397765,
+      "released_bytes": 28985552
+    },
+    {
+      "id": "MSD_basic_unet16_ce_dice_bands_target10_f0s0",
+      "archive_ready": 1791978990.5937924,
+      "archive_verified": 1791979021.9859898,
+      "archive_wait_seconds": 31.392197370529175,
+      "training_seconds": 61.09815112000797,
+      "released_bytes": 29009872
+    },
+    {
+      "id": "MSD_basic_unet16_ce_dice_bands_edge_depth_target10_f0s0",
+      "archive_ready": 1791992222.459718,
+      "archive_verified": 1791992266.312572,
+      "archive_wait_seconds": 43.85285401344299,
+      "training_seconds": 79.30793565901695,
+      "released_bytes": 29009872
+    }
+  ],
+  "total_observed_archive_wait_seconds": 12810.848355531693,
+  "resolution": "Collector reconnected and verified pending archives; worker continued automatically. An always-available archive destination is required before the long sweep can be submitted unattended.",
+  "remote_filesystem_check": {
+    "/home/3160552": "BeeGFS",
+    "/mnt/beegfsstudents/home/3160552": "BeeGFS",
+    "/tmp": "local XFS, not a durable project archive"
+  },
+  "total_training_seconds": 427.03317799797514,
+  "released_file_bytes": 173961952,
+  "completed_at": 1791992834.344175
+}

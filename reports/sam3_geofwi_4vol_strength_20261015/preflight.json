@@ -1,0 +1,29 @@
+{
+  "status": "passed",
+  "manifest_sha256": "ff0f3ea6731a5c4d9b1031bef57fd5beea331bbf878b626d508c46d49be7a8a3",
+  "quota": {
+    "used_gib": 24.75,
+    "limit_gib": 93.13,
+    "free_gib": 68.38,
+    "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  24.75GiB/93.13GiB  205.51k/\u221e  \n\n",
+    "checked_at": 1792093790.0066936
+  },
+  "support": [
+    "model_0546",
+    "model_0093",
+    "model_0417",
+    "model_0103"
+  ],
+  "training_pairs": 400,
+  "calibration_pairs": 16,
+  "validation_volumes": 96,
+  "checks": [
+    "All scientific training source byte-identical to successful SAM3 experiment",
+    "Actual four-volume support and matched400-pair schedules across seven conditions",
+    "All100 images/annotations, pretrained checkpoint and upstream source hashes",
+    "Only support size and target/p95 strength change; no ADNI work",
+    "Two isolated GPU workers; per-run verified durable archive before cleanup"
+  ],
+  "scheduler_test": "sbatch: Job 702894 to start at 2026-10-15T22:34:49 a using 8 processors on nodes gnode02 in partition stud\n",
+  "gpu_gate": "Original finite native/bands/edge losses and retained backward check before training"
+}

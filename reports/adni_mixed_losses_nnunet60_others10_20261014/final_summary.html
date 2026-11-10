@@ -1,0 +1,1458 @@
+<!doctype html><meta charset="utf-8"><title>ADNI final sweep results</title><style>body{font:16px system-ui;max-width:1500px;margin:36px auto;padding:0 24px;color:#182334}h1,h2{color:#173e57}table{border-collapse:collapse;width:100%;margin:20px 0;font-size:14px}th,td{padding:10px;border-bottom:1px solid #d9e3ea;text-align:right}th:first-child,td:first-child{text-align:left}thead{background:#e7f0f5}details{margin:16px 0}a{color:#176382}p{max-width:1050px;line-height:1.6}</style><h1>ADNI: final 56-run comparison</h1>
+<p>All 56 experiments completed, archives verified and bulky generated artifacts cleaned. Saved 5% subject split: 5 training subjects / 10 crops; 27 validation subjects / 54 crops. Fold 0, seed 0, no augmentation. Primary results: final optimization-budget checkpoint. Single fold/seed, exploratory; model selection uses these validation results.</p>
+<p>nnUNet uses native foreground Dice + CE, deep supervision and SGD, with 60% sequential constraint targets and a 75% p95 ceiling. The other models use MONAI Dice including background and AdamW, with 10% targets and a 50% ceiling. Architecture and baseline-loss/optimizer effects are confounded across models; use matched within-model gains.</p>
+<h2>Final validation Dice (%)</h2><table><thead><tr><th>Condition</th><th>nnUNet</th><th>SwinUNETR</th><th>UNETR</th><th>3D U-Net</th></tr></thead><tbody>
+<tr><td>Baseline</td><td>72.70</td><td>67.02</td><td>60.34</td><td>67.41</td></tr>
+<tr><td>bands</td><td>73.71</td><td>70.21</td><td>63.83</td><td>70.63</td></tr>
+<tr><td>sdf</td><td>72.83</td><td>67.08</td><td>60.09</td><td>65.57</td></tr>
+<tr><td>bands + sdf</td><td>73.75</td><td>70.23</td><td>63.79</td><td>71.08</td></tr>
+<tr><td>bands + edge</td><td>73.26</td><td>70.57</td><td>64.18</td><td>72.26</td></tr>
+<tr><td>bands + edge + sdf</td><td>73.28</td><td>70.41</td><td>64.02</td><td>71.68</td></tr>
+<tr><td>depth</td><td>73.14</td><td>68.16</td><td>61.88</td><td>69.32</td></tr>
+<tr><td>bands + depth</td><td>73.99</td><td>70.96</td><td>63.84</td><td>71.79</td></tr>
+<tr><td>edge + depth</td><td>73.53</td><td>68.52</td><td>62.24</td><td>70.87</td></tr>
+<tr><td>sdf + depth</td><td>73.48</td><td>68.04</td><td>61.93</td><td>67.85</td></tr>
+<tr><td>bands + edge + depth</td><td>73.49</td><td>71.33</td><td>64.36</td><td>71.62</td></tr>
+<tr><td>bands + sdf + depth</td><td>74.08</td><td>70.99</td><td>63.78</td><td>71.66</td></tr>
+<tr><td>edge + sdf + depth</td><td>73.57</td><td>68.53</td><td>62.34</td><td>70.80</td></tr>
+<tr><td>bands + edge + sdf + depth</td><td>73.88</td><td>71.36</td><td>64.25</td><td>72.75</td></tr>
+</tbody></table>
+<h2>Gain against matched baseline (percentage points)</h2><table><thead><tr><th>Condition</th><th>nnUNet</th><th>SwinUNETR</th><th>UNETR</th><th>3D U-Net</th></tr></thead><tbody>
+<tr><td>Baseline</td><td>+0.00</td><td>+0.00</td><td>+0.00</td><td>+0.00</td></tr>
+<tr><td>bands</td><td>+1.01</td><td>+3.19</td><td>+3.49</td><td>+3.23</td></tr>
+<tr><td>sdf</td><td>+0.13</td><td>+0.06</td><td>-0.25</td><td>-1.83</td></tr>
+<tr><td>bands + sdf</td><td>+1.05</td><td>+3.22</td><td>+3.45</td><td>+3.67</td></tr>
+<tr><td>bands + edge</td><td>+0.56</td><td>+3.56</td><td>+3.84</td><td>+4.85</td></tr>
+<tr><td>bands + edge + sdf</td><td>+0.57</td><td>+3.39</td><td>+3.68</td><td>+4.27</td></tr>
+<tr><td>depth</td><td>+0.44</td><td>+1.15</td><td>+1.54</td><td>+1.91</td></tr>
+<tr><td>bands + depth</td><td>+1.29</td><td>+3.94</td><td>+3.50</td><td>+4.38</td></tr>
+<tr><td>edge + depth</td><td>+0.83</td><td>+1.50</td><td>+1.90</td><td>+3.46</td></tr>
+<tr><td>sdf + depth</td><td>+0.78</td><td>+1.02</td><td>+1.59</td><td>+0.44</td></tr>
+<tr><td>bands + edge + depth</td><td>+0.78</td><td>+4.31</td><td>+4.02</td><td>+4.21</td></tr>
+<tr><td>bands + sdf + depth</td><td>+1.38</td><td>+3.98</td><td>+3.45</td><td>+4.25</td></tr>
+<tr><td>edge + sdf + depth</td><td>+0.87</td><td>+1.51</td><td>+2.00</td><td>+3.40</td></tr>
+<tr><td>bands + edge + sdf + depth</td><td>+1.17</td><td>+4.35</td><td>+3.91</td><td>+5.34</td></tr>
+</tbody></table>
+<h2>Training, validation and errors</h2><p>False negatives and false positives are pooled validation voxel counts. ADNI has one foreground class, so anterior/posterior swaps do not apply. The training Dice is a final evaluation on the training cohort.</p><table><thead><tr><th>Model / condition</th><th>Train Dice</th><th>Validation Dice</th><th>Gap (pp)</th><th>FN</th><th>FP</th><th>Best / stopping update</th></tr></thead><tbody>
+<tr><td>nnUNet / Baseline</td><td>82.08</td><td>72.70</td><td>9.38</td><td>27,329</td><td>55,498</td><td>90 / 90</td></tr>
+<tr><td>SwinUNETR / Baseline</td><td>77.26</td><td>67.02</td><td>10.25</td><td>12,211</td><td>110,413</td><td>206 / 206</td></tr>
+<tr><td>UNETR / Baseline</td><td>70.01</td><td>60.34</td><td>9.67</td><td>14,290</td><td>147,669</td><td>245 / 245</td></tr>
+<tr><td>3D U-Net / Baseline</td><td>78.94</td><td>67.41</td><td>11.53</td><td>10,278</td><td>112,101</td><td>563 / 563</td></tr>
+<tr><td>nnUNet / bands</td><td>83.30</td><td>73.71</td><td>9.59</td><td>28,042</td><td>50,029</td><td>90 / 90</td></tr>
+<tr><td>SwinUNETR / bands</td><td>81.82</td><td>70.21</td><td>11.61</td><td>14,477</td><td>89,334</td><td>206 / 206</td></tr>
+<tr><td>UNETR / bands</td><td>76.20</td><td>63.83</td><td>12.37</td><td>17,842</td><td>117,577</td><td>245 / 245</td></tr>
+<tr><td>3D U-Net / bands</td><td>84.55</td><td>70.63</td><td>13.92</td><td>11,855</td><td>92,406</td><td>563 / 563</td></tr>
+<tr><td>nnUNet / sdf</td><td>82.14</td><td>72.83</td><td>9.31</td><td>27,392</td><td>54,848</td><td>90 / 90</td></tr>
+<tr><td>SwinUNETR / sdf</td><td>77.42</td><td>67.08</td><td>10.34</td><td>12,225</td><td>110,025</td><td>206 / 206</td></tr>
+<tr><td>UNETR / sdf</td><td>69.34</td><td>60.09</td><td>9.25</td><td>14,259</td><td>149,535</td><td>245 / 245</td></tr>
+<tr><td>3D U-Net / sdf</td><td>77.19</td><td>65.57</td><td>11.61</td><td>9,207</td><td>125,097</td><td>563 / 563</td></tr>
+<tr><td>nnUNet / bands + sdf</td><td>83.36</td><td>73.75</td><td>9.61</td><td>28,560</td><td>48,954</td><td>90 / 90</td></tr>
+<tr><td>SwinUNETR / bands + sdf</td><td>81.71</td><td>70.23</td><td>11.48</td><td>14,940</td><td>88,394</td><td>206 / 206</td></tr>
+<tr><td>UNETR / bands + sdf</td><td>75.68</td><td>63.79</td><td>11.89</td><td>18,101</td><td>117,225</td><td>245 / 245</td></tr>
+<tr><td>3D U-Net / bands + sdf</td><td>84.94</td><td>71.08</td><td>13.87</td><td>12,268</td><td>89,218</td><td>563 / 563</td></tr>
+<tr><td>nnUNet / bands + edge</td><td>83.05</td><td>73.26</td><td>9.79</td><td>27,845</td><td>52,092</td><td>85 / 89</td></tr>
+<tr><td>SwinUNETR / bands + edge</td><td>82.39</td><td>70.57</td><td>11.82</td><td>14,943</td><td>86,705</td><td>206 / 206</td></tr>
+<tr><td>UNETR / bands + edge</td><td>77.06</td><td>64.18</td><td>12.88</td><td>18,646</td><td>113,753</td><td>245 / 245</td></tr>
+<tr><td>3D U-Net / bands + edge</td><td>87.25</td><td>72.26</td><td>15.00</td><td>13,750</td><td>80,885</td><td>562 / 562</td></tr>
+<tr><td>nnUNet / bands + edge + sdf</td><td>83.19</td><td>73.28</td><td>9.92</td><td>28,276</td><td>51,303</td><td>85 / 89</td></tr>
+<tr><td>SwinUNETR / bands + edge + sdf</td><td>82.07</td><td>70.41</td><td>11.67</td><td>14,985</td><td>87,440</td><td>206 / 206</td></tr>
+<tr><td>UNETR / bands + edge + sdf</td><td>76.40</td><td>64.02</td><td>12.37</td><td>18,724</td><td>114,604</td><td>233 / 245</td></tr>
+<tr><td>3D U-Net / bands + edge + sdf</td><td>87.53</td><td>71.68</td><td>15.85</td><td>14,556</td><td>82,178</td><td>478 / 562</td></tr>
+<tr><td>nnUNet / depth</td><td>82.69</td><td>73.14</td><td>9.55</td><td>28,016</td><td>52,504</td><td>90 / 90</td></tr>
+<tr><td>SwinUNETR / depth</td><td>78.84</td><td>68.16</td><td>10.67</td><td>12,976</td><td>102,711</td><td>206 / 206</td></tr>
+<tr><td>UNETR / depth</td><td>72.84</td><td>61.88</td><td>10.97</td><td>15,717</td><td>134,279</td><td>245 / 245</td></tr>
+<tr><td>3D U-Net / depth</td><td>82.01</td><td>69.32</td><td>12.69</td><td>12,039</td><td>98,515</td><td>563 / 563</td></tr>
+<tr><td>nnUNet / bands + depth</td><td>83.90</td><td>73.99</td><td>9.91</td><td>28,715</td><td>47,658</td><td>90 / 90</td></tr>
+<tr><td>SwinUNETR / bands + depth</td><td>82.99</td><td>70.96</td><td>12.03</td><td>15,364</td><td>84,217</td><td>206 / 206</td></tr>
+<tr><td>UNETR / bands + depth</td><td>77.37</td><td>63.84</td><td>13.52</td><td>18,855</td><td>115,384</td><td>208 / 245</td></tr>
+<tr><td>3D U-Net / bands + depth</td><td>86.11</td><td>71.79</td><td>14.32</td><td>13,500</td><td>83,510</td><td>563 / 563</td></tr>
+<tr><td>nnUNet / edge + depth</td><td>82.91</td><td>73.53</td><td>9.38</td><td>28,533</td><td>49,967</td><td>90 / 90</td></tr>
+<tr><td>SwinUNETR / edge + depth</td><td>79.27</td><td>68.52</td><td>10.75</td><td>13,455</td><td>99,970</td><td>206 / 206</td></tr>
+<tr><td>UNETR / edge + depth</td><td>73.77</td><td>62.24</td><td>11.53</td><td>16,567</td><td>130,158</td><td>245 / 245</td></tr>
+<tr><td>3D U-Net / edge + depth</td><td>83.97</td><td>70.87</td><td>13.11</td><td>12,479</td><td>89,714</td><td>563 / 563</td></tr>
+<tr><td>nnUNet / sdf + depth</td><td>82.99</td><td>73.48</td><td>9.51</td><td>28,259</td><td>50,673</td><td>90 / 90</td></tr>
+<tr><td>SwinUNETR / sdf + depth</td><td>78.72</td><td>68.04</td><td>10.69</td><td>13,031</td><td>103,267</td><td>206 / 206</td></tr>
+<tr><td>UNETR / sdf + depth</td><td>73.11</td><td>61.93</td><td>11.18</td><td>16,544</td><td>131,968</td><td>245 / 245</td></tr>
+<tr><td>3D U-Net / sdf + depth</td><td>80.25</td><td>67.85</td><td>12.41</td><td>10,284</td><td>109,611</td><td>507 / 563</td></tr>
+<tr><td>nnUNet / bands + edge + depth</td><td>83.75</td><td>73.49</td><td>10.27</td><td>29,221</td><td>48,798</td><td>85 / 89</td></tr>
+<tr><td>SwinUNETR / bands + edge + depth</td><td>83.68</td><td>71.33</td><td>12.35</td><td>16,015</td><td>81,227</td><td>206 / 206</td></tr>
+<tr><td>UNETR / bands + edge + depth</td><td>78.23</td><td>64.36</td><td>13.88</td><td>19,441</td><td>111,156</td><td>208 / 245</td></tr>
+<tr><td>3D U-Net / bands + edge + depth</td><td>86.89</td><td>71.62</td><td>15.28</td><td>14,189</td><td>83,083</td><td>562 / 562</td></tr>
+<tr><td>nnUNet / bands + sdf + depth</td><td>84.08</td><td>74.08</td><td>10.00</td><td>28,766</td><td>47,211</td><td>90 / 90</td></tr>
+<tr><td>SwinUNETR / bands + sdf + depth</td><td>83.02</td><td>70.99</td><td>12.03</td><td>15,518</td><td>83,754</td><td>206 / 206</td></tr>
+<tr><td>UNETR / bands + sdf + depth</td><td>77.22</td><td>63.78</td><td>13.44</td><td>19,650</td><td>114,094</td><td>233 / 245</td></tr>
+<tr><td>3D U-Net / bands + sdf + depth</td><td>85.51</td><td>71.66</td><td>13.85</td><td>12,820</td><td>85,148</td><td>563 / 563</td></tr>
+<tr><td>nnUNet / edge + sdf + depth</td><td>83.25</td><td>73.57</td><td>9.67</td><td>29,129</td><td>48,812</td><td>90 / 90</td></tr>
+<tr><td>SwinUNETR / edge + sdf + depth</td><td>79.44</td><td>68.53</td><td>10.91</td><td>13,489</td><td>99,798</td><td>206 / 206</td></tr>
+<tr><td>UNETR / edge + sdf + depth</td><td>73.58</td><td>62.34</td><td>11.23</td><td>16,444</td><td>129,748</td><td>245 / 245</td></tr>
+<tr><td>3D U-Net / edge + sdf + depth</td><td>84.51</td><td>70.80</td><td>13.70</td><td>13,429</td><td>88,288</td><td>563 / 563</td></tr>
+<tr><td>nnUNet / bands + edge + sdf + depth</td><td>83.92</td><td>73.88</td><td>10.04</td><td>29,027</td><td>47,503</td><td>89 / 89</td></tr>
+<tr><td>SwinUNETR / bands + edge + sdf + depth</td><td>83.69</td><td>71.36</td><td>12.33</td><td>16,192</td><td>80,777</td><td>206 / 206</td></tr>
+<tr><td>UNETR / bands + edge + sdf + depth</td><td>78.13</td><td>64.25</td><td>13.88</td><td>20,515</td><td>109,522</td><td>233 / 245</td></tr>
+<tr><td>3D U-Net / bands + edge + sdf + depth</td><td>87.91</td><td>72.75</td><td>15.16</td><td>14,572</td><td>77,058</td><td>562 / 562</td></tr>
+</tbody></table><h2>Learning curves</h2><p>Baseline versus the best final-budget condition per model. Training objectives differ when constraints are added, so their absolute losses are not directly comparable.</p><img src="final_curves.png" style="width:100%;max-width:1200px" alt="ADNI learning curves"><p><a href="final_curves.pdf">Download curve figure as PDF</a></p><h2>Calibration, optimization budget and curves</h2><p>Every run stayed within 31,976,450,667,090 optimization FLOPs. Calibration is separately accounted and is excluded from that cap. Links below provide the original sampled training-loss and validation curves, not interpolated measurements.</p>
+<details><summary>nnUNet / Baseline</summary><pre>{
+  &quot;updates&quot;: 90,
+  &quot;optimization_flops&quot;: 31969835578710,
+  &quot;calibration_flops&quot;: 0,
+  &quot;budget_fraction&quot;: 0.9997931262462845,
+  &quot;weights&quot;: {},
+  &quot;statistics&quot;: {}
+}</pre><p><a href="runs/ADNI_nnunet_dicece_dice_target60_f0s0/metrics.csv">Sampled curves CSV</a> · <a href="runs/ADNI_nnunet_dicece_dice_target60_f0s0/calibration.json">Full calibration</a> · <a href="runs/ADNI_nnunet_dicece_dice_target60_f0s0/config.json">Configuration and split</a> · <a href="runs/ADNI_nnunet_dicece_dice_target60_f0s0/budget_ledger.json">Update/budget ledger</a></p></details>
+<details><summary>SwinUNETR / Baseline</summary><pre>{
+  &quot;updates&quot;: 206,
+  &quot;optimization_flops&quot;: 31923805675378,
+  &quot;calibration_flops&quot;: 0,
+  &quot;budget_fraction&quot;: 0.99835363241968,
+  &quot;weights&quot;: {},
+  &quot;statistics&quot;: {}
+}</pre><p><a href="runs/ADNI_swinunetr_diceonly_dice_target10_f0s0/metrics.csv">Sampled curves CSV</a> · <a href="runs/ADNI_swinunetr_diceonly_dice_target10_f0s0/calibration.json">Full calibration</a> · <a href="runs/ADNI_swinunetr_diceonly_dice_target10_f0s0/config.json">Configuration and split</a> · <a href="runs/ADNI_swinunetr_diceonly_dice_target10_f0s0/budget_ledger.json">Update/budget ledger</a></p></details>
+<details><summary>UNETR / Baseline</summary><pre>{
+  &quot;updates&quot;: 245,
+  &quot;optimization_flops&quot;: 31857754370785,
+  &quot;calibration_flops&quot;: 0,
+  &quot;budget_fraction&quot;: 0.9962880090244924,
+  &quot;weights&quot;: {},
+  &quot;statistics&quot;: {}
+}</pre><p><a href="runs/ADNI_unetr_vit_b16_diceonly_dice_target10_f0s0/metrics.csv">Sampled curves CSV</a> · <a href="runs/ADNI_unetr_vit_b16_diceonly_dice_target10_f0s0/calibration.json">Full calibration</a> · <a href="runs/ADNI_unetr_vit_b16_diceonly_dice_target10_f0s0/config.json">Configuration and split</a> · <a href="runs/ADNI_unetr_vit_b16_diceonly_dice_target10_f0s0/budget_ledger.json">Update/budget ledger</a></p></details>
+<details><summary>3D U-Net / Baseline</summary><pre>{
+  &quot;updates&quot;: 563,
+  &quot;optimization_flops&quot;: 31920671478143,
+  &quot;calibration_flops&quot;: 0,
+  &quot;budget_fraction&quot;: 0.9982556166246304,
+  &quot;weights&quot;: {},
+  &quot;statistics&quot;: {}
+}</pre><p><a href="runs/ADNI_basic_unet16_diceonly_dice_target10_f0s0/metrics.csv">Sampled curves CSV</a> · <a href="runs/ADNI_basic_unet16_diceonly_dice_target10_f0s0/calibration.json">Full calibration</a> · <a href="runs/ADNI_basic_unet16_diceonly_dice_target10_f0s0/config.json">Configuration and split</a> · <a href="runs/ADNI_basic_unet16_diceonly_dice_target10_f0s0/budget_ledger.json">Update/budget ledger</a></p></details>
+<details><summary>nnUNet / bands</summary><pre>{
+  &quot;updates&quot;: 90,
+  &quot;optimization_flops&quot;: 31975441267788,
+  &quot;calibration_flops&quot;: 1186503128644,
+  &quot;budget_fraction&quot;: 0.9999684330411618,
+  &quot;weights&quot;: {
+    &quot;bands&quot;: 0.03754386065416465
+  },
+  &quot;statistics&quot;: {
+    &quot;bands&quot;: {
+      &quot;median_raw_ratio&quot;: 15.981307983398438,
+      &quot;p95_raw_ratio&quot;: 19.04652910232544,
+      &quot;weighted_median_ratio&quot;: 0.6,
+      &quot;weighted_p95_ratio&quot;: 0.715080234563198
+    }
+  }
+}</pre><p><a href="runs/ADNI_nnunet_dicece_dice_bands_target60_f0s0/metrics.csv">Sampled curves CSV</a> · <a href="runs/ADNI_nnunet_dicece_dice_bands_target60_f0s0/calibration.json">Full calibration</a> · <a href="runs/ADNI_nnunet_dicece_dice_bands_target60_f0s0/config.json">Configuration and split</a> · <a href="runs/ADNI_nnunet_dicece_dice_bands_target60_f0s0/budget_ledger.json">Update/budget ledger</a></p></details>
+<details><summary>SwinUNETR / bands</summary><pre>{
+  &quot;updates&quot;: 206,
+  &quot;optimization_flops&quot;: 31934520027598,
+  &quot;calibration_flops&quot;: 521389929444,
+  &quot;budget_fraction&quot;: 0.9986887025102147,
+  &quot;weights&quot;: {
+    &quot;bands&quot;: 0.0035546657802059778
+  },
+  &quot;statistics&quot;: {
+    &quot;bands&quot;: {
+      &quot;median_raw_ratio&quot;: 28.13204002380371,
+      &quot;p95_raw_ratio&quot;: 36.89190216064453,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.13113838217715007
+    }
+  }
+}</pre><p><a href="runs/ADNI_swinunetr_diceonly_dice_bands_target10_f0s0/metrics.csv">Sampled curves CSV</a> · <a href="runs/ADNI_swinunetr_diceonly_dice_bands_target10_f0s0/calibration.json">Full calibration</a> · <a href="runs/ADNI_swinunetr_diceonly_dice_bands_target10_f0s0/config.json">Configuration and split</a> · <a href="runs/ADNI_swinunetr_diceonly_dice_bands_target10_f0s0/budget_ledger.json">Update/budget ledger</a></p></details>
+<details><summary>UNETR / bands</summary><pre>{
+  &quot;updates&quot;: 245,
+  &quot;optimization_flops&quot;: 31871147311060,
+  &quot;calibration_flops&quot;: 432331615154,
+  &quot;budget_fraction&quot;: 0.9967068466376608,
+  &quot;weights&quot;: {
+    &quot;bands&quot;: 0.003868865410249142
+  },
+  &quot;statistics&quot;: {
+    &quot;bands&quot;: {
+      &quot;median_raw_ratio&quot;: 25.847371101379395,
+      &quot;p95_raw_ratio&quot;: 31.734139347076415,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.12277511404393023
+    }
+  }
+}</pre><p><a href="runs/ADNI_unetr_vit_b16_diceonly_dice_bands_target10_f0s0/metrics.csv">Sampled curves CSV</a> · <a href="runs/ADNI_unetr_vit_b16_diceonly_dice_bands_target10_f0s0/calibration.json">Full calibration</a> · <a href="runs/ADNI_unetr_vit_b16_diceonly_dice_bands_target10_f0s0/config.json">Configuration and split</a> · <a href="runs/ADNI_unetr_vit_b16_diceonly_dice_bands_target10_f0s0/budget_ledger.json">Update/budget ledger</a></p></details>
+<details><summary>3D U-Net / bands</summary><pre>{
+  &quot;updates&quot;: 563,
+  &quot;optimization_flops&quot;: 31955905213328,
+  &quot;calibration_flops&quot;: 190687986354,
+  &quot;budget_fraction&quot;: 0.9993574817300425,
+  &quot;weights&quot;: {
+    &quot;bands&quot;: 0.002982334200067384
+  },
+  &quot;statistics&quot;: {
+    &quot;bands&quot;: {
+      &quot;median_raw_ratio&quot;: 33.53078269958496,
+      &quot;p95_raw_ratio&quot;: 38.2937255859375,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.11420468746293684
+    }
+  }
+}</pre><p><a href="runs/ADNI_basic_unet16_diceonly_dice_bands_target10_f0s0/metrics.csv">Sampled curves CSV</a> · <a href="runs/ADNI_basic_unet16_diceonly_dice_bands_target10_f0s0/calibration.json">Full calibration</a> · <a href="runs/ADNI_basic_unet16_diceonly_dice_bands_target10_f0s0/config.json">Configuration and split</a> · <a href="runs/ADNI_basic_unet16_diceonly_dice_bands_target10_f0s0/budget_ledger.json">Update/budget ledger</a></p></details>
+<details><summary>nnUNet / sdf</summary><pre>{
+  &quot;updates&quot;: 90,
+  &quot;optimization_flops&quot;: 31970076751590,
+  &quot;calibration_flops&quot;: 1185871361454,
+  &quot;budget_fraction&quot;: 0.9998006684492172,
+  &quot;weights&quot;: {
+    &quot;sdf&quot;: 0.6909111985624576
+  },
+  &quot;statistics&quot;: {
+    &quot;sdf&quot;: {
+      &quot;median_raw_ratio&quot;: 0.8684184034770144,
+      &quot;p95_raw_ratio&quot;: 0.9271926507777668,
+      &quot;weighted_median_ratio&quot;: 0.6,
+      &quot;weighted_p95_ratio&quot;: 0.6406077856471691
+    }
+  }
+}</pre><p><a href="runs/ADNI_nnunet_dicece_dice_sdf_target60_f0s0/metrics.csv">Sampled curves CSV</a> · <a href="runs/ADNI_nnunet_dicece_dice_sdf_target60_f0s0/calibration.json">Full calibration</a> · <a href="runs/ADNI_nnunet_dicece_dice_sdf_target60_f0s0/config.json">Configuration and split</a> · <a href="runs/ADNI_nnunet_dicece_dice_sdf_target60_f0s0/budget_ledger.json">Update/budget ledger</a></p></details>
+<details><summary>SwinUNETR / sdf</summary><pre>{
+  &quot;updates&quot;: 206,
+  &quot;optimization_flops&quot;: 31924664459902,
+  &quot;calibration_flops&quot;: 520758162254,
+  &quot;budget_fraction&quot;: 0.9983804892004071,
+  &quot;weights&quot;: {
+    &quot;sdf&quot;: 0.062107680187729414
+  },
+  &quot;statistics&quot;: {
+    &quot;sdf&quot;: {
+      &quot;median_raw_ratio&quot;: 1.610106828941857,
+      &quot;p95_raw_ratio&quot;: 1.9292112693723744,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.11981883653274293
+    }
+  }
+}</pre><p><a href="runs/ADNI_swinunetr_diceonly_dice_sdf_target10_f0s0/metrics.csv">Sampled curves CSV</a> · <a href="runs/ADNI_swinunetr_diceonly_dice_sdf_target10_f0s0/calibration.json">Full calibration</a> · <a href="runs/ADNI_swinunetr_diceonly_dice_sdf_target10_f0s0/config.json">Configuration and split</a> · <a href="runs/ADNI_swinunetr_diceonly_dice_sdf_target10_f0s0/budget_ledger.json">Update/budget ledger</a></p></details>
+<details><summary>UNETR / sdf</summary><pre>{
+  &quot;updates&quot;: 245,
+  &quot;optimization_flops&quot;: 31858827851440,
+  &quot;calibration_flops&quot;: 431699847964,
+  &quot;budget_fraction&quot;: 0.9963215800004015,
+  &quot;weights&quot;: {
+    &quot;sdf&quot;: 0.06314794326651785
+  },
+  &quot;statistics&quot;: {
+    &quot;sdf&quot;: {
+      &quot;median_raw_ratio&quot;: 1.583582850480924,
+      &quot;p95_raw_ratio&quot;: 1.8193780966626403,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.11488998482839763
+    }
+  }
+}</pre><p><a href="runs/ADNI_unetr_vit_b16_diceonly_dice_sdf_target10_f0s0/metrics.csv">Sampled curves CSV</a> · <a href="runs/ADNI_unetr_vit_b16_diceonly_dice_sdf_target10_f0s0/calibration.json">Full calibration</a> · <a href="runs/ADNI_unetr_vit_b16_diceonly_dice_sdf_target10_f0s0/config.json">Configuration and split</a> · <a href="runs/ADNI_unetr_vit_b16_diceonly_dice_sdf_target10_f0s0/budget_ledger.json">Update/budget ledger</a></p></details>
+<details><summary>3D U-Net / sdf</summary><pre>{
+  &quot;updates&quot;: 563,
+  &quot;optimization_flops&quot;: 31922047735393,
+  &quot;calibration_flops&quot;: 190056219164,
+  &quot;budget_fraction&quot;: 0.9982986563373342,
+  &quot;weights&quot;: {
+    &quot;sdf&quot;: 0.04959613163587506
+  },
+  &quot;statistics&quot;: {
+    &quot;sdf&quot;: {
+      &quot;median_raw_ratio&quot;: 2.0162862848695564,
+      &quot;p95_raw_ratio&quot;: 2.1132130117381616,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.10480719070480986
+    }
+  }
+}</pre><p><a href="runs/ADNI_basic_unet16_diceonly_dice_sdf_target10_f0s0/metrics.csv">Sampled curves CSV</a> · <a href="runs/ADNI_basic_unet16_diceonly_dice_sdf_target10_f0s0/calibration.json">Full calibration</a> · <a href="runs/ADNI_basic_unet16_diceonly_dice_sdf_target10_f0s0/config.json">Configuration and split</a> · <a href="runs/ADNI_basic_unet16_diceonly_dice_sdf_target10_f0s0/budget_ledger.json">Update/budget ledger</a></p></details>
+<details><summary>nnUNet / bands + sdf</summary><pre>{
+  &quot;updates&quot;: 90,
+  &quot;optimization_flops&quot;: 31975661468948,
+  &quot;calibration_flops&quot;: 1186573907534,
+  &quot;budget_fraction&quot;: 0.9999753193951945,
+  &quot;weights&quot;: {
+    &quot;bands&quot;: 0.03754386065416465,
+    &quot;sdf&quot;: 0.934746565957961
+  },
+  &quot;statistics&quot;: {
+    &quot;bands&quot;: {
+      &quot;median_raw_ratio&quot;: 15.981307983398438,
+      &quot;p95_raw_ratio&quot;: 19.04652910232544,
+      &quot;weighted_median_ratio&quot;: 0.6,
+      &quot;weighted_p95_ratio&quot;: 0.715080234563198
+    },
+    &quot;sdf&quot;: {
+      &quot;median_raw_ratio&quot;: 0.64188521450742,
+      &quot;p95_raw_ratio&quot;: 0.6510315976490157,
+      &quot;weighted_median_ratio&quot;: 0.6,
+      &quot;weighted_p95_ratio&quot;: 0.6085495502325424
+    }
+  }
+}</pre><p><a href="runs/ADNI_nnunet_dicece_dice_bands_sdf_target60_f0s0/metrics.csv">Sampled curves CSV</a> · <a href="runs/ADNI_nnunet_dicece_dice_bands_sdf_target60_f0s0/calibration.json">Full calibration</a> · <a href="runs/ADNI_nnunet_dicece_dice_bands_sdf_target60_f0s0/config.json">Configuration and split</a> · <a href="runs/ADNI_nnunet_dicece_dice_bands_sdf_target60_f0s0/budget_ledger.json">Update/budget ledger</a></p></details>
+<details><summary>SwinUNETR / bands + sdf</summary><pre>{
+  &quot;updates&quot;: 206,
+  &quot;optimization_flops&quot;: 31935378812122,
+  &quot;calibration_flops&quot;: 521460708334,
+  &quot;budget_fraction&quot;: 0.9987155592909418,
+  &quot;weights&quot;: {
+    &quot;bands&quot;: 0.0035546657802059778,
+    &quot;sdf&quot;: 0.06435673527411105
+  },
+  &quot;statistics&quot;: {
+    &quot;bands&quot;: {
+      &quot;median_raw_ratio&quot;: 28.13204002380371,
+      &quot;p95_raw_ratio&quot;: 36.89190216064453,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.13113838217715007
+    },
+    &quot;sdf&quot;: {
+      &quot;median_raw_ratio&quot;: 1.5538389194864468,
+      &quot;p95_raw_ratio&quot;: 1.8461960364308776,
+      &quot;weighted_median_ratio&quot;: 0.10000000000000002,
+      &quot;weighted_p95_ratio&quot;: 0.11881514958069507
+    }
+  }
+}</pre><p><a href="runs/ADNI_swinunetr_diceonly_dice_bands_sdf_target10_f0s0/metrics.csv">Sampled curves CSV</a> · <a href="runs/ADNI_swinunetr_diceonly_dice_bands_sdf_target10_f0s0/calibration.json">Full calibration</a> · <a href="runs/ADNI_swinunetr_diceonly_dice_bands_sdf_target10_f0s0/config.json">Configuration and split</a> · <a href="runs/ADNI_swinunetr_diceonly_dice_bands_sdf_target10_f0s0/budget_ledger.json">Update/budget ledger</a></p></details>
+<details><summary>UNETR / bands + sdf</summary><pre>{
+  &quot;updates&quot;: 245,
+  &quot;optimization_flops&quot;: 31872220791715,
+  &quot;calibration_flops&quot;: 432402394044,
+  &quot;budget_fraction&quot;: 0.9967404176135698,
+  &quot;weights&quot;: {
+    &quot;bands&quot;: 0.003868865410249142,
+    &quot;sdf&quot;: 0.06656838132792327
+  },
+  &quot;statistics&quot;: {
+    &quot;bands&quot;: {
+      &quot;median_raw_ratio&quot;: 25.847371101379395,
+      &quot;p95_raw_ratio&quot;: 31.734139347076415,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.12277511404393023
+    },
+    &quot;sdf&quot;: {
+      &quot;median_raw_ratio&quot;: 1.5022146851879852,
+      &quot;p95_raw_ratio&quot;: 1.7076182950492753,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.11367338582737835
+    }
+  }
+}</pre><p><a href="runs/ADNI_unetr_vit_b16_diceonly_dice_bands_sdf_target10_f0s0/metrics.csv">Sampled curves CSV</a> · <a href="runs/ADNI_unetr_vit_b16_diceonly_dice_bands_sdf_target10_f0s0/calibration.json">Full calibration</a> · <a href="runs/ADNI_unetr_vit_b16_diceonly_dice_bands_sdf_target10_f0s0/config.json">Configuration and split</a> · <a href="runs/ADNI_unetr_vit_b16_diceonly_dice_bands_sdf_target10_f0s0/budget_ledger.json">Update/budget ledger</a></p></details>
+<details><summary>3D U-Net / bands + sdf</summary><pre>{
+  &quot;updates&quot;: 563,
+  &quot;optimization_flops&quot;: 31958729293205,
+  &quot;calibration_flops&quot;: 190758765244,
+  &quot;budget_fraction&quot;: 0.9994457992205108,
+  &quot;weights&quot;: {
+    &quot;bands&quot;: 0.002982334200067384,
+    &quot;sdf&quot;: 0.050031630205942215
+  },
+  &quot;statistics&quot;: {
+    &quot;bands&quot;: {
+      &quot;median_raw_ratio&quot;: 33.53078269958496,
+      &quot;p95_raw_ratio&quot;: 38.2937255859375,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.11420468746293684
+    },
+    &quot;sdf&quot;: {
+      &quot;median_raw_ratio&quot;: 1.998735591632253,
+      &quot;p95_raw_ratio&quot;: 2.0933035284643133,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.10473138804492056
+    }
+  }
+}</pre><p><a href="runs/ADNI_basic_unet16_diceonly_dice_bands_sdf_target10_f0s0/metrics.csv">Sampled curves CSV</a> · <a href="runs/ADNI_basic_unet16_diceonly_dice_bands_sdf_target10_f0s0/calibration.json">Full calibration</a> · <a href="runs/ADNI_basic_unet16_diceonly_dice_bands_sdf_target10_f0s0/config.json">Configuration and split</a> · <a href="runs/ADNI_basic_unet16_diceonly_dice_bands_sdf_target10_f0s0/budget_ledger.json">Update/budget ledger</a></p></details>
+<details><summary>nnUNet / bands + edge</summary><pre>{
+  &quot;updates&quot;: 89,
+  &quot;optimization_flops&quot;: 31625742215711,
+  &quot;calibration_flops&quot;: 1187217675924,
+  &quot;budget_fraction&quot;: 0.9890322895736534,
+  &quot;weights&quot;: {
+    &quot;bands&quot;: 0.03754386065416465,
+    &quot;edge&quot;: 0.10730291529755276
+  },
+  &quot;statistics&quot;: {
+    &quot;bands&quot;: {
+      &quot;median_raw_ratio&quot;: 15.981307983398438,
+      &quot;p95_raw_ratio&quot;: 19.04652910232544,
+      &quot;weighted_median_ratio&quot;: 0.6,
+      &quot;weighted_p95_ratio&quot;: 0.715080234563198
+    },
+    &quot;edge&quot;: {
+      &quot;median_raw_ratio&quot;: 5.591646772468297,
+      &quot;p95_raw_ratio&quot;: 6.218747222627722,
+      &quot;weighted_median_ratio&quot;: 0.6,
+      &quot;weighted_p95_ratio&quot;: 0.667289706486514
+    }
+  }
+}</pre><p><a href="runs/ADNI_nnunet_dicece_dice_bands_edge_target60_f0s0/metrics.csv">Sampled curves CSV</a> · <a href="runs/ADNI_nnunet_dicece_dice_bands_edge_target60_f0s0/calibration.json">Full calibration</a> · <a href="runs/ADNI_nnunet_dicece_dice_bands_edge_target60_f0s0/config.json">Configuration and split</a> · <a href="runs/ADNI_nnunet_dicece_dice_bands_edge_target60_f0s0/budget_ledger.json">Update/budget ledger</a></p></details>
+<details><summary>SwinUNETR / bands + edge</summary><pre>{
+  &quot;updates&quot;: 206,
+  &quot;optimization_flops&quot;: 31945421598694,
+  &quot;calibration_flops&quot;: 522104476724,
+  &quot;budget_fraction&quot;: 0.9990296274993418,
+  &quot;weights&quot;: {
+    &quot;bands&quot;: 0.0035546657802059778,
+    &quot;edge&quot;: 0.0077772559481205155
+  },
+  &quot;statistics&quot;: {
+    &quot;bands&quot;: {
+      &quot;median_raw_ratio&quot;: 28.13204002380371,
+      &quot;p95_raw_ratio&quot;: 36.89190216064453,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.13113838217715007
+    },
+    &quot;edge&quot;: {
+      &quot;median_raw_ratio&quot;: 12.858005531393939,
+      &quot;p95_raw_ratio&quot;: 15.70918644267786,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.12217436370145054
+    }
+  }
+}</pre><p><a href="runs/ADNI_swinunetr_diceonly_dice_bands_edge_target10_f0s0/metrics.csv">Sampled curves CSV</a> · <a href="runs/ADNI_swinunetr_diceonly_dice_bands_edge_target10_f0s0/calibration.json">Full calibration</a> · <a href="runs/ADNI_swinunetr_diceonly_dice_bands_edge_target10_f0s0/config.json">Configuration and split</a> · <a href="runs/ADNI_swinunetr_diceonly_dice_bands_edge_target10_f0s0/budget_ledger.json">Update/budget ledger</a></p></details>
+<details><summary>UNETR / bands + edge</summary><pre>{
+  &quot;updates&quot;: 245,
+  &quot;optimization_flops&quot;: 31884774274930,
+  &quot;calibration_flops&quot;: 433046162434,
+  &quot;budget_fraction&quot;: 0.9971330028740697,
+  &quot;weights&quot;: {
+    &quot;bands&quot;: 0.003868865410249142,
+    &quot;edge&quot;: 0.007045936879795677
+  },
+  &quot;statistics&quot;: {
+    &quot;bands&quot;: {
+      &quot;median_raw_ratio&quot;: 25.847371101379395,
+      &quot;p95_raw_ratio&quot;: 31.734139347076415,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.12277511404393023
+    },
+    &quot;edge&quot;: {
+      &quot;median_raw_ratio&quot;: 14.1925767582096,
+      &quot;p95_raw_ratio&quot;: 17.6961710029852,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.12468610390110428
+    }
+  }
+}</pre><p><a href="runs/ADNI_unetr_vit_b16_diceonly_dice_bands_edge_target10_f0s0/metrics.csv">Sampled curves CSV</a> · <a href="runs/ADNI_unetr_vit_b16_diceonly_dice_bands_edge_target10_f0s0/calibration.json">Full calibration</a> · <a href="runs/ADNI_unetr_vit_b16_diceonly_dice_bands_edge_target10_f0s0/config.json">Configuration and split</a> · <a href="runs/ADNI_unetr_vit_b16_diceonly_dice_bands_edge_target10_f0s0/budget_ledger.json">Update/budget ledger</a></p></details>
+<details><summary>3D U-Net / bands + edge</summary><pre>{
+  &quot;updates&quot;: 562,
+  &quot;optimization_flops&quot;: 31934918584314,
+  &quot;calibration_flops&quot;: 191402533634,
+  &quot;budget_fraction&quot;: 0.9987011665801062,
+  &quot;weights&quot;: {
+    &quot;bands&quot;: 0.002982334200067384,
+    &quot;edge&quot;: 0.0212778157726717
+  },
+  &quot;statistics&quot;: {
+    &quot;bands&quot;: {
+      &quot;median_raw_ratio&quot;: 33.53078269958496,
+      &quot;p95_raw_ratio&quot;: 38.2937255859375,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.11420468746293684
+    },
+    &quot;edge&quot;: {
+      &quot;median_raw_ratio&quot;: 4.69973051126966,
+      &quot;p95_raw_ratio&quot;: 6.003696100345324,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.1277455395782553
+    }
+  }
+}</pre><p><a href="runs/ADNI_basic_unet16_diceonly_dice_bands_edge_target10_f0s0/metrics.csv">Sampled curves CSV</a> · <a href="runs/ADNI_basic_unet16_diceonly_dice_bands_edge_target10_f0s0/calibration.json">Full calibration</a> · <a href="runs/ADNI_basic_unet16_diceonly_dice_bands_edge_target10_f0s0/config.json">Configuration and split</a> · <a href="runs/ADNI_basic_unet16_diceonly_dice_bands_edge_target10_f0s0/budget_ledger.json">Update/budget ledger</a></p></details>
+<details><summary>nnUNet / bands + edge + sdf</summary><pre>{
+  &quot;updates&quot;: 89,
+  &quot;optimization_flops&quot;: 31625956911842,
+  &quot;calibration_flops&quot;: 1187298940574,
+  &quot;budget_fraction&quot;: 0.9890390037688352,
+  &quot;weights&quot;: {
+    &quot;bands&quot;: 0.03754386065416465,
+    &quot;edge&quot;: 0.10730291529755276,
+    &quot;sdf&quot;: 1.2730875034324638
+  },
+  &quot;statistics&quot;: {
+    &quot;bands&quot;: {
+      &quot;median_raw_ratio&quot;: 15.981307983398438,
+      &quot;p95_raw_ratio&quot;: 19.04652910232544,
+      &quot;weighted_median_ratio&quot;: 0.6,
+      &quot;weighted_p95_ratio&quot;: 0.715080234563198
+    },
+    &quot;edge&quot;: {
+      &quot;median_raw_ratio&quot;: 5.591646772468297,
+      &quot;p95_raw_ratio&quot;: 6.218747222627722,
+      &quot;weighted_median_ratio&quot;: 0.6,
+      &quot;weighted_p95_ratio&quot;: 0.667289706486514
+    },
+    &quot;sdf&quot;: {
+      &quot;median_raw_ratio&quot;: 0.47129517679051625,
+      &quot;p95_raw_ratio&quot;: 0.48595529553616834,
+      &quot;weighted_median_ratio&quot;: 0.6,
+      &quot;weighted_p95_ratio&quot;: 0.6186636139739257
+    }
+  }
+}</pre><p><a href="runs/ADNI_nnunet_dicece_dice_bands_edge_sdf_target60_f0s0/metrics.csv">Sampled curves CSV</a> · <a href="runs/ADNI_nnunet_dicece_dice_bands_edge_sdf_target60_f0s0/calibration.json">Full calibration</a> · <a href="runs/ADNI_nnunet_dicece_dice_bands_edge_sdf_target60_f0s0/config.json">Configuration and split</a> · <a href="runs/ADNI_nnunet_dicece_dice_bands_edge_sdf_target60_f0s0/budget_ledger.json">Update/budget ledger</a></p></details>
+<details><summary>SwinUNETR / bands + edge + sdf</summary><pre>{
+  &quot;updates&quot;: 206,
+  &quot;optimization_flops&quot;: 31946280383218,
+  &quot;calibration_flops&quot;: 522185741374,
+  &quot;budget_fraction&quot;: 0.9990564842800689,
+  &quot;weights&quot;: {
+    &quot;bands&quot;: 0.0035546657802059778,
+    &quot;edge&quot;: 0.0077772559481205155,
+    &quot;sdf&quot;: 0.066585564516461
+  },
+  &quot;statistics&quot;: {
+    &quot;bands&quot;: {
+      &quot;median_raw_ratio&quot;: 28.13204002380371,
+      &quot;p95_raw_ratio&quot;: 36.89190216064453,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.13113838217715007
+    },
+    &quot;edge&quot;: {
+      &quot;median_raw_ratio&quot;: 12.858005531393939,
+      &quot;p95_raw_ratio&quot;: 15.70918644267786,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.12217436370145054
+    },
+    &quot;sdf&quot;: {
+      &quot;median_raw_ratio&quot;: 1.501827021009613,
+      &quot;p95_raw_ratio&quot;: 1.76037364651738,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.11721547301326071
+    }
+  }
+}</pre><p><a href="runs/ADNI_swinunetr_diceonly_dice_bands_edge_sdf_target10_f0s0/metrics.csv">Sampled curves CSV</a> · <a href="runs/ADNI_swinunetr_diceonly_dice_bands_edge_sdf_target10_f0s0/calibration.json">Full calibration</a> · <a href="runs/ADNI_swinunetr_diceonly_dice_bands_edge_sdf_target10_f0s0/config.json">Configuration and split</a> · <a href="runs/ADNI_swinunetr_diceonly_dice_bands_edge_sdf_target10_f0s0/budget_ledger.json">Update/budget ledger</a></p></details>
+<details><summary>UNETR / bands + edge + sdf</summary><pre>{
+  &quot;updates&quot;: 245,
+  &quot;optimization_flops&quot;: 31885847755585,
+  &quot;calibration_flops&quot;: 433127427084,
+  &quot;budget_fraction&quot;: 0.9971665738499786,
+  &quot;weights&quot;: {
+    &quot;bands&quot;: 0.003868865410249142,
+    &quot;edge&quot;: 0.007045936879795677,
+    &quot;sdf&quot;: 0.06941181390891646
+  },
+  &quot;statistics&quot;: {
+    &quot;bands&quot;: {
+      &quot;median_raw_ratio&quot;: 25.847371101379395,
+      &quot;p95_raw_ratio&quot;: 31.734139347076415,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.12277511404393023
+    },
+    &quot;edge&quot;: {
+      &quot;median_raw_ratio&quot;: 14.1925767582096,
+      &quot;p95_raw_ratio&quot;: 17.6961710029852,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.12468610390110428
+    },
+    &quot;sdf&quot;: {
+      &quot;median_raw_ratio&quot;: 1.4406769448673673,
+      &quot;p95_raw_ratio&quot;: 1.6137211379174334,
+      &quot;weighted_median_ratio&quot;: 0.09999999999999999,
+      &quot;weighted_p95_ratio&quot;: 0.1120113113260098
+    }
+  }
+}</pre><p><a href="runs/ADNI_unetr_vit_b16_diceonly_dice_bands_edge_sdf_target10_f0s0/metrics.csv">Sampled curves CSV</a> · <a href="runs/ADNI_unetr_vit_b16_diceonly_dice_bands_edge_sdf_target10_f0s0/calibration.json">Full calibration</a> · <a href="runs/ADNI_unetr_vit_b16_diceonly_dice_bands_edge_sdf_target10_f0s0/config.json">Configuration and split</a> · <a href="runs/ADNI_unetr_vit_b16_diceonly_dice_bands_edge_sdf_target10_f0s0/budget_ledger.json">Update/budget ledger</a></p></details>
+<details><summary>3D U-Net / bands + edge + sdf</summary><pre>{
+  &quot;updates&quot;: 562,
+  &quot;optimization_flops&quot;: 31936289336535,
+  &quot;calibration_flops&quot;: 191483798284,
+  &quot;budget_fraction&quot;: 0.9987440341339593,
+  &quot;weights&quot;: {
+    &quot;bands&quot;: 0.002982334200067384,
+    &quot;edge&quot;: 0.0212778157726717,
+    &quot;sdf&quot;: 0.050514942268599095
+  },
+  &quot;statistics&quot;: {
+    &quot;bands&quot;: {
+      &quot;median_raw_ratio&quot;: 33.53078269958496,
+      &quot;p95_raw_ratio&quot;: 38.2937255859375,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.11420468746293684
+    },
+    &quot;edge&quot;: {
+      &quot;median_raw_ratio&quot;: 4.69973051126966,
+      &quot;p95_raw_ratio&quot;: 6.003696100345324,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.1277455395782553
+    },
+    &quot;sdf&quot;: {
+      &quot;median_raw_ratio&quot;: 1.9796122792396345,
+      &quot;p95_raw_ratio&quot;: 2.073221924164725,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.104728685809175
+    }
+  }
+}</pre><p><a href="runs/ADNI_basic_unet16_diceonly_dice_bands_edge_sdf_target10_f0s0/metrics.csv">Sampled curves CSV</a> · <a href="runs/ADNI_basic_unet16_diceonly_dice_bands_edge_sdf_target10_f0s0/calibration.json">Full calibration</a> · <a href="runs/ADNI_basic_unet16_diceonly_dice_bands_edge_sdf_target10_f0s0/config.json">Configuration and split</a> · <a href="runs/ADNI_basic_unet16_diceonly_dice_bands_edge_sdf_target10_f0s0/budget_ledger.json">Update/budget ledger</a></p></details>
+<details><summary>nnUNet / depth</summary><pre>{
+  &quot;updates&quot;: 90,
+  &quot;optimization_flops&quot;: 31970345186889,
+  &quot;calibration_flops&quot;: 1186033402686,
+  &quot;budget_fraction&quot;: 0.99980906323017,
+  &quot;weights&quot;: {
+    &quot;depth&quot;: 0.08102466905255325
+  },
+  &quot;statistics&quot;: {
+    &quot;depth&quot;: {
+      &quot;median_raw_ratio&quot;: 7.4051521223842975,
+      &quot;p95_raw_ratio&quot;: 9.004722962102164,
+      &quot;weighted_median_ratio&quot;: 0.6,
+      &quot;weighted_p95_ratio&quot;: 0.7296046979142549
+    }
+  }
+}</pre><p><a href="runs/ADNI_nnunet_dicece_dice_depth_target60_f0s0/metrics.csv">Sampled curves CSV</a> · <a href="runs/ADNI_nnunet_dicece_dice_depth_target60_f0s0/calibration.json">Full calibration</a> · <a href="runs/ADNI_nnunet_dicece_dice_depth_target60_f0s0/config.json">Configuration and split</a> · <a href="runs/ADNI_nnunet_dicece_dice_depth_target60_f0s0/budget_ledger.json">Update/budget ledger</a></p></details>
+<details><summary>SwinUNETR / depth</summary><pre>{
+  &quot;updates&quot;: 206,
+  &quot;optimization_flops&quot;: 31924787142982,
+  &quot;calibration_flops&quot;: 520876130636,
+  &quot;budget_fraction&quot;: 0.9983843258701263,
+  &quot;weights&quot;: {
+    &quot;depth&quot;: 0.005171137425948089
+  },
+  &quot;statistics&quot;: {
+    &quot;depth&quot;: {
+      &quot;median_raw_ratio&quot;: 19.33810528767097,
+      &quot;p95_raw_ratio&quot;: 21.835647482743735,
+      &quot;weighted_median_ratio&quot;: 0.09999999999999999,
+      &quot;weighted_p95_ratio&quot;: 0.11291513391782532
+    }
+  }
+}</pre><p><a href="runs/ADNI_swinunetr_diceonly_dice_depth_target10_f0s0/metrics.csv">Sampled curves CSV</a> · <a href="runs/ADNI_swinunetr_diceonly_dice_depth_target10_f0s0/calibration.json">Full calibration</a> · <a href="runs/ADNI_swinunetr_diceonly_dice_depth_target10_f0s0/config.json">Configuration and split</a> · <a href="runs/ADNI_swinunetr_diceonly_dice_depth_target10_f0s0/budget_ledger.json">Update/budget ledger</a></p></details>
+<details><summary>UNETR / depth</summary><pre>{
+  &quot;updates&quot;: 245,
+  &quot;optimization_flops&quot;: 31858981205290,
+  &quot;calibration_flops&quot;: 431817816346,
+  &quot;budget_fraction&quot;: 0.9963263758375503,
+  &quot;weights&quot;: {
+    &quot;depth&quot;: 0.006159853737321051
+  },
+  &quot;statistics&quot;: {
+    &quot;depth&quot;: {
+      &quot;median_raw_ratio&quot;: 16.234151696512598,
+      &quot;p95_raw_ratio&quot;: 18.06118337895847,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.1112542479373182
+    }
+  }
+}</pre><p><a href="runs/ADNI_unetr_vit_b16_diceonly_dice_depth_target10_f0s0/metrics.csv">Sampled curves CSV</a> · <a href="runs/ADNI_unetr_vit_b16_diceonly_dice_depth_target10_f0s0/calibration.json">Full calibration</a> · <a href="runs/ADNI_unetr_vit_b16_diceonly_dice_depth_target10_f0s0/config.json">Configuration and split</a> · <a href="runs/ADNI_unetr_vit_b16_diceonly_dice_depth_target10_f0s0/budget_ledger.json">Update/budget ledger</a></p></details>
+<details><summary>3D U-Net / depth</summary><pre>{
+  &quot;updates&quot;: 563,
+  &quot;optimization_flops&quot;: 31923898996610,
+  &quot;calibration_flops&quot;: 190174187546,
+  &quot;budget_fraction&quot;: 0.9983565508559058,
+  &quot;weights&quot;: {
+    &quot;depth&quot;: 0.004407905467491733
+  },
+  &quot;statistics&quot;: {
+    &quot;depth&quot;: {
+      &quot;median_raw_ratio&quot;: 22.68651193577067,
+      &quot;p95_raw_ratio&quot;: 28.74511777457988,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.12670576180226445
+    }
+  }
+}</pre><p><a href="runs/ADNI_basic_unet16_diceonly_dice_depth_target10_f0s0/metrics.csv">Sampled curves CSV</a> · <a href="runs/ADNI_basic_unet16_diceonly_dice_depth_target10_f0s0/calibration.json">Full calibration</a> · <a href="runs/ADNI_basic_unet16_diceonly_dice_depth_target10_f0s0/config.json">Configuration and split</a> · <a href="runs/ADNI_basic_unet16_diceonly_dice_depth_target10_f0s0/budget_ledger.json">Update/budget ledger</a></p></details>
+<details><summary>nnUNet / bands + depth</summary><pre>{
+  &quot;updates&quot;: 90,
+  &quot;optimization_flops&quot;: 31975950875967,
+  &quot;calibration_flops&quot;: 1187459466346,
+  &quot;budget_fraction&quot;: 0.9999843700250474,
+  &quot;weights&quot;: {
+    &quot;bands&quot;: 0.03754386065416465,
+    &quot;depth&quot;: 0.11159555536121382
+  },
+  &quot;statistics&quot;: {
+    &quot;bands&quot;: {
+      &quot;median_raw_ratio&quot;: 15.981307983398438,
+      &quot;p95_raw_ratio&quot;: 19.04652910232544,
+      &quot;weighted_median_ratio&quot;: 0.6,
+      &quot;weighted_p95_ratio&quot;: 0.715080234563198
+    },
+    &quot;depth&quot;: {
+      &quot;median_raw_ratio&quot;: 5.37655821558406,
+      &quot;p95_raw_ratio&quot;: 6.718825202643384,
+      &quot;weighted_median_ratio&quot;: 0.6,
+      &quot;weighted_p95_ratio&quot;: 0.7497910298639084
+    }
+  }
+}</pre><p><a href="runs/ADNI_nnunet_dicece_dice_bands_depth_target60_f0s0/metrics.csv">Sampled curves CSV</a> · <a href="runs/ADNI_nnunet_dicece_dice_bands_depth_target60_f0s0/calibration.json">Full calibration</a> · <a href="runs/ADNI_nnunet_dicece_dice_bands_depth_target60_f0s0/config.json">Configuration and split</a> · <a href="runs/ADNI_nnunet_dicece_dice_bands_depth_target60_f0s0/budget_ledger.json">Update/budget ledger</a></p></details>
+<details><summary>SwinUNETR / bands + depth</summary><pre>{
+  &quot;updates&quot;: 206,
+  &quot;optimization_flops&quot;: 31935501495202,
+  &quot;calibration_flops&quot;: 522302194296,
+  &quot;budget_fraction&quot;: 0.998719395960661,
+  &quot;weights&quot;: {
+    &quot;bands&quot;: 0.0035546657802059778,
+    &quot;depth&quot;: 0.0053881760065101845
+  },
+  &quot;statistics&quot;: {
+    &quot;bands&quot;: {
+      &quot;median_raw_ratio&quot;: 28.13204002380371,
+      &quot;p95_raw_ratio&quot;: 36.89190216064453,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.13113838217715007
+    },
+    &quot;depth&quot;: {
+      &quot;median_raw_ratio&quot;: 18.55915617440419,
+      &quot;p95_raw_ratio&quot;: 21.148950857090114,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.11395426957103595
+    }
+  }
+}</pre><p><a href="runs/ADNI_swinunetr_diceonly_dice_bands_depth_target10_f0s0/metrics.csv">Sampled curves CSV</a> · <a href="runs/ADNI_swinunetr_diceonly_dice_bands_depth_target10_f0s0/calibration.json">Full calibration</a> · <a href="runs/ADNI_swinunetr_diceonly_dice_bands_depth_target10_f0s0/config.json">Configuration and split</a> · <a href="runs/ADNI_swinunetr_diceonly_dice_bands_depth_target10_f0s0/budget_ledger.json">Update/budget ledger</a></p></details>
+<details><summary>UNETR / bands + depth</summary><pre>{
+  &quot;updates&quot;: 245,
+  &quot;optimization_flops&quot;: 31872374145565,
+  &quot;calibration_flops&quot;: 433243880006,
+  &quot;budget_fraction&quot;: 0.9967452134507188,
+  &quot;weights&quot;: {
+    &quot;bands&quot;: 0.003868865410249142,
+    &quot;depth&quot;: 0.006529501964089923
+  },
+  &quot;statistics&quot;: {
+    &quot;bands&quot;: {
+      &quot;median_raw_ratio&quot;: 25.847371101379395,
+      &quot;p95_raw_ratio&quot;: 31.734139347076415,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.12277511404393023
+    },
+    &quot;depth&quot;: {
+      &quot;median_raw_ratio&quot;: 15.315103747570115,
+      &quot;p95_raw_ratio&quot;: 17.046285697367146,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.11130375594139676
+    }
+  }
+}</pre><p><a href="runs/ADNI_unetr_vit_b16_diceonly_dice_bands_depth_target10_f0s0/metrics.csv">Sampled curves CSV</a> · <a href="runs/ADNI_unetr_vit_b16_diceonly_dice_bands_depth_target10_f0s0/calibration.json">Full calibration</a> · <a href="runs/ADNI_unetr_vit_b16_diceonly_dice_bands_depth_target10_f0s0/config.json">Configuration and split</a> · <a href="runs/ADNI_unetr_vit_b16_diceonly_dice_bands_depth_target10_f0s0/budget_ledger.json">Update/budget ledger</a></p></details>
+<details><summary>3D U-Net / bands + depth</summary><pre>{
+  &quot;updates&quot;: 563,
+  &quot;optimization_flops&quot;: 31959132731795,
+  &quot;calibration_flops&quot;: 191600251206,
+  &quot;budget_fraction&quot;: 0.9994584159613179,
+  &quot;weights&quot;: {
+    &quot;bands&quot;: 0.002982334200067384,
+    &quot;depth&quot;: 0.004447249779513654
+  },
+  &quot;statistics&quot;: {
+    &quot;bands&quot;: {
+      &quot;median_raw_ratio&quot;: 33.53078269958496,
+      &quot;p95_raw_ratio&quot;: 38.2937255859375,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.11420468746293684
+    },
+    &quot;depth&quot;: {
+      &quot;median_raw_ratio&quot;: 22.485806949870916,
+      &quot;p95_raw_ratio&quot;: 28.497493218907568,
+      &quot;weighted_median_ratio&quot;: 0.10000000000000002,
+      &quot;weighted_p95_ratio&quot;: 0.12673547043447853
+    }
+  }
+}</pre><p><a href="runs/ADNI_basic_unet16_diceonly_dice_bands_depth_target10_f0s0/metrics.csv">Sampled curves CSV</a> · <a href="runs/ADNI_basic_unet16_diceonly_dice_bands_depth_target10_f0s0/calibration.json">Full calibration</a> · <a href="runs/ADNI_basic_unet16_diceonly_dice_bands_depth_target10_f0s0/config.json">Configuration and split</a> · <a href="runs/ADNI_basic_unet16_diceonly_dice_bands_depth_target10_f0s0/budget_ledger.json">Update/budget ledger</a></p></details>
+<details><summary>nnUNet / edge + depth</summary><pre>{
+  &quot;updates&quot;: 90,
+  &quot;optimization_flops&quot;: 31976048085768,
+  &quot;calibration_flops&quot;: 1187483468766,
+  &quot;budget_fraction&quot;: 0.9999874100685473,
+  &quot;weights&quot;: {
+    &quot;edge&quot;: 0.07952465374728028,
+    &quot;depth&quot;: 0.10348257287719193
+  },
+  &quot;statistics&quot;: {
+    &quot;edge&quot;: {
+      &quot;median_raw_ratio&quot;: 7.544830083847046,
+      &quot;p95_raw_ratio&quot;: 8.863749504089355,
+      &quot;weighted_median_ratio&quot;: 0.6,
+      &quot;weighted_p95_ratio&quot;: 0.7048866102153333
+    },
+    &quot;depth&quot;: {
+      &quot;median_raw_ratio&quot;: 5.798077717994611,
+      &quot;p95_raw_ratio&quot;: 7.169939284862902,
+      &quot;weighted_median_ratio&quot;: 0.6,
+      &quot;weighted_p95_ratio&quot;: 0.7419637645708667
+    }
+  }
+}</pre><p><a href="runs/ADNI_nnunet_dicece_dice_edge_depth_target60_f0s0/metrics.csv">Sampled curves CSV</a> · <a href="runs/ADNI_nnunet_dicece_dice_edge_depth_target60_f0s0/calibration.json">Full calibration</a> · <a href="runs/ADNI_nnunet_dicece_dice_edge_depth_target60_f0s0/config.json">Configuration and split</a> · <a href="runs/ADNI_nnunet_dicece_dice_edge_depth_target60_f0s0/budget_ledger.json">Update/budget ledger</a></p></details>
+<details><summary>SwinUNETR / edge + depth</summary><pre>{
+  &quot;updates&quot;: 206,
+  &quot;optimization_flops&quot;: 31935688714078,
+  &quot;calibration_flops&quot;: 522326196716,
+  &quot;budget_fraction&quot;: 0.9987252508592533,
+  &quot;weights&quot;: {
+    &quot;edge&quot;: 0.007468763989562296,
+    &quot;depth&quot;: 0.005373207457287006
+  },
+  &quot;statistics&quot;: {
+    &quot;edge&quot;: {
+      &quot;median_raw_ratio&quot;: 13.3890962600708,
+      &quot;p95_raw_ratio&quot;: 16.414600992202757,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.12259678079359748
+    },
+    &quot;depth&quot;: {
+      &quot;median_raw_ratio&quot;: 18.610857815359907,
+      &quot;p95_raw_ratio&quot;: 21.192027807975975,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.1138691618528501
+    }
+  }
+}</pre><p><a href="runs/ADNI_swinunetr_diceonly_dice_edge_depth_target10_f0s0/metrics.csv">Sampled curves CSV</a> · <a href="runs/ADNI_swinunetr_diceonly_dice_edge_depth_target10_f0s0/calibration.json">Full calibration</a> · <a href="runs/ADNI_swinunetr_diceonly_dice_edge_depth_target10_f0s0/config.json">Configuration and split</a> · <a href="runs/ADNI_swinunetr_diceonly_dice_edge_depth_target10_f0s0/budget_ledger.json">Update/budget ledger</a></p></details>
+<details><summary>UNETR / edge + depth</summary><pre>{
+  &quot;updates&quot;: 245,
+  &quot;optimization_flops&quot;: 31872608169160,
+  &quot;calibration_flops&quot;: 433267882426,
+  &quot;budget_fraction&quot;: 0.9967525320739592,
+  &quot;weights&quot;: {
+    &quot;edge&quot;: 0.0066904459635863224,
+    &quot;depth&quot;: 0.006443617001029397
+  },
+  &quot;statistics&quot;: {
+    &quot;edge&quot;: {
+      &quot;median_raw_ratio&quot;: 14.946686744689941,
+      &quot;p95_raw_ratio&quot;: 18.854194164276123,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.126142967243054
+    },
+    &quot;depth&quot;: {
+      &quot;median_raw_ratio&quot;: 15.519233992961494,
+      &quot;p95_raw_ratio&quot;: 17.297964927986623,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.11146146089318484
+    }
+  }
+}</pre><p><a href="runs/ADNI_unetr_vit_b16_diceonly_dice_edge_depth_target10_f0s0/metrics.csv">Sampled curves CSV</a> · <a href="runs/ADNI_unetr_vit_b16_diceonly_dice_edge_depth_target10_f0s0/calibration.json">Full calibration</a> · <a href="runs/ADNI_unetr_vit_b16_diceonly_dice_edge_depth_target10_f0s0/config.json">Configuration and split</a> · <a href="runs/ADNI_unetr_vit_b16_diceonly_dice_edge_depth_target10_f0s0/budget_ledger.json">Update/budget ledger</a></p></details>
+<details><summary>3D U-Net / edge + depth</summary><pre>{
+  &quot;updates&quot;: 563,
+  &quot;optimization_flops&quot;: 31959748393868,
+  &quot;calibration_flops&quot;: 191624253626,
+  &quot;budget_fraction&quot;: 0.9994776695701506,
+  &quot;weights&quot;: {
+    &quot;edge&quot;: 0.021075261923053135,
+    &quot;depth&quot;: 0.004463011630262586
+  },
+  &quot;statistics&quot;: {
+    &quot;edge&quot;: {
+      &quot;median_raw_ratio&quot;: 4.74489951133728,
+      &quot;p95_raw_ratio&quot;: 6.061645793914793,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.12775077279152763
+    },
+    &quot;depth&quot;: {
+      &quot;median_raw_ratio&quot;: 22.406394668999866,
+      &quot;p95_raw_ratio&quot;: 28.472200081708515,
+      &quot;weighted_median_ratio&quot;: 0.10000000000000002,
+      &quot;weighted_p95_ratio&quot;: 0.12707176010382845
+    }
+  }
+}</pre><p><a href="runs/ADNI_basic_unet16_diceonly_dice_edge_depth_target10_f0s0/metrics.csv">Sampled curves CSV</a> · <a href="runs/ADNI_basic_unet16_diceonly_dice_edge_depth_target10_f0s0/calibration.json">Full calibration</a> · <a href="runs/ADNI_basic_unet16_diceonly_dice_edge_depth_target10_f0s0/config.json">Configuration and split</a> · <a href="runs/ADNI_basic_unet16_diceonly_dice_edge_depth_target10_f0s0/budget_ledger.json">Update/budget ledger</a></p></details>
+<details><summary>nnUNet / sdf + depth</summary><pre>{
+  &quot;updates&quot;: 90,
+  &quot;optimization_flops&quot;: 31970586359769,
+  &quot;calibration_flops&quot;: 1186195931976,
+  &quot;budget_fraction&quot;: 0.9998166054331028,
+  &quot;weights&quot;: {
+    &quot;sdf&quot;: 0.6909111985624576,
+    &quot;depth&quot;: 0.12587182132266556
+  },
+  &quot;statistics&quot;: {
+    &quot;sdf&quot;: {
+      &quot;median_raw_ratio&quot;: 0.8684184034770144,
+      &quot;p95_raw_ratio&quot;: 0.9271926507777668,
+      &quot;weighted_median_ratio&quot;: 0.6,
+      &quot;weighted_p95_ratio&quot;: 0.6406077856471691
+    },
+    &quot;depth&quot;: {
+      &quot;median_raw_ratio&quot;: 4.766753938214119,
+      &quot;p95_raw_ratio&quot;: 5.8870305770768505,
+      &quot;weighted_median_ratio&quot;: 0.6,
+      &quot;weighted_p95_ratio&quot;: 0.741011260918886
+    }
+  }
+}</pre><p><a href="runs/ADNI_nnunet_dicece_dice_sdf_depth_target60_f0s0/metrics.csv">Sampled curves CSV</a> · <a href="runs/ADNI_nnunet_dicece_dice_sdf_depth_target60_f0s0/calibration.json">Full calibration</a> · <a href="runs/ADNI_nnunet_dicece_dice_sdf_depth_target60_f0s0/config.json">Configuration and split</a> · <a href="runs/ADNI_nnunet_dicece_dice_sdf_depth_target60_f0s0/budget_ledger.json">Update/budget ledger</a></p></details>
+<details><summary>SwinUNETR / sdf + depth</summary><pre>{
+  &quot;updates&quot;: 206,
+  &quot;optimization_flops&quot;: 31925288100621,
+  &quot;calibration_flops&quot;: 521038659926,
+  &quot;budget_fraction&quot;: 0.9983999923255505,
+  &quot;weights&quot;: {
+    &quot;sdf&quot;: 0.062107680187729414,
+    &quot;depth&quot;: 0.005636811162639353
+  },
+  &quot;statistics&quot;: {
+    &quot;sdf&quot;: {
+      &quot;median_raw_ratio&quot;: 1.610106828941857,
+      &quot;p95_raw_ratio&quot;: 1.9292112693723744,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.11981883653274293
+    },
+    &quot;depth&quot;: {
+      &quot;median_raw_ratio&quot;: 17.740526889174074,
+      &quot;p95_raw_ratio&quot;: 20.242835002962227,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.1141050383081641
+    }
+  }
+}</pre><p><a href="runs/ADNI_swinunetr_diceonly_dice_sdf_depth_target10_f0s0/metrics.csv">Sampled curves CSV</a> · <a href="runs/ADNI_swinunetr_diceonly_dice_sdf_depth_target10_f0s0/calibration.json">Full calibration</a> · <a href="runs/ADNI_swinunetr_diceonly_dice_sdf_depth_target10_f0s0/config.json">Configuration and split</a> · <a href="runs/ADNI_swinunetr_diceonly_dice_sdf_depth_target10_f0s0/budget_ledger.json">Update/budget ledger</a></p></details>
+<details><summary>UNETR / sdf + depth</summary><pre>{
+  &quot;updates&quot;: 245,
+  &quot;optimization_flops&quot;: 31859575748422,
+  &quot;calibration_flops&quot;: 431980345636,
+  &quot;budget_fraction&quot;: 0.9963449689934385,
+  &quot;weights&quot;: {
+    &quot;sdf&quot;: 0.06314794326651785,
+    &quot;depth&quot;: 0.006658638416808505
+  },
+  &quot;statistics&quot;: {
+    &quot;sdf&quot;: {
+      &quot;median_raw_ratio&quot;: 1.583582850480924,
+      &quot;p95_raw_ratio&quot;: 1.8193780966626403,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.11488998482839763
+    },
+    &quot;depth&quot;: {
+      &quot;median_raw_ratio&quot;: 15.018085341226586,
+      &quot;p95_raw_ratio&quot;: 16.72887740955698,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.11139154578935605
+    }
+  }
+}</pre><p><a href="runs/ADNI_unetr_vit_b16_diceonly_dice_sdf_depth_target10_f0s0/metrics.csv">Sampled curves CSV</a> · <a href="runs/ADNI_unetr_vit_b16_diceonly_dice_sdf_depth_target10_f0s0/calibration.json">Full calibration</a> · <a href="runs/ADNI_unetr_vit_b16_diceonly_dice_sdf_depth_target10_f0s0/config.json">Configuration and split</a> · <a href="runs/ADNI_unetr_vit_b16_diceonly_dice_sdf_depth_target10_f0s0/budget_ledger.json">Update/budget ledger</a></p></details>
+<details><summary>3D U-Net / sdf + depth</summary><pre>{
+  &quot;updates&quot;: 563,
+  &quot;optimization_flops&quot;: 31925275253860,
+  &quot;calibration_flops&quot;: 190336716836,
+  &quot;budget_fraction&quot;: 0.9983995905686096,
+  &quot;weights&quot;: {
+    &quot;sdf&quot;: 0.04959613163587506,
+    &quot;depth&quot;: 0.004838008680876086
+  },
+  &quot;statistics&quot;: {
+    &quot;sdf&quot;: {
+      &quot;median_raw_ratio&quot;: 2.0162862848695564,
+      &quot;p95_raw_ratio&quot;: 2.1132130117381616,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.10480719070480986
+    },
+    &quot;depth&quot;: {
+      &quot;median_raw_ratio&quot;: 20.669661134607885,
+      &quot;p95_raw_ratio&quot;: 26.135231690073493,
+      &quot;weighted_median_ratio&quot;: 0.09999999999999999,
+      &quot;weighted_p95_ratio&quot;: 0.12644247779328333
+    }
+  }
+}</pre><p><a href="runs/ADNI_basic_unet16_diceonly_dice_sdf_depth_target10_f0s0/metrics.csv">Sampled curves CSV</a> · <a href="runs/ADNI_basic_unet16_diceonly_dice_sdf_depth_target10_f0s0/calibration.json">Full calibration</a> · <a href="runs/ADNI_basic_unet16_diceonly_dice_sdf_depth_target10_f0s0/config.json">Configuration and split</a> · <a href="runs/ADNI_basic_unet16_diceonly_dice_sdf_depth_target10_f0s0/budget_ledger.json">Update/budget ledger</a></p></details>
+<details><summary>nnUNet / bands + edge + depth</summary><pre>{
+  &quot;updates&quot;: 89,
+  &quot;optimization_flops&quot;: 31626245532431,
+  &quot;calibration_flops&quot;: 1188940989696,
+  &quot;budget_fraction&quot;: 0.9890480298046516,
+  &quot;weights&quot;: {
+    &quot;bands&quot;: 0.03754386065416465,
+    &quot;edge&quot;: 0.10730291529755276,
+    &quot;depth&quot;: 0.14640841145725347
+  },
+  &quot;statistics&quot;: {
+    &quot;bands&quot;: {
+      &quot;median_raw_ratio&quot;: 15.981307983398438,
+      &quot;p95_raw_ratio&quot;: 19.04652910232544,
+      &quot;weighted_median_ratio&quot;: 0.6,
+      &quot;weighted_p95_ratio&quot;: 0.715080234563198
+    },
+    &quot;edge&quot;: {
+      &quot;median_raw_ratio&quot;: 5.591646772468297,
+      &quot;p95_raw_ratio&quot;: 6.218747222627722,
+      &quot;weighted_median_ratio&quot;: 0.6,
+      &quot;weighted_p95_ratio&quot;: 0.667289706486514
+    },
+    &quot;depth&quot;: {
+      &quot;median_raw_ratio&quot;: 4.098125196687764,
+      &quot;p95_raw_ratio&quot;: 4.9858505854222885,
+      &quot;weighted_median_ratio&quot;: 0.6,
+      &quot;weighted_p95_ratio&quot;: 0.7299704639748945
+    }
+  }
+}</pre><p><a href="runs/ADNI_nnunet_dicece_dice_bands_edge_depth_target60_f0s0/metrics.csv">Sampled curves CSV</a> · <a href="runs/ADNI_nnunet_dicece_dice_bands_edge_depth_target60_f0s0/calibration.json">Full calibration</a> · <a href="runs/ADNI_nnunet_dicece_dice_bands_edge_depth_target60_f0s0/config.json">Configuration and split</a> · <a href="runs/ADNI_nnunet_dicece_dice_bands_edge_depth_target60_f0s0/budget_ledger.json">Update/budget ledger</a></p></details>
+<details><summary>SwinUNETR / bands + edge + depth</summary><pre>{
+  &quot;updates&quot;: 206,
+  &quot;optimization_flops&quot;: 31946403066298,
+  &quot;calibration_flops&quot;: 523783717646,
+  &quot;budget_fraction&quot;: 0.999060320949788,
+  &quot;weights&quot;: {
+    &quot;bands&quot;: 0.0035546657802059778,
+    &quot;edge&quot;: 0.0077772559481205155,
+    &quot;depth&quot;: 0.005629416855838692
+  },
+  &quot;statistics&quot;: {
+    &quot;bands&quot;: {
+      &quot;median_raw_ratio&quot;: 28.13204002380371,
+      &quot;p95_raw_ratio&quot;: 36.89190216064453,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.13113838217715007
+    },
+    &quot;edge&quot;: {
+      &quot;median_raw_ratio&quot;: 12.858005531393939,
+      &quot;p95_raw_ratio&quot;: 15.70918644267786,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.12217436370145054
+    },
+    &quot;depth&quot;: {
+      &quot;median_raw_ratio&quot;: 17.763829284783284,
+      &quot;p95_raw_ratio&quot;: 20.44081177608607,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.11506985035932495
+    }
+  }
+}</pre><p><a href="runs/ADNI_swinunetr_diceonly_dice_bands_edge_depth_target10_f0s0/metrics.csv">Sampled curves CSV</a> · <a href="runs/ADNI_swinunetr_diceonly_dice_bands_edge_depth_target10_f0s0/calibration.json">Full calibration</a> · <a href="runs/ADNI_swinunetr_diceonly_dice_bands_edge_depth_target10_f0s0/config.json">Configuration and split</a> · <a href="runs/ADNI_swinunetr_diceonly_dice_bands_edge_depth_target10_f0s0/budget_ledger.json">Update/budget ledger</a></p></details>
+<details><summary>UNETR / bands + edge + depth</summary><pre>{
+  &quot;updates&quot;: 245,
+  &quot;optimization_flops&quot;: 31886001109435,
+  &quot;calibration_flops&quot;: 434725403356,
+  &quot;budget_fraction&quot;: 0.9971713696871276,
+  &quot;weights&quot;: {
+    &quot;bands&quot;: 0.003868865410249142,
+    &quot;edge&quot;: 0.007045936879795677,
+    &quot;depth&quot;: 0.00686460533272396
+  },
+  &quot;statistics&quot;: {
+    &quot;bands&quot;: {
+      &quot;median_raw_ratio&quot;: 25.847371101379395,
+      &quot;p95_raw_ratio&quot;: 31.734139347076415,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.12277511404393023
+    },
+    &quot;edge&quot;: {
+      &quot;median_raw_ratio&quot;: 14.1925767582096,
+      &quot;p95_raw_ratio&quot;: 17.6961710029852,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.12468610390110428
+    },
+    &quot;depth&quot;: {
+      &quot;median_raw_ratio&quot;: 14.567479870007148,
+      &quot;p95_raw_ratio&quot;: 16.25805860025242,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.1116051557670314
+    }
+  }
+}</pre><p><a href="runs/ADNI_unetr_vit_b16_diceonly_dice_bands_edge_depth_target10_f0s0/metrics.csv">Sampled curves CSV</a> · <a href="runs/ADNI_unetr_vit_b16_diceonly_dice_bands_edge_depth_target10_f0s0/calibration.json">Full calibration</a> · <a href="runs/ADNI_unetr_vit_b16_diceonly_dice_bands_edge_depth_target10_f0s0/config.json">Configuration and split</a> · <a href="runs/ADNI_unetr_vit_b16_diceonly_dice_bands_edge_depth_target10_f0s0/budget_ledger.json">Update/budget ledger</a></p></details>
+<details><summary>3D U-Net / bands + edge + depth</summary><pre>{
+  &quot;updates&quot;: 562,
+  &quot;optimization_flops&quot;: 31938139811322,
+  &quot;calibration_flops&quot;: 193081774556,
+  &quot;budget_fraction&quot;: 0.9988019040584942,
+  &quot;weights&quot;: {
+    &quot;bands&quot;: 0.002982334200067384,
+    &quot;edge&quot;: 0.0212778157726717,
+    &quot;depth&quot;: 0.004514335545796445
+  },
+  &quot;statistics&quot;: {
+    &quot;bands&quot;: {
+      &quot;median_raw_ratio&quot;: 33.53078269958496,
+      &quot;p95_raw_ratio&quot;: 38.2937255859375,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.11420468746293684
+    },
+    &quot;edge&quot;: {
+      &quot;median_raw_ratio&quot;: 4.69973051126966,
+      &quot;p95_raw_ratio&quot;: 6.003696100345324,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.1277455395782553
+    },
+    &quot;depth&quot;: {
+      &quot;median_raw_ratio&quot;: 22.151654210355655,
+      &quot;p95_raw_ratio&quot;: 28.16147194692663,
+      &quot;weighted_median_ratio&quot;: 0.10000000000000002,
+      &quot;weighted_p95_ratio&quot;: 0.1271303338319603
+    }
+  }
+}</pre><p><a href="runs/ADNI_basic_unet16_diceonly_dice_bands_edge_depth_target10_f0s0/metrics.csv">Sampled curves CSV</a> · <a href="runs/ADNI_basic_unet16_diceonly_dice_bands_edge_depth_target10_f0s0/calibration.json">Full calibration</a> · <a href="runs/ADNI_basic_unet16_diceonly_dice_bands_edge_depth_target10_f0s0/config.json">Configuration and split</a> · <a href="runs/ADNI_basic_unet16_diceonly_dice_bands_edge_depth_target10_f0s0/budget_ledger.json">Update/budget ledger</a></p></details>
+<details><summary>nnUNet / bands + sdf + depth</summary><pre>{
+  &quot;updates&quot;: 90,
+  &quot;optimization_flops&quot;: 31976171077127,
+  &quot;calibration_flops&quot;: 1187653452916,
+  &quot;budget_fraction&quot;: 0.99999125637908,
+  &quot;weights&quot;: {
+    &quot;bands&quot;: 0.03754386065416465,
+    &quot;sdf&quot;: 0.934746565957961,
+    &quot;depth&quot;: 0.1618950670941373
+  },
+  &quot;statistics&quot;: {
+    &quot;bands&quot;: {
+      &quot;median_raw_ratio&quot;: 15.981307983398438,
+      &quot;p95_raw_ratio&quot;: 19.04652910232544,
+      &quot;weighted_median_ratio&quot;: 0.6,
+      &quot;weighted_p95_ratio&quot;: 0.715080234563198
+    },
+    &quot;sdf&quot;: {
+      &quot;median_raw_ratio&quot;: 0.64188521450742,
+      &quot;p95_raw_ratio&quot;: 0.6510315976490157,
+      &quot;weighted_median_ratio&quot;: 0.6,
+      &quot;weighted_p95_ratio&quot;: 0.6085495502325424
+    },
+    &quot;depth&quot;: {
+      &quot;median_raw_ratio&quot;: 3.7061042734002347,
+      &quot;p95_raw_ratio&quot;: 4.627111947901163,
+      &quot;weighted_median_ratio&quot;: 0.6,
+      &quot;weighted_p95_ratio&quot;: 0.7491065992575432
+    }
+  }
+}</pre><p><a href="runs/ADNI_nnunet_dicece_dice_bands_sdf_depth_target60_f0s0/metrics.csv">Sampled curves CSV</a> · <a href="runs/ADNI_nnunet_dicece_dice_bands_sdf_depth_target60_f0s0/calibration.json">Full calibration</a> · <a href="runs/ADNI_nnunet_dicece_dice_bands_sdf_depth_target60_f0s0/config.json">Configuration and split</a> · <a href="runs/ADNI_nnunet_dicece_dice_bands_sdf_depth_target60_f0s0/budget_ledger.json">Update/budget ledger</a></p></details>
+<details><summary>SwinUNETR / bands + sdf + depth</summary><pre>{
+  &quot;updates&quot;: 206,
+  &quot;optimization_flops&quot;: 31936002452841,
+  &quot;calibration_flops&quot;: 522496180866,
+  &quot;budget_fraction&quot;: 0.9987350624160852,
+  &quot;weights&quot;: {
+    &quot;bands&quot;: 0.0035546657802059778,
+    &quot;sdf&quot;: 0.06435673527411105,
+    &quot;depth&quot;: 0.005867776350291922
+  },
+  &quot;statistics&quot;: {
+    &quot;bands&quot;: {
+      &quot;median_raw_ratio&quot;: 28.13204002380371,
+      &quot;p95_raw_ratio&quot;: 36.89190216064453,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.13113838217715007
+    },
+    &quot;sdf&quot;: {
+      &quot;median_raw_ratio&quot;: 1.5538389194864468,
+      &quot;p95_raw_ratio&quot;: 1.8461960364308776,
+      &quot;weighted_median_ratio&quot;: 0.10000000000000002,
+      &quot;weighted_p95_ratio&quot;: 0.11881514958069507
+    },
+    &quot;depth&quot;: {
+      &quot;median_raw_ratio&quot;: 17.04223099693038,
+      &quot;p95_raw_ratio&quot;: 19.639980759526313,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.11524301462093689
+    }
+  }
+}</pre><p><a href="runs/ADNI_swinunetr_diceonly_dice_bands_sdf_depth_target10_f0s0/metrics.csv">Sampled curves CSV</a> · <a href="runs/ADNI_swinunetr_diceonly_dice_bands_sdf_depth_target10_f0s0/calibration.json">Full calibration</a> · <a href="runs/ADNI_swinunetr_diceonly_dice_bands_sdf_depth_target10_f0s0/config.json">Configuration and split</a> · <a href="runs/ADNI_swinunetr_diceonly_dice_bands_sdf_depth_target10_f0s0/budget_ledger.json">Update/budget ledger</a></p></details>
+<details><summary>UNETR / bands + sdf + depth</summary><pre>{
+  &quot;updates&quot;: 245,
+  &quot;optimization_flops&quot;: 31872968688697,
+  &quot;calibration_flops&quot;: 433437866576,
+  &quot;budget_fraction&quot;: 0.9967638066066068,
+  &quot;weights&quot;: {
+    &quot;bands&quot;: 0.003868865410249142,
+    &quot;sdf&quot;: 0.06656838132792327,
+    &quot;depth&quot;: 0.007028988716613425
+  },
+  &quot;statistics&quot;: {
+    &quot;bands&quot;: {
+      &quot;median_raw_ratio&quot;: 25.847371101379395,
+      &quot;p95_raw_ratio&quot;: 31.734139347076415,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.12277511404393023
+    },
+    &quot;sdf&quot;: {
+      &quot;median_raw_ratio&quot;: 1.5022146851879852,
+      &quot;p95_raw_ratio&quot;: 1.7076182950492753,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.11367338582737835
+    },
+    &quot;depth&quot;: {
+      &quot;median_raw_ratio&quot;: 14.22679762789264,
+      &quot;p95_raw_ratio&quot;: 15.860288671087568,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.11148179011130625
+    }
+  }
+}</pre><p><a href="runs/ADNI_unetr_vit_b16_diceonly_dice_bands_sdf_depth_target10_f0s0/metrics.csv">Sampled curves CSV</a> · <a href="runs/ADNI_unetr_vit_b16_diceonly_dice_bands_sdf_depth_target10_f0s0/calibration.json">Full calibration</a> · <a href="runs/ADNI_unetr_vit_b16_diceonly_dice_bands_sdf_depth_target10_f0s0/config.json">Configuration and split</a> · <a href="runs/ADNI_unetr_vit_b16_diceonly_dice_bands_sdf_depth_target10_f0s0/budget_ledger.json">Update/budget ledger</a></p></details>
+<details><summary>3D U-Net / bands + sdf + depth</summary><pre>{
+  &quot;updates&quot;: 563,
+  &quot;optimization_flops&quot;: 31960508989045,
+  &quot;calibration_flops&quot;: 191794237776,
+  &quot;budget_fraction&quot;: 0.9995014556740218,
+  &quot;weights&quot;: {
+    &quot;bands&quot;: 0.002982334200067384,
+    &quot;sdf&quot;: 0.050031630205942215,
+    &quot;depth&quot;: 0.004877788792494635
+  },
+  &quot;statistics&quot;: {
+    &quot;bands&quot;: {
+      &quot;median_raw_ratio&quot;: 33.53078269958496,
+      &quot;p95_raw_ratio&quot;: 38.2937255859375,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.11420468746293684
+    },
+    &quot;sdf&quot;: {
+      &quot;median_raw_ratio&quot;: 1.998735591632253,
+      &quot;p95_raw_ratio&quot;: 2.0933035284643133,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.10473138804492056
+    },
+    &quot;depth&quot;: {
+      &quot;median_raw_ratio&quot;: 20.501092657777267,
+      &quot;p95_raw_ratio&quot;: 25.927568937451955,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.12646920517973517
+    }
+  }
+}</pre><p><a href="runs/ADNI_basic_unet16_diceonly_dice_bands_sdf_depth_target10_f0s0/metrics.csv">Sampled curves CSV</a> · <a href="runs/ADNI_basic_unet16_diceonly_dice_bands_sdf_depth_target10_f0s0/calibration.json">Full calibration</a> · <a href="runs/ADNI_basic_unet16_diceonly_dice_bands_sdf_depth_target10_f0s0/config.json">Configuration and split</a> · <a href="runs/ADNI_basic_unet16_diceonly_dice_bands_sdf_depth_target10_f0s0/budget_ledger.json">Update/budget ledger</a></p></details>
+<details><summary>nnUNet / edge + sdf + depth</summary><pre>{
+  &quot;updates&quot;: 90,
+  &quot;optimization_flops&quot;: 31976268286928,
+  &quot;calibration_flops&quot;: 1187677455336,
+  &quot;budget_fraction&quot;: 0.9999942964225799,
+  &quot;weights&quot;: {
+    &quot;edge&quot;: 0.07952465374728028,
+    &quot;sdf&quot;: 0.8734324110465712,
+    &quot;depth&quot;: 0.1525116356108393
+  },
+  &quot;statistics&quot;: {
+    &quot;edge&quot;: {
+      &quot;median_raw_ratio&quot;: 7.544830083847046,
+      &quot;p95_raw_ratio&quot;: 8.863749504089355,
+      &quot;weighted_median_ratio&quot;: 0.6,
+      &quot;weighted_p95_ratio&quot;: 0.7048866102153333
+    },
+    &quot;sdf&quot;: {
+      &quot;median_raw_ratio&quot;: 0.6869449683932191,
+      &quot;p95_raw_ratio&quot;: 0.6951772671292261,
+      &quot;weighted_median_ratio&quot;: 0.6,
+      &quot;weighted_p95_ratio&quot;: 0.6071903565334462
+    },
+    &quot;depth&quot;: {
+      &quot;median_raw_ratio&quot;: 3.9341260592798784,
+      &quot;p95_raw_ratio&quot;: 4.8890441706030545,
+      &quot;weighted_median_ratio&quot;: 0.6,
+      &quot;weighted_p95_ratio&quot;: 0.7456361230323111
+    }
+  }
+}</pre><p><a href="runs/ADNI_nnunet_dicece_dice_edge_sdf_depth_target60_f0s0/metrics.csv">Sampled curves CSV</a> · <a href="runs/ADNI_nnunet_dicece_dice_edge_sdf_depth_target60_f0s0/calibration.json">Full calibration</a> · <a href="runs/ADNI_nnunet_dicece_dice_edge_sdf_depth_target60_f0s0/config.json">Configuration and split</a> · <a href="runs/ADNI_nnunet_dicece_dice_edge_sdf_depth_target60_f0s0/budget_ledger.json">Update/budget ledger</a></p></details>
+<details><summary>SwinUNETR / edge + sdf + depth</summary><pre>{
+  &quot;updates&quot;: 206,
+  &quot;optimization_flops&quot;: 31936189671717,
+  &quot;calibration_flops&quot;: 522520183286,
+  &quot;budget_fraction&quot;: 0.9987409173146775,
+  &quot;weights&quot;: {
+    &quot;edge&quot;: 0.007468763989562296,
+    &quot;sdf&quot;: 0.06403050581765564,
+    &quot;depth&quot;: 0.005849603698358964
+  },
+  &quot;statistics&quot;: {
+    &quot;edge&quot;: {
+      &quot;median_raw_ratio&quot;: 13.3890962600708,
+      &quot;p95_raw_ratio&quot;: 16.414600992202757,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.12259678079359748
+    },
+    &quot;sdf&quot;: {
+      &quot;median_raw_ratio&quot;: 1.5617555838896124,
+      &quot;p95_raw_ratio&quot;: 1.8508770691189693,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.11851259494198758
+    },
+    &quot;depth&quot;: {
+      &quot;median_raw_ratio&quot;: 17.095175187347103,
+      &quot;p95_raw_ratio&quot;: 19.68291013985157,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.11513722394854288
+    }
+  }
+}</pre><p><a href="runs/ADNI_swinunetr_diceonly_dice_edge_sdf_depth_target10_f0s0/metrics.csv">Sampled curves CSV</a> · <a href="runs/ADNI_swinunetr_diceonly_dice_edge_sdf_depth_target10_f0s0/calibration.json">Full calibration</a> · <a href="runs/ADNI_swinunetr_diceonly_dice_edge_sdf_depth_target10_f0s0/config.json">Configuration and split</a> · <a href="runs/ADNI_swinunetr_diceonly_dice_edge_sdf_depth_target10_f0s0/budget_ledger.json">Update/budget ledger</a></p></details>
+<details><summary>UNETR / edge + sdf + depth</summary><pre>{
+  &quot;updates&quot;: 245,
+  &quot;optimization_flops&quot;: 31873202712292,
+  &quot;calibration_flops&quot;: 433461868996,
+  &quot;budget_fraction&quot;: 0.9967711252298472,
+  &quot;weights&quot;: {
+    &quot;edge&quot;: 0.0066904459635863224,
+    &quot;sdf&quot;: 0.06557002671917743,
+    &quot;depth&quot;: 0.006940550830053705
+  },
+  &quot;statistics&quot;: {
+    &quot;edge&quot;: {
+      &quot;median_raw_ratio&quot;: 14.946686744689941,
+      &quot;p95_raw_ratio&quot;: 18.854194164276123,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.126142967243054
+    },
+    &quot;sdf&quot;: {
+      &quot;median_raw_ratio&quot;: 1.5250870710832385,
+      &quot;p95_raw_ratio&quot;: 1.7292161301011877,
+      &quot;weighted_median_ratio&quot;: 0.09999999999999999,
+      &quot;weighted_p95_ratio&quot;: 0.11338474785396747
+    },
+    &quot;depth&quot;: {
+      &quot;median_raw_ratio&quot;: 14.408078328161487,
+      &quot;p95_raw_ratio&quot;: 16.081656710186454,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.11161555582852332
+    }
+  }
+}</pre><p><a href="runs/ADNI_unetr_vit_b16_diceonly_dice_edge_sdf_depth_target10_f0s0/metrics.csv">Sampled curves CSV</a> · <a href="runs/ADNI_unetr_vit_b16_diceonly_dice_edge_sdf_depth_target10_f0s0/calibration.json">Full calibration</a> · <a href="runs/ADNI_unetr_vit_b16_diceonly_dice_edge_sdf_depth_target10_f0s0/config.json">Configuration and split</a> · <a href="runs/ADNI_unetr_vit_b16_diceonly_dice_edge_sdf_depth_target10_f0s0/budget_ledger.json">Update/budget ledger</a></p></details>
+<details><summary>3D U-Net / edge + sdf + depth</summary><pre>{
+  &quot;updates&quot;: 563,
+  &quot;optimization_flops&quot;: 31961124651118,
+  &quot;calibration_flops&quot;: 191818240196,
+  &quot;budget_fraction&quot;: 0.9995207092828544,
+  &quot;weights&quot;: {
+    &quot;edge&quot;: 0.021075261923053135,
+    &quot;sdf&quot;: 0.05001396165809315,
+    &quot;depth&quot;: 0.004891923469305893
+  },
+  &quot;statistics&quot;: {
+    &quot;edge&quot;: {
+      &quot;median_raw_ratio&quot;: 4.74489951133728,
+      &quot;p95_raw_ratio&quot;: 6.061645793914793,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.12775077279152763
+    },
+    &quot;sdf&quot;: {
+      &quot;median_raw_ratio&quot;: 1.9994416895750593,
+      &quot;p95_raw_ratio&quot;: 2.097237767830699,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.10489116930818944
+    },
+    &quot;depth&quot;: {
+      &quot;median_raw_ratio&quot;: 20.441856997036965,
+      &quot;p95_raw_ratio&quot;: 25.910067701865263,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.12675006828205929
+    }
+  }
+}</pre><p><a href="runs/ADNI_basic_unet16_diceonly_dice_edge_sdf_depth_target10_f0s0/metrics.csv">Sampled curves CSV</a> · <a href="runs/ADNI_basic_unet16_diceonly_dice_edge_sdf_depth_target10_f0s0/calibration.json">Full calibration</a> · <a href="runs/ADNI_basic_unet16_diceonly_dice_edge_sdf_depth_target10_f0s0/config.json">Configuration and split</a> · <a href="runs/ADNI_basic_unet16_diceonly_dice_edge_sdf_depth_target10_f0s0/budget_ledger.json">Update/budget ledger</a></p></details>
+<details><summary>nnUNet / bands + edge + sdf + depth</summary><pre>{
+  &quot;updates&quot;: 89,
+  &quot;optimization_flops&quot;: 31626460228562,
+  &quot;calibration_flops&quot;: 1189166433546,
+  &quot;budget_fraction&quot;: 0.9890547439998333,
+  &quot;weights&quot;: {
+    &quot;bands&quot;: 0.03754386065416465,
+    &quot;edge&quot;: 0.10730291529755276,
+    &quot;sdf&quot;: 1.2730875034324638,
+    &quot;depth&quot;: 0.20610126105480414
+  },
+  &quot;statistics&quot;: {
+    &quot;bands&quot;: {
+      &quot;median_raw_ratio&quot;: 15.981307983398438,
+      &quot;p95_raw_ratio&quot;: 19.04652910232544,
+      &quot;weighted_median_ratio&quot;: 0.6,
+      &quot;weighted_p95_ratio&quot;: 0.715080234563198
+    },
+    &quot;edge&quot;: {
+      &quot;median_raw_ratio&quot;: 5.591646772468297,
+      &quot;p95_raw_ratio&quot;: 6.218747222627722,
+      &quot;weighted_median_ratio&quot;: 0.6,
+      &quot;weighted_p95_ratio&quot;: 0.667289706486514
+    },
+    &quot;sdf&quot;: {
+      &quot;median_raw_ratio&quot;: 0.47129517679051625,
+      &quot;p95_raw_ratio&quot;: 0.48595529553616834,
+      &quot;weighted_median_ratio&quot;: 0.6,
+      &quot;weighted_p95_ratio&quot;: 0.6186636139739257
+    },
+    &quot;depth&quot;: {
+      &quot;median_raw_ratio&quot;: 2.911190338813379,
+      &quot;p95_raw_ratio&quot;: 3.588797190154631,
+      &quot;weighted_median_ratio&quot;: 0.6,
+      &quot;weighted_p95_ratio&quot;: 0.7396556265608072
+    }
+  }
+}</pre><p><a href="runs/ADNI_nnunet_dicece_dice_bands_edge_sdf_depth_target60_f0s0/metrics.csv">Sampled curves CSV</a> · <a href="runs/ADNI_nnunet_dicece_dice_bands_edge_sdf_depth_target60_f0s0/calibration.json">Full calibration</a> · <a href="runs/ADNI_nnunet_dicece_dice_bands_edge_sdf_depth_target60_f0s0/config.json">Configuration and split</a> · <a href="runs/ADNI_nnunet_dicece_dice_bands_edge_sdf_depth_target60_f0s0/budget_ledger.json">Update/budget ledger</a></p></details>
+<details><summary>SwinUNETR / bands + edge + sdf + depth</summary><pre>{
+  &quot;updates&quot;: 206,
+  &quot;optimization_flops&quot;: 31946904023937,
+  &quot;calibration_flops&quot;: 524009161496,
+  &quot;budget_fraction&quot;: 0.9990759874052123,
+  &quot;weights&quot;: {
+    &quot;bands&quot;: 0.0035546657802059778,
+    &quot;edge&quot;: 0.0077772559481205155,
+    &quot;sdf&quot;: 0.066585564516461,
+    &quot;depth&quot;: 0.006123509335322605
+  },
+  &quot;statistics&quot;: {
+    &quot;bands&quot;: {
+      &quot;median_raw_ratio&quot;: 28.13204002380371,
+      &quot;p95_raw_ratio&quot;: 36.89190216064453,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.13113838217715007
+    },
+    &quot;edge&quot;: {
+      &quot;median_raw_ratio&quot;: 12.858005531393939,
+      &quot;p95_raw_ratio&quot;: 15.70918644267786,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.12217436370145054
+    },
+    &quot;sdf&quot;: {
+      &quot;median_raw_ratio&quot;: 1.501827021009613,
+      &quot;p95_raw_ratio&quot;: 1.76037364651738,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.11721547301326071
+    },
+    &quot;depth&quot;: {
+      &quot;median_raw_ratio&quot;: 16.330505029716218,
+      &quot;p95_raw_ratio&quot;: 19.02273479730633,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.11648589411467147
+    }
+  }
+}</pre><p><a href="runs/ADNI_swinunetr_diceonly_dice_bands_edge_sdf_depth_target10_f0s0/metrics.csv">Sampled curves CSV</a> · <a href="runs/ADNI_swinunetr_diceonly_dice_bands_edge_sdf_depth_target10_f0s0/calibration.json">Full calibration</a> · <a href="runs/ADNI_swinunetr_diceonly_dice_bands_edge_sdf_depth_target10_f0s0/config.json">Configuration and split</a> · <a href="runs/ADNI_swinunetr_diceonly_dice_bands_edge_sdf_depth_target10_f0s0/budget_ledger.json">Update/budget ledger</a></p></details>
+<details><summary>UNETR / bands + edge + sdf + depth</summary><pre>{
+  &quot;updates&quot;: 245,
+  &quot;optimization_flops&quot;: 31886595652567,
+  &quot;calibration_flops&quot;: 434950847206,
+  &quot;budget_fraction&quot;: 0.9971899628430156,
+  &quot;weights&quot;: {
+    &quot;bands&quot;: 0.003868865410249142,
+    &quot;edge&quot;: 0.007045936879795677,
+    &quot;sdf&quot;: 0.06941181390891646,
+    &quot;depth&quot;: 0.007362103829892718
+  },
+  &quot;statistics&quot;: {
+    &quot;bands&quot;: {
+      &quot;median_raw_ratio&quot;: 25.847371101379395,
+      &quot;p95_raw_ratio&quot;: 31.734139347076415,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.12277511404393023
+    },
+    &quot;edge&quot;: {
+      &quot;median_raw_ratio&quot;: 14.1925767582096,
+      &quot;p95_raw_ratio&quot;: 17.6961710029852,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.12468610390110428
+    },
+    &quot;sdf&quot;: {
+      &quot;median_raw_ratio&quot;: 1.4406769448673673,
+      &quot;p95_raw_ratio&quot;: 1.6137211379174334,
+      &quot;weighted_median_ratio&quot;: 0.09999999999999999,
+      &quot;weighted_p95_ratio&quot;: 0.1120113113260098
+    },
+    &quot;depth&quot;: {
+      &quot;median_raw_ratio&quot;: 13.583073848261282,
+      &quot;p95_raw_ratio&quot;: 15.223875429562831,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.11207975160579417
+    }
+  }
+}</pre><p><a href="runs/ADNI_unetr_vit_b16_diceonly_dice_bands_edge_sdf_depth_target10_f0s0/metrics.csv">Sampled curves CSV</a> · <a href="runs/ADNI_unetr_vit_b16_diceonly_dice_bands_edge_sdf_depth_target10_f0s0/calibration.json">Full calibration</a> · <a href="runs/ADNI_unetr_vit_b16_diceonly_dice_bands_edge_sdf_depth_target10_f0s0/config.json">Configuration and split</a> · <a href="runs/ADNI_unetr_vit_b16_diceonly_dice_bands_edge_sdf_depth_target10_f0s0/budget_ledger.json">Update/budget ledger</a></p></details>
+<details><summary>3D U-Net / bands + edge + sdf + depth</summary><pre>{
+  &quot;updates&quot;: 562,
+  &quot;optimization_flops&quot;: 31939510563543,
+  &quot;calibration_flops&quot;: 193307218406,
+  &quot;budget_fraction&quot;: 0.9988447716123473,
+  &quot;weights&quot;: {
+    &quot;bands&quot;: 0.002982334200067384,
+    &quot;edge&quot;: 0.0212778157726717,
+    &quot;sdf&quot;: 0.050514942268599095,
+    &quot;depth&quot;: 0.0049432080821223325
+  },
+  &quot;statistics&quot;: {
+    &quot;bands&quot;: {
+      &quot;median_raw_ratio&quot;: 33.53078269958496,
+      &quot;p95_raw_ratio&quot;: 38.2937255859375,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.11420468746293684
+    },
+    &quot;edge&quot;: {
+      &quot;median_raw_ratio&quot;: 4.69973051126966,
+      &quot;p95_raw_ratio&quot;: 6.003696100345324,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.1277455395782553
+    },
+    &quot;sdf&quot;: {
+      &quot;median_raw_ratio&quot;: 1.9796122792396345,
+      &quot;p95_raw_ratio&quot;: 2.073221924164725,
+      &quot;weighted_median_ratio&quot;: 0.1,
+      &quot;weighted_p95_ratio&quot;: 0.104728685809175
+    },
+    &quot;depth&quot;: {
+      &quot;median_raw_ratio&quot;: 20.229777573325556,
+      &quot;p95_raw_ratio&quot;: 25.65176452844664,
+      &quot;weighted_median_ratio&quot;: 0.09999999999999999,
+      &quot;weighted_p95_ratio&quot;: 0.1268020097377164
+    }
+  }
+}</pre><p><a href="runs/ADNI_basic_unet16_diceonly_dice_bands_edge_sdf_depth_target10_f0s0/metrics.csv">Sampled curves CSV</a> · <a href="runs/ADNI_basic_unet16_diceonly_dice_bands_edge_sdf_depth_target10_f0s0/calibration.json">Full calibration</a> · <a href="runs/ADNI_basic_unet16_diceonly_dice_bands_edge_sdf_depth_target10_f0s0/config.json">Configuration and split</a> · <a href="runs/ADNI_basic_unet16_diceonly_dice_bands_edge_sdf_depth_target10_f0s0/budget_ledger.json">Update/budget ledger</a></p></details>
+<p>Cleanup released 35.79 GiB of generated files. Durable archives retain metrics, curves, configuration, splits, calibration, source and logs. <a href="comparison.json">Complete machine-readable comparison</a>.</p>

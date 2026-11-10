@@ -1,0 +1,16 @@
+{
+  "status": "submitted",
+  "local_module": "scripts.cross_dataset_campaign.manage_msd_ce_constraints",
+  "remote_module": "scripts.cross_dataset_campaign.msd_ce_constraints_job",
+  "remote_stage": "/mnt/beegfsstudents/home/3160552/msd_four_models_ce_target60_20261014",
+  "pause": "rtk proxy .venv/bin/python -m scripts.cross_dataset_campaign.manage_msd_ce_constraints pause",
+  "resume": "rtk proxy .venv/bin/python -m scripts.cross_dataset_campaign.manage_msd_ce_constraints resume",
+  "status_command": "rtk proxy .venv/bin/python -m scripts.cross_dataset_campaign.manage_msd_ce_constraints status",
+  "report_command": "rtk proxy .venv/bin/python -m scripts.cross_dataset_campaign.manage_msd_ce_constraints report",
+  "monitor_automation_id": "report-msd-four-model-60-constraints",
+  "monitor_interval_minutes": 20,
+  "archive_dependency": "Mac must be online to archive. If unreachable, GPU releases after 5 minutes, files stay protected, and collector resumes after verified receipt. Manual pause prevents auto-resubmission.",
+  "time_limit": "24h with one queued continuation; optimizer, RNG and sampling state restored",
+  "other_jobs": "Full replicated and cross-dataset jobs remain held",
+  "job_id": "700918"
+}

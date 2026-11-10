@@ -1,0 +1,23 @@
+{
+  "job_id": "706836",
+  "dependency": "706834",
+  "quota": {
+    "used_gib": 25.8,
+    "limit_gib": 93.13,
+    "free_gib": 67.33,
+    "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  25.80GiB/93.13GiB  222.73k/\u221e  \n\n",
+    "checked_at": 1792336541.5627725
+  },
+  "submitted_at": 1792336541.6954608,
+  "command": [
+    "sbatch",
+    "--parsable",
+    "--chdir=/mnt/beegfsstudents/home/3160552/adni_medsam3_2sample_3fold_3seed_14arms_20261018",
+    "--output=/mnt/beegfsstudents/home/3160552/adni_medsam3_2sample_3fold_3seed_14arms_20261018/slurm-%j.out",
+    "--error=/mnt/beegfsstudents/home/3160552/adni_medsam3_2sample_3fold_3seed_14arms_20261018/slurm-%j.err",
+    "--dependency=afterany:706834",
+    "/mnt/beegfsstudents/home/3160552/adni_medsam3_2sample_3fold_3seed_14arms_20261018/run.sbatch",
+    "/mnt/beegfsstudents/home/3160552/adni_medsam3_2sample_3fold_3seed_14arms_20261018"
+  ],
+  "manifest_sha256": "0503950dff7b76a8bfd20cc2fe2671b792dc78dfe931b9783bbd96317879dec3"
+}

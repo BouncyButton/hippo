@@ -1,0 +1,229 @@
+{
+  "scope": "All ten unaugmented training crops; no validation or optimizer updates",
+  "diagnostic_runtime": {
+    "torch": "2.2.2",
+    "device": "CPU",
+    "precision": "FP32"
+  },
+  "limitation": "Diagnostic FP32 gradients, not exact CUDA BF16 training gradients",
+  "original_weight": 0.006257310109027442,
+  "original_calibration_step": 9,
+  "original_calibration_statistics": {
+    "median_raw_ratio": 15.981307983398438,
+    "p95_raw_ratio": 19.04652910232544,
+    "weighted_median_ratio": 0.1,
+    "weighted_p95_ratio": 0.11918003909386635
+  },
+  "checkpoints": {
+    "baseline": {
+      "model_sha256": "9aa87c5f8b60e448111546bf008a1daed0036acf176cfba3b1ed8c610c843a7a",
+      "checkpoint_sha256": "8e79eb9259bf7e9aeb516bea79a4030064892cca1351a889ce3d72abfbe1a362",
+      "selected_step": 90,
+      "rows": [
+        {
+          "case_name": "hippocampus_adni_10365_L",
+          "native_loss": -0.787289023399353,
+          "band_loss": 0.5402724742889404,
+          "weighted_logit_norm_ratio": 0.042787399142980576,
+          "weighted_parameter_norm_ratio": 0.031496915966272354,
+          "parameter_cosine": 0.6195143461227417,
+          "logit_cosine": 0.6782797574996948
+        },
+        {
+          "case_name": "hippocampus_adni_10365_R",
+          "native_loss": -0.7891115546226501,
+          "band_loss": 0.525782585144043,
+          "weighted_logit_norm_ratio": 0.04469141364097595,
+          "weighted_parameter_norm_ratio": 0.02507680095732212,
+          "parameter_cosine": 0.6200825572013855,
+          "logit_cosine": 0.6691260933876038
+        },
+        {
+          "case_name": "hippocampus_adni_141468_L",
+          "native_loss": -0.7365397810935974,
+          "band_loss": 0.5732587575912476,
+          "weighted_logit_norm_ratio": 0.04304827004671097,
+          "weighted_parameter_norm_ratio": 0.025646382942795753,
+          "parameter_cosine": 0.6110020279884338,
+          "logit_cosine": 0.6171443462371826
+        },
+        {
+          "case_name": "hippocampus_adni_141468_R",
+          "native_loss": -0.7280806303024292,
+          "band_loss": 0.6403446197509766,
+          "weighted_logit_norm_ratio": 0.04565757140517235,
+          "weighted_parameter_norm_ratio": 0.02435806393623352,
+          "parameter_cosine": 0.6932487487792969,
+          "logit_cosine": 0.6042853593826294
+        },
+        {
+          "case_name": "hippocampus_adni_147119_L",
+          "native_loss": -0.8102062940597534,
+          "band_loss": 0.4411656856536865,
+          "weighted_logit_norm_ratio": 0.03869657590985298,
+          "weighted_parameter_norm_ratio": 0.032483894377946854,
+          "parameter_cosine": 0.6790016293525696,
+          "logit_cosine": 0.707514226436615
+        },
+        {
+          "case_name": "hippocampus_adni_147119_R",
+          "native_loss": -0.8074834942817688,
+          "band_loss": 0.4069401025772095,
+          "weighted_logit_norm_ratio": 0.04007691517472267,
+          "weighted_parameter_norm_ratio": 0.022061729803681374,
+          "parameter_cosine": 0.6445332765579224,
+          "logit_cosine": 0.6879986524581909
+        },
+        {
+          "case_name": "hippocampus_adni_257270_L",
+          "native_loss": -0.7741627097129822,
+          "band_loss": 0.7128263115882874,
+          "weighted_logit_norm_ratio": 0.048017848283052444,
+          "weighted_parameter_norm_ratio": 0.03274206072092056,
+          "parameter_cosine": 0.732440173625946,
+          "logit_cosine": 0.6066097617149353
+        },
+        {
+          "case_name": "hippocampus_adni_257270_R",
+          "native_loss": -0.7961666584014893,
+          "band_loss": 0.5360826253890991,
+          "weighted_logit_norm_ratio": 0.044301070272922516,
+          "weighted_parameter_norm_ratio": 0.030592281371355057,
+          "parameter_cosine": 0.6954206824302673,
+          "logit_cosine": 0.6672176122665405
+        },
+        {
+          "case_name": "hippocampus_adni_258594_L",
+          "native_loss": -0.7533712387084961,
+          "band_loss": 0.5868264436721802,
+          "weighted_logit_norm_ratio": 0.043737832456827164,
+          "weighted_parameter_norm_ratio": 0.029216215014457703,
+          "parameter_cosine": 0.6818537712097168,
+          "logit_cosine": 0.6304865479469299
+        },
+        {
+          "case_name": "hippocampus_adni_258594_R",
+          "native_loss": -0.7594258785247803,
+          "band_loss": 0.5934857726097107,
+          "weighted_logit_norm_ratio": 0.04450405016541481,
+          "weighted_parameter_norm_ratio": 0.0308957751840353,
+          "parameter_cosine": 0.6015313267707825,
+          "logit_cosine": 0.6508052945137024
+        }
+      ],
+      "median": {
+        "native_loss": -0.7807258665561676,
+        "band_loss": 0.556765615940094,
+        "weighted_logit_norm_ratio": 0.04401945136487484,
+        "weighted_parameter_norm_ratio": 0.02990424819290638,
+        "parameter_cosine": 0.661767452955246,
+        "logit_cosine": 0.6590114533901215
+      }
+    },
+    "bands": {
+      "model_sha256": "1f4cbd3d89d072d470014873ccdfe519ff863db4776ae994fb732723897f513f",
+      "checkpoint_sha256": "a421dbeb383dce4d4d168f8e84aebb91911adfaab21fedf4d56f31f9f1d9315a",
+      "selected_step": 90,
+      "rows": [
+        {
+          "case_name": "hippocampus_adni_10365_L",
+          "native_loss": -0.7884142398834229,
+          "band_loss": 0.5266290903091431,
+          "weighted_logit_norm_ratio": 0.042696014046669006,
+          "weighted_parameter_norm_ratio": 0.02934512309730053,
+          "parameter_cosine": 0.6063918471336365,
+          "logit_cosine": 0.682263970375061
+        },
+        {
+          "case_name": "hippocampus_adni_10365_R",
+          "native_loss": -0.7903801202774048,
+          "band_loss": 0.5161339044570923,
+          "weighted_logit_norm_ratio": 0.044470228254795074,
+          "weighted_parameter_norm_ratio": 0.025072962045669556,
+          "parameter_cosine": 0.6062043309211731,
+          "logit_cosine": 0.6722290515899658
+        },
+        {
+          "case_name": "hippocampus_adni_141468_L",
+          "native_loss": -0.7386388182640076,
+          "band_loss": 0.5587137937545776,
+          "weighted_logit_norm_ratio": 0.042330481112003326,
+          "weighted_parameter_norm_ratio": 0.024137364700436592,
+          "parameter_cosine": 0.6186748743057251,
+          "logit_cosine": 0.6222423911094666
+        },
+        {
+          "case_name": "hippocampus_adni_141468_R",
+          "native_loss": -0.732009768486023,
+          "band_loss": 0.6102223992347717,
+          "weighted_logit_norm_ratio": 0.04455187916755676,
+          "weighted_parameter_norm_ratio": 0.023392006754875183,
+          "parameter_cosine": 0.6951315999031067,
+          "logit_cosine": 0.6112914085388184
+        },
+        {
+          "case_name": "hippocampus_adni_147119_L",
+          "native_loss": -0.812175989151001,
+          "band_loss": 0.43392202258110046,
+          "weighted_logit_norm_ratio": 0.03855464607477188,
+          "weighted_parameter_norm_ratio": 0.03123321197926998,
+          "parameter_cosine": 0.6460443735122681,
+          "logit_cosine": 0.7089955806732178
+        },
+        {
+          "case_name": "hippocampus_adni_147119_R",
+          "native_loss": -0.8108229637145996,
+          "band_loss": 0.3948710560798645,
+          "weighted_logit_norm_ratio": 0.03947925195097923,
+          "weighted_parameter_norm_ratio": 0.021883105859160423,
+          "parameter_cosine": 0.6226188540458679,
+          "logit_cosine": 0.6975357532501221
+        },
+        {
+          "case_name": "hippocampus_adni_257270_L",
+          "native_loss": -0.7770140171051025,
+          "band_loss": 0.702439546585083,
+          "weighted_logit_norm_ratio": 0.047742486000061035,
+          "weighted_parameter_norm_ratio": 0.03360523283481598,
+          "parameter_cosine": 0.7268807291984558,
+          "logit_cosine": 0.6096707582473755
+        },
+        {
+          "case_name": "hippocampus_adni_257270_R",
+          "native_loss": -0.7982394099235535,
+          "band_loss": 0.5248232483863831,
+          "weighted_logit_norm_ratio": 0.04387397691607475,
+          "weighted_parameter_norm_ratio": 0.02997136302292347,
+          "parameter_cosine": 0.6748433113098145,
+          "logit_cosine": 0.6724302172660828
+        },
+        {
+          "case_name": "hippocampus_adni_258594_L",
+          "native_loss": -0.756623387336731,
+          "band_loss": 0.5626221895217896,
+          "weighted_logit_norm_ratio": 0.042795803397893906,
+          "weighted_parameter_norm_ratio": 0.02952154539525509,
+          "parameter_cosine": 0.6780524253845215,
+          "logit_cosine": 0.6361593008041382
+        },
+        {
+          "case_name": "hippocampus_adni_258594_R",
+          "native_loss": -0.7602695226669312,
+          "band_loss": 0.5867049694061279,
+          "weighted_logit_norm_ratio": 0.04438502714037895,
+          "weighted_parameter_norm_ratio": 0.030372342094779015,
+          "parameter_cosine": 0.5991642475128174,
+          "logit_cosine": 0.6515334844589233
+        }
+      ],
+      "median": {
+        "native_loss": -0.7827141284942627,
+        "band_loss": 0.5426714420318604,
+        "weighted_logit_norm_ratio": 0.04333489015698433,
+        "weighted_parameter_norm_ratio": 0.02943333424627781,
+        "parameter_cosine": 0.634331613779068,
+        "logit_cosine": 0.6618812680244446
+      }
+    }
+  }
+}

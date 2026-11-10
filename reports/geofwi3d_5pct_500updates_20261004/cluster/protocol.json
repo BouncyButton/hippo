@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "model": "3D SwinUNETR",
+  "feature_size": 24,
+  "model_seed": 0,
+  "from_scratch": true,
+  "native_shape": [
+    96,
+    96,
+    96
+  ],
+  "success_metric": "validation mean foreground hard Dice",
+  "test_evaluation": false,
+  "max_updates": 500,
+  "min_updates": 500,
+  "scheduler_updates": 5000,
+  "validate_every": 100,
+  "early_stopping_patience": 10,
+  "min_delta": 0.0005,
+  "learning_rate": 0.0001,
+  "weight_decay": 1e-05,
+  "warmup_updates": 100,
+  "batch_size": 1,
+  "amp": true,
+  "amp_dtype": "bfloat16",
+  "activation_checkpointing": true,
+  "cache_volumes": true,
+  "cpu_threads": 4,
+  "augmentation": true,
+  "augmentation_policy": "XY flips and 90-degree rotations; preserve Z depth",
+  "base_loss": "foreground Dice + cross entropy",
+  "methods": [
+    "baseline"
+  ],
+  "band_weight": 0.1,
+  "band_warmup_updates": 500,
+  "band_policy": "optional two-voxel side-balanced BCE; omit observation-cube faces",
+  "budget_policy": "same maximum optimizer updates and validation opportunities for every fraction",
+  "checkpoint_selection": "exact highest mean validation Dice; early stopping uses min_delta separately",
+  "budget_selection_note": "Exploratory validation-informed 500-update budget: selected after job 682953 reached Dice 0.7373735061 at update 500; its longer-budget best was 0.8326919904. Report the actual best Dice without retuning to a requested range."
+}

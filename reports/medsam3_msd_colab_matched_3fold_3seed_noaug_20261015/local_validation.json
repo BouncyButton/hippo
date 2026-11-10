@@ -1,0 +1,85 @@
+{
+  "status": "passed_local_verification_gpu_preflight_required",
+  "tasks": 126,
+  "unique_tasks": 126,
+  "all_controls_first": true,
+  "no_augmentation": true,
+  "calibration_policy": "fresh_runtime_sequential",
+  "historical_results_role": "reference_only",
+  "zip_members": 285,
+  "zip_integrity_and_all_member_hashes": true,
+  "all_315_data_files_verified": true,
+  "base_and_medical_adapter_verified": true,
+  "all_9_protocols_unchanged": true,
+  "old_package_unchanged": true,
+  "notebook_cells_compiled": true,
+  "notebook_and_upload_hashes_verified": true,
+  "compatibility": {
+    "previous_manifest_sha256": "26f4f23962fb7dd1931f70c2e672e8f76d8c5f4cd983ce980b2dc041c994f20a",
+    "unchanged_definitions": {
+      "engine.py": [
+        "TransformCache",
+        "auxiliary",
+        "ensure_equivalence_audit",
+        "equivalence",
+        "equivalence_audit",
+        "evaluate",
+        "forward",
+        "gram_matrix",
+        "load",
+        "main",
+        "prepare_slabs",
+        "request_stop",
+        "rng_state",
+        "save_pt",
+        "set_rng",
+        "stopped",
+        "train"
+      ],
+      "runtime.py": [
+        "RecoveryWriter",
+        "activate",
+        "archive_run",
+        "binding",
+        "check_ledger",
+        "child",
+        "completed",
+        "copy_verified",
+        "digest",
+        "environment",
+        "fold_calibration",
+        "quota",
+        "read",
+        "relative",
+        "restore",
+        "run",
+        "write"
+      ]
+    },
+    "measurement_loop_unchanged": true,
+    "dependencies_unchanged": true
+  },
+  "transfer": {
+    "uploads": {
+      "medsam3_msd_matched_code.zip": "1a6a0130083c90632f3ba392c67e9bb9940908e84ff4f4d6cfb86714f61d7239",
+      "medsam3_msd_data.zip": "ad869cf8c8862697b41bda740e91cae91bea6fcfdadca364b6f3ec5e6acf95e4",
+      "sam3.pt": "9999e2341ceef5e136daa386eecb55cb414446a00ac2b55eb2dfd2f7c3cf8c9e"
+    },
+    "bundle_manifest_sha256": "39788851ab86a8df615031a2f6fe460be09cc045c666944fb4ebe74481b74654",
+    "notebook_sha256": "0c4a750f386315ca5fcc66e9f265fbb7b11c2bc45a36f3c29c76ff1352cda6ed",
+    "new_runs": 126,
+    "reused_runs": 0,
+    "historical_reference_runs": 27,
+    "optimization_flop_cap": null,
+    "updates": 200,
+    "augmentation": "none"
+  },
+  "gpu_validation": "Previous strict GPU audits remain unchanged; full new three-fold preflight is still required on Colab.",
+  "regression_tests": {
+    "command": "MPLCONFIGDIR=/private/tmp/hippo_adni_colab_matplotlib .venv/bin/python -m unittest scripts.colab_medsam3.test_runtime -q",
+    "count": 30,
+    "status": "passed",
+    "seconds": 12.767
+  },
+  "current_runtime_upgrade_cell_sha256": "3ca97a6c5b19b6be83f2a2ddc2396bff8587311554b2f1d6a5c3981a544bc508"
+}

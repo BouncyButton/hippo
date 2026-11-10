@@ -1,0 +1,162 @@
+{
+  "account": "focacciafilippo@gmail.com",
+  "connection_nickname": "second",
+  "source_modified_utc": "2026-10-18T11:04:33.647Z",
+  "source": "https://drive.google.com/file/d/1zZNS4Bf__S59AhbqkiZhNCv3_QDR0yI4/view",
+  "reported_completed": 133,
+  "phase_total": 336,
+  "total_seeds014": 504,
+  "original_run_folder_count": 142,
+  "current_seeds_with_reported_results": [
+    0,
+    1
+  ],
+  "current_plan_seeds": [
+    0,
+    1,
+    4
+  ],
+  "balanced_comparison": {
+    "fold": 0,
+    "seeds": [
+      0,
+      1
+    ],
+    "conditions": 14,
+    "models": 4,
+    "runs": 112
+  },
+  "checks": "133 unique run IDs, paired gains recomputed, per-run FLOP cap and discarded-attempt accounting checked; three archive spot checks only, not a full rehash of all archives.",
+  "archive_spot_checks": [
+    {
+      "id": "ADNI_basic_unet16_dice_bands_edge_depth_f0s1",
+      "validation_cases": 54,
+      "reported_dice": 71.94060197434743,
+      "recipe": {
+        "dataset": "ADNI",
+        "model": "basic_unet16",
+        "objective": "dice_bands_edge_depth",
+        "weight_dice": 1,
+        "weight_ce": 0,
+        "dice_include_background": true,
+        "native_deep_supervision": false,
+        "augmentation": "none",
+        "constraints": [
+          "bands",
+          "edge",
+          "depth"
+        ],
+        "calibration_base": "Dice",
+        "target": 0.1,
+        "p95_cap": 0.5,
+        "sdf_policy": "not_applicable",
+        "primary_checkpoint": "final_budget",
+        "ap_swaps_applicable": false,
+        "protocol_sha256": "689e9371686b158203a5058718124acde8dfdbdf2278305eff5c124daf832c39"
+      },
+      "cleanup": {
+        "status": "complete",
+        "deleted": [
+          {
+            "name": "checkpoint_best.pt",
+            "bytes": 5786093,
+            "sha256": "91e7f3677da068f6177dd975afc7f62586d194c9aba0e2c545ee5db95024fb9b"
+          },
+          {
+            "name": "checkpoint_latest.pt",
+            "bytes": 23191715,
+            "sha256": "b27d020e4499f006cfa6f45995a20413c22b7fe3c22c45832ac755dfab489e2a"
+          }
+        ],
+        "durable_archive": "/content/drive/MyDrive/hippo_adni_3fold_3seed/results_noaug_v1/runs/ADNI_basic_unet16_dice_bands_edge_depth_f0s1",
+        "released_file_bytes": 28977808,
+        "time": 1792319778.7097676
+      }
+    },
+    {
+      "id": "ADNI_nnunet_dice_f0s0",
+      "validation_cases": 54,
+      "reported_dice": 72.65163275482233,
+      "recipe": {
+        "dataset": "ADNI",
+        "model": "nnunet",
+        "objective": "dice",
+        "weight_dice": 1,
+        "weight_ce": 1,
+        "dice_include_background": false,
+        "native_deep_supervision": true,
+        "augmentation": "none",
+        "constraints": [],
+        "calibration_base": "Dice+CE",
+        "target": 0.6,
+        "p95_cap": 0.75,
+        "sdf_policy": "not_applicable",
+        "primary_checkpoint": "final_budget",
+        "ap_swaps_applicable": false,
+        "protocol_sha256": "2a60ed13121440af746baf2e4d9205403996d37932b9d06fc6ea21e3e174757b"
+      },
+      "cleanup": {
+        "status": "complete",
+        "deleted": [
+          {
+            "name": "checkpoint_best.pt",
+            "bytes": 196410191,
+            "sha256": "c0f2b6d497ffa3ad9dbea63853bc59886849a71a738c9399a6adb319bd41a474"
+          },
+          {
+            "name": "checkpoint_latest.pt",
+            "bytes": 328918531,
+            "sha256": "d5df2cbaadb5c740a5a7fa2437b76700a029f8d3f2c63127f55658ee220ea4e0"
+          }
+        ],
+        "durable_archive": "/content/drive/MyDrive/hippo_adni_3fold_3seed/results_noaug_v1/runs/ADNI_nnunet_dice_f0s0",
+        "released_file_bytes": 525328722,
+        "time": 1792059876.693827
+      }
+    },
+    {
+      "id": "ADNI_swinunetr_dice_sdf_f1s0",
+      "validation_cases": 54,
+      "reported_dice": 71.08883439793185,
+      "recipe": {
+        "dataset": "ADNI",
+        "model": "swinunetr",
+        "objective": "dice_sdf",
+        "weight_dice": 1,
+        "weight_ce": 0,
+        "dice_include_background": true,
+        "native_deep_supervision": false,
+        "augmentation": "none",
+        "constraints": [
+          "sdf"
+        ],
+        "calibration_base": "Dice",
+        "target": 0.1,
+        "p95_cap": 0.5,
+        "sdf_policy": "original_shared_ramp",
+        "primary_checkpoint": "final_budget",
+        "ap_swaps_applicable": false,
+        "protocol_sha256": "162a326726a7ffb22c2795c9f19743294db53ee47b461e7a3550cb2f0d201351"
+      },
+      "cleanup": {
+        "status": "complete",
+        "deleted": [
+          {
+            "name": "checkpoint_best.pt",
+            "bytes": 70397929,
+            "sha256": "ffab43007b819c4458052d391f0294b5c6039415328205bef4bc6d6573b73dd3"
+          },
+          {
+            "name": "checkpoint_latest.pt",
+            "bytes": 266597867,
+            "sha256": "a0e8e70d89c104a37ecec1d51b0a6c75aece879af629c27295929ede9a678184"
+          }
+        ],
+        "durable_archive": "/content/drive/MyDrive/hippo_adni_3fold_3seed/results_noaug_v1/runs/ADNI_swinunetr_dice_sdf_f1s0",
+        "released_file_bytes": 336995796,
+        "time": 1792321461.8155975
+      }
+    }
+  ],
+  "full_folds_seeds_complete": false
+}

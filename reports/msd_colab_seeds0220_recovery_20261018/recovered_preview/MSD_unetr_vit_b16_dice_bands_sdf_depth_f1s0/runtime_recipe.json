@@ -1,0 +1,44 @@
+{
+  "dataset": "MSD",
+  "model": "unetr_vit_b16",
+  "objective": "dice_bands_sdf_depth",
+  "weight_dice": 1,
+  "weight_ce": 0,
+  "dice_include_background": true,
+  "native_deep_supervision": false,
+  "augmentation": "none",
+  "constraints": [
+    "bands",
+    "sdf",
+    "depth"
+  ],
+  "calibration_base": "Dice",
+  "target": 0.1,
+  "p95_cap": 0.5,
+  "sdf_policy": "delayed_5_of_9",
+  "baseline_reference": {
+    "initialization_sha256": "fbd018b46230496e47bad2cca9c91936e1c5805718603f1f39a97135b81311d0",
+    "seed": 0,
+    "policy": "Fresh matched baseline for each fold and seed; initialization verified in original cluster environment",
+    "pilot_reference": {
+      "campaign": "msd_other_models_loss_pairs_20261014",
+      "run": "MSD_unetr_vit_b16_dice_f0s0",
+      "initialization_sha256": "fbd018b46230496e47bad2cca9c91936e1c5805718603f1f39a97135b81311d0",
+      "validation_sha256": "f4e5212ad9f06fd8bc86cf3f626457ee617614645fb78cbfd414163ec38d8c0d",
+      "validation_dice": 0.49648948862895836
+    }
+  },
+  "runtime_acceleration": {
+    "enabled": true,
+    "gpu_data_cache": true,
+    "immutable_sdf_depth_cache": true,
+    "deferred_validation_readback": true,
+    "validation_batch_size": 1,
+    "skip_unchanged_best_writes": true,
+    "benchmark": "msd_runtime_benchmark_v2_20261014",
+    "benchmark_summary_sha256": "df1e5201d9f33a3d7277735e148a4b6400785d9c7111a5d1fb51b2555053fcb6",
+    "optimization_graph_precision_optimizer_and_resume_unchanged": true
+  },
+  "primary_checkpoint": "final_budget",
+  "protocol_sha256": "c614c86e23018c232287a7f583a9efbb0def8d87b7f02e5b74e59a110a37a42e"
+}

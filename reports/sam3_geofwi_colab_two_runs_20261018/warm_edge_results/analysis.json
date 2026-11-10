@@ -1,0 +1,88 @@
+{
+  "bands": {
+    "mean_pp": -5.885925281932201,
+    "median_pp": -4.629568995881394,
+    "wins": 20,
+    "losses": 76,
+    "p10_pp": -15.538328795267256,
+    "p90_pp": 2.6375459214661667,
+    "min_pp": -24.432437550745977,
+    "max_pp": 13.793940600487566,
+    "foreground_fn_pct_change": 25.90915805637135,
+    "foreground_fp_pct_change": -35.76586943897164
+  },
+  "old_edge": {
+    "mean_pp": 10.530042555562686,
+    "median_pp": 9.30028075048776,
+    "wins": 88,
+    "losses": 8,
+    "p10_pp": 0.31626592705735757,
+    "p90_pp": 23.708530478960082,
+    "min_pp": -5.71791936696247,
+    "max_pp": 42.22938658630912,
+    "foreground_fn_pct_change": -16.906927485798363,
+    "foreground_fp_pct_change": 46.339345140500974
+  },
+  "retry_voxel": {
+    "tp": 3530333,
+    "fn": 4082646,
+    "fp": 360586,
+    "recall": 0.46372556656205144,
+    "precision": 0.9073262640522715
+  },
+  "bands_voxel": {
+    "tp": 4370446,
+    "fn": 3242533,
+    "fp": 561362,
+    "recall": 0.5740782944495184,
+    "precision": 0.8861752120114976
+  },
+  "old_edge_voxel": {
+    "tp": 2699638,
+    "fn": 4913341,
+    "fp": 246404,
+    "recall": 0.35460993653075884,
+    "precision": 0.9163610023210803
+  },
+  "matched_monitoring": {
+    "5": {
+      "slabs": 5,
+      "median": 0.3134436974348581,
+      "max": 0.49330988002470527,
+      "conflicts": 1
+    },
+    "10": {
+      "slabs": 5,
+      "median": 0.19066193917945798,
+      "max": 0.48845030430926356,
+      "conflicts": 0
+    },
+    "25": {
+      "slabs": 5,
+      "median": 0.24583030381856164,
+      "max": 0.6885036565451323,
+      "conflicts": 0
+    }
+  },
+  "edge_weight_reduction_factor": 24.227455427577716,
+  "first_five_updates_match_saved_bands": false,
+  "completed_updates": 25,
+  "validation_truth_hashes_match": true,
+  "verified_archive_files": {
+    "protocol.json": true,
+    "calibration.json": true,
+    "training_history.json": true,
+    "training_summary.json": true,
+    "slab_schedule.json": true,
+    "runtime_recipe.json": true,
+    "evaluation.json": true,
+    "completion.json": true,
+    "evaluation_audit.json": true
+  },
+  "interpretation": [
+    "Warm recalibration improved validation Dice by10.53 percentage points versus original bands+edge, but remained5.89 points below bands and2.57 below saved native baseline.",
+    "The retry is still more conservative than bands: lower false positives but higher false negatives.",
+    "The full20-slab calibration median1.94% and five-slab monitoring medians must not be used as a matched drift comparison. The same five anchors give31.34%,19.07%,24.58% at updates5,10,25.",
+    "Initial five-update GPU traces differ from saved bands despite matching data/sampling; the previous exact-prefix test was a CPU fixture only. Cause not established; do not attribute all metric differences solely to calibration."
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "status": "fixed_and_locally_verified",
+  "cause": {
+    "raw_array_mutated": true,
+    "old_check_failed": true,
+    "old_max_abs_diff": 2.384185791015625e-07,
+    "independent_load_exact_match": true,
+    "fresh_max_abs_diff": 0.0,
+    "labels_unchanged": true,
+    "cause": "NormalizeIntensity writes through the tensor into its NumPy source; repeated construction from the same dataframe normalizes an already normalized crop"
+  },
+  "changed_bundle_files": [
+    "gpu_preflight.py"
+  ],
+  "tests_passed": 13,
+  "preprocessing_exact_crops": 174,
+  "augmentation": "none",
+  "frozen_training_source_unchanged": true,
+  "data_zip_unchanged": true,
+  "code_zip_sha256": "1a1c1361f371e4b2f76f878f298aa4ca884627a4352c399e4b854daa79bfb436",
+  "original_manifest_sha256": "49ee150bfbbd77dd47b32b93d593557cad275893416902184dfe3f13064df61f",
+  "repaired_manifest_sha256": "e0b87c00231bb355aa66531f6684c361a632b3f8e393f6afbfb4939a37d0caeb",
+  "deployment": "Replace code ZIP in Drive input, open updated notebook, rerun cells 1 through 4 on the same runtime. Existing data ZIP is valid."
+}

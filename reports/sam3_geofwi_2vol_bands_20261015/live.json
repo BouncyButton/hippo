@@ -1,0 +1,32 @@
+{
+  "status.json": {
+    "status": "superseded",
+    "replacement_stage": "/mnt/beegfsstudents/home/3160552/foundation_two_sample_2gpu_20261015",
+    "replacement_job": "702517"
+  },
+  "submission.json": {
+    "job_id": "702445",
+    "dependency": "702047",
+    "quota": {
+      "used_gib": 25.04,
+      "limit_gib": 93.13,
+      "free_gib": 68.09,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  25.04GiB/93.13GiB  200.85k/\u221e  \n\n",
+      "checked_at": 1792077252.2561255
+    },
+    "submitted_at": 1792077252.5220785,
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--chdir=/mnt/beegfsstudents/home/3160552/sam3_geofwi_2vol_bands_20261015",
+      "--output=/mnt/beegfsstudents/home/3160552/sam3_geofwi_2vol_bands_20261015/slurm-%j.out",
+      "--error=/mnt/beegfsstudents/home/3160552/sam3_geofwi_2vol_bands_20261015/slurm-%j.err",
+      "--dependency=afterany:702047",
+      "/mnt/beegfsstudents/home/3160552/sam3_geofwi_2vol_bands_20261015/run.sbatch",
+      "/mnt/beegfsstudents/home/3160552/sam3_geofwi_2vol_bands_20261015"
+    ],
+    "manifest_sha256": "51116e266eea8fe802cfbafd211ea97248807994a3f7d19430789e6e811fdc30"
+  },
+  "ready": [],
+  "cleanup": []
+}

@@ -1,0 +1,167 @@
+{
+  "status": "complete",
+  "dataset": "MSD",
+  "model": "basic_unet16",
+  "fold": 0,
+  "seed": 0,
+  "augmentation": "none",
+  "baseline_dice_ce_percent": 81.17938473325637,
+  "baseline_updates": 563,
+  "budget_flops": 31976450667090,
+  "runs": [
+    {
+      "id": "MSD_basic_unet16_ce_dice_bands_target80_f0s0",
+      "objective": "dice_bands",
+      "target": 0.8,
+      "updates": 562,
+      "validation_dice_percent": 83.60468093211072,
+      "gain_vs_dice_ce_baseline_pp": 2.4252961988543547,
+      "training_dice_percent": 94.755439192366,
+      "anterior_dice_percent": 83.73175773757961,
+      "posterior_dice_percent": 83.47760412664182,
+      "voxel_errors": {
+        "foreground_fp": 24603,
+        "foreground_fn": 23866,
+        "anterior_to_posterior": 2114,
+        "posterior_to_anterior": 2335
+      },
+      "weights": {
+        "bands": 0.15911858335922918
+      },
+      "calibration_statistics": {
+        "bands": {
+          "median_raw_ratio": 5.027696847915649,
+          "p95_raw_ratio": 5.379240012168884,
+          "weighted_median_ratio": 0.8,
+          "weighted_p95_ratio": 0.8559370502855955
+        }
+      },
+      "consumed_training_flops": 31920475117450,
+      "archive_verified": true,
+      "cleanup": "complete"
+    },
+    {
+      "id": "MSD_basic_unet16_ce_dice_bands_target100_f0s0",
+      "objective": "dice_bands",
+      "target": 1.0,
+      "updates": 562,
+      "validation_dice_percent": 83.54183320480962,
+      "gain_vs_dice_ce_baseline_pp": 2.3624484715532503,
+      "training_dice_percent": 94.67696115867902,
+      "anterior_dice_percent": 83.765908589898,
+      "posterior_dice_percent": 83.31775781972124,
+      "voxel_errors": {
+        "foreground_fp": 25678,
+        "foreground_fn": 22812,
+        "anterior_to_posterior": 1975,
+        "posterior_to_anterior": 2649
+      },
+      "weights": {
+        "bands": 0.19889822919903646
+      },
+      "calibration_statistics": {
+        "bands": {
+          "median_raw_ratio": 5.027696847915649,
+          "p95_raw_ratio": 5.379240012168884,
+          "weighted_median_ratio": 1.0,
+          "weighted_p95_ratio": 1.0699213128569944
+        }
+      },
+      "consumed_training_flops": 31920475117450,
+      "archive_verified": true,
+      "cleanup": "complete"
+    },
+    {
+      "id": "MSD_basic_unet16_ce_dice_bands_edge_depth_target80_f0s0",
+      "objective": "dice_bands_edge_depth",
+      "target": 0.8,
+      "updates": 562,
+      "validation_dice_percent": 83.60612326571994,
+      "gain_vs_dice_ce_baseline_pp": 2.426738532463574,
+      "training_dice_percent": 94.93634024267044,
+      "anterior_dice_percent": 83.48527673731468,
+      "posterior_dice_percent": 83.72696979412524,
+      "voxel_errors": {
+        "foreground_fp": 22315,
+        "foreground_fn": 25399,
+        "anterior_to_posterior": 2579,
+        "posterior_to_anterior": 1920
+      },
+      "weights": {
+        "bands": 0.15911858335922918,
+        "edge": 0.796426511133251,
+        "depth": 0.4093091753984069
+      },
+      "calibration_statistics": {
+        "bands": {
+          "median_raw_ratio": 5.027696847915649,
+          "p95_raw_ratio": 5.379240012168884,
+          "weighted_median_ratio": 0.8,
+          "weighted_p95_ratio": 0.8559370502855955
+        },
+        "edge": {
+          "median_raw_ratio": 1.0044869034578774,
+          "p95_raw_ratio": 1.0778642027977545,
+          "weighted_median_ratio": 0.8,
+          "weighted_p95_ratio": 0.8584396265096386
+        },
+        "depth": {
+          "median_raw_ratio": 1.9545127450937514,
+          "p95_raw_ratio": 2.1781180419201256,
+          "weighted_median_ratio": 0.8,
+          "weighted_p95_ratio": 0.8915236996587192
+        }
+      },
+      "consumed_training_flops": 31962025996682,
+      "archive_verified": true,
+      "cleanup": "complete"
+    },
+    {
+      "id": "MSD_basic_unet16_ce_dice_bands_edge_depth_target100_f0s0",
+      "objective": "dice_bands_edge_depth",
+      "target": 1.0,
+      "updates": 562,
+      "validation_dice_percent": 83.79983836770487,
+      "gain_vs_dice_ce_baseline_pp": 2.620453634448495,
+      "training_dice_percent": 95.18010357438817,
+      "anterior_dice_percent": 84.02895799467836,
+      "posterior_dice_percent": 83.5707187407314,
+      "voxel_errors": {
+        "foreground_fp": 23471,
+        "foreground_fn": 23245,
+        "anterior_to_posterior": 1812,
+        "posterior_to_anterior": 3065
+      },
+      "weights": {
+        "bands": 0.19889822919903646,
+        "edge": 1.1006978909188838,
+        "depth": 0.6325252717983809
+      },
+      "calibration_statistics": {
+        "bands": {
+          "median_raw_ratio": 5.027696847915649,
+          "p95_raw_ratio": 5.379240012168884,
+          "weighted_median_ratio": 1.0,
+          "weighted_p95_ratio": 1.0699213128569944
+        },
+        "edge": {
+          "median_raw_ratio": 0.9085145054336214,
+          "p95_raw_ratio": 0.9761903614061601,
+          "weighted_median_ratio": 0.9999999999999999,
+          "weighted_p95_ratio": 1.0744906719351033
+        },
+        "depth": {
+          "median_raw_ratio": 1.580964499895512,
+          "p95_raw_ratio": 1.7571916943812063,
+          "weighted_median_ratio": 1.0,
+          "weighted_p95_ratio": 1.11146815409033
+        }
+      },
+      "consumed_training_flops": 31962025996682,
+      "archive_verified": true,
+      "cleanup": "complete"
+    }
+  ],
+  "methodology": "All constraints added to the identical Dice+CE baseline; final-budget checkpoints compared. Calibration uses training-only gradients, sequentially bands, edge, depth. Single fold/seed exploratory comparison.",
+  "other_models_and_exploration": "held"
+}

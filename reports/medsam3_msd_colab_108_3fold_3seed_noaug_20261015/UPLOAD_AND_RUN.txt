@@ -1,0 +1,13 @@
+Complete MedSAM3 MSD notebook and code package: 108 runs
+
+1. Upload medsam3_msd_108_code.zip to MyDrive/hippo_medsam3_msd_extension/input.
+2. Open MedSAM3_MSD_108_runs_3fold_3seed.ipynb in Colab and run it from the top, on an A100 High-RAM runtime.
+3. Keep medsam3_msd_data.zip and sam3.pt in the existing input folder. No new dataset or checkpoint upload is needed.
+
+Scope is exactly 99 missing constraint runs plus 9 fresh baselines. Bands and bands+edge are not repeated. The notebook preserves the original 200-update recipe, folds 0/1/3, seeds 17/83/191, medical LoRA, 10% median calibration target and 50% p95 calibration ceiling, and NO AUGMENTATION. This is not the four-model FLOP-capped study.
+
+All 27 historical results remain available as reference only. Primary gains use the fresh matched baseline for each fold/seed. Bands and bands+edge are excluded from new matched comparisons because they are not rerun.
+
+The old package and results remain intact. This notebook uses results_matched200_noaug_108_v1. It imports compatible complete calibration measurements and passed audits from results_original200_noaug_v1 after verifying their source, environment, data and sample schedule. No coefficients or scientific training results are imported. Any missing GPU preflight/calibration still runs and must pass. A manual STOP is respected.
+
+The notebook handles setup and evidence reuse. Do not use the earlier 126-run notebook or any standalone upgrade cell. Verified completed runs in this 108-run study are skipped on resume. Training still requires a successful GPU preflight.

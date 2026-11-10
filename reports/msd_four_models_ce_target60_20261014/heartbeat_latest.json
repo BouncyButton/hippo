@@ -1,0 +1,115 @@
+{
+  "checked_at": 1791998945.420542,
+  "phase": "MSD",
+  "milestone": "four_model_bands_complete",
+  "fold": 0,
+  "seed": 0,
+  "augmentation": "none",
+  "primary_checkpoint": "final_budget",
+  "baselines": {
+    "nnunet": 64.95946880780754,
+    "swinunetr": 70.22862054445298,
+    "unetr_vit_b16": 43.202098018995855,
+    "basic_unet16": 81.17938473325637
+  },
+  "bands": [
+    {
+      "model": "nnunet",
+      "validation_dice_percent": 74.28785804281615,
+      "gain_over_baseline_percentage_points": 9.328389235008615,
+      "errors": {
+        "foreground_fn": 27806,
+        "foreground_fp": 34811,
+        "ap_swaps": {
+          "anterior_to_posterior": 7944,
+          "posterior_to_anterior": 6193
+        }
+      },
+      "cleanup_status": "complete"
+    },
+    {
+      "model": "swinunetr",
+      "validation_dice_percent": 69.16126177908251,
+      "gain_over_baseline_percentage_points": -1.0673587653704715,
+      "errors": {
+        "foreground_fn": 27670,
+        "foreground_fp": 76333,
+        "ap_swaps": {
+          "anterior_to_posterior": 9520,
+          "posterior_to_anterior": 5618
+        }
+      },
+      "cleanup_status": "complete"
+    },
+    {
+      "model": "unetr_vit_b16",
+      "validation_dice_percent": 33.50804997712178,
+      "gain_over_baseline_percentage_points": -9.694048041874076,
+      "errors": {
+        "foreground_fn": 56244,
+        "foreground_fp": 169560,
+        "ap_swaps": {
+          "anterior_to_posterior": 43282,
+          "posterior_to_anterior": 117
+        }
+      },
+      "cleanup_status": "complete"
+    },
+    {
+      "model": "basic_unet16",
+      "validation_dice_percent": 83.05103359368444,
+      "gain_over_baseline_percentage_points": 1.871648860428067,
+      "errors": {
+        "foreground_fn": 24815,
+        "foreground_fp": 25041,
+        "ap_swaps": {
+          "anterior_to_posterior": 1547,
+          "posterior_to_anterior": 3161
+        }
+      },
+      "cleanup_status": "pending"
+    }
+  ],
+  "calibration": {
+    "nnunet": {
+      "median_raw_ratio": 18.098137855529785,
+      "p95_raw_ratio": 20.190003013610838,
+      "weighted_median_ratio": 0.6,
+      "weighted_p95_ratio": 0.6693507312668158
+    },
+    "swinunetr": {
+      "median_raw_ratio": 5.800611972808838,
+      "p95_raw_ratio": 6.2288618087768555,
+      "weighted_median_ratio": 0.6,
+      "weighted_p95_ratio": 0.6442970332760231
+    },
+    "unetr_vit_b16": {
+      "median_raw_ratio": 5.408041000366211,
+      "p95_raw_ratio": 5.752586221694946,
+      "weighted_median_ratio": 0.6,
+      "weighted_p95_ratio": 0.6382258811986156
+    },
+    "basic_unet16": {
+      "median_raw_ratio": 5.027696847915649,
+      "p95_raw_ratio": 5.379240012168884,
+      "weighted_median_ratio": 0.6,
+      "weighted_p95_ratio": 0.6419527877141966
+    }
+  },
+  "completed": 8,
+  "total": 56,
+  "released_gib": 5.09,
+  "last_checked_quota": {
+    "used_gib": 24.57,
+    "limit_gib": 93.13,
+    "free_gib": 68.56
+  },
+  "jobs": {
+    "running": "700918",
+    "queued": "700973"
+  },
+  "followon_eta_gpu_hours": [
+    35,
+    55
+  ]
+}

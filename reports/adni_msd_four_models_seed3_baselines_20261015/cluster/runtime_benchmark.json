@@ -1,0 +1,131 @@
+{
+  "status": "passed",
+  "models": [
+    {
+      "model": "nnunet",
+      "torch": "2.12.1+cu130",
+      "device": "NVIDIA A100 80GB PCIe MIG 4g.40gb",
+      "status": "passed",
+      "exact_loss_gradient_optimizer_model_calibration_metrics_rng_resume": true,
+      "selected_validation_batch_size": 1,
+      "validation_batch_trials": [
+        {
+          "batch_size": 2,
+          "seconds": 0.3163946820423007,
+          "exact_metrics": false,
+          "exact_rng": true
+        },
+        {
+          "batch_size": 4,
+          "seconds": 0.25800874398555607,
+          "exact_metrics": false,
+          "exact_rng": true
+        },
+        {
+          "batch_size": 8,
+          "seconds": 0.23324815195519477,
+          "exact_metrics": false,
+          "exact_rng": true
+        }
+      ],
+      "evaluation_speedup": 1.23737501173521,
+      "repeated_annotation_speedup": 1219.769710081182,
+      "checkpoint_speedup": 1.4489010182008726
+    },
+    {
+      "model": "swinunetr",
+      "torch": "2.12.1+cu130",
+      "device": "NVIDIA A100 80GB PCIe MIG 4g.40gb",
+      "status": "passed",
+      "exact_loss_gradient_optimizer_model_calibration_metrics_rng_resume": true,
+      "selected_validation_batch_size": 1,
+      "validation_batch_trials": [
+        {
+          "batch_size": 2,
+          "seconds": 0.8622594260377809,
+          "exact_metrics": false,
+          "exact_rng": true
+        },
+        {
+          "batch_size": 4,
+          "seconds": 0.7439806710463017,
+          "exact_metrics": false,
+          "exact_rng": true
+        },
+        {
+          "batch_size": 8,
+          "seconds": 0.7004722829442471,
+          "exact_metrics": false,
+          "exact_rng": true
+        }
+      ],
+      "evaluation_speedup": 1.038300414454461,
+      "repeated_annotation_speedup": 1353.4753506763698,
+      "checkpoint_speedup": 1.3717008183438286
+    },
+    {
+      "model": "unetr_vit_b16",
+      "torch": "2.12.1+cu130",
+      "device": "NVIDIA A100 80GB PCIe MIG 4g.40gb",
+      "status": "passed",
+      "exact_loss_gradient_optimizer_model_calibration_metrics_rng_resume": true,
+      "selected_validation_batch_size": 1,
+      "validation_batch_trials": [
+        {
+          "batch_size": 2,
+          "seconds": 0.44934202497825027,
+          "exact_metrics": false,
+          "exact_rng": true
+        },
+        {
+          "batch_size": 4,
+          "seconds": 0.2966571239521727,
+          "exact_metrics": false,
+          "exact_rng": true
+        },
+        {
+          "batch_size": 8,
+          "seconds": 0.2196659630862996,
+          "exact_metrics": false,
+          "exact_rng": true
+        }
+      ],
+      "evaluation_speedup": 1.084813829755397,
+      "repeated_annotation_speedup": 1226.1618009671697,
+      "checkpoint_speedup": 1.292751669682742
+    },
+    {
+      "model": "basic_unet16",
+      "torch": "2.12.1+cu130",
+      "device": "NVIDIA A100 80GB PCIe MIG 4g.40gb",
+      "status": "passed",
+      "exact_loss_gradient_optimizer_model_calibration_metrics_rng_resume": true,
+      "selected_validation_batch_size": 1,
+      "validation_batch_trials": [
+        {
+          "batch_size": 2,
+          "seconds": 0.20778487797360867,
+          "exact_metrics": false,
+          "exact_rng": true
+        },
+        {
+          "batch_size": 4,
+          "seconds": 0.1719414460239932,
+          "exact_metrics": false,
+          "exact_rng": true
+        },
+        {
+          "batch_size": 8,
+          "seconds": 0.14798497699666768,
+          "exact_metrics": false,
+          "exact_rng": true
+        }
+      ],
+      "evaluation_speedup": 1.2619874123390817,
+      "repeated_annotation_speedup": 1458.888334333394,
+      "checkpoint_speedup": 1.3518770800047575
+    }
+  ],
+  "scope": "Runtime-only benchmark, not scientific results; six matched diagnostic updates per model with original losses and all four auxiliaries, all52 validation crops; no augmentation",
+  "requires_fresh_source_freeze_before_sweep": true
+}

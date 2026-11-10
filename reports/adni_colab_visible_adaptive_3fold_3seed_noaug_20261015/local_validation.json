@@ -1,0 +1,46 @@
+{
+  "status": "passed_local_tests_gpu_not_tested",
+  "checked_at": "2026-10-15T16:34:03.970217+00:00",
+  "tests_passed": 50,
+  "full_suite_seconds": 79.158,
+  "final_packaging_and_heartbeat_tests_passed": 5,
+  "commands": [
+    "MPLCONFIGDIR=/private/tmp/hippo_parallel_matplotlib .venv/bin/python -m unittest scripts.colab_adni_parallel.test_scheduler scripts.colab_adni.test_runtime -q",
+    ".venv/bin/python -m unittest scripts.colab_adni_parallel.test_scheduler.HeartbeatTests scripts.colab_adni_parallel.test_scheduler.PackageTests -q"
+  ],
+  "python": "3.12.1",
+  "platform": "macOS-15.7.9-x86_64-i386-64bit",
+  "artifact_sha256": {
+    "ADNI_adaptive_progress_3fold_3seed_no_augmentation.ipynb": "5ba1304bbbfb855040c9aa82ae1abae17404338fb591069c69bc02aea7e41665",
+    "adni_adaptive_control_v2.zip": "1825fdbc77e4ce167ec83e71bdc68f2d29730b8ea31b20c220ad0eaad10c6e37",
+    "START_HERE.txt": "a632706b6002359fa106914239287d77b85611aa61de3cfda9f9e7fb674268be"
+  },
+  "frozen_files_verified": 649,
+  "scientific_bundle_sha256": "e0b87c00231bb355aa66531f6684c361a632b3f8e393f6afbfb4939a37d0caeb",
+  "total_runs": 504,
+  "extra_experiments": 0,
+  "augmentation": "none",
+  "results_directory": "/content/drive/MyDrive/hippo_adni_3fold_3seed/results_noaug_v1",
+  "tested": [
+    "simultaneous workers and unique launches",
+    "resume priority and fresh-VM durable checkpoint/ledger restore",
+    "archive hashes/readability/identity/acknowledgment/cleanup checks",
+    "completed archives retained byte-for-byte",
+    "charge/checkpoint mismatch blocks without accounting reset",
+    "failure and STOP drain other workers",
+    "heartbeat independent of blocked Drive and resource probes",
+    "single startup inventory without 504 negative probes",
+    "no concurrency growth from zero throughput, stale status or busy CPU",
+    "throughput gain/decline and task-mix safeguards",
+    "CPU SGD/AdamW losses, weights, optimizer/RNG and call trace equivalence",
+    "original binary ADNI data/preflight regressions",
+    "notebook syntax, ZIP hashes/CRC and all original frozen file hashes"
+  ],
+  "not_tested": [
+    "CUDA/A100/H100 execution",
+    "live Colab Drive mount and cross-VM ownership races",
+    "actual throughput benefit and GPU memory peaks on pending scientific runs"
+  ],
+  "current_runtime_accessed": false,
+  "jobs_launched": 0
+}

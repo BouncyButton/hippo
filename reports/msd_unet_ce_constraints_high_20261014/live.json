@@ -1,0 +1,127 @@
+{
+  "status.json": {
+    "status": "complete",
+    "active": null,
+    "completed": 4,
+    "total": 4,
+    "runs": [
+      {
+        "id": "MSD_basic_unet16_ce_dice_bands_target80_f0s0",
+        "kind": "conventional",
+        "dataset": "MSD",
+        "model": "basic_unet16",
+        "fold": 0,
+        "seed": 0,
+        "arm": "dice_bands",
+        "target": 0.8,
+        "protocol": "basic_unet16_target80",
+        "final_dice": 0.8360468093211073,
+        "best_dice": 0.8360468093211073,
+        "released_bytes": 28985552
+      },
+      {
+        "id": "MSD_basic_unet16_ce_dice_bands_target100_f0s0",
+        "kind": "conventional",
+        "dataset": "MSD",
+        "model": "basic_unet16",
+        "fold": 0,
+        "seed": 0,
+        "arm": "dice_bands",
+        "target": 1.0,
+        "protocol": "basic_unet16_target100",
+        "final_dice": 0.8354183320480962,
+        "best_dice": 0.8354183320480962,
+        "released_bytes": 28985552
+      },
+      {
+        "id": "MSD_basic_unet16_ce_dice_bands_edge_depth_target80_f0s0",
+        "kind": "conventional",
+        "dataset": "MSD",
+        "model": "basic_unet16",
+        "fold": 0,
+        "seed": 0,
+        "arm": "dice_bands_edge_depth",
+        "target": 0.8,
+        "protocol": "basic_unet16_target80",
+        "final_dice": 0.8360612326571994,
+        "best_dice": 0.8360612326571994,
+        "released_bytes": 28985552
+      },
+      {
+        "id": "MSD_basic_unet16_ce_dice_bands_edge_depth_target100_f0s0",
+        "kind": "conventional",
+        "dataset": "MSD",
+        "model": "basic_unet16",
+        "fold": 0,
+        "seed": 0,
+        "arm": "dice_bands_edge_depth",
+        "target": 1.0,
+        "protocol": "basic_unet16_target100",
+        "final_dice": 0.8379983836770487,
+        "best_dice": 0.8379983836770487,
+        "released_bytes": 28985552
+      }
+    ],
+    "job_id": "700843",
+    "updated_at": 1791994250.1770937,
+    "quota": {
+      "used_gib": 24.2,
+      "limit_gib": 93.13,
+      "free_gib": 68.92999999999999,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  24.20GiB/93.13GiB  186.61k/\u221e  \n\n",
+      "checked_at": 1791994250.2095766
+    }
+  },
+  "submission.json": {
+    "job_id": "700843",
+    "dependency": null,
+    "quota": {
+      "used_gib": 24.14,
+      "limit_gib": 93.13,
+      "free_gib": 68.99,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  24.14GiB/93.13GiB  186.47k/\u221e  \n\n",
+      "checked_at": 1791993359.667058
+    },
+    "submitted_at": 1791993359.8963108,
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--chdir=/mnt/beegfsstudents/home/3160552/msd_unet_ce_constraints_high_20261014",
+      "--output=/mnt/beegfsstudents/home/3160552/msd_unet_ce_constraints_high_20261014/slurm-%j.out",
+      "--error=/mnt/beegfsstudents/home/3160552/msd_unet_ce_constraints_high_20261014/slurm-%j.err",
+      "/mnt/beegfsstudents/home/3160552/msd_unet_ce_constraints_high_20261014/run.sbatch",
+      "/mnt/beegfsstudents/home/3160552/msd_unet_ce_constraints_high_20261014"
+    ],
+    "manifest_sha256": "326267ad02dabb2176525759e7b937cb2aa40dba9ddb1042e58b816cbca5c85a"
+  },
+  "successor.json": {
+    "job_id": "700844",
+    "dependency": "700843",
+    "quota": {
+      "used_gib": 24.14,
+      "limit_gib": 93.13,
+      "free_gib": 68.99,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  24.14GiB/93.13GiB  186.47k/\u221e  \n\n",
+      "checked_at": 1791993368.5927248
+    },
+    "submitted_at": 1791993368.7259948,
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--chdir=/mnt/beegfsstudents/home/3160552/msd_unet_ce_constraints_high_20261014",
+      "--output=/mnt/beegfsstudents/home/3160552/msd_unet_ce_constraints_high_20261014/slurm-%j.out",
+      "--error=/mnt/beegfsstudents/home/3160552/msd_unet_ce_constraints_high_20261014/slurm-%j.err",
+      "--dependency=afterany:700843",
+      "/mnt/beegfsstudents/home/3160552/msd_unet_ce_constraints_high_20261014/run.sbatch",
+      "/mnt/beegfsstudents/home/3160552/msd_unet_ce_constraints_high_20261014"
+    ],
+    "manifest_sha256": "326267ad02dabb2176525759e7b937cb2aa40dba9ddb1042e58b816cbca5c85a"
+  },
+  "ready": [],
+  "cleanup": [
+    "runs/MSD_basic_unet16_ce_dice_bands_target100_f0s0/cleanup.json",
+    "runs/MSD_basic_unet16_ce_dice_bands_target80_f0s0/cleanup.json",
+    "runs/MSD_basic_unet16_ce_dice_bands_edge_depth_target80_f0s0/cleanup.json",
+    "runs/MSD_basic_unet16_ce_dice_bands_edge_depth_target100_f0s0/cleanup.json"
+  ]
+}

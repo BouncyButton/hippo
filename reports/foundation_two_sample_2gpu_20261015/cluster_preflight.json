@@ -1,0 +1,22 @@
+{
+  "status": "passed",
+  "manifest_sha256": "9c40972644c2bee57f2dd597e6b8c8201e6b3f9fa484d4c7ec5ef6b683e46b54",
+  "checks": [
+    "Working training source byte-identical",
+    "Two nested training samples and unchanged validation for both datasets",
+    "Data, pretrained model, medical adapter and upstream hashes",
+    "Independent GPU worker, resume, archive and handoff tests",
+    "Actual support geometry and matched 400-pair schedules",
+    "Two GPUs are the account maximum; Slurm test submission passed"
+  ],
+  "quota": {
+    "used_gib": 25.17,
+    "limit_gib": 93.13,
+    "free_gib": 67.96,
+    "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  25.17GiB/93.13GiB  201.77k/\u221e  \n\n",
+    "checked_at": 1792080645.063691
+  },
+  "qos": "stud|cpu=12,gres/gpu=2|gres/gpu=4|2|4\n",
+  "scheduler_test": "sbatch: Job 702515 to start at 2026-10-15T18:32:44 a using 8 processors on nodes gnode02 in partition stud\n",
+  "gpu_gate": "At allocation start, two Slurm tasks must each see one distinct GPU; original native-loss/backward probe before training"
+}

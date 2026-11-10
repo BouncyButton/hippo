@@ -1,0 +1,60 @@
+{
+  "status": "passed",
+  "checks": [
+    "True subject-grouped fold-0 selection; both sides retained",
+    "All 64 selected/validation crops finite and binary; foreground preserved during padding",
+    "Real CPU forward/backward/optimizer step for all four binary architectures",
+    "Binary per-update arithmetic profiled with original MSD runtime and counter",
+    "Three focused data/metric unit tests passed",
+    "All four three-class control costs exactly match frozen MSD costs",
+    "Two-step real ADNI CPU training and completed-run resume passed",
+    "Slurm shell syntax and Python parsing passed",
+    "Frozen stage manifest reverified"
+  ],
+  "manifest_sha256": "66442d9f7272c22e56cd8c075a3a2176392246b8d61ea29ec58310171101df7b",
+  "runs": [
+    {
+      "model": "swinunetr",
+      "alias": "swinunetr",
+      "updates": 206,
+      "gflops_per_update": 154.969930463,
+      "parameters": 15703004,
+      "initial_lr": 0.0001
+    },
+    {
+      "model": "unetr_vit_b16",
+      "alias": "unet",
+      "updates": 245,
+      "gflops_per_update": 130.031650493,
+      "parameters": 92685538,
+      "initial_lr": 0.0001
+    },
+    {
+      "model": "basic_unet16",
+      "alias": "unet",
+      "updates": 563,
+      "gflops_per_update": 56.697462661,
+      "parameters": 1438802,
+      "initial_lr": 0.0003
+    },
+    {
+      "model": "nnunet",
+      "alias": "nnunet",
+      "updates": 90,
+      "gflops_per_update": 355.220395319,
+      "parameters": 16547592,
+      "initial_lr": 0.01
+    }
+  ],
+  "submission_status": "submitted",
+  "dataset_bytes": 60242117,
+  "dataset_sha256": "ea14f279b910ebd4d6a98209d98dc428d9a09fb56f52fb1c6d613302d7fe128a",
+  "cluster_runtime_verified": {
+    "torch": "2.12.1+cu130",
+    "monai": "1.6.0",
+    "dynamic_network_architectures": "0.4.4"
+  },
+  "medical_dataset_transfer_approved": true,
+  "cluster_dataset_hash_verified": true,
+  "job_id": 698735
+}

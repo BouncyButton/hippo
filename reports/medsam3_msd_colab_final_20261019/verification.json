@@ -1,0 +1,113 @@
+{
+  "session_result": {
+    "status": "complete",
+    "error": null,
+    "new_completed": 108,
+    "launched": 18,
+    "bundle_sha256": "716f2e774fb9de3140baf1077eabff75fc0dc144f9a9e6752ec620dc5ddd6ac2"
+  },
+  "last_cleanup": {
+    "status": "complete",
+    "removed": [
+      {
+        "file": "/content/hippo_medsam3_msd_108_bundle/work/MSD_MedSAM3_bands_edge_sdf_depth_f3s191/checkpoint_latest.pt",
+        "bytes": 223140661,
+        "sha256": "3b9593cf9d0d1d0e744b1fe9ad24b15461484aa28b88903739dad108e9bd02ef"
+      },
+      {
+        "file": "/content/drive/MyDrive/hippo_medsam3_msd_extension/results_matched200_noaug_108_v1/recovery/MSD_MedSAM3_bands_edge_sdf_depth_f3s191/recovery-76afa92f9629cee3b18ae82261dffa35628886743479d71e408473f6a8c34f22.tar",
+        "bytes": 223201280,
+        "sha256": "76afa92f9629cee3b18ae82261dffa35628886743479d71e408473f6a8c34f22"
+      }
+    ],
+    "verified_at": 1792428466.392786
+  },
+  "last_archive_manifest": {
+    "task": {
+      "id": "MSD_MedSAM3_bands_edge_sdf_depth_f3s191",
+      "fold": 3,
+      "seed": 191,
+      "arm": "bands_edge_sdf_depth"
+    },
+    "files": {
+      "protocol.json": "b4f6c384a557631a4cc95ac63d451f2aa57769b895c86aa9a07d203c20df3207",
+      "calibration.json": "02f8747f5c9128b1984487c003fd8fd2edcdc206db540fc7572af714d0f47f80",
+      "training_history.json": "fb99c9fa092d8a80d4e55a05d41b3430bb53ec8c0f510e223bcac1d3cadf742e",
+      "training_summary.json": "363769252e61e044d4e609dd5110ccc64c4bdca084409cd37e98e924d7d3e03c",
+      "slab_schedule.json": "2cfb7e71137f6fcea8f302807eaede6d757e284e59e755e76c0fde9195fca0da",
+      "runtime_recipe.json": "889e605a9ec799bf34ab7666f25c66fbc24ce238d7f26fd6cf34cb26e35140f8",
+      "evaluation.json": "7530b97270fde226f04c51f2eb77ff4f04671613d58b4eec4ea677b83a1d1b0c",
+      "curves.png": "5d4254fb12eea8424d5db02ef64956c0e67d82c197b2e70153f629f5ea302e76",
+      "completion.json": "f3c28011c6f25b23ed72a329e0579935a7228b455b8a3225f1f9cdbd6a0e907d",
+      "train.log": "4e85d8dd3e392ca2046fb0109b24995ccef16fc2e99b9ef9bfb5c53143fe80b8"
+    },
+    "bundle_sha256": "716f2e774fb9de3140baf1077eabff75fc0dc144f9a9e6752ec620dc5ddd6ac2",
+    "checkpoint_sha256": "3b9593cf9d0d1d0e744b1fe9ad24b15461484aa28b88903739dad108e9bd02ef"
+  },
+  "last_runtime_recipe": {
+    "augmentation": "none",
+    "precision": "native CUDA BF16 autocast; FP32 model/LoRA parameters",
+    "gpu": "NVIDIA A100-SXM4-80GB",
+    "torch": "2.12.1+cu130",
+    "cuda": "13.0",
+    "tf32_matmul": true,
+    "tf32_cudnn": true,
+    "optimizer": "AdamW",
+    "weight_decay": 0.01,
+    "gradient_clip_norm": 1,
+    "updates": 200,
+    "accumulation": 2,
+    "learning_rate": 0.00005,
+    "final_learning_rate": 0.000005,
+    "warmup_updates": 20,
+    "constraint_warmup_updates": 20,
+    "trainable_parameters": 18497664,
+    "classes": [
+      "background",
+      "anterior",
+      "posterior"
+    ],
+    "prompts": {
+      "1": "anterior hippocampus",
+      "2": "posterior hippocampus"
+    },
+    "native_loss_source_sha256": "4a883dd311296039d35076fbf5c0c42df9447d37034353cd8ee99b5cbfebbf80",
+    "image_transform_cache_max_bytes": 1073741824,
+    "learned_feature_cache": false,
+    "optimization_flop_cap": null
+  },
+  "last_training_summary": {
+    "updates": 200,
+    "augmentation": "none",
+    "frozen_before": "a6ee8b75984a10ba912137dfe2b39398c252c2a26c6bbec5239f3699644a7bae",
+    "frozen_after": "a6ee8b75984a10ba912137dfe2b39398c252c2a26c6bbec5239f3699644a7bae",
+    "adapter_before": "10fc30e12c83c3263de91289ad35efe5526d2a3ea559feb321762b6846c676ff",
+    "adapter_after": "976537e723ebd5f497dc15fb9dbdf46286262388f38283c638e3f668ae74f762",
+    "weights": {
+      "bands": 8.0660501752469,
+      "edge": 220.48101920332743,
+      "sdf": 191.32755843335948,
+      "depth": 37.87440598364763
+    },
+    "elapsed_seconds": 2965.8621102350007,
+    "schedule_sha256": "2cfb7e71137f6fcea8f302807eaede6d757e284e59e755e76c0fde9195fca0da",
+    "budget_policy": "Original 200 optimizer updates, accumulation 2; not a FLOP cap",
+    "flops": null,
+    "calibration_accounted_separately": true,
+    "checkpoint_selection": "final_update"
+  },
+  "storage_quota_last_recorded": {
+    "data": {
+      "checked_at": 1792424866.1809244,
+      "limit": "21990232555520",
+      "usage": "1063165664186",
+      "usageInDrive": "1063149981516",
+      "usageInDriveTrash": "1048820182840"
+    },
+    "modified": "2026-10-19T15:47:53.808Z",
+    "url": "https://drive.google.com/file/d/1XFYazysS1AIIMiE4Wt_QNDsWT24d0tsp/view"
+  },
+  "source_url": "https://drive.google.com/file/d/1ZT8KK_Jyreyd4EeIuPQhTJzwu5Hu6pC6/view",
+  "source_modified": "2026-10-19T16:47:57.196Z",
+  "account": "filippofocaccia2@gmail.com"
+}

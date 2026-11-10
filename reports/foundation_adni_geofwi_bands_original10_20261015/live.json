@@ -1,0 +1,76 @@
+{
+  "status.json": {
+    "status": "failed",
+    "active": "ADNI_MedSAM3_dice_target10_f0s0",
+    "completed": 0,
+    "total": 6,
+    "runs": [],
+    "job_id": "701718",
+    "updated_at": 1792061403.4773908,
+    "quota": {
+      "used_gib": 24.94,
+      "limit_gib": 93.13,
+      "free_gib": 68.19,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  24.94GiB/93.13GiB  196.69k/\u221e  \n\n",
+      "checked_at": 1792061403.5146704
+    }
+  },
+  "failure.json": {
+    "active": "ADNI_MedSAM3_dice_target10_f0s0",
+    "traceback": "Traceback (most recent call last):\n  File \"/mnt/beegfsstudents/home/3160552/foundation_adni_geofwi_bands_original10_20261015/source/scripts/cross_dataset_campaign/controller.py\", line 160, in run\n    raise RuntimeError(f'{active}: trainer exited {process.returncode}')\nRuntimeError: ADNI_MedSAM3_dice_target10_f0s0: trainer exited 1\n",
+    "time": 1792061403.4598575
+  },
+  "submission.json": {
+    "job_id": "701718",
+    "dependency": "701702",
+    "quota": {
+      "used_gib": 24.42,
+      "limit_gib": 93.13,
+      "free_gib": 68.71,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  24.42GiB/93.13GiB  194.95k/\u221e  \n\n",
+      "checked_at": 1792048404.7436283
+    },
+    "submitted_at": 1792048404.9451218,
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--chdir=/mnt/beegfsstudents/home/3160552/foundation_adni_geofwi_bands_original10_20261015",
+      "--output=/mnt/beegfsstudents/home/3160552/foundation_adni_geofwi_bands_original10_20261015/slurm-%j.out",
+      "--error=/mnt/beegfsstudents/home/3160552/foundation_adni_geofwi_bands_original10_20261015/slurm-%j.err",
+      "--dependency=afterany:701702",
+      "/mnt/beegfsstudents/home/3160552/foundation_adni_geofwi_bands_original10_20261015/run.sbatch",
+      "/mnt/beegfsstudents/home/3160552/foundation_adni_geofwi_bands_original10_20261015"
+    ],
+    "manifest_sha256": "6d5cbc6589beb2f8277f078bee99812c3bac41859b0f42e35b9bd06a41c95a7c"
+  },
+  "successor.json": {
+    "job_id": "701945",
+    "dependency": "701718",
+    "quota": {
+      "used_gib": 24.44,
+      "limit_gib": 93.13,
+      "free_gib": 68.69,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  24.44GiB/93.13GiB  196.53k/\u221e  \n\n",
+      "checked_at": 1792061190.3558843
+    },
+    "submitted_at": 1792061190.470946,
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--chdir=/mnt/beegfsstudents/home/3160552/foundation_adni_geofwi_bands_original10_20261015",
+      "--output=/mnt/beegfsstudents/home/3160552/foundation_adni_geofwi_bands_original10_20261015/slurm-%j.out",
+      "--error=/mnt/beegfsstudents/home/3160552/foundation_adni_geofwi_bands_original10_20261015/slurm-%j.err",
+      "--dependency=afterany:701718",
+      "/mnt/beegfsstudents/home/3160552/foundation_adni_geofwi_bands_original10_20261015/run.sbatch",
+      "/mnt/beegfsstudents/home/3160552/foundation_adni_geofwi_bands_original10_20261015"
+    ],
+    "manifest_sha256": "6d5cbc6589beb2f8277f078bee99812c3bac41859b0f42e35b9bd06a41c95a7c"
+  },
+  "base_request.json": {
+    "job_id": "701718",
+    "destination": "/tmp/hippo-sam3-1395-701718.pt",
+    "expected_sha256": "9999e2341ceef5e136daa386eecb55cb414446a00ac2b55eb2dfd2f7c3cf8c9e"
+  },
+  "ready": [],
+  "cleanup": []
+}

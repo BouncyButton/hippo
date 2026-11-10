@@ -1,0 +1,23 @@
+{
+  "job_id": "700973",
+  "dependency": "700918",
+  "quota": {
+    "used_gib": 30.47,
+    "limit_gib": 93.13,
+    "free_gib": 62.66,
+    "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  30.47GiB/93.13GiB  188.59k/\u221e  \n\n",
+    "checked_at": 1791998252.6282148
+  },
+  "submitted_at": 1791998252.844194,
+  "command": [
+    "sbatch",
+    "--parsable",
+    "--chdir=/mnt/beegfsstudents/home/3160552/adni_seismic_ce60_followon_20261014",
+    "--output=/mnt/beegfsstudents/home/3160552/adni_seismic_ce60_followon_20261014/slurm-%j.out",
+    "--error=/mnt/beegfsstudents/home/3160552/adni_seismic_ce60_followon_20261014/slurm-%j.err",
+    "--dependency=afterany:700918",
+    "/mnt/beegfsstudents/home/3160552/adni_seismic_ce60_followon_20261014/run.sbatch",
+    "/mnt/beegfsstudents/home/3160552/adni_seismic_ce60_followon_20261014"
+  ],
+  "manifest_sha256": "e7e7c7b0701e68dfc6c247d505ac721603ddf3aafc8fd702ccc5e5b1779d8bb8"
+}

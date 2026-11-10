@@ -1,0 +1,338 @@
+{
+  "torch": "2.12.1+cu130",
+  "device": "NVIDIA A100 80GB PCIe MIG 4g.40gb",
+  "case": "hippocampus_adni_147119_L",
+  "anchor": 6,
+  "passes": [
+    {
+      "label": "reference_a",
+      "loss": 622.1910400390625,
+      "seconds": 6.498390633030795,
+      "cuda_rng": "99b44c069f43609b4b6a90891935e01eef3d3b39265cf3c540682981f2655552"
+    },
+    {
+      "label": "reference_b",
+      "loss": 622.1910400390625,
+      "seconds": 2.154442582046613,
+      "cuda_rng": "99b44c069f43609b4b6a90891935e01eef3d3b39265cf3c540682981f2655552"
+    },
+    {
+      "label": "optimized_a",
+      "loss": 622.1910400390625,
+      "seconds": 2.3363194779958576,
+      "cuda_rng": "99b44c069f43609b4b6a90891935e01eef3d3b39265cf3c540682981f2655552"
+    },
+    {
+      "label": "optimized_b",
+      "loss": 622.1910400390625,
+      "seconds": 2.1342645779950544,
+      "cuda_rng": "99b44c069f43609b4b6a90891935e01eef3d3b39265cf3c540682981f2655552"
+    }
+  ],
+  "reference_repeat": {
+    "changed_parameters": 250,
+    "failed_parameters": 250,
+    "worst": [
+      {
+        "parameter": "backbone.vision_backbone.trunk.blocks.0.attn.qkv.lora.lora_A",
+        "allclose": false,
+        "max_abs": 0.40234375,
+        "relative_l2": 0.023276679794143877,
+        "a_norm": 62.60501652011274,
+        "b_norm": 62.29065548007609
+      },
+      {
+        "parameter": "backbone.vision_backbone.trunk.blocks.0.mlp.fc1.lora.lora_A",
+        "allclose": false,
+        "max_abs": 0.3125,
+        "relative_l2": 0.011264687458613719,
+        "a_norm": 93.1669168902055,
+        "b_norm": 93.37573661707837
+      },
+      {
+        "parameter": "backbone.vision_backbone.trunk.blocks.7.attn.qkv.lora.lora_A",
+        "allclose": false,
+        "max_abs": 0.3125,
+        "relative_l2": 0.0035839414533964187,
+        "a_norm": 238.75525220095707,
+        "b_norm": 238.41057280031174
+      },
+      {
+        "parameter": "backbone.vision_backbone.trunk.blocks.4.attn.qkv.lora.lora_A",
+        "allclose": false,
+        "max_abs": 0.28125,
+        "relative_l2": 0.0061486393518680755,
+        "a_norm": 119.67271208511069,
+        "b_norm": 119.63414210953236
+      },
+      {
+        "parameter": "backbone.vision_backbone.trunk.blocks.10.attn.proj.lora.lora_B",
+        "allclose": false,
+        "max_abs": 0.25,
+        "relative_l2": 0.003712497643192072,
+        "a_norm": 509.08374757543356,
+        "b_norm": 508.9979226438999
+      },
+      {
+        "parameter": "backbone.vision_backbone.trunk.blocks.10.mlp.fc1.lora.lora_B",
+        "allclose": false,
+        "max_abs": 0.25,
+        "relative_l2": 0.0038015854895840067,
+        "a_norm": 666.1899984256611,
+        "b_norm": 666.2990130789821
+      },
+      {
+        "parameter": "backbone.vision_backbone.trunk.blocks.12.attn.proj.lora.lora_B",
+        "allclose": false,
+        "max_abs": 0.25,
+        "relative_l2": 0.0034417014251953456,
+        "a_norm": 483.83157191412295,
+        "b_norm": 483.7824432792216
+      },
+      {
+        "parameter": "backbone.vision_backbone.trunk.blocks.0.attn.proj.lora.lora_B",
+        "allclose": false,
+        "max_abs": 0.22265625,
+        "relative_l2": 0.01163056735819387,
+        "a_norm": 187.27750124643177,
+        "b_norm": 186.98343798119487
+      },
+      {
+        "parameter": "backbone.vision_backbone.trunk.blocks.1.mlp.fc1.lora.lora_B",
+        "allclose": false,
+        "max_abs": 0.21875,
+        "relative_l2": 0.009224087512308495,
+        "a_norm": 175.94303833121808,
+        "b_norm": 175.93516014598654
+      },
+      {
+        "parameter": "backbone.vision_backbone.trunk.blocks.5.mlp.fc1.lora.lora_A",
+        "allclose": false,
+        "max_abs": 0.1875,
+        "relative_l2": 0.006197265463198513,
+        "a_norm": 130.30188886369157,
+        "b_norm": 130.07749098188438
+      },
+      {
+        "parameter": "backbone.vision_backbone.trunk.blocks.5.mlp.fc1.lora.lora_B",
+        "allclose": false,
+        "max_abs": 0.1875,
+        "relative_l2": 0.005896138565173795,
+        "a_norm": 408.6155207186825,
+        "b_norm": 408.4750324613233
+      },
+      {
+        "parameter": "backbone.vision_backbone.trunk.blocks.5.mlp.fc2.lora.lora_B",
+        "allclose": false,
+        "max_abs": 0.1875,
+        "relative_l2": 0.004971148810584715,
+        "a_norm": 517.2170826611988,
+        "b_norm": 517.0158575522825
+      }
+    ]
+  },
+  "reference_optimized": {
+    "changed_parameters": 250,
+    "failed_parameters": 250,
+    "worst": [
+      {
+        "parameter": "backbone.vision_backbone.trunk.blocks.0.attn.qkv.lora.lora_A",
+        "allclose": false,
+        "max_abs": 0.34375,
+        "relative_l2": 0.018776634286980468,
+        "a_norm": 62.60501652011274,
+        "b_norm": 62.58180442673423
+      },
+      {
+        "parameter": "backbone.vision_backbone.trunk.blocks.0.mlp.fc1.lora.lora_A",
+        "allclose": false,
+        "max_abs": 0.26171875,
+        "relative_l2": 0.010002590321207585,
+        "a_norm": 93.1669168902055,
+        "b_norm": 93.14451861899568
+      },
+      {
+        "parameter": "backbone.vision_backbone.trunk.blocks.27.attn.qkv.lora.lora_B",
+        "allclose": false,
+        "max_abs": 0.2578125,
+        "relative_l2": 0.0025823773305335336,
+        "a_norm": 252.05316341216405,
+        "b_norm": 252.10579782758572
+      },
+      {
+        "parameter": "backbone.vision_backbone.trunk.blocks.4.attn.qkv.lora.lora_A",
+        "allclose": false,
+        "max_abs": 0.25390625,
+        "relative_l2": 0.0056847758004745525,
+        "a_norm": 119.67271208511069,
+        "b_norm": 119.67058576393919
+      },
+      {
+        "parameter": "backbone.vision_backbone.trunk.blocks.0.attn.proj.lora.lora_B",
+        "allclose": false,
+        "max_abs": 0.25,
+        "relative_l2": 0.011368904910037322,
+        "a_norm": 187.27750124643177,
+        "b_norm": 186.9602784072294
+      },
+      {
+        "parameter": "backbone.vision_backbone.trunk.blocks.10.attn.proj.lora.lora_B",
+        "allclose": false,
+        "max_abs": 0.25,
+        "relative_l2": 0.003529876194901544,
+        "a_norm": 509.08374757543356,
+        "b_norm": 509.0918253022513
+      },
+      {
+        "parameter": "backbone.vision_backbone.trunk.blocks.10.mlp.fc1.lora.lora_B",
+        "allclose": false,
+        "max_abs": 0.25,
+        "relative_l2": 0.0038410617227830684,
+        "a_norm": 666.1899984256611,
+        "b_norm": 666.3752446142653
+      },
+      {
+        "parameter": "backbone.vision_backbone.trunk.blocks.12.attn.proj.lora.lora_B",
+        "allclose": false,
+        "max_abs": 0.25,
+        "relative_l2": 0.0034163530570963246,
+        "a_norm": 483.83157191412295,
+        "b_norm": 483.8487406016486
+      },
+      {
+        "parameter": "backbone.vision_backbone.trunk.blocks.6.mlp.fc1.lora.lora_B",
+        "allclose": false,
+        "max_abs": 0.1875,
+        "relative_l2": 0.005375413551802031,
+        "a_norm": 437.99268975825674,
+        "b_norm": 437.7996688915924
+      },
+      {
+        "parameter": "backbone.vision_backbone.trunk.blocks.19.attn.qkv.lora.lora_B",
+        "allclose": false,
+        "max_abs": 0.1875,
+        "relative_l2": 0.002962435283289435,
+        "a_norm": 392.8329598151482,
+        "b_norm": 392.7547538354068
+      },
+      {
+        "parameter": "backbone.vision_backbone.trunk.blocks.2.mlp.fc2.lora.lora_B",
+        "allclose": false,
+        "max_abs": 0.15625,
+        "relative_l2": 0.008052930344567189,
+        "a_norm": 312.3932446333816,
+        "b_norm": 312.40176008296265
+      },
+      {
+        "parameter": "backbone.vision_backbone.trunk.blocks.5.mlp.fc2.lora.lora_B",
+        "allclose": false,
+        "max_abs": 0.15625,
+        "relative_l2": 0.00507974925666883,
+        "a_norm": 517.2170826611988,
+        "b_norm": 516.9929194299621
+      }
+    ]
+  },
+  "optimized_repeat": {
+    "changed_parameters": 250,
+    "failed_parameters": 250,
+    "worst": [
+      {
+        "parameter": "backbone.vision_backbone.trunk.blocks.12.attn.proj.lora.lora_B",
+        "allclose": false,
+        "max_abs": 0.3125,
+        "relative_l2": 0.003487561807795803,
+        "a_norm": 483.8487406016486,
+        "b_norm": 483.847440311375
+      },
+      {
+        "parameter": "backbone.vision_backbone.trunk.blocks.0.attn.qkv.lora.lora_A",
+        "allclose": false,
+        "max_abs": 0.28125,
+        "relative_l2": 0.0236212404953941,
+        "a_norm": 62.58180442673423,
+        "b_norm": 62.525584046595114
+      },
+      {
+        "parameter": "backbone.vision_backbone.trunk.blocks.0.attn.proj.lora.lora_B",
+        "allclose": false,
+        "max_abs": 0.28125,
+        "relative_l2": 0.010870593762615604,
+        "a_norm": 186.9602784072294,
+        "b_norm": 187.02296643241482
+      },
+      {
+        "parameter": "backbone.vision_backbone.trunk.blocks.0.mlp.fc1.lora.lora_A",
+        "allclose": false,
+        "max_abs": 0.265625,
+        "relative_l2": 0.00910284889345661,
+        "a_norm": 93.14451861899568,
+        "b_norm": 93.39038011930792
+      },
+      {
+        "parameter": "backbone.vision_backbone.trunk.blocks.27.attn.qkv.lora.lora_B",
+        "allclose": false,
+        "max_abs": 0.2578125,
+        "relative_l2": 0.0027155322801254793,
+        "a_norm": 252.10579782758572,
+        "b_norm": 252.01579002959406
+      },
+      {
+        "parameter": "backbone.vision_backbone.trunk.blocks.10.attn.proj.lora.lora_B",
+        "allclose": false,
+        "max_abs": 0.25,
+        "relative_l2": 0.0036619650778290744,
+        "a_norm": 509.0918253022513,
+        "b_norm": 509.1320957813268
+      },
+      {
+        "parameter": "backbone.vision_backbone.trunk.blocks.10.mlp.fc1.lora.lora_B",
+        "allclose": false,
+        "max_abs": 0.25,
+        "relative_l2": 0.003964798776447861,
+        "a_norm": 666.3752446142653,
+        "b_norm": 666.3872252026861
+      },
+      {
+        "parameter": "backbone.vision_backbone.trunk.blocks.0.attn.qkv.lora.lora_B",
+        "allclose": false,
+        "max_abs": 0.193359375,
+        "relative_l2": 0.016024518962307475,
+        "a_norm": 124.55659909388969,
+        "b_norm": 124.46145318241398
+      },
+      {
+        "parameter": "backbone.vision_backbone.trunk.blocks.5.mlp.fc1.lora.lora_B",
+        "allclose": false,
+        "max_abs": 0.171875,
+        "relative_l2": 0.0060430563479531,
+        "a_norm": 408.631042395611,
+        "b_norm": 408.32383059575307
+      },
+      {
+        "parameter": "backbone.vision_backbone.trunk.blocks.0.mlp.fc2.lora.lora_B",
+        "allclose": false,
+        "max_abs": 0.15625,
+        "relative_l2": 0.010051622425608111,
+        "a_norm": 248.88411831754823,
+        "b_norm": 248.8364881126931
+      },
+      {
+        "parameter": "backbone.vision_backbone.trunk.blocks.5.mlp.fc2.lora.lora_B",
+        "allclose": false,
+        "max_abs": 0.15625,
+        "relative_l2": 0.004929485228685021,
+        "a_norm": 516.9929194299621,
+        "b_norm": 516.8630511051191
+      },
+      {
+        "parameter": "backbone.vision_backbone.trunk.blocks.9.mlp.fc1.lora.lora_B",
+        "allclose": false,
+        "max_abs": 0.15625,
+        "relative_l2": 0.004080109122216098,
+        "a_norm": 633.7752401259442,
+        "b_norm": 633.743025434154
+      }
+    ]
+  }
+}

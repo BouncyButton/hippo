@@ -1,0 +1,71 @@
+{
+  "queue": "710974|RUNNING|hippo-geofwi-reweighted|2:52|gres/gpu:4g.40gb:2|gnode01\n",
+  "lane0.json": {
+    "status": "preflight",
+    "task": {
+      "id": "GeoFWI3D_swinunetr_dice_bands_edge_sdf_depth_f0s2",
+      "model": "swinunetr",
+      "fold": 0,
+      "seed": 2,
+      "arm": "dice_bands_edge_sdf_depth",
+      "strength": "x1"
+    }
+  },
+  "lane1.json": {
+    "status": "preflight",
+    "task": {
+      "id": "GeoFWI3D_basic_unet16_dice_edge_sdf_depth_f0s2",
+      "model": "basic_unet16",
+      "fold": 0,
+      "seed": 2,
+      "arm": "dice_edge_sdf_depth",
+      "strength": "x1"
+    }
+  },
+  "gpu_probes": {
+    "gpu_probe/710974/0.json": {
+      "uuid": "96a03b24-6b6f-ecc9-6702-893cf37ac7b5",
+      "gpu": "NVIDIA A100 80GB PCIe MIG 4g.40gb",
+      "visible_devices": 1,
+      "packages": {
+        "torch": "2.12.1",
+        "monai": "1.6.0",
+        "dynamic-network-architectures": "0.4.4",
+        "numpy": "2.4.6",
+        "pandas": "3.0.3",
+        "scipy": "1.17.1",
+        "scikit-image": "0.26.0",
+        "nibabel": "5.4.2",
+        "einops": "0.8.2"
+      },
+      "job": "710974"
+    },
+    "gpu_probe/710974/1.json": {
+      "uuid": "79d06021-72ed-7661-e4b6-edf1ceab6994",
+      "gpu": "NVIDIA A100 80GB PCIe MIG 4g.40gb",
+      "visible_devices": 1,
+      "packages": {
+        "torch": "2.12.1",
+        "monai": "1.6.0",
+        "dynamic-network-architectures": "0.4.4",
+        "numpy": "2.4.6",
+        "pandas": "3.0.3",
+        "scipy": "1.17.1",
+        "scikit-image": "0.26.0",
+        "nibabel": "5.4.2",
+        "einops": "0.8.2"
+      },
+      "job": "710974"
+    }
+  },
+  "preflights": {},
+  "preflight_logs": {
+    "preflight/710974/1_basic_unet16_dice_edge_sdf_depth_x1/preflight.log": "",
+    "preflight/710974/0_swinunetr_dice_bands_edge_sdf_depth_x1/preflight.log": ""
+  },
+  "failures": {},
+  "logs": {
+    "slurm-710974.err": "INFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\n",
+    "slurm-710974.out": ""
+  }
+}

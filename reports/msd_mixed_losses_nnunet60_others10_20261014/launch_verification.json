@@ -1,0 +1,37 @@
+{
+  "verified_at": 1792008093.496299,
+  "job_id": "701282",
+  "successor_job_id": "701283",
+  "running_task": "MSD_nnunet_dicece_dice_target60_f0s0",
+  "preflight": {
+    "status": "passed",
+    "manifest_sha256": "e9cd3a60fd42a15d63fa04df28e9c952662b36f17364608464ecdc3e89cedf52",
+    "checks": [
+      "56 fresh MSD runs, fold0 seed0, no augmentation, frozen10/52 split",
+      "nnUNet native foreground Dice+CE, original deep supervision and SGD preserved",
+      "SwinUNETR/UNETR/3DUNet original MONAI Dice including background and AdamW preserved",
+      "All13 constraint combinations and original SDF timing checked numerically at64-cube resolution",
+      "Sequential60% native Dice+CE and10% other-model Dice calibration checked with direct gradients",
+      "Original75%/50% p95 ceilings retained",
+      "Unchanged measured profiles bound to exact source hashes; per-objective schedules recomputed",
+      "Actual dataset hash verified; final-budget evaluation and archive policy retained",
+      "Shell syntax"
+    ]
+  },
+  "manifest_sha256": "e9cd3a60fd42a15d63fa04df28e9c952662b36f17364608464ecdc3e89cedf52",
+  "collector": {
+    "pid": 10601,
+    "caffeinate_pid": 10602,
+    "started_at": 1792008053.810426,
+    "python": "/Library/Frameworks/Python.framework/Versions/3.12/bin/python3",
+    "log": "/Users/filippofocaccia/Desktop/hippo/reports/msd_mixed_losses_nnunet60_others10_20261014/collector.log"
+  },
+  "monitor_id": "report-msd-four-model-60-constraints",
+  "monitor_thread_id": "01a13bf6-e2b3-7f20-8a44-cefcf9668110",
+  "optional_startup_backend": "rejected_not_adopted",
+  "offline_behavior": "finish active run, preserve results, release GPU after 300s waiting for verified local archive; automatically continue after collector returns unless manually paused",
+  "monitor_status": "PAUSED",
+  "monitor_paused_by_user_at": 1792008181.873101,
+  "monitor_pause_reason": "User will return to check manually",
+  "collector_left_running_for_verified_archival": true
+}

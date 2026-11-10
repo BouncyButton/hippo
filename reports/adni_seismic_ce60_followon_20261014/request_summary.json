@@ -1,0 +1,66 @@
+{
+  "runs": 126,
+  "fold": 0,
+  "seed": 0,
+  "augmentation": "none",
+  "adni": {
+    "models": 4,
+    "conditions": 14,
+    "train_crops": 10,
+    "validation_crops": 54,
+    "budget_flops": 31976450667090,
+    "baseline": "Dice+CE"
+  },
+  "seismic": {
+    "models": 4,
+    "conditions": 14,
+    "train_volumes": 19,
+    "validation_volumes": 96,
+    "native_shape": [
+      96,
+      96,
+      96
+    ],
+    "budget_flops": 182178126543160,
+    "baseline": "Dice+CE",
+    "nnunet_updates": 151,
+    "cap_note": "Preserve the numeric cap originally selected for 152 Dice-only updates; new Dice+CE forward/backward cost admits 151 updates (7.95 passes)."
+  },
+  "medsam3": {
+    "dataset": "ADNI",
+    "conditions": 14,
+    "support_crops": 5,
+    "updates": 200,
+    "baseline": "Established native MedSAM3 loss",
+    "frozen_base": true
+  },
+  "calibration": {
+    "target": 0.6,
+    "p95_ceiling": 0.75,
+    "interpretation": "Sequential per auxiliary, not aggregate"
+  },
+  "eta": {
+    "gpu_hours_range": [
+      35,
+      55
+    ],
+    "adni_hours": [
+      5,
+      7
+    ],
+    "seismic_hours": [
+      20,
+      34
+    ],
+    "medsam3_hours": [
+      8,
+      14
+    ],
+    "basis": "MSD observed runtime, native96 volume/validation scaling, previous 200-update foundation timing; provisional pending new dataset timing",
+    "excludes": [
+      "GPU queue delays",
+      "offline durable archive waits"
+    ]
+  },
+  "replicated_full_sweep": "Held, not authorized for submission"
+}

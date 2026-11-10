@@ -1,0 +1,56 @@
+{
+  "status": "complete",
+  "job_id": "700317",
+  "fold": 0,
+  "seed": 0,
+  "augmentation": "none",
+  "updates_each": 90,
+  "train_volumes": 10,
+  "validation_volumes": 52,
+  "native_foreground_dice_identical": true,
+  "initialization_sha256": "da12211023b3b7703372e45b56696ecba5677e35ae6bda856416a9861e8e18df",
+  "comparison": "Only CE weight changes from 0 to 1. Both use final update-90 checkpoint.",
+  "runs": [
+    {
+      "run": "MSD_nnunet_native_dice_90updates_f0s0",
+      "ce_weight": 0,
+      "updates": 90,
+      "validation_dice_percent": 5.94714042135631,
+      "training_dice_percent": 5.936376916642673,
+      "anterior_validation_dice_percent": 5.030930464540222,
+      "posterior_validation_dice_percent": 6.863350378172396,
+      "validation_voxel_errors": {
+        "foreground_fp": 3469250,
+        "foreground_fn": 138,
+        "anterior_to_posterior": 30176,
+        "posterior_to_anterior": 35270
+      },
+      "training_flops": 31975643344950,
+      "archive_verified": true,
+      "cleanup": "complete"
+    },
+    {
+      "run": "MSD_nnunet_native_dice_ce_90updates_f0s0",
+      "ce_weight": 1,
+      "updates": 90,
+      "validation_dice_percent": 64.95946880780754,
+      "training_dice_percent": 70.42235576468747,
+      "anterior_validation_dice_percent": 78.36600414272536,
+      "posterior_validation_dice_percent": 51.55293347288972,
+      "validation_voxel_errors": {
+        "foreground_fp": 25122,
+        "foreground_fn": 54915,
+        "anterior_to_posterior": 5069,
+        "posterior_to_anterior": 6807
+      },
+      "training_flops": 31976450667090,
+      "archive_verified": true,
+      "cleanup": "complete"
+    }
+  ],
+  "validation_gain_percentage_points": 59.01232838645123,
+  "interpretation": "Adding CE markedly improves this matched fold0 seed0 test at the 90-update budget. Replication across folds/seeds is still needed.",
+  "exploration_status": "paused pending review; previous exploration used a different MONAI Dice-only formulation",
+  "released_checkpoint_bytes": 1050685860,
+  "recorded_at": 1791974645.763139
+}

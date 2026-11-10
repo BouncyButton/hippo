@@ -1,0 +1,247 @@
+{
+  "scope": "Read-only scientific audit; no new training, evaluation, or model changes.",
+  "same_loss_source_sha256": {
+    "scripts/medsam3_supervised_constraints.py": "7a6eeca6098593d7e5323309ff1f6fa08be068d7532ad296705b16db9bfa8d18",
+    "thesis/new_constraints/edge_consistency.py": "eed72308a29b75e76ff51a36c7b056886ee6581be34b26e8c87ba34cc4085b1a",
+    "thesis/new_constraints/bands/outer_boundary.py": "bdaf5b99d4c07bae80191292b2161740886086faeb7b79b54ffabbadfa7bb68a"
+  },
+  "estimator_verification": "4 tests passed: full-volume values and gradients, no wraparound, confidence gradients, extreme logits.",
+  "medsam3_selector_matches_sam3_weights": true,
+  "calibrated_weights": {
+    "bands": 5.078932100766348,
+    "edge": 3082.0237895015457
+  },
+  "calibrated_statistics": {
+    "bands": {
+      "valid": 20,
+      "target": 0.1,
+      "p95_cap": 0.5,
+      "weighted_median": 0.05310020752791711,
+      "weighted_p95": 0.49999999999999994
+    },
+    "edge": {
+      "valid": 20,
+      "target": 0.1,
+      "p95_cap": 0.5,
+      "weighted_median": 0.02099491444492266,
+      "weighted_p95": 0.5
+    }
+  },
+  "edge_gradient_ratio": {
+    "min": 9.857739312667401e-05,
+    "median": 0.020994914444922658,
+    "p95": 0.5,
+    "max": 2.959288200552947
+  },
+  "cosine_edge_native_plus_bands": {
+    "min": -0.9418711291931673,
+    "median": 0.8323365571768826,
+    "max": 0.9896127873857773,
+    "negative_count": 7,
+    "samples": 20
+  },
+  "cosine_edge_bands": {
+    "min": -0.9806548332970688,
+    "median": 0.8123882256373445,
+    "max": 0.9901949943858964,
+    "negative_count": 7
+  },
+  "previous_medsam3_msd_archive_edge_weights": {
+    "fold0": 244.51236305424106,
+    "fold1": 142.75874580967613,
+    "fold3": 351.3157097493493
+  },
+  "training_scalar_contributions": [
+    {
+      "update": 1,
+      "native": 364.1408996582031,
+      "scaled_bands": 0.998674450680223,
+      "scaled_edge": 34.451529826540074,
+      "scaled_edge_over_native": 0.09461043749514988
+    },
+    {
+      "update": 2,
+      "native": 275.7301330566406,
+      "scaled_bands": 2.4585589801487076,
+      "scaled_edge": 132.87843508642163,
+      "scaled_edge_over_native": 0.4819148114621396
+    },
+    {
+      "update": 3,
+      "native": 115.39230728149414,
+      "scaled_bands": 1.0068006071458775,
+      "scaled_edge": 81.10299648049775,
+      "scaled_edge_over_native": 0.7028457822812294
+    },
+    {
+      "update": 4,
+      "native": 130.6064567565918,
+      "scaled_bands": 0.0,
+      "scaled_edge": 0.0,
+      "scaled_edge_over_native": 0.0
+    },
+    {
+      "update": 5,
+      "native": 182.7424087524414,
+      "scaled_bands": 1.7442004234093085,
+      "scaled_edge": 153.9980425743932,
+      "scaled_edge_over_native": 0.8427055527270202
+    },
+    {
+      "update": 6,
+      "native": 170.45904541015625,
+      "scaled_bands": 0.0,
+      "scaled_edge": 0.0,
+      "scaled_edge_over_native": 0.0
+    },
+    {
+      "update": 7,
+      "native": 202.4703140258789,
+      "scaled_bands": 2.636006385176868,
+      "scaled_edge": 254.99425609435932,
+      "scaled_edge_over_native": 1.259415521337943
+    },
+    {
+      "update": 8,
+      "native": 108.12510681152344,
+      "scaled_bands": 1.563854776730107,
+      "scaled_edge": 115.804611443242,
+      "scaled_edge_over_native": 1.0710242501318863
+    },
+    {
+      "update": 9,
+      "native": 84.89114379882812,
+      "scaled_bands": 1.995518865531561,
+      "scaled_edge": 211.6286413245768,
+      "scaled_edge_over_native": 2.4929413346825258
+    },
+    {
+      "update": 10,
+      "native": 99.09369659423828,
+      "scaled_bands": 1.3445805415408922,
+      "scaled_edge": 130.5033329747031,
+      "scaled_edge_over_native": 1.3169690652381125
+    },
+    {
+      "update": 11,
+      "native": 129.004545211792,
+      "scaled_bands": 1.631730589627075,
+      "scaled_edge": 199.59304284487976,
+      "scaled_edge_over_native": 1.5471783766781222
+    },
+    {
+      "update": 12,
+      "native": 142.2442398071289,
+      "scaled_bands": 4.284790063691939,
+      "scaled_edge": 637.4513044354753,
+      "scaled_edge_over_native": 4.481385715863118
+    },
+    {
+      "update": 13,
+      "native": 91.74192428588867,
+      "scaled_bands": 3.4082976327976646,
+      "scaled_edge": 623.7446189281086,
+      "scaled_edge_over_native": 6.798904903982379
+    },
+    {
+      "update": 14,
+      "native": 101.19744873046875,
+      "scaled_bands": 2.4612017383357583,
+      "scaled_edge": 204.50645219856833,
+      "scaled_edge_over_native": 2.020865691419304
+    },
+    {
+      "update": 15,
+      "native": 78.64030838012695,
+      "scaled_bands": 1.1389549319211698,
+      "scaled_edge": 223.2574468809354,
+      "scaled_edge_over_native": 2.8389696261332866
+    },
+    {
+      "update": 16,
+      "native": 57.78396797180176,
+      "scaled_bands": 3.2759111081213526,
+      "scaled_edge": 539.1935333180132,
+      "scaled_edge_over_native": 9.331196043531254
+    },
+    {
+      "update": 17,
+      "native": 55.584449768066406,
+      "scaled_bands": 3.266515144159432,
+      "scaled_edge": 262.4067211139179,
+      "scaled_edge_over_native": 4.720865677520337
+    },
+    {
+      "update": 18,
+      "native": 71.99635314941406,
+      "scaled_bands": 4.968773276969958,
+      "scaled_edge": 469.33909569252086,
+      "scaled_edge_over_native": 6.518928739605758
+    },
+    {
+      "update": 19,
+      "native": 118.82293701171875,
+      "scaled_bands": 5.418734061052146,
+      "scaled_edge": 656.460782922522,
+      "scaled_edge_over_native": 5.524697498916218
+    },
+    {
+      "update": 20,
+      "native": 65.67994689941406,
+      "scaled_bands": 3.321848105846877,
+      "scaled_edge": 490.4223977401828,
+      "scaled_edge_over_native": 7.466851312947056
+    },
+    {
+      "update": 21,
+      "native": 113.20202255249023,
+      "scaled_bands": 4.294013336498373,
+      "scaled_edge": 645.7698876172881,
+      "scaled_edge_over_native": 5.704579061896649
+    },
+    {
+      "update": 22,
+      "native": 69.41826057434082,
+      "scaled_bands": 3.6292957295577093,
+      "scaled_edge": 429.36872790361167,
+      "scaled_edge_over_native": 6.185241813194033
+    },
+    {
+      "update": 23,
+      "native": 46.85689926147461,
+      "scaled_bands": 1.3745668039126266,
+      "scaled_edge": 322.1131503792616,
+      "scaled_edge_over_native": 6.8744017520617415
+    },
+    {
+      "update": 24,
+      "native": 96.0465087890625,
+      "scaled_bands": 5.467200819975634,
+      "scaled_edge": 749.9027908322747,
+      "scaled_edge_over_native": 7.807704832657817
+    },
+    {
+      "update": 25,
+      "native": 47.1265983581543,
+      "scaled_bands": 1.345142253240436,
+      "scaled_edge": 141.51687492659704,
+      "scaled_edge_over_native": 3.0029087576211713
+    }
+  ],
+  "confirmed_differences": [
+    "Conventional gradient-ratio calibration uses detached segmentation logits; SAM3/MedSAM3 uses trainable LoRA parameters.",
+    "Conventional Dice-only objective differs from the full SAM3 native loss, which includes classification/presence, boxes and mask terms.",
+    "SAM3 semantic foreground multiplies mask probability by query and presence confidences and takes a per-pixel maximum over queries.",
+    "GeoFWI3D SAM3 initializes fresh zero-output LoRA; MedSAM3 MSD starts with the medical adapter and uses exclusive three-class probabilities.",
+    "GeoFWI3D SAM3 calibrates before any optimizer update and freezes its coefficient; the conventional capped recipe calibrates after a baseline prefix.",
+    "Earlier GeoFWI3D SwinUNETR runs used literal 0.1 auxiliary coefficients and a 500-update ramp; this SAM3 recipe uses gradient-ratio targets and a 20-update ramp."
+  ],
+  "hypothesis": "Cold-start calibration of confidence-gated edge gradients yields a large, static coefficient with heterogeneous/conflicting slab gradients; its influence may change rapidly during adaptation.",
+  "limitations": [
+    "Scalar loss ratios are not gradient ratios; per-term gradients were not logged during training.",
+    "Large coefficients across different models and datasets are not directly comparable as effective strengths.",
+    "The audit confirms formula and coefficient-rule equivalence, not the causal explanation of the Dice collapse.",
+    "Final adapters were already retired after completed evaluations; no trained-model confidence-path probe was performed."
+  ],
+  "next_diagnostic": "A short instrumented training-prefix replay on training support only, measuring per-term gradient ratios and cosines and mask/query/presence contributions as learning progresses, with no baseline evaluation rerun."
+}

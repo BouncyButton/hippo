@@ -1,0 +1,62 @@
+{
+  "status": "complete",
+  "dataset": "MSD",
+  "fold": 0,
+  "seed": 0,
+  "augmentation": "none",
+  "train_volumes": 10,
+  "validation_volumes": 52,
+  "budget_flops_each": 31976450667090,
+  "models": [
+    {
+      "model": "nnunet",
+      "dice_only_validation_percent": 5.94714042135631,
+      "dice_ce_validation_percent": 64.95946880780754,
+      "validation_gain_percentage_points": 59.01232838645123,
+      "updates_each": 90
+    },
+    {
+      "model": "swinunetr",
+      "initialization_sha256": "8d7d717c9669bfbe02e2ad48e5cb3b84cb60ca89f96623f1b14804068d7fb2a4",
+      "dice_only_validation_percent": 45.627680367179515,
+      "dice_ce_validation_percent": 70.22862054445298,
+      "validation_gain_percentage_points": 24.600940177273465,
+      "dice_only_training_percent": 47.1859786697569,
+      "dice_ce_training_percent": 78.54985045453672,
+      "updates_each": 206
+    },
+    {
+      "model": "unetr_vit_b16",
+      "initialization_sha256": "fbd018b46230496e47bad2cca9c91936e1c5805718603f1f39a97135b81311d0",
+      "dice_only_validation_percent": 49.648948862895836,
+      "dice_ce_validation_percent": 43.202098018995855,
+      "validation_gain_percentage_points": -6.4468508438999805,
+      "dice_only_training_percent": 57.875286741487955,
+      "dice_ce_training_percent": 57.875550726762015,
+      "updates_each": 245
+    },
+    {
+      "model": "basic_unet16",
+      "initialization_sha256": "5bc2d519363bce3fb7e486e3f5be350ad59fa58e7b8cce7b593d7cc941229904",
+      "dice_only_validation_percent": 74.16785879378678,
+      "dice_ce_validation_percent": 81.17938473325637,
+      "validation_gain_percentage_points": 7.011525939469593,
+      "dice_only_training_percent": 77.41040123855788,
+      "dice_ce_training_percent": 89.67679346535556,
+      "updates_each": 563
+    }
+  ],
+  "methodology": "Each pair preserves its Dice term, model initialization, split and optimizer; CE coefficient alone is toggled. nnUNet uses native foreground Dice/deep supervision and SGD. Other models retain their established MONAI Dice including background and AdamW. Final budget checkpoints are primary. One seed/fold only.",
+  "source_reports": {
+    "nnunet": {
+      "path": "reports/msd_nnunet_loss_pair_90updates_20261014/comparison.json",
+      "sha256": "c9d0aa4c51d50309f3c4f5566ae4cad67062efcea9e3aa3287f23e37f5193cfe"
+    },
+    "other_models": {
+      "path": "reports/msd_other_models_loss_pairs_20261014/comparison.json",
+      "sha256": "ea087c420dc6a4cf9b634c2fb1055d6d06a2dfb9d31ef59c0fc3b093b1ff06f6"
+    }
+  },
+  "bands_pilot": "12 Dice+CE+bands runs prepared, awaiting final-result review; not submitted",
+  "exploration": "paused"
+}

@@ -1,0 +1,355 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>MedSAM3 MSD final results</title>
+<style>body{font:16px/1.5 system-ui,sans-serif;color:#17283e;max-width:1280px;margin:40px auto;padding:0 26px}h1{font-size:32px}h2{margin-top:38px}p{max-width:1050px}.meta{color:#526477}.results{border-collapse:collapse;font-size:14px;width:100%;margin:20px 0}th,td{padding:9px 10px;border-bottom:1px solid #dce3ea;text-align:right}th:first-child,td:first-child{text-align:left}thead{background:#edf3f7}img{width:100%;height:auto}.note{background:#eef5f8;padding:16px 20px;border-left:4px solid #2272b5}a{color:#126491}</style>
+<h1>MedSAM3 MSD: final matched results</h1><p class="meta">Completed 19 October 2026, 18:47 CEST · filippofocaccia2@gmail.com</p>
+<p class="note"><strong>108/108 complete.</strong> Bands + Edge + SDF + Depth achieved <strong>81.73% validation Dice</strong>, compared with <strong>76.34%</strong> for the fresh baseline: <strong>+5.38 percentage points</strong>. It improved all 9 matched fold/seed pairs.</p>
+<p>Final-update checkpoints after 200 updates; folds 0, 1, 3; seeds 17, 83, 191; no augmentation. Dice is the per-volume mean of anterior and posterior Dice, averaged over validation volumes in each run, seeds within each fold, then folds equally. Training Dice uses the saved training-support evaluation.</p>
+<img src="results_overview.png" alt="Paired gains for all conditions and per-fold baseline versus full combination">
+<h2>All fresh conditions</h2><p>Every row contains 9 runs. Gain is paired to the same fold and seed. FN, FP and anterior/posterior swaps are mean voxel counts per validation volume, averaged equally across runs; they are not rates.</p><table class="dataframe results">
+  <thead>
+    <tr style="text-align: right;">
+      <th>condition</th>
+      <th>validation_dice_pct</th>
+      <th>gain_pp</th>
+      <th>training_dice_pct</th>
+      <th>improved_pairs</th>
+      <th>foreground_fn</th>
+      <th>foreground_fp</th>
+      <th>ap_swaps</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Bands + Edge + SDF + Depth</td>
+      <td>81.73</td>
+      <td>5.38</td>
+      <td>86.88</td>
+      <td>9</td>
+      <td>555.99</td>
+      <td>436.97</td>
+      <td>97.59</td>
+    </tr>
+    <tr>
+      <td>Edge + SDF + Depth</td>
+      <td>81.28</td>
+      <td>4.94</td>
+      <td>86.40</td>
+      <td>9</td>
+      <td>630.28</td>
+      <td>373.11</td>
+      <td>93.36</td>
+    </tr>
+    <tr>
+      <td>Bands + SDF + Depth</td>
+      <td>81.09</td>
+      <td>4.75</td>
+      <td>86.01</td>
+      <td>9</td>
+      <td>627.33</td>
+      <td>400.67</td>
+      <td>90.98</td>
+    </tr>
+    <tr>
+      <td>Bands + Edge + SDF</td>
+      <td>81.02</td>
+      <td>4.68</td>
+      <td>86.44</td>
+      <td>9</td>
+      <td>572.99</td>
+      <td>469.56</td>
+      <td>98.55</td>
+    </tr>
+    <tr>
+      <td>Bands + Edge + Depth</td>
+      <td>80.95</td>
+      <td>4.60</td>
+      <td>86.29</td>
+      <td>9</td>
+      <td>559.08</td>
+      <td>475.00</td>
+      <td>106.65</td>
+    </tr>
+    <tr>
+      <td>Edge + Depth</td>
+      <td>80.74</td>
+      <td>4.39</td>
+      <td>85.84</td>
+      <td>9</td>
+      <td>632.72</td>
+      <td>402.13</td>
+      <td>98.15</td>
+    </tr>
+    <tr>
+      <td>Bands + SDF</td>
+      <td>80.60</td>
+      <td>4.26</td>
+      <td>85.29</td>
+      <td>9</td>
+      <td>676.99</td>
+      <td>367.77</td>
+      <td>90.29</td>
+    </tr>
+    <tr>
+      <td>Bands + Depth</td>
+      <td>80.45</td>
+      <td>4.10</td>
+      <td>85.58</td>
+      <td>9</td>
+      <td>632.12</td>
+      <td>424.54</td>
+      <td>99.04</td>
+    </tr>
+    <tr>
+      <td>SDF + Depth</td>
+      <td>79.84</td>
+      <td>3.49</td>
+      <td>84.53</td>
+      <td>9</td>
+      <td>779.18</td>
+      <td>295.25</td>
+      <td>80.98</td>
+    </tr>
+    <tr>
+      <td>Depth</td>
+      <td>78.90</td>
+      <td>2.56</td>
+      <td>84.21</td>
+      <td>8</td>
+      <td>787.34</td>
+      <td>314.11</td>
+      <td>95.53</td>
+    </tr>
+    <tr>
+      <td>SDF</td>
+      <td>76.96</td>
+      <td>0.62</td>
+      <td>81.49</td>
+      <td>6</td>
+      <td>954.32</td>
+      <td>234.00</td>
+      <td>80.04</td>
+    </tr>
+    <tr>
+      <td>Baseline</td>
+      <td>76.34</td>
+      <td>0.00</td>
+      <td>81.00</td>
+      <td>0</td>
+      <td>869.18</td>
+      <td>310.63</td>
+      <td>123.13</td>
+    </tr>
+  </tbody>
+</table>
+<h2>Consistency across folds</h2><table class="dataframe results">
+  <thead>
+    <tr style="text-align: right;">
+      <th>fold</th>
+      <th>0</th>
+      <th>1</th>
+      <th>3</th>
+    </tr>
+    <tr>
+      <th>arm</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Bands + Edge + SDF + Depth</th>
+      <td>82.08</td>
+      <td>80.16</td>
+      <td>82.94</td>
+    </tr>
+    <tr>
+      <th>Edge + SDF + Depth</th>
+      <td>81.30</td>
+      <td>79.85</td>
+      <td>82.70</td>
+    </tr>
+    <tr>
+      <th>Bands + SDF + Depth</th>
+      <td>80.56</td>
+      <td>80.24</td>
+      <td>82.47</td>
+    </tr>
+    <tr>
+      <th>Bands + Edge + SDF</th>
+      <td>80.82</td>
+      <td>79.64</td>
+      <td>82.60</td>
+    </tr>
+    <tr>
+      <th>Bands + Edge + Depth</th>
+      <td>81.22</td>
+      <td>79.30</td>
+      <td>82.33</td>
+    </tr>
+    <tr>
+      <th>Edge + Depth</th>
+      <td>80.40</td>
+      <td>79.43</td>
+      <td>82.38</td>
+    </tr>
+    <tr>
+      <th>Bands + SDF</th>
+      <td>80.45</td>
+      <td>79.48</td>
+      <td>81.87</td>
+    </tr>
+    <tr>
+      <th>Bands + Depth</th>
+      <td>80.21</td>
+      <td>79.69</td>
+      <td>81.44</td>
+    </tr>
+    <tr>
+      <th>SDF + Depth</th>
+      <td>79.56</td>
+      <td>79.00</td>
+      <td>80.95</td>
+    </tr>
+    <tr>
+      <th>Depth</th>
+      <td>78.84</td>
+      <td>77.48</td>
+      <td>80.38</td>
+    </tr>
+    <tr>
+      <th>SDF</th>
+      <td>77.15</td>
+      <td>74.31</td>
+      <td>79.41</td>
+    </tr>
+    <tr>
+      <th>Baseline</th>
+      <td>77.35</td>
+      <td>74.45</td>
+      <td>77.23</td>
+    </tr>
+  </tbody>
+</table>
+<h2>Best mean condition: all nine matched pairs</h2><table class="dataframe results">
+  <thead>
+    <tr style="text-align: right;">
+      <th>fold</th>
+      <th>seed</th>
+      <th>baseline_dice_pct</th>
+      <th>validation_dice_pct</th>
+      <th>gain_pp</th>
+      <th>training_dice_pct</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>17</td>
+      <td>76.83</td>
+      <td>81.28</td>
+      <td>4.45</td>
+      <td>88.36</td>
+    </tr>
+    <tr>
+      <td>0</td>
+      <td>83</td>
+      <td>77.55</td>
+      <td>82.47</td>
+      <td>4.93</td>
+      <td>87.40</td>
+    </tr>
+    <tr>
+      <td>0</td>
+      <td>191</td>
+      <td>77.67</td>
+      <td>82.49</td>
+      <td>4.83</td>
+      <td>88.78</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>17</td>
+      <td>75.35</td>
+      <td>80.61</td>
+      <td>5.27</td>
+      <td>85.33</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>83</td>
+      <td>71.95</td>
+      <td>79.59</td>
+      <td>7.64</td>
+      <td>84.96</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>191</td>
+      <td>76.05</td>
+      <td>80.27</td>
+      <td>4.22</td>
+      <td>85.48</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>17</td>
+      <td>79.78</td>
+      <td>83.11</td>
+      <td>3.33</td>
+      <td>87.64</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>83</td>
+      <td>77.04</td>
+      <td>82.80</td>
+      <td>5.76</td>
+      <td>86.57</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>191</td>
+      <td>74.88</td>
+      <td>82.91</td>
+      <td>8.03</td>
+      <td>87.44</td>
+    </tr>
+  </tbody>
+</table>
+<h2>Interpretation</h2><ul><li>Full combination gains range from +3.33 to +8.03 points. Its fold-mean gains are +4.74, +5.71 and +5.71 points.</li><li>The full combination leads Edge + SDF + Depth by only 0.44 points and wins 7/9 pairs. This smaller ranking difference is less secure than the improvement over baseline.</li><li>Full-combination FN falls from 869.18 to 555.99 voxels/volume (−36.0%); FP rises from 310.63 to 436.97 (+40.7%); A/P swaps fall from 123.13 to 97.59 (−20.7%). This is a sensitivity/false-positive trade-off.</li><li>Training Dice rises from 81.00% to 86.88%, alongside validation improvement. The train–validation gap is 4.66 points for baseline and 5.16 for the full combination.</li><li>SDF alone is weak and variable (+0.62 points, 6/9 positive pairs; negative fold-mean gains in folds 0 and 1). Depth alone improves 8/9 pairs. Every fresh multi-constraint condition improves all 9 pairs.</li><li>Selected folds and repeated seeds do not establish statistical significance or nine independent test sets. The condition ranking is exploratory, and was selected using these validation results.</li></ul>
+<h2>Original cluster study: separate historical reference</h2><table class="dataframe results">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>validation_dice_pct</th>
+      <th>within_cluster_gain_pp</th>
+    </tr>
+    <tr>
+      <th>arm</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>bands</th>
+      <td>78.76</td>
+      <td>3.83</td>
+    </tr>
+    <tr>
+      <th>bands_edge</th>
+      <td>80.12</td>
+      <td>5.19</td>
+    </tr>
+    <tr>
+      <th>baseline</th>
+      <td>74.93</td>
+      <td>0.00</td>
+    </tr>
+  </tbody>
+</table><p>Bands and Bands + Edge were deliberately not rerun. These 27 historical results use their own cluster baseline and calibration. They were not substituted into the fresh Colab controls; cross-environment differences cannot be attributed solely to constraints.</p>
+<h2>Calibration and budget checks</h2><p>All 108 rows confirm no augmentation and exactly 200 updates (21,600 optimizer updates in this fresh study). This study is update-matched, not FLOP-capped or compute-matched to the four-model sweeps. Calibration is accounted for separately. All fold calibration records retain the 10% sequential target and 50% p95 cap; measured medians can be below 10% when the p95 cap binds. Coefficients were calibrated in the Colab environment and are not identical to historic cluster coefficients.</p>
+<p>The last run records AdamW, learning rate 5e−5 to 5e−6, 20-update warm-up, accumulation 2, gradient clipping at 1, native BF16 autocast, 18,497,664 trainable parameters and final-update selection. Frozen-parameter hashes match before/after; adapter hashes changed.</p>
+<p><a href="calibrated_weights.csv">All fold/condition calibration coefficients and diagnostics</a></p>
+<h2>Completion, storage and evidence</h2><p>The final session receipt is complete with no error and 108 archived experiments. The report generator includes runs only after archive-file hashes and complete cleanup receipts pass. The last run's cleanup receipt confirms removal of its checkpoint and bulky recovery archive after verification. This analysis independently recomputed every paired gain and aggregate from the 108 stored completion rows; it did not redownload and rehash all archive files.</p><p>Last recorded quota check (19 October, 17:47 CEST): 0.967 TiB used out of 20 TiB; 0.954 TiB was in Trash. This is an account-wide snapshot, not the campaign size. No Trash was emptied.</p>
+<p><a href="https://drive.google.com/drive/folders/1TZwrPM1EJf-uFkAIOYjzfjH0iUC-CbbE">Drive results</a> · <a href="all_108_runs.csv">All 108 runs CSV</a> · <a href="condition_summary.csv">Condition summary CSV</a> · <a href="results_overview.pdf">Exportable figure PDF</a> · <a href="comparison.json">Original comparison JSON</a> · <a href="verification.json">Completion evidence</a></p></html>

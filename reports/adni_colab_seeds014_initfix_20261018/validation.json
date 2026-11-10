@@ -1,0 +1,86 @@
+{
+  "status": "passed_local_validation",
+  "total_tests": 112,
+  "regression": {
+    "status": "passed",
+    "tests": 102,
+    "errors": 0,
+    "failures": 0,
+    "seconds": 97.89332845299941,
+    "modules": [
+      "scripts.colab_adni_seed014.test_campaign",
+      "scripts.colab_adni_parallel.test_scheduler",
+      "scripts.colab_adni.test_runtime",
+      "scripts.colab_adni_parallel.test_acceleration",
+      "scripts.colab_adni_parallel.test_archive_verification",
+      "scripts.colab_adni_parallel.test_acceleration_gate"
+    ],
+    "gpu_tested": false,
+    "scientific_jobs_launched": 0
+  },
+  "initialization_fix": {
+    "status": "passed",
+    "tests": 10,
+    "errors": 0,
+    "failures": 0,
+    "seconds": 23.23498801900132,
+    "module": "scripts.colab_adni_seed014.test_initialization_compat"
+  },
+  "canonical_position_bias_checks": {
+    "status": "passed_original_portable_bias_tolerance_and_rng_checks",
+    "torch": "2.2.2",
+    "monai": "1.4.0",
+    "checks": [
+      {
+        "seed": 0,
+        "portable_calls": 8,
+        "max_difference": 7.450580596923828e-09,
+        "rng_exact": true
+      },
+      {
+        "seed": 1,
+        "portable_calls": 8,
+        "max_difference": 7.450580596923828e-09,
+        "rng_exact": true
+      },
+      {
+        "seed": 4,
+        "portable_calls": 8,
+        "max_difference": 7.450580596923828e-09,
+        "rng_exact": true
+      }
+    ],
+    "full_frozen_model_validation": "required on Colab; local older libraries differ in nonportable weights",
+    "gpu_tested": false
+  },
+  "scientific_invariants": {
+    "both_frozen_bundle_manifests_unchanged": true,
+    "scope": {
+      "folds": [
+        0,
+        1,
+        2
+      ],
+      "seeds": [
+        0,
+        1,
+        4
+      ],
+      "target_runs": 504
+    },
+    "augmentation": "none",
+    "optimization_flops_cap": 31976450667090,
+    "completed_archives_recovery_ledger_preserved": true,
+    "existing_gpu_preflight_and_environment_checks_retained": true,
+    "original_initialization_tolerance_retained": true,
+    "exact_final_model_and_rng_checks_retained": true
+  },
+  "limitations": [
+    "No A100 execution tested locally.",
+    "Local PyTorch 2.2.2/MONAI 1.4.0 differ from Colab; full frozen model hash validation is required on Colab before training.",
+    "The CPU test checked all 24 real frozen Swin position-bias tensors and exact RNG states; full-model gate and failures were tested with CPU fixtures."
+  ],
+  "failure_evidence": "../adni_disconnect_audit_20261018_2035/failure_train.log",
+  "code_zip_sha256": "38598c0b56d617d31daa238fcd2d3677a324b8258d2d8bfee5a7bf2d4915e140",
+  "notebook_sha256": "5fc120f42d8e3bed35068c08b0adfaa4b6041d8fab0b0b3c9bae98acccdd194f"
+}

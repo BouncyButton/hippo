@@ -1,0 +1,37 @@
+{
+  "native_shape": [
+    96,
+    96,
+    96
+  ],
+  "preview_shape": [
+    48,
+    48,
+    48
+  ],
+  "downsampling": "Every second native voxel; preview only",
+  "amplitude_display": "Symmetric clipping at per-volume 99.5th absolute percentile",
+  "mask": "rgt3d == 0; includes all salt voxels, not only surfaces",
+  "bands": "2 native voxels, 6-connected; exclude outer 2-voxel observation frame",
+  "no_predictions": true,
+  "models": [
+    {
+      "id": "model_0002",
+      "label": "1 generated salt body",
+      "defaultSlice": 5,
+      "nativeForegroundVoxels": 23618,
+      "foregroundFraction": 0.026694968894675927,
+      "nativeConnectedComponents": 7,
+      "clipAbsAmplitude": 0.2977784432470784
+    },
+    {
+      "id": "model_0001",
+      "label": "3 generated salt bodies + faults",
+      "defaultSlice": 17,
+      "nativeForegroundVoxels": 120673,
+      "foregroundFraction": 0.13639435944733797,
+      "nativeConnectedComponents": 5,
+      "clipAbsAmplitude": 0.3198084123432627
+    }
+  ]
+}

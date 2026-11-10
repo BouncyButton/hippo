@@ -1,0 +1,85 @@
+{
+  "completed": 5,
+  "total": 56,
+  "active": "MSD_swinunetr_diceonly_dice_bands_target10_f0s0",
+  "job_id": "701319",
+  "rows": [
+    {
+      "model": "nnunet",
+      "arm": "dice",
+      "baseline_loss": "Dice+CE",
+      "target": 0.6,
+      "training_dice_percent": 73.46908439673443,
+      "validation_dice_percent": 67.94041605603068,
+      "gain_over_baseline_percentage_points": 0.0,
+      "updates": 90,
+      "cleanup_status": "complete"
+    },
+    {
+      "model": "swinunetr",
+      "arm": "dice",
+      "baseline_loss": "Dice",
+      "target": 0.1,
+      "training_dice_percent": 46.15297516862813,
+      "validation_dice_percent": 44.48766956053531,
+      "gain_over_baseline_percentage_points": 0.0,
+      "updates": 206,
+      "cleanup_status": "complete"
+    },
+    {
+      "model": "unetr_vit_b16",
+      "arm": "dice",
+      "baseline_loss": "Dice",
+      "target": 0.1,
+      "training_dice_percent": 58.13659718200482,
+      "validation_dice_percent": 49.73487933491671,
+      "gain_over_baseline_percentage_points": 0.0,
+      "updates": 245,
+      "cleanup_status": "complete"
+    },
+    {
+      "model": "basic_unet16",
+      "arm": "dice",
+      "baseline_loss": "Dice",
+      "target": 0.1,
+      "training_dice_percent": 76.24935650952878,
+      "validation_dice_percent": 73.21936510786665,
+      "gain_over_baseline_percentage_points": 0.0,
+      "updates": 563,
+      "cleanup_status": "complete"
+    },
+    {
+      "model": "nnunet",
+      "arm": "dice_bands",
+      "baseline_loss": "Dice+CE",
+      "target": 0.6,
+      "training_dice_percent": 79.25176903049812,
+      "validation_dice_percent": 74.13770029688239,
+      "gain_over_baseline_percentage_points": 6.197284240851701,
+      "updates": 89,
+      "cleanup_status": "complete"
+    }
+  ],
+  "nnunet_error_comparison": {
+    "foreground_fn": {
+      "baseline": 49317,
+      "bands": 27701,
+      "change": -21616,
+      "percent_change": -43.830727740941256
+    },
+    "foreground_fp": {
+      "baseline": 27081,
+      "bands": 35171,
+      "change": 8090,
+      "percent_change": 29.87334293416048
+    },
+    "ap_swaps": {
+      "baseline": 11399,
+      "bands": 14352,
+      "change": 2953,
+      "percent_change": 25.905781208877972
+    }
+  },
+  "released_gib": 3.0460256692022085,
+  "free_gib_last_cluster_check": 68.75999999999999
+}

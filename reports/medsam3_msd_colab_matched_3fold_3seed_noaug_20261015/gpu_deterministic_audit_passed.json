@@ -1,0 +1,65 @@
+{
+  "status": "diagnostic_only",
+  "preflight_approved": false,
+  "scientific_updates": 0,
+  "environment": {
+    "gpu": "NVIDIA A100-SXM4-80GB",
+    "cuda": "13.0",
+    "cudnn": 92000,
+    "packages": {
+      "torch": "2.12.1",
+      "torchvision": "0.27.1",
+      "numpy": "2.4.6",
+      "scipy": "1.17.1",
+      "nibabel": "5.4.2",
+      "timm": "1.0.22",
+      "einops": "0.8.2",
+      "Pillow": "12.3.0"
+    }
+  },
+  "bundle_sha256": "92b387c59ce409c5700e6e9b84f4bcf27069d9cb43f29f0fd8ce67ceb84d543d",
+  "probe_sha256": "672a953c2a1d5253971e53a5c4bdf15292d5d99fb1422e7210614eb7e2f90107",
+  "candidate_sources": {
+    "equivalence": "6596a32aca8e3bca0d5365137879ffaef7245c6a856c676d43d20dfc89746c4c",
+    "audit_numerics.py": "2e4ab46a51bb9a144f8a9fb31c55241ff2453ff4a40bf6aee7d4956c26d408a4"
+  },
+  "gradient_rtol": 1e-05,
+  "gradient_atol": 1e-07,
+  "training_recipe_changed": false,
+  "augmentation": "none",
+  "empty_point_grid": {
+    "mode": "audit-only empty-grid exact-zero backward",
+    "native_forward": true,
+    "empty_calls": 28,
+    "nonempty_calls": 0,
+    "shapes": [
+      {
+        "input": [
+          1,
+          256,
+          72,
+          72
+        ],
+        "grid": [
+          1,
+          0,
+          1,
+          2
+        ],
+        "dtype": "torch.float32"
+      }
+    ]
+  },
+  "checks": {
+    "status": "passed",
+    "original_repeatability": true,
+    "original_loss_gradient_equivalence": true,
+    "optimizer_checkpoint_resume_exact": true,
+    "label_free_inference_exact": true,
+    "numerical_mode": "isolated deterministic audit; original calibration/training modes unchanged",
+    "peak_gpu_bytes": 12562933760
+  },
+  "adapter_restored": true,
+  "frozen_unchanged": true,
+  "candidate_audit_passed": true
+}

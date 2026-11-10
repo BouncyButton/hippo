@@ -1,0 +1,218 @@
+{
+  "status": "evidence_complete_causal_attribution_provisional",
+  "records": {
+    "dice": {
+      "validation_macro_dice_percent": 43.202098018995855,
+      "validation_anterior_dice_percent": 21.143699550347048,
+      "validation_posterior_dice_percent": 65.26049648764467,
+      "training_macro_dice_percent": 57.875550726762015,
+      "best_macro_dice_percent": 45.01871068197553,
+      "binary_foreground_dice_percent": 50.945690118552974,
+      "foreground_fn": 71610,
+      "foreground_fp": 168000,
+      "anterior_to_posterior": 11584,
+      "posterior_to_anterior": 203,
+      "confusion": [
+        [
+          13289138,
+          108202,
+          59798
+        ],
+        [
+          61332,
+          18794,
+          11584
+        ],
+        [
+          10278,
+          203,
+          72159
+        ]
+      ],
+      "updates": 245,
+      "discarded_attempts": 0
+    },
+    "dice_bands": {
+      "validation_macro_dice_percent": 33.50804997712178,
+      "validation_anterior_dice_percent": 12.488452789370688,
+      "validation_posterior_dice_percent": 54.52764716487286,
+      "training_macro_dice_percent": 38.99862682889459,
+      "best_macro_dice_percent": 35.11906559542454,
+      "binary_foreground_dice_percent": 57.29922952211318,
+      "foreground_fn": 56244,
+      "foreground_fp": 169560,
+      "anterior_to_posterior": 43282,
+      "posterior_to_anterior": 117,
+      "confusion": [
+        [
+          13287578,
+          117156,
+          52404
+        ],
+        [
+          38342,
+          10086,
+          43282
+        ],
+        [
+          17902,
+          117,
+          64621
+        ]
+      ],
+      "updates": 245,
+      "discarded_attempts": 0
+    }
+  },
+  "initialization_match": true,
+  "config_differences": {
+    "objective": [
+      "dice",
+      "dice_bands"
+    ],
+    "schedule": [
+      {
+        "prefix_updates": 0,
+        "sdf_prefix_updates": 0,
+        "baseline_flops_per_update": 130069137349,
+        "early_flops_per_update": 130069137349,
+        "flops_per_update": 130069137349,
+        "calibration_flops": 0,
+        "constraint_warmup_updates": 50,
+        "sdf_warmup_updates": 50,
+        "budget_scope": "optimization_only",
+        "max_steps": 245,
+        "consumed_training_flops": 31866938650505,
+        "consumed_flops": 31866938650505,
+        "consumed_total_flops": 31866938650505,
+        "unused_flops": 109512016585,
+        "patient_pass_epochs": 24.5
+      },
+      {
+        "prefix_updates": 50,
+        "sdf_prefix_updates": 50,
+        "baseline_flops_per_update": 130069137349,
+        "early_flops_per_update": 130138343382,
+        "flops_per_update": 130138343382,
+        "calibration_flops": 432554437874,
+        "constraint_warmup_updates": 50,
+        "sdf_warmup_updates": 50,
+        "budget_scope": "optimization_only",
+        "max_steps": 245,
+        "consumed_training_flops": 31880433826940,
+        "consumed_flops": 31880433826940,
+        "consumed_total_flops": 32312988264814,
+        "unused_flops": 96016840150,
+        "patient_pass_epochs": 24.5
+      }
+    ],
+    "sdf_prefix_updates": [
+      0,
+      50
+    ]
+  },
+  "prefix_metrics_exactly_match_at_updates": [
+    12,
+    24,
+    36,
+    49
+  ],
+  "calibration": {
+    "status": "complete",
+    "weights": {
+      "bands": 0.11094590443367022
+    },
+    "statistics": {
+      "bands": {
+        "median_raw_ratio": 5.408041000366211,
+        "p95_raw_ratio": 5.752586221694946,
+        "weighted_median_ratio": 0.6,
+        "weighted_p95_ratio": 0.6382258811986156
+      }
+    },
+    "cases": [
+      {
+        "dice_rms": 1.6264486930595012e-06,
+        "bands_rms": 8.210266969399527e-06,
+        "bands_over_dice": 5.047971725463867,
+        "case_name": "hippocampus_093"
+      },
+      {
+        "dice_rms": 1.6159059441633872e-06,
+        "bands_rms": 9.58145028562285e-06,
+        "bands_over_dice": 5.929460525512695,
+        "case_name": "hippocampus_097"
+      },
+      {
+        "dice_rms": 1.6238954003711115e-06,
+        "bands_rms": 8.741631972952746e-06,
+        "bands_over_dice": 5.383124828338623,
+        "case_name": "hippocampus_197"
+      },
+      {
+        "dice_rms": 1.6157458730958751e-06,
+        "bands_rms": 8.793007509666495e-06,
+        "bands_over_dice": 5.442073345184326,
+        "case_name": "hippocampus_287"
+      },
+      {
+        "dice_rms": 1.6184027344934293e-06,
+        "bands_rms": 8.960135346569587e-06,
+        "bands_over_dice": 5.536406517028809,
+        "case_name": "hippocampus_311"
+      },
+      {
+        "dice_rms": 1.6117280665639555e-06,
+        "bands_rms": 8.759729098528624e-06,
+        "bands_over_dice": 5.434991836547852,
+        "case_name": "hippocampus_314"
+      },
+      {
+        "dice_rms": 1.6461888208141318e-06,
+        "bands_rms": 8.943673492467497e-06,
+        "bands_over_dice": 5.432957172393799,
+        "case_name": "hippocampus_353"
+      },
+      {
+        "dice_rms": 1.6395372313127154e-06,
+        "bands_rms": 8.644875379104633e-06,
+        "bands_over_dice": 5.2727532386779785,
+        "case_name": "hippocampus_361"
+      },
+      {
+        "dice_rms": 1.6356017340513063e-06,
+        "bands_rms": 8.63804598338902e-06,
+        "bands_over_dice": 5.281264781951904,
+        "case_name": "hippocampus_373"
+      },
+      {
+        "dice_rms": 1.6277634813377517e-06,
+        "bands_rms": 8.622726454632357e-06,
+        "bands_over_dice": 5.2972846031188965,
+        "case_name": "hippocampus_390"
+      }
+    ],
+    "anchor_model_sha256": "561d01fa4917457f930d68f1ced54a503608838cd2d0e2dfe47d8115d53d167f",
+    "target_ratio": 0.6,
+    "p95_cap": 0.75,
+    "scope": "All ten training crops only; sequential bands, edge, SDF, depth against the accumulated weighted gradient; native deep-supervision weighting retained for nnUNet",
+    "base_gradient": "Dice+CE",
+    "legacy_dice_rms_means": "Joint Dice+CE logit-gradient RMS",
+    "config_sha256": "8d5bdb0a7cd18901d96dd84a09592aa0e35ca9e9c58cd6eeb8aa409ea404e43c",
+    "anchor_successful_updates": 50,
+    "anchor_training_attempts": 50,
+    "charged_flops": 432554437874
+  },
+  "synthetic_test": {
+    "logit_AP_swap_invariant": true,
+    "label_AP_swap_invariant": true,
+    "synthetic_wrong_posterior_to_correct_anterior_gradient_ratio": 7.3890559412483485,
+    "interpretation": "On an inner-band anterior voxel with posterior logit already larger, bands raises both foreground logits but pushes the already larger posterior more strongly. It cannot penalize A/P swaps. This verifies a possible mechanism, not its causal contribution throughout training."
+  },
+  "limits": [
+    "One fold/seed; do not infer an inherent transformer weakness.",
+    "Calibration measures detached logit-gradient RMS at update50, then holds a scalar weight fixed. Later parameter-gradient ratios were not recorded.",
+    "Completed checkpoints were removed after verified archive under storage policy; no retrospective model-gradient test was performed."
+  ],
+  "source_sha256": "bdaf5b99d4c07bae80191292b2161740886086faeb7b79b54ffabbadfa7bb68a"
+}

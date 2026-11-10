@@ -1,0 +1,56 @@
+{
+  "name": "adni_nnunet_bands_feedback_20261013",
+  "parent_stage": "/mnt/beegfsstudents/home/3160552/adni_constraints_noaug_5pct_fold0_seed0_20261013",
+  "parent_manifest_sha256": "371e7fe4690bb7d23dffa9f650155f95673c9973b3a0b18b2741b7deef5b76b7",
+  "dataset": "/mnt/beegfsstudents/home/3160552/hippo/datasets/Dataset103_ADNI/adni_hippocampus_full.pkl",
+  "dataset_sha256": "ea14f279b910ebd4d6a98209d98dc428d9a09fb56f52fb1c6d613302d7fe128a",
+  "runs": [
+    {
+      "variant": "bands_target20",
+      "target": 0.2,
+      "expected_band_weight": 0.012514620218054884,
+      "model": "nnunet",
+      "alias": "nnunet",
+      "objective": "dice_bands",
+      "updates": 90,
+      "optimization_gflops": 31975.441267788
+    },
+    {
+      "variant": "bands_target40",
+      "target": 0.4,
+      "expected_band_weight": 0.025029240436109768,
+      "model": "nnunet",
+      "alias": "nnunet",
+      "objective": "dice_bands",
+      "updates": 90,
+      "optimization_gflops": 31975.441267788
+    }
+  ],
+  "num_runs": 2,
+  "fold": 0,
+  "seed": 0,
+  "augmentation": "none",
+  "budget_flops_per_run": 31976450667090,
+  "runtime_versions": {
+    "torch": "2.12.1+cu130",
+    "monai": "1.6.0"
+  },
+  "references": {
+    "dice": {
+      "final_dice": 0.7270455338336803,
+      "completion_sha256": "dbdb6e480b376a9a73520678fb720b85d05ce682797b815e513c5a2ea7363df1",
+      "validation_sha256": "e5a411a8566a4fa4c7b54615236132a23bec7cf0ce685f1b75846ecf0611d5f8"
+    },
+    "dice_bands": {
+      "final_dice": 0.7300473170148002,
+      "completion_sha256": "fc9bec935a8dec00d5e563910ca693cfb3a6ef5f2470c1991504044ba09251ca",
+      "validation_sha256": "182ce223053a2a33f443003afd206f74ed917a0d897c06beda44e8e5bcc14122"
+    }
+  },
+  "expected_anchor_model_sha256": "5c6cd31b345e533390ff03aca1f8f5dbceacf2deb11a797f6b6fec8008f48ebc",
+  "baseline_runs_reused": true,
+  "calibration_in_cap": false,
+  "diagnostic_compute": "Separate CPU FP32 read-only probes; excluded from training cap.",
+  "rationale": "Test whether stronger bands feedback improves the endpoint after the baseline catches up. Timing already matches corrected MSD.",
+  "retention": "Node-local optimizer writes; retain verified best model and all metadata for new conditions."
+}

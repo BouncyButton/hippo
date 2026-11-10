@@ -1,0 +1,206 @@
+{
+  "status.json": {
+    "status": "waiting_for_verified_archive",
+    "active": "MSD_basic_unet16_dice_ce_f0s0",
+    "completed": 5,
+    "total": 6,
+    "runs": [
+      {
+        "id": "MSD_swinunetr_dice_f0s0",
+        "kind": "conventional",
+        "dataset": "MSD",
+        "model": "swinunetr",
+        "fold": 0,
+        "seed": 0,
+        "arm": "dice",
+        "protocol": "swinunetr_dice",
+        "final_dice": 0.45627680367179513,
+        "best_dice": 0.45627680367179513,
+        "released_bytes": 337003284
+      },
+      {
+        "id": "MSD_swinunetr_dice_ce_f0s0",
+        "kind": "conventional",
+        "dataset": "MSD",
+        "model": "swinunetr",
+        "fold": 0,
+        "seed": 0,
+        "arm": "dice",
+        "protocol": "swinunetr_dice_ce",
+        "final_dice": 0.7022862054445298,
+        "best_dice": 0.7022862054445298,
+        "released_bytes": 337003348
+      },
+      {
+        "id": "MSD_unetr_vit_b16_dice_f0s0",
+        "kind": "conventional",
+        "dataset": "MSD",
+        "model": "unetr_vit_b16",
+        "fold": 0,
+        "seed": 0,
+        "arm": "dice",
+        "protocol": "unetr_vit_b16_dice",
+        "final_dice": 0.49648948862895836,
+        "best_dice": 0.49648948862895836,
+        "released_bytes": 1853970782
+      },
+      {
+        "id": "MSD_unetr_vit_b16_dice_ce_f0s0",
+        "kind": "conventional",
+        "dataset": "MSD",
+        "model": "unetr_vit_b16",
+        "fold": 0,
+        "seed": 0,
+        "arm": "dice",
+        "protocol": "unetr_vit_b16_dice_ce",
+        "final_dice": 0.43202098018995855,
+        "best_dice": 0.45018710681975527,
+        "released_bytes": 1853995358
+      },
+      {
+        "id": "MSD_basic_unet16_dice_f0s0",
+        "kind": "conventional",
+        "dataset": "MSD",
+        "model": "basic_unet16",
+        "fold": 0,
+        "seed": 0,
+        "arm": "dice",
+        "protocol": "basic_unet16_dice",
+        "final_dice": 0.7416785879378678,
+        "best_dice": 0.7416785879378678,
+        "released_bytes": 28985360
+      }
+    ],
+    "job_id": "700338",
+    "updated_at": 1791977240.9442773,
+    "quota": {
+      "used_gib": 24.9,
+      "limit_gib": 93.13,
+      "free_gib": 68.22999999999999,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  24.90GiB/93.13GiB  183.84k/\u221e  \n\n",
+      "checked_at": 1791977240.9839861
+    }
+  },
+  "preflight.json": {
+    "status": "passed",
+    "manifest_sha256": "3d528736ee8d69a18abe5c1f07b4109362dc834993030d7f4b1954567e5c1961",
+    "checks": [
+      "All six frozen source/data/split identities",
+      "Measured loss-specific FLOP costs and admitted cap",
+      "Original Dice-only preserved exactly; difference is mean CE only",
+      "Finite backward both arms",
+      "Original AdamW and model-specific LR schedule",
+      "All six unaugmented, unconstrained, fold0 seed0 on the same 10/52 split",
+      "Shell syntax"
+    ]
+  },
+  "submission.json": {
+    "job_id": "700338",
+    "dependency": null,
+    "quota": {
+      "used_gib": 24.1,
+      "limit_gib": 93.13,
+      "free_gib": 69.03,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  24.10GiB/93.13GiB  183.64k/\u221e  \n\n",
+      "checked_at": 1791975307.4020717
+    },
+    "submitted_at": 1791975307.623597,
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--chdir=/mnt/beegfsstudents/home/3160552/msd_other_models_loss_pairs_20261014",
+      "--output=/mnt/beegfsstudents/home/3160552/msd_other_models_loss_pairs_20261014/slurm-%j.out",
+      "--error=/mnt/beegfsstudents/home/3160552/msd_other_models_loss_pairs_20261014/slurm-%j.err",
+      "/mnt/beegfsstudents/home/3160552/msd_other_models_loss_pairs_20261014/run.sbatch",
+      "/mnt/beegfsstudents/home/3160552/msd_other_models_loss_pairs_20261014"
+    ],
+    "manifest_sha256": "3d528736ee8d69a18abe5c1f07b4109362dc834993030d7f4b1954567e5c1961"
+  },
+  "runs": [
+    {
+      "id": "MSD_basic_unet16_dice_ce_f0s0",
+      "latest": {
+        "step": "563",
+        "patient_passes": "56.3",
+        "macro_hard_dice": "0.8117938473325637"
+      },
+      "complete": {
+        "updates": 563,
+        "training_dice": 0.8967679346535556
+      },
+      "validation_dice": 0.8117938473325637,
+      "initialization": "5bc2d519363bce3fb7e486e3f5be350ad59fa58e7b8cce7b593d7cc941229904"
+    },
+    {
+      "id": "MSD_basic_unet16_dice_f0s0",
+      "latest": {
+        "step": "563",
+        "patient_passes": "56.3",
+        "macro_hard_dice": "0.7416785879378678"
+      },
+      "complete": {
+        "updates": 563,
+        "training_dice": 0.7741040123855788
+      },
+      "validation_dice": 0.7416785879378678,
+      "initialization": "5bc2d519363bce3fb7e486e3f5be350ad59fa58e7b8cce7b593d7cc941229904"
+    },
+    {
+      "id": "MSD_swinunetr_dice_ce_f0s0",
+      "latest": {
+        "step": "206",
+        "patient_passes": "20.6",
+        "macro_hard_dice": "0.7022862054445298"
+      },
+      "complete": {
+        "updates": 206,
+        "training_dice": 0.7854985045453672
+      },
+      "validation_dice": 0.7022862054445298,
+      "initialization": "8d7d717c9669bfbe02e2ad48e5cb3b84cb60ca89f96623f1b14804068d7fb2a4"
+    },
+    {
+      "id": "MSD_swinunetr_dice_f0s0",
+      "latest": {
+        "step": "206",
+        "patient_passes": "20.6",
+        "macro_hard_dice": "0.45627680367179513"
+      },
+      "complete": {
+        "updates": 206,
+        "training_dice": 0.471859786697569
+      },
+      "validation_dice": 0.45627680367179513,
+      "initialization": "8d7d717c9669bfbe02e2ad48e5cb3b84cb60ca89f96623f1b14804068d7fb2a4"
+    },
+    {
+      "id": "MSD_unetr_vit_b16_dice_ce_f0s0",
+      "latest": {
+        "step": "245",
+        "patient_passes": "24.5",
+        "macro_hard_dice": "0.43202098018995855"
+      },
+      "complete": {
+        "updates": 245,
+        "training_dice": 0.5787555072676202
+      },
+      "validation_dice": 0.43202098018995855,
+      "initialization": "fbd018b46230496e47bad2cca9c91936e1c5805718603f1f39a97135b81311d0"
+    },
+    {
+      "id": "MSD_unetr_vit_b16_dice_f0s0",
+      "latest": {
+        "step": "245",
+        "patient_passes": "24.5",
+        "macro_hard_dice": "0.49648948862895836"
+      },
+      "complete": {
+        "updates": 245,
+        "training_dice": 0.5787528674148795
+      },
+      "validation_dice": 0.49648948862895836,
+      "initialization": "fbd018b46230496e47bad2cca9c91936e1c5805718603f1f39a97135b81311d0"
+    }
+  ],
+  "queue": "700339|PENDING|hippo-msd-three-pairs|0:00|(Dependency)\n700338|RUNNING|hippo-msd-three-pairs|32:34|gnode03\n"
+}

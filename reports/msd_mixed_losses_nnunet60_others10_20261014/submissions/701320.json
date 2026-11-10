@@ -1,0 +1,23 @@
+{
+  "job_id": "701320",
+  "dependency": "701319",
+  "quota": {
+    "used_gib": 25.31,
+    "limit_gib": 93.13,
+    "free_gib": 67.82,
+    "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  25.31GiB/93.13GiB  190.97k/\u221e  \n\n",
+    "checked_at": 1792011896.051007
+  },
+  "submitted_at": 1792011896.1929832,
+  "command": [
+    "sbatch",
+    "--parsable",
+    "--chdir=/mnt/beegfsstudents/home/3160552/msd_mixed_losses_nnunet60_others10_20261014",
+    "--output=/mnt/beegfsstudents/home/3160552/msd_mixed_losses_nnunet60_others10_20261014/slurm-%j.out",
+    "--error=/mnt/beegfsstudents/home/3160552/msd_mixed_losses_nnunet60_others10_20261014/slurm-%j.err",
+    "--dependency=afterany:701319",
+    "/mnt/beegfsstudents/home/3160552/msd_mixed_losses_nnunet60_others10_20261014/run.sbatch",
+    "/mnt/beegfsstudents/home/3160552/msd_mixed_losses_nnunet60_others10_20261014"
+  ],
+  "manifest_sha256": "e9cd3a60fd42a15d63fa04df28e9c952662b36f17364608464ecdc3e89cedf52"
+}

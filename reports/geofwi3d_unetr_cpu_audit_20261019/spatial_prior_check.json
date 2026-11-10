@@ -1,0 +1,39 @@
+{
+  "method": "One fixed spatial mask for every case, learned from training labels only; no image inputs, no GPU, no model training",
+  "threshold_selection": "Leave-one-training-volume-out Dice, with ties resolved toward the lower k; no validation threshold search",
+  "selected_threshold": 0.1111111111111111,
+  "selected_training_loo_dice": 0.16148313164122846,
+  "training_loo_scores": [
+    0.1544368997872117,
+    0.16148313164122846,
+    0.16038636925182775,
+    0.11699868065370726,
+    0.06732647983705442,
+    0.018389218270540193,
+    0.0007460214371318401,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "results": {
+    "majority_vote": {
+      "validation_mean_dice": 0.0,
+      "predicted_fraction": 0.0,
+      "cases_above_50": 0
+    },
+    "training_loo_selected": {
+      "validation_mean_dice": 0.16477592137693417,
+      "predicted_fraction": 0.16899730541087962,
+      "cases_above_50": 0
+    }
+  },
+  "interpretation": "Diagnostic reference only. Does not prove what spatial features UNETR learned."
+}

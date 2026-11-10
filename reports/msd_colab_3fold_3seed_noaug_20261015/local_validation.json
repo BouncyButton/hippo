@@ -1,0 +1,26 @@
+{
+  "status": "local_checks_passed_gpu_preflight_pending",
+  "bundle_manifest_sha256": "3ea970f4ce296a3988517e875bb07710888f1bd916a54b98a20779c6ad48f7ff",
+  "code_zip_sha256": "18734e8fbd261236cadeeab6139f0f7cfa90d4e01fde574c68775278b6889d45",
+  "checks": [
+    "Six bundle, notebook, no-augmentation and recovery tests passed under Python3.12",
+    "Uploaded ZIPs reconstruct a verified 504-run study",
+    "Only scope/path/initialization-provenance protocol fields differ from completed MSD pilot",
+    "All 12 initializations verified in original cluster CPU environment; four seed0 hashes match pilot",
+    "Exact toy original-trainer full-versus-resumed model, optimizer and sampling with storage hooks; five recovery snapshots and zero discarded updates",
+    "All notebook code cells and new Python modules parse"
+  ],
+  "gpu_preflight": "Required in the notebook on the actual Colab GPU before training",
+  "colab_runs_started": 0,
+  "cluster_jobs_modified": false,
+  "data_upload": "User reports the verified data ZIP uploaded to My Drive/hippo_msd_3fold_3seed/input",
+  "latest_repair": {
+    "name": "portable_exact_initialization",
+    "regression_tests": "9 passed, including correction of small numerical deviations, exact RNG preservation, rejection of other changed weights and incorrect initializer distributions",
+    "cluster_initializations": "12/12 passed with original full hashes and exact RNG; Swin seed0 also tested with injected initializer roundoff",
+    "manifest_sha256": "3b9d0c30f71873b6f834ae3b1fd989bf33e37bef7682fdda094b656daff3620b",
+    "colab_gpu_preflight": "pending on user runtime",
+    "augmentation": "none",
+    "data_zip": "unchanged; existing uploaded ZIP remains valid"
+  }
+}

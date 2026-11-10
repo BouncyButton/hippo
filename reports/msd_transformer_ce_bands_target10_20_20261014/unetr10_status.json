@@ -1,0 +1,3738 @@
+{
+  "checked_at": 1792001722.6315885,
+  "status.json": {
+    "status": "waiting_for_verified_archive",
+    "active": "MSD_unetr_vit_b16_ce_dice_bands_target10_f0s0",
+    "completed": 1,
+    "total": 4,
+    "runs": [
+      {
+        "id": "MSD_swinunetr_ce_dice_bands_target10_f0s0",
+        "kind": "conventional",
+        "dataset": "MSD",
+        "model": "swinunetr",
+        "fold": 0,
+        "seed": 0,
+        "arm": "dice_bands",
+        "target": 0.1,
+        "protocol": "swinunetr_target10",
+        "final_dice": 0.7088304243326318,
+        "best_dice": 0.7088304243326318,
+        "released_bytes": 337003604
+      }
+    ],
+    "job_id": "701092",
+    "updated_at": 1792001695.5179577,
+    "quota": {
+      "used_gib": 28.0,
+      "limit_gib": 93.13,
+      "free_gib": 65.13,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  28.00GiB/93.13GiB  189.72k/\u221e  \n\n",
+      "checked_at": 1792001695.5668
+    }
+  },
+  "completion.json": {
+    "status": "complete",
+    "model": "unet",
+    "objective": "dice_bands",
+    "fold": 0,
+    "seed": 0,
+    "updates": 245,
+    "training_attempts_charged": 245,
+    "discarded_attempts": 0,
+    "calibration_attempts": 1,
+    "calibration_flops": 432554437874,
+    "consumed_training_flops": 31880433826940,
+    "consumed_total_flops": 32312988264814,
+    "unused_flops": 96016840150,
+    "budget_flops": 31976450667090,
+    "budget_scope": "optimization_only",
+    "selected_step": 245,
+    "best_validation_hard_dice": 0.45545547823163185,
+    "final_training_hard_dice": 0.6208279770987959,
+    "seconds_this_invocation": 353.71786137804156,
+    "config_sha256": "51708a908e1eddbd0090e22138c0cb900e1d094afb8282e050374bd150b7b533",
+    "checkpoint_best_sha256": "d21f1134a9882c94fe5eb9b71a1ec8e195386e2a6fa97807e5d19ed586bd59dc",
+    "checkpoint_latest_sha256": "9776905470dbbb66e011635508371469e1a5651c7447c220075bd901a085a0e5",
+    "metrics_sha256": "743524d311189625a69a13c115a8488df978419494595a50f6bd37da7e26c340",
+    "budget_ledger_sha256": "a9eb8ef9f0a11919884c411b60c18dd0b6e8c7fa31ff395c409b05c89ec438ed",
+    "validation_best_sha256": "5d1f0a1430d155a2e6e2518f37896d0fa860c0b17ca7008fc34921d9f300fa5f",
+    "calibration_sha256": "ccf1119ceb2d0aac5bf6d1f82f6cda19a65457a5e51d2fd87a78f304320cf653"
+  },
+  "validation_latest.json": {
+    "summary": {
+      "macro_hard_dice": 0.45545547823163185,
+      "anterior_hard_dice": 0.25241359059387275,
+      "anterior_soft_dice": 0.017989323367006503,
+      "posterior_hard_dice": 0.6584973658693911,
+      "posterior_soft_dice": 0.06864340495891295,
+      "macro_soft_dice": 0.04331636416295973
+    },
+    "cases": [
+      {
+        "confusion": [
+          [
+            257989,
+            124,
+            553
+          ],
+          [
+            1570,
+            491,
+            74
+          ],
+          [
+            99,
+            3,
+            1241
+          ]
+        ],
+        "per_class": {
+          "background": {
+            "tp": 257989,
+            "fp": 1669,
+            "fn": 677,
+            "dice": 0.9954738734845386
+          },
+          "anterior": {
+            "tp": 491,
+            "fp": 127,
+            "fn": 1644,
+            "dice": 0.35670177987649837
+          },
+          "posterior": {
+            "tp": 1241,
+            "fp": 627,
+            "fn": 102,
+            "dice": 0.7729679227654936
+          }
+        },
+        "macro_hard_dice": 0.564834851320996,
+        "foreground_fp": 677,
+        "foreground_fn": 1669,
+        "ap_swaps": {
+          "anterior_to_posterior": 74,
+          "posterior_to_anterior": 3
+        },
+        "case_name": "hippocampus_017",
+        "anterior_hard_dice": 0.35670177987649837,
+        "anterior_soft_dice": 0.02194487303495407,
+        "posterior_hard_dice": 0.7729679227654936,
+        "posterior_soft_dice": 0.06472410261631012,
+        "macro_soft_dice": 0.043334487825632095
+      },
+      {
+        "confusion": [
+          [
+            253258,
+            3841,
+            1689
+          ],
+          [
+            1457,
+            194,
+            237
+          ],
+          [
+            248,
+            1,
+            1219
+          ]
+        ],
+        "per_class": {
+          "background": {
+            "tp": 253258,
+            "fp": 1705,
+            "fn": 5530,
+            "dice": 0.9859173023507497
+          },
+          "anterior": {
+            "tp": 194,
+            "fp": 3842,
+            "fn": 1694,
+            "dice": 0.06549628629304524
+          },
+          "posterior": {
+            "tp": 1219,
+            "fp": 1926,
+            "fn": 249,
+            "dice": 0.5285063949707349
+          }
+        },
+        "macro_hard_dice": 0.2970013406318901,
+        "foreground_fp": 5530,
+        "foreground_fn": 1705,
+        "ap_swaps": {
+          "anterior_to_posterior": 237,
+          "posterior_to_anterior": 1
+        },
+        "case_name": "hippocampus_019",
+        "anterior_hard_dice": 0.06549628629304524,
+        "anterior_soft_dice": 0.018664119765162468,
+        "posterior_hard_dice": 0.5285063949707349,
+        "posterior_soft_dice": 0.06277032196521759,
+        "macro_soft_dice": 0.04071722086519003
+      },
+      {
+        "confusion": [
+          [
+            256868,
+            899,
+            954
+          ],
+          [
+            1455,
+            165,
+            235
+          ],
+          [
+            583,
+            0,
+            985
+          ]
+        ],
+        "per_class": {
+          "background": {
+            "tp": 256868,
+            "fp": 2038,
+            "fn": 1853,
+            "dice": 0.992483004170957
+          },
+          "anterior": {
+            "tp": 165,
+            "fp": 899,
+            "fn": 1690,
+            "dice": 0.1130524152106886
+          },
+          "posterior": {
+            "tp": 985,
+            "fp": 1189,
+            "fn": 583,
+            "dice": 0.5264564404061999
+          }
+        },
+        "macro_hard_dice": 0.3197544278084442,
+        "foreground_fp": 1853,
+        "foreground_fn": 2038,
+        "ap_swaps": {
+          "anterior_to_posterior": 235,
+          "posterior_to_anterior": 0
+        },
+        "case_name": "hippocampus_033",
+        "anterior_hard_dice": 0.1130524152106886,
+        "anterior_soft_dice": 0.018412265926599503,
+        "posterior_hard_dice": 0.5264564404061999,
+        "posterior_soft_dice": 0.05246840417385101,
+        "macro_soft_dice": 0.03544033505022526
+      },
+      {
+        "confusion": [
+          [
+            257431,
+            735,
+            528
+          ],
+          [
+            1548,
+            188,
+            131
+          ],
+          [
+            574,
+            0,
+            1009
+          ]
+        ],
+        "per_class": {
+          "background": {
+            "tp": 257431,
+            "fp": 2122,
+            "fn": 1263,
+            "dice": 0.9934683654705189
+          },
+          "anterior": {
+            "tp": 188,
+            "fp": 735,
+            "fn": 1679,
+            "dice": 0.13476702508960572
+          },
+          "posterior": {
+            "tp": 1009,
+            "fp": 659,
+            "fn": 574,
+            "dice": 0.6207320824361735
+          }
+        },
+        "macro_hard_dice": 0.3777495537628896,
+        "foreground_fp": 1263,
+        "foreground_fn": 2122,
+        "ap_swaps": {
+          "anterior_to_posterior": 131,
+          "posterior_to_anterior": 0
+        },
+        "case_name": "hippocampus_035",
+        "anterior_hard_dice": 0.13476702508960572,
+        "anterior_soft_dice": 0.019071636721491814,
+        "posterior_hard_dice": 0.6207320824361735,
+        "posterior_soft_dice": 0.05391063541173935,
+        "macro_soft_dice": 0.03649113606661558
+      },
+      {
+        "confusion": [
+          [
+            258581,
+            51,
+            317
+          ],
+          [
+            647,
+            613,
+            318
+          ],
+          [
+            181,
+            0,
+            1436
+          ]
+        ],
+        "per_class": {
+          "background": {
+            "tp": 258581,
+            "fp": 828,
+            "fn": 368,
+            "dice": 0.9976927143016988
+          },
+          "anterior": {
+            "tp": 613,
+            "fp": 51,
+            "fn": 965,
+            "dice": 0.5468331846565566
+          },
+          "posterior": {
+            "tp": 1436,
+            "fp": 635,
+            "fn": 181,
+            "dice": 0.7787418655097614
+          }
+        },
+        "macro_hard_dice": 0.662787525083159,
+        "foreground_fp": 368,
+        "foreground_fn": 828,
+        "ap_swaps": {
+          "anterior_to_posterior": 318,
+          "posterior_to_anterior": 0
+        },
+        "case_name": "hippocampus_037",
+        "anterior_hard_dice": 0.5468331846565566,
+        "anterior_soft_dice": 0.01657027378678322,
+        "posterior_hard_dice": 0.7787418655097614,
+        "posterior_soft_dice": 0.07384689897298813,
+        "macro_soft_dice": 0.045208586379885674
+      },
+      {
+        "confusion": [
+          [
+            257749,
+            33,
+            634
+          ],
+          [
+            1083,
+            614,
+            211
+          ],
+          [
+            94,
+            0,
+            1726
+          ]
+        ],
+        "per_class": {
+          "background": {
+            "tp": 257749,
+            "fp": 1177,
+            "fn": 667,
+            "dice": 0.9964356267227482
+          },
+          "anterior": {
+            "tp": 614,
+            "fp": 33,
+            "fn": 1294,
+            "dice": 0.4806262230919765
+          },
+          "posterior": {
+            "tp": 1726,
+            "fp": 845,
+            "fn": 94,
+            "dice": 0.7861534957868367
+          }
+        },
+        "macro_hard_dice": 0.6333898594394066,
+        "foreground_fp": 667,
+        "foreground_fn": 1177,
+        "ap_swaps": {
+          "anterior_to_posterior": 211,
+          "posterior_to_anterior": 0
+        },
+        "case_name": "hippocampus_049",
+        "anterior_hard_dice": 0.4806262230919765,
+        "anterior_soft_dice": 0.02079278789460659,
+        "posterior_hard_dice": 0.7861534957868367,
+        "posterior_soft_dice": 0.08777952194213867,
+        "macro_soft_dice": 0.05428615491837263
+      },
+      {
+        "confusion": [
+          [
+            255252,
+            2518,
+            1013
+          ],
+          [
+            825,
+            602,
+            420
+          ],
+          [
+            210,
+            0,
+            1304
+          ]
+        ],
+        "per_class": {
+          "background": {
+            "tp": 255252,
+            "fp": 1035,
+            "fn": 3531,
+            "dice": 0.9911351855087658
+          },
+          "anterior": {
+            "tp": 602,
+            "fp": 2518,
+            "fn": 1245,
+            "dice": 0.2423998389369841
+          },
+          "posterior": {
+            "tp": 1304,
+            "fp": 1433,
+            "fn": 210,
+            "dice": 0.6135027052458245
+          }
+        },
+        "macro_hard_dice": 0.4279512720914043,
+        "foreground_fp": 3531,
+        "foreground_fn": 1035,
+        "ap_swaps": {
+          "anterior_to_posterior": 420,
+          "posterior_to_anterior": 0
+        },
+        "case_name": "hippocampus_052",
+        "anterior_hard_dice": 0.2423998389369841,
+        "anterior_soft_dice": 0.018861841410398483,
+        "posterior_hard_dice": 0.6135027052458245,
+        "posterior_soft_dice": 0.06668851524591446,
+        "macro_soft_dice": 0.04277517832815647
+      },
+      {
+        "confusion": [
+          [
+            254977,
+            2667,
+            850
+          ],
+          [
+            692,
+            717,
+            321
+          ],
+          [
+            302,
+            1,
+            1617
+          ]
+        ],
+        "per_class": {
+          "background": {
+            "tp": 254977,
+            "fp": 994,
+            "fn": 3517,
+            "dice": 0.9912316678491249
+          },
+          "anterior": {
+            "tp": 717,
+            "fp": 2668,
+            "fn": 1013,
+            "dice": 0.28035190615835776
+          },
+          "posterior": {
+            "tp": 1617,
+            "fp": 1171,
+            "fn": 303,
+            "dice": 0.6869158878504673
+          }
+        },
+        "macro_hard_dice": 0.4836338970044125,
+        "foreground_fp": 3517,
+        "foreground_fn": 994,
+        "ap_swaps": {
+          "anterior_to_posterior": 321,
+          "posterior_to_anterior": 1
+        },
+        "case_name": "hippocampus_065",
+        "anterior_hard_dice": 0.28035190615835776,
+        "anterior_soft_dice": 0.01925322785973549,
+        "posterior_hard_dice": 0.6869158878504673,
+        "posterior_soft_dice": 0.08480634540319443,
+        "macro_soft_dice": 0.05202978663146496
+      },
+      {
+        "confusion": [
+          [
+            257866,
+            466,
+            441
+          ],
+          [
+            1181,
+            331,
+            138
+          ],
+          [
+            181,
+            0,
+            1540
+          ]
+        ],
+        "per_class": {
+          "background": {
+            "tp": 257866,
+            "fp": 1362,
+            "fn": 907,
+            "dice": 0.9956196995758696
+          },
+          "anterior": {
+            "tp": 331,
+            "fp": 466,
+            "fn": 1319,
+            "dice": 0.2705353494074377
+          },
+          "posterior": {
+            "tp": 1540,
+            "fp": 579,
+            "fn": 181,
+            "dice": 0.8020833333333334
+          }
+        },
+        "macro_hard_dice": 0.5363093413703856,
+        "foreground_fp": 907,
+        "foreground_fn": 1362,
+        "ap_swaps": {
+          "anterior_to_posterior": 138,
+          "posterior_to_anterior": 0
+        },
+        "case_name": "hippocampus_083",
+        "anterior_hard_dice": 0.2705353494074377,
+        "anterior_soft_dice": 0.016994716599583626,
+        "posterior_hard_dice": 0.8020833333333334,
+        "posterior_soft_dice": 0.07684587687253952,
+        "macro_soft_dice": 0.04692029673606157
+      },
+      {
+        "confusion": [
+          [
+            254471,
+            2965,
+            830
+          ],
+          [
+            1157,
+            774,
+            179
+          ],
+          [
+            223,
+            9,
+            1536
+          ]
+        ],
+        "per_class": {
+          "background": {
+            "tp": 254471,
+            "fp": 1380,
+            "fn": 3795,
+            "dice": 0.9899341978576861
+          },
+          "anterior": {
+            "tp": 774,
+            "fp": 2974,
+            "fn": 1336,
+            "dice": 0.26425401160805734
+          },
+          "posterior": {
+            "tp": 1536,
+            "fp": 1009,
+            "fn": 232,
+            "dice": 0.7122652446093206
+          }
+        },
+        "macro_hard_dice": 0.48825962810868895,
+        "foreground_fp": 3795,
+        "foreground_fn": 1380,
+        "ap_swaps": {
+          "anterior_to_posterior": 179,
+          "posterior_to_anterior": 9
+        },
+        "case_name": "hippocampus_088",
+        "anterior_hard_dice": 0.26425401160805734,
+        "anterior_soft_dice": 0.022784816101193428,
+        "posterior_hard_dice": 0.7122652446093206,
+        "posterior_soft_dice": 0.07808107137680054,
+        "macro_soft_dice": 0.05043294373899698
+      },
+      {
+        "confusion": [
+          [
+            254133,
+            2881,
+            1129
+          ],
+          [
+            837,
+            767,
+            440
+          ],
+          [
+            454,
+            0,
+            1503
+          ]
+        ],
+        "per_class": {
+          "background": {
+            "tp": 254133,
+            "fp": 1291,
+            "fn": 4010,
+            "dice": 0.9896780751099662
+          },
+          "anterior": {
+            "tp": 767,
+            "fp": 2881,
+            "fn": 1277,
+            "dice": 0.26950105411103303
+          },
+          "posterior": {
+            "tp": 1503,
+            "fp": 1569,
+            "fn": 454,
+            "dice": 0.59773314774309
+          }
+        },
+        "macro_hard_dice": 0.4336171009270615,
+        "foreground_fp": 4010,
+        "foreground_fn": 1291,
+        "ap_swaps": {
+          "anterior_to_posterior": 440,
+          "posterior_to_anterior": 0
+        },
+        "case_name": "hippocampus_090",
+        "anterior_hard_dice": 0.26950105411103303,
+        "anterior_soft_dice": 0.021363819018006325,
+        "posterior_hard_dice": 0.59773314774309,
+        "posterior_soft_dice": 0.08003582060337067,
+        "macro_soft_dice": 0.050699819810688496
+      },
+      {
+        "confusion": [
+          [
+            257171,
+            1392,
+            439
+          ],
+          [
+            839,
+            487,
+            162
+          ],
+          [
+            209,
+            12,
+            1433
+          ]
+        ],
+        "per_class": {
+          "background": {
+            "tp": 257171,
+            "fp": 1048,
+            "fn": 1831,
+            "dice": 0.9944337140216658
+          },
+          "anterior": {
+            "tp": 487,
+            "fp": 1404,
+            "fn": 1001,
+            "dice": 0.28825096182302457
+          },
+          "posterior": {
+            "tp": 1433,
+            "fp": 601,
+            "fn": 221,
+            "dice": 0.777114967462039
+          }
+        },
+        "macro_hard_dice": 0.5326829646425317,
+        "foreground_fp": 1831,
+        "foreground_fn": 1048,
+        "ap_swaps": {
+          "anterior_to_posterior": 162,
+          "posterior_to_anterior": 12
+        },
+        "case_name": "hippocampus_092",
+        "anterior_hard_dice": 0.28825096182302457,
+        "anterior_soft_dice": 0.0161578506231308,
+        "posterior_hard_dice": 0.777114967462039,
+        "posterior_soft_dice": 0.07101203501224518,
+        "macro_soft_dice": 0.04358494281768799
+      },
+      {
+        "confusion": [
+          [
+            256001,
+            1682,
+            676
+          ],
+          [
+            1792,
+            60,
+            339
+          ],
+          [
+            116,
+            0,
+            1478
+          ]
+        ],
+        "per_class": {
+          "background": {
+            "tp": 256001,
+            "fp": 1908,
+            "fn": 2358,
+            "dice": 0.991736849853177
+          },
+          "anterior": {
+            "tp": 60,
+            "fp": 1682,
+            "fn": 2131,
+            "dice": 0.03051106025934401
+          },
+          "posterior": {
+            "tp": 1478,
+            "fp": 1015,
+            "fn": 116,
+            "dice": 0.723268901394666
+          }
+        },
+        "macro_hard_dice": 0.37688998082700503,
+        "foreground_fp": 2358,
+        "foreground_fn": 1908,
+        "ap_swaps": {
+          "anterior_to_posterior": 339,
+          "posterior_to_anterior": 0
+        },
+        "case_name": "hippocampus_095",
+        "anterior_hard_dice": 0.03051106025934401,
+        "anterior_soft_dice": 0.019741827622056007,
+        "posterior_hard_dice": 0.723268901394666,
+        "posterior_soft_dice": 0.07494236528873444,
+        "macro_soft_dice": 0.04734209645539522
+      },
+      {
+        "confusion": [
+          [
+            255890,
+            1820,
+            488
+          ],
+          [
+            1158,
+            598,
+            155
+          ],
+          [
+            315,
+            9,
+            1711
+          ]
+        ],
+        "per_class": {
+          "background": {
+            "tp": 255890,
+            "fp": 1473,
+            "fn": 2308,
+            "dice": 0.9926662412401248
+          },
+          "anterior": {
+            "tp": 598,
+            "fp": 1829,
+            "fn": 1313,
+            "dice": 0.2757030889810973
+          },
+          "posterior": {
+            "tp": 1711,
+            "fp": 643,
+            "fn": 324,
+            "dice": 0.7796764638869902
+          }
+        },
+        "macro_hard_dice": 0.5276897764340438,
+        "foreground_fp": 2308,
+        "foreground_fn": 1473,
+        "ap_swaps": {
+          "anterior_to_posterior": 155,
+          "posterior_to_anterior": 9
+        },
+        "case_name": "hippocampus_107",
+        "anterior_hard_dice": 0.2757030889810973,
+        "anterior_soft_dice": 0.020314959809184074,
+        "posterior_hard_dice": 0.7796764638869902,
+        "posterior_soft_dice": 0.0856587290763855,
+        "macro_soft_dice": 0.052986844442784786
+      },
+      {
+        "confusion": [
+          [
+            256340,
+            1223,
+            641
+          ],
+          [
+            1191,
+            665,
+            203
+          ],
+          [
+            182,
+            0,
+            1699
+          ]
+        ],
+        "per_class": {
+          "background": {
+            "tp": 256340,
+            "fp": 1373,
+            "fn": 1864,
+            "dice": 0.9937257349534906
+          },
+          "anterior": {
+            "tp": 665,
+            "fp": 1223,
+            "fn": 1394,
+            "dice": 0.33696478337978214
+          },
+          "posterior": {
+            "tp": 1699,
+            "fp": 844,
+            "fn": 182,
+            "dice": 0.7680831826401446
+          }
+        },
+        "macro_hard_dice": 0.5525239830099634,
+        "foreground_fp": 1864,
+        "foreground_fn": 1373,
+        "ap_swaps": {
+          "anterior_to_posterior": 203,
+          "posterior_to_anterior": 0
+        },
+        "case_name": "hippocampus_108",
+        "anterior_hard_dice": 0.33696478337978214,
+        "anterior_soft_dice": 0.022161593660712242,
+        "posterior_hard_dice": 0.7680831826401446,
+        "posterior_soft_dice": 0.0868527814745903,
+        "macro_soft_dice": 0.05450718756765127
+      },
+      {
+        "confusion": [
+          [
+            256570,
+            1460,
+            885
+          ],
+          [
+            975,
+            434,
+            303
+          ],
+          [
+            19,
+            0,
+            1498
+          ]
+        ],
+        "per_class": {
+          "background": {
+            "tp": 256570,
+            "fp": 994,
+            "fn": 2345,
+            "dice": 0.9935350711258347
+          },
+          "anterior": {
+            "tp": 434,
+            "fp": 1460,
+            "fn": 1278,
+            "dice": 0.24070992789794787
+          },
+          "posterior": {
+            "tp": 1498,
+            "fp": 1188,
+            "fn": 19,
+            "dice": 0.7128241732096122
+          }
+        },
+        "macro_hard_dice": 0.47676705055378005,
+        "foreground_fp": 2345,
+        "foreground_fn": 994,
+        "ap_swaps": {
+          "anterior_to_posterior": 303,
+          "posterior_to_anterior": 0
+        },
+        "case_name": "hippocampus_123",
+        "anterior_hard_dice": 0.24070992789794787,
+        "anterior_soft_dice": 0.017550524324178696,
+        "posterior_hard_dice": 0.7128241732096122,
+        "posterior_soft_dice": 0.07938925176858902,
+        "macro_soft_dice": 0.04846988804638386
+      },
+      {
+        "confusion": [
+          [
+            248290,
+            8856,
+            2272
+          ],
+          [
+            993,
+            299,
+            365
+          ],
+          [
+            290,
+            0,
+            779
+          ]
+        ],
+        "per_class": {
+          "background": {
+            "tp": 248290,
+            "fp": 1283,
+            "fn": 11128,
+            "dice": 0.9756164647312034
+          },
+          "anterior": {
+            "tp": 299,
+            "fp": 8856,
+            "fn": 1358,
+            "dice": 0.05530891601923788
+          },
+          "posterior": {
+            "tp": 779,
+            "fp": 2637,
+            "fn": 290,
+            "dice": 0.34738015607580824
+          }
+        },
+        "macro_hard_dice": 0.20134453604752306,
+        "foreground_fp": 11128,
+        "foreground_fn": 1283,
+        "ap_swaps": {
+          "anterior_to_posterior": 365,
+          "posterior_to_anterior": 0
+        },
+        "case_name": "hippocampus_125",
+        "anterior_hard_dice": 0.05530891601923788,
+        "anterior_soft_dice": 0.015216745436191559,
+        "posterior_hard_dice": 0.34738015607580824,
+        "posterior_soft_dice": 0.03896668180823326,
+        "macro_soft_dice": 0.02709171362221241
+      },
+      {
+        "confusion": [
+          [
+            258153,
+            41,
+            598
+          ],
+          [
+            521,
+            580,
+            343
+          ],
+          [
+            172,
+            0,
+            1736
+          ]
+        ],
+        "per_class": {
+          "background": {
+            "tp": 258153,
+            "fp": 693,
+            "fn": 639,
+            "dice": 0.9974267731503483
+          },
+          "anterior": {
+            "tp": 580,
+            "fp": 41,
+            "fn": 864,
+            "dice": 0.5617433414043583
+          },
+          "posterior": {
+            "tp": 1736,
+            "fp": 941,
+            "fn": 172,
+            "dice": 0.7572519083969466
+          }
+        },
+        "macro_hard_dice": 0.6594976249006524,
+        "foreground_fp": 639,
+        "foreground_fn": 693,
+        "ap_swaps": {
+          "anterior_to_posterior": 343,
+          "posterior_to_anterior": 0
+        },
+        "case_name": "hippocampus_157",
+        "anterior_hard_dice": 0.5617433414043583,
+        "anterior_soft_dice": 0.015732457861304283,
+        "posterior_hard_dice": 0.7572519083969466,
+        "posterior_soft_dice": 0.08941373974084854,
+        "macro_soft_dice": 0.05257309880107641
+      },
+      {
+        "confusion": [
+          [
+            240111,
+            12729,
+            5435
+          ],
+          [
+            1461,
+            232,
+            7
+          ],
+          [
+            678,
+            130,
+            1361
+          ]
+        ],
+        "per_class": {
+          "background": {
+            "tp": 240111,
+            "fp": 2139,
+            "fn": 18164,
+            "dice": 0.9594365915788422
+          },
+          "anterior": {
+            "tp": 232,
+            "fp": 12859,
+            "fn": 1468,
+            "dice": 0.03137042796295044
+          },
+          "posterior": {
+            "tp": 1361,
+            "fp": 5442,
+            "fn": 808,
+            "dice": 0.3033883192153366
+          }
+        },
+        "macro_hard_dice": 0.1673793735891435,
+        "foreground_fp": 18164,
+        "foreground_fn": 2139,
+        "ap_swaps": {
+          "anterior_to_posterior": 7,
+          "posterior_to_anterior": 130
+        },
+        "case_name": "hippocampus_164",
+        "anterior_hard_dice": 0.03137042796295044,
+        "anterior_soft_dice": 0.01647120900452137,
+        "posterior_hard_dice": 0.3033883192153366,
+        "posterior_soft_dice": 0.06611578166484833,
+        "macro_soft_dice": 0.04129349533468485
+      },
+      {
+        "confusion": [
+          [
+            254514,
+            3781,
+            990
+          ],
+          [
+            954,
+            112,
+            297
+          ],
+          [
+            296,
+            0,
+            1200
+          ]
+        ],
+        "per_class": {
+          "background": {
+            "tp": 254514,
+            "fp": 1250,
+            "fn": 4771,
+            "dice": 0.9883098501307642
+          },
+          "anterior": {
+            "tp": 112,
+            "fp": 3781,
+            "fn": 1251,
+            "dice": 0.0426179604261796
+          },
+          "posterior": {
+            "tp": 1200,
+            "fp": 1287,
+            "fn": 296,
+            "dice": 0.6025608837559628
+          }
+        },
+        "macro_hard_dice": 0.3225894220910712,
+        "foreground_fp": 4771,
+        "foreground_fn": 1250,
+        "ap_swaps": {
+          "anterior_to_posterior": 297,
+          "posterior_to_anterior": 0
+        },
+        "case_name": "hippocampus_169",
+        "anterior_hard_dice": 0.0426179604261796,
+        "anterior_soft_dice": 0.012786935083568096,
+        "posterior_hard_dice": 0.6025608837559628,
+        "posterior_soft_dice": 0.06149250268936157,
+        "macro_soft_dice": 0.037139718886464834
+      },
+      {
+        "confusion": [
+          [
+            257961,
+            833,
+            611
+          ],
+          [
+            757,
+            653,
+            165
+          ],
+          [
+            57,
+            1,
+            1106
+          ]
+        ],
+        "per_class": {
+          "background": {
+            "tp": 257961,
+            "fp": 814,
+            "fn": 1444,
+            "dice": 0.9956424408506697
+          },
+          "anterior": {
+            "tp": 653,
+            "fp": 834,
+            "fn": 922,
+            "dice": 0.42651861528412804
+          },
+          "posterior": {
+            "tp": 1106,
+            "fp": 776,
+            "fn": 58,
+            "dice": 0.7261982928430729
+          }
+        },
+        "macro_hard_dice": 0.5763584540636004,
+        "foreground_fp": 1444,
+        "foreground_fn": 814,
+        "ap_swaps": {
+          "anterior_to_posterior": 165,
+          "posterior_to_anterior": 1
+        },
+        "case_name": "hippocampus_175",
+        "anterior_hard_dice": 0.42651861528412804,
+        "anterior_soft_dice": 0.017237069085240364,
+        "posterior_hard_dice": 0.7261982928430729,
+        "posterior_soft_dice": 0.057185202836990356,
+        "macro_soft_dice": 0.03721113596111536
+      },
+      {
+        "confusion": [
+          [
+            258264,
+            16,
+            751
+          ],
+          [
+            1362,
+            252,
+            227
+          ],
+          [
+            55,
+            0,
+            1217
+          ]
+        ],
+        "per_class": {
+          "background": {
+            "tp": 258264,
+            "fp": 1417,
+            "fn": 767,
+            "dice": 0.9957895710914727
+          },
+          "anterior": {
+            "tp": 252,
+            "fp": 16,
+            "fn": 1589,
+            "dice": 0.23897581792318634
+          },
+          "posterior": {
+            "tp": 1217,
+            "fp": 978,
+            "fn": 55,
+            "dice": 0.7020478800115374
+          }
+        },
+        "macro_hard_dice": 0.47051184896736187,
+        "foreground_fp": 767,
+        "foreground_fn": 1417,
+        "ap_swaps": {
+          "anterior_to_posterior": 227,
+          "posterior_to_anterior": 0
+        },
+        "case_name": "hippocampus_185",
+        "anterior_hard_dice": 0.23897581792318634,
+        "anterior_soft_dice": 0.018811263144016266,
+        "posterior_hard_dice": 0.7020478800115374,
+        "posterior_soft_dice": 0.06390685588121414,
+        "macro_soft_dice": 0.041359059512615204
+      },
+      {
+        "confusion": [
+          [
+            257677,
+            545,
+            613
+          ],
+          [
+            1066,
+            473,
+            126
+          ],
+          [
+            283,
+            12,
+            1349
+          ]
+        ],
+        "per_class": {
+          "background": {
+            "tp": 257677,
+            "fp": 1349,
+            "fn": 1158,
+            "dice": 0.9951589326093295
+          },
+          "anterior": {
+            "tp": 473,
+            "fp": 557,
+            "fn": 1192,
+            "dice": 0.3510204081632653
+          },
+          "posterior": {
+            "tp": 1349,
+            "fp": 739,
+            "fn": 295,
+            "dice": 0.7229367631296891
+          }
+        },
+        "macro_hard_dice": 0.5369785856464773,
+        "foreground_fp": 1158,
+        "foreground_fn": 1349,
+        "ap_swaps": {
+          "anterior_to_posterior": 126,
+          "posterior_to_anterior": 12
+        },
+        "case_name": "hippocampus_190",
+        "anterior_hard_dice": 0.3510204081632653,
+        "anterior_soft_dice": 0.017890634015202522,
+        "posterior_hard_dice": 0.7229367631296891,
+        "posterior_soft_dice": 0.0671161636710167,
+        "macro_soft_dice": 0.04250339884310961
+      },
+      {
+        "confusion": [
+          [
+            258663,
+            86,
+            501
+          ],
+          [
+            928,
+            363,
+            70
+          ],
+          [
+            143,
+            3,
+            1387
+          ]
+        ],
+        "per_class": {
+          "background": {
+            "tp": 258663,
+            "fp": 1071,
+            "fn": 587,
+            "dice": 0.996805296502397
+          },
+          "anterior": {
+            "tp": 363,
+            "fp": 89,
+            "fn": 998,
+            "dice": 0.40044125758411475
+          },
+          "posterior": {
+            "tp": 1387,
+            "fp": 571,
+            "fn": 146,
+            "dice": 0.7946147235749069
+          }
+        },
+        "macro_hard_dice": 0.5975279905795108,
+        "foreground_fp": 587,
+        "foreground_fn": 1071,
+        "ap_swaps": {
+          "anterior_to_posterior": 70,
+          "posterior_to_anterior": 3
+        },
+        "case_name": "hippocampus_194",
+        "anterior_hard_dice": 0.40044125758411475,
+        "anterior_soft_dice": 0.0144511042162776,
+        "posterior_hard_dice": 0.7946147235749069,
+        "posterior_soft_dice": 0.07077210396528244,
+        "macro_soft_dice": 0.04261160409078002
+      },
+      {
+        "confusion": [
+          [
+            256269,
+            1906,
+            1096
+          ],
+          [
+            699,
+            645,
+            298
+          ],
+          [
+            22,
+            2,
+            1207
+          ]
+        ],
+        "per_class": {
+          "background": {
+            "tp": 256269,
+            "fp": 721,
+            "fn": 3002,
+            "dice": 0.9927885313823822
+          },
+          "anterior": {
+            "tp": 645,
+            "fp": 1908,
+            "fn": 997,
+            "dice": 0.3075089392133492
+          },
+          "posterior": {
+            "tp": 1207,
+            "fp": 1394,
+            "fn": 24,
+            "dice": 0.6299582463465553
+          }
+        },
+        "macro_hard_dice": 0.46873359277995225,
+        "foreground_fp": 3002,
+        "foreground_fn": 721,
+        "ap_swaps": {
+          "anterior_to_posterior": 298,
+          "posterior_to_anterior": 2
+        },
+        "case_name": "hippocampus_204",
+        "anterior_hard_dice": 0.3075089392133492,
+        "anterior_soft_dice": 0.017427148297429085,
+        "posterior_hard_dice": 0.6299582463465553,
+        "posterior_soft_dice": 0.06538126617670059,
+        "macro_soft_dice": 0.04140420723706484
+      },
+      {
+        "confusion": [
+          [
+            258387,
+            396,
+            657
+          ],
+          [
+            953,
+            279,
+            82
+          ],
+          [
+            274,
+            2,
+            1114
+          ]
+        ],
+        "per_class": {
+          "background": {
+            "tp": 258387,
+            "fp": 1227,
+            "fn": 1053,
+            "dice": 0.9956073934503924
+          },
+          "anterior": {
+            "tp": 279,
+            "fp": 398,
+            "fn": 1035,
+            "dice": 0.2802611752887996
+          },
+          "posterior": {
+            "tp": 1114,
+            "fp": 739,
+            "fn": 276,
+            "dice": 0.687018193031144
+          }
+        },
+        "macro_hard_dice": 0.4836396841599718,
+        "foreground_fp": 1053,
+        "foreground_fn": 1227,
+        "ap_swaps": {
+          "anterior_to_posterior": 82,
+          "posterior_to_anterior": 2
+        },
+        "case_name": "hippocampus_205",
+        "anterior_hard_dice": 0.2802611752887996,
+        "anterior_soft_dice": 0.01381315104663372,
+        "posterior_hard_dice": 0.687018193031144,
+        "posterior_soft_dice": 0.05396630987524986,
+        "macro_soft_dice": 0.03388973046094179
+      },
+      {
+        "confusion": [
+          [
+            255694,
+            2138,
+            1317
+          ],
+          [
+            698,
+            643,
+            300
+          ],
+          [
+            90,
+            0,
+            1264
+          ]
+        ],
+        "per_class": {
+          "background": {
+            "tp": 255694,
+            "fp": 788,
+            "fn": 3455,
+            "dice": 0.9917712472679105
+          },
+          "anterior": {
+            "tp": 643,
+            "fp": 2138,
+            "fn": 998,
+            "dice": 0.2908186341022162
+          },
+          "posterior": {
+            "tp": 1264,
+            "fp": 1617,
+            "fn": 90,
+            "dice": 0.5969303423848878
+          }
+        },
+        "macro_hard_dice": 0.443874488243552,
+        "foreground_fp": 3455,
+        "foreground_fn": 788,
+        "ap_swaps": {
+          "anterior_to_posterior": 300,
+          "posterior_to_anterior": 0
+        },
+        "case_name": "hippocampus_210",
+        "anterior_hard_dice": 0.2908186341022162,
+        "anterior_soft_dice": 0.017438575625419617,
+        "posterior_hard_dice": 0.5969303423848878,
+        "posterior_soft_dice": 0.06556976586580276,
+        "macro_soft_dice": 0.04150417074561119
+      },
+      {
+        "confusion": [
+          [
+            254372,
+            3927,
+            743
+          ],
+          [
+            1323,
+            439,
+            258
+          ],
+          [
+            109,
+            0,
+            973
+          ]
+        ],
+        "per_class": {
+          "background": {
+            "tp": 254372,
+            "fp": 1432,
+            "fn": 4670,
+            "dice": 0.9881479121912183
+          },
+          "anterior": {
+            "tp": 439,
+            "fp": 3927,
+            "fn": 1581,
+            "dice": 0.13748825555903538
+          },
+          "posterior": {
+            "tp": 973,
+            "fp": 1001,
+            "fn": 109,
+            "dice": 0.6367801047120419
+          }
+        },
+        "macro_hard_dice": 0.3871341801355387,
+        "foreground_fp": 4670,
+        "foreground_fn": 1432,
+        "ap_swaps": {
+          "anterior_to_posterior": 258,
+          "posterior_to_anterior": 0
+        },
+        "case_name": "hippocampus_217",
+        "anterior_hard_dice": 0.13748825555903538,
+        "anterior_soft_dice": 0.01946779154241085,
+        "posterior_hard_dice": 0.6367801047120419,
+        "posterior_soft_dice": 0.051020506769418716,
+        "macro_soft_dice": 0.035244149155914783
+      },
+      {
+        "confusion": [
+          [
+            254244,
+            3727,
+            1343
+          ],
+          [
+            1450,
+            2,
+            86
+          ],
+          [
+            144,
+            0,
+            1148
+          ]
+        ],
+        "per_class": {
+          "background": {
+            "tp": 254244,
+            "fp": 1594,
+            "fn": 5070,
+            "dice": 0.9870640121750474
+          },
+          "anterior": {
+            "tp": 2,
+            "fp": 3727,
+            "fn": 1536,
+            "dice": 0.0007594456047085627
+          },
+          "posterior": {
+            "tp": 1148,
+            "fp": 1429,
+            "fn": 144,
+            "dice": 0.5934349961230292
+          }
+        },
+        "macro_hard_dice": 0.29709722086386886,
+        "foreground_fp": 5070,
+        "foreground_fn": 1594,
+        "ap_swaps": {
+          "anterior_to_posterior": 86,
+          "posterior_to_anterior": 0
+        },
+        "case_name": "hippocampus_219",
+        "anterior_hard_dice": 0.0007594456047085627,
+        "anterior_soft_dice": 0.012662801891565323,
+        "posterior_hard_dice": 0.5934349961230292,
+        "posterior_soft_dice": 0.05786900967359543,
+        "macro_soft_dice": 0.035265905782580376
+      },
+      {
+        "confusion": [
+          [
+            258189,
+            31,
+            747
+          ],
+          [
+            829,
+            377,
+            252
+          ],
+          [
+            139,
+            0,
+            1580
+          ]
+        ],
+        "per_class": {
+          "background": {
+            "tp": 258189,
+            "fp": 968,
+            "fn": 778,
+            "dice": 0.9966301503115085
+          },
+          "anterior": {
+            "tp": 377,
+            "fp": 31,
+            "fn": 1081,
+            "dice": 0.4040728831725616
+          },
+          "posterior": {
+            "tp": 1580,
+            "fp": 999,
+            "fn": 139,
+            "dice": 0.7352256863657515
+          }
+        },
+        "macro_hard_dice": 0.5696492847691565,
+        "foreground_fp": 778,
+        "foreground_fn": 968,
+        "ap_swaps": {
+          "anterior_to_posterior": 252,
+          "posterior_to_anterior": 0
+        },
+        "case_name": "hippocampus_229",
+        "anterior_hard_dice": 0.4040728831725616,
+        "anterior_soft_dice": 0.01553970854729414,
+        "posterior_hard_dice": 0.7352256863657515,
+        "posterior_soft_dice": 0.08190803229808807,
+        "macro_soft_dice": 0.04872387042269111
+      },
+      {
+        "confusion": [
+          [
+            255271,
+            2688,
+            977
+          ],
+          [
+            1227,
+            327,
+            143
+          ],
+          [
+            494,
+            8,
+            1009
+          ]
+        ],
+        "per_class": {
+          "background": {
+            "tp": 255271,
+            "fp": 1721,
+            "fn": 3665,
+            "dice": 0.9895605588376672
+          },
+          "anterior": {
+            "tp": 327,
+            "fp": 2696,
+            "fn": 1370,
+            "dice": 0.1385593220338983
+          },
+          "posterior": {
+            "tp": 1009,
+            "fp": 1120,
+            "fn": 502,
+            "dice": 0.5543956043956044
+          }
+        },
+        "macro_hard_dice": 0.34647746321475137,
+        "foreground_fp": 3665,
+        "foreground_fn": 1721,
+        "ap_swaps": {
+          "anterior_to_posterior": 143,
+          "posterior_to_anterior": 8
+        },
+        "case_name": "hippocampus_244",
+        "anterior_hard_dice": 0.1385593220338983,
+        "anterior_soft_dice": 0.01767565682530403,
+        "posterior_hard_dice": 0.5543956043956044,
+        "posterior_soft_dice": 0.050799962133169174,
+        "macro_soft_dice": 0.0342378094792366
+      },
+      {
+        "confusion": [
+          [
+            254414,
+            2403,
+            1256
+          ],
+          [
+            1656,
+            299,
+            444
+          ],
+          [
+            525,
+            0,
+            1147
+          ]
+        ],
+        "per_class": {
+          "background": {
+            "tp": 254414,
+            "fp": 2181,
+            "fn": 3659,
+            "dice": 0.9886528791376188
+          },
+          "anterior": {
+            "tp": 299,
+            "fp": 2403,
+            "fn": 2100,
+            "dice": 0.11723191531072338
+          },
+          "posterior": {
+            "tp": 1147,
+            "fp": 1700,
+            "fn": 525,
+            "dice": 0.5076344323965479
+          }
+        },
+        "macro_hard_dice": 0.31243317385363567,
+        "foreground_fp": 3659,
+        "foreground_fn": 2181,
+        "ap_swaps": {
+          "anterior_to_posterior": 444,
+          "posterior_to_anterior": 0
+        },
+        "case_name": "hippocampus_261",
+        "anterior_hard_dice": 0.11723191531072338,
+        "anterior_soft_dice": 0.02213931642472744,
+        "posterior_hard_dice": 0.5076344323965479,
+        "posterior_soft_dice": 0.058263931423425674,
+        "macro_soft_dice": 0.04020162392407656
+      },
+      {
+        "confusion": [
+          [
+            255081,
+            2400,
+            821
+          ],
+          [
+            1103,
+            562,
+            269
+          ],
+          [
+            275,
+            0,
+            1633
+          ]
+        ],
+        "per_class": {
+          "background": {
+            "tp": 255081,
+            "fp": 1378,
+            "fn": 3221,
+            "dice": 0.9910657567298222
+          },
+          "anterior": {
+            "tp": 562,
+            "fp": 2400,
+            "fn": 1372,
+            "dice": 0.2295751633986928
+          },
+          "posterior": {
+            "tp": 1633,
+            "fp": 1090,
+            "fn": 275,
+            "dice": 0.7052472468149428
+          }
+        },
+        "macro_hard_dice": 0.4674112051068178,
+        "foreground_fp": 3221,
+        "foreground_fn": 1378,
+        "ap_swaps": {
+          "anterior_to_posterior": 269,
+          "posterior_to_anterior": 0
+        },
+        "case_name": "hippocampus_264",
+        "anterior_hard_dice": 0.2295751633986928,
+        "anterior_soft_dice": 0.02072504162788391,
+        "posterior_hard_dice": 0.7052472468149428,
+        "posterior_soft_dice": 0.08579705655574799,
+        "macro_soft_dice": 0.05326104909181595
+      },
+      {
+        "confusion": [
+          [
+            255134,
+            2591,
+            1115
+          ],
+          [
+            1097,
+            179,
+            419
+          ],
+          [
+            495,
+            0,
+            1114
+          ]
+        ],
+        "per_class": {
+          "background": {
+            "tp": 255134,
+            "fp": 1592,
+            "fn": 3706,
+            "dice": 0.9897239150758583
+          },
+          "anterior": {
+            "tp": 179,
+            "fp": 2591,
+            "fn": 1516,
+            "dice": 0.08017917133258678
+          },
+          "posterior": {
+            "tp": 1114,
+            "fp": 1534,
+            "fn": 495,
+            "dice": 0.5233732675593141
+          }
+        },
+        "macro_hard_dice": 0.30177621944595046,
+        "foreground_fp": 3706,
+        "foreground_fn": 1592,
+        "ap_swaps": {
+          "anterior_to_posterior": 419,
+          "posterior_to_anterior": 0
+        },
+        "case_name": "hippocampus_277",
+        "anterior_hard_dice": 0.08017917133258678,
+        "anterior_soft_dice": 0.015955548733472824,
+        "posterior_hard_dice": 0.5233732675593141,
+        "posterior_soft_dice": 0.05658063292503357,
+        "macro_soft_dice": 0.0362680908292532
+      },
+      {
+        "confusion": [
+          [
+            258037,
+            770,
+            724
+          ],
+          [
+            609,
+            533,
+            225
+          ],
+          [
+            92,
+            1,
+            1153
+          ]
+        ],
+        "per_class": {
+          "background": {
+            "tp": 258037,
+            "fp": 701,
+            "fn": 1494,
+            "dice": 0.9957647476503515
+          },
+          "anterior": {
+            "tp": 533,
+            "fp": 771,
+            "fn": 834,
+            "dice": 0.39910146012729314
+          },
+          "posterior": {
+            "tp": 1153,
+            "fp": 949,
+            "fn": 93,
+            "dice": 0.6887694145758662
+          }
+        },
+        "macro_hard_dice": 0.5439354373515797,
+        "foreground_fp": 1494,
+        "foreground_fn": 701,
+        "ap_swaps": {
+          "anterior_to_posterior": 225,
+          "posterior_to_anterior": 1
+        },
+        "case_name": "hippocampus_280",
+        "anterior_hard_dice": 0.39910146012729314,
+        "anterior_soft_dice": 0.014592750929296017,
+        "posterior_hard_dice": 0.6887694145758662,
+        "posterior_soft_dice": 0.060786716639995575,
+        "macro_soft_dice": 0.037689733784645796
+      },
+      {
+        "confusion": [
+          [
+            246682,
+            9015,
+            3275
+          ],
+          [
+            967,
+            338,
+            257
+          ],
+          [
+            291,
+            2,
+            1317
+          ]
+        ],
+        "per_class": {
+          "background": {
+            "tp": 246682,
+            "fp": 1258,
+            "fn": 12290,
+            "dice": 0.9732734675841171
+          },
+          "anterior": {
+            "tp": 338,
+            "fp": 9017,
+            "fn": 1224,
+            "dice": 0.06192177338096547
+          },
+          "posterior": {
+            "tp": 1317,
+            "fp": 3532,
+            "fn": 293,
+            "dice": 0.40780306549001394
+          }
+        },
+        "macro_hard_dice": 0.2348624194354897,
+        "foreground_fp": 12290,
+        "foreground_fn": 1258,
+        "ap_swaps": {
+          "anterior_to_posterior": 257,
+          "posterior_to_anterior": 2
+        },
+        "case_name": "hippocampus_286",
+        "anterior_hard_dice": 0.06192177338096547,
+        "anterior_soft_dice": 0.015326041728258133,
+        "posterior_hard_dice": 0.40780306549001394,
+        "posterior_soft_dice": 0.06424093246459961,
+        "macro_soft_dice": 0.03978348709642887
+      },
+      {
+        "confusion": [
+          [
+            250918,
+            5341,
+            2040
+          ],
+          [
+            999,
+            695,
+            156
+          ],
+          [
+            418,
+            5,
+            1572
+          ]
+        ],
+        "per_class": {
+          "background": {
+            "tp": 250918,
+            "fp": 1417,
+            "fn": 7381,
+            "dice": 0.9827704383178558
+          },
+          "anterior": {
+            "tp": 695,
+            "fp": 5346,
+            "fn": 1155,
+            "dice": 0.1761500443543277
+          },
+          "posterior": {
+            "tp": 1572,
+            "fp": 2196,
+            "fn": 423,
+            "dice": 0.5455491931285789
+          }
+        },
+        "macro_hard_dice": 0.36084961874145327,
+        "foreground_fp": 7381,
+        "foreground_fn": 1417,
+        "ap_swaps": {
+          "anterior_to_posterior": 156,
+          "posterior_to_anterior": 5
+        },
+        "case_name": "hippocampus_288",
+        "anterior_hard_dice": 0.1761500443543277,
+        "anterior_soft_dice": 0.02031947672367096,
+        "posterior_hard_dice": 0.5455491931285789,
+        "posterior_soft_dice": 0.07989007234573364,
+        "macro_soft_dice": 0.0501047745347023
+      },
+      {
+        "confusion": [
+          [
+            258602,
+            10,
+            794
+          ],
+          [
+            932,
+            210,
+            140
+          ],
+          [
+            127,
+            5,
+            1324
+          ]
+        ],
+        "per_class": {
+          "background": {
+            "tp": 258602,
+            "fp": 1059,
+            "fn": 804,
+            "dice": 0.9964108679611688
+          },
+          "anterior": {
+            "tp": 210,
+            "fp": 15,
+            "fn": 1072,
+            "dice": 0.278699402786994
+          },
+          "posterior": {
+            "tp": 1324,
+            "fp": 934,
+            "fn": 132,
+            "dice": 0.7129779213785676
+          }
+        },
+        "macro_hard_dice": 0.4958386620827808,
+        "foreground_fp": 804,
+        "foreground_fn": 1059,
+        "ap_swaps": {
+          "anterior_to_posterior": 140,
+          "posterior_to_anterior": 5
+        },
+        "case_name": "hippocampus_289",
+        "anterior_hard_dice": 0.278699402786994,
+        "anterior_soft_dice": 0.013683350756764412,
+        "posterior_hard_dice": 0.7129779213785676,
+        "posterior_soft_dice": 0.06915537267923355,
+        "macro_soft_dice": 0.04141936171799898
+      },
+      {
+        "confusion": [
+          [
+            256567,
+            1015,
+            644
+          ],
+          [
+            1156,
+            667,
+            275
+          ],
+          [
+            198,
+            9,
+            1613
+          ]
+        ],
+        "per_class": {
+          "background": {
+            "tp": 256567,
+            "fp": 1354,
+            "fn": 1659,
+            "dice": 0.9941625157174215
+          },
+          "anterior": {
+            "tp": 667,
+            "fp": 1024,
+            "fn": 1431,
+            "dice": 0.35207178675112166
+          },
+          "posterior": {
+            "tp": 1613,
+            "fp": 919,
+            "fn": 207,
+            "dice": 0.7412683823529411
+          }
+        },
+        "macro_hard_dice": 0.5466700845520314,
+        "foreground_fp": 1659,
+        "foreground_fn": 1354,
+        "ap_swaps": {
+          "anterior_to_posterior": 275,
+          "posterior_to_anterior": 9
+        },
+        "case_name": "hippocampus_296",
+        "anterior_hard_dice": 0.35207178675112166,
+        "anterior_soft_dice": 0.022471187636256218,
+        "posterior_hard_dice": 0.7412683823529411,
+        "posterior_soft_dice": 0.08338970690965652,
+        "macro_soft_dice": 0.05293044727295637
+      },
+      {
+        "confusion": [
+          [
+            258508,
+            121,
+            486
+          ],
+          [
+            1393,
+            61,
+            195
+          ],
+          [
+            186,
+            0,
+            1194
+          ]
+        ],
+        "per_class": {
+          "background": {
+            "tp": 258508,
+            "fp": 1579,
+            "fn": 607,
+            "dice": 0.995789692643711
+          },
+          "anterior": {
+            "tp": 61,
+            "fp": 121,
+            "fn": 1588,
+            "dice": 0.06663025669033315
+          },
+          "posterior": {
+            "tp": 1194,
+            "fp": 681,
+            "fn": 186,
+            "dice": 0.7336405529953917
+          }
+        },
+        "macro_hard_dice": 0.4001354048428624,
+        "foreground_fp": 607,
+        "foreground_fn": 1579,
+        "ap_swaps": {
+          "anterior_to_posterior": 195,
+          "posterior_to_anterior": 0
+        },
+        "case_name": "hippocampus_305",
+        "anterior_hard_dice": 0.06663025669033315,
+        "anterior_soft_dice": 0.015487798489630222,
+        "posterior_hard_dice": 0.7336405529953917,
+        "posterior_soft_dice": 0.060862187296152115,
+        "macro_soft_dice": 0.03817499289289117
+      },
+      {
+        "confusion": [
+          [
+            252557,
+            4426,
+            1507
+          ],
+          [
+            792,
+            805,
+            414
+          ],
+          [
+            410,
+            0,
+            1233
+          ]
+        ],
+        "per_class": {
+          "background": {
+            "tp": 252557,
+            "fp": 1202,
+            "fn": 5933,
+            "dice": 0.9860712270790182
+          },
+          "anterior": {
+            "tp": 805,
+            "fp": 4426,
+            "fn": 1206,
+            "dice": 0.22231427782380558
+          },
+          "posterior": {
+            "tp": 1233,
+            "fp": 1921,
+            "fn": 410,
+            "dice": 0.5140712945590994
+          }
+        },
+        "macro_hard_dice": 0.36819278619145246,
+        "foreground_fp": 5933,
+        "foreground_fn": 1202,
+        "ap_swaps": {
+          "anterior_to_posterior": 414,
+          "posterior_to_anterior": 0
+        },
+        "case_name": "hippocampus_308",
+        "anterior_hard_dice": 0.22231427782380558,
+        "anterior_soft_dice": 0.02093582972884178,
+        "posterior_hard_dice": 0.5140712945590994,
+        "posterior_soft_dice": 0.06586617231369019,
+        "macro_soft_dice": 0.043401001021265984
+      },
+      {
+        "confusion": [
+          [
+            258403,
+            52,
+            404
+          ],
+          [
+            793,
+            422,
+            441
+          ],
+          [
+            205,
+            0,
+            1424
+          ]
+        ],
+        "per_class": {
+          "background": {
+            "tp": 258403,
+            "fp": 998,
+            "fn": 456,
+            "dice": 0.9971944583799637
+          },
+          "anterior": {
+            "tp": 422,
+            "fp": 52,
+            "fn": 1234,
+            "dice": 0.39624413145539905
+          },
+          "posterior": {
+            "tp": 1424,
+            "fp": 845,
+            "fn": 205,
+            "dice": 0.7306310928681375
+          }
+        },
+        "macro_hard_dice": 0.5634376121617684,
+        "foreground_fp": 456,
+        "foreground_fn": 998,
+        "ap_swaps": {
+          "anterior_to_posterior": 441,
+          "posterior_to_anterior": 0
+        },
+        "case_name": "hippocampus_317",
+        "anterior_hard_dice": 0.39624413145539905,
+        "anterior_soft_dice": 0.01600310392677784,
+        "posterior_hard_dice": 0.7306310928681375,
+        "posterior_soft_dice": 0.07291949540376663,
+        "macro_soft_dice": 0.044461299665272236
+      },
+      {
+        "confusion": [
+          [
+            257002,
+            1074,
+            425
+          ],
+          [
+            1130,
+            644,
+            318
+          ],
+          [
+            208,
+            1,
+            1342
+          ]
+        ],
+        "per_class": {
+          "background": {
+            "tp": 257002,
+            "fp": 1338,
+            "fn": 1499,
+            "dice": 0.9945108843919116
+          },
+          "anterior": {
+            "tp": 644,
+            "fp": 1075,
+            "fn": 1448,
+            "dice": 0.3379690369981632
+          },
+          "posterior": {
+            "tp": 1342,
+            "fp": 743,
+            "fn": 209,
+            "dice": 0.7381738173817382
+          }
+        },
+        "macro_hard_dice": 0.5380714271899507,
+        "foreground_fp": 1499,
+        "foreground_fn": 1338,
+        "ap_swaps": {
+          "anterior_to_posterior": 318,
+          "posterior_to_anterior": 1
+        },
+        "case_name": "hippocampus_327",
+        "anterior_hard_dice": 0.3379690369981632,
+        "anterior_soft_dice": 0.02141464129090309,
+        "posterior_hard_dice": 0.7381738173817382,
+        "posterior_soft_dice": 0.06839842349290848,
+        "macro_soft_dice": 0.044906532391905785
+      },
+      {
+        "confusion": [
+          [
+            255652,
+            1637,
+            858
+          ],
+          [
+            1670,
+            371,
+            191
+          ],
+          [
+            414,
+            1,
+            1350
+          ]
+        ],
+        "per_class": {
+          "background": {
+            "tp": 255652,
+            "fp": 2084,
+            "fn": 2495,
+            "dice": 0.9911239564009668
+          },
+          "anterior": {
+            "tp": 371,
+            "fp": 1638,
+            "fn": 1861,
+            "dice": 0.1749587361471351
+          },
+          "posterior": {
+            "tp": 1350,
+            "fp": 1049,
+            "fn": 415,
+            "dice": 0.6484149855907781
+          }
+        },
+        "macro_hard_dice": 0.4116868608689566,
+        "foreground_fp": 2495,
+        "foreground_fn": 2084,
+        "ap_swaps": {
+          "anterior_to_posterior": 191,
+          "posterior_to_anterior": 1
+        },
+        "case_name": "hippocampus_330",
+        "anterior_hard_dice": 0.1749587361471351,
+        "anterior_soft_dice": 0.0217807125300169,
+        "posterior_hard_dice": 0.6484149855907781,
+        "posterior_soft_dice": 0.06828630715608597,
+        "macro_soft_dice": 0.045033509843051434
+      },
+      {
+        "confusion": [
+          [
+            258145,
+            40,
+            632
+          ],
+          [
+            984,
+            629,
+            190
+          ],
+          [
+            188,
+            3,
+            1333
+          ]
+        ],
+        "per_class": {
+          "background": {
+            "tp": 258145,
+            "fp": 1172,
+            "fn": 672,
+            "dice": 0.9964410750886836
+          },
+          "anterior": {
+            "tp": 629,
+            "fp": 43,
+            "fn": 1174,
+            "dice": 0.5082828282828283
+          },
+          "posterior": {
+            "tp": 1333,
+            "fp": 822,
+            "fn": 191,
+            "dice": 0.7246534384343571
+          }
+        },
+        "macro_hard_dice": 0.6164681333585927,
+        "foreground_fp": 672,
+        "foreground_fn": 1172,
+        "ap_swaps": {
+          "anterior_to_posterior": 190,
+          "posterior_to_anterior": 3
+        },
+        "case_name": "hippocampus_332",
+        "anterior_hard_dice": 0.5082828282828283,
+        "anterior_soft_dice": 0.019494716078042984,
+        "posterior_hard_dice": 0.7246534384343571,
+        "posterior_soft_dice": 0.06953829526901245,
+        "macro_soft_dice": 0.04451650567352772
+      },
+      {
+        "confusion": [
+          [
+            248754,
+            7574,
+            2193
+          ],
+          [
+            1533,
+            185,
+            289
+          ],
+          [
+            576,
+            1,
+            1039
+          ]
+        ],
+        "per_class": {
+          "background": {
+            "tp": 248754,
+            "fp": 2109,
+            "fn": 9767,
+            "dice": 0.9766855653102571
+          },
+          "anterior": {
+            "tp": 185,
+            "fp": 7575,
+            "fn": 1822,
+            "dice": 0.03788266612061022
+          },
+          "posterior": {
+            "tp": 1039,
+            "fp": 2482,
+            "fn": 577,
+            "dice": 0.404516254623321
+          }
+        },
+        "macro_hard_dice": 0.2211994603719656,
+        "foreground_fp": 9767,
+        "foreground_fn": 2109,
+        "ap_swaps": {
+          "anterior_to_posterior": 289,
+          "posterior_to_anterior": 1
+        },
+        "case_name": "hippocampus_338",
+        "anterior_hard_dice": 0.03788266612061022,
+        "anterior_soft_dice": 0.01757781021296978,
+        "posterior_hard_dice": 0.404516254623321,
+        "posterior_soft_dice": 0.0505758635699749,
+        "macro_soft_dice": 0.03407683689147234
+      },
+      {
+        "confusion": [
+          [
+            258930,
+            9,
+            615
+          ],
+          [
+            823,
+            170,
+            224
+          ],
+          [
+            208,
+            0,
+            1165
+          ]
+        ],
+        "per_class": {
+          "background": {
+            "tp": 258930,
+            "fp": 1031,
+            "fn": 624,
+            "dice": 0.9968143364484182
+          },
+          "anterior": {
+            "tp": 170,
+            "fp": 9,
+            "fn": 1047,
+            "dice": 0.24355300859598855
+          },
+          "posterior": {
+            "tp": 1165,
+            "fp": 839,
+            "fn": 208,
+            "dice": 0.6899615042937518
+          }
+        },
+        "macro_hard_dice": 0.4667572564448702,
+        "foreground_fp": 624,
+        "foreground_fn": 1031,
+        "ap_swaps": {
+          "anterior_to_posterior": 224,
+          "posterior_to_anterior": 0
+        },
+        "case_name": "hippocampus_349",
+        "anterior_hard_dice": 0.24355300859598855,
+        "anterior_soft_dice": 0.012170543894171715,
+        "posterior_hard_dice": 0.6899615042937518,
+        "posterior_soft_dice": 0.060646820813417435,
+        "macro_soft_dice": 0.036408682353794575
+      },
+      {
+        "confusion": [
+          [
+            258579,
+            41,
+            582
+          ],
+          [
+            950,
+            229,
+            296
+          ],
+          [
+            112,
+            0,
+            1355
+          ]
+        ],
+        "per_class": {
+          "background": {
+            "tp": 258579,
+            "fp": 1062,
+            "fn": 623,
+            "dice": 0.9967523894511442
+          },
+          "anterior": {
+            "tp": 229,
+            "fp": 41,
+            "fn": 1246,
+            "dice": 0.26246418338108884
+          },
+          "posterior": {
+            "tp": 1355,
+            "fp": 878,
+            "fn": 112,
+            "dice": 0.7324324324324324
+          }
+        },
+        "macro_hard_dice": 0.49744830790676065,
+        "foreground_fp": 623,
+        "foreground_fn": 1062,
+        "ap_swaps": {
+          "anterior_to_posterior": 296,
+          "posterior_to_anterior": 0
+        },
+        "case_name": "hippocampus_350",
+        "anterior_hard_dice": 0.26246418338108884,
+        "anterior_soft_dice": 0.014898988418281078,
+        "posterior_hard_dice": 0.7324324324324324,
+        "posterior_soft_dice": 0.07180609554052353,
+        "macro_soft_dice": 0.043352541979402304
+      },
+      {
+        "confusion": [
+          [
+            257452,
+            423,
+            773
+          ],
+          [
+            1155,
+            547,
+            161
+          ],
+          [
+            219,
+            0,
+            1414
+          ]
+        ],
+        "per_class": {
+          "background": {
+            "tp": 257452,
+            "fp": 1374,
+            "fn": 1196,
+            "dice": 0.9950335669038445
+          },
+          "anterior": {
+            "tp": 547,
+            "fp": 423,
+            "fn": 1316,
+            "dice": 0.38616307800917754
+          },
+          "posterior": {
+            "tp": 1414,
+            "fp": 934,
+            "fn": 219,
+            "dice": 0.7103742778196434
+          }
+        },
+        "macro_hard_dice": 0.5482686779144105,
+        "foreground_fp": 1196,
+        "foreground_fn": 1374,
+        "ap_swaps": {
+          "anterior_to_posterior": 161,
+          "posterior_to_anterior": 0
+        },
+        "case_name": "hippocampus_356",
+        "anterior_hard_dice": 0.38616307800917754,
+        "anterior_soft_dice": 0.019934607669711113,
+        "posterior_hard_dice": 0.7103742778196434,
+        "posterior_soft_dice": 0.07282770425081253,
+        "macro_soft_dice": 0.04638115596026182
+      },
+      {
+        "confusion": [
+          [
+            258720,
+            40,
+            497
+          ],
+          [
+            677,
+            333,
+            509
+          ],
+          [
+            214,
+            0,
+            1154
+          ]
+        ],
+        "per_class": {
+          "background": {
+            "tp": 258720,
+            "fp": 891,
+            "fn": 537,
+            "dice": 0.9972478549457665
+          },
+          "anterior": {
+            "tp": 333,
+            "fp": 40,
+            "fn": 1186,
+            "dice": 0.35200845665961944
+          },
+          "posterior": {
+            "tp": 1154,
+            "fp": 1006,
+            "fn": 214,
+            "dice": 0.6541950113378685
+          }
+        },
+        "macro_hard_dice": 0.503101733998744,
+        "foreground_fp": 537,
+        "foreground_fn": 891,
+        "ap_swaps": {
+          "anterior_to_posterior": 509,
+          "posterior_to_anterior": 0
+        },
+        "case_name": "hippocampus_358",
+        "anterior_hard_dice": 0.35200845665961944,
+        "anterior_soft_dice": 0.013853972777724266,
+        "posterior_hard_dice": 0.6541950113378685,
+        "posterior_soft_dice": 0.061298225075006485,
+        "macro_soft_dice": 0.037576098926365376
+      },
+      {
+        "confusion": [
+          [
+            254009,
+            3503,
+            755
+          ],
+          [
+            1013,
+            887,
+            223
+          ],
+          [
+            69,
+            0,
+            1685
+          ]
+        ],
+        "per_class": {
+          "background": {
+            "tp": 254009,
+            "fp": 1082,
+            "fn": 4258,
+            "dice": 0.9895979024384542
+          },
+          "anterior": {
+            "tp": 887,
+            "fp": 3503,
+            "fn": 1236,
+            "dice": 0.2723783202825119
+          },
+          "posterior": {
+            "tp": 1685,
+            "fp": 978,
+            "fn": 69,
+            "dice": 0.7629612859406837
+          }
+        },
+        "macro_hard_dice": 0.5176698031115978,
+        "foreground_fp": 4258,
+        "foreground_fn": 1082,
+        "ap_swaps": {
+          "anterior_to_posterior": 223,
+          "posterior_to_anterior": 0
+        },
+        "case_name": "hippocampus_374",
+        "anterior_hard_dice": 0.2723783202825119,
+        "anterior_soft_dice": 0.023218641057610512,
+        "posterior_hard_dice": 0.7629612859406837,
+        "posterior_soft_dice": 0.08692900836467743,
+        "macro_soft_dice": 0.05507382471114397
+      },
+      {
+        "confusion": [
+          [
+            257918,
+            7,
+            405
+          ],
+          [
+            1503,
+            360,
+            124
+          ],
+          [
+            293,
+            2,
+            1532
+          ]
+        ],
+        "per_class": {
+          "background": {
+            "tp": 257918,
+            "fp": 1796,
+            "fn": 412,
+            "dice": 0.995737813776436
+          },
+          "anterior": {
+            "tp": 360,
+            "fp": 9,
+            "fn": 1627,
+            "dice": 0.30560271646859083
+          },
+          "posterior": {
+            "tp": 1532,
+            "fp": 529,
+            "fn": 295,
+            "dice": 0.7880658436213992
+          }
+        },
+        "macro_hard_dice": 0.546834280044995,
+        "foreground_fp": 412,
+        "foreground_fn": 1796,
+        "ap_swaps": {
+          "anterior_to_posterior": 124,
+          "posterior_to_anterior": 2
+        },
+        "case_name": "hippocampus_394",
+        "anterior_hard_dice": 0.30560271646859083,
+        "anterior_soft_dice": 0.020197348669171333,
+        "posterior_hard_dice": 0.7880658436213992,
+        "posterior_soft_dice": 0.08010147511959076,
+        "macro_soft_dice": 0.050149411894381046
+      }
+    ]
+  },
+  "training_final.json": {
+    "summary": {
+      "macro_hard_dice": 0.6208279770987959,
+      "anterior_hard_dice": 0.46562093107851305,
+      "anterior_soft_dice": 0.01860040295869112,
+      "posterior_hard_dice": 0.7760350231190791,
+      "posterior_soft_dice": 0.08065146878361702,
+      "macro_soft_dice": 0.04962593587115407
+    },
+    "cases": [
+      {
+        "confusion": [
+          [
+            256959,
+            817,
+            626
+          ],
+          [
+            784,
+            689,
+            289
+          ],
+          [
+            24,
+            1,
+            1955
+          ]
+        ],
+        "per_class": {
+          "background": {
+            "tp": 256959,
+            "fp": 808,
+            "fn": 1443,
+            "dice": 0.9956390252029859
+          },
+          "anterior": {
+            "tp": 689,
+            "fp": 818,
+            "fn": 1073,
+            "dice": 0.42153563780972775
+          },
+          "posterior": {
+            "tp": 1955,
+            "fp": 915,
+            "fn": 25,
+            "dice": 0.8061855670103093
+          }
+        },
+        "macro_hard_dice": 0.6138606024100185,
+        "foreground_fp": 1443,
+        "foreground_fn": 808,
+        "ap_swaps": {
+          "anterior_to_posterior": 289,
+          "posterior_to_anterior": 1
+        },
+        "case_name": "hippocampus_093",
+        "anterior_hard_dice": 0.42153563780972775,
+        "anterior_soft_dice": 0.019367070868611336,
+        "posterior_hard_dice": 0.8061855670103093,
+        "posterior_soft_dice": 0.10018933564424515,
+        "macro_soft_dice": 0.05977820325642824
+      },
+      {
+        "confusion": [
+          [
+            258385,
+            435,
+            571
+          ],
+          [
+            625,
+            529,
+            200
+          ],
+          [
+            13,
+            0,
+            1386
+          ]
+        ],
+        "per_class": {
+          "background": {
+            "tp": 258385,
+            "fp": 638,
+            "fn": 1006,
+            "dice": 0.9968287893459667
+          },
+          "anterior": {
+            "tp": 529,
+            "fp": 435,
+            "fn": 825,
+            "dice": 0.45642795513373596
+          },
+          "posterior": {
+            "tp": 1386,
+            "fp": 771,
+            "fn": 13,
+            "dice": 0.7795275590551181
+          }
+        },
+        "macro_hard_dice": 0.617977757094427,
+        "foreground_fp": 1006,
+        "foreground_fn": 638,
+        "ap_swaps": {
+          "anterior_to_posterior": 200,
+          "posterior_to_anterior": 0
+        },
+        "case_name": "hippocampus_097",
+        "anterior_hard_dice": 0.45642795513373596,
+        "anterior_soft_dice": 0.015029354020953178,
+        "posterior_hard_dice": 0.7795275590551181,
+        "posterior_soft_dice": 0.07478195428848267,
+        "macro_soft_dice": 0.04490565415471792
+      },
+      {
+        "confusion": [
+          [
+            256621,
+            1735,
+            411
+          ],
+          [
+            682,
+            736,
+            366
+          ],
+          [
+            21,
+            0,
+            1572
+          ]
+        ],
+        "per_class": {
+          "background": {
+            "tp": 256621,
+            "fp": 703,
+            "fn": 2146,
+            "dice": 0.9944796557196308
+          },
+          "anterior": {
+            "tp": 736,
+            "fp": 1735,
+            "fn": 1048,
+            "dice": 0.34594594594594597
+          },
+          "posterior": {
+            "tp": 1572,
+            "fp": 777,
+            "fn": 21,
+            "dice": 0.7975646879756468
+          }
+        },
+        "macro_hard_dice": 0.5717553169607964,
+        "foreground_fp": 2146,
+        "foreground_fn": 703,
+        "ap_swaps": {
+          "anterior_to_posterior": 366,
+          "posterior_to_anterior": 0
+        },
+        "case_name": "hippocampus_197",
+        "anterior_hard_dice": 0.34594594594594597,
+        "anterior_soft_dice": 0.01924133114516735,
+        "posterior_hard_dice": 0.7975646879756468,
+        "posterior_soft_dice": 0.08436575531959534,
+        "macro_soft_dice": 0.051803543232381344
+      },
+      {
+        "confusion": [
+          [
+            255718,
+            2045,
+            681
+          ],
+          [
+            703,
+            782,
+            281
+          ],
+          [
+            42,
+            0,
+            1892
+          ]
+        ],
+        "per_class": {
+          "background": {
+            "tp": 255718,
+            "fp": 745,
+            "fn": 2726,
+            "dice": 0.9932589768637832
+          },
+          "anterior": {
+            "tp": 782,
+            "fp": 2045,
+            "fn": 984,
+            "dice": 0.34051817983888527
+          },
+          "posterior": {
+            "tp": 1892,
+            "fp": 962,
+            "fn": 42,
+            "dice": 0.7903091060985797
+          }
+        },
+        "macro_hard_dice": 0.5654136429687325,
+        "foreground_fp": 2726,
+        "foreground_fn": 745,
+        "ap_swaps": {
+          "anterior_to_posterior": 281,
+          "posterior_to_anterior": 0
+        },
+        "case_name": "hippocampus_287",
+        "anterior_hard_dice": 0.34051817983888527,
+        "anterior_soft_dice": 0.01977294497191906,
+        "posterior_hard_dice": 0.7903091060985797,
+        "posterior_soft_dice": 0.0991189256310463,
+        "macro_soft_dice": 0.05944593530148268
+      },
+      {
+        "confusion": [
+          [
+            257703,
+            685,
+            555
+          ],
+          [
+            675,
+            662,
+            228
+          ],
+          [
+            34,
+            2,
+            1600
+          ]
+        ],
+        "per_class": {
+          "background": {
+            "tp": 257703,
+            "fp": 709,
+            "fn": 1240,
+            "dice": 0.9962327608701955
+          },
+          "anterior": {
+            "tp": 662,
+            "fp": 687,
+            "fn": 903,
+            "dice": 0.4543582704186685
+          },
+          "posterior": {
+            "tp": 1600,
+            "fp": 783,
+            "fn": 36,
+            "dice": 0.7962179646678278
+          }
+        },
+        "macro_hard_dice": 0.6252881175432481,
+        "foreground_fp": 1240,
+        "foreground_fn": 709,
+        "ap_swaps": {
+          "anterior_to_posterior": 228,
+          "posterior_to_anterior": 2
+        },
+        "case_name": "hippocampus_311",
+        "anterior_hard_dice": 0.4543582704186685,
+        "anterior_soft_dice": 0.017499106004834175,
+        "posterior_hard_dice": 0.7962179646678278,
+        "posterior_soft_dice": 0.08478102087974548,
+        "macro_soft_dice": 0.05114006344228983
+      },
+      {
+        "confusion": [
+          [
+            257466,
+            1175,
+            560
+          ],
+          [
+            656,
+            728,
+            313
+          ],
+          [
+            38,
+            0,
+            1208
+          ]
+        ],
+        "per_class": {
+          "background": {
+            "tp": 257466,
+            "fp": 694,
+            "fn": 1735,
+            "dice": 0.9953050191259102
+          },
+          "anterior": {
+            "tp": 728,
+            "fp": 1175,
+            "fn": 969,
+            "dice": 0.40444444444444444
+          },
+          "posterior": {
+            "tp": 1208,
+            "fp": 873,
+            "fn": 38,
+            "dice": 0.7261797415088669
+          }
+        },
+        "macro_hard_dice": 0.5653120929766556,
+        "foreground_fp": 1735,
+        "foreground_fn": 694,
+        "ap_swaps": {
+          "anterior_to_posterior": 313,
+          "posterior_to_anterior": 0
+        },
+        "case_name": "hippocampus_314",
+        "anterior_hard_dice": 0.40444444444444444,
+        "anterior_soft_dice": 0.018875200301408768,
+        "posterior_hard_dice": 0.7261797415088669,
+        "posterior_soft_dice": 0.06608662754297256,
+        "macro_soft_dice": 0.042480913922190666
+      },
+      {
+        "confusion": [
+          [
+            258805,
+            15,
+            569
+          ],
+          [
+            550,
+            625,
+            240
+          ],
+          [
+            56,
+            0,
+            1284
+          ]
+        ],
+        "per_class": {
+          "background": {
+            "tp": 258805,
+            "fp": 606,
+            "fn": 584,
+            "dice": 0.9977062451811873
+          },
+          "anterior": {
+            "tp": 625,
+            "fp": 15,
+            "fn": 790,
+            "dice": 0.6082725060827251
+          },
+          "posterior": {
+            "tp": 1284,
+            "fp": 809,
+            "fn": 56,
+            "dice": 0.7480337896883192
+          }
+        },
+        "macro_hard_dice": 0.6781531478855222,
+        "foreground_fp": 584,
+        "foreground_fn": 606,
+        "ap_swaps": {
+          "anterior_to_posterior": 240,
+          "posterior_to_anterior": 0
+        },
+        "case_name": "hippocampus_353",
+        "anterior_hard_dice": 0.6082725060827251,
+        "anterior_soft_dice": 0.015512891113758087,
+        "posterior_hard_dice": 0.7480337896883192,
+        "posterior_soft_dice": 0.06751914322376251,
+        "macro_soft_dice": 0.0415160171687603
+      },
+      {
+        "confusion": [
+          [
+            258433,
+            84,
+            522
+          ],
+          [
+            788,
+            735,
+            210
+          ],
+          [
+            64,
+            1,
+            1307
+          ]
+        ],
+        "per_class": {
+          "background": {
+            "tp": 258433,
+            "fp": 852,
+            "fn": 606,
+            "dice": 0.9971870876131531
+          },
+          "anterior": {
+            "tp": 735,
+            "fp": 85,
+            "fn": 998,
+            "dice": 0.5757931844888367
+          },
+          "posterior": {
+            "tp": 1307,
+            "fp": 732,
+            "fn": 65,
+            "dice": 0.7663441805922017
+          }
+        },
+        "macro_hard_dice": 0.6710686825405192,
+        "foreground_fp": 606,
+        "foreground_fn": 852,
+        "ap_swaps": {
+          "anterior_to_posterior": 210,
+          "posterior_to_anterior": 1
+        },
+        "case_name": "hippocampus_361",
+        "anterior_hard_dice": 0.5757931844888367,
+        "anterior_soft_dice": 0.019088471308350563,
+        "posterior_hard_dice": 0.7663441805922017,
+        "posterior_soft_dice": 0.06813623011112213,
+        "macro_soft_dice": 0.04361235070973635
+      },
+      {
+        "confusion": [
+          [
+            257856,
+            2,
+            597
+          ],
+          [
+            682,
+            855,
+            345
+          ],
+          [
+            44,
+            1,
+            1762
+          ]
+        ],
+        "per_class": {
+          "background": {
+            "tp": 257856,
+            "fp": 726,
+            "fn": 599,
+            "dice": 0.9974373207333325
+          },
+          "anterior": {
+            "tp": 855,
+            "fp": 3,
+            "fn": 1027,
+            "dice": 0.6240875912408759
+          },
+          "posterior": {
+            "tp": 1762,
+            "fp": 942,
+            "fn": 45,
+            "dice": 0.7812015074262912
+          }
+        },
+        "macro_hard_dice": 0.7026445493335836,
+        "foreground_fp": 599,
+        "foreground_fn": 726,
+        "ap_swaps": {
+          "anterior_to_posterior": 345,
+          "posterior_to_anterior": 1
+        },
+        "case_name": "hippocampus_373",
+        "anterior_hard_dice": 0.6240875912408759,
+        "anterior_soft_dice": 0.020714350044727325,
+        "posterior_hard_dice": 0.7812015074262912,
+        "posterior_soft_dice": 0.09057782590389252,
+        "macro_soft_dice": 0.05564608797430992
+      },
+      {
+        "confusion": [
+          [
+            257000,
+            1388,
+            504
+          ],
+          [
+            743,
+            883,
+            260
+          ],
+          [
+            36,
+            0,
+            1330
+          ]
+        ],
+        "per_class": {
+          "background": {
+            "tp": 257000,
+            "fp": 779,
+            "fn": 1892,
+            "dice": 0.9948303659388663
+          },
+          "anterior": {
+            "tp": 883,
+            "fp": 1388,
+            "fn": 1003,
+            "dice": 0.42482559538128456
+          },
+          "posterior": {
+            "tp": 1330,
+            "fp": 764,
+            "fn": 36,
+            "dice": 0.7687861271676301
+          }
+        },
+        "macro_hard_dice": 0.5968058612744573,
+        "foreground_fp": 1892,
+        "foreground_fn": 779,
+        "ap_swaps": {
+          "anterior_to_posterior": 260,
+          "posterior_to_anterior": 0
+        },
+        "case_name": "hippocampus_390",
+        "anterior_hard_dice": 0.42482559538128456,
+        "anterior_soft_dice": 0.02090330980718136,
+        "posterior_hard_dice": 0.7687861271676301,
+        "posterior_soft_dice": 0.07095786929130554,
+        "macro_soft_dice": 0.04593058954924345
+      }
+    ]
+  },
+  "calibration.json": {
+    "status": "complete",
+    "weights": {
+      "bands": 0.018490984072278373
+    },
+    "statistics": {
+      "bands": {
+        "median_raw_ratio": 5.408041000366211,
+        "p95_raw_ratio": 5.752586221694946,
+        "weighted_median_ratio": 0.1,
+        "weighted_p95_ratio": 0.10637098019976927
+      }
+    },
+    "cases": [
+      {
+        "dice_rms": 1.6264486930595012e-06,
+        "bands_rms": 8.210266969399527e-06,
+        "bands_over_dice": 5.047971725463867,
+        "case_name": "hippocampus_093"
+      },
+      {
+        "dice_rms": 1.6159059441633872e-06,
+        "bands_rms": 9.58145028562285e-06,
+        "bands_over_dice": 5.929460525512695,
+        "case_name": "hippocampus_097"
+      },
+      {
+        "dice_rms": 1.6238954003711115e-06,
+        "bands_rms": 8.741631972952746e-06,
+        "bands_over_dice": 5.383124828338623,
+        "case_name": "hippocampus_197"
+      },
+      {
+        "dice_rms": 1.6157458730958751e-06,
+        "bands_rms": 8.793007509666495e-06,
+        "bands_over_dice": 5.442073345184326,
+        "case_name": "hippocampus_287"
+      },
+      {
+        "dice_rms": 1.6184027344934293e-06,
+        "bands_rms": 8.960135346569587e-06,
+        "bands_over_dice": 5.536406517028809,
+        "case_name": "hippocampus_311"
+      },
+      {
+        "dice_rms": 1.6117280665639555e-06,
+        "bands_rms": 8.759729098528624e-06,
+        "bands_over_dice": 5.434991836547852,
+        "case_name": "hippocampus_314"
+      },
+      {
+        "dice_rms": 1.6461888208141318e-06,
+        "bands_rms": 8.943673492467497e-06,
+        "bands_over_dice": 5.432957172393799,
+        "case_name": "hippocampus_353"
+      },
+      {
+        "dice_rms": 1.6395372313127154e-06,
+        "bands_rms": 8.644875379104633e-06,
+        "bands_over_dice": 5.2727532386779785,
+        "case_name": "hippocampus_361"
+      },
+      {
+        "dice_rms": 1.6356017340513063e-06,
+        "bands_rms": 8.63804598338902e-06,
+        "bands_over_dice": 5.281264781951904,
+        "case_name": "hippocampus_373"
+      },
+      {
+        "dice_rms": 1.6277634813377517e-06,
+        "bands_rms": 8.622726454632357e-06,
+        "bands_over_dice": 5.2972846031188965,
+        "case_name": "hippocampus_390"
+      }
+    ],
+    "anchor_model_sha256": "561d01fa4917457f930d68f1ced54a503608838cd2d0e2dfe47d8115d53d167f",
+    "target_ratio": 0.1,
+    "p95_cap": 0.75,
+    "scope": "All ten training crops only; same calibration graph and prefix as the matched 60% bands run",
+    "base_gradient": "Dice+CE",
+    "legacy_dice_rms_means": "Joint Dice+CE logit-gradient RMS",
+    "config_sha256": "51708a908e1eddbd0090e22138c0cb900e1d094afb8282e050374bd150b7b533",
+    "anchor_successful_updates": 50,
+    "anchor_training_attempts": 50,
+    "charged_flops": 432554437874
+  },
+  "metrics": [
+    {
+      "step": "12",
+      "charged_attempts": "12",
+      "patient_passes": "1.2",
+      "estimated_training_flops": "1560829648188",
+      "calibration_flops": "0",
+      "total_flops": "1560829648188",
+      "compute_fraction": "0.04881184795767211",
+      "mean_train_loss": "1.9652022222677867",
+      "learning_rate": "5e-05",
+      "macro_hard_dice": "0.026907579699336628",
+      "anterior_hard_dice": "0.017634629026925204",
+      "anterior_soft_dice": "0.014585282743120423",
+      "posterior_hard_dice": "0.03618053037174805",
+      "posterior_soft_dice": "0.013727700588508295",
+      "macro_soft_dice": "0.014156491665814359"
+    },
+    {
+      "step": "24",
+      "charged_attempts": "24",
+      "patient_passes": "2.4",
+      "estimated_training_flops": "3121659296376",
+      "calibration_flops": "0",
+      "total_flops": "3121659296376",
+      "compute_fraction": "0.09762369591534421",
+      "mean_train_loss": "1.7840017080307007",
+      "learning_rate": "0.0001",
+      "macro_hard_dice": "0.0318644829356266",
+      "anterior_hard_dice": "0.040226046144334116",
+      "anterior_soft_dice": "0.0147699758482094",
+      "posterior_hard_dice": "0.023502919726919078",
+      "posterior_soft_dice": "0.011864465303145923",
+      "macro_soft_dice": "0.013317220575677661"
+    },
+    {
+      "step": "36",
+      "charged_attempts": "36",
+      "patient_passes": "3.6",
+      "estimated_training_flops": "4682488944564",
+      "calibration_flops": "0",
+      "total_flops": "4682488944564",
+      "compute_fraction": "0.14643554387301633",
+      "mean_train_loss": "1.612906704346339",
+      "learning_rate": "9.98553988023854e-05",
+      "macro_hard_dice": "0.03333812879104879",
+      "anterior_hard_dice": "0.04546734076370704",
+      "anterior_soft_dice": "0.015503246265535172",
+      "posterior_hard_dice": "0.021208916818390544",
+      "posterior_soft_dice": "0.012738221701091299",
+      "macro_soft_dice": "0.014120733983313235"
+    },
+    {
+      "step": "49",
+      "charged_attempts": "49",
+      "patient_passes": "4.9",
+      "estimated_training_flops": "6373387730101",
+      "calibration_flops": "0",
+      "total_flops": "6373387730101",
+      "compute_fraction": "0.1993150458271611",
+      "mean_train_loss": "1.5208394894233117",
+      "learning_rate": "9.931291054251963e-05",
+      "macro_hard_dice": "0.04035215642624405",
+      "anterior_hard_dice": "0.05019241278097069",
+      "anterior_soft_dice": "0.015726267628801558",
+      "posterior_hard_dice": "0.030511900071517405",
+      "posterior_soft_dice": "0.013921727157699374",
+      "macro_soft_dice": "0.014823997393250465"
+    },
+    {
+      "step": "61",
+      "charged_attempts": "61",
+      "patient_passes": "6.1",
+      "estimated_training_flops": "7934978644652",
+      "calibration_flops": "432554437874",
+      "total_flops": "8367533082526",
+      "compute_fraction": "0.24815070087871383",
+      "mean_train_loss": "1.465861827135086",
+      "learning_rate": "9.845852655209575e-05",
+      "macro_hard_dice": "0.051087532647516164",
+      "anterior_hard_dice": "0.05601245900684341",
+      "anterior_soft_dice": "0.0161060718461298",
+      "posterior_hard_dice": "0.0461626062881889",
+      "posterior_soft_dice": "0.015083916037558364",
+      "macro_soft_dice": "0.015594993941844083"
+    },
+    {
+      "step": "73",
+      "charged_attempts": "73",
+      "patient_passes": "7.3",
+      "estimated_training_flops": "9496638765236",
+      "calibration_flops": "432554437874",
+      "total_flops": "9929193203110",
+      "compute_fraction": "0.29698852021152844",
+      "mean_train_loss": "1.4323872029781342",
+      "learning_rate": "9.727071659119285e-05",
+      "macro_hard_dice": "0.063946203356527",
+      "anterior_hard_dice": "0.06227586987033655",
+      "anterior_soft_dice": "0.016379896497640472",
+      "posterior_hard_dice": "0.06561653684271745",
+      "posterior_soft_dice": "0.015882314523108877",
+      "macro_soft_dice": "0.016131105510374673"
+    },
+    {
+      "step": "86",
+      "charged_attempts": "86",
+      "patient_passes": "8.6",
+      "estimated_training_flops": "11188437229202",
+      "calibration_flops": "432554437874",
+      "total_flops": "11620991667076",
+      "compute_fraction": "0.34989615782207756",
+      "mean_train_loss": "1.3962766023782582",
+      "learning_rate": "9.561729335575171e-05",
+      "macro_hard_dice": "0.08366353937460701",
+      "anterior_hard_dice": "0.06478743457187514",
+      "anterior_soft_dice": "0.01649624454932144",
+      "posterior_hard_dice": "0.10253964417733884",
+      "posterior_soft_dice": "0.01682880875439598",
+      "macro_soft_dice": "0.01666252665185871"
+    },
+    {
+      "step": "98",
+      "charged_attempts": "98",
+      "patient_passes": "9.8",
+      "estimated_training_flops": "12750097349786",
+      "calibration_flops": "432554437874",
+      "total_flops": "13182651787660",
+      "compute_fraction": "0.39873397715489217",
+      "mean_train_loss": "1.3727238774299622",
+      "learning_rate": "9.376398968609998e-05",
+      "macro_hard_dice": "0.09587025105711502",
+      "anterior_hard_dice": "0.07978227632756302",
+      "anterior_soft_dice": "0.016817323881416366",
+      "posterior_hard_dice": "0.11195822578666707",
+      "posterior_soft_dice": "0.017626230175105426",
+      "macro_soft_dice": "0.017221777028260894"
+    },
+    {
+      "step": "110",
+      "charged_attempts": "110",
+      "patient_passes": "11.0",
+      "estimated_training_flops": "14311757470370",
+      "calibration_flops": "432554437874",
+      "total_flops": "14744311908244",
+      "compute_fraction": "0.44757179648770673",
+      "mean_train_loss": "1.3473296463489532",
+      "learning_rate": "9.160989825700335e-05",
+      "macro_hard_dice": "0.1245116251198833",
+      "anterior_hard_dice": "0.09408383808189526",
+      "anterior_soft_dice": "0.017041447679870404",
+      "posterior_hard_dice": "0.15493941215787135",
+      "posterior_soft_dice": "0.01932836827248908",
+      "macro_soft_dice": "0.01818490797617974"
+    },
+    {
+      "step": "122",
+      "charged_attempts": "122",
+      "patient_passes": "12.2",
+      "estimated_training_flops": "15873417590954",
+      "calibration_flops": "432554437874",
+      "total_flops": "16305972028828",
+      "compute_fraction": "0.49640961582052134",
+      "mean_train_loss": "1.3206859628359477",
+      "learning_rate": "8.916999513375995e-05",
+      "macro_hard_dice": "0.14637410419504987",
+      "anterior_hard_dice": "0.12425344658536658",
+      "anterior_soft_dice": "0.016980218074212853",
+      "posterior_hard_dice": "0.16849476180473316",
+      "posterior_soft_dice": "0.02075696032709227",
+      "macro_soft_dice": "0.018868589200652562"
+    },
+    {
+      "step": "135",
+      "charged_attempts": "135",
+      "patient_passes": "13.5",
+      "estimated_training_flops": "17565216054920",
+      "calibration_flops": "432554437874",
+      "total_flops": "17997770492794",
+      "compute_fraction": "0.5493172534310705",
+      "mean_train_loss": "1.2996174097061157",
+      "learning_rate": "8.622395608201405e-05",
+      "macro_hard_dice": "0.19034741795458507",
+      "anterior_hard_dice": "0.16559999696201191",
+      "anterior_soft_dice": "0.017019781678055342",
+      "posterior_hard_dice": "0.21509483894715814",
+      "posterior_soft_dice": "0.02272130000906495",
+      "macro_soft_dice": "0.019870540843560144"
+    },
+    {
+      "step": "147",
+      "charged_attempts": "147",
+      "patient_passes": "14.7",
+      "estimated_training_flops": "19126876175504",
+      "calibration_flops": "432554437874",
+      "total_flops": "19559430613378",
+      "compute_fraction": "0.598155072763885",
+      "mean_train_loss": "1.277378390232722",
+      "learning_rate": "8.324525897975587e-05",
+      "macro_hard_dice": "0.23903658183129248",
+      "anterior_hard_dice": "0.2042910118277662",
+      "anterior_soft_dice": "0.017258509080140635",
+      "posterior_hard_dice": "0.2737821518348186",
+      "posterior_soft_dice": "0.02432676411878604",
+      "macro_soft_dice": "0.02079263659946334"
+    },
+    {
+      "step": "159",
+      "charged_attempts": "159",
+      "patient_passes": "15.9",
+      "estimated_training_flops": "20688536296088",
+      "calibration_flops": "432554437874",
+      "total_flops": "21121090733962",
+      "compute_fraction": "0.6469928920966996",
+      "mean_train_loss": "1.2609875202178955",
+      "learning_rate": "8.003890434631702e-05",
+      "macro_hard_dice": "0.2847487558650305",
+      "anterior_hard_dice": "0.22642191536332829",
+      "anterior_soft_dice": "0.017434498939949732",
+      "posterior_hard_dice": "0.34307559636673274",
+      "posterior_soft_dice": "0.025840348062606957",
+      "macro_soft_dice": "0.021637423501278345"
+    },
+    {
+      "step": "172",
+      "charged_attempts": "172",
+      "patient_passes": "17.2",
+      "estimated_training_flops": "22380334760054",
+      "calibration_flops": "432554437874",
+      "total_flops": "22812889197928",
+      "compute_fraction": "0.6999005297072488",
+      "mean_train_loss": "1.242243794294504",
+      "learning_rate": "7.633433795646853e-05",
+      "macro_hard_dice": "0.3368962799582087",
+      "anterior_hard_dice": "0.21767902259070054",
+      "anterior_soft_dice": "0.017352559012719072",
+      "posterior_hard_dice": "0.4561135373257169",
+      "posterior_soft_dice": "0.02873914187344221",
+      "macro_soft_dice": "0.02304585044308064"
+    },
+    {
+      "step": "184",
+      "charged_attempts": "184",
+      "patient_passes": "18.4",
+      "estimated_training_flops": "23941994880638",
+      "calibration_flops": "432554437874",
+      "total_flops": "24374549318512",
+      "compute_fraction": "0.7487383490400634",
+      "mean_train_loss": "1.2260850270589192",
+      "learning_rate": "7.272694575124199e-05",
+      "macro_hard_dice": "0.38626176697444975",
+      "anterior_hard_dice": "0.2508923604372102",
+      "anterior_soft_dice": "0.017579032144007776",
+      "posterior_hard_dice": "0.5216311735116892",
+      "posterior_soft_dice": "0.0317330678853278",
+      "macro_soft_dice": "0.024656050014667787"
+    },
+    {
+      "step": "196",
+      "charged_attempts": "196",
+      "patient_passes": "19.6",
+      "estimated_training_flops": "25503655001222",
+      "calibration_flops": "432554437874",
+      "total_flops": "25936209439096",
+      "compute_fraction": "0.7975761683728779",
+      "mean_train_loss": "1.2120531400044758",
+      "learning_rate": "6.896502334063384e-05",
+      "macro_hard_dice": "0.4313766723857115",
+      "anterior_hard_dice": "0.24936037574974976",
+      "anterior_soft_dice": "0.01766486636076409",
+      "posterior_hard_dice": "0.6133929690216733",
+      "posterior_soft_dice": "0.03854289686737152",
+      "macro_soft_dice": "0.028103881614067808"
+    },
+    {
+      "step": "208",
+      "charged_attempts": "208",
+      "patient_passes": "20.8",
+      "estimated_training_flops": "27065315121806",
+      "calibration_flops": "432554437874",
+      "total_flops": "27497869559680",
+      "compute_fraction": "0.8464139877056925",
+      "mean_train_loss": "1.1970861554145813",
+      "learning_rate": "6.507472504423652e-05",
+      "macro_hard_dice": "0.44999979057690265",
+      "anterior_hard_dice": "0.24805752598398148",
+      "anterior_soft_dice": "0.017727284226566553",
+      "posterior_hard_dice": "0.6519420551698237",
+      "posterior_soft_dice": "0.049644381345178075",
+      "macro_soft_dice": "0.03368583278587231"
+    },
+    {
+      "step": "221",
+      "charged_attempts": "221",
+      "patient_passes": "22.1",
+      "estimated_training_flops": "28757113585772",
+      "calibration_flops": "432554437874",
+      "total_flops": "29189668023646",
+      "compute_fraction": "0.8993216253162417",
+      "mean_train_loss": "1.1802480220794678",
+      "learning_rate": "6.074675390053559e-05",
+      "macro_hard_dice": "0.42325582625009794",
+      "anterior_hard_dice": "0.19941623017134844",
+      "anterior_soft_dice": "0.017505840774482258",
+      "posterior_hard_dice": "0.6470954223288474",
+      "posterior_soft_dice": "0.0624964962211939",
+      "macro_soft_dice": "0.04000116849783808"
+    },
+    {
+      "step": "233",
+      "charged_attempts": "233",
+      "patient_passes": "23.3",
+      "estimated_training_flops": "30318773706356",
+      "calibration_flops": "432554437874",
+      "total_flops": "30751328144230",
+      "compute_fraction": "0.9481594446490563",
+      "mean_train_loss": "1.163487325112025",
+      "learning_rate": "5.667668744843303e-05",
+      "macro_hard_dice": "0.45034448659541215",
+      "anterior_hard_dice": "0.23936941013323354",
+      "anterior_soft_dice": "0.017977477642349325",
+      "posterior_hard_dice": "0.6613195630575907",
+      "posterior_soft_dice": "0.06580392428888725",
+      "macro_soft_dice": "0.04189070096561828"
+    },
+    {
+      "step": "245",
+      "charged_attempts": "245",
+      "patient_passes": "24.5",
+      "estimated_training_flops": "31880433826940",
+      "calibration_flops": "432554437874",
+      "total_flops": "32312988264814",
+      "compute_fraction": "0.9969972639818708",
+      "mean_train_loss": "1.1544294555981953",
+      "learning_rate": "5.256367830907751e-05",
+      "macro_hard_dice": "0.45545547823163185",
+      "anterior_hard_dice": "0.25241359059387275",
+      "anterior_soft_dice": "0.017989323367006503",
+      "posterior_hard_dice": "0.6584973658693911",
+      "posterior_soft_dice": "0.06864340495891295",
+      "macro_soft_dice": "0.04331636416295973"
+    }
+  ]
+}

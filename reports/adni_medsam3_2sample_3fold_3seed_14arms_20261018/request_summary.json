@@ -1,0 +1,43 @@
+{
+  "name": "adni_medsam3_2sample_3fold_3seed_14arms_20261018",
+  "folds": [
+    0,
+    1,
+    3
+  ],
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "conditions": [
+    "dice",
+    "dice_bands",
+    "dice_sdf",
+    "dice_bands_sdf",
+    "dice_bands_edge",
+    "dice_bands_edge_sdf",
+    "dice_depth",
+    "dice_bands_depth",
+    "dice_edge_depth",
+    "dice_sdf_depth",
+    "dice_bands_edge_depth",
+    "dice_bands_sdf_depth",
+    "dice_edge_sdf_depth",
+    "dice_bands_edge_sdf_depth"
+  ],
+  "runs": 126,
+  "fresh_baselines": 9,
+  "training_crops": 2,
+  "training_subjects": 2,
+  "validation_crops": 54,
+  "validation_subjects": 27,
+  "updates": 200,
+  "augmentation": "none",
+  "workers": 2,
+  "calibration_target": 0.1,
+  "calibration_p95_cap": 0.5,
+  "support_note": "Fold 3 shares the two training samples with fold 0, but uses a different held-out validation fold; do not treat these as independent training-support draws.",
+  "geometry_policy": "Existing ADNI source-voxel geometry: SDF clipped at 8 source voxels; normalized PCA-plane depth CE using source X as reference. No anatomical-axis or millimeter claim without affine metadata.",
+  "scope": "All results fresh; historical pilots are references only"
+}

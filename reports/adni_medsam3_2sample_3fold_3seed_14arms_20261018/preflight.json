@@ -1,0 +1,23 @@
+{
+  "status": "passed",
+  "manifest_sha256": "0503950dff7b76a8bfd20cc2fe2671b792dc78dfe931b9783bbd96317879dec3",
+  "quota": {
+    "used_gib": 25.8,
+    "limit_gib": 93.13,
+    "free_gib": 67.33,
+    "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  25.80GiB/93.13GiB  222.71k/\u221e  \n\n",
+    "checked_at": 1792336445.7925217
+  },
+  "qos": "stud|cpu=12,gres/gpu=2|gres/gpu=4|2|4\n",
+  "scheduler_test": "sbatch: Job 706833 to start at 2026-10-18T22:44:05 a using 8 processors on nodes gnode01 in partition stud\n",
+  "checked_at": 1792336445.8017495,
+  "gpu_gate": "All-loss finite backward/calibration must pass on both distinct supports before any optimizer updates",
+  "checks": [
+    "Original trainer byte-identical",
+    "126 exact cells with nine fresh baselines",
+    "Subject split, geometry and gradient tests",
+    "Two-worker pool, archive gate, resume, pause and failure tests",
+    "Data/weights/upstream hashes",
+    "Scheduler and quota"
+  ]
+}

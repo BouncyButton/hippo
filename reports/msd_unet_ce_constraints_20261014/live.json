@@ -1,0 +1,157 @@
+{
+  "status.json": {
+    "status": "complete",
+    "active": null,
+    "completed": 6,
+    "total": 6,
+    "runs": [
+      {
+        "id": "MSD_basic_unet16_ce_dice_bands_target10_f0s0",
+        "kind": "conventional",
+        "dataset": "MSD",
+        "model": "basic_unet16",
+        "fold": 0,
+        "seed": 0,
+        "arm": "dice_bands",
+        "target": 0.1,
+        "protocol": "basic_unet16_target10",
+        "final_dice": 0.8198369347184762,
+        "best_dice": 0.8203094980427483,
+        "released_bytes": 29009872
+      },
+      {
+        "id": "MSD_basic_unet16_ce_dice_bands_target40_f0s0",
+        "kind": "conventional",
+        "dataset": "MSD",
+        "model": "basic_unet16",
+        "fold": 0,
+        "seed": 0,
+        "arm": "dice_bands",
+        "target": 0.4,
+        "protocol": "basic_unet16_target40",
+        "final_dice": 0.831651056979132,
+        "best_dice": 0.831651056979132,
+        "released_bytes": 28985552
+      },
+      {
+        "id": "MSD_basic_unet16_ce_dice_bands_target60_f0s0",
+        "kind": "conventional",
+        "dataset": "MSD",
+        "model": "basic_unet16",
+        "fold": 0,
+        "seed": 0,
+        "arm": "dice_bands",
+        "target": 0.6,
+        "protocol": "basic_unet16_target60",
+        "final_dice": 0.8305103359368443,
+        "best_dice": 0.8305103359368443,
+        "released_bytes": 28985552
+      },
+      {
+        "id": "MSD_basic_unet16_ce_dice_bands_edge_depth_target10_f0s0",
+        "kind": "conventional",
+        "dataset": "MSD",
+        "model": "basic_unet16",
+        "fold": 0,
+        "seed": 0,
+        "arm": "dice_bands_edge_depth",
+        "target": 0.1,
+        "protocol": "basic_unet16_target10",
+        "final_dice": 0.8229123708151731,
+        "best_dice": 0.8249011848764112,
+        "released_bytes": 29009872
+      },
+      {
+        "id": "MSD_basic_unet16_ce_dice_bands_edge_depth_target40_f0s0",
+        "kind": "conventional",
+        "dataset": "MSD",
+        "model": "basic_unet16",
+        "fold": 0,
+        "seed": 0,
+        "arm": "dice_bands_edge_depth",
+        "target": 0.4,
+        "protocol": "basic_unet16_target40",
+        "final_dice": 0.8335817858089231,
+        "best_dice": 0.8335817858089231,
+        "released_bytes": 28985552
+      },
+      {
+        "id": "MSD_basic_unet16_ce_dice_bands_edge_depth_target60_f0s0",
+        "kind": "conventional",
+        "dataset": "MSD",
+        "model": "basic_unet16",
+        "fold": 0,
+        "seed": 0,
+        "arm": "dice_bands_edge_depth",
+        "target": 0.6,
+        "protocol": "basic_unet16_target60",
+        "final_dice": 0.8380476557035408,
+        "best_dice": 0.8380476557035408,
+        "released_bytes": 28985552
+      }
+    ],
+    "job_id": "700406",
+    "updated_at": 1791992771.7449124,
+    "quota": {
+      "used_gib": 24.19,
+      "limit_gib": 93.13,
+      "free_gib": 68.94,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  24.19GiB/93.13GiB  185.69k/\u221e  \n\n",
+      "checked_at": 1791992771.7775977
+    }
+  },
+  "submission.json": {
+    "job_id": "700406",
+    "dependency": null,
+    "quota": {
+      "used_gib": 24.13,
+      "limit_gib": 93.13,
+      "free_gib": 69.0,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  24.13GiB/93.13GiB  185.48k/\u221e  \n\n",
+      "checked_at": 1791978796.2121103
+    },
+    "submitted_at": 1791978796.4295936,
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--chdir=/mnt/beegfsstudents/home/3160552/msd_unet_ce_constraints_20261014",
+      "--output=/mnt/beegfsstudents/home/3160552/msd_unet_ce_constraints_20261014/slurm-%j.out",
+      "--error=/mnt/beegfsstudents/home/3160552/msd_unet_ce_constraints_20261014/slurm-%j.err",
+      "/mnt/beegfsstudents/home/3160552/msd_unet_ce_constraints_20261014/run.sbatch",
+      "/mnt/beegfsstudents/home/3160552/msd_unet_ce_constraints_20261014"
+    ],
+    "manifest_sha256": "1ed1eae234824740076d09ca2421beee12718924193740f30a0ab339ddc2f79f"
+  },
+  "successor.json": {
+    "job_id": "700407",
+    "dependency": "700406",
+    "quota": {
+      "used_gib": 24.13,
+      "limit_gib": 93.13,
+      "free_gib": 69.0,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  24.13GiB/93.13GiB  185.48k/\u221e  \n\n",
+      "checked_at": 1791978809.2715406
+    },
+    "submitted_at": 1791978809.4283373,
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--chdir=/mnt/beegfsstudents/home/3160552/msd_unet_ce_constraints_20261014",
+      "--output=/mnt/beegfsstudents/home/3160552/msd_unet_ce_constraints_20261014/slurm-%j.out",
+      "--error=/mnt/beegfsstudents/home/3160552/msd_unet_ce_constraints_20261014/slurm-%j.err",
+      "--dependency=afterany:700406",
+      "/mnt/beegfsstudents/home/3160552/msd_unet_ce_constraints_20261014/run.sbatch",
+      "/mnt/beegfsstudents/home/3160552/msd_unet_ce_constraints_20261014"
+    ],
+    "manifest_sha256": "1ed1eae234824740076d09ca2421beee12718924193740f30a0ab339ddc2f79f"
+  },
+  "ready": [],
+  "cleanup": [
+    "runs/MSD_basic_unet16_ce_dice_bands_target60_f0s0/cleanup.json",
+    "runs/MSD_basic_unet16_ce_dice_bands_edge_depth_target60_f0s0/cleanup.json",
+    "runs/MSD_basic_unet16_ce_dice_bands_target40_f0s0/cleanup.json",
+    "runs/MSD_basic_unet16_ce_dice_bands_target10_f0s0/cleanup.json",
+    "runs/MSD_basic_unet16_ce_dice_bands_edge_depth_target40_f0s0/cleanup.json",
+    "runs/MSD_basic_unet16_ce_dice_bands_edge_depth_target10_f0s0/cleanup.json"
+  ]
+}

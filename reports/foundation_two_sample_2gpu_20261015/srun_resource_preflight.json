@@ -1,0 +1,20 @@
+{
+  "command": [
+    "srun",
+    "--test-only",
+    "--partition=stud",
+    "--qos=stud",
+    "--time=24:00:00",
+    "--nodes=1",
+    "--ntasks=2",
+    "--cpus-per-task=4",
+    "--mem=80G",
+    "--gres=gpu:4g.40gb:2",
+    "--gpus-per-task=4g.40gb:1",
+    "--gpu-bind=single:1",
+    "/bin/true"
+  ],
+  "returncode": 0,
+  "stdout": "",
+  "stderr": "srun: Job 702516 to start at 2026-10-15T18:32:45 a using 8 processors on nodes gnode02 in partition stud\n"
+}

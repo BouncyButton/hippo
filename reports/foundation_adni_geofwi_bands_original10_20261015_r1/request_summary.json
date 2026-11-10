@@ -1,0 +1,50 @@
+{
+  "status": "failed_before_training",
+  "runs": 6,
+  "fold": 0,
+  "seed": 0,
+  "augmentation": "none",
+  "arms": [
+    "baseline",
+    "bands",
+    "bands+edge"
+  ],
+  "models": {
+    "ADNI": "MedSAM3",
+    "GeoFWI3D": "SAM3"
+  },
+  "support_volumes": 5,
+  "validation_volumes": {
+    "ADNI": 54,
+    "GeoFWI3D": 96
+  },
+  "recipe": {
+    "base_sha256": "9999e2341ceef5e136daa386eecb55cb414446a00ac2b55eb2dfd2f7c3cf8c9e",
+    "updates": 200,
+    "accumulation": 2,
+    "warmup_updates": 20,
+    "learning_rate": 5e-05,
+    "final_learning_rate": 5e-06,
+    "calibration_slabs_per_volume": 4,
+    "constraint_warmup_updates": 20,
+    "gradient_ratio_target": 0.1,
+    "gradient_ratio_p95_cap": 0.5,
+    "calibration_seed": 20260929
+  },
+  "original_recipe_path": "docs/experiments/medsam3_multiclass_replication_20260930/protocols/fold0_seed17.json",
+  "original_recipe_sha256": "808eb47ca2e532a6b8e5ecc49e7b0d2cc5f81b05de6526c339d58be58970d36a",
+  "manifest_sha256": "c9a4b699c0ab1fc80dfbb90fe8b80ed415a9628fbceba431c384b83c9b1a1378",
+  "monitoring": "No chat heartbeat requested or created",
+  "queued_handoff": "Current ADNI sweep finishes first, including verified per-run archives and cleanup",
+  "gpu_validation": "Mandatory real-model numerical loss/gradient equivalence before training; pending GPU allocation",
+  "job_id": "701972",
+  "dependency": "701702",
+  "campaign": "foundation_adni_geofwi_bands_original10_20261015_r1",
+  "recovery_of": "foundation_adni_geofwi_bands_original10_20261015",
+  "previous_job": "701718",
+  "repair": "Validation-only deterministic kernels and CPU FP32 grid sampling; original training runtime restored; numerical tolerances unchanged",
+  "training_updates_before_failure": 0,
+  "collector_pid": 36495,
+  "training_updates": 0,
+  "replacement_campaign": "foundation_adni_geofwi_bands_original10_20261015_r2"
+}

@@ -1,0 +1,327 @@
+{
+  "status": "diagnostic_only",
+  "environment": {
+    "gpu": "NVIDIA A100-SXM4-80GB",
+    "cuda": "13.0",
+    "cudnn": 92000,
+    "packages": {
+      "torch": "2.12.1",
+      "torchvision": "0.27.1",
+      "numpy": "2.4.6",
+      "scipy": "1.17.1",
+      "nibabel": "5.4.2",
+      "timm": "1.0.22",
+      "einops": "0.8.2",
+      "Pillow": "12.3.0"
+    }
+  },
+  "bundle_sha256": "92b387c59ce409c5700e6e9b84f4bcf27069d9cb43f29f0fd8ce67ceb84d543d",
+  "diagnostic_sha256": "fd0be90bb03166d47022596e212397ea2837257047eac26f08d5bda312cb9ec6",
+  "case": "hippocampus_156",
+  "anchor": 12,
+  "seed": 7319,
+  "rtol": 1e-05,
+  "atol": 1e-07,
+  "comparisons": [
+    {
+      "test": "original_repeat",
+      "losses": {
+        "native": 131.508056640625,
+        "bands": 3.969644546508789,
+        "edge": 0.30132782459259033
+      },
+      "rng_before": {
+        "cpu": "693941db2a8d91793a5fdf55683e101931e2163e2e3eadd2369cb7fb6f177af0",
+        "cuda": [
+          "a679fde4094b2562e9823f779865a0bcfaa9ac0652472768c1e378a160f52acf"
+        ],
+        "python": "87976fbb25e385b1b3f357adee5203d866ad3778c62c4e2739eb0f1b029630b6",
+        "numpy": "5bab9abaa0b59ffbdf17a2ac7bd0e1828a317faf9b9ab4fe51bedb2d0f0848ab"
+      },
+      "rng_after_forward": {
+        "cpu": "693941db2a8d91793a5fdf55683e101931e2163e2e3eadd2369cb7fb6f177af0",
+        "cuda": [
+          "76f84348b5c64b0ac2479149ff8ea9f9594145551ec084fca8f2ea4bba72a647"
+        ],
+        "python": "87976fbb25e385b1b3f357adee5203d866ad3778c62c4e2739eb0f1b029630b6",
+        "numpy": "5bab9abaa0b59ffbdf17a2ac7bd0e1828a317faf9b9ab4fe51bedb2d0f0848ab"
+      },
+      "rng_after_backward": {
+        "cpu": "693941db2a8d91793a5fdf55683e101931e2163e2e3eadd2369cb7fb6f177af0",
+        "cuda": [
+          "76f84348b5c64b0ac2479149ff8ea9f9594145551ec084fca8f2ea4bba72a647"
+        ],
+        "python": "87976fbb25e385b1b3f357adee5203d866ad3778c62c4e2739eb0f1b029630b6",
+        "numpy": "5bab9abaa0b59ffbdf17a2ac7bd0e1828a317faf9b9ab4fe51bedb2d0f0848ab"
+      },
+      "losses_close": {
+        "native": true,
+        "bands": true,
+        "edge": true
+      },
+      "rng_before_equal": true,
+      "rng_after_forward_equal": true,
+      "rng_after_backward_equal": true,
+      "gradients": {
+        "native": {
+          "passed": false,
+          "failed_parameters": 717,
+          "mismatched_elements": 13615657,
+          "compared_elements": 18497664,
+          "relative_l2": 0.004642373590594979,
+          "first_failures": [
+            {
+              "parameter": "backbone.vision_backbone.trunk.blocks.0.attn.qkv.lora.lora_A",
+              "shape": [
+                1024,
+                16
+              ],
+              "mismatches": 16017,
+              "elements": 16384,
+              "max_abs": 0.05859375,
+              "reference_max_abs": 4.92578125,
+              "reference_finite": true,
+              "actual_finite": true
+            },
+            {
+              "parameter": "backbone.vision_backbone.trunk.blocks.0.attn.qkv.lora.lora_B",
+              "shape": [
+                16,
+                3072
+              ],
+              "mismatches": 48244,
+              "elements": 49152,
+              "max_abs": 0.016357421875,
+              "reference_max_abs": 0.952392578125,
+              "reference_finite": true,
+              "actual_finite": true
+            },
+            {
+              "parameter": "backbone.vision_backbone.trunk.blocks.0.attn.proj.lora.lora_A",
+              "shape": [
+                1024,
+                16
+              ],
+              "mismatches": 16125,
+              "elements": 16384,
+              "max_abs": 0.0185546875,
+              "reference_max_abs": 1.039306640625,
+              "reference_finite": true,
+              "actual_finite": true
+            },
+            {
+              "parameter": "backbone.vision_backbone.trunk.blocks.0.attn.proj.lora.lora_B",
+              "shape": [
+                16,
+                1024
+              ],
+              "mismatches": 15990,
+              "elements": 16384,
+              "max_abs": 0.0699462890625,
+              "reference_max_abs": 11.5208740234375,
+              "reference_finite": true,
+              "actual_finite": true
+            },
+            {
+              "parameter": "backbone.vision_backbone.trunk.blocks.0.mlp.fc1.lora.lora_A",
+              "shape": [
+                1024,
+                16
+              ],
+              "mismatches": 15945,
+              "elements": 16384,
+              "max_abs": 0.05078125,
+              "reference_max_abs": 5.560546875,
+              "reference_finite": true,
+              "actual_finite": true
+            }
+          ]
+        },
+        "bands": {
+          "passed": false,
+          "failed_parameters": 246,
+          "mismatched_elements": 6285965,
+          "compared_elements": 18497664,
+          "relative_l2": 0.0022543198344107027,
+          "first_failures": [
+            {
+              "parameter": "backbone.vision_backbone.trunk.blocks.0.attn.qkv.lora.lora_A",
+              "shape": [
+                1024,
+                16
+              ],
+              "mismatches": 15563,
+              "elements": 16384,
+              "max_abs": 0.001953125,
+              "reference_max_abs": 0.161529541015625,
+              "reference_finite": true,
+              "actual_finite": true
+            },
+            {
+              "parameter": "backbone.vision_backbone.trunk.blocks.0.attn.qkv.lora.lora_B",
+              "shape": [
+                16,
+                3072
+              ],
+              "mismatches": 46453,
+              "elements": 49152,
+              "max_abs": 0.00054931640625,
+              "reference_max_abs": 0.036376953125,
+              "reference_finite": true,
+              "actual_finite": true
+            },
+            {
+              "parameter": "backbone.vision_backbone.trunk.blocks.0.attn.proj.lora.lora_A",
+              "shape": [
+                1024,
+                16
+              ],
+              "mismatches": 15589,
+              "elements": 16384,
+              "max_abs": 0.000946044921875,
+              "reference_max_abs": 0.06884765625,
+              "reference_finite": true,
+              "actual_finite": true
+            },
+            {
+              "parameter": "backbone.vision_backbone.trunk.blocks.0.attn.proj.lora.lora_B",
+              "shape": [
+                16,
+                1024
+              ],
+              "mismatches": 15381,
+              "elements": 16384,
+              "max_abs": 0.0023193359375,
+              "reference_max_abs": 0.3670654296875,
+              "reference_finite": true,
+              "actual_finite": true
+            },
+            {
+              "parameter": "backbone.vision_backbone.trunk.blocks.0.mlp.fc1.lora.lora_A",
+              "shape": [
+                1024,
+                16
+              ],
+              "mismatches": 15155,
+              "elements": 16384,
+              "max_abs": 0.0023193359375,
+              "reference_max_abs": 0.263671875,
+              "reference_finite": true,
+              "actual_finite": true
+            }
+          ]
+        },
+        "edge": {
+          "passed": false,
+          "failed_parameters": 250,
+          "mismatched_elements": 6180496,
+          "compared_elements": 18497664,
+          "relative_l2": 0.0029402321560194774,
+          "first_failures": [
+            {
+              "parameter": "backbone.vision_backbone.trunk.blocks.0.attn.qkv.lora.lora_A",
+              "shape": [
+                1024,
+                16
+              ],
+              "mismatches": 12257,
+              "elements": 16384,
+              "max_abs": 8.7738037109375e-05,
+              "reference_max_abs": 0.007784843444824219,
+              "reference_finite": true,
+              "actual_finite": true
+            },
+            {
+              "parameter": "backbone.vision_backbone.trunk.blocks.0.attn.qkv.lora.lora_B",
+              "shape": [
+                16,
+                3072
+              ],
+              "mismatches": 40349,
+              "elements": 49152,
+              "max_abs": 2.7894973754882812e-05,
+              "reference_max_abs": 0.0012093782424926758,
+              "reference_finite": true,
+              "actual_finite": true
+            },
+            {
+              "parameter": "backbone.vision_backbone.trunk.blocks.0.attn.proj.lora.lora_A",
+              "shape": [
+                1024,
+                16
+              ],
+              "mismatches": 14757,
+              "elements": 16384,
+              "max_abs": 2.193450927734375e-05,
+              "reference_max_abs": 0.0020599365234375,
+              "reference_finite": true,
+              "actual_finite": true
+            },
+            {
+              "parameter": "backbone.vision_backbone.trunk.blocks.0.attn.proj.lora.lora_B",
+              "shape": [
+                16,
+                1024
+              ],
+              "mismatches": 16035,
+              "elements": 16384,
+              "max_abs": 3.719329833984375e-05,
+              "reference_max_abs": 0.011652946472167969,
+              "reference_finite": true,
+              "actual_finite": true
+            },
+            {
+              "parameter": "backbone.vision_backbone.trunk.blocks.0.mlp.fc1.lora.lora_A",
+              "shape": [
+                1024,
+                16
+              ],
+              "mismatches": 14364,
+              "elements": 16384,
+              "max_abs": 9.453296661376953e-05,
+              "reference_max_abs": 0.0074176788330078125,
+              "reference_finite": true,
+              "actual_finite": true
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "optimizer_updates": 0,
+  "preflight_approved": false,
+  "reference": {
+    "losses": {
+      "native": 131.508056640625,
+      "bands": 3.969644546508789,
+      "edge": 0.30132782459259033
+    },
+    "rng_before": {
+      "cpu": "693941db2a8d91793a5fdf55683e101931e2163e2e3eadd2369cb7fb6f177af0",
+      "cuda": [
+        "a679fde4094b2562e9823f779865a0bcfaa9ac0652472768c1e378a160f52acf"
+      ],
+      "python": "87976fbb25e385b1b3f357adee5203d866ad3778c62c4e2739eb0f1b029630b6",
+      "numpy": "5bab9abaa0b59ffbdf17a2ac7bd0e1828a317faf9b9ab4fe51bedb2d0f0848ab"
+    },
+    "rng_after_forward": {
+      "cpu": "693941db2a8d91793a5fdf55683e101931e2163e2e3eadd2369cb7fb6f177af0",
+      "cuda": [
+        "76f84348b5c64b0ac2479149ff8ea9f9594145551ec084fca8f2ea4bba72a647"
+      ],
+      "python": "87976fbb25e385b1b3f357adee5203d866ad3778c62c4e2739eb0f1b029630b6",
+      "numpy": "5bab9abaa0b59ffbdf17a2ac7bd0e1828a317faf9b9ab4fe51bedb2d0f0848ab"
+    },
+    "rng_after_backward": {
+      "cpu": "693941db2a8d91793a5fdf55683e101931e2163e2e3eadd2369cb7fb6f177af0",
+      "cuda": [
+        "76f84348b5c64b0ac2479149ff8ea9f9594145551ec084fca8f2ea4bba72a647"
+      ],
+      "python": "87976fbb25e385b1b3f357adee5203d866ad3778c62c4e2739eb0f1b029630b6",
+      "numpy": "5bab9abaa0b59ffbdf17a2ac7bd0e1828a317faf9b9ab4fe51bedb2d0f0848ab"
+    }
+  },
+  "finding": "Original code does not meet the gradient tolerance when repeated with the same seed.",
+  "adapter_unchanged": true,
+  "frozen_unchanged": true
+}

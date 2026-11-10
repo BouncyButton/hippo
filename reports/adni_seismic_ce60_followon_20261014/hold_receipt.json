@@ -1,0 +1,52 @@
+{
+  "status": "followon_held",
+  "cancelled_job": "700973",
+  "msd_control": {
+    "pause": false,
+    "disabled_tasks": [],
+    "full_submission_enabled": false
+  },
+  "followon_control": {
+    "pause": true,
+    "disabled_tasks": [],
+    "full_submission_enabled": false,
+    "hold_reason": "User unqueued ADNI/seismic/MedSAM3 follow-on pending MSD analysis",
+    "held_at": 1791999456.1161454
+  },
+  "msd_continuation": {
+    "job_id": "701050",
+    "dependency": "700918",
+    "quota": {
+      "used_gib": 25.15,
+      "limit_gib": 93.13,
+      "free_gib": 67.97999999999999,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  25.15GiB/93.13GiB  188.68k/\u221e  \n\n",
+      "checked_at": 1791999476.1280382
+    },
+    "submitted_at": 1791999476.347048,
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--chdir=/mnt/beegfsstudents/home/3160552/msd_four_models_ce_target60_20261014",
+      "--output=/mnt/beegfsstudents/home/3160552/msd_four_models_ce_target60_20261014/slurm-%j.out",
+      "--error=/mnt/beegfsstudents/home/3160552/msd_four_models_ce_target60_20261014/slurm-%j.err",
+      "--dependency=afterany:700918",
+      "/mnt/beegfsstudents/home/3160552/msd_four_models_ce_target60_20261014/run.sbatch",
+      "/mnt/beegfsstudents/home/3160552/msd_four_models_ce_target60_20261014"
+    ],
+    "manifest_sha256": "46fba8cbd02c32450422c08c1c3e8e503800eed88a10ee27b40e15e16334601d"
+  },
+  "queue": [
+    [
+      "701050",
+      "PENDING",
+      "hippo-msd-four-ce60"
+    ],
+    [
+      "700918",
+      "RUNNING",
+      "hippo-msd-four-ce60"
+    ]
+  ],
+  "time": 1791999476.6784503
+}

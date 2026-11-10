@@ -1,0 +1,71 @@
+{
+  "status.json": {
+    "status": "running",
+    "active": "MSD_basic_unet16_ce_dice_bands_target10_f0s0",
+    "completed": 0,
+    "total": 6,
+    "runs": [],
+    "job_id": "700406",
+    "updated_at": 1791978809.526746,
+    "quota": {
+      "used_gib": 24.13,
+      "limit_gib": 93.13,
+      "free_gib": 69.0,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  24.13GiB/93.13GiB  185.48k/\u221e  \n\n",
+      "checked_at": 1791978809.5599566
+    }
+  },
+  "preflight.json": {
+    "status": "passed",
+    "manifest_sha256": "1ed1eae234824740076d09ca2421beee12718924193740f30a0ab339ddc2f79f",
+    "checks": [
+      "Six authorized 3D UNet conditions; original-fourteen winner verified",
+      "Frozen data/source and 10/52 split, fold0 seed0, no augmentation",
+      "Both constraints added on top of unchanged Dice+CE",
+      "Correct gradients and sequential calibration against joint Dice+CE baseline",
+      "10/40/60 targets and .5/.5/.75 p95 ceilings",
+      "Measured FLOP schedules and original 50-update prefix/ramp",
+      "Original AdamW and 1095-update LR horizon",
+      "Shell syntax"
+    ]
+  },
+  "submission.json": {
+    "job_id": "700406",
+    "dependency": null,
+    "quota": {
+      "used_gib": 24.13,
+      "limit_gib": 93.13,
+      "free_gib": 69.0,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  24.13GiB/93.13GiB  185.48k/\u221e  \n\n",
+      "checked_at": 1791978796.2121103
+    },
+    "submitted_at": 1791978796.4295936,
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--chdir=/mnt/beegfsstudents/home/3160552/msd_unet_ce_constraints_20261014",
+      "--output=/mnt/beegfsstudents/home/3160552/msd_unet_ce_constraints_20261014/slurm-%j.out",
+      "--error=/mnt/beegfsstudents/home/3160552/msd_unet_ce_constraints_20261014/slurm-%j.err",
+      "/mnt/beegfsstudents/home/3160552/msd_unet_ce_constraints_20261014/run.sbatch",
+      "/mnt/beegfsstudents/home/3160552/msd_unet_ce_constraints_20261014"
+    ],
+    "manifest_sha256": "1ed1eae234824740076d09ca2421beee12718924193740f30a0ab339ddc2f79f"
+  },
+  "runs": [
+    {
+      "id": "MSD_basic_unet16_ce_dice_bands_target10_f0s0",
+      "latest": {
+        "step": "562",
+        "patient_passes": "56.2",
+        "macro_hard_dice": "0.8198369347184762"
+      },
+      "complete": {
+        "updates": 562,
+        "training_dice": 0.9218912367723678
+      },
+      "validation_dice": 0.8198369347184762,
+      "initialization": "5bc2d519363bce3fb7e486e3f5be350ad59fa58e7b8cce7b593d7cc941229904"
+    }
+  ],
+  "queue": "700407|PENDING|hippo-unet-ce-constraints|0:00|(Dependency)\n700406|RUNNING|hippo-unet-ce-constraints|3:09|gnode03\n"
+}

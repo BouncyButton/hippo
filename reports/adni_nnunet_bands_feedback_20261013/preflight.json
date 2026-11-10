@@ -1,0 +1,28 @@
+{
+  "status": "passed",
+  "manifest_sha256": "cd869b63bf6786aff86c6ddb76cbc594590ae41c8ec56af787fa2f9187bcd781",
+  "checks": [
+    {
+      "variant": "bands_target20",
+      "weight": 0.012514620218054884,
+      "target": 0.2,
+      "p95": 0.2383600781877327,
+      "updates": 90
+    },
+    {
+      "variant": "bands_target40",
+      "weight": 0.025029240436109768,
+      "target": 0.4,
+      "p95": 0.4767201563754654,
+      "updates": 90
+    }
+  ],
+  "assertions": [
+    "Only bands gradient target changes",
+    "Actual wrapper returns the planned coefficients",
+    "Native lower-resolution gradients unchanged",
+    "Auxiliary gradient equals the intended coefficient times ramp at initial and full strength",
+    "Original 9/9 timing, 20 validations, same 90-update budget floor and unchanged learning-rate horizon",
+    "Identical ADNI subset, binary loss, no augmentation"
+  ]
+}

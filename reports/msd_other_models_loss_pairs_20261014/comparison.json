@@ -1,0 +1,153 @@
+{
+  "status": "complete",
+  "dataset": "MSD",
+  "fold": 0,
+  "seed": 0,
+  "augmentation": "none",
+  "budget_flops_each": 31976450667090,
+  "runs": [
+    {
+      "model": "swinunetr",
+      "weight_ce": 0,
+      "updates": 206,
+      "validation_dice_percent": 45.627680367179515,
+      "training_dice_percent": 47.1859786697569,
+      "anterior_dice_percent": 70.64799208581361,
+      "posterior_dice_percent": 20.607368648545435,
+      "voxel_errors": {
+        "foreground_fp": 665682,
+        "foreground_fn": 1887,
+        "anterior_to_posterior": 3200,
+        "posterior_to_anterior": 3692
+      },
+      "consumed_training_flops": 31932500020532,
+      "archive_verified": true,
+      "cleanup": "complete"
+    },
+    {
+      "model": "swinunetr",
+      "weight_ce": 1,
+      "updates": 206,
+      "validation_dice_percent": 70.22862054445298,
+      "training_dice_percent": 78.54985045453672,
+      "anterior_dice_percent": 66.36586243264037,
+      "posterior_dice_percent": 74.09137865626553,
+      "voxel_errors": {
+        "foreground_fp": 113627,
+        "foreground_fn": 16797,
+        "anterior_to_posterior": 4284,
+        "posterior_to_anterior": 4755
+      },
+      "consumed_training_flops": 31934120070658,
+      "archive_verified": true,
+      "cleanup": "complete"
+    },
+    {
+      "model": "unetr_vit_b16",
+      "weight_ce": 0,
+      "updates": 245,
+      "validation_dice_percent": 49.648948862895836,
+      "training_dice_percent": 57.875286741487955,
+      "anterior_dice_percent": 39.63511170368535,
+      "posterior_dice_percent": 59.66278602210635,
+      "voxel_errors": {
+        "foreground_fp": 376508,
+        "foreground_fn": 8434,
+        "anterior_to_posterior": 2910,
+        "posterior_to_anterior": 2689
+      },
+      "consumed_training_flops": 31865011891860,
+      "archive_verified": true,
+      "cleanup": "complete"
+    },
+    {
+      "model": "unetr_vit_b16",
+      "weight_ce": 1,
+      "updates": 245,
+      "validation_dice_percent": 43.202098018995855,
+      "training_dice_percent": 57.875550726762015,
+      "anterior_dice_percent": 21.143699550347048,
+      "posterior_dice_percent": 65.26049648764467,
+      "voxel_errors": {
+        "foreground_fp": 168000,
+        "foreground_fn": 71610,
+        "anterior_to_posterior": 11584,
+        "posterior_to_anterior": 203
+      },
+      "consumed_training_flops": 31866938650505,
+      "archive_verified": true,
+      "cleanup": "complete"
+    },
+    {
+      "model": "basic_unet16",
+      "weight_ce": 0,
+      "updates": 563,
+      "validation_dice_percent": 74.16785879378678,
+      "training_dice_percent": 77.41040123855788,
+      "anterior_dice_percent": 77.28662417936094,
+      "posterior_dice_percent": 71.04909340821266,
+      "voxel_errors": {
+        "foreground_fp": 98762,
+        "foreground_fn": 4832,
+        "anterior_to_posterior": 2523,
+        "posterior_to_anterior": 2450
+      },
+      "consumed_training_flops": 31937348965348,
+      "archive_verified": true,
+      "cleanup": "complete"
+    },
+    {
+      "model": "basic_unet16",
+      "weight_ce": 1,
+      "updates": 563,
+      "validation_dice_percent": 81.17938473325637,
+      "training_dice_percent": 89.67679346535556,
+      "anterior_dice_percent": 81.86743006289109,
+      "posterior_dice_percent": 80.49133940362165,
+      "voxel_errors": {
+        "foreground_fp": 46026,
+        "foreground_fn": 15715,
+        "anterior_to_posterior": 1985,
+        "posterior_to_anterior": 2644
+      },
+      "consumed_training_flops": 31941776578071,
+      "archive_verified": true,
+      "cleanup": "complete"
+    }
+  ],
+  "pairs": [
+    {
+      "model": "swinunetr",
+      "initialization_sha256": "8d7d717c9669bfbe02e2ad48e5cb3b84cb60ca89f96623f1b14804068d7fb2a4",
+      "dice_only_validation_percent": 45.627680367179515,
+      "dice_ce_validation_percent": 70.22862054445298,
+      "validation_gain_percentage_points": 24.600940177273465,
+      "dice_only_training_percent": 47.1859786697569,
+      "dice_ce_training_percent": 78.54985045453672,
+      "updates_each": 206
+    },
+    {
+      "model": "unetr_vit_b16",
+      "initialization_sha256": "fbd018b46230496e47bad2cca9c91936e1c5805718603f1f39a97135b81311d0",
+      "dice_only_validation_percent": 49.648948862895836,
+      "dice_ce_validation_percent": 43.202098018995855,
+      "validation_gain_percentage_points": -6.4468508438999805,
+      "dice_only_training_percent": 57.875286741487955,
+      "dice_ce_training_percent": 57.875550726762015,
+      "updates_each": 245
+    },
+    {
+      "model": "basic_unet16",
+      "initialization_sha256": "5bc2d519363bce3fb7e486e3f5be350ad59fa58e7b8cce7b593d7cc941229904",
+      "dice_only_validation_percent": 74.16785879378678,
+      "dice_ce_validation_percent": 81.17938473325637,
+      "validation_gain_percentage_points": 7.011525939469593,
+      "dice_only_training_percent": 77.41040123855788,
+      "dice_ce_training_percent": 89.67679346535556,
+      "updates_each": 563
+    }
+  ],
+  "comparison": "Original model-specific MONAI Dice and AdamW preserved; only CE coefficient toggled 0/1. Final budget checkpoints are primary.",
+  "scope": "One matched seed/fold; no inference of cross-fold replication.",
+  "exploration": "paused"
+}

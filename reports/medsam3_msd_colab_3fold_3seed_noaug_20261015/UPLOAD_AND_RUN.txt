@@ -1,0 +1,53 @@
+MEDSAM3 MSD COLAB EXTENSION — CORRECTED PREFLIGHT, ORIGINAL RECIPE, NO AUGMENTATION
+
+CONTINUE IN THE CURRENT A100 SESSION
+1. Replace MyDrive/hippo_medsam3_msd_extension/input/medsam3_msd_code.zip with the corrected ZIP.
+   Keep the filename exactly medsam3_msd_code.zip. No data or sam3.pt reupload is needed.
+2. In the existing notebook, replace the code cell under section 2 (Verify uploads and stage on the VM SSD)
+   with the complete contents of REPLACE_STEP_2_CELL.txt. Run that cell; merely editing it does not stage the fix.
+   It checks upload hashes, preserves old preflight evidence, and refuses scientific/recovery work.
+3. Run these commands in a new cell using the existing environment:
+       campaign('verify')
+       campaign('preflight')
+   Preflight now runs the verified audit in a separate process, then calibrates the three folds.
+4. Once campaign preflight completes successfully, run the existing section 5 training cell.
+   Diagnostic success alone does not approve training; the complete preflight is mandatory.
+
+UPDATED NOTEBOOK / NEW SESSION
+Open MedSAM3_MSD_remaining_constraints_3fold_3seed.ipynb in Google Colab.
+Use an A100 or H100 GPU with at least 40 GB VRAM and a High-RAM runtime.
+Run sections 1 through 4 in order, then section 5. The new notebook includes the corrected staging cell.
+A new runtime must use the same GPU/software for any existing scientific work.
+
+INPUT FILES
+MyDrive/hippo_medsam3_msd_extension/input must contain:
+- medsam3_msd_code.zip (includes frozen source and medical LoRA)
+- medsam3_msd_data.zip (exact original NIfTI data and splits)
+- sam3.pt (3.45 GB frozen base checkpoint)
+The code ZIP is the only changed upload. Results remain in results_original200_noaug_v1.
+Keep at least 8 GiB of spare Drive quota and 16 GiB free VM disk before setup.
+
+SCOPE
+Folds 0, 1, 3; seeds 17, 83, 191; five original support volumes per fold.
+No augmentation. Original native SAM3 objective and pretrained MedSAM3 LoRA.
+200 optimizer updates, accumulation 2, original learning-rate/warmup schedule.
+10% auxiliary-gradient target, 50% p95 calibration ceiling.
+This is NOT the 31.98 TFLOP-capped four-model experiment.
+27 original baseline/bands/bands+edge results are imported; 99 missing runs remain.
+SDF and depth use the original 20-update auxiliary ramp without an added delay.
+The selected folds and cross-hardware comparison are exploratory.
+
+RECOVERY
+Interrupt the training cell once and wait for the Drive upload to finish.
+Never run two copies against the same results folder.
+A hard VM loss with updates newer than the durable checkpoint blocks silent replay.
+A manually created STOP file remains in effect until you deliberately remove it.
+
+VALIDATION
+The user A100 audit passed original gradient repeatability, cached-extension equivalence,
+exact optimizer/checkpoint resume and label-free inference. All model weights were restored.
+The packaged audit function and numerical helper exactly match the tested hashes.
+Only the audit process uses deterministic kernels and exact-zero backward for empty point grids.
+Calibration and training retain their original runtime settings; tolerance thresholds were not relaxed.
+24 local tests passed. Dataset, checkpoint, frozen source, ZIPs and notebook syntax verified.
+Full campaign preflight and calibration for folds 0, 1, 3 remain required after upgrading.

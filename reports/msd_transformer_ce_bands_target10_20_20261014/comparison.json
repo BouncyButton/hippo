@@ -1,0 +1,488 @@
+{
+  "status": "complete",
+  "completed": 4,
+  "total": 4,
+  "runs": [
+    {
+      "id": "MSD_swinunetr_ce_dice_bands_target10_f0s0",
+      "kind": "conventional",
+      "dataset": "MSD",
+      "model": "swinunetr",
+      "fold": 0,
+      "seed": 0,
+      "arm": "dice_bands",
+      "target": 0.1,
+      "protocol": "swinunetr_target10",
+      "validation_dice_percent": 70.88304243326317,
+      "baseline_dice_percent": 70.22862054445298,
+      "bands60_dice_percent": 69.16126177908251,
+      "gain_over_baseline_points": 0.6544218888101909,
+      "gain_over_bands60_points": 1.7217806541806624,
+      "training_dice_percent": 81.4143784182875,
+      "foreground_fn": 21462,
+      "foreground_fp": 96077,
+      "ap_swaps": {
+        "anterior_to_posterior": 6981,
+        "posterior_to_anterior": 3271
+      },
+      "calibration": {
+        "status": "complete",
+        "weights": {
+          "bands": 0.01723956032031856
+        },
+        "statistics": {
+          "bands": {
+            "median_raw_ratio": 5.800611972808838,
+            "p95_raw_ratio": 6.2288618087768555,
+            "weighted_median_ratio": 0.1,
+            "weighted_p95_ratio": 0.10738283887933718
+          }
+        },
+        "cases": [
+          {
+            "dice_rms": 1.5337055856434745e-06,
+            "bands_rms": 8.341175089299213e-06,
+            "bands_over_dice": 5.4385762214660645,
+            "case_name": "hippocampus_093"
+          },
+          {
+            "dice_rms": 1.5190615840765531e-06,
+            "bands_rms": 9.663510354585014e-06,
+            "bands_over_dice": 6.361500263214111,
+            "case_name": "hippocampus_097"
+          },
+          {
+            "dice_rms": 1.5234074908221373e-06,
+            "bands_rms": 8.804814569884911e-06,
+            "bands_over_dice": 5.779684543609619,
+            "case_name": "hippocampus_197"
+          },
+          {
+            "dice_rms": 1.5181487924564863e-06,
+            "bands_rms": 8.837962923280429e-06,
+            "bands_over_dice": 5.821539402008057,
+            "case_name": "hippocampus_287"
+          },
+          {
+            "dice_rms": 1.5271464235411258e-06,
+            "bands_rms": 9.26481243368471e-06,
+            "bands_over_dice": 6.066748142242432,
+            "case_name": "hippocampus_311"
+          },
+          {
+            "dice_rms": 1.5116775102796964e-06,
+            "bands_rms": 8.866294592735358e-06,
+            "bands_over_dice": 5.8652024269104,
+            "case_name": "hippocampus_314"
+          },
+          {
+            "dice_rms": 1.55432167048275e-06,
+            "bands_rms": 9.361088814330287e-06,
+            "bands_over_dice": 6.02262020111084,
+            "case_name": "hippocampus_353"
+          },
+          {
+            "dice_rms": 1.5490186342503875e-06,
+            "bands_rms": 8.722613529243972e-06,
+            "bands_over_dice": 5.6310577392578125,
+            "case_name": "hippocampus_361"
+          },
+          {
+            "dice_rms": 1.5409482330142055e-06,
+            "bands_rms": 8.658555088914e-06,
+            "bands_over_dice": 5.618978500366211,
+            "case_name": "hippocampus_373"
+          },
+          {
+            "dice_rms": 1.5353147091445862e-06,
+            "bands_rms": 8.743773832975421e-06,
+            "bands_over_dice": 5.695101737976074,
+            "case_name": "hippocampus_390"
+          }
+        ],
+        "anchor_model_sha256": "27d32d90534f6e811fcec06400ca11321eb300f6164d86e9cd8a4ea50048016e",
+        "target_ratio": 0.1,
+        "p95_cap": 0.75,
+        "scope": "All ten training crops only; same calibration graph and prefix as the matched 60% bands run",
+        "base_gradient": "Dice+CE",
+        "legacy_dice_rms_means": "Joint Dice+CE logit-gradient RMS",
+        "config_sha256": "97d969025237054015e2c67d3cf512c15dd97b803746d026cbaadb34bd5fd217",
+        "anchor_successful_updates": 50,
+        "anchor_training_attempts": 50,
+        "charged_flops": 521654695204
+      },
+      "matching_calibration_anchor": true,
+      "matching_prefix_updates": [
+        10,
+        20,
+        30,
+        41
+      ],
+      "cleanup_status": "complete",
+      "released_bytes": 337003604
+    },
+    {
+      "id": "MSD_unetr_vit_b16_ce_dice_bands_target10_f0s0",
+      "kind": "conventional",
+      "dataset": "MSD",
+      "model": "unetr_vit_b16",
+      "fold": 0,
+      "seed": 0,
+      "arm": "dice_bands",
+      "target": 0.1,
+      "protocol": "unetr_vit_b16_target10",
+      "validation_dice_percent": 45.54554782316318,
+      "baseline_dice_percent": 43.202098018995855,
+      "bands60_dice_percent": 33.50804997712178,
+      "gain_over_baseline_points": 2.343449804167328,
+      "gain_over_bands60_points": 12.037497846041404,
+      "training_dice_percent": 62.082797709879586,
+      "foreground_fn": 69522,
+      "foreground_fp": 160468,
+      "ap_swaps": {
+        "anterior_to_posterior": 12645,
+        "posterior_to_anterior": 223
+      },
+      "calibration": {
+        "status": "complete",
+        "weights": {
+          "bands": 0.018490984072278373
+        },
+        "statistics": {
+          "bands": {
+            "median_raw_ratio": 5.408041000366211,
+            "p95_raw_ratio": 5.752586221694946,
+            "weighted_median_ratio": 0.1,
+            "weighted_p95_ratio": 0.10637098019976927
+          }
+        },
+        "cases": [
+          {
+            "dice_rms": 1.6264486930595012e-06,
+            "bands_rms": 8.210266969399527e-06,
+            "bands_over_dice": 5.047971725463867,
+            "case_name": "hippocampus_093"
+          },
+          {
+            "dice_rms": 1.6159059441633872e-06,
+            "bands_rms": 9.58145028562285e-06,
+            "bands_over_dice": 5.929460525512695,
+            "case_name": "hippocampus_097"
+          },
+          {
+            "dice_rms": 1.6238954003711115e-06,
+            "bands_rms": 8.741631972952746e-06,
+            "bands_over_dice": 5.383124828338623,
+            "case_name": "hippocampus_197"
+          },
+          {
+            "dice_rms": 1.6157458730958751e-06,
+            "bands_rms": 8.793007509666495e-06,
+            "bands_over_dice": 5.442073345184326,
+            "case_name": "hippocampus_287"
+          },
+          {
+            "dice_rms": 1.6184027344934293e-06,
+            "bands_rms": 8.960135346569587e-06,
+            "bands_over_dice": 5.536406517028809,
+            "case_name": "hippocampus_311"
+          },
+          {
+            "dice_rms": 1.6117280665639555e-06,
+            "bands_rms": 8.759729098528624e-06,
+            "bands_over_dice": 5.434991836547852,
+            "case_name": "hippocampus_314"
+          },
+          {
+            "dice_rms": 1.6461888208141318e-06,
+            "bands_rms": 8.943673492467497e-06,
+            "bands_over_dice": 5.432957172393799,
+            "case_name": "hippocampus_353"
+          },
+          {
+            "dice_rms": 1.6395372313127154e-06,
+            "bands_rms": 8.644875379104633e-06,
+            "bands_over_dice": 5.2727532386779785,
+            "case_name": "hippocampus_361"
+          },
+          {
+            "dice_rms": 1.6356017340513063e-06,
+            "bands_rms": 8.63804598338902e-06,
+            "bands_over_dice": 5.281264781951904,
+            "case_name": "hippocampus_373"
+          },
+          {
+            "dice_rms": 1.6277634813377517e-06,
+            "bands_rms": 8.622726454632357e-06,
+            "bands_over_dice": 5.2972846031188965,
+            "case_name": "hippocampus_390"
+          }
+        ],
+        "anchor_model_sha256": "561d01fa4917457f930d68f1ced54a503608838cd2d0e2dfe47d8115d53d167f",
+        "target_ratio": 0.1,
+        "p95_cap": 0.75,
+        "scope": "All ten training crops only; same calibration graph and prefix as the matched 60% bands run",
+        "base_gradient": "Dice+CE",
+        "legacy_dice_rms_means": "Joint Dice+CE logit-gradient RMS",
+        "config_sha256": "51708a908e1eddbd0090e22138c0cb900e1d094afb8282e050374bd150b7b533",
+        "anchor_successful_updates": 50,
+        "anchor_training_attempts": 50,
+        "charged_flops": 432554437874
+      },
+      "matching_calibration_anchor": true,
+      "matching_prefix_updates": [
+        12,
+        24,
+        36,
+        49
+      ],
+      "cleanup_status": "complete",
+      "released_bytes": 1853971038
+    },
+    {
+      "id": "MSD_swinunetr_ce_dice_bands_target20_f0s0",
+      "kind": "conventional",
+      "dataset": "MSD",
+      "model": "swinunetr",
+      "fold": 0,
+      "seed": 0,
+      "arm": "dice_bands",
+      "target": 0.2,
+      "protocol": "swinunetr_target20",
+      "validation_dice_percent": 70.49940731620462,
+      "baseline_dice_percent": 70.22862054445298,
+      "bands60_dice_percent": 69.16126177908251,
+      "gain_over_baseline_points": 0.270786771751645,
+      "gain_over_bands60_points": 1.3381455371221165,
+      "training_dice_percent": 82.14298457638482,
+      "foreground_fn": 24776,
+      "foreground_fp": 87346,
+      "ap_swaps": {
+        "anterior_to_posterior": 8924,
+        "posterior_to_anterior": 2720
+      },
+      "calibration": {
+        "status": "complete",
+        "weights": {
+          "bands": 0.03447912064063712
+        },
+        "statistics": {
+          "bands": {
+            "median_raw_ratio": 5.800611972808838,
+            "p95_raw_ratio": 6.2288618087768555,
+            "weighted_median_ratio": 0.2,
+            "weighted_p95_ratio": 0.21476567775867436
+          }
+        },
+        "cases": [
+          {
+            "dice_rms": 1.5337055856434745e-06,
+            "bands_rms": 8.341175089299213e-06,
+            "bands_over_dice": 5.4385762214660645,
+            "case_name": "hippocampus_093"
+          },
+          {
+            "dice_rms": 1.5190615840765531e-06,
+            "bands_rms": 9.663510354585014e-06,
+            "bands_over_dice": 6.361500263214111,
+            "case_name": "hippocampus_097"
+          },
+          {
+            "dice_rms": 1.5234074908221373e-06,
+            "bands_rms": 8.804814569884911e-06,
+            "bands_over_dice": 5.779684543609619,
+            "case_name": "hippocampus_197"
+          },
+          {
+            "dice_rms": 1.5181487924564863e-06,
+            "bands_rms": 8.837962923280429e-06,
+            "bands_over_dice": 5.821539402008057,
+            "case_name": "hippocampus_287"
+          },
+          {
+            "dice_rms": 1.5271464235411258e-06,
+            "bands_rms": 9.26481243368471e-06,
+            "bands_over_dice": 6.066748142242432,
+            "case_name": "hippocampus_311"
+          },
+          {
+            "dice_rms": 1.5116775102796964e-06,
+            "bands_rms": 8.866294592735358e-06,
+            "bands_over_dice": 5.8652024269104,
+            "case_name": "hippocampus_314"
+          },
+          {
+            "dice_rms": 1.55432167048275e-06,
+            "bands_rms": 9.361088814330287e-06,
+            "bands_over_dice": 6.02262020111084,
+            "case_name": "hippocampus_353"
+          },
+          {
+            "dice_rms": 1.5490186342503875e-06,
+            "bands_rms": 8.722613529243972e-06,
+            "bands_over_dice": 5.6310577392578125,
+            "case_name": "hippocampus_361"
+          },
+          {
+            "dice_rms": 1.5409482330142055e-06,
+            "bands_rms": 8.658555088914e-06,
+            "bands_over_dice": 5.618978500366211,
+            "case_name": "hippocampus_373"
+          },
+          {
+            "dice_rms": 1.5353147091445862e-06,
+            "bands_rms": 8.743773832975421e-06,
+            "bands_over_dice": 5.695101737976074,
+            "case_name": "hippocampus_390"
+          }
+        ],
+        "anchor_model_sha256": "27d32d90534f6e811fcec06400ca11321eb300f6164d86e9cd8a4ea50048016e",
+        "target_ratio": 0.2,
+        "p95_cap": 0.75,
+        "scope": "All ten training crops only; same calibration graph and prefix as the matched 60% bands run",
+        "base_gradient": "Dice+CE",
+        "legacy_dice_rms_means": "Joint Dice+CE logit-gradient RMS",
+        "config_sha256": "56868909023a5e60f0f36ed42bb6d72898bc750d5350bfa171118d3f0e3e9106",
+        "anchor_successful_updates": 50,
+        "anchor_training_attempts": 50,
+        "charged_flops": 521654695204
+      },
+      "matching_calibration_anchor": true,
+      "matching_prefix_updates": [
+        10,
+        20,
+        30,
+        41
+      ],
+      "cleanup_status": "complete",
+      "released_bytes": 337003604
+    },
+    {
+      "id": "MSD_unetr_vit_b16_ce_dice_bands_target20_f0s0",
+      "kind": "conventional",
+      "dataset": "MSD",
+      "model": "unetr_vit_b16",
+      "fold": 0,
+      "seed": 0,
+      "arm": "dice_bands",
+      "target": 0.2,
+      "protocol": "unetr_vit_b16_target20",
+      "validation_dice_percent": 45.89061972931493,
+      "baseline_dice_percent": 43.202098018995855,
+      "bands60_dice_percent": 33.50804997712178,
+      "gain_over_baseline_points": 2.6885217103190726,
+      "gain_over_bands60_points": 12.382569752193149,
+      "training_dice_percent": 62.17613654574815,
+      "foreground_fn": 66239,
+      "foreground_fp": 158739,
+      "ap_swaps": {
+        "anterior_to_posterior": 15913,
+        "posterior_to_anterior": 205
+      },
+      "calibration": {
+        "status": "complete",
+        "weights": {
+          "bands": 0.036981968144556746
+        },
+        "statistics": {
+          "bands": {
+            "median_raw_ratio": 5.408041000366211,
+            "p95_raw_ratio": 5.752586221694946,
+            "weighted_median_ratio": 0.2,
+            "weighted_p95_ratio": 0.21274196039953855
+          }
+        },
+        "cases": [
+          {
+            "dice_rms": 1.6264486930595012e-06,
+            "bands_rms": 8.210266969399527e-06,
+            "bands_over_dice": 5.047971725463867,
+            "case_name": "hippocampus_093"
+          },
+          {
+            "dice_rms": 1.6159059441633872e-06,
+            "bands_rms": 9.58145028562285e-06,
+            "bands_over_dice": 5.929460525512695,
+            "case_name": "hippocampus_097"
+          },
+          {
+            "dice_rms": 1.6238954003711115e-06,
+            "bands_rms": 8.741631972952746e-06,
+            "bands_over_dice": 5.383124828338623,
+            "case_name": "hippocampus_197"
+          },
+          {
+            "dice_rms": 1.6157458730958751e-06,
+            "bands_rms": 8.793007509666495e-06,
+            "bands_over_dice": 5.442073345184326,
+            "case_name": "hippocampus_287"
+          },
+          {
+            "dice_rms": 1.6184027344934293e-06,
+            "bands_rms": 8.960135346569587e-06,
+            "bands_over_dice": 5.536406517028809,
+            "case_name": "hippocampus_311"
+          },
+          {
+            "dice_rms": 1.6117280665639555e-06,
+            "bands_rms": 8.759729098528624e-06,
+            "bands_over_dice": 5.434991836547852,
+            "case_name": "hippocampus_314"
+          },
+          {
+            "dice_rms": 1.6461888208141318e-06,
+            "bands_rms": 8.943673492467497e-06,
+            "bands_over_dice": 5.432957172393799,
+            "case_name": "hippocampus_353"
+          },
+          {
+            "dice_rms": 1.6395372313127154e-06,
+            "bands_rms": 8.644875379104633e-06,
+            "bands_over_dice": 5.2727532386779785,
+            "case_name": "hippocampus_361"
+          },
+          {
+            "dice_rms": 1.6356017340513063e-06,
+            "bands_rms": 8.63804598338902e-06,
+            "bands_over_dice": 5.281264781951904,
+            "case_name": "hippocampus_373"
+          },
+          {
+            "dice_rms": 1.6277634813377517e-06,
+            "bands_rms": 8.622726454632357e-06,
+            "bands_over_dice": 5.2972846031188965,
+            "case_name": "hippocampus_390"
+          }
+        ],
+        "anchor_model_sha256": "561d01fa4917457f930d68f1ced54a503608838cd2d0e2dfe47d8115d53d167f",
+        "target_ratio": 0.2,
+        "p95_cap": 0.75,
+        "scope": "All ten training crops only; same calibration graph and prefix as the matched 60% bands run",
+        "base_gradient": "Dice+CE",
+        "legacy_dice_rms_means": "Joint Dice+CE logit-gradient RMS",
+        "config_sha256": "0074ea0b51863d07af9a191fd88f48d8c64b328fcc71e205243eeba51c62aa56",
+        "anchor_successful_updates": 50,
+        "anchor_training_attempts": 50,
+        "charged_flops": 432554437874
+      },
+      "matching_calibration_anchor": true,
+      "matching_prefix_updates": [
+        12,
+        24,
+        36,
+        49
+      ],
+      "cleanup_status": "complete",
+      "released_bytes": 1853995614
+    }
+  ],
+  "augmentation": "none",
+  "fold": 0,
+  "seed": 0,
+  "baseline": "Same per-model Dice+CE",
+  "train_crops": 10,
+  "validation_crops": 52,
+  "budget_flops": 31976450667090,
+  "interpretation": "Single fold/seed strength ablation; final FLOP-budget checkpoint is primary",
+  "released_bytes": 4381973860
+}

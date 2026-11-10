@@ -1,0 +1,13 @@
+{
+  "failed_job": "702843",
+  "root_cause": "The inherited trainer parser rejected seed3 before any training updates",
+  "patch": {
+    "file": "source/scripts/cross_dataset_campaign/capped_core.py",
+    "before": "parser.add_argument(\"--seed\", type=int, choices=(0, 1, 2), required=True)",
+    "after": "parser.add_argument(\"--seed\", type=int, choices=(0, 1, 2, 3), required=True)"
+  },
+  "optimization_code_unchanged": true,
+  "original_manifest_sha256": "469af1dd0bfc7cdb902c57f961b7384ff3cf1601c85da16f3a700e83f6925188",
+  "repaired_manifest_sha256": "b64b56e4699470de4b6e20ef06f3519fd06026e1c549e3c798ee604bebce8ec4",
+  "preflight_cli_checks": 24
+}

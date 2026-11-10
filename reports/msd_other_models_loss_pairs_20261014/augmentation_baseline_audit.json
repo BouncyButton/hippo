@@ -1,0 +1,43 @@
+{
+  "status": "verified",
+  "model": "MONAI BasicUNet width16",
+  "parameters": 1438819,
+  "screenshot_value": 65.08416526146934,
+  "screenshot_scope": "Mean of all nine augmented runs: folds 0/1/2, seeds 0/1/2",
+  "matched_fold0_seed0": {
+    "augmented_dice_only_percent": 70.00941768861735,
+    "unaugmented_dice_only_percent": 74.16785879378678,
+    "gain_percentage_points": 4.15844110516943
+  },
+  "matching_configuration_fields": [
+    "model_identity",
+    "dataset_sha256",
+    "train_cases",
+    "validation_cases",
+    "fold",
+    "seed",
+    "max_steps",
+    "budget_flops",
+    "lr_horizon_updates",
+    "initial_lr",
+    "torch",
+    "monai",
+    "objective_source_sha256",
+    "shared_source_sha256",
+    "precision"
+  ],
+  "matching_lr_milestones": 20,
+  "matching_source_files": [
+    "baselines/simple_segmentation.py",
+    "scripts/campaign90.py",
+    "scripts/compute_constraint_objectives.py",
+    "scripts/train_compute_matched_baselines.py"
+  ],
+  "observed_difference": "mild_v1 augmentation versus none",
+  "trainer_changes": "New wrapper adds checkpoint/resume/archiving and confusion-matrix diagnostics; baseline objective, optimizer and sample permutation logic preserved. Validation cadence differs; final checkpoint compared in both.",
+  "caveat": "Single fold/seed comparison supports better unaugmented performance here, not a replicated general effect. Old run has no stored initialization digest.",
+  "source_runs": {
+    "old": "reports/four_models_six_optimization_31976_20261006/runs_metadata/basic_unet16/dice/fold0/seed0/run",
+    "new": "reports/msd_other_models_loss_pairs_20261014/runs/MSD_basic_unet16_dice_f0s0"
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "status": "passed",
+  "manifest_sha256": "e5f30b022882dffcda908dc775eac3013e10e5a84f8e432d7c539d99990942b0",
+  "optimizer_updates": 0,
+  "models": [
+    {
+      "dataset": "MSD",
+      "model": "nnunet",
+      "seed": 7,
+      "initialization_sha256": "fc4a65aa73858c98e7f1c917ea50c60bcf96da7621cda80edc8fc18a715cccde",
+      "updates": 90
+    },
+    {
+      "dataset": "MSD",
+      "model": "swinunetr",
+      "seed": 7,
+      "initialization_sha256": "2b3e03601ad7878e70bbb683fd025c612bc099f62e7e225ba82a35f56fc729c8",
+      "updates": 206
+    },
+    {
+      "dataset": "MSD",
+      "model": "unetr_vit_b16",
+      "seed": 7,
+      "initialization_sha256": "129a989429e6c087dc535caf00e68ecc29d03174e938380364dfa71845a6d1df",
+      "updates": 245
+    },
+    {
+      "dataset": "MSD",
+      "model": "basic_unet16",
+      "seed": 7,
+      "initialization_sha256": "7570a9502fb76c7edc049464abfe70572844cc1facb65430e8b9c51714d5476b",
+      "updates": 563
+    },
+    {
+      "dataset": "MSD",
+      "model": "nnunet",
+      "seed": 8,
+      "initialization_sha256": "d58c27514856a525736b07c420123e82c93c7def5b6e1de385cd50bee7c2dacc",
+      "updates": 90
+    },
+    {
+      "dataset": "MSD",
+      "model": "swinunetr",
+      "seed": 8,
+      "initialization_sha256": "b467bc83c5aaa4d3de1b863911c253b0bfd3445140e8ed4a0c5a3ca7f1a7ccc8",
+      "updates": 206
+    },
+    {
+      "dataset": "MSD",
+      "model": "unetr_vit_b16",
+      "seed": 8,
+      "initialization_sha256": "d1e7b47f9681de19ce7748d0173ebd2fbfad4e147de5145496c2131502505716",
+      "updates": 245
+    },
+    {
+      "dataset": "MSD",
+      "model": "basic_unet16",
+      "seed": 8,
+      "initialization_sha256": "a52226339a5223deb9cf1ed26cb33ddb67de1ccbc8b936af475e15084da6146b",
+      "updates": 563
+    },
+    {
+      "dataset": "MSD",
+      "model": "nnunet",
+      "seed": 9,
+      "initialization_sha256": "eeb130013854609524af99a4cbbef605378478908e328646e1f548eb17125ccc",
+      "updates": 90
+    },
+    {
+      "dataset": "MSD",
+      "model": "swinunetr",
+      "seed": 9,
+      "initialization_sha256": "80693b140219daf4e42428bacf8c65170ba1f0ae48f31f3903940fea545499b1",
+      "updates": 206
+    },
+    {
+      "dataset": "MSD",
+      "model": "unetr_vit_b16",
+      "seed": 9,
+      "initialization_sha256": "eb4d8fd5caf7065c1f0eb7ac5963cb51bb72b5201b3b0ed6c8513e02aa781124",
+      "updates": 245
+    },
+    {
+      "dataset": "MSD",
+      "model": "basic_unet16",
+      "seed": 9,
+      "initialization_sha256": "35e4a50874a8ea245bab6e363b10196d20eb86aabbab0f15c9f913143f90391a",
+      "updates": 563
+    }
+  ],
+  "cli_commands_checked": 36,
+  "quota": {
+    "used_gib": 25.46,
+    "limit_gib": 93.13,
+    "free_gib": 67.66999999999999,
+    "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  25.46GiB/93.13GiB  213.80k/\u221e  \n\n",
+    "checked_at": 1792315831.084343
+  },
+  "scheduler_test": "sbatch: Job 706248 to start at 2026-10-18T11:30:30 a using 8 processors on nodes gnode01 in partition stud\n",
+  "checks": [
+    "All36 protocols match seed3 apart from seed and run identity",
+    "All scientific and worker source identical except accepted CLI seed range",
+    "MSD dataset and12 initializations verified in original environment",
+    "Original losses, optimizers, no augmentation and FLOP schedules",
+    "Two isolated GPU workers and verified per-run archival/cleanup"
+  ]
+}

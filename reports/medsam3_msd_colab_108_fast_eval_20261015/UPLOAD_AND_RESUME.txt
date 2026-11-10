@@ -1,0 +1,8 @@
+1. Interrupt the CURRENT Run cell once. Wait until every worker verifies its Drive recovery and the cell returns.
+2. Upload medsam3_msd_108_fast_eval_code.zip to MyDrive/hippo_medsam3_msd_extension/input/. Keep the existing data ZIP and sam3.pt.
+3. Open MedSAM3_MSD_108_parallel_fast_evaluation.ipynb in Colab. Use the same A100 type, High RAM and Drive account.
+4. Run the notebook cells from the top. Keep RESULTS as results_matched200_noaug_108_v1.
+5. Completed runs/volumes are skipped, interrupted work resumes, and matching preflight/calibration is reused.
+6. Evaluation enables feature reuse only after its checkpoint-specific equivalence and speed audit.
+7. An older VM keeps its original lifetime. Reduce SESSION_HOURS accordingly; do not run two notebooks at once.
+No augmentation. 108 existing tasks, zero added tasks. Same original 200-update training recipe.

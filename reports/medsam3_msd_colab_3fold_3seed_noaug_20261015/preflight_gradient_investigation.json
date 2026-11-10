@@ -1,0 +1,72 @@
+{
+  "status": "gpu_verified_fix_packaged",
+  "root_cause": "Strict gradient comparison assumed repeatability absent in original default CUDA execution. A separate strict deterministic audit passes after disabling AOT buffer donation and supplying the exact zero derivative of empty point grids; the individual source of native nonzero-gradient variation was not isolated.",
+  "observed_failure": "Original-versus-extension gradient assertion rtol1e-5 atol1e-7; 16035/16384 elements differ; maximum absolute delta .06640625",
+  "scientific_code_modified": false,
+  "receipt_bypassed": false,
+  "original_artifacts_unchanged": {
+    "preserved_backup": true,
+    "scientific_functions": true,
+    "data_weights_protocols_upstream_runtime": true,
+    "published_code_zip_rebuilt": true
+  },
+  "tests": "24 local tests passed in 11.739s; candidate audit passed on user A100",
+  "next_step": "Replace code ZIP on Drive; run updated staging cell, campaign verify and full campaign preflight/calibration before training.",
+  "gpu_evidence": {
+    "gpu": "NVIDIA A100-SXM4-80GB",
+    "losses_identical": true,
+    "rng_identical": true,
+    "frozen_unchanged": true,
+    "adapter_unchanged": true,
+    "relative_l2": {
+      "native": 0.004642373590594979,
+      "bands": 0.0022543198344107027,
+      "edge": 0.0029402321560194774
+    }
+  },
+  "deterministic_probe_first": "Blocked by PyTorch AOTAutograd donated-buffer restriction with retain_graph=True, before comparisons",
+  "diagnostic_correction": "Use strict deterministic algorithms and disable AOTAutograd donated buffers in a separate audit process. Calibration and training functions unchanged.",
+  "scientific_functions_ast_verified_unchanged": [
+    "train",
+    "evaluate",
+    "load",
+    "forward",
+    "auxiliary",
+    "weights_for",
+    "gram_matrix",
+    "prepare_slabs",
+    "TransformCache",
+    "rng_state",
+    "set_rng",
+    "save_pt"
+  ],
+  "bundle_rebuilt": true,
+  "sources": [
+    "https://docs.pytorch.org/docs/2.12/notes/randomness.html",
+    "https://raw.githubusercontent.com/pytorch/pytorch/v2.12.1/torch/_functorch/config.py",
+    "https://docs.pytorch.org/docs/2.12/generated/torch.nn.functional.grid_sample.html"
+  ],
+  "last_probe": "A100 candidate audit passed original repeat, extension gradients, exact optimizer resume and label-free inference; model restored exactly. Empty-grid shape [1,0,1,2], 28 calls, zero nonempty calls.",
+  "candidate_implementation_files": [
+    "scripts/colab_medsam3/engine.py",
+    "scripts/colab_medsam3/prepare.py",
+    "scripts/colab_medsam3/test_runtime.py",
+    "scripts/colab_medsam3/audit_numerics.py",
+    "scripts/colab_medsam3/build_audit_probe.py"
+  ],
+  "strict_tolerances_unchanged": true,
+  "published_bundle_unchanged": false,
+  "deterministic_probe_second": {
+    "settings_verified": true,
+    "deterministic": true,
+    "donated_buffer": false,
+    "error": "grid_sampler_2d_backward_cuda does not have a deterministic implementation",
+    "report": "deterministic_20261015_114230.json",
+    "scientific_updates": 0
+  },
+  "candidate_empty_grid_fix": "Audit-only context retains native forward and exact zero derivatives for empty 2D point grids. Nonempty grids retain native backward and strict checks. Shape must be observed on GPU.",
+  "specific_source_of_original_gradient_variance": "Not yet isolated; empty point-grid operation blocks strict mode but cannot contribute a nonzero derivative.",
+  "gpu_audit_report": "gpu_deterministic_audit_passed.json",
+  "corrected_bundle_manifest_sha256": "26f4f23962fb7dd1931f70c2e672e8f76d8c5f4cd983ce980b2dc041c994f20a",
+  "package_validation": "corrected_package_validation.json"
+}

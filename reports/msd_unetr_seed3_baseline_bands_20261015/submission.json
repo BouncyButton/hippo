@@ -1,0 +1,41 @@
+{
+  "job_id": "702776",
+  "dependency": "702580:702517",
+  "quota": {
+    "used_gib": 25.07,
+    "limit_gib": 93.13,
+    "free_gib": 68.06,
+    "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  25.07GiB/93.13GiB  203.07k/\u221e  \n\n",
+    "checked_at": 1792090615.3371506
+  },
+  "submitted_at": 1792090615.6609359,
+  "command": [
+    "sbatch",
+    "--parsable",
+    "--chdir=/mnt/beegfsstudents/home/3160552/msd_unetr_seed3_baseline_bands_20261015",
+    "--output=/mnt/beegfsstudents/home/3160552/msd_unetr_seed3_baseline_bands_20261015/slurm-%j.out",
+    "--error=/mnt/beegfsstudents/home/3160552/msd_unetr_seed3_baseline_bands_20261015/slurm-%j.err",
+    "--dependency=afterany:702580:702517",
+    "/mnt/beegfsstudents/home/3160552/msd_unetr_seed3_baseline_bands_20261015/run.sbatch",
+    "/mnt/beegfsstudents/home/3160552/msd_unetr_seed3_baseline_bands_20261015"
+  ],
+  "manifest_sha256": "44f9dc5f509da24e0c9bcc00ea2f4b4da0ce97bbfa0800bd8279e8334d632f5a",
+  "single_allocation": true,
+  "gpu_workers": 2,
+  "runs": 6,
+  "prequeued_successor": false,
+  "queue_before_submission": [
+    [
+      "702580",
+      "PENDING",
+      "hippo-foundation-2gpu"
+    ],
+    [
+      "702517",
+      "RUNNING",
+      "hippo-foundation-2gpu"
+    ]
+  ],
+  "authorization": "Create a single sbatch \u2014 direct user reply to the request for one extra pending job behind the existing chain",
+  "queue_exception_scope": "One additional pending allocation for these six runs only; existing jobs untouched"
+}

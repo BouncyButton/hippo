@@ -1,0 +1,27 @@
+{
+  "failure": "Initialization differs for swinunetr/seed0",
+  "colab_observed": {
+    "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+    "python": "3.13.15",
+    "torch": "2.12.1+cu130",
+    "cpu": "AVX512",
+    "threads": 24,
+    "cuda": "13.0",
+    "cudnn": 92000
+  },
+  "cluster_reference": {
+    "python": "3.11.15",
+    "torch": "2.12.1+cu130",
+    "cpu": "AVX512",
+    "threads": 4
+  },
+  "swin_seed0_subhashes": {
+    "cluster_position_bias": "8a6f495ddaa55b8565a530743c8e07dac421850aebd16d152fb122198179c9cd",
+    "colab_position_bias": "281a08f860b75a4c6a6dd4a101fb7b8c948e1ed152c004aa5bd7633eac1abf9c",
+    "cluster_and_colab_other_weights": "a9164ad20d61a5dbe0ad0071b7887365ec12927d6006b437dbba114d80c3ce3f"
+  },
+  "diagnosis": "Confirmed mismatch is confined to CPU truncated-normal position-bias values. Package versions match. Cluster CPU instruction sets AVX2/AVX512 and thread counts 1/2/4/8/16/24/32 reproduce the pilot hash. Python-wheel numerical differences remain the suspected lower-level cause, not independently proven.",
+  "fix": "Canonical original CPU truncated-normal outputs, same initializer execution and exact RNG consumption, bounded numerical deviations, full original model-state hash still mandatory. Same hook in preflight, benchmark, training and resume construction.",
+  "scope": "504 fresh runs; folds 0/1/2; seeds 0/1/2; augmentation none; all protocol scientific fields unchanged.",
+  "gpu_validation": "Actual Colab GPU preflight remains required; no H100 or Blackwell training run executed by this local repair."
+}

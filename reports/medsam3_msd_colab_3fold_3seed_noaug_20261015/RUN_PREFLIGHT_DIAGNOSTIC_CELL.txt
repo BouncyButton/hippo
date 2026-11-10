@@ -1,0 +1,29 @@
+from google.colab import files
+from pathlib import Path
+import subprocess, time, hashlib
+
+uploaded = files.upload()  # Select diagnose_medsam3_preflight.py
+if len(uploaded) != 1:
+    raise ValueError("Select only the diagnostic Python file.")
+probe = Path('/content/diagnose_medsam3_preflight.py')
+payload = next(iter(uploaded.values()))
+if hashlib.sha256(payload).hexdigest() != 'fd0be90bb03166d47022596e212397ea2837257047eac26f08d5bda312cb9ec6':
+    raise ValueError('The selected file is not the verified diagnostic script.')
+probe.write_bytes(payload)
+report = RESULTS / 'diagnostics' / time.strftime('gradient_%Y%m%d_%H%M%S.json')
+report.parent.mkdir(parents=True, exist_ok=True)
+args = [str(PYTHON), '-u', str(probe), '--bundle', str(BUNDLE), '--output', str(report)]
+with report.with_suffix('.log').open('w') as log:
+    process = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
+    try:
+        for line in process.stdout:
+            print(line, end='', flush=True)
+            log.write(line); log.flush()
+        code = process.wait()
+    except KeyboardInterrupt:
+        process.terminate(); process.wait()
+        raise
+if code:
+    raise RuntimeError(f'Diagnostic failed; send the log: {report.with_suffix(".log")}')
+print('Send this JSON report:', report)
+files.download(str(report))

@@ -1,0 +1,314 @@
+{
+  "status": "incomplete",
+  "completed": 8,
+  "total": 12,
+  "baselines": [
+    {
+      "model": "swinunetr",
+      "fold": 0,
+      "run": "MSD_swinunetr_dice_f0s5",
+      "validation_dice": 0.4156516577022726,
+      "archive_manifest_sha256": "8bbaaaf4d34b1a7cb3dc08c1d50a5b5543468e1aff7afcd10b81f91ad453c346"
+    },
+    {
+      "model": "swinunetr",
+      "fold": 1,
+      "run": "MSD_swinunetr_dice_f1s5",
+      "validation_dice": 0.38966749516163496,
+      "archive_manifest_sha256": "3d7f9ac52edba72253a6a77bf9beac0535d9049f5e42cebbef70b2ce50203d20"
+    },
+    {
+      "model": "swinunetr",
+      "fold": 2,
+      "run": "MSD_swinunetr_dice_f2s5",
+      "validation_dice": 0.4019065881525571,
+      "archive_manifest_sha256": "9be74b94ee44e33eaceb8b070c6f63ce5551501f8f904f09272735cfbbce65b9"
+    },
+    {
+      "model": "basic_unet16",
+      "fold": 0,
+      "run": "MSD_basic_unet16_dice_f0s5",
+      "validation_dice": 0.8066140746970808,
+      "archive_manifest_sha256": "42c323d91c1bae9a253ee99a60e5f631739aa007f88b3df9127ddca121a6de84"
+    },
+    {
+      "model": "basic_unet16",
+      "fold": 1,
+      "run": "MSD_basic_unet16_dice_f1s5",
+      "validation_dice": 0.7836436368584122,
+      "archive_manifest_sha256": "a92793d0534fb7ba5853b99ede62bb6854c0129aa2b62d2dbc07edbfcaaca26d"
+    },
+    {
+      "model": "basic_unet16",
+      "fold": 2,
+      "run": "MSD_basic_unet16_dice_f2s5",
+      "validation_dice": 0.7725213189655584,
+      "archive_manifest_sha256": "2e4fbeb92ccbe41f8a57c15b9de4fd411e8dee23bab4a3546f43dd76b89098b4"
+    }
+  ],
+  "groups": [
+    {
+      "model": "basic_unet16",
+      "arm": "dice_bands",
+      "complete": false,
+      "completed_folds": [
+        0,
+        1
+      ],
+      "mean_dice": null,
+      "mean_delta_percentage_points": null,
+      "improved_folds": [
+        0,
+        1
+      ]
+    },
+    {
+      "model": "basic_unet16",
+      "arm": "dice_bands_edge",
+      "complete": false,
+      "completed_folds": [
+        0,
+        1
+      ],
+      "mean_dice": null,
+      "mean_delta_percentage_points": null,
+      "improved_folds": [
+        0,
+        1
+      ]
+    },
+    {
+      "model": "swinunetr",
+      "arm": "dice_bands",
+      "complete": false,
+      "completed_folds": [
+        0,
+        1
+      ],
+      "mean_dice": null,
+      "mean_delta_percentage_points": null,
+      "improved_folds": [
+        0,
+        1
+      ]
+    },
+    {
+      "model": "swinunetr",
+      "arm": "dice_bands_edge",
+      "complete": false,
+      "completed_folds": [
+        0,
+        1
+      ],
+      "mean_dice": null,
+      "mean_delta_percentage_points": null,
+      "improved_folds": [
+        0,
+        1
+      ]
+    }
+  ],
+  "runs": [
+    {
+      "id": "MSD_swinunetr_dice_bands_f0s5",
+      "kind": "conventional",
+      "dataset": "MSD",
+      "model": "swinunetr",
+      "fold": 0,
+      "seed": 5,
+      "arm": "dice_bands",
+      "protocol": "MSD_swinunetr_f0s5",
+      "validation_dice": 0.4217455201863979,
+      "baseline_dice": 0.4156516577022726,
+      "delta_percentage_points": 0.6093862484125301,
+      "best_validation_dice": 0.4217455201863979,
+      "foreground_fn": 3880,
+      "foreground_fp": 984338,
+      "ap_swaps": {
+        "anterior_to_posterior": 4191,
+        "posterior_to_anterior": 2273
+      },
+      "updates": 206,
+      "training_flops": 31943296161680,
+      "total_flops_including_calibration": 32464864349304,
+      "cleanup": "complete",
+      "released_file_bytes": 337003412
+    },
+    {
+      "id": "MSD_swinunetr_dice_bands_edge_f0s5",
+      "kind": "conventional",
+      "dataset": "MSD",
+      "model": "swinunetr",
+      "fold": 0,
+      "seed": 5,
+      "arm": "dice_bands_edge",
+      "protocol": "MSD_swinunetr_f0s5",
+      "validation_dice": 0.4246058024552963,
+      "baseline_dice": 0.4156516577022726,
+      "delta_percentage_points": 0.8954144753023696,
+      "best_validation_dice": 0.4246058024552963,
+      "foreground_fn": 4553,
+      "foreground_fp": 981545,
+      "ap_swaps": {
+        "anterior_to_posterior": 4136,
+        "posterior_to_anterior": 2235
+      },
+      "updates": 206,
+      "training_flops": 31954606677416,
+      "total_flops_including_calibration": 32476923491040,
+      "cleanup": "complete",
+      "released_file_bytes": 337003412
+    },
+    {
+      "id": "MSD_basic_unet16_dice_bands_f0s5",
+      "kind": "conventional",
+      "dataset": "MSD",
+      "model": "basic_unet16",
+      "fold": 0,
+      "seed": 5,
+      "arm": "dice_bands",
+      "protocol": "MSD_basic_unet16_f0s5",
+      "validation_dice": 0.821579702912506,
+      "baseline_dice": 0.8066140746970808,
+      "delta_percentage_points": 1.4965628215425242,
+      "best_validation_dice": 0.821579702912506,
+      "foreground_fn": 13592,
+      "foreground_fp": 45293,
+      "ap_swaps": {
+        "anterior_to_posterior": 2196,
+        "posterior_to_anterior": 2024
+      },
+      "updates": 563,
+      "training_flops": 31972851660277,
+      "total_flops_including_calibration": 32163675961771,
+      "cleanup": "complete",
+      "released_file_bytes": 28985552
+    },
+    {
+      "id": "MSD_basic_unet16_dice_bands_edge_f0s5",
+      "kind": "conventional",
+      "dataset": "MSD",
+      "model": "basic_unet16",
+      "fold": 0,
+      "seed": 5,
+      "arm": "dice_bands_edge",
+      "protocol": "MSD_basic_unet16_f0s5",
+      "validation_dice": 0.8238098197781992,
+      "baseline_dice": 0.8066140746970808,
+      "delta_percentage_points": 1.719574508111843,
+      "best_validation_dice": 0.8238098197781992,
+      "foreground_fn": 12844,
+      "foreground_fp": 45762,
+      "ap_swaps": {
+        "anterior_to_posterior": 1809,
+        "posterior_to_anterior": 2366
+      },
+      "updates": 562,
+      "training_flops": 31953177061720,
+      "total_flops_including_calibration": 32144749989214,
+      "cleanup": "complete",
+      "released_file_bytes": 28985552
+    },
+    {
+      "id": "MSD_swinunetr_dice_bands_f1s5",
+      "kind": "conventional",
+      "dataset": "MSD",
+      "model": "swinunetr",
+      "fold": 1,
+      "seed": 5,
+      "arm": "dice_bands",
+      "protocol": "MSD_swinunetr_f1s5",
+      "validation_dice": 0.3951936366529729,
+      "baseline_dice": 0.38966749516163496,
+      "delta_percentage_points": 0.5526141491337955,
+      "best_validation_dice": 0.3951936366529729,
+      "foreground_fn": 3621,
+      "foreground_fp": 1053550,
+      "ap_swaps": {
+        "anterior_to_posterior": 1351,
+        "posterior_to_anterior": 6422
+      },
+      "updates": 206,
+      "training_flops": 31943296161680,
+      "total_flops_including_calibration": 32464864349304,
+      "cleanup": "complete",
+      "released_file_bytes": 337003476
+    },
+    {
+      "id": "MSD_swinunetr_dice_bands_edge_f1s5",
+      "kind": "conventional",
+      "dataset": "MSD",
+      "model": "swinunetr",
+      "fold": 1,
+      "seed": 5,
+      "arm": "dice_bands_edge",
+      "protocol": "MSD_swinunetr_f1s5",
+      "validation_dice": 0.39894551472370393,
+      "baseline_dice": 0.38966749516163496,
+      "delta_percentage_points": 0.9278019562068973,
+      "best_validation_dice": 0.40240337426316963,
+      "foreground_fn": 4548,
+      "foreground_fp": 1042873,
+      "ap_swaps": {
+        "anterior_to_posterior": 1528,
+        "posterior_to_anterior": 5921
+      },
+      "updates": 206,
+      "training_flops": 31954606677416,
+      "total_flops_including_calibration": 32476923491040,
+      "cleanup": "complete",
+      "released_file_bytes": 337027668
+    },
+    {
+      "id": "MSD_basic_unet16_dice_bands_f1s5",
+      "kind": "conventional",
+      "dataset": "MSD",
+      "model": "basic_unet16",
+      "fold": 1,
+      "seed": 5,
+      "arm": "dice_bands",
+      "protocol": "MSD_basic_unet16_f1s5",
+      "validation_dice": 0.7953811576295224,
+      "baseline_dice": 0.7836436368584122,
+      "delta_percentage_points": 1.1737520771110233,
+      "best_validation_dice": 0.7953811576295224,
+      "foreground_fn": 11037,
+      "foreground_fp": 57582,
+      "ap_swaps": {
+        "anterior_to_posterior": 1403,
+        "posterior_to_anterior": 4200
+      },
+      "updates": 563,
+      "training_flops": 31972851660277,
+      "total_flops_including_calibration": 32163675961771,
+      "cleanup": "complete",
+      "released_file_bytes": 28985552
+    },
+    {
+      "id": "MSD_basic_unet16_dice_bands_edge_f1s5",
+      "kind": "conventional",
+      "dataset": "MSD",
+      "model": "basic_unet16",
+      "fold": 1,
+      "seed": 5,
+      "arm": "dice_bands_edge",
+      "protocol": "MSD_basic_unet16_f1s5",
+      "validation_dice": 0.7848933190956149,
+      "baseline_dice": 0.7836436368584122,
+      "delta_percentage_points": 0.12496822372026761,
+      "best_validation_dice": 0.7990977395287365,
+      "foreground_fn": 9456,
+      "foreground_fp": 65569,
+      "ap_swaps": {
+        "anterior_to_posterior": 2233,
+        "posterior_to_anterior": 3250
+      },
+      "updates": 562,
+      "training_flops": 31953177061720,
+      "total_flops_including_calibration": 32144749989214,
+      "cleanup": "complete",
+      "released_file_bytes": 29009744
+    }
+  ],
+  "interpretation": "Paired final-budget validation Dice; original optimization-only cap. Calibration separately reported. Three-fold means withheld until complete; all outcomes retained."
+}

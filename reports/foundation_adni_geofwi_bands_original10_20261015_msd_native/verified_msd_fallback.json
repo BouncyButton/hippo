@@ -1,0 +1,47 @@
+{
+  "source": "docs/experiments/medsam3_multiclass_fold0_seed46_20260930/results.json",
+  "sha256": "8e5b035ff7789bc488b006b4d881c3c8082b9064d4fe525c599c9e639e157cee",
+  "status": "complete",
+  "recipe": {
+    "updates": 200,
+    "accumulation": 2,
+    "learning_rate": 5e-05,
+    "final_learning_rate": 5e-06,
+    "warmup_updates": 20,
+    "constraint_warmup_updates": 20,
+    "gradient_ratio_target": 0.1,
+    "gradient_ratio_p95_cap": 0.5
+  },
+  "training": {
+    "baseline": {
+      "updates": 200,
+      "frozen_before": "a6ee8b75984a10ba912137dfe2b39398c252c2a26c6bbec5239f3699644a7bae",
+      "frozen_after": "a6ee8b75984a10ba912137dfe2b39398c252c2a26c6bbec5239f3699644a7bae",
+      "adapter_before": "10fc30e12c83c3263de91289ad35efe5526d2a3ea559feb321762b6846c676ff",
+      "adapter_after": "b82ef1d43c1e71cadd1916a9e601617e763eaac03e4f44e3f68bbb85a4d70d18",
+      "trainable_parameters": 18497664,
+      "schedule_sha256": "1bc7d5b5b20982d721dfc9f19a280911b32615392d63d192485d95b05e3c0e02"
+    },
+    "bands": {
+      "updates": 200,
+      "frozen_before": "a6ee8b75984a10ba912137dfe2b39398c252c2a26c6bbec5239f3699644a7bae",
+      "frozen_after": "a6ee8b75984a10ba912137dfe2b39398c252c2a26c6bbec5239f3699644a7bae",
+      "adapter_before": "10fc30e12c83c3263de91289ad35efe5526d2a3ea559feb321762b6846c676ff",
+      "adapter_after": "95b6125a32b610930bad2a7ec261ff92f3d8b478c21e7ce9129653b8a5449053",
+      "trainable_parameters": 18497664,
+      "schedule_sha256": "1bc7d5b5b20982d721dfc9f19a280911b32615392d63d192485d95b05e3c0e02"
+    },
+    "bands_edge": {
+      "updates": 200,
+      "frozen_before": "a6ee8b75984a10ba912137dfe2b39398c252c2a26c6bbec5239f3699644a7bae",
+      "frozen_after": "a6ee8b75984a10ba912137dfe2b39398c252c2a26c6bbec5239f3699644a7bae",
+      "adapter_before": "10fc30e12c83c3263de91289ad35efe5526d2a3ea559feb321762b6846c676ff",
+      "adapter_after": "13f0b267db3f572f8770e5747f31913774d710234a93374868a606562341ce73",
+      "trainable_parameters": 18497664,
+      "schedule_sha256": "1bc7d5b5b20982d721dfc9f19a280911b32615392d63d192485d95b05e3c0e02"
+    }
+  },
+  "trainer": "scripts/train_medsam3_multiclass.py",
+  "shared_original_training": "scripts/train_medsam3_constraint_few_shot.py",
+  "fallback_authorization": "Use the successful MSD MedSAM3 path if this variant fails; retain new dataset split, fold0 seed0, no augmentation."
+}

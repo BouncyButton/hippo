@@ -1,0 +1,70 @@
+{
+  "status": "passed",
+  "manifest_sha256": "421bf11e33ce3b4a2a0e60a93760b80c7a458ceef97ec7c659975a9e170c60f9",
+  "cli_commands_checked": 12,
+  "initializations": [
+    {
+      "model": "swinunetr",
+      "sha256": "08792c08f0208a6fd641bc0e533d44494d7ca69f1ff7d735e95f0135b66331a2"
+    },
+    {
+      "model": "basic_unet16",
+      "sha256": "04a3174ca3c8eb65dee75ece34476c663559dfae1f19562dd82f4843c6974642"
+    }
+  ],
+  "optimizer_updates": 0,
+  "quota": {
+    "used_gib": 25.55,
+    "limit_gib": 93.13,
+    "free_gib": 67.58,
+    "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  25.55GiB/93.13GiB  216.86k/\u221e  \n\n",
+    "checked_at": 1792319354.8569033
+  },
+  "constraint_smoke": [
+    {
+      "arm": "dice_bands",
+      "weights": {
+        "bands": 0.004453580028069324
+      },
+      "statistics": {
+        "bands": {
+          "median_raw_ratio": 22.453845977783203,
+          "p95_raw_ratio": 22.453845977783203,
+          "weighted_median_ratio": 0.1,
+          "weighted_p95_ratio": 0.1
+        }
+      },
+      "finite_gradient": true
+    },
+    {
+      "arm": "dice_bands_edge",
+      "weights": {
+        "bands": 0.004472802511651691,
+        "edge": 0.013408551637402573
+      },
+      "statistics": {
+        "bands": {
+          "median_raw_ratio": 22.35734748840332,
+          "p95_raw_ratio": 22.35734748840332,
+          "weighted_median_ratio": 0.1,
+          "weighted_p95_ratio": 0.1
+        },
+        "edge": {
+          "median_raw_ratio": 7.457927053139307,
+          "p95_raw_ratio": 7.457927053139307,
+          "weighted_median_ratio": 0.1,
+          "weighted_p95_ratio": 0.1
+        }
+      },
+      "finite_gradient": true
+    }
+  ],
+  "scheduler_test": "sbatch: Job 706343 to start at 2026-10-18T17:59:14 a using 8 processors on nodes gnode01 in partition stud\n",
+  "checks": [
+    "Scientific source identical to archived seed5 baselines",
+    "Only constraint activation and requested arms changed in protocols",
+    "Exact dataset, splits, initialization, Dice/AdamW and optimization cap",
+    "Both calibrated objectives have finite gradients and preserve zero-scale baseline",
+    "Two isolated GPUs, verified per-run archive before cleanup"
+  ]
+}

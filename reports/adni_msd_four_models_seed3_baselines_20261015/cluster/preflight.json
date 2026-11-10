@@ -1,0 +1,61 @@
+{
+  "status": "passed",
+  "manifest_sha256": "469af1dd0bfc7cdb902c57f961b7384ff3cf1601c85da16f3a700e83f6925188",
+  "optimizer_updates": 0,
+  "models": [
+    {
+      "dataset": "ADNI",
+      "model": "nnunet",
+      "initialization_sha256": "18b8985a5b58156b9a2c0d3960f98f027e26555b1deaaabad1bbab5f860b5603",
+      "updates": 90
+    },
+    {
+      "dataset": "MSD",
+      "model": "nnunet",
+      "initialization_sha256": "21395cb33899623b5396f2e21c299e146669218353dd7a8dd5ba639dbb475d28",
+      "updates": 90
+    },
+    {
+      "dataset": "ADNI",
+      "model": "swinunetr",
+      "initialization_sha256": "411bd7c94cc0ddef57eed5510397199eb0cf14903e78b0e1e11d0c253e886247",
+      "updates": 206
+    },
+    {
+      "dataset": "MSD",
+      "model": "swinunetr",
+      "initialization_sha256": "bd75b46bc22793ccedd125c0733faa4ed54deacd262b38cdc6e6ff79e7d09cd4",
+      "updates": 206
+    },
+    {
+      "dataset": "ADNI",
+      "model": "unetr_vit_b16",
+      "initialization_sha256": "3176b6c6730da3e9f93c88d8a7b320bd27085462453801e74402ade5b460b65f",
+      "updates": 245
+    },
+    {
+      "dataset": "MSD",
+      "model": "unetr_vit_b16",
+      "initialization_sha256": "24e0605cb7bb8fecaa4840a1bcb890fbdb0ec9b31dd8743d9c43a768260d2d41",
+      "updates": 245
+    },
+    {
+      "dataset": "ADNI",
+      "model": "basic_unet16",
+      "initialization_sha256": "a637021ca23fec49bcc8c966b89f9a37cb6cb14fcf5be5f30181bbddd34b4d8d",
+      "updates": 563
+    },
+    {
+      "dataset": "MSD",
+      "model": "basic_unet16",
+      "initialization_sha256": "881165387a4341bd4bdc2d8978448d338815bc54ec6fab7d222d2e65853da44b",
+      "updates": 563
+    }
+  ],
+  "checks": [
+    "Scientific sources, all24 protocols and saved cohorts match original bundles",
+    "Actual datasets and eight seed3 initializations verified in original environment",
+    "Original baseline losses, optimizers, no augmentation and measured cap schedules",
+    "Two isolated GPUs verified before training; per-run verified archive and cleanup"
+  ]
+}

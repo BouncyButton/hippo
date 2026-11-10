@@ -1,0 +1,27 @@
+{
+  "status": "passed_original_portable_bias_tolerance_and_rng_checks",
+  "torch": "2.2.2",
+  "monai": "1.4.0",
+  "checks": [
+    {
+      "seed": 0,
+      "portable_calls": 8,
+      "max_difference": 7.450580596923828e-09,
+      "rng_exact": true
+    },
+    {
+      "seed": 1,
+      "portable_calls": 8,
+      "max_difference": 7.450580596923828e-09,
+      "rng_exact": true
+    },
+    {
+      "seed": 4,
+      "portable_calls": 8,
+      "max_difference": 7.450580596923828e-09,
+      "rng_exact": true
+    }
+  ],
+  "full_frozen_model_validation": "required on Colab; local older libraries differ in nonportable weights",
+  "gpu_tested": false
+}

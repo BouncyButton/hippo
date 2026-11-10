@@ -1,0 +1,82 @@
+{
+  "checked_at": 1792329722.8254204,
+  "queue": "706693|PENDING|hippo-adni-medsam3-f13\n706691|RUNNING|hippo-adni-medsam3-f13\n",
+  "allocation": "JobId=706691 JobName=hippo-adni-medsam3-f13 UserId=3160552(1395) GroupId=grp_hpcclusterstudentsbocconiusers(1009) MCS_label=N/A Priority=2589 Nice=0 Account=3160552 QOS=stud JobState=RUNNING Reason=None Dependency=(null) Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:58 TimeLimit=1-00:00:00 TimeMin=N/A SubmitTime=2026-10-18T15:21:04 EligibleTime=2026-10-18T15:21:04 AccrueTime=2026-10-18T15:21:04 StartTime=2026-10-18T15:21:05 EndTime=2026-10-19T15:21:05 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-18T15:21:05 Scheduler=Main Partition=stud AllocNode:Sid=slnode01:3643744 ReqNodeList=(null) ExcNodeList=(null) NodeList=gnode01 BatchHost=gnode01 NumNodes=1 NumCPUs=8 NumTasks=2 CPUs/Task=4 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=80G,node=1,billing=16,gres/gpu=2 AllocTRES=cpu=8,mem=80G,node=1,billing=16,gres/gpu=2 Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=4 MinMemoryNode=80G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) LicensesAlloc=(null) Network=(null) Command=/mnt/beegfsstudents/home/3160552/adni_medsam3_2sample_folds13_seed0_20261018/run.sbatch WorkDir=/mnt/beegfsstudents/home/3160552/adni_medsam3_2sample_folds13_seed0_20261018 StdErr=/mnt/beegfsstudents/home/3160552/adni_medsam3_2sample_folds13_seed0_20261018/slurm-706691.err StdIn=/dev/null StdOut=/mnt/beegfsstudents/home/3160552/adni_medsam3_2sample_folds13_seed0_20261018/slurm-706691.out TresPerNode=gres/gpu:4g.40gb:2 TresPerTask=cpu=4 \n",
+  "status.json": {
+    "status": "waiting_for_base_checkpoint",
+    "active": [],
+    "completed": 0,
+    "total": 6,
+    "runs": [],
+    "job_id": "706691",
+    "updated_at": 1792329701.5339575,
+    "quota": {
+      "used_gib": 26.03,
+      "limit_gib": 93.13,
+      "free_gib": 67.1,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  26.03GiB/93.13GiB  221.32k/\u221e  \n\n",
+      "checked_at": 1792329701.5704465
+    }
+  },
+  "parallel_status.json": {
+    "status": "waiting_for_base_checkpoint",
+    "job_id": "706691",
+    "updated_at": 1792329701.5830526,
+    "workers": {}
+  },
+  "gpu_allocation.json": {
+    "status": "passed",
+    "workers": [
+      {
+        "status": "passed",
+        "device_uuid": "96a03b24-6b6f-ecc9-6702-893cf37ac7b5",
+        "visible_devices": 1,
+        "cuda_visible_devices": "0",
+        "slurm_step_gpus": "0",
+        "slurm_job_id": "706691",
+        "slurm_step_id": "0",
+        "rank": "0",
+        "worker": null,
+        "gpu_name": "NVIDIA A100 80GB PCIe MIG 4g.40gb",
+        "total_memory": 42144366592,
+        "cpu_affinity": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "host": "gnode01",
+        "time": 1792329700.218161
+      },
+      {
+        "status": "passed",
+        "device_uuid": "79d06021-72ed-7661-e4b6-edf1ceab6994",
+        "visible_devices": 1,
+        "cuda_visible_devices": "0",
+        "slurm_step_gpus": "0",
+        "slurm_job_id": "706691",
+        "slurm_step_id": "0",
+        "rank": "1",
+        "worker": null,
+        "gpu_name": "NVIDIA A100 80GB PCIe MIG 4g.40gb",
+        "total_memory": 42144366592,
+        "cpu_affinity": [
+          16,
+          17,
+          18,
+          19
+        ],
+        "host": "gnode01",
+        "time": 1792329700.2181616
+      }
+    ],
+    "manifest_sha256": "7052e09eacabdfed80fa806eb7ef0908659edd7851a0bd506a12bcac62a58088",
+    "job_id": "706691"
+  },
+  "base_request.json": {
+    "job_id": "706691",
+    "destination": "/tmp/hippo-sam3-1395-706691.pt",
+    "expected_sha256": "9999e2341ceef5e136daa386eecb55cb414446a00ac2b55eb2dfd2f7c3cf8c9e"
+  },
+  "workers": {}
+}

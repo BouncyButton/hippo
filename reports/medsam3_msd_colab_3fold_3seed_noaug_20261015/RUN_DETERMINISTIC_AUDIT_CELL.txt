@@ -1,0 +1,29 @@
+from google.colab import files
+from pathlib import Path
+import hashlib, os, subprocess, tempfile, time
+
+uploaded = files.upload()  # Select medsam3_deterministic_audit.py
+if len(uploaded) != 1:
+    raise ValueError('Select only the new audit script.')
+payload = next(iter(uploaded.values()))
+if hashlib.sha256(payload).hexdigest() != '672a953c2a1d5253971e53a5c4bdf15292d5d99fb1422e7210614eb7e2f90107':
+    raise ValueError('Wrong file: select the new medsam3_deterministic_audit.py.')
+probe = Path('/content/medsam3_deterministic_audit.py')
+probe.write_bytes(payload)
+report = RESULTS / 'diagnostics' / time.strftime('candidate_audit_%Y%m%d_%H%M%S.json')
+report.parent.mkdir(parents=True, exist_ok=True)
+with tempfile.TemporaryDirectory(prefix='medsam3_audit_') as cache:
+    env = dict(os.environ, CUBLAS_WORKSPACE_CONFIG=':4096:8', TORCHINDUCTOR_CACHE_DIR=cache)
+    args = [str(PYTHON), '-u', str(probe), '--bundle', str(BUNDLE), '--output', str(report)]
+    with report.with_suffix('.log').open('w') as log:
+        with subprocess.Popen(args, env=env, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True) as proc:
+            try:
+                for line in proc.stdout:
+                    print(line, end='', flush=True)
+                    log.write(line); log.flush()
+                print('Audit exit code:', proc.wait())
+            except KeyboardInterrupt:
+                proc.terminate(); proc.wait()
+                raise
+print('Report:', report)
+print('Log:', report.with_suffix('.log'))

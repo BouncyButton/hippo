@@ -1,0 +1,113 @@
+{
+  "status.json": {
+    "status": "paused",
+    "active": null,
+    "completed": 3,
+    "total": 50,
+    "runs": [
+      {
+        "id": "MSD_nnunet_dice_target10_f0s0",
+        "kind": "conventional",
+        "dataset": "MSD",
+        "model": "nnunet",
+        "fold": 0,
+        "seed": 0,
+        "arm": "dice",
+        "protocol": "MSD_nnunet_target10",
+        "target": 0.1,
+        "final_dice": 0.11219298590063866,
+        "best_dice": 0.11219298590063866,
+        "released_bytes": 525343058
+      },
+      {
+        "id": "MSD_nnunet_dice_bands_target10_f0s0",
+        "kind": "conventional",
+        "dataset": "MSD",
+        "model": "nnunet",
+        "fold": 0,
+        "seed": 0,
+        "arm": "dice_bands",
+        "protocol": "MSD_nnunet_target10",
+        "target": 0.1,
+        "final_dice": 0.11679707171243886,
+        "best_dice": 0.11679707171243886,
+        "released_bytes": 525343250
+      },
+      {
+        "id": "MSD_nnunet_dice_sdf_target10_f0s0",
+        "kind": "conventional",
+        "dataset": "MSD",
+        "model": "nnunet",
+        "fold": 0,
+        "seed": 0,
+        "arm": "dice_sdf",
+        "protocol": "MSD_nnunet_target10",
+        "target": 0.1,
+        "final_dice": 0.11389291290151635,
+        "best_dice": 0.11389291290151635,
+        "released_bytes": 525343186
+      }
+    ],
+    "job_id": null,
+    "updated_at": 1791972924.2289946,
+    "quota": {
+      "used_gib": 80.65,
+      "limit_gib": 93.13,
+      "free_gib": 12.47999999999999,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  80.65GiB/93.13GiB  207.48k/\u221e  \n\n",
+      "checked_at": 1791972924.3595679
+    }
+  },
+  "submission.json": {
+    "job_id": "700232",
+    "dependency": "700231",
+    "quota": {
+      "used_gib": 79.67,
+      "limit_gib": 93.13,
+      "free_gib": 13.459999999999994,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  79.67GiB/93.13GiB  207.33k/\u221e  \n\n",
+      "checked_at": 1791970259.494306
+    },
+    "submitted_at": 1791970259.6893206,
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--chdir=/mnt/beegfsstudents/home/3160552/cross_dataset_exploration_20261014",
+      "--output=/mnt/beegfsstudents/home/3160552/cross_dataset_exploration_20261014/slurm-%j.out",
+      "--error=/mnt/beegfsstudents/home/3160552/cross_dataset_exploration_20261014/slurm-%j.err",
+      "--dependency=afterany:700231",
+      "/mnt/beegfsstudents/home/3160552/cross_dataset_exploration_20261014/run.sbatch",
+      "/mnt/beegfsstudents/home/3160552/cross_dataset_exploration_20261014"
+    ],
+    "manifest_sha256": "1ee59d4604d5b92bb3bee68e6cd14a6c34fb47077ed004aee0f7e175704b08e1"
+  },
+  "successor.json": {
+    "job_id": "700235",
+    "dependency": "700232",
+    "quota": {
+      "used_gib": 79.92,
+      "limit_gib": 93.13,
+      "free_gib": 13.209999999999994,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  79.92GiB/93.13GiB  207.37k/\u221e  \n\n",
+      "checked_at": 1791970445.7622068
+    },
+    "submitted_at": 1791970445.9013853,
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--chdir=/mnt/beegfsstudents/home/3160552/cross_dataset_exploration_20261014",
+      "--output=/mnt/beegfsstudents/home/3160552/cross_dataset_exploration_20261014/slurm-%j.out",
+      "--error=/mnt/beegfsstudents/home/3160552/cross_dataset_exploration_20261014/slurm-%j.err",
+      "--dependency=afterany:700232",
+      "/mnt/beegfsstudents/home/3160552/cross_dataset_exploration_20261014/run.sbatch",
+      "/mnt/beegfsstudents/home/3160552/cross_dataset_exploration_20261014"
+    ],
+    "manifest_sha256": "1ee59d4604d5b92bb3bee68e6cd14a6c34fb47077ed004aee0f7e175704b08e1"
+  },
+  "ready": [],
+  "cleanup": [
+    "runs/MSD_nnunet_dice_bands_target10_f0s0/cleanup.json",
+    "runs/MSD_nnunet_dice_sdf_target10_f0s0/cleanup.json",
+    "runs/MSD_nnunet_dice_target10_f0s0/cleanup.json"
+  ]
+}

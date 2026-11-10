@@ -1,0 +1,496 @@
+{
+  "status": "passed",
+  "campaign": "foundation_two_sample_2gpu_20261015",
+  "runs": [
+    {
+      "id": "ADNI_MedSAM3_2sample_dice_f0s0",
+      "kind": "foundation",
+      "dataset": "ADNI",
+      "model": "MedSAM3",
+      "fold": 0,
+      "seed": 0,
+      "arm": "dice",
+      "target": 0.1,
+      "protocol": "ADNI",
+      "validation_dice_percent": 75.83022995465932,
+      "training_dice_percent": 91.48867705468989,
+      "calibration": {
+        "weights": {
+          "bands": 0.0,
+          "edge": 0.0
+        },
+        "status": "not_required"
+      },
+      "errors": {
+        "training_support": {
+          "foreground_fn": 916,
+          "foreground_fp": 282
+        },
+        "validation": {
+          "foreground_fn": 41669,
+          "foreground_fp": 18287
+        }
+      },
+      "cleanup_status": "complete",
+      "released_bytes": 223134773,
+      "gain_over_baseline_percentage_points": 0.0
+    },
+    {
+      "id": "ADNI_MedSAM3_2sample_dice_bands_f0s0",
+      "kind": "foundation",
+      "dataset": "ADNI",
+      "model": "MedSAM3",
+      "fold": 0,
+      "seed": 0,
+      "arm": "dice_bands",
+      "target": 0.1,
+      "protocol": "ADNI",
+      "validation_dice_percent": 76.55302416296833,
+      "training_dice_percent": 92.7880226160726,
+      "calibration": {
+        "status": "complete",
+        "weights": {
+          "bands": 14.153484729676347,
+          "edge": 0.0
+        },
+        "statistics": {
+          "bands": {
+            "valid": 8,
+            "weighted_median": 0.014252647126650602,
+            "weighted_p95": 0.5
+          }
+        },
+        "rows": [
+          {
+            "case": "hippocampus_adni_147119_L",
+            "anchor": 6,
+            "gram": [
+              [
+                41215604.27707698,
+                -1142.6692728065425
+              ],
+              [
+                -1142.6692728065425,
+                0.7068201630397978
+              ]
+            ],
+            "losses": {
+              "native": 666.2513427734375,
+              "bands": 0.007620403077453375
+            }
+          },
+          {
+            "case": "hippocampus_adni_147119_L",
+            "anchor": 15,
+            "gram": [
+              [
+                3891381.9448634004,
+                127200.35358382853
+              ],
+              [
+                127200.35358382853,
+                9767.876767262716
+              ]
+            ],
+            "losses": {
+              "native": 149.3205108642578,
+              "bands": 3.2407960891723633
+            }
+          },
+          {
+            "case": "hippocampus_adni_147119_L",
+            "anchor": 25,
+            "gram": [
+              [
+                53517390.43137427,
+                199954.66720593575
+              ],
+              [
+                199954.66720593575,
+                3197.492059101414
+              ]
+            ],
+            "losses": {
+              "native": 319.2967529296875,
+              "bands": 2.775385856628418
+            }
+          },
+          {
+            "case": "hippocampus_adni_147119_L",
+            "anchor": 34,
+            "gram": [
+              [
+                34617793.953085504,
+                -540.5844256279757
+              ],
+              [
+                -540.5844256279757,
+                0.0959801836836804
+              ]
+            ],
+            "losses": {
+              "native": 618.753662109375,
+              "bands": 0.0021093410905450583
+            }
+          },
+          {
+            "case": "hippocampus_adni_257270_R",
+            "anchor": 5,
+            "gram": [
+              [
+                35992429.753794305,
+                -132.14367647425593
+              ],
+              [
+                -132.14367647425593,
+                0.005387376599368101
+              ]
+            ],
+            "losses": {
+              "native": 685.0009765625,
+              "bands": 0.0007252076175063848
+            }
+          },
+          {
+            "case": "hippocampus_adni_257270_R",
+            "anchor": 15,
+            "gram": [
+              [
+                134208935.13336138,
+                -3932.477274966821
+              ],
+              [
+                -3932.477274966821,
+                432.9744510949547
+              ]
+            ],
+            "losses": {
+              "native": 745.4993896484375,
+              "bands": 1.6706335544586182
+            }
+          },
+          {
+            "case": "hippocampus_adni_257270_R",
+            "anchor": 25,
+            "gram": [
+              [
+                136297866.59697384,
+                645602.6771480093
+              ],
+              [
+                645602.6771480093,
+                8483.027602332086
+              ]
+            ],
+            "losses": {
+              "native": 649.5084228515625,
+              "bands": 5.973937511444092
+            }
+          },
+          {
+            "case": "hippocampus_adni_257270_R",
+            "anchor": 35,
+            "gram": [
+              [
+                49516840.56003834,
+                1460.3145502815914
+              ],
+              [
+                1460.3145502815914,
+                2.3504641178927628
+              ]
+            ],
+            "losses": {
+              "native": 616.5650024414062,
+              "bands": 0.03782431408762932
+            }
+          }
+        ],
+        "names": [
+          "native",
+          "bands"
+        ],
+        "scope": "Training support only; sequential LoRA gradient norm calibration",
+        "target": 0.1,
+        "p95_cap": 0.5
+      },
+      "errors": {
+        "training_support": {
+          "foreground_fn": 611,
+          "foreground_fp": 434
+        },
+        "validation": {
+          "foreground_fn": 32879,
+          "foreground_fp": 30179
+        }
+      },
+      "cleanup_status": "complete",
+      "released_bytes": 223134773,
+      "gain_over_baseline_percentage_points": 0.7227942083090113
+    },
+    {
+      "id": "ADNI_MedSAM3_2sample_dice_bands_edge_f0s0",
+      "kind": "foundation",
+      "dataset": "ADNI",
+      "model": "MedSAM3",
+      "fold": 0,
+      "seed": 0,
+      "arm": "dice_bands_edge",
+      "target": 0.1,
+      "protocol": "ADNI",
+      "validation_dice_percent": 78.29277867157201,
+      "training_dice_percent": 94.14417349274319,
+      "calibration": {
+        "status": "complete",
+        "weights": {
+          "bands": 14.151587748116699,
+          "edge": 1486.758648182695
+        },
+        "statistics": {
+          "bands": {
+            "valid": 8,
+            "weighted_median": 0.014250280287359494,
+            "weighted_p95": 0.5
+          },
+          "edge": {
+            "valid": 8,
+            "weighted_median": 0.09055522659833266,
+            "weighted_p95": 0.5
+          }
+        },
+        "rows": [
+          {
+            "case": "hippocampus_adni_147119_L",
+            "anchor": 6,
+            "gram": [
+              [
+                41215763.26876473,
+                -1142.739460567425,
+                -0.4902829185132269
+              ],
+              [
+                -1142.739460567425,
+                0.7068584681734218,
+                0.000561916674199559
+              ],
+              [
+                -0.4902829185132269,
+                0.000561916674199559,
+                2.713835203590927e-05
+              ]
+            ],
+            "losses": {
+              "native": 666.2513427734375,
+              "bands": 0.007620403077453375,
+              "edge": 1.806457839848008e-05
+            }
+          },
+          {
+            "case": "hippocampus_adni_147119_L",
+            "anchor": 15,
+            "gram": [
+              [
+                3889837.5619819527,
+                127178.19858389303,
+                831.5334368433463
+              ],
+              [
+                127178.19858389303,
+                9766.483006944924,
+                72.61518819013851
+              ],
+              [
+                831.5334368433463,
+                72.61518819013851,
+                1.639210243092185
+              ]
+            ],
+            "losses": {
+              "native": 149.3205108642578,
+              "bands": 3.2407960891723633,
+              "edge": 0.3618631958961487
+            }
+          },
+          {
+            "case": "hippocampus_adni_147119_L",
+            "anchor": 25,
+            "gram": [
+              [
+                53555460.85282587,
+                200059.12280700376,
+                3813.63672509276
+              ],
+              [
+                200059.12280700376,
+                3198.293026448611,
+                18.401689559985957
+              ],
+              [
+                3813.63672509276,
+                18.401689559985957,
+                0.6324401924467395
+              ]
+            ],
+            "losses": {
+              "native": 319.2967529296875,
+              "bands": 2.775385856628418,
+              "edge": 0.35318678617477417
+            }
+          },
+          {
+            "case": "hippocampus_adni_147119_L",
+            "anchor": 34,
+            "gram": [
+              [
+                34617548.56331213,
+                -540.580795132482,
+                -0.37951243261009143
+              ],
+              [
+                -540.580795132482,
+                0.09596826867100428,
+                6.363933339771818e-05
+              ],
+              [
+                -0.37951243261009143,
+                6.363933339771818e-05,
+                1.2355698046212977e-07
+              ]
+            ],
+            "losses": {
+              "native": 618.753662109375,
+              "bands": 0.0021093410905450583,
+              "edge": 1.0165208550461102e-06
+            }
+          },
+          {
+            "case": "hippocampus_adni_257270_R",
+            "anchor": 5,
+            "gram": [
+              [
+                35994474.88357253,
+                -132.14309578368147,
+                -6.250152145040796
+              ],
+              [
+                -132.14309578368147,
+                0.005387277517392163,
+                0.00027432741618816926
+              ],
+              [
+                -6.250152145040796,
+                0.00027432741618816926,
+                1.8226418932283488e-05
+              ]
+            ],
+            "losses": {
+              "native": 685.0009765625,
+              "bands": 0.0007252076175063848,
+              "edge": 1.2079480256943498e-05
+            }
+          },
+          {
+            "case": "hippocampus_adni_257270_R",
+            "anchor": 15,
+            "gram": [
+              [
+                134178364.21091212,
+                -3905.7691544756294,
+                3808.351221424939
+              ],
+              [
+                -3905.7691544756294,
+                432.8444067550184,
+                8.489183631326421
+              ],
+              [
+                3808.351221424939,
+                8.489183631326421,
+                3.6469834986209
+              ]
+            ],
+            "losses": {
+              "native": 745.4993896484375,
+              "bands": 1.6706335544586182,
+              "edge": 0.31337156891822815
+            }
+          },
+          {
+            "case": "hippocampus_adni_257270_R",
+            "anchor": 25,
+            "gram": [
+              [
+                136212068.5376412,
+                645468.540664582,
+                9655.148378386857
+              ],
+              [
+                645468.540664582,
+                8481.343182676956,
+                75.40492710516064
+              ],
+              [
+                9655.148378386857,
+                75.40492710516064,
+                5.472805783728123
+              ]
+            ],
+            "losses": {
+              "native": 649.5084228515625,
+              "bands": 5.973937511444092,
+              "edge": 0.4553949534893036
+            }
+          },
+          {
+            "case": "hippocampus_adni_257270_R",
+            "anchor": 35,
+            "gram": [
+              [
+                49517997.180925146,
+                1460.6434811001309,
+                -2.1864759352243275
+              ],
+              [
+                1460.6434811001309,
+                2.3505332468480153,
+                0.10056216879877651
+              ],
+              [
+                -2.1864759352243275,
+                0.10056216879877651,
+                0.017940863443124365
+              ]
+            ],
+            "losses": {
+              "native": 616.5650024414062,
+              "bands": 0.03782431408762932,
+              "edge": 0.001147016417235136
+            }
+          }
+        ],
+        "names": [
+          "native",
+          "bands",
+          "edge"
+        ],
+        "scope": "Training support only; sequential LoRA gradient norm calibration",
+        "target": 0.1,
+        "p95_cap": 0.5
+      },
+      "errors": {
+        "training_support": {
+          "foreground_fn": 471,
+          "foreground_fp": 387
+        },
+        "validation": {
+          "foreground_fn": 32484,
+          "foreground_fp": 24842
+        }
+      },
+      "cleanup_status": "complete",
+      "released_bytes": 223134773,
+      "gain_over_baseline_percentage_points": 2.4625487169126927
+    }
+  ],
+  "manifest_sha256": "9c40972644c2bee57f2dd597e6b8c8201e6b3f9fa484d4c7ec5ef6b683e46b54"
+}

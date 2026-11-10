@@ -1,0 +1,60 @@
+{
+  "preflight.json": {
+    "status": "passed",
+    "manifest_sha256": "9bf03e19fa23eb16569129cbf810204a237625688c8b55436f363c8b18510179",
+    "checks": [
+      "Four exact model/target combinations, fold0 seed0, no augmentation",
+      "Original 10-training/52-validation split and actual dataset hash",
+      "Exact parent training implementation and measured FLOP schedule",
+      "Same Dice+CE baseline, AdamW and background handling",
+      "10% and 20% calibration matches direct logit gradients at native 64-cube shape",
+      "Same 75% p95 ceiling; unchanged prefix and warmup",
+      "Finite objective gradients and zero-scale baseline equality",
+      "Shell syntax"
+    ]
+  },
+  "status.json": {
+    "status": "running",
+    "active": "MSD_swinunetr_ce_dice_bands_target10_f0s0",
+    "completed": 0,
+    "total": 4,
+    "runs": [],
+    "job_id": "701092",
+    "updated_at": 1792000935.4523766,
+    "quota": {
+      "used_gib": 24.3,
+      "limit_gib": 93.13,
+      "free_gib": 68.83,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  24.30GiB/93.13GiB  189.65k/\u221e  \n\n",
+      "checked_at": 1792000935.4892
+    }
+  },
+  "successor.json": {
+    "job_id": "701093",
+    "dependency": "701092",
+    "quota": {
+      "used_gib": 24.3,
+      "limit_gib": 93.13,
+      "free_gib": 68.83,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  24.30GiB/93.13GiB  189.65k/\u221e  \n\n",
+      "checked_at": 1792000935.2080271
+    },
+    "submitted_at": 1792000935.3476324,
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--chdir=/mnt/beegfsstudents/home/3160552/msd_transformer_ce_bands_target10_20_20261014",
+      "--output=/mnt/beegfsstudents/home/3160552/msd_transformer_ce_bands_target10_20_20261014/slurm-%j.out",
+      "--error=/mnt/beegfsstudents/home/3160552/msd_transformer_ce_bands_target10_20_20261014/slurm-%j.err",
+      "--dependency=afterany:701092",
+      "/mnt/beegfsstudents/home/3160552/msd_transformer_ce_bands_target10_20_20261014/run.sbatch",
+      "/mnt/beegfsstudents/home/3160552/msd_transformer_ce_bands_target10_20_20261014"
+    ],
+    "manifest_sha256": "9bf03e19fa23eb16569129cbf810204a237625688c8b55436f363c8b18510179"
+  },
+  "queue": "701093|PENDING|hippo-transformer-bands-low\n701092|RUNNING|hippo-transformer-bands-low\n",
+  "run_progress": {
+    "MSD_swinunetr_ce_dice_bands_target10_f0s0": ""
+  },
+  "runtime_recipes": {}
+}

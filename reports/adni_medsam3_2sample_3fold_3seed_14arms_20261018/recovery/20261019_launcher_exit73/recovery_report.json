@@ -1,0 +1,30 @@
+{
+  "status": "recovered_and_resumed",
+  "checked_at": 1792409701.032535,
+  "symptom": "Sweep stopped at 73 archived runs; launcher returned 73 for a step Slurm records as completed with exit 0.",
+  "verified_findings": [
+    "Flagged run has 200 updates and all 56 evaluation records with matching hashes.",
+    "Peer has 200 saved updates and 45 evaluation records; 11 evaluations remain.",
+    "Both checkpoints are readable and match frozen protocols and saved histories.",
+    "Recovered completed run archived and acknowledged before checkpoint retirement."
+  ],
+  "action": "Resume unchanged frozen campaign and restore collector; preserve incident evidence.",
+  "source_changes": false,
+  "manifest_sha256": "0503950dff7b76a8bfd20cc2fe2671b792dc78dfe931b9783bbd96317879dec3",
+  "tests": {
+    "resume_skips_cleaned_and_completed_training": "passed",
+    "failure_stops_new_launches": "passed"
+  },
+  "limitation": "The launcher exit-code discrepancy is confirmed; its underlying Slurm cause is not established.",
+  "job_id": "708118",
+  "successor_job_id": "708119",
+  "collector_pid": 51961,
+  "verified_completed": 75,
+  "remaining": 51,
+  "recovered_task_validation_dice": 0.764172582539983,
+  "training_history_unchanged": true,
+  "trained_adapter_unchanged": true,
+  "previous_evaluations_preserved": true,
+  "all_evaluations_completed": true,
+  "cleanup": "complete"
+}
