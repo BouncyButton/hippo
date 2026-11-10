@@ -1,0 +1,147 @@
+--- before.tex
++++ Template_tesi/thesis-revision.tex
+@@ -29,14 +29,17 @@
+ \usepackage{graphicx}
+ \usepackage{tikz} % Only the compact, editable adaptation workflow is drawn live.
+ \usepackage[section]{placeins}
+-% Keep pending figures and tables inside the section that introduces them.
+-\AddToHook{cmd/subsection/before}{\FloatBarrier}
+-\AddToHook{cmd/subsubsection/before}{\FloatBarrier}
++% Keep floats within chapters (top-level sections), but let text continue
++% around them within a chapter. Barriers after individual figures or before
++% every subsection can leave half a page empty when a figure does not fit.
+ % Allow substantial figures alongside text without deferring them unnecessarily.
+ \renewcommand{\topfraction}{0.9}
+ \renewcommand{\bottomfraction}{0.8}
+ \renewcommand{\textfraction}{0.1}
+ \renewcommand{\floatpagefraction}{0.75}
++\setlength{\textfloatsep}{12pt plus 2pt minus 2pt}
++\setlength{\intextsep}{12pt plus 2pt minus 2pt}
++\setlength{\floatsep}{12pt plus 2pt minus 2pt}
+ \AddToHook{env/figure/begin}{\setstretch{1.05}}
+ % If a full figure page is needed, align its contents at the top.
+ \makeatletter
+@@ -593,7 +596,6 @@
+ labels remain fixed while training changes the predictions.}
+ \label{fig:ltn-grounding-example}
+ \end{figure}
+-\FloatBarrier
+ 
+ Geometric errors can enter the same framework. Let $e_\theta(u)$ measure
+ a violation, with zero meaning agreement and larger nonnegative values
+@@ -708,7 +710,6 @@
+ experiments.}
+ \label{fig:sam-prompting}
+ \end{figure}
+-\FloatBarrier
+ 
+ Low-Rank Adaptation (LoRA) keeps a pretrained weight matrix fixed and
+ learns an additive correction through two smaller matrices
+@@ -931,7 +932,6 @@
+ conventions are given in Appendix~\ref{sec:geo-boundaries}.}
+ \label{fig:dataset-bands-teaching}
+ \end{figure}
+-\FloatBarrier
+ 
+ For the fixed group, abbreviate $B_{i,F}^s$ as $B_i^s$, with
+ $s\in\{\mathrm{in},\mathrm{out}\}$ identifying the side. The logical
+@@ -1058,7 +1058,6 @@
+ increases it. Each orange value is the local squared discrepancy.}
+ \label{fig:edge-consistency-example}
+ \end{figure}
+-\FloatBarrier
+ 
+ The predicate $\mathsf{Transition}_F(i,u,v)$ states that the predicted
+ membership change agrees with the annotated change. Its exponential
+@@ -1162,7 +1161,6 @@
+ coefficient. The cutaway changes only the display.}
+ \label{fig:sdf-3d-penalty-example}
+ \end{figure}
+-\FloatBarrier
+ 
+ Let $\mathsf{Geom}_c(i,v)$ express agreement with this class geometry.
+ The grounding
+@@ -1242,7 +1240,6 @@
+ The object and voxel counts are independent schematic examples.}
+ \label{fig:depth-weighting-example}
+ \end{figure}
+-\FloatBarrier
+ 
+ For MSD, positions are expressed in physical right--anterior--superior
+ coordinates: the axes point towards the subject's right, front and top.
+@@ -1383,7 +1380,7 @@
+ preventing a further increase per voxel. Complete layer distributions
+ appear in Appendix~\ref{sec:dataset-constraint-examples}.
+ 
+-\begin{figure}[p]
++\begin{figure}[htbp]
+ \centering
+ % Actual native annotations; generator: figures/source/dataset-constraint-examples.py
+ % Provenance: reports/thesis_dataset_constraint_examples_20261103/provenance.json
+@@ -1401,7 +1398,6 @@
+ conventions.}
+ \label{fig:dataset-constraint-3d}
+ \end{figure}
+-\FloatBarrier
+ 
+ \subsection{Combined Objective and Experimental Scope}
+ \label{sec:constraint-combination}
+@@ -1584,7 +1580,6 @@
+ \end{table}
+ 
+ 
+-\FloatBarrier
+ \subsection{GeoFWI3D: Salt Segmentation}
+ \label{sec:geo-methods}
+ 
+@@ -2096,7 +2091,6 @@
+ comparisons, near ties and negative outcomes are documented in
+ Appendix~\ref{sec:secondary-objective-results}.
+ 
+-\FloatBarrier
+ \subsection{Spatial Supervision During Pretrained Adaptation}
+ \label{sec:sam3-results}\label{sec:medsam-results}\label{sec:medsam-adni-results}
+ 
+@@ -2135,7 +2129,6 @@
+ or establish a model ranking at equal resources. Complete results are
+ in Appendix~\ref{sec:complete-result-tables}.
+ 
+-\FloatBarrier
+ \subsection{What the Overlap Improvements Mean}
+ \label{sec:error-analysis}\label{sec:capped-errors-resources}
+ \label{sec:background-dice-results}
+@@ -2172,7 +2165,7 @@
+ remain the basis of the aggregate results. Reproduction and selection
+ details are in Appendix~\ref{sec:qualitative-predictions}.
+ 
+-\begin{figure}[p]
++\begin{figure}[htbp]
+ \centering
+ \includegraphics[width=\linewidth]{figures/qualitative/typical-predictions.png}
+ \caption{Typical held-out examples from the qualitative reproductions,
+@@ -2236,7 +2229,6 @@
+ across the volume, while expert assessment or application-specific
+ evaluation would determine their medical or geological importance.
+ 
+-\FloatBarrier
+ \subsection{Limits of the Findings}
+ \label{sec:limitations}\label{sec:experimental-limitations}
+ 
+@@ -3174,7 +3166,7 @@
+ receive equal total weight. Sparser layers receive proportionally less;
+ within a layer, its weight is divided equally among its voxels.
+ 
+-\begin{figure}[p]
++\begin{figure}[htbp]
+ \centering
+ \includegraphics[width=\linewidth]{figures/compiled/constraint-support-details.pdf}
+ \caption{Additional details for the three Chapter~\ref{sec:spatial-constraints}
+@@ -3667,7 +3659,7 @@
+ These stored-grid views carry no anatomical-plane claim. Whole-volume
+ scores can reflect errors outside the displayed slice.
+ 
+-\begin{figure}[p]
++\begin{figure}[htbp]
+ \centering
+ \includegraphics[width=\linewidth]{figures/qualitative/adverse-predictions.png}
+ \caption{Adverse cases selected by the smallest whole-volume Dice change

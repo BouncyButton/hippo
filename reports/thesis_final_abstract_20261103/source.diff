@@ -1,0 +1,87 @@
+--- before.tex
++++ thesis-revision.tex
+@@ -64,44 +64,51 @@
+ 
+ \begin{document}
+ 
+-% Submission version: abstract retained here, excluded from the compiled thesis.
+-% Set \thesisincludeabstracttrue if the programme requires it in the PDF.
++% Review copy: include the abstract for the supervisors.
++% Set \thesisincludeabstractfalse to omit it when submitting the abstract separately.
++% The matching standalone submission text is saved in abstract.txt.
+ \newif\ifthesisincludeabstract
+-\thesisincludeabstractfalse
++\thesisincludeabstracttrue
+ \ifthesisincludeabstract
+ \section*{Abstract}
+ 
+ Semantic segmentation assigns a class to each location in an image,
+-turning measurements into structures that can be identified and measured.
+-In medical imaging, it supports quantitative analysis of organs and
+-anatomical regions, but learning accurate segmentations can require
+-substantial annotation and computation. This thesis investigates whether
+-spatial information in existing annotations can improve three-dimensional
+-segmentation when both resources are limited.
+-
+-The approach uses Logic Tensor Networks (LTNs), a neuro-symbolic framework
+-that connects logical statements with differentiable learning, and their
+-logarithmic formulation, logLTN. Additional training objectives encourage
+-predictions to agree with annotated boundaries, neighbouring labels and
+-region geometry. The method is evaluated first on synthetic geological
+-volumes from GeoFWI3D and then on hippocampus magnetic resonance imaging
+-from the Medical Segmentation Decathlon (MSD) and Alzheimer's Disease
+-Neuroimaging Initiative (ADNI). Hippocampus delineation supports studies
+-of brain structure in a region affected by Alzheimer's disease.
+-
+-Experiments cover both training from scratch and adapting pretrained
+-models, which start with representations learned from other images.
+-Across four architectures trained from scratch, the highest-mean tested
+-configurations improve Dice, a measure of region overlap, over matched
+-baselines by 1.16--6.14 percentage
+-points on GeoFWI3D, 5.35--11.97 points on MSD and 1.03--5.54 points on
+-ADNI. Adaptation of Segment Anything Model~3 (SAM3) reaches 72.76\% Dice
+-on GeoFWI3D, a gain of 3.45 points. Its medical specialization, MedSAM3,
+-reaches 81.73\% on MSD and 80.85\% on ADNI, with gains of 5.38 and
+-3.53 points. The preferred objective varies with the model and task.
+-The findings show that explicit spatial supervision can improve the
+-segmentation accuracy attainable from limited annotations and training,
+-including when adapting a pretrained model.
++allowing structures such as organs to be identified and measured. In
++medical imaging, it supports the study of anatomy and disease, but
++obtaining annotations and training accurate models require time and
++resources. This thesis investigates whether spatial information already
++contained in annotations can improve three-dimensional segmentation when
++labelled data and training computation are limited.
++
++The approach uses Logic Tensor Networks (LTNs), which combine neural
++learning with knowledge expressed as logical statements, and their
++logarithmic formulation, logLTN. Four additional training objectives
++encourage correct labels near boundaries and correct label transitions
++between neighbouring locations, weight errors by distance from class
++boundaries, and balance supervision across layers of a volume. These
++objectives reuse existing annotations without requiring additional manual
++labelling.
++
++The medical experiments concern hippocampus segmentation, relevant to the
++study of memory and Alzheimer's disease, using the Medical Segmentation
++Decathlon (MSD) and Alzheimer's Disease Neuroimaging Initiative (ADNI)
++datasets. Salt-body segmentation in synthetic GeoFWI3D volumes tests
++whether the benefits extend beyond medical imaging. Experiments cover four
++architectures trained from scratch under matched computational budgets
++within each dataset, and adaptation of pretrained Segment Anything Model 3
++(SAM3) and its medical specialization, MedSAM3, using small labelled
++support sets.
++
++For every architecture and dataset studied from scratch, at least one
++tested combination improves mean validation Dice, a measure of
++segmentation overlap, over the matched baseline. The largest gains are
++11.97 percentage points in the medical experiments and 6.14 points in the
++geological experiments. The best tested adaptation configurations improve
++Dice by 3.45 to 5.38 points. The preferred combination varies across
++models and tasks, and adding more constraints does not consistently
++improve performance. These findings support annotation-derived spatial
++supervision as a useful training strategy under limited resources, with
++benefits demonstrated in both medical and geological segmentation.
+ 
+ \clearpage
+ \fi

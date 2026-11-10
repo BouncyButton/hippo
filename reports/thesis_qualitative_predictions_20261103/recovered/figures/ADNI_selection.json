@@ -1,0 +1,103 @@
+{
+  "dataset": "ADNI",
+  "baseline": {
+    "id": "ADNI_MedSAM3_2sample_dice_f1s2",
+    "dataset": "ADNI",
+    "fold": 1,
+    "seed": 2,
+    "arm": "dice",
+    "worker": 0,
+    "role": "baseline",
+    "expected_dice": 0.7801500446825522,
+    "updates": 200
+  },
+  "constrained": {
+    "id": "ADNI_MedSAM3_2sample_dice_edge_sdf_depth_f1s2",
+    "dataset": "ADNI",
+    "fold": 1,
+    "seed": 2,
+    "arm": "dice_edge_sdf_depth",
+    "worker": 1,
+    "role": "constrained",
+    "expected_dice": 0.8156784388190051,
+    "updates": 200
+  },
+  "held_out_cases": 54,
+  "examples": [
+    {
+      "case": "hippocampus_adni_250173_L",
+      "slice_axis": 2,
+      "slice_zero_based": 20,
+      "selection": "Median paired change",
+      "baseline_dice": 0.8427171566185019,
+      "constrained_dice": 0.8768656716417911,
+      "delta_pp": 3.4148515023289194,
+      "baseline_background_dice": 0.9918962168082903,
+      "constrained_background_dice": 0.9931986809563067,
+      "baseline_all_class_dice": 0.9173066867133961,
+      "constrained_all_class_dice": 0.9350321762990489,
+      "baseline_foreground_fn": 817,
+      "constrained_foreground_fn": 534,
+      "baseline_foreground_fp": 130,
+      "constrained_foreground_fp": 258,
+      "baseline_ap_swaps": null,
+      "constrained_ap_swaps": null
+    },
+    {
+      "case": "hippocampus_adni_28514_R",
+      "slice_axis": 2,
+      "slice_zero_based": 24,
+      "selection": "Smallest paired change",
+      "baseline_dice": 0.7625562556255625,
+      "constrained_dice": 0.7406094968107725,
+      "delta_pp": -2.1946758814790024,
+      "baseline_background_dice": 0.9887577242701896,
+      "constrained_background_dice": 0.9875123682145416,
+      "baseline_all_class_dice": 0.8756569899478761,
+      "constrained_all_class_dice": 0.864060932512657,
+      "baseline_foreground_fn": 1221,
+      "constrained_foreground_fn": 1249,
+      "baseline_foreground_fp": 98,
+      "constrained_foreground_fp": 215,
+      "baseline_ap_swaps": null,
+      "constrained_ap_swaps": null
+    },
+    {
+      "case": "hippocampus_adni_10007_L",
+      "slice_axis": 2,
+      "slice_zero_based": 17,
+      "selection": "Largest paired change",
+      "baseline_dice": 0.5828471411901983,
+      "constrained_dice": 0.6991492652745553,
+      "delta_pp": 11.630212408435703,
+      "baseline_background_dice": 0.9880286642333322,
+      "constrained_background_dice": 0.9901933597196663,
+      "baseline_all_class_dice": 0.7854379027117653,
+      "constrained_all_class_dice": 0.8446713124971108,
+      "baseline_foreground_fn": 1327,
+      "constrained_foreground_fn": 970,
+      "baseline_foreground_fp": 103,
+      "constrained_foreground_fp": 197,
+      "baseline_ap_swaps": null,
+      "constrained_ap_swaps": null
+    }
+  ],
+  "mean_paired_gain_pp": 3.522343974215664,
+  "positive_cases": 51,
+  "qualification": "Fresh reproduction for visualization. Original nine-cell study remains the source of aggregate claims.",
+  "slice_rule": "First source-axis-2 slice attaining maximum reference foreground area; identical image and slice for all panels.",
+  "original_comparisons": [
+    {
+      "original_dice": 0.7801500446825522,
+      "reproduced_dice": 0.7712126388062175,
+      "difference_pp": -0.8937405876334736,
+      "interpretation": "New qualitative reproduction; original scores remain the thesis evidence. Review discrepancies before using panels."
+    },
+    {
+      "original_dice": 0.8156784388190051,
+      "reproduced_dice": 0.8064360785483743,
+      "difference_pp": -0.9242360270630856,
+      "interpretation": "New qualitative reproduction; original scores remain the thesis evidence. Review discrepancies before using panels."
+    }
+  ]
+}

@@ -1,0 +1,1995 @@
+--- before.tex
++++ thesis-revision.tex
+@@ -92,7 +92,8 @@
+ Experiments cover both training from scratch and adapting pretrained
+ models, which start with representations learned from other images.
+ Across four architectures trained from scratch, the highest-mean tested
+-configurations improve Dice over matched baselines by 1.16--6.14 percentage
++configurations improve Dice, a measure of region overlap, over matched
++baselines by 1.16--6.14 percentage
+ points on GeoFWI3D, 5.35--11.97 points on MSD and 1.03--5.54 points on
+ ADNI. Adaptation of Segment Anything Model~3 (SAM3) reaches 72.76\% Dice
+ on GeoFWI3D, a gain of 3.45 points. Its medical specialization, MedSAM3,
+@@ -122,12 +123,12 @@
+ structures in the images. A segmentation mask stores these decisions as
+ class labels on the image grid. In supervised learning, a neural network
+ learns to reproduce such masks from paired images and annotations.
+-Convolutional encoder--decoder models, notably U-Net and its volumetric
+-extension, made this approach widely applicable to biomedical images
+-\cite{ronneberger2015unet,cicek2016unet}. Transformer-based models offer
+-another way to combine information across an image, while pretrained
+-segmentation models allow an existing representation to be adapted to a
+-new task. These developments provide several routes to automatic
++Models such as U-Net and its three-dimensional extension learn image
++features and use them to predict a mask, making this approach widely
++applicable to biomedical images \cite{ronneberger2015unet,cicek2016unet}.
++Transformer-based models learn how strongly information from different
++image regions should influence a prediction. Pretrained models begin
++with features learned from other images and can be adapted to a new task. These developments provide several routes to automatic
+ segmentation, but they do not remove two practical constraints:
+ \begin{itemize}
+ \item \textbf{Limited annotations.} Delineating a structure throughout a
+@@ -139,27 +140,29 @@
+ valuable even when a longer training run would eventually close the gap.
+ \end{itemize}
+ 
+-This thesis asks whether the spatial information already contained in a
+-mask can make learning more effective under these restrictions. Consider
+-a voxel just inside an annotated object: its label specifies membership,
+-but its location also tells us that it lies close to the object's edge.
+-Two neighbouring voxels reveal whether the annotation changes class at
+-that location. The proposed approach gives these relationships an explicit
+-role in the training objective, alongside the model's usual segmentation
+-loss. It needs no additional manual annotations.
++This thesis asks whether the spatial information already contained in a mask
++can make learning more effective under these restrictions. Consider a voxel
++just inside an annotated object: its label specifies membership, but its
++location also tells us that it lies close to the object's edge. Two
++neighbouring voxels reveal whether the annotation changes class at that
++location. The proposed approach gives these relationships an explicit role
++in the training objective, alongside the model's usual segmentation loss,
++the numerical penalty for disagreement with the annotation. Training with
++this usual loss alone provides the baseline against which the added
++supervision is compared. No additional manual annotations are needed.
+ 
+ Logic Tensor Networks (LTNs) provide a way to express such supervision
+ \cite{badreddine2022logic}. They belong to neuro-symbolic artificial
+ intelligence, which combines neural learning with explicitly stated
+ knowledge. In an LTN, a statement such as ``these annotated inner voxels
+-belong to the object'' receives a numerical degree of satisfaction from
+-the model's predictions. Training can then increase that satisfaction.
+-The logarithmic formulation, logLTN, expresses truth degrees through
+-their logarithms: multiplying degrees of satisfaction becomes addition,
+-and their negative logarithms give penalties to minimize
+-\cite{badreddine2023logltn}. Here, \emph{spatial constraints}
+-means soft training objectives: they encourage the stated properties
+-without guaranteeing them in every predicted segmentation.
++belong to the object'' receives a numerical degree of satisfaction from the
++model's predictions. Training can then increase that satisfaction. The
++logarithmic formulation, logLTN, expresses these satisfaction values, also
++called truth degrees, through their logarithms: multiplying degrees of
++satisfaction becomes addition, and their negative logarithms give penalties
++to minimize \cite{badreddine2023logltn}. Here, \emph{spatial constraints}
++means soft training objectives: they encourage the stated properties without
++guaranteeing them in every predicted segmentation.
+ 
+ Four forms of supervision are studied. The first reinforces membership
+ on either side of an annotated boundary. The second encourages
+@@ -171,50 +174,52 @@
+ combination. This separates the formulation of a useful constraint from
+ the empirical question of whether it improves learning.
+ 
+-The experiments address two learning situations. Models trained from
+-scratch must learn from the available task annotations, whereas pretrained
+-models start with representations learned from other images. The first
+-comparison includes convolutional and transformer architectures to test
+-whether the usefulness of spatial supervision depends on how a model
+-represents image context. The second adapts Segment Anything Model~3
+-(SAM3) and its medical specialization, MedSAM3, to the target tasks \cite{carion2025sam3,liu2025medsam3}. It asks whether
+-spatial supervision still helps when the initial representation is
+-already available. Within each study, constrained and baseline training
+-share the data and the stated computational or update budget.
++The experiments address two learning situations. Models trained from scratch
++must learn from the available task annotations, whereas pretrained models
++start with representations learned from other images. The first comparison
++includes convolutional models, which learn local image patterns, and
++transformer models to test whether the usefulness of spatial supervision
++depends on how a model represents image context. The second adapts Segment
++Anything Model~3 (SAM3) and its medical specialization, MedSAM3, to the
++target tasks \cite{carion2025sam3,liu2025medsam3}. It asks whether spatial
++supervision still helps when the initial representation is already
++available. Within each study, constrained and baseline training share the
++data and the stated computational or update budget.
+ 
+ To test whether the benefits of spatial supervision extend beyond medical
+ imaging, the investigation also considers salt-body segmentation in
+ GeoFWI3D. This dataset contains synthetic subsurface models and associated
+-reflectivity volumes, with labels distinguishing salt from the surrounding
+-material \cite{swaminadhan2026geofwi3d}. The geological task provides a
+-contrasting application in which to examine whether the same supervision
+-remains useful.
++reflectivity volumes, which describe contrasts that reflect seismic waves,
++with labels distinguishing salt from the surrounding material
++\cite{swaminadhan2026geofwi3d}. The geological task provides a contrasting
++application in which to examine whether the same supervision remains useful.
+ 
+ The medical application is hippocampus segmentation in magnetic resonance
+ imaging (MRI). The hippocampus is involved in memory and is affected early
+-in Alzheimer's disease; identifying its boundaries supports measurements
+-of anatomical volume and variation \cite{niaAlzheimerBrain}. Two datasets
++in Alzheimer's disease; identifying its boundaries supports measurements of
++anatomical volume and variation \cite{niaAlzheimerBrain}. Two datasets
+ provide complementary tasks. The Medical Segmentation Decathlon (MSD)
+ distinguishes anterior and posterior hippocampus from background
+-\cite{simpson2019dataset}. It therefore requires both the outer contour
+-and an internal division to be recovered. The Alzheimer's Disease
+-Neuroimaging Initiative (ADNI) supplies images for a binary task,
+-distinguishing hippocampus from background in separate left and right
+-crops \cite{adniStudy}. SAM3 is adapted to the geological task and
+-MedSAM3 to the two medical tasks. Figure~\ref{fig:dataset-examples}
+-illustrates the images and masks used in these three settings.
+-
+-The contribution is a common LTN/logLTN formulation of these four
+-objectives and an assessment of when they improve segmentation. The
+-formulation builds on established ideas, including signed-distance
+-boundary supervision, and specifies the regions, statements and
+-reductions used by each objective. Its value lies in making those
+-choices explicit and testing their effects across models, datasets and
+-initializations. A separate annotation audit tests whether proposed
+-geometric rules for the MSD class division agree with the stored masks
+-before treating such rules as anatomical constraints.
+-Figure~\ref{fig:thesis-overview} summarizes the investigation; the
+-experimental protocols are given in Chapter~\ref{sec:methodology}.
++\cite{simpson2019dataset}. It therefore requires both the outer contour and
++an internal division to be recovered. The Alzheimer's Disease Neuroimaging
++Initiative (ADNI) supplies images for a binary task, distinguishing
++hippocampus from background in separate left and right crops, smaller image
++volumes centred on each hippocampus \cite{adniStudy}. SAM3 is adapted to the
++geological task and MedSAM3 to the two medical tasks.
++Figure~\ref{fig:dataset-examples} illustrates the images and masks used in
++these three settings.
++
++The contribution is a common LTN/logLTN formulation of these four objectives
++and an assessment of when they improve segmentation. The formulation builds
++on established ideas, including supervision based on distance from a
++boundary, and specifies the regions, statements and averaging rules used by
++each objective. Its value lies in making those choices explicit and testing
++their effects across models, datasets and initializations. A separate
++annotation audit tests whether proposed geometric rules for the MSD class
++division agree with the stored masks before treating such rules as
++anatomical constraints. Figure~\ref{fig:thesis-overview} summarizes the
++investigation; the experimental protocols are given in
++Chapter~\ref{sec:methodology}.
+ 
+ \begin{figure}[p]
+ \centering
+@@ -222,8 +227,9 @@
+ % Cached vector figure; editable source: figures/source/dataset-examples.tikz
+ \includegraphics{figures/compiled/dataset-examples.pdf}
+ \caption{Example inputs and reference annotations from the three local
+-dataset preparations. Each column shows the lexicographically first
+-training case and the slice with the largest foreground area perpendicular
++dataset preparations. Foreground denotes the labelled target structures;
++background is everything else. Each column shows the first training case
++when identifiers are sorted and the slice with the largest foreground area perpendicular
+ to its first stored axis (ties use the lowest index). The labels retain
+ their native voxel grid. Reflectivity is displayed over $[-1,1]$; MRI
+ intensities are clipped to each volume's first and ninety-ninth percentiles.
+@@ -267,25 +273,31 @@
+ \subsection{Segmentation and Supervised Objectives}
+ \label{sec:volumetric-segmentation}\label{sec:segmentation-objectives}
+ 
+-A digital image is an array of measurements. In a two-dimensional image,
+-each entry is a pixel; in a volume, each entry is a voxel. Multiple
+-channels can represent colour or different imaging measurements, although
+-the datasets used here have one input channel. Image classification
+-assigns a label to an entire image, object detection locates objects,
+-and semantic segmentation assigns a class at every location. Segmentation
+-therefore preserves the spatial information needed to describe a region's
+-size and shape.
++A digital image stores measurements on a regular grid, also called an array.
++In two dimensions, the grid locations are pixels; in a three-dimensional
++image volume, they are voxels. A voxel's location in this array is
++identified by three integer indices, one for each axis. Each location can
++hold several measurements, called channels, such as colour components or
++different imaging measurements. The datasets used here have one input
++channel. Image classification assigns a label to an entire image, object
++detection locates objects, and semantic segmentation assigns a class at
++every location. Segmentation therefore preserves the spatial information
++needed to describe a region's size and shape.
+ 
+ For an image volume indexed by $i$ (a \emph{case}), let
+ $\Omega_i=\{0,\ldots,D_i-1\}\times\{0,\ldots,H_i-1\}\times
+-\{0,\ldots,W_i-1\}$ be the voxel grid. The image
++\{0,\ldots,W_i-1\}$ be the voxel grid, with $D_i$, $H_i$ and $W_i$
++giving its three axis lengths. A location $v\in\Omega_i$ is a triplet
++of voxel indices. The image
+ $x_i:\Omega_i\to\mathbb R^M$ contains $M$ measurements at each location,
+-and the reference map $y_i:\Omega_i\to\mathcal C$ assigns one of $K$
+-mutually exclusive classes. The subscript $i$ allows native image dimensions
+-to vary across volumes; individual training recipes may prepare a fixed
+-input size. Background has label zero. The one-hot value
+-$y_{i,c}(v)=\mathbf1\{y_i(v)=c\}$ indicates whether voxel $v$ belongs to
+-class $c$. A network with parameters $\theta$ produces logits
++and the reference map $y_i:\Omega_i\to\mathcal C$ assigns one of the $K$
++mutually exclusive classes in the set $\mathcal C$. Image dimensions can
++vary across cases, although preprocessing may prepare a fixed input size
++for training. Background has label zero; the target classes together
++form the foreground. The one-hot value
++$y_{i,c}(v)=\mathbf1\{y_i(v)=c\}$ is one when voxel $v$ belongs to
++class $c$ and zero otherwise. The indicator $\mathbf1$ therefore converts
++a class assignment into a binary mask. A network with parameters $\theta$ produces logits
+ $z_{\theta,i,c}(v)$, which are unrestricted class scores. The softmax
+ operation converts them to nonnegative probabilities that sum to one:
+ \begin{equation}
+@@ -296,28 +308,40 @@
+ \sum_{c\in\mathcal{C}}p_{\theta,i,c}(v)=1.
+ \label{eq:segmentation-softmax}
+ \end{equation}
+-Training operates on these continuous outputs. The final label is
++Training operates on these continuous outputs. The final label is the
++class with the largest probability, written as
+ $\widehat y_i(v)=\operatorname{arg\,max}_{c\in\mathcal C}
+ p_{\theta,i,c}(v)$. 
+ 
+-The class vocabulary determines which errors a constraint can detect.
+-Salt segmentation uses $\mathcal C=\{0,S\}$, where $S$ denotes salt.
+-Binary hippocampus segmentation uses $\{0,H\}$, where $H$ denotes
+-hippocampus. MSD uses $\{0,A,P\}$: $A$ and $P$ denote anterior and
+-posterior hippocampus, respectively. Its whole-foreground probability is
+-$q_i=p_{\theta,i,A}+p_{\theta,i,P}$. A term depending only on this sum
+-cannot distinguish an anterior/posterior exchange that preserves it.
+-Furthermore, foreground thresholding and multiclass argmax are distinct
+-decision rules: for $(p_0,p_A,p_P)=(0.40,0.35,0.25)$, the foreground sum
+-exceeds $0.5$ although background is the most probable individual class.
+-The experiments use multiclass argmax before evaluating the labelled
+-regions.
++The class vocabulary determines which errors a constraint can detect. Salt
++segmentation uses $\mathcal C=\{0,S\}$, where $S$ denotes salt. Binary
++hippocampus segmentation uses $\{0,H\}$, where $H$ denotes hippocampus. MSD
++uses $\{0,A,P\}$: $A$ and $P$ denote anterior and posterior hippocampus,
++respectively. Its whole-foreground probability is
++$q_i(v)=p_{\theta,i,A}(v)+p_{\theta,i,P}(v)$. A term depending only on this
++sum cannot distinguish an anterior/posterior exchange that preserves it.
++Labelling a voxel as foreground whenever this sum exceeds a threshold is
++different from choosing its most probable class: for
++$(p_0,p_A,p_P)=(0.40,0.35,0.25)$, the foreground sum exceeds $0.5$ although
++background is the most probable individual class. The experiments use
++multiclass argmax before evaluating the labelled regions. Predicting
++background where the reference is foreground is a false negative (FN);
++predicting foreground in reference background is a false positive (FP). An
++anterior/posterior swap instead assigns the wrong foreground class while
++preserving whole-hippocampus membership.
+ 
+ A loss assigns a numerical penalty to disagreement between a prediction
+ and its annotation. Training adjusts the parameters to reduce that
+-penalty. We write losses as $\mathcal L(x_i,y_i;\theta)$; later family
+-subscripts abbreviate these inputs when they are fixed by the context.
+-Cross-entropy penalizes low probability for the reference class:
++penalty. An optimizer is the algorithm that makes these adjustments.
++It uses gradients, derivatives indicating how the loss changes with the
++parameters. Backpropagation computes those gradients through the network;
++gradient descent uses them to move towards a lower loss. Each update
++processes a batch, a group of training examples that may contain just
++one volume. We write losses as $\mathcal L(x_i,y_i;\theta)$; later subscripts
++identify the particular loss, and inputs fixed by the context are omitted.
++Cross-entropy penalizes low probability for the reference class and
++averages this penalty over the $|\Omega_i|$ voxels. Here $|\Omega_i|$
++denotes their count and $\log$ is the natural logarithm:
+ \begin{equation}
+ \begin{aligned}
+ \mathcal{L}_{\mathrm{CE}}(x_i,y_i;\theta)
+@@ -329,11 +353,13 @@
+ \label{eq:cross-entropy}
+ \end{equation}
+ Each location contributes a class error, while the network can use spatial
+-context to determine its prediction. The voxelwise reduction therefore
+-does not assume independent image locations. Fixed nonnegative weights
+-with $\sum_v w_i(v)=1$ give the weighted form
++context to determine its prediction. Averaging over voxels therefore
++does not assume independent image locations. Assigning a fixed nonnegative
++weight $w_i(v)$ to each voxel, with $\sum_v w_i(v)=1$, gives the weighted form
+ $-\sum_v w_i(v)\log p_{\theta,i,y_i(v)}(v)$. This changes the allocation
+-of supervision across the volume and is the basis of the depth objective.
++of supervision across the volume: some locations can contribute more
++than others. Chapter~\ref{sec:spatial-constraints} uses this idea to
++balance supervision across spatial layers.
+ 
+ Dice measures how much a predicted region overlaps its reference.
+ For a reference region $Y$ and a predicted region $\widehat Y$, treated
+@@ -358,8 +384,9 @@
+ \end{figure}
+ 
+ Training uses a continuous version of this overlap measure so that its
+-derivatives can guide learning \cite{milletari2016vnet}. The
+-linear-denominator soft Dice used in this study is
++derivatives can guide learning \cite{milletari2016vnet}. The following
++soft Dice for class $c$ uses probabilities in place of a discrete mask.
++A small positive constant $\varepsilon$ prevents division by zero:
+ \begin{equation}
+ D_{i,c}^{\mathrm{soft}}=
+ \frac{2\sum_{v\in\Omega_i}p_{\theta,i,c}(v)y_{i,c}(v)+\varepsilon}
+@@ -389,17 +416,18 @@
+ cross-entropy term can change both the strength of class supervision and
+ where it is concentrated.
+ 
+-To describe spatial relationships, we need to distinguish a voxel's
+-position in the stored array from its position in the imaged volume.
+-Moving one step in the array does not necessarily mean moving the same
+-physical distance in every direction. For example, neighbouring voxel
+-centres might be 1~mm apart along one axis and 2~mm apart along another,
+-as illustrated in Figure~\ref{fig:voxel-coordinates}.
++The three indices of a voxel tell us where its value appears in the image
++grid introduced above. They do not, by themselves, tell us the physical
++distance between voxel centres in the imaged object. Moving one grid step
++can represent a different physical distance along each axis. For example,
++neighbouring voxel centres might be 1~mm apart along one axis and 2~mm apart
++along another, as illustrated in Figure~\ref{fig:voxel-coordinates}.
+ 
+ The image's coordinate transform converts an array index $v$ into a
+ physical position $r_i(v)$. Its matrix $Q_i$ specifies the orientation
+ and scale of the array axes, and $b_i$ gives the position of the array
+-origin. This also lets us calculate the straight-line distance between
++origin. Together they define an affine transform, a linear mapping
++followed by a translation. This also lets us calculate the straight-line distance between
+ two voxel centres, indexed by $u$ and $v$:
+ \begin{equation}
+ r_i(v)=Q_i v+b_i,
+@@ -408,8 +436,8 @@
+ \label{eq:physical-coordinates}
+ \end{equation}
+ Here $\lVert\cdot\rVert_2$ denotes Euclidean length. Neuroimaging
+-Informatics Technology Initiative (NIfTI) image headers store the
+-coordinate transforms and spatial units needed for this calculation
++Informatics Technology Initiative (NIfTI) image headers, the metadata
++stored alongside image values, contain the coordinate transforms and spatial units needed for this calculation
+ \cite{nifti1fields}.
+ 
+ We define neighbours directly on the array grid. Two voxels are neighbours
+@@ -421,18 +449,20 @@
+ \label{eq:voxel-neighbourhood}
+ \end{equation}
+ The condition $\lVert u-v\rVert_1=1$ says that the sum of the absolute
+-index differences is one. Boundary bands and edge comparisons use this
+-grid neighbourhood. The MSD depth construction uses physical positions,
+-so it also depends on the image's coordinate transform. The experimental
+-protocols specify the coordinate conventions for the other datasets.
++index differences is one. These neighbouring pairs let us describe
++local changes and construct regions around an annotated boundary.
++Constraints that also depend on physical distance or orientation need
++the coordinate transform. Chapter~\ref{sec:spatial-constraints} specifies
++which description each constraint uses.
+ 
+ \begin{figure}[htbp]
+ \centering
+ % Pre-rendered vector figure; generator: figures/source/voxel-coordinates.py
+ \includegraphics[width=0.95\linewidth]{figures/compiled/voxel-coordinates.pdf}
+ \caption{Voxel indices and physical distances in a synthetic example with
+-$Q=\operatorname{diag}(1,2,1)\,\mathrm{mm}$ and $b=0$.
+-The panels show the slice $v_3=1$. Each coloured segment joins the central
++voxel spacings of 1, 2 and 1~mm along the three grid axes, aligned with
++the physical axes and sharing their origin.
++The panels show the slice with third index $v_3=1$. Each coloured segment joins the central
+ voxel to a face-sharing neighbour and represents one grid step. Its
+ physical length is 1~mm horizontally and 2~mm vertically. Four neighbours
+ lie in the displayed plane; two additional neighbours outside the plane
+@@ -442,52 +472,59 @@
+ 
+ \subsection{Segmentation Architectures}\label{sec:segmentation-architectures}
+ 
+-The four architectures provide different ways to use the surrounding
+-image when classifying a voxel. A convolutional model builds context
+-through repeated local operations; a transformer can combine features
+-from more distant locations through attention. Testing both helps assess
+-whether a spatial objective is useful beyond a single model family.
+-All four connect an encoder, which extracts image features, to a decoder,
+-which converts those features into voxelwise predictions. The comparison
+-also includes two convolutional baselines: a compact U-Net and the more
+-elaborate nnU-Net training pipeline. It therefore probes sensitivity to
+-both representation and training recipe, rather than isolating encoder
++The four architectures provide different ways to use the surrounding image
++when classifying a voxel. Convolution applies learned filters to small
++neighbourhoods, detecting local image patterns called features. Repeating
++these operations combines information over larger regions. A transformer
++instead uses attention, which learns how strongly features at different
++locations should contribute to one another. Testing both helps assess
++whether a spatial objective is useful beyond a single model family. All four
++connect an encoder, which extracts image features, to a decoder, which
++converts those features into voxelwise predictions. The comparison also
++includes two convolutional baselines: a compact U-Net and the more elaborate
++nnU-Net training pipeline. It therefore probes sensitivity to both
++representation and training recipe, rather than isolating encoder
+ architecture alone.
+ 
+-U-Net builds increasingly coarse feature maps through an encoder and
+-combines them with an upsampling decoder through skip connections
+-\cite{ronneberger2015unet}. Coarse features provide context, while the
+-skips retain information useful for localization. Three-dimensional
+-U-Net applies these operations across a volume \cite{cicek2016unet}.
+-The compact implementation in this study provides a convolutional
+-reference with a relatively small configured network.
++U-Net's encoder forms feature maps, arrays of responses to learned image
++patterns, and progressively reduces their spatial resolution by
++\emph{downsampling}. The decoder raises that resolution again through
++\emph{upsampling}. Skip connections pass encoder features directly to
++corresponding decoder stages, preserving detail useful for localization
++\cite{ronneberger2015unet}. Three-dimensional U-Net applies these operations
++across a volume \cite{cicek2016unet}. The compact implementation in this
++study provides a convolutional reference with a relatively small configured
++network.
+ 
+ nnU-Net uses a U-Net architecture within a system that configures
+ preprocessing, network design and training for the segmentation problem
+ \cite{isensee2021nnunet}. Its identity therefore includes the training
+ pipeline as well as the encoder. The present experiment fixes a particular
+-configuration and retains its native supervised loss and deep supervision.
+-This makes the constrained and unconstrained versions comparable within
+-that system.
+-
+-Transformer encoders use self-attention to combine token features through
+-input-dependent query--key similarities \cite{vaswani2017attention}.
+-UNETR (U-Net with a transformer encoder) divides the volume into
+-patches, embeds them as a sequence and
+-applies global attention on a fixed token grid
+-\cite{hatamizadeh2021unetr}. Features from intermediate blocks are
+-reshaped and upsampled for a convolutional decoder. Attention can connect
+-distant patches within the supplied crop, although the crop itself still
+-limits the available context.
+-
+-SwinUNETR combines a shifted-window (Swin) transformer with a U-Net
+-decoder, forming a hierarchy of transformer features
+-\cite{hatamizadeh2022swin}. Attention is restricted to local windows;
+-alternating shifted partitions exchange information across their
+-boundaries, and patch merging produces coarser representations
+-\cite{liu2021swin}. The resulting feature maps feed a convolutional
+-decoder. Figure~\ref{fig:architecture-families} contrasts this hierarchy
+-with UNETR's fixed token grid and the convolutional U-Net organization.
++configuration and retains its native supervised loss and deep supervision,
++which applies losses to intermediate decoder outputs as well as the final
++prediction. This makes the constrained and unconstrained versions comparable
++within that system.
++
++A transformer represents image regions as vectors called tokens.
++Self-attention updates each token by combining information from other
++tokens, with weights calculated from their features
++\cite{vaswani2017attention}. UNETR (U-Net with a transformer encoder)
++divides the volume into patches and converts each patch into a token, a step
++called embedding. It applies attention across the full sequence on a fixed
++token grid \cite{hatamizadeh2021unetr}. Features from intermediate blocks
++are reshaped and upsampled for a convolutional decoder. Attention can
++connect distant patches within the supplied crop, although the crop itself
++still limits the available context.
++
++SwinUNETR combines a shifted-window (Swin) transformer with a U-Net decoder,
++forming a hierarchy of transformer features \cite{hatamizadeh2022swin}.
++Attention is restricted to windows, groups of neighbouring tokens. Shifting
++the windows between successive stages exchanges information across their
++boundaries. Patch merging combines neighbouring tokens to produce coarser
++representations \cite{liu2021swin}. The resulting feature maps feed a
++convolutional decoder. Figure~\ref{fig:architecture-families} contrasts this
++hierarchy with UNETR's fixed token grid and the convolutional U-Net
++organization.
+ 
+ \begin{figure}[htbp]
+ \centering
+@@ -507,13 +544,13 @@
+ \end{figure}
+ 
+ These architectural differences also affect the meaning of a training
+-budget. Parameter count describes stored weights, whereas computational
+-cost depends additionally on feature-map dimensions, kernel reuse, token
++budget. Parameter count describes stored weights, whereas computational cost
++also depends on feature-map dimensions, how often filters are applied, token
+ counts and decoder operations. Windowed attention reduces pairwise
+-interaction costs at a fixed token count, but does not alone determine
+-the cost of a complete model. The experiments therefore profile the
+-configured models and objectives; their widths and optimizers are given
+-in Section~\ref{sec:main-msd-methods}.
++interaction costs at a fixed token count, but does not alone determine the
++cost of a complete model. The experiments therefore measure the arithmetic
++work of the configured models and objectives; their sizes and optimizer
++settings are given in Section~\ref{sec:main-msd-methods}.
+ 
+ \subsection{Logic Tensor Networks and logLTN}\label{sec:ltn-background}
+ 
+@@ -522,11 +559,11 @@
+ \emph{grounding}, maps a statement to a truth degree in $[0,1]$; this map
+ is denoted by $\mathcal G_\theta$. It makes statements differentiable
+ with respect to the model parameters
+-\cite{badreddine2022logic}. Individuals are represented by constants or
+-variables, predicates evaluate their properties in $[0,1]$, and numerical
+-operators combine these truth degrees. A segmentation predicate can take
+-a voxel and its image as an individual and use the model's class
+-probability as its grounding:
++\cite{badreddine2022logic}. An \emph{individual} is an object being described,
++here a voxel in a particular image. A \emph{predicate} expresses a property
++of that object, such as belonging to class $c$. We write this segmentation
++predicate as $\mathsf{Seg}_c(i,v)$ and ground it with the model's class
++probability:
+ \begin{equation}
+ \mathcal{G}_{\theta}\bigl(\mathsf{Seg}_c(i,v)\bigr)
+ =p_{\theta,i,c}(v).
+@@ -546,14 +583,18 @@
+ truth degrees are combined. It measures agreement with the chosen rule;
+ it is not automatically the probability that the entire rule is true.
+ 
+-Multiplying many truth degrees can produce very small values.
+-logLTN works with their logarithms, so products become sums and these
+-quantities can be evaluated without first forming the product
+-\cite{badreddine2023logltn}. If
+-$\ell_\theta(\phi)=\log\mathcal G_\theta(\phi)$, complete satisfaction
+-has value zero and lower satisfaction has a negative value. Product
+-conjunction becomes addition. For the objectives in this thesis,
+-universal reduction takes the weighted mean of local log-truths:
++Multiplying many truth degrees can produce very small values. logLTN works
++with their logarithms, so products become sums and these quantities can be
++evaluated without first forming the product \cite{badreddine2023logltn}. For
++a statement $\phi$, write its log-truth as $\ell_\theta(\phi)=\log\mathcal
++G_\theta(\phi)$. Complete satisfaction has value zero and lower satisfaction
++has a negative value. Combining statements with logical ``and'' can use the
++product of their truth degrees; in log space, this becomes addition.
++
++To express that a property $P$ should hold for every individual $u$ in a
++nonempty set $U$, this thesis uses the weighted mean of their log-truths.
++The universal quantifier $\forall$ means ``for all'', and $\omega(u)$
++is the weight assigned to individual $u$:
+ \begin{equation}
+ \ell_{\theta}(\forall_{\omega}u\in U:\,P(u))
+ =\sum_{u\in U}\omega(u)\ell_{\theta}(P(u)),
+@@ -583,8 +624,10 @@
+ \end{figure}
+ \FloatBarrier
+ 
+-Geometric errors can enter the same framework. Any nonnegative violation
+-$e_\theta(u)$ defines an agreement predicate through
++Geometric errors can enter the same framework. Let $e_\theta(u)$ measure
++a violation, with zero meaning agreement and larger nonnegative values
++meaning greater error. It defines an agreement predicate, written
++$\mathsf{Cons}(u)$, through
+ \begin{equation}
+ \mathcal{G}_{\theta}(\mathsf{Cons}(u))=\exp(-e_{\theta}(u)),
+ \qquad
+@@ -609,68 +652,71 @@
+ \subsection{Related Work on Spatial Supervision}\label{sec:spatial-related-work}
+ 
+ Prior work incorporates spatial information through location-dependent
+-weights, geometric penalties and representations of valid shape.
+-Ronneberger \emph{et al.}\ weighted cross-entropy near boundaries separating
+-touching cells \cite{ronneberger2015unet}. This demonstrates how an
+-annotation can specify where class supervision deserves extra emphasis.
+-The boundary bands studied here use explicit inner and outer domains,
+-with balanced side reductions. In the principal experiment, those domains
+-follow the exterior of the whole foreground.
+-
+-Kervadec \emph{et al.}\ formulate boundary supervision as a regional integral
+-of predicted probabilities against a reference signed-distance field
+-\cite{kervadec2019boundary}. The formulation supplies a geometric
+-learning signal without extracting a hard predicted contour. The
+-classwise distance term in this thesis follows that approach, with
+-specified discrete distances, clipping and normalization. A constant
+-shift makes its loss nonnegative while preserving the model gradient.
+-
+-Anatomically Constrained Neural Networks supervise segmentation through
+-a learned representation of valid shapes \cite{oktay2017anatomically}.
+-clDice instead uses mask and skeleton overlap to address connectivity
+-in tubular structures \cite{shit2021cldice}. These approaches concern
+-properties that local membership and transition agreement do not enforce.
+-The present edge term preserves the changes in the annotation, including
+-its boundaries; it does not require a globally connected prediction.
+-
+-Bergamin \emph{et al.}\ use LTNs for MSD hippocampus segmentation with relations
+-concerning connection, non-nesting and relative volume
+-\cite{bergamin2025integrating}. Their work provides a direct predecessor
+-for logical supervision of this task. The present study evaluates four
+-families of local or classwise geometric supervision across multiple
+-architectures under an optimization FLOP ceiling. It also examines the
+-compatibility of candidate anatomical proxies with the actual label maps
+-(Appendix~\ref{sec:annotation-results}).
+-
+-Together, these studies motivate explicit spatial supervision while
+-showing that different objectives encode different properties. The
++weights, geometric penalties and representations of valid shape. Ronneberger
++\emph{et al.}\ weighted cross-entropy near boundaries separating touching
++cells \cite{ronneberger2015unet}. This demonstrates how an annotation can
++specify where class supervision deserves extra emphasis. The boundary bands
++studied here select voxels just inside and outside the annotated region,
++averaging the loss separately on each side. In the principal experiment,
++these bands follow the exterior of the whole foreground.
++
++A signed-distance field assigns each location a distance from the annotated
++boundary, negative inside the region and positive outside. Kervadec \emph{et
++al.}\ use this field to weight predicted probabilities throughout the image
++\cite{kervadec2019boundary}. This supplies a geometric learning signal
++without extracting a discrete predicted contour. The classwise distance term
++in this thesis follows that approach; its exact distance convention and loss
++are developed in Section~\ref{sec:sdf-constraints}.
++
++Anatomically Constrained Neural Networks supervise segmentation through a
++learned representation of valid shapes \cite{oktay2017anatomically}. clDice
++instead compares masks and their skeletons, thin centreline representations,
++to encourage connected paths in tubular structures \cite{shit2021cldice}.
++These approaches concern properties that local membership and transition
++agreement do not enforce. The present edge term preserves the changes in the
++annotation, including its boundaries; it does not require a globally
++connected prediction.
++
++Bergamin \emph{et al.}\ use LTNs for MSD hippocampus segmentation with
++relations concerning whether regions are connected, whether one is contained
++in another, and their relative volumes \cite{bergamin2025integrating}. Their
++work provides a direct predecessor for logical supervision of this task. The
++present study evaluates four families of local or classwise geometric
++supervision across multiple architectures under an optimization FLOP
++ceiling. It also examines the compatibility of simplified anatomical rules
++with the actual label maps (Appendix~\ref{sec:annotation-results}).
++
++Together, these studies motivate explicit spatial supervision while showing
++that different objectives encode different properties. The
+ fourteen-objective comparison evaluates the selected families and their
+ combinations; the literature methods provide context rather than further
+-experimental arms. Differences in datasets and protocols preclude a
+-numerical ranking against those published systems.
++methods tested in these experiments. Differences in datasets and protocols
++preclude a numerical ranking against those published systems.
+ 
+ \subsection{Pretrained Segmentation and Low-Rank Adaptation}
+ \label{sec:pretrained-adaptation}
+ 
+ Pretraining changes the starting point of learning. A target model can
+-specialize representations acquired from a larger training collection,
+-so the relevant resource question becomes the additional data and
+-optimization needed for adaptation. Prompting specifies the target of
+-an individual prediction; fine-tuning changes parameters using labelled
+-examples. A pretrained segmentation system can use both.
+-
+-The Segment Anything Model (SAM) combines an image encoder, a prompt encoder and a mask decoder,
+-using prompts such as points or bounding boxes
+-\cite{kirillov2023segment}. MedSAM adapts this framework to medical
+-images with box prompts \cite{ma2024medsam}. SAM3 supports concepts
+-specified through text or exemplars \cite{carion2025sam3}, and MedSAM3
+-specializes that capability for medical concepts \cite{liu2025medsam3}.
+-The hippocampus experiments use fixed anatomical phrases, and the
+-geological SAM3 experiment uses the phrase \emph{salt body}. These queries
+-are shared across cases; inference receives no case-specific localization
+-from a held-out reference mask.
+-Figure~\ref{fig:sam-prompting} illustrates the distinction between
+-locating a target with a point and naming its concept with text.
++specialize representations acquired from a larger training collection, so
++the relevant resource question becomes the additional data and optimization
++needed for adaptation. A prompt is an additional input, such as a point or a
++text description, specifying what to segment in an image. Fine-tuning
++instead changes model parameters using labelled examples. A pretrained
++segmentation system can use both.
++
++The Segment Anything Model (SAM) encodes the image and prompt into features,
++then combines them in a decoder that predicts a mask. Its prompts can be
++points or bounding boxes, rectangles enclosing the target
++\cite{kirillov2023segment}. MedSAM adapts this framework to medical images
++with box prompts \cite{ma2024medsam}. SAM3 supports concepts specified
++through text or example image regions \cite{carion2025sam3}, and MedSAM3
++specializes that capability for medical concepts \cite{liu2025medsam3}. The
++hippocampus experiments use fixed anatomical phrases, and the geological
++SAM3 experiment uses the phrase \emph{salt body}. These queries are shared
++across cases. At inference, when the trained model makes a prediction, it
++receives no location information from the reference mask of the image being
++evaluated. Figure~\ref{fig:sam-prompting} illustrates the distinction
++between locating a target with a point and naming its concept with text.
+ 
+ \begin{figure}[htbp]
+ \centering
+@@ -688,8 +734,12 @@
+ \end{figure}
+ \FloatBarrier
+ 
+-Low-Rank Adaptation (LoRA) parameterizes the update to a selected weight matrix
+-through two smaller trainable factors \cite{hu2021lora}:
++Low-Rank Adaptation (LoRA) keeps a pretrained weight matrix fixed and
++learns an additive correction through two smaller matrices
++\cite{hu2021lora}. Consider a layer mapping $d_{\mathrm{in}}$ input
++features to $d_{\mathrm{out}}$ output features. Its original matrix is
++$W_0$; $A$ and $B$ are the trainable factors, and the effective matrix
++used by the layer is
+ \begin{equation}
+ W_{\mathrm{eff}}=W_0+\frac{\alpha}{r}BA,
+ \qquad
+@@ -697,19 +747,21 @@
+ B\in\mathbb{R}^{d_{\mathrm{out}}\times r},
+ \label{eq:lora-weight-update}
+ \end{equation}
+-The base matrix $W_0$ is frozen, $r$ is the rank and $\alpha$ controls
+-the update scale. The factors contain
++The shared inner dimension $r$ limits the rank of the correction $BA$,
++and $\alpha$ controls its scale. With $r$ much smaller than the input
++and output dimensions, the correction needs fewer trainable parameters. The factors contain
+ $r(d_{\mathrm{in}}+d_{\mathrm{out}})$ parameters, compared with
+ $d_{\mathrm{in}}d_{\mathrm{out}}$ in the dense matrix. The rank restriction
+ applies to the update, while the pretrained matrix remains available
+-in the forward computation.
+-
+-Optimizing fewer parameters reduces gradient and optimizer-state storage.
+-It still requires execution of the underlying model and propagation of
+-gradients to the adapter locations. Parameter count, memory and runtime
+-therefore describe different aspects of adaptation effort.
+-Sections~\ref{sec:medsam-methods} and~\ref{sec:sam3-methods} describe how
+-this form of adaptation is applied to MedSAM3 and SAM3 in the experiments.
++when the model processes an input.
++
++Optimizing fewer parameters reduces storage for gradients and the additional
++values maintained by the optimizer. It still requires running the underlying
++model and backpropagating gradients to the layers containing adapters.
++Parameter count, memory and runtime therefore describe different aspects of
++adaptation effort. Sections~\ref{sec:medsam-methods}
++and~\ref{sec:sam3-methods} describe how this form of adaptation is applied
++to MedSAM3 and SAM3 in the experiments.
+ 
+ \clearpage
+ \section{Spatial Constraints in the LTN/logLTN Framework}
+@@ -724,8 +776,9 @@
+ 
+ \subsection{Shared Formulation}\label{sec:constraint-formulation}
+ 
+-Let $F$ be a nonempty subset of the class vocabulary with a nonempty
+-complement. Its reference membership and predicted probability are
++Let $F$ group one or more classes from $\mathcal C$, leaving at least
++one class outside the group. Its complement consists of those remaining
++classes. The group's reference membership and predicted probability are
+ \begin{equation}
+ h_{i,F}(v)=\sum_{c\in F}y_{i,c}(v),
+ \qquad
+@@ -735,11 +788,12 @@
+ The reference region is $M_{i,F}=\{v\in\Omega_i:h_{i,F}(v)=1\}$,
+ and the predicate $\mathsf{In}_F(i,v)$ is grounded by
+ $q_{\theta,i,F}(v)$. The annotation determines both the membership
+-target and any spatial supports, distances or weights derived from it.
++target and the spatial support, meaning the locations or voxel pairs
++where the constraint applies. It also determines any distances or weights.
+ These quantities are fixed with respect to $\theta$ during an update.
+-For example, erosion selects reference voxels before the band loss is
+-evaluated. Backpropagation differentiates the predictions at those
+-locations; it does not need to differentiate the erosion or the labels.
++For example, the band construction selects reference voxels before the
++loss is evaluated. Backpropagation differentiates the predictions at those
++locations; it does not need to differentiate the selection or the labels.
+ When a training example is spatially transformed, its image, labels,
+ coordinate map and derived targets are kept aligned.
+ 
+@@ -761,8 +815,8 @@
+ (b) Adjacent pairs within the band support: the black line is the
+ annotation boundary, while coloured segments join voxel centres. Orange
+ segments cross between labels; blue segments connect equal labels. (c) Signed distances for class $A$, including its interface with
+-class $P$. (d) Weights assigned using depth strata within a surrounding
+-region. This is a two-dimensional illustration with four-neighbour,
++class $P$. (d) Weights assigned to depth strata, parallel spatial layers within
++a surrounding region. This is a two-dimensional illustration with four-neighbour,
+ one-step bands; the principal experiment uses three-dimensional,
+ six-neighbour, two-step bands. The distance colours and depth weights
+ illustrate their definitions and are not measurements from a dataset.
+@@ -770,14 +824,14 @@
+ \label{fig:constraint-domains}
+ \end{figure}
+ 
+-The common log-space formulation turns each local truth into a loss
+-through its negative log-grounding. Membership contributes a
+-log-probability; a nonnegative geometric error contributes its negative
+-through an exponential agreement predicate. Domain selection and
+-aggregation complete the definition. In particular, a mean over voxels
+-followed by a mean over cases differs from pooling all voxels first.
+-The reductions below retain the conventions of the principal
+-implementation, including the treatment of empty supports.
++The common log-space formulation turns each local truth into a loss through
++its negative log-grounding. Membership contributes a log-probability; a
++nonnegative geometric error contributes its negative through an exponential
++agreement predicate. Domain selection and aggregation complete the
++definition. In particular, a mean over voxels followed by a mean over cases
++differs from pooling all voxels first. These aggregation rules, called
++reductions, retain the conventions of the principal implementation,
++including the treatment of empty supports.
+ 
+ All four families use the geometry actually present in the annotation.
+ They therefore remain applicable when a simplified anatomical proxy
+@@ -794,11 +848,13 @@
+ reference mask, so an incorrect predicted contour cannot move the target
+ support away from an error.
+ 
+-For a fixed class group $F$, write $M=M_{i,F}$, $B_i^s=B_{i,F}^s$,
++For a fixed class group $F$, write $M=M_{i,F}$,
+ $q_i(v)=q_{\theta,i,F}(v)$ and $h_i(v)=h_{i,F}(v)$ to simplify notation.
+-For the six-neighbour structuring element
+-$\mathcal N_6=\{0,\pm e_1,\pm e_2,\pm e_3\}$, where $e_k$ denotes
+-a unit array offset, dilation and erosion are
++Two operations construct the bands: dilation expands the region to
++neighbouring voxels, while erosion removes voxels exposed to its exterior.
++Their neighbourhood, or structuring element, is
++$\mathcal N_6=\{0,\pm e_1,\pm e_2,\pm e_3\}$. Here $e_k$ is a one-voxel
++step along grid axis $k$ and $0$ includes the centre voxel. The operations are
+ \begin{equation}
+ \begin{aligned}
+ \operatorname{Dil}_6(M)
+@@ -823,7 +879,9 @@
+ \label{fig:three-dimensional-morphology}
+ \end{figure}
+ 
+-Repeating each operation twice gives
++Repeating each operation $r=2$ times gives the two bands below.
++The set difference $U\setminus V$ retains locations in $U$ that are
++not in $V$:
+ \begin{equation}
+ \begin{aligned}
+ B_{i,F}^{\mathrm{in}}
+@@ -841,8 +899,10 @@
+ place foreground in the inner band, whereas the outer support remains
+ limited to observed voxels.
+ 
+-The corresponding logical statements require positive membership on
+-the inner support and its negation on the outer support:
++For the fixed group, abbreviate $B_{i,F}^s$ as $B_i^s$, with
++$s\in\{\mathrm{in},\mathrm{out}\}$ identifying the side. The logical
++statements require membership on the inner band and its negation,
++written $\lnot$, on the outer band:
+ \begin{equation}
+ \begin{aligned}
+ \Phi_i^{\mathrm{in}}
+@@ -884,13 +944,15 @@
+ The full satisfaction identity is given in
+ Appendix~\ref{sec:technical-details}.
+ 
+-The main MSD implementation averages case losses only when both bands
+-are nonempty. If no case meets that condition, it returns zero connected
+-to the prediction graph. Empty and entirely foreground grids consequently
+-receive no band penalty, while retaining their supervised baseline loss.
+-The local calculation is binary cross-entropy, evaluated stably from
+-the grouped logits. Its derivatives propagate through the probabilities
+-to the network parameters. Numerical settings are recorded in
++The main MSD implementation averages case losses only when both bands are
++nonempty. If no case meets that condition, it returns a zero loss with a
++zero gradient, so the term does not change the parameter update. Empty and
++entirely foreground grids consequently receive no band penalty, while
++retaining their supervised baseline loss. The local calculation is binary
++cross-entropy, evaluated from a grouped logit that combines the selected
++classes into one membership score. This avoids numerical loss of precision
++near probabilities zero and one. Its derivatives propagate through the
++probabilities to the network parameters. Numerical settings are recorded in
+ Appendix~\ref{sec:band-implementation-details}.
+ 
+ Gradient descent raises foreground membership on inner voxels and lowers
+@@ -983,27 +1045,27 @@
+    \bigl(\delta_i(u)-\delta_i(v)\bigr)^2.
+ \label{eq:edge-case-loss}
+ \end{equation}
+-for $n_i^E=|\mathcal E_i^B|>0$. Pair counts from all three directions
++for a nonempty pair set, whose size is $n_i^E=|\mathcal E_i^B|>0$. Pair counts from all three directions
+ are pooled before dividing. This gives every pair equal influence,
+ whereas averaging three directional means would give different pair
+ weights when counts differ. There is no count stabilizer. The batch
+ mean includes cases with at least one valid pair and returns a
+ differentiable zero when none remains.
+ 
+-The residual form explains the relationship to bands. An edge loss of
+-zero requires $\delta_i$ to be constant within each connected component
+-of the selected pair graph. A component with only one reference label
+-can therefore retain a uniform membership error. If it contains both
+-zero and one labels, the bounds $0\leq q_i\leq1$ force this constant
+-to zero. Bands directly anchor individual memberships; edges constrain
+-how those memberships change locally.
+-
+-The sigmoid used to obtain membership probabilities attenuates the
+-logit gradient near saturation, as derived in
+-Appendix~\ref{sec:technical-details}. The selected graph also covers
+-only a local band region. Its consistency does not establish global
+-connectivity or correct distant predictions. As with union bands,
+-anterior/posterior exchanges preserving foreground membership remain
++The residual form explains the relationship to bands. An edge loss of zero
++requires $\delta_i$ to be constant within each connected component of the
++selected pair graph: a group of voxels linked by chains of selected pairs. A
++component with only one reference label can therefore retain a uniform
++membership error. If it contains both zero and one labels, the bounds $0\leq
++q_i\leq1$ force this constant to zero. Bands directly anchor individual
++memberships; edges constrain how those memberships change locally.
++
++When membership probabilities approach zero or one, they become less
++sensitive to changes in their logits. This reduces the edge loss's logit
++gradient, as derived in Appendix~\ref{sec:technical-details}. The selected
++graph also covers only a local band region. Its consistency does not
++establish global connectivity or correct distant predictions. As with union
++bands, anterior/posterior exchanges preserving foreground membership remain
+ outside the direct supervision of the main MSD edge term.
+ 
+ \subsection{Classwise Signed Distance}\label{sec:sdf-constraints}
+@@ -1036,6 +1098,7 @@
+ the penalty increases with missed class probability; outside, it
+ increases with excess class probability. In both cases the distance
+ magnitude weights the error, making the product nonnegative.
++Let $\mathsf{Geom}_c(i,v)$ express agreement with this class geometry.
+ The grounding
+ $\mathcal G_\theta(\mathsf{Geom}_c(i,v))=\exp(-e_{i,c}(v))$
+ and statement
+@@ -1066,25 +1129,25 @@
+ agreement-predicate interpretation.
+ 
+ Compared with bands, the spatial reach is broader. A misplaced class
+-probability farther from its interface receives a larger geometric
+-weight until the eight-voxel clipping threshold, beyond which that
+-weight remains constant. Separate $A$ and $P$ fields penalize internal
+-class exchanges even when the whole foreground is correct. This is
+-geometric error supervision, with no guarantee of a particular final
+-topology.
++probability farther from its interface receives a larger geometric weight
++until the eight-voxel clipping threshold, beyond which that weight remains
++constant. Separate $A$ and $P$ fields penalize internal class exchanges even
++when the whole foreground is correct. This is geometric error supervision,
++with no guarantee of a particular final connectivity or number of separate
++regions.
+ 
+ \subsection{Depth-Weighted Class Supervision}\label{sec:depth-constraints}
+ 
+-Ordinary voxel averaging allocates more total supervision to spatial
+-regions containing more voxels. Depth weighting instead divides a
+-region around the hippocampus into strata and controls their relative
+-contributions. A reference plane contains the hippocampal long axis;
+-layers are measured across that plane, rather than along the long axis.
+-The annotation determines this coordinate, while each voxel keeps its
+-original class target. The plane therefore organizes the weights; it
+-does not define an anatomical anterior/posterior cut.
+-Figure~\ref{fig:depth-weighting-example} illustrates the geometry and
+-how weighting changes the contribution of differently sized strata.
++Ordinary voxel averaging allocates more total supervision to spatial regions
++containing more voxels. Depth weighting instead divides a region around the
++hippocampus into parallel layers, called strata, and controls their relative
++contributions. A reference plane contains the hippocampal long axis; layers
++are measured across that plane, rather than along the long axis. The
++annotation determines this coordinate, while each voxel keeps its original
++class target. The plane therefore organizes the weights; it does not define
++an anatomical anterior/posterior cut.
++Figure~\ref{fig:depth-weighting-example} illustrates the geometry and how
++weighting changes the contribution of differently sized strata.
+ 
+ \begin{figure}[htbp]
+ \centering
+@@ -1092,7 +1155,8 @@
+ \includegraphics[width=\linewidth]{figures/compiled/depth-weighting-example.pdf}
+ \caption{Depth geometry and the allocation of supervision.
+ (a) The reference plane contains the long axis $\ell$ and centroid
+-$\mu$; depth changes along its perpendicular direction $n$. Dotted
++$\mu$, the mean position of the foreground voxels; depth changes along
++its perpendicular direction $n$. Dotted
+ traces indicate parallel levels on either side of the plane.
+ (b) For three strata with 32, 128 and 256 voxels, uniform voxel weights
+ give each stratum a share proportional to its size. The depth rule with
+@@ -1102,18 +1166,21 @@
+ \end{figure}
+ \FloatBarrier
+ 
+-Let $\mu_i$ be the foreground centroid in physical
+-right--anterior--superior coordinates and $\ell_i$ its dominant unit
+-principal axis. Project the rightward unit vector $e_R$ perpendicular
+-to that axis:
++For MSD, positions are expressed in physical right--anterior--superior
++coordinates: the axes point towards the subject's right, front and top.
++Let $\mu_i$ be the foreground centroid and $\ell_i$ its unit principal
++axis, the direction in which the foreground positions vary most.
++Project the rightward unit vector $e_R$ perpendicular to that axis.
++Writing $\mathsf T$ for matrix transpose, this gives
+ \begin{equation}
+ \widetilde n_i=e_R-(e_R^{\mathsf T}\ell_i)\ell_i,
+ \qquad
+ n_i=\frac{\widetilde n_i}{\|\widetilde n_i\|_2}.
+ \label{eq:depth-plane-normal}
+ \end{equation}
+-The normal defines a plane through the centroid containing the
+-longitudinal direction, and signed distance to it gives depth:
++The unit vector $n_i$ is normal, or perpendicular, to a plane through
++the centroid containing the longitudinal direction. Call this plane
++$\Pi_i$ and the signed distance of voxel $v$ from it $\eta_i(v)$:
+ \begin{equation}
+ \begin{aligned}
+ \Pi_i&=\{r\in\mathbb{R}^{3}:n_i^{\mathsf T}(r-\mu_i)=0\},\\
+@@ -1139,12 +1206,17 @@
+ \end{aligned}
+ \label{eq:depth-strata}
+ \end{equation}
+-The floor operation keeps the two sides of the plane separate.
++Here $\lfloor\cdot\rfloor$ rounds down to the nearest integer,
++$\kappa_i(v)$ assigns a layer index, and $\mathcal B_i$ contains the
++occupied layers. Negative and nonnegative indices keep the two sides
++of the plane separate.
+ Each stratum may contain several semantic classes, whose reference
+ labels remain unchanged.
+ 
+-Assigning equal mass to every occupied stratum could give excessive
+-influence to a very sparse one. The implemented rule instead uses
++Assigning equal total weight to every occupied stratum could give
++excessive influence to a very sparse one. The rule first assigns a mass
++$m_{i,b}$ to each stratum, then divides by their sum $Z_i^{\mathrm{depth}}$
++to obtain its share $\alpha_{i,b}$ of the total weight:
+ \begin{equation}
+  m_{i,b}=\min\left(\frac{N_{i,b}}{T},1\right),
+ \qquad
+@@ -1172,7 +1244,8 @@
+ partially downweighted. These numbers illustrate the rule rather
+ than an observed dataset distribution.
+ 
+-With $\mathsf{Correct}(i,v)$ grounded by
++The predicate $\mathsf{Correct}(i,v)$ states that voxel $v$ has its
++reference class. With this predicate grounded by
+ $p_{\theta,i,y_i(v)}(v)$, the weighted statement
+ $\Phi_i^{\mathrm{depth}}=\forall_{w_i}v\in R_i:
+ \mathsf{Correct}(i,v)$ has loss
+@@ -1189,21 +1262,26 @@
+ \end{equation}
+ The last expression shows a weighted average of stratum-wise
+ cross-entropies. Depth determines where supervision receives weight;
+-it adds neither a focal factor nor a separate class weight, and it
+-does not multiply the signed-distance loss.
+-
+-Physical geometry is essential to this definition. The distance
+-transform uses axis spacings and assumes orthogonal voxel axes,
+-so sheared affines are rejected. Coordinate transformations must
+-preserve the relation between labels and their coordinate map.
+-The principal MSD recipe evaluates the term on the primary grid
+-with one volume per update. Further coordinate and centroid details
+-are provided in Appendix~\ref{sec:technical-details}.
++the weights do not additionally depend on prediction difficulty or class
++identity, and they do not multiply the signed-distance loss.
++
++Physical geometry is essential to this definition. A distance transform
++computes each voxel's distance to the reference region. Here it uses the
++axis spacings and assumes perpendicular voxel axes, so coordinate maps that
++shear the grid, making those axes nonperpendicular, are rejected. Coordinate
++transformations must preserve the relation between labels and their
++coordinate map. The principal MSD recipe evaluates the term on the
++full-resolution prediction grid, with one volume per update. Further
++coordinate and centroid details are provided in
++Appendix~\ref{sec:technical-details}.
+ 
+ \subsection{Combined Objective and Experimental Scope}
+ \label{sec:constraint-combination}
+ 
+-For configuration $a$ with selected families $J_a$, training minimizes
++Let $a$ identify a model and training configuration, and $J_a$ its set
++of selected spatial-loss families. Write $\mathcal L_{\mathrm{seg},a}$
++for its supervised baseline loss and $\mathcal L_{a,j}$ for auxiliary
++family $j$. Training minimizes
+ \begin{equation}
+ \mathcal{L}_{a}^{(t)}(\theta)
+ =\mathcal{L}_{\mathrm{seg},a}(\theta)
+@@ -1218,15 +1296,17 @@
+ $S_{a,j}=\exp(-\mathcal L_{a,j})$, the auxiliary sum is the negative
+ logarithm of
+ $\prod_{j\in J_a}S_{a,j}^{\lambda_{a,j}s_{a,j}(t)}$.
+-The supervised baseline retains its native convention, including
+-nnU-Net's negative Dice term.
+-
+-Complementary domains motivate combinations, but do not ensure
+-complementary gradients. Terms can reinforce or oppose one another,
+-and their computation consumes part of a fixed optimization allowance.
+-The experiments therefore treat coefficients, activation schedules
+-and resource accounting as parts of the tested configuration,
+-specified in Chapter~\ref{sec:methodology}.
++The supervised baseline retains its native convention. For example,
++nnU-Net minimizes negative Dice rather than one minus Dice; the constant
++difference leaves the gradient unchanged.
++
++Complementary domains motivate combinations, but do not ensure complementary
++gradients. Terms can reinforce or oppose one another, and their computation
++consumes part of a fixed optimization allowance. The coefficients are set by
++calibration, which compares the losses' gradients on training examples. The
++experiments treat this calibration, activation schedules and resource
++accounting as parts of the tested configuration, specified in
++Chapter~\ref{sec:methodology}.
+ 
+ The task-specific domains, crop conventions and sampled reductions
+ are specified with the experimental protocols in
+@@ -1239,37 +1319,44 @@
+ \section{Datasets and Experimental Methodology}
+ \label{sec:methodology}
+ 
+-The experiments pair each constrained run with a baseline sharing its
+-model recipe, support set, fold and optimization seed. The medical
+-four-model studies match the number of floating-point operations (FLOPs)
+-used during optimization; the geological four-model
+-study caps training plus calibration. MedSAM3 and SAM3 instead match
+-adapter updates within their respective schedules. These task and
++Each run trains and evaluates one model with a specified objective. A
++constrained run is paired with a baseline using the same model recipe and
++labelled training examples, called the support set. They also share the data
++partition and the random settings, defined below. The medical four-model
++studies match the number of floating-point operations (FLOPs) used during
++optimization; one GFLOP is one billion such operations. The geological
++four-model study caps training plus calibration. MedSAM3 and SAM3 instead
++match adapter updates within their respective schedules. These task and
+ resource definitions delimit the comparisons that can be made.
+ 
+ \subsection{Design and Units of Comparison}
+ \label{sec:experimental-structure}
+ 
+-A fold identifies a data partition and a seed controls training
+-randomness. Repeating seeds within a fold measures sensitivity to
+-initialization and data presentation; changing folds also changes the
+-support and evaluation images. These repetitions provide evidence about
+-consistency under the available data, while sharing parts of the same
+-experimental setting.
+-
+-Table~\ref{tab:experimental-design} records the six studies, including
+-two geological and four medical comparisons. The design assigns nine fold/seed cells
+-to each condition. Evaluation uses the final admissible state in the
++A fold identifies a partition into training and validation examples;
++validation examples are held out from parameter fitting. A seed initializes
++the pseudorandom generator controlling training randomness. Repeating seeds
++within a fold measures sensitivity to initialization and data presentation;
++changing folds also changes the support and evaluation images. These
++repetitions provide evidence about consistency under the available data,
++while sharing parts of the same experimental setting.
++
++Table~\ref{tab:experimental-design} records the six studies, including two
++geological and four medical comparisons. A condition is a particular model,
++dataset and objective. Each condition has nine fold/seed cells, one run for
++each combination of three folds and three seeds. A checkpoint is a saved
++model state. Evaluation uses the final state allowed by the budget in the
+ capped experiments, the final 200-update MedSAM3 adapter and the final
+-25-update SAM3 adapter, without validation-selected checkpoint
+-replacement or early stopping.
+-
+-Throughout the comparisons, \emph{Baseline} denotes the supervised
+-training objective configured for the particular model and dataset.
+-\emph{Baseline} $+B$, for example, retains that objective and adds
+-boundary-band supervision; the same convention applies to combinations
+-of spatial terms. The baseline may itself combine several losses, as
+-specified in the model-specific protocols below.
++25-update SAM3 adapter, without validation-selected checkpoint replacement
++or early stopping.
++
++Throughout the comparisons, \emph{Baseline} denotes the supervised training
++objective configured for the particular model and dataset. \emph{Baseline}
++$+B$, for example, retains that objective and adds boundary-band
++supervision; the same convention applies to combinations of spatial terms.
++The baseline may itself combine several losses, as specified in the
++model-specific protocols below. In tables and charts, $B$, $E$, $S$ and $D$
++abbreviate boundary bands, edges, signed distance and depth supervision,
++respectively.
+ 
+ \begin{table}[htbp]
+ \centering\small\setstretch{1.05}
+@@ -1288,7 +1375,7 @@
+ \caption{Completed study design: 1,890 objective runs in 210 conditions,
+ comprising 630 geological and 1,260 medical runs.
+ Each MedSAM3 campaign covers fourteen objectives, counting the baseline
+-objective once. Repeated matched controls support paired gains but do
++objective once. Repeated matched controls (baseline runs) support paired gains but do
+ not enlarge the objective inventory.
+ Geological recipes and strengths were tuned during development;
+ MedSAM3 fold selection is exploratory.
+@@ -1326,7 +1413,7 @@
+ \hline
+ Dataset & Model input & Reference classes & Role in the investigation \\
+ \hline
+-GeoFWI3D & Synthetic 3D P-wave reflectivity &
++GeoFWI3D & Synthetic 3D seismic reflectivity &
+ $0$: background; $1$: salt &
+ Nonmedical four-model comparison and SAM3 adaptation. \\[0.4em]
+ MSD hippocampus & Single-channel MRI crop &
+@@ -1360,10 +1447,13 @@
+ 
+ Synthetic reflectivity is the model input. Each volume is divided by
+ the 99.5th percentile of its absolute intensities and clipped to
+-$[-1,1]$, using only image values. Velocity and relative geological
+-time are used to build the annotation. Inspection showed that zero
++$[-1,1]$, using only image values. Velocity and relative geological time (RGT), a coordinate describing
++the ordering of geological layers, are used to build the annotation. Inspection showed that zero
+ relative geological time can also mark null artifacts, so the reference
+-requires agreement with the scene's recorded salt velocity:
++requires agreement with the scene's recorded salt velocity. Write
++$V_{P,i}(v)$ for the velocity at voxel $v$ and $V_{\mathrm{salt},i}$
++for the recorded salt value. The latter is converted to the same
++32-bit floating-point format, denoted float32, as the velocity volume:
+ \begin{equation}
+  y_i(v)=\mathbf{1}\{\mathrm{RGT}_i(v)=0\}
+         \mathbf{1}\{V_{P,i}(v)=\operatorname{float32}(V_{\mathrm{salt},i})\}.
+@@ -1380,7 +1470,7 @@
+ UNETR and the compact 3D U-Net under the same fourteen-objective
+ inventory used in the medical studies. Folds 0, 1 and 2 each contain
+ 19 labelled training scenes and 96 validation scenes on the native
+-$96^3$ grid. The support set is the frozen approximately 5\% subset
++$96^3$ grid. The support set is the fixed approximately 5\% subset
+ of the eligible training pool. Training and validation are disjoint
+ within each fold, and the three validation sets are pairwise disjoint.
+ The support sets contain 54 distinct scenes across their 57 entries.
+@@ -1392,19 +1482,23 @@
+ 
+ \subsubsection{Frozen Model Recipes and Spatial Geometry}
+ 
+-The model recipes preserve batch size one and bfloat16 autocast through
+-NVIDIA's CUDA parallel-computing platform
+-with float32 parameters. nnU-Net uses its native Dice-plus-cross-entropy
+-objective and deep supervision. SwinUNETR and the compact U-Net use
+-Dice with background included. Geological UNETR uses foreground
+-Dice plus cross-entropy, squared prediction terms in Dice, dropout
+-0.1 and learning rate $6\times10^{-4}$.
++The model recipes use one volume per batch and mixed numerical precision:
++selected operations use the 16-bit bfloat16 format, while parameters remain
++in float32. Automatic choice of operation precision is called autocast.
++Computation uses NVIDIA's CUDA platform on graphics processing units (GPUs).
++nnU-Net uses its native Dice-plus-cross-entropy objective and deep
++supervision. SwinUNETR and the compact U-Net use Dice with background
++included. Geological UNETR uses foreground Dice plus cross-entropy, squared
++prediction terms in Dice, dropout 0.1 and learning rate $6\times10^{-4}$.
++Dropout randomly suppresses a fraction of intermediate activations during
++training; the learning rate controls the size of parameter updates.
+ 
+ In preliminary experiments, the initial UNETR recipe consistently struggled
+ to achieve satisfactory validation performance across the seeds tested
+ within the fixed FLOP budget. Two modifications were introduced during
+-development to improve its generalization on GeoFWI3D: horizontal data
+-augmentation and exclusion of the observation frame from the spatial
++development to improve performance on unseen GeoFWI3D scenes: horizontal
++data augmentation, which creates transformed presentations of training
++examples, and exclusion of the observation frame from the spatial
+ constraints. Both address properties of this geological task and were
+ retained in its final UNETR training recipe.
+ 
+@@ -1465,12 +1559,14 @@
+ 
+ Calibration measures gradients on all 19 support scenes. Its strengths
+ differ across architectures, and the nnU-Net and UNETR settings follow
+-exploratory comparisons. Auxiliary terms enter through fixed ramps, with
+-some signed-distance configurations delayed. Each constrained run is
++exploratory comparisons. Auxiliary terms enter through fixed ramps, during
++which their weights increase gradually from zero to their calibrated values.
++Some signed-distance configurations start later. Each constrained run is
+ compared with the baseline of the same frozen model recipe. The final
+-admissible checkpoint supplies the score. Appendix~\ref{sec:geological-budget-details}
+-records the exact ceiling, strengths and schedules, while
+-Table~\ref{tab:cap-training-exposure} gives the actual training exposure.
++admissible checkpoint supplies the score.
++Appendix~\ref{sec:geological-budget-details} records the exact ceiling,
++strengths and schedules, while Table~\ref{tab:cap-training-exposure} gives
++the actual training exposure.
+ 
+ \subsection{MSD: Medical Segmentation Decathlon}
+ \label{sec:msd-data-methods}
+@@ -1479,30 +1575,32 @@
+ The MSD collection contains 263 labelled MRI crops with background,
+ anterior and posterior hippocampus classes \cite{simpson2019dataset}.
+ 
+-For the capped experiments, each image is z-score normalized over nonzero
+-intensities, then padded and centrally cropped with its labels to $64^3$.
+-This preserves voxel scale rather than resizing the anatomy. Validation
+-uses this prepared grid. Each of folds 0, 1 and 2 supplies ten support
+-crops and 52 validation crops, shared across models and objectives.
+-Seeds are 0, 2 and 20. Validation identifiers are disjoint across the
+-three folds, but the available crop identifiers do not establish
+-participant-level independence. MedSAM3 uses its separate native-grid
+-preparation and manifests
+-in Section~\ref{sec:medsam-methods}.
++For the capped experiments, each image is z-score normalized: the mean of
++its nonzero intensities is subtracted and the result divided by their
++standard deviation. The image and its labels are then padded (extended with
++zeros) and centrally cropped to $64^3$. This preserves voxel scale rather
++than resizing the anatomy. Validation uses this prepared grid. Each of folds
++0, 1 and 2 supplies ten support crops and 52 validation crops, shared across
++models and objectives. Seeds are 0, 2 and 20. Validation identifiers are
++disjoint across the three folds, but the available crop identifiers do not
++establish participant-level independence. MedSAM3 uses its separate
++native-grid preparation and manifests, files listing the cases assigned to
++each partition, in Section~\ref{sec:medsam-methods}.
+ 
+ \subsubsection{Testing Proposed Anatomical Rules}
+ \label{sec:annotation-compatibility}
+ 
+ The MSD data descriptor \cite{simpson2019dataset} cites the manual
+-annotation protocols of Pruessner \emph{et al.}\ \cite{pruessner2000volumetry}
+-and Woolard and Heckers \cite{woolard2012asymmetry}.
+-It identifies the last hippocampal-head slice as the coronal slice
+-containing the uncal apex; body and tail form the posterior label.
+-Turning this description
+-into an automatic constraint requires a detectable landmark, a known
+-orientation and a relation that remains meaningful on the stored grid.
+-The annotation audit tests these operational assumptions before imposing
+-them during learning.
++annotation protocols of Pruessner \emph{et al.}\
++\cite{pruessner2000volumetry} and Woolard and Heckers
++\cite{woolard2012asymmetry}. It identifies the last hippocampal-head slice
++as the coronal slice containing the uncal apex, the landmark used to mark
++the end of the head; body and tail form the posterior label. Coronal planes
++divide the anatomy into front and back portions; sagittal planes divide left
++and right. Turning this description into an automatic constraint requires a
++detectable landmark, a known orientation and a relation that remains
++meaningful on the stored grid. The annotation audit tests these operational
++assumptions before imposing them during learning.
+ 
+ Two analyses address the proposed A/P transition rules. A planar analysis tests
+ whether one coronal separation reproduces the stored labels in all
+@@ -1521,14 +1619,12 @@
+ \subsection{ADNI: Alzheimer's Disease Neuroimaging Initiative}
+ \label{sec:adni-methods}
+ 
+-
+ The ADNI dataset used here combines the final released hippocampal labels
+ and oriented images from the European Alzheimer's Disease Consortium
+-(EADC)--ADNI harmonized-protocol resource
+-\cite{harpReleasedLabels}. Image and label pairs are identified through
+-subject and image metadata. Because the release notes a possible
+-alignment issue in converted NIfTI images, the builder uses the
+-original MINC arrays to export paired crops.
++(EADC)--ADNI harmonized-protocol resource \cite{harpReleasedLabels}. Image
++and label pairs are identified through subject and image metadata. Because
++the release notes a possible alignment issue in converted NIfTI images, the
++builder uses the original MINC-format image arrays to export paired crops.
+ 
+ The preparation contains 135 subject identifiers and 135 image
+ identifiers, each contributing left and right hippocampal crops.
+@@ -1554,19 +1650,19 @@
+ without resizing. MedSAM3 uses the separate
+ two-crop support protocol in Section~\ref{sec:medsam-adni-methods}.
+ 
+-The exported ADNI crops do not retain the original spacing and
+-orientation metadata, so spatial constraints are defined in voxel
+-coordinates. They retain the same geometric construction used for MSD:
+-signed distances are capped at eight voxels, and depth supervision uses
+-layers two voxels thick within the hippocampus and its eight-voxel
+-surrounding region. The depth plane passes through the hippocampus
+-centre and contains its main axis; in ADNI, an image-grid axis fixes
+-its orientation. Because MSD has verified $1\,\mathrm{mm}$ isotropic
+-spacing, its $2\,\mathrm{mm}$ layers and $8\,\mathrm{mm}$ surrounding
+-region match these widths numerically on the voxel grid. The two
+-formulations are therefore comparable in construction and grid-scale
+-settings, without assuming identical physical spacing or anatomical
+-orientation across the datasets.
++The exported ADNI crops do not retain the original spacing and orientation
++metadata, so spatial constraints are defined in voxel coordinates. They
++retain the same geometric construction used for MSD: signed distances are
++capped at eight voxels, and depth supervision uses layers two voxels thick
++within the hippocampus and its eight-voxel surrounding region. The depth
++plane passes through the hippocampus centre and contains its main axis; in
++ADNI, an image-grid axis fixes its orientation. Because MSD has verified
++isotropic spacing, meaning the same $1\,\mathrm{mm}$ spacing along all three
++axes, its $2\,\mathrm{mm}$ layers and $8\,\mathrm{mm}$ surrounding region
++match these widths numerically on the voxel grid. The two formulations are
++therefore comparable in construction and grid-scale settings, without
++assuming identical physical spacing or anatomical orientation across the
++datasets.
+ 
+ % ADNI example panels: real images and annotations, not model predictions.
+ % DATA FIGURE PROVENANCE: {"dataset": "Dataset103_ADNI", "image": "datasets/Dataset103_ADNI/imagesTr/hippocampus_adni_10007_L_0000.nii.gz", "labels": "datasets/Dataset103_ADNI/labelsTr/hippocampus_adni_10007_L.nii.gz", "shape": [32, 48, 40], "plane_axis": 0, "slice_index_zero_based": 15, "selection": "maximum foreground area; lowest index breaks ties", "display_gray_limits": [75.62541742107685, 787.0265820841897], "display_gray_levels": 32, "display_transform": "transpose axes 1/2, then flip displayed rows (axis 2)", "overlay_alpha": 0.45, "labels_in_slice": [0, 1], "image_sha256": "b1479c7bd284e5d4013dd970ff5330819c49732d8f3b8b27c5d4957bde68b799", "labels_sha256": "03fbe773f988e7541ced3681d1f76719745059b8d404b9c9de76c74401def8b3"}
+@@ -1654,7 +1750,8 @@
+ settings are given in Appendix~\ref{sec:conventional-implementation}.
+ 
+ Fourteen objectives cover the combinations in
+-Table~\ref{tab:constraint-combinations}. Bands and edges supervise
++Table~\ref{tab:constraint-combinations}; $\varnothing$ denotes no
++selected term among $B,E,S$. Bands and edges supervise
+ the hippocampal union on MSD and the single foreground on ADNI; SDF
+ supervises each foreground class, and depth
+ uses the original reference classes. Preliminary MSD screening did not
+@@ -1664,8 +1761,7 @@
+ fourteen-objective replications across datasets. Their exclusion is a
+ scope decision based on the preliminary comparisons; the main replication
+ provides evidence for the retained configurations. It consequently
+-supports comparisons among those configurations, rather than a complete
+-factorial estimate of every interaction.
++supports comparisons among those configurations, rather than a test of every possible combination and interaction.
+ % EXCLUSION EVIDENCE: reports/compute_matched_constraints_20pct_20261004/
+ % summary.json (U-Net, MSD fold 0 / seed 0): E 41.33 vs baseline 42.14;
+ % E+S 57.25 vs S 61.15, although E+S exceeds baseline. The longer pilot in
+@@ -1793,25 +1889,29 @@
+ images and sampling schedule, so their comparison measures the effect
+ of changing the training objective from the same starting point.
+ 
+-The baseline combines detection classification and bounding-box losses,
+-a presence loss, and focal and soft Dice mask losses. Spatial penalties
+-are added to that objective. Their coefficients are calibrated from
+-gradients on the support annotations. Each optimizer update uses two
++The pretrained baseline supervises several outputs. Classification and
++bounding-box losses assess detected objects and their enclosing boxes; a
++presence loss assesses whether the queried target occurs in the image. The
++mask losses combine soft Dice with focal loss, a form of cross-entropy that
++reduces the weight of already confident correct predictions. Spatial
++penalties are added to that objective. Their coefficients are calibrated
++from gradients on the support annotations. Each optimizer update uses two
+ adjacent-slice pairs, allowing edge supervision to compare predictions
+-across planes as well as within them. Reference supports are constructed
+-in three dimensions. Full-volume counts and sampling corrections
+-preserve the corresponding volume reductions in expectation; averaging
+-each sampled plane separately would give a different weighting.
+-Appendix~\ref{sec:sampled-pretrained-supervision} gives these reductions.
+-
+-Inference uses image planes and fixed text queries. Mask, query and
+-presence confidences supply the foreground responses, which are
+-converted to mutually exclusive labels and reassembled into volumes.
+-Reference masks are used to score these predictions, never to provide
+-localization prompts. Each study evaluates the adapter at its final
+-update, without early stopping or validation-based checkpoint selection.
+-Dice is averaged within a run, then across seeds within each fold and
+-equally across folds.
++across planes as well as within them. Reference supports are constructed in
++three dimensions. Full-volume counts and sampling corrections ensure that
++averaging over all possible sampled planes recovers the corresponding volume
++loss. Normalizing by each sampled plane's own support count would give a
++different weighting. Appendix~\ref{sec:sampled-pretrained-supervision} gives
++these reductions.
++
++Inference uses image planes and fixed text queries. The model's confidence
++in each mask location, its match to the text query and the target's presence
++supply the foreground responses, which are converted to mutually exclusive
++labels and reassembled into volumes. Reference masks are used to score these
++predictions, never to provide localization prompts. Each study evaluates the
++adapter at its final update, without early stopping or validation-based
++checkpoint selection. Dice is averaged within a run, then across seeds
++within each fold and equally across folds.
+ 
+ \paragraph{SAM3 on GeoFWI3D.}\label{sec:sam3-methods}
+ Each fold uses five labelled support volumes, taken from the beginning
+@@ -1820,16 +1920,15 @@
+ image processing. The query \emph{salt body} produces one foreground
+ response; its complement represents background.
+ 
+-Every arm receives 25 updates, using the first 25 steps of the retained
+-200-update learning-rate schedule. The schedule is not compressed into
+-a shorter decay. Bands are calibrated at initialization; other selected
+-terms are calibrated after five prefix updates, during which their
+-weights are zero. Bands and edges use the salt mask, with two-step,
+-zero-padded morphology retaining crop-face support. SDF uses one
+-foreground field on the unit voxel grid. Depth weights use source-array
+-geometry, with no anatomical orientation assumption. These choices
+-distinguish this adaptation protocol from the conventional geological
+-recipes.
++Every objective receives 25 updates, using the first 25 steps of the
++retained 200-update learning-rate schedule. The schedule is not compressed
++into a shorter decay. Bands are calibrated at initialization; other selected
++terms are calibrated after five prefix updates, during which their weights
++are zero. Bands and edges use the salt mask, with two-step, zero-padded
++morphology retaining crop-face support. SDF uses one foreground field on the
++unit voxel grid. Depth weights use source-array geometry, with no anatomical
++orientation assumption. These choices distinguish this adaptation protocol
++from the conventional geological recipes.
+ 
+ \paragraph{MedSAM3 on MSD.}\label{sec:medsam-methods}
+ Five support crops are used in each fold, with 46, 52 and 44 held-out
+@@ -1837,18 +1936,19 @@
+ evaluation crops do not overlap. Fold selection followed earlier
+ exploratory outcomes, and participant identities are unavailable; the
+ crop separation therefore does not establish participant independence.
+-Images and masks are placed in their closest canonical NIfTI
+-orientation. Intensities are clipped and scaled between the first and
++Images and masks are reordered and, where needed, flipped together
++into the closest right--anterior--superior orientation recorded by their
++NIfTI coordinate transforms. Intensities are clipped and scaled between the first and
+ 99th percentiles, then converted to eight-bit planes.
+ 
+-The fixed queries are \emph{anterior hippocampus} and
+-\emph{posterior hippocampus}. Their response log-odds, together with a
+-zero background logit, are normalized by softmax before argmax assigns
+-one class per voxel. Bands and edges are applied separately to
+-background, anterior and posterior, so they include the internal
+-interface. SDF uses the two foreground classes and depth uses physical
+-geometry. All variants receive 200 updates, with their selected
+-auxiliary terms ramping from the first update.
++The fixed queries are \emph{anterior hippocampus} and \emph{posterior
++hippocampus}. Each response probability $q$ is converted to log-odds,
++$\log(q/(1-q))$. These scores, together with a zero background logit, are
++normalized by softmax before argmax assigns one class per voxel. Bands and
++edges are applied separately to background, anterior and posterior, so they
++include the internal interface. SDF uses the two foreground classes and
++depth uses physical geometry. All variants receive 200 updates, with their
++selected auxiliary terms ramping from the first update.
+ 
+ The fourteen objectives were completed across two execution batches.
+ The original bands and bands-plus-edge results retain their matched
+@@ -1955,7 +2055,9 @@
+ adds background and all-class Dice as complementary measures on
+ the same predictions, retaining this order of averaging.
+ 
+-For objective $j$, model $m$, fold $f$ and seed $s$, the paired change is
++Let $\overline D_{m,j,f,s}$ denote the mean volume Dice in a run with
++model $m$, objective $j$, fold $f$ and seed $s$. Subscript
++$\mathrm{base}$ identifies its matched baseline. Their paired change is
+ \begin{equation}
+  \Delta_{m,j,f,s}=100\left(
+  \overline D_{m,j,f,s}-\overline D_{m,\mathrm{base},f,s}\right).
+@@ -1971,18 +2073,19 @@
+ Dispersion across cases is identified separately from dispersion
+ across fold/seed cells.
+ 
+-Pretrained-model confusion matrices use reference classes as rows and
+-predicted classes as columns. For MSD, four disjoint errors are counted: background
+-predicted as foreground, foreground predicted as background, anterior
+-predicted as posterior, and posterior predicted as anterior. Their
+-sum gives all incorrectly labelled voxels. Conventional-run error counts pool the full validation grid before
+-averaging runs. MedSAM3 tables average errors per crop within each run
+-and then weight folds equally. All counts cover the complete prediction,
+-including voxels outside the boundary bands. SAM3 FN/FP are likewise
+-averaged per held-out volume within a run, then over seeds and folds;
+-each run contains 96 validation volumes. Binary ADNI and GeoFWI3D have
+-no A/P swaps. The different error-count reductions are labelled and are not compared
+-as if they had the same denominator.
++A confusion matrix counts how often each reference class is assigned each
++predicted class. The pretrained-model matrices use reference classes as rows
++and predicted classes as columns. For MSD, four disjoint errors are counted:
++background predicted as foreground, foreground predicted as background,
++anterior predicted as posterior, and posterior predicted as anterior. Their
++sum gives all incorrectly labelled voxels. Conventional-run error counts
++pool the full validation grid before averaging runs. MedSAM3 tables average
++errors per crop within each run and then weight folds equally. All counts
++cover the complete prediction, including voxels outside the boundary bands.
++SAM3 FN/FP are likewise averaged per held-out volume within a run, then over
++seeds and folds; each run contains 96 validation volumes. Binary ADNI and
++GeoFWI3D have no A/P swaps. The different error-count reductions are
++labelled and are not compared as if they had the same denominator.
+ 
+ \clearpage
+ 
+@@ -2108,13 +2211,16 @@
+ differences matter when deciding which errors an application can tolerate;
+ the full counts are reported in Appendix~\ref{sec:complete-error-tables}.
+ 
+-Including background in the Dice average provides a complementary check
+-on the overlap gains. Figure~\ref{fig:metric-sensitivity-key-results}
+-shows that the selected adaptation objectives improve both foreground
+-and background Dice. The same holds for the selected conventional models.
+-Background scores already lie close to their ceiling, so their changes
+-are much smaller. Giving background equal class weight raises the
+-absolute average while reducing the size of the improvement.
++Including background in the Dice average provides a complementary check on
++the overlap gains. All-class Dice gives equal weight to each class:
++background, anterior and posterior on MSD, or background and the single
++foreground class on the binary tasks.
++Figure~\ref{fig:metric-sensitivity-key-results} shows that the selected
++adaptation objectives improve both foreground and background Dice. The same
++holds for the selected conventional models. Background scores already lie
++close to their ceiling, so their changes are much smaller. Giving background
++equal class weight raises the absolute average while reducing the size of
++the improvement.
+ 
+ \begin{figure}[htbp]\centering\setstretch{1.05}
+ % Cached vector figure; editable source: figures/source/metric-sensitivity-key-results.tikz
+@@ -2151,8 +2257,8 @@
+ \centering
+ \includegraphics[width=\linewidth]{figures/qualitative/typical-predictions.png}
+ \caption{Typical held-out examples from the qualitative reproductions:
+-SAM3 on GeoFWI3D and MedSAM3 on MSD and ADNI. Each case has the upper-median
+-paired Dice change within its reproduced validation set. Columns use the
++SAM3 on GeoFWI3D and MedSAM3 on MSD and ADNI. Each case is the middle entry after sorting by paired Dice change,
++using the higher of the two central entries for an even-sized validation set. Columns use the
+ same image and slice, selected by maximum reference foreground area along
+ the third stored array axis. Blue denotes salt, anterior hippocampus or
+ whole hippocampus, respectively; orange denotes posterior hippocampus on
+@@ -2193,13 +2299,13 @@
+ Closely ranked combinations should likewise be treated as alternatives
+ within the observed variation rather than evidence of a unique optimum.
+ 
+-The MSD annotation audit gives a related caution about the knowledge
+-encoded in a constraint. Simplified coronal-plane and disconnected-profile
+-rules do not reproduce every annotated anterior/posterior transition.
+-The thesis therefore supervises the stored class boundary rather than
+-imposing either proxy universally. The detailed checks and their relation
+-to the original annotation protocols are in
+-Appendix~\ref{sec:annotation-results}; they do not establish that the
++The MSD annotation audit gives a related caution about the knowledge encoded
++in a constraint. Neither a single coronal separating plane nor a rule based
++on separate foreground regions appearing in a slice reproduces every
++annotated anterior/posterior transition. The thesis therefore supervises the
++stored class boundary rather than imposing either proxy universally. The
++detailed checks and their relation to the original annotation protocols are
++in Appendix~\ref{sec:annotation-results}; they do not establish that the
+ original anatomical tracing was incorrect.
+ 
+ \clearpage
+@@ -2468,21 +2574,28 @@
+ 
+ \subsection{Stable Membership Evaluation}
+ 
+-For a class group $F$ and its complement $\overline F$, define the
+-log-sum-exp operation $\operatorname{LSE}(z_U)=\log\sum_{c\in U}\exp z_c$. The grouped logit
++For a class group $F$ and its complement $\overline F$, suppress the
++case and voxel indices. For any class set $U$, $z_U$ collects its logits
++and the log-sum-exp operation is
++$\operatorname{LSE}(z_U)=\log\sum_{c\in U}\exp z_c$.
++The sigmoid $\sigma(s)=1/(1+\exp(-s))$ converts a binary logit into a
++membership probability. The grouped logit
+ \begin{equation}
+ s_F=\operatorname{LSE}(z_F)-\operatorname{LSE}(z_{\overline F})
+ \label{eq:grouped-predicate-logit}
+ \end{equation}
+ satisfies $\sigma(s_F)=\sum_{c\in F}p_c$. On MSD, $F=\{A,P\}$
+-and the complement contains only background. The stable membership loss is
++and the complement contains only background. Restoring case and voxel
++indices, write this grouped logit as $s_i(v)$. With
++$\operatorname{softplus}(s)=\log(1+\exp s)$, the stable membership loss is
+ \begin{equation}
+ e_i(v)=h_i(v)\operatorname{softplus}(-s_i(v))
+        +(1-h_i(v))\operatorname{softplus}(s_i(v)).
+ \label{eq:band-stable-bce}
+ \end{equation}
+-Grouped logits and the fused loss use float32; classwise log-probabilities
+-use log-softmax. These evaluations avoid taking logarithms of rounded
++Grouped logits and the combined logit-based loss use float32.
++Classwise log-probabilities use log-softmax,
++$\log p_c=z_c-\operatorname{LSE}(z_{\mathcal C})$. These evaluations avoid taking logarithms of rounded
+ probabilities.
+ 
+ Adding $\varepsilon$ to a nonempty support count multiplies its exact
+@@ -2503,12 +2616,12 @@
+ \label{sec:band-implementation-details}
+ 
+ The principal MSD implementation evaluates grouped logits and binary
+-cross-entropy in float32. Optional focal factors and degree-based
+-weights are disabled. Both full-volume bands must be nonempty for a
+-case to enter the mean; if no valid case remains, the code returns a
++cross-entropy in float32. Optional focal factors and weights based on the
++number of neighbours are disabled. Both full-volume bands must be nonempty
++for a case to enter the mean; if no valid case remains, the code returns a
+ differentiable zero connected to the logits. The count constant is
+-$\varepsilon=10^{-6}$. Equation~\ref{eq:balanced-band-satisfaction} retains its
+-factor in the loss and gradient.
++$\varepsilon=10^{-6}$. Equation~\ref{eq:balanced-band-satisfaction} retains
++its factor in the loss and gradient.
+ 
+ 
+ \subsection{Relational and Signed-Distance Derivatives}
+@@ -2527,8 +2640,10 @@
+ \end{aligned}
+ \label{eq:edge-logit-gradient}
+ \end{equation}
+-The first expression applies the graph Laplacian to the membership
+-residual; the sigmoid factor attenuates the logit gradient near saturation.
++The first expression sums the differences between a voxel's membership
++residual and those of its neighbours, an operation called the graph
++Laplacian. The sigmoid factor $q_i(u)(1-q_i(u))$ becomes small near
++probabilities zero and one, reducing the logit gradient.
+ 
+ For the MSD signed-distance term, define $\bar\varphi_{i,0}=0$ and
+ $\bar\varphi_{i,c}=\varphi_{i,c}$ for $c\in\{A,P\}$. Then
+@@ -2547,7 +2662,9 @@
+ 
+ \subsection{Physical Geometry of the Depth Construction}
+ 
+-For the MSD hippocampal union $M_i$, the physical centroid and covariance are
++For the MSD hippocampal union $M_i$, the centroid $\mu_i$ is the mean
++physical position and the covariance matrix $\Sigma_i$ describes how
++foreground positions spread around it:
+ \begin{equation}
+ \begin{aligned}
+ \mu_i&=\frac{1}{|M_i|}\sum_{v\in M_i}r_i(v),\\
+@@ -2556,10 +2673,11 @@
+ \end{aligned}
+ \label{eq:depth-centroid-covariance}
+ \end{equation}
+-The dominant unit eigenvector is oriented anteriorly to choose its
+-sign. Reversing this sign leaves the projected rightward normal in
+-Equation~\ref{eq:depth-plane-normal} unchanged. The principal-axis
+-eigenvalue gap is recorded as a diagnostic, without replacing
++The unit eigenvector associated with the largest eigenvalue of
++$\Sigma_i$ gives the principal axis $\ell_i$ used in the main text.
++It is oriented anteriorly to choose its sign. Reversing this sign leaves the projected rightward normal in
++Equation~\ref{eq:depth-plane-normal} unchanged. The gap between the largest two eigenvalues indicates how clearly one
++direction dominates the spread and is recorded as a diagnostic, without replacing
+ ambiguous geometry by a zero constraint.
+ 
+ The surrounding region is
+@@ -2576,12 +2694,13 @@
+ foreground points or a projected normal of norm below 0.1. Such
+ failures require correction of the preparation.
+ 
+-The conventional medical recipes use one $64^3$ volume per update
+-and apply constraints only to the primary output; nnU-Net's other
+-supervised resolutions retain their baseline losses. Identity affines
+-introduced during ADNI export do not establish anatomical orientation
+-or physical spacing; its distance and depth constructions therefore
+-use stored array coordinates in voxel units.
++The conventional medical recipes use one $64^3$ volume per update and apply
++constraints only to the primary output; nnU-Net's other supervised
++resolutions retain their baseline losses. Identity affines introduced during
++ADNI export leave grid coordinates unchanged; these placeholder transforms
++do not establish anatomical orientation or physical spacing; its distance
++and depth constructions therefore use stored array coordinates in voxel
++units.
+ 
+ \subsection{GeoFWI3D Observation Boundaries}
+ \label{sec:geo-boundaries}
+@@ -2627,8 +2746,10 @@
+ whose inner band can therefore reach crop faces. Support counts are
+ computed over the full volume before sampling.
+ 
+-For $Z_i$ planes, uniform anchor $k$ and plane domain
+-$\Omega_i^{(k)}$, a class with two nonempty band sides contributes
++Let $Z_i$ be the number of planes. One plane, the anchor, is selected
++uniformly with index $k$, and $\Omega_i^{(k)}$ denotes its voxel domain.
++For a class with two nonempty full-volume band sides, its sampled
++contribution is
+ \begin{equation}
+ \begin{aligned}
+ \widehat{\mathcal{L}}_{B,i,c}^{(k)}
+@@ -2670,8 +2791,8 @@
+ \label{eq:medsam-edge-expectation}
+ \end{equation}
+ The native supervised objective uses companion plane
+-$(k+1)\bmod Z_i$, but the edge estimator never joins the final
+-plane to the first. Empty full-volume edge support contributes zero.
++$(k+1)\bmod Z_i$, where the modulo operation wraps the last index back
++to zero. The edge estimator never joins the final plane to the first. Empty full-volume edge support contributes zero.
+ 
+ On MSD, both estimators average all three classes with weight $1/3$,
+ including zero-contributing classes. ADNI MedSAM3 and GeoFWI3D SAM3
+@@ -2707,7 +2828,11 @@
+ \subsection{Calibration and Discrete Compute Limits}
+ 
+ Sequential calibration adds weighted gradient vectors before measuring
+-their root mean square (RMS). For example,
++their root mean square (RMS). Let $g_{i,0}$ and $g_{i,B}$ be the
++baseline and band-loss gradients with respect to the $m_i$ primary
++logits of case $i$. For a vector $g$ with $m_i$ entries,
++$\operatorname{RMS}(g)=\sqrt{m_i^{-1}\sum_{k=1}^{m_i}g_k^2}$.
++For example,
+ \begin{equation}
+ \begin{aligned}
+ \operatorname{RMS}(g_{i,0}+\lambda_B g_{i,B})^2
+@@ -2723,9 +2848,10 @@
+ interpolation, and calibration requires finite positive ratios,
+ without an arbitrary fallback for an invalid result.
+ 
+-For early activation $d_a$, delayed SDF activation $d_a^S$ and
+-profiled per-update costs $f_{a,0},f_{a,1},f_{a,2}$ in the three
+-phases, the charge is
++Let $d_a$ and $d_a^S$ be the update boundaries for early and delayed
++SDF activation. The measured per-update costs $f_{a,0}$, $f_{a,1}$
++and $f_{a,2}$ correspond to baseline-only training, early terms active,
++and delayed SDF also active. The cumulative charge for $n$ updates is
+ \begin{equation}
+ \begin{aligned}
+ C_a(n)={}&f_{a,0}\min(n,d_a)\\
+@@ -2734,8 +2860,9 @@
+ \end{aligned}
+ \label{eq:piecewise-optimization-cost}
+ \end{equation}
+-with $[x]_+=\max(x,0)$. The largest integer update count satisfying
+-the ceiling is permitted. The delayed boundary is chosen nearest
++Here $[x]_+=\max(x,0)$ and $C_{\max}$ denotes the medical optimization
++ceiling specified in Equation~\ref{eq:main-numerical-cap}. The largest
++integer update count satisfying that ceiling is permitted. The delayed boundary is chosen nearest
+ to charge $5C_{\max}/9$, after the early ramp, with ties resolved
+ toward the earlier boundary. Shared activation requires only two
+ cost phases.
+@@ -2753,9 +2880,10 @@
+ therefore matches measured gradient scales before assigning fixed
+ coefficients. It uses the ten support cases after nine
+ baseline updates for nnU-Net and 50 for the other models. The network
+-is evaluated without changing its parameters, buffers or random-generator
+-states. For detached float32 primary logits $z_i$ with $m_i$ entries,
+-define
++is evaluated without changing its parameters, other stored network
++values or random-generator states. The float32 primary logits $z_i$, with $m_i$ entries, are detached
++from the network: derivatives are measured with respect to these outputs
++without propagating back to its parameters. Define
+ \begin{equation}
+ g_{i,0}=\nabla_{z_i}\mathcal{L}_{\mathrm{seg},i},
+ \qquad
+@@ -2779,7 +2907,9 @@
+                   {\operatorname{RMS}(g_{i,<j})}.
+ \label{eq:sequential-calibration-ratio}
+ \end{equation}
+-The coefficient is then
++Let $\eta_a$ be the target median gradient ratio and $\kappa_a$ its
++upper-percentile limit; $Q_{0.95}$ denotes the 95th percentile across
++calibration cases. The coefficient is then
+ \begin{equation}
+ \lambda_j=
+ \min\left\{
+@@ -2799,7 +2929,8 @@
+ later. These measurements use no validation labels and do not guarantee
+ the same gradient ratios throughout optimization.
+ 
+-Early terms follow
++For a baseline prefix of $d_a$ updates and a ramp lasting $w_a$ updates,
++early terms follow
+ \begin{equation}
+ s_a^{\mathrm{early}}(t)=
+ \begin{cases}
+@@ -2847,7 +2978,8 @@
+ \end{equation}
+ Each other architecture receives this same FLOP allowance, with its
+ number of updates determined by its own measured cost. Cheaper models
+-therefore receive more updates and complete more epochs. The cap matches
++therefore receive more updates and complete more epochs, where an epoch
++is one pass through the selected training subset. The cap matches
+ computational allowance across architectures; it does not require them
+ to reach the same stage of learning or convergence.
+ 
+@@ -2924,8 +3056,8 @@
+ was 152 nnU-Net updates, corresponding to eight complete passes through
+ 19 training scenes. Multiplying this count by the original Dice-only
+ nnU-Net profile of $1{,}198.540306205$ GFLOPs per update established the
+-numerical cap. The final comparison retains that cap and charges both
+-training and calibration computation within it:
++numerical cap. The final comparison retains it and charges both training
++cost $C_{\mathrm{train}}$ and calibration cost $C_{\mathrm{cal}}$ within it:
+ % CAP PROVENANCE: scripts/cross_dataset_campaign/prepare_full.py sets
+ % SEISMIC_CAP from 152 times the original Dice-only nnU-Net update profile.
+ % The final native Dice+CE recipe retains that numerical cap.
+@@ -2940,15 +3072,14 @@
+ end-to-end compute budget, and absolute medical/geological scores do
+ not represent equal-compute comparisons across datasets.
+ 
+-Calibration uses all 19 training scenes at the frozen anchor, without
+-augmentation or validation inputs. The sequential gradient-ratio
+-procedure uses target/p95 limits of 3.6/4.5 for nnU-Net, 0.4/2.0 for
+-UNETR and 0.1/0.5 for SwinUNETR and the compact U-Net. The nnU-Net
+-and UNETR strengths were selected following exploratory comparisons;
+-they are not shared coefficients across architectures. For combinations,
+-sequential calibration can also change a term's coefficient when another
+-term is added. The comparisons therefore evaluate complete calibrated
+-configurations.
++Calibration uses all 19 training scenes at a fixed network state, without
++augmentation or validation inputs. The sequential gradient-ratio procedure
++uses median-target/95th-percentile limits of 3.6/4.5 for nnU-Net, 0.4/2.0
++for UNETR and 0.1/0.5 for SwinUNETR and the compact U-Net. The nnU-Net and
++UNETR strengths were selected following exploratory comparisons; they are
++not shared coefficients across architectures. For combinations, sequential
++calibration can also change a term's coefficient when another term is added.
++The comparisons therefore evaluate complete calibrated configurations.
+ 
+ The unconstrained prefix and auxiliary ramp each last nine updates
+ for nnU-Net and 50 for the other models. SDF uses the early shared
+@@ -2977,7 +3108,12 @@
+ 
+ \subsection{Model Settings and Training Exposure}\label{sec:implementation-tables}
+ These tables give the configured network sizes, activation policies and
+-training exposure underlying the main-text comparisons.
++training exposure underlying the main-text comparisons. Stochastic
++gradient descent (SGD) updates parameters from batch gradients; momentum
++also uses previous update directions. AdamW adjusts step sizes using
++running gradient statistics and applies weight decay, a shrinkage of the
++weights. A schedule horizon is the update count over which the chosen
++learning-rate trajectory is defined.
+ 
+ \begin{table}[htbp]
+ \centering\small\setstretch{1.08}
+@@ -3086,7 +3222,8 @@
+ shift places adjacent inside and outside centres on opposite sides of
+ the interface. This defines a discrete distance convention; it is not
+ an exact continuous-surface distance for every boundary orientation.
+-Clipping and normalization give
++Clipping replaces values outside $[-\tau,\tau]$ by the corresponding
++endpoint, and division by $\tau$ normalizes their scale:
+ \begin{equation}
+ \varphi_{i,c}(v)
+ =\frac{\operatorname{clip}
+@@ -3103,21 +3240,29 @@
+ \subsection{Conventional Model and Optimizer Settings}
+ \label{sec:conventional-implementation}
+ 
+-The compact model uses the Medical Open Network for Artificial Intelligence
+-(MONAI) \texttt{BasicUNet}, with encoder widths
+-$16,16,32,64,128$ and final decoder width 16. It uses pooling,
+-transposed convolutions and concatenated skips, without residual blocks
+-or deep supervision. The fixed nnU-Net uses five stages of widths
+-$32,64,128,256,320$, three-dimensional kernels, instance normalization
+-and leaky rectified linear activations. UNETR has 12 blocks,
+-768-dimensional embeddings, 12 attention heads and $16^3$ patches,
+-giving 64 tokens per crop; its residual convolutional decoder has
+-base width 16. SwinUNETR combines a hierarchical shifted-window encoder
+-with a convolutional decoder.
+-
+-
+-nnU-Net uses polynomial learning-rate decay with exponent 0.9 and no
+-warmup. AdamW models warm up over 5\% of their fixed horizon and then
++Here a layer's width is its number of feature channels; embedding width is
++the length of each token vector. Pooling reduces spatial resolution, and
++transposed convolutions perform learned upsampling. Concatenated skips join
++encoder and decoder channels, while residual blocks add a block's input to
++its transformed output. Instance normalization rescales each case's feature
++channels; leaky rectified linear activations retain a small slope for
++negative inputs. Multiple attention heads apply separate attention
++calculations within a layer.
++
++The compact model uses MONAI's \texttt{BasicUNet}, with encoder widths
++$16,16,32,64,128$ and final decoder width 16. It uses pooling, transposed
++convolutions and concatenated skips, without residual blocks or deep
++supervision. The fixed nnU-Net uses five stages of widths
++$32,64,128,256,320$, three-dimensional kernels, instance normalization and
++leaky rectified linear activations. UNETR has 12 blocks, 768-dimensional
++embeddings, 12 attention heads and $16^3$ patches, giving 64 tokens per
++crop; its residual convolutional decoder has base width 16. SwinUNETR
++combines a hierarchical shifted-window encoder with a convolutional decoder.
++
++
++A warmup gradually increases the learning rate at the start of training;
++decay lowers it later. nnU-Net uses polynomial learning-rate decay with
++exponent 0.9 and no warmup. AdamW models warm up over 5\% of their fixed horizon and then
+ decay cosinusoidally toward 1\% of the initial rate. Every objective
+ for a model follows the same trajectory. When an extra loss reduces
+ the number of affordable updates, the learning-rate horizon remains
+@@ -3130,9 +3275,12 @@
+ 
+ Section~\ref{sec:sam3-methods} defines the SAM3 support data, input
+ preparation and binary prediction rule; Sections~\ref{sec:medsam-methods}
+-and \ref{sec:medsam-adni-methods} give the corresponding MedSAM3
+-protocols. This section records their exact optimizer, calibration and
+-execution settings.
++and \ref{sec:medsam-adni-methods} give the corresponding MedSAM3 protocols.
++This section records their exact optimizer, calibration and execution
++settings. Gradient-norm clipping rescales an excessively large gradient
++vector to a maximum allowed length. Accumulation combines gradients from
++sequentially processed slice pairs before one parameter update. A slab here
++consists of an anchor plane and its adjacent companion.
+ 
+ \paragraph{SAM3 on GeoFWI3D.}\label{sec:sam3-methods-details}
+ Folds 0, 1 and 3 are crossed with seeds 0, 1 and 2 and fourteen
+@@ -3166,21 +3314,22 @@
+ support and 96 held-out volumes. Paired gains use only the SAM3
+ baseline from the same fold and seed.
+ 
+-The completed inventory contains 76 runs on Colab A100-SXM4-80GB
+-graphics processing units (GPUs) and 50 on A100 80GB PCIe GPUs allocated
+-as 4g.40gb Multi-Instance GPU (MIG) partitions. All retain the same
+-scientific source identity. Archived hashes verify unchanged base
++The completed inventory contains 76 runs on Colab A100-SXM4-80GB graphics
++processing units (GPUs) and 50 on A100 80GB PCIe GPUs allocated as 4g.40gb
++Multi-Instance GPU (MIG) partitions, allocated subdivisions of a physical
++GPU. All retain the same scientific source identity. Archived hashes,
++digital fingerprints of file or array contents, verify unchanged base
+ parameters and matching initial adapters, support arrays and sampling
+-schedules within each comparison. Hardware allocation was not fully
+-crossed with the objectives, so timing records retain their execution
+-platform. Recovery attempts are distinguished from the final
+-25-update trajectory.
++schedules within each comparison. Hardware allocation was not fully crossed
++with the objectives, so timing records retain their execution platform.
++Recovery attempts are distinguished from the final 25-update trajectory.
+ 
+ \paragraph{MedSAM3 on MSD.}\label{sec:medsam-methods-details}
+ Folds 0, 1 and 3 are crossed with seeds 17, 83 and 191. Fourteen
+ objectives give 126 completed objective runs across the
+ nine fold/seed cells, with repeated matched controls retained in the
+-execution records. The 916 trainable adapter tensors start from the
++execution records. The 916 trainable adapter tensors (multidimensional parameter arrays)
++start from the
+ released medical factors. Each 200-update run uses two adjacent-slice pairs per update,
+ giving 800 slice and 1,600 foreground-query presentations. These
+ repetitions do not increase the five-crop annotation budget.
+@@ -3232,14 +3381,14 @@
+ Evaluation uses the final 200-update adapter on both support crops
+ and all 54 held-out crops.
+ 
+-In both medical studies, volume scores and mean per-crop confusion
+-counts are averaged within runs, across seeds within a fold and
+-equally across folds. No early stopping or validation-dependent
+-checkpoint selection is used. Training-loop timers exclude
+-initialization, calibration, validation and inference, and provide no
+-peak-memory measurement. The adaptation allowance excludes pretraining.
+-Production CUDA execution does not establish bitwise determinism from
+-a common seed alone. Execution and calibration records are indexed in
++In both medical studies, volume scores and mean per-crop confusion counts
++are averaged within runs, across seeds within a fold and equally across
++folds. No early stopping or validation-dependent checkpoint selection is
++used. Training-loop timers exclude initialization, calibration, validation
++and inference, and provide no peak-memory measurement. The adaptation
++allowance excludes pretraining. A common seed alone does not guarantee
++bitwise determinism, or numerically identical stored outputs, in CUDA
++execution. Execution and calibration records are indexed in
+ Appendix~\ref{sec:evidence-register}.
+ 
+ \clearpage
+@@ -4394,15 +4543,16 @@
+ automatically.
+ 
+ The MSD dataset description attributes manual tracing to two earlier
+-hippocampal annotation protocols \cite{simpson2019dataset}.
+-Pruessner \emph{et al.}\ \cite{pruessner2000volumetry} describe manual volumetry
+-with simultaneous inspection of sagittal, coronal and horizontal views.
+-Woolard and Heckers \cite{woolard2012asymmetry} build on that protocol:
+-sagittal tracing is refined in coronal views, and the hippocampus is then
+-divided into anterior uncus and posterior body and tail. Their anatomical
+-cues include ``more than one cut through the hippocampus'' in a coronal
+-section and a medial protrusion towards the crus cerebri; the division
+-is checked in the sagittal view.
++hippocampal annotation protocols \cite{simpson2019dataset}. Pruessner
++\emph{et al.}\ \cite{pruessner2000volumetry} describe manual volumetry with
++simultaneous inspection of sagittal, coronal and horizontal views; the last
++correspond to planes dividing upper and lower portions. Woolard and Heckers
++\cite{woolard2012asymmetry} build on that protocol: sagittal tracing is
++refined in coronal views, and the hippocampus is then divided into anterior
++uncus and posterior body and tail. Their anatomical cues include ``more than
++one cut through the hippocampus'' in a coronal section and a protrusion
++towards the brain's midline and the crus cerebri, a nearby midbrain
++structure; the division is checked in the sagittal view.
+ 
+ The MSD paper specifies the final head section as the ``coronal slice
+ containing the uncal apex'' \cite{simpson2019dataset}. These descriptions

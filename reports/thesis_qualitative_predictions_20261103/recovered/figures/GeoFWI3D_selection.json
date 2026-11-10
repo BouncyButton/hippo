@@ -1,0 +1,103 @@
+{
+  "dataset": "GeoFWI3D",
+  "baseline": {
+    "id": "GeoFWI3D_SAM3_f1s2_dice_u25_v1",
+    "dataset": "GeoFWI3D",
+    "fold": 1,
+    "seed": 2,
+    "arm": "dice",
+    "worker": 0,
+    "role": "baseline",
+    "expected_dice": 0.7539479513537787,
+    "updates": 25
+  },
+  "constrained": {
+    "id": "GeoFWI3D_SAM3_f1s2_dice_bands_edge_depth_u25_v1",
+    "dataset": "GeoFWI3D",
+    "fold": 1,
+    "seed": 2,
+    "arm": "dice_bands_edge_depth",
+    "worker": 1,
+    "role": "constrained",
+    "expected_dice": 0.7821478382858525,
+    "updates": 25
+  },
+  "held_out_cases": 96,
+  "examples": [
+    {
+      "case": "model_0303",
+      "slice_axis": 2,
+      "slice_zero_based": 67,
+      "selection": "Median paired change",
+      "baseline_dice": 0.8589414884712641,
+      "constrained_dice": 0.8871647517709426,
+      "delta_pp": 2.8223263299678503,
+      "baseline_background_dice": 0.9792411411796893,
+      "constrained_background_dice": 0.982667943616868,
+      "baseline_all_class_dice": 0.9190913148254767,
+      "constrained_all_class_dice": 0.9349163476939053,
+      "baseline_foreground_fn": 24994,
+      "constrained_foreground_fn": 17971,
+      "baseline_foreground_fp": 7026,
+      "constrained_foreground_fp": 8614,
+      "baseline_ap_swaps": null,
+      "constrained_ap_swaps": null
+    },
+    {
+      "case": "model_0442",
+      "slice_axis": 2,
+      "slice_zero_based": 95,
+      "selection": "Smallest paired change",
+      "baseline_dice": 0.6867956623431852,
+      "constrained_dice": 0.6021171746669101,
+      "delta_pp": -8.467848767627517,
+      "baseline_background_dice": 0.9966344121645551,
+      "constrained_background_dice": 0.9950101742090096,
+      "baseline_all_class_dice": 0.8417150372538702,
+      "constrained_all_class_dice": 0.7985636744379598,
+      "baseline_foreground_fn": 911,
+      "constrained_foreground_fn": 773,
+      "baseline_foreground_fp": 4981,
+      "constrained_foreground_fp": 7947,
+      "baseline_ap_swaps": null,
+      "constrained_ap_swaps": null
+    },
+    {
+      "case": "model_0832",
+      "slice_axis": 2,
+      "slice_zero_based": 64,
+      "selection": "Largest paired change",
+      "baseline_dice": 0.6556562663412934,
+      "constrained_dice": 0.7297826861417884,
+      "delta_pp": 7.412641980049505,
+      "baseline_background_dice": 0.9954755846469903,
+      "constrained_background_dice": 0.9965266488686996,
+      "baseline_all_class_dice": 0.8255659254941419,
+      "constrained_all_class_dice": 0.8631546675052439,
+      "baseline_foreground_fn": 3191,
+      "constrained_foreground_fn": 2520,
+      "baseline_foreground_fp": 4711,
+      "constrained_foreground_fp": 3548,
+      "baseline_ap_swaps": null,
+      "constrained_ap_swaps": null
+    }
+  ],
+  "mean_paired_gain_pp": 2.745214194979402,
+  "positive_cases": 88,
+  "qualification": "Fresh reproduction for visualization. Original nine-cell study remains the source of aggregate claims.",
+  "slice_rule": "First source-axis-2 slice attaining maximum reference foreground area; identical image and slice for all panels.",
+  "original_comparisons": [
+    {
+      "original_dice": 0.7539479513537787,
+      "reproduced_dice": 0.7672046579381927,
+      "difference_pp": 1.3256706584414024,
+      "interpretation": "New qualitative reproduction; original scores remain the thesis evidence. Review discrepancies before using panels."
+    },
+    {
+      "original_dice": 0.7821478382858525,
+      "reproduced_dice": 0.7946567998879869,
+      "difference_pp": 1.2508961602134328,
+      "interpretation": "New qualitative reproduction; original scores remain the thesis evidence. Review discrepancies before using panels."
+    }
+  ]
+}

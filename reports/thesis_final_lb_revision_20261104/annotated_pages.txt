@@ -1,0 +1,379 @@
+PDF PAGE 1
+Abstract
+Semantic segmentation assigns a class to each location in an image, allowing structures
+such as organs to be identified and measured. In medical imaging, it supports the study of
+anatomy and disease, but obtaining annotations and training accurate models require time
+and resources. This thesis investigates whether spatial information already contained in
+annotations can improve three-dimensional segmentation when labelled data and training
+computation are limited.
+The approach uses Logic Tensor Networks (LTNs), which combine neural learning with
+knowledge expressed as logical statements, and their logarithmic formulation, logLTN.
+Four additional training objectives encourage correct labels near boundaries and correct
+label transitions between neighbouring locations, weight errors by distance from class
+boundaries, and balance supervision across layers of a volume. These objectives reuse
+existing annotations without requiring additional manual labelling.
+The medical experiments concern hippocampus segmentation, relevant to the study of
+memory and Alzheimer’s disease, using the Medical Segmentation Decathlon (MSD) and
+Alzheimer’s Disease Neuroimaging Initiative (ADNI) datasets. Salt-body segmentation in
+synthetic GeoFWI3D volumes tests whether the benefits extend beyond medical imaging.
+Experiments cover four architectures trained from scratch under matched computational
+budgets within each dataset, and adaptation of pretrained Segment Anything Model 3
+(SAM3) and its medical specialization, MedSAM3, using small labelled support sets.
+For every architecture and dataset studied from scratch, at least one tested combination
+improves mean validation Dice, a measure of segmentation overlap, over the matched
+baseline. The largest gains are 11.97 percentage points in the medical experiments and 6.14
+points in the geological experiments. The best tested adaptation configurations improve
+Dice by 3.45 to 5.38 points. The preferred combination varies across models and tasks,
+and adding more constraints does not consistently improve performance. These findings
+support annotation-derived spatial supervision as a useful training strategy under limited
+resources, with benefits demonstrated in both medical and geological segmentation.
+1
+
+PDF PAGE 9
+in reference background is a false positive (FP). An anterior/posterior swap instead assigns
+the wrong foreground class while preserving whole-hippocampus membership.
+A loss assigns a numerical penalty to disagreement between a prediction and its
+annotation. Training adjusts the parameters to reduce that penalty. An optimizer is the
+algorithm that makes these adjustments. It uses gradients, derivatives indicating how the
+loss changes with the parameters. Backpropagation computes those gradients through the
+network; gradient descent uses them to move towards a lower loss. Each update processes
+a batch, a group of training examples that may contain just one volume. We write losses
+asL(xi,yi;θ); later subscripts identify the particular loss, and inputs fixed by the context
+are omitted. Cross-entropy penalizes low probability for the reference class and averages
+this penalty over the|Ωi|voxels. Here|Ωi|denotes their count andlog is the natural
+logarithm:
+LCE(xi,yi;θ) =−1
+|Ωi|
+∑︂
+v∈Ωi
+∑︂
+c∈C
+yi,c(v) logpθ,i,c(v)
+=−1
+|Ωi|
+∑︂
+v∈Ωi
+logpθ,i,yi(v)(v).
+(2)
+Each location contributes a class error, while the network can use spatial context to
+determine its prediction. Averaging over voxels therefore does not assume independent
+image locations. Assigning a fixed nonnegative weightwi(v)to each voxel, with∑︁
+vwi(v) =
+1, gives the weighted form−∑︁
+vwi(v) logpθ,i,yi(v)(v). This changes the allocation of
+supervision across the volume: some locations can contribute more than others. Chapter 3
+uses this idea to balance supervision across spatial layers.
+Dice measures how much a predicted region overlaps its reference. For a reference
+region Y and a predicted regionˆ︁Y, treated as sets of pixels or voxels, the Dice coefficient
+is
+Dice(Y, ˆ︁Y) = 2|Y∩ˆ︁Y|
+|Y|+|ˆ︁Y|,|Y|+|ˆ︁Y|>0.(3)
+Here|Y|and|ˆ︁Y|count the locations in each region, and|Y∩ˆ︁Y|counts those shared by
+both. A score of one indicates perfect agreement and zero indicates no overlap. Figure 2
+works through a nine-pixel example.
+Training uses a continuous version of this overlap measure so that its derivatives can
+guide learning [14]. The following soft Dice for classc uses probabilities in place of a
+discrete mask. A small positive constantεprevents division by zero:
+Dsoft
+i,c = 2∑︁
+v∈Ωipθ,i,c(v)yi,c(v) +ε
+∑︁
+v∈Ωipθ,i,c(v) +∑︁
+v∈Ωiyi,c(v) +ε, ε>0.(4)
+For a selected class setCD, the corresponding loss is1−|CD|−1∑︁
+c∈CDDsoft
+i,c . Unlike a
+sum of local class errors, the ratio couples predictions through the total predicted and
+9
+
+PDF PAGE 11
+(NIfTI) image headers, the metadata stored alongside image values, contain the coordinate
+transforms and spatial units needed for this calculation [11].
+We define neighbours directly on the array grid. Two voxels are neighbours when they
+share a face: their indices differ by one along exactly one axis and are equal along the
+other two. An interior voxel therefore has six neighbours, two along each axis. The set of
+these neighbouring pairs is
+Ei ={{u,v}:u,v∈Ωi,∥u−v∥1 = 1}.(6)
+The condition∥u−v∥1 = 1says that the sum of the absolute index differences is one.
+These neighbouring pairs let us describe local changes and construct regions around an
+annotated boundary. Constraints that also depend on physical distance or orientation
+need the coordinate transform. Chapter 3 specifies which description each constraint uses.
+0 1 2
+v1
+0
+1
+2v2
+1 step
+1 step
+0 1 2
+r1 (mm)
+0
+2
+4r2 (mm)
+1 mm
+2 mm
+(a) Voxel indices (b) Physical positions
+⟶
+r = Qv
+Same neighbours; different physical step lengths.
+Figure 3: Voxel indices and physical distances in a synthetic example with voxel spacings
+of 1, 2 and 1 mm along the three grid axes, aligned with the physical axes and sharing their
+origin. The panels show the slice with third indexv3 = 1. Each coloured segment joins
+the central voxel to a face-sharing neighbour and represents one grid step. Its physical
+length is 1 mm horizontally and 2 mm vertically. Four neighbours lie in the displayed
+plane; two additional neighbours outside the plane complete the six-neighbour graph in
+three dimensions.
+11
+
+PDF PAGE 16
+specify where class supervision deserves extra emphasis. The boundary bands studied here
+select voxels just inside and outside the annotated region, averaging the loss separately
+on each side. In the principal experiment, these bands follow the exterior of the whole
+foreground.
+A signed-distance field assigns each location a distance from the annotated boundary,
+negative inside the region and positive outside. Kervadecet al.use this field to weight
+predicted probabilities throughout the image [20]. This supplies a geometric learning
+signal without extracting a discrete predicted contour. The classwise distance term in
+this thesis follows that approach; its exact distance convention and loss are developed in
+Section 3.4.
+Anatomically Constrained Neural Networks supervise segmentation through a learned
+representation of valid shapes [21]. clDice instead compares masks and their skeletons,
+thin centreline representations, to encourage connected paths in tubular structures [22].
+These approaches concern properties that local membership and transition agreement do
+not enforce. The present edge term preserves the changes in the annotation, including its
+boundaries; it does not require a globally connected prediction.
+Bergaminet al.use LTNs for MSD hippocampus segmentation with relations concerning
+whether regions are connected, whether one is contained in another, and their relative
+volumes [23]. Their work provides a direct predecessor for logical supervision of this
+task. The present study evaluates four families of local or classwise geometric supervision
+across multiple architectures under an optimization FLOP ceiling. It also examines the
+compatibility of simplified anatomical rules with the actual label maps (Appendix B.5).
+Together, these studies motivate explicit spatial supervision while showing that different
+objectives encode different properties. The fourteen-objective comparison evaluates the
+selected families and their combinations; the literature methods provide context rather
+than further methods tested in these experiments. Differences in datasets and protocols
+preclude a numerical ranking against those published systems.
+2.5 Pretrained Segmentation and Low-Rank Adaptation
+Pretraining changes the starting point of learning. A target model can specialize repre-
+sentations acquired from a larger training collection, so the relevant resource question
+becomes the additional data and optimization needed for adaptation. A prompt is an
+additional input, such as a point or a text description, specifying what to segment in
+an image. Fine-tuning instead changes model parameters using labelled examples. A
+pretrained segmentation system can use both.
+The Segment Anything Model (SAM) encodes the image and prompt into features,
+then combines them in a decoder that predicts a mask. Its prompts can be points or
+16
+
+PDF PAGE 22
+separate MSD audit in Section 4.3.1 and Appendix B.5 examines this issue for proposed
+anatomical A/P transition rules.
+3.2 Boundary-Band Membership
+Boundary bands concentrate membership supervision on the two sides of an annotated
+interface. An inner band encourages the prediction to retain foreground close to that
+interface, while an outer band discourages extension into adjacent background. The
+selected locations depend on the reference mask, so an incorrect predicted contour cannot
+move the target support away from an error.
+For a fixed class group F, write M = Mi,F, Bs
+i = Bs
+i,F, qi(v) = qθ,i,F(v) and
+hi(v) = hi,F (v) to simplify notation. For the six-neighbour structuring elementN6 =
+{0,±e1,±e2,±e3}, whereek denotes a unit array offset, dilation and erosion are
+Dil6(M) ={v∈Ωi :∃a∈N6, v+a∈M},
+Ero6(M) ={v∈Ωi :∀a∈N6, v+a∈M}.
+(11)
+Dilation includes a voxel when at least one location in its neighbourhood belongs to the
+region. Erosion retains it only when the complete neighbourhood belongs to the region.
+Locations outside Ωi are treated as absent, corresponding to zero padding. Figure 6
+illustrates one step on a solid cube.
+Reference region
+27 voxels
+One erosion
+1 voxel
+One dilation
+81 voxels
+Figure 6: Six-neighbour morphology in three dimensions. A solid3×3×3 region contains
+27 voxels. One erosion retains only its centre, whose six face-sharing neighbours are all
+inside. One dilation adds the 54 face-adjacent exterior voxels (orange), giving 81 voxels;
+diagonal neighbours are not added in that step. This example assumes a surrounding
+background grid. The experiments repeat the operation twice to construct their bands.
+17
+Figure 8: Six-neighbour morphology in three dimensions. A solid3×3×3region contains
+27 voxels. One erosion retains only its centre, whose six face-sharing neighbours are all
+inside. One dilation adds the 54 face-adjacent exterior voxels (orange), giving 81 voxels;
+diagonal neighbours are not added in that step. This example assumes a surrounding
+background grid. The experiments repeat the operation twice to construct their bands.
+U\Vretains locations inUthat are not inV:
+Bin
+i,F =M i,F\Eror
+6 (Mi,F ),
+Bout
+i,F = Dilr
+6 (Mi,F )\M i,F, r= 2.
+(13)
+The inner band contains the region’s voxels removed by erosion and the outer band contains
+the additional voxels reached by dilation. Their two-step width counts moves between
+face-sharing voxels, rather than a distance in millimetres. Narrow parts of the region
+can belong entirely to the inner band. At a crop face, zero padding can likewise place
+foreground in the inner band, whereas the outer support remains limited to observed
+voxels.
+Figure 9 shows these bands on actual volumes from all three datasets. In each enlarged
+view, blue voxels should retain foreground membership and orange voxels should receive
+backgroundlabels. Uncolouredvoxelsreceivenocontributionfromthisbandterm, although
+the ordinary segmentation loss still applies there. Some blue voxels can appear away
+from the visible contour: the region may end in a neighbouring slice, since the bands are
+constructed in three dimensions.
+22
+
+PDF PAGE 23
+Annotated foreground
+MSD
+Two-step bands: enlarged view
+Annotated foreground
+ADNI
+Two-step bands: enlarged view
+Annotated foreground
+GeoFWI3D
+Two-step bands: enlarged view
+Inner band: foreground target
+Outer band: background target
+White contour: reference boundary
+Figure 9: Boundary bands on MSD, ADNI and GeoFWI3D volumes. Top: an image
+slice with the annotated foreground outlined in white; the yellow square locates the
+enlarged view below. Bottom: inner (blue) and outer (orange) bands obtained by two
+steps of six-neighbour morphology on the full three-dimensional mask. MSD uses the
+anterior/posterior union. These native-grid examples use zero padding; geological recipe-
+specific crop conventions are given in Appendix A.2.
+For the fixed group, abbreviateBs
+i,F asBs
+i, withs∈{in,out}identifying the side. The
+logical statements require membership on the inner band and its negation, written¬, on
+the outer band:
+Φ in
+i =∀v∈Bin
+i :In F (i,v),
+Φ out
+i =∀v∈Bout
+i :¬InF (i,v).
+(14)
+The symbolΦ s
+i names the statement for sides, rather than a new model output. Its
+truth is obtained from the membership probability:Gθ(InF (i,v )) = qi(v)inside and
+Gθ(¬InF (i,v )) = 1−qi(v)outside. Taking the negative log and averaging over each side
+gives the two terms below. For nonempty sides, define their voxel countsns
+i =|Bs
+i|, with
+s∈{in,out}. The implemented loss is
+LB,i =−1
+2
+[︄∑︁
+v∈Bin
+i
+logqi(v)
+nin
+i +ε +
+∑︁
+v∈Bout
+i
+log(1−qi(v))
+nout
+i +ε
+]︄
+, ε= 10 −6.(15)
+23
+
+PDF PAGE 33
+voxels, the total weight decreases with their size, preventing a further increase in weight
+per voxel. The complete layer distributions appear in Appendix A.7.
+33
+
+PDF PAGE 35
+3.6 Combined Objective and Experimental Scope
+Training retains the model’s usual segmentation loss and adds the selected spatial penalties.
+Each penalty has a coefficient that controls its strength relative to the other terms. An
+activation schedule determines when it contributes and can increase its contribution
+gradually during training. These choices let the usual class supervision and the additional
+spatial guidance contribute to the same parameter update.
+Let a identify a model and training configuration, andJa its set of selected spatial-
+loss families. WriteLseg,a for its supervised baseline loss andLa,j for auxiliary familyj.
+Training minimizes
+L(t)
+a (θ) =Lseg,a(θ) +
+∑︂
+j∈Ja
+λa,jsa,j(t)La,j(θ), λa,j≥0,0≤sa,j(t)≤1.(28)
+at update t. The coefficient λa,j sets a term’s scale, whilesa,j(t)determines when it
+becomes active. Both are fixed when differentiating that update. IfSa,j = exp(−La,j)
+denotes the satisfaction value of auxiliary familyj, the auxiliary sum is the negative
+logarithm of∏︁
+j∈JaS
+λa,jsa,j(t)
+a,j . The supervised baseline retains its native convention. For
+example, nnU-Net minimizes negative Dice rather than one minus Dice; the constant
+difference leaves the gradient unchanged.
+Complementary domains motivate combinations, but do not ensure complementary
+gradients. Terms can reinforce or oppose one another, and their computation consumes
+part of a fixed optimization allowance. The coefficients are set by calibration, which
+compares the losses’ gradients on training examples. The experiments treat this calibration,
+activation schedules and resource accounting as parts of the tested configuration, specified
+in Chapter 4.
+The task-specific domains, crop conventions and sampled reductions are specified
+with the experimental protocols in Chapter 4. These choices matter when transferring a
+constraint between datasets. At inference, the network uses its image and any specified
+prompts; reference-derived spatial targets are needed only during training.
+35
+
+PDF PAGE 37
+Study Support per fold Folds; seeds Conditions and budget
+GeoFWI3D,
+from scratch
+19 scenes 0,1,2; 0,1,2 4 models×14 objectives; 504
+runs;182,178.13GFLOPs/run
+including calibration.
+MSD, from
+scratch
+10 crops 0,1,2; 0,2,20 4 models×14 objectives; 504
+runs;31,976.45GFLOPs/run.
+ADNI, from
+scratch
+10 crops, 5
+subjects
+0,1,2; 0,1,4 4 models×14 objectives; 504
+runs; same FLOP cap.
+GeoFWI3D,
+SAM3
+5 scenes 0,1,3; 0,1,2 14 objectives; 126 runs; 25
+updates/run.
+MSD,
+MedSAM3
+5 crops 0,1,3; 17,83,191 14 objectives; 126 runs; 200
+updates/run.
+ADNI,
+MedSAM3
+2 crops, 2
+subjects
+0,1,3; 0,1,2 14 objectives; 126 runs; 200
+updates/run.
+Table 1: Completed study design: 1,890 objective runs in 210 conditions, comprising 630
+geological and 1,260 medical runs. Each MedSAM3 campaign covers fourteen objectives,
+counting the baseline objective once. Repeated matched controls (baseline runs) support
+paired gains but do not enlarge the objective inventory. Geological recipes and strengths
+were tuned during development; MedSAM3 fold selection is exploratory. All scores use
+matched final-budget baselines.
+Within each conventional dataset comparison, all four architectures and all fourteen
+objectives use the same set, preserving the pairing between each constrained run and its
+baseline. Each objective includes all nine combinations of three folds and three seeds, with
+equal weight for the three folds.
+For the conventional medical studies, the seed sets were informed by preliminary
+results. These comparisons therefore provide exploratory evidence for the evaluated
+settings; repeating them with new seeds fixed in advance would test their robustness
+further.
+An annotatedvolumeis the stored example. In MSD, this is a hippocampal crop, so a
+ten-volume or five-volume support set is an annotation budget in crops. The available
+identifiers do not establish how those crops map to participants. ADNI retains subject
+identifiers and allows subject grouping to be checked explicitly. Table 2 summarizes the
+images and labels. The examples in the following sections pair an image slice with its
+reference mask and a transparent overlay. They use the native grids, before model-specific
+preparation, and show the slice with the largest labelled area in the chosen viewing
+direction. Only MSD includes an internal anterior/posterior division. The experiments
+evaluate segmentation, with no downstream diagnostic task.
+37

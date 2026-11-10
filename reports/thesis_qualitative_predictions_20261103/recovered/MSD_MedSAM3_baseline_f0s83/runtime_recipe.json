@@ -1,0 +1,32 @@
+{
+  "augmentation": "none",
+  "precision": "native CUDA BF16 autocast; FP32 model/LoRA parameters",
+  "gpu": "NVIDIA A100 80GB PCIe MIG 4g.40gb",
+  "torch": "2.12.1+cu130",
+  "cuda": "13.0",
+  "tf32_matmul": true,
+  "tf32_cudnn": true,
+  "optimizer": "AdamW",
+  "weight_decay": 0.01,
+  "gradient_clip_norm": 1.0,
+  "updates": 200,
+  "accumulation": 2,
+  "learning_rate": 5e-05,
+  "final_learning_rate": 5e-06,
+  "warmup_updates": 20,
+  "constraint_warmup_updates": 20,
+  "trainable_parameters": 18497664,
+  "classes": [
+    "background",
+    "anterior",
+    "posterior"
+  ],
+  "prompts": {
+    "1": "anterior hippocampus",
+    "2": "posterior hippocampus"
+  },
+  "native_loss_source_sha256": "4a883dd311296039d35076fbf5c0c42df9447d37034353cd8ee99b5cbfebbf80",
+  "image_transform_cache_max_bytes": 1073741824,
+  "learned_feature_cache": false,
+  "optimization_flop_cap": null
+}

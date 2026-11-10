@@ -1,0 +1,134 @@
+--- thesis before SAM3 audit
++++ thesis after SAM3 audit
+@@ -6,7 +6,8 @@
+ % GeoFWI3D: 504 fixed fold/seed/objective cells integrated 22 October 2026.
+ % Geological UNETR uses XY D4; the other geological models use no augmentation.
+ % Geological cap includes calibration; see reports/thesis_geofwi_update_20261022/.
+-% Separate SAM3 fine-tuning results remain outside the completed inventory.
++% SAM3: verified completion inventory is 110/126 on 23 October 2026.
++% Methods and explicit incomplete status added; no final SAM3 outcome claims.
+ % Existing dataset illustrations and annotation-compatibility audit are retained.
+ % Standalone bibliography is embedded; the Overleaf template may use ref.bib.
+ 
+@@ -3546,6 +3547,40 @@
+ validation, inference or peak-memory use. Production CUDA execution
+ does not establish bitwise determinism from a common seed alone.
+ 
++\subsection{SAM3 Adaptation on GeoFWI3D}
++\label{sec:sam3-methods}
++
++The geological adaptation study starts from the general SAM~3 checkpoint
++\cite{carion2025sam3}, with fresh LoRA factors whose initial output is
++zero. Only the 18,497,664 adapter parameters are optimized; the base
++weights remain frozen. This initialization contains no medical adapter.
++The fixed query is \emph{salt body}, and the output classes are salt and
++background. Whole-volume predictions are reconstructed from image slices
++and this query, without reference-mask localization prompts.
++
++The design crosses folds 0, 1 and 3 with seeds 0, 1 and 2 and fourteen
++objectives, giving 126 planned runs. Each fold uses five labelled support
++volumes, selected as the first five of its established geological support
++list, and 96 held-out volumes. Supports remain fixed across seeds and
++objectives. Every run receives 25 optimizer updates without augmentation,
++using two adjacent-slice pairs per update. The learning-rate schedule
++retains its 200-update horizon, 20-update warmup and rates of
++$5\times10^{-5}$ and $5\times10^{-6}$; training uses its first 25 updates.
++This is a fixed adaptation schedule, separate from the geological
++FLOP-capped comparison.
++
++The baseline retains SAM3's native detection, presence and mask losses;
++\texttt{dice} in the run identifiers is a naming convention, not a
++Dice-only objective. Auxiliary coefficients target a median gradient
++ratio of 0.1 with a 95th-percentile cap of 0.5. Bands are calibrated at
++initialization for each fold/seed cell; the other selected terms are
++calibrated after five prefix updates, using four sampled pairs per
++support volume. Coefficients then remain fixed. Spatial targets use
++source-array voxel geometry. Evaluation uses the final adapter and
++records per-volume salt Dice and foreground FN/FP on both support and
++held-out volumes. The completion inventory is reported separately in
++Section~\ref{sec:sam3-results}.
++
+ \subsection{ADNI Dataset}
+ \label{sec:adni-methods}
+ 
+@@ -4470,6 +4505,24 @@
+ error summaries where retained outputs and valid geometry permit them;
+ complete calibration, training, inference and memory measurements.]}
+ 
++\subsection{SAM3 on GeoFWI3D: Replication Status}
++\label{sec:sam3-results}
++
++The SAM3 replication is not yet a complete three-fold, three-seed
++comparison. The 23 October 2026 inventory contains 110 of the 126 planned
++runs: 76 completed in Colab and 34 completed on the cluster. The remaining
++cells are $D$, $B+D$ and $E+D$ for fold 1, seed 2, and all thirteen
++constrained objectives for fold 3, seed 2. Its baseline is complete.
++Consequently, the available objectives have unequal replication, and
++partial averages do not constitute the final comparison.
++
++\noindent\textit{[Results to insert after all 126 runs and their archives
++are verified: a fourteen-objective table of held-out and support Dice,
++paired changes against the SAM3 baseline, fold/seed variation and FN/FP;
++interpretation of the paired effects and complete adaptation resource
++measurements. The 110-run snapshot is excluded from the completed-study
++aggregates elsewhere in this chapter.]}
++
+ \subsection{What the Annotation Audit Establishes}
+ \label{sec:annotation-results}
+ 
+@@ -4606,15 +4659,10 @@
+ \subsection{Future Work}\label{sec:future-work}
+ \label{sec:pending-results}
+ 
+-The immediate reporting priority is to integrate the separate SAM3
+-fine-tuning study once its configuration, paired inventory and evaluation
+-archive have been verified. Its initialization and adaptation procedure
+-must be documented independently of MedSAM3.
+-
+-\noindent\textit{[Results to integrate after verification: the separate
+-SAM3 fine-tuning study, with its actual model/objective coverage,
+-support data, budget, paired gains and error analysis. The verified
+-findings belong in Chapter~\ref{sec:results}.]}
++Completing and auditing the SAM3 replication described in
++Sections~\ref{sec:sam3-methods} and~\ref{sec:sam3-results} is the remaining
++experimental reporting task. Its final comparison will extend the
++pretrained-model analysis to the geological application.
+ 
+ Further analysis of the completed studies should recover the nine reused
+ GeoFWI3D baseline raw archives for full FN/FP comparisons, add paired
+@@ -5577,6 +5625,24 @@
+ are excluded from its support subjects. This explicit overlap prevents
+ misinterpreting three folds as three independent two-crop support draws.
+ 
++\subsection{SAM3 Completion Inventory}
++
++The separate geological adaptation campaign is defined in
++\path{reports/sam3_geofwi_f013_s012_126_20261019/bundle/}.
++The inventory in \path{reports/thesis_sam3_update_20261023/inventory.json}
++reconciles its 126 task identifiers with the preserved Colab completion
++state and cluster run directories. The two sources contain 76 and 34
++completed tasks respectively, with no overlap. All completion records
++specify 25 updates and the planned fold, seed and objective. The cluster
++check verifies 805 metadata files against archive hashes and confirms
++matching durable-archive acknowledgements. This inventory check does
++not replace the final per-case audit of all Colab payloads or establish
++completion of the sixteen outstanding tasks. A documented Colab restart
++of the fold-1, seed-2 $B+E+S$ run resumed from checkpoint 0 despite a
++charge for update 1. The record allows up to one additional update attempt;
++whether the lost attempt completed is unknown. Recovery computation must
++therefore be reported separately from the final 25-update trajectory.
++
+ \subsection{Annotation Evidence and Outstanding Items}
+ 
+ Annotation evidence comes from the uncal-boundary, profile and
+@@ -5586,8 +5652,8 @@
+ validation crops. These denominators and geometric supports remain
+ separate from the performance-run inventories.
+ 
+-The remaining experimental integration item is the separate SAM3
+-fine-tuning study, with its actual coverage and verified paired records.
++The remaining experimental integration item is the SAM3 replication
++listed in Section~\ref{sec:sam3-results}.
+ The geological four-model matrix is complete; retrieving the nine
+ baseline raw archives would complete its baseline error aggregates. Presentation
+ and measurement gaps include attributable prediction examples,

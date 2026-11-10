@@ -1,0 +1,87 @@
+--- before.tex
++++ thesis-revision.tex
+@@ -2674,9 +2674,20 @@
+ 8 mm of the foreground. Axis spacings are column norms of the affine
+ matrix $Q_i$; this distance calculation requires orthogonal axes.
+ Sheared affines, fewer than four foreground points, or a projected
+-normal of norm below 0.1 are rejected. ADNI's placeholder identity
+-affines establish neither anatomical orientation nor physical spacing;
+-its construction uses source-array coordinates in voxel units.
++normal of norm below 0.1 are rejected.
++
++ADNI's placeholder identity affines establish neither anatomical
++orientation nor physical spacing. Its depth construction therefore uses
++unit source-array coordinates. The reference direction is the first
++array axis (axis 0, denoted $X$): projecting it orthogonally to the
++foreground's principal axis and normalizing gives the plane normal.
++The plane passes through the foreground centroid, with the same 0.1
++projection-norm rejection rule. In MedSAM3, labels are transposed from
++$(X,Y,Z)$ to $(Z,Y,X)$ for slice sampling; the coordinate mapping
++reverses that permutation before constructing the plane, preserving
++source $X$ as the reference. This convention assigns no anatomical
++left--right meaning to that axis.
++
+ Depth layers are two units thick within an eight-unit surrounding region:
+ millimetres on MSD and source-array voxels on ADNI and GeoFWI3D. MSD's
+ verified isotropic 1 mm spacing makes the two measures numerically equal
+@@ -3039,10 +3050,25 @@
+ \label{sec:adaptation-implementation}
+ 
+ All three studies freeze the SAM3 base weights and update 18,497,664
+-LoRA parameters. Geological adaptation uses fresh factors that initially
+-leave the base model unchanged; medical adaptation starts with the
+-released MedSAM3 factors. Every run restores its matched initial
+-weights and sampling schedule.
++LoRA parameters. The adapters use rank $r=16$, scaling $\alpha=32$
++(so $\alpha/r=2$) and zero adapter dropout. Geological adaptation uses
++fresh factors that initially leave the base model unchanged; medical
++adaptation starts with the released MedSAM3 factors. Every run restores
++its matched initial weights and sampling schedule.
++
++Adapter insertion is enabled for the image and text backbones, geometry
++encoder, transformer encoder and decoder, and mask decoder. Within the
++model, linear layers are selected by the module-name fragments
++\texttt{q\_proj}, \texttt{k\_proj}, \texttt{v\_proj}, \texttt{out\_proj},
++\texttt{qkv}, \texttt{proj}, \texttt{fc1}, \texttt{fc2}, \texttt{c\_fc},
++\texttt{c\_proj}, \texttt{linear1} and \texttt{linear2}, covering attention
++and feed-forward projections. Fused multihead-attention modules are
++first converted to explicit query, key, value and output projections
++so that these linear layers can receive adapters.
++% VERIFIED 3 November 2026: matched MSD and extension bundles, SAM3
++% f013_s012_126 bundle, and frozen ADNI source/provenance. The loaders
++% override the upstream YAML's dropout=0.1 with dropout=0.0.
++% Verification record: reports/thesis_appendix_reproducibility_20261103/evidence.json
+ 
+ The pretrained baseline supervises object classification, bounding
+ boxes, target presence and segmentation masks. The mask losses combine
+@@ -3052,12 +3078,13 @@
+ counts before slice sampling, as specified in
+ Section~\ref{sec:sampled-pretrained-supervision}.
+ 
+-AdamW uses weight decay 0.01, gradient-norm clipping at one, 20 warmup
+-updates, peak learning rate $5\times10^{-5}$ and final rate
+-$5\times10^{-6}$ over a 200-update horizon. Two adjacent-plane pairs
+-are accumulated per update. Medical runs execute 200 updates; SAM3
+-executes the first 25 without compressing the learning-rate schedule.
+-These are target-specific allowances and exclude pretraining.
++AdamW uses weight decay 0.01 and gradient-norm clipping at one. The
++learning rate rises linearly from $2.5\times10^{-6}$ at update 1 to
++$5\times10^{-5}$ at update 20. Update 21 retains that peak, followed
++by cosine decay to $5\times10^{-6}$ at update 200. Two adjacent-plane
++pairs are accumulated per update. Medical runs execute all 200 updates;
++SAM3 executes the first 25 without compressing this schedule. These
++are target-specific allowances and exclude pretraining.
+ 
+ For inference, each query's foreground response combines mask-location
+ confidence, query matching and target presence. The class conversion
+@@ -3121,8 +3148,8 @@
+ orientation. The \emph{hippocampus} response and its complement define
+ the binary probabilities. Bands and edges supervise the foreground
+ mask without a second background-mask average. Signed distance uses
+-unit array voxels, and depth uses source-axis geometry without inferred
+-anatomical orientation.
++unit array voxels; the depth reference axis and coordinate mapping are
++specified in Section~\ref{sec:sdf-construction-details}.
+ 
+ Two support crops provide eight calibration probes, with the same
+ medical optimizer, sequential calibration targets and activation ramp.

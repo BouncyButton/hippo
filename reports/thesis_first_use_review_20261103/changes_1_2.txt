@@ -1,0 +1,76 @@
+Convolutional encoder--decoder models, notably U-Net and its volumetric
+extension, made th
+role in the training objective, alongside the model's usual segmentation
+loss. It needs no
+The logarithmic formulation, logLTN, expresses truth degrees through
+their logarithms:
+distinguishing hippocampus from background in separate left and right
+crops \cite{adniStud
+formulation builds on established ideas, including signed-distance
+boundary supervision, a
+dataset preparations. Each column shows the lexicographically first
+training case and the 
+A digital image is an array of measurements. In a two-dimensional image,
+each entry is a p
+\{0,\ldots,W_i-1\}$ be the voxel grid. The image
+and the reference map $y_i:\Omega_i\to\mathcal C$ assigns one of $K$
+mutually exclusive cl
+Training operates on these continuous outputs. The final label is
+$q_i=p_{\theta,i,A}+p_{\theta,i,P}$.
+Furthermore, foreground thresholding and multiclass argmax are distinct
+decision rules:
+and its annotation. Training adjusts the parameters to reduce that
+penalty.
+Cross-entropy penalizes low probability for the reference class:
+context to determine its prediction. The voxelwise reduction therefore
+does not assume ind
+of supervision across the volume and is the basis of the depth objective.
+derivatives can guide learning \cite{milletari2016vnet}. The
+linear-denominator soft Dice 
+To describe spatial relationships, we need to distinguish a voxel's
+position in the stored
+index differences is one. Boundary bands and edge comparisons use this
+grid neighbourhood.
+$Q=\operatorname{diag}(1,2,1)\,\mathrm{mm}$ and $b=0$.
+The panels show the slice $v_3=1$.
+image when classifying a voxel. A convolutional model builds context
+through repeated loca
+U-Net builds increasingly coarse feature maps through an encoder and
+combines them with an
+configuration and retains its native supervised loss and deep supervision.
+Transformer encoders use self-attention to combine token features through
+input-dependent 
+Attention is restricted to local windows;
+alternating shifted partitions exchange informat
+cost depends additionally on feature-map dimensions, kernel reuse, token
+counts and decode
+The experiments therefore profile the
+configured models and objectives; their widths and o
+\cite{badreddine2022logic}. Individuals are represented by constants or
+variables, predica
+\cite{badreddine2023logltn}. If
+$\ell_\theta(\phi)=\log\mathcal G_\theta(\phi)$, complete 
+Geometric errors can enter the same framework. Any nonnegative violation
+$e_\theta(u)$ def
+The boundary bands studied here use explicit inner and outer domains,
+with balanced side r
+Kervadec \emph{et al.}\ formulate boundary supervision as a regional integral
+of predicted
+clDice instead uses mask and skeleton overlap to address connectivity
+in tubular structure
+concerning connection, non-nesting and relative volume
+compatibility of candidate anatomical proxies with the actual label maps
+experimental arms. Differences in datasets
+optimization needed for adaptation. Prompting specifies the target of
+an individual predic
+The Segment Anything Model (SAM) combines an image encoder, a prompt encoder and a mask de
+specified through text or exemplars
+are shared across cases; inference receives no case-specific localization
+from a held-out 
+Low-Rank Adaptation (LoRA) parameterizes the update to a selected weight matrix
+through tw
+The base matrix $W_0$ is frozen, $r$ is the rank and $\alpha$ controls
+the update scale.
+in the forward computation.
+Optimizing fewer parameters reduces gradient and optimizer-state storage.
+It still require

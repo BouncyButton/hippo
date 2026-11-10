@@ -1,0 +1,60 @@
+{
+  "checked_at": 1792750424.952157,
+  "job_id": "714363",
+  "successor_job_id": "714364",
+  "status": "running",
+  "collector": {
+    "pid": 10083,
+    "command": [
+      "/usr/bin/caffeinate",
+      "-i",
+      "/Users/filippofocaccia/Desktop/hippo/.venv/bin/python",
+      "-u",
+      "-m",
+      "scripts.cross_dataset_campaign.collect",
+      "--stage",
+      "/mnt/beegfsstudents/home/3160552/sam3_f013_s012_cluster_tail_20261022",
+      "--local-stage",
+      "/Users/filippofocaccia/Desktop/hippo/reports/sam3_geofwi_f013_s012_126_20261019/split_cluster_20261022/cluster_stage",
+      "--destination",
+      "/Users/filippofocaccia/Desktop/hippo/reports/sam3_geofwi_f013_s012_126_20261019/split_cluster_20261022/cluster_results"
+    ],
+    "started_at": 1792750344.258858,
+    "recovery_job": "714363",
+    "reason": "Restore existing collector after archive outage; remaining campaign resumed with no scientific changes"
+  },
+  "completed_run_cleanup": {
+    "GeoFWI3D_SAM3_f3s1_dice_bands_edge_sdf_depth_u25_v1": {
+      "status": "complete",
+      "deleted": [
+        {
+          "name": "checkpoint_latest.pt",
+          "bytes": 223187701,
+          "sha256": "00a0e7ba804421f4f7429760a7c65036fb761e79184c4a80e37848287f0c2c07"
+        }
+      ],
+      "durable_archive": "/Users/filippofocaccia/Desktop/hippo/reports/sam3_geofwi_f013_s012_126_20261019/split_cluster_20261022/cluster_results/runs/GeoFWI3D_SAM3_f3s1_dice_bands_edge_sdf_depth_u25_v1",
+      "released_file_bytes": 223187701,
+      "time": 1792750232.4359403
+    },
+    "GeoFWI3D_SAM3_f3s2_dice_u25_v1": {
+      "status": "complete",
+      "deleted": [
+        {
+          "name": "checkpoint_latest.pt",
+          "bytes": 223117109,
+          "sha256": "e6f6801f4f58b7e02dc007e5d3d92a96e04f3f1bdc749b7f30b58c0ff0cfe065"
+        }
+      ],
+      "durable_archive": "/Users/filippofocaccia/Desktop/hippo/reports/sam3_geofwi_f013_s012_126_20261019/split_cluster_20261022/cluster_results/runs/GeoFWI3D_SAM3_f3s2_dice_u25_v1",
+      "released_file_bytes": 223117109,
+      "time": 1792750235.1716056
+    }
+  },
+  "released_bytes": 446304810,
+  "submission_quota_free_gib": 50.55,
+  "scientific_changes": false,
+  "training_replayed_this_recovery": false,
+  "source_manifest_sha256": "404df5c678f327f6b4322b4d58c357392eaa9906d13e2b3be67308f73190c0ff",
+  "recovery": "Archive collector restored. A completed-run restart overwrote gpu_worker.json; original metadata restored from verified durable archive, attempted restart provenance preserved under remote revisions/, all metadata reverified, normal cleanup performed. Existing launcher and scientific bundle unchanged."
+}

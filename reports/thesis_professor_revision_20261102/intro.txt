@@ -1,0 +1,102 @@
+Three-dimensional semantic segmentation identifies structures in an image
+by assigning a class to every voxel, the three-dimensional counterpart
+of a pixel. A stack of medical image slices can thereby become a map of
+an organ; a geological image can become a map of a subsurface formation.
+These maps make it possible to measure the size of a structure and study
+its shape and relationship to its surroundings. Segmentation thus connects
+image acquisition with quantitative analysis.
+
+Traditionally, reference segmentations have been produced by delineating
+structures in the images. A segmentation mask stores these decisions as
+class labels on the image grid. In supervised learning, a neural network
+learns to reproduce such masks from paired images and annotations.
+Convolutional encoder--decoder models, notably U-Net and its volumetric
+extension, made this approach widely applicable to biomedical images
+\cite{ronneberger2015unet,cicek2016unet}. Transformer-based models offer
+another way to combine information across an image, while pretrained
+segmentation models allow an existing representation to be adapted to a
+new task. These developments provide several routes to automatic
+segmentation, but they do not remove two practical constraints:
+\begin{itemize}
+\item \textbf{Limited annotations.} Delineating a structure throughout a
+volume takes time and can require specialist knowledge. In medical
+imaging, uncertain boundaries further complicate consistent labelling
+\cite{wang2021annotation}.
+\item \textbf{Limited computation.} Training a volumetric model can be
+expensive. An approach that reaches useful accuracy sooner may be
+valuable even when a longer training run would eventually close the gap.
+\end{itemize}
+
+This thesis asks whether the spatial information already contained in a
+mask can make learning more effective under these restrictions. Consider
+a voxel just inside an annotated object: its label specifies membership,
+but its location also tells us that it lies close to the object's edge.
+Two neighbouring voxels reveal whether the annotation changes class at
+that location. The proposed approach gives these relationships an explicit
+role in the training objective, alongside the model's usual segmentation
+loss. It needs no additional manual annotations.
+
+Logic Tensor Networks (LTNs) provide a way to express such supervision
+\cite{badreddine2022logic}. They belong to neuro-symbolic artificial
+intelligence, which combines neural learning with explicitly stated
+knowledge. In an LTN, a statement such as ``these annotated inner voxels
+belong to the object'' receives a numerical degree of satisfaction from
+the model's predictions. Training can then increase that satisfaction.
+The logarithmic formulation, logLTN, represents truth values through
+their logarithms and allows the corresponding penalties to be evaluated
+in that space \cite{badreddine2023logltn}. Here, \emph{spatial constraints}
+means soft training objectives: they encourage the stated properties
+without guaranteeing them in every predicted segmentation.
+
+Four forms of supervision are studied. The first reinforces membership
+on either side of an annotated boundary. The second encourages
+neighbouring predictions to reproduce the class transitions in the mask.
+The third uses distance from each class boundary to weight membership
+errors. The fourth balances class supervision across spatial layers of
+the annotated region. The thesis connects each property to its logical
+statement and numerical loss, then tests the terms individually and in
+combination. This separates the formulation of a useful constraint from
+the empirical question of whether it improves learning.
+
+The investigation first evaluates these ideas on salt-body segmentation
+in GeoFWI3D, a collection of synthetic subsurface models and associated
+reflectivity volumes \cite{swaminadhan2026geofwi3d}. The foreground is the
+salt region and the background is the surrounding material. This task
+provides a nonmedical setting for testing spatial supervision before its
+application to anatomical images.
+
+The medical application is hippocampus segmentation in magnetic resonance
+imaging (MRI). The hippocampus is involved in memory and is affected early
+in Alzheimer's disease; identifying its boundaries supports measurements
+of anatomical volume and variation \cite{niaAlzheimerBrain}. Two datasets
+provide complementary tasks. The Medical Segmentation Decathlon (MSD)
+distinguishes anterior and posterior hippocampus from background
+\cite{simpson2019dataset}. It therefore requires both the outer contour
+and an internal division to be recovered. The Alzheimer's Disease
+Neuroimaging Initiative (ADNI) supplies images for a binary task,
+distinguishing hippocampus from background in separate left and right
+crops \cite{adniStudy}. Figure~\ref{fig:dataset-examples} illustrates the
+images and masks used in these three settings.
+
+The experiments address two learning situations. Models trained from
+scratch must learn from the available task annotations, whereas pretrained
+models start with representations learned from other images. The first
+comparison includes convolutional and transformer architectures to test
+whether the usefulness of spatial supervision depends on how a model
+represents image context. The second adapts Segment Anything Model~3
+(SAM3) to geological images and its medical specialization, MedSAM3, to
+hippocampus images \cite{carion2025sam3,liu2025medsam3}. It asks whether
+spatial supervision still helps when the initial representation is
+already available. Within each study, constrained and baseline training
+share the data and the stated computational or update budget.
+
+The contribution is a common LTN/logLTN formulation of four spatial
+objectives, together with an experimental assessment across these
+architectures, datasets and learning situations. An additional audit
+checks whether simplified geometric interpretations of the MSD
+annotation protocol agree with the stored masks. The results examine
+both the improvements and the settings in which an added term has little
+benefit or reduces accuracy. Figure~\ref{fig:thesis-overview} summarizes
+the design; the training schedules and replication details are given in
+Chapter~\ref{sec:methodology}.
+

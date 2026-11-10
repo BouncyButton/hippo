@@ -1,0 +1,43 @@
+{
+  "required_tasks": 126,
+  "required_conditions": 14,
+  "folds": [
+    0,
+    1,
+    3
+  ],
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "per_task_updates": 25,
+  "evaluation_records_per_task": 101,
+  "reduce_full_inventory_only": true,
+  "paired_control": "SAM3 baseline from same fold and seed",
+  "sd": "sample SD of three seed-averaged fold means",
+  "error_unit": "FN and FP per validation volume, then equal seed/fold means",
+  "tables": [
+    "tab:sam3-geo-results",
+    "tab:sam3-geo-errors",
+    "tab:sam3-geo-folds"
+  ],
+  "narrative_fields": [
+    "final salt Dice, paired change in percentage\npoints and consistency across the nine comparisons",
+    "baseline validation Dice",
+    "baseline support Dice",
+    "objective",
+    "validation Dice",
+    "signed mean change",
+    "number",
+    "interpretation of the magnitude, fold variation and any\nnegative or inconsistent effects; compare individual terms and\ncombinations without assuming an ordering",
+    "FN/FP changes for the selected\nobjective against its matched baseline, and whether the Dice change\naccompanies fewer misses, less foreground extension or a tradeoff",
+    "recorded training-loop time by execution site,\nwith median and range, and separately measured calibration, evaluation\nand peak-memory values where available; identify any unmeasured scope",
+    "paired baseline/constrained prediction panels,\nselected by a stated rule, illustrating the measured FN/FP pattern",
+    "cross-study interpretation of the verified paired effects,\nincluding any differences from the medical adaptation results",
+    "final archive audit: reconcile all 126 task IDs,\nverify available payload hashes and archive acknowledgements, check\n25-update records, frozen-parameter identities, matched initialization\nand sampling, and recompute 12,726 support/validation volume records;\nstate any unavailable payloads or limits of verification"
+  ],
+  "abstract": "Report final Dice and paired gain without naming auxiliary terms",
+  "claims": "Determine directions and interpretation from final evidence; do not assume improvement",
+  "final_cleanup": "Replace draft markers and pending-cell caveats only after verified final extraction"
+}

@@ -1,0 +1,774 @@
+--- chapter4_before
++++ chapter4_after
+@@ -1,35 +1,42 @@
+ \section{Datasets and Experimental Methodology}
+ \label{sec:methodology}
+ 
+-Each run trains and evaluates one model with a specified objective. A
+-constrained run is paired with a baseline using the same model recipe and
+-labelled training examples, called the support set. They also share the data
+-partition and the random settings, defined below. The medical four-model
+-studies match the number of floating-point operations (FLOPs) used during
+-optimization; one GFLOP is one billion such operations. The geological
+-four-model study caps training plus calibration. MedSAM3 and SAM3 instead
+-match adapter updates within their respective schedules. These task and
+-resource definitions delimit the comparisons that can be made.
++The experiments test whether spatial supervision helps models learn from
++small labelled datasets under limited training budgets. They cover two
++medical datasets and a geological application, using both models trained
++from scratch and pretrained models adapted to the task. Within each model,
++training with constraints is compared with a baseline using the same
++training configuration and examples. Comparisons between models also
++reflect their different configurations. This chapter describes the data,
++the training procedures and the measures used to assess the predictions.
+ 
+ \subsection{Design and Units of Comparison}
+ \label{sec:experimental-structure}
+ 
+-A fold identifies a partition into training and validation examples;
+-validation examples are held out from parameter fitting. A seed initializes
+-the pseudorandom generator controlling training randomness. Repeating seeds
+-within a fold measures sensitivity to initialization and data presentation;
+-changing folds also changes the support and evaluation images. These
+-repetitions provide evidence about consistency under the available data,
+-while sharing parts of the same experimental setting.
++A run trains and evaluates one model with a specified objective. Its
++labelled training examples form the \emph{support set}. A fold identifies
++a partition into training and validation examples, with validation held
++out from parameter fitting. A seed initializes the pseudorandom generator
++controlling training randomness. Repeating seeds within a fold tests
++sensitivity to initialization and data presentation; using several folds
++also tests different data partitions. The dataset descriptions below
++specify where support examples overlap between folds.
++
++Training from scratch is limited by floating-point operations (FLOPs),
++which measure arithmetic work; one GFLOP is one billion operations.
++Medical budgets cover optimization, with calibration---the preliminary
++measurement used to set constraint weights---recorded separately. The
++geological budget includes both. Adaptation instead fixes the number
++of updates to the pretrained model's adapters. These budgets support
++comparisons within each study and do not make all six studies equal in cost.
+ 
+ Table~\ref{tab:experimental-design} records the six studies, including two
+ geological and four medical comparisons. A condition is a particular model,
+ dataset and objective. Each condition has nine fold/seed cells, one run for
+-each combination of three folds and three seeds. A checkpoint is a saved
+-model state. Evaluation uses the final state allowed by the budget in the
+-capped experiments, the final 200-update MedSAM3 adapter and the final
+-25-update SAM3 adapter, without validation-selected checkpoint replacement
+-or early stopping.
++each combination of three folds and three seeds. Evaluation uses the
++final saved model state, or \emph{checkpoint},
++allowed by each training budget. Runs do not stop early or replace that
++state with a checkpoint chosen for its validation score.
+ 
+ Throughout the comparisons, \emph{Baseline} denotes the supervised training
+ objective configured for the particular model and dataset. \emph{Baseline}
+@@ -81,16 +88,13 @@
+ annotation budget in crops. The available identifiers do not establish
+ how those crops map to participants. ADNI retains subject identifiers
+ and allows subject grouping to be checked explicitly.
+-Table~\ref{tab:dataset-task-overview} summarizes the input types and label
+-vocabularies. Each dataset section below illustrates these with an image,
+-its reference mask and an overlay of the two. The figures show slices
+-through the native three-dimensional volumes, before model-specific
+-padding or cropping. Only MSD includes an internal anterior/posterior division.
+-The experiments evaluate segmentation, with no downstream diagnostic task.
+-Within the chosen viewing direction, each example shows the slice with
+-the largest labelled area. The colours are transparent in the overlays
+-so that the underlying image remains visible. Image and label panels use
+-the same view and preserve the proportions of the stored grid.
++Table~\ref{tab:dataset-task-overview} summarizes the images and labels.
++The examples in the following sections pair an image slice with its
++reference mask and a transparent overlay. They use the native grids,
++before model-specific preparation, and show the slice with the largest
++labelled area in the chosen viewing direction. Only MSD includes an
++internal anterior/posterior division. The experiments evaluate
++segmentation, with no downstream diagnostic task.
+ 
+ \begin{table}[htbp]
+ \centering
+@@ -152,135 +156,42 @@
+ \label{fig:geo-data-examples}
+ \end{figure}
+ 
+-For preprocessing, each reflectivity volume is divided by
+-the 99.5th percentile of its absolute intensities and clipped to
+-$[-1,1]$, using only image values. Velocity and relative geological time (RGT), a coordinate describing
+-the ordering of geological layers, are used to build the annotation. Inspection showed that zero
+-relative geological time can also mark null artifacts, so the reference
+-requires agreement with the scene's recorded salt velocity. Write
+-$V_{P,i}(v)$ for the velocity at voxel $v$ and $V_{\mathrm{salt},i}$
+-for the recorded salt value. The latter is converted to the same
+-32-bit floating-point format, denoted float32, as the velocity volume:
+-\begin{equation}
+- y_i(v)=\mathbf{1}\{\mathrm{RGT}_i(v)=0\}
+-        \mathbf{1}\{V_{P,i}(v)=\operatorname{float32}(V_{\mathrm{salt},i})\}.
+-\label{eq:geo-reference-construction}
+-\end{equation}
+-The equality uses the stored simulation value. All physically valid
+-salt components are retained, and checks reject physical salt outside
+-the implicit mask. This correction matters for boundary supervision:
+-an artifact in the source field would otherwise be treated as a
+-geological interface.
+-
+-
+-The completed geological comparison evaluates nnU-Net, SwinUNETR,
+-UNETR and the compact 3D U-Net under the same fourteen-objective
+-inventory used in the medical studies. Folds 0, 1 and 2 each contain
+-19 labelled training scenes and 96 validation scenes on the native
+-$96^3$ grid. The support set is the fixed approximately 5\% subset
+-of the eligible training pool. Training and validation are disjoint
+-within each fold, and the three validation sets are pairwise disjoint.
+-The support sets contain 54 distinct scenes across their 57 entries.
+-Seeds 0, 1 and 2 are used in every condition, giving 504 cells.
+-All nine final-budget outcomes enter each condition mean.
+-
+-The final matrix combines 36 matched frozen baselines with 468
+-constrained results. 
+-
+-\subsubsection{Frozen Model Recipes and Spatial Geometry}
+-
+-The model recipes use one volume per batch and mixed numerical precision:
+-selected operations use the 16-bit bfloat16 format, while parameters remain
+-in float32. Automatic choice of operation precision is called autocast.
+-Computation uses NVIDIA's CUDA platform on graphics processing units (GPUs).
+-nnU-Net uses its native Dice-plus-cross-entropy objective and deep
+-supervision. SwinUNETR and the compact U-Net use Dice with background
+-included. Geological UNETR uses foreground Dice plus cross-entropy, squared
+-prediction terms in Dice, dropout 0.1 and learning rate $6\times10^{-4}$.
+-Dropout randomly suppresses a fraction of intermediate activations during
+-training; the learning rate controls the size of parameter updates.
+-
+-In preliminary experiments, the initial UNETR recipe consistently struggled
+-to achieve satisfactory validation performance across the seeds tested
+-within the fixed FLOP budget. Two modifications were introduced during
+-development to improve performance on unseen GeoFWI3D scenes: horizontal
+-data augmentation, which creates transformed presentations of training
+-examples, and exclusion of the observation frame from the spatial
+-constraints. Both address properties of this geological task and were
+-retained in its final UNETR training recipe.
+-
+-The augmentation policy selects among eight transformations in the
+-horizontal (XY) plane: rotations of $0^\circ$, $90^\circ$, $180^\circ$
+-or $270^\circ$, each with or without a reflection. Each transformation
+-is applied jointly to the image and its reference mask, preserving the
+-depth (Z) axis and their alignment. These operations rearrange voxels
+-without interpolation or intensity changes and are applied only during
+-training. The policy is shared by the UNETR baseline and all its
+-constrained objectives.
+-
+-The second modification excludes the outer two voxel layers from the
+-band and edge supports. A salt body can continue beyond the observed
+-cube, whereas zero-padded erosion can treat the cube face as a region
+-boundary. Exclusion is intended to concentrate auxiliary supervision
+-on interfaces observed within the volume, reducing its dependence on
+-where the observation window ends. It changes the support of the
+-constraints while preserving the full input, prediction grid and
+-baseline segmentation loss. Its development comparison is reported in
+-Appendix~\ref{sec:geo-development}; the modification is a task-specific
+-loss-design choice rather than a requirement of the UNETR architecture.
+-
+-All four models use two-step, six-neighbour bands on binary salt
+-membership. The other three geological recipes retain zero-padded
+-morphology at the cube faces. All four use stabilized band denominators
+-and require both sides to be nonempty.
+-Appendix~\ref{sec:geo-boundaries} specifies the reductions. The final
+-comparison therefore evaluates complete model recipes, including these
+-choices, rather than varying architecture alone.
+-
+-Signed-distance supervision uses one salt field in voxel units, clipped
+-at eight voxels and normalized by eight. Depth supervision uses the
+-source-array geometry: its plane normal is source axis 0 projected
+-orthogonally to the salt mask's first principal axis. If the projected
+-norm is below 0.1, the least-parallel source axis is substituted, with
+-axis-index tie breaking. Depth strata are two voxels wide, the region
+-margin is eight voxels, and sparse strata use a threshold of 64 voxels.
+-These widths match those used for ADNI and, in voxel units, for MSD's
+-$1\,\mathrm{mm}$ grid. Their numerical agreement supports comparison of
+-the constraint settings without assuming equal physical scales across
+-applications.
+-UNETR's coordinate mapping is restored after the horizontal transformations before
+-constructing depth weights. This is an annotation-derived coordinate;
+-it is not a measurement of geological age or a guaranteed vertical
+-stratigraphic ordering.
+-
+-\subsubsection{Calibration, Scheduling and Compute Allowance}
+-
+-The geological study uses a larger computation allowance because its
+-inputs are larger. The reference is the original measured cost of 152
+-nnU-Net updates on the $96^3$ grid, approximately 182,178 GFLOPs. This
+-corresponds to eight passes through the 19 support scenes under the
+-reference profile. The final recipes retain that numerical ceiling and
+-charge both calibration and optimization within it. Evaluation and recipe
+-development remain outside the budget. Medical and geological results
+-therefore do not constitute an equal-compute comparison across datasets.
+-
+-Calibration measures gradients on all 19 support scenes. Its strengths
+-differ across architectures, and the nnU-Net and UNETR settings follow
+-exploratory comparisons. Auxiliary terms enter through fixed ramps, during
+-which their weights increase gradually from zero to their calibrated values.
+-Some signed-distance configurations start later. Each constrained run is
+-compared with the baseline of the same frozen model recipe. The final
+-admissible checkpoint supplies the score.
+-Appendix~\ref{sec:geological-budget-details} records the exact ceiling,
+-strengths and schedules, while Table~\ref{tab:cap-training-exposure} gives
+-the actual training exposure.
++The salt annotation uses two fields supplied by the simulator: velocity
++and relative geological time (RGT), a coordinate describing the ordering
++of geological layers. A voxel is labelled as salt when its RGT is zero
++and its velocity matches the scene's recorded salt value. Using RGT alone
++would also include null background artifacts. The preparation checks that
++every voxel with the recorded salt velocity lies in the zero-RGT region
++and retains all such components, including disconnected ones. This avoids
++treating the background artifacts as salt boundaries.
++% Verified label rule: scripts/geofwi3d_data.py, salt_mask.
++% Velocity equality uses np.float32(metadata.salt_vel), as in the source volume.
++
++Each reflectivity image is divided by the 99.5th percentile of its
++absolute intensities and clipped to $[-1,1]$. This normalization uses
++only image values and preserves the native $96^3$ grid.
++
++For training from scratch, folds 0, 1 and 2 each supply 19 labelled
++training scenes and 96 validation scenes. The support set is a fixed
++approximately 5\% subset of the eligible training pool. Training and
++validation are disjoint within each fold, and the three validation sets
++are pairwise disjoint. The support sets contain 54 distinct scenes across
++their 57 entries. All models and objectives use these same partitions
++and the seeds in Table~\ref{tab:experimental-design}. SAM3 uses the smaller
++support sets specified in Section~\ref{sec:sam3-methods}.
+ 
+ \subsection{MSD: Medical Segmentation Decathlon}
+ \label{sec:msd-data-methods}
+ 
+ 
+-The MSD collection contains 263 labelled MRI crops with background,
+-anterior and posterior hippocampus classes \cite{simpson2019dataset}.
++The downloaded MSD hippocampus dataset used here contains 260 labelled
++MRI crops with background, anterior and posterior hippocampus classes
++\cite{simpson2019dataset}. All 260 image--label pairs are retained in the
++local preparation and form the pool for the experiments and annotation
++audit.
++% Verified against Task04_Hippocampus.tar: descriptor and inventory both 260.
++% Archive matches MONAI's published MD5; all local image/label bytes match.
++% Audit: reports/thesis_chapter4_revision_20261103/msd_count_verification.json.
+ Figure~\ref{fig:msd-data-examples} shows one crop and its annotation.
+ Together, the blue and orange regions form the hippocampus; their shared
+ interface is the internal division that the model must recover in addition
+@@ -329,8 +240,8 @@
+ assumptions before imposing them during learning.
+ 
+ Two analyses address the proposed A/P transition rules. A planar analysis tests
+-whether one coronal separation reproduces the stored labels in all
+-260 crops. Coronal-profile and image-cue analyses examine 52 original
++whether one coronal separation reproduces the stored labels across the
++complete 260-crop collection. Coronal-profile and image-cue analyses examine 52 original
+ validation cases for a reliable way to locate the transition.
+ 
+ The image-cue investigation includes automated and visual searches but
+@@ -338,8 +249,7 @@
+ The audit can therefore establish whether a tested numerical proxy fits
+ the available labels. It cannot determine whether the original annotators
+ misapplied the anatomical protocol. Appendix~\ref{sec:annotation-results}
+-reports the findings within the limitations and explains their
+-consequences for constraint design.
++reports the findings and their consequences for constraint design.
+ 
+ 
+ \subsection{ADNI: Alzheimer's Disease Neuroimaging Initiative}
+@@ -350,7 +260,8 @@
+ (EADC)--ADNI harmonized-protocol resource \cite{harpReleasedLabels}. Image
+ and label pairs are identified through subject and image metadata. Because
+ the release notes a possible alignment issue in converted NIfTI images, the
+-builder uses the original MINC-format image arrays to export paired crops.
++preparation uses the original volumetric images, stored in Medical
++Imaging NetCDF (MINC) format, when exporting paired crops.
+ 
+ The preparation contains 135 subject identifiers and 135 image
+ identifiers, each contributing left and right hippocampal crops.
+@@ -381,61 +292,46 @@
+ 
+ Crops are centred on the reference-mask bounding box, with identical
+ indices applied to the image. Their evaluation therefore assumes prior
+-hippocampal localization. The capped experiments use three partitions,
+-identified as folds 0, 1 and 2. Each partition groups both sides of a
+-subject together, with an eligible training pool of 108 subjects
+-(216 crops) and 27 validation subjects (54 crops), with no within-fold
+-subject overlap. Five selected training subjects contribute both sides:
+-ten support crops per fold, shared across models and seeds 0, 1 and 4.
+-Images are
+-z-score normalized over nonzero intensities and padded to $64^3$,
+-without resizing. MedSAM3 uses the separate
+-two-crop support protocol in Section~\ref{sec:medsam-adni-methods}.
+-
+-The exported ADNI crops do not retain the original spacing and orientation
+-metadata, so spatial constraints are defined in voxel coordinates. They
+-retain the same geometric construction used for MSD: signed distances are
+-capped at eight voxels, and depth supervision uses layers two voxels thick
+-within the hippocampus and its eight-voxel surrounding region. The depth
+-plane passes through the hippocampus centre and contains its main axis; in
+-ADNI, an image-grid axis fixes its orientation. Because MSD has verified
+-isotropic spacing, meaning the same $1\,\mathrm{mm}$ spacing along all three
+-axes, its $2\,\mathrm{mm}$ layers and $8\,\mathrm{mm}$ surrounding region
+-match these widths numerically on the voxel grid. The two formulations are
+-therefore comparable in construction and grid-scale settings, without
+-assuming identical physical spacing or anatomical orientation across the
+-datasets.
+-
+-
+-
++hippocampal localization. For the capped experiments, images are
++z-score normalized over nonzero intensities and padded to $64^3$ without
++resizing. The exported crops do not retain the original spacing and
++orientation metadata, so their spatial constraints use voxel coordinates.
++
++Folds 0, 1 and 2 keep both sides of each subject together. Each has an
++eligible training pool of 108 subjects (216 crops) and 27 validation
++subjects (54 crops), with no within-fold subject overlap. Five training
++subjects contribute both sides, giving ten support crops per fold shared
++across models and seeds. MedSAM3 uses the separate two-crop support
++protocol in Section~\ref{sec:medsam-adni-methods}.
+ 
+ \subsection{Four-Model Comparisons under a FLOP Ceiling}
+ \label{sec:main-msd-methods}
+ 
+-\subsubsection{Models and Baseline Objectives}
+-
+-nnU-Net, SwinUNETR, UNETR and a compact three-dimensional U-Net start
+-from random initialization, use batch size one and predict the same
+-dataset-specific $64^3$ grid: three classes on MSD and two on ADNI. Their configurations instantiate the model
+-families introduced in Section~\ref{sec:segmentation-architectures}.
+-MSD parameter counts and shared optimizer settings are listed in
+-Table~\ref{tab:main-model-settings}.
+-
+-This selection compares a compact convolutional network, a configured
+-convolutional segmentation system and two ways of incorporating attention.
+-Keeping the same output grid and labelled cases makes their responses
+-to the added supervision comparable within the stated compute allowance.
+-Layer widths and other implementation settings are recorded in
++\subsubsection{Models and Training Configurations}
++
++The four models represent different approaches to volumetric
++segmentation: a compact convolutional U-Net, the configured convolutional
++system nnU-Net, UNETR with attention across image patches, and SwinUNETR
++with attention within shifted local windows. Chapter~\ref{sec:background}
++introduces these architectures. Testing all four examines whether the
++benefit of spatial supervision depends on the model receiving it.
++
++All start from random initialization and process one volume per update.
++Within each dataset, they use the same support examples and prediction
++grid: $64^3$ for MSD and ADNI, and $96^3$ for GeoFWI3D. MSD requires three
++output classes; ADNI and GeoFWI3D require two. Model sizes, optimizer
++settings and learning-rate schedules are recorded in
+ Appendix~\ref{sec:conventional-implementation}.
+ 
+-The native baseline objectives are retained
+-(Table~\ref{tab:capped-baseline-losses}). The Medical Open Network for
+-Artificial Intelligence (MONAI) Dice loss uses all dataset
+-softmax classes with a linear denominator. nnU-Net combines all-class
+-cross-entropy and negative mean foreground Dice, pooling region sums
+-over the batch. Both implementations use $10^{-5}$ numerator and
+-denominator smoothing. Negative Dice and one minus Dice differ by a
+-constant and produce the same derivative.
++Table~\ref{tab:capped-baseline-losses} summarizes the medical baseline
++objectives. SwinUNETR, UNETR and the compact U-Net use soft Dice over all
++classes, implemented with the Medical Open Network for Artificial
++Intelligence (MONAI) library. nnU-Net combines foreground Dice with
++cross-entropy over all classes. On GeoFWI3D, these choices are retained
++except for UNETR, which uses foreground Dice plus cross-entropy and
++squared prediction terms in the Dice denominator. Its dropout is 0.1
++and its initial learning rate is $6\times10^{-4}$. These differences
++are held fixed within each baseline/constrained comparison.
+ 
+ \begin{table}[htbp]
+ \centering
+@@ -458,32 +354,42 @@
+ \label{tab:capped-baseline-losses}
+ \end{table}
+ 
+-nnU-Net also retains its weighted losses at multiple output resolutions,
+-with nearest-neighbour resampling of labels. Auxiliary terms act on
+-the primary, full-resolution prediction. The paired comparison within
+-each model thus isolates a change to its configured training objective;
+-cross-model comparisons also reflect different baselines and optimizers.
+-
+-Each model follows a fixed learning-rate trajectory across its
+-objectives. If an extra loss reduces the number of updates affordable
+-under the cap, the schedule is not shortened to compensate. The
+-comparison therefore measures the accuracy reached with the complete
+-objective inside the allowance. Optimizer schedules and precision
+-settings are given in Appendix~\ref{sec:conventional-implementation}.
++nnU-Net applies its baseline losses at several output resolutions,
++resampling the reference labels to each grid. All auxiliary terms act
++only on the primary, full-resolution prediction. Each model also keeps
++the same learning-rate trajectory across its objectives. If an extra
++loss leaves room for fewer updates under the cap, that trajectory is
++not shortened to compensate.
++
++The final geological UNETR configuration includes two changes developed
++after its initial recipe struggled within the budget. First, training
++uses right-angle rotations and reflections in the horizontal plane,
++applied jointly to images and labels. These transformations preserve
++the depth axis and require no interpolation. Second, the outer two
++voxel layers are excluded from band and edge supervision. A salt body
++can continue beyond the observed cube, so its intersection with a cube
++face need not be an observed salt/background boundary. The full input,
++prediction grid and baseline loss are retained. Both choices apply to
++the UNETR baseline and its constrained variants; the other three
++geological models retain their original crop-face convention.
++Appendix~\ref{sec:geo-boundaries} specifies that convention, and
++Appendix~\ref{sec:geo-development} records the development comparison.
++Thus, cross-model differences concern complete training configurations,
++including these choices, rather than architecture alone.
++
++\subsubsection{Spatial Objectives}
+ 
+ Fourteen objectives cover the combinations in
+ Table~\ref{tab:constraint-combinations}; $\varnothing$ denotes no
+-selected term among $B,E,S$. Bands and edges supervise
+-the hippocampal union on MSD and the single foreground on ADNI; SDF
+-supervises each foreground class, and depth
+-uses the original reference classes. Preliminary MSD screening did not
+-establish a consistent incremental benefit from edge alone over the
+-supervised baseline, or from edge plus SDF over SDF alone. These two
++selected term among $B,E,S$. These abbreviations refer to boundary
++bands, edge consistency and signed distance; $D$ adds depth supervision.
++Preliminary MSD screening did not establish a consistent incremental
++benefit from edge alone over the supervised baseline, or from edge plus
++signed distance over signed distance alone. These two
+ configurations were therefore omitted from the subsequent
+-fourteen-objective replications across datasets. Their exclusion is a
+-scope decision based on the preliminary comparisons; the main replication
+-provides evidence for the retained configurations. It consequently
+-supports comparisons among those configurations, rather than a test of every possible combination and interaction.
++fourteen-objective replications across datasets. The study therefore
++compares the retained objectives; it does not test every possible
++combination or interaction.
+ % EXCLUSION EVIDENCE: reports/compute_matched_constraints_20pct_20261004/
+ % summary.json (U-Net, MSD fold 0 / seed 0): E 41.33 vs baseline 42.14;
+ % E+S 57.25 vs S 61.15, although E+S exceeds baseline. The longer pilot in
+@@ -520,54 +426,89 @@
+ \label{tab:constraint-combinations}
+ \end{table}
+ 
++Bands and edges supervise the combined anterior/posterior foreground
++on MSD, the hippocampus on ADNI and salt on GeoFWI3D. Signed-distance
++fields (SDFs) are constructed separately for each foreground class;
++depth supervision retains the original reference classes. All
++conventional models use two-step bands with six face-sharing neighbours.
++The class groups determine which interfaces receive supervision, while
++the geological UNETR exclusion changes where bands and edges apply.
++
++Distance fields are clipped at eight voxels and normalized by eight.
++Depth supervision balances class errors across layers two units thick
++within the foreground and an eight-unit surrounding region. On MSD,
++these units are millimetres; its verified isotropic spacing of
++$1\,\mathrm{mm}$ makes them numerically equal to voxel units. ADNI and
++GeoFWI3D use voxel units and orient the reference plane using the
++image grid rather than an anatomical direction. The plane passes
++through the foreground centre and contains its main axis, following
++Chapter~\ref{sec:spatial-constraints}. Matching these numerical widths
++does not establish equal physical distances across datasets.
++
++For GeoFWI3D, source axis 0 supplies the plane's reference direction;
++another grid axis is used if its projection is too small. UNETR's
++coordinate mapping is restored after augmentation before computing
++the depth weights. This annotation-derived coordinate is not a
++measurement of geological age or a guaranteed vertical ordering of
++layers. Numerical distance and boundary conventions are given in
++Appendix~\ref{sec:sdf-construction-details}.
++% Geo depth settings retained from the verified protocol: projection norm
++% below 0.1 selects the least-parallel source axis, with axis-index tie break;
++% sparse-stratum threshold 64 voxels. No inference of physical spacing.
++
+ \subsubsection{Calibration and Activation}
+ \label{sec:calibration-methods}
+ 
+-An auxiliary loss can dominate an update simply because its numerical
+-scale differs from the baseline. Calibration sets its coefficient by
+-comparing the size of their gradients on the labelled support cases.
+-This uses training annotations only and holds the measured network state
+-fixed. The coefficients are then retained during optimization.
+-
+-The medical studies calibrate after a short baseline prefix: nine updates
+-for nnU-Net and 50 for the other models. In a combined objective, terms
+-are calibrated sequentially against the baseline and preceding terms.
+-The order is bands, edges, signed distance and depth. Consequently, a
+-term's coefficient can change when it is used in a different combination;
+-these experiments compare complete calibrated objectives. A median
+-gradient target sets the typical strength, while an upper-percentile
+-bound limits unusually large contributions. The equations and numerical
+-settings are given in Appendix~\ref{sec:detailed-calibration}.
+-
+-Auxiliary terms enter gradually after the prefix. Signed distance either
+-shares that ramp or starts later, according to the fixed activation
+-policy in Table~\ref{tab:sdf-activation-policies}. This policy was developed
+-from earlier MSD validation experiments and retained for the reported
+-campaigns; it was not selected independently of those exploratory results.
+-Combinations containing both signed distance and depth use delayed
+-activation of the distance term.
++An auxiliary loss can dominate training simply because its numerical
++scale differs from the baseline. Calibration chooses its coefficient
++by comparing their gradients on the support examples, without changing
++the network during this measurement. The resulting coefficients remain
++fixed during training. All ten medical support crops, or all 19
++geological support scenes, contribute to calibration.
++
++The conventional models first train with the baseline alone for nine
++updates in nnU-Net or 50 in the other architectures. Selected terms are
++then calibrated in order: bands, edges, signed distance and depth.
++Each is compared with the baseline and any preceding terms, so its
++coefficient can change between combinations. Targets for the typical
++and unusually large gradient contributions control the strength of
++supervision. Their values differ by model and dataset; the geological
++nnU-Net and UNETR settings followed exploratory comparisons.
++Appendix~\ref{sec:detailed-calibration} gives the equations and settings.
++
++After calibration, auxiliary contributions increase gradually to full
++strength. Signed distance either enters with the other terms or starts
++later, following Table~\ref{tab:sdf-activation-policies}. Combinations
++containing both signed distance and depth use the later start. These
++policies were developed from earlier MSD validation experiments and
++retained for the reported campaigns. The comparisons therefore assess
++complete calibrated objectives, including their activation schedules.
+ 
+ \subsubsection{Resource Accounting and Evaluation}
+ 
+-The medical ceiling corresponds to the measured cost of 90 nnU-Net
+-updates, approximately 31,976 billion floating-point operations (GFLOPs).
+-Exploratory learning curves informed this short reference allowance.
+-With ten support crops and one crop per update, the reference represents
+-nine passes through the training subset. nnU-Net has the most expensive
+-update among the four implementations, so the same allowance lets models
+-with cheaper updates perform more optimization steps.
+-
+-Every medical model and objective receives that ceiling. The accounting
+-includes the forward pass, active training losses, backpropagation and
+-the optimizer update. A step is allowed only when its full cost fits in
+-the remaining budget. Reference-target construction, validation, data
+-loading and storage are excluded, and calibration is recorded separately.
+-This matches optimization work, not elapsed time or end-to-end computation.
+-Equal allowances also need not place the architectures equally close to
+-convergence.
+-Figure~\ref{fig:flop-budget-example} illustrates how update cost affects
+-training exposure and distinguishes the medical and geological
+-calibration accounting.
++A fixed computation allowance limits how much training each model can
++receive. The medical ceiling is approximately 31,976 GFLOPs, the
++measured cost of 90 nnU-Net updates. With ten support crops, this
++reference represents nine passes through the training subset.
++Exploratory learning curves informed this short allowance. Models
++with cheaper updates can take more steps within it.
++
++The geological study uses a larger allowance for its larger input
++volumes: approximately 182,178 GFLOPs, defined from the original cost
++of 152 nnU-Net updates, or eight passes through 19 support scenes.
++The final training configurations retain that ceiling. Medical
++calibration is recorded separately, whereas geological calibration
++consumes part of the allowance. The budgets therefore differ in both
++size and accounting scope across domains.
++
++Training costs include the forward pass, active losses, backpropagation
++and optimizer update. Another step is taken only if its full cost fits
++in the remaining budget. Reference-target construction, validation,
++data loading, storage and recipe development are outside these
++allowances. The comparison matches the specified arithmetic work,
++not elapsed time or end-to-end computation, and does not imply that
++different architectures are equally close to convergence.
++Figure~\ref{fig:flop-budget-example} illustrates these distinctions.
+ 
+ \begin{figure}[htbp]
+ \centering
+@@ -587,53 +528,47 @@
+ \end{figure}
+ \FloatBarrier
+ 
+-The reported checkpoint is the final state admitted by the budget, with
+-no early stopping or selection of a validation-best checkpoint. Selecting
+-the highest-mean objective after the experiments is a separate, descriptive
+-comparison. All 504 runs in each medical study enter the aggregation.
+-Appendix~\ref{sec:detailed-resource-accounting} gives the exact ceiling
+-and arithmetic conventions; Table~\ref{tab:cap-training-exposure} reports
+-how the resulting update counts translate into passes through the data.
+-The same numerical medical ceiling is used on MSD and ADNI, while their
+-different label vocabularies remain part of the interpretation.
++Each of the three conventional studies contributes all 504
++final-budget runs. Reporting the highest-mean objective afterwards
++is a descriptive comparison, separate from checkpoint selection.
++Appendix~\ref{sec:detailed-resource-accounting} gives the exact ceilings
++and counting conventions. Table~\ref{tab:cap-training-exposure} shows
++the resulting numbers of updates and passes through the support data.
+ 
+ \subsection{Adapting Pretrained Models}
+ 
+-The adaptation studies ask how much the same spatial supervision helps
+-when an image representation is already available. All three studies
+-freeze the SAM3 base weights and train only LoRA factors, giving
+-18,497,664 trainable adapter parameters in each study. The geological
+-study starts from fresh factors with a zero initial update; the medical
+-studies start from the released MedSAM3 adapter
+-\cite{carion2025sam3,liu2025medsam3}. Within each matched comparison, the
+-same base weights and initial adapter parameters are restored before
+-every baseline and constrained run. These runs also share the support
+-images and sampling schedule, so their comparison measures the effect
+-of changing the training objective from the same starting point.
+-
+-The pretrained baseline supervises several outputs. Classification and
+-bounding-box losses assess detected objects and their enclosing boxes; a
+-presence loss assesses whether the queried target occurs in the image. The
+-mask losses combine soft Dice with focal loss, a form of cross-entropy that
+-reduces the weight of already confident correct predictions. Spatial
+-penalties are added to that objective. Their coefficients are calibrated
+-from gradients on the support annotations. Each optimizer update uses two
+-adjacent-slice pairs, allowing edge supervision to compare predictions
+-across planes as well as within them. Reference supports are constructed in
+-three dimensions. Full-volume counts and sampling corrections ensure that
+-averaging over all possible sampled planes recovers the corresponding volume
+-loss. Normalizing by each sampled plane's own support count would give a
+-different weighting. Appendix~\ref{sec:sampled-pretrained-supervision} gives
+-these reductions.
+-
+-Inference uses image planes and fixed text queries. The model's confidence
+-in each mask location, its match to the text query and the target's presence
+-supply the foreground responses, which are converted to mutually exclusive
+-labels and reassembled into volumes. Reference masks are used to score these
+-predictions, never to provide localization prompts. Each study evaluates the
+-adapter at its final update, without early stopping or validation-based
+-checkpoint selection. Dice is averaged within a run, then across seeds
+-within each fold and equally across folds.
++The adaptation studies ask whether spatial supervision also helps
++when the model already has pretrained image representations. SAM3 and
++MedSAM3 process two-dimensional image planes, although the annotations
++and final evaluation concern three-dimensional volumes. During
++training, neighbouring planes are sampled together so that the edge
++term can compare predictions across slices as well as within them.
++At evaluation, slice predictions are reassembled into a volume.
++
++All three studies freeze the SAM3 base weights and update only the
++low-rank adaptation (LoRA) factors introduced in Chapter~\ref{sec:background},
++giving 18,497,664 trainable parameters. Geological adaptation starts
++with fresh factors that initially leave the base model unchanged;
++medical adaptation starts with the released MedSAM3 adapter
++\cite{carion2025sam3,liu2025medsam3}. Every matched baseline and
++constrained run restores the same base weights and initial factors,
++and uses the same support images and sampling schedule.
++
++The pretrained baseline supervises object classification, bounding
++boxes, target presence and segmentation masks. Its mask losses combine
++soft Dice with focal loss, a form of cross-entropy that gives less
++weight to already confident correct predictions. Spatial penalties
++are added to this objective and calibrated on the support annotations.
++Each update uses two adjacent-slice pairs. Constraint regions and
++normalization counts are defined on the full annotated volume, so
++sampling preserves the intended weighting across it; the corresponding
++reductions are given in Appendix~\ref{sec:sampled-pretrained-supervision}.
++
++Inference uses image planes and fixed text queries. The model combines
++its confidence in each mask location, its match to the query and the
++target's presence to form foreground responses. These responses are
++converted into mutually exclusive class labels. Reference masks are
++used to score the predictions, never to supply localization prompts.
+ 
+ \paragraph{SAM3 on GeoFWI3D.}\label{sec:sam3-methods}
+ Each fold uses five labelled support volumes, taken from the beginning
+@@ -751,18 +686,15 @@
+ \subsection{Evaluation Measures}
+ \label{sec:evaluation-methods}
+ 
+-Dice serves two distinct roles. During training, a differentiable soft
+-Dice loss contributes to the architecture-specific optimization
+-objective. During evaluation, hard Dice measures overlap between the
+-final discrete predictions and reference labels. Every Dice score in
+-the results figures and tables uses this second definition, including scores on the
+-training support set. Validation Dice uses held-out examples;
+-training-set Dice uses examples supplied during fitting. Neither score
+-contains focal, cross-entropy, box, presence or spatial-constraint loss
+-terms, and neither is the value of the Dice loss used during training.
+-
+-Voxelwise argmax defines the predicted label. For reference region
+-$Y_{i,c}$ and prediction $\widehat Y_{i,c}$, hard class Dice is
++Every reported Dice score measures overlap between a discrete
++prediction and its reference annotation. This is hard Dice, distinct
++from the differentiable soft Dice loss used during training.
++Validation scores use held-out examples; training scores use the
++support examples supplied during fitting.
++
++Each voxel receives the class with the highest predicted probability
++(argmax). For volume $i$ and class $c$, let $Y_{i,c}$ be the set of
++reference voxels and $\widehat Y_{i,c}$ the predicted set. Hard Dice is
+ \begin{equation}
+  D_{i,c}=\frac{2|Y_{i,c}\cap\widehat Y_{i,c}|}
+  {|Y_{i,c}|+|\widehat Y_{i,c}|}.
+@@ -772,10 +704,15 @@
+ The MSD volume score is the mean anterior/posterior Dice,
+ $D_i=(D_{i,A}+D_{i,P})/2$, and the ADNI volume score is hippocampus Dice. Geological evaluation
+ uses salt Dice.
+-Background is excluded from these primary metrics. Volumes receive
+-equal weight in a run mean. Section~\ref{sec:background-dice-results}
+-adds background and all-class Dice as complementary measures on
+-the same predictions, retaining this order of averaging.
++Background is excluded from these primary metrics.
++Section~\ref{sec:background-dice-results} also reports background and
++all-class Dice on the same predictions.
++
++To summarize a study, we first average Dice equally across validation
++volumes in a run, then across the three seeds within each fold, and
++finally across the three folds. The reported sample standard deviation
++describes variation between those three fold averages. Training Dice
++follows the same hierarchy using support volumes.
+ 
+ Let $\overline D_{m,j,f,s}$ denote the mean volume Dice in a run with
+ model $m$, objective $j$, fold $f$ and seed $s$. Subscript
+@@ -785,29 +722,30 @@
+  \overline D_{m,j,f,s}-\overline D_{m,\mathrm{base},f,s}\right).
+ \label{eq:paired-reported-gain}
+ \end{equation}
+-Dice is reported on a percentage scale and differences in percentage
+-points. Reported standard deviations are sample standard deviations across
+-the three seed-averaged fold means; paired-gain dispersions use the three
+-fold-mean differences. Positive-change counts use all nine matched
+-fold/seed cells. Each figure or table identifies its reduction explicitly.
+-These standard deviations are not confidence intervals over independent datasets: seeds share data,
++Dice is reported as a percentage and gains as percentage-point
++differences. Paired gains follow the same averaging hierarchy, with
++their standard deviation calculated across the three fold-mean
++differences. Positive-change counts refer to the nine individual
++matched runs. These standard deviations describe observed variation,
++not confidence intervals over independent datasets: seeds share data,
+ training pools overlap and configuration selection is exploratory.
+-Dispersion across cases is identified separately from dispersion
+-across fold/seed cells.
+-
+-A confusion matrix counts how often each reference class is assigned each
+-predicted class. The pretrained-model matrices use reference classes as rows
+-and predicted classes as columns. For MSD, four disjoint errors are counted:
+-background predicted as foreground, foreground predicted as background,
+-anterior predicted as posterior, and posterior predicted as anterior. Their
+-sum gives all incorrectly labelled voxels. Conventional-run error counts
+-pool the full validation grid before averaging runs. MedSAM3 tables average
+-errors per crop within each run and then weight folds equally. All counts
+-cover the complete prediction, including voxels outside the boundary bands.
+-SAM3 FN/FP are likewise averaged per held-out volume within a run, then over
+-seeds and folds; each run contains 96 validation volumes. Binary ADNI and
+-GeoFWI3D have no A/P swaps. The different error-count reductions are
+-labelled and are not compared as if they had the same denominator.
++Any dispersion across individual volumes is identified separately.
++
++Error counts complement Dice by distinguishing missed foreground
++(false negatives, FN) from extra foreground (false positives, FP).
++MSD also permits anterior-to-posterior and posterior-to-anterior swaps.
++These four disjoint error categories account for every incorrectly
++labelled voxel. They can be read from a confusion matrix, which records
++reference classes against predicted classes; the pretrained-model
++matrices use reference classes as rows. ADNI and GeoFWI3D are binary
++tasks and have no anterior/posterior swaps.
++
++All counts cover the full prediction grid, including errors outside
++the boundary bands. Conventional studies sum errors across validation
++volumes before averaging runs. MedSAM3 and SAM3 instead average errors
++per validation volume, then across seeds and folds. Their tables state
++these units because totals over a validation set cannot be compared
++directly with averages per volume.
+ 
+ \clearpage
+ 

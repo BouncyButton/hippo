@@ -1,0 +1,54 @@
+The experiments use multiclass argmax before evaluating the labelled
+regions.
+later family
+subscripts abbreviate these inputs when they are fixed by the context.
+Let $F$ be a nonempty subset of the class vocabulary with a nonempty
+complement.
+The annotation determines both the membership
+target and any spatial supports, distances o
+For example, erosion selects reference voxels before the band loss is
+evaluated. Backpropa
+(d) Weights assigned using depth strata within a surrounding
+region.
+The reductions below retain the conventions of the principal
+implementation, including the
+For a fixed class group $F$, write $M=M_{i,F}$, $B_i^s=B_{i,F}^s$,
+$q_i(v)=q_{\theta,i,F}(
+Repeating each operation twice gives
+The corresponding logical statements require positive membership on
+the inner support and 
+If no case meets that condition, it returns zero connected
+to the prediction graph.
+The local calculation is binary cross-entropy, evaluated stably from
+the grouped logits.
+for $n_i^E=|\mathcal E_i^B|>0$.
+zero requires $\delta_i$ to be constant within each connected component
+of the selected pa
+The sigmoid used to obtain membership probabilities attenuates the
+logit gradient near sat
+The grounding
+$\mathcal G_\theta(\mathsf{Geom}_c(i,v))=\exp(-e_{i,c}(v))$
+topology.
+
+\subsection{Depth-Weighted
+region around the hippocampus into strata and controls their relative
+contributions.
+(a) The reference plane contains the long axis $\ell$ and centroid
+$\mu$; depth changes al
+Let $\mu_i$ be the foreground centroid in physical
+right--anterior--superior coordinates a
+The normal defines a plane through the centroid containing the
+longitudinal direction, and
+The floor operation keeps the two sides of the plane separate.
+Assigning equal mass to every occupied stratum could give excessive
+influence to a very sp
+With $\mathsf{Correct}(i,v)$ grounded by
+it adds neither a focal factor nor a separate class weight, and it
+does not multiply the s
+Physical geometry is essential to this definition. The distance
+transform uses axis spacin
+For configuration $a$ with selected families $J_a$, training minimizes
+The supervised baseline retains its native convention, including
+nnU-Net's negative Dice t
+The experiments therefore treat coefficients, activation schedules
+and resource accounting

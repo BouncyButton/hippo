@@ -1,0 +1,272 @@
+PROFESSOR FEEDBACK REVISION — 2 NOVEMBER 2026
+
+Edited source: /Users/filippofocaccia/Desktop/hippo/Template_tesi/thesis-revision.tex
+Original source preserved as source_before.tex in this report directory.
+Review inputs: review1-luca_tesi_magistrale_draft.pdf; tesi_magistrale_draft_AT.pdf; the two accompanying email screenshots.
+
+EMAIL-LEVEL CHANGES
+- Rewrote the Introduction for a reader unfamiliar with the topic: problem, importance, limitations, intuitive approach, then the experimental settings.
+- Expanded acronyms on first substantive use and improved explanations of core image and learning terminology.
+- Reduced main-text subsection/subsubsection fragmentation from 30/28 to 24/8.
+- Moved 20 detailed tables and exact calibration/resource-accounting material to appendices. Numeric sequences in all relocated tables were checked against the original source and preserved.
+- Added four baseline-versus-constrained bar charts with correctly described fold-level standard deviations; complete objective matrices remain available in the appendix.
+- Added the requested Dice and three-dimensional morphology teaching illustrations.
+- Condensed error discussion and conclusions; interpretation remains in Results, with future research directions in the final chapter.
+- Revised the abstract and retained it inside a false-by-default LaTeX conditional. Andrea's suggestion about excluding it from the thesis was tentative: confirm the programme's submission rule. Changing thesisincludeabstractfalse to thesisincludeabstracttrue restores it in the PDF.
+
+EVIDENCE AND VERIFICATION
+- Revisions reorganize and explain the existing experimental evidence; they do not invent experiments or recompute the entire result archive.
+- Selection and comparison limitations necessary for interpreting the results remain explicit.
+- Missing qualitative prediction panels and surface measures remain an evidence limitation, not a visible drafting placeholder or an invented result.
+- All 163 labels are unique; every reference and citation resolves.
+- The saved source compiled with local latexmk/pdfLaTeX: 86 pages, with no compiler warnings or errors. The built-in compile_latex_document tool was unavailable and document-control discovery returned no connected sessions.
+- Inspected rendered contents, Introduction/dataset examples, both teaching illustrations, all four bar charts, Methods, Conclusions, and representative appendix tables. Corrected overlapping chart legends and the ADNI overview text box.
+- validation.json records numeric-preservation checks and the final source hash.
+
+ANNOTATION RESPONSES
+Numbers below refer to the extraction order in annotations.json. Page numbers refer to each reviewed PDF, not the revised document. Ink annotations were inspected visually; related handwriting is addressed as a cluster where separate strokes do not constitute independent requests.
+
+01. Luca, reviewed PDF page 1, Highlight
+Comment: missing: what is semantic segmentation? why is it useful, especially in the medical field?
+
+hint: prova a costruire questa frase con la struttura "ABT" (and, but, therefore). tipo: segmentation è utile per motivo1 AND motivo2, MA richiede tanti dati e potenza computazionale per essere efficace (cosa che non sempre si verifica in ambiti medici). THEREFORE consideriamo come integrare informazione aggiuntiva per rimediare a questi problemi.
+Resolution: Rewrote the abstract around the task, its value, limited annotations/computation, and the proposed response. The abstract is retained in source but excluded from the submission PDF by default.
+
+02. Luca, reviewed PDF page 1, Highlight
+Comment: cos'è LTN? contestualizzare accennando a neurosymbolic AI.
+Resolution: Expanded Logic Tensor Networks and introduced neuro-symbolic learning before logLTN in the abstract and Introduction.
+
+03. Luca, reviewed PDF page 1, Highlight
+Comment: perché segmentare l'ippocampo è particolarmente importante?
+Resolution: Explained the relevance of hippocampal delineation to anatomical measurement and Alzheimer's research.
+
+04. Luca, reviewed PDF page 1, Highlight
+Comment: probabilmente meglio seguire la "storia" di andrea (validiamo sperimentalmente su dati non medici e infine applichiamo su dati medici). meglio fare un double check insieme però
+Resolution: Organized the investigation from a general segmentation problem to geological validation and then the medical application. This adopts the suggested narrative without claiming that one dataset transfers weights to another.
+
+05. Luca, reviewed PDF page 1, Highlight
+Comment: non necessario in un abs
+Resolution: Removed fold/seed inventories from the abstract; replication remains in Methods.
+
+06. Luca, reviewed PDF page 1, Ink
+Resolution: Applied the abstract handwriting edits through the full abstract rewrite, removing operational detail.
+
+07. Luca, reviewed PDF page 1, Highlight
+Comment: missing: come funzionano i metodi, almeno intuitivamente?
+Resolution: Added intuitive descriptions of the spatial supervision and explained training from scratch versus adaptation of pretrained representations.
+
+08. Luca, reviewed PDF page 1, Ink
+Resolution: Applied the abstract handwriting edits through the full abstract rewrite, removing protocol clutter.
+
+09. Luca, reviewed PDF page 1, Highlight
+Comment: che significa?
+Resolution: Removed the unexplained annotation-audit claim from the abstract. The audit remains in the thesis with its assumptions and limits.
+
+10. Luca, reviewed PDF page 1, Ink
+Resolution: Applied the abstract handwriting edits through the full abstract rewrite, retaining findings at a readable level.
+
+11. Luca, reviewed PDF page 4, Ink
+Resolution: Moved the original image/mask examples for all three datasets to the Introduction, where readers first encounter the tasks.
+
+12. Luca, reviewed PDF page 4, Highlight
+Comment: volume?
+Resolution: Replaced vague spatial-extent wording with size, shape, and anatomical volume as appropriate.
+
+13. Luca, reviewed PDF page 4, Highlight
+Comment: stesso punto dell'abs: manca contestualizzazione (perché il task è importante, da quando e come è stato affrontato finora, dove è stato applicato)
+Resolution: Added segmentation context, manual masks, supervised learning, U-Net and volumetric U-Net, and the reason to study resource limitations.
+
+14. Luca, reviewed PDF page 4, Highlight
+Comment: qui stai definendo cos'è una mask? eviterei di usare "reference" (sembra che vuoi definire una estensione di una mask, ma non mi pare sia questo il caso?)
+Resolution: Defined a segmentation mask as class labels on the image grid before introducing reference annotations.
+
+15. Luca, reviewed PDF page 4, Highlight
+Comment: ottimo. renderei la distinzione ancora più chiara graficamente, anche tramite l'impiego di elenchi puntati e/o grassetto. cioè, argomentare quali sono le debolezze dei sistemi di semantic segmentation
+Resolution: Separated limited annotation and limited computation into two short, bold-led bullet points.
+
+16. Luca, reviewed PDF page 4, Ink
+Resolution: Addressed the Introduction handwriting cluster through the rewritten problem statement and simpler terminology.
+
+17. Luca, reviewed PDF page 4, Ink
+Resolution: Addressed the Introduction handwriting cluster through clearer links between masks, spatial information, and learning.
+
+18. Luca, reviewed PDF page 4, Highlight
+Comment: metterei logLTN dopo. prima spieghi la novelty di LTN, poi spieghi la novelty di logLTN.
+Resolution: Introduced LTN and its contribution before introducing the logarithmic logLTN formulation.
+
+19. Luca, reviewed PDF page 4, Ink
+Resolution: Addressed the Introduction handwriting cluster in the new contextual narrative; protocol details are deferred to Methods.
+
+20. Luca, reviewed PDF page 5, Ink
+Resolution: Removed implementation and replication detail from the Introduction and clarified the high-level study design.
+
+21. Luca, reviewed PDF page 5, Highlight
+Comment: questi dettagli non sono molto da intro
+Resolution: Moved fold/seed/update details out of the Introduction; Methods retains the actual protocols.
+
+22. Luca, reviewed PDF page 5, Highlight
+Comment: stai un po' ripetendo la stessa cosa spiegata prima
+Resolution: Replaced the repetitive contribution enumeration with one concise contribution paragraph.
+
+23. Luca, reviewed PDF page 5, Highlight
+Comment: questo penso andrebbe nelle limitations (verso le conclusions)
+Resolution: Kept the lack-of-convergence evidence limitation in Results, alongside interpretation of the budgeted comparisons, rather than in the Introduction. This also follows the instruction to discuss findings only once.
+
+24. Luca, reviewed PDF page 6, Ink
+Resolution: Revised the overview diagram to state two/three/two classes and clarify geological versus medical tasks and the two learning settings.
+
+25. Luca, reviewed PDF page 6, Highlight
+Comment: non so se convenga chiamarli "constraints" o se sia più corretto chiamarlo così
+Resolution: Defined spatial constraints as soft training objectives that encourage agreement, without guarantees on individual predictions.
+
+26. Luca, reviewed PDF page 8, Ink
+Resolution: Expanded the image-representation introduction and clarified the notation before presenting objectives.
+
+27. Luca, reviewed PDF page 8, Highlight
+Comment: not sure why we need this (the dimension is fixed, isn't it?)
+Resolution: Explained that native image dimensions can differ across volumes even when a training recipe transforms examples to a fixed output grid.
+
+28. Luca, reviewed PDF page 8, Highlight
+Comment: by the softmax operation, that is...
+Resolution: Named and defined softmax explicitly.
+
+29. Luca, reviewed PDF page 8, Highlight
+Comment: avoid this
+Resolution: Removed the premature slice-assembly sentence from the general probability notation; adaptation-specific conversion remains with that method.
+
+30. Luca, reviewed PDF page 8, Highlight
+Comment: userei \mathcal{L} per le loss, specificando gli input (tipo \mathcal{L}(y, \hat y; \theta, oppure \mathcal{L}(y; \theta))
+Resolution: Used calligraphic L for losses with explicit inputs, reserving ell for log-truth.
+
+31. Luca, reviewed PDF page 9, Highlight
+Comment: qua ci starebbe bene una figura che spiega il calcolo su 9 pixels
+Resolution: Added a nine-pixel Dice example: four reference pixels, four predicted pixels, three shared pixels, and Dice of 75 percent.
+
+32. Luca, reviewed PDF page 11, Highlight
+Comment: not sure if this is the right place to put this
+Resolution: Removed the boundary-band-specific example from the general LTN background and developed it in the constraint chapter.
+
+33. Luca, reviewed PDF page 11, Ink
+Resolution: Simplified the compound-grounding explanation in the general LTN background.
+
+34. Luca, reviewed PDF page 12, Ink
+Resolution: Clarified log-truth evaluation and removed redundant exponential/logarithm explanation.
+
+35. Luca, reviewed PDF page 16, Ink
+Resolution: Defined the black annotation-boundary line in the spatial-domain figure caption.
+
+36. Luca, reviewed PDF page 17, Ink
+Resolution: Addressed the cluster of handwritten band-formulation notes together: added a 3D erosion/dilation illustration, defined group and case shorthand and side counts, distinguished logical statements from their groundings, connected mean log-truth to the loss, and retained the exact stabilized denominators and empty-support rules. Individual ink strokes are not treated as separate algorithm changes.
+
+37. Luca, reviewed PDF page 17, Ink
+Resolution: Addressed the cluster of handwritten band-formulation notes together: added a 3D erosion/dilation illustration, defined group and case shorthand and side counts, distinguished logical statements from their groundings, connected mean log-truth to the loss, and retained the exact stabilized denominators and empty-support rules. Individual ink strokes are not treated as separate algorithm changes.
+
+38. Luca, reviewed PDF page 17, Ink
+Resolution: Addressed the cluster of handwritten band-formulation notes together: added a 3D erosion/dilation illustration, defined group and case shorthand and side counts, distinguished logical statements from their groundings, connected mean log-truth to the loss, and retained the exact stabilized denominators and empty-support rules. Individual ink strokes are not treated as separate algorithm changes.
+
+39. Luca, reviewed PDF page 17, Ink
+Resolution: Addressed the cluster of handwritten band-formulation notes together: added a 3D erosion/dilation illustration, defined group and case shorthand and side counts, distinguished logical statements from their groundings, connected mean log-truth to the loss, and retained the exact stabilized denominators and empty-support rules. Individual ink strokes are not treated as separate algorithm changes.
+
+40. Luca, reviewed PDF page 17, Ink
+Resolution: Addressed the cluster of handwritten band-formulation notes together: added a 3D erosion/dilation illustration, defined group and case shorthand and side counts, distinguished logical statements from their groundings, connected mean log-truth to the loss, and retained the exact stabilized denominators and empty-support rules. Individual ink strokes are not treated as separate algorithm changes.
+
+41. Luca, reviewed PDF page 17, Ink
+Resolution: Addressed the cluster of handwritten band-formulation notes together: added a 3D erosion/dilation illustration, defined group and case shorthand and side counts, distinguished logical statements from their groundings, connected mean log-truth to the loss, and retained the exact stabilized denominators and empty-support rules. Individual ink strokes are not treated as separate algorithm changes.
+
+42. Luca, reviewed PDF page 17, Ink
+Resolution: Addressed the cluster of handwritten band-formulation notes together: added a 3D erosion/dilation illustration, defined group and case shorthand and side counts, distinguished logical statements from their groundings, connected mean log-truth to the loss, and retained the exact stabilized denominators and empty-support rules. Individual ink strokes are not treated as separate algorithm changes.
+
+43. Luca, reviewed PDF page 17, Ink
+Resolution: Addressed the cluster of handwritten band-formulation notes together: added a 3D erosion/dilation illustration, defined group and case shorthand and side counts, distinguished logical statements from their groundings, connected mean log-truth to the loss, and retained the exact stabilized denominators and empty-support rules. Individual ink strokes are not treated as separate algorithm changes.
+
+44. Luca, reviewed PDF page 17, Ink
+Resolution: Addressed the cluster of handwritten band-formulation notes together: added a 3D erosion/dilation illustration, defined group and case shorthand and side counts, distinguished logical statements from their groundings, connected mean log-truth to the loss, and retained the exact stabilized denominators and empty-support rules. Individual ink strokes are not treated as separate algorithm changes.
+
+45. Luca, reviewed PDF page 17, Ink
+Resolution: Addressed the cluster of handwritten band-formulation notes together: added a 3D erosion/dilation illustration, defined group and case shorthand and side counts, distinguished logical statements from their groundings, connected mean log-truth to the loss, and retained the exact stabilized denominators and empty-support rules. Individual ink strokes are not treated as separate algorithm changes.
+
+46. Luca, reviewed PDF page 17, Ink
+Resolution: Addressed the cluster of handwritten band-formulation notes together: added a 3D erosion/dilation illustration, defined group and case shorthand and side counts, distinguished logical statements from their groundings, connected mean log-truth to the loss, and retained the exact stabilized denominators and empty-support rules. Individual ink strokes are not treated as separate algorithm changes.
+
+47. Luca, reviewed PDF page 17, Ink
+Resolution: Addressed the cluster of handwritten band-formulation notes together: added a 3D erosion/dilation illustration, defined group and case shorthand and side counts, distinguished logical statements from their groundings, connected mean log-truth to the loss, and retained the exact stabilized denominators and empty-support rules. Individual ink strokes are not treated as separate algorithm changes.
+
+48. Luca, reviewed PDF page 17, Ink
+Resolution: Addressed the cluster of handwritten band-formulation notes together: added a 3D erosion/dilation illustration, defined group and case shorthand and side counts, distinguished logical statements from their groundings, connected mean log-truth to the loss, and retained the exact stabilized denominators and empty-support rules. Individual ink strokes are not treated as separate algorithm changes.
+
+49. Luca, reviewed PDF page 17, Ink
+Resolution: Addressed the cluster of handwritten band-formulation notes together: added a 3D erosion/dilation illustration, defined group and case shorthand and side counts, distinguished logical statements from their groundings, connected mean log-truth to the loss, and retained the exact stabilized denominators and empty-support rules. Individual ink strokes are not treated as separate algorithm changes.
+
+50. Luca, reviewed PDF page 17, Ink
+Resolution: Addressed the cluster of handwritten band-formulation notes together: added a 3D erosion/dilation illustration, defined group and case shorthand and side counts, distinguished logical statements from their groundings, connected mean log-truth to the loss, and retained the exact stabilized denominators and empty-support rules. Individual ink strokes are not treated as separate algorithm changes.
+
+51. Luca, reviewed PDF page 17, Highlight
+Comment: non mi è chiaro quando questa entri nella loss riportata sotto
+Resolution: Made the statement-to-grounding-to-loss path explicit: Phi denotes a logical statement, its grounding is its numerical satisfaction, and its negative log-grounding contributes to the loss.
+
+52. Luca, reviewed PDF page 19, Highlight
+Comment: ossia: per ogni coppia di voxel, uno nella regione "IN" del bordo e della regione "OUT" del bordo, questi dovrebbero avere una classificazione opposta.
+Resolution: Explained the opposite-membership case across the boundary and also retained same-side pairs, which are present in the implemented edge loss. The annotation is not interpreted as authorization to change the algorithm.
+
+53. Andrea, reviewed PDF page 1, StrikeOut
+Resolution: Removed the struck abstract detail in the rewritten abstract; detailed protocols remain in Methods.
+
+54. Andrea, reviewed PDF page 1, StrikeOut
+Resolution: Removed the struck abstract detail in the rewritten abstract; detailed protocols remain in Methods.
+
+55. Andrea, reviewed PDF page 1, Text
+Comment: Perché SAM3 e MedSAM3 hanno una menzione a parte, cosa cambia con gli altri?
+Resolution: Explained that SAM3 and MedSAM3 start from pretrained representations, unlike the four models trained from scratch.
+
+56. Andrea, reviewed PDF page 4, Highlight
+Comment: Qui parli di medical ma poi salti di colpo a salt-body. 
+
+Introdurrei tutto in modo più agnostico, poi dopo citerei i tre datasets.
+Resolution: Started with the general segmentation problem, then introduced geological and medical tasks in a consistent order.
+
+57. Andrea, reviewed PDF page 4, Highlight
+Comment: Qui c'è un grosso salto dai datasets a LTN. Anche qui, combina bene tutta la parte architetturale e poi i dataset (o vicersa), ma non mischiare le cose. Inoltre, cosa sono queste LTNs? Almeno un paio di frasi ad alto livello
+Resolution: Grouped the intuitive LTN explanation and spatial-supervision approach before introducing the datasets and experimental strands.
+
+58. Andrea, reviewed PDF page 8, Highlight
+Comment: Per me puoi omettere questi cappelletti introduttivi
+Resolution: Removed redundant chapter roadmaps where the following text already establishes the subject.
+
+59. Andrea, reviewed PDF page 8, Highlight
+Comment: Cosa è un case?
+Resolution: Defined a case as an image volume.
+
+60. Andrea, reviewed PDF page 8, Highlight
+Comment: Che cosa sono S, H, A e P?
+Resolution: Defined S, H, A, and P as salt, hippocampus, anterior hippocampus, and posterior hippocampus.
+
+61. Andrea, reviewed PDF page 8, Highlight
+Comment: Farei una piccola introduzione a come si rappreentano le immagini e quali sono i main task in questo dominio
+Resolution: Added accessible explanations of pixels, voxels, channels, and classification/detection/segmentation before the equations.
+
+62. Andrea, reviewed PDF page 10, Highlight
+Comment: Cosa è G?
+Resolution: Defined G as the grounding that gives a logical expression its numerical truth value.
+
+63. Andrea, reviewed PDF page 12, Highlight
+Comment: corsivo
+Resolution: Italicized et al. in prose.
+
+64. Andrea, reviewed PDF page 19, Highlight
+Resolution: Clarified that edge supervision reproduces reference transitions, including both agreement within a region and opposing membership across its boundary.
+
+65. Andrea, reviewed PDF page 25, Highlight
+Comment: Perché hai scelto numeri diversi tra gli study per i seed?
+Resolution: Explained pseudorandom streams, why studies can use different seed inventories, and why comparisons must remain matched within a study. Retained existing selection limitations rather than inventing a prespecified selection rule.
+
+66. Andrea, reviewed PDF page 29, Text
+Comment: In generale, mi sembra che manchi il perché hai deciso di testare più reti e cosa el differenzia
+Resolution: Explained the architectural comparison: convolutional models versus transformer context representations, with nnU-Net also contributing a configured training recipe.
+
+67. Andrea, reviewed PDF page 52, Highlight
+Comment: ???
+Resolution: Removed the visible drafting placeholder for absent SAM3 prediction panels. The Results scope explicitly acknowledges unavailable paired prediction panels and surface measures; no qualitative result was fabricated.
+
+68. Andrea, reviewed PDF page 70, Caret
+Comment: s
+Resolution: Renamed the heading Future Research Directions, avoiding the grammatically incorrect Future Works.

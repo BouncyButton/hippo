@@ -1,0 +1,422 @@
+\section{Results and Analysis}
+\label{sec:results}
+
+Spatial supervision improves the best observed mean Dice in every model
+and dataset studied, but its benefit depends on the objective and training
+setting. This chapter presents those principal comparisons and examines
+what the improvements mean. The complete results, including unsuccessful
+configurations and individual fold effects, are retained in
+Appendix~\ref{sec:extended-results}.
+
+Each figure compares a baseline with the objective that has the highest
+mean validation Dice in the same study. Selection uses these validation
+results, so the comparisons are descriptive rather than independent tests
+of an optimal method. Dice is reported in percent and gains in percentage
+points (pp); all gains use the corresponding matched baseline.
+
+\subsection{Spatial Supervision When Training from Scratch}
+\label{sec:geo-results}\label{sec:main-msd-results}\label{sec:adni-results}
+
+Figure~\ref{fig:scratch-key-results} brings the three datasets together.
+The consistent pattern is an improvement over each model's own baseline.
+The size of that improvement varies considerably, even among models
+trained on the same data.
+
+\begin{figure}[htbp]
+\centering\setstretch{1.05}
+\begin{tikzpicture}[x=1cm,y=-1cm,font=\footnotesize]
+\node[anchor=west,font=\bfseries\footnotesize] at (0,0.000) {(a) GeoFWI3D};
+\node[anchor=center,font=\scriptsize,text=thesisGray] at (14.35,0.000) {Gain (pp)};
+\draw[thesisGray!22,line width=.3pt] (3.050,0.380) -- (3.050,3.320);
+\node[font=\scriptsize,text=thesisGray] at (3.050,3.570) {0};
+\draw[thesisGray!22,line width=.3pt] (5.050,0.380) -- (5.050,3.320);
+\node[font=\scriptsize,text=thesisGray] at (5.050,3.570) {20};
+\draw[thesisGray!22,line width=.3pt] (7.050,0.380) -- (7.050,3.320);
+\node[font=\scriptsize,text=thesisGray] at (7.050,3.570) {40};
+\draw[thesisGray!22,line width=.3pt] (9.050,0.380) -- (9.050,3.320);
+\node[font=\scriptsize,text=thesisGray] at (9.050,3.570) {60};
+\draw[thesisGray!22,line width=.3pt] (11.050,0.380) -- (11.050,3.320);
+\node[font=\scriptsize,text=thesisGray] at (11.050,3.570) {80};
+\draw[thesisGray!22,line width=.3pt] (13.050,0.380) -- (13.050,3.320);
+\node[font=\scriptsize,text=thesisGray] at (13.050,3.570) {100};
+\node[anchor=east] at (2.85,0.770) {nnU-Net};
+\fill[thesisBlue!85] (3.05,0.545) rectangle (10.258,0.735);
+\draw[thesisInk,line width=.45pt] (10.113,0.640) -- (10.403,0.640);
+\draw[thesisInk,line width=.45pt] (10.113,0.575) -- (10.113,0.705);
+\draw[thesisInk,line width=.45pt] (10.403,0.575) -- (10.403,0.705);
+\fill[thesisOrange!85] (3.05,0.805) rectangle (10.872,0.995);
+\draw[thesisInk,line width=.45pt] (10.630,0.900) -- (11.114,0.900);
+\draw[thesisInk,line width=.45pt] (10.630,0.835) -- (10.630,0.965);
+\draw[thesisInk,line width=.45pt] (11.114,0.835) -- (11.114,0.965);
+\node at (14.35,0.770) {$+6.14$};
+\node[anchor=east] at (2.85,1.510) {SwinUNETR};
+\fill[thesisBlue!85] (3.05,1.285) rectangle (8.604,1.475);
+\draw[thesisInk,line width=.45pt] (8.547,1.380) -- (8.661,1.380);
+\draw[thesisInk,line width=.45pt] (8.547,1.315) -- (8.547,1.445);
+\draw[thesisInk,line width=.45pt] (8.661,1.315) -- (8.661,1.445);
+\fill[thesisOrange!85] (3.05,1.545) rectangle (8.811,1.735);
+\draw[thesisInk,line width=.45pt] (8.728,1.640) -- (8.894,1.640);
+\draw[thesisInk,line width=.45pt] (8.728,1.575) -- (8.728,1.705);
+\draw[thesisInk,line width=.45pt] (8.894,1.575) -- (8.894,1.705);
+\node at (14.35,1.510) {$+2.07$};
+\node[anchor=east] at (2.85,2.250) {UNETR};
+\fill[thesisBlue!85] (3.05,2.025) rectangle (8.541,2.215);
+\draw[thesisInk,line width=.45pt] (8.311,2.120) -- (8.771,2.120);
+\draw[thesisInk,line width=.45pt] (8.311,2.055) -- (8.311,2.185);
+\draw[thesisInk,line width=.45pt] (8.771,2.055) -- (8.771,2.185);
+\fill[thesisOrange!85] (3.05,2.285) rectangle (8.657,2.475);
+\draw[thesisInk,line width=.45pt] (8.438,2.380) -- (8.876,2.380);
+\draw[thesisInk,line width=.45pt] (8.438,2.315) -- (8.438,2.445);
+\draw[thesisInk,line width=.45pt] (8.876,2.315) -- (8.876,2.445);
+\node at (14.35,2.250) {$+1.16$};
+\node[anchor=east] at (2.85,2.990) {3D U-Net};
+\fill[thesisBlue!85] (3.05,2.765) rectangle (10.810,2.955);
+\draw[thesisInk,line width=.45pt] (10.551,2.860) -- (11.069,2.860);
+\draw[thesisInk,line width=.45pt] (10.551,2.795) -- (10.551,2.925);
+\draw[thesisInk,line width=.45pt] (11.069,2.795) -- (11.069,2.925);
+\fill[thesisOrange!85] (3.05,3.025) rectangle (11.123,3.215);
+\draw[thesisInk,line width=.45pt] (10.899,3.120) -- (11.347,3.120);
+\draw[thesisInk,line width=.45pt] (10.899,3.055) -- (10.899,3.185);
+\draw[thesisInk,line width=.45pt] (11.347,3.055) -- (11.347,3.185);
+\node at (14.35,2.990) {$+3.14$};
+\node[anchor=west,font=\bfseries\footnotesize] at (0,4.050) {(b) MSD};
+\node[anchor=center,font=\scriptsize,text=thesisGray] at (14.35,4.050) {Gain (pp)};
+\draw[thesisGray!22,line width=.3pt] (3.050,4.430) -- (3.050,7.370);
+\node[font=\scriptsize,text=thesisGray] at (3.050,7.620) {0};
+\draw[thesisGray!22,line width=.3pt] (5.050,4.430) -- (5.050,7.370);
+\node[font=\scriptsize,text=thesisGray] at (5.050,7.620) {20};
+\draw[thesisGray!22,line width=.3pt] (7.050,4.430) -- (7.050,7.370);
+\node[font=\scriptsize,text=thesisGray] at (7.050,7.620) {40};
+\draw[thesisGray!22,line width=.3pt] (9.050,4.430) -- (9.050,7.370);
+\node[font=\scriptsize,text=thesisGray] at (9.050,7.620) {60};
+\draw[thesisGray!22,line width=.3pt] (11.050,4.430) -- (11.050,7.370);
+\node[font=\scriptsize,text=thesisGray] at (11.050,7.620) {80};
+\draw[thesisGray!22,line width=.3pt] (13.050,4.430) -- (13.050,7.370);
+\node[font=\scriptsize,text=thesisGray] at (13.050,7.620) {100};
+\node[anchor=east] at (2.85,4.820) {nnU-Net};
+\fill[thesisBlue!85] (3.05,4.595) rectangle (9.302,4.785);
+\draw[thesisInk,line width=.45pt] (8.565,4.690) -- (10.039,4.690);
+\draw[thesisInk,line width=.45pt] (8.565,4.625) -- (8.565,4.755);
+\draw[thesisInk,line width=.45pt] (10.039,4.625) -- (10.039,4.755);
+\fill[thesisOrange!85] (3.05,4.855) rectangle (10.317,5.045);
+\draw[thesisInk,line width=.45pt] (10.062,4.950) -- (10.572,4.950);
+\draw[thesisInk,line width=.45pt] (10.062,4.885) -- (10.062,5.015);
+\draw[thesisInk,line width=.45pt] (10.572,4.885) -- (10.572,5.015);
+\node at (14.35,4.820) {$+10.15$};
+\node[anchor=east] at (2.85,5.560) {SwinUNETR};
+\fill[thesisBlue!85] (3.05,5.335) rectangle (8.454,5.525);
+\draw[thesisInk,line width=.45pt] (8.301,5.430) -- (8.607,5.430);
+\draw[thesisInk,line width=.45pt] (8.301,5.365) -- (8.301,5.495);
+\draw[thesisInk,line width=.45pt] (8.607,5.365) -- (8.607,5.495);
+\fill[thesisOrange!85] (3.05,5.595) rectangle (9.650,5.785);
+\draw[thesisInk,line width=.45pt] (9.548,5.690) -- (9.752,5.690);
+\draw[thesisInk,line width=.45pt] (9.548,5.625) -- (9.548,5.755);
+\draw[thesisInk,line width=.45pt] (9.752,5.625) -- (9.752,5.755);
+\node at (14.35,5.560) {$+11.97$};
+\node[anchor=east] at (2.85,6.300) {UNETR};
+\fill[thesisBlue!85] (3.05,6.075) rectangle (8.521,6.265);
+\draw[thesisInk,line width=.45pt] (8.471,6.170) -- (8.571,6.170);
+\draw[thesisInk,line width=.45pt] (8.471,6.105) -- (8.471,6.235);
+\draw[thesisInk,line width=.45pt] (8.571,6.105) -- (8.571,6.235);
+\fill[thesisOrange!85] (3.05,6.335) rectangle (9.057,6.525);
+\draw[thesisInk,line width=.45pt] (9.024,6.430) -- (9.090,6.430);
+\draw[thesisInk,line width=.45pt] (9.024,6.365) -- (9.024,6.495);
+\draw[thesisInk,line width=.45pt] (9.090,6.365) -- (9.090,6.495);
+\node at (14.35,6.300) {$+5.35$};
+\node[anchor=east] at (2.85,7.040) {3D U-Net};
+\fill[thesisBlue!85] (3.05,6.815) rectangle (10.433,7.005);
+\draw[thesisInk,line width=.45pt] (10.325,6.910) -- (10.541,6.910);
+\draw[thesisInk,line width=.45pt] (10.325,6.845) -- (10.325,6.975);
+\draw[thesisInk,line width=.45pt] (10.541,6.845) -- (10.541,6.975);
+\fill[thesisOrange!85] (3.05,7.075) rectangle (11.050,7.265);
+\draw[thesisInk,line width=.45pt] (10.986,7.170) -- (11.114,7.170);
+\draw[thesisInk,line width=.45pt] (10.986,7.105) -- (10.986,7.235);
+\draw[thesisInk,line width=.45pt] (11.114,7.105) -- (11.114,7.235);
+\node at (14.35,7.040) {$+6.17$};
+\node[anchor=west,font=\bfseries\footnotesize] at (0,8.100) {(c) ADNI};
+\node[anchor=center,font=\scriptsize,text=thesisGray] at (14.35,8.100) {Gain (pp)};
+\draw[thesisGray!22,line width=.3pt] (3.050,8.480) -- (3.050,11.420);
+\node[font=\scriptsize,text=thesisGray] at (3.050,11.670) {0};
+\draw[thesisGray!22,line width=.3pt] (5.050,8.480) -- (5.050,11.420);
+\node[font=\scriptsize,text=thesisGray] at (5.050,11.670) {20};
+\draw[thesisGray!22,line width=.3pt] (7.050,8.480) -- (7.050,11.420);
+\node[font=\scriptsize,text=thesisGray] at (7.050,11.670) {40};
+\draw[thesisGray!22,line width=.3pt] (9.050,8.480) -- (9.050,11.420);
+\node[font=\scriptsize,text=thesisGray] at (9.050,11.670) {60};
+\draw[thesisGray!22,line width=.3pt] (11.050,8.480) -- (11.050,11.420);
+\node[font=\scriptsize,text=thesisGray] at (11.050,11.670) {80};
+\draw[thesisGray!22,line width=.3pt] (13.050,8.480) -- (13.050,11.420);
+\node[font=\scriptsize,text=thesisGray] at (13.050,11.670) {100};
+\node[anchor=east] at (2.85,8.870) {nnU-Net};
+\fill[thesisBlue!85] (3.05,8.645) rectangle (10.616,8.835);
+\draw[thesisInk,line width=.45pt] (10.467,8.740) -- (10.765,8.740);
+\draw[thesisInk,line width=.45pt] (10.467,8.675) -- (10.467,8.805);
+\draw[thesisInk,line width=.45pt] (10.765,8.675) -- (10.765,8.805);
+\fill[thesisOrange!85] (3.05,8.905) rectangle (10.719,9.095);
+\draw[thesisInk,line width=.45pt] (10.575,9.000) -- (10.863,9.000);
+\draw[thesisInk,line width=.45pt] (10.575,8.935) -- (10.575,9.065);
+\draw[thesisInk,line width=.45pt] (10.863,8.935) -- (10.863,9.065);
+\node at (14.35,8.870) {$+1.03$};
+\node[anchor=east] at (2.85,9.610) {SwinUNETR};
+\fill[thesisBlue!85] (3.05,9.385) rectangle (9.922,9.575);
+\draw[thesisInk,line width=.45pt] (9.636,9.480) -- (10.208,9.480);
+\draw[thesisInk,line width=.45pt] (9.636,9.415) -- (9.636,9.545);
+\draw[thesisInk,line width=.45pt] (10.208,9.415) -- (10.208,9.545);
+\fill[thesisOrange!85] (3.05,9.645) rectangle (10.353,9.835);
+\draw[thesisInk,line width=.45pt] (10.126,9.740) -- (10.580,9.740);
+\draw[thesisInk,line width=.45pt] (10.126,9.675) -- (10.126,9.805);
+\draw[thesisInk,line width=.45pt] (10.580,9.675) -- (10.580,9.805);
+\node at (14.35,9.610) {$+4.31$};
+\node[anchor=east] at (2.85,10.350) {UNETR};
+\fill[thesisBlue!85] (3.05,10.125) rectangle (8.677,10.315);
+\draw[thesisInk,line width=.45pt] (8.436,10.220) -- (8.918,10.220);
+\draw[thesisInk,line width=.45pt] (8.436,10.155) -- (8.436,10.285);
+\draw[thesisInk,line width=.45pt] (8.918,10.155) -- (8.918,10.285);
+\fill[thesisOrange!85] (3.05,10.385) rectangle (9.096,10.575);
+\draw[thesisInk,line width=.45pt] (8.953,10.480) -- (9.239,10.480);
+\draw[thesisInk,line width=.45pt] (8.953,10.415) -- (8.953,10.545);
+\draw[thesisInk,line width=.45pt] (9.239,10.415) -- (9.239,10.545);
+\node at (14.35,10.350) {$+4.20$};
+\node[anchor=east] at (2.85,11.090) {3D U-Net};
+\fill[thesisBlue!85] (3.05,10.865) rectangle (10.014,11.055);
+\draw[thesisInk,line width=.45pt] (9.701,10.960) -- (10.327,10.960);
+\draw[thesisInk,line width=.45pt] (9.701,10.895) -- (9.701,11.025);
+\draw[thesisInk,line width=.45pt] (10.327,10.895) -- (10.327,11.025);
+\fill[thesisOrange!85] (3.05,11.125) rectangle (10.568,11.315);
+\draw[thesisInk,line width=.45pt] (10.304,11.220) -- (10.832,11.220);
+\draw[thesisInk,line width=.45pt] (10.304,11.155) -- (10.304,11.285);
+\draw[thesisInk,line width=.45pt] (10.832,11.155) -- (10.832,11.285);
+\node at (14.35,11.090) {$+5.54$};
+\node[text=thesisGray] at (8.05,12.1) {Foreground Dice (\%)};
+\fill[thesisBlue!85] (2.1,12.57) rectangle (2.4,12.75);
+\node[anchor=west] at (2.55,12.66) {Baseline};
+\fill[thesisOrange!85] (6.1,12.57) rectangle (6.4,12.75);
+\node[anchor=west] at (6.55,12.66) {With spatial supervision};
+\end{tikzpicture}
+\caption{Training from scratch: baseline and the highest-mean tested
+spatial objective for each model and dataset. Whiskers show the sample
+standard deviation of three seed-averaged fold means; they are not
+confidence intervals. Right-hand labels give paired gains from unrounded
+scores. Foreground Dice averages anterior and posterior on MSD and measures
+the single target class on the binary tasks. Panels share a score scale,
+but their task and budget differences preclude a direct dataset ranking.
+Complete objective scores and selected combinations are in
+Appendix~\ref{sec:complete-result-tables}.}
+\label{fig:scratch-key-results}
+\label{fig:geo-key-results}\label{fig:msd-key-results}\label{fig:adni-key-results}
+\end{figure}
+
+The medical comparisons illustrate why absolute accuracy and improvement
+must be distinguished. On MSD, SwinUNETR gains almost twelve points, yet
+the compact U-Net reaches the highest Dice, 80.00\%. A large gain can
+therefore reflect the correction of a weak short-budget baseline without
+producing the most accurate model. On ADNI, nnU-Net starts from the
+strongest baseline and retains the highest score, although its improvement
+is only about one point.
+
+The geological results extend the positive pattern beyond medical images.
+The compact U-Net again reaches the highest score, while nnU-Net benefits
+most from the added supervision. This is evidence that the approach can
+help in both domains under the tested procedures. It does not establish
+that one domain benefits more: the geological and medical comparisons
+use different budgets and task definitions.
+
+No single constraint combination explains all these gains. Boundary
+membership alone improves every model mean across the three datasets,
+but other additions can reduce accuracy. For example, signed-distance
+supervision alone lowers the MSD nnU-Net mean by about two points.
+The useful conclusion is therefore that annotation geometry can improve
+learning when its contribution is tested within the chosen training
+recipe. Adding more terms is not reliably better. The objective-level
+comparisons, near ties and negative outcomes are documented in
+Appendix~\ref{sec:secondary-objective-results}.
+
+\FloatBarrier
+\subsection{Spatial Supervision During Pretrained Adaptation}
+\label{sec:sam3-results}\label{sec:medsam-results}\label{sec:medsam-adni-results}
+
+The adaptation experiments ask whether the same idea remains useful when
+the model already has a pretrained representation. Figure~\ref{fig:adaptation-key-results}
+shows improvements in all three studies: SAM3 reaches 72.76\% Dice on
+GeoFWI3D, while MedSAM3 reaches 81.73\% on MSD and 80.85\% on ADNI.
+The largest improvement is on MSD, where the gain over the matched
+adapted baseline exceeds five percentage points.
+
+\begin{figure}[htbp]\centering
+\begin{tikzpicture}[x=1cm,y=0.035cm,font=\footnotesize]
+\node[anchor=west] at (0,112) {Validation Dice (\%)};
+\draw[thesisGray!25] (0,0) -- (14.6,0);\node[anchor=east] at (-.15,0) {0};
+\draw[thesisGray!25] (0,20) -- (14.6,20);\node[anchor=east] at (-.15,20) {20};
+\draw[thesisGray!25] (0,40) -- (14.6,40);\node[anchor=east] at (-.15,40) {40};
+\draw[thesisGray!25] (0,60) -- (14.6,60);\node[anchor=east] at (-.15,60) {60};
+\draw[thesisGray!25] (0,80) -- (14.6,80);\node[anchor=east] at (-.15,80) {80};
+\draw[thesisGray!25] (0,100) -- (14.6,100);\node[anchor=east] at (-.15,100) {100};
+\fill[thesisBlue!85] (0.890,0) rectangle (1.550,69.31);
+\draw[thesisInk] (1.220,65.310) -- (1.220,73.310);\draw[thesisInk] (1.100,73.310) -- (1.340,73.310);
+\fill[thesisOrange!85] (1.750,0) rectangle (2.410,72.76);
+\draw[thesisInk] (2.080,70.790) -- (2.080,74.730);\draw[thesisInk] (1.960,74.730) -- (2.200,74.730);
+\node[font=\scriptsize] at (1.650,80.730) {$+3.45$ pp};
+\node[align=center,anchor=north,text width=3.2cm] at (1.650,-4) {SAM3 / GeoFWI3D\\$+B+E+D$};
+\fill[thesisBlue!85] (5.223,0) rectangle (5.883,76.34);
+\draw[thesisInk] (5.553,74.700) -- (5.553,77.980);\draw[thesisInk] (5.433,77.980) -- (5.673,77.980);
+\fill[thesisOrange!85] (6.083,0) rectangle (6.743,81.73);
+\draw[thesisInk] (6.413,80.300) -- (6.413,83.160);\draw[thesisInk] (6.293,83.160) -- (6.533,83.160);
+\node[font=\scriptsize] at (5.983,89.160) {$+5.38$ pp};
+\node[align=center,anchor=north,text width=3.2cm] at (5.983,-4) {MedSAM3 / MSD\\$+B+E+S+D$};
+\fill[thesisBlue!85] (9.557,0) rectangle (10.217,77.32);
+\draw[thesisInk] (9.887,75.370) -- (9.887,79.270);\draw[thesisInk] (9.767,79.270) -- (10.007,79.270);
+\fill[thesisOrange!85] (10.417,0) rectangle (11.077,80.85);
+\draw[thesisInk] (10.747,78.800) -- (10.747,82.900);\draw[thesisInk] (10.627,82.900) -- (10.867,82.900);
+\node[font=\scriptsize] at (10.317,88.900) {$+3.53$ pp};
+\node[align=center,anchor=north,text width=3.2cm] at (10.317,-4) {MedSAM3 / ADNI\\$+E+S+D$};
+\fill[thesisBlue!85] (2,-47) rectangle (2.3,-43);\node[anchor=west] at (2.45,-45) {Baseline};
+\fill[thesisOrange!85] (6,-47) rectangle (6.3,-43);\node[anchor=west] at (6.45,-45) {With spatial supervision};
+\end{tikzpicture}
+\caption{Pretrained adaptation:
+baseline and the highest-mean tested objective, with fold-level standard
+deviations. The MSD baseline is matched to the execution batch of the
+all-term variant. $B,E,S,D$ denote bands, edges, signed distance and depth
+supervision. The studies use different support sizes and update budgets;
+the figure compares each model with its own baseline. Full results are in
+Appendix~\ref{sec:complete-result-tables}.}
+\label{fig:adaptation-key-results}
+\end{figure}
+
+Spatial supervision consequently remains useful beyond learning from
+scratch. The improvement is present in every fold mean for each selected
+configuration, although the SAM3 gain varies more across support
+partitions. The medical gains are positive in every matched run; SAM3
+has one negative pair. These patterns support a benefit under the
+evaluated adaptation conditions, without implying that every new support
+set would produce the same change.
+
+The preferred objective again depends on the task. SAM3 benefits most
+from bands, edges and depth supervision; including signed distance lowers
+its mean. MedSAM3 on MSD reaches its highest mean with all four terms,
+whereas ADNI has closely ranked alternatives. The studies also differ in
+initialization, support size and update budget, so their scores cannot
+isolate the effect of medical pretraining or establish a model ranking at
+equal resources. For MSD, comparisons retain the control from each
+variant's execution batch; the complete matched results are in
+Table~\ref{tab:medsam-msd-noaug}.
+
+\FloatBarrier
+\subsection{What the Overlap Improvements Mean}
+\label{sec:error-analysis}\label{sec:capped-errors-resources}
+\label{sec:background-dice-results}
+
+Higher Dice does not mean that every kind of error becomes less frequent.
+Across the adaptation studies, the selected constraints recover more of
+the target structure but also label more surrounding voxels as foreground.
+On MSD, fewer anterior/posterior exchanges accompany this tradeoff.
+The models trained from scratch show a less uniform pattern: some mainly
+reduce missed foreground, others mainly reduce unwanted extension. These
+differences matter when deciding which errors an application can tolerate;
+the full counts are reported in Appendix~\ref{sec:complete-error-tables}.
+
+Including background in the Dice average provides a complementary check
+on the overlap gains. Figure~\ref{fig:metric-sensitivity-key-results}
+shows that the selected adaptation objectives improve both foreground
+and background Dice. The same holds for the selected conventional models.
+Background scores already lie close to their ceiling, so their changes
+are much smaller. Giving background equal class weight raises the
+absolute average while reducing the size of the improvement.
+
+\begin{figure}[htbp]\centering\setstretch{1.05}
+\begin{tikzpicture}[x=1cm,y=.70cm,font=\footnotesize]
+\node[anchor=west] at (0,6.9) {Dice gain over matched baseline (percentage points)};
+\draw[thesisGray!22] (0,0) -- (14.6,0);
+\node[anchor=east] at (-.12,0) {0};
+\draw[thesisGray!22] (0,1) -- (14.6,1);
+\node[anchor=east] at (-.12,1) {1};
+\draw[thesisGray!22] (0,2) -- (14.6,2);
+\node[anchor=east] at (-.12,2) {2};
+\draw[thesisGray!22] (0,3) -- (14.6,3);
+\node[anchor=east] at (-.12,3) {3};
+\draw[thesisGray!22] (0,4) -- (14.6,4);
+\node[anchor=east] at (-.12,4) {4};
+\draw[thesisGray!22] (0,5) -- (14.6,5);
+\node[anchor=east] at (-.12,5) {5};
+\draw[thesisGray!22] (0,6) -- (14.6,6);
+\node[anchor=east] at (-.12,6) {6};
+\fill[thesisOrange!85] (1.330,0) rectangle (1.970,3.449880);
+\node[anchor=south,font=\scriptsize] at (1.650,3.529880) {3.45};
+\fill[thesisGray!80] (2.180,0) rectangle (2.820,0.221744);
+\node[anchor=south,font=\scriptsize] at (2.500,0.301744) {0.22};
+\fill[thesisBlue!85] (3.030,0) rectangle (3.670,1.835812);
+\node[anchor=south,font=\scriptsize] at (3.350,1.915812) {1.84};
+\node[anchor=north,align=center,text width=3.7cm] at (2.500,-.15) {SAM3\\GeoFWI3D};
+\fill[thesisOrange!85] (5.980,0) rectangle (6.620,5.383887);
+\node[anchor=south,font=\scriptsize] at (6.300,5.463887) {5.38};
+\fill[thesisGray!80] (6.830,0) rectangle (7.470,0.150927);
+\node[anchor=south,font=\scriptsize] at (7.150,0.230927) {0.15};
+\fill[thesisBlue!85] (7.680,0) rectangle (8.320,3.639567);
+\node[anchor=south,font=\scriptsize] at (8.000,3.719567) {3.64};
+\node[anchor=north,align=center,text width=3.7cm] at (7.150,-.15) {MedSAM3\\MSD};
+\fill[thesisOrange!85] (10.630,0) rectangle (11.270,3.529483);
+\node[anchor=south,font=\scriptsize] at (10.950,3.609483) {3.53};
+\fill[thesisGray!80] (11.480,0) rectangle (12.120,0.092890);
+\node[anchor=south,font=\scriptsize] at (11.800,0.172890) {0.09};
+\fill[thesisBlue!85] (12.330,0) rectangle (12.970,1.811187);
+\node[anchor=south,font=\scriptsize] at (12.650,1.891187) {1.81};
+\node[anchor=north,align=center,text width=3.7cm] at (11.800,-.15) {MedSAM3\\ADNI};
+\fill[thesisOrange!85] (1.8,-2.5) rectangle (2.1,-2.25);
+\node[anchor=west] at (2.25,-2.375) {Foreground};
+\fill[thesisGray!80] (6.2,-2.5) rectangle (6.5,-2.25);
+\node[anchor=west] at (6.65,-2.375) {Background};
+\fill[thesisBlue!85] (10.6,-2.5) rectangle (10.9,-2.25);
+\node[anchor=west] at (11.049999999999999,-2.375) {All classes};
+\end{tikzpicture}
+\caption{The same adaptation
+predictions assessed in three ways. Bars show mean gains for the objectives
+in Figure~\ref{fig:adaptation-key-results}, calculated from the unrounded
+archive aggregates. Including the already high-scoring background reduces
+the gain in the class average, while preserving its positive direction.
+These are complementary measurements of the same runs. The exact
+aggregation, absolute scores and checks across all recoverable objectives
+are in Appendix~\ref{sec:metric-sensitivity-details}.}
+\label{fig:metric-sensitivity-key-results}
+\end{figure}
+
+The main conclusion survives this change of measure: across all recoverable
+comparisons, the sign of the mean effect and the highest-mean objective
+in each study are unchanged. A few small individual effects and secondary
+rankings differ. Appendix~\ref{sec:metric-sensitivity-details} gives the
+full checks and archive coverage. The earlier MSD MedSAM3 bands and
+bands-plus-edges comparisons retain complete foreground results, but lack
+recoverable background scores.
+
+These measurements describe agreement with the annotations. They do not
+establish where boundary errors occur or whether the improvement is
+useful downstream. Paired prediction panels and surface measurements
+would be needed to assess those questions; the existing dataset images
+illustrate the annotations rather than model performance.
+
+\FloatBarrier
+\subsection{Limits of the Findings}
+\label{sec:limitations}\label{sec:experimental-limitations}
+
+The results concern limited training budgets, prepared hippocampus crops
+and synthetic geological volumes. They establish benefits within those
+settings; persistence after substantially longer training and transfer
+to uncropped medical images or measured seismic data remain open.
+Small support sets and overlap between some support partitions also
+limit conclusions about sensitivity to the annotated examples available.
+
+The comparisons evaluate complete calibrated objectives. In particular,
+depth supervision adds a class loss as well as spatial weighting, so
+a matched unweighted control is needed to distinguish those contributions.
+Closely ranked combinations should likewise be treated as alternatives
+within the observed variation rather than evidence of a unique optimum.
+
+The MSD annotation audit gives a related caution about the knowledge
+encoded in a constraint. Simplified coronal-plane and disconnected-profile
+rules do not reproduce every annotated anterior/posterior transition.
+The thesis therefore supervises the stored class boundary rather than
+imposing either proxy universally. The detailed checks and their relation
+to the original annotation protocols are in
+Appendix~\ref{sec:annotation-results}; they do not establish that the
+original anatomical tracing was incorrect.
+
+\clearpage
+

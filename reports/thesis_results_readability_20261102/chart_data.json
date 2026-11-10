@@ -1,0 +1,215 @@
+{
+  "scratch": [
+    {
+      "label": "fig:geo-key-results",
+      "rows": [
+        [
+          "nnU-Net",
+          "B+E+S+D",
+          72.08,
+          1.45,
+          78.22,
+          2.42,
+          6.14
+        ],
+        [
+          "SwinUNETR",
+          "B+E+S+D",
+          55.54,
+          0.57,
+          57.61,
+          0.83,
+          2.07
+        ],
+        [
+          "UNETR",
+          "B+E",
+          54.91,
+          2.3,
+          56.07,
+          2.19,
+          1.16
+        ],
+        [
+          "3D U-Net",
+          "B+E+S+D",
+          77.6,
+          2.59,
+          80.73,
+          2.24,
+          3.14
+        ]
+      ]
+    },
+    {
+      "label": "fig:msd-key-results",
+      "rows": [
+        [
+          "nnU-Net",
+          "B+S+D",
+          62.52,
+          7.37,
+          72.67,
+          2.55,
+          10.15
+        ],
+        [
+          "SwinUNETR",
+          "B+E+S+D",
+          54.04,
+          1.53,
+          66.0,
+          1.02,
+          11.97
+        ],
+        [
+          "UNETR",
+          "B+E+S",
+          54.71,
+          0.5,
+          60.07,
+          0.33,
+          5.35
+        ],
+        [
+          "3D U-Net",
+          "B+E+D",
+          73.83,
+          1.08,
+          80.0,
+          0.64,
+          6.17
+        ]
+      ]
+    },
+    {
+      "label": "fig:adni-key-results",
+      "rows": [
+        [
+          "nnU-Net",
+          "B+S+D",
+          75.66,
+          1.49,
+          76.69,
+          1.44,
+          1.03
+        ],
+        [
+          "SwinUNETR",
+          "B+E+D",
+          68.72,
+          2.86,
+          73.03,
+          2.27,
+          4.31
+        ],
+        [
+          "UNETR",
+          "B+E+S+D",
+          56.27,
+          2.41,
+          60.46,
+          1.43,
+          4.2
+        ],
+        [
+          "3D U-Net",
+          "B+E+D",
+          69.64,
+          3.13,
+          75.18,
+          2.64,
+          5.54
+        ]
+      ]
+    }
+  ],
+  "adaptation": {
+    "label": "fig:adaptation-key-results",
+    "rows": [
+      [
+        "SAM3 / GeoFWI3D",
+        "B+E+D",
+        69.31,
+        4.0,
+        72.76,
+        1.97,
+        3.45
+      ],
+      [
+        "MedSAM3 / MSD",
+        "B+E+S+D",
+        76.34,
+        1.64,
+        81.73,
+        1.43,
+        5.38
+      ],
+      [
+        "MedSAM3 / ADNI",
+        "E+S+D",
+        77.32,
+        1.95,
+        80.85,
+        2.05,
+        3.53
+      ]
+    ]
+  },
+  "metric_sensitivity": [
+    {
+      "study": "SAM3 / GeoFWI3D",
+      "baseline": {
+        "foreground_dice": 69.31390273396318,
+        "background_dice": 97.61542048381256,
+        "dice_including_background": 83.46466160888785
+      },
+      "selected": {
+        "foreground_dice": 72.76378276375158,
+        "background_dice": 97.83716412808232,
+        "dice_including_background": 85.30047344591695
+      },
+      "gains_pp": {
+        "foreground_dice": 3.449880029788399,
+        "background_dice": 0.22174364426976734,
+        "dice_including_background": 1.8358118370290888
+      }
+    },
+    {
+      "study": "MedSAM3 / MSD",
+      "baseline": {
+        "foreground_dice": 76.34302997344444,
+        "background_dice": 99.01443416472368,
+        "dice_including_background": 83.90016470387086
+      },
+      "selected": {
+        "foreground_dice": 81.72691687405444,
+        "background_dice": 99.16536150617907,
+        "dice_including_background": 87.53973175142931
+      },
+      "gains_pp": {
+        "foreground_dice": 5.383886900610002,
+        "background_dice": 0.15092734145537579,
+        "dice_including_background": 3.6395670475584563
+      }
+    },
+    {
+      "study": "MedSAM3 / ADNI",
+      "baseline": {
+        "foreground_dice": 77.32475125228365,
+        "background_dice": 99.09941338633207,
+        "dice_including_background": 88.21208231930787
+      },
+      "selected": {
+        "foreground_dice": 80.85423453587363,
+        "background_dice": 99.19230379616532,
+        "dice_including_background": 90.02326916601947
+      },
+      "gains_pp": {
+        "foreground_dice": 3.5294832835899737,
+        "background_dice": 0.09289040983323504,
+        "dice_including_background": 1.8111868467115988
+      }
+    }
+  ]
+}

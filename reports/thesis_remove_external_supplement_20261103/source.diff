@@ -1,0 +1,179 @@
+--- before.tex
++++ thesis-revision.tex
+@@ -1411,8 +1411,7 @@
+ native-grid illustrations show
+ annotation-derived supervision. Appendix~\ref{sec:dataset-constraint-examples}
+ provides edge examples, complete layer distributions and display
+-conventions. The full per-dataset panels are retained in the electronic
+-supplement.}
++conventions.}
+ \label{fig:dataset-constraint-3d}
+ \end{figure}
+ \FloatBarrier
+@@ -2286,8 +2285,7 @@
+ and dataset studied, but its benefit depends on the objective and training
+ setting. This chapter presents those principal comparisons and examines
+ what the improvements mean. Complete aggregate results, including unsuccessful configurations,
+-and a compact fold summary are retained in Appendix~\ref{sec:extended-results};
+-the electronic supplement preserves every run and fold record.
++and a compact fold summary are retained in Appendix~\ref{sec:extended-results}.
+ 
+ The aggregate charts compare a baseline with the objective that has the highest
+ mean validation Dice in the same study. Selection uses these validation
+@@ -2399,8 +2397,7 @@
+ The models trained from scratch show a less uniform pattern: some mainly
+ reduce missed foreground, others mainly reduce unwanted extension. These
+ differences matter when deciding which errors an application can tolerate;
+-error changes are summarized in Appendix~\ref{sec:complete-error-tables};
+-complete counts for every objective are in the electronic supplement.
++error changes are summarized in Appendix~\ref{sec:complete-error-tables}.
+ 
+ Including background in the Dice average provides a complementary check on
+ the overlap gains. All-class Dice gives equal weight to each class:
+@@ -2456,8 +2453,7 @@
+ MSD. Scores describe the whole volume, with anterior/posterior Dice
+ averaged on MSD, rather than the displayed slice. The constrained
+ objectives are $B+E+D$, $B+E+S+D$ and $E+S+D$, respectively.
+-Adverse cases are shown in Appendix~\ref{sec:qualitative-predictions};
+-largest-gain cases are retained in the electronic supplement.}
++Adverse cases are shown in Appendix~\ref{sec:qualitative-predictions}.}
+ \label{fig:qualitative-typical}
+ \end{figure}
+ 
+@@ -2748,9 +2744,7 @@
+ \label{sec:technical-details}
+ 
+ This appendix records the numerical conventions and training settings
+-needed to reproduce the methods. Extended derivations and execution
+-records are supplied in the electronic supplement described in
+-Appendix~\ref{sec:evidence-register}.
++needed to reproduce the methods.
+ 
+ \subsection{Stable Loss Evaluation and Derivatives}
+ \label{sec:band-implementation-details}
+@@ -3134,8 +3128,7 @@
+ The 25 updates present 100 slices and class queries. Final evaluation
+ covers five support and 96 held-out volumes. The original 126 runs
+ span full Colab A100-SXM4 GPUs and A100 PCIe MIG partitions;
+-hardware was not fully crossed with objectives. Timing records in the
+-supplement retain the platform distinction.
++hardware was not fully crossed with objectives.
+ 
+ \paragraph{MedSAM3 on MSD.}\label{sec:medsam-methods-details}
+ The released medical factors initialize 916 trainable adapter tensors.
+@@ -3188,9 +3181,7 @@
+ exploded three-dimensional views. Bars show voxel share; points show
+ total normalized loss weight. Layers with at least 64 region voxels
+ receive equal total weight. Sparser layers receive proportionally less;
+-within a layer, its weight is divided equally among its voxels. Full
+-panels, coordinate maps, input identities and display settings are
+-preserved in the supplement.
++within a layer, its weight is divided equally among its voxels.
+ 
+ \begin{figure}[p]
+ \centering
+@@ -3213,8 +3204,6 @@
+ 
+ These tables retain the complete objective comparisons and the checks
+ needed to assess the main results. Interpretation is given in Chapter~5.
+-Run-level records, full error counts and fold decompositions are in the
+-electronic supplement (Appendix~\ref{sec:evidence-register}).
+ 
+ \subsection{Complete Aggregate Dice Comparisons}
+ \label{sec:complete-result-tables}\label{sec:secondary-objective-results}
+@@ -3435,7 +3424,7 @@
+ for the configurations highlighted in Results. Each fold gain averages
+ three paired seed differences. Shared data within folds and overlap
+ between data partitions mean that the nine cells are not nine independent
+-test datasets. The full objective-by-fold records remain in the supplement.
++test datasets.
+ 
+ \begin{table}[htbp]
+ \centering\footnotesize\setstretch{1.05}
+@@ -3484,8 +3473,7 @@
+ For each record type, seeds and folds are averaged before calculating
+ the percentage change from its matched baseline. These percentages are
+ changes in error counts, not changes in Dice or absolute comparisons
+-between datasets. All objectives' counts and fold dispersion are in
+-\path{errors/} in the supplement.
++between datasets.
+ 
+ \begin{table}[htbp]
+ \centering\footnotesize\setstretch{1.05}
+@@ -3537,8 +3525,7 @@
+ The highest-mean objective is unchanged in all 15 model/dataset studies.
+ Six of 1,737 individual paired run differences change sign, all on
+ GeoFWI3D with absolute foreground differences below 0.14 pp and
+-all-class differences below 0.03 pp. Complete objective-level scores
+-and run values are in \path{complementary-dice/} in the supplement.
++all-class differences below 0.03 pp.
+ 
+ \begin{table}[htbp]
+ \centering\footnotesize\setstretch{1.05}
+@@ -3564,7 +3551,7 @@
+ ADNI & MedSAM3 & $77.32\to80.85$ & $99.10\to99.19$ & $88.21\to90.02$ \\
+ \hline
+ \end{tabular}
+-\caption{Mean Dice (\%) before $\to$ after adding the selected constraints. All-class Dice weights classes equally, rather than weighting them by voxel count. MSD MedSAM3 uses the extension control matched to $B+E+S+D$. Fold variation is retained in the complete aggregate tables and supplement.}
++\caption{Mean Dice (\%) before $\to$ after adding the selected constraints. All-class Dice weights classes equally, rather than weighting them by voxel count. MSD MedSAM3 uses the extension control matched to $B+E+S+D$. Fold variation in foreground Dice is reported with the complete aggregate comparisons.}
+ \label{tab:complementary-dice-summary}
+ \end{table}
+ 
+@@ -3658,8 +3645,7 @@
+ Within each reproduced validation set, cases are ordered by whole-volume
+ Dice gain, breaking ties by case identifier. The upper median is shown
+ in Results; Figure~\ref{fig:qualitative-adverse} shows the minimum.
+-Largest-gain examples and all case scores are in the supplement. Every
+-view uses the first source-axis-two slice with maximal reference
++Every view uses the first source-axis-two slice with maximal reference
+ foreground area and identical image limits and colours within a pair.
+ These stored-grid views carry no anatomical-plane claim. Whole-volume
+ scores can reflect errors outside the displayed slice.
+@@ -3680,47 +3666,4 @@
+ \end{figure}
+ \clearpage
+ 
+-\section{Electronic Supplement}
+-\label{sec:evidence-register}\label{sec:background-dice-evidence}
+-\label{sec:all-variant-error-evidence}
+-
+-The accompanying \path{thesis-supplementary-results.zip} preserves the
+-numerical records omitted from the printed appendices. Comma-separated
+-values (CSV) files can be opened in a spreadsheet; JavaScript Object
+-Notation (JSON) files retain structured records. The included
+-\path{README.txt} explains units, aggregation and matched controls.
+-
+-\begin{center}
+-\small\setstretch{1.1}
+-\begin{tabular}{@{}P{4.3cm}P{10.7cm}@{}}
+-\hline
+-Folder or file & Contents \\
+-\hline
+-\path{medical/} & Conventional MSD/ADNI and MedSAM3 run scores, paired gains,
+-fold summaries and preserved matched controls. \\[.4em]
+-\path{geological/} & All 504 conventional runs and the final 126 SAM3 runs,
+-with SAM3 case-level records. \\[.4em]
+-\path{errors/} & Complete FN/FP/swap counts for every objective, with
+-run records and fold dispersion. \\[.4em]
+-\path{complementary-dice/} & All recoverable foreground, background and
+-all-class scores, by run and objective. \\[.4em]
+-\path{qualitative/} & All reproduced validation-case scores, predetermined
+-case selections, adverse/largest-gain panels and verification receipt. \\[.4em]
+-\path{illustrations/} & Full constraint illustrations and figure provenance. \\[.4em]
+-\path{archived-appendix.tex} & Previous detailed appendix as a source
+-fragment, including full tables and extended derivations. \\[.4em]
+-\path{manifest.json} & File identities, source paths and checksums. \\
+-\hline
+-\end{tabular}
+-\end{center}
+-
+-The final SAM3 extraction replaces incomplete earlier SAM3 snapshots in
+-the error and complementary-Dice inventories. The original MSD MedSAM3
+-$B$ and $B+E$ controls remain separate; their unavailable per-volume
+-matrices are not reconstructed from aggregate scores. Source manifests,
+-calibrated coefficients, execution histories and payload-verification
+-records remain linked through the project research archives. The
+-supplement is a compact evidence extract, not a copy of raw medical
+-images or a claim that deleted checkpoints remain available.
+-
+ \end{document}

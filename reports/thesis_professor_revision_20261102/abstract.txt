@@ -1,0 +1,30 @@
+Semantic segmentation assigns a class to each location in an image,
+turning measurements into structures that can be identified and measured.
+In medical imaging, it supports quantitative analysis of organs and
+anatomical regions, but learning accurate segmentations can require
+substantial annotation and computation. This thesis investigates whether
+spatial information in existing annotations can improve three-dimensional
+segmentation when both resources are limited.
+
+The approach uses Logic Tensor Networks (LTNs), a neuro-symbolic framework
+that connects logical statements with differentiable learning, and their
+logarithmic formulation, logLTN. Additional training objectives encourage
+predictions to agree with annotated boundaries, neighbouring labels and
+region geometry. The method is evaluated first on synthetic geological
+volumes from GeoFWI3D and then on hippocampus magnetic resonance imaging
+from the Medical Segmentation Decathlon (MSD) and Alzheimer's Disease
+Neuroimaging Initiative (ADNI). Hippocampus delineation supports studies
+of brain structure in a region affected by Alzheimer's disease.
+
+Experiments cover both training from scratch and adapting pretrained
+models, which start with representations learned from other images.
+Across four architectures trained from scratch, the highest-mean tested
+configurations improve Dice over matched baselines by 1.16--6.14 percentage
+points on GeoFWI3D, 5.35--11.97 points on MSD and 1.03--5.54 points on
+ADNI. Adaptation of Segment Anything Model~3 (SAM3) reaches 72.76\% Dice
+on GeoFWI3D, a gain of 3.45 points. Its medical specialization, MedSAM3,
+reaches 81.73\% on MSD and 80.85\% on ADNI, with gains of 5.38 and
+3.53 points. The preferred objective varies with the model and task.
+The findings show that explicit spatial supervision can improve the
+segmentation accuracy attainable from limited annotations and training,
+including when adapting a pretrained model.

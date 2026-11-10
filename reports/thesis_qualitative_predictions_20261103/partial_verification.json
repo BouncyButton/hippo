@@ -1,0 +1,170 @@
+{
+  "checked_at": 1793708945.389944,
+  "status": "partial; ADNI constrained evaluation still pending",
+  "geology": {
+    "completed_and_archived": 2,
+    "baseline_comparison": {
+      "original_dice": 0.7539479513537787,
+      "reproduced_dice": 0.7672046579381927,
+      "difference_pp": 1.3256706584414024,
+      "interpretation": "New qualitative reproduction; original scores remain the thesis evidence. Review discrepancies before using panels."
+    },
+    "constrained_comparison": {
+      "original_dice": 0.7821478382858525,
+      "reproduced_dice": 0.7946567998879869,
+      "difference_pp": 1.2508961602134328,
+      "interpretation": "New qualitative reproduction; original scores remain the thesis evidence. Review discrepancies before using panels."
+    },
+    "original_paired_gain_pp": 2.819988693207387,
+    "reproduced_paired_gain_pp": 2.7452141949794173,
+    "matched_train_cases": true,
+    "matched_evaluation_cases": true,
+    "constrained_protocol_matches_original": true,
+    "constrained_slab_schedule_matches_original": true,
+    "constrained_initial_adapter_matches_original": true,
+    "constrained_frozen_weights_match_original": true,
+    "baseline_case_ids_match_original": true,
+    "baseline_reference_hashes_match_original": true,
+    "constrained_first_update_losses_identical": true,
+    "constrained_first_gradient_norm": 32371.4921875,
+    "original_first_gradient_norm": 32380.482421875,
+    "new_weights": {
+      "bands": 7.5178417933031,
+      "edge": 381.1228334191559,
+      "sdf": 0.0,
+      "depth": 28.166894702721297
+    },
+    "original_weights": {
+      "bands": 7.5178417933031,
+      "edge": 363.7041259807734,
+      "sdf": 0.0,
+      "depth": 29.217086639959792
+    },
+    "discrepancy_assessment": "Absolute scores differ by about 1.3 pp. Same constrained protocol, schedule, initial weights and first-update forward losses; gradient norm already differs at update 1, before changed calibration or inference. This establishes optimization divergence rather than a pure reporting/aggregation discrepancy. Exact kernel-level cause has not been established. The five-update calibration was repeated under the original rule, producing different edge/depth weights. Paired improvement stays positive (2.745 vs 2.820 pp). Present as qualitative reproduction, never as recovered original checkpoint or as replacement aggregate evidence.",
+    "further_training_submitted": false
+  },
+  "integration_note": "All six runs must finish and pass verification before thesis integration. TeX now uses external compiled figure assets; preserve them and rebuild Template_tesi/thesis-overleaf-fast.zip with reports/thesis_compile_optimization_20261103/package.py after the panel update.",
+  "msd": {
+    "completed_and_archived": 2,
+    "checks": [
+      {
+        "run": "MSD_MedSAM3_baseline_f0s83",
+        "archive_and_all_extracted_member_hashes_verified": true,
+        "volumes": 51,
+        "held_out_volumes": 46,
+        "protocol_matches_original": true,
+        "case_ids_splits_and_reference_hashes_match_original": true,
+        "npz_metrics_recomputed": true,
+        "prediction_identity_matches_final_adapter": true,
+        "checkpoint_ledger_matches_protocol_and_final_update": true,
+        "original_calibration_values_reused": true,
+        "comparison": {
+          "original_dice": 0.7754573938970237,
+          "reproduced_dice": 0.7863058662958741,
+          "difference_pp": 1.084847239885034,
+          "interpretation": "New qualitative reproduction; original scores remain the thesis evidence. Review discrepancies before using panels."
+        }
+      },
+      {
+        "run": "MSD_MedSAM3_bands_edge_sdf_depth_f0s83",
+        "archive_and_all_extracted_member_hashes_verified": true,
+        "volumes": 51,
+        "held_out_volumes": 46,
+        "protocol_matches_original": true,
+        "case_ids_splits_and_reference_hashes_match_original": true,
+        "npz_metrics_recomputed": true,
+        "prediction_identity_matches_final_adapter": true,
+        "checkpoint_ledger_matches_protocol_and_final_update": true,
+        "original_calibration_values_reused": true,
+        "comparison": {
+          "original_dice": 0.8247289475215867,
+          "reproduced_dice": 0.8187263103780068,
+          "difference_pp": -0.6002637143579848,
+          "interpretation": "New qualitative reproduction; original scores remain the thesis evidence. Review discrepancies before using panels."
+        }
+      }
+    ],
+    "matched_images_masks_affines_all51_cases": true,
+    "matched_train_inventory_and_sampling_schedule": true,
+    "original_baseline_sampling_and_initial_weights_match": true,
+    "baseline_first_update_original": {
+      "update": 1,
+      "lr": 2.5e-06,
+      "ramp": 0.05,
+      "gradient_norm": 2896.990478515625,
+      "total": 395.1468505859375,
+      "native": 395.1468505859375,
+      "bands": 1.306045651435852,
+      "edge": 0.16541101783514023,
+      "sdf": 0.09247558563947678,
+      "depth": 0.4766281992197037
+    },
+    "baseline_first_update_reproduction": {
+      "update": 1,
+      "lr": 2.5e-06,
+      "ramp": 0.05,
+      "gradient_norm": 2601.81005859375,
+      "total": 391.8579559326172,
+      "native": 391.8579559326172,
+      "bands": 1.2094187140464783,
+      "edge": 0.16166538000106812,
+      "sdf": 0.09081581234931946,
+      "depth": 0.4218181371688843
+    },
+    "runtime_differences": {
+      "gpu": {
+        "original": "NVIDIA A100-SXM4-80GB",
+        "reproduction": "NVIDIA A100 80GB PCIe MIG 4g.40gb"
+      }
+    },
+    "original_paired_gain_pp": 4.9271553624562925,
+    "reproduced_paired_gain_pp": 3.2420444082132738,
+    "discrepancy_assessment": "Original protocols, case IDs/reference hashes, sampling and initial base/adapter match; original fixed calibration values retained. Baseline forward losses and gradient norm differ at update1, establishing optimization divergence before inference. Recorded runtime recipe differs in GPU(full A100-SXM4 vs A100 PCIe MIG4g40gb); exact stochastic/kernel-level cause unestablished. Use fresh qualitative reproductions, not recovered original predictions or replacement aggregate evidence.",
+    "further_training_submitted": false
+  },
+  "adni_baseline": {
+    "run": "ADNI_MedSAM3_2sample_dice_f1s2",
+    "completed_and_archived": true,
+    "volumes": 56,
+    "held_out_volumes": 54,
+    "archive_and_extracted_member_hashes_verified": true,
+    "protocol_matches_original": true,
+    "sampling_and_training_inventory_match_original": true,
+    "original_initial_weights_and_calibration_match": true,
+    "case_ids_splits_reference_hashes_match_original": true,
+    "npz_metrics_recomputed": true,
+    "prediction_identity_matches_final_adapter": true,
+    "comparison": {
+      "original_dice": 0.7801500446825522,
+      "reproduced_dice": 0.7712126388062175,
+      "difference_pp": -0.8937405876334736,
+      "interpretation": "New qualitative reproduction; original scores remain the thesis evidence. Review discrepancies before using panels."
+    },
+    "first_update_original": {
+      "update": 1,
+      "lr": 2.5e-06,
+      "ramp": 0.05,
+      "gradient_norm": 7265.83935546875,
+      "native": 600.4327392578125,
+      "bands": 1.8369652032852173,
+      "edge": 0.2582143545150757,
+      "sdf": 0.0,
+      "depth": 0.0,
+      "total": 600.4327392578125
+    },
+    "first_update_reproduction": {
+      "update": 1,
+      "lr": 2.5e-06,
+      "ramp": 0.05,
+      "gradient_norm": 7266.107421875,
+      "native": 600.4327392578125,
+      "bands": 1.8369652032852173,
+      "edge": 0.2582143545150757,
+      "sdf": 0.0,
+      "depth": 0.0,
+      "total": 600.4327392578125
+    },
+    "discrepancy_assessment": "Baseline is0.89374pp below original despite matching protocol, original sampling, inputs, initial weights and calibration. First-update forward losses match exactly but gradient norm differs7265.83935546875 vs7266.107421875, establishing optimization divergence before inference; exact kernel-level cause unestablished. Paired analysis awaits constrained completion. Original thesis aggregates remain unchanged.",
+    "further_training_submitted": false
+  }
+}

@@ -1,0 +1,58 @@
+configurations improve Dice over matched baselines by 1.16--6.14 percentage
+The experiments pair each constrained run with a baseline sharing its
+model recipe, suppor
+used during optimization; the geological four-model
+study caps training plus calibration.
+A fold identifies a data partition and a seed controls training
+randomness.
+The design assigns nine fold/seed cells
+to each condition. Evaluation uses the final admis
+objective once. Repeated matched controls support paired gains but do
+The baseline may itself combine several losses, as
+specified in the model-specific protoco
+GeoFWI3D & Synthetic 3D P-wave reflectivity
+Velocity and relative geological
+time are used to build the annotation.
+requires agreement with the scene's recorded salt velocity:
+The model recipes preserve batch size one and bfloat16 autocast through
+NVIDIA's CUDA para
+Dice plus cross-entropy, squared prediction terms in Dice, dropout
+0.1 and learning rate $
+modifications were introduced during
+development to improve its generalization on GeoFWI3D
+The support set is the frozen approximately 5\% subset
+Auxiliary terms enter through fixed ramps, with
+some signed-distance configurations delaye
+For the capped experiments, each image is z-score normalized over nonzero
+intensities, the
+MedSAM3 uses its separate native-grid
+preparation and manifests
+It identifies the last hippocampal-head slice as the coronal slice
+containing the uncal ap
+original MINC arrays to export paired crops.
+Because MSD has verified $1\,\mathrm{mm}$ isotropic
+spacing,
+Fourteen objectives cover the combinations in
+Table~\ref{tab:constraint-combinations}.
+a complete
+factorial estimate of every interaction.
+The baseline combines detection classification and bounding-box losses,
+a presence loss, a
+Full-volume counts and sampling corrections
+preserve the corresponding volume reductions i
+Mask, query and
+presence confidences supply the foreground responses,
+Every arm receives 25 updates,
+Images and masks are placed in their closest canonical NIfTI
+orientation.
+Their response log-odds, together with a
+zero background logit,
+For objective $j$, model $m$, fold $f$ and seed $s$, the paired change is
+Pretrained-model confusion matrices use reference classes as rows and
+predicted classes as
+Including background in the Dice average provides a complementary check
+on the overlap gai
+Each case has the upper-median
+paired Dice change within its reproduced validation set.
+Simplified coronal-plane and disconnected-profile
+rules do not reproduce every annotated a

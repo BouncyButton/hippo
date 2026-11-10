@@ -1,0 +1,882 @@
+--- thesis-revision.tex before
++++ thesis-revision.tex after
+@@ -6,8 +6,10 @@
+ % GeoFWI3D: 504 fixed fold/seed/objective cells integrated 22 October 2026.
+ % Geological UNETR uses XY D4; the other geological models use no augmentation.
+ % Geological cap includes calibration; see reports/thesis_geofwi_update_20261022/.
+-% SAM3: verified completion inventory is 110/126 on 23 October 2026.
+-% Methods and explicit incomplete status added; no final SAM3 outcome claims.
++% SAM3: full study structure integrated 23 October 2026.
++% Numerical results and empirical interpretations remain explicit placeholders.
++% Progress counts are recorded in reports/thesis_sam3_update_20261023/.
++% Revision provenance: reports/thesis_sam3_structure_20261023/.
+ % Existing dataset illustrations and annotation-compatibility audit are retained.
+ % Standalone bibliography is embedded; the Overleaf template may use ref.bib.
+ 
+@@ -52,6 +54,9 @@
+ \definecolor{thesisPaleBlue}{RGB}{235,243,249}
+ \definecolor{thesisPaleOrange}{RGB}{252,242,232}
+ \definecolor{thesisPaleGray}{RGB}{245,247,249}
++% Explicit drafting markers; pending cells are not measured values.
++\newcommand{\samPending}{\textit{pending}}
++\newcommand{\samResult}[1]{\textit{[SAM3: #1 to insert]}}
+ \setstretch{1.3}
+ \setlength{\emergencystretch}{2em}
+ \raggedbottom
+@@ -66,53 +71,41 @@
+ \section*{Abstract}
+ 
+ Segmentation annotations describe both voxel classes and the geometry of
+-the labelled regions. This thesis investigates whether explicit spatial
+-supervision improves three-dimensional segmentation when labelled examples
+-and training computation are limited. Four annotation-derived objectives
+-are expressed in the LTN/logLTN framework: boundary-band membership,
+-edge consistency, classwise signed distance and depth-weighted class
+-supervision. Their logical descriptions are linked to the domains,
+-probabilities and reductions used in optimization.
+-
+-The completed analysis covers 1,764 planned objective runs: 1,260 medical
+-runs without augmentation and 504 geological runs under model-specific
+-training recipes.
+-On each of MSD and ADNI, four architectures and fourteen objectives are
+-evaluated across three folds and three seeds under an optimization
+-ceiling of $31{,}976.45$ GFLOPs per run, with calibration reported
+-separately. The highest-mean constrained configurations improve Dice by
+-10.15, 11.97, 5.35 and 6.17 percentage points on MSD for nnU-Net,
+-SwinUNETR, UNETR and a compact 3D U-Net, respectively. Corresponding
+-ADNI gains are 1.03, 4.31, 4.20 and 5.54 points. Boundary bands improve
+-all eight model/dataset means, whereas the contribution of other terms
+-depends on the configuration.
+-
+-On GeoFWI3D, the same four-model, fourteen-objective inventory uses
+-19 support scenes per fold and a separate cap of $182{,}178.13$ GFLOPs,
+-including calibration. Highest-mean gains are 6.14, 2.07, 1.16 and
+-3.14 points, respectively. UNETR retains XY augmentation, while the
+-other geological models use none; these are within-recipe comparisons.
+-
+-MedSAM3 is adapted for 200 updates using five support crops on MSD and
+-two on ADNI. MSD covers all fourteen objectives through a completed
+-27-run original campaign and 99 constrained extension runs. Each
+-campaign retains its own matched baseline for estimating improvements. Original bands and bands-plus-edge reach 78.76\% and
+-80.12\%, respectively, versus 74.93\% for their matched baseline.
+-ADNI evaluates fourteen objectives in one campaign. The
+-highest-mean objectives reach 81.73\% mean anterior/posterior Dice on
+-MSD and 80.85\% hippocampus Dice on ADNI, compared with matched
+-baselines of 76.34\% and 77.32\%. Both gains are positive in all nine
+-paired cells. Fewer missed foreground voxels accompany more foreground
+-extension, illustrating why overlap and error counts are reported together.
+-
+-These are exploratory validation findings: medical seed replacement,
+-geological recipe tuning, selected adaptation folds and selection of preferred objectives after
+-inspection limit confirmatory claims. An MSD annotation audit also
+-identifies counterexamples to strict geometric proxies for anatomical
+-rules. The evidence supports spatial supervision under the specified
+-budgets across medical and synthetic geological tasks. Independent
+-confirmation and the separate SAM3 fine-tuning comparison remain
+-outside the completed evidence.
++the labelled regions. This thesis investigates whether making that spatial
++information explicit during learning improves three-dimensional
++segmentation when labelled examples and training computation are limited.
++Four forms of annotation-derived supervision are expressed in the
++LTN/logLTN framework and evaluated individually and in combination.
++The investigation connects hippocampus segmentation in MRI, using MSD
++and ADNI, with salt-body segmentation in synthetic GeoFWI3D volumes.
++
++Two learning settings are examined: training volumetric models from
++scratch under specified computational budgets, and adapting pretrained
++segmentation models with few labelled volumes and short update schedules.
++Comparisons use three folds and three seeds. Across the four architectures
++trained from scratch, the highest-mean configurations improve Dice over
++their matched baselines by 5.35--11.97 percentage points on MSD,
++1.03--5.54 points on ADNI and 1.16--6.14 points on GeoFWI3D.
++The geological and medical studies retain their own computational
++allowances and training recipes.
++
++MedSAM3 is adapted for 200 updates using five labelled crops on MSD and
++two on ADNI. The highest-mean configurations reach 81.73\% mean
++anterior/posterior Dice on MSD and 80.85\% hippocampus Dice on ADNI,
++improving their matched baselines by 5.39 and 3.53 percentage points,
++respectively. SAM3 extends pretrained adaptation to salt segmentation,
++starting from its general checkpoint and using five labelled volumes
++and 25 updates. \samResult{final salt Dice, paired change in percentage
++points and consistency across the nine comparisons}.
++
++The findings characterize performance within the specified budgets.
++Selection of seeds, recipes, adaptation folds and preferred configurations
++limits confirmatory interpretation. An annotation audit also identifies
++counterexamples to strict geometric proxies for the MSD anatomical
++labelling rules, motivating supervision grounded in the stored masks.
++Together, the experiments assess the value and limits of explicit spatial
++supervision across tasks and learning conditions, with independent
++confirmation required to establish broader generality.
+ 
+ \clearpage
+ \setcounter{tocdepth}{2}
+@@ -154,8 +147,8 @@
+ therefore measures accuracy under a common optimization FLOP ceiling.
+ The cost of an active constraint is charged within that allowance, and
+ its calibration cost is reported separately. The medical comparisons apply this resource definition on both MSD
+-and ADNI. Pretrained adaptation is evaluated separately under a fixed
+-200-update schedule.
++and ADNI. Pretrained adaptation uses separate fixed schedules: 200 updates
++for MedSAM3 on the medical datasets and 25 for SAM3 on GeoFWI3D.
+ 
+ The study begins with salt-body segmentation in GeoFWI3D, whose synthetic
+ reflectivity volumes provide a nonmedical application of spatial
+@@ -181,13 +174,17 @@
+ 
+ The principal comparisons evaluate nnU-Net, SwinUNETR, UNETR and a compact
+ 3D U-Net under fourteen objectives on GeoFWI3D and both medical datasets,
+-with three folds and three seeds in each setting. The second
+-strand specializes MedSAM3 through its medical LoRA factors, using five
+-labelled crops on MSD and two on ADNI for 200 updates
+-\cite{liu2025medsam3}. Each study compares a constrained objective with
+-its own matched baseline. The geological comparison uses a distinct
+-compute allowance and frozen model recipes; the separate SAM3
+-fine-tuning experiment remains outside the completed results.
++with three folds and three seeds in each setting. The second strand
++adapts pretrained models through low-rank parameters while retaining
++their base weights. MedSAM3 continues its released medical adapter using
++five labelled crops on MSD and two on ADNI for 200 updates
++\cite{liu2025medsam3}. SAM3 starts from its general checkpoint with fresh
++adapters and uses five geological volumes for 25 updates
++\cite{carion2025sam3}. Fixed text queries identify the target structures
++without supplying case-specific localization. These studies examine both
++the quality attainable with limited adaptation and the additional effect
++of spatial supervision. Each objective is compared with its own matched
++baseline under the same initialization, support set and schedule.
+ 
+ The thesis makes three contributions:
+ \begin{enumerate}
+@@ -196,17 +193,19 @@
+ \item A paired experimental analysis of individual and combined objectives,
+ including four-model comparisons on three datasets under explicitly
+ defined FLOP ceilings and an audit of candidate rules against MSD annotations.
+-\item An evaluation of limited-data MedSAM3 adaptation and the contribution
+-of spatial supervision to that procedure on two medical datasets.
++\item An evaluation of limited-data adaptation with MedSAM3 on two medical
++datasets and SAM3 on geological volumes, assessing the attainable
++segmentation quality and the paired contribution of spatial supervision.
+ \end{enumerate}
+ 
+-The retained performance analysis comprises five completed studies:
+-three conventional dataset comparisons and two MedSAM3 adaptation studies.
+-The medical studies use no augmentation; the geological study retains
+-its own model-specific recipes. It reports final-budget accuracy, paired changes and
+-variation across the selected folds and seeds. It does not establish
+-that short-budget gains persist after convergence. Figure~\ref{fig:thesis-overview}
+-summarizes the relationship between the applications and learning settings.
++The experimental design comprises six studies: three conventional dataset
++comparisons, two MedSAM3 adaptations and one SAM3 adaptation. Medical
++experiments and both pretrained models use no augmentation; conventional
++geological UNETR retains its specified XY augmentation. The analysis
++reports final-budget accuracy, paired changes and variation across the
++selected folds and seeds. It does not establish that short-budget gains
++persist after convergence. Figure~\ref{fig:thesis-overview} summarizes
++the relationship between the applications and learning settings.
+ 
+ \begin{figure}[htbp]
+ \centering
+@@ -234,14 +233,16 @@
+ \draw[fill=thesisPaleBlue,draw=thesisBlue,line width=.65pt,rounded corners=2pt] (0.100,6.800) rectangle (7.500,9.400);
+ \node[align=center,text width=7.16cm,inner sep=0pt,text=thesisInk,font=\fontsize{11}{13}\selectfont] at (3.800,8.100) {Training from scratch\\GeoFWI3D, MSD and ADNI\\4 architectures; 14 objectives\\Dataset-specific FLOP budgets};
+ \draw[fill=thesisPaleOrange,draw=thesisOrange,line width=.65pt,rounded corners=2pt] (8.000,6.800) rectangle (15.400,9.400);
+-\node[align=center,text width=7.16cm,inner sep=0pt,text=thesisInk,font=\fontsize{11}{13}\selectfont] at (11.700,8.100) {Pretrained-model adaptation\\MedSAM3 on MSD and ADNI\\5 / 2 support crops; 200 updates\\14 objectives per dataset};
++\node[align=center,text width=7.16cm,inner sep=0pt,text=thesisInk,font=\fontsize{10}{12}\selectfont] at (11.700,8.100) {Pretrained-model adaptation\\MedSAM3: MSD / ADNI, 200 updates\\5 / 2 labelled support crops\\SAM3: GeoFWI3D, 25 updates\\5 labelled support volumes};
+ \node[align=center,text width=15.2cm,inner sep=0pt,text=thesisInk,font=\fontsize{10}{12}\selectfont] at (7.750,10.080) {Cross-dataset analyses connect GeoFWI3D, MSD and ADNI\\through task-specific experimental protocols.};
+ \end{tikzpicture}
+ \caption{Organization of the investigation. Four-model comparisons cover
+ GeoFWI3D, MSD and ADNI. The medical studies share an optimization-only
+ ceiling; the larger geological ceiling also charges calibration.
+-MedSAM3 uses a separate fixed-update budget on MSD and ADNI. Medical
+-experiments use no augmentation; geological UNETR retains XY augmentation.
++Pretrained adaptation evaluates fourteen objectives with MedSAM3 on MSD
++and ADNI and with SAM3 on GeoFWI3D, under separate fixed-update budgets.
++Medical and adaptation experiments use no augmentation; conventional
++geological UNETR retains XY augmentation.
+ Arrows indicate conceptual relationships rather than weight transfer.}
+ 
+ \label{fig:thesis-overview}
+@@ -253,7 +254,7 @@
+ Chapter~\ref{sec:spatial-constraints}. Chapter~\ref{sec:methodology}
+ defines the datasets and experimental procedures.
+ Chapter~\ref{sec:results} presents and interprets the geological comparison,
+-MSD, ADNI, MedSAM3 and the annotation audit, including the limitations
++MSD, ADNI, MedSAM3, SAM3 and the annotation audit, including the limitations
+ of the evidence. Chapter~\ref{sec:conclusions} closes the thesis and
+ sets out future work. Technical derivations, extended numerical results
+ and reproducibility records are collected in the appendices.
+@@ -636,9 +637,10 @@
+ images with box prompts \cite{ma2024medsam}. SAM~3 supports concepts
+ specified through text or exemplars \cite{carion2025sam3}, and MedSAM3
+ specializes that capability for medical concepts \cite{liu2025medsam3}.
+-The hippocampus experiment uses fixed anatomical phrases for every case,
+-so its inference inputs contain no case-specific localization drawn from
+-a held-out reference mask.
++The hippocampus experiments use fixed anatomical phrases, and the
++geological SAM3 experiment uses the phrase \emph{salt body}. These queries
++are shared across cases; inference receives no case-specific localization
++from a held-out reference mask.
+ 
+ Low-Rank Adaptation parameterizes the update to a selected weight matrix
+ through two smaller trainable factors \cite{hu2021lora}:
+@@ -659,12 +661,14 @@
+ Optimizing fewer parameters reduces gradient and optimizer-state storage.
+ It still requires execution of the underlying model and propagation of
+ gradients to the adapter locations. Parameter count, memory and runtime
+-therefore describe different aspects of adaptation effort. The MedSAM3
+-study continues a released medical adapter from a common initialization
+-and measures both its final segmentation quality and the paired effect
+-of spatial objectives. Section~\ref{sec:medsam-methods} specifies the
+-semantic projection, support data and update schedule used for this
+-comparison.
++therefore describe different aspects of adaptation effort. MedSAM3
++continues a released medical adapter, whereas SAM3 starts with fresh
++factors whose initial product $BA$ is zero. Both studies optimize
++18,497,664 adapter parameters and restore the same starting state before
++each matched run. Their initial representations differ, while their
++paired comparisons isolate the effect of the training objective within
++each study. Sections~\ref{sec:medsam-methods} and~\ref{sec:sam3-methods}
++specify the semantic outputs, support data and adaptation schedules.
+ 
+ \clearpage
+ \section{Spatial Constraints in the LTN/logLTN Framework}
+@@ -696,8 +700,10 @@
+ target and any spatial supports, distances or weights derived from it.
+ These quantities are fixed with respect to $\theta$ during an update.
+ Preprocessing keeps the image, labels and coordinate map consistent.
+-The reported experiments apply no stochastic spatial or intensity augmentation. Parameter and
+-group indices are suppressed below when their meaning is unambiguous.
++Where the conventional geological UNETR recipe transforms a training
++example, its labels and spatial targets follow the same transformation.
++Medical and pretrained-adaptation experiments use no augmentation.
++Parameter and group indices are suppressed below when unambiguous.
+ 
+ For the principal MSD comparison, bands and edges use the hippocampal
+ union $F=\{A,P\}$. Signed distance uses separate fields for $A$ and $P$,
+@@ -706,7 +712,9 @@
+ MedSAM3 uses a further variant: bands and edges are evaluated separately
+ for background, anterior and posterior on MSD, so their supports also
+ follow the internal class interface. Its binary ADNI implementation uses
+-the hippocampus membership predicate. Figure~\ref{fig:constraint-domains}
++the hippocampus membership predicate. SAM3 on GeoFWI3D likewise uses a
++single salt-membership predicate, with full-volume supports evaluated
++through sampled planes. Figure~\ref{fig:constraint-domains}
+ illustrates the distinction between voxel, pair, distance and weighted
+ class supervision.
+ 
+@@ -1888,29 +1896,31 @@
+ 
+ Task-specific variants also retain their own domains and reductions.
+ GeoFWI3D uses binary salt membership and one foreground distance field.
+-Its frozen UNETR recipe excludes an observation frame from bands and
+-edges, whereas the other three model recipes retain crop-face support.
+-MedSAM3 applies classwise bands and edges with full-volume
+-normalization while sampling image planes. ADNI provides a binary
+-hippocampus class. Its implemented depth coordinate uses the stored
+-array geometry, with distances in voxels and no inferred anatomical
+-orientation; this differs from the physical-coordinate MSD construction. These variations are documented
+-with their protocols. At inference, the learned network requires
+-its image and any specified prompt inputs; the annotation-derived
++Its conventional UNETR recipe excludes an observation frame from bands
++and edges, whereas the other three conventional recipes retain crop-face
++support. MedSAM3 and SAM3 use full-volume normalization while sampling
++image planes: their bands and edges supervise three class masks on MSD,
++the hippocampus mask on ADNI and the salt mask on GeoFWI3D. SAM3 retains
++zero-padded morphology without observation-frame exclusion. ADNI and
++SAM3 depth targets use source-array geometry, with distances in voxels
++and no inferred anatomical orientation; MSD uses physical coordinates.
++These variations are specified with their protocols. At inference, the
++network requires its image and any specified prompts; annotation-derived
+ constraint targets are used only during training.
+ 
+ \clearpage
+ \section{Datasets and Experimental Methodology}
+ \label{sec:methodology}
+ 
+-The completed experiments pair each constrained run with a baseline
+-sharing its model recipe, support set, fold and optimization seed.
+-The medical four-model studies match optimization FLOPs; the geological
+-study caps training plus calibration; MedSAM3 studies match adapter
+-updates. All medical runs use no augmentation. Geological UNETR retains
+-XY augmentation in both baseline and constrained arms, while the other
+-geological models use none. These task and resource definitions delimit
+-the comparisons that can be made.
++The experiments pair each constrained run with a baseline sharing its
++model recipe, support set, fold and optimization seed. The medical
++four-model studies match optimization FLOPs; the geological four-model
++study caps training plus calibration. MedSAM3 and SAM3 instead match
++adapter updates within their respective schedules. All medical and
++pretrained-adaptation runs use no augmentation. Conventional geological
++UNETR retains XY augmentation in both baseline and constrained arms,
++while the other conventional geological models use none. These task
++and resource definitions delimit the comparisons that can be made.
+ 
+ \subsection{Design and Units of Comparison}
+ \label{sec:experimental-structure}
+@@ -1922,13 +1932,13 @@
+ consistency under the available data, while sharing parts of the same
+ experimental setting.
+ 
+-Table~\ref{tab:experimental-design} records the five completed studies,
+-including the geological comparison and four medical studies.
+-MSD MedSAM3 has two separately reported campaigns. Every condition has
+-nine fold/seed cells. Evaluation uses the final
+-admissible state in the capped experiments and the final 200-update
+-adapter in the adaptation experiments, without validation-selected
+-checkpoint replacement or early stopping.
++Table~\ref{tab:experimental-design} records the six studies, including
++two geological and four medical comparisons. MSD MedSAM3 has two
++separately reported campaigns. The design assigns nine fold/seed cells
++to each condition. Evaluation uses the final admissible state in the
++capped experiments, the final 200-update MedSAM3 adapter and the final
++25-update SAM3 adapter, without validation-selected checkpoint
++replacement or early stopping.
+ 
+ \begin{table}[htbp]
+ \centering\small\setstretch{1.05}
+@@ -1941,11 +1951,13 @@
+ ADNI, from scratch & 10 crops, 5 subjects & 0,1,2; 0,1,4 & 4 models $\times$ 14 objectives; 504 runs; same FLOP cap. \\[.5em]
+ MSD, MedSAM3 original & 5 crops & 0,1,3; 17,83,191 & Baseline, $B$, $B+E$; 27 runs; 200 updates/run. \\[.5em]
+ MSD, MedSAM3 extension & 5 crops & 0,1,3; 17,83,191 & 11 additional objectives; 99 runs; 200 updates/run. \\[.5em]
+-ADNI, MedSAM3 & 2 crops, 2 subjects & 0,1,3; 0,1,2 & 14 objectives; 126 runs; 200 updates/run. \\
++ADNI, MedSAM3 & 2 crops, 2 subjects & 0,1,3; 0,1,2 & 14 objectives; 126 runs; 200 updates/run. \\[.5em]
++GeoFWI3D, SAM3 & 5 scenes & 0,1,3; 0,1,2 & 14 objectives; 126 runs; 25 updates/run. \\
+ \hline
+ \end{tabular}
+-\caption{Completed studies: 1,764 planned runs in 196 objective
+-conditions, comprising 504 geological and 1,260 medical runs. MSD MedSAM3 covers all fourteen objectives across
++\caption{Study design: 1,890 planned runs in 210 objective conditions,
++comprising 630 geological and 1,260 medical runs. These are design totals;
++SAM3 numerical entries awaiting final aggregation are marked explicitly. MSD MedSAM3 covers all fourteen objectives across
+ its two campaigns, counting the baseline objective once. Repeated
+ extension baseline controls support paired gains but do not enlarge
+ this objective inventory.
+@@ -1987,7 +1999,7 @@
+ \hline
+ GeoFWI3D & Synthetic 3D P-wave reflectivity &
+ $0$: background; $1$: salt &
+-Nonmedical application of spatial supervision. \\[0.4em]
++Nonmedical four-model comparison and SAM3 adaptation. \\[0.4em]
+ MSD hippocampus & Single-channel MRI crop &
+ $0$: background; $1$: anterior; $2$: posterior &
+ Main medical comparison, including the FLOP-capped study and MedSAM3 adaptation. \\[0.4em]
+@@ -3246,8 +3258,8 @@
+ $B,E,S$ & Baseline $+B+E+S$ & Baseline $+B+E+S+D$ \\
+ \hline
+ \end{tabular}
+-\caption{The fourteen objective combinations in each conventional medical
+-comparison and in ADNI MedSAM3. MSD MedSAM3 covers all fourteen
++\caption{The fourteen objective combinations in each conventional dataset
++comparison, in ADNI MedSAM3 and in GeoFWI3D SAM3. MSD MedSAM3 covers all fourteen
+ across its original and extension campaigns; $B$ and $B+E$ retain
+ the original matched baseline. Each included entry retains the architecture's supervised
+ baseline. Coefficients are calibrated for the corresponding combination;
+@@ -3550,36 +3562,77 @@
+ \subsection{SAM3 Adaptation on GeoFWI3D}
+ \label{sec:sam3-methods}
+ 
++\subsubsection{Initialization, Support Data and Predictions}
++
+ The geological adaptation study starts from the general SAM~3 checkpoint
+-\cite{carion2025sam3}, with fresh LoRA factors whose initial output is
++\cite{carion2025sam3}, with fresh LoRA factors whose initial product is
+ zero. Only the 18,497,664 adapter parameters are optimized; the base
+-weights remain frozen. This initialization contains no medical adapter.
+-The fixed query is \emph{salt body}, and the output classes are salt and
+-background. Whole-volume predictions are reconstructed from image slices
+-and this query, without reference-mask localization prompts.
+-
+-The design crosses folds 0, 1 and 3 with seeds 0, 1 and 2 and fourteen
+-objectives, giving 126 planned runs. Each fold uses five labelled support
+-volumes, selected as the first five of its established geological support
+-list, and 96 held-out volumes. Supports remain fixed across seeds and
+-objectives. Every run receives 25 optimizer updates without augmentation,
+-using two adjacent-slice pairs per update. The learning-rate schedule
+-retains its 200-update horizon, 20-update warmup and rates of
+-$5\times10^{-5}$ and $5\times10^{-6}$; training uses its first 25 updates.
+-This is a fixed adaptation schedule, separate from the geological
+-FLOP-capped comparison.
++weights remain frozen. No medical adapter is loaded. The fixed query is
++\emph{salt body}. Its foreground response combines mask, query and
++presence confidences as in the binary projection of
++Section~\ref{sec:medsam-methods}; the complementary response represents
++background. Argmax produces mutually exclusive salt/background labels.
++Whole-volume predictions are reconstructed from slices and the fixed
++query, without reference-mask localization prompts.
++
++The design crosses folds 0, 1 and 3 with seeds 0, 1 and 2 and the fourteen
++objectives in Table~\ref{tab:constraint-combinations}, giving 126 runs.
++Each fold uses five labelled support volumes, selected as the first five
++of its established geological support list, and 96 held-out volumes.
++Supports remain fixed across seeds and objectives. The native
++$96\times96\times96$ volumes are sampled as adjacent-slice pairs;
++reflectivity is mapped from $[-1,1]$ to $[0,1]$ before conversion to the
++model's image input. Training uses no stochastic augmentation.
++
++\subsubsection{Objectives, Calibration and Update Schedule}
+ 
+ The baseline retains SAM3's native detection, presence and mask losses;
+-\texttt{dice} in the run identifiers is a naming convention, not a
+-Dice-only objective. Auxiliary coefficients target a median gradient
+-ratio of 0.1 with a 95th-percentile cap of 0.5. Bands are calibrated at
+-initialization for each fold/seed cell; the other selected terms are
+-calibrated after five prefix updates, using four sampled pairs per
+-support volume. Coefficients then remain fixed. Spatial targets use
+-source-array voxel geometry. Evaluation uses the final adapter and
+-records per-volume salt Dice and foreground FN/FP on both support and
+-held-out volumes. The completion inventory is reported separately in
+-Section~\ref{sec:sam3-results}.
++\texttt{dice} in the archived run identifiers is a naming convention,
++not a Dice-only objective. Bands and edges supervise the salt mask using
++three-dimensional supports and full-volume normalization. The two-step,
++zero-padded construction retains crop-face support. Signed distances
++use unit-grid distances clipped at eight voxels and normalized by eight.
++Depth weights use source-array geometry, without an anatomical
++orientation assumption. The sampled reductions are given in
++Appendix~\ref{sec:sampled-pretrained-supervision}.
++
++Every arm receives 25 optimizer updates, each accumulating two
++adjacent-slice pairs: 100 slice and single-class-query presentations in
++total, drawn repeatedly from the five volumes. AdamW uses weight decay
++0.01 and gradient-norm clipping at 1. The learning-rate schedule retains
++its 200-update horizon, 20-update warmup and peak/final rates of
++$5\times10^{-5}$ and $5\times10^{-6}$. Training uses the first 25 updates
++of that schedule; the decay is not compressed to finish at update 25.
++
++Calibration uses four anchor pairs per support volume, for twenty
++probes. Bands are calibrated at initialization for each fold/seed cell.
++Other selected terms are calibrated sequentially after five prefix
++updates, in the order bands, edges, signed distance and depth, retaining
++the already calibrated band coefficient when present. Each additional
++term targets a median gradient ratio of 0.1 with a 95th-percentile cap
++of 0.5; coefficients then remain fixed. Terms awaiting calibration have
++zero weight during the prefix. The constraint ramp follows the global
++20-update warmup, so a newly calibrated term enters at update 6 with
++ramp factor $6/20$.
++
++\subsubsection{Paired Evaluation and Execution Conditions}
++
++Each arm restores the same base and initial adapters and uses the matched
++fold/seed sampling schedule. The final adapter is evaluated on all five
++support and 96 held-out volumes. Per-volume salt Dice and foreground
++FN/FP are reduced using Section~\ref{sec:evaluation-methods}. Paired
++changes use only the SAM3 baseline from the same fold and seed;
++historical pilots, MedSAM3 controls and conventional geological
++baselines do not enter these differences.
++
++The campaign spans Colab A100 and cluster A100 execution, with the
++cluster using a 40 GB MIG partition. Source and protocol identities are
++retained across execution sites, but some matched arms run on different
++sites. Hardware, timing scope and recovery attempts are therefore
++recorded separately; the design does not establish an identical-hardware
++runtime comparison. The 25-update allowance measures task adaptation
++and excludes pretraining. It is distinct from the geological FLOP cap
++and the 200-update medical adaptation schedule.
+ 
+ \subsection{ADNI Dataset}
+ \label{sec:adni-methods}
+@@ -3990,15 +4043,17 @@
+ Dispersion across cases is identified separately from dispersion
+ across fold/seed cells.
+ 
+-MedSAM3 confusion matrices use reference classes as rows and predicted
+-classes as columns. Four disjoint errors are counted: background
++Pretrained-model confusion matrices use reference classes as rows and
++predicted classes as columns. For MSD, four disjoint errors are counted: background
+ predicted as foreground, foreground predicted as background, anterior
+ predicted as posterior, and posterior predicted as anterior. Their
+ sum gives all incorrectly labelled voxels. Conventional-run error counts pool the full validation grid before
+ averaging runs. MedSAM3 tables average errors per crop within each run
+ and then weight folds equally. All counts cover the complete prediction,
+-including voxels outside the boundary bands. ADNI has no A/P swaps.
+-The different error-count reductions are labelled and are not compared
++including voxels outside the boundary bands. SAM3 FN/FP are likewise
++averaged per held-out volume within a run, then over seeds and folds;
++each run contains 96 validation volumes. Binary ADNI and GeoFWI3D have
++no A/P swaps. The different error-count reductions are labelled and are not compared
+ as if they had the same denominator.
+ 
+ Held-out segmentation quality is assessed independently of training
+@@ -4012,10 +4067,12 @@
+ \section{Results and Analysis}
+ \label{sec:results}
+ 
+-The five completed studies cover 1,764 planned objective runs: 504
+-on GeoFWI3D and 1,260 across the medical comparisons and adaptations.
+-The geological results are presented first, followed by MSD, ADNI,
+-MedSAM3 and the MSD annotation audit.
++The six-study design covers 1,890 planned objective runs: 630 on
++GeoFWI3D and 1,260 across the medical comparisons and adaptations.
++The conventional geological results are presented first, followed by
++MSD, ADNI, MedSAM3, SAM3 and the MSD annotation audit. Numerical SAM3
++cells marked \emph{pending} reserve the final balanced aggregates;
++they are not estimates from an incomplete subset.
+ Every objective is evaluated against a matched final-budget baseline.
+ Tables report Dice in percent and paired changes in percentage points;
+ $B,E,S,D$ denote bands, edges, signed distance and depth supervision.
+@@ -4025,7 +4082,7 @@
+ inspection, so their apparent advantage also reflects selection among
+ the tested configurations.
+ 
+-\subsection{GeoFWI3D: Three-Fold, Three-Seed Salt Segmentation}
++\subsection{GeoFWI3D: Four-Model Salt Segmentation}
+ \label{sec:geo-results}
+ 
+ The completed 504-cell geological comparison extends the constraint
+@@ -4505,23 +4562,124 @@
+ error summaries where retained outputs and valid geometry permit them;
+ complete calibration, training, inference and memory measurements.]}
+ 
+-\subsection{SAM3 on GeoFWI3D: Replication Status}
++\subsection{SAM3 Adaptation on GeoFWI3D}
+ \label{sec:sam3-results}
+ 
+-The SAM3 replication is not yet a complete three-fold, three-seed
+-comparison. The 23 October 2026 inventory contains 110 of the 126 planned
+-runs: 76 completed in Colab and 34 completed on the cluster. The remaining
+-cells are $D$, $B+D$ and $E+D$ for fold 1, seed 2, and all thirteen
+-constrained objectives for fold 3, seed 2. Its baseline is complete.
+-Consequently, the available objectives have unequal replication, and
+-partial averages do not constitute the final comparison.
+-
+-\noindent\textit{[Results to insert after all 126 runs and their archives
+-are verified: a fourteen-objective table of held-out and support Dice,
+-paired changes against the SAM3 baseline, fold/seed variation and FN/FP;
+-interpretation of the paired effects and complete adaptation resource
+-measurements. The 110-run snapshot is excluded from the completed-study
+-aggregates elsewhere in this chapter.]}
++\subsubsection{Segmentation Quality and Paired Effects}
++
++The SAM3 comparison evaluates general-checkpoint adaptation with five
++labelled geological volumes and 25 updates. Table~\ref{tab:sam3-geo-results}
++reports the fourteen objectives across folds 0, 1 and 3 and seeds 0, 1
++and 2. Each gain uses the SAM3 baseline from the same fold and seed.
++Support Dice describes fit to the five training volumes; validation
++Dice measures generalization to the 96 held-out volumes in each fold.
++
++\begin{table}[htbp]
++\centering\small\setstretch{1.05}
++\setlength{\tabcolsep}{6pt}
++\renewcommand{\arraystretch}{1.12}
++\begin{tabular}{@{}lrrrr@{}}
++\hline
++Objective & Validation Dice & $\Delta$ base (pp) & Positive / 9 & Support Dice \\
++\hline
++Baseline & \samPending & 0.00 & --- & \samPending \\
++$B$ & \samPending & \samPending & \samPending & \samPending \\
++$S$ & \samPending & \samPending & \samPending & \samPending \\
++$B+S$ & \samPending & \samPending & \samPending & \samPending \\
++$B+E$ & \samPending & \samPending & \samPending & \samPending \\
++$B+E+S$ & \samPending & \samPending & \samPending & \samPending \\
++$D$ & \samPending & \samPending & \samPending & \samPending \\
++$B+D$ & \samPending & \samPending & \samPending & \samPending \\
++$E+D$ & \samPending & \samPending & \samPending & \samPending \\
++$S+D$ & \samPending & \samPending & \samPending & \samPending \\
++$B+E+D$ & \samPending & \samPending & \samPending & \samPending \\
++$B+S+D$ & \samPending & \samPending & \samPending & \samPending \\
++$E+S+D$ & \samPending & \samPending & \samPending & \samPending \\
++$B+E+S+D$ & \samPending & \samPending & \samPending & \samPending \\
++\hline
++\end{tabular}
++\caption{SAM3 on GeoFWI3D after 25 updates. Dice entries contain mean
++$\pm$ sample SD across three seed-averaged fold means; paired changes
++contain mean $\pm$ SD of the three fold-mean differences. Positive counts
++use the nine paired runs. Each row represents the full three-fold,
++three-seed condition. Pending entries await final verified aggregation;
++baseline changes are zero by definition.}
++\label{tab:sam3-geo-results}
++\end{table}
++
++The adapted baseline reaches \samResult{baseline validation Dice}\%,
++with support Dice of \samResult{baseline support Dice}\%.
++The highest-mean configuration is \samResult{objective}, reaching
++\samResult{validation Dice}\% and a paired change of
++\samResult{signed mean change} percentage points. The change is positive
++in \samResult{number}/9 fold/seed comparisons.
++\samResult{interpretation of the magnitude, fold variation and any
++negative or inconsistent effects; compare individual terms and
++combinations without assuming an ordering}.
++The fold-level decomposition in Table~\ref{tab:sam3-geo-folds} distinguishes
++changes shared across support partitions from effects concentrated in
++one fold. Selection of the highest mean remains exploratory.
++
++\subsubsection{Error Balance and Adaptation Cost}
++
++Table~\ref{tab:sam3-geo-errors} separates missed salt from foreground
++extension. The counts cover the entire held-out volumes, including
++errors outside the constraint supports. Binary salt segmentation has
++no internal-class swap category. \samResult{FN/FP changes for the selected
++objective against its matched baseline, and whether the Dice change
++accompanies fewer misses, less foreground extension or a tradeoff}.
++
++\begin{table}[htbp]
++\centering\small\setstretch{1.05}
++\setlength{\tabcolsep}{8pt}
++\renewcommand{\arraystretch}{1.12}
++\begin{tabular}{@{}lrrrr@{}}
++\hline
++Objective & FN / volume & FP / volume & $\Delta$ FN & $\Delta$ FP \\
++\hline
++Baseline & \samPending & \samPending & 0 & 0 \\
++$B$ & \samPending & \samPending & \samPending & \samPending \\
++$S$ & \samPending & \samPending & \samPending & \samPending \\
++$B+S$ & \samPending & \samPending & \samPending & \samPending \\
++$B+E$ & \samPending & \samPending & \samPending & \samPending \\
++$B+E+S$ & \samPending & \samPending & \samPending & \samPending \\
++$D$ & \samPending & \samPending & \samPending & \samPending \\
++$B+D$ & \samPending & \samPending & \samPending & \samPending \\
++$E+D$ & \samPending & \samPending & \samPending & \samPending \\
++$S+D$ & \samPending & \samPending & \samPending & \samPending \\
++$B+E+D$ & \samPending & \samPending & \samPending & \samPending \\
++$B+S+D$ & \samPending & \samPending & \samPending & \samPending \\
++$E+S+D$ & \samPending & \samPending & \samPending & \samPending \\
++$B+E+S+D$ & \samPending & \samPending & \samPending & \samPending \\
++\hline
++\end{tabular}
++\caption{SAM3 validation errors per volume. Counts are averaged across
++the 96 held-out volumes in each run, then across seeds and folds.
++Changes use the matched SAM3 baseline; negative changes denote fewer
++errors. Pending entries require complete nine-run conditions. Baseline
++changes are zero by definition.}
++\label{tab:sam3-geo-errors}
++\end{table}
++
++The adaptation budget comprises 25 updates and 100 slice presentations
++per run. \samResult{recorded training-loop time by execution site,
++with median and range, and separately measured calibration, evaluation
++and peak-memory values where available; identify any unmeasured scope}.
++Colab and cluster execution are reported separately because their GPU
++allocations differ. Recovery attempts contribute additional execution
++cost and do not enlarge the final adapter's 25-update trajectory.
++
++\noindent\samResult{paired baseline/constrained prediction panels,
++selected by a stated rule, illustrating the measured FN/FP pattern}.
++
++The comparison with MedSAM3 concerns the behaviour of spatial supervision
++in two adaptation settings. It does not isolate the effect of medical
++pretraining: the tasks, support data, initialization and update budgets
++also differ. Likewise, SAM3 and the conventional geological models use
++different support sizes and resource definitions. Their absolute Dice
++scores cannot establish a ranking at matched total computation.
++\samResult{cross-study interpretation of the verified paired effects,
++including any differences from the medical adaptation results}.
+ 
+ \subsection{What the Annotation Audit Establishes}
+ \label{sec:annotation-results}
+@@ -4623,7 +4781,9 @@
+ pools. ADNI groups subjects within each split, whereas MSD crop
+ identifiers do not establish participant independence. The adaptation
+ folds were selected, and ADNI's three support sets contain only three
+-distinct crops. Fold standard deviations and positive-pair counts
++distinct crops. SAM3 retains fixed five-volume supports and only the
++first 25 updates of a longer learning-rate schedule, so its findings
++are specific to that short adaptation procedure. Fold standard deviations and positive-pair counts
+ describe variation within these designs; they are not independent
+ confirmation or multiplicity-adjusted significance tests.
+ 
+@@ -4644,9 +4804,9 @@
+ This thesis develops a common LTN/logLTN formulation of four kinds of
+ annotation-derived spatial supervision and connects each to its
+ implemented training loss. The experimental investigation brings together
+-volumetric models trained from scratch, adaptation of a pretrained
+-medical model, and segmentation tasks with different label vocabularies
+-and geometries. Its contribution is a formulation and evaluation approach
++volumetric models trained from scratch, MedSAM3 adaptation on medical
++images, SAM3 adaptation on geological volumes, and segmentation tasks
++with different label vocabularies and geometries. Its contribution is a formulation and evaluation approach
+ in which the supervised property, computational allowance and unit of
+ comparison are explicit.
+ 
+@@ -4658,11 +4818,6 @@
+ 
+ \subsection{Future Work}\label{sec:future-work}
+ \label{sec:pending-results}
+-
+-Completing and auditing the SAM3 replication described in
+-Sections~\ref{sec:sam3-methods} and~\ref{sec:sam3-results} is the remaining
+-experimental reporting task. Its final comparison will extend the
+-pretrained-model analysis to the geological application.
+ 
+ Further analysis of the completed studies should recover the nine reused
+ GeoFWI3D baseline raw archives for full FN/FP comparisons, add paired
+@@ -4675,7 +4830,9 @@
+ Further experiments should separate the effects of spatial weighting
+ from those of an additional loss through an unweighted cross-entropy
+ control, and test whether gains persist under longer and exposure-matched
+-training. Independently sampled support sets would assess sensitivity
++training. For SAM3, extending beyond the initial 25-update segment would
++test whether the observed effects persist later in adaptation.
++Independently sampled support sets would assess sensitivity
+ to the few annotated examples used in adaptation. A confirmation study
+ should fix seeds, objectives and evaluation rules before inspecting
+ outcomes, using an independent evaluation set where feasible.
+@@ -4843,7 +5000,8 @@
+ % MSD MedSAM3: original cluster campaign 27; separate Colab extension 108.
+ % ADNI MedSAM3: 126 complete run archives, rebuilt beyond the stale summary.
+ % All performance tables use no-augmentation runs and campaign-matched baselines.
+-% Pending integration: separate SAM3 fine-tuning; geological four-model results are complete.
++% SAM3 full-study templates await verified final numerical aggregates.
++% Conventional geological results remain complete; no partial SAM3 means inserted.
+ 
+ \section{Numerical and Implementation Details}
+ \label{sec:technical-details}
+@@ -5042,10 +5200,12 @@
+ clipping threshold eight. The coordinate and depth conventions are
+ specified in Section~\ref{sec:geo-methods}.
+ 
+-\subsection{Sampled Volumetric Supervision in MedSAM3}
++\subsection{Sampled Volumetric Supervision in Pretrained Models}
++\label{sec:sampled-pretrained-supervision}
+ 
+ Native three-dimensional class masks define separate bands for
+-$c\in\{0,A,P\}$ on MSD and $c=H$ on ADNI. Zero padding is retained, including for background,
++$c\in\{0,A,P\}$ on MSD, $c=H$ on ADNI and $c=S$ for SAM3 on
++GeoFWI3D. Zero padding is retained, including for MSD background,
+ whose inner band can therefore reach crop faces. Support counts are
+ computed over the full volume before sampling.
+ 
+@@ -5098,8 +5258,9 @@
+ plane to the first. Empty full-volume edge support contributes zero.
+ 
+ On MSD, both estimators average all three classes with weight $1/3$,
+-including zero-contributing classes. ADNI evaluates the single foreground
+-mask, with no additional background-class average. Volumes and anchors are sampled
++including zero-contributing classes. ADNI MedSAM3 and GeoFWI3D SAM3
++evaluate their single foreground mask, with no additional
++background-class average. Volumes and anchors are sampled
+ uniformly, and the two pairs per update are averaged through the
+ fixed accumulation schedule. For fixed slice predictions, the finite
+ expectation identities also apply to their gradients. They provide
+@@ -5123,9 +5284,10 @@
+ and weighted cross-entropy, respectively. The SDF estimator already
+ averages the plane and needs no $Z_i$ factor; the depth weights are
+ normalized over the full volume and therefore do. Distances use the
+-verified 1 mm MSD grid and unit ADNI array coordinates, as specified
+-in the methods. The identity affines of ADNI do not establish physical
+-millimetres or anatomical orientation.
++verified 1 mm MSD grid and unit source-array coordinates for ADNI and
++GeoFWI3D SAM3, as specified in the methods. The latter two constructions
++do not infer physical millimetres or anatomical orientation from their
++working coordinate maps.
+ 
+ \subsection{Calibration and Discrete Compute Limits}
+ 
+@@ -5177,8 +5339,10 @@
+ evaluated on the support data and averaged over the nine runs. Gains
+ are paired percentage points and positive counts refer to nine cells.
+ Conventional FN, FP and swaps are mean pooled validation counts per run;
+-MedSAM3 errors are means per validation crop. All reductions and full
+-precision values are preserved in the accompanying CSV/JSON extraction.
++MedSAM3 errors are means per validation crop, and SAM3 errors are means
++per validation volume. Verified numerical reductions and full-precision
++values are preserved in the accompanying CSV/JSON extractions. SAM3
++placeholders retain the same reporting conventions for final insertion.
+ 
+ \subsection{Geological Comparison}
+ 
+@@ -5498,6 +5662,42 @@
+ \end{table}
+ \clearpage
+ 
++\subsection{SAM3 Fold Effects}
++
++\begin{table}[htbp]
++\centering\small\setstretch{1.05}
++\setlength{\tabcolsep}{5pt}
++\renewcommand{\arraystretch}{1.12}
++\begin{tabular}{@{}lrrrrrr@{}}
++\hline
++ & \multicolumn{3}{c}{Validation Dice (\%)} & \multicolumn{3}{c}{$\Delta$ base (pp)} \\
++Objective & Fold 0 & Fold 1 & Fold 3 & Fold 0 & Fold 1 & Fold 3 \\
++\hline
++Baseline & \samPending & \samPending & \samPending & 0.00 & 0.00 & 0.00 \\
++$B$ & \samPending & \samPending & \samPending & \samPending & \samPending & \samPending \\
++$S$ & \samPending & \samPending & \samPending & \samPending & \samPending & \samPending \\
++$B+S$ & \samPending & \samPending & \samPending & \samPending & \samPending & \samPending \\
++$B+E$ & \samPending & \samPending & \samPending & \samPending & \samPending & \samPending \\
++$B+E+S$ & \samPending & \samPending & \samPending & \samPending & \samPending & \samPending \\
++$D$ & \samPending & \samPending & \samPending & \samPending & \samPending & \samPending \\
++$B+D$ & \samPending & \samPending & \samPending & \samPending & \samPending & \samPending \\
++$E+D$ & \samPending & \samPending & \samPending & \samPending & \samPending & \samPending \\
++$S+D$ & \samPending & \samPending & \samPending & \samPending & \samPending & \samPending \\
++$B+E+D$ & \samPending & \samPending & \samPending & \samPending & \samPending & \samPending \\
++$B+S+D$ & \samPending & \samPending & \samPending & \samPending & \samPending & \samPending \\
++$E+S+D$ & \samPending & \samPending & \samPending & \samPending & \samPending & \samPending \\
++$B+E+S+D$ & \samPending & \samPending & \samPending & \samPending & \samPending & \samPending \\
++\hline
++\end{tabular}
++\caption{SAM3 fold means, each averaging seeds 0, 1 and 2. Paired changes
++use the corresponding baseline within each fold. Pending cells reserve
++complete three-seed reductions; they are not partial means. All fourteen
++objectives appear regardless of the direction of their final changes.}
++\label{tab:sam3-geo-folds}
++\end{table}
++
++\clearpage
++
+ \section{Reproducibility and Evidence Register}
+ \label{sec:evidence-register}
+ 
+@@ -5625,23 +5825,33 @@
+ are excluded from its support subjects. This explicit overlap prevents
+ misinterpreting three folds as three independent two-crop support draws.
+ 
+-\subsection{SAM3 Completion Inventory}
+-
+-The separate geological adaptation campaign is defined in
++\subsection{SAM3 Campaign}
++
++The geological adaptation campaign is defined in
+ \path{reports/sam3_geofwi_f013_s012_126_20261019/bundle/}.
+-The inventory in \path{reports/thesis_sam3_update_20261023/inventory.json}
+-reconciles its 126 task identifiers with the preserved Colab completion
+-state and cluster run directories. The two sources contain 76 and 34
+-completed tasks respectively, with no overlap. All completion records
+-specify 25 updates and the planned fold, seed and objective. The cluster
+-check verifies 805 metadata files against archive hashes and confirms
+-matching durable-archive acknowledgements. This inventory check does
+-not replace the final per-case audit of all Colab payloads or establish
+-completion of the sixteen outstanding tasks. A documented Colab restart
+-of the fold-1, seed-2 $B+E+S$ run resumed from checkpoint 0 despite a
+-charge for update 1. The record allows up to one additional update attempt;
+-whether the lost attempt completed is unknown. Recovery computation must
+-therefore be reported separately from the final 25-update trajectory.
++Its immutable plan assigns 126 distinct tasks to fourteen objectives,
++folds 0, 1 and 3, and seeds 0, 1 and 2. All tasks are fresh runs;
++historical pilots serve only as protocol references. The Colab and
++cluster subsets retain disjoint task identifiers and the same frozen
++scientific source. Dated progress inventories are preserved under
++\path{reports/thesis_sam3_update_20261023/}; they are not substituted
++for balanced final-result aggregates.
++
++\noindent\samResult{final archive audit: reconcile all 126 task IDs,
++verify available payload hashes and archive acknowledgements, check
++25-update records, frozen-parameter identities, matched initialization
++and sampling, and recompute 12,726 support/validation volume records;
++state any unavailable payloads or limits of verification}.
++
++Final extraction supplies the fourteen-objective quality and error tables,
++the fold decomposition and the linked abstract/result fields. The expected
++per-volume inventory is $126\times(5+96)=12{,}726$ evaluations, with support
++and validation reduced separately. Runtime summaries retain execution
++site, measured scope and recovery cost. A documented Colab restart of
++the fold-1, seed-2 $B+E+S$ run resumed from checkpoint 0 despite a charge
++for update 1. The record allows up to one additional update attempt;
++whether the lost attempt completed is unknown. This recovery cost remains
++separate from the final 25-update trajectory.
+ 
+ \subsection{Annotation Evidence and Outstanding Items}
+ 
+@@ -5652,8 +5862,9 @@
+ validation crops. These denominators and geometric supports remain
+ separate from the performance-run inventories.
+ 
+-The remaining experimental integration item is the SAM3 replication
+-listed in Section~\ref{sec:sam3-results}.
++SAM3 numerical and interpretation fields are marked explicitly in the
++abstract, Section~\ref{sec:sam3-results} and its fold table. They require
++the final verified extraction and do not imply measured outcomes.
+ The geological four-model matrix is complete; retrieving the nine
+ baseline raw archives would complete its baseline error aggregates. Presentation
+ and measurement gaps include attributable prediction examples,

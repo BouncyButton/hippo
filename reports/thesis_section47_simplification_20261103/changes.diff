@@ -1,0 +1,75 @@
+--- before.tex
++++ after.tex
+@@ -1991,7 +1991,7 @@
+ \end{equation}
+ A present reference class with no predicted voxels scores zero.
+ The MSD volume score is the mean anterior/posterior Dice,
+-$D_i=(D_{i,A}+D_{i,P})/2$, and the ADNI volume score is hippocampus Dice. Geological evaluation
++$D_i=(D_{i,A}+D_{i,P})/2$. ADNI uses hippocampus Dice and GeoFWI3D
+ uses salt Dice.
+ Background is excluded from these primary metrics.
+ Section~\ref{sec:background-dice-results} also reports background and
+@@ -2003,31 +2003,29 @@
+ describes variation between those three fold averages. Training Dice
+ follows the same hierarchy using support volumes.
+ 
+-Let $\overline D_{m,j,f,s}$ denote the mean volume Dice in a run with
+-model $m$, objective $j$, fold $f$ and seed $s$. Subscript
+-$\mathrm{base}$ identifies its matched baseline. Their paired change is
+-\begin{equation}
+- \Delta_{m,j,f,s}=100\left(
+- \overline D_{m,j,f,s}-\overline D_{m,\mathrm{base},f,s}\right).
+-\label{eq:paired-reported-gain}
+-\end{equation}
+-Dice is reported as a percentage and gains as percentage-point
+-differences. Paired gains follow the same averaging hierarchy, with
+-their standard deviation calculated across the three fold-mean
+-differences. Positive-change counts refer to the nine individual
+-matched runs. These standard deviations describe observed variation,
+-not confidence intervals over independent datasets: seeds share data,
+-training pools overlap and configuration selection is exploratory.
+-Any dispersion across individual volumes is identified separately.
++To measure the benefit of a constraint, we compare each constrained
++run with its matched baseline: the same dataset, model, fold and seed,
++within the same experimental batch. The paired gain is simply the
++constrained run's Dice minus the baseline's Dice. Scores are reported
++as percentages and gains as percentage points: for example, an increase
++from 75\% to 78\% is a gain of 3 percentage points.
++
++We average these paired gains across the three seeds within each fold
++and then equally across folds. Their sample standard deviation describes
++variation between the three fold-mean gains. Positive-change counts
++state how many of the nine matched runs improve on their baseline.
++These standard deviations describe the variation observed in this
++study; they are not confidence intervals over independent datasets.
++Seeds share data, training pools overlap and configuration selection
++is exploratory. Any variation across individual volumes is reported
++separately.
+ 
+ Error counts complement Dice by distinguishing missed foreground
+ (false negatives, FN) from extra foreground (false positives, FP).
+ MSD also permits anterior-to-posterior and posterior-to-anterior swaps.
+-These four disjoint error categories account for every incorrectly
+-labelled voxel. They can be read from a confusion matrix, which records
+-reference classes against predicted classes; the pretrained-model
+-matrices use reference classes as rows. ADNI and GeoFWI3D are binary
+-tasks and have no anterior/posterior swaps.
++On MSD, these four categories do not overlap and together account for
++every incorrectly labelled voxel. ADNI and GeoFWI3D are binary tasks
++and have no anterior/posterior swaps.
+ 
+ All counts cover the full prediction grid, including errors outside
+ the boundary bands. Conventional studies sum errors across validation
+@@ -3430,6 +3428,12 @@
+ 
+ \subsection{Error Tradeoffs}
+ \label{sec:complete-error-tables}
++A confusion matrix counts voxels for each combination of reference and
++predicted class. In the pretrained-model records, rows represent the
++reference classes and columns the predicted classes. Its off-diagonal
++entries give the false negatives, false positives and, on MSD, the two
++directions of anterior/posterior swaps.
++
+ Table~\ref{tab:selected-error-tradeoffs} summarizes the error changes
+ for the same selected configurations. False negatives (FN) are missed
+ foreground and false positives (FP) are extra foreground; MSD swaps

@@ -1,0 +1,931 @@
+\appendix
+
+% DATA FIGURE PROVENANCE: {"dataset": "Dataset203_GeoFWI3D", "image": "datasets/Dataset203_GeoFWI3D/imagesTr/model_0001_0000.nii.gz", "labels": "datasets/Dataset203_GeoFWI3D/labelsTr/model_0001.nii.gz", "shape": [96, 96, 96], "plane_axis": 0, "slice_index_zero_based": 50, "display_gray_limits": [-1.0, 1.0], "display_gray_levels": 32, "display_flip_axis2": false, "labels_in_slice": [0, 1], "image_sha256": "f2a8f1a7e2ac61692301b6780c5a7255f98cfa50ca7017aa7b7f0582c858921a", "labels_sha256": "13cbf533c902d76848279d8636a330f64bb48d51371cecf546046d03f530eb33"}
+% DATA FIGURE PROVENANCE: {"dataset": "Dataset101_MSD", "image": "datasets/Dataset101_MSD/imagesTr/hippocampus_001_0000.nii.gz", "labels": "datasets/Dataset101_MSD/labelsTr/hippocampus_001.nii.gz", "shape": [35, 51, 35], "plane_axis": 0, "slice_index_zero_based": 14, "display_gray_limits": [9.0, 106.0], "display_gray_levels": 32, "display_flip_axis2": true, "labels_in_slice": [0, 1, 2], "image_sha256": "ab47d6115b412ffaba041cbf48962967127f199f39eb56c777a6bb3746353b4a", "labels_sha256": "31e218cd74ee787c25a17a9cc3a13743ba8ecd11dd76fbad3c0c18c09fd8b396"}
+% DATA FIGURE PROVENANCE: {"dataset": "Dataset103_ADNI", "image": "datasets/Dataset103_ADNI/imagesTr/hippocampus_adni_10007_L_0000.nii.gz", "labels": "datasets/Dataset103_ADNI/labelsTr/hippocampus_adni_10007_L.nii.gz", "shape": [32, 48, 40], "plane_axis": 0, "slice_index_zero_based": 15, "display_gray_limits": [75.62541742107685, 787.0265820841897], "display_gray_levels": 32, "display_flip_axis2": true, "labels_in_slice": [0, 1], "image_sha256": "b1479c7bd284e5d4013dd970ff5330819c49732d8f3b8b27c5d4957bde68b799", "labels_sha256": "03fbe773f988e7541ced3681d1f76719745059b8d404b9c9de76c74401def8b3"}
+% CURRENT NUMERICAL PROVENANCE -- 21 October 2026:
+% reports/thesis_noaug_update_20261021/audit.json records source SHA-256 identities.
+% Conventional MSD and ADNI final reports: 504 runs per dataset.
+% MSD MedSAM3: one campaign; execution batches preserve 27 and 108 records.
+% ADNI MedSAM3: 126 complete run archives, rebuilt beyond the stale summary.
+% Performance tables retain the recorded matched baselines for each comparison.
+% SAM3 final 126-run aggregates verified in reports/thesis_sam3_final_20261023/.
+% All conventional and adaptation objective inventories are complete.
+
+\section{Numerical and Implementation Details}
+\label{sec:technical-details}
+
+The main constraint chapter defines the supervised properties and their
+losses. This appendix supplies the stable evaluations, derivatives and
+protocol-specific reductions needed to reproduce them.
+
+\subsection{Stable Membership Evaluation}
+
+Let $\overline F$ be the complement of a class group $F$, and define
+$\operatorname{LSE}(z_U)=\log\sum_{c\in U}\exp z_c$. The grouped logit
+\begin{equation}
+s_F=\operatorname{LSE}(z_F)-\operatorname{LSE}(z_{\overline{F}}).
+\label{eq:grouped-predicate-logit}
+\end{equation}
+obeys $\sigma(s_F)=\sum_{c\in F}p_c$ in real arithmetic. Its positive
+and negative log-memberships are
+$-\operatorname{softplus}(-s_F)$ and
+$-\operatorname{softplus}(s_F)$, respectively. For the MSD union,
+\begin{equation}
+s_i(v)=\operatorname{LSE}\bigl(z_{\theta,i,A}(v),
+                              z_{\theta,i,P}(v)\bigr)
+        -z_{\theta,i,0}(v),
+\qquad q_i(v)=\sigma(s_i(v)).
+\label{eq:msd-band-logit}
+\end{equation}
+gives the binary cross-entropy expression
+\begin{equation}
+e_i(v)=h_i(v)\operatorname{softplus}(-s_i(v))
+       +(1-h_i(v))\operatorname{softplus}(s_i(v)).
+\label{eq:band-stable-bce}
+\end{equation}
+Grouped logits and the fused loss are evaluated in float32. This avoids
+forming a logarithm after subtracting an already rounded probability
+from one. A singleton group gives the classwise version; multiclass
+log-probabilities use log-softmax.
+
+Count stabilization must also be retained for exact correspondence.
+For a nonempty support $U$,
+\begin{equation}
+\frac{\sum_{u\in U}e(u)}{|U|+\varepsilon}
+=\frac{|U|}{|U|+\varepsilon}
+\left(\frac{1}{|U|}\sum_{u\in U}e(u)\right).
+\label{eq:stabilized-quantifier-reduction}
+\end{equation}
+Let $b_i^s=-\ell_\theta(\Phi_i^s)$ denote an unstabilized band-side
+mean and $\rho_i^s=n_i^s/(n_i^s+\varepsilon)$. Then
+$\mathcal L_{B,i}=\tfrac12\sum_s\rho_i^s b_i^s$ and
+\begin{equation}
+\exp(-\mathcal{L}_{B,i})
+=\mathcal{G}_\theta(\Phi_i^{\mathrm{in}})^{\rho_i^{\mathrm{in}}/2}
+ \mathcal{G}_\theta(\Phi_i^{\mathrm{out}})^{\rho_i^{\mathrm{out}}/2}.
+\label{eq:balanced-band-satisfaction}
+\end{equation}
+The factors affect both values and gradients. Empty supports instead
+follow each protocol's validity rule; no mean over an empty set is
+evaluated.
+
+\subsection{Constraint Derivatives}
+
+For a valid band case, the fixed voxel coefficient is
+\begin{equation}
+a_i(v)=\frac{\mathbf{1}\{v\in B_i^{\mathrm{in}}\}}
+                 {2(n_i^{\mathrm{in}}+\varepsilon)}
+       +\frac{\mathbf{1}\{v\in B_i^{\mathrm{out}}\}}
+                 {2(n_i^{\mathrm{out}}+\varepsilon)}.
+\label{eq:band-voxel-coefficient}
+\end{equation}
+and differentiation with respect to the grouped logit gives
+\begin{equation}
+\frac{\partial\mathcal{L}_{B,i}}{\partial s_i(v)}
+ =a_i(v)\bigl(q_i(v)-h_i(v)\bigr).
+\label{eq:band-logit-gradient}
+\end{equation}
+There is no direct derivative outside the bands, although shared model
+parameters can change predictions at other locations.
+
+For edges, write $\mathcal N_i^B(u)$ for the neighbours of voxel $u$
+in the selected pair graph. The derivatives are
+\begin{equation}
+\frac{\partial\mathcal{L}_{E,i}}{\partial q_i(u)}
+=\frac{2}{n_i^E}\sum_{v\in\mathcal{N}_i^B(u)}
+       \bigl(\delta_i(u)-\delta_i(v)\bigr).
+\label{eq:edge-probability-gradient}
+\end{equation}
+and
+\begin{equation}
+\frac{\partial\mathcal{L}_{E,i}}{\partial s_i(u)}
+=q_i(u)\bigl(1-q_i(u)\bigr)
+  \frac{\partial\mathcal{L}_{E,i}}{\partial q_i(u)}.
+\label{eq:edge-logit-gradient}
+\end{equation}
+The probability derivative is the graph Laplacian applied to the
+membership residual. The additional sigmoid factor in the logit
+derivative explains its attenuation near saturated probabilities.
+
+For SDF, define $\bar\varphi_{i,0}=0$ and
+$\bar\varphi_{i,c}=\varphi_{i,c}$ for $c\in\{A,P\}$. Softmax
+differentiation yields
+\begin{equation}
+\frac{\partial\mathcal{L}_{\mathrm{SDF},i}}
+     {\partial z_{\theta,i,k}(v)}
+=\frac{p_{i,k}(v)}{2|\Omega_i|}
+ \left[\bar\varphi_{i,k}(v)
+       -\sum_{c\in\mathcal{C}}p_{i,c}(v)\bar\varphi_{i,c}(v)\right].
+\label{eq:sdf-logit-gradient}
+\end{equation}
+The annotation-dependent offset used to make the penalty nonnegative
+does not change this derivative. Fixed depth weights give the usual
+weighted cross-entropy derivative,
+\begin{equation}
+\frac{\partial\mathcal{L}_{\mathrm{depth},i}}
+     {\partial z_{\theta,i,c}(v)}
+ =w_i(v)\bigl(p_{\theta,i,c}(v)-y_{i,c}(v)\bigr),
+\qquad c\in\{0,A,P\}.
+\label{eq:depth-logit-gradient}
+\end{equation}
+These are case-loss derivatives before batch reduction, calibration
+coefficients and activation multipliers. Those factors are applied
+through Equation~\ref{eq:scheduled-constraint-objective}.
+
+\subsection{Physical Geometry of the Depth Construction}
+
+For hippocampal union $M_i$, the physical centroid and covariance are
+\begin{equation}
+\begin{aligned}
+\mu_i&=\frac{1}{|M_i|}\sum_{v\in M_i}r_i(v),\\
+\Sigma_i&=\frac{1}{|M_i|}\sum_{v\in M_i}
+       (r_i(v)-\mu_i)(r_i(v)-\mu_i)^{\mathsf T}.
+\end{aligned}
+\label{eq:depth-centroid-covariance}
+\end{equation}
+The dominant unit eigenvector is oriented anteriorly to choose its
+sign. Reversing this sign leaves the projected rightward normal in
+Equation~\ref{eq:depth-plane-normal} unchanged. The principal-axis
+eigenvalue gap is recorded as a diagnostic, without replacing
+ambiguous geometry by a zero constraint.
+
+The surrounding region is
+\begin{equation}
+R_i=\left\{v\in\Omega_i:
+       \min_{u\in M_i}\|r_i(v)-r_i(u)\|_2\leq m\right\},
+\qquad m=8\,\mathrm{mm}.
+\label{eq:depth-region-of-interest}
+\end{equation}
+with the same coordinate map as the plane. The distance transform uses
+column norms of $Q_i$ as axis spacings. This implements physical
+Euclidean distance for orthogonal voxel axes, including rotated grids.
+Sheared affines are rejected, as are annotations with fewer than four
+foreground points or a projected normal of norm below 0.1. Such
+failures require correction of the preparation.
+
+Fixed preprocessing preserves the relation between labels and
+coordinates. The conventional recipes use one $64^3$ volume per update
+and apply constraints only to the primary output; nnU-Net's other
+supervised resolutions retain their baseline losses. Identity affines
+introduced during ADNI export do not establish anatomical orientation
+or physical spacing; its distance and depth constructions therefore
+use stored array coordinates in voxel units.
+
+\subsection{GeoFWI3D Observation Boundaries}
+\label{sec:geo-boundaries}
+
+The final four-model geological campaign retains model-specific band
+supports. For axis lengths $N_{i,k}$, define the interior domain
+\begin{equation}
+R_i^{(r)}=\{v\in\Omega_i:
+ r\leq v_k\leq N_{i,k}-1-r\ \text{for }k=1,2,3\}.
+\label{eq:geological-band-frame}
+\end{equation}
+UNETR uses $\widetilde B_i^s=B_i^s\cap R_i^{(2)}$, excluding the
+two-voxel observation frame. nnU-Net, SwinUNETR and the compact U-Net
+use $\widetilde B_i^s=B_i^s$ without this exclusion. In every recipe,
+the band loss is the half-sum of inner and outer BCE sums divided
+by their respective counts plus $10^{-6}$. Both sides must be
+nonempty; invalid cases are skipped and an entirely invalid batch
+returns a differentiable zero. These are the final campaign's
+reductions, not the available-side exact means of the earlier
+geological pilot.
+
+Edge pairs require both endpoints in
+$\widetilde B_i^{\mathrm{in}}\cup\widetilde B_i^{\mathrm{out}}$.
+The reduction is an exact pair mean followed by a valid-case mean,
+with differentiable zero when no valid case remains. Thus only the
+UNETR recipe excludes pairs involving the observation frame.
+The single-foreground distance loss is
+\begin{equation}
+\mathcal{L}_{\mathrm{SDF},i}^{\mathrm{Geo}}
+=\frac{1}{|\Omega_i|}\sum_{v\in\Omega_i}
+ \bigl(p_{i,S}(v)-y_{i,S}(v)\bigr)\varphi_{i,S}(v).
+\label{eq:geological-sdf-loss}
+\end{equation}
+It covers the full stored grid, including the observation frame,
+and retains the half-voxel shift, unit-grid Euclidean distances and
+clipping threshold eight. The coordinate and depth conventions are
+specified in Section~\ref{sec:geo-methods}.
+
+\subsection{Sampled Volumetric Supervision in Pretrained Models}
+\label{sec:sampled-pretrained-supervision}
+
+Native three-dimensional class masks define separate bands for
+$c\in\{0,A,P\}$ on MSD, $c=H$ on ADNI and $c=S$ for SAM3 on
+GeoFWI3D. Zero padding is retained, including for MSD background,
+whose inner band can therefore reach crop faces. Support counts are
+computed over the full volume before sampling.
+
+For $Z_i$ planes, uniform anchor $k$ and plane domain
+$\Omega_i^{(k)}$, a class with two nonempty band sides contributes
+\begin{equation}
+\begin{aligned}
+\widehat{\mathcal{L}}_{B,i,c}^{(k)}
+=-\frac{Z_i}{2}\Biggl[
+ &\frac{\sum_{v\in B_{i,c}^{\mathrm{in}}\cap\Omega_i^{(k)}}
+                  \log p_{\theta,i,c}(v)}
+        {n_{i,c}^{\mathrm{in}}+\varepsilon}\\
+ {}+{}&\frac{\sum_{v\in B_{i,c}^{\mathrm{out}}\cap\Omega_i^{(k)}}
+                  \log(1-p_{\theta,i,c}(v))}
+        {n_{i,c}^{\mathrm{out}}+\varepsilon}\Biggr].
+\end{aligned}
+\label{eq:medsam-sampled-band-loss}
+\end{equation}
+where $n_{i,c}^s=|B_{i,c}^s|$ and $\varepsilon=10^{-6}$.
+Averaging over all anchors cancels the factor $Z_i$ and recovers
+the full-volume stabilized loss for fixed predictions. A plane-local
+denominator would assign different weights and define a different
+objective. An empty full-volume side gives a zero class contribution;
+an empty sampled support also contributes zero while retaining the
+global denominator.
+
+Let $\mathcal E_{i,c}^B(k)$ contain selected in-plane pairs on $k$
+and through-plane pairs from $k$ to $k+1$ for $k<Z_i-1$.
+This assigns every full-volume edge to exactly one anchor. With
+$n_{i,c}^E=|\mathcal E_{i,c}^B|>0$ and
+$\delta_{i,c}=p_{\theta,i,c}-y_{i,c}$,
+\begin{equation}
+\widehat{\mathcal{L}}_{E,i,c}^{(k)}
+=\frac{Z_i}{n_{i,c}^E}
+  \sum_{\{u,v\}\in\mathcal{E}_{i,c}^B(k)}
+    \bigl(\delta_{i,c}(u)-\delta_{i,c}(v)\bigr)^2.
+\label{eq:medsam-sampled-edge-loss}
+\end{equation}
+satisfies
+\begin{equation}
+\frac{1}{Z_i}\sum_{k=0}^{Z_i-1}
+  \widehat{\mathcal{L}}_{E,i,c}^{(k)}
+=\frac{1}{n_{i,c}^E}\sum_{\{u,v\}\in\mathcal{E}_{i,c}^B}
+    \bigl(\delta_{i,c}(u)-\delta_{i,c}(v)\bigr)^2
+=\mathcal{L}_{E,i,c}.
+\label{eq:medsam-edge-expectation}
+\end{equation}
+The native supervised objective uses companion plane
+$(k+1)\bmod Z_i$, but the edge estimator never joins the final
+plane to the first. Empty full-volume edge support contributes zero.
+
+On MSD, both estimators average all three classes with weight $1/3$,
+including zero-contributing classes. ADNI MedSAM3 and GeoFWI3D SAM3
+evaluate their single foreground mask, with no additional
+background-class average. Volumes and anchors are sampled
+uniformly, and the two pairs per update are averaged through the
+fixed accumulation schedule. For fixed slice predictions, the finite
+expectation identities also apply to their gradients. They provide
+volumetric supervision while retaining an image-based encoder.
+
+
+Signed-distance and depth supervision also admit sampled volumetric
+reductions. Let $C_+$ be the foreground class set, let each plane
+contain $N_i$ voxels and let $w_i(v)$ be full-volume normalized depth
+weights. Their anchor estimators are
+\begin{align}
+\widehat{\mathcal L}_{S,i}^{(k)}
+ &=\frac{1}{|C_+|N_i}\sum_{c\in C_+}
+   \sum_{v\in\Omega_i^{(k)}}(p_{i,c}(v)-y_{i,c}(v))\varphi_{i,c}(v),
+   \label{eq:medsam-sampled-sdf}\\
+\widehat{\mathcal L}_{D,i}^{(k)}
+ &=-Z_i\sum_{v\in\Omega_i^{(k)}}w_i(v)\log p_{i,y_i(v)}(v).
+   \label{eq:medsam-sampled-depth}
+\end{align}
+Averaging uniformly over $Z_i$ anchors yields the full-volume SDF mean
+and weighted cross-entropy, respectively. The SDF estimator already
+averages the plane and needs no $Z_i$ factor; the depth weights are
+normalized over the full volume and therefore do. Distances use the
+verified 1 mm MSD grid and unit source-array coordinates for ADNI and
+GeoFWI3D SAM3, as specified in the methods. The latter two constructions
+do not infer physical millimetres or anatomical orientation from their
+working coordinate maps.
+
+\subsection{Calibration and Discrete Compute Limits}
+
+Sequential calibration adds weighted gradient vectors before measuring
+their RMS. For example,
+\begin{equation}
+\begin{aligned}
+\operatorname{RMS}(g_{i,0}+\lambda_B g_{i,B})^2
+={}&\operatorname{RMS}(g_{i,0})^2
+ +2\lambda_B\langle g_{i,0},g_{i,B}\rangle_{m_i}\\
+ &+\lambda_B^2\operatorname{RMS}(g_{i,B})^2,
+\end{aligned}
+\label{eq:calibration-cross-term}
+\end{equation}
+where $\langle a,b\rangle_{m_i}=m_i^{-1}\sum_k a_kb_k$.
+The cross term retains directional agreement. Adding norms instead
+would generally give another coefficient. Quantiles use linear
+interpolation, and calibration requires finite positive ratios,
+without an arbitrary fallback for an invalid result.
+
+For early activation $d_a$, delayed SDF activation $d_a^S$ and
+profiled per-update costs $f_{a,0},f_{a,1},f_{a,2}$ in the three
+phases, the charge is
+\begin{equation}
+\begin{aligned}
+C_a(n)={}&f_{a,0}\min(n,d_a)\\
+ &+f_{a,1}\bigl[\min(n,d_a^S)-d_a\bigr]_+\\
+ &+f_{a,2}[n-d_a^S]_+,
+\end{aligned}
+\label{eq:piecewise-optimization-cost}
+\end{equation}
+with $[x]_+=\max(x,0)$. The largest integer update count satisfying
+the ceiling is permitted. The delayed boundary is chosen nearest
+to charge $5C_{\max}/9$, after the early ramp, with ties resolved
+toward the earlier boundary. Shared activation requires only two
+cost phases.
+
+Attempted updates are charged even when a numerical failure prevents
+a parameter change; successful updates are tracked separately.
+Fractional final updates are not permitted. Calibration remains
+outside this optimization ledger.
+
+\clearpage
+
+\section{Extended Experimental Results}
+\label{sec:extended-results}
+
+The following ledger includes every retained condition. Support Dice is
+evaluated on the labelled training data and averaged over the nine runs. Gains
+are paired percentage points and positive counts refer to nine cells.
+The full error tables and their reductions are presented together in
+Section~\ref{sec:error-analysis}. Verified numerical reductions and
+full-precision values are preserved in the accompanying CSV/JSON
+extractions. SAM3 includes all fourteen final conditions, with the
+same seed-within-fold reduction used in the main results.
+
+\subsection{Geological Comparison}
+
+\begingroup\footnotesize\setstretch{1.0}
+\setlength{\tabcolsep}{4pt}
+\begin{longtable}{@{}lrrrr@{}}
+\caption{GeoFWI3D complete condition ledger. Dice is in percent; gains are paired percentage points. Full-validation error counts are reported in Table~\ref{tab:geo-all-errors}.}\label{tab:geo-ledger}\\
+\hline
+Variant & Dice & $\Delta$ & Positive & Updates \\ \hline
+\endfirsthead
+\hline
+Variant & Dice & $\Delta$ & Positive & Updates \\ \hline
+\endhead
+\hline
+\multicolumn{5}{r}{Continued on next page}\\
+\endfoot
+\hline
+\endlastfoot
+\multicolumn{5}{l}{\textbf{nnU-Net}}\\[.3em]
+Baseline & 72.08 & +0.00 & --- & 151 \\
+Baseline $+B$ & 73.43 & +1.35 & 8/9 & 145 \\
+Baseline $+S$ & 72.01 & -0.07 & 4/9 & 145 \\
+Baseline $+B+S$ & 73.14 & +1.06 & 6/9 & 145 \\
+Baseline $+B+E$ & 72.84 & +0.76 & 7/9 & 145 \\
+Baseline $+B+E+S$ & 71.79 & -0.29 & 5/9 & 145 \\
+Baseline $+D$ & 73.92 & +1.84 & 9/9 & 145 \\
+Baseline $+B+D$ & 75.23 & +3.15 & 9/9 & 145 \\
+Baseline $+E+D$ & 75.21 & +3.13 & 9/9 & 145 \\
+Baseline $+S+D$ & 76.26 & +4.18 & 9/9 & 145 \\
+Baseline $+B+E+D$ & 70.72 & -1.36 & 5/9 & 145 \\
+Baseline $+B+S+D$ & 77.33 & +5.25 & 9/9 & 145 \\
+Baseline $+E+S+D$ & 76.85 & +4.77 & 8/9 & 145 \\
+Baseline $+B+E+S+D$ & 78.22 & +6.14 & 9/9 & 145 \\
+\multicolumn{5}{l}{\textbf{SwinUNETR}}\\[.3em]
+Baseline & 55.54 & +0.00 & --- & 362 \\
+Baseline $+B$ & 57.13 & +1.59 & 8/9 & 356 \\
+Baseline $+S$ & 55.91 & +0.37 & 7/9 & 356 \\
+Baseline $+B+S$ & 56.98 & +1.44 & 8/9 & 356 \\
+Baseline $+B+E$ & 56.99 & +1.45 & 9/9 & 356 \\
+Baseline $+B+E+S$ & 56.93 & +1.39 & 8/9 & 356 \\
+Baseline $+D$ & 56.55 & +1.01 & 9/9 & 356 \\
+Baseline $+B+D$ & 57.28 & +1.74 & 9/9 & 356 \\
+Baseline $+E+D$ & 56.76 & +1.21 & 9/9 & 356 \\
+Baseline $+S+D$ & 56.50 & +0.96 & 8/9 & 356 \\
+Baseline $+B+E+D$ & 57.33 & +1.79 & 9/9 & 356 \\
+Baseline $+B+S+D$ & 57.58 & +2.04 & 9/9 & 356 \\
+Baseline $+E+S+D$ & 56.76 & +1.22 & 9/9 & 356 \\
+Baseline $+B+E+S+D$ & 57.61 & +2.07 & 9/9 & 356 \\
+\multicolumn{5}{l}{\textbf{UNETR}}\\[.3em]
+Baseline & 54.91 & +0.00 & --- & 414 \\
+Baseline $+B$ & 55.66 & +0.75 & 7/9 & 407 \\
+Baseline $+S$ & 54.57 & -0.33 & 2/9 & 408 \\
+Baseline $+B+S$ & 54.97 & +0.06 & 3/9 & 407 \\
+Baseline $+B+E$ & 56.07 & +1.16 & 8/9 & 407 \\
+Baseline $+B+E+S$ & 54.70 & -0.20 & 3/9 & 407 \\
+Baseline $+D$ & 55.59 & +0.68 & 6/9 & 408 \\
+Baseline $+B+D$ & 55.69 & +0.78 & 6/9 & 407 \\
+Baseline $+E+D$ & 55.68 & +0.77 & 6/9 & 407 \\
+Baseline $+S+D$ & 55.12 & +0.21 & 6/9 & 408 \\
+Baseline $+B+E+D$ & 55.85 & +0.94 & 7/9 & 407 \\
+Baseline $+B+S+D$ & 55.31 & +0.41 & 5/9 & 407 \\
+Baseline $+E+S+D$ & 54.67 & -0.24 & 4/9 & 407 \\
+Baseline $+B+E+S+D$ & 55.55 & +0.65 & 6/9 & 407 \\
+\multicolumn{5}{l}{\textbf{3D U-Net}}\\[.3em]
+Baseline & 77.60 & +0.00 & --- & 952 \\
+Baseline $+B$ & 78.32 & +0.72 & 7/9 & 944 \\
+Baseline $+S$ & 77.83 & +0.24 & 7/9 & 945 \\
+Baseline $+B+S$ & 77.91 & +0.31 & 7/9 & 944 \\
+Baseline $+B+E$ & 78.14 & +0.55 & 7/9 & 943 \\
+Baseline $+B+E+S$ & 78.56 & +0.96 & 7/9 & 943 \\
+Baseline $+D$ & 79.40 & +1.81 & 9/9 & 945 \\
+Baseline $+B+D$ & 80.40 & +2.80 & 9/9 & 944 \\
+Baseline $+E+D$ & 79.59 & +1.99 & 8/9 & 944 \\
+Baseline $+S+D$ & 79.77 & +2.17 & 9/9 & 945 \\
+Baseline $+B+E+D$ & 80.50 & +2.90 & 9/9 & 943 \\
+Baseline $+B+S+D$ & 80.73 & +3.13 & 9/9 & 944 \\
+Baseline $+E+S+D$ & 80.28 & +2.69 & 9/9 & 944 \\
+Baseline $+B+E+S+D$ & 80.73 & +3.14 & 9/9 & 943 \\
+\end{longtable}
+\endgroup
+
+\subsection{Conventional Medical Comparisons}
+
+\begingroup\footnotesize\setstretch{1.0}
+\setlength{\tabcolsep}{4pt}
+\begin{longtable}{@{}lrrrr@{}}
+\caption{MSD full condition ledger. Support Dice is in percent and gains are paired validation-Dice percentage points. Error counts are reported in Table~\ref{tab:msd-all-errors}.}\label{tab:msd-noaug-ledger}\\
+\hline
+Variant & Support Dice & $\Delta$ & Positive & Updates \\ \hline
+\endfirsthead
+\hline
+Variant & Support Dice & $\Delta$ & Positive & Updates \\ \hline
+\endhead
+\hline\endfoot
+\multicolumn{5}{@{}l}{\textbf{nnU-Net}}\\*
+Baseline & 66.74 & +0.00 & --- & 90 \\
+Baseline $+B$ & 74.24 & +7.55 & 9/9 & 89 \\
+Baseline $+S$ & 64.63 & -2.04 & 0/9 & 89 \\
+Baseline $+B+S$ & 74.34 & +7.59 & 9/9 & 89 \\
+Baseline $+B+E$ & 73.21 & +6.45 & 9/9 & 89 \\
+Baseline $+B+E+S$ & 73.29 & +6.47 & 9/9 & 89 \\
+Baseline $+D$ & 68.30 & +1.61 & 8/9 & 89 \\
+Baseline $+B+D$ & 76.25 & +9.38 & 9/9 & 89 \\
+Baseline $+E+D$ & 67.13 & +0.46 & 6/9 & 89 \\
+Baseline $+S+D$ & 69.72 & +3.00 & 9/9 & 89 \\
+Baseline $+B+E+D$ & 75.97 & +9.09 & 9/9 & 89 \\
+Baseline $+B+S+D$ & 77.11 & +10.15 & 9/9 & 89 \\
+Baseline $+E+S+D$ & 69.14 & +2.39 & 8/9 & 89 \\
+Baseline $+B+E+S+D$ & 76.97 & +9.98 & 9/9 & 89 \\
+\multicolumn{5}{@{}l}{\textbf{SwinUNETR}}\\*
+Baseline & 57.07 & +0.00 & --- & 206 \\
+Baseline $+B$ & 62.27 & +3.85 & 9/9 & 206 \\
+Baseline $+S$ & 57.16 & +0.26 & 6/9 & 206 \\
+Baseline $+B+S$ & 63.36 & +4.97 & 9/9 & 206 \\
+Baseline $+B+E$ & 62.67 & +4.00 & 9/9 & 206 \\
+Baseline $+B+E+S$ & 63.68 & +5.16 & 9/9 & 206 \\
+Baseline $+D$ & 66.06 & +8.24 & 9/9 & 206 \\
+Baseline $+B+D$ & 70.07 & +11.04 & 7/9 & 206 \\
+Baseline $+E+D$ & 66.85 & +8.97 & 9/9 & 206 \\
+Baseline $+S+D$ & 66.23 & +8.44 & 9/9 & 206 \\
+Baseline $+B+E+D$ & 70.78 & +11.55 & 7/9 & 206 \\
+Baseline $+B+S+D$ & 70.60 & +11.67 & 9/9 & 206 \\
+Baseline $+E+S+D$ & 66.96 & +9.12 & 9/9 & 206 \\
+Baseline $+B+E+S+D$ & 71.15 & +11.97 & 9/9 & 206 \\
+\multicolumn{5}{@{}l}{\textbf{UNETR}}\\*
+Baseline & 62.07 & +0.00 & --- & 245 \\
+Baseline $+B$ & 68.68 & +3.89 & 9/9 & 245 \\
+Baseline $+S$ & 62.55 & +0.78 & 6/9 & 245 \\
+Baseline $+B+S$ & 69.76 & +5.14 & 9/9 & 245 \\
+Baseline $+B+E$ & 69.28 & +4.13 & 9/9 & 245 \\
+Baseline $+B+E+S$ & 70.31 & +5.35 & 9/9 & 245 \\
+Baseline $+D$ & 64.90 & +1.76 & 8/9 & 245 \\
+Baseline $+B+D$ & 69.20 & +3.70 & 9/9 & 245 \\
+Baseline $+E+D$ & 65.64 & +2.21 & 9/9 & 245 \\
+Baseline $+S+D$ & 65.47 & +2.37 & 9/9 & 245 \\
+Baseline $+B+E+D$ & 69.56 & +3.80 & 9/9 & 245 \\
+Baseline $+B+S+D$ & 69.89 & +4.70 & 9/9 & 245 \\
+Baseline $+E+S+D$ & 65.94 & +2.71 & 9/9 & 245 \\
+Baseline $+B+E+S+D$ & 70.45 & +4.89 & 9/9 & 245 \\
+\multicolumn{5}{@{}l}{\textbf{3D U-Net}}\\*
+Baseline & 78.50 & +0.00 & --- & 563 \\
+Baseline $+B$ & 85.59 & +4.83 & 9/9 & 563 \\
+Baseline $+S$ & 78.53 & -0.17 & 5/9 & 563 \\
+Baseline $+B+S$ & 85.49 & +4.85 & 9/9 & 562 \\
+Baseline $+B+E$ & 86.96 & +5.71 & 9/9 & 562 \\
+Baseline $+B+E+S$ & 86.59 & +5.53 & 9/9 & 562 \\
+Baseline $+D$ & 81.80 & +2.30 & 9/9 & 563 \\
+Baseline $+B+D$ & 85.84 & +5.02 & 9/9 & 562 \\
+Baseline $+E+D$ & 82.94 & +3.19 & 8/9 & 562 \\
+Baseline $+S+D$ & 81.89 & +2.36 & 9/9 & 563 \\
+Baseline $+B+E+D$ & 87.66 & +6.17 & 9/9 & 562 \\
+Baseline $+B+S+D$ & 85.66 & +4.95 & 9/9 & 562 \\
+Baseline $+E+S+D$ & 83.33 & +3.33 & 8/9 & 562 \\
+Baseline $+B+E+S+D$ & 87.56 & +6.07 & 9/9 & 562 \\
+\end{longtable}\endgroup
+
+\begingroup\footnotesize\setstretch{1.0}
+\setlength{\tabcolsep}{4pt}
+\begin{longtable}{@{}lrrrr@{}}
+\caption{ADNI full condition ledger. Support Dice is in percent and gains are paired validation-Dice percentage points. Error counts are reported in Table~\ref{tab:adni-all-errors}.}\label{tab:adni-noaug-ledger}\\
+\hline
+Variant & Support Dice & $\Delta$ & Positive & Updates \\ \hline
+\endfirsthead
+\hline
+Variant & Support Dice & $\Delta$ & Positive & Updates \\ \hline
+\endhead
+\hline\endfoot
+\multicolumn{5}{@{}l}{\textbf{nnU-Net}}\\*
+Baseline & 84.86 & +0.00 & --- & 90 \\
+Baseline $+B$ & 85.74 & +0.73 & 9/9 & 90 \\
+Baseline $+S$ & 84.92 & +0.01 & 6/9 & 90 \\
+Baseline $+B+S$ & 85.76 & +0.73 & 9/9 & 90 \\
+Baseline $+B+E$ & 85.65 & +0.59 & 8/9 & 89 \\
+Baseline $+B+E+S$ & 85.68 & +0.60 & 8/9 & 89 \\
+Baseline $+D$ & 85.19 & +0.31 & 9/9 & 90 \\
+Baseline $+B+D$ & 86.03 & +0.96 & 9/9 & 90 \\
+Baseline $+E+D$ & 85.40 & +0.48 & 9/9 & 90 \\
+Baseline $+S+D$ & 85.39 & +0.43 & 9/9 & 90 \\
+Baseline $+B+E+D$ & 86.03 & +0.87 & 9/9 & 89 \\
+Baseline $+B+S+D$ & 86.13 & +1.03 & 9/9 & 90 \\
+Baseline $+E+S+D$ & 85.56 & +0.53 & 8/9 & 90 \\
+Baseline $+B+E+S+D$ & 86.16 & +0.88 & 9/9 & 89 \\
+\multicolumn{5}{@{}l}{\textbf{SwinUNETR}}\\*
+Baseline & 75.07 & +0.00 & --- & 206 \\
+Baseline $+B$ & 80.06 & +3.34 & 9/9 & 206 \\
+Baseline $+S$ & 74.97 & -0.07 & 3/9 & 206 \\
+Baseline $+B+S$ & 79.95 & +3.27 & 9/9 & 206 \\
+Baseline $+B+E$ & 80.70 & +3.68 & 9/9 & 206 \\
+Baseline $+B+E+S$ & 80.60 & +3.62 & 9/9 & 206 \\
+Baseline $+D$ & 77.12 & +1.35 & 9/9 & 206 \\
+Baseline $+B+D$ & 80.97 & +3.91 & 9/9 & 206 \\
+Baseline $+E+D$ & 77.79 & +1.78 & 9/9 & 206 \\
+Baseline $+S+D$ & 76.97 & +1.31 & 9/9 & 206 \\
+Baseline $+B+E+D$ & 81.72 & +4.31 & 9/9 & 206 \\
+Baseline $+B+S+D$ & 80.81 & +3.80 & 9/9 & 206 \\
+Baseline $+E+S+D$ & 77.71 & +1.76 & 9/9 & 206 \\
+Baseline $+B+E+S+D$ & 81.59 & +4.22 & 9/9 & 206 \\
+\multicolumn{5}{@{}l}{\textbf{UNETR}}\\*
+Baseline & 68.27 & +0.00 & --- & 245 \\
+Baseline $+B$ & 75.51 & +2.99 & 9/9 & 245 \\
+Baseline $+S$ & 67.35 & -0.34 & 1/9 & 245 \\
+Baseline $+B+S$ & 75.04 & +3.24 & 9/9 & 245 \\
+Baseline $+B+E$ & 77.00 & +3.49 & 9/9 & 245 \\
+Baseline $+B+E+S$ & 76.56 & +3.91 & 9/9 & 245 \\
+Baseline $+D$ & 71.91 & +1.51 & 9/9 & 245 \\
+Baseline $+B+D$ & 77.00 & +3.70 & 9/9 & 245 \\
+Baseline $+E+D$ & 73.09 & +1.85 & 9/9 & 245 \\
+Baseline $+S+D$ & 71.47 & +1.52 & 9/9 & 245 \\
+Baseline $+B+E+D$ & 78.53 & +4.10 & 9/9 & 245 \\
+Baseline $+B+S+D$ & 76.27 & +3.52 & 9/9 & 245 \\
+Baseline $+E+S+D$ & 72.68 & +2.07 & 9/9 & 245 \\
+Baseline $+B+E+S+D$ & 78.12 & +4.20 & 9/9 & 245 \\
+\multicolumn{5}{@{}l}{\textbf{3D U-Net}}\\*
+Baseline & 76.69 & +0.00 & --- & 563 \\
+Baseline $+B$ & 83.99 & +3.81 & 9/9 & 563 \\
+Baseline $+S$ & 76.35 & -0.24 & 2/9 & 563 \\
+Baseline $+B+S$ & 84.66 & +4.67 & 9/9 & 563 \\
+Baseline $+B+E$ & 85.56 & +4.57 & 9/9 & 562 \\
+Baseline $+B+E+S$ & 85.39 & +4.76 & 9/9 & 562 \\
+Baseline $+D$ & 80.05 & +1.97 & 8/9 & 563 \\
+Baseline $+B+D$ & 84.66 & +4.51 & 9/9 & 563 \\
+Baseline $+E+D$ & 81.16 & +2.30 & 9/9 & 563 \\
+Baseline $+S+D$ & 80.05 & +1.98 & 9/9 & 563 \\
+Baseline $+B+E+D$ & 86.73 & +5.54 & 9/9 & 562 \\
+Baseline $+B+S+D$ & 85.03 & +4.72 & 9/9 & 563 \\
+Baseline $+E+S+D$ & 81.64 & +2.75 & 9/9 & 563 \\
+Baseline $+B+E+S+D$ & 86.51 & +5.39 & 9/9 & 562 \\
+\end{longtable}\endgroup
+
+\subsection{SAM3 Fold Effects}
+
+\begin{table}[htbp]
+\centering\small\setstretch{1.05}
+\setlength{\tabcolsep}{5pt}
+\renewcommand{\arraystretch}{1.12}
+\begin{tabular}{@{}lrrrrrr@{}}
+\hline
+ & \multicolumn{3}{c}{Validation Dice (\%)} & \multicolumn{3}{c}{$\Delta$ Dice (pp)} \\
+Variant & Fold 0 & Fold 1 & Fold 3 & Fold 0 & Fold 1 & Fold 3 \\
+\hline
+Baseline & 64.77 & 72.30 & 70.87 & 0.00 & 0.00 & 0.00 \\
+Baseline $+B$ & 70.65 & 73.23 & 68.48 & +5.88 & +0.94 & -2.39 \\
+Baseline $+S$ & 65.04 & 74.51 & 67.74 & +0.27 & +2.21 & -3.13 \\
+Baseline $+B+S$ & 69.29 & 71.28 & 68.25 & +4.52 & -1.02 & -2.62 \\
+Baseline $+B+E$ & 65.45 & 71.46 & 71.40 & +0.68 & -0.84 & +0.53 \\
+Baseline $+B+E+S$ & 66.01 & 68.11 & 68.27 & +1.24 & -4.19 & -2.61 \\
+Baseline $+D$ & 70.12 & 74.12 & 72.64 & +5.35 & +1.83 & +1.77 \\
+Baseline $+B+D$ & 71.66 & 73.02 & 72.66 & +6.89 & +0.72 & +1.79 \\
+Baseline $+E+D$ & 65.85 & 70.11 & 71.58 & +1.08 & -2.19 & +0.71 \\
+Baseline $+S+D$ & 69.85 & 71.25 & 68.67 & +5.08 & -1.05 & -2.20 \\
+Baseline $+B+E+D$ & 70.97 & 74.87 & 72.45 & +6.19 & +2.57 & +1.58 \\
+Baseline $+B+S+D$ & 71.14 & 72.68 & 72.67 & +6.37 & +0.39 & +1.80 \\
+Baseline $+E+S+D$ & 67.81 & 67.86 & 73.42 & +3.04 & -4.44 & +2.55 \\
+Baseline $+B+E+S+D$ & 69.30 & 71.94 & 71.62 & +4.52 & -0.35 & +0.75 \\
+\hline
+\end{tabular}
+\caption{SAM3 fold means, each averaging seeds 0, 1 and 2. Paired changes
+use the corresponding baseline within each fold. All 126 final runs
+are included, and every objective is shown regardless of the direction
+of its change.}
+\label{tab:sam3-geo-folds}
+\end{table}
+
+\clearpage
+
+\subsection{MedSAM3 Fold Effects and Error Counts}
+\begin{table}[htbp]
+\centering\small\setstretch{1.05}
+\setlength{\tabcolsep}{5pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}llrlrr@{}}
+\hline
+Dataset & Fold & \shortstack{Baseline validation\\Dice (\%)} & \shortstack{Selected training\\variant} & \shortstack{Selected validation\\Dice (\%)} & \shortstack{$\Delta$ Dice\\(pp)} \\
+\hline
+MSD & 0 & 77.35 & Baseline $+B+E+S+D$ & 82.08 & +4.74 \\
+MSD & 1 & 74.45 & Baseline $+B+E+S+D$ & 80.16 & +5.71 \\
+MSD & 3 & 77.23 & Baseline $+B+E+S+D$ & 82.94 & +5.71 \\
+ADNI & 0 & 75.21 & Baseline $+E+S+D$ & 78.57 & +3.36 \\
+ADNI & 1 & 77.70 & Baseline $+E+S+D$ & 81.47 & +3.77 \\
+ADNI & 3 & 79.06 & Baseline $+E+S+D$ & 82.52 & +3.46 \\
+\hline
+\end{tabular}
+\caption{MedSAM3 fold means, each averaging three seeds. The selected objective is chosen using the overall validation mean, not separately within each fold.}
+\label{tab:medsam-noaug-folds}
+\end{table}
+The complete MedSAM3 error tables are presented in
+Section~\ref{sec:error-analysis}, Tables~\ref{tab:medsam-msd-all-errors}
+and~\ref{tab:medsam-adni-all-errors}.
+
+\begin{table}[htbp]
+\centering\small\setstretch{1.05}
+\setlength{\tabcolsep}{5pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}llrr@{}}
+\hline
+Fold & Training variant & Validation Dice (\%) & $\Delta$ Dice (pp) \\
+\hline
+0 & Baseline & 73.46 & +0.00 \\
+1 & Baseline & 73.89 & +0.00 \\
+3 & Baseline & 77.43 & +0.00 \\
+0 & Baseline $+B$ & 78.36 & +4.89 \\
+1 & Baseline $+B$ & 78.89 & +5.00 \\
+3 & Baseline $+B$ & 79.03 & +1.60 \\
+0 & Baseline $+B+E$ & 79.60 & +6.14 \\
+1 & Baseline $+B+E$ & 79.26 & +5.38 \\
+3 & Baseline $+B+E$ & 81.50 & +4.07 \\
+\hline
+\end{tabular}
+\caption{MSD MedSAM3 boundary variants: fold means over seeds 17, 83 and 191, with gains against their matched baseline within each fold.}
+\label{tab:medsam-msd-original-folds}
+\end{table}
+\clearpage
+
+\section{Reproducibility and Evidence Register}
+\label{sec:evidence-register}
+
+Historical SAM3 and MedSAM3 archive keys such as \texttt{dice} and
+\texttt{dice\_bands} identify the composite baseline and baseline with
+bands, respectively. These keys are retained for traceability; tables
+and figures use Baseline and Baseline $+B$. The keys do not specify a
+Dice-only training loss or alter the definition of reported Dice scores.
+
+The numerical revision of 21 October 2026 covers four medical
+campaigns. MSD MedSAM3 records are retained in two execution batches. The extraction script, source hashes,
+1,260 planned run records and 140 objective summaries are stored in
+\path{reports/thesis_noaug_update_20261021/}. Its
+\path{audit.py} recomputes paired gains, fold means, fold dispersion,
+error reductions and the tables' full-precision inputs. The complete
+audit additionally preserves nine repeated MSD MedSAM3 baseline
+controls, identified separately from the planned objective inventory.
+The scope of
+source verification differs between campaigns and is stated below.
+
+\subsection{GeoFWI3D}
+
+The geological update of 22 October 2026 uses
+\path{reports/geofwi3d_reweighted_full_suite_20261021/}, its
+\path{final_summary.json}, completed archives and preserved earlier
+cells. The 36 baseline references come from
+\path{reports/geofwi3d_frozen_3fold_3seed_20261020/}.
+The source final audit reconciles all 468 constrained cells, including
+381 newly completed and 87 reused cells, with final validation scores
+and budget records. It checks frozen initialization references for
+all 468, with direct baseline hash comparisons available for 312.
+
+The thesis extraction is preserved separately in
+\path{reports/thesis_geofwi_update_20261022/}. Its \path{audit.py}
+checks the unique 504-cell inventory and regenerates all 56 condition
+summaries, paired gains and fold dispersions. It verifies 7,410
+available metadata files and recomputes 47,520 per-volume Dice scores
+and FN/FP counts from the saved confusion matrices of 495 run records.
+At that extraction, nine reused fold-0 baselines were represented
+only by saved summary references and two additional baseline extracts
+contained part of their manifest-listed metadata. The subsequent
+recovery described in Section~\ref{sec:background-dice-evidence}
+supplies the nine missing evaluation records and checks all 504
+evaluation hashes. It does not reload deleted checkpoint tensors
+or establish completeness of every other archived payload. The
+error analysis in Section~\ref{sec:error-analysis} incorporates
+all 504 evaluations, including the recovered baseline counts.
+
+The new extraction stores \path{all_504_runs.csv},
+\path{all_56_condition_summaries.csv}, \path{results.json} and
+\path{audit.json}. It checks the 19/96 train/validation cardinalities
+and disjointness in available raw records, the model-specific
+augmentation settings and the training-plus-calibration cap. Original
+campaign SD values across nine cells are recomputed across the three
+seed-averaged fold means for consistency with the thesis tables.
+Exploratory recipe and strength selection, native voxel geometry and
+the different budget definition remain explicit limitations.
+
+\subsection{Conventional MSD and ADNI}
+
+MSD uses \path{reports/msd_3fold_3seed_final_20261020/}, including
+\path{all_504_runs.csv}, the completed reports and
+\path{analysis_audit.json}. All 504 cells and saved schedule identities
+were reconciled; 180 preserved summary rows match their earlier reports
+and 324 are additional completed rows. The final audit checks report
+hashes and aggregate calculations, with one final raw archive spot
+check. It does not rehash every original payload. Completed optimization
+and calibration charges are available, while recovery-cost accounting
+is incomplete for seven tasks.
+
+ADNI's final archive includes
+\path{all_504_runs.csv}, \path{analysis.json}, calibration records and
+% SOURCE DIRECTORY: reports/adni_colab_final_20261019/
+\path{validation.json}. The final inventory reconciles 329 preserved
+summary rows and 175 continuation rows. All 56 condition means are
+recalculated from nine runs each. The saved audit distinguishes
+historical summaries from continuation records and does not claim a
+new hash check of every historical checkpoint or prediction.
+
+Frozen continuation source and protocols are preserved in the
+corresponding MSD and ADNI campaign archives. Their numeric configuration
+fields specify the model-specific calibration targets,
+% SOURCE DIRECTORIES: reports/msd_colab_seeds0220_noaug_20261018/
+% and reports/adni_colab_seeds014_noaug_20261018/
+update schedules and common optimization cap.
+
+\subsection{SAM3 Campaign}
+
+The geological adaptation campaign is defined in
+\path{reports/sam3_geofwi_f013_s012_126_20261019/bundle/}.
+Its immutable plan assigns 126 distinct tasks to fourteen objectives,
+folds 0, 1 and 3, and seeds 0, 1 and 2. All tasks are fresh runs;
+historical pilots serve only as protocol references. The final
+collection is preserved in the campaign's
+\path{split_cluster_20261022/final_results_20261023/} directory.
+
+The independent thesis extraction in
+\path{reports/thesis_sam3_final_20261023/} reconciles every planned
+identifier with its final result and verifies 2,252 manifest-listed
+metadata payload hashes. All required evaluation, completion, protocol,
+training-summary, sampling and support-inventory records are available.
+The 76 Colab ZIP archives also match their recovery-receipt hashes;
+the 50 cluster runs retain archive acknowledgements. Each final run
+records 25 updates and unchanged frozen-parameter hashes. Initial
+adapter, base, support-array and sampling-schedule identities agree
+across all fourteen arms within each of the nine fold/seed cells.
+
+The extraction recomputes 12,726 volume records from their confusion
+matrices: 630 support and 12,096 validation evaluations. Per-volume
+class Dice, run-level support/validation means and full-validation
+FN/FP reproduce the archived values. The fourteen objective means and
+positive-pair counts also reproduce the final campaign summary.
+Dispersion is recomputed across the three seed-averaged fold means,
+consistent with the thesis; the upstream summary's standard deviation
+instead describes the nine individual runs.
+
+All 126 records retain the same scientific source identity. Hardware
+records distinguish 76 full A100-SXM4-80GB allocations from 50 A100
+PCIe MIG 4g.40gb allocations. Recorded training-loop elapsed time is
+not an end-to-end adaptation measurement: initial setup, shared
+calibration, evaluation and unretained work before recovery require
+separate accounting. The final ledger records upper bounds of five
+repeated update attempts for fold 0, seed 1, $B+E+S$, and one for
+fold 1, seed 2, $B+E+S$. These costs are additional to the final
+25-update trajectories and are not counted as extra scientific runs.
+
+\subsection{MedSAM3 Campaigns}
+
+The MSD MedSAM3 campaign is preserved in two execution-batch archives.
+The $B$ and $B+E$ variants and their matched baseline are recorded in
+\path{existing_results.json}.
+% SOURCE: reports/medsam3_msd_colab_108_3fold_3seed_noaug_20261015/bundle/existing_results.json
+It contains all 27 baseline, band and band-plus-edge runs, together
+with nine passed fold/seed audits and their per-arm summaries.
+The present extraction reconciles all 27 scores and error counts with
+those saved audit summaries and verifies the source retirement report's
+SHA-256 identity. Saved training records confirm 200 updates, unchanged
+frozen-parameter hashes and changed adapter hashes. This rechecks the
+preserved evidence rather than reloading deleted model tensors.
+These baseline records are retained for every $B$ and $B+E$ paired
+gain; the pilot with seed 46 is excluded.
+
+The other eleven constrained MSD variants and their matched controls
+are preserved in
+\path{all_108_runs.csv}, \path{comparison.json},
+% SOURCE DIRECTORY: reports/medsam3_msd_colab_final_20261019/
+\path{calibration.json}, \path{verification.json} and
+\path{analysis_checks.json}. These identify eleven complete nine-cell constrained
+conditions, their repeated matched controls and support-only calibration.
+The two archives jointly supply the complete MSD campaign. Their
+paired reductions retain the controls and calibrations recorded for
+each execution batch, without pooling or substituting baseline runs.
+The corresponding source bundle is preserved with the campaign records.
+% SOURCE BUNDLE: reports/medsam3_msd_colab_108_3fold_3seed_noaug_20261015/
+The extraction verifies the saved run inventory and recomputes its
+summaries without claiming a new audit of unavailable model tensors.
+
+ADNI uses
+\path{reports/adni_medsam3_2sample_3fold_3seed_14arms_20261018/}.
+Its top-level comparison snapshot stops at 109 completed rows; the
+final thesis summary is instead rebuilt from all 126 archived run
+directories. The audit checks 1,755 files against their archive
+metadata and recalculates 7,056 per-case confusion/Dice records
+(two support and 54 validation crops per run). It confirms 200 updates,
+preserved frozen-parameter hashes, changed adapter
+hashes and identical sampling hashes across arms within each fold/seed
+cell. These are checks of retained records; deleted checkpoint tensors
+are not independently reloaded.
+
+The ADNI support manifests retain
+\texttt{hippocampus\_adni\_147119\_L} and
+\texttt{hippocampus\_adni\_257270\_R} in folds 0 and 3.
+Fold 1 retains the first crop and replaces the second with
+\texttt{hippocampus\_adni\_223901\_R}. Each fold's evaluation subjects
+are excluded from its support subjects. This explicit overlap prevents
+misinterpreting three folds as three independent two-crop support draws.
+
+\subsection{Background-Dice Recovery}
+\label{sec:background-dice-evidence}
+
+The complementary analysis in Section~\ref{sec:background-dice-results}
+uses \path{reports/background_dice_archive_recovery_20261023/}.
+The original recovery inventory contains 1,862 run evaluations and
+124,860 validation-volume records. The final SAM3 supplement in
+\path{reports/thesis_sam3_final_20261023/} replaces its 116-record
+SAM3 snapshot with all 126 final evaluations. Together they cover
+1,872 run evaluations and 125,820 validation-volume records:
+504 runs for each conventional dataset, 108 for MSD MedSAM3,
+126 for ADNI MedSAM3 and 126 for SAM3. Evaluation payloads match
+their manifest hashes and reproduce their recorded foreground means.
+Per-volume foreground and background scores are recomputed from the
+saved confusion matrices; the all-class score follows
+Equation~\ref{eq:reported-all-class-dice}. These checks use evaluation
+metadata rather than rerunning models.
+
+The directory preserves \path{background_dice_cases.csv},
+\path{background_dice_runs.csv}, \path{background_dice_conditions.csv}
+and \path{background_metric_comparison.csv}, together with verification
+records, download receipts and the recovery script. The thesis tables
+are generated and checked in
+\path{reports/thesis_background_dice_update_20261023/}, with the
+completed SAM3 rows and the 193-comparison sensitivity check updated in
+\path{reports/thesis_sam3_final_20261023/}.
+For the MSD $B$ and $B+E$ variants and their matched baseline,
+aggregate foreground results are preserved, but the searched archives
+did not yield their 27 per-volume evaluation records. Their missing
+complementary scores are not inferred from other variants or controls.
+
+\subsection{Full-Validation Error Tables}
+\label{sec:all-variant-error-evidence}
+
+The error tables in Section~\ref{sec:error-analysis} are generated from
+\path{reports/thesis_all_variant_errors_20261023/}. Its \path{build.py}
+reads the recovered per-volume confusion matrices, checks their dimensions,
+nonnegative integer entries, voxel totals and unique case/run identities,
+and verifies all 1,862 evaluation-file hashes. It reconstructs errors
+from 124,860 validation-volume records and checks the results against
+1,242 earlier medical run summaries and 990 available geological FN/FP
+values. The remaining 27 MSD MedSAM3 records use the preserved aggregate
+errors in \path{reports/thesis_noaug_update_20261021/results.json}; they
+do not require reconstruction of unavailable per-volume matrices.
+
+The extraction retains all 1,512 conventional evaluations, 135 MSD
+MedSAM3 records including the repeated matched controls, 126 ADNI
+MedSAM3 evaluations and the original 116-record SAM3 snapshot.
+The final SAM3 extraction in \path{reports/thesis_sam3_final_20261023/}
+replaces that snapshot with 126 evaluations and recomputes all
+fourteen SAM3 error rows. The combined tables therefore contain
+211 complete condition rows, including the two applicable MSD baseline
+rows. Every row uses its declared nine-cell fold and seed inventory. The directory preserves
+\path{run_errors.json}, \path{condition_errors.json},
+\path{verification.json} and the generated table rows, including source
+hashes, full-precision values and fold dispersions. No training or
+inference is rerun for this extraction.
+
+\subsection{Annotation Evidence and Outstanding Items}
+
+Annotation evidence comes from the uncal-boundary, profile and
+cue-consistency studies of 21 September 2026.
+The planar analysis uses 260 crops; profile and image-cue analyses use 52 original
+validation crops. These denominators and geometric supports remain
+separate from the performance-run inventories.
+
+The SAM3 numerical inventory, fold decomposition, full-volume FN/FP
+and foreground/background/all-class Dice analyses are complete.
+The geological four-model matrix and its FN/FP aggregates are also
+complete. Presentation
+and measurement gaps include attributable prediction examples,
+classwise/surface summaries where available, complete adaptation
+resource accounting and reconciliation of the MSD source inventory.
+All six studies are complete within their declared objective inventories. The MSD MedSAM3 campaign has completed results for all
+fourteen objectives, with each paired gain retaining its matched baseline. No additional $B$ or $B+E$ runs are required to
+complete that objective inventory.
+
+The extensions proposed in Section~\ref{sec:future-work} are distinct
+from missing results in the completed campaigns. Durable metrics,
+manifests, source identities, calibration and logs should remain
+available after bulky artifacts are removed in accordance with the
+experiment-storage policy.
+
+\clearpage
+
+\end{document}
+

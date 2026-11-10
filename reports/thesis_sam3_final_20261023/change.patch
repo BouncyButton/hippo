@@ -1,0 +1,605 @@
+--- thesis-revision.tex (before)
++++ thesis-revision.tex (after)
+@@ -6,10 +6,9 @@
+ % GeoFWI3D: 504 fixed fold/seed/objective cells integrated 22 October 2026.
+ % Geological UNETR uses XY D4 transformations in baseline and constrained arms.
+ % Geological cap includes calibration; see reports/thesis_geofwi_update_20261022/.
+-% SAM3: full study structure integrated 23 October 2026.
+-% Numerical results and empirical interpretations remain explicit placeholders.
+-% Progress counts are recorded in reports/thesis_sam3_update_20261023/.
+-% Revision provenance: reports/thesis_sam3_structure_20261023/.
++% SAM3: all 126 final runs verified and integrated 23 October 2026.
++% Scores, fold effects, FN/FP and complementary Dice: reports/thesis_sam3_final_20261023/.
++% Earlier structure and progress reports remain dated provenance snapshots.
+ % Background/all-class Dice integrated 23 October 2026 from verified evaluation archives.
+ % See reports/thesis_background_dice_update_20261023/ for numeric checks and patch.
+ % Existing dataset illustrations and annotation-compatibility audit are retained.
+@@ -56,9 +55,7 @@
+ \definecolor{thesisPaleBlue}{RGB}{235,243,249}
+ \definecolor{thesisPaleOrange}{RGB}{252,242,232}
+ \definecolor{thesisPaleGray}{RGB}{245,247,249}
+-% Explicit drafting markers; pending cells are not measured values.
+-\newcommand{\samPending}{\textit{pending}}
+-\newcommand{\samResult}[1]{\textit{[SAM3: #1 to insert]}}
++% SAM3 numerical results are complete; remaining presentation gaps are marked locally.
+ \setstretch{1.3}
+ \setlength{\emergencystretch}{2em}
+ \raggedbottom
+@@ -97,8 +94,9 @@
+ improving their matched baselines by 5.39 and 3.53 percentage points,
+ respectively. SAM3 extends pretrained adaptation to salt segmentation,
+ starting from its general checkpoint and using five labelled volumes
+-and 25 updates. \samResult{final Dice, paired change in percentage
+-points and consistency across the nine comparisons}.
++and 25 updates. Its highest-mean configuration reaches 72.76\% Dice,
++improving the matched baseline by 3.45 percentage points, with positive
++changes in eight of nine comparisons.
+ 
+ The findings characterize performance within the specified budgets.
+ Selection of seeds, recipes, adaptation folds and preferred configurations
+@@ -200,8 +198,9 @@
+ segmentation quality and the paired contribution of spatial supervision.
+ \end{enumerate}
+ 
+-The experimental design comprises six studies: three conventional dataset
+-comparisons, two MedSAM3 adaptations and one SAM3 adaptation. The analysis
++The experimental evaluation comprises six completed studies: three conventional
++dataset comparisons, two MedSAM3 adaptations and one SAM3 adaptation.
++Each includes the full fourteen-objective comparison. The analysis
+ reports final-budget accuracy, paired changes and variation across the
+ selected folds and seeds. It does not establish that short-budget gains
+ persist after convergence. Figure~\ref{fig:thesis-overview} summarizes
+@@ -1952,13 +1951,12 @@
+ MSD, from scratch & 10 crops & 0,1,2; 0,2,20 & 4 models $\times$ 14 objectives; 504 runs; $31{,}976.45$ GFLOPs/run. \\[.5em]
+ ADNI, from scratch & 10 crops, 5 subjects & 0,1,2; 0,1,4 & 4 models $\times$ 14 objectives; 504 runs; same FLOP cap. \\[.5em]
+ GeoFWI3D, SAM3 & 5 scenes & 0,1,3; 0,1,2 & 14 objectives; 126 runs; 25 updates/run. \\[.5em]
+-MSD, MedSAM3 & 5 crops & 0,1,3; 17,83,191 & 14 objectives; 126 planned runs; 200 updates/run. \\[.5em]
++MSD, MedSAM3 & 5 crops & 0,1,3; 17,83,191 & 14 objectives; 126 runs; 200 updates/run. \\[.5em]
+ ADNI, MedSAM3 & 2 crops, 2 subjects & 0,1,3; 0,1,2 & 14 objectives; 126 runs; 200 updates/run. \\
+ \hline
+ \end{tabular}
+-\caption{Study design: 1,890 planned runs in 210 objective conditions,
+-comprising 630 geological and 1,260 medical runs. These are design totals;
+-SAM3 numerical entries awaiting final aggregation are marked explicitly.
++\caption{Completed study design: 1,890 objective runs in 210 conditions,
++comprising 630 geological and 1,260 medical runs.
+ Each MedSAM3 campaign covers fourteen objectives, counting the baseline
+ objective once. Repeated matched controls support paired gains but do
+ not enlarge the objective inventory.
+@@ -3996,8 +3994,15 @@
+ historical pilots, MedSAM3 controls and conventional geological
+ baselines do not enter these differences.
+ 
+-Training uses NVIDIA A100 GPUs. Resource measurements record the GPU
+-allocation, timing scope and recovery attempts. The 25-update allowance
++The completed inventory contains 76 runs on Colab A100-SXM4-80GB
++GPUs and 50 on A100 80GB PCIe GPUs allocated as 4g.40gb MIG instances.
++All runs retain the same scientific source identity. Archived hashes
++verify unchanged base parameters and matching initial adapters, support
++arrays and sampling schedules within every fold/seed comparison.
++Hardware allocation was not a fully crossed factor; timing comparisons
++must retain their execution platform and measurement scope.
++Resource records also distinguish recovery attempts from the final
++25-update trajectory. The 25-update allowance
+ measures task adaptation and excludes pretraining. It is distinct from the geological FLOP cap
+ and the 200-update medical adaptation schedule.
+ 
+@@ -4276,17 +4281,15 @@
+ \section{Results and Analysis}
+ \label{sec:results}
+ 
+-The six-study design covers 1,890 planned objective runs: 630 on
++The six-study design covers 1,890 completed objective runs: 630 on
+ GeoFWI3D and 1,260 across the medical comparisons and adaptations.
+ The conventional geological results are presented first, followed by
+ MSD and ADNI. The adaptation results then follow the order SAM3 on
+ GeoFWI3D, MedSAM3 on MSD and MedSAM3 on ADNI. A complementary analysis compares
+ foreground, background and all-class Dice before the MSD annotation
+-audit. Numerical SAM3
+-cells marked \emph{pending} reserve the final balanced aggregates;
+-they are not estimates from an incomplete subset. The metric-sensitivity
+-and error analyses identify their separate SAM3 archive snapshot and
+-use only fully populated conditions within it. Every objective is evaluated against a matched final-budget baseline.
++audit. All SAM3 tables use the complete 126-run inventory, including
++the error and complementary Dice analyses. Every objective is evaluated
++against a matched final-budget baseline.
+ Tables label training variants as Baseline or Baseline plus the added
+ constraints, and report evaluation Dice in percent and paired changes
+ in percentage points. The symbols $B,E,S,D$ denote bands, edges,
+@@ -4590,20 +4593,20 @@
+ \hline
+ \shortstack{Training\\variant} & \shortstack{Validation\\Dice (\%)} & \shortstack{$\Delta$ Dice\\(pp)} & \shortstack{Positive\\pairs} & \shortstack{Training-set\\Dice (\%)} \\
+ \hline
+-Baseline & \samPending & 0.00 & --- & \samPending \\
+-Baseline $+B$ & \samPending & \samPending & \samPending & \samPending \\
+-Baseline $+S$ & \samPending & \samPending & \samPending & \samPending \\
+-Baseline $+B+S$ & \samPending & \samPending & \samPending & \samPending \\
+-Baseline $+B+E$ & \samPending & \samPending & \samPending & \samPending \\
+-Baseline $+B+E+S$ & \samPending & \samPending & \samPending & \samPending \\
+-Baseline $+D$ & \samPending & \samPending & \samPending & \samPending \\
+-Baseline $+B+D$ & \samPending & \samPending & \samPending & \samPending \\
+-Baseline $+E+D$ & \samPending & \samPending & \samPending & \samPending \\
+-Baseline $+S+D$ & \samPending & \samPending & \samPending & \samPending \\
+-Baseline $+B+E+D$ & \samPending & \samPending & \samPending & \samPending \\
+-Baseline $+B+S+D$ & \samPending & \samPending & \samPending & \samPending \\
+-Baseline $+E+S+D$ & \samPending & \samPending & \samPending & \samPending \\
+-Baseline $+B+E+S+D$ & \samPending & \samPending & \samPending & \samPending \\
++Baseline & 69.31 $\pm$ 4.00 & 0.00 & --- & 74.97 $\pm$ 5.73 \\
++Baseline $+B$ & 70.79 $\pm$ 2.38 & +1.48 $\pm$ 4.16 & 6/9 & 77.03 $\pm$ 7.11 \\
++Baseline $+S$ & 69.10 $\pm$ 4.88 & -0.22 $\pm$ 2.70 & 5/9 & 75.31 $\pm$ 7.92 \\
++Baseline $+B+S$ & 69.60 $\pm$ 1.54 & +0.29 $\pm$ 3.75 & 3/9 & 76.67 $\pm$ 5.77 \\
++Baseline $+B+E$ & 69.44 $\pm$ 3.45 & +0.12 $\pm$ 0.84 & 3/9 & 76.12 $\pm$ 6.57 \\
++Baseline $+B+E+S$ & 67.46 $\pm$ 1.26 & -1.85 $\pm$ 2.79 & 3/9 & 76.14 $\pm$ 5.22 \\
++Baseline $+D$ & 72.29 $\pm$ 2.03 & +2.98 $\pm$ 2.05 & 8/9 & 77.55 $\pm$ 6.22 \\
++Baseline $+B+D$ & 72.45 $\pm$ 0.70 & +3.13 $\pm$ 3.30 & 7/9 & 77.47 $\pm$ 5.22 \\
++Baseline $+E+D$ & 69.18 $\pm$ 2.97 & -0.13 $\pm$ 1.79 & 5/9 & 76.14 $\pm$ 4.90 \\
++Baseline $+S+D$ & 69.93 $\pm$ 1.29 & +0.61 $\pm$ 3.91 & 5/9 & 76.34 $\pm$ 6.34 \\
++Baseline $+B+E+D$ & 72.76 $\pm$ 1.97 & +3.45 $\pm$ 2.43 & 8/9 & 77.41 $\pm$ 6.86 \\
++Baseline $+B+S+D$ & 72.17 $\pm$ 0.89 & +2.85 $\pm$ 3.13 & 7/9 & 77.40 $\pm$ 5.58 \\
++Baseline $+E+S+D$ & 69.70 $\pm$ 3.23 & +0.39 $\pm$ 4.18 & 5/9 & 75.52 $\pm$ 2.88 \\
++Baseline $+B+E+S+D$ & 70.95 $\pm$ 1.44 & +1.64 $\pm$ 2.56 & 7/9 & 77.79 $\pm$ 5.06 \\
+ \hline
+ \end{tabular}
+ \caption{SAM3 on GeoFWI3D after 25 updates. Both Dice columns report
+@@ -4612,29 +4615,46 @@
+ $\pm$ sample SD across three seed-averaged fold means; paired changes
+ contain mean $\pm$ SD of the three fold-mean differences. Positive counts
+ use the nine paired runs. Each row represents the full three-fold,
+-three-seed condition. Pending entries await final verified aggregation;
++three-seed condition, verified against the final archives;
+ baseline changes are zero by definition.}
+ \label{tab:sam3-geo-results}
+ \end{table}
+ 
+-The adapted baseline reaches \samResult{baseline validation Dice}\%,
+-with support Dice of \samResult{baseline support Dice}\%.
+-The highest-mean configuration is \samResult{objective}, reaching
+-\samResult{validation Dice}\% and a paired change of
+-\samResult{signed mean change} percentage points. The change is positive
+-in \samResult{number}/9 fold/seed comparisons.
+-\samResult{interpretation of the magnitude, fold variation and any
+-negative or inconsistent effects; compare individual terms and
+-combinations without assuming an ordering}.
+-The fold-level decomposition in Table~\ref{tab:sam3-geo-folds} distinguishes
+-changes shared across support partitions from effects concentrated in
+-one fold. Selection of the highest mean remains exploratory.
++The adapted baseline reaches 69.31\% validation Dice and 74.97\%
++support Dice. Adding bands, edges and depth supervision gives the
++highest validation mean, 72.76\%, with a paired gain of
++$3.45\pm2.43$ percentage points across the three fold means.
++The gain is positive in eight of nine runs. Its fold-mean changes are
+++6.19, +2.57 and +1.58 points for folds 0, 1 and 3, respectively
++(Table~\ref{tab:sam3-geo-folds}). Thus the mean improvement occurs
++in every support partition, although its magnitude varies and the
++fold-0, seed-2 run loses 2.74 points. The selected configuration's
++support Dice is 77.41\%; selection by the highest validation mean
++remains exploratory.
++
++Ten of the thirteen constrained variants improve mean validation Dice.
++Depth supervision alone gives a 2.98-point gain, positive in eight
++runs, while bands alone give 1.48 points, positive in six. The
++$B+D$ and $B+S+D$ combinations also exceed the baseline by more
++than 2.8 points. These results associate several of the larger gains
++with depth supervision under the present calibration and schedule;
++they do not isolate the contribution of depth weighting from that
++of the added classification loss.
++
++Combining more terms does not guarantee a larger benefit. Adding
++signed distance to $B+E+D$ lowers mean Dice from 72.76\% to
++70.95\%. Signed distance alone and $E+D$ give small negative
++mean changes, while $B+E+S$ loses 1.85 points and improves only
++three runs. The small positive means of $B+S$ and $B+E$ also
++occur in only three runs each, illustrating why an average gain
++should be read alongside its fold decomposition and positive-pair count.
+ 
+ Full-volume errors for all SAM3 variants are reported in
+ Section~\ref{sec:error-analysis}, Table~\ref{tab:sam3-geo-errors}.
+ 
+-\noindent\samResult{paired baseline/constrained prediction panels,
+-selected by a stated rule, illustrating the measured FN/FP pattern}.
++\noindent\textit{[Presentation to insert: paired SAM3 baseline/constrained
++prediction panels selected by a stated rule. The numerical comparison
++is complete; these spatial examples require attributable retained outputs.]}
+ 
+ The comparison with MedSAM3 concerns the behaviour of spatial supervision
+ in two adaptation settings. It does not isolate the effect of medical
+@@ -4642,8 +4662,12 @@
+ also differ. Likewise, SAM3 and the conventional geological models use
+ different support sizes and resource definitions. Their absolute Dice
+ scores cannot establish a ranking at matched total computation.
+-\samResult{cross-study interpretation of the verified paired effects,
+-including any differences from the medical adaptation results}.
++As in the medical adaptation studies, spatial supervision can improve
++the short-budget baseline. However, the preferred combination differs:
++$B+E+D$ for SAM3, compared with $B+E+S+D$ on MSD and $E+S+D$
++on ADNI for MedSAM3. This supports testing the constraint combination
++within each learning setting rather than assuming one combination
++transfers unchanged across tasks.
+ 
+ 
+ 
+@@ -4799,7 +4823,7 @@
+ the highest mean total error: FN $+$ FP for binary segmentation, and
+ FN $+$ FP $+$ A/P swaps for MSD. These categories are disjoint, so their
+ sum counts all incorrectly labelled voxels. Ordering uses unrounded
+-means; pending conditions appear last.
++means.
+ 
+ \subsubsection{GeoFWI3D: Conventional Models}
+ 
+@@ -5083,20 +5107,15 @@
+ 
+ \subsubsection{SAM3 on GeoFWI3D}
+ 
+-Table~\ref{tab:sam3-geo-errors} uses the verified archive snapshot of
+-23 October 2026 at 13:37 UTC, also used for the complementary Dice
+-analysis in Section~\ref{sec:background-dice-results}. It contains
+-116 of the 126 planned evaluations. Six conditions have all nine
+-fold/seed cells and can be summarized; the eight remaining rows show
+-their available run counts and retain pending aggregates. These are
+-archive-coverage counts, not a live statement of training completion.
+-No mean is calculated from an incomplete condition.
++Table~\ref{tab:sam3-geo-errors} uses all 126 final evaluations,
++with nine runs for every objective. Counts are reconstructed from the
++same per-volume confusion matrices used for the Dice comparison.
+ 
+ \begingroup\footnotesize\setstretch{1.0}
+ \setlength{\tabcolsep}{4pt}
+ \renewcommand{\arraystretch}{1.12}
+ \begin{longtable}{@{}lrrr@{}}
+-\caption{SAM3 on GeoFWI3D: full-volume FN and FP for all fourteen variants. Each run averages errors over 96 held-out volumes; complete rows report mean $\pm$ sample SD across three seed-averaged fold means. Runs records coverage in the stated archive snapshot. Pending rows await complete nine-run evidence. Within each model, rows ascend by mean total error (FN $+$ FP). Pending conditions follow the complete rows.}
++\caption{SAM3 on GeoFWI3D: full-volume FN and FP for all fourteen variants. Each run averages errors over 96 held-out volumes; rows report mean $\pm$ sample SD across three seed-averaged fold means. All rows contain nine runs. Rows ascend by mean total error (FN $+$ FP).}
+ \label{tab:sam3-geo-errors}\\
+ \hline
+ Variant & \shortstack{FN / volume\\($\times 10^{3}$)} & \shortstack{FP / volume\\($\times 10^{3}$)} & Runs \\ \hline
+@@ -5108,27 +5127,39 @@
+ \multicolumn{4}{r}{Continued on next page}\\
+ \endfoot
+ \hline\endlastfoot
++Baseline $+B+E+D$ & 27.16 $\pm$ 5.11 & 6.99 $\pm$ 1.69 & 9/9 \\
++Baseline $+B+D$ & 28.64 $\pm$ 3.16 & 5.81 $\pm$ 1.70 & 9/9 \\
++Baseline $+B+S+D$ & 29.29 $\pm$ 3.73 & 5.59 $\pm$ 1.92 & 9/9 \\
++Baseline $+D$ & 30.19 $\pm$ 4.29 & 4.80 $\pm$ 1.18 & 9/9 \\
++Baseline $+B+E+S+D$ & 30.58 $\pm$ 5.39 & 5.41 $\pm$ 2.60 & 9/9 \\
+ Baseline $+B$ & 29.74 $\pm$ 5.03 & 6.38 $\pm$ 3.08 & 9/9 \\
++Baseline $+E+S+D$ & 32.84 $\pm$ 5.64 & 4.40 $\pm$ 1.16 & 9/9 \\
++Baseline $+S+D$ & 32.19 $\pm$ 3.24 & 5.15 $\pm$ 1.58 & 9/9 \\
+ Baseline $+B+E$ & 32.46 $\pm$ 7.51 & 5.12 $\pm$ 2.59 & 9/9 \\
+ Baseline $+S$ & 33.82 $\pm$ 6.83 & 3.97 $\pm$ 1.40 & 9/9 \\
+ Baseline & 34.16 $\pm$ 6.41 & 3.70 $\pm$ 0.49 & 9/9 \\
++Baseline $+E+D$ & 32.76 $\pm$ 6.28 & 5.16 $\pm$ 2.13 & 9/9 \\
+ Baseline $+B+S$ & 33.94 $\pm$ 3.05 & 4.12 $\pm$ 1.25 & 9/9 \\
+ Baseline $+B+E+S$ & 36.05 $\pm$ 4.36 & 3.87 $\pm$ 1.48 & 9/9 \\
+-Baseline $+D$ & \samPending & \samPending & 8/9 \\
+-Baseline $+B+D$ & \samPending & \samPending & 7/9 \\
+-Baseline $+E+D$ & \samPending & \samPending & 7/9 \\
+-Baseline $+S+D$ & \samPending & \samPending & 8/9 \\
+-Baseline $+B+E+D$ & \samPending & \samPending & 8/9 \\
+-Baseline $+B+S+D$ & \samPending & \samPending & 8/9 \\
+-Baseline $+E+S+D$ & \samPending & \samPending & 8/9 \\
+-Baseline $+B+E+S+D$ & \samPending & \samPending & 8/9 \\
+ \end{longtable}
+ \endgroup
+ 
+-\noindent\samResult{interpret the FN/FP changes of the final selected
+-SAM3 objective against its matched baseline after the complete
+-nine-run conditions have been verified; distinguish fewer misses,
+-less foreground extension and any tradeoff}.
++The baseline makes substantially more foreground misses than false
++positive assignments. The highest-Dice variant, $B+E+D$, reduces
++mean FN from 34.16 to 27.16 thousand voxels per volume, a 20.5\%
++decrease, while FP rises from 3.70 to 6.99 thousand. Its improvement
++therefore reflects greater recovery of salt at the cost of additional
++foreground extension. Total incorrectly labelled voxels fall by 9.8\%.
++The increased background Dice reported in
++Section~\ref{sec:background-dice-results} is compatible with this
++tradeoff: foreground misses are false positives for background,
++so background overlap depends on both error directions.
++
++By contrast, $B+E+S$ increases both mean FN and mean FP relative
++to baseline, consistent with its negative Dice change. The error
++counts describe the amount of misclassification over the full volume;
++they do not establish whether the remaining errors are concentrated
++on particular surfaces or connected components.
+ 
+ \subsubsection{MedSAM3 on MSD}
+ 
+@@ -5261,7 +5292,8 @@
+ counts are not pooled across volumes to form a substitute Dice score.
+ 
+ The complete comparison covers all 504 conventional runs on each
+-dataset, 108 MSD MedSAM3 run records and all 126 ADNI MedSAM3 runs.
++dataset, 108 MSD MedSAM3 run records, all 126 ADNI MedSAM3 runs
++and all 126 SAM3 runs.
+ The MSD $B$ and $B+E$ variants and their matched controls retain complete
+ foreground results for all 27 runs, but their per-volume records were
+ not located. Their background and all-class Dice therefore remain
+@@ -5338,29 +5370,35 @@
+ MedSAM3 & Baseline & 77.32 & 99.10 & 88.21 & --- & --- \\
+  & Baseline $+E+S+D$ & 80.85 & 99.19 & 90.02 & +3.53 & +1.81 \\
+ \hline
+-\multicolumn{7}{@{}l}{\textit{GeoFWI3D: SAM3, complete conditions in the recovery snapshot}}\\[.25em]
++\multicolumn{7}{@{}l}{\textit{GeoFWI3D: SAM3, all fourteen objectives}}\\[.25em]
+ SAM3 & Baseline & 69.31 & 97.62 & 83.46 & --- & --- \\
+  & Baseline $+B$ & 70.79 & 97.72 & 84.25 & +1.48 & +0.79 \\
+  & Baseline $+S$ & 69.10 & 97.62 & 83.36 & -0.22 & -0.11 \\
+  & Baseline $+B+S$ & 69.60 & 97.60 & 83.60 & +0.29 & +0.14 \\
+  & Baseline $+B+E$ & 69.44 & 97.63 & 83.53 & +0.12 & +0.07 \\
+  & Baseline $+B+E+S$ & 67.46 & 97.49 & 82.48 & -1.85 & -0.99 \\
++ & Baseline $+D$ & 72.29 & 97.79 & 85.04 & +2.98 & +1.58 \\
++ & Baseline $+B+D$ & 72.45 & 97.82 & 85.13 & +3.13 & +1.67 \\
++ & Baseline $+E+D$ & 69.18 & 97.61 & 83.40 & -0.13 & -0.07 \\
++ & Baseline $+S+D$ & 69.93 & 97.64 & 83.78 & +0.61 & +0.32 \\
++ & Baseline $+B+E+D$ & 72.76 & 97.84 & 85.30 & +3.45 & +1.84 \\
++ & Baseline $+B+S+D$ & 72.17 & 97.79 & 84.98 & +2.85 & +1.52 \\
++ & Baseline $+E+S+D$ & 69.70 & 97.65 & 83.68 & +0.39 & +0.21 \\
++ & Baseline $+B+E+S+D$ & 70.95 & 97.73 & 84.34 & +1.64 & +0.88 \\
+ \hline
+ \end{tabular}
+ \caption{Complementary Dice measures for pretrained adaptation. MedSAM3
+ rows compare the matched baseline with the previously selected
+ configuration; the MSD row uses the control matched to $B+E+S+D$.
+-The SAM3 block includes every objective with all nine evaluations in the
+-23 October recovery snapshot, including negative effects. Its rows do
+-not establish the highest configuration of the unfinished full inventory.
+-All rows use three folds and three seeds, the same per-volume averaging
+-as Table~\ref{tab:background-conventional}, percentage scores and
+-percentage-point gains. The SAM3 snapshot is separate from the final
+-fourteen-objective aggregates reserved in Section~\ref{sec:sam3-results}.}
++The SAM3 block includes all fourteen completed objective conditions,
++including negative effects; $B+E+D$ has the highest foreground and
++all-class mean. All rows use three folds and three seeds, the same
++per-volume averaging as Table~\ref{tab:background-conventional},
++percentage scores and percentage-point gains.}
+ \label{tab:background-adaptation}
+ \end{table}
+ 
+-Every one of these fourteen selected configurations improves both
++Every one of the fifteen foreground-selected configurations improves both
+ mean foreground and mean background Dice. Background means in their
+ baseline and selected rows range from 95.24\% to 99.76\%, leaving
+ less room for improvement than the foreground scores. For example,
+@@ -5379,32 +5417,30 @@
+ the same predictions under different class weights.
+ 
+ The conclusions also hold beyond the selected configurations. Across
+-all 180 complete constrained-objective comparisons with their matched
+-baselines, the same 169 mean effects are positive and the same eleven
+-are negative under foreground and all-class Dice. The highest-mean
+-objective is unchanged in all fourteen model/dataset comparisons.
+-The selected configurations retain their positive-pair counts: nine
+-of nine in thirteen comparisons and eight of nine for geological
+-UNETR. Bands alone still improve all 72 conventional medical
++all 193 complete constrained-objective comparisons with recoverable
++background scores, the same 179 mean effects are positive and the
++same fourteen are negative under foreground and all-class Dice.
++The highest-mean objective is unchanged in all fifteen model/dataset
++comparisons. The selected configurations retain their positive-pair
++counts: nine of nine in thirteen comparisons and eight of nine for
++geological UNETR and SAM3. Bands alone still improve all 72 conventional medical
+ model/fold/seed cells under both measures.
+ 
+ This agreement does not imply identical ordering of every outcome.
+-Six of 1,620 individual paired differences change sign, all on
++Six of 1,737 individual paired differences change sign, all on
+ GeoFWI3D; their foreground magnitudes are below 0.14 points and
+ their all-class magnitudes below 0.03 points. Some secondary objective
+ rankings also change. These small differences leave the reported
+ mean benefits and negative findings intact, without establishing
+ statistical superiority between closely ranked objectives.
+ 
+-The SAM3 archive snapshot contains 116 of the planned 126 evaluations.
+-Only its six fully populated objective conditions, including baseline,
+-enter Table~\ref{tab:background-adaptation}; each has all three folds
+-and three seeds. Within this balanced subset, bands retain a positive
+-mean effect of 1.48 foreground points and 0.79 all-class points,
+-whereas $B+E+S$ retains a negative effect of 1.85 and 0.99 points,
+-respectively. The remaining objective conditions require their final
+-records before a complete comparison or preferred configuration can
+-be reported. This subset is excluded from the 180-comparison check.
++For SAM3, the selected $B+E+D$ variant raises background Dice
++from 97.62\% to 97.84\% and all-class Dice from 83.46\% to
++85.30\%. Its 3.45-point foreground gain becomes a 1.84-point
++all-class gain. All thirteen SAM3 mean effects retain their sign,
++and no individual SAM3 paired effect changes sign when background
++is included. In particular, the negative $B+E+S$ finding persists
++under both measures. These checks use the complete campaign.
+ 
+ Together, the measures show that the selected foreground improvements
+ persist when background participates in the class average. They provide
+@@ -5772,8 +5808,8 @@
+ % MSD MedSAM3: one campaign; execution batches preserve 27 and 108 records.
+ % ADNI MedSAM3: 126 complete run archives, rebuilt beyond the stale summary.
+ % Performance tables retain the recorded matched baselines for each comparison.
+-% SAM3 full-study templates await verified final numerical aggregates.
+-% Conventional geological results remain complete; no partial SAM3 means inserted.
++% SAM3 final 126-run aggregates verified in reports/thesis_sam3_final_20261023/.
++% All conventional and adaptation objective inventories are complete.
+ 
+ \section{Numerical and Implementation Details}
+ \label{sec:technical-details}
+@@ -6113,8 +6149,8 @@
+ The full error tables and their reductions are presented together in
+ Section~\ref{sec:error-analysis}. Verified numerical reductions and
+ full-precision values are preserved in the accompanying CSV/JSON
+-extractions. SAM3 placeholders retain the stated reporting conventions
+-for final insertion.
++extractions. SAM3 includes all fourteen final conditions, with the
++same seed-within-fold reduction used in the main results.
+ 
+ \subsection{Geological Comparison}
+ 
+@@ -6355,26 +6391,26 @@
+  & \multicolumn{3}{c}{Validation Dice (\%)} & \multicolumn{3}{c}{$\Delta$ Dice (pp)} \\
+ Variant & Fold 0 & Fold 1 & Fold 3 & Fold 0 & Fold 1 & Fold 3 \\
+ \hline
+-Baseline & \samPending & \samPending & \samPending & 0.00 & 0.00 & 0.00 \\
+-Baseline $+B$ & \samPending & \samPending & \samPending & \samPending & \samPending & \samPending \\
+-Baseline $+S$ & \samPending & \samPending & \samPending & \samPending & \samPending & \samPending \\
+-Baseline $+B+S$ & \samPending & \samPending & \samPending & \samPending & \samPending & \samPending \\
+-Baseline $+B+E$ & \samPending & \samPending & \samPending & \samPending & \samPending & \samPending \\
+-Baseline $+B+E+S$ & \samPending & \samPending & \samPending & \samPending & \samPending & \samPending \\
+-Baseline $+D$ & \samPending & \samPending & \samPending & \samPending & \samPending & \samPending \\
+-Baseline $+B+D$ & \samPending & \samPending & \samPending & \samPending & \samPending & \samPending \\
+-Baseline $+E+D$ & \samPending & \samPending & \samPending & \samPending & \samPending & \samPending \\
+-Baseline $+S+D$ & \samPending & \samPending & \samPending & \samPending & \samPending & \samPending \\
+-Baseline $+B+E+D$ & \samPending & \samPending & \samPending & \samPending & \samPending & \samPending \\
+-Baseline $+B+S+D$ & \samPending & \samPending & \samPending & \samPending & \samPending & \samPending \\
+-Baseline $+E+S+D$ & \samPending & \samPending & \samPending & \samPending & \samPending & \samPending \\
+-Baseline $+B+E+S+D$ & \samPending & \samPending & \samPending & \samPending & \samPending & \samPending \\
++Baseline & 64.77 & 72.30 & 70.87 & 0.00 & 0.00 & 0.00 \\
++Baseline $+B$ & 70.65 & 73.23 & 68.48 & +5.88 & +0.94 & -2.39 \\
++Baseline $+S$ & 65.04 & 74.51 & 67.74 & +0.27 & +2.21 & -3.13 \\
++Baseline $+B+S$ & 69.29 & 71.28 & 68.25 & +4.52 & -1.02 & -2.62 \\
++Baseline $+B+E$ & 65.45 & 71.46 & 71.40 & +0.68 & -0.84 & +0.53 \\
++Baseline $+B+E+S$ & 66.01 & 68.11 & 68.27 & +1.24 & -4.19 & -2.61 \\
++Baseline $+D$ & 70.12 & 74.12 & 72.64 & +5.35 & +1.83 & +1.77 \\
++Baseline $+B+D$ & 71.66 & 73.02 & 72.66 & +6.89 & +0.72 & +1.79 \\
++Baseline $+E+D$ & 65.85 & 70.11 & 71.58 & +1.08 & -2.19 & +0.71 \\
++Baseline $+S+D$ & 69.85 & 71.25 & 68.67 & +5.08 & -1.05 & -2.20 \\
++Baseline $+B+E+D$ & 70.97 & 74.87 & 72.45 & +6.19 & +2.57 & +1.58 \\
++Baseline $+B+S+D$ & 71.14 & 72.68 & 72.67 & +6.37 & +0.39 & +1.80 \\
++Baseline $+E+S+D$ & 67.81 & 67.86 & 73.42 & +3.04 & -4.44 & +2.55 \\
++Baseline $+B+E+S+D$ & 69.30 & 71.94 & 71.62 & +4.52 & -0.35 & +0.75 \\
+ \hline
+ \end{tabular}
+ \caption{SAM3 fold means, each averaging seeds 0, 1 and 2. Paired changes
+-use the corresponding baseline within each fold. Pending cells reserve
+-complete three-seed reductions; they are not partial means. All fourteen
+-objectives appear regardless of the direction of their final changes.}
++use the corresponding baseline within each fold. All 126 final runs
++are included, and every objective is shown regardless of the direction
++of its change.}
+ \label{tab:sam3-geo-folds}
+ \end{table}
+ 
+@@ -6523,26 +6559,39 @@
+ \path{reports/sam3_geofwi_f013_s012_126_20261019/bundle/}.
+ Its immutable plan assigns 126 distinct tasks to fourteen objectives,
+ folds 0, 1 and 3, and seeds 0, 1 and 2. All tasks are fresh runs;
+-historical pilots serve only as protocol references. All tasks retain
+-distinct identifiers and the same frozen scientific source. Dated progress inventories are preserved under
+-\path{reports/thesis_sam3_update_20261023/}; they are not substituted
+-for balanced final-result aggregates.
+-
+-\noindent\samResult{final archive audit: reconcile all 126 task IDs,
+-verify available payload hashes and archive acknowledgements, check
+-25-update records, frozen-parameter identities, matched initialization
+-and sampling, and recompute 12,726 support/validation volume records;
+-state any unavailable payloads or limits of verification}.
+-
+-Final extraction supplies the fourteen-objective quality and error tables,
+-the fold decomposition and the linked abstract/result fields. The expected
+-per-volume inventory is $126\times(5+96)=12{,}726$ evaluations, with support
+-and validation reduced separately. Runtime summaries retain GPU
+-configuration, measured scope and recovery cost. A documented restart of
+-the fold-1, seed-2 $B+E+S$ run resumed from checkpoint 0 despite a charge
+-for update 1. The record allows up to one additional update attempt;
+-whether the lost attempt completed is unknown. This recovery cost remains
+-separate from the final 25-update trajectory.
++historical pilots serve only as protocol references. The final
++collection is preserved in the campaign's
++\path{split_cluster_20261022/final_results_20261023/} directory.
++
++The independent thesis extraction in
++\path{reports/thesis_sam3_final_20261023/} reconciles every planned
++identifier with its final result and verifies 2,252 manifest-listed
++metadata payload hashes. All required evaluation, completion, protocol,
++training-summary, sampling and support-inventory records are available.
++The 76 Colab ZIP archives also match their recovery-receipt hashes;
++the 50 cluster runs retain archive acknowledgements. Each final run
++records 25 updates and unchanged frozen-parameter hashes. Initial
++adapter, base, support-array and sampling-schedule identities agree
++across all fourteen arms within each of the nine fold/seed cells.
++
++The extraction recomputes 12,726 volume records from their confusion
++matrices: 630 support and 12,096 validation evaluations. Per-volume
++class Dice, run-level support/validation means and full-validation
++FN/FP reproduce the archived values. The fourteen objective means and
++positive-pair counts also reproduce the final campaign summary.
++Dispersion is recomputed across the three seed-averaged fold means,
++consistent with the thesis; the upstream summary's standard deviation
++instead describes the nine individual runs.
++
++All 126 records retain the same scientific source identity. Hardware
++records distinguish 76 full A100-SXM4-80GB allocations from 50 A100
++PCIe MIG 4g.40gb allocations. Recorded training-loop elapsed time is
++not an end-to-end adaptation measurement: initial setup, shared
++calibration, evaluation and unretained work before recovery require
++separate accounting. The final ledger records upper bounds of five
++repeated update attempts for fold 0, seed 1, $B+E+S$, and one for
++fold 1, seed 2, $B+E+S$. These costs are additional to the final
++25-update trajectories and are not counted as extra scientific runs.
+ 
+ \subsection{MedSAM3 Campaigns}
+ 
+@@ -6600,11 +6649,14 @@
+ 
+ The complementary analysis in Section~\ref{sec:background-dice-results}
+ uses \path{reports/background_dice_archive_recovery_20261023/}.
+-The retained inventory contains 1,862 run evaluations and 124,860
+-validation-volume records: 504 runs for each conventional dataset,
+-108 for MSD MedSAM3, 126 for ADNI MedSAM3 and 116
+-SAM3 evaluations in the recovery snapshot. Each evaluation matches
+-its manifest SHA-256 and reproduces its recorded foreground run mean.
++The original recovery inventory contains 1,862 run evaluations and
++124,860 validation-volume records. The final SAM3 supplement in
++\path{reports/thesis_sam3_final_20261023/} replaces its 116-record
++SAM3 snapshot with all 126 final evaluations. Together they cover
++1,872 run evaluations and 125,820 validation-volume records:
++504 runs for each conventional dataset, 108 for MSD MedSAM3,
++126 for ADNI MedSAM3 and 126 for SAM3. Evaluation payloads match
++their manifest hashes and reproduce their recorded foreground means.
+ Per-volume foreground and background scores are recomputed from the
+ saved confusion matrices; the all-class score follows
+ Equation~\ref{eq:reported-all-class-dice}. These checks use evaluation
+@@ -6615,7 +6667,9 @@
+ and \path{background_metric_comparison.csv}, together with verification
+ records, download receipts and the recovery script. The thesis tables
+ are generated and checked in
+-\path{reports/thesis_background_dice_update_20261023/}.
++\path{reports/thesis_background_dice_update_20261023/}, with the
++completed SAM3 rows and the 193-comparison sensitivity check updated in
++\path{reports/thesis_sam3_final_20261023/}.
+ For the MSD $B$ and $B+E$ variants and their matched baseline,
+ aggregate foreground results are preserved, but the searched archives
+ did not yield their 27 per-volume evaluation records. Their missing
+@@ -6637,11 +6691,12 @@
+ 
+ The extraction retains all 1,512 conventional evaluations, 135 MSD
+ MedSAM3 records including the repeated matched controls, 126 ADNI
+-MedSAM3 evaluations and the 116-record SAM3 snapshot. It produces
+-211 condition rows, including the two applicable MSD baseline rows.
+-Of these, 203 have all nine fold/seed cells; the other eight are SAM3
+-conditions whose aggregate errors remain pending. Every complete row
+-uses the declared fold and seed inventory. The directory preserves
++MedSAM3 evaluations and the original 116-record SAM3 snapshot.
++The final SAM3 extraction in \path{reports/thesis_sam3_final_20261023/}
++replaces that snapshot with 126 evaluations and recomputes all
++fourteen SAM3 error rows. The combined tables therefore contain
++211 complete condition rows, including the two applicable MSD baseline
++rows. Every row uses its declared nine-cell fold and seed inventory. The directory preserves
+ \path{run_errors.json}, \path{condition_errors.json},
+ \path{verification.json} and the generated table rows, including source
+ hashes, full-precision values and fold dispersions. No training or
+@@ -6655,15 +6710,14 @@
+ validation crops. These denominators and geometric supports remain
+ separate from the performance-run inventories.
+ 
+-SAM3 numerical and interpretation fields are marked explicitly in the
+-abstract, Section~\ref{sec:sam3-results} and its fold table. They require
+-the final verified extraction and do not imply measured outcomes.
+-The geological four-model matrix and its FN/FP aggregates are complete. Presentation
++The SAM3 numerical inventory, fold decomposition, full-volume FN/FP
++and foreground/background/all-class Dice analyses are complete.
++The geological four-model matrix and its FN/FP aggregates are also
++complete. Presentation
+ and measurement gaps include attributable prediction examples,
+ classwise/surface summaries where available, complete adaptation
+ resource accounting and reconciliation of the MSD source inventory.
+-All four medical campaigns above are complete within their declared
+-inventories. The MSD MedSAM3 campaign has completed results for all
++All six studies are complete within their declared objective inventories. The MSD MedSAM3 campaign has completed results for all
+ fourteen objectives, with each paired gain retaining its matched baseline. No additional $B$ or $B+E$ runs are required to
+ complete that objective inventory.
+ 

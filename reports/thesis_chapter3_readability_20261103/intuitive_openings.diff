@@ -1,0 +1,45 @@
+--- before
++++ after
+@@ -1183,11 +1183,23 @@
+ Ordinary voxel averaging allocates more total supervision to spatial regions
+ containing more voxels. Depth weighting instead divides a region around the
+ hippocampus into parallel layers, called strata, and controls their relative
+-contributions. A reference plane contains the hippocampal long axis; layers
+-are measured across that plane, rather than along the long axis. The
+-annotation determines this coordinate, while each voxel keeps its original
+-class target. The plane therefore organizes the weights; it does not define
+-an anatomical anterior/posterior cut.
++contributions.
++
++The construction follows four steps. First, the annotation defines a
++reference plane containing the hippocampal long axis. Second, the
++hippocampus and its surrounding region are divided into layers according
++to their distance from that plane. Third, the class prediction errors
++are averaged within each layer using cross-entropy. Finally, these layer
++averages are combined using weights that give sufficiently populated
++layers equal influence and very sparse layers less influence. Two large
++layers can therefore contribute equally even when one contains many more
++voxels than the other, while a layer with only a few voxels receives a
++smaller share.
++
++Depth is measured perpendicular to the reference plane, rather than along
++the hippocampal long axis. Each voxel keeps its original class target:
++the plane organizes the weights and does not define an anatomical
++anterior/posterior cut.
+ Figure~\ref{fig:depth-weighting-example} illustrates the geometry and how
+ weighting changes the contribution of differently sized strata.
+ 
+@@ -1325,6 +1337,13 @@
+ 
+ \subsection{Combined Objective and Experimental Scope}
+ \label{sec:constraint-combination}
++
++Training retains the model's usual segmentation loss and adds the selected
++spatial penalties. Each penalty has a coefficient that controls its
++strength relative to the other terms. An activation schedule determines
++when it contributes and can increase its contribution gradually during
++training. These choices let the usual class supervision and the additional
++spatial guidance contribute to the same parameter update.
+ 
+ Let $a$ identify a model and training configuration, and $J_a$ its set
+ of selected spatial-loss families. Write $\mathcal L_{\mathrm{seg},a}$

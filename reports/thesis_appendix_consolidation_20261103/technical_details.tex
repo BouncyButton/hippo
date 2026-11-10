@@ -1,0 +1,385 @@
+\section{Numerical and Implementation Details}
+\label{sec:technical-details}
+
+This appendix records the numerical conventions and training settings
+needed to reproduce the methods. Extended derivations and execution
+records are supplied in the electronic supplement described in
+Appendix~\ref{sec:evidence-register}.
+
+\subsection{Stable Loss Evaluation and Derivatives}
+\label{sec:band-implementation-details}
+
+For a class group $F$ and its complement $\overline F$, let $z_U$
+collect the logits for classes in a set $U$. Define
+$\operatorname{LSE}(z_U)=\log\sum_{c\in U}\exp z_c$,
+$\sigma(s)=1/(1+\exp(-s))$ and
+$\operatorname{softplus}(s)=\log(1+\exp s)$. The grouped logit and
+stable binary cross-entropy are
+\begin{align}
+s_F&=\operatorname{LSE}(z_F)-\operatorname{LSE}(z_{\overline F}),
+ &\sigma(s_F)&=\sum_{c\in F}p_c,\label{eq:grouped-predicate-logit}\\
+e_i(v)&=h_i(v)\operatorname{softplus}(-s_i(v))
+ +(1-h_i(v))\operatorname{softplus}(s_i(v)).&&\label{eq:band-stable-bce}
+\end{align}
+Grouped logits and losses use float32; classwise log-probabilities use
+log-softmax. Optional focal factors and neighbour-count weights are
+disabled. The band count constant is $\varepsilon=10^{-6}$. Adding it
+to a nonempty count multiplies the exact side mean by
+$\rho_i^s=n_i^s/(n_i^s+\varepsilon)$; the implemented case loss is
+$\tfrac12\sum_s\rho_i^s b_i^s$, where $b_i^s$ is that side's mean
+negative log-truth. Both bands must be nonempty for a case to enter the
+mean. If none is valid, a zero connected to the logits gives zero
+gradient. These conventions retain the implemented value rather than
+silently replacing stabilized sums by exact means.
+In terms of the inner and outer statement satisfactions, the exact
+identity is
+\begin{equation}
+\exp(-\mathcal L_{B,i})=
+\mathcal G_\theta(\Phi_i^{\rm in})^{\rho_i^{\rm in}/2}
+\mathcal G_\theta(\Phi_i^{\rm out})^{\rho_i^{\rm out}/2}.
+\label{eq:balanced-band-satisfaction}
+\end{equation}
+
+For edges, $\mathcal N_i^B(u)$ contains the neighbours of $u$ in the
+selected pair set, $n_i^E$ is the number of selected pairs and
+$\delta_i=q_i-h_i$. Differentiation gives
+\begin{equation}
+\begin{aligned}
+\frac{\partial\mathcal L_{E,i}}{\partial q_i(u)}
+ &=\frac{2}{n_i^E}\sum_{v\in\mathcal N_i^B(u)}
+     (\delta_i(u)-\delta_i(v)),\\
+\frac{\partial\mathcal L_{E,i}}{\partial s_i(u)}
+ &=q_i(u)(1-q_i(u))\frac{\partial\mathcal L_{E,i}}{\partial q_i(u)}.
+\end{aligned}\label{eq:edge-logit-gradient}
+\end{equation}
+The first line is a graph Laplacian: it sums residual differences with
+neighbours. The sigmoid factor reduces the logit gradient near zero or
+one. For the MSD signed-distance term, set $\bar\varphi_{i,0}=0$ and
+$\bar\varphi_{i,c}=\varphi_{i,c}$ for $c\in\{A,P\}$. Then
+\begin{equation}
+\frac{\partial\mathcal L_{\mathrm{SDF},i}}{\partial z_{i,k}(v)}
+=\frac{p_{i,k}(v)}{2|\Omega_i|}
+ \left[\bar\varphi_{i,k}(v)-\sum_{c\in\mathcal C}
+ p_{i,c}(v)\bar\varphi_{i,c}(v)\right].
+\label{eq:sdf-logit-gradient}
+\end{equation}
+The fixed annotation offset does not change this derivative. Case
+averaging, calibrated coefficients and schedules then apply as in the
+main objective.
+
+\subsection{Distance Fields and Observation Geometry}
+\label{sec:sdf-construction-details}
+
+For a nonempty, non-full class mask $M$, let $d(v,U)$ be the Euclidean
+distance from voxel centre $v$ to the nearest centre in $U$. The field
+used in the implementation is
+\begin{equation}
+\varphi^{\rm raw}(v)=
+\begin{cases}
+-(d(v,\Omega\setminus M)-\tfrac12), & v\in M,\\
+d(v,M)-\tfrac12, & v\notin M,
+\end{cases}
+\qquad
+\varphi(v)=\frac{\operatorname{clip}(\varphi^{\rm raw}(v),-8,8)}{8}.
+\label{eq:sdf-half-voxel-field}
+\end{equation}
+The half-voxel shift places the interface between opposite-class
+centres; it does not give an exact continuous-surface distance for every
+boundary orientation. A missing class receives the constant field $+1$;
+a full-grid class receives $-1$; both remain in the class reduction.
+No exterior background frame is added. The conventional construction uses unit grid
+spacing. Pretrained MSD uses its verified 1 mm spacing; ADNI and
+GeoFWI3D use unit source-array coordinates. Clipping and normalization
+retain these stated units.
+
+For the MSD depth construction, $r_i(v)$ maps a voxel index to its
+physical position. The foreground centroid and covariance are
+\begin{equation}
+\mu_i=\frac{1}{|M_i|}\sum_{v\in M_i}r_i(v),\qquad
+\Sigma_i=\frac{1}{|M_i|}\sum_{v\in M_i}
+(r_i(v)-\mu_i)(r_i(v)-\mu_i)^{\mathsf T}.
+\label{eq:depth-centroid-covariance}
+\end{equation}
+The largest-eigenvalue eigenvector supplies the principal axis. Its
+sign is oriented anteriorly, although reversing it leaves the projected
+rightward normal unchanged. The eigenvalue gap is recorded as a
+diagnostic. The surrounding region contains voxel centres within
+8 mm of the foreground. Axis spacings are column norms of the affine
+matrix $Q_i$; this distance calculation requires orthogonal axes.
+Sheared affines, fewer than four foreground points, or a projected
+normal of norm below 0.1 are rejected. ADNI's placeholder identity
+affines establish neither anatomical orientation nor physical spacing;
+its construction uses source-array coordinates in voxel units.
+
+\paragraph{Geological crop faces.}\label{sec:geo-boundaries}
+For axis lengths $N_{i,k}$, define
+\begin{equation}
+R_i^{(r)}=\{v\in\Omega_i:r\leq v_k\leq N_{i,k}-1-r, k=1,2,3\}.
+\label{eq:geological-band-frame}
+\end{equation}
+The final UNETR recipe intersects both bands with $R_i^{(2)}$;
+nnU-Net, SwinUNETR and the compact U-Net retain the zero-padded bands.
+Band losses average the two stabilized side means and require both
+sides to be nonempty. Edge pairs require both endpoints in the retained
+band support; an exact pair mean is followed by a valid-case mean.
+An empty valid-case set gives a differentiable zero. Signed distance
+covers the full grid, including crop faces, with loss
+$|\Omega_i|^{-1}\sum_v(p_{i,S}(v)-y_{i,S}(v))\varphi_{i,S}(v)$.
+
+\paragraph{Earlier geological development check.}\label{sec:geo-development}
+A separate UNETR check jointly changed frame exclusion and calibration,
+obtaining 50.61\% versus 52.03\% Dice after 407
+updates. It used one fold/seed pair and learning rate $5\times10^{-4}$;
+the final recipe uses $6\times10^{-4}$. Its 1.42-point difference
+cannot isolate the effect of frame exclusion and is excluded from the
+final three-fold results.
+
+\subsection{Sampled Volumetric Supervision}
+\label{sec:sampled-pretrained-supervision}
+
+Native three-dimensional masks define the supports before planes are
+sampled. Let $Z_i$ be the number of planes, $k$ a uniformly sampled
+anchor, and $\Omega_i^{(k)}$ its $N_i$ voxels. Band counts $n_{i,c}^s$
+and edge counts $n_{i,c}^E$ refer to the full volume. For nonempty
+supports, the anchor estimators are
+\begin{align}
+\widehat{\mathcal L}_{B,i,c}^{(k)}
+ &=-\frac{Z_i}{2}\left[
+ \frac{\sum_{v\in B_{i,c}^{\rm in}\cap\Omega_i^{(k)}}\log p_{i,c}(v)}{n_{i,c}^{\rm in}+\varepsilon}
+ +\frac{\sum_{v\in B_{i,c}^{\rm out}\cap\Omega_i^{(k)}}\log(1-p_{i,c}(v))}{n_{i,c}^{\rm out}+\varepsilon}
+ \right],\label{eq:medsam-sampled-band-loss}\\
+\widehat{\mathcal L}_{E,i,c}^{(k)}
+ &=\frac{Z_i}{n_{i,c}^E}\sum_{\{u,v\}\in\mathcal E_{i,c}^B(k)}
+ (\delta_{i,c}(u)-\delta_{i,c}(v))^2,\label{eq:medsam-sampled-edge-loss}\\
+\widehat{\mathcal L}_{S,i}^{(k)}
+ &=\frac{1}{|C_+|N_i}\sum_{c\in C_+}\sum_{v\in\Omega_i^{(k)}}
+ (p_{i,c}(v)-y_{i,c}(v))\varphi_{i,c}(v),\label{eq:medsam-sampled-sdf}\\
+\widehat{\mathcal L}_{D,i}^{(k)}
+ &=-Z_i\sum_{v\in\Omega_i^{(k)}}w_i(v)\log p_{i,y_i(v)}(v).
+ \label{eq:medsam-sampled-depth}
+\end{align}
+Here $C_+$ is the foreground class set, $w_i$ sums to one over the
+volume, and $\delta_{i,c}=p_{i,c}-y_{i,c}$. The edge set for anchor $k$
+contains its in-plane pairs and the pairs to $k+1$, when that plane
+exists. Every full-volume edge is assigned once. The baseline's
+companion plane wraps from the last index to zero, but no edge joins
+those two planes. For fixed predictions, averaging each estimator over
+all $Z_i$ anchors recovers its full-volume loss and gradient.
+
+MSD averages band and edge contributions over all three classes,
+including background; ADNI and GeoFWI3D use the single foreground
+mask. A class with an empty full-volume band side or edge set contributes
+zero and retains its place in the class mean. An empty sampled support
+does not change the full-volume denominator. Morphology uses zero
+padding, so MSD background bands can reach crop faces. Volumes and
+anchors are sampled uniformly; two adjacent-plane pairs are averaged
+per optimizer update.
+
+\subsection{Calibration and Activation Schedules}
+\label{sec:detailed-calibration}
+
+Conventional models calibrate gradients with respect to detached
+float32 primary logits $z_i$, with $m_i$ entries. For case $i$, define
+\begin{equation}
+g_{i,0}=\nabla_{z_i}\mathcal L_{{\rm seg},i},\quad
+g_{i,j}=\nabla_{z_i}\mathcal L_{j,i},\quad
+\operatorname{RMS}(g)=\sqrt{m_i^{-1}\sum_{k=1}^{m_i}g_k^2}.
+\label{eq:calibration-logit-gradients}
+\end{equation}
+The order is $B\to E\to S\to D$, omitting absent terms. If $K_j$
+contains preceding terms, calibration uses
+\begin{equation}
+g_{i,<j}=g_{i,0}+\sum_{k\in K_j}\lambda_k g_{i,k},\quad
+r_{i,j}=\frac{\operatorname{RMS}(g_{i,j})}{\operatorname{RMS}(g_{i,<j})},\quad
+\lambda_j=\min\left\{\frac{\eta_a}{\operatorname{median}_i r_{i,j}},
+\frac{\kappa_a}{Q_{0.95}(\{r_{i,j}\}_i)}\right\}.
+\label{eq:constraint-calibrated-coefficient}
+\end{equation}
+The median target $\eta_a$ and percentile cap $\kappa_a$ control relative
+gradient scale. Quantiles use linear interpolation and require finite
+positive ratios. Adding vectors before measuring RMS retains their
+directional interactions; adding norms would change the calibration.
+Depth is calibrated against preceding terms at full strength even when
+SDF activates later.
+
+MSD and ADNI use all ten support cases after a baseline prefix of nine
+updates for nnU-Net or 50 for the other models. Parameters, stored
+network values and random-generator states remain unchanged during
+the measurement. nnU-Net includes its primary deep-supervision weight;
+coarser detached outputs contribute no logit derivative. The medical
+settings are $(\eta_a,\kappa_a)=(0.6,0.75)$ for nnU-Net and
+$(0.1,0.5)$ otherwise. GeoFWI3D uses all 19 training scenes, with
+$(3.6,4.5)$ for nnU-Net, $(0.4,2.0)$ for UNETR and $(0.1,0.5)$
+otherwise. These model-specific strengths followed exploratory comparisons.
+
+For prefix $d_a$ and ramp length $w_a$, early terms use
+$s_a(t)=\min\{1,\max\{0,(t-d_a)/w_a\}\}$, with $d_a=w_a=9$
+for nnU-Net and 50 otherwise. SDF shares this ramp or starts near
+five ninths of the nominal FLOP allowance, with a separate ramp of
+the same length (Table~\ref{tab:sdf-activation-policies}). This policy
+was developed using earlier MSD validation experiments and retained
+for the campaigns; coefficient calibration itself uses support data
+only. Learning-rate horizons remain fixed when costs change the number
+of affordable updates.
+
+\subsection{Compute Accounting and Model Settings}
+\label{sec:detailed-resource-accounting}\label{sec:geological-budget-details}
+\label{sec:implementation-tables}\label{sec:conventional-implementation}
+
+The medical ceiling is 90 times the measured nnU-Net baseline update
+cost of $355{,}293{,}896{,}301$ FLOPs:
+\begin{equation}
+C_{\max}=31{,}976.45066709\;\mathrm{GFLOPs}.
+\label{eq:main-numerical-cap}
+\end{equation}
+Exploratory learning curves informed this short reference allowance.
+The ledger charges forward computation, active losses, backward
+computation and the optimizer, counting two FLOPs per
+multiply--accumulate. Fixed-target construction, validation, loading
+and storage are excluded; medical calibration is reported separately.
+For GeoFWI3D, the retained cap is
+\begin{equation}
+C_{\rm train}+C_{\rm cal}\leq182{,}178.12654316\;\mathrm{GFLOPs}.
+\label{eq:geological-compute-cap}
+\end{equation}
+It was defined as 152 times the original Dice-only nnU-Net update
+profile of $1{,}198.540306205$ GFLOPs. The final Dice-plus-cross-entropy
+baseline fits 151 updates. Geological evaluation, preflight diagnostics
+and recipe development are excluded. Thus the two datasets' allowances
+differ in both magnitude and treatment of calibration.
+
+Let $d_a,d_a^S$ mark early and delayed activation, and let
+$f_{a,0},f_{a,1},f_{a,2}$ be the measured update costs in the three
+successive phases. With $[x]_+=\max(x,0)$, the training charge is
+\begin{equation}
+C_a(n)=f_{a,0}\min(n,d_a)
++f_{a,1}[\min(n,d_a^S)-d_a]_+
++f_{a,2}[n-d_a^S]_+.
+\label{eq:piecewise-optimization-cost}
+\end{equation}
+The last integer update fitting the applicable ledger is admitted.
+Delayed activation uses the boundary nearest five ninths of the
+nominal cap after the early ramp, breaking ties toward the earlier
+boundary. Attempted updates are charged even if a numerical failure
+prevents a parameter change. Final states supply the reported scores;
+there is no early stopping or validation-best checkpoint substitution.
+With batch size one, completed epochs equal $\lfloor U/N\rfloor$
+for $U$ updates and $N$ training cases; calibration does not add epochs.
+
+The compact MONAI BasicUNet uses encoder widths $16,16,32,64,128$
+and final decoder width 16, with pooling, transposed convolutions and
+concatenated skips, without residual blocks or deep supervision.
+The fixed nnU-Net has five stages of widths $32,64,128,256,320$,
+three-dimensional kernels, instance normalization and leaky rectified
+linear activations. UNETR has 12 blocks, embedding width 768, 12
+attention heads and $16^3$ patches (64 tokens per $64^3$ medical crop),
+with a residual convolutional decoder of base width 16. SwinUNETR
+uses a hierarchical shifted-window encoder and convolutional decoder.
+Constraints apply only to the primary output; nnU-Net's other supervised
+resolutions keep their baseline losses.
+
+nnU-Net uses polynomial learning-rate decay with exponent 0.9 and no
+warmup. AdamW models warm up over 5\% of the fixed horizon, then decay
+cosinusoidally toward 1\% of the initial rate. Parameters and optimizer
+states use float32, eligible CUDA operations use bfloat16 autocast,
+and constraint calculations retain float32.
+
+@@TABLE:tab:main-model-settings@@
+
+@@TABLE:tab:sdf-activation-policies@@
+
+@@TABLE:tab:cap-training-exposure@@
+
+\subsection{Pretrained Adaptation Settings}
+\label{sec:adaptation-implementation}
+
+Every arm restores the same base model and initial adapters and follows
+its matched sampling schedule. AdamW uses weight decay 0.01,
+gradient-norm clipping at one, 20 warmup updates, peak learning rate
+$5\times10^{-5}$ and final rate $5\times10^{-6}$ over a 200-update
+horizon. Two adjacent-plane pairs are accumulated per update.
+Medical runs execute 200 updates; SAM3 executes only the first 25.
+These are target-specific allowances and exclude pretraining.
+
+\paragraph{SAM3 on GeoFWI3D.}\label{sec:sam3-methods-details}
+Five support volumes provide twenty calibration probes (four anchors
+each). Bands are calibrated at initialization. Other selected terms
+are calibrated after five prefix updates in order $B\to E\to S\to D$,
+retaining the band coefficient. Median/95th-percentile targets are
+0.1/0.5. Terms awaiting calibration have zero weight, then enter the
+global ramp $\min\{1,t/20\}$; entry at update six gives factor 0.3.
+The 25 updates present 100 slices and class queries. Final evaluation
+covers five support and 96 held-out volumes. The original 126 runs
+span full Colab A100-SXM4 GPUs and A100 PCIe MIG partitions;
+hardware was not fully crossed with objectives. Timing records in the
+supplement retain the platform distinction.
+
+\paragraph{MedSAM3 on MSD.}\label{sec:medsam-methods-details}
+The released medical factors initialize 916 trainable adapter tensors.
+Five support crops and 200 updates give 800 slice and 1,600 foreground
+query presentations. Twenty calibration probes measure gradients with
+respect to LoRA parameters in sequential order $B\to E\to S\to D$,
+using targets 0.1/0.5. Combination-specific coefficients are shared
+across optimization seeds within each fold according to the saved
+calibration records. $B$ and $B+E$ keep their original calibration and
+matched baseline; the other eleven constrained objectives use the
+separately audited execution batch. Controls are not interchanged.
+Every selected term uses $\min\{1,t/20\}$ from the first update,
+without delayed SDF activation.
+
+\paragraph{MedSAM3 on ADNI.}\label{sec:medsam-adni-methods-details}
+Two support crops provide eight calibration probes, with the same
+medical optimizer, sequential calibration targets and activation ramp.
+Support selection and overlap follow
+Section~\ref{sec:medsam-adni-methods}. The 200 updates give 800 slice
+and 800 single-class-query presentations. Final evaluation covers both
+support crops and all 54 held-out crops.
+
+The native-grid reductions are in
+Section~\ref{sec:sampled-pretrained-supervision}. Training-loop timers
+exclude initialization, calibration, validation and inference; they do
+not measure peak memory. All three adaptation studies use final-update
+evaluation without early stopping. Matching initialization and sampling
+does not guarantee bitwise-identical CUDA execution, as the qualitative
+reproductions document in Section~\ref{sec:qualitative-predictions}.
+
+\subsection{Illustration Supports and Depth-Layer Counts}
+\label{sec:dataset-constraint-examples}
+
+The Chapter~\ref{sec:spatial-constraints} illustrations use native,
+unaugmented annotations: MSD \texttt{hippocampus\_001} ($35\times51\times35$),
+ADNI \texttt{hippocampus\_adni\_10007\_L} ($32\times48\times40$),
+and GeoFWI3D \texttt{model\_0001} ($96^3$). They demonstrate the rules;
+they are not saved training-update targets or model predictions.
+All supports, distances and counts are computed in three dimensions.
+Bands use two six-neighbour steps. The edge close-ups in
+Figure~\ref{fig:constraint-support-details} use a $16\times16$ region
+around the reference boundary nearest the slice foreground centroid.
+The source-axis-two slice maximizes reference foreground area, with
+the first index resolving ties.
+
+Depth layers are two units wide within an eight-unit surrounding region:
+millimetres for MSD, source-array voxels for ADNI and GeoFWI3D. None of
+these examples requires the geological normal fallback. The right-hand
+plots include every occupied layer, including those omitted from the
+exploded three-dimensional views. Bars show voxel share; points show
+total normalized loss weight. Layers with at least 64 region voxels
+receive equal total weight. Sparser layers receive proportionally less;
+within a layer, its weight is divided equally among its voxels. Full
+panels, coordinate maps, input identities and display settings are
+preserved in the supplement.
+
+\begin{figure}[p]
+\centering
+\includegraphics[width=\linewidth]{figures/compiled/constraint-support-details.pdf}
+\caption{Additional details for the three Chapter~\ref{sec:spatial-constraints}
+examples. Left: selected in-plane neighbouring pairs, with blue for
+reference agreement and orange for a foreground transition. The dark
+outline is the reference boundary. Right: each depth layer's share of
+the three-dimensional surrounding region and of the loss weight.
+Equal total weights can correspond to different voxel counts, giving
+larger per-voxel weights in smaller layers. The sparse-layer rule reduces
+the weight of the small outermost MSD layer.}
+\label{fig:constraint-support-details}
+\end{figure}
+\clearpage

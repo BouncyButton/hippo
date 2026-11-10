@@ -1,0 +1,244 @@
+--- before.tex
++++ thesis-revision.tex
+@@ -322,17 +322,26 @@
+ balance supervision across spatial layers.
+ 
+ Dice measures how much a predicted region overlaps its reference.
+-For a reference region $Y$ and a predicted region $\widehat Y$, treated
+-as sets of pixels or voxels, the Dice coefficient is
+-\begin{equation}
+-\operatorname{Dice}(Y,\widehat Y)
+-=\frac{2|Y\cap\widehat Y|}{|Y|+|\widehat Y|},
+-\qquad |Y|+|\widehat Y|>0.
++For class $c$ in volume $i$, collect the voxels labelled as that class
++in the annotation and in the prediction:
++\[
++Y_{i,c}=\{v\in\Omega_i:y_i(v)=c\},
++\qquad
++\widehat Y_{i,c}=\{v\in\Omega_i:\widehat y_i(v)=c\}.
++\]
++These are sets of voxel locations, not probabilities. The predicted
++label $\widehat y_i(v)$ is the class with the largest model probability.
++Their Dice coefficient is
++\begin{equation}
++\operatorname{Dice}(Y_{i,c},\widehat Y_{i,c})
++=\frac{2|Y_{i,c}\cap\widehat Y_{i,c}|}
++       {|Y_{i,c}|+|\widehat Y_{i,c}|},
++\qquad |Y_{i,c}|+|\widehat Y_{i,c}|>0.
+ \label{eq:dice-set-definition}
+ \end{equation}
+-Here $|Y|$ and $|\widehat Y|$ count the locations in each region, and
+-$|Y\cap\widehat Y|$ counts those shared by both. A score of one
+-indicates perfect agreement and zero indicates no overlap.
++The vertical bars count voxels, and the intersection $\cap$ selects
++those assigned to class $c$ in both masks. A score of one indicates
++perfect agreement and zero indicates no overlap.
+ Figure~\ref{fig:dice-example} works through a nine-pixel example.
+ 
+ \begin{figure}[htbp]
+@@ -395,10 +404,11 @@
+ d_i^{\mathrm{phys}}(u,v)=\lVert Q_i(u-v)\rVert_2.
+ \label{eq:physical-coordinates}
+ \end{equation}
+-Here $\lVert\cdot\rVert_2$ denotes Euclidean length. Neuroimaging
+-Informatics Technology Initiative (NIfTI) image headers, the metadata
+-stored alongside image values, contain the coordinate transforms and spatial units needed for this calculation
+-\cite{nifti1fields}.
++Here $\lVert\cdot\rVert_2$ denotes Euclidean length. Calculating these
++positions and distances requires the coordinate transform and its spatial
++units. In Neuroimaging Informatics Technology Initiative (NIfTI) files,
++these values are stored in the image header, the metadata accompanying
++the image values \cite{nifti1fields}.
+ 
+ We define neighbours directly on the array grid. Two voxels are neighbours
+ when they share a face: their indices differ by one along exactly one
+@@ -646,6 +656,11 @@
+ supervision across multiple architectures under an optimization FLOP
+ ceiling. It also examines the compatibility of simplified anatomical rules
+ with the actual label maps (Appendix~\ref{sec:annotation-results}).
++
++A nonmedical example is Gigante's application of LTNs to three-dimensional
++point-cloud segmentation of cultural heritage structures. Its logical
++rules use geometric properties such as verticality and coplanarity
++\cite{gigante2025pointcloud}.
+ 
+ Together, these studies motivate explicit spatial supervision while showing
+ that different objectives encode different properties. The
+@@ -1345,35 +1360,28 @@
+ coordinate and centroid details are provided in
+ Appendix~\ref{sec:technical-details}.
+ 
+-The three-dimensional examples in Figure~\ref{fig:dataset-constraint-3d}
+-show how these constructions follow real annotations. They use a hippocampal
+-volume from MSD, one from the Alzheimer's Disease Neuroimaging Initiative
+-(ADNI), and a salt volume from GeoFWI3D. The left column shows signed
+-distance: blue is inside the selected class, orange is outside, and pale
+-colours mark locations close to its boundary. Stronger colour means a
+-larger distance magnitude, not a larger observed prediction error. In MSD,
+-the selected class is anterior hippocampus, so posterior voxels lie outside
+-that class even though they belong to the same organ.
+-
+-The right column shows five separated depth layers from each volume.
+-Each layer contains part of the foreground and its surrounding region.
+-Darker blue means greater weight \emph{per voxel}. The colour scale divides
+-each weight by the mean positive voxel weight in that volume: a value of
+-one is the mean, and ten means ten times that mean. Weights are constant
+-within a layer; small differences between its visible faces come from
+-rendering light and shade. The weight changes between layers according to
+-their voxel counts, rather than increasing automatically with distance
++Figure~\ref{fig:dataset-constraint-3d} shows signed distance and depth
++weights on actual MSD, ADNI and GeoFWI3D annotations. In the left column,
++blue marks locations inside the selected class and orange those outside;
++pale colours are close to the boundary. Stronger colour means a larger
++distance magnitude, not a larger prediction error. MSD shows the anterior
++class, so posterior voxels count as outside it.
++
++The right column separates five depth layers for visibility. Each contains
++foreground and part of the surrounding region. Darker blue means greater
++weight per voxel, expressed relative to the volume's mean positive weight:
++one is the mean and ten is ten times that mean. Weights are constant
++within a layer; shading differences between its faces come from rendering.
++Between layers, weights depend on voxel counts, not simply on distance
+ from the reference plane.
+ 
+-For example, the displayed ADNI volume has 13 occupied layers, all above
+-the 64-voxel threshold. Each receives $1/13$, or about $7.69\%$, of the
+-total weight. One layer contains 74 voxels and another 2,918: a voxel in
+-the smaller layer therefore receives about 39 times as much weight.
+-Their layer averages still have the same coefficient, although different
+-prediction errors can give them different contributions to the loss.
+-For layers below 64 voxels, the total weight decreases with their size,
+-preventing a further increase in weight per voxel. The complete layer
+-distributions appear in Appendix~\ref{sec:dataset-constraint-examples}.
++All 13 layers in the displayed ADNI volume exceed 64 voxels, so each
++receives $1/13$ (about $7.69\%$) of the total weight. Layers containing
++74 and 2,918 voxels therefore differ about 39-fold in weight per voxel,
++while their mean class errors have equal coefficients in the loss.
++Below 64 voxels, a layer receives proportionally less total weight,
++preventing a further increase per voxel. Complete layer distributions
++appear in Appendix~\ref{sec:dataset-constraint-examples}.
+ 
+ \begin{figure}[p]
+ \centering
+@@ -1406,12 +1414,12 @@
+ spatial guidance contribute to the same parameter update.
+ 
+ Let $a$ identify a model and training configuration, and $J_a$ its set
+-of selected spatial-loss families. Write $\mathcal L_{\mathrm{seg},a}$
++of selected spatial-loss families. Write $\mathcal L_{\mathrm{segm},a}$
+ for its supervised baseline loss and $\mathcal L_{a,j}$ for auxiliary
+ family $j$. Training minimizes
+ \begin{equation}
+ \mathcal{L}_{a}^{(t)}(\theta)
+-=\mathcal{L}_{\mathrm{seg},a}(\theta)
++=\mathcal{L}_{\mathrm{segm},a}(\theta)
+ +\sum_{j\in J_a}\lambda_{a,j}\,s_{a,j}(t)\,
+ \mathcal{L}_{a,j}(\theta),
+ \qquad \lambda_{a,j}\geq0,\quad 0\leq s_{a,j}(t)\leq1.
+@@ -1495,20 +1503,21 @@
+ 
+ \begin{table}[htbp]
+ \centering\small\setstretch{1.05}
+-\begin{tabular}{@{}P{2.5cm}P{3.0cm}P{3.2cm}P{5.7cm}@{}}
+-\hline
+-Study & Support per fold & Folds; seeds & Conditions and budget \\
+-\hline
+-GeoFWI3D, from scratch & 19 scenes & 0,1,2; 0,1,2 & 4 models $\times$ 14 objectives; 504 runs; $182{,}178.13$ GFLOPs/run including calibration. \\[.5em]
+-MSD, from scratch & 10 crops & 0,1,2; 0,2,20 & 4 models $\times$ 14 objectives; 504 runs; $31{,}976.45$ GFLOPs/run. \\[.5em]
+-ADNI, from scratch & 10 crops, 5 subjects & 0,1,2; 0,1,4 & 4 models $\times$ 14 objectives; 504 runs; same FLOP cap. \\[.5em]
+-GeoFWI3D, SAM3 & 5 scenes & 0,1,3; 0,1,2 & 14 objectives; 126 runs; 25 updates/run. \\[.5em]
+-MSD, MedSAM3 & 5 crops & 0,1,3; 17,83,191 & 14 objectives; 126 runs; 200 updates/run. \\[.5em]
+-ADNI, MedSAM3 & 2 crops, 2 subjects & 0,1,3; 0,1,2 & 14 objectives; 126 runs; 200 updates/run. \\
++\begin{tabular}{@{}P{3.1cm}P{3.0cm}P{8.8cm}@{}}
++\hline
++Study & Support per fold & Conditions and budget \\
++\hline
++GeoFWI3D, from scratch & 19 scenes & 4 models $\times$ 14 objectives; 504 runs; $182{,}178.13$ GFLOPs/run including calibration. \\[.5em]
++MSD, from scratch & 10 crops & 4 models $\times$ 14 objectives; 504 runs; $31{,}976.45$ GFLOPs/run. \\[.5em]
++ADNI, from scratch & 10 crops, 5 subjects & 4 models $\times$ 14 objectives; 504 runs; same FLOP cap. \\[.5em]
++GeoFWI3D, SAM3 & 5 scenes & 14 objectives; 126 runs; 25 updates/run. \\[.5em]
++MSD, MedSAM3 & 5 crops & 14 objectives; 126 runs; 200 updates/run. \\[.5em]
++ADNI, MedSAM3 & 2 crops, 2 subjects & 14 objectives; 126 runs; 200 updates/run. \\
+ \hline
+ \end{tabular}
+ \caption{Completed study design: 1,890 objective runs in 210 conditions,
+-comprising 630 geological and 1,260 medical runs.
++comprising 630 geological and 1,260 medical runs. Each condition is
++repeated over three folds and three seeds.
+ Each MedSAM3 campaign covers fourteen objectives, counting the baseline
+ objective once. Repeated matched controls (baseline runs) support paired gains but do
+ not enlarge the objective inventory.
+@@ -1520,7 +1529,8 @@
+ 
+ Each comparison is repeated with three seeds to assess how much its
+ outcome depends on training randomness. Different studies use different
+-seed sets, as recorded in Table~\ref{tab:experimental-design}. Within
++seed sets; the identifiers are retained in
++Appendix~\ref{sec:replication-identifiers}. Within
+ each conventional dataset comparison, all four architectures and all
+ fourteen objectives use the same set, preserving the pairing between
+ each constrained run and its baseline. Each objective includes all nine
+@@ -1626,7 +1636,7 @@
+ validation are disjoint within each fold, and the three validation sets
+ are pairwise disjoint. The support sets contain 54 distinct scenes across
+ their 57 entries. All models and objectives use these same partitions
+-and the seeds in Table~\ref{tab:experimental-design}. SAM3 uses the smaller
++and the seeds in Appendix~\ref{sec:replication-identifiers}. SAM3 uses the smaller
+ support sets specified in Section~\ref{sec:sam3-methods}.
+ 
+ \subsection{MSD: Medical Segmentation Decathlon}
+@@ -1667,7 +1677,7 @@
+ zeros) and centrally cropped to $64^3$. This preserves voxel scale rather
+ than resizing the anatomy. Validation uses this prepared grid. Each of folds
+ 0, 1 and 2 supplies ten support crops and 52 validation crops, shared across
+-models and objectives. Seeds are 0, 2 and 20. Validation identifiers are
++models and objectives. Validation identifiers are
+ disjoint across the three folds, but the available crop identifiers do not
+ establish participant-level independence. MedSAM3 uses its separate
+ native-grid preparation and manifests, files listing the cases assigned to
+@@ -2487,6 +2497,11 @@
+ Knowledge in Medical Semantic Segmentation with Logic Tensor Networks,''
+ arXiv:2509.22399, 2025. \url{https://arxiv.org/abs/2509.22399}.
+ 
++\bibitem{gigante2025pointcloud}
++F.~Gigante, ``Integrating Neuro-Symbolic Reasoning into 3D Point Cloud
++Semantic Segmentation,'' master's thesis, Politecnico di Torino, 2025.
++\url{https://webthesis.biblio.polito.it/38640/}.
++
+ \bibitem{kirillov2023segment}
+ A.~Kirillov et al., ``Segment Anything,'' arXiv:2304.02643, 2023.
+ \url{https://arxiv.org/abs/2304.02643}.
+@@ -2765,7 +2780,7 @@
+ Conventional models calibrate gradients with respect to detached
+ float32 primary logits $z_i$, with $m_i$ entries. For case $i$, define
+ \begin{equation}
+-g_{i,0}=\nabla_{z_i}\mathcal L_{{\rm seg},i},\quad
++g_{i,0}=\nabla_{z_i}\mathcal L_{{\rm segm},i},\quad
+ g_{i,j}=\nabla_{z_i}\mathcal L_{j,i},\quad
+ \operatorname{RMS}(g)=\sqrt{m_i^{-1}\sum_{k=1}^{m_i}g_k^2}.
+ \label{eq:calibration-logit-gradients}
+@@ -3396,6 +3411,15 @@
+ \end{table}
+ 
+ \subsection{Variation across Folds and Seeds}
++\label{sec:replication-identifiers}
++The conventional studies use folds 0, 1 and 2. Their seed sets are
++$\{0,1,2\}$ for GeoFWI3D, $\{0,2,20\}$ for MSD and $\{0,1,4\}$ for
++ADNI. The pretrained studies use folds 0, 1 and 3, with seeds
++$\{0,1,2\}$ for SAM3 on GeoFWI3D and MedSAM3 on ADNI, and
++$\{17,83,191\}$ for MedSAM3 on MSD. These identifiers specify the
++reported runs; the selection limitations are discussed in
++Section~\ref{sec:experimental-structure}.
++
+ Table~\ref{tab:paired-replication-summary} groups the replication checks
+ for the configurations highlighted in Results. Each fold gain averages
+ three paired seed differences. Shared data within folds and overlap
+
+--- abstract_before.txt
++++ abstract.txt
+@@ -1,4 +1,4 @@
+-Semantic segmentation assigns a class to each location in an image, allowing structures such as organs to be identified and measured. In medical imaging, it supports the study of anatomy and disease, but obtaining annotations and training accurate models require time and resources. This thesis investigates whether spatial information already contained in annotations can improve three-dimensional segmentation when labelled data and training computation are limited.
++Semantic segmentation assigns a class to each location in an image, allowing structures such as organs to be identified and measured. In medical imaging, segmentation supports the interpretation of scans and can contribute to diagnosis and prognosis. Developing an accurate segmentation model, however, requires time, annotated data and computational resources. This thesis investigates whether spatial information already contained in annotations can improve three-dimensional segmentation when labelled data and training computation are limited.
+ 
+ The approach uses Logic Tensor Networks (LTNs), which combine neural learning with knowledge expressed as logical statements, and their logarithmic formulation, logLTN. Four additional training objectives encourage correct labels near boundaries and correct label transitions between neighbouring locations, weight errors by distance from class boundaries, and balance supervision across layers of a volume. These objectives reuse existing annotations without requiring additional manual labelling.
+ 

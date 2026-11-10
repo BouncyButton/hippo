@@ -1,0 +1,463 @@
+\subsection{Error Analysis}
+\label{sec:error-analysis}
+\label{sec:capped-errors-resources}
+
+The following tables report errors for every training variant in the
+six studies, in the same order as the Dice comparisons. A false negative
+(FN) is reference foreground predicted as background; a false positive
+(FP) is reference background predicted as foreground. On MSD, A/P swaps
+count anterior voxels predicted as posterior plus posterior voxels
+predicted as anterior. These swaps preserve foreground membership and
+are counted separately from FN and FP. They are not applicable
+to binary ADNI or GeoFWI3D segmentation. All counts cover the complete
+validation prediction, including locations outside the constraint bands.
+
+For the conventional models, counts are pooled over the validation
+volumes in each run. For SAM3 and MedSAM3, counts are averaged per volume
+or crop within a run. Each complete condition then averages the three
+seeds within each fold and weights the three folds equally. Tables give
+the resulting mean and sample standard deviation across the three fold
+means. Both the mean and its standard deviation use the power of ten
+shown in the column heading, with displayed values rounded to two decimal
+places. For example, $2.12\pm0.70$ under $\times10^6$ denotes
+approximately $2.12\times10^6\pm0.70\times10^6$ voxels. Full-precision
+counts are retained in the numerical archive.
+These dispersions describe variation between the evaluated folds;
+they are not confidence intervals. Counts retain each study's evaluation
+grid and denominator, so their absolute magnitudes should not be compared
+across studies as a measure of relative performance.
+
+Within each model and dataset, variants are ordered from the lowest to
+the highest mean total error: FN $+$ FP for binary segmentation, and
+FN $+$ FP $+$ A/P swaps for MSD. These categories are disjoint, so their
+sum counts all incorrectly labelled voxels. Ordering uses unrounded
+means; pending conditions appear last.
+
+\subsubsection{GeoFWI3D: Conventional Models}
+
+Table~\ref{tab:geo-all-errors} includes all 504 evaluations, including
+the nine recovered baseline records. For each architecture's highest-mean
+Dice variant, nnU-Net reduces both FN (34.4\%) and FP (11.4\%) relative
+to baseline. SwinUNETR and 3D U-Net reduce FP by 12.4\% and 26.9\%,
+respectively, with FN increases of 0.7\% and 3.9\%. UNETR's $B+E$
+configuration instead reduces FN by 4.3\% while increasing FP by 2.9\%.
+Thus, the overlap gains arise from different changes in foreground
+retention and extension. The full table also retains variants with
+negative Dice changes; no error category is selected for reporting
+according to whether it improves.
+
+\begingroup\footnotesize\setstretch{1.0}
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.12}
+\begin{longtable}{@{}lrr@{}}
+\caption{GeoFWI3D conventional models: all fourteen objectives for each architecture. Entries are mean $\pm$ sample SD across three seed-averaged fold means, using all nine runs per row. Counts pool the full validation set within each run. Within each model, rows ascend by mean total error (FN $+$ FP).}
+\label{tab:geo-all-errors}\\
+\hline
+Variant & \shortstack{FN / run\\($\times 10^{6}$)} & \shortstack{FP / run\\($\times 10^{6}$)} \\ \hline
+\endfirsthead
+\hline
+Variant & \shortstack{FN / run\\($\times 10^{6}$)} & \shortstack{FP / run\\($\times 10^{6}$)} \\ \hline
+\endhead
+\hline
+\multicolumn{3}{r}{Continued on next page}\\
+\endfoot
+\hline\endlastfoot
+\multicolumn{3}{@{}l}{\textbf{nnU-Net}}\\*
+Baseline $+B+E+S+D$ & 1.39 $\pm$ 0.57 & 1.21 $\pm$ 0.52 \\
+Baseline $+B+S+D$ & 1.50 $\pm$ 0.53 & 1.22 $\pm$ 0.52 \\
+Baseline $+E+S+D$ & 1.54 $\pm$ 0.58 & 1.25 $\pm$ 0.66 \\
+Baseline $+S+D$ & 1.74 $\pm$ 0.65 & 1.15 $\pm$ 0.54 \\
+Baseline $+B+D$ & 1.52 $\pm$ 0.56 & 1.47 $\pm$ 0.67 \\
+Baseline $+E+D$ & 1.66 $\pm$ 0.58 & 1.35 $\pm$ 0.61 \\
+Baseline $+D$ & 2.05 $\pm$ 0.76 & 1.18 $\pm$ 0.49 \\
+Baseline $+B$ & 1.97 $\pm$ 0.78 & 1.31 $\pm$ 0.53 \\
+Baseline $+B+S$ & 2.21 $\pm$ 0.79 & 1.11 $\pm$ 0.46 \\
+Baseline $+B+E$ & 1.85 $\pm$ 0.78 & 1.53 $\pm$ 0.66 \\
+Baseline $+B+E+S$ & 2.31 $\pm$ 0.95 & 1.13 $\pm$ 0.46 \\
+Baseline $+S$ & 2.16 $\pm$ 0.70 & 1.33 $\pm$ 0.55 \\
+Baseline & 2.12 $\pm$ 0.70 & 1.36 $\pm$ 0.57 \\
+Baseline $+B+E+D$ & 1.05 $\pm$ 0.26 & 2.73 $\pm$ 0.67 \\
+\hline
+\multicolumn{3}{@{}l}{\textbf{SwinUNETR}}\\*
+Baseline $+B+E+S+D$ & 2.14 $\pm$ 0.77 & 4.40 $\pm$ 1.08 \\
+Baseline $+B+S+D$ & 2.13 $\pm$ 0.77 & 4.42 $\pm$ 1.10 \\
+Baseline $+B+D$ & 2.15 $\pm$ 0.79 & 4.45 $\pm$ 1.10 \\
+Baseline $+B+E+D$ & 2.15 $\pm$ 0.75 & 4.46 $\pm$ 1.12 \\
+Baseline $+B+E$ & 2.11 $\pm$ 0.73 & 4.62 $\pm$ 1.06 \\
+Baseline $+B$ & 2.08 $\pm$ 0.71 & 4.66 $\pm$ 1.04 \\
+Baseline $+B+S$ & 2.11 $\pm$ 0.73 & 4.64 $\pm$ 1.08 \\
+Baseline $+B+E+S$ & 2.10 $\pm$ 0.74 & 4.67 $\pm$ 1.10 \\
+Baseline $+E+S+D$ & 2.14 $\pm$ 0.76 & 4.64 $\pm$ 0.98 \\
+Baseline $+E+D$ & 2.13 $\pm$ 0.74 & 4.67 $\pm$ 0.98 \\
+Baseline $+D$ & 2.15 $\pm$ 0.75 & 4.70 $\pm$ 0.95 \\
+Baseline $+S+D$ & 2.16 $\pm$ 0.80 & 4.69 $\pm$ 1.05 \\
+Baseline $+S$ & 2.10 $\pm$ 0.79 & 4.99 $\pm$ 0.82 \\
+Baseline & 2.13 $\pm$ 0.82 & 5.02 $\pm$ 0.90 \\
+\hline
+\multicolumn{3}{@{}l}{\textbf{UNETR}}\\*
+Baseline $+B+E+S+D$ & 3.67 $\pm$ 1.06 & 1.74 $\pm$ 0.82 \\
+Baseline $+B+S+D$ & 3.66 $\pm$ 1.04 & 1.81 $\pm$ 0.84 \\
+Baseline $+S+D$ & 3.71 $\pm$ 1.02 & 1.77 $\pm$ 0.78 \\
+Baseline $+E+D$ & 3.51 $\pm$ 1.02 & 1.99 $\pm$ 0.85 \\
+Baseline $+B+S$ & 3.70 $\pm$ 1.03 & 1.80 $\pm$ 0.76 \\
+Baseline $+E+S+D$ & 3.76 $\pm$ 1.04 & 1.75 $\pm$ 0.83 \\
+Baseline $+B+E+D$ & 3.42 $\pm$ 0.98 & 2.09 $\pm$ 0.89 \\
+Baseline $+B+E+S$ & 3.77 $\pm$ 1.05 & 1.74 $\pm$ 0.79 \\
+Baseline $+D$ & 3.49 $\pm$ 1.02 & 2.03 $\pm$ 0.87 \\
+Baseline $+B+E$ & 3.42 $\pm$ 1.03 & 2.11 $\pm$ 0.90 \\
+Baseline $+B+D$ & 3.45 $\pm$ 0.99 & 2.09 $\pm$ 0.91 \\
+Baseline $+B$ & 3.46 $\pm$ 0.98 & 2.12 $\pm$ 0.89 \\
+Baseline $+S$ & 3.73 $\pm$ 1.03 & 1.86 $\pm$ 0.77 \\
+Baseline & 3.58 $\pm$ 0.97 & 2.05 $\pm$ 0.78 \\
+\hline
+\multicolumn{3}{@{}l}{\textbf{3D U-Net}}\\*
+Baseline $+B+E+S+D$ & 0.72 $\pm$ 0.31 & 1.44 $\pm$ 0.45 \\
+Baseline $+B+S+D$ & 0.71 $\pm$ 0.31 & 1.46 $\pm$ 0.47 \\
+Baseline $+B+E+D$ & 0.73 $\pm$ 0.32 & 1.46 $\pm$ 0.45 \\
+Baseline $+B+D$ & 0.70 $\pm$ 0.31 & 1.50 $\pm$ 0.49 \\
+Baseline $+E+S+D$ & 0.67 $\pm$ 0.30 & 1.61 $\pm$ 0.52 \\
+Baseline $+S+D$ & 0.69 $\pm$ 0.30 & 1.67 $\pm$ 0.56 \\
+Baseline $+E+D$ & 0.67 $\pm$ 0.29 & 1.72 $\pm$ 0.59 \\
+Baseline $+D$ & 0.66 $\pm$ 0.31 & 1.76 $\pm$ 0.65 \\
+Baseline $+B+E+S$ & 0.70 $\pm$ 0.29 & 1.79 $\pm$ 0.46 \\
+Baseline $+B$ & 0.68 $\pm$ 0.29 & 1.85 $\pm$ 0.55 \\
+Baseline $+B+E$ & 0.68 $\pm$ 0.27 & 1.85 $\pm$ 0.40 \\
+Baseline $+B+S$ & 0.68 $\pm$ 0.27 & 1.93 $\pm$ 0.33 \\
+Baseline $+S$ & 0.71 $\pm$ 0.31 & 1.93 $\pm$ 0.60 \\
+Baseline & 0.69 $\pm$ 0.29 & 1.97 $\pm$ 0.58 \\
+\hline
+\end{longtable}
+\endgroup
+
+\subsubsection{MSD: Conventional Models}
+
+Table~\ref{tab:msd-all-errors} separates whole-foreground errors from
+internal A/P confusion for all four models and fourteen objectives.
+At the highest-mean Dice configuration of each architecture, nnU-Net
+reduces missed foreground while increasing foreground extension
+slightly; the other models reduce extension while increasing omissions.
+All four selected configurations reduce mean A/P swaps. This does not
+imply that every constrained variant reduces every error category.
+
+\begingroup\footnotesize\setstretch{1.0}
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.12}
+\begin{longtable}{@{}lrrr@{}}
+\caption{MSD conventional models: all fourteen objectives for each architecture. Entries are mean $\pm$ sample SD across three seed-averaged fold means, using all nine runs per row. Counts pool the full validation set within each run. Within each model, rows ascend by mean total error (FN $+$ FP $+$ A/P swaps).}
+\label{tab:msd-all-errors}\label{tab:capped-errors}\\
+\hline
+Variant & \shortstack{FN / run\\($\times 10^{3}$)} & \shortstack{FP / run\\($\times 10^{3}$)} & \shortstack{A/P swaps / run\\($\times 10^{3}$)} \\ \hline
+\endfirsthead
+\hline
+Variant & \shortstack{FN / run\\($\times 10^{3}$)} & \shortstack{FP / run\\($\times 10^{3}$)} & \shortstack{A/P swaps / run\\($\times 10^{3}$)} \\ \hline
+\endhead
+\hline
+\multicolumn{4}{r}{Continued on next page}\\
+\endfoot
+\hline\endlastfoot
+\multicolumn{4}{@{}l}{\textbf{nnU-Net}}\\*
+Baseline $+B+E+S+D$ & 34.63 $\pm$ 4.36 & 29.14 $\pm$ 1.68 & 12.77 $\pm$ 1.71 \\
+Baseline $+B+S+D$ & 34.09 $\pm$ 3.55 & 30.26 $\pm$ 1.51 & 12.60 $\pm$ 1.72 \\
+Baseline $+B+E+D$ & 35.11 $\pm$ 3.94 & 29.71 $\pm$ 1.44 & 13.62 $\pm$ 1.82 \\
+Baseline $+B+D$ & 34.40 $\pm$ 3.57 & 31.15 $\pm$ 1.45 & 13.29 $\pm$ 1.78 \\
+Baseline $+B+S$ & 37.49 $\pm$ 4.53 & 30.74 $\pm$ 1.66 & 13.60 $\pm$ 1.53 \\
+Baseline $+B$ & 36.75 $\pm$ 4.52 & 31.58 $\pm$ 2.08 & 14.06 $\pm$ 1.60 \\
+Baseline $+B+E+S$ & 39.62 $\pm$ 5.18 & 28.92 $\pm$ 2.24 & 14.16 $\pm$ 1.55 \\
+Baseline $+B+E$ & 38.75 $\pm$ 5.19 & 29.67 $\pm$ 2.30 & 14.82 $\pm$ 1.72 \\
+Baseline $+S+D$ & 48.03 $\pm$ 9.09 & 27.32 $\pm$ 3.95 & 12.86 $\pm$ 1.49 \\
+Baseline $+E+S+D$ & 49.08 $\pm$ 10.10 & 26.00 $\pm$ 4.31 & 13.19 $\pm$ 1.56 \\
+Baseline $+D$ & 49.87 $\pm$ 10.13 & 27.43 $\pm$ 4.69 & 13.49 $\pm$ 1.57 \\
+Baseline $+E+D$ & 51.49 $\pm$ 11.02 & 26.05 $\pm$ 4.88 & 14.03 $\pm$ 1.65 \\
+Baseline & 51.25 $\pm$ 12.54 & 28.97 $\pm$ 6.06 & 14.12 $\pm$ 1.68 \\
+Baseline $+S$ & 56.56 $\pm$ 13.76 & 26.18 $\pm$ 5.60 & 13.42 $\pm$ 1.08 \\
+\hline
+\multicolumn{4}{@{}l}{\textbf{SwinUNETR}}\\*
+Baseline $+B+E+S+D$ & 5.36 $\pm$ 1.28 & 155.79 $\pm$ 6.00 & 5.96 $\pm$ 0.77 \\
+Baseline $+B+S+D$ & 4.96 $\pm$ 1.18 & 158.26 $\pm$ 5.90 & 5.88 $\pm$ 0.70 \\
+Baseline $+B+E+D$ & 5.85 $\pm$ 1.38 & 160.75 $\pm$ 5.84 & 5.95 $\pm$ 0.75 \\
+Baseline $+B+D$ & 5.10 $\pm$ 1.40 & 165.24 $\pm$ 7.01 & 5.85 $\pm$ 0.64 \\
+Baseline $+E+S+D$ & 2.79 $\pm$ 0.84 & 178.30 $\pm$ 9.94 & 5.98 $\pm$ 0.50 \\
+Baseline $+E+D$ & 2.92 $\pm$ 0.87 & 180.22 $\pm$ 10.23 & 5.97 $\pm$ 0.52 \\
+Baseline $+S+D$ & 2.54 $\pm$ 0.70 & 183.92 $\pm$ 10.78 & 6.06 $\pm$ 0.57 \\
+Baseline $+D$ & 2.61 $\pm$ 0.72 & 186.21 $\pm$ 9.53 & 6.02 $\pm$ 0.49 \\
+Baseline $+B+S$ & 4.27 $\pm$ 1.06 & 293.26 $\pm$ 63.55 & 5.98 $\pm$ 0.56 \\
+Baseline $+B+E+S$ & 4.61 $\pm$ 1.07 & 295.88 $\pm$ 61.75 & 6.00 $\pm$ 0.45 \\
+Baseline $+B$ & 4.42 $\pm$ 0.93 & 324.20 $\pm$ 68.15 & 5.95 $\pm$ 0.42 \\
+Baseline $+B+E$ & 5.12 $\pm$ 1.23 & 326.80 $\pm$ 63.71 & 6.03 $\pm$ 0.44 \\
+Baseline $+S$ & 1.45 $\pm$ 0.42 & 345.53 $\pm$ 49.45 & 6.21 $\pm$ 0.27 \\
+Baseline & 1.49 $\pm$ 0.41 & 388.34 $\pm$ 55.21 & 6.36 $\pm$ 0.29 \\
+\hline
+\multicolumn{4}{@{}l}{\textbf{UNETR}}\\*
+Baseline $+B+E+S$ & 12.27 $\pm$ 2.96 & 206.13 $\pm$ 11.59 & 6.18 $\pm$ 0.59 \\
+Baseline $+B+S$ & 11.79 $\pm$ 3.04 & 208.42 $\pm$ 17.42 & 6.21 $\pm$ 0.56 \\
+Baseline $+B+E+S+D$ & 13.89 $\pm$ 3.43 & 213.83 $\pm$ 19.18 & 6.01 $\pm$ 0.47 \\
+Baseline $+B+S+D$ & 13.12 $\pm$ 3.00 & 216.21 $\pm$ 19.88 & 6.07 $\pm$ 0.63 \\
+Baseline $+B+E$ & 12.62 $\pm$ 3.15 & 225.02 $\pm$ 19.89 & 6.26 $\pm$ 0.63 \\
+Baseline $+B$ & 12.06 $\pm$ 2.89 & 227.37 $\pm$ 21.72 & 6.23 $\pm$ 0.57 \\
+Baseline $+B+E+D$ & 14.14 $\pm$ 3.27 & 230.27 $\pm$ 24.66 & 6.09 $\pm$ 0.62 \\
+Baseline $+B+D$ & 13.65 $\pm$ 3.41 & 232.29 $\pm$ 27.12 & 6.05 $\pm$ 0.66 \\
+Baseline $+E+S+D$ & 9.03 $\pm$ 2.80 & 237.84 $\pm$ 20.07 & 6.40 $\pm$ 0.70 \\
+Baseline $+S+D$ & 8.68 $\pm$ 2.78 & 241.21 $\pm$ 18.68 & 6.39 $\pm$ 0.64 \\
+Baseline $+E+D$ & 9.43 $\pm$ 2.92 & 247.54 $\pm$ 24.11 & 6.33 $\pm$ 0.63 \\
+Baseline $+D$ & 9.02 $\pm$ 2.82 & 252.46 $\pm$ 24.46 & 6.39 $\pm$ 0.67 \\
+Baseline $+S$ & 6.32 $\pm$ 1.90 & 255.86 $\pm$ 10.53 & 6.60 $\pm$ 0.58 \\
+Baseline & 6.74 $\pm$ 2.27 & 270.61 $\pm$ 15.13 & 6.73 $\pm$ 0.76 \\
+\hline
+\multicolumn{4}{@{}l}{\textbf{3D U-Net}}\\*
+Baseline $+B+E+D$ & 10.26 $\pm$ 1.54 & 57.47 $\pm$ 4.99 & 4.86 $\pm$ 0.30 \\
+Baseline $+B+E+S+D$ & 10.23 $\pm$ 1.63 & 58.02 $\pm$ 6.63 & 4.89 $\pm$ 0.41 \\
+Baseline $+B+E$ & 9.78 $\pm$ 1.34 & 60.30 $\pm$ 5.41 & 4.92 $\pm$ 0.49 \\
+Baseline $+B+E+S$ & 9.46 $\pm$ 1.17 & 61.43 $\pm$ 5.00 & 5.05 $\pm$ 0.29 \\
+Baseline $+B+D$ & 9.10 $\pm$ 1.49 & 64.49 $\pm$ 6.53 & 5.05 $\pm$ 0.25 \\
+Baseline $+B+S+D$ & 8.79 $\pm$ 1.57 & 65.31 $\pm$ 7.46 & 5.06 $\pm$ 0.45 \\
+Baseline $+B$ & 8.67 $\pm$ 1.35 & 66.06 $\pm$ 7.32 & 5.07 $\pm$ 0.33 \\
+Baseline $+B+S$ & 8.76 $\pm$ 1.38 & 66.17 $\pm$ 7.05 & 4.95 $\pm$ 0.28 \\
+Baseline $+E+S+D$ & 7.49 $\pm$ 1.38 & 75.95 $\pm$ 8.27 & 5.02 $\pm$ 0.57 \\
+Baseline $+E+D$ & 6.80 $\pm$ 0.88 & 77.32 $\pm$ 6.69 & 5.14 $\pm$ 0.52 \\
+Baseline $+S+D$ & 6.51 $\pm$ 0.82 & 82.57 $\pm$ 6.71 & 5.09 $\pm$ 0.32 \\
+Baseline $+D$ & 6.47 $\pm$ 0.96 & 82.89 $\pm$ 8.81 & 5.12 $\pm$ 0.39 \\
+Baseline & 4.96 $\pm$ 0.68 & 99.43 $\pm$ 8.64 & 4.99 $\pm$ 0.15 \\
+Baseline $+S$ & 5.21 $\pm$ 1.18 & 99.03 $\pm$ 11.06 & 5.32 $\pm$ 0.61 \\
+\hline
+\end{longtable}
+\endgroup
+
+\subsubsection{ADNI: Conventional Models}
+
+Table~\ref{tab:adni-all-errors} reports the corresponding binary-task
+errors. At each architecture's highest-mean Dice configuration, nnU-Net
+reduces both error types, while the other models exchange fewer false
+positives for more false negatives. A Dice improvement therefore does
+not by itself establish a reduction in both omissions and extensions.
+
+\begingroup\footnotesize\setstretch{1.0}
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.12}
+\begin{longtable}{@{}lrr@{}}
+\caption{ADNI conventional models: all fourteen objectives for each architecture. Entries are mean $\pm$ sample SD across three seed-averaged fold means, using all nine runs per row. Counts pool the full validation set within each run. Within each model, rows ascend by mean total error (FN $+$ FP).}
+\label{tab:adni-all-errors}\\
+\hline
+Variant & \shortstack{FN / run\\($\times 10^{3}$)} & \shortstack{FP / run\\($\times 10^{3}$)} \\ \hline
+\endfirsthead
+\hline
+Variant & \shortstack{FN / run\\($\times 10^{3}$)} & \shortstack{FP / run\\($\times 10^{3}$)} \\ \hline
+\endhead
+\hline
+\multicolumn{3}{r}{Continued on next page}\\
+\endfoot
+\hline\endlastfoot
+\multicolumn{3}{@{}l}{\textbf{nnU-Net}}\\*
+Baseline $+B+S+D$ & 35.91 $\pm$ 9.08 & 32.26 $\pm$ 10.23 \\
+Baseline $+B+D$ & 35.94 $\pm$ 9.22 & 32.48 $\pm$ 10.60 \\
+Baseline $+B+E+S+D$ & 36.29 $\pm$ 9.63 & 32.26 $\pm$ 11.28 \\
+Baseline $+B+E+D$ & 36.03 $\pm$ 9.74 & 32.76 $\pm$ 11.47 \\
+Baseline $+B+S$ & 36.01 $\pm$ 9.61 & 33.27 $\pm$ 11.00 \\
+Baseline $+B$ & 36.03 $\pm$ 9.40 & 33.25 $\pm$ 10.95 \\
+Baseline $+E+S+D$ & 37.25 $\pm$ 9.95 & 32.07 $\pm$ 11.22 \\
+Baseline $+E+D$ & 37.02 $\pm$ 9.84 & 32.63 $\pm$ 11.42 \\
+Baseline $+B+E+S$ & 36.10 $\pm$ 10.19 & 33.66 $\pm$ 12.17 \\
+Baseline $+S+D$ & 36.94 $\pm$ 9.74 & 32.93 $\pm$ 11.42 \\
+Baseline $+B+E$ & 35.97 $\pm$ 10.14 & 33.91 $\pm$ 12.32 \\
+Baseline $+D$ & 36.85 $\pm$ 9.86 & 33.54 $\pm$ 11.73 \\
+Baseline $+S$ & 36.94 $\pm$ 10.12 & 34.58 $\pm$ 12.83 \\
+Baseline & 36.91 $\pm$ 10.16 & 34.68 $\pm$ 12.84 \\
+\hline
+\multicolumn{3}{@{}l}{\textbf{SwinUNETR}}\\*
+Baseline $+B+E+D$ & 16.89 $\pm$ 2.41 & 78.63 $\pm$ 9.19 \\
+Baseline $+B+E+S+D$ & 16.89 $\pm$ 2.44 & 79.05 $\pm$ 9.99 \\
+Baseline $+B+D$ & 16.21 $\pm$ 2.48 & 81.71 $\pm$ 9.57 \\
+Baseline $+B+S+D$ & 16.29 $\pm$ 2.34 & 82.12 $\pm$ 10.53 \\
+Baseline $+B+E$ & 15.86 $\pm$ 2.13 & 83.41 $\pm$ 9.75 \\
+Baseline $+B+E+S$ & 15.99 $\pm$ 2.36 & 83.48 $\pm$ 10.43 \\
+Baseline $+B$ & 15.35 $\pm$ 2.19 & 85.97 $\pm$ 10.17 \\
+Baseline $+B+S$ & 15.60 $\pm$ 2.31 & 85.89 $\pm$ 11.03 \\
+Baseline $+E+D$ & 14.58 $\pm$ 2.42 & 95.41 $\pm$ 12.06 \\
+Baseline $+E+S+D$ & 14.57 $\pm$ 2.58 & 95.54 $\pm$ 12.12 \\
+Baseline $+D$ & 14.27 $\pm$ 2.34 & 98.21 $\pm$ 11.31 \\
+Baseline $+S+D$ & 14.11 $\pm$ 2.40 & 98.72 $\pm$ 12.25 \\
+Baseline & 13.17 $\pm$ 2.94 & 107.73 $\pm$ 13.17 \\
+Baseline $+S$ & 13.26 $\pm$ 2.83 & 107.95 $\pm$ 11.99 \\
+\hline
+\multicolumn{3}{@{}l}{\textbf{UNETR}}\\*
+Baseline $+B+E+S+D$ & 25.22 $\pm$ 5.03 & 140.23 $\pm$ 9.58 \\
+Baseline $+B+E+D$ & 25.61 $\pm$ 5.30 & 140.71 $\pm$ 11.95 \\
+Baseline $+B+E+S$ & 23.79 $\pm$ 4.88 & 145.42 $\pm$ 15.00 \\
+Baseline $+B+D$ & 24.01 $\pm$ 4.86 & 147.25 $\pm$ 13.04 \\
+Baseline $+B+S+D$ & 23.48 $\pm$ 4.92 & 149.29 $\pm$ 12.88 \\
+Baseline $+B+E$ & 23.96 $\pm$ 4.95 & 149.13 $\pm$ 17.16 \\
+Baseline $+B+S$ & 22.48 $\pm$ 4.20 & 153.58 $\pm$ 14.02 \\
+Baseline $+B$ & 22.59 $\pm$ 4.94 & 156.09 $\pm$ 15.65 \\
+Baseline $+E+S+D$ & 20.99 $\pm$ 4.71 & 166.67 $\pm$ 17.18 \\
+Baseline $+E+D$ & 21.51 $\pm$ 4.73 & 168.22 $\pm$ 18.36 \\
+Baseline $+S+D$ & 19.70 $\pm$ 4.40 & 174.31 $\pm$ 13.34 \\
+Baseline $+D$ & 20.16 $\pm$ 4.62 & 174.23 $\pm$ 14.84 \\
+Baseline & 17.26 $\pm$ 4.09 & 192.93 $\pm$ 18.30 \\
+Baseline $+S$ & 16.96 $\pm$ 3.78 & 196.19 $\pm$ 17.67 \\
+\hline
+\multicolumn{3}{@{}l}{\textbf{3D U-Net}}\\*
+Baseline $+B+E+D$ & 17.35 $\pm$ 3.67 & 67.90 $\pm$ 10.34 \\
+Baseline $+B+E+S+D$ & 16.98 $\pm$ 3.84 & 69.22 $\pm$ 11.68 \\
+Baseline $+B+E+S$ & 16.15 $\pm$ 3.58 & 73.55 $\pm$ 14.26 \\
+Baseline $+B+S+D$ & 16.17 $\pm$ 4.36 & 73.63 $\pm$ 12.94 \\
+Baseline $+B+S$ & 15.93 $\pm$ 3.64 & 74.21 $\pm$ 9.93 \\
+Baseline $+B+E$ & 16.66 $\pm$ 3.76 & 73.76 $\pm$ 15.96 \\
+Baseline $+B+D$ & 15.61 $\pm$ 4.27 & 75.50 $\pm$ 11.53 \\
+Baseline $+B$ & 15.57 $\pm$ 3.66 & 78.91 $\pm$ 8.31 \\
+Baseline $+E+S+D$ & 15.75 $\pm$ 3.49 & 83.92 $\pm$ 12.91 \\
+Baseline $+E+D$ & 15.13 $\pm$ 4.70 & 87.13 $\pm$ 11.78 \\
+Baseline $+D$ & 14.41 $\pm$ 3.28 & 89.93 $\pm$ 8.80 \\
+Baseline $+S+D$ & 14.17 $\pm$ 3.30 & 90.28 $\pm$ 9.46 \\
+Baseline & 12.91 $\pm$ 3.24 & 103.28 $\pm$ 14.28 \\
+Baseline $+S$ & 12.64 $\pm$ 3.70 & 105.25 $\pm$ 14.81 \\
+\hline
+\end{longtable}
+\endgroup
+
+\subsubsection{SAM3 on GeoFWI3D}
+
+Table~\ref{tab:sam3-geo-errors} uses the verified archive snapshot of
+23 October 2026 at 13:37 UTC, also used for the complementary Dice
+analysis in Section~\ref{sec:background-dice-results}. It contains
+116 of the 126 planned evaluations. Six conditions have all nine
+fold/seed cells and can be summarized; the eight remaining rows show
+their available run counts and retain pending aggregates. These are
+archive-coverage counts, not a live statement of training completion.
+No mean is calculated from an incomplete condition.
+
+\begingroup\footnotesize\setstretch{1.0}
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.12}
+\begin{longtable}{@{}lrrr@{}}
+\caption{SAM3 on GeoFWI3D: full-volume FN and FP for all fourteen variants. Each run averages errors over 96 held-out volumes; complete rows report mean $\pm$ sample SD across three seed-averaged fold means. Runs records coverage in the stated archive snapshot. Pending rows await complete nine-run evidence. Within each model, rows ascend by mean total error (FN $+$ FP). Pending conditions follow the complete rows.}
+\label{tab:sam3-geo-errors}\\
+\hline
+Variant & \shortstack{FN / volume\\($\times 10^{3}$)} & \shortstack{FP / volume\\($\times 10^{3}$)} & Runs \\ \hline
+\endfirsthead
+\hline
+Variant & \shortstack{FN / volume\\($\times 10^{3}$)} & \shortstack{FP / volume\\($\times 10^{3}$)} & Runs \\ \hline
+\endhead
+\hline
+\multicolumn{4}{r}{Continued on next page}\\
+\endfoot
+\hline\endlastfoot
+Baseline $+B$ & 29.74 $\pm$ 5.03 & 6.38 $\pm$ 3.08 & 9/9 \\
+Baseline $+B+E$ & 32.46 $\pm$ 7.51 & 5.12 $\pm$ 2.59 & 9/9 \\
+Baseline $+S$ & 33.82 $\pm$ 6.83 & 3.97 $\pm$ 1.40 & 9/9 \\
+Baseline & 34.16 $\pm$ 6.41 & 3.70 $\pm$ 0.49 & 9/9 \\
+Baseline $+B+S$ & 33.94 $\pm$ 3.05 & 4.12 $\pm$ 1.25 & 9/9 \\
+Baseline $+B+E+S$ & 36.05 $\pm$ 4.36 & 3.87 $\pm$ 1.48 & 9/9 \\
+Baseline $+D$ & \samPending & \samPending & 8/9 \\
+Baseline $+B+D$ & \samPending & \samPending & 7/9 \\
+Baseline $+E+D$ & \samPending & \samPending & 7/9 \\
+Baseline $+S+D$ & \samPending & \samPending & 8/9 \\
+Baseline $+B+E+D$ & \samPending & \samPending & 8/9 \\
+Baseline $+B+S+D$ & \samPending & \samPending & 8/9 \\
+Baseline $+E+S+D$ & \samPending & \samPending & 8/9 \\
+Baseline $+B+E+S+D$ & \samPending & \samPending & 8/9 \\
+\end{longtable}
+\endgroup
+
+\noindent\samResult{interpret the FN/FP changes of the final selected
+SAM3 objective against its matched baseline after the complete
+nine-run conditions have been verified; distinguish fewer misses,
+less foreground extension and any tradeoff}.
+
+\subsubsection{MedSAM3 on MSD}
+
+Table~\ref{tab:medsam-msd-all-errors} covers all fourteen objectives.
+The two baseline rows identify the controls matched to $B$ and $B+E$,
+and to the other constrained variants, within the same campaign.
+The preserved aggregate records supply FN, FP and swaps for $B$, $B+E$
+and their matched baseline even though their per-volume confusion
+matrices were not recovered. Consequently, those error results are
+complete; the missing per-volume records affect the complementary
+background-Dice analysis, not the error counts reported here.
+
+The highest-mean MSD adapter, $B+E+S+D$, reduces mean FN by 36.0\%
+and A/P swaps by 20.7\%, while FP increases by 40.7\% relative to its
+matched baseline. Improved overlap therefore includes a shift toward
+retaining more foreground, with fewer internal class confusions.
+
+\begingroup\footnotesize\setstretch{1.0}
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.12}
+\begin{longtable}{@{}lrrr@{}}
+\caption{MSD MedSAM3: all variants and their matched controls. Counts are mean errors per validation crop within a run, then averaged over seeds and folds; $\pm$ gives sample SD across the three fold means. Each row includes nine runs. The two baseline labels identify their matched constrained variants. Within each model, rows ascend by mean total error (FN $+$ FP $+$ A/P swaps).}
+\label{tab:medsam-msd-all-errors}\label{tab:medsam-noaug-errors}\label{tab:medsam-noaug-error-ledger}\\
+\hline
+Variant & \shortstack{FN / crop\\($\times 10^{2}$)} & \shortstack{FP / crop\\($\times 10^{2}$)} & \shortstack{A/P swaps / crop\\($\times 10^{2}$)} \\ \hline
+\endfirsthead
+\hline
+Variant & \shortstack{FN / crop\\($\times 10^{2}$)} & \shortstack{FP / crop\\($\times 10^{2}$)} & \shortstack{A/P swaps / crop\\($\times 10^{2}$)} \\ \hline
+\endhead
+\hline
+\multicolumn{4}{r}{Continued on next page}\\
+\endfoot
+\hline\endlastfoot
+Baseline $+B+E+S+D$ & 5.56 $\pm$ 0.59 & 4.37 $\pm$ 0.22 & 0.98 $\pm$ 0.17 \\
+Baseline $+E+S+D$ & 6.30 $\pm$ 0.66 & 3.73 $\pm$ 0.08 & 0.93 $\pm$ 0.19 \\
+Baseline $+B+S+D$ & 6.27 $\pm$ 0.71 & 4.01 $\pm$ 0.22 & 0.91 $\pm$ 0.13 \\
+Baseline $+E+D$ & 6.33 $\pm$ 0.70 & 4.02 $\pm$ 0.22 & 0.98 $\pm$ 0.24 \\
+Baseline $+B+S$ & 6.77 $\pm$ 0.45 & 3.68 $\pm$ 0.28 & 0.90 $\pm$ 0.16 \\
+Baseline $+B+E+D$ & 5.59 $\pm$ 0.57 & 4.75 $\pm$ 0.38 & 1.07 $\pm$ 0.17 \\
+Baseline $+B+E+S$ & 5.73 $\pm$ 0.53 & 4.70 $\pm$ 0.39 & 0.99 $\pm$ 0.22 \\
+Baseline $+S+D$ & 7.79 $\pm$ 0.48 & 2.95 $\pm$ 0.25 & 0.81 $\pm$ 0.13 \\
+Baseline $+B+D$ & 6.32 $\pm$ 0.67 & 4.25 $\pm$ 0.08 & 0.99 $\pm$ 0.12 \\
+Baseline $+D$ & 7.87 $\pm$ 0.59 & 3.14 $\pm$ 0.12 & 0.96 $\pm$ 0.32 \\
+Baseline $+B+E$ & 5.55 $\pm$ 0.77 & 5.64 $\pm$ 0.38 & 1.04 $\pm$ 0.13 \\
+Baseline $+B$ & 6.27 $\pm$ 0.66 & 5.16 $\pm$ 0.44 & 1.23 $\pm$ 0.08 \\
+Baseline $+S$ & 9.54 $\pm$ 1.03 & 2.34 $\pm$ 0.24 & 0.80 $\pm$ 0.26 \\
+Baseline (other variants) & 8.69 $\pm$ 0.83 & 3.11 $\pm$ 0.13 & 1.23 $\pm$ 0.38 \\
+Baseline ($B$, $B+E$) & 9.00 $\pm$ 0.82 & 4.23 $\pm$ 1.19 & 1.11 $\pm$ 0.15 \\
+\end{longtable}
+\endgroup
+
+\subsubsection{MedSAM3 on ADNI}
+
+Table~\ref{tab:medsam-adni-all-errors} reports all fourteen binary
+segmentation variants. For the highest-mean Dice configuration,
+$E+S+D$, FN decreases by 24.0\% and FP increases by 26.2\% relative
+to baseline. As on MSD, the overlap gain includes greater foreground
+retention rather than a simultaneous reduction of both error types.
+Surface measures and attributable prediction examples would be needed
+to locate these changes. The dataset examples in
+Chapter~\ref{sec:methodology} show reference annotations and should
+not be read as model-performance examples.
+
+\begingroup\footnotesize\setstretch{1.0}
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.12}
+\begin{longtable}{@{}lrr@{}}
+\caption{ADNI MedSAM3: all fourteen variants, each with nine runs. Counts are mean errors per validation crop within each run; entries give mean $\pm$ sample SD across three seed-averaged fold means. Within each model, rows ascend by mean total error (FN $+$ FP).}
+\label{tab:medsam-adni-all-errors}\\
+\hline
+Variant & \shortstack{FN / crop\\($\times 10^{2}$)} & \shortstack{FP / crop\\($\times 10^{2}$)} \\ \hline
+\endfirsthead
+\hline
+Variant & \shortstack{FN / crop\\($\times 10^{2}$)} & \shortstack{FP / crop\\($\times 10^{2}$)} \\ \hline
+\endhead
+\hline
+\multicolumn{3}{r}{Continued on next page}\\
+\endfoot
+\hline\endlastfoot
+Baseline $+E+S+D$ & 5.91 $\pm$ 0.37 & 3.59 $\pm$ 0.37 \\
+Baseline $+B+S$ & 6.31 $\pm$ 0.40 & 3.26 $\pm$ 0.56 \\
+Baseline $+B+E+S$ & 6.02 $\pm$ 0.36 & 3.55 $\pm$ 0.32 \\
+Baseline $+B+E+S+D$ & 5.82 $\pm$ 0.27 & 3.79 $\pm$ 0.54 \\
+Baseline $+B+S+D$ & 6.11 $\pm$ 0.34 & 3.55 $\pm$ 0.75 \\
+Baseline $+B+D$ & 6.12 $\pm$ 0.35 & 3.70 $\pm$ 0.92 \\
+Baseline $+S+D$ & 6.99 $\pm$ 0.47 & 2.93 $\pm$ 0.75 \\
+Baseline $+D$ & 6.86 $\pm$ 0.57 & 3.21 $\pm$ 0.68 \\
+Baseline $+S$ & 7.64 $\pm$ 0.58 & 2.52 $\pm$ 0.79 \\
+Baseline $+E+D$ & 6.01 $\pm$ 0.43 & 4.16 $\pm$ 1.20 \\
+Baseline $+B+E+D$ & 5.77 $\pm$ 0.29 & 4.46 $\pm$ 0.93 \\
+Baseline $+B$ & 6.32 $\pm$ 0.47 & 4.09 $\pm$ 1.16 \\
+Baseline & 7.78 $\pm$ 0.54 & 2.85 $\pm$ 0.82 \\
+Baseline $+B+E$ & 5.81 $\pm$ 0.17 & 4.84 $\pm$ 1.10 \\
+\end{longtable}
+\endgroup
+
+\noindent\textit{[Presentation evidence to insert: paired baseline and
+constrained predictions selected by a stated rule, with classwise and
+surface error summaries where retained outputs and valid geometry permit them.]}
+

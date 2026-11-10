@@ -1,0 +1,78 @@
+--- before.tex
++++ thesis-revision.tex
+@@ -2273,6 +2273,13 @@
+ that one domain benefits more: the geological and medical comparisons
+ use different budgets and task definitions.
+ 
++For the selected combinations, Dice improves in all nine matched runs in
++eleven of the twelve model--dataset comparisons. The exception is UNETR
++on GeoFWI3D, which improves in eight of nine runs. The gains are therefore
++consistent across the tested folds and random seeds, although runs within
++a fold share the same data. Table~\ref{tab:paired-replication-summary}
++reports the variation between folds.
++
+ No single constraint combination explains all these gains. Boundary
+ membership alone improves every model mean across the three datasets,
+ but other additions can reduce accuracy. For example, signed-distance
+@@ -2333,7 +2340,11 @@
+ Higher Dice does not mean that every kind of error becomes less frequent.
+ Across the adaptation studies, the selected constraints recover more of
+ the target structure but also label more surrounding voxels as foreground.
+-On MSD, fewer anterior/posterior exchanges accompany this tradeoff.
++For example, using all four constraints with MedSAM3 on MSD reduces the
++mean number of missed foreground voxels by 36.0\%, while increasing the
++mean number of background voxels incorrectly labelled as foreground by
++40.7\%, relative to the matched baseline. Fewer anterior/posterior
++exchanges accompany this tradeoff.
+ The models trained from scratch show a less uniform pattern: some mainly
+ reduce missed foreground, others mainly reduce unwanted extension. These
+ differences matter when deciding which errors an application can tolerate;
+@@ -2385,29 +2396,30 @@
+ \centering
+ \includegraphics[width=\linewidth]{figures/qualitative/typical-predictions.png}
+ \caption{Typical held-out examples from the qualitative reproductions:
+-SAM3 on GeoFWI3D and MedSAM3 on MSD and ADNI. Each case is the middle entry after sorting by paired Dice change,
+-using the higher of the two central entries for an even-sized validation set. Columns use the
+-same image and slice, selected by maximum reference foreground area along
+-the third stored array axis. Blue denotes salt, anterior hippocampus or
+-whole hippocampus, respectively; orange denotes posterior hippocampus on
+-MSD. Scores describe the whole volume, with anterior/posterior Dice
+-averaged on MSD, rather than the displayed slice. The constrained
++SAM3 on GeoFWI3D and MedSAM3 on MSD and ADNI. Cases are selected near the
++median paired Dice change. Each row compares the same image and slice.
++Blue denotes salt, anterior hippocampus or whole hippocampus, respectively;
++orange denotes posterior hippocampus on MSD. Scores measure whole-volume
++foreground Dice, averaging anterior and posterior on MSD. The constrained
+ objectives are $B+E+D$, $B+E+S+D$ and $E+S+D$, respectively.
+-Adverse cases are shown in Appendix~\ref{sec:qualitative-predictions}.}
++Appendix~\ref{sec:qualitative-predictions} gives the selection procedure
++and adverse examples.}
+ \label{fig:qualitative-typical}
+ \end{figure}
+ 
+-The examples show local changes rather than a wholesale change in the
+-predicted object. In the MSD view, the constrained prediction recovers
+-more of the posterior region; in the ADNI view it extends towards parts
+-of the reference missed by the baseline. Contour disagreements remain in
+-both. Across the full volumes of these three typical cases, missed
+-foreground decreases while extra foreground increases. The adverse
++The examples show how the predictions change within each object. In the
++GeoFWI3D slice, the constrained prediction fills a small area inside the
++lower-right salt region that the baseline leaves unlabelled. In the MSD
++view, it recovers more of the posterior region; in the ADNI view, it
++extends towards parts of the reference missed by the baseline. Boundary
++disagreements remain in all three examples. Across their full volumes,
++missed foreground decreases while extra foreground increases. The adverse
+ examples in the appendix show that this tradeoff can instead lower Dice.
+-A single slice cannot explain every change in a volume score, and neither
+-these images nor overlap measurements establish downstream usefulness.
+-Surface-distance evaluation and expert assessment remain necessary to
+-address that question.
++
++A single slice cannot explain every change in a volume score.
++Surface-distance measures would quantify boundary errors across the
++volume. Whether the observed changes matter for medical or geological
++use requires expert assessment or evaluation in the intended application.
+ 
+ \FloatBarrier
+ \subsection{Limits of the Findings}

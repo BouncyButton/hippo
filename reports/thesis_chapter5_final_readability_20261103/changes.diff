@@ -1,0 +1,335 @@
+--- before.tex
++++ after.tex
+@@ -2054,40 +2054,37 @@
+ \subsection{Spatial Supervision When Training from Scratch}
+ \label{sec:geo-results}\label{sec:main-msd-results}\label{sec:adni-results}
+ 
+-Figure~\ref{fig:scratch-key-results} brings the three datasets together.
+-The consistent pattern is an improvement over each model's own baseline.
+-The size of that improvement varies considerably, even among models
+-trained on the same data.
++For every architecture and dataset, at least one tested constraint
++combination improves on the baseline (Figure~\ref{fig:scratch-key-results}).
++The size of the gain varies considerably, even among models trained
++on the same data.
+ 
+ \begin{figure}[htbp]
+ \centering\setstretch{1.05}
+ % Cached vector figure; generator: figures/source/scratch-key-results.py
+ \includegraphics[width=\linewidth]{figures/compiled/scratch-key-results.pdf}
+ \caption{Training from scratch: baseline and the highest-mean tested
+-spatial objective for each model and dataset. Whiskers show the sample
+-standard deviation of three seed-averaged fold means; they are not
+-confidence intervals. The right-hand columns identify the added constraint
+-combination and its paired gain from unrounded scores: $B$ denotes
+-boundary bands, $E$ edge consistency, $S$ signed distance and $D$
+-depth-weighted supervision. Foreground Dice averages anterior and posterior on MSD and measures
+-the single target class on the binary tasks. Panels share a score scale,
+-but their task and budget differences preclude a direct dataset ranking.
+-Complete objective scores and selected combinations are in
+-Appendix~\ref{sec:complete-result-tables}.}
++objective for each model and dataset. Whiskers show the sample standard
++deviation of three seed-averaged fold means, not confidence intervals.
++Right-hand columns give the added terms and paired gain (pp): $B$ bands,
++$E$ edges, $S$ signed distance and $D$ depth supervision. Foreground Dice
++averages anterior and posterior on MSD and measures the single target
++class on binary tasks. Different tasks and budgets prevent a direct
++dataset ranking.}
+ \label{fig:scratch-key-results}
+ \label{fig:geo-key-results}\label{fig:msd-key-results}\label{fig:adni-key-results}
+ \end{figure}
+ 
+ The medical comparisons illustrate why absolute accuracy and improvement
+ must be distinguished. On MSD, SwinUNETR gains almost twelve points, yet
+-the compact U-Net reaches the highest Dice, 80.00\%. A large gain can
++the compact 3D U-Net reaches the highest Dice, 80.00\%. A large gain can
+ therefore reflect the correction of a weak short-budget baseline without
+ producing the most accurate model. On ADNI, nnU-Net starts from the
+ strongest baseline and retains the highest score, although its improvement
+ is only about one point.
+ 
+ The geological results extend the positive pattern beyond medical images.
+-The compact U-Net again reaches the highest score, while nnU-Net benefits
++The compact 3D U-Net again reaches the highest score, while nnU-Net benefits
+ most from the added supervision. This is evidence that the approach can
+ help in both domains under the tested procedures. It does not establish
+ that one domain benefits more: the geological and medical comparisons
+@@ -2124,122 +2121,131 @@
+ \begin{figure}[htbp]\centering
+ % Cached vector figure; editable source: figures/source/adaptation-key-results.tikz
+ \includegraphics{figures/compiled/adaptation-key-results.pdf}
+-\caption{Pretrained adaptation:
+-baseline and the highest-mean tested objective, with fold-level standard
+-deviations. The MSD baseline is matched to the execution batch of the
+-all-term variant. $B,E,S,D$ denote bands, edges, signed distance and depth
+-supervision. The studies use different support sizes and update budgets;
+-the figure compares each model with its own baseline. Full results are in
+-Appendix~\ref{sec:complete-result-tables}.}
++\caption{Pretrained adaptation: baseline and the highest-mean tested
++objective, with standard deviations across seed-averaged fold means.
++The MSD baseline is matched to the execution batch of the all-term
++variant. $B,E,S,D$ denote bands, edges, signed distance and depth
++supervision. Each comparison uses its own baseline; support sizes and
++update budgets differ between studies.}
+ \label{fig:adaptation-key-results}
+ \end{figure}
+ 
+-Spatial supervision consequently remains useful beyond learning from
+-scratch. The improvement is present in every fold mean for each selected
+-configuration, although the SAM3 gain varies more across support
+-partitions. The medical gains are positive in every matched run; SAM3
+-has one negative pair. These patterns support a benefit under the
+-evaluated adaptation conditions, without implying that every new support
+-set would produce the same change.
+-
+-The preferred objective again depends on the task. SAM3 benefits most
+-from bands, edges and depth supervision; including signed distance lowers
+-its mean. MedSAM3 on MSD reaches its highest mean with all four terms,
+-whereas ADNI has closely ranked alternatives. The studies also differ in
+-initialization, support size and update budget, so their scores cannot
+-isolate the effect of medical pretraining or establish a model ranking at
+-equal resources. For MSD, comparisons retain the control from each
+-variant's execution batch; the complete matched results are in
+-Table~\ref{tab:medsam-msd-noaug}.
++For each selected configuration, average Dice improves in every fold.
++All nine matched runs improve in each medical comparison, compared with
++eight of nine for SAM3. The SAM3 gains also vary more between support
++partitions. Spatial supervision thus remains useful
++after pretraining, although its benefit can depend on the labelled
++examples available for adaptation.
++
++The preferred objective again depends on the task. SAM3 reaches its
++highest mean with bands, edges and depth supervision; the four-term
++combination has a lower mean. MedSAM3 on MSD reaches its highest mean
++with all four terms, whereas ADNI has closely ranked alternatives.
++Because initialization, support size and update budget differ between
++studies, these scores cannot isolate the effect of medical pretraining
++or establish a model ranking at equal resources. Complete results are
++in Appendix~\ref{sec:complete-result-tables}.
+ 
+ \FloatBarrier
+ \subsection{What the Overlap Improvements Mean}
+ \label{sec:error-analysis}\label{sec:capped-errors-resources}
+ \label{sec:background-dice-results}
+ 
+-Higher Dice does not mean that every kind of error becomes less frequent.
+-Across the adaptation studies, the selected constraints recover more of
+-the target structure but also label more surrounding voxels as foreground.
+-For example, using all four constraints with MedSAM3 on MSD reduces the
+-mean number of missed foreground voxels by 36.0\%, while increasing the
+-mean number of background voxels incorrectly labelled as foreground by
+-40.7\%, relative to the matched baseline. Fewer anterior/posterior
+-exchanges accompany this tradeoff.
++The overlap gains reflect a balance between different errors. A constraint
++can reduce missed parts of a structure while adding a smaller number of
++incorrect foreground voxels elsewhere. Across the adaptation studies,
++the selected objectives recover more foreground but also extend further
++into the surrounding background.
++
++MedSAM3 on MSD provides a concrete example. With all four constraints,
++the mean number of missed foreground voxels falls by about 313 per
++validation volume, while extra foreground increases by about 126 voxels.
++Anterior/posterior swaps also decrease. The reduction in misses is thus
++about two and a half times the increase in extra foreground. Expressed
++as percentages of their respective baseline counts, these changes are
++$-36.0\%$ and $+40.7\%$: the larger percentage increase starts from a
++smaller count and does not mean that it cancels the reduction in misses.
++These are study averages, not a guarantee for every volume. Dice gives
++false positives and false negatives symmetric roles within each class;
++the improvement reflects the resulting overlap, not a lower penalty
++assigned to the additional errors.
++
+ The models trained from scratch show a less uniform pattern: some mainly
+-reduce missed foreground, others mainly reduce unwanted extension. These
+-differences matter when deciding which errors an application can tolerate;
+-error changes are summarized in Appendix~\ref{sec:complete-error-tables}.
+-
+-Including background in the Dice average provides a complementary check on
+-the overlap gains. All-class Dice gives equal weight to each class:
+-background, anterior and posterior on MSD, or background and the single
+-foreground class on the binary tasks.
+-Figure~\ref{fig:metric-sensitivity-key-results} shows that the selected
+-adaptation objectives improve both foreground and background Dice. The same
+-holds for the selected conventional models. Background scores already lie
+-close to their ceiling, so their changes are much smaller. Giving background
+-equal class weight raises the absolute average while reducing the size of
+-the improvement.
++reduce missed foreground, others mainly reduce unwanted extension. The
++balance of changes therefore matters more than the direction of any
++one error count. Appendix~\ref{sec:complete-error-tables} gives the
++full comparisons and the counts underlying the MSD example.
++
++Figure~\ref{fig:qualitative-typical} shows what these changes look like.
++Its matched image, reference and prediction panels come from qualitative
++reproductions of the three adaptation studies. They illustrate the
++segmentation behaviour; the original three-fold, three-seed studies
++remain the basis of the aggregate results. Reproduction and selection
++details are in Appendix~\ref{sec:qualitative-predictions}.
++
++\begin{figure}[p]
++\centering
++\includegraphics[width=\linewidth]{figures/qualitative/typical-predictions.png}
++\caption{Typical held-out examples from the qualitative reproductions,
++selected near the median paired Dice change. Each row uses the same
++image and slice. Blue denotes salt, anterior hippocampus or whole
++hippocampus; orange denotes posterior hippocampus on MSD. Scores are
++whole-volume foreground Dice, averaging anterior and posterior on MSD.
++Constrained objectives are $B+E+D$ (GeoFWI3D), $B+E+S+D$ (MSD) and
++$E+S+D$ (ADNI). Selection details and adverse examples are in
++Appendix~\ref{sec:qualitative-predictions}.}
++\label{fig:qualitative-typical}
++\end{figure}
++
++In the GeoFWI3D slice, the constrained prediction fills a small area
++inside the lower-right salt region that the baseline leaves unlabelled.
++In the MSD view, it recovers more of the posterior region; in the ADNI
++view, it extends towards parts of the reference missed by the baseline.
++Boundary disagreements remain in all three examples. Across their full
++volumes, missed foreground decreases while extra foreground increases.
++The adverse examples in the appendix show that this tradeoff can instead
++lower Dice. A single slice also cannot explain every change in a
++whole-volume score.
++
++Background Dice helps assess the other side of the foreground boundary.
++A missed foreground voxel is wrongly labelled as background, while an
++extra foreground voxel is wrongly removed from background. Both errors
++affect background Dice: reducing misses can therefore outweigh an
++increase in extra foreground. For the selected objectives, mean
++foreground and background Dice both improve, in the adaptation studies
++and the comparisons from scratch. This does not mean that every kind
++of error decreases.
++
++We also average Dice across all classes, giving equal weight to
++background, anterior and posterior on MSD, or to background and the
++single foreground class on the binary tasks. Background Dice is already
++close to 100\%, and its gains are much smaller than foreground gains.
++Including it therefore raises the absolute class average but reduces
++the size of the improvement (Figure~\ref{fig:metric-sensitivity-key-results}).
+ 
+ \begin{figure}[htbp]\centering\setstretch{1.05}
+ % Cached vector figure; editable source: figures/source/metric-sensitivity-key-results.tikz
+ \includegraphics{figures/compiled/metric-sensitivity-key-results.pdf}
+-\caption{The same adaptation
+-predictions assessed in three ways. Bars show mean gains for the objectives
+-in Figure~\ref{fig:adaptation-key-results}, calculated from the unrounded
+-archive aggregates. Including the already high-scoring background reduces
+-the gain in the class average, while preserving its positive direction.
+-These are complementary measurements of the same runs. The exact
+-aggregation, absolute scores and checks across all recoverable objectives
+-are in Appendix~\ref{sec:metric-sensitivity-details}.}
++\caption{Foreground, background and all-class Dice gains for the same
++adaptation predictions and selected objectives as in
++Figure~\ref{fig:adaptation-key-results}. Adding the already high-scoring
++background to the class average reduces the gain while preserving its
++positive direction. Absolute scores and coverage are given in
++Appendix~\ref{sec:metric-sensitivity-details}.}
+ \label{fig:metric-sensitivity-key-results}
+ \end{figure}
+ 
+-The main conclusion survives this change of measure: across all recoverable
+-comparisons, the sign of the mean effect and the highest-mean objective
+-in each study are unchanged. A few small individual effects and secondary
+-rankings differ. Appendix~\ref{sec:metric-sensitivity-details} gives the
+-full checks and archive coverage. The earlier MSD MedSAM3 bands and
+-bands-plus-edges comparisons retain complete foreground results, but lack
+-recoverable background scores.
+-
+-Figure~\ref{fig:qualitative-typical} makes these differences visible through
+-matched image, reference and prediction panels. The examples come from
+-six short, matched reproductions of SAM3 on GeoFWI3D and MedSAM3 on MSD
+-and ADNI, performed because the original trained adapters and predictions
+-were no longer available. They illustrate the segmentation behaviour;
+-the original three-fold, three-seed studies remain the basis of the
+-aggregate results above. Appendix~\ref{sec:qualitative-predictions}
+-documents the case selection and differences from the original run scores.
+-
+-\begin{figure}[p]
+-\centering
+-\includegraphics[width=\linewidth]{figures/qualitative/typical-predictions.png}
+-\caption{Typical held-out examples from the qualitative reproductions:
+-SAM3 on GeoFWI3D and MedSAM3 on MSD and ADNI. Cases are selected near the
+-median paired Dice change. Each row compares the same image and slice.
+-Blue denotes salt, anterior hippocampus or whole hippocampus, respectively;
+-orange denotes posterior hippocampus on MSD. Scores measure whole-volume
+-foreground Dice, averaging anterior and posterior on MSD. The constrained
+-objectives are $B+E+D$, $B+E+S+D$ and $E+S+D$, respectively.
+-Appendix~\ref{sec:qualitative-predictions} gives the selection procedure
+-and adverse examples.}
+-\label{fig:qualitative-typical}
+-\end{figure}
+-
+-The examples show how the predictions change within each object. In the
+-GeoFWI3D slice, the constrained prediction fills a small area inside the
+-lower-right salt region that the baseline leaves unlabelled. In the MSD
+-view, it recovers more of the posterior region; in the ADNI view, it
+-extends towards parts of the reference missed by the baseline. Boundary
+-disagreements remain in all three examples. Across their full volumes,
+-missed foreground decreases while extra foreground increases. The adverse
+-examples in the appendix show that this tradeoff can instead lower Dice.
+-
+-A single slice cannot explain every change in a volume score.
+-Surface-distance measures would quantify boundary errors across the
+-volume. Whether the observed changes matter for medical or geological
+-use requires expert assessment or evaluation in the intended application.
++Where both measures are available, foreground and all-class Dice give
++the same direction of mean change for every tested objective and identify
++the same highest-mean objective in each study. A few small individual-run
++effects and secondary rankings differ. The conclusion that spatial
++supervision can improve overlap therefore holds with either measure;
++Appendix~\ref{sec:metric-sensitivity-details} reports the full checks.
++
++Overlap alone does not establish whether a segmentation is suitable for
++its intended use. Surface-distance measures would assess boundary errors
++across the volume, while expert assessment or application-specific
++evaluation would determine their medical or geological importance.
+ 
+ \FloatBarrier
+ \subsection{Limits of the Findings}
+@@ -2258,14 +2264,14 @@
+ Closely ranked combinations should likewise be treated as alternatives
+ within the observed variation rather than evidence of a unique optimum.
+ 
+-The MSD annotation audit gives a related caution about the knowledge encoded
+-in a constraint. Neither a single coronal separating plane nor a rule based
+-on separate foreground regions appearing in a slice reproduces every
+-annotated anterior/posterior transition. The thesis therefore supervises the
+-stored class boundary rather than imposing either proxy universally. The
+-detailed checks and their relation to the original annotation protocols are
+-in Appendix~\ref{sec:annotation-results}; they do not establish that the
+-original anatomical tracing was incorrect.
++The MSD annotation audit also shows why an anatomical rule must be checked
++against the labels it is intended to supervise. Neither a single coronal
++dividing plane nor the appearance of disconnected regions in a slice
++reproduces every annotated anterior/posterior transition, so neither
++rule is imposed universally here.
++These checks limit the proposed automatic rules; they do not establish
++that the original anatomical tracing was incorrect
++(Appendix~\ref{sec:annotation-results}).
+ 
+ \clearpage
+ 
+@@ -3445,6 +3451,15 @@
+ changes in error counts, not changes in Dice or absolute comparisons
+ between datasets.
+ 
++For the selected MSD MedSAM3 comparison, the baseline mean counts per
++validation volume are 869.18 missed foreground voxels, 310.63 extra
++foreground voxels and 123.13 anterior/posterior swaps. With all four
++constraints, the corresponding means are 555.99, 436.97 and 97.59.
++Counts are averaged over volumes within each run, seeds within each
++fold and then equally over folds. The changes quoted in
++Section~\ref{sec:error-analysis} use the unrounded means: 313.19 fewer
++misses, 126.35 additional false positives and 25.53 fewer swaps.
++
+ \begin{table}[htbp]
+ \centering\footnotesize\setstretch{1.05}
+ \setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.15}
+@@ -3480,6 +3495,8 @@
+ MSD and $(D_{\rm fg}+D_{\rm bg})/2$ on the binary tasks. Class scores
+ are calculated per volume, then averaged over volumes, seeds and folds;
+ pooled error counts are not substituted for volume Dice.
++Dice gains in the charts are calculated from unrounded archive
++aggregates before display rounding.
+ Table~\ref{tab:complementary-dice-summary} uses the same selected
+ objectives as Table~\ref{tab:paired-replication-summary}.
+ 

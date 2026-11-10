@@ -1,0 +1,124 @@
+--- before.tex
++++ thesis-revision.tex
+@@ -934,6 +934,30 @@
+ place foreground in the inner band, whereas the outer support remains
+ limited to observed voxels.
+ 
++Figure~\ref{fig:dataset-bands-teaching} shows these bands on actual volumes
++from all three datasets. In each enlarged view, blue voxels should retain
++foreground membership and orange voxels should receive background labels.
++Uncoloured voxels receive no contribution from this band term, although
++the ordinary segmentation loss still applies there. Some blue voxels can
++appear away from the visible contour: the region may end in a neighbouring
++slice, since the bands are constructed in three dimensions.
++
++\begin{figure}[htbp]
++\centering
++% Actual native annotations; generator: figures/source/constraint-teaching-examples.py
++% Provenance: reports/thesis_constraint_teaching_examples_20261103/provenance.json
++\includegraphics[width=\linewidth]{figures/compiled/dataset-bands-teaching.pdf}
++\caption{Boundary bands on MSD, ADNI and GeoFWI3D volumes. Top: an image
++slice with the annotated foreground outlined in white; the yellow square
++locates the enlarged view below. Bottom: inner (blue) and outer (orange)
++bands obtained by two steps of six-neighbour morphology on the full
++three-dimensional mask. MSD uses the anterior/posterior union. These
++native-grid examples use zero padding; recipe-specific crop conventions
++are given in Appendix~\ref{sec:dataset-constraint-examples}.}
++\label{fig:dataset-bands-teaching}
++\end{figure}
++\FloatBarrier
++
+ For the fixed group, abbreviate $B_{i,F}^s$ as $B_i^s$, with
+ $s\in\{\mathrm{in},\mathrm{out}\}$ identifying the side. The logical
+ statements require membership on the inner band and its negation,
+@@ -1143,6 +1167,32 @@
+ the penalty increases with missed class probability; outside, it
+ increases with excess class probability. In both cases the distance
+ magnitude weights the error, making the product nonnegative.
++
++Figure~\ref{fig:sdf-3d-penalty-example} gives a concrete example on an
++ADNI annotation. Two voxels outside the hippocampus have distance-field
++values of $0.5$ and $3.5$ voxel units under the half-voxel convention.
++Suppose the model assigns the same hippocampus probability, $p=0.25$, to
++both. After dividing the distances by eight, their local penalties are
++$0.015625$ and $0.109375$. The more distant voxel receives seven times
++the penalty for the same excess probability. The geometry comes from
++the actual annotation; the probabilities are chosen to illustrate the
++rule and are not model results.
++
++\begin{figure}[htbp]
++\centering
++% Generator: figures/source/constraint-teaching-examples.py
++\includegraphics[width=\linewidth]{figures/compiled/sdf-3d-penalty-example.pdf}
++\caption{How signed distance weights an error. A three-dimensional cutaway
++of the ADNI distance field exposes its interior (blue) and exterior
++(orange); pale colours indicate smaller distance magnitudes. The circle
++and diamond mark two actual background voxels. Giving both an illustrative
++hippocampus probability of $0.25$ isolates the effect of distance on their
++local penalties, before averaging or applying the auxiliary-loss
++coefficient. The cutaway changes only the display.}
++\label{fig:sdf-3d-penalty-example}
++\end{figure}
++\FloatBarrier
++
+ Let $\mathsf{Geom}_c(i,v)$ express agreement with this class geometry.
+ The grounding
+ $\mathcal G_\theta(\mathsf{Geom}_c(i,v))=\exp(-e_{i,c}(v))$
+@@ -1341,15 +1391,32 @@
+ The three-dimensional examples in Figure~\ref{fig:dataset-constraint-3d}
+ show how these constructions follow real annotations. They use a hippocampal
+ volume from MSD, one from the Alzheimer's Disease Neuroimaging Initiative
+-(ADNI), and a salt volume from GeoFWI3D. In the distance views, the cutaway
+-exposes the negative field inside the selected class and the positive field
+-outside it. An equally large class-probability error receives a larger
+-penalty where the distance magnitude is greater, up to the clipping limit.
+-In the depth views, each displayed layer is a three-dimensional part of the
+-foreground and its surrounding region. Darker layers assign more weight to
+-each voxel; this need not mean that the entire layer receives more weight.
+-The accompanying layer charts in
+-Appendix~\ref{sec:dataset-constraint-examples} make that distinction explicit.
++(ADNI), and a salt volume from GeoFWI3D. The left column shows signed
++distance: blue is inside the selected class, orange is outside, and pale
++colours mark locations close to its boundary. Stronger colour means a
++larger distance magnitude, not a larger observed prediction error. In MSD,
++the selected class is anterior hippocampus, so posterior voxels lie outside
++that class even though they belong to the same organ.
++
++The right column shows five separated depth layers from each volume.
++Each layer contains part of the foreground and its surrounding region.
++Darker blue means greater weight \emph{per voxel}. The colour scale divides
++each weight by the mean positive voxel weight in that volume: a value of
++one is the mean, and ten means ten times that mean. Weights are constant
++within a layer; small differences between its visible faces come from
++rendering light and shade. The weight changes between layers according to
++their voxel counts, rather than increasing automatically with distance
++from the reference plane.
++
++For example, the displayed ADNI volume has 13 occupied layers, all above
++the 64-voxel threshold. Each receives $1/13$, or about $7.69\%$, of the
++total weight. One layer contains 74 voxels and another 2,918: a voxel in
++the smaller layer therefore receives about 39 times as much weight.
++Their layer averages still have the same coefficient, although different
++prediction errors can give them different contributions to the loss.
++For layers below 64 voxels, the total weight decreases with their size,
++preventing a further increase in weight per voxel. The complete layer
++distributions appear in Appendix~\ref{sec:dataset-constraint-examples}.
+ 
+ \begin{figure}[p]
+ \centering
+@@ -1358,10 +1425,12 @@
+ \includegraphics[width=\linewidth]{figures/compiled/dataset-constraint-overview.pdf}
+ \caption{Signed-distance and depth supervision on actual three-dimensional
+ annotations. Left: a cutaway through the class and its surrounding distance
+-field; the MSD example shows the anterior class. Right: five sampled depth
+-layers, separated for visibility and coloured by voxel weight relative to
++field, with blue inside, orange outside and pale colours near the boundary;
++MSD shows the anterior class. Right: five sampled depth layers, separated
++for visibility. Darker blue indicates a larger voxel weight relative to
+ the mean positive weight in the full volume (logarithmic scale). All layers
+-enter the weight calculation. These native-grid illustrations show
++enter the weight calculation, including those not displayed. These
++native-grid illustrations show
+ annotation-derived supervision. Appendix~\ref{sec:dataset-constraint-examples}
+ provides the intact masks, band and edge examples, layer distributions and
+ display conventions.}

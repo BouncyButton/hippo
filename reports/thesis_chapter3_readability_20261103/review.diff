@@ -1,0 +1,389 @@
+--- before.tex
++++ thesis-revision.tex
+@@ -472,19 +472,20 @@
+ 
+ \subsection{Segmentation Architectures}\label{sec:segmentation-architectures}
+ 
+-The four architectures provide different ways to use the surrounding image
+-when classifying a voxel. Convolution applies learned filters to small
+-neighbourhoods, detecting local image patterns called features. Repeating
+-these operations combines information over larger regions. A transformer
+-instead uses attention, which learns how strongly features at different
+-locations should contribute to one another. Testing both helps assess
+-whether a spatial objective is useful beyond a single model family. All four
+-connect an encoder, which extracts image features, to a decoder, which
+-converts those features into voxelwise predictions. The comparison also
+-includes two convolutional baselines: a compact U-Net and the more elaborate
+-nnU-Net training pipeline. It therefore probes sensitivity to both
+-representation and training recipe, rather than isolating encoder
+-architecture alone.
++The comparison uses four segmentation models: a compact three-dimensional
++U-Net, nnU-Net, UNETR and SwinUNETR. The first two use convolution, which
++applies learned filters to small neighbourhoods to detect local image
++patterns called features. Repeating these operations combines information
++over larger regions. UNETR and SwinUNETR incorporate transformers, whose
++attention mechanism learns how strongly features at different locations
++should contribute to one another. Testing both approaches helps assess
++whether a spatial objective is useful beyond a single model family.
++
++All four connect an encoder, which extracts image features, to a decoder,
++which converts those features into voxelwise predictions. The compact
++U-Net and nnU-Net also differ in their training pipelines, as described
++below. The comparison therefore examines the contribution of spatial
++supervision across both model designs and training recipes.
+ 
+ U-Net's encoder forms feature maps, arrays of responses to learned image
+ patterns, and progressively reduces their spatial resolution by
+@@ -519,8 +520,8 @@
+ SwinUNETR combines a shifted-window (Swin) transformer with a U-Net decoder,
+ forming a hierarchy of transformer features \cite{hatamizadeh2022swin}.
+ Attention is restricted to windows, groups of neighbouring tokens. Shifting
+-the windows between successive stages exchanges information across their
+-boundaries. Patch merging combines neighbouring tokens to produce coarser
++the windows between successive attention layers exchanges information
++across their boundaries. Patch merging combines neighbouring tokens to produce coarser
+ representations \cite{liu2021swin}. The resulting feature maps feed a
+ convolutional decoder. Figure~\ref{fig:architecture-families} contrasts this
+ hierarchy with UNETR's fixed token grid and the convolutional U-Net
+@@ -776,20 +777,40 @@
+ 
+ \subsection{Shared Formulation}\label{sec:constraint-formulation}
+ 
+-Let $F$ group one or more classes from $\mathcal C$, leaving at least
+-one class outside the group. Its complement consists of those remaining
+-classes. The group's reference membership and predicted probability are
++The constraints can supervise a single class or several classes treated
++as one region. To describe these choices, let $\mathcal C$ denote the full
++set of segmentation classes. For the Medical Segmentation Decathlon (MSD)
++hippocampus task, $\mathcal C=\{0,A,P\}$: $0$ denotes background,
++$A$ anterior hippocampus and $P$ posterior hippocampus.
++
++We use $F$ for the group of classes selected for a constraint. For example,
++$F=\{A,P\}$ treats the whole hippocampus as one region. The classes left
++outside the group form its complement, which in this example contains
++only background. We require at least one class inside and one outside
++the group so that this membership distinction is meaningful.
++
++For image volume $i$, $\Omega_i$ denotes its voxel grid and $v$ a location
++on that grid. Its annotated class is $y_i(v)$; the indicator $y_{i,c}(v)$
++is one when that class is $c$ and zero otherwise. The model, with parameters
++$\theta$, assigns probability $p_{\theta,i,c}(v)$ to class $c$ there.
++Summing over the selected classes gives the reference membership
++$h_{i,F}(v)$ and predicted membership probability $q_{\theta,i,F}(v)$:
+ \begin{equation}
+ h_{i,F}(v)=\sum_{c\in F}y_{i,c}(v),
+ \qquad
+ q_{\theta,i,F}(v)=\sum_{c\in F}p_{\theta,i,c}(v).
+ \label{eq:constraint-group-membership}
+ \end{equation}
+-The reference region is $M_{i,F}=\{v\in\Omega_i:h_{i,F}(v)=1\}$,
+-and the predicate $\mathsf{In}_F(i,v)$ is grounded by
+-$q_{\theta,i,F}(v)$. The annotation determines both the membership
+-target and the spatial support, meaning the locations or voxel pairs
+-where the constraint applies. It also determines any distances or weights.
++Thus $h_{i,F}(v)$ is either zero or one, while $q_{\theta,i,F}(v)$ lies
++between zero and one. The reference region
++$M_{i,F}=\{v\in\Omega_i:h_{i,F}(v)=1\}$ collects the voxels annotated
++as belonging to the group. The predicate $\mathsf{In}_F(i,v)$ expresses
++the statement ``voxel $v$ in image $i$ belongs to this group''. Its
++grounding, or numerical truth value, is $q_{\theta,i,F}(v)$.
++
++The annotation determines both the membership target and the spatial
++support, meaning the locations or voxel pairs where the constraint applies.
++It also determines any distances or weights.
+ These quantities are fixed with respect to $\theta$ during an update.
+ For example, the band construction selects reference voxels before the
+ loss is evaluated. Backpropagation differentiates the predictions at those
+@@ -797,12 +818,12 @@
+ When a training example is spatially transformed, its image, labels,
+ coordinate map and derived targets are kept aligned.
+ 
+-The choice of $F$ determines which interfaces a membership statement
+-can describe. On MSD, $F=\{A,P\}$ represents the whole hippocampus,
+-whereas $F=\{A\}$ separates anterior hippocampus from both posterior
+-hippocampus and background. The first choice cannot distinguish an
+-internal class exchange that preserves the union. The experiments use
+-both kinds of domain, as specified in Chapter~\ref{sec:methodology}.
++The choice of group determines which boundaries the constraint can
++describe. Taking $F=\{A\}$ separates anterior hippocampus from both
++posterior hippocampus and background. In contrast, treating $A$ and $P$
++as one region cannot detect an exchange between them that leaves the
++whole-hippocampus probability unchanged. The experiments use both kinds
++of grouping, as specified in Chapter~\ref{sec:methodology}.
+ Figure~\ref{fig:constraint-domains} illustrates the four forms of
+ spatial supervision.
+ 
+@@ -824,32 +845,43 @@
+ \label{fig:constraint-domains}
+ \end{figure}
+ 
+-The common log-space formulation turns each local truth into a loss through
+-its negative log-grounding. Membership contributes a log-probability; a
+-nonnegative geometric error contributes its negative through an exponential
+-agreement predicate. Domain selection and aggregation complete the
+-definition. In particular, a mean over voxels followed by a mean over cases
+-differs from pooling all voxels first. These aggregation rules, called
+-reductions, retain the conventions of the principal implementation,
+-including the treatment of empty supports.
++As introduced in Section~\ref{sec:ltn-background}, a logical statement
++$\Phi$ receives a truth value $\mathcal G_\theta(\Phi)$. Its logarithm
++is written $\ell_\theta(\Phi)$, and the loss is its negative,
++$-\ell_\theta(\Phi)$. A more satisfied statement therefore has a smaller
++loss. For a membership statement with probability $q$, this gives
++$-\log q$. For a nonnegative geometric error $e$, assigning truth
++$\exp(-e)$ makes the loss exactly $e$.
++
++The local losses must then be combined into one training objective.
++These averaging rules, also called reductions, determine the relative
++influence of different locations and images. Averaging within each image
++and then across images gives each image equal weight; pooling all selected
++voxels first gives more weight to images with more selected voxels.
++The following sections specify these rules and what happens when no
++voxels or pairs satisfy a constraint's selection rule.
+ 
+ All four families use the geometry actually present in the annotation.
+-They therefore remain applicable when a simplified anatomical proxy
++They therefore remain applicable when a simplified anatomical rule
+ fails to reproduce that geometry. The separate MSD audit in
+ Section~\ref{sec:annotation-compatibility} and Appendix~\ref{sec:annotation-results}
+-examines this issue for proposed anatomical A/P transition rules.
++examines this issue for proposed rules defining the anterior/posterior
++division.
+ 
+ \subsection{Boundary-Band Membership}\label{sec:boundary-band-constraints}
+ 
+ Boundary bands concentrate membership supervision on the two sides of an
+-annotated interface. An inner band encourages the prediction to retain
+-foreground close to that interface, while an outer band discourages
+-extension into adjacent background. The selected locations depend on the
+-reference mask, so an incorrect predicted contour cannot move the target
+-support away from an error.
++annotated boundary. The inner band contains voxels just inside the selected
++region, where the model should predict membership; the outer band contains
++voxels just outside it, where it should predict nonmembership. In the main
++MSD comparison, this region is the whole hippocampus. The selected
++locations depend on the reference mask, so an incorrect predicted contour
++cannot move the supervised bands away from an error.
+ 
+ For a fixed class group $F$, write $M=M_{i,F}$,
+-$q_i(v)=q_{\theta,i,F}(v)$ and $h_i(v)=h_{i,F}(v)$ to simplify notation.
++$q_i(v)=q_{\theta,i,F}(v)$ and $h_i(v)=h_{i,F}(v)$ to simplify notation:
++$M$ is the annotated region, $q_i(v)$ its predicted membership probability
++and $h_i(v)$ the binary reference membership.
+ Two operations construct the bands: dilation expands the region to
+ neighbouring voxels, while erosion removes voxels exposed to its exterior.
+ Their neighbourhood, or structuring element, is
+@@ -892,9 +924,10 @@
+ \end{aligned}
+ \label{eq:reference-boundary-bands}
+ \end{equation}
+-The inner support contains the foreground removed by erosion and the
+-outer support the background reached by dilation. Their two-step width
+-is defined on the voxel graph. Narrow parts of the region can belong
++The inner band contains the region's voxels removed by erosion and the
++outer band contains the additional voxels reached by dilation. Their
++two-step width counts moves between face-sharing voxels, rather than a
++distance in millimetres. Narrow parts of the region can belong
+ entirely to the inner band. At a crop face, zero padding can likewise
+ place foreground in the inner band, whereas the outer support remains
+ limited to observed voxels.
+@@ -968,8 +1001,10 @@
+ Membership supervision treats each selected voxel separately. The edge
+ objective adds a relation between predictions at neighbouring locations:
+ their difference should match the difference in the reference labels.
+-The domain contains face-sharing pairs whose endpoints both lie in the
+-combined band support,
++Recall that $\mathcal E_i$ denotes all pairs of face-sharing voxels in
++image $i$. The edge objective selects pairs whose endpoints both lie
++in the inner or outer band. Write $S_{i,F}^{B}$ for the union of these
++bands and $\mathcal E_{i,F}^{B}$ for the selected pairs:
+ \begin{equation}
+ S_{i,F}^{B}=B_{i,F}^{\mathrm{in}}\cup B_{i,F}^{\mathrm{out}},
+ \qquad
+@@ -978,14 +1013,18 @@
+           u,v\in S_{i,F}^{B}\bigr\}.
+ \label{eq:edge-supported-pairs}
+ \end{equation}
+-with each undirected pair counted once through positive offsets along
++Each undirected pair is counted once through positive offsets along
+ the array axes. Pairs crossing a crop face are absent. Every selected
+ pair has the same weight, without a correction for physical spacing or
+ face area.
+ 
+-For a fixed class group, write $\mathcal E_i^B=\mathcal E_{i,F}^B$
+-and $\delta_i(v)=q_i(v)-h_i(v)$. The transition discrepancy and its
+-squared penalty are
++For a fixed class group, write $\mathcal E_i^B=\mathcal E_{i,F}^B$.
++As in the band loss, $q_i(v)$ is the predicted membership probability
++and $h_i(v)$ its binary reference. Their difference,
++$\delta_i(v)=q_i(v)-h_i(v)$, is the membership error, or residual, at
++that voxel. The error in a predicted transition is then the difference
++between the two residuals. Denoting it by $d_i(u,v)$ and its squared
++penalty by $e_i^E(u,v)$ gives
+ \begin{equation}
+ \begin{aligned}
+ d_i(u,v)
+@@ -1037,7 +1076,8 @@
+ \end{aligned}
+ \label{eq:edge-logical-statement}
+ \end{equation}
+-and its negative mean log-truth gives
++For a nonempty pair set, let $n_i^E=|\mathcal E_i^B|$ be the number
++of selected pairs. The negative mean log-truth of this statement gives
+ \begin{equation}
+ \mathcal{L}_{E,i}
+ =-\ell_{\theta}(\Phi_i^E)
+@@ -1045,7 +1085,7 @@
+    \bigl(\delta_i(u)-\delta_i(v)\bigr)^2.
+ \label{eq:edge-case-loss}
+ \end{equation}
+-for a nonempty pair set, whose size is $n_i^E=|\mathcal E_i^B|>0$. Pair counts from all three directions
++Pair counts from all three directions
+ are pooled before dividing. This gives every pair equal influence,
+ whereas averaging three directional means would give different pair
+ weights when counts differ. There is no count stabilizer. The batch
+@@ -1070,17 +1110,19 @@
+ 
+ \subsection{Classwise Signed Distance}\label{sec:sdf-constraints}
+ 
+-A signed-distance field (SDF) gives prediction errors a geometric scale over the whole
+-volume. Constructing a separate field for each foreground class also
+-makes the internal anterior/posterior interface visible to the loss.
+-Write $\varphi_{i,c}(v)$ for the fixed signed distance of voxel $v$
+-from class $c$: it is negative inside that class and positive outside.
+-Its magnitude expresses how far a misplaced class probability lies from
+-the interface. The implementation measures distance on the unit voxel
+-grid, clips it at eight voxels and divides by eight, bounding the
+-weights. The precise half-voxel convention and absent-class rules are
+-given in Appendix~\ref{sec:sdf-construction-details}. For readability,
+-write $p_{i,c}(v)=p_{\theta,i,c}(v)$ below.
++A signed-distance field (SDF) weights each voxel's class error by its
++distance from the annotated boundary. Unlike bands, it provides weights
++across the whole volume. Constructing a separate field for each foreground
++class also makes the internal anterior/posterior boundary visible to the
++loss. Write $\varphi_{i,c}(v)$ for the fixed, normalized distance field of
++class $c$: it is negative inside that class and positive outside.
++The implementation measures distances on the unit voxel grid, limits
++their magnitudes to eight voxels and divides by eight. The resulting
++weights therefore have magnitude at most one. The precise half-voxel
++convention and absent-class rules are given in
++Appendix~\ref{sec:sdf-construction-details}. For readability, write
++$p_{i,c}(v)=p_{\theta,i,c}(v)$ for the predicted probability below;
++$y_{i,c}(v)$ remains the zero-or-one reference for the same class.
+ 
+ The local penalty combines class error and signed distance:
+ \begin{equation}
+@@ -1114,10 +1156,10 @@
+ \end{aligned}
+ \label{eq:sdf-full-volume-loss}
+ \end{equation}
+-Case losses are averaged over the batch. Each foreground class and each
+-stored voxel has equal weight in this reduction, including crop-face
+-voxels; foreground and background are not balanced separately within
+-a class. Distances are constructed from the transformed reference grid
++Case losses are averaged over the batch. The reduction averages over both
++foreground classes and the full image grid, including crop-face voxels;
++it does not balance foreground and background separately within a class.
++Distances are constructed from the transformed reference grid
+ used by the current prediction.
+ 
+ This loss follows the distance-based boundary formulation of
+@@ -1168,8 +1210,9 @@
+ 
+ For MSD, positions are expressed in physical right--anterior--superior
+ coordinates: the axes point towards the subject's right, front and top.
+-Let $\mu_i$ be the foreground centroid and $\ell_i$ its unit principal
+-axis, the direction in which the foreground positions vary most.
++Let $\mu_i$ be the foreground centroid, the mean physical position of its
++voxels, and $\ell_i$ its unit principal axis, the direction in which the
++foreground positions vary most.
+ Project the rightward unit vector $e_R$ perpendicular to that axis.
+ Writing $\mathsf T$ for matrix transpose, this gives
+ \begin{equation}
+@@ -1180,7 +1223,9 @@
+ \end{equation}
+ The unit vector $n_i$ is normal, or perpendicular, to a plane through
+ the centroid containing the longitudinal direction. Call this plane
+-$\Pi_i$ and the signed distance of voxel $v$ from it $\eta_i(v)$:
++$\Pi_i$ and the signed distance of voxel $v$ from it $\eta_i(v)$.
++Here $r_i(v)$ is the voxel's physical position, obtained from the image
++coordinate transform described in Section~\ref{sec:volumetric-segmentation}:
+ \begin{equation}
+ \begin{aligned}
+ \Pi_i&=\{r\in\mathbb{R}^{3}:n_i^{\mathsf T}(r-\mu_i)=0\},\\
+@@ -1195,8 +1240,10 @@
+ $\|\widetilde n_i\|_2<0.1$.
+ 
+ The supervised region $R_i$ contains the foreground and background
+-within $8\,\mathrm{mm}$ of it, clipped to the stored volume. Consecutive
+-signed strata of width $\Delta=2\,\mathrm{mm}$ are defined by
++within $8\,\mathrm{mm}$ of it, limited to the image volume. This region
++is divided into layers of width $\Delta=2\,\mathrm{mm}$. Each layer
++has an integer index $b$; $D_{i,b}$ is its set of voxels and $N_{i,b}$
++their count. The construction is
+ \begin{equation}
+ \begin{aligned}
+ \kappa_i(v)&=\left\lfloor\frac{\eta_i(v)}{\Delta}\right\rfloor,\\
+@@ -1208,15 +1255,16 @@
+ \end{equation}
+ Here $\lfloor\cdot\rfloor$ rounds down to the nearest integer,
+ $\kappa_i(v)$ assigns a layer index, and $\mathcal B_i$ contains the
+-occupied layers. Negative and nonnegative indices keep the two sides
+-of the plane separate.
++indices of layers containing at least one voxel. Negative and nonnegative
++indices keep the two sides of the plane separate.
+ Each stratum may contain several semantic classes, whose reference
+ labels remain unchanged.
+ 
+ Assigning equal total weight to every occupied stratum could give
+-excessive influence to a very sparse one. The rule first assigns a mass
+-$m_{i,b}$ to each stratum, then divides by their sum $Z_i^{\mathrm{depth}}$
+-to obtain its share $\alpha_{i,b}$ of the total weight:
++excessive influence to a very sparse one. The rule first assigns a
++preliminary weight $m_{i,b}$ to each stratum using a threshold of $T=64$
++voxels. Dividing by the sum $Z_i^{\mathrm{depth}}$ of these weights gives
++the stratum's share $\alpha_{i,b}$ of the total:
+ \begin{equation}
+  m_{i,b}=\min\left(\frac{N_{i,b}}{T},1\right),
+ \qquad
+@@ -1225,8 +1273,8 @@
+  \alpha_{i,b}=\frac{m_{i,b}}{Z_i^{\mathrm{depth}}}.
+ \label{eq:depth-stratum-masses}
+ \end{equation}
+-with $T=64$ voxels, and spreads each normalized mass uniformly across
+-its stratum:
++This share is then distributed equally among the voxels in that stratum.
++The resulting voxel weight $w_i(v)$ is
+ \begin{equation}
+  w_i(v)=
+  \begin{cases}
+@@ -1237,7 +1285,7 @@
+ \label{eq:depth-voxel-weights}
+ \end{equation}
+ The weights sum to one. Strata with at least 64 voxels receive equal
+-total mass; smaller strata receive proportionally less. As an
++total weight; smaller strata receive proportionally less. As an
+ illustration, three strata of 32, 128 and 256 voxels receive total
+ weights $0.2$, $0.4$ and $0.4$. The two larger strata contribute
+ equally despite their different sizes, while the sparse stratum is
+@@ -1245,8 +1293,8 @@
+ than an observed dataset distribution.
+ 
+ The predicate $\mathsf{Correct}(i,v)$ states that voxel $v$ has its
+-reference class. With this predicate grounded by
+-$p_{\theta,i,y_i(v)}(v)$, the weighted statement
++reference class $y_i(v)$. Its grounding, $p_{\theta,i,y_i(v)}(v)$, is
++the probability the model assigns to that annotated class. The weighted statement
+ $\Phi_i^{\mathrm{depth}}=\forall_{w_i}v\in R_i:
+ \mathsf{Correct}(i,v)$ has loss
+ \begin{equation}
+@@ -1293,7 +1341,8 @@
+ at update $t$. The coefficient $\lambda_{a,j}$ sets a term's scale,
+ while $s_{a,j}(t)$ determines when it becomes active. Both are fixed
+ when differentiating that update. If
+-$S_{a,j}=\exp(-\mathcal L_{a,j})$, the auxiliary sum is the negative
++$S_{a,j}=\exp(-\mathcal L_{a,j})$ denotes the satisfaction value of
++auxiliary family $j$, the auxiliary sum is the negative
+ logarithm of
+ $\prod_{j\in J_a}S_{a,j}^{\lambda_{a,j}s_{a,j}(t)}$.
+ The supervised baseline retains its native convention. For example,

@@ -1,0 +1,331 @@
+--- /Users/filippofocaccia/Desktop/hippo/Template_tesi/thesis-revision.tex
++++ /Users/filippofocaccia/Desktop/hippo/Template_tesi/thesis-revision.tex
+@@ -10,6 +10,8 @@
+ % Numerical results and empirical interpretations remain explicit placeholders.
+ % Progress counts are recorded in reports/thesis_sam3_update_20261023/.
+ % Revision provenance: reports/thesis_sam3_structure_20261023/.
++% Background/all-class Dice integrated 23 October 2026 from verified evaluation archives.
++% See reports/thesis_background_dice_update_20261023/ for numeric checks and patch.
+ % Existing dataset illustrations and annotation-compatibility audit are retained.
+ % Standalone bibliography is embedded; the Overleaf template may use ref.bib.
+ 
+@@ -4040,7 +4042,9 @@
+ $D_i=(D_{i,A}+D_{i,P})/2$, and the ADNI volume score is hippocampus Dice. Geological evaluation
+ uses salt Dice.
+ Background is excluded from these primary metrics. Volumes receive
+-equal weight in a run mean.
++equal weight in a run mean. Section~\ref{sec:background-dice-results}
++adds background and all-class Dice as complementary measures on
++the same predictions, retaining this order of averaging.
+ 
+ For objective $j$, model $m$, fold $f$ and seed $s$, the paired change is
+ \begin{equation}
+@@ -4085,10 +4089,13 @@
+ The six-study design covers 1,890 planned objective runs: 630 on
+ GeoFWI3D and 1,260 across the medical comparisons and adaptations.
+ The conventional geological results are presented first, followed by
+-MSD, ADNI, MedSAM3, SAM3 and the MSD annotation audit. Numerical SAM3
++MSD, ADNI, MedSAM3 and SAM3. A complementary analysis compares
++foreground, background and all-class Dice before the MSD annotation
++audit. Numerical SAM3
+ cells marked \emph{pending} reserve the final balanced aggregates;
+-they are not estimates from an incomplete subset.
+-Every objective is evaluated against a matched final-budget baseline.
++they are not estimates from an incomplete subset. The metric-sensitivity
++analysis identifies its separate SAM3 snapshot and uses only fully
++populated conditions within it. Every objective is evaluated against a matched final-budget baseline.
+ Tables report Dice in percent and paired changes in percentage points;
+ $B,E,S,D$ denote bands, edges, signed distance and depth supervision.
+ Unless otherwise stated, $\pm$ gives the sample standard deviation of
+@@ -4191,12 +4198,12 @@
+ Table~\ref{tab:geo-ledger} in Appendix~\ref{sec:extended-results}
+ gives all 56 condition summaries with
+ paired gains, positive-cell counts, updates and available full-volume
+-FN/FP counts. The complete 504-cell Dice inventory is available,
+-but nine reused fold-0 baseline raw archives are absent from the
+-local extraction. Consequently, complete nine-cell baseline FN/FP
+-aggregates are not reported here, and no full-matrix baseline-relative
+-error reduction is inferred from the incomplete counts. This is an
+-error-analysis evidence gap, not an unfinished segmentation run.
++FN/FP counts. The appendix retains the error-count coverage of the
++22 October extraction. The nine reused fold-0 baseline evaluation
++records have since been recovered, completing the confusion-matrix
++evidence used in Section~\ref{sec:background-dice-results}. Full-matrix
++baseline-relative FN/FP summaries remain to be incorporated into
++the appendix; all 504 final Dice results are already included.
+ 
+ The geological comparison uses a larger cap, charges calibration
+ inside it, and retains model-specific region losses, augmentation,
+@@ -4696,6 +4703,192 @@
+ \samResult{cross-study interpretation of the verified paired effects,
+ including any differences from the medical adaptation results}.
+ 
++% BEGIN BACKGROUND DICE ANALYSIS -- 23 October 2026
++% Source: reports/background_dice_archive_recovery_20261023/
++% Generated and checked by reports/thesis_background_dice_update_20261023/integrate.py.
++\FloatBarrier
++\subsection{Foreground, Background and All-Class Dice}
++\label{sec:background-dice-results}
++
++The primary Dice scores emphasize the labelled target structures.
++Evaluating background separately complements them by checking whether
++foreground gains accompany improved agreement in the surrounding region.
++The recovered per-volume confusion matrices permit both measurements
++on the same saved predictions, without further training or inference.
++Write $D_{i,\mathrm{fg}}$ for the primary volume score and
++$D_{i,\mathrm{bg}}=D_{i,0}$ for background Dice. Equal weighting of
++all classes gives
++\begin{equation}
++D_{i,\mathrm{all}}=
++\begin{cases}
++\displaystyle\frac{2D_{i,\mathrm{fg}}+D_{i,\mathrm{bg}}}{3},
++ & \text{MSD},\\[.6em]
++\displaystyle\frac{D_{i,\mathrm{fg}}+D_{i,\mathrm{bg}}}{2},
++ & \text{ADNI and GeoFWI3D}.
++\end{cases}
++\label{eq:reported-all-class-dice}
++\end{equation}
++MSD retains separate anterior and posterior classes. The class scores
++are calculated within each volume, followed by equal-volume, seed and
++fold reductions as in Section~\ref{sec:evaluation-methods}; confusion
++counts are not pooled across volumes to form a substitute Dice score.
++
++The complete comparison covers all 504 conventional runs on each
++dataset, the 108-run MSD MedSAM3 extension and all 126 ADNI MedSAM3
++runs. The original 27 MSD MedSAM3 runs retain their completed
++foreground results, but their per-volume records were not located.
++Their background and all-class Dice therefore remain unreported, and
++the extension baseline is not substituted for their original control.
++
++Tables~\ref{tab:background-conventional} and
++\ref{tab:background-adaptation} place the three measures alongside
++one another. The conventional and MedSAM3 comparisons retain the
++configurations already selected by foreground Dice, allowing the
++effect of changing the evaluation measure to be examined directly.
++\begin{table}[p]
++\centering\small\setstretch{1.05}
++\setlength{\tabcolsep}{5pt}
++\renewcommand{\arraystretch}{1.12}
++\begin{tabular}{@{}llrrrrr@{}}
++\hline
++Model & Objective & $D_{\mathrm{fg}}$ & $D_{\mathrm{bg}}$ & $D_{\mathrm{all}}$ & $\Delta_{\mathrm{fg}}$ & $\Delta_{\mathrm{all}}$ \\
++\hline
++\multicolumn{7}{@{}l}{\textit{GeoFWI3D}}\\[.25em]
++nnU-Net & Baseline & 72.08 & 97.71 & 84.89 & --- & --- \\
++ & $B+E+S+D$ & 78.22 & 98.29 & 88.25 & +6.14 & +3.36 \\
++SwinUNETR & Baseline & 55.54 & 95.24 & 75.39 & --- & --- \\
++ & $B+E+S+D$ & 57.61 & 95.66 & 76.63 & +2.07 & +1.24 \\
++UNETR & Baseline & 54.91 & 96.33 & 75.62 & --- & --- \\
++ & $B+E$ & 56.07 & 96.39 & 76.23 & +1.16 & +0.61 \\
++3D U-Net & Baseline & 77.60 & 98.25 & 87.92 & --- & --- \\
++ & $B+E+S+D$ & 80.73 & 98.58 & 89.66 & +3.14 & +1.73 \\
++\hline
++\multicolumn{7}{@{}l}{\textit{MSD}}\\[.25em]
++nnU-Net & Baseline & 62.52 & 99.70 & 74.92 & --- & --- \\
++ & $B+S+D$ & 72.67 & 99.76 & 81.70 & +10.15 & +6.79 \\
++SwinUNETR & Baseline & 54.04 & 98.52 & 68.87 & --- & --- \\
++ & $B+E+S+D$ & 66.00 & 99.40 & 77.13 & +11.97 & +8.27 \\
++UNETR & Baseline & 54.71 & 98.96 & 69.46 & --- & --- \\
++ & $B+E+S$ & 60.07 & 99.18 & 73.11 & +5.35 & +3.64 \\
++3D U-Net & Baseline & 73.83 & 99.61 & 82.42 & --- & --- \\
++ & $B+E+D$ & 80.00 & 99.75 & 86.58 & +6.17 & +4.16 \\
++\hline
++\multicolumn{7}{@{}l}{\textit{ADNI}}\\[.25em]
++nnU-Net & Baseline & 75.66 & 99.74 & 87.70 & --- & --- \\
++ & $B+S+D$ & 76.69 & 99.76 & 88.23 & +1.03 & +0.52 \\
++SwinUNETR & Baseline & 68.72 & 99.57 & 84.14 & --- & --- \\
++ & $B+E+D$ & 73.03 & 99.66 & 86.34 & +4.31 & +2.20 \\
++UNETR & Baseline & 56.27 & 99.24 & 77.76 & --- & --- \\
++ & $B+E+S+D$ & 60.46 & 99.41 & 79.93 & +4.20 & +2.18 \\
++3D U-Net & Baseline & 69.64 & 99.58 & 84.61 & --- & --- \\
++ & $B+E+D$ & 75.18 & 99.70 & 87.44 & +5.54 & +2.83 \\
++\hline
++\end{tabular}
++\caption{Foreground, background and all-class Dice for the conventional
++models. Scores are percentages; paired gains are percentage points.
++Each baseline is followed by the configuration selected by its highest
++foreground mean in the preceding results. Each row averages three seeds
++within each of three folds and then weights folds equally. The selected
++configuration is also highest under all-class Dice in every model/dataset
++comparison. These tables show means; fold variation and the original
++selection limitations remain as reported above. Gains use unrounded values.}
++\label{tab:background-conventional}
++\end{table}
++
++\begin{table}[p]
++\centering\small\setstretch{1.05}
++\setlength{\tabcolsep}{5pt}
++\renewcommand{\arraystretch}{1.12}
++\begin{tabular}{@{}llrrrrr@{}}
++\hline
++Model & Objective & $D_{\mathrm{fg}}$ & $D_{\mathrm{bg}}$ & $D_{\mathrm{all}}$ & $\Delta_{\mathrm{fg}}$ & $\Delta_{\mathrm{all}}$ \\
++\hline
++\multicolumn{7}{@{}l}{\textit{MSD: MedSAM3 extension}}\\[.25em]
++MedSAM3 & Baseline & 76.34 & 99.01 & 83.90 & --- & --- \\
++ & $B+E+S+D$ & 81.73 & 99.17 & 87.54 & +5.38 & +3.64 \\
++\hline
++\multicolumn{7}{@{}l}{\textit{ADNI: MedSAM3}}\\[.25em]
++MedSAM3 & Baseline & 77.32 & 99.10 & 88.21 & --- & --- \\
++ & $E+S+D$ & 80.85 & 99.19 & 90.02 & +3.53 & +1.81 \\
++\hline
++\multicolumn{7}{@{}l}{\textit{GeoFWI3D: SAM3, complete conditions in the recovery snapshot}}\\[.25em]
++SAM3 & Baseline & 69.31 & 97.62 & 83.46 & --- & --- \\
++ & $B$ & 70.79 & 97.72 & 84.25 & +1.48 & +0.79 \\
++ & $S$ & 69.10 & 97.62 & 83.36 & -0.22 & -0.11 \\
++ & $B+S$ & 69.60 & 97.60 & 83.60 & +0.29 & +0.14 \\
++ & $B+E$ & 69.44 & 97.63 & 83.53 & +0.12 & +0.07 \\
++ & $B+E+S$ & 67.46 & 97.49 & 82.48 & -1.85 & -0.99 \\
++\hline
++\end{tabular}
++\caption{Complementary Dice measures for pretrained adaptation. MedSAM3
++rows compare the matched baseline with the previously selected
++configuration; the MSD baseline belongs to the extension campaign.
++The SAM3 block includes every objective with all nine evaluations in the
++23 October recovery snapshot, including negative effects. Its rows do
++not establish the highest configuration of the unfinished full inventory.
++All rows use three folds and three seeds, the same per-volume averaging
++as Table~\ref{tab:background-conventional}, percentage scores and
++percentage-point gains. The SAM3 snapshot is separate from the final
++fourteen-objective aggregates reserved in Section~\ref{sec:sam3-results}.}
++\label{tab:background-adaptation}
++\end{table}
++
++Every one of these fourteen selected configurations improves both
++mean foreground and mean background Dice. Background means in their
++baseline and selected rows range from 95.24\% to 99.76\%, leaving
++less room for improvement than the foreground scores. For example,
++ADNI MedSAM3 changes from 77.32\% to 80.85\% foreground Dice and
++from 99.10\% to 99.19\% background Dice. Its all-class score rises
++from 88.21\% to 90.02\%. This supports an improvement in agreement
++across both regions, while the foreground measure retains sensitivity
++to the target structure.
++
++The higher absolute all-class scores result from the added contribution
++of background. Their gains are smaller because background changes
++relatively little: its inclusion reduces the foreground weight to
++two-thirds on MSD and one-half on the binary tasks. The selected
++MSD SwinUNETR gain changes from 11.97 to 8.27 points; the ADNI
++MedSAM3 gain changes from 3.53 to 1.81 points. Both quantities describe
++the same predictions under different class weights.
++
++The conclusions also hold beyond the selected configurations. Across
++all 180 complete constrained-objective comparisons with their matched
++baselines, the same 169 mean effects are positive and the same eleven
++are negative under foreground and all-class Dice. The highest-mean
++objective is unchanged in all fourteen model/dataset comparisons.
++The selected configurations retain their positive-pair counts: nine
++of nine in thirteen comparisons and eight of nine for geological
++UNETR. Bands alone still improve all 72 conventional medical
++model/fold/seed cells under both measures.
++
++This agreement does not imply identical ordering of every outcome.
++Six of 1,620 individual paired differences change sign, all on
++GeoFWI3D; their foreground magnitudes are below 0.14 points and
++their all-class magnitudes below 0.03 points. Some secondary objective
++rankings also change. These small differences leave the reported
++mean benefits and negative findings intact, without establishing
++statistical superiority between closely ranked objectives.
++
++The SAM3 archive snapshot contains 116 of the planned 126 evaluations.
++Only its six fully populated objective conditions, including baseline,
++enter Table~\ref{tab:background-adaptation}; each has all three folds
++and three seeds. Within this balanced subset, bands retain a positive
++mean effect of 1.48 foreground points and 0.79 all-class points,
++whereas $B+E+S$ retains a negative effect of 1.85 and 0.99 points,
++respectively. The remaining objective conditions require their final
++records before a complete comparison or preferred configuration can
++be reported. This subset is excluded from the 180-comparison check.
++
++Together, the measures show that the selected foreground improvements
++persist when background participates in the class average. They provide
++a broader assessment of overlap while preserving the original
++foreground endpoint. This is a sensitivity analysis of the metric on
++the same experiments, so it retains their selection and replication
++limitations and supplies no additional evidence of surface accuracy
++or downstream usefulness.
++\FloatBarrier
++% END BACKGROUND DICE ANALYSIS
++
+ \subsection{What the Annotation Audit Establishes}
+ \label{sec:annotation-results}
+ 
+@@ -4834,8 +5027,8 @@
+ \subsection{Future Work}\label{sec:future-work}
+ \label{sec:pending-results}
+ 
+-Further analysis of the completed studies should recover the nine reused
+-GeoFWI3D baseline raw archives for full FN/FP comparisons, add paired
++Further analysis of the completed studies should extend the geological
++FN/FP comparisons using the recovered baseline records, add paired
+ prediction examples selected by a stated rule, and complete end-to-end
+ runtime and memory reporting. Surface evaluation should use verified
+ physical geometry and available predictions, with targeted reruns where
+@@ -5366,8 +5559,9 @@
+ \begin{longtable}{@{}lrrrrrr@{}}
+ \caption{GeoFWI3D complete condition ledger. Dice is in percent; gains
+ are paired percentage points. FN and FP are mean pooled counts over
+-the full 96-volume validation set per run. Dashes identify unavailable
+-complete baseline error aggregates, not missing Dice results.}
++the full 96-volume validation set per run. Dashes retain the baseline error aggregates omitted from the
++22 October extraction. The subsequent recovery is documented in
++Section~\ref{sec:background-dice-evidence}; all Dice results are complete.}
+ \label{tab:geo-ledger}\\
+ \hline
+ Objective & Dice & $\Delta$ & Positive & FN & FP & Updates \\ \hline
+@@ -5746,14 +5940,15 @@
+ summaries, paired gains and fold dispersions. It verifies 7,410
+ available metadata files and recomputes 47,520 per-volume Dice scores
+ and FN/FP counts from the saved confusion matrices of 495 run records.
+-Nine reused fold-0 baselines are available as saved summary references
+-with source/archive identities, but their raw archives are not present
+-locally. Two additional baseline extracts contain only part of their
+-manifest-listed metadata. The audit records these limits and does not
+-claim a new complete payload check of every baseline or of deleted
+-checkpoint tensors. Complete baseline FN/FP aggregates remain a
+-reporting gap; all 504 final Dice values and their paired gains are
+-included.
++At that extraction, nine reused fold-0 baselines were represented
++only by saved summary references and two additional baseline extracts
++contained part of their manifest-listed metadata. The subsequent
++recovery described in Section~\ref{sec:background-dice-evidence}
++supplies the nine missing evaluation records and checks all 504
++evaluation hashes. It does not reload deleted checkpoint tensors
++or establish completeness of every other archived payload. The
++appendix retains the earlier FN/FP coverage pending integration
++of the recovered baseline counts.
+ 
+ The new extraction stores \path{all_504_runs.csv},
+ \path{all_56_condition_summaries.csv}, \path{results.json} and
+@@ -5839,6 +6034,32 @@
+ \texttt{hippocampus\_adni\_223901\_R}. Each fold's evaluation subjects
+ are excluded from its support subjects. This explicit overlap prevents
+ misinterpreting three folds as three independent two-crop support draws.
++
++\subsection{Background-Dice Recovery}
++\label{sec:background-dice-evidence}
++
++The complementary analysis in Section~\ref{sec:background-dice-results}
++uses \path{reports/background_dice_archive_recovery_20261023/}.
++The retained inventory contains 1,862 run evaluations and 124,860
++validation-volume records: 504 runs for each conventional dataset,
++108 for the MSD MedSAM3 extension, 126 for ADNI MedSAM3 and 116
++SAM3 evaluations in the recovery snapshot. Each evaluation matches
++its manifest SHA-256 and reproduces its recorded foreground run mean.
++Per-volume foreground and background scores are recomputed from the
++saved confusion matrices; the all-class score follows
++Equation~\ref{eq:reported-all-class-dice}. These checks use evaluation
++metadata rather than rerunning models.
++
++The directory preserves \path{background_dice_cases.csv},
++\path{background_dice_runs.csv}, \path{background_dice_conditions.csv}
++and \path{background_metric_comparison.csv}, together with verification
++records, download receipts and the recovery script. The thesis tables
++are generated and checked in
++\path{reports/thesis_background_dice_update_20261023/}.
++The original MSD MedSAM3 campaign remains separate: its aggregate
++foreground results are preserved, but the searched archives did not
++yield its 27 per-volume evaluation records. Its missing complementary
++scores are not inferred from the later campaign.
+ 
+ \subsection{SAM3 Campaign}
+ 

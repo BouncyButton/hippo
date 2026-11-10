@@ -1,0 +1,22 @@
+--- before.tex
++++ thesis-revision.tex
+@@ -2303,13 +2303,15 @@
+ 
+ \begin{figure}[htbp]
+ \centering\setstretch{1.05}
+-% Cached vector figure; editable source: figures/source/scratch-key-results.tikz
+-\includegraphics{figures/compiled/scratch-key-results.pdf}
++% Cached vector figure; generator: figures/source/scratch-key-results.py
++\includegraphics[width=\linewidth]{figures/compiled/scratch-key-results.pdf}
+ \caption{Training from scratch: baseline and the highest-mean tested
+ spatial objective for each model and dataset. Whiskers show the sample
+ standard deviation of three seed-averaged fold means; they are not
+-confidence intervals. Right-hand labels give paired gains from unrounded
+-scores. Foreground Dice averages anterior and posterior on MSD and measures
++confidence intervals. The right-hand columns identify the added constraint
++combination and its paired gain from unrounded scores: $B$ denotes
++boundary bands, $E$ edge consistency, $S$ signed distance and $D$
++depth-weighted supervision. Foreground Dice averages anterior and posterior on MSD and measures
+ the single target class on the binary tasks. Panels share a score scale,
+ but their task and budget differences preclude a direct dataset ranking.
+ Complete objective scores and selected combinations are in

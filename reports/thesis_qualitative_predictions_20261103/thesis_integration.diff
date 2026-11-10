@@ -1,0 +1,241 @@
+--- thesis-before
++++ thesis-after
+@@ -11,8 +11,10 @@
+ % Background/all-class Dice integrated 23 October 2026 from verified evaluation archives.
+ % See reports/thesis_background_dice_update_20261023/ for numeric checks and patch.
+ % Existing dataset illustrations and annotation-compatibility audit are retained.
+-% Bibliography is embedded; figure assets are in figures/compiled.
+-% For Overleaf, upload thesis-revision.tex AND figures/compiled together.
++% Verified qualitative reproductions integrated 3 November 2026; original aggregates unchanged.
++% Provenance: reports/thesis_qualitative_predictions_20261103/final_verification.json.
++% Bibliography is embedded; figure assets are in figures/compiled and figures/qualitative.
++% For Overleaf, upload thesis-revision.tex AND the complete figures folder together.
+ 
+ \documentclass[12pt,a4paper]{article}
+ \usepackage[T1]{fontenc}
+@@ -1979,7 +1981,7 @@
+ configurations and individual fold effects, are retained in
+ Appendix~\ref{sec:extended-results}.
+ 
+-Each figure compares a baseline with the objective that has the highest
++The aggregate charts compare a baseline with the objective that has the highest
+ mean validation Dice in the same study. Selection uses these validation
+ results, so the comparisons are descriptive rather than independent tests
+ of an optimal method. Dice is reported in percent and gains in percentage
+@@ -2121,11 +2123,43 @@
+ bands-plus-edges comparisons retain complete foreground results, but lack
+ recoverable background scores.
+ 
+-These measurements describe agreement with the annotations. They do not
+-establish where boundary errors occur or whether the improvement is
+-useful downstream. Paired prediction panels and surface measurements
+-would be needed to assess those questions; the existing dataset images
+-illustrate the annotations rather than model performance.
++Figure~\ref{fig:qualitative-typical} makes these differences visible through
++matched image, reference and prediction panels. The examples come from
++six short, matched reproductions of SAM3 on GeoFWI3D and MedSAM3 on MSD
++and ADNI, performed because the original trained adapters and predictions
++were no longer available. They illustrate the segmentation behaviour;
++the original three-fold, three-seed studies remain the basis of the
++aggregate results above. Appendix~\ref{sec:qualitative-predictions}
++documents the case selection and differences from the original run scores.
++
++\begin{figure}[p]
++\centering
++\includegraphics[width=\linewidth]{figures/qualitative/typical-predictions.png}
++\caption{Typical held-out examples from the qualitative reproductions:
++SAM3 on GeoFWI3D and MedSAM3 on MSD and ADNI. Each case has the upper-median
++paired Dice change within its reproduced validation set. Columns use the
++same image and slice, selected by maximum reference foreground area along
++the third stored array axis. Blue denotes salt, anterior hippocampus or
++whole hippocampus, respectively; orange denotes posterior hippocampus on
++MSD. Scores describe the whole volume, with anterior/posterior Dice
++averaged on MSD, rather than the displayed slice. The constrained
++objectives are $B+E+D$, $B+E+S+D$ and $E+S+D$, respectively.
++Adverse and largest-gain cases are shown in
++Appendix~\ref{sec:qualitative-predictions}.}
++\label{fig:qualitative-typical}
++\end{figure}
++
++The examples show local changes rather than a wholesale change in the
++predicted object. In the MSD view, the constrained prediction recovers
++more of the posterior region; in the ADNI view it extends towards parts
++of the reference missed by the baseline. Contour disagreements remain in
++both. Across the full volumes of these three typical cases, missed
++foreground decreases while extra foreground increases. The adverse
++examples in the appendix show that this tradeoff can instead lower Dice.
++A single slice cannot explain every change in a volume score, and neither
++these images nor overlap measurements establish downstream usefulness.
++Surface-distance evaluation and expert assessment remain necessary to
++address that question.
+ 
+ \FloatBarrier
+ \subsection{Limits of the Findings}
+@@ -3650,10 +3684,11 @@
+ those with negative Dice changes. Conventional-model counts are pooled
+ within each run; adaptation counts are means per image. Their absolute
+ magnitudes therefore should not be compared across studies. The error
+-counts establish how much misclassification changes, but the retained archives lack the paired
+-prediction panels and surface measurements needed to establish where
+-those changes occur. The dataset illustrations show annotations,
+-not evidence of predicted segmentation quality.
++counts establish how much misclassification changes. The separate
++qualitative reproductions in Section~\ref{sec:qualitative-predictions}
++provide matched prediction examples for the pretrained models; they do
++not replace the original aggregate error counts below. Surface-distance
++measurements remain outside the present evaluation.
+ 
+ \FloatBarrier
+ 
+@@ -4217,6 +4252,124 @@
+ \label{tab:background-adaptation}
+ \end{table}
+ \FloatBarrier
++\subsection{Qualitative Prediction Examples}
++\label{sec:qualitative-predictions}
++
++The prediction panels supplement the aggregate comparisons with examples
++of where models agree with or depart from the reference. They use fresh
++matched reproductions, because the original final adapters and prediction
++volumes were not retained. For each pretrained-model study, the constrained
++objective is the one with the highest original mean validation Dice.
++The reproduced run pair was chosen before execution as the pair with the
++median original gain among the nine recorded comparisons. Thus, each
++dataset contributes one baseline and one constrained reproduction, rather
++than a new three-fold, three-seed study.
++
++The repeats preserve the recorded support and validation cases,
++initial weights, sampling sequence and update schedule. SAM3 uses five
++GeoFWI3D support volumes and 25 updates; MedSAM3 uses five MSD volumes or
++two ADNI crops and 200 updates. Medical runs reuse the saved calibration
++coefficients. The geological runs repeat the original five-update
++calibration procedure. Inference uses images and the fixed text queries;
++reference masks enter evaluation and figure selection, not the model's
++inference prompts. Case identities, reference hashes and final-adapter
++identities were checked, and Dice and error counts were recalculated from
++all 416 saved support and validation predictions.
++
++\begin{table}[htbp]
++\centering\small\setstretch{1.05}
++\renewcommand{\arraystretch}{1.2}
++\begin{tabular}{@{}lrrrrr@{}}
++\hline
++& \multicolumn{2}{c}{Original run pair} &
++\multicolumn{3}{c}{Qualitative reproduction} \\
++Study (held-out cases) & Baseline & Constrained & Baseline & Constrained & $\Delta$ \\
++\hline
++GeoFWI3D / SAM3 (96) & 75.39 & 78.21 & 76.72 & 79.47 & +2.75 \\
++MSD / MedSAM3 (46) & 77.55 & 82.47 & 78.63 & 81.87 & +3.24 \\
++ADNI / MedSAM3 (54) & 78.02 & 81.57 & 77.12 & 80.64 & +3.52 \\
++\hline
++\end{tabular}
++\caption{Mean foreground Dice for the selected original run pairs and
++their qualitative reproductions. Scores are percentages and $\Delta$ is
++the reproduced paired gain in percentage points, calculated before
++rounding. These are single-run validation means, not the original
++three-fold aggregates. Constrained objectives follow
++Figure~\ref{fig:qualitative-typical}.}
++\label{tab:qualitative-reproduction-scores}
++\end{table}
++
++The repetitions are not numerically identical to the original runs
++(Table~\ref{tab:qualitative-reproduction-scores}). The largest change in
++paired gain occurs on MSD: 4.93 points in the selected original pair
++becomes 3.24 points. Training records already diverge at the first update,
++before inference, despite matching initial weights and sampling. On
++GeoFWI3D and ADNI the first forward losses agree but gradient norms differ;
++on MSD the baseline forward losses also differ. The recorded MSD hardware
++changes from a full A100-SXM4 GPU to an A100 PCIe GPU partition. These
++checks locate the divergence in optimization but do not establish its
++exact numerical cause. Repeating geological calibration also changes
++the edge and depth coefficients. The panels therefore describe the
++reproduced models and do not stand in for the original predictions.
++
++For each reproduced validation set, cases are ordered by constrained
++minus baseline whole-volume Dice, with case identifier breaking ties.
++The upper-median case is shown in Figure~\ref{fig:qualitative-typical};
++the minimum and maximum changes are shown below. The same predetermined
++slice rule applies to all examples: choose the first slice along source
++array axis two, indexed from zero, with the largest reference foreground
++area. Images, views, intensity limits and label colours are identical
++within each pair. These are stored-grid views, with no anatomical-plane
++claim. Scores describe entire volumes, so the displayed slice need not
++contain the errors responsible for the largest part of a score change.
++
++The constrained reproduction improves Dice in 88 of 96 GeoFWI3D volumes,
++41 of 46 MSD crops and 51 of 54 ADNI crops. The exceptions make the limits
++of the average improvement concrete. In the adverse geological case,
++whole-volume false positives rise from 4,981 to 7,947, while false
++negatives fall only from 911 to 773. The selected slice lies on the cube
++face and shows only part of that error balance. In the adverse MSD case,
++false positives rise from 188 to 645 despite fewer missed voxels and
++anterior/posterior swaps. In the adverse ADNI case, both missed and extra
++foreground increase. These examples support the need to examine the
++kind and location of errors alongside Dice; they provide no assessment
++of clinical or geological usefulness.
++
++\begin{figure}[p]
++\centering
++\includegraphics[width=\linewidth]{figures/qualitative/geofwi3d-extreme-predictions.png}
++\caption{SAM3 on GeoFWI3D: the smallest and largest whole-volume Dice
++changes in the reproduced validation set. Blue denotes salt. The adverse
++case loses 8.47 points and the largest-gain case gains 7.41 points.
++The upper view is slice 95, the last slice of the stored cube. Both views
++follow the same reference-area selection rule as the typical examples;
++neither was chosen by inspecting prediction errors.}
++\label{fig:qualitative-geo-extremes}
++\end{figure}
++
++\begin{figure}[p]
++\centering
++\includegraphics[width=\linewidth]{figures/qualitative/msd-extreme-predictions.png}
++\caption{MedSAM3 on MSD: the smallest and largest whole-volume mean
++anterior/posterior Dice changes, $-3.02$ and $+9.05$ points. Blue denotes
++anterior and orange posterior hippocampus. The adverse example illustrates
++that extending a prediction can introduce disagreement even when more
++reference foreground is recovered across the volume.}
++\label{fig:qualitative-msd-extremes}
++\end{figure}
++
++\begin{figure}[p]
++\centering
++\includegraphics[width=\linewidth]{figures/qualitative/adni-extreme-predictions.png}
++\caption{MedSAM3 on ADNI: the smallest and largest whole-volume Dice
++changes, $-2.19$ and $+11.63$ points. Blue denotes hippocampus. In the
++largest-gain example, the constrained model retains more of the elongated
++reference region, although substantial disagreement remains. Each row
++uses one common image and slice for both models.}
++\label{fig:qualitative-adni-extremes}
++\end{figure}
++
++\FloatBarrier
+ \subsection{Annotation Compatibility and the Anterior/Posterior Transition}
+ \label{sec:annotation-results}
+ 
+@@ -4507,6 +4660,7 @@
+ Per-volume confusion matrices and Dice & \path{background_dice_archive_recovery_20261023/} \\
+ Complementary Dice tables & \path{thesis_background_dice_update_20261023/} \\
+ Full-validation error tables & \path{thesis_all_variant_errors_20261023/} \\
++Qualitative reproductions and panels & \path{thesis_qualitative_predictions_20261103/} \\
+ \hline
+ \end{tabular}
+ \end{center}
+@@ -4515,10 +4669,17 @@
+ within each fold and then weighting folds equally. Reported dispersion
+ is the sample standard deviation of fold means. Paired gains retain the
+ baseline for the same fold, seed and execution batch, including the
+-distinct matched controls for MSD MedSAM3 $B$ and $B+E$. Verification
++distinct matched controls for MSD MedSAM3 $B$ and $B+E$. Aggregate verification
+ records distinguish inventory checks, numerical recalculation and
+ available payload-hash checks; these checks use retained records rather
+ than rerunning training or inference.
++
++The qualitative archive is separate from those aggregate extracts. It
++contains the six reproduction records, saved image/reference/prediction
++arrays, original-score comparisons, verification receipts and the scripts
++and selection metadata for the panels. Section~\ref{sec:qualitative-predictions}
++states their provenance and numerical differences; none of these repeats
++changes the original aggregate tables or charts.
+ 
+ Saved confusion matrices support recalculation of per-volume Dice and
+ full-grid errors. The complete SAM3 extraction supplies the final 126

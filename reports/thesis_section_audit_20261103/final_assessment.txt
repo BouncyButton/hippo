@@ -1,0 +1,66 @@
+THESIS REVIEW AGAINST BOTH RELATORS' CORRECTIONS
+3 November 2026 — read-only audit
+
+Scope: nine independent subagents reviewed all six main chapters and three appendices. Chapter1 review included the retained submission abstract; AppendixC review included the bibliography. The reviewers used the current source, both annotated PDFs and their broader written feedback. The root checked findings against the current source and reconciled repeated findings.
+
+Source: /Users/filippofocaccia/Desktop/hippo/Template_tesi/thesis-revision.tex
+Reviewed final source SHA256: 813221f28d26c194d1008df835d4065244c1492c8295968b50ae16af55a2d5ef
+The user added an explicit set-based Dice equation during this audit (eight additional lines in Chapter2). That change was preserved and checked; its formula and nonempty-denominator condition are correct. It shifts subsequent review references by eight lines. This report uses the updated references.
+
+OVERALL ASSESSMENT
+Most explicit corrections are addressed. No new broad rewrite is indicated. The main outstanding explicit reviewer request is attributable paired baseline/constrained prediction panels (Andrea originalPDFp52). Their reproduction work is already underway; an honest statement that figures are absent does not itself fulfill this request. Additional findings concern framing, population definitions, acronym clarity and two reproducibility details. These do not require new experiments merely to document them accurately.
+
+CHAPTER-BY-CHAPTER
+
+1 INTRODUCTION AND RETAINED ABSTRACT
+Addressed: Luca's novice-reader motivation, explanation of semantic segmentation and medical relevance, LTN/neuro-symbolic context before logLTN, limited annotations/compute, contextual flow. Andrea's scratch-versus-pretrained distinction, example inputs/reference masks, architecture citations and acronym expansion. Contributions consolidated, redundant introductory subdivisions removed; the compiled abstract is disabled while retained for submission.
+Remaining: lines71–75 still say geology was evaluated first, followed by medical data. This conflicts with the user's clarified framing at170–176: geological segmentation tests extension beyond the medical domain. Update the retained abstract and reports/thesis_professor_followup_20261103/submission_abstract.txt consistently.
+Optional: caption209–218 includes lexicographic selection, tie-breaking and grayscale details that could move to reproducibility material.
+External: the programme-specific requirement to exclude the abstract has not independently been confirmed; Andrea's wording was qualified.
+
+2 BACKGROUND AND RELATED WORK
+No substantive unresolved explicit correction found. Images/tasks, cases, class notation, softmax, loss inputs, grounding and numerical Dice/logic examples are now explained. Luca's ambiguous wording and excessive roadmap were addressed. Andrea's model-choice rationale and italic narrative et al. are present. Current architecture/Dice figure assets are legible.
+Optional: exact18,497,664 adapter count and reset/execution detail at628–633 fit Methods better than Background.
+
+3 SPATIAL CONSTRAINTS
+No unresolved explicit correction or mathematical inconsistency found. Luca's figure-outline distinction, 3D morphology, differentiability, formula-to-loss explanation, epsilon and empty-domain rules are addressed. Andrea's relation-predicate concern is answered with explicit groundings. Technical derivatives have appropriate appendix treatment.
+Optional: make the distinction between intermediate log-truth and minimized negative log-truth slightly plainer at695–698; remaining pair-count/coordinate validation detail can be shortened if desired. Do not restrict edge supervision to crossing-boundary pairs: the actual method also uses same-side relations.
+
+4 DATASETS AND METHODS
+Andrea's originalp25 seed-number question and p29 multi-model rationale are explicitly answered; protocol matching, recipe differences, resource accounting and exploratory limitations are disclosed. Consolidated adaptation methods and appendix implementation tables address the broad style request.
+Remaining population wording: line1366 cites263 labelled MSD crops; line1396 refers to all260 audited crops. Local datasets/Dataset101_MSD/dataset.json:10 declares260 training masks; docs/thesis/new_constraints/ap_plane/README.md:50–60 retains all260 (202 planar+58 nonplanar). Clarify cited collection versus locally prepared/audited population. No three audit exclusions were established; do not invent an exclusion reason.
+Remaining acronyms: MINC at1418 is unexplained. FN/FP first appear1844, before expansions in AppendixB. Attach these abbreviations to the already-written error definitions1837–1840.
+Optional: move exact geometry fallback thresholds to the appendix.
+
+5 RESULTS AND ANALYSIS
+Andrea's main presentation request is met: zero tables and three charts in the chapter, full results/negative outcomes in AppendixB. Absolute quality, matched gains, objective dependence and error tradeoffs are interpreted. Luca's convergence caveat belongs in and now appears in limitations. Background/all-class analysis is qualified by archive coverage. Chart values agree with corresponding summaries.
+Outstanding explicit request: paired prediction examples, currently acknowledged as absent2004–2008 and3533–3536. Insert verified matched panels after the ongoing job completes; retain existing aggregate results and identify qualitative reproductions honestly.
+Small clarity fix: spatial error localization can be examined with panels/surface measures, but downstream relevance requires expert/application assessment. The paragraph2004–2008 currently combines those questions too loosely.
+Optional: one quantified FN/FP tradeoff would make the current qualitative explanation more concrete without adding a main-text table.
+Root rejected an optional reviewer-agent suggestion to move geology before medicine merely to match an earlier narrative: the user's later medical-to-nonmedical aim takes precedence. Current medical-first Results prose is compatible with that aim.
+
+6 CONCLUSIONS
+Explicit corrections addressed: concise synthesis, no repeated numerical discussion, plural Future Research Directions, legitimate prospective tasks. Prediction-panel production is correctly absent from Future Work; surface-distance evaluation and expert assessment remain prospective. No clinical benefit is claimed.
+Minor temporal wording: line2074 says beyond overlap scores and visual comparisons even though paired prediction comparisons are not yet presented. Resolve with the panel integration or temporarily shorten to beyond overlap scores.
+
+APPENDIX A — NUMERICAL AND IMPLEMENTATION DETAILS
+All13 subsections reviewed. No outstanding explicit professor correction. Stable BCE, edge/SDF derivatives, volumetric sampling and calibration agree with Chapter3.
+Two reproducibility details still need precise documentation:
+(a) ADNI depth reference at2413–2415 and3063 does not identify the image-grid axis. The current local implementation uses sourceX/axis0, preserved through its Z,Y,X transpose (scripts/cross_dataset_campaign/foundation.py:75). Verify against the frozen campaign source, then name the axis and link the projection/rejection rule.
+(b) Adaptation settings2966–2967,2975–2977,3020–3022 omit LoRA rank, alpha, dropout, target-module scope and full learning-rate curve shape. Parameter count and endpoints alone are insufficient. A retained MSD bundle has rank16,alpha32,dropout0.1; local lr_for_update implements linear warmup then cosine decay. Verify all three frozen campaign configurations before asserting shared values, then add a compact shared settings table or two sentences.
+Optional: line2945 should specify64 tokens per medical64^3 crop, rather than seemingly applying that count to geological96^3 inputs. Line2652 has an overly broad self-reference to AppendixA. Some budget motivations repeat Methods and can be shortened.
+
+APPENDIX B — SUPPLEMENTARY EXPERIMENTAL RESULTS
+No additional numerical contradiction or wrong control pairing found. Negative outcomes remain visible. Coverage reconciles:193 complementary comparisons=156 conventional+11MSDMedSAM3+13ADNIMedSAM3+13SAM3;1737=193x9 matched cells.108 recoverable MSD background records plus27 earlier records include distinct repeated controls and remain correctly paired.
+The260-mask annotation audit is consistent with local records; fix its relation to the cited263 collection in Methods, not the audit numbers blindly. Missing prediction panels are the same pending item above.
+Optional: the compact adaptation complementary-Dice table at3931–3957 repeats the full table, and nearby SAM3 score interpretation repeats selected values. These are appendix concision opportunities, not violations merely because tables exist here.
+
+APPENDIX C AND BIBLIOGRAPHY
+No outstanding explicit correction or material internal mismatch found. All six archive entry points exist. Verification records support final126SAM3 evaluations and explain replacement of older116-run snapshots. Missing per-volume matrices for original27MSDMedSAM3 records remain disclosed. Twelve blank training-score cells in a consolidated GeoFWI3DCSV do not establish lost results: underlying completion records retain final_training_hard_dice.
+All31bibliography entries are cited, with no duplicate or undefined citation keys. Andrea's narrative et al. italics are implemented; roman et al. in bibliography is optional consistency. Citation order should change only if the thesis style requires first-use numbering.
+Optional: add a reader-facing archive-access locator if/when research material is shared; local paths alone are less useful to external readers. This is not a relator correction.
+
+VERIFICATION LIMITS
+No manuscript changes, new experiments, cluster actions or full-document compilation were performed in this audit. Current external figure assets exist and were inspected, but the existing full thesis PDF predates recent source restructuring. A fresh built-in compile and final pagination check are needed after the targeted corrections/panel integration. This review is not a full literature revalidation or a new reproduction of every reported number.
+
+Evidence and detailed reviewer notes are in this directory; original annotation extraction is reports/thesis_professor_revision_20261102/annotations.json. Related initial chapter notes use the pre-eight-line-insertion source numbering.

@@ -1,0 +1,421 @@
+--- before
++++ after
+@@ -1777,97 +1777,23 @@
+ \subsection{Four-Model Comparisons under a FLOP Ceiling}
+ \label{sec:main-msd-methods}
+ 
+-\subsubsection{Models and Training Configurations}
+-
+-The four models represent different approaches to volumetric
+-segmentation: a compact convolutional U-Net, the configured convolutional
+-system nnU-Net, UNETR with attention across image patches, and SwinUNETR
+-with attention within shifted local windows. Chapter~\ref{sec:background}
+-introduces these architectures. Testing all four examines whether the
+-benefit of spatial supervision depends on the model receiving it.
+-
+-All start from random initialization and process one volume per update.
+-Within each dataset, they use the same support examples and prediction
+-grid: $64^3$ for MSD and ADNI, and $96^3$ for GeoFWI3D. MSD requires three
+-output classes; ADNI and GeoFWI3D require two. Model sizes, optimizer
+-settings and learning-rate schedules are recorded in
+-Appendix~\ref{sec:conventional-implementation}.
+-
+-Table~\ref{tab:capped-baseline-losses} summarizes the medical baseline
+-objectives. SwinUNETR, UNETR and the compact U-Net use soft Dice over all
+-classes, implemented with the Medical Open Network for Artificial
+-Intelligence (MONAI) library. nnU-Net combines foreground Dice with
+-cross-entropy over all classes. On GeoFWI3D, these choices are retained
+-except for UNETR, which uses foreground Dice plus cross-entropy and
+-squared prediction terms in the Dice denominator. Its dropout is 0.1
+-and its initial learning rate is $6\times10^{-4}$. These differences
+-are held fixed within each baseline/constrained comparison.
+-
+-\begin{table}[htbp]
+-\centering
+-\small
+-\begin{tabular}{P{4.3cm}P{3.2cm}P{6.0cm}}
+-\hline
+-Model & Baseline objective & Training Dice classes and supervision \\
+-\hline
+-SwinUNETR, UNETR and 3D U-Net
+-& Soft Dice
+-& All dataset classes, including background; final output. \\[0.5em]
+-nnU-Net
+-& Soft Dice plus cross-entropy
+-& Foreground classes in Dice; all classes in cross-entropy;
+-  multiple output resolutions. \\
+-\hline
+-\end{tabular}
+-\caption{Baseline losses in the capped MSD and ADNI comparisons. The class set
+-listed for Dice concerns training, not the selection of evaluation metrics.}
+-\label{tab:capped-baseline-losses}
+-\end{table}
+-
+-nnU-Net applies its baseline losses at several output resolutions,
+-resampling the reference labels to each grid. All auxiliary terms act
+-only on the primary, full-resolution prediction. Each model also keeps
+-the same learning-rate trajectory across its objectives. If an extra
+-loss leaves room for fewer updates under the cap, that trajectory is
+-not shortened to compensate.
+-
+-The final geological UNETR configuration includes two changes developed
+-after its initial recipe struggled within the budget. First, training
+-uses right-angle rotations and reflections in the horizontal plane,
+-applied jointly to images and labels. These transformations preserve
+-the depth axis and require no interpolation. Second, the outer two
+-voxel layers are excluded from band and edge supervision. A salt body
+-can continue beyond the observed cube, so its intersection with a cube
+-face need not be an observed salt/background boundary. The full input,
+-prediction grid and baseline loss are retained. Both choices apply to
+-the UNETR baseline and its constrained variants; the other three
+-geological models retain their original crop-face convention.
+-Appendix~\ref{sec:geo-boundaries} specifies that convention, and
+-Appendix~\ref{sec:geo-development} records the development comparison.
+-Thus, cross-model differences concern complete training configurations,
+-including these choices, rather than architecture alone.
+-
+-\subsubsection{Spatial Objectives}
+-
+-Fourteen objectives cover the combinations in
+-Table~\ref{tab:constraint-combinations}; $\varnothing$ denotes no
+-selected term among $B,E,S$. These abbreviations refer to boundary
+-bands, edge consistency and signed distance; $D$ adds depth supervision.
+-Preliminary MSD screening did not establish a consistent incremental
+-benefit from edge alone over the supervised baseline, or from edge plus
+-signed distance over signed distance alone. These two
+-configurations were therefore omitted from the subsequent
+-fourteen-objective replications across datasets. The study therefore
+-compares the retained objectives; it does not test every possible
+-combination or interaction.
+-% EXCLUSION EVIDENCE: reports/compute_matched_constraints_20pct_20261004/
+-% summary.json (U-Net, MSD fold 0 / seed 0): E 41.33 vs baseline 42.14;
+-% E+S 57.25 vs S 61.15, although E+S exceeds baseline. The longer pilot in
+-% reports/compute_matched_constraints_682338/README.md records only a
+-% +0.055 pp validation-selected edge gain and a slightly lower final score.
+-% These archives do not establish ineffectiveness across all datasets/seeds.
+-% Pilot records are preserved; omitted configurations were not part of the
+-% later fourteen-objective replication inventory.
++The comparison asks whether spatial supervision helps different models
++learn from the same small set of annotated volumes. On each dataset,
++nnU-Net, SwinUNETR, UNETR and the compact three-dimensional U-Net are
++trained from scratch, using the architectures introduced in
++Chapter~\ref{sec:background}. For each model, the baseline uses its
++configured segmentation loss. The constrained versions retain that loss
++and add selected spatial terms. Training examples, initialization and
++the remaining model settings are matched to the corresponding baseline.
++
++The fourteen objectives are listed in
++Table~\ref{tab:constraint-combinations}. Here, $B$ denotes boundary bands,
++$E$ edge consistency, $S$ signed distance and $D$ depth supervision;
++$\varnothing$ means that none of $B,E,S$ is added. Reading across a row
++shows the same combination without and with depth supervision. Edge
++alone and edge plus signed distance were not carried forward after
++preliminary MSD screening, so the table covers the retained objectives,
++rather than every possible combination.
+ 
+ \begin{table}[htbp]
+ \centering
+@@ -1896,63 +1822,20 @@
+ \label{tab:constraint-combinations}
+ \end{table}
+ 
+-Bands and edges supervise the combined anterior/posterior foreground
+-on MSD, the hippocampus on ADNI and salt on GeoFWI3D. Signed-distance
+-fields (SDFs) are constructed separately for each foreground class;
+-depth supervision retains the original reference classes. All
+-conventional models use two-step bands with six face-sharing neighbours.
+-The class groups determine which interfaces receive supervision, while
+-the geological UNETR exclusion changes where bands and edges apply.
+-
+-Distance fields are clipped at eight voxels and normalized by eight.
+-Depth supervision balances class errors across layers two units thick
+-within the foreground and an eight-unit surrounding region. On MSD,
+-these units are millimetres; its verified isotropic spacing of
+-$1\,\mathrm{mm}$ makes them numerically equal to voxel units. ADNI and
+-GeoFWI3D use voxel units and orient the reference plane using the
+-image grid rather than an anatomical direction. The plane passes
+-through the foreground centre and contains its main axis, following
+-Chapter~\ref{sec:spatial-constraints}. Matching these numerical widths
+-does not establish equal physical distances across datasets.
+-
+-For GeoFWI3D, source axis 0 supplies the plane's reference direction;
+-another grid axis is used if its projection is too small. UNETR's
+-coordinate mapping is restored after augmentation before computing
+-the depth weights. This annotation-derived coordinate is not a
+-measurement of geological age or a guaranteed vertical ordering of
+-layers. Numerical distance and boundary conventions are given in
+-Appendix~\ref{sec:sdf-construction-details}.
+-% Geo depth settings retained from the verified protocol: projection norm
+-% below 0.1 selects the least-parallel source axis, with axis-index tie break;
+-% sparse-stratum threshold 64 voxels. No inference of physical spacing.
+-
+-\subsubsection{Calibration and Activation}
+-\label{sec:calibration-methods}
+-
+-An auxiliary loss can dominate training simply because its numerical
+-scale differs from the baseline. Calibration chooses its coefficient
+-by comparing their gradients on the support examples, without changing
+-the network during this measurement. The resulting coefficients remain
+-fixed during training. All ten medical support crops, or all 19
+-geological support scenes, contribute to calibration.
+-
+-The conventional models first train with the baseline alone for nine
+-updates in nnU-Net or 50 in the other architectures. Selected terms are
+-then calibrated in order: bands, edges, signed distance and depth.
+-Each is compared with the baseline and any preceding terms, so its
+-coefficient can change between combinations. Targets for the typical
+-and unusually large gradient contributions control the strength of
+-supervision. Their values differ by model and dataset; the geological
+-nnU-Net and UNETR settings followed exploratory comparisons.
+-Appendix~\ref{sec:detailed-calibration} gives the equations and settings.
+-
+-After calibration, auxiliary contributions increase gradually to full
+-strength. Signed distance either enters with the other terms or starts
+-later, following Table~\ref{tab:sdf-activation-policies}. Combinations
+-containing both signed distance and depth use the later start. These
+-policies were developed from earlier MSD validation experiments and
+-retained for the reported campaigns. The comparisons therefore assess
+-complete calibrated objectives, including their activation schedules.
++The additional losses need appropriate weights: a term should not
++dominate training simply because its numerical values are larger.
++Calibration sets those weights using the training examples, and the
++constraints are then introduced gradually. The detailed weighting rules
++and activation schedules are given in
++Appendix~\ref{sec:detailed-calibration}.
++
++The training configurations differ between architectures, including
++their baseline losses and the task-specific adjustments made to
++geological UNETR. These choices remain fixed within each
++baseline/constrained comparison. Cross-model scores therefore compare
++complete training configurations. The loss settings, spatial conventions
++and model-specific adjustments are recorded in
++Appendix~\ref{sec:technical-details}.
+ 
+ \subsubsection{Resource Accounting and Evaluation}
+ 
+@@ -1978,32 +1861,14 @@
+ allowances. The comparison matches the specified arithmetic work,
+ not elapsed time or end-to-end computation, and does not imply that
+ different architectures are equally close to convergence.
+-Figure~\ref{fig:flop-budget-example} illustrates these distinctions.
+-
+-\begin{figure}[htbp]
+-\centering
+-% Generator: figures/source/explanatory-concepts.py
+-\includegraphics[width=\linewidth]{figures/compiled/flop-budget-example.pdf}
+-\caption{Computation budgets in the comparisons from scratch.
+-(a) Each block bounded by white separators represents one complete
+-optimizer update. A more expensive update permits fewer steps under
+-the same ceiling; auxiliary computation also consumes that allowance.
+-Costs and update counts here are illustrative, not experimental
+-measurements. (b) Medical comparisons report calibration separately
+-from their optimization ceiling. The geological ceiling includes both
+-calibration and optimization. The outlined containers indicate
+-accounting scope, not relative measured costs or equal budgets across
+-datasets.}
+-\label{fig:flop-budget-example}
+-\end{figure}
+-\FloatBarrier
++Appendix~\ref{sec:detailed-resource-accounting} illustrates the accounting
++scope and gives the exact counting rules.
+ 
+ Each of the three conventional studies contributes all 504
+ final-budget runs. Reporting the highest-mean objective afterwards
+ is a descriptive comparison, separate from checkpoint selection.
+-Appendix~\ref{sec:detailed-resource-accounting} gives the exact ceilings
+-and counting conventions. Table~\ref{tab:cap-training-exposure} shows
+-the resulting numbers of updates and passes through the support data.
++Table~\ref{tab:cap-training-exposure} in the appendix records the resulting
++numbers of updates and passes through the support data.
+ 
+ \subsection{Adapting Pretrained Models}
+ 
+@@ -2052,8 +1917,8 @@
+ into a shorter decay. Bands are calibrated at initialization; other selected
+ terms are calibrated after five prefix updates, during which their weights
+ are zero. Bands and edges use the salt mask, with two-step, zero-padded
+-morphology retaining crop-face support. SDF uses one foreground field on the
+-unit voxel grid. Depth weights use source-array geometry, with no anatomical
++morphology retaining crop-face support. The signed-distance field (SDF)
++is computed for salt on the unit voxel grid. Depth weights use source-array geometry, with no anatomical
+ orientation assumption. These choices distinguish this adaptation protocol
+ from the conventional geological recipes.
+ 
+@@ -2801,6 +2666,12 @@
+ \subsection{Distance Fields and Observation Geometry}
+ \label{sec:sdf-construction-details}
+ 
++In the conventional comparisons, bands and edges supervise the combined
++anterior/posterior foreground on MSD, hippocampus on ADNI and salt on
++GeoFWI3D. They use two-step morphology with six face-sharing neighbours.
++Signed-distance fields are classwise over foreground classes; depth
++supervision retains the original reference classes.
++
+ For a nonempty, non-full class mask $M$, let $d(v,U)$ be the Euclidean
+ distance from voxel centre $v$ to the nearest centre in $U$. The field
+ used in the implementation is
+@@ -2841,6 +2712,21 @@
+ normal of norm below 0.1 are rejected. ADNI's placeholder identity
+ affines establish neither anatomical orientation nor physical spacing;
+ its construction uses source-array coordinates in voxel units.
++Depth layers are two units thick within an eight-unit surrounding region:
++millimetres on MSD and source-array voxels on ADNI and GeoFWI3D. MSD's
++verified isotropic 1 mm spacing makes the two measures numerically equal
++there; matching numerical widths does not imply equal physical distances
++across datasets.
++
++For GeoFWI3D, source axis 0 supplies the plane's reference direction.
++If its projection orthogonal to the foreground's principal axis has norm
++below 0.1, the least-parallel grid axis is used, with axis-index tie
++breaking. The plane passes through the foreground centre and contains
++its principal axis. UNETR's source-coordinate mapping is restored after
++augmentation before constructing depth weights. Strata with fewer than
++64 voxels receive reduced total weight as defined in
++Section~\ref{sec:depth-constraints}. This coordinate does not measure
++geological age or guarantee vertical stratigraphic ordering.
+ 
+ \paragraph{Geological crop faces.}\label{sec:geo-boundaries}
+ For axis lengths $N_{i,k}$, define
+@@ -2850,6 +2736,9 @@
+ \end{equation}
+ The final UNETR recipe intersects both bands with $R_i^{(2)}$;
+ nnU-Net, SwinUNETR and the compact U-Net retain the zero-padded bands.
++This exclusion avoids treating a salt body's continuation beyond the
++observed cube as a salt/background interface. The full input and
++prediction grid remain available to the baseline loss.
+ Band losses average the two stabilized side means and require both
+ sides to be nonempty. Edge pairs require both endpoints in the retained
+ band support; an exact pair mean is followed by a valid-case mean.
+@@ -2907,7 +2796,23 @@
+ per optimizer update.
+ 
+ \subsection{Calibration and Activation Schedules}
+-\label{sec:detailed-calibration}
++\label{sec:detailed-calibration}\label{sec:calibration-methods}
++
++The objective inventory in Table~\ref{tab:constraint-combinations} follows
++preliminary MSD screening. Edge alone did not establish a consistent
++incremental benefit over the baseline, nor edge plus signed distance
++over signed distance alone. Those two configurations were omitted from
++the subsequent replications. This screening does not establish their
++ineffectiveness across other datasets or training conditions.
++% EXCLUSION EVIDENCE: reports/compute_matched_constraints_20pct_20261004/
++% summary.json (U-Net, MSD fold 0 / seed 0): E 41.33 vs baseline 42.14;
++% E+S 57.25 vs S 61.15, although E+S exceeds baseline. The longer pilot in
++% reports/compute_matched_constraints_682338/README.md records only a
++% +0.055 pp validation-selected edge gain and a slightly lower final score.
++% These archives do not establish ineffectiveness across all datasets/seeds.
++% Pilot records are preserved; omitted configurations were not part of the
++% later fourteen-objective replication inventory.
++
+ 
+ Conventional models calibrate gradients with respect to detached
+ float32 primary logits $z_i$, with $m_i$ entries. For case $i$, define
+@@ -2931,7 +2836,8 @@
+ positive ratios. Adding vectors before measuring RMS retains their
+ directional interactions; adding norms would change the calibration.
+ Depth is calibrated against preceding terms at full strength even when
+-SDF activates later.
++SDF activates later. The resulting coefficients remain fixed during the
++run, but can differ between objective combinations.
+ 
+ MSD and ADNI use all ten support cases after a baseline prefix of nine
+ updates for nnU-Net or 50 for the other models. Parameters, stored
+@@ -2957,6 +2863,27 @@
+ \label{sec:detailed-resource-accounting}\label{sec:geological-budget-details}
+ \label{sec:implementation-tables}\label{sec:conventional-implementation}
+ 
++Figure~\ref{fig:flop-budget-example} illustrates why a shared ceiling
++permits different numbers of updates and distinguishes the two
++calibration-accounting conventions.
++
++\begin{figure}[htbp]
++\centering
++% Generator: figures/source/explanatory-concepts.py
++\includegraphics[width=\linewidth]{figures/compiled/flop-budget-example.pdf}
++\caption{Computation budgets in the comparisons from scratch.
++(a) Each block bounded by white separators represents one complete
++optimizer update. A more expensive update permits fewer steps under
++the same ceiling; auxiliary computation also consumes that allowance.
++Costs and update counts here are illustrative, not experimental
++measurements. (b) Medical comparisons report calibration separately
++from their optimization ceiling. The geological ceiling includes both
++calibration and optimization. The outlined containers indicate
++accounting scope, not relative measured costs or equal budgets across
++datasets.}
++\label{fig:flop-budget-example}
++\end{figure}
++
+ The medical ceiling is 90 times the measured nnU-Net baseline update
+ cost of $355{,}293{,}896{,}301$ FLOPs:
+ \begin{equation}
+@@ -2996,6 +2923,37 @@
+ there is no early stopping or validation-best checkpoint substitution.
+ With batch size one, completed epochs equal $\lfloor U/N\rfloor$
+ for $U$ updates and $N$ training cases; calibration does not add epochs.
++
++All conventional models start from random initialization and process one
++volume per update, on $64^3$ grids for MSD and ADNI and $96^3$ for GeoFWI3D.
++Output heads have three classes on MSD and two on ADNI and GeoFWI3D.
++Table~\ref{tab:capped-baseline-losses} records the medical training losses.
++SwinUNETR, UNETR and the compact U-Net use Dice implementations from the
++Medical Open Network for Artificial Intelligence (MONAI) library.
++GeoFWI3D retains these loss choices except
++for UNETR, which uses foreground Dice plus cross-entropy, with squared
++prediction terms in the Dice denominator.
++
++\begin{table}[htbp]
++\centering
++\small
++\begin{tabular}{P{4.3cm}P{3.2cm}P{6.0cm}}
++\hline
++Model & Baseline objective & Training Dice classes and supervision \\
++\hline
++SwinUNETR, UNETR and 3D U-Net
++& Soft Dice
++& All dataset classes, including background; final output. \\[0.5em]
++nnU-Net
++& Soft Dice plus cross-entropy
++& Foreground classes in Dice; all classes in cross-entropy;
++  multiple output resolutions. \\
++\hline
++\end{tabular}
++\caption{Baseline losses in the capped MSD and ADNI comparisons. The class set
++listed for Dice concerns training, not the selection of evaluation metrics.}
++\label{tab:capped-baseline-losses}
++\end{table}
+ 
+ The compact MONAI BasicUNet uses encoder widths $16,16,32,64,128$
+ and final decoder width 16, with pooling, transposed convolutions and
+@@ -3006,14 +2964,28 @@
+ attention heads and $16^3$ patches (64 tokens per $64^3$ medical crop),
+ with a residual convolutional decoder of base width 16. SwinUNETR
+ uses a hierarchical shifted-window encoder and convolutional decoder.
+-Constraints apply only to the primary output; nnU-Net's other supervised
+-resolutions keep their baseline losses.
++Constraints apply only to the primary, full-resolution output.
++nnU-Net's other supervised resolutions keep their baseline losses, with
++reference labels resampled to each grid.
++
++Geological UNETR uses dropout 0.1 and initial learning rate
++$6\times10^{-4}$. Its final recipe adds right-angle rotations and
++reflections in the horizontal plane, jointly applied to images and
++labels without interpolation and preserving the depth axis. These
++settings were developed after the initial recipe struggled within the
++budget. The same augmentation and model settings apply to its baseline
++and constrained variants. Its two-voxel band/edge frame exclusion is
++specified in Section~\ref{sec:geo-boundaries}; the other geological
++models retain their original crop-face convention.
++Section~\ref{sec:geo-development} records the earlier development check.
+ 
+ nnU-Net uses polynomial learning-rate decay with exponent 0.9 and no
+ warmup. AdamW models warm up over 5\% of the fixed horizon, then decay
+ cosinusoidally toward 1\% of the initial rate. Parameters and optimizer
+ states use float32, eligible CUDA operations use bfloat16 autocast,
+-and constraint calculations retain float32.
++and constraint calculations retain float32. Each model keeps the same
++learning-rate trajectory across objectives; fewer affordable updates
++do not shorten its original schedule horizon.
+ 
+ \begin{table}[htbp]
+ \centering\small\setstretch{1.08}

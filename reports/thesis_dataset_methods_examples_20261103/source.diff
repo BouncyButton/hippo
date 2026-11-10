@@ -1,0 +1,165 @@
+--- before.tex
++++ thesis-revision.tex
+@@ -206,8 +206,8 @@
+ hippocampus from background in separate left and right crops, smaller image
+ volumes centred on each hippocampus \cite{adniStudy}. SAM3 is adapted to the
+ geological task and MedSAM3 to the two medical tasks.
+-Figure~\ref{fig:dataset-examples} illustrates the images and masks used in
+-these three settings.
++Chapter~\ref{sec:methodology} introduces each dataset with examples of its
++images and reference annotations.
+ 
+ The contribution is a common LTN/logLTN formulation of these four objectives
+ and an assessment of when they improve segmentation. The formulation builds
+@@ -220,25 +220,6 @@
+ anatomical constraints. Figure~\ref{fig:thesis-overview} summarizes the
+ investigation; the experimental protocols are given in
+ Chapter~\ref{sec:methodology}.
+-
+-\begin{figure}[p]
+-\centering
+-\setstretch{1.05}
+-% Cached vector figure; editable source: figures/source/dataset-examples.tikz
+-\includegraphics{figures/compiled/dataset-examples.pdf}
+-\caption{Example inputs and reference annotations from the three local
+-dataset preparations. Foreground denotes the labelled target structures;
+-background is everything else. Each column shows the first training case
+-when identifiers are sorted and the slice with the largest foreground area perpendicular
+-to its first stored axis (ties use the lowest index). The labels retain
+-their native voxel grid. Reflectivity is displayed over $[-1,1]$; MRI
+-intensities are clipped to each volume's first and ninety-ninth percentiles.
+-Grayscale uses 32 levels for display only. Geological depth increases
+-downward. Panels preserve voxel aspect ratio and are scaled independently;
+-they do not share a physical scale. These are reference masks, not model
+-predictions.}
+-\label{fig:dataset-examples}
+-\end{figure}
+ 
+ \begin{figure}[htbp]
+ \centering
+@@ -1568,10 +1549,16 @@
+ annotation budget in crops. The available identifiers do not establish
+ how those crops map to participants. ADNI retains subject identifiers
+ and allows subject grouping to be checked explicitly.
+-Table~\ref{tab:dataset-task-overview} and
+-Figure~\ref{fig:dataset-examples} show the input types and label
+-vocabularies. Only MSD includes an internal anterior/posterior division.
++Table~\ref{tab:dataset-task-overview} summarizes the input types and label
++vocabularies. Each dataset section below illustrates these with an image,
++its reference mask and an overlay of the two. The figures show slices
++through the native three-dimensional volumes, before model-specific
++padding or cropping. Only MSD includes an internal anterior/posterior division.
+ The experiments evaluate segmentation, with no downstream diagnostic task.
++Within the chosen viewing direction, each example shows the slice with
++the largest labelled area. The colours are transparent in the overlays
++so that the underlying image remains visible. Image and label panels use
++the same view and preserve the proportions of the stored grid.
+ 
+ \begin{table}[htbp]
+ \centering
+@@ -1614,7 +1601,26 @@
+ a delineation task conditional on salt being present. Entirely
+ salt-free scenes are outside its evaluation population.
+ 
+-Synthetic reflectivity is the model input. Each volume is divided by
++Each example pairs a reflectivity volume with a binary annotation that
++identifies salt. Figure~\ref{fig:geo-data-examples} shows one cross-section:
++the image contains the measurements available to the model, and the blue
++region marks the salt body it is trained to identify.
++
++\begin{figure}[htbp]
++\centering
++% Native data; generator: figures/source/dataset-methods-examples.py.
++% Provenance: reports/thesis_dataset_methods_examples_20261103/provenance.json.
++\includegraphics[width=0.98\linewidth]{figures/compiled/geo-data-examples.pdf}
++\caption{One GeoFWI3D example: reflectivity image, reference salt mask and
++their overlay on the same slice. Blue denotes salt; white in the mask
++denotes background. The slice is taken from a $96\times96\times96$
++volume, with geological depth increasing downward. Reflectivity is
++displayed over $[-1,1]$. The image illustrates the input and training
++annotation, not a model prediction.}
++\label{fig:geo-data-examples}
++\end{figure}
++
++For preprocessing, each reflectivity volume is divided by
+ the 99.5th percentile of its absolute intensities and clipped to
+ $[-1,1]$, using only image values. Velocity and relative geological time (RGT), a coordinate describing
+ the ordering of geological layers, are used to build the annotation. Inspection showed that zero
+@@ -1743,6 +1749,25 @@
+ 
+ The MSD collection contains 263 labelled MRI crops with background,
+ anterior and posterior hippocampus classes \cite{simpson2019dataset}.
++Figure~\ref{fig:msd-data-examples} shows one crop and its annotation.
++Together, the blue and orange regions form the hippocampus; their shared
++interface is the internal division that the model must recover in addition
++to the outer boundary.
++
++\begin{figure}[htbp]
++\centering
++% Native data; generator: figures/source/dataset-methods-examples.py.
++% Provenance: reports/thesis_dataset_methods_examples_20261103/provenance.json.
++\includegraphics[width=0.98\linewidth]{figures/compiled/msd-data-examples.pdf}
++\caption{One MSD example: an MRI slice, its reference labels and their
++overlay. Blue marks the anterior hippocampus and orange the posterior
++hippocampus; white in the mask denotes background. All three panels show
++the same slice of the native $35\times51\times35$ crop. MRI contrast is
++adjusted for display using the volume's first and ninety-ninth intensity
++percentiles. The coloured regions are reference annotations, not model
++predictions.}
++\label{fig:msd-data-examples}
++\end{figure}
+ 
+ For the capped experiments, each image is z-score normalized: the mean of
+ its nonzero intensities is subtracted and the result divided by their
+@@ -1805,6 +1830,22 @@
+ the same foreground class, without the anterior/posterior subdivision
+ of MSD.
+ 
++% Native data; generator: figures/source/dataset-methods-examples.py.
++% Provenance: reports/thesis_dataset_methods_examples_20261103/provenance.json.
++\begin{figure}[htbp]
++\centering
++\includegraphics[width=0.98\linewidth]{figures/compiled/adni-data-examples.pdf}
++\caption{Paired ADNI examples from one subject: the left and right
++hippocampal crops, each shown as an MRI slice, a reference mask and an
++annotation overlay. Blue denotes hippocampus on both sides; white in the
++masks denotes background. Each row is a slice through a separate
++$32\times48\times40$ volume. MRI contrast is adjusted separately for each
++crop using its first and ninety-ninth intensity percentiles. The panels
++follow the stored grids; no anatomical plane or physical scale is inferred
++from the exported coordinate metadata. These are reference annotations,
++not model predictions.}
++\label{fig:adni-data-examples}
++\end{figure}
+ 
+ Crops are centred on the reference-mask bounding box, with identical
+ indices applied to the image. Their evaluation therefore assumes prior
+@@ -1833,27 +1874,7 @@
+ assuming identical physical spacing or anatomical orientation across the
+ datasets.
+ 
+-% ADNI example panels: real images and annotations, not model predictions.
+-% DATA FIGURE PROVENANCE: {"dataset": "Dataset103_ADNI", "image": "datasets/Dataset103_ADNI/imagesTr/hippocampus_adni_10007_L_0000.nii.gz", "labels": "datasets/Dataset103_ADNI/labelsTr/hippocampus_adni_10007_L.nii.gz", "shape": [32, 48, 40], "plane_axis": 0, "slice_index_zero_based": 15, "selection": "maximum foreground area; lowest index breaks ties", "display_gray_limits": [75.62541742107685, 787.0265820841897], "display_gray_levels": 32, "display_transform": "transpose axes 1/2, then flip displayed rows (axis 2)", "overlay_alpha": 0.45, "labels_in_slice": [0, 1], "image_sha256": "b1479c7bd284e5d4013dd970ff5330819c49732d8f3b8b27c5d4957bde68b799", "labels_sha256": "03fbe773f988e7541ced3681d1f76719745059b8d404b9c9de76c74401def8b3"}
+-% DATA FIGURE PROVENANCE: {"dataset": "Dataset103_ADNI", "image": "datasets/Dataset103_ADNI/imagesTr/hippocampus_adni_10007_R_0000.nii.gz", "labels": "datasets/Dataset103_ADNI/labelsTr/hippocampus_adni_10007_R.nii.gz", "shape": [32, 48, 40], "plane_axis": 0, "slice_index_zero_based": 12, "selection": "maximum foreground area; lowest index breaks ties", "display_gray_limits": [110.08756386855754, 793.6879399794946], "display_gray_levels": 32, "display_transform": "transpose axes 1/2, then flip displayed rows (axis 2)", "overlay_alpha": 0.45, "labels_in_slice": [0, 1], "image_sha256": "a71a51f30abb2f9a7107bb30baa3e2fc1183061eedda62f3fce89c4ade6037c3", "labels_sha256": "3de1fd97b94f462673fe46ff4199b863d869224ee9e9c1664d147c7a1a8c3f62"}
+-\begin{figure}[htbp]
+-\centering
+-\setstretch{1.05}
+-% Cached vector figure; editable source: figures/source/adni-data-examples.tikz
+-\includegraphics{figures/compiled/adni-data-examples.pdf}
+-\caption{ADNI examples from the left and right crops of the first paired
+-image identifier in the local preparation. Each row shows the MRI,
+-binary reference mask and their overlay at the slice with the largest
+-foreground area perpendicular to the first stored axis (ties use the
+-lowest index; indices are zero-based). Intensities are clipped to each
+-crop's first and ninety-ninth percentiles and displayed with 32 grey
+-levels; the overlay uses 45\% blue opacity. The native $48\times40$
+-pixel grid is retained without interpolation. Both rows use the same
+-array-display convention; no anatomical plane or physical scale is
+-inferred from the exported identity affines. These are dataset
+-annotations, not segmentation results.}
+-\label{fig:adni-data-examples}
+-\end{figure}
++
+ 
+ 
+ \subsection{Four-Model Comparisons under a FLOP Ceiling}

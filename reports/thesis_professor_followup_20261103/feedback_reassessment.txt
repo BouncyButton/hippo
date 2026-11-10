@@ -1,0 +1,129 @@
+PROFESSOR-FEEDBACK REASSESSMENT — 3 NOVEMBER 2026
+
+Scope: source revision and re-review against both annotated PDFs and the two email screenshots.
+Edited source: /Users/filippofocaccia/Desktop/hippo/Template_tesi/thesis-revision.tex
+Reference PDFs: review1-luca_tesi_magistrale_draft.pdf; tesi_magistrale_draft_AT.pdf (Downloads).
+The 68 PDF annotation objects include text comments, highlights, strikeouts and individual ink strokes. They are not 68 separate revision requests.
+Pages below refer to the ORIGINAL reviewed PDFs. Current locations are source lines, not unverified new PDF page numbers.
+
+ASSESSMENT
+The remaining editorial changes have been applied. The introduction now keeps general method, learning settings and dataset discussion in a readable progression. The contribution is framed as a shared formulation and empirical investigation, without claiming that an equivalent logical notation alone changes optimization.
+Worked examples now explain a truth degree, its negative log penalty and the two-sided boundary loss. Morphology is explicitly fixed with respect to model parameters; the prediction path remains differentiable. The signed-distance convention and detailed architecture/optimizer settings are retained in Appendix A.
+The main adaptation section is approximately 831 versus 2,006 lexical words under the same source-counting procedure (about 59% shorter; figures excluded). It now gives shared principles once and preserves the important dataset differences, support overlap, schedules and matched baseline groups. The appendix was also consolidated instead of duplicating all the former prose.
+Future Research Directions now prioritizes independent evaluation, controlled ablations, qualitative predictions, anatomical validation and adaptation questions. Repository preparation-script descriptions have been removed.
+The main Results chapter remains focused: three figures, zero tables. The 31 complete data-table blocks and Results text are byte-for-byte unchanged in this turn. Detailed interpretation is not repeated in Conclusions.
+
+ANNOTATION-BY-ANNOTATION GROUPS
+
+Objects 1,2,3,4,5,6,7,8,9,10,53,54,55 — Luca p.1, Andrea p.1
+Abstract: explain segmentation, medical relevance, LTN and the two learning settings; omit replication/protocol detail and unclear audit claim.
+Addressed in retained submission abstract; compiled abstract disabled.
+Current source line 76.
+
+Objects 11,12,13,14,15,16,17,19,56,57 — Luca p.4, Andrea p.4
+Introduction: context, mask definition, two practical limitations, coherent progression from the general method to learning settings and then datasets; illustrative figure.
+Addressed. Learning settings now precede the contiguous dataset discussion; image/mask examples and the two limitations remain.
+Current source line 112.
+
+Objects 18 — Luca p.4
+Explain LTN before logLTN and distinguish their roles.
+Addressed with plain-language introduction and numerical example in Section 2.3; no claim that notation alone improves an identical loss.
+Current source line 153.
+
+Objects 20,21,22 — Luca p.5
+Intro: model citations, remove protocol inventory and repeated contributions.
+Addressed. One focused contribution paragraph; numerical schedules in Methods and Appendix A.
+Current source line 208.
+
+Objects 23 — Luca p.5
+Move convergence caveat to limitations.
+Addressed in Results limitations; conclusions do not repeat the detailed analysis.
+Current source line 4465.
+
+Objects 24,25 — Luca p.6
+Overview: class counts; terminology of constraints/spatial supervision; handwritten question about development dataset.
+Class counts 2/3/2 and soft-supervision definition addressed. GeoFWI3D remains the first nonmedical application; it is not relabelled as a formal development-only split on the basis of a question mark.
+Current source line 1190.
+
+Objects 26,27,28,29,30,58,59,60,61 — Luca p.8, Andrea p.8
+Background: define image/task/case/class symbols, explain varying native dimensions and softmax, use loss notation with inputs, remove misplaced assembly aside and chapter roadmap.
+Addressed in Section 2.1. Existing corrections retained and checked.
+Current source line 1209.
+
+Objects 31 — Luca p.9
+Nine-pixel Dice illustration.
+Addressed by the existing worked diagram.
+Current source line 1328.
+
+Objects 32,33,34,62 — Luca p.11, Andrea p.10
+LTN: define grounding, distinguish truth from probability, relocate band-specific example and simplify direct-loss implementation explanation.
+Addressed. Generic probability-to-log-penalty example stays in Background; boundary worked example is in Section 3.2.
+Current source line 1525.
+
+Objects 35 — Luca p.16 (ink/highlight)
+Constraint diagram: clarify the dark outline versus coloured neighbour segments.
+Addressed by the existing caption: outline marks annotation boundary; coloured segments join voxel centres.
+Current source line 2501.
+
+Objects 36,37,38,39,40 — Luca p.17 (ink/highlight)
+Handwritten morphology drawing request and associated strokes.
+Addressed by the existing three-dimensional morphology figure. Individual strokes are not counted as separate requests.
+Current source line 2519.
+
+Objects 41,42,43,44,45,46,47,48,49,50,51 — Luca p.17
+Band statements: consistent symbols, link Phi to actual loss, explain epsilon and differentiability.
+Addressed with explicit grounding/mean relationship, two numerical cases, count factor, separate validity rule, and explanation that backpropagation acts through predictions rather than morphology.
+Current source line 2697.
+
+Objects 52,64 — Luca p.19
+Edge predicate and opposite classifications across a boundary; Andrea highlight has no written instruction.
+Annotated cross-boundary sign explained without dropping same-side pairs present in the implementation. Transition predicate and suppressed group subscript are now explicitly defined. The meaning of Andrea empty highlight is not assumed beyond clarifying its marked predicate.
+Current source line 2734.
+
+Objects 63 — Andrea p.12
+Italicize et al. in prose.
+Addressed; bibliography formatting retained separately.
+Current source line 1600.
+
+Objects 65 — Andrea p.25
+Explain why seed numbers differ among studies.
+Addressed in Design and Units of Comparison. Recorded streams, matched comparisons and exploratory selection retained; no scientific disclosure removed.
+Current source line 3094.
+
+Objects 66 — Andrea p.29
+Why compare four architectures and how do they differ?
+Addressed in Section 2.2 and reinforced in Methods; layer widths and optimizer settings moved to Appendix A.
+Current source line 1380.
+
+Objects 67 — Andrea p.52
+Missing paired baseline/constrained prediction panels.
+OPEN: substantive visual-evidence gap. No verified final matched pair recovered in the inspected local archives. Placeholder removal alone does not resolve this comment.
+Current source line 4458.
+
+Objects 68 — Andrea p.70
+Plural correction to future-work heading.
+Addressed: Future Research Directions; priorities rewritten around specific follow-up questions.
+Current source line 4511.
+
+EMAIL-LEVEL REQUESTS
+- Reader-first, less technical-report prose: addressed by the revised progression, examples, shared adaptation explanation and concise future directions. The mathematical contribution still requires notation; technical depth is concentrated there and in Appendix A. This is an editorial assessment, not a claim that the professors have approved the new voice.
+- Acronyms: primary terms expanded at first use; this pass repaired the MONAI definition after relocating implementation details and retained the full MNI dataset name. Repeated expansion in every chapter was not required by Andrea, who allowed either policy.
+- Fewer subdivisions: main adaptation uses one subsection and three dataset paragraphs. New reproducibility material belongs in the appendix; the short boundary-setting note is a paragraph within the existing stable-evaluation subsection.
+- Key results as charts, complete tables in appendix: maintained. The two critical main results comparisons and metric interpretation remain in three figures, with no main Results tables.
+- Abstract: excluded from the compiled thesis by the existing switch, with a revised copy retained in the source and submission_abstract.txt. Andrea qualified the submission-format advice with “if I remember correctly”; no independent claim about the university rule is made.
+
+WHAT IS ACTUALLY STILL OPEN
+1. Paired prediction panels (Andrea, original p.52): one substantive evidence/presentation gap remains. Ninety-five local archives were inspected. An interrupted evaluation contains one uint8 96×96×96 prediction; two recovery archives contain checkpoints. No verified completed baseline/constrained pair from the final reported campaigns was recovered. Earlier pilots, pretrained initialization weights and curves are not substitutes. Closing this requires attributable final outputs for the same case/protocol or a targeted matched rerun, followed by a stated case-selection rule. No new training was launched and no panels were invented.
+2. Current visual pagination check: the built-in compiler succeeded, but it does not export the refreshed PDF. The existing on-disk PDF is from 2 November. The computer-use tool explicitly blocks access to the Codex app, so the new page breaks and figure placement could not be visually inspected. No separate PDF was compiled and no tab was opened. A fresh editor PDF is needed to close this verification step.
+3. Submission administration: confirm whether the programme wants the abstract solely in the submission form. The source is already configured that way, following Andrea’s advice; the text is preserved if the rule differs.
+Independent confirmatory runs, surface metrics, unweighted depth controls and new datasets are scientific follow-up work, now explicitly prioritized. They are not missing cells in the completed fourteen-objective result inventories and were not invented as a prerequisite for responding to the editorial comments.
+
+SELF-REVIEW AND VERIFICATION
+- Rechecked each textual comment and the relevant handwritten pages, including the empty Andrea highlight on Transition; no unwritten instruction was claimed for that highlight.
+- Repaired a stale geological-development cross-reference, defined the abbreviated edge-pair domain, clarified the Transition predicate, moved MONAI expansion back to its first use, and shortened the adaptation workflow caption.
+- No missing references, duplicate labels, missing citation keys, or mismatched LaTeX environments in static validation.
+- All 31 data-table blocks and the Results chapter are unchanged; three Results figures and zero Results tables remain.
+- Final built-in compilation status is recorded in verification.json. Visual verification remains qualified as above.
+
+Supporting files: annotation_reassessment.json (all 68 objects); verification.json; prediction_recovery.json; source_before.tex; revise.py; self_review.py.
+No professor approval or complete resolution of the qualitative-evidence comment is claimed.

@@ -1,0 +1,169 @@
+--- before.tex
++++ thesis-revision.tex
+@@ -825,7 +825,9 @@
+ whole-hippocampus probability unchanged. The experiments use both kinds
+ of grouping, as specified in Chapter~\ref{sec:methodology}.
+ Figure~\ref{fig:constraint-domains} illustrates the four forms of
+-spatial supervision.
++spatial supervision. Examples constructed from actual dataset volumes are
++shown in Figure~\ref{fig:dataset-constraint-3d} and
++Appendix~\ref{sec:dataset-constraint-examples}.
+ 
+ \begin{figure}[htbp]
+ \centering
+@@ -1102,9 +1104,10 @@
+ 
+ When membership probabilities approach zero or one, they become less
+ sensitive to changes in their logits. This reduces the edge loss's logit
+-gradient, as derived in Appendix~\ref{sec:technical-details}. The selected
+-graph also covers only a local band region. Its consistency does not
+-establish global connectivity or correct distant predictions. As with union
++gradient, as derived in Appendix~\ref{sec:technical-details}. The edge loss
++compares neighbouring predictions only within the selected boundary bands.
++It therefore does not directly penalize errors outside those bands or
++guarantee that the complete predicted region is connected. As with union
+ bands, anterior/posterior exchanges preserving foreground membership remain
+ outside the direct supervision of the main MSD edge term.
+ 
+@@ -1334,6 +1337,37 @@
+ full-resolution prediction grid, with one volume per update. Further
+ coordinate and centroid details are provided in
+ Appendix~\ref{sec:technical-details}.
++
++The three-dimensional examples in Figure~\ref{fig:dataset-constraint-3d}
++show how these constructions follow real annotations. They use a hippocampal
++volume from MSD, one from the Alzheimer's Disease Neuroimaging Initiative
++(ADNI), and a salt volume from GeoFWI3D. In the distance views, the cutaway
++exposes the negative field inside the selected class and the positive field
++outside it. An equally large class-probability error receives a larger
++penalty where the distance magnitude is greater, up to the clipping limit.
++In the depth views, each displayed layer is a three-dimensional part of the
++foreground and its surrounding region. Darker layers assign more weight to
++each voxel; this need not mean that the entire layer receives more weight.
++The accompanying layer charts in
++Appendix~\ref{sec:dataset-constraint-examples} make that distinction explicit.
++
++\begin{figure}[p]
++\centering
++% Actual native annotations; generator: figures/source/dataset-constraint-examples.py
++% Provenance: reports/thesis_dataset_constraint_examples_20261103/provenance.json
++\includegraphics[width=\linewidth]{figures/compiled/dataset-constraint-overview.pdf}
++\caption{Signed-distance and depth supervision on actual three-dimensional
++annotations. Left: a cutaway through the class and its surrounding distance
++field; the MSD example shows the anterior class. Right: five sampled depth
++layers, separated for visibility and coloured by voxel weight relative to
++the mean positive weight in the full volume (logarithmic scale). All layers
++enter the weight calculation. These native-grid illustrations show
++annotation-derived supervision. Appendix~\ref{sec:dataset-constraint-examples}
++provides the intact masks, band and edge examples, layer distributions and
++display conventions.}
++\label{fig:dataset-constraint-3d}
++\end{figure}
++\FloatBarrier
+ 
+ \subsection{Combined Objective and Experimental Scope}
+ \label{sec:constraint-combination}
+@@ -3305,6 +3339,103 @@
+ exterior background frame.
+ 
+ 
++\subsection{Spatial Supervision on Actual Dataset Volumes}
++\label{sec:dataset-constraint-examples}
++
++Figures~\ref{fig:msd-constraint-example}--\ref{fig:geofwi3d-constraint-example}
++use the same cases as the dataset illustrations: \texttt{hippocampus\_001},
++\texttt{hippocampus\_adni\_10007\_L} and \texttt{model\_0001}.
++Their native grids contain $35\times51\times35$, $32\times48\times40$
++and $96\times96\times96$ voxels, respectively. All morphology, distance
++fields, depth layers and counts are computed in three dimensions before
++rendering. The examples illustrate the definitions on unaugmented native
++grids; training applies the constraints to the grid specified by each
++recipe, which can change the available surrounding region and its weights.
++
++Panel (a) shows the intact three-dimensional annotation. Panels (b) and (c)
++show two-step, six-neighbour bands and the in-plane subset of their selected
++voxel pairs. Bands and edges use the whole foreground, including the union
++of anterior and posterior hippocampus in MSD. Blue pair segments connect
++equal foreground-membership labels; orange segments cross between foreground
++and background. The anatomical division within MSD is therefore absent from
++this pair target. The geological example retains zero-padded morphology at
++the cube faces, as in three of the four conventional model recipes. UNETR's
++frame exclusion is specified in Appendix~\ref{sec:geo-boundaries}.
++
++The band view is the source-axis-2 slice containing the most foreground
++voxels, with the lowest index breaking ties. The yellow square identifies
++the $16\times16$ area enlarged in the pair view. Its centre is placed near
++the in-plane foreground boundary closest to the slice's foreground centroid,
++away from the crop faces where possible. Pairs extending out of the displayed
++plane still enter the three-dimensional objective but are not drawn.
++
++Panel (d) renders the signed-distance field of anterior hippocampus for MSD
++and of the single foreground class for ADNI and GeoFWI3D. Distances use the
++half-voxel convention, clipping at eight voxels and division by eight. The
++rendering retains the class and exterior field values up to four voxel units;
++a quadrant is cut away to expose the interior. These display choices do not
++alter the computed field. The intact class mask in (a) provides its context.
++
++Panels (e) and (f) explain depth balancing. The bars in (e) show each layer's
++share of the surrounding region's voxels; the line shows its share of the
++loss weight. The latter is equal across layers with at least 64 voxels and
++smaller for sparser layers. Panel (f) shows five occupied layers sampled
++uniformly across the ordered layer indices, including both extremes. Each
++retains its full three-dimensional shape and is translated along the plane
++normal to separate it from its neighbours. Colours use the voxel weights
++computed from \emph{all} layers, divided by their mean over the full region;
++they do not depict prediction errors. The common colour scale is logarithmic.
++
++MSD uses its verified physical coordinate map, with two-millimetre layers
++and an eight-millimetre surrounding margin. ADNI and GeoFWI3D use two-voxel
++layers and an eight-voxel margin in source-array coordinates. The reference
++plane follows the dataset-specific construction described in
++Chapter~\ref{sec:methodology}. None of these examples requires the geological
++fallback for a nearly parallel principal axis. Volumes are rotated for
++presentation without smoothing or resampling their voxel faces; rendered
++sizes are fitted independently and do not imply a common physical scale.
++
++\begin{figure}[p]
++\centering
++\includegraphics[width=\linewidth]{figures/compiled/msd-constraint-example.pdf}
++\caption{Spatial supervision on an MSD volume. The intact annotation in
++(a) distinguishes anterior (blue) and posterior (orange) hippocampus.
++The union bands in (b) and enlarged neighbour pairs in (c) omit this
++internal division, whereas (d) shows a distance field specific to the
++anterior class. The full-volume layer distribution in (e) explains the
++weights of the sampled three-dimensional layers in (f): one sparse layer
++receives less total weight, while the remaining layers have equal shares.
++The yellow square in (b) locates the enlarged pair view.}
++\label{fig:msd-constraint-example}
++\end{figure}
++
++\begin{figure}[p]
++\centering
++\includegraphics[width=\linewidth]{figures/compiled/adni-constraint-example.pdf}
++\caption{Spatial supervision on an ADNI hippocampus volume. Panels follow
++the same arrangement as Figure~\ref{fig:msd-constraint-example}, with one
++foreground class. The three-dimensional signed-distance cutaway shows its
++interior and surrounding background. Every occupied depth layer contains
++at least 64 voxels in this example, so the layer-level loss shares in (e)
++are equal despite different voxel counts. The smaller layers therefore
++have larger weights per voxel, visible in (f).}
++\label{fig:adni-constraint-example}
++\end{figure}
++
++\begin{figure}[p]
++\centering
++\includegraphics[width=\linewidth]{figures/compiled/geofwi3d-constraint-example.pdf}
++\caption{Spatial supervision on a GeoFWI3D salt volume. The three-dimensional
++annotation in (a) and distance cutaway in (d) retain the native salt geometry.
++Bands and pairs in (b)--(c) follow its observed interfaces under zero-padded
++morphology. All occupied depth layers exceed the sparse-layer threshold,
++giving equal layer-level loss shares in (e). The separated layers in (f)
++use the same annotation-derived weighting rule as the medical examples,
++in voxel units; their ordering does not represent geological age.}
++\label{fig:geofwi3d-constraint-example}
++\end{figure}
++\FloatBarrier
++
+ \subsection{Conventional Model and Optimizer Settings}
+ \label{sec:conventional-implementation}
+ 

@@ -1,0 +1,223 @@
+{
+  "runs": 126,
+  "platforms": {
+    "Colab": 76,
+    "cluster": 50
+  },
+  "volume_records": 12726,
+  "validation_records": 12096,
+  "metadata_hashes_checked": 2252,
+  "unavailable_manifest_metadata": [],
+  "colab_archive_hashes_matched_to_cloud_receipts": 76,
+  "cluster_verified_archive_acknowledgements": 50,
+  "pairing_cells_verified": 9,
+  "all_frozen_parameter_hashes_unchanged": true,
+  "final_summary_scores_verified": true,
+  "summary_sd_note": "Recomputed SD across three seed-averaged fold means; upstream recipe_summary SD is across nine runs.",
+  "combined_recovered_runs": 1872,
+  "combined_validation_records": 125820,
+  "repeated_attempts_upper_bound": 6,
+  "gpu_counts": {
+    "NVIDIA A100-SXM4-80GB": 76,
+    "NVIDIA A100 80GB PCIe MIG 4g.40gb": 50
+  },
+  "source_identities": {
+    "bd128e499273277477f204a8d182906b669b377eae008c6d169d8ad4fe0c69cd": 126
+  },
+  "sources": {
+    "reports/sam3_geofwi_f013_s012_126_20261019/split_cluster_20261022/final_results_20261023/results.json": "a51f9bc38de74531c73a2f3c2f6505ab861e7e984069cd3fe46b9ac85c12488f",
+    "reports/sam3_geofwi_f013_s012_126_20261019/bundle/plan.json": "badc67295f0739b1a45cf290c8248b7f19a7356bdede46e3d68ecf7b58b9a9f0",
+    "reports/background_dice_archive_recovery_20261023/background_dice_runs.csv": "c622c6e52008fd25d991fb5b730d1f6266ce2aff1bdef9626b6c66a6e414c99d"
+  },
+  "issues": []
+}
+dice 69.3139 3.9964 0.0 0.0 74.9725 97.6154 83.4647 0
+dice_bands 70.7892 2.3783 1.4753 4.1599 77.0285 97.7187 84.2539 6
+dice_sdf 69.0981 4.8785 -0.2158 2.7038 75.3146 97.6197 83.3589 5
+dice_bands_sdf 69.6048 1.5397 0.2909 3.7473 76.675 97.6004 83.6026 3
+dice_bands_edge 69.4385 3.4506 0.1246 0.8369 76.1182 97.6306 83.5346 3
+dice_bands_edge_sdf 67.4605 1.2591 -1.8534 2.7909 76.1441 97.4907 82.4756 3
+dice_depth 72.2938 2.0252 2.9799 2.0488 77.5472 97.7867 85.0403 8
+dice_bands_depth 72.447 0.7013 3.1331 3.2977 77.4726 97.8199 85.1335 7
+dice_edge_depth 69.1806 2.9739 -0.1333 1.7904 76.1398 97.6098 83.3952 5
+dice_sdf_depth 69.9255 1.2918 0.6116 3.9126 76.3361 97.6434 83.7845 5
+dice_bands_edge_depth 72.7638 1.9704 3.4499 2.4275 77.4147 97.8372 85.3005 8
+dice_bands_sdf_depth 72.1662 0.8874 2.8523 3.1264 77.3962 97.7935 84.9798 7
+dice_edge_sdf_depth 69.6993 3.226 0.3854 4.1837 75.5192 97.6518 83.6755 5
+dice_bands_edge_sdf_depth 70.9533 1.4444 1.6394 2.5571 77.7933 97.7267 84.34 7
+SENSITIVITY {
+  "comparisons": 193,
+  "individual_pairs": 1737,
+  "positive_foreground": 179,
+  "positive_all_class": 179,
+  "mean_sign_changes": [],
+  "individual_sign_changes": [
+    {
+      "campaign": "GeoFWI3D_conventional",
+      "model": "basic_unet16",
+      "arm": "dice_edge_depth",
+      "fold": 0,
+      "seed": 1,
+      "foreground_dice": -0.0003290149564736389,
+      "background_dice": 0.0004869073516217126,
+      "dice_including_background": 7.894619757398136e-05
+    },
+    {
+      "campaign": "GeoFWI3D_conventional",
+      "model": "nnunet",
+      "arm": "dice_depth",
+      "fold": 0,
+      "seed": 0,
+      "foreground_dice": 1.5921232283666598e-05,
+      "background_dice": -0.0005828783008963168,
+      "dice_including_background": -0.0002834785343063251
+    },
+    {
+      "campaign": "GeoFWI3D_conventional",
+      "model": "nnunet",
+      "arm": "dice_bands_edge_depth",
+      "fold": 0,
+      "seed": 2,
+      "foreground_dice": -0.0013887734975294164,
+      "background_dice": 0.0015449803915655869,
+      "dice_including_background": 7.810344701819627e-05
+    },
+    {
+      "campaign": "GeoFWI3D_conventional",
+      "model": "swinunetr",
+      "arm": "dice_bands_edge_sdf",
+      "fold": 2,
+      "seed": 2,
+      "foreground_dice": -4.310815679486879e-05,
+      "background_dice": 0.0005735860596257636,
+      "dice_including_background": 0.0002652389514155029
+    },
+    {
+      "campaign": "GeoFWI3D_conventional",
+      "model": "unetr_vit_b16",
+      "arm": "dice_sdf",
+      "fold": 2,
+      "seed": 2,
+      "foreground_dice": -0.0003545393236592531,
+      "background_dice": 0.0006573105577970528,
+      "dice_including_background": 0.00015138561706884435
+    },
+    {
+      "campaign": "GeoFWI3D_conventional",
+      "model": "unetr_vit_b16",
+      "arm": "dice_bands_edge_sdf",
+      "fold": 2,
+      "seed": 1,
+      "foreground_dice": -0.0005795875667108374,
+      "background_dice": 0.0010530931238147412,
+      "dice_including_background": 0.00023675277855195187
+    }
+  ],
+  "selected": [
+    {
+      "campaign": "ADNI_MedSAM3",
+      "model": "MedSAM3",
+      "foreground_best": "dice_edge_sdf_depth",
+      "all_class_best": "dice_edge_sdf_depth",
+      "background_improves": true
+    },
+    {
+      "campaign": "ADNI_conventional",
+      "model": "basic_unet16",
+      "foreground_best": "dice_bands_edge_depth",
+      "all_class_best": "dice_bands_edge_depth",
+      "background_improves": true
+    },
+    {
+      "campaign": "ADNI_conventional",
+      "model": "nnunet",
+      "foreground_best": "dice_bands_sdf_depth",
+      "all_class_best": "dice_bands_sdf_depth",
+      "background_improves": true
+    },
+    {
+      "campaign": "ADNI_conventional",
+      "model": "swinunetr",
+      "foreground_best": "dice_bands_edge_depth",
+      "all_class_best": "dice_bands_edge_depth",
+      "background_improves": true
+    },
+    {
+      "campaign": "ADNI_conventional",
+      "model": "unetr_vit_b16",
+      "foreground_best": "dice_bands_edge_sdf_depth",
+      "all_class_best": "dice_bands_edge_sdf_depth",
+      "background_improves": true
+    },
+    {
+      "campaign": "GeoFWI3D_SAM3",
+      "model": "SAM3",
+      "foreground_best": "dice_bands_edge_depth",
+      "all_class_best": "dice_bands_edge_depth",
+      "background_improves": true
+    },
+    {
+      "campaign": "GeoFWI3D_conventional",
+      "model": "basic_unet16",
+      "foreground_best": "dice_bands_edge_sdf_depth",
+      "all_class_best": "dice_bands_edge_sdf_depth",
+      "background_improves": true
+    },
+    {
+      "campaign": "GeoFWI3D_conventional",
+      "model": "nnunet",
+      "foreground_best": "dice_bands_edge_sdf_depth",
+      "all_class_best": "dice_bands_edge_sdf_depth",
+      "background_improves": true
+    },
+    {
+      "campaign": "GeoFWI3D_conventional",
+      "model": "swinunetr",
+      "foreground_best": "dice_bands_edge_sdf_depth",
+      "all_class_best": "dice_bands_edge_sdf_depth",
+      "background_improves": true
+    },
+    {
+      "campaign": "GeoFWI3D_conventional",
+      "model": "unetr_vit_b16",
+      "foreground_best": "dice_bands_edge",
+      "all_class_best": "dice_bands_edge",
+      "background_improves": true
+    },
+    {
+      "campaign": "MSD_MedSAM3_extension",
+      "model": "MedSAM3",
+      "foreground_best": "bands_edge_sdf_depth",
+      "all_class_best": "bands_edge_sdf_depth",
+      "background_improves": true
+    },
+    {
+      "campaign": "MSD_conventional",
+      "model": "basic_unet16",
+      "foreground_best": "dice_bands_edge_depth",
+      "all_class_best": "dice_bands_edge_depth",
+      "background_improves": true
+    },
+    {
+      "campaign": "MSD_conventional",
+      "model": "nnunet",
+      "foreground_best": "dice_bands_sdf_depth",
+      "all_class_best": "dice_bands_sdf_depth",
+      "background_improves": true
+    },
+    {
+      "campaign": "MSD_conventional",
+      "model": "swinunetr",
+      "foreground_best": "dice_bands_edge_sdf_depth",
+      "all_class_best": "dice_bands_edge_sdf_depth",
+      "background_improves": true
+    },
+    {
+      "campaign": "MSD_conventional",
+      "model": "unetr_vit_b16",
+      "foreground_best": "dice_bands_edge_sdf",
+      "all_class_best": "dice_bands_edge_sdf",
+      "background_improves": true
+    }
+  ]
+}
