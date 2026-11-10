@@ -1,0 +1,41 @@
+{
+  "identity": {
+    "protocol": "fea19f735ed6affd90dfd2697ce300f031b322d0863108fa36b6a72d168a5e0d",
+    "initial_encoder_sha256": "54f04e4c01332254c7a5d8125270e0c22d3a2549fd637c363d6f0b930347d24b",
+    "settings": {
+      "seed": 17,
+      "steps": 300,
+      "lr": 0.0003,
+      "representation_weight": 0.1,
+      "purpose": "Correct observed background leakage during A/P swaps without relaxing audit thresholds."
+    },
+    "train": [
+      "hippocampus_093",
+      "hippocampus_097",
+      "hippocampus_197",
+      "hippocampus_287",
+      "hippocampus_311",
+      "hippocampus_314",
+      "hippocampus_353",
+      "hippocampus_361",
+      "hippocampus_373",
+      "hippocampus_390"
+    ]
+  },
+  "encoder_sha256": "e29f145fb3a1edaa8ee9621f2da8fcc86075c4be6183e08eba5f4e57e0e83b37",
+  "steps": 300,
+  "train_cases": [
+    "hippocampus_093",
+    "hippocampus_097",
+    "hippocampus_197",
+    "hippocampus_287",
+    "hippocampus_311",
+    "hippocampus_314",
+    "hippocampus_353",
+    "hippocampus_361",
+    "hippocampus_373",
+    "hippocampus_390"
+  ],
+  "validation_cases_used": [],
+  "correction_teacher": "Cross-entropy logit-gradient direction on independently generated training corruptions; not used as a Swin auxiliary loss."
+}

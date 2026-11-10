@@ -1,0 +1,487 @@
+{
+  "parent_id": "ap82_s1_winner_b25_g100",
+  "targeted_count": 20,
+  "removed_broad_refinements": 44,
+  "removed_optional_combinations_max": 32,
+  "selection_rule": {
+    "shared_swap_delta": "< 0",
+    "mean_case_shared_error_rate_delta": "< 0",
+    "delta_foreground_dice": ">= 0",
+    "delta_outer_errors": "<= 0",
+    "delta_ap_interface_chamfer_mm": "< 0",
+    "delta_ap_interface_hd95_mm": "<= 0",
+    "scope": "Mixed bands/endpoints on the frozen outer winner; same 52 development cases.",
+    "ranking": "Lowest mean paired common-tissue error-rate delta, then interface Chamfer delta, then identifier.",
+    "fallback": "No qualifying parent means no targeted A/P runs; preserve the outer sweep."
+  },
+  "eligible_ids": [
+    "ap82_s1_winner_b25_g100"
+  ],
+  "order": "Finish screening, preserve all selected outer runs in their original order, then run paired targeted A/P refinements.",
+  "comparisons": [
+    {
+      "id": "ap82_s2_winner_target_strength_low",
+      "background": "winner",
+      "spec": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.25,
+        "gradient_ratio": 0.07500000000000001
+      },
+      "changes": {
+        "strength_low": {
+          "gradient_ratio": 0.07500000000000001
+        }
+      }
+    },
+    {
+      "id": "ap82_s2_dice_target_strength_low",
+      "background": "dice",
+      "spec": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.25,
+        "gradient_ratio": 0.07500000000000001
+      },
+      "changes": {
+        "strength_low": {
+          "gradient_ratio": 0.07500000000000001
+        }
+      }
+    },
+    {
+      "id": "ap82_s2_winner_target_strength_high",
+      "background": "winner",
+      "spec": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.25,
+        "gradient_ratio": 0.125
+      },
+      "changes": {
+        "strength_high": {
+          "gradient_ratio": 0.125
+        }
+      }
+    },
+    {
+      "id": "ap82_s2_dice_target_strength_high",
+      "background": "dice",
+      "spec": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.25,
+        "gradient_ratio": 0.125
+      },
+      "changes": {
+        "strength_high": {
+          "gradient_ratio": 0.125
+        }
+      }
+    },
+    {
+      "id": "ap82_s2_winner_target_band_lower",
+      "background": "winner",
+      "spec": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.125,
+        "gradient_ratio": 0.1
+      },
+      "changes": {
+        "band_lower": {
+          "band_share": 0.125
+        }
+      }
+    },
+    {
+      "id": "ap82_s2_dice_target_band_lower",
+      "background": "dice",
+      "spec": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.125,
+        "gradient_ratio": 0.1
+      },
+      "changes": {
+        "band_lower": {
+          "band_share": 0.125
+        }
+      }
+    },
+    {
+      "id": "ap82_s2_winner_target_band_higher",
+      "background": "winner",
+      "spec": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.375,
+        "gradient_ratio": 0.1
+      },
+      "changes": {
+        "band_higher": {
+          "band_share": 0.375
+        }
+      }
+    },
+    {
+      "id": "ap82_s2_dice_target_band_higher",
+      "background": "dice",
+      "spec": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.375,
+        "gradient_ratio": 0.1
+      },
+      "changes": {
+        "band_higher": {
+          "band_share": 0.375
+        }
+      }
+    },
+    {
+      "id": "ap82_s2_winner_target_width2",
+      "background": "winner",
+      "spec": {
+        "width": 2.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.25,
+        "gradient_ratio": 0.1
+      },
+      "changes": {
+        "width2": {
+          "width": 2.0
+        }
+      }
+    },
+    {
+      "id": "ap82_s2_dice_target_width2",
+      "background": "dice",
+      "spec": {
+        "width": 2.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.25,
+        "gradient_ratio": 0.1
+      },
+      "changes": {
+        "width2": {
+          "width": 2.0
+        }
+      }
+    },
+    {
+      "id": "ap82_s2_winner_target_width1",
+      "background": "winner",
+      "spec": {
+        "width": 1.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.25,
+        "gradient_ratio": 0.1
+      },
+      "changes": {
+        "width1": {
+          "width": 1.0
+        }
+      }
+    },
+    {
+      "id": "ap82_s2_dice_target_width1",
+      "background": "dice",
+      "spec": {
+        "width": 1.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.25,
+        "gradient_ratio": 0.1
+      },
+      "changes": {
+        "width1": {
+          "width": 1.0
+        }
+      }
+    },
+    {
+      "id": "ap82_s2_winner_target_hard25",
+      "background": "winner",
+      "spec": {
+        "width": 3.0,
+        "anterior_fraction": 0.25,
+        "posterior_fraction": 0.25,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.25,
+        "gradient_ratio": 0.1
+      },
+      "changes": {
+        "hard25": {
+          "anterior_fraction": 0.25,
+          "posterior_fraction": 0.25
+        }
+      }
+    },
+    {
+      "id": "ap82_s2_dice_target_hard25",
+      "background": "dice",
+      "spec": {
+        "width": 3.0,
+        "anterior_fraction": 0.25,
+        "posterior_fraction": 0.25,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.25,
+        "gradient_ratio": 0.1
+      },
+      "changes": {
+        "hard25": {
+          "anterior_fraction": 0.25,
+          "posterior_fraction": 0.25
+        }
+      }
+    },
+    {
+      "id": "ap82_s2_winner_target_emphasis75",
+      "background": "winner",
+      "spec": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.75,
+        "posterior_emphasis": 0.75,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.25,
+        "gradient_ratio": 0.1
+      },
+      "changes": {
+        "emphasis75": {
+          "anterior_emphasis": 0.75,
+          "posterior_emphasis": 0.75
+        }
+      }
+    },
+    {
+      "id": "ap82_s2_dice_target_emphasis75",
+      "background": "dice",
+      "spec": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.75,
+        "posterior_emphasis": 0.75,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.25,
+        "gradient_ratio": 0.1
+      },
+      "changes": {
+        "emphasis75": {
+          "anterior_emphasis": 0.75,
+          "posterior_emphasis": 0.75
+        }
+      }
+    },
+    {
+      "id": "ap82_s2_winner_target_anterior40",
+      "background": "winner",
+      "spec": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.4,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.25,
+        "gradient_ratio": 0.1
+      },
+      "changes": {
+        "anterior40": {
+          "anterior_mass": 0.4
+        }
+      }
+    },
+    {
+      "id": "ap82_s2_dice_target_anterior40",
+      "background": "dice",
+      "spec": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.4,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.25,
+        "gradient_ratio": 0.1
+      },
+      "changes": {
+        "anterior40": {
+          "anterior_mass": 0.4
+        }
+      }
+    },
+    {
+      "id": "ap82_s2_winner_target_anterior60",
+      "background": "winner",
+      "spec": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.6,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.25,
+        "gradient_ratio": 0.1
+      },
+      "changes": {
+        "anterior60": {
+          "anterior_mass": 0.6
+        }
+      }
+    },
+    {
+      "id": "ap82_s2_dice_target_anterior60",
+      "background": "dice",
+      "spec": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.6,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.25,
+        "gradient_ratio": 0.1
+      },
+      "changes": {
+        "anterior60": {
+          "anterior_mass": 0.6
+        }
+      }
+    }
+  ]
+}

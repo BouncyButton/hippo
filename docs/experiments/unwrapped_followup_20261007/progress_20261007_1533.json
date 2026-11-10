@@ -1,0 +1,801 @@
+{
+  "queue": "687700|RUNNING|2:03:19|hippo-unfold-followup|gnode01\n",
+  "accounting": "JobID|JobName|State|Elapsed|Start|End|ExitCode\n687658|hippo-cap-depth-retry|COMPLETED|02:13:47|2026-10-07T11:16:00|2026-10-07T13:29:47|0:0\n687658.batch|batch|COMPLETED|02:13:47|2026-10-07T11:16:00|2026-10-07T13:29:47|0:0\n687700|hippo-unfold-followup|RUNNING|02:03:19|2026-10-07T13:29:52|Unknown|0:0\n687700.batch|batch|RUNNING|02:03:19|2026-10-07T13:29:52|Unknown|0:0\n",
+  "status": {
+    "job_id": "687700",
+    "state": "running",
+    "stages": [
+      {
+        "stage": "followup_unit_checks",
+        "returncode": 0,
+        "seconds": 95.19938969612122
+      },
+      {
+        "stage": "5pct_cuda_preflight",
+        "returncode": 0,
+        "seconds": 97.85862684249878
+      },
+      {
+        "stage": "5pct_diagnostic_plane_position",
+        "returncode": 0,
+        "seconds": 129.15039253234863
+      },
+      {
+        "stage": "5pct_diagnostic_unfold_position",
+        "returncode": 0,
+        "seconds": 130.67170095443726
+      },
+      {
+        "stage": "5pct_dice_ablation_s0_plane_position_none",
+        "returncode": 0,
+        "seconds": 547.6551494598389
+      },
+      {
+        "stage": "5pct_dice_ablation_s0_unfold_position_none",
+        "returncode": 0,
+        "seconds": 601.0197670459747
+      },
+      {
+        "stage": "5pct_replication_s1_depth_none",
+        "returncode": 0,
+        "seconds": 319.14157581329346
+      },
+      {
+        "stage": "5pct_replication_s1_plane_position_none",
+        "returncode": 0,
+        "seconds": 476.89834332466125
+      },
+      {
+        "stage": "5pct_replication_s1_unfold_position_none",
+        "returncode": 0,
+        "seconds": 482.76555705070496
+      },
+      {
+        "stage": "5pct_replication_s2_depth_none",
+        "returncode": 0,
+        "seconds": 319.95429706573486
+      },
+      {
+        "stage": "5pct_replication_s2_plane_position_none",
+        "returncode": 0,
+        "seconds": 809.4088869094849
+      },
+      {
+        "stage": "5pct_replication_s2_unfold_position_none",
+        "returncode": 0,
+        "seconds": 827.4977784156799
+      },
+      {
+        "stage": "5pct_uncertainty_s0_plane_position_entropy",
+        "returncode": 0,
+        "seconds": 711.3545813560486
+      },
+      {
+        "stage": "5pct_uncertainty_s0_plane_position_mean_entropy",
+        "returncode": 0,
+        "seconds": 583.62655377388
+      },
+      {
+        "stage": "5pct_uncertainty_s0_unfold_position_entropy",
+        "returncode": 0,
+        "seconds": 574.1563694477081
+      },
+      {
+        "stage": "5pct_uncertainty_s0_unfold_position_mean_entropy",
+        "returncode": 0,
+        "seconds": 585.4397368431091
+      }
+    ],
+    "started_unix": 1791372675.3454475,
+    "protocol_sha256": "cbc7fe400e9ffa5761c316f9637d16c6f34b0f632d474ed4a17a912b0c0378d3",
+    "current_stage": "full_cuda_preflight"
+  },
+  "comparison": {
+    "protocol_sha256": "cbc7fe400e9ffa5761c316f9637d16c6f34b0f632d474ed4a17a912b0c0378d3",
+    "new_completed": 12,
+    "new_requested": 24,
+    "runs": {
+      "prior/5pct/dice": {
+        "completed_epochs": 75,
+        "best_epoch": 73,
+        "validation": {
+          "anterior_dice": 0.7800853360387859,
+          "posterior_dice": 0.7032494709019621,
+          "foreground_dice": 0.7679295577740514,
+          "macro_dice": 0.7416674034703739,
+          "missed": 15386,
+          "extra": 80273,
+          "swaps": 5794,
+          "surface_distance_mean_mm": 1.0295219720632496,
+          "hd95_mm": 2.314959541257156,
+          "undefined_surface_cases": 0
+        }
+      },
+      "prior/5pct/depth": {
+        "completed_epochs": 75,
+        "best_epoch": 75,
+        "validation": {
+          "anterior_dice": 0.7826759258767402,
+          "posterior_dice": 0.719702168879289,
+          "foreground_dice": 0.7769578193350284,
+          "macro_dice": 0.7511890473780146,
+          "missed": 15273,
+          "extra": 75585,
+          "swaps": 5461,
+          "surface_distance_mean_mm": 0.9586216742786798,
+          "hd95_mm": 2.1822373618871485,
+          "undefined_surface_cases": 0
+        }
+      },
+      "prior/5pct/plane_position": {
+        "completed_epochs": 45,
+        "best_epoch": 39,
+        "validation": {
+          "anterior_dice": 0.8210666851362887,
+          "posterior_dice": 0.8150743809020421,
+          "foreground_dice": 0.8420853169726334,
+          "macro_dice": 0.8180705330191655,
+          "missed": 24380,
+          "extra": 31669,
+          "swaps": 4269,
+          "surface_distance_mean_mm": 0.6685060026011608,
+          "hd95_mm": 1.5955650549069036,
+          "undefined_surface_cases": 0
+        }
+      },
+      "prior/5pct/unfold_position": {
+        "completed_epochs": 50,
+        "best_epoch": 42,
+        "validation": {
+          "anterior_dice": 0.8212143702054905,
+          "posterior_dice": 0.8166351685933051,
+          "foreground_dice": 0.8447978013281152,
+          "macro_dice": 0.8189247693993978,
+          "missed": 25800,
+          "extra": 28661,
+          "swaps": 4562,
+          "surface_distance_mean_mm": 0.6581973620339407,
+          "hd95_mm": 1.6034501321203687,
+          "undefined_surface_cases": 0
+        }
+      },
+      "prior/full/dice": {
+        "completed_epochs": 25,
+        "best_epoch": 23,
+        "validation": {
+          "anterior_dice": 0.8854451486142442,
+          "posterior_dice": 0.8715835782872422,
+          "foreground_dice": 0.899476668555805,
+          "macro_dice": 0.8785143634507431,
+          "missed": 17533,
+          "extra": 17177,
+          "swaps": 3635,
+          "surface_distance_mean_mm": 0.4253065675992399,
+          "hd95_mm": 1.1415282270295846,
+          "undefined_surface_cases": 0
+        }
+      },
+      "prior/full/depth": {
+        "completed_epochs": 25,
+        "best_epoch": 12,
+        "validation": {
+          "anterior_dice": 0.8873975241468115,
+          "posterior_dice": 0.8727202833943897,
+          "foreground_dice": 0.9004062857518629,
+          "macro_dice": 0.8800589037706007,
+          "missed": 17282,
+          "extra": 17138,
+          "swaps": 3524,
+          "surface_distance_mean_mm": 0.42390330959881584,
+          "hd95_mm": 1.1556061271751399,
+          "undefined_surface_cases": 0
+        }
+      },
+      "prior/full/plane_attention": {
+        "completed_epochs": 25,
+        "best_epoch": 9,
+        "validation": {
+          "anterior_dice": 0.8897874552212353,
+          "posterior_dice": 0.8739586073157464,
+          "foreground_dice": 0.9033729607175102,
+          "macro_dice": 0.8818730312684908,
+          "missed": 15835,
+          "extra": 17813,
+          "swaps": 3730,
+          "surface_distance_mean_mm": 0.4147647749844442,
+          "hd95_mm": 1.1157779000238806,
+          "undefined_surface_cases": 0
+        }
+      },
+      "prior/full/unfold_attention": {
+        "completed_epochs": 29,
+        "best_epoch": 21,
+        "validation": {
+          "anterior_dice": 0.891191746220231,
+          "posterior_dice": 0.8763889747506498,
+          "foreground_dice": 0.9036036565687204,
+          "macro_dice": 0.8837903604854407,
+          "missed": 17989,
+          "extra": 15082,
+          "swaps": 3389,
+          "surface_distance_mean_mm": 0.4067283213041058,
+          "hd95_mm": 1.1096656453085774,
+          "undefined_surface_cases": 0
+        }
+      },
+      "5pct_dice_ablation_s0_plane_position_none": {
+        "completed_epochs": 47,
+        "best_epoch": 39,
+        "validation": {
+          "anterior_dice": 0.8257431909071229,
+          "posterior_dice": 0.8142516104847217,
+          "foreground_dice": 0.8450208942920175,
+          "macro_dice": 0.8199974006959222,
+          "missed": 23486,
+          "extra": 31554,
+          "swaps": 4447,
+          "surface_distance_mean_mm": 0.6561293315192339,
+          "hd95_mm": 1.5758050362281133,
+          "undefined_surface_cases": 0
+        }
+      },
+      "5pct_dice_ablation_s0_unfold_position_none": {
+        "completed_epochs": 52,
+        "best_epoch": 45,
+        "validation": {
+          "anterior_dice": 0.8208691702575904,
+          "posterior_dice": 0.8127754513495377,
+          "foreground_dice": 0.8430888343686127,
+          "macro_dice": 0.8168223108035642,
+          "missed": 26649,
+          "extra": 28237,
+          "swaps": 4597,
+          "surface_distance_mean_mm": 0.6627504126982733,
+          "hd95_mm": 1.6058654251783153,
+          "undefined_surface_cases": 0
+        }
+      },
+      "5pct_replication_s1_depth_none": {
+        "completed_epochs": 75,
+        "best_epoch": 75,
+        "validation": {
+          "anterior_dice": 0.7666352775297554,
+          "posterior_dice": 0.7937926949484416,
+          "foreground_dice": 0.8057821303378139,
+          "macro_dice": 0.7802139862390983,
+          "missed": 15733,
+          "extra": 60262,
+          "swaps": 5139,
+          "surface_distance_mean_mm": 0.8301177365407948,
+          "hd95_mm": 2.071586334853343,
+          "undefined_surface_cases": 0
+        }
+      },
+      "5pct_replication_s1_plane_position_none": {
+        "completed_epochs": 38,
+        "best_epoch": 30,
+        "validation": {
+          "anterior_dice": 0.8131519448557774,
+          "posterior_dice": 0.8288821164874258,
+          "foreground_dice": 0.8450623088480694,
+          "macro_dice": 0.8210170306716016,
+          "missed": 23032,
+          "extra": 32330,
+          "swaps": 4521,
+          "surface_distance_mean_mm": 0.6560820870561541,
+          "hd95_mm": 1.628855764618211,
+          "undefined_surface_cases": 0
+        }
+      },
+      "5pct_replication_s1_unfold_position_none": {
+        "completed_epochs": 39,
+        "best_epoch": 31,
+        "validation": {
+          "anterior_dice": 0.8048679591183169,
+          "posterior_dice": 0.8302772128220289,
+          "foreground_dice": 0.8428123136603123,
+          "macro_dice": 0.8175725859701727,
+          "missed": 23033,
+          "extra": 33282,
+          "swaps": 4671,
+          "surface_distance_mean_mm": 0.6647225186680065,
+          "hd95_mm": 1.6631297050086102,
+          "undefined_surface_cases": 0
+        }
+      },
+      "5pct_replication_s2_depth_none": {
+        "completed_epochs": 75,
+        "best_epoch": 74,
+        "validation": {
+          "anterior_dice": 0.7348280510393977,
+          "posterior_dice": 0.6952432669970418,
+          "foreground_dice": 0.739349739621627,
+          "macro_dice": 0.7150356590182197,
+          "missed": 7970,
+          "extra": 108431,
+          "swaps": 5350,
+          "surface_distance_mean_mm": 1.208691535663644,
+          "hd95_mm": 2.6105104505982957,
+          "undefined_surface_cases": 0
+        }
+      },
+      "5pct_replication_s2_plane_position_none": {
+        "completed_epochs": 75,
+        "best_epoch": 74,
+        "validation": {
+          "anterior_dice": 0.7995177050205104,
+          "posterior_dice": 0.7240671357109407,
+          "foreground_dice": 0.7933156807648769,
+          "macro_dice": 0.7617924203657256,
+          "missed": 18747,
+          "extra": 61920,
+          "swaps": 6650,
+          "surface_distance_mean_mm": 0.8827811914618044,
+          "hd95_mm": 2.0942540387515347,
+          "undefined_surface_cases": 0
+        }
+      },
+      "5pct_replication_s2_unfold_position_none": {
+        "completed_epochs": 75,
+        "best_epoch": 74,
+        "validation": {
+          "anterior_dice": 0.8001392991643775,
+          "posterior_dice": 0.7105043330102199,
+          "foreground_dice": 0.7913063816385468,
+          "macro_dice": 0.7553218160872988,
+          "missed": 17619,
+          "extra": 64681,
+          "swaps": 7775,
+          "surface_distance_mean_mm": 0.8932662916639598,
+          "hd95_mm": 2.1138165855721414,
+          "undefined_surface_cases": 0
+        }
+      },
+      "5pct_uncertainty_s0_plane_position_entropy": {
+        "completed_epochs": 63,
+        "best_epoch": 55,
+        "validation": {
+          "anterior_dice": 0.8199851406508369,
+          "posterior_dice": 0.8072285745916894,
+          "foreground_dice": 0.8383850198605806,
+          "macro_dice": 0.8136068576212632,
+          "missed": 24240,
+          "extra": 33453,
+          "swaps": 4387,
+          "surface_distance_mean_mm": 0.6822356248291498,
+          "hd95_mm": 1.6137047650942162,
+          "undefined_surface_cases": 0
+        }
+      },
+      "5pct_uncertainty_s0_plane_position_mean_entropy": {
+        "completed_epochs": 50,
+        "best_epoch": 48,
+        "validation": {
+          "anterior_dice": 0.816099349738052,
+          "posterior_dice": 0.7726520501913199,
+          "foreground_dice": 0.8192117668566811,
+          "macro_dice": 0.794375699964686,
+          "missed": 17962,
+          "extra": 50604,
+          "swaps": 4776,
+          "surface_distance_mean_mm": 0.779762002975928,
+          "hd95_mm": 1.77483564723722,
+          "undefined_surface_cases": 0
+        }
+      },
+      "5pct_uncertainty_s0_unfold_position_entropy": {
+        "completed_epochs": 48,
+        "best_epoch": 42,
+        "validation": {
+          "anterior_dice": 0.8207207551097899,
+          "posterior_dice": 0.8087360535324208,
+          "foreground_dice": 0.8405451552401929,
+          "macro_dice": 0.8147284043211054,
+          "missed": 20472,
+          "extra": 37563,
+          "swaps": 4668,
+          "surface_distance_mean_mm": 0.680147389507101,
+          "hd95_mm": 1.620130347123291,
+          "undefined_surface_cases": 0
+        }
+      },
+      "5pct_uncertainty_s0_unfold_position_mean_entropy": {
+        "completed_epochs": 50,
+        "best_epoch": 48,
+        "validation": {
+          "anterior_dice": 0.8127099952961576,
+          "posterior_dice": 0.7817522532706581,
+          "foreground_dice": 0.823327021007918,
+          "macro_dice": 0.7972311242834078,
+          "missed": 18242,
+          "extra": 48333,
+          "swaps": 4966,
+          "surface_distance_mean_mm": 0.7658274113266239,
+          "hd95_mm": 1.7717102422749385,
+          "undefined_surface_cases": 0
+        }
+      }
+    },
+    "comparisons": [
+      {
+        "group": "remove_depth",
+        "reference": "prior/5pct/plane_position",
+        "candidate": "5pct_dice_ablation_s0_plane_position_none",
+        "delta_dice_pp": 0.19268676767568205,
+        "patient_bootstrap95_pp": [
+          0.051915917239305595,
+          0.34959405038306546
+        ],
+        "cases_improved": 31,
+        "cases_worsened": 21,
+        "error_deltas": {
+          "missed": -894,
+          "extra": -115,
+          "swaps": 178
+        }
+      },
+      {
+        "group": "dice_branch_vs_native",
+        "reference": "prior/5pct/dice",
+        "candidate": "5pct_dice_ablation_s0_plane_position_none",
+        "delta_dice_pp": 7.8329997225548285,
+        "patient_bootstrap95_pp": [
+          7.223292411192913,
+          8.41007945933064
+        ],
+        "cases_improved": 52,
+        "cases_worsened": 0,
+        "error_deltas": {
+          "missed": 8100,
+          "extra": -48719,
+          "swaps": -1347
+        }
+      },
+      {
+        "group": "gate_vs_original",
+        "reference": "prior/5pct/plane_position",
+        "candidate": "5pct_uncertainty_s0_plane_position_entropy",
+        "delta_dice_pp": -0.44636753979021326,
+        "patient_bootstrap95_pp": [
+          -0.7489799222408401,
+          -0.14090869118228708
+        ],
+        "cases_improved": 14,
+        "cases_worsened": 38,
+        "error_deltas": {
+          "missed": -140,
+          "extra": 1784,
+          "swaps": 118
+        }
+      },
+      {
+        "group": "gate_vs_original",
+        "reference": "prior/5pct/plane_position",
+        "candidate": "5pct_uncertainty_s0_plane_position_mean_entropy",
+        "delta_dice_pp": -2.369483305447937,
+        "patient_bootstrap95_pp": [
+          -2.7754823092758985,
+          -1.9505683873233588
+        ],
+        "cases_improved": 3,
+        "cases_worsened": 49,
+        "error_deltas": {
+          "missed": -6418,
+          "extra": 18935,
+          "swaps": 507
+        }
+      },
+      {
+        "group": "spatial_vs_mean_gate",
+        "reference": "5pct_uncertainty_s0_plane_position_mean_entropy",
+        "candidate": "5pct_uncertainty_s0_plane_position_entropy",
+        "delta_dice_pp": 1.9231157656577236,
+        "patient_bootstrap95_pp": [
+          1.5765979337819591,
+          2.2796208509078544
+        ],
+        "cases_improved": 49,
+        "cases_worsened": 3,
+        "error_deltas": {
+          "missed": 6278,
+          "extra": -17151,
+          "swaps": -389
+        }
+      },
+      {
+        "group": "remove_depth",
+        "reference": "prior/5pct/unfold_position",
+        "candidate": "5pct_dice_ablation_s0_unfold_position_none",
+        "delta_dice_pp": -0.21024585958338027,
+        "patient_bootstrap95_pp": [
+          -0.41863125472551943,
+          -0.009461612388895015
+        ],
+        "cases_improved": 20,
+        "cases_worsened": 32,
+        "error_deltas": {
+          "missed": 849,
+          "extra": -424,
+          "swaps": 35
+        }
+      },
+      {
+        "group": "dice_branch_vs_native",
+        "reference": "prior/5pct/dice",
+        "candidate": "5pct_dice_ablation_s0_unfold_position_none",
+        "delta_dice_pp": 7.515490733319015,
+        "patient_bootstrap95_pp": [
+          6.816217236728949,
+          8.215810006041814
+        ],
+        "cases_improved": 52,
+        "cases_worsened": 0,
+        "error_deltas": {
+          "missed": 11263,
+          "extra": -52036,
+          "swaps": -1197
+        }
+      },
+      {
+        "group": "gate_vs_original",
+        "reference": "prior/5pct/unfold_position",
+        "candidate": "5pct_uncertainty_s0_unfold_position_entropy",
+        "delta_dice_pp": -0.4196365078292482,
+        "patient_bootstrap95_pp": [
+          -0.7204616600499354,
+          -0.10488412935662599
+        ],
+        "cases_improved": 18,
+        "cases_worsened": 34,
+        "error_deltas": {
+          "missed": -5328,
+          "extra": 8902,
+          "swaps": 106
+        }
+      },
+      {
+        "group": "gate_vs_original",
+        "reference": "prior/5pct/unfold_position",
+        "candidate": "5pct_uncertainty_s0_unfold_position_mean_entropy",
+        "delta_dice_pp": -2.1693645115990026,
+        "patient_bootstrap95_pp": [
+          -2.5207225482702458,
+          -1.79701411050126
+        ],
+        "cases_improved": 3,
+        "cases_worsened": 49,
+        "error_deltas": {
+          "missed": -7558,
+          "extra": 19672,
+          "swaps": 404
+        }
+      },
+      {
+        "group": "spatial_vs_mean_gate",
+        "reference": "5pct_uncertainty_s0_unfold_position_mean_entropy",
+        "candidate": "5pct_uncertainty_s0_unfold_position_entropy",
+        "delta_dice_pp": 1.7497280037697547,
+        "patient_bootstrap95_pp": [
+          1.5417032747065487,
+          1.954083361530181
+        ],
+        "cases_improved": 52,
+        "cases_worsened": 0,
+        "error_deltas": {
+          "missed": 2230,
+          "extra": -10770,
+          "swaps": -298
+        }
+      },
+      {
+        "group": "dice_only_unfold_vs_plane",
+        "reference": "5pct_dice_ablation_s0_plane_position_none",
+        "candidate": "5pct_dice_ablation_s0_unfold_position_none",
+        "delta_dice_pp": -0.31750898923581305,
+        "patient_bootstrap95_pp": [
+          -0.6975099860159364,
+          0.05939973773427852
+        ],
+        "cases_improved": 22,
+        "cases_worsened": 30,
+        "error_deltas": {
+          "missed": 3163,
+          "extra": -3317,
+          "swaps": 150
+        }
+      },
+      {
+        "group": "replication_vs_depth",
+        "reference": "5pct_replication_s1_depth_none",
+        "candidate": "5pct_replication_s1_plane_position_none",
+        "delta_dice_pp": 4.08030444325032,
+        "patient_bootstrap95_pp": [
+          3.4095029909124532,
+          4.7268436603112916
+        ],
+        "cases_improved": 50,
+        "cases_worsened": 2,
+        "error_deltas": {
+          "missed": 7299,
+          "extra": -27932,
+          "swaps": -618
+        }
+      },
+      {
+        "group": "replication_vs_depth",
+        "reference": "5pct_replication_s1_depth_none",
+        "candidate": "5pct_replication_s1_unfold_position_none",
+        "delta_dice_pp": 3.735859973107453,
+        "patient_bootstrap95_pp": [
+          3.233507003025271,
+          4.211209187274856
+        ],
+        "cases_improved": 52,
+        "cases_worsened": 0,
+        "error_deltas": {
+          "missed": 7300,
+          "extra": -26980,
+          "swaps": -468
+        }
+      },
+      {
+        "group": "replication_unfold_vs_plane",
+        "reference": "5pct_replication_s1_plane_position_none",
+        "candidate": "5pct_replication_s1_unfold_position_none",
+        "delta_dice_pp": -0.3444444701428669,
+        "patient_bootstrap95_pp": [
+          -0.6625813945860676,
+          -0.014122286985695535
+        ],
+        "cases_improved": 25,
+        "cases_worsened": 27,
+        "error_deltas": {
+          "missed": 1,
+          "extra": 952,
+          "swaps": 150
+        }
+      },
+      {
+        "group": "replication_vs_depth",
+        "reference": "5pct_replication_s2_depth_none",
+        "candidate": "5pct_replication_s2_plane_position_none",
+        "delta_dice_pp": 4.675676134750591,
+        "patient_bootstrap95_pp": [
+          3.9817368451608033,
+          5.305498983650539
+        ],
+        "cases_improved": 50,
+        "cases_worsened": 2,
+        "error_deltas": {
+          "missed": 10777,
+          "extra": -46511,
+          "swaps": 1300
+        }
+      },
+      {
+        "group": "replication_vs_depth",
+        "reference": "5pct_replication_s2_depth_none",
+        "candidate": "5pct_replication_s2_unfold_position_none",
+        "delta_dice_pp": 4.028615706907894,
+        "patient_bootstrap95_pp": [
+          3.3945111186819172,
+          4.610742834358016
+        ],
+        "cases_improved": 49,
+        "cases_worsened": 3,
+        "error_deltas": {
+          "missed": 9649,
+          "extra": -43750,
+          "swaps": 2425
+        }
+      },
+      {
+        "group": "replication_unfold_vs_plane",
+        "reference": "5pct_replication_s2_plane_position_none",
+        "candidate": "5pct_replication_s2_unfold_position_none",
+        "delta_dice_pp": -0.6470604278426962,
+        "patient_bootstrap95_pp": [
+          -0.7871112720629934,
+          -0.5094475836045693
+        ],
+        "cases_improved": 5,
+        "cases_worsened": 47,
+        "error_deltas": {
+          "missed": -1128,
+          "extra": 2761,
+          "swaps": 1125
+        }
+      }
+    ],
+    "seed_replication": {
+      "5pct": {
+        "depth": {
+          "seeds": [
+            0,
+            1,
+            2
+          ],
+          "dice_pct": [
+            75.11890473780146,
+            78.02139862390983,
+            71.50356590182197
+          ],
+          "mean": 74.88128975451109,
+          "sample_sd": 3.2654067906606787
+        },
+        "plane_position": {
+          "seeds": [
+            0,
+            1,
+            2
+          ],
+          "dice_pct": [
+            81.80705330191655,
+            82.10170306716016,
+            76.17924203657256
+          ],
+          "mean": 80.02933280188309,
+          "sample_sd": 3.3375295949079757
+        },
+        "unfold_position": {
+          "seeds": [
+            0,
+            1,
+            2
+          ],
+          "dice_pct": [
+            81.89247693993978,
+            81.75725859701727,
+            75.53218160872987
+          ],
+          "mean": 79.72730571522898,
+          "sample_sd": 3.633713073670388
+        }
+      },
+      "full": {}
+    },
+    "uncertainty": "Case bootstraps condition on validation-selected checkpoints; seed replication shares frozen seed-0 guides and coefficients. This is development validation, not an independent test."
+  },
+  "preflights": {
+    "environment.json": {
+      "job_id": "687700",
+      "torch": "2.12.1+cu130",
+      "gpu": "NVIDIA A100 80GB PCIe MIG 4g.40gb",
+      "packages": {
+        "monai": "1.6.0",
+        "libigl": "2.6.1",
+        "trimesh": "4.7.4",
+        "scikit-image": "0.26.0"
+      },
+      "protocol_sha256": "cbc7fe400e9ffa5761c316f9637d16c6f34b0f632d474ed4a17a912b0c0378d3"
+    },
+    "cuda_preflight_5pct.json": {
+      "passed": true,
+      "device": "cuda",
+      "arm": "unfold_position",
+      "unit_gate_exactly_matches_prior": true,
+      "all_parameters_trainable": true,
+      "parameter_count": 15724877,
+      "native_encoder_fusion_gradients_nonzero": true,
+      "checks": [
+        {
+          "mode": "entropy",
+          "loss": 0.6620196104049683
+        },
+        {
+          "mode": "mean_entropy",
+          "loss": 0.6620177030563354
+        }
+      ],
+      "peak_memory_bytes": 2224371200,
+      "case": "hippocampus_287"
+    },
+    "cuda_preflight_full.json": null
+  },
+  "logs": {
+    "current_stage_tail": "",
+    "slurm-687700.out": "Starting followup_unit_checks\nStarting 5pct_cuda_preflight\nStarting 5pct_diagnostic_plane_position\nStarting 5pct_diagnostic_unfold_position\nStarting 5pct_dice_ablation_s0_plane_position_none\nStarting 5pct_dice_ablation_s0_unfold_position_none\nStarting 5pct_replication_s1_depth_none\nStarting 5pct_replication_s1_plane_position_none\nStarting 5pct_replication_s1_unfold_position_none\nStarting 5pct_replication_s2_depth_none\nStarting 5pct_replication_s2_plane_position_none\nStarting 5pct_replication_s2_unfold_position_none\nStarting 5pct_uncertainty_s0_plane_position_entropy\nStarting 5pct_uncertainty_s0_plane_position_mean_entropy\nStarting 5pct_uncertainty_s0_unfold_position_entropy\nStarting 5pct_uncertainty_s0_unfold_position_mean_entropy\nStarting full_cuda_preflight\n",
+    "slurm-687700.err": ""
+  },
+  "quota": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  82.90GiB/93.13GiB  168.63k/∞  \n\n"
+}

@@ -1,0 +1,157 @@
+{
+  "purpose": "Dataset illustrations for the supervisor meeting; no model predictions or performance-based selection.",
+  "geofwi3d": {
+    "cases": [
+      {
+        "id": "model_0002",
+        "axis": 1,
+        "slice": 11,
+        "origin": "upper",
+        "limits": [
+          -0.2977784432470784,
+          0.2977784432470784
+        ],
+        "native_shape": [
+          96,
+          96,
+          96
+        ],
+        "foreground_voxels": 23617,
+        "removed_null_rgt_voxels": 1,
+        "display_label": "Example A\n1 generated salt\nbody"
+      },
+      {
+        "id": "model_0001",
+        "axis": 1,
+        "slice": 33,
+        "origin": "upper",
+        "limits": [
+          -0.3198084123432627,
+          0.3198084123432627
+        ],
+        "native_shape": [
+          96,
+          96,
+          96
+        ],
+        "foreground_voxels": 120672,
+        "removed_null_rgt_voxels": 1,
+        "display_label": "Example B\n3 generated salt\nbodies + faults"
+      }
+    ],
+    "selection": "Both previously downloaded public sample volumes; maximal foreground-area Y slice, first maximum.",
+    "mask_rule": "(rgt3d == 0) & (vp3d == float32(metadata.salt_vel)); matches the experiment preparation rule.",
+    "display": "Native voxels; symmetric clipping at each volume's 99.5th absolute amplitude percentile; depth down."
+  },
+  "adni": {
+    "cases": [
+      {
+        "id": "hippocampus_adni_10007_L",
+        "fold0_partition": "train",
+        "axis": 0,
+        "slice": 15,
+        "origin": "lower",
+        "limits": [
+          75.62541742107685,
+          787.0265820841897
+        ],
+        "native_shape": [
+          32,
+          48,
+          40
+        ],
+        "foreground_voxels": 2326,
+        "export_affine": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "display_label": "Example A\nLeft hippocampus\nMRI crop"
+      },
+      {
+        "id": "hippocampus_adni_106775_R",
+        "fold0_partition": "val",
+        "axis": 0,
+        "slice": 9,
+        "origin": "lower",
+        "limits": [
+          72.60627072405579,
+          788.2253214736958
+        ],
+        "native_shape": [
+          32,
+          48,
+          40
+        ],
+        "foreground_voxels": 2727,
+        "export_affine": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "display_label": "Example B\nRight hippocampus\nMRI crop"
+      }
+    ],
+    "selection": "First lexicographic left training crop and right validation crop in stored fold 0; maximal foreground-area axis-0 slice, first maximum.",
+    "display": "Native voxels; per-volume 1st/99th percentile intensity window; transpose displayed slice only; no anatomical axis claim."
+  },
+  "source_sha256": {
+    "reports/geofwi3d_preview/provenance.json": "1eab9193fa16eea0ec57e04b5299f654d19f079cb2806dc2ce4a88dfb0068524",
+    "reports/geofwi3d_preview/model_0002/image3d.bin": "a655c673033a2ab94867be455c952a518f3edf593848252d32e220e34ac6dd86",
+    "reports/geofwi3d_preview/model_0002/rgt3d.bin": "9ac5177d0e3b993cc4bcd538564d47a838e8d3352dd08d05748e853d1594517b",
+    "reports/geofwi3d_preview/model_0002/vp3d.bin": "d54ef4125e05edf3467623a50fbcb7b3cda4ba7f71f36ad6b204ac2bc4a8ede3",
+    "reports/geofwi3d_preview/model_0002/label_audit.json": "0305ce540f6896177d18abd1d4782bcdde39ae898040f6d2020d39d396e95dbb",
+    "reports/geofwi3d_preview/model_0001/image3d.bin": "87b25261ceea76ceda55a330a333d2cca4939490672d11fd94879dae70901e4e",
+    "reports/geofwi3d_preview/model_0001/rgt3d.bin": "92b8ec7dc5ff9168256913d673ba1a9d6ccf7614ca4112446e6a08ca911e246c",
+    "reports/geofwi3d_preview/model_0001/vp3d.bin": "aff39d7fa19d26fcf4c941bdba6233c6ebfa599e5109881bc97bb9456166df1a",
+    "reports/geofwi3d_preview/model_0001/label_audit.json": "be2a690e03d7cbeb7e9977bcb995da37f965687afbbb4b94201391943afaf189",
+    "datasets/Dataset103_ADNI/dataset.json": "7e2fed81e5c7a33873753f86bca6a423190d2e1d5cb015673d0d668b25daff7a",
+    "datasets/Dataset103_ADNI/splits_final.json": "b0e221f03c7c7bfb3e70c35749121f632a812eece34d6af350ec9519081c16a1",
+    "datasets/Dataset103_ADNI/imagesTr/hippocampus_adni_10007_L_0000.nii.gz": "b1479c7bd284e5d4013dd970ff5330819c49732d8f3b8b27c5d4957bde68b799",
+    "datasets/Dataset103_ADNI/labelsTr/hippocampus_adni_10007_L.nii.gz": "03fbe773f988e7541ced3681d1f76719745059b8d404b9c9de76c74401def8b3",
+    "datasets/Dataset103_ADNI/imagesTr/hippocampus_adni_106775_R_0000.nii.gz": "57ce70c9345a5de7fda01aca9d31f8a9de47b0fa81d9c200baa133104bdaba30",
+    "datasets/Dataset103_ADNI/labelsTr/hippocampus_adni_106775_R.nii.gz": "1cc1bbe849114543300487c6279326b2c9ff4588fd27cd9be915ea4dcd57bfda"
+  }
+}

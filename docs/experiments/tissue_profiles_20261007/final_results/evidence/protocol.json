@@ -1,0 +1,9649 @@
+{
+  "dataset": "MSD Task04 / Dataset101_MSD",
+  "fold": 0,
+  "max_epochs": 75,
+  "baseline_loss": "dice",
+  "model": "MONAI SwinUNETR",
+  "feature_size": 24,
+  "spatial_size": [
+    64,
+    64,
+    64
+  ],
+  "batch_size": 1,
+  "drop_rate": 0.0,
+  "activation_checkpointing": false,
+  "pretrained": false,
+  "training_augmentation": "none",
+  "precision": "CUDA bfloat16 autocast; FP32 loss and optimizer",
+  "learning_rate": 0.0001,
+  "weight_decay": 1e-05,
+  "step_size": 20,
+  "lr_gamma": 0.5,
+  "early_stopping": {
+    "patience": 8,
+    "min_epochs": 25,
+    "min_delta": 0.0005
+  },
+  "selection": "maximum mean per-patient anterior/posterior hard Dice, evaluated each epoch",
+  "geometry": {
+    "band_mm": 2.0,
+    "roi_margin_mm": 8.0,
+    "distance_clip_mm": 8.0,
+    "layer_grid_mm": 1.0,
+    "sparse_band_voxels": 64
+  },
+  "plane": "foreground centroid + longest physical PCA axis; normal is RAS right projected orthogonally to longitudinal axis; keep signed sides separate",
+  "required_monai": "1.6.0",
+  "splits": {
+    "full": {
+      "train": [
+        "hippocampus_001",
+        "hippocampus_003",
+        "hippocampus_004",
+        "hippocampus_006",
+        "hippocampus_007",
+        "hippocampus_008",
+        "hippocampus_011",
+        "hippocampus_014",
+        "hippocampus_015",
+        "hippocampus_020",
+        "hippocampus_023",
+        "hippocampus_024",
+        "hippocampus_025",
+        "hippocampus_026",
+        "hippocampus_034",
+        "hippocampus_036",
+        "hippocampus_038",
+        "hippocampus_039",
+        "hippocampus_040",
+        "hippocampus_041",
+        "hippocampus_042",
+        "hippocampus_044",
+        "hippocampus_045",
+        "hippocampus_046",
+        "hippocampus_048",
+        "hippocampus_050",
+        "hippocampus_051",
+        "hippocampus_053",
+        "hippocampus_056",
+        "hippocampus_057",
+        "hippocampus_058",
+        "hippocampus_060",
+        "hippocampus_064",
+        "hippocampus_067",
+        "hippocampus_068",
+        "hippocampus_070",
+        "hippocampus_074",
+        "hippocampus_075",
+        "hippocampus_077",
+        "hippocampus_084",
+        "hippocampus_087",
+        "hippocampus_089",
+        "hippocampus_091",
+        "hippocampus_093",
+        "hippocampus_094",
+        "hippocampus_096",
+        "hippocampus_097",
+        "hippocampus_098",
+        "hippocampus_099",
+        "hippocampus_101",
+        "hippocampus_102",
+        "hippocampus_104",
+        "hippocampus_105",
+        "hippocampus_106",
+        "hippocampus_109",
+        "hippocampus_114",
+        "hippocampus_124",
+        "hippocampus_126",
+        "hippocampus_127",
+        "hippocampus_130",
+        "hippocampus_132",
+        "hippocampus_133",
+        "hippocampus_135",
+        "hippocampus_136",
+        "hippocampus_138",
+        "hippocampus_141",
+        "hippocampus_142",
+        "hippocampus_143",
+        "hippocampus_144",
+        "hippocampus_145",
+        "hippocampus_146",
+        "hippocampus_148",
+        "hippocampus_149",
+        "hippocampus_150",
+        "hippocampus_152",
+        "hippocampus_154",
+        "hippocampus_155",
+        "hippocampus_156",
+        "hippocampus_158",
+        "hippocampus_160",
+        "hippocampus_161",
+        "hippocampus_162",
+        "hippocampus_163",
+        "hippocampus_165",
+        "hippocampus_166",
+        "hippocampus_170",
+        "hippocampus_171",
+        "hippocampus_172",
+        "hippocampus_173",
+        "hippocampus_174",
+        "hippocampus_176",
+        "hippocampus_177",
+        "hippocampus_178",
+        "hippocampus_180",
+        "hippocampus_181",
+        "hippocampus_184",
+        "hippocampus_188",
+        "hippocampus_189",
+        "hippocampus_193",
+        "hippocampus_195",
+        "hippocampus_197",
+        "hippocampus_199",
+        "hippocampus_203",
+        "hippocampus_207",
+        "hippocampus_212",
+        "hippocampus_215",
+        "hippocampus_216",
+        "hippocampus_220",
+        "hippocampus_221",
+        "hippocampus_222",
+        "hippocampus_223",
+        "hippocampus_224",
+        "hippocampus_225",
+        "hippocampus_226",
+        "hippocampus_227",
+        "hippocampus_228",
+        "hippocampus_230",
+        "hippocampus_231",
+        "hippocampus_232",
+        "hippocampus_233",
+        "hippocampus_234",
+        "hippocampus_235",
+        "hippocampus_236",
+        "hippocampus_238",
+        "hippocampus_242",
+        "hippocampus_243",
+        "hippocampus_245",
+        "hippocampus_248",
+        "hippocampus_249",
+        "hippocampus_250",
+        "hippocampus_251",
+        "hippocampus_252",
+        "hippocampus_253",
+        "hippocampus_257",
+        "hippocampus_259",
+        "hippocampus_260",
+        "hippocampus_263",
+        "hippocampus_265",
+        "hippocampus_268",
+        "hippocampus_269",
+        "hippocampus_274",
+        "hippocampus_276",
+        "hippocampus_279",
+        "hippocampus_282",
+        "hippocampus_287",
+        "hippocampus_290",
+        "hippocampus_292",
+        "hippocampus_294",
+        "hippocampus_295",
+        "hippocampus_297",
+        "hippocampus_298",
+        "hippocampus_299",
+        "hippocampus_300",
+        "hippocampus_301",
+        "hippocampus_302",
+        "hippocampus_303",
+        "hippocampus_304",
+        "hippocampus_309",
+        "hippocampus_310",
+        "hippocampus_311",
+        "hippocampus_314",
+        "hippocampus_316",
+        "hippocampus_318",
+        "hippocampus_319",
+        "hippocampus_320",
+        "hippocampus_321",
+        "hippocampus_322",
+        "hippocampus_325",
+        "hippocampus_326",
+        "hippocampus_328",
+        "hippocampus_329",
+        "hippocampus_331",
+        "hippocampus_333",
+        "hippocampus_334",
+        "hippocampus_335",
+        "hippocampus_336",
+        "hippocampus_337",
+        "hippocampus_340",
+        "hippocampus_341",
+        "hippocampus_343",
+        "hippocampus_345",
+        "hippocampus_351",
+        "hippocampus_352",
+        "hippocampus_353",
+        "hippocampus_354",
+        "hippocampus_355",
+        "hippocampus_359",
+        "hippocampus_360",
+        "hippocampus_361",
+        "hippocampus_363",
+        "hippocampus_366",
+        "hippocampus_367",
+        "hippocampus_368",
+        "hippocampus_370",
+        "hippocampus_372",
+        "hippocampus_373",
+        "hippocampus_375",
+        "hippocampus_376",
+        "hippocampus_378",
+        "hippocampus_380",
+        "hippocampus_381",
+        "hippocampus_383",
+        "hippocampus_385",
+        "hippocampus_386",
+        "hippocampus_387",
+        "hippocampus_389",
+        "hippocampus_390",
+        "hippocampus_393"
+      ],
+      "val": [
+        "hippocampus_017",
+        "hippocampus_019",
+        "hippocampus_033",
+        "hippocampus_035",
+        "hippocampus_037",
+        "hippocampus_049",
+        "hippocampus_052",
+        "hippocampus_065",
+        "hippocampus_083",
+        "hippocampus_088",
+        "hippocampus_090",
+        "hippocampus_092",
+        "hippocampus_095",
+        "hippocampus_107",
+        "hippocampus_108",
+        "hippocampus_123",
+        "hippocampus_125",
+        "hippocampus_157",
+        "hippocampus_164",
+        "hippocampus_169",
+        "hippocampus_175",
+        "hippocampus_185",
+        "hippocampus_190",
+        "hippocampus_194",
+        "hippocampus_204",
+        "hippocampus_205",
+        "hippocampus_210",
+        "hippocampus_217",
+        "hippocampus_219",
+        "hippocampus_229",
+        "hippocampus_244",
+        "hippocampus_261",
+        "hippocampus_264",
+        "hippocampus_277",
+        "hippocampus_280",
+        "hippocampus_286",
+        "hippocampus_288",
+        "hippocampus_289",
+        "hippocampus_296",
+        "hippocampus_305",
+        "hippocampus_308",
+        "hippocampus_317",
+        "hippocampus_327",
+        "hippocampus_330",
+        "hippocampus_332",
+        "hippocampus_338",
+        "hippocampus_349",
+        "hippocampus_350",
+        "hippocampus_356",
+        "hippocampus_358",
+        "hippocampus_374",
+        "hippocampus_394"
+      ]
+    },
+    "5pct": {
+      "train": [
+        "hippocampus_093",
+        "hippocampus_097",
+        "hippocampus_197",
+        "hippocampus_287",
+        "hippocampus_311",
+        "hippocampus_314",
+        "hippocampus_353",
+        "hippocampus_361",
+        "hippocampus_373",
+        "hippocampus_390"
+      ],
+      "val": [
+        "hippocampus_017",
+        "hippocampus_019",
+        "hippocampus_033",
+        "hippocampus_035",
+        "hippocampus_037",
+        "hippocampus_049",
+        "hippocampus_052",
+        "hippocampus_065",
+        "hippocampus_083",
+        "hippocampus_088",
+        "hippocampus_090",
+        "hippocampus_092",
+        "hippocampus_095",
+        "hippocampus_107",
+        "hippocampus_108",
+        "hippocampus_123",
+        "hippocampus_125",
+        "hippocampus_157",
+        "hippocampus_164",
+        "hippocampus_169",
+        "hippocampus_175",
+        "hippocampus_185",
+        "hippocampus_190",
+        "hippocampus_194",
+        "hippocampus_204",
+        "hippocampus_205",
+        "hippocampus_210",
+        "hippocampus_217",
+        "hippocampus_219",
+        "hippocampus_229",
+        "hippocampus_244",
+        "hippocampus_261",
+        "hippocampus_264",
+        "hippocampus_277",
+        "hippocampus_280",
+        "hippocampus_286",
+        "hippocampus_288",
+        "hippocampus_289",
+        "hippocampus_296",
+        "hippocampus_305",
+        "hippocampus_308",
+        "hippocampus_317",
+        "hippocampus_327",
+        "hippocampus_330",
+        "hippocampus_332",
+        "hippocampus_338",
+        "hippocampus_349",
+        "hippocampus_350",
+        "hippocampus_356",
+        "hippocampus_358",
+        "hippocampus_374",
+        "hippocampus_394"
+      ]
+    }
+  },
+  "low_data_fraction_actual": 0.04807692307692308,
+  "pkl_sha256": "3311d2233b99e09080c40ca80f1035781d9c1dc9c5b109dc266c73eb52a3df01",
+  "uncompressed_pickle_sha256": "272044453bd1fc67a40880afa12f6f1f5e3e5b867a1567ba2b21f8a8a260c41f",
+  "native_geometry": {
+    "hippocampus_001": {
+      "native_shape": [
+        35,
+        51,
+        35
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -13.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "0753eac710a88592f0500f1401bc2d8dc8d51b7658be7bf1b14b542da396d1f7"
+    },
+    "hippocampus_003": {
+      "native_shape": [
+        34,
+        52,
+        35
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -13.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "89d82ae5139cb9efb366ce2fa00ee55b2511cc81c50d5ae3844a6dfc877e8d28"
+    },
+    "hippocampus_004": {
+      "native_shape": [
+        36,
+        52,
+        38
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -12.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "9b2337498754da6dcbfbfe0664e2326f5111e27b936a56e366f1daa2477f4d89"
+    },
+    "hippocampus_006": {
+      "native_shape": [
+        35,
+        52,
+        34
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -14.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "b325ec38885d98121546fc0a6b91755cd02aad2dff59028eb6d6a7c791a53893"
+    },
+    "hippocampus_007": {
+      "native_shape": [
+        34,
+        47,
+        40
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -7.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -11.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "1aad3b4b1c039e010d97cc027a972117123d40facfc942cd05d1a26b9688ab85"
+    },
+    "hippocampus_008": {
+      "native_shape": [
+        36,
+        48,
+        40
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -7.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -11.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "89b8dde2aabb5920706b00596a68fc8ee51b3812135498fffde143f29269a133"
+    },
+    "hippocampus_011": {
+      "native_shape": [
+        36,
+        50,
+        31
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -6.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -15.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "c88c5d0c33ccbc535cf2e85daa52b4798b104c05bd7a6b3165453f75c5647ed1"
+    },
+    "hippocampus_014": {
+      "native_shape": [
+        39,
+        50,
+        40
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -11.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -6.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -11.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "1c5673e7dfc2691a93aa214f0c5907255dc89f782e4f7d967fc4a72f61941924"
+    },
+    "hippocampus_015": {
+      "native_shape": [
+        42,
+        51,
+        28
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -10.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -17.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "43676058c3736460d7a4fc171c343eced10452f18206cf303112776f4de9e8d5"
+    },
+    "hippocampus_017": {
+      "native_shape": [
+        35,
+        48,
+        32
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -7.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -15.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "2ac0acc145d7c902f8b00ae5af3a15886bf7c5eef0ebd4bf1bf372309ee71749"
+    },
+    "hippocampus_019": {
+      "native_shape": [
+        36,
+        47,
+        41
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -7.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -10.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "9ca17a1c594d2447df3dcdd0caf06246bc3cfa68aad00486cfb26842e2b78b59"
+    },
+    "hippocampus_020": {
+      "native_shape": [
+        36,
+        46,
+        43
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -8.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -9.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "8cdf5b7ffd8fc266c7274ef202bbaf9976f44b12d3423d6e4dd3a5cb0179b7b9"
+    },
+    "hippocampus_023": {
+      "native_shape": [
+        35,
+        51,
+        35
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -13.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "e0a0ecc661134e4c83fca52b8d8748576bc43e94198c500cd897fb218f887f95"
+    },
+    "hippocampus_024": {
+      "native_shape": [
+        38,
+        52,
+        33
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -12.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -14.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "03145da28f98ea6a1da2e08c9249700f3d92bc453c89468fcd8622a41b2860a6"
+    },
+    "hippocampus_025": {
+      "native_shape": [
+        35,
+        48,
+        35
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -7.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -13.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "2c24e5608d8af70c7efe01e9e7c0b6c8f5e176dfdbf85d4c77637d7a8af593e8"
+    },
+    "hippocampus_026": {
+      "native_shape": [
+        36,
+        50,
+        36
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -6.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -13.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "54bd4be778bec2debf7a26e6f719ae48d89b237bed2b5a9fcb58b43e32eba9ad"
+    },
+    "hippocampus_033": {
+      "native_shape": [
+        33,
+        48,
+        38
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -7.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -12.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "75d0ac78983bc528c38965d2242b6ecfcc6b825c2c3e88aa72704648a34ab142"
+    },
+    "hippocampus_034": {
+      "native_shape": [
+        36,
+        49,
+        40
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -6.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -11.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "15c99d464e43d998b02c00607560873c9a6daf629bdedd854f1ca67c69802d3d"
+    },
+    "hippocampus_035": {
+      "native_shape": [
+        35,
+        47,
+        37
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -7.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -12.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "b7f39988284c1c316822b8c3a76e0632a48d7f6254d024b9e8c658a2c5fdcbd6"
+    },
+    "hippocampus_036": {
+      "native_shape": [
+        36,
+        47,
+        39
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -7.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -11.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "c992e85283a52eb2ebc76316565f81ef29fca6a9602e4d1d32975f495d82d68b"
+    },
+    "hippocampus_037": {
+      "native_shape": [
+        34,
+        51,
+        32
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -15.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "91b3e2e90549058b97b54e5f520f6a6dc4ae06e7ae6fd14a696c50e183e733ab"
+    },
+    "hippocampus_038": {
+      "native_shape": [
+        37,
+        51,
+        35
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -12.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -13.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "4dffb711584433468f48679551a1a8a2ae5839882b359cf1204789b086b4a721"
+    },
+    "hippocampus_039": {
+      "native_shape": [
+        34,
+        53,
+        34
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -15.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -15.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "09e23f0ea4a999762101cb3174c477d4f151453e44dd95f8b8ab01ba108f44d5"
+    },
+    "hippocampus_040": {
+      "native_shape": [
+        36,
+        52,
+        37
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -6.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -13.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "9583d66b7e14a069f29946c9e115bc29c13acbc6ef91b55761c3577c0e04df4f"
+    },
+    "hippocampus_041": {
+      "native_shape": [
+        36,
+        51,
+        34
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -14.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "e692cc8c23cc7eb91eda9044dc08366c1a26d54e0b8aed83c93dc36abb74faed"
+    },
+    "hippocampus_042": {
+      "native_shape": [
+        37,
+        52,
+        34
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -12.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -14.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "fbc636341e001686bcd4ba8e4c2547c15db8ae3345ab2658806207369f639c06"
+    },
+    "hippocampus_044": {
+      "native_shape": [
+        38,
+        48,
+        33
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -12.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -7.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -14.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "6bbbed05d2b43f07ee91acd62ffbf612959eba1e116383c2baa00cc718b699bc"
+    },
+    "hippocampus_045": {
+      "native_shape": [
+        36,
+        48,
+        37
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -7.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -12.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "d3691b411878a99d4d97a88b307acbfa997325d93c8447b968e558c4cf07e0c7"
+    },
+    "hippocampus_046": {
+      "native_shape": [
+        36,
+        49,
+        38
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -6.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -12.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "f6841fabfbf5e356d76a6b62ebc24eb37bbd670dcd57d10959125916cd68fd6d"
+    },
+    "hippocampus_048": {
+      "native_shape": [
+        38,
+        52,
+        29
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -12.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -16.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "debc37c12b5a82f1d6a3e708eb1ed827e818456635711dc9c18fa09e083a8384"
+    },
+    "hippocampus_049": {
+      "native_shape": [
+        35,
+        51,
+        36
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -13.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "185cd330c7cd0ca3cdc40b060fc2c5be22d074768e0970e3cefb427003f28ed3"
+    },
+    "hippocampus_050": {
+      "native_shape": [
+        38,
+        49,
+        38
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -12.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -6.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -12.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "3fd000f5df5eb50f67b860674c2d20e71a5ea944388daba70fdc8eb0e6edad2a"
+    },
+    "hippocampus_051": {
+      "native_shape": [
+        33,
+        54,
+        39
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -4.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -11.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "eb8279688a462d4fad659f6ffa7b7a0bb6e29813258d9316ae3b7dbfc56a6027"
+    },
+    "hippocampus_052": {
+      "native_shape": [
+        34,
+        52,
+        40
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -11.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "743fab0233f5f205aa0c65aaaa4fa280079c545789d5bd2e8a72d94f7ff451bb"
+    },
+    "hippocampus_053": {
+      "native_shape": [
+        37,
+        51,
+        35
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -12.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -13.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "6765f2f1fcc9a1ab07ab5f15ca97b4956518ae497652bba7b7fc51f3ec92964f"
+    },
+    "hippocampus_056": {
+      "native_shape": [
+        41,
+        47,
+        42
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -10.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -7.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -10.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "26e619725ac318551d6ee4b1ab1be92565af87a5603434cc32bdc647aa2dd192"
+    },
+    "hippocampus_057": {
+      "native_shape": [
+        35,
+        51,
+        34
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -14.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "c5e7bb827b3c1335d4d7fa7c1004360886b5c9876f60e02d29b6d1486f2b9b3c"
+    },
+    "hippocampus_058": {
+      "native_shape": [
+        34,
+        53,
+        36
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -4.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -13.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "ed3454f7f67efea80541a9b4ad19eb40b595191666a161cf3c6c058d14a2f101"
+    },
+    "hippocampus_060": {
+      "native_shape": [
+        39,
+        52,
+        31
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -11.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -15.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "91906caaa6b5179b11d437297062cc853303a9eee7e665c44d66988366a42c30"
+    },
+    "hippocampus_064": {
+      "native_shape": [
+        35,
+        53,
+        35
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -4.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -13.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "370f5c84711838206242efbea9eee30f3862f078c5eeb0e2cd88660a10021e69"
+    },
+    "hippocampus_065": {
+      "native_shape": [
+        39,
+        52,
+        37
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -11.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -12.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "8a4eb8eaf4a33a7a546d0b48a7d09d523d452d9809113d6879f5662d47c60792"
+    },
+    "hippocampus_067": {
+      "native_shape": [
+        36,
+        42,
+        41
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -10.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -10.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "35eea54acad9668eb003f5e700cc4d5b1f155562341f9e0ec0c28982a892bd08"
+    },
+    "hippocampus_068": {
+      "native_shape": [
+        36,
+        40,
+        43
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -11.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -9.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "90cf38b2125231737f7b9c755cfb3d451f90f747b55816d3a50841eae8845dcf"
+    },
+    "hippocampus_070": {
+      "native_shape": [
+        37,
+        50,
+        38
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -12.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -6.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -12.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "c402535444d3984b8e9e73d9184eb7c8b3bbf850f5d7f89b4eb8fba1ffb51b8e"
+    },
+    "hippocampus_074": {
+      "native_shape": [
+        37,
+        47,
+        42
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -8.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -11.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "3b3d8ae91e60f40cb30b499262ff53b7dd6bc97999452c60b91d2a21414d6d4b"
+    },
+    "hippocampus_075": {
+      "native_shape": [
+        32,
+        47,
+        41
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -15.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -7.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -10.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "0c583c67985cc268d7f621053b5aca9fd321c9f3f982eeb2d093076c0ff29916"
+    },
+    "hippocampus_077": {
+      "native_shape": [
+        35,
+        47,
+        45
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -7.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -8.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "437bd622fd18637cab3d8ffa818ee6ef273d89cf66c052b045f1139c1ec1ee58"
+    },
+    "hippocampus_083": {
+      "native_shape": [
+        33,
+        52,
+        37
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -12.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "e504af662cf49a5f83aa900c9d7bf6588fc0d63738ac501f758990d7f51c62db"
+    },
+    "hippocampus_084": {
+      "native_shape": [
+        34,
+        52,
+        37
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -12.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "a4912f3cb0edc40bf8c49b1d7f4659e7283af4ebdcfc915106e0859d365880a0"
+    },
+    "hippocampus_087": {
+      "native_shape": [
+        35,
+        55,
+        32
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -3.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -15.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "f8e85bcfce7e324d406f11956b8c8acfa6ff3d78e3625d8ea46dfdbc9008c697"
+    },
+    "hippocampus_088": {
+      "native_shape": [
+        40,
+        52,
+        35
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -11.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -13.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "27b0a608edd1dfa64d804119a845720cd256edfa92e0de18718cf675ad54bb1c"
+    },
+    "hippocampus_089": {
+      "native_shape": [
+        34,
+        51,
+        38
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -12.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "7cfc89024b8c378bbf345c344af1e7ee1a1207d34f97797bc6d66e3d4edf8379"
+    },
+    "hippocampus_090": {
+      "native_shape": [
+        37,
+        50,
+        40
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -12.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -6.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -11.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "56fa53c0914c278e175516b852156befc1a4213b9f4887efc2b0e21873a1f50e"
+    },
+    "hippocampus_091": {
+      "native_shape": [
+        36,
+        51,
+        29
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -16.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "4943ca2b1c0a5b55d12faaec6905fe8753d0e3c0e9609e127a71fec12454591e"
+    },
+    "hippocampus_092": {
+      "native_shape": [
+        38,
+        49,
+        28
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -12.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -6.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -17.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "c82a6ca7c58a17143beb85c10199c0edc55608c0b37618d1c02ad28ad245eb81"
+    },
+    "hippocampus_093": {
+      "native_shape": [
+        34,
+        53,
+        37
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -15.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -13.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "49c3124a3696249ff78de2edc26c67869617ed0fa2b2a567779d49cdb68b1b92"
+    },
+    "hippocampus_094": {
+      "native_shape": [
+        38,
+        50,
+        38
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -7.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -13.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "9775cff8a8ab45f58aef1aba85a844d1661e8839db2a7fe1993995af5dfc2937"
+    },
+    "hippocampus_095": {
+      "native_shape": [
+        34,
+        49,
+        39
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -6.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -11.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "dc2ce28b1533f0a6355b39688c75b8ab149876128c6725640a3659e6f41be91f"
+    },
+    "hippocampus_096": {
+      "native_shape": [
+        34,
+        47,
+        39
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -7.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -11.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "fc5ed28f5592866514fd5b178ddd3d35243ec1a68ede93719de723f38d3f5c41"
+    },
+    "hippocampus_097": {
+      "native_shape": [
+        37,
+        48,
+        34
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -12.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -7.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -14.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "34d88662c288c284901059b74215fb4acf649f72b2c009d3f2d9bad2100ea3c2"
+    },
+    "hippocampus_098": {
+      "native_shape": [
+        37,
+        48,
+        34
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -12.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -7.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -14.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "70fca7e1cd2e88732d0c6c8b3f7ff02466cd552c200cbfecf8f62be5961c66bd"
+    },
+    "hippocampus_099": {
+      "native_shape": [
+        33,
+        52,
+        27
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -17.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "fe15d50e3755ea60d69816710bd4d2a27048084dac40828cbb27208e1c2cc7bf"
+    },
+    "hippocampus_101": {
+      "native_shape": [
+        36,
+        52,
+        32
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -15.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "a0a4bae56c199954cd9a0ed2892dc2a639b91ac808448621dc5c033a3d53041f"
+    },
+    "hippocampus_102": {
+      "native_shape": [
+        36,
+        55,
+        32
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -3.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -15.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "03206091dc0c78a810c894f8ad7272a174ab25e2bff81f539fc06f5e30a74229"
+    },
+    "hippocampus_104": {
+      "native_shape": [
+        35,
+        53,
+        39
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -4.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -11.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "ce0453ca63b46ee288d1cc5405efdb28e2d9b8c23a574941e1cce754760ec0ce"
+    },
+    "hippocampus_105": {
+      "native_shape": [
+        33,
+        47,
+        37
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -7.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -12.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "5ad24f5c64387e15fe3a54c3cb50713fbe0e4a84c07c19211169c538dc91429a"
+    },
+    "hippocampus_106": {
+      "native_shape": [
+        34,
+        46,
+        38
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -8.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -12.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "70aa4518c2de83f5b1a375a9926e14529002ac5c7a83eb1075090b2c3d584c34"
+    },
+    "hippocampus_107": {
+      "native_shape": [
+        35,
+        55,
+        34
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -3.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -14.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "82d1fd31f453536afa52339be6579129c59725b584caeee665c0b7a396496dfc"
+    },
+    "hippocampus_108": {
+      "native_shape": [
+        36,
+        53,
+        37
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -4.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -12.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "c2d22a32d405c31a6cfee1066b7e097db56dc21d642fbc7513aca7a775c85142"
+    },
+    "hippocampus_109": {
+      "native_shape": [
+        36,
+        49,
+        36
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -6.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -13.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "b2b206ffc997fa56c1735215c5ce492a77b3a3e11a59cec04bcdb2cedfd1c21e"
+    },
+    "hippocampus_114": {
+      "native_shape": [
+        38,
+        50,
+        39
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -12.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -6.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -11.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "b57611b85199ef84cc8be41668713be7d2375a7ddca9bbd94ab6bf95d030d876"
+    },
+    "hippocampus_123": {
+      "native_shape": [
+        32,
+        53,
+        38
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -15.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -4.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -12.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "71913988fb92547d21ee8b009769b2274a1852808fd44637feacd11b936d10bc"
+    },
+    "hippocampus_124": {
+      "native_shape": [
+        35,
+        55,
+        41
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -3.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -10.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "f80ed2f785e818ed46d04f436245ccf035db9c34cf32203930b6027ae99a4cb7"
+    },
+    "hippocampus_125": {
+      "native_shape": [
+        43,
+        42,
+        39
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -9.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -10.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -11.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "31a4c6c882860458cebff7d330167e80daa69502f7aa04890d13b4cd3622a372"
+    },
+    "hippocampus_126": {
+      "native_shape": [
+        39,
+        44,
+        43
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -11.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -9.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -9.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "ac15bd4d7fbf543af63fadcdc14dd629d27584ab64f3b14cb377c3b78e7b0707"
+    },
+    "hippocampus_127": {
+      "native_shape": [
+        38,
+        55,
+        31
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -12.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -3.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -15.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "7f4116a4ce55150267e7ebdd07b5b541144f91ce41690e129b26fa134e19fb14"
+    },
+    "hippocampus_130": {
+      "native_shape": [
+        35,
+        49,
+        40
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -6.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -11.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "af0fd022554a02ce17028b8063ff891c2ec2348dd8b17cb4385226b6afc87354"
+    },
+    "hippocampus_132": {
+      "native_shape": [
+        36,
+        50,
+        40
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -6.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -11.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "9ebd9fc23d7c0908e9be79244c223de02cab5f11b6916f0552924956ab9168bc"
+    },
+    "hippocampus_133": {
+      "native_shape": [
+        39,
+        41,
+        42
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -11.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -10.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -10.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "401830911eee45f9a2ff67908da2a1573c092e1783c35632aca56c3a3a5e8437"
+    },
+    "hippocampus_135": {
+      "native_shape": [
+        32,
+        49,
+        38
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -15.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -6.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -12.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "702520267e09e64bedcf58d70f9cc9117a91e8b2ff8192d2347473532e74d33e"
+    },
+    "hippocampus_136": {
+      "native_shape": [
+        34,
+        49,
+        41
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -6.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -10.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "93190d2fd4526180215e059a3cfc0f1e61153a0afa37e5a023c146bf9eec866c"
+    },
+    "hippocampus_138": {
+      "native_shape": [
+        32,
+        46,
+        42
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -15.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -8.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -10.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "8f51588968dea241b36288b5cae1f43de67c6ac560fcc1841228e2fd755da710"
+    },
+    "hippocampus_141": {
+      "native_shape": [
+        33,
+        44,
+        42
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -9.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -10.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "ce9d2f588e564367bd58ee4c1846cbfc8b9f4cec3b505cafd11362c44c411258"
+    },
+    "hippocampus_142": {
+      "native_shape": [
+        38,
+        43,
+        41
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -12.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -9.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -10.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "0b279b3254e68aeaefd8ce3d7d485e6dcc41888c68155e09ca5d64abb3554852"
+    },
+    "hippocampus_143": {
+      "native_shape": [
+        32,
+        45,
+        41
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -15.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -8.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -10.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "754f26952a1a10d1c238aefce7e999fc583397b2d23550f23f60faeb58fe5640"
+    },
+    "hippocampus_144": {
+      "native_shape": [
+        34,
+        45,
+        43
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -8.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -9.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "28fb74867544daf20db960b3fa87409650e3a2d551aa9b2750d28980ca1d9519"
+    },
+    "hippocampus_145": {
+      "native_shape": [
+        36,
+        53,
+        33
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -4.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -14.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "0046b419a12fea2ba6e22fd06152799fa10e06b9e814d5dc9d9b7ed9c2caed20"
+    },
+    "hippocampus_146": {
+      "native_shape": [
+        36,
+        51,
+        32
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -15.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "1797b2e118d7386c1b05116feb84d91ab11feb9c1b0e6c1c42db06ee97dc2ed9"
+    },
+    "hippocampus_148": {
+      "native_shape": [
+        34,
+        48,
+        32
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -7.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -15.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "3ee6abfdaa2e4970d2e4e826304bbe597c732c0db8d7f32a093364a854ccc684"
+    },
+    "hippocampus_149": {
+      "native_shape": [
+        33,
+        49,
+        32
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -6.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -15.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "a4d2a9ca868bd9dc226fdf843d5ca561656b8c6b1e29ad80e25ade3acc153359"
+    },
+    "hippocampus_150": {
+      "native_shape": [
+        37,
+        49,
+        34
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -12.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -6.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -14.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "239bc799057f5e27663062638b13969794e257602b2d22ff2e92a2ae528dda0c"
+    },
+    "hippocampus_152": {
+      "native_shape": [
+        36,
+        53,
+        37
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -4.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -12.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "e1378dbd1bc726afdffa4e12ff154cac81845bd42d90bc360c5fce0deb63fa12"
+    },
+    "hippocampus_154": {
+      "native_shape": [
+        35,
+        46,
+        42
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -8.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -10.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "d2f18232d710b8dcb3fe2618235781cab11bbab3e9fbe909fad06984c9a883d7"
+    },
+    "hippocampus_155": {
+      "native_shape": [
+        34,
+        53,
+        37
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -4.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -12.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "adf6b568624e4ff02e101a5ccab27abb314c5a7755cc2d72eb765348187ddc2c"
+    },
+    "hippocampus_156": {
+      "native_shape": [
+        36,
+        52,
+        36
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -13.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "46e318579d2faa736991ff541d523d95f489e96a24ac11313dbae4bbbff8cf35"
+    },
+    "hippocampus_157": {
+      "native_shape": [
+        36,
+        51,
+        35
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -13.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "2044bb65fa17504bfce4fa538b33a54ab6b5da7a64c92bddc184814eccc15c71"
+    },
+    "hippocampus_158": {
+      "native_shape": [
+        38,
+        52,
+        36
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -12.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -13.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "1c18a3fda6752a883e7f1412f07b3430a89156ed06d5b69ff1c0eb84b4717002"
+    },
+    "hippocampus_160": {
+      "native_shape": [
+        34,
+        51,
+        26
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -18.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "03670a892ab4231327132e83c99e06657809264d2364979cce07b1eecc1cf027"
+    },
+    "hippocampus_161": {
+      "native_shape": [
+        35,
+        51,
+        36
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -13.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "e48cec50bfa19e95c4bb19b9174127c30de6a6a309cd6e460aa1066890f2f8ef"
+    },
+    "hippocampus_162": {
+      "native_shape": [
+        38,
+        51,
+        37
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -12.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -12.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "a3f5a4e82c16b7a4c96b603112ad5b6d275af948ee15f13c8cca500215b46dbf"
+    },
+    "hippocampus_163": {
+      "native_shape": [
+        36,
+        47,
+        44
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -7.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -9.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "5d274be30b50a704abd4915e7aaca4b6ff9cec0e7381c04921d42e9605aa6051"
+    },
+    "hippocampus_164": {
+      "native_shape": [
+        41,
+        48,
+        47
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -10.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -7.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -7.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "bc25f9bbd4c1cfc770f26260ef43906a1de9f6daf2cdc560a891890b1b761cf5"
+    },
+    "hippocampus_165": {
+      "native_shape": [
+        34,
+        49,
+        29
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -6.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -16.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "9f80d2c5f1c81351b0ad59db5a4d6fe65e17668de62ead17fa208de450f9be57"
+    },
+    "hippocampus_166": {
+      "native_shape": [
+        36,
+        49,
+        31
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -6.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -15.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "62a84ac7651102ecfcd8513ba0b8f3290a852fb70c430ccc3824b4cfea672171"
+    },
+    "hippocampus_169": {
+      "native_shape": [
+        36,
+        45,
+        39
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -8.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -11.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "5340bf5834db6b3c5dba3e4cd178f01dde6c2336b82b6683279b126e5f2ea2ef"
+    },
+    "hippocampus_170": {
+      "native_shape": [
+        34,
+        48,
+        40
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -7.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -11.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "a4a0b3c7335b98ce58a32a48435608e6cd712143855e39628d4473c8e103b691"
+    },
+    "hippocampus_171": {
+      "native_shape": [
+        35,
+        56,
+        28
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -3.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -17.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "25f239df5166656240904919bb51391b7225a3cab6a4a46351cc9903dee922e5"
+    },
+    "hippocampus_172": {
+      "native_shape": [
+        34,
+        56,
+        31
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -3.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -15.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "21937697eb8645d93234d22be0d0fa3cd69efbb71f6fe804e498c0db36498ad6"
+    },
+    "hippocampus_173": {
+      "native_shape": [
+        35,
+        53,
+        32
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -4.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -15.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "9cf79421ab7f41d38d19ddb6f8a7064dca9e2442989dbd05f68d9d58297d62e7"
+    },
+    "hippocampus_174": {
+      "native_shape": [
+        37,
+        55,
+        34
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -12.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -3.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -14.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "db555556d51cacb8d52c7a3529b1872cd405958627e9ce5fc43fa04d819faa72"
+    },
+    "hippocampus_175": {
+      "native_shape": [
+        33,
+        47,
+        35
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -7.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -13.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "26fbf0c336cf027ec584aba29e69a23f63d0933d68cb208765aaafa6aceba262"
+    },
+    "hippocampus_176": {
+      "native_shape": [
+        35,
+        50,
+        36
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -6.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -13.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "38dc97a17112129b1fee43c47b39a5eb080940701447ee816ffff924095a0f76"
+    },
+    "hippocampus_177": {
+      "native_shape": [
+        33,
+        44,
+        40
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -9.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -11.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "b0b47a0653f17d5f47ec908c0dd23bac514d542ac6841eb5944e118a0fbb9c38"
+    },
+    "hippocampus_178": {
+      "native_shape": [
+        35,
+        44,
+        41
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -9.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -10.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "ef8c9defcbb75258f15183e8e07a69007c81db60af3794d6edd20a161a9d43cc"
+    },
+    "hippocampus_180": {
+      "native_shape": [
+        37,
+        45,
+        36
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -12.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -8.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -13.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "a1cfaea279043f1f025be0193a6c75a47e1b0c9592180f11e4432a12c0fa279b"
+    },
+    "hippocampus_181": {
+      "native_shape": [
+        33,
+        49,
+        40
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -6.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -11.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "610819892453ff7a4240eaca96f4beda37a93d48ee0d596c02939bb0df01a87b"
+    },
+    "hippocampus_184": {
+      "native_shape": [
+        37,
+        51,
+        33
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -12.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -14.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "113ad90ab009e6094be2e2e6492476a3e40d471bc05e409bc91ef18c3d9d58c9"
+    },
+    "hippocampus_185": {
+      "native_shape": [
+        35,
+        49,
+        33
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -6.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -14.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "f6bbbc9d24c76e181bcae5cf67550abccdc61dea3a0cc415d43bd7441f360a5f"
+    },
+    "hippocampus_188": {
+      "native_shape": [
+        37,
+        54,
+        36
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -12.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -4.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -13.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "cff9e80d6cff88203cd3711996caf406c2265d11fac75c51a043c1e73e028745"
+    },
+    "hippocampus_189": {
+      "native_shape": [
+        35,
+        53,
+        30
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -4.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -16.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "d68ce1b670d5bc66550e6b77d7c82973b96b316f658590ec8e694b54f266e3dd"
+    },
+    "hippocampus_190": {
+      "native_shape": [
+        37,
+        52,
+        30
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -12.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -16.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "f7166b8608cfcacddcf6d4b6c2691f3fce9898055f1ab438d9cb000b0268b0a5"
+    },
+    "hippocampus_193": {
+      "native_shape": [
+        33,
+        50,
+        29
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -6.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -16.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "f5b0c60e2ed7d1c7195f90131c293c2830d650348fa8a3f2f4e5394346f03308"
+    },
+    "hippocampus_194": {
+      "native_shape": [
+        35,
+        50,
+        30
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -6.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -16.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "abad442231a898b8c3db2d3e2018fc66fdfe485452ea1364f01a1a95d80b6b79"
+    },
+    "hippocampus_195": {
+      "native_shape": [
+        33,
+        53,
+        28
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -4.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -17.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "66a46dcf2673474891d5f3ce205bf2b1eca1e26344d7bbdfd38193e0666835b8"
+    },
+    "hippocampus_197": {
+      "native_shape": [
+        38,
+        51,
+        31
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -12.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -15.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "68700a8a57508f38cebf774aa063c74db526c04a049ca6a4c3ec161c9d292854"
+    },
+    "hippocampus_199": {
+      "native_shape": [
+        37,
+        52,
+        26
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -6.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -19.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "7f6ec33839eaab1e26d7bce10cffe5b9b7deca80cf7dfa93b4d9a26c77b07662"
+    },
+    "hippocampus_203": {
+      "native_shape": [
+        34,
+        49,
+        38
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -6.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -12.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "95eae499d09d67a9caf292136a8f07ffbb34900e80bc30ef63525c3af57481de"
+    },
+    "hippocampus_204": {
+      "native_shape": [
+        36,
+        48,
+        39
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -7.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -11.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "6bb38a82b5ee4d21235a523f354341c1aaec6490575c71b60a8316f380b3a3cb"
+    },
+    "hippocampus_205": {
+      "native_shape": [
+        32,
+        47,
+        32
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -15.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -7.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -15.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "a06da83b56506cf06dae6af169d230cbbed83d780fd8455fdff02076eff68485"
+    },
+    "hippocampus_207": {
+      "native_shape": [
+        35,
+        53,
+        33
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -4.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -14.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "faa4e9ed5c4b06df66dc1d51e057a1c8e8ccfd9d634da70f449226f9ee51c534"
+    },
+    "hippocampus_210": {
+      "native_shape": [
+        34,
+        48,
+        40
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -7.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -11.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "2942073780d53c1ff4459cb154221801d9f8363cc970f194e1837b456b29ee8b"
+    },
+    "hippocampus_212": {
+      "native_shape": [
+        35,
+        56,
+        34
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -3.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -14.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "5083aeef6ffe9c6de6cfbf32b9a1a180f3407f3f838aafa58ad7634edf827493"
+    },
+    "hippocampus_215": {
+      "native_shape": [
+        35,
+        49,
+        33
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -6.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -14.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "0a546edd19b15d294547a85d94fe479fc7c43d02c89a0a7e4c53ad3d243e847c"
+    },
+    "hippocampus_216": {
+      "native_shape": [
+        32,
+        49,
+        36
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -15.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -6.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -13.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "f7703cf7c73a6d51d1a94c4f7c70faeaeccde1fbc557158029db271726fd9f3f"
+    },
+    "hippocampus_217": {
+      "native_shape": [
+        38,
+        53,
+        27
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -12.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -4.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -17.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "56ea2e0d8ada6e552bdbe410402ddfb0d30271d3ec82217f577eb28473420ddb"
+    },
+    "hippocampus_219": {
+      "native_shape": [
+        37,
+        45,
+        39
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -12.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -8.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -11.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "b6cc91e7508b0e83ba3145a4a7fc9293b62fd59f1421cb0e2f6397e7ae693176"
+    },
+    "hippocampus_220": {
+      "native_shape": [
+        39,
+        45,
+        40
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -11.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -8.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -11.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "54e8732b6ba02645c8b61553591b336112057d74bbb985da3a7b6a550794805d"
+    },
+    "hippocampus_221": {
+      "native_shape": [
+        32,
+        48,
+        34
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -15.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -7.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -14.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "1ba4f3e672d9abcd1212fdf0f206c4cd1509bdd710d3d15764a212889d54b945"
+    },
+    "hippocampus_222": {
+      "native_shape": [
+        34,
+        49,
+        36
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -6.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -13.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "8d4bf91c50f05e2f5a93b8a54e78674e488bbd54c9d788820807dc277fef0bdf"
+    },
+    "hippocampus_223": {
+      "native_shape": [
+        35,
+        52,
+        37
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -12.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "024c330be7be5413748d3cbe76bcb87368ed013d74495edf9dd705721ab03253"
+    },
+    "hippocampus_224": {
+      "native_shape": [
+        37,
+        48,
+        37
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -12.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -7.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -12.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "e5ae0c47627e80a2ea668bee037ee39ab0e6289efbd90c3793527cba04e94d1f"
+    },
+    "hippocampus_225": {
+      "native_shape": [
+        33,
+        53,
+        26
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -4.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -18.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "38a0030ef6ba769bc403b335bbde21c310187ce9c62d04de45f35d7bda2decff"
+    },
+    "hippocampus_226": {
+      "native_shape": [
+        32,
+        51,
+        28
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -15.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -17.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "6b9d868f3e00aa0a7e9ee234083d562399d4e950e423c6a13593c4c157140b56"
+    },
+    "hippocampus_227": {
+      "native_shape": [
+        36,
+        47,
+        36
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -7.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -13.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "c429ddd18f6f40a010257257c50e6bc534506c8ccf4c44c93fcf43a0e3fff00a"
+    },
+    "hippocampus_228": {
+      "native_shape": [
+        37,
+        48,
+        36
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -12.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -7.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -13.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "84eed77cb941d50f2ed326a4149f2cef397fff4ee0e831907d0b39ce31462520"
+    },
+    "hippocampus_229": {
+      "native_shape": [
+        33,
+        50,
+        35
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -6.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -13.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "af1b7ef3b8ee064e42aacc88e3ca9c94d788835d17129445482e10a23db483fb"
+    },
+    "hippocampus_230": {
+      "native_shape": [
+        34,
+        49,
+        37
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -6.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -12.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "6610df10534f056c7753baf3057330a2099801be813b29b3a00e9fb6221cfcb8"
+    },
+    "hippocampus_231": {
+      "native_shape": [
+        33,
+        47,
+        42
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -7.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -10.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "b5991b100841dbce92846c0b3e2f04ea430c77c19d5d3c428a86d5d65fda1912"
+    },
+    "hippocampus_232": {
+      "native_shape": [
+        36,
+        44,
+        43
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -9.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -9.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "2a8457ac058447ccb183c2b9c16b94f5d784319b14918f9ac2adf8fb8865174a"
+    },
+    "hippocampus_233": {
+      "native_shape": [
+        33,
+        51,
+        37
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -12.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "2060d6edc866abe16f00027e85e312ce6d5331f7599af95b92e60c899392274b"
+    },
+    "hippocampus_234": {
+      "native_shape": [
+        38,
+        49,
+        36
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -12.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -6.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -13.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "c5343373bc547dd66309dc6aa1f4a0d9a57ee22b99fa806525ad8e2080e97dd0"
+    },
+    "hippocampus_235": {
+      "native_shape": [
+        37,
+        58,
+        35
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -12.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -2.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -13.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "e7bff31e7dbf5d222c91c85c1c52590572a1eb3e584a8677e28cc089834f2710"
+    },
+    "hippocampus_236": {
+      "native_shape": [
+        37,
+        57,
+        35
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -12.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -2.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -13.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "308d1789339a9b506a06c20484ad85725d59187e22066596c56b323d866b10f3"
+    },
+    "hippocampus_238": {
+      "native_shape": [
+        37,
+        56,
+        36
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -12.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -3.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -13.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "429345c94b28d665ee0f03a17493863225483fed04dac8cd8eee9e32c5aacd50"
+    },
+    "hippocampus_242": {
+      "native_shape": [
+        38,
+        52,
+        34
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -12.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -14.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "76f90ecb60456b17e1afb0dc73cb207b3fa3c88c6e3f16e816e05f4c3459407c"
+    },
+    "hippocampus_243": {
+      "native_shape": [
+        34,
+        53,
+        24
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -4.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -19.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "c6302a4b471b9dec27c6657a511acba7e297d9dcf84d601e9de118bb3f978693"
+    },
+    "hippocampus_244": {
+      "native_shape": [
+        38,
+        53,
+        30
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -12.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -4.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -16.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "7f1fe301be97c96639fdec8cf3151b2ab7b27fc48af52e505a2bf7d6bb83f7c7"
+    },
+    "hippocampus_245": {
+      "native_shape": [
+        35,
+        48,
+        42
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -8.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -11.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "9adb5b1344559d235ad0c5ce57013a3c59e5ec24bdc783a5e49f7c9d46eafb2e"
+    },
+    "hippocampus_248": {
+      "native_shape": [
+        36,
+        50,
+        38
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -6.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -12.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "cd0cf81b86f1f490c4f55feee437a2ad93d21e4bbc7297d85981f5532aadfe0d"
+    },
+    "hippocampus_249": {
+      "native_shape": [
+        32,
+        52,
+        34
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -15.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -14.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "55e3f993d0bff8f4f682a062863a6079263d4a428ea0c8d8fbaa0f28dc9c72bf"
+    },
+    "hippocampus_250": {
+      "native_shape": [
+        35,
+        51,
+        36
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -13.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "ac012a747c861a1f70439e0e0549cbba0437874dad142c20707ce4ebb7fc387a"
+    },
+    "hippocampus_251": {
+      "native_shape": [
+        36,
+        58,
+        28
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -2.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -17.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "e16d051fa48d596e1806935a34880e40a0efe440b7eaf8c45c99ca6f182bbb43"
+    },
+    "hippocampus_252": {
+      "native_shape": [
+        37,
+        55,
+        26
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -12.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -3.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -18.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "2728d49554e9bf5efd76d8bd9f9eae44b888b799b4bfa596858c0f54d3654298"
+    },
+    "hippocampus_253": {
+      "native_shape": [
+        34,
+        51,
+        31
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -15.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -6.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -16.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "54c39cdacef5ae619b00c319d9e200e9a88a128b0d008e49ea58a2b1a3293df3"
+    },
+    "hippocampus_257": {
+      "native_shape": [
+        34,
+        51,
+        33
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -14.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "0406d0ebd8798e71a8e66121b2cfc2cf5f413524ebd4e3b9a202898767b935ea"
+    },
+    "hippocampus_259": {
+      "native_shape": [
+        33,
+        51,
+        28
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -17.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "3228e533466f3719dd5da55a36b4fc18b7ebd04f9a573524de5442d459878852"
+    },
+    "hippocampus_260": {
+      "native_shape": [
+        35,
+        53,
+        29
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -4.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -16.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "b42a87b8a69c897c5187f40275d0ebb04695bfc54af2c28a9686def4ef98745b"
+    },
+    "hippocampus_261": {
+      "native_shape": [
+        36,
+        58,
+        33
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -2.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -14.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "49adea47d6e8a8c5a90b56037d8888e4fda62c7306565e5b7fc4a02cfd42e999"
+    },
+    "hippocampus_263": {
+      "native_shape": [
+        36,
+        51,
+        35
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -13.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "6a3fdc6d9efa6cc5c3c8855abba14bf93f4a99dcd83b40288378baff6c8e404e"
+    },
+    "hippocampus_264": {
+      "native_shape": [
+        38,
+        51,
+        37
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -12.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -12.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "26f9ce83004eb4fc42387ceb54a35ef6522184f9fe72ed679708f4a248a10a75"
+    },
+    "hippocampus_265": {
+      "native_shape": [
+        31,
+        54,
+        34
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -15.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -4.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -14.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "838015a1b19b0f32df45b0cab3bf590bfd68c602b469c51faa41ac5a5f88aada"
+    },
+    "hippocampus_268": {
+      "native_shape": [
+        34,
+        51,
+        37
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -15.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -6.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -13.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "abf31562f218eb5bb0743bc855d99250cb1de9a09b3e759a29aa089894d659aa"
+    },
+    "hippocampus_269": {
+      "native_shape": [
+        35,
+        49,
+        37
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -6.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -12.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "dd0b6b9d9233d133c914146bf4a9c7d4c8fdb76afb4540287b76c97c2c90964f"
+    },
+    "hippocampus_274": {
+      "native_shape": [
+        35,
+        40,
+        40
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -11.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -11.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "a6001b037aa944d6c90fe81fed2719967a415a66ae7f4b4ce0e9330040af6bcb"
+    },
+    "hippocampus_276": {
+      "native_shape": [
+        35,
+        50,
+        33
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -6.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -14.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "ab9d9d23909f7453198feb72751c8003e0e47e77d2ba9e1c1b358878ec28231d"
+    },
+    "hippocampus_277": {
+      "native_shape": [
+        33,
+        59,
+        29
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -1.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -16.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "afe2ff3f7f13ccbec6ce1b3cd8f9dd0cfe18edeaa11951a72d503bac81f14eb9"
+    },
+    "hippocampus_279": {
+      "native_shape": [
+        34,
+        50,
+        32
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -6.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -15.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "4e992c76b906dff150bdf7c17b6a35f3fc7ec2f2af290a9f984b514ee57555cc"
+    },
+    "hippocampus_280": {
+      "native_shape": [
+        37,
+        47,
+        32
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -12.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -7.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -15.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "be00fbe0c33096e2baaafcdc394dfde74ff8ad194f71a0b655582c1fb53ff6ea"
+    },
+    "hippocampus_282": {
+      "native_shape": [
+        37,
+        52,
+        32
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -12.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -15.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "15faaf35dfb24d6cbe2122fcb6158d34f8816c23c6c93fad7c5eca14dca3d5bb"
+    },
+    "hippocampus_286": {
+      "native_shape": [
+        37,
+        45,
+        46
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -12.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -8.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -8.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "81000643d735c4b2cfd16ccfec2a0710e9f3c536462b09def86cb2f9a07f45ab"
+    },
+    "hippocampus_287": {
+      "native_shape": [
+        37,
+        50,
+        39
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -12.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -6.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -11.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "b68559cdcb40f298a35be98e91294706510ef062072585f94a5e8e5d8b87c8e0"
+    },
+    "hippocampus_288": {
+      "native_shape": [
+        38,
+        50,
+        42
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -12.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -6.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -10.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "540f172c05901ad0e26759f826e2828ac79e519e34950454660ae80e65963415"
+    },
+    "hippocampus_289": {
+      "native_shape": [
+        35,
+        49,
+        36
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -6.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -13.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "6789c0bc36b68f514f4000040da1349e76f2f87f91ab3bedaecf5d13b6fa0425"
+    },
+    "hippocampus_290": {
+      "native_shape": [
+        35,
+        49,
+        40
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -6.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -11.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "09837ee67dd46c9116484b1517fac4d09c23408e1e6ff68f81078467e85761cf"
+    },
+    "hippocampus_292": {
+      "native_shape": [
+        38,
+        52,
+        33
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -12.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -14.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "8e6c0879c1fe9878b7675d55ffb9ee10416b32be655152e8fa2f4a75ff20d484"
+    },
+    "hippocampus_294": {
+      "native_shape": [
+        35,
+        44,
+        44
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -9.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -9.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "49ec1c023dbf89521749028f80decbdd512bd01971cd68402ee7dc4c4664f1ff"
+    },
+    "hippocampus_295": {
+      "native_shape": [
+        35,
+        53,
+        36
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -4.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -13.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "903c38ca1aab1f623ac3771519ec03a454e6ed2838acbc57210e13e6fe1f8a9f"
+    },
+    "hippocampus_296": {
+      "native_shape": [
+        35,
+        54,
+        35
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -4.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -13.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "8e3903ffb808cdc6ad4afe05577cb5d3f6c5476eae0cc63bf40bfaca139dd440"
+    },
+    "hippocampus_297": {
+      "native_shape": [
+        34,
+        51,
+        30
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -16.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "37a24e38cd58041abc69784e65a5dd090c595be495db7d846738fa482dea4354"
+    },
+    "hippocampus_298": {
+      "native_shape": [
+        37,
+        50,
+        33
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -12.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -6.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -14.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "b5c340b7a99a23cff535c70a051d7eacd6d06999801e4f1ce17d832960ea129d"
+    },
+    "hippocampus_299": {
+      "native_shape": [
+        32,
+        54,
+        34
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -15.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -4.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -14.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "e93595f3177f85005e6718a20af3cb9fe1fbdafae89e53c904eb678e96f1afde"
+    },
+    "hippocampus_300": {
+      "native_shape": [
+        34,
+        53,
+        35
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -4.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -13.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "72f942e7dcb4ee9e87cd853bc3e0e6df976faef54a8e153d51d4eab01f8de649"
+    },
+    "hippocampus_301": {
+      "native_shape": [
+        31,
+        50,
+        36
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -16.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -7.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -14.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "b0209d297e206c8e23b1a03b68517ecd2a4c62207264451606a603d8dbcf35f6"
+    },
+    "hippocampus_302": {
+      "native_shape": [
+        35,
+        46,
+        39
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -9.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -12.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "3bca186dcf9e9dc1518bc5182fcaa84b5dbc537c382479d39539a76426ac52f9"
+    },
+    "hippocampus_303": {
+      "native_shape": [
+        35,
+        48,
+        38
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -7.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -12.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "aa55b6ce263bbe024f280ac0aa2094fa27f4c04000214501cd026f3400554737"
+    },
+    "hippocampus_304": {
+      "native_shape": [
+        36,
+        48,
+        38
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -7.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -12.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "08786c7a71606c86450415bf6556fc40ea15954bcb655db27066fdccae3ea94d"
+    },
+    "hippocampus_305": {
+      "native_shape": [
+        34,
+        49,
+        30
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -15.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -7.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -17.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "1e050a8c7c0bb356a0c21ad48ab04cb1b60c6befe793a1174d4157bfb495d09a"
+    },
+    "hippocampus_308": {
+      "native_shape": [
+        38,
+        48,
+        40
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -12.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -7.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -11.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "5125da1c02307f2e51f007b22bdcc3b65c24f5c7055e4ca3349b21695c062dbe"
+    },
+    "hippocampus_309": {
+      "native_shape": [
+        34,
+        52,
+        38
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -12.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "eb344065c65bdfc110e8950117567df2be0a001afab37576a82a0f1b9e57767a"
+    },
+    "hippocampus_310": {
+      "native_shape": [
+        35,
+        52,
+        38
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -12.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "8828abb503aebc1c2627c614098ea922e57181f324bf4b80e5adb3f2063382c3"
+    },
+    "hippocampus_311": {
+      "native_shape": [
+        37,
+        49,
+        37
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -12.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -6.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -12.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "b74d47a9ecc5296d2030864adcddb4703b8fccefce225efc5131e3df3ce2fd37"
+    },
+    "hippocampus_314": {
+      "native_shape": [
+        37,
+        53,
+        33
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -12.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -4.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -14.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "df54d6028bd6621a9b087279d3ddae54693c40d441cf415b7844391dc0de6ea0"
+    },
+    "hippocampus_316": {
+      "native_shape": [
+        37,
+        51,
+        33
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -12.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -14.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "8274180b42678dcf42b31ffaefad54f680b24edae03a399205303e718a79e5ca"
+    },
+    "hippocampus_317": {
+      "native_shape": [
+        33,
+        51,
+        34
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -14.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "bd4e21b36542b737797536d777762b1a531ca3c621aa5201d063bbd55ecac5d5"
+    },
+    "hippocampus_318": {
+      "native_shape": [
+        37,
+        51,
+        33
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -12.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -14.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "b07c66d092256839cedb113af2f78120055e3c42833c3ccff97b937ffc2726b0"
+    },
+    "hippocampus_319": {
+      "native_shape": [
+        33,
+        48,
+        34
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -7.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -14.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "44a747f05bfb47c6fe42095dc751756b3308f591ad68f5d213143706faf876bb"
+    },
+    "hippocampus_320": {
+      "native_shape": [
+        33,
+        47,
+        34
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -7.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -14.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "96371cadaae7f5d8b64def8559a22aaf21d84ed8a80e3428399f924842d29da3"
+    },
+    "hippocampus_321": {
+      "native_shape": [
+        34,
+        46,
+        34
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -15.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -9.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -15.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "20a1e35f5728794d1ae6f7bc560938cbfe17044b1713dcf1f55717ec99bfe73a"
+    },
+    "hippocampus_322": {
+      "native_shape": [
+        38,
+        47,
+        37
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -8.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -13.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "65ceafc614b9d96df149adc14478689064051112495b459346c26f2ddfcc5ee0"
+    },
+    "hippocampus_325": {
+      "native_shape": [
+        35,
+        51,
+        40
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -11.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "6ab299d8fab51d740f5c9d9020bed86cdc65d2683ba981d9876a3bb2b932d247"
+    },
+    "hippocampus_326": {
+      "native_shape": [
+        36,
+        49,
+        41
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -6.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -10.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "200c81ff14548cd21a786ec25ceb00990a8690f2f643d0c11fffb74c1fbbd9af"
+    },
+    "hippocampus_327": {
+      "native_shape": [
+        36,
+        54,
+        27
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -4.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -17.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "3d7169389456c6580179f927677590cf78259d7c46c8ee8769dfb50998e15a6d"
+    },
+    "hippocampus_328": {
+      "native_shape": [
+        38,
+        54,
+        30
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -12.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -4.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -16.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "c4f53728800e28438e026d94873e4ecbc6c2cb591db175c1d14913434c359c28"
+    },
+    "hippocampus_329": {
+      "native_shape": [
+        34,
+        53,
+        32
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -4.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -15.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "67a8fe15c9bdd58e54630046b4da0210109642fa67b668bf0230a070a5ccfc54"
+    },
+    "hippocampus_330": {
+      "native_shape": [
+        35,
+        55,
+        33
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -3.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -14.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "aea31ad0c00dccfbc10c5f5c03775204983e17db312ab4d77ab5d07dd00d7f19"
+    },
+    "hippocampus_331": {
+      "native_shape": [
+        35,
+        52,
+        33
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -6.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -15.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "23c7c072646497dbefe9a4507734eea0e6a22b11afcbcdc062cb5887512d91c5"
+    },
+    "hippocampus_332": {
+      "native_shape": [
+        35,
+        52,
+        33
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -6.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -15.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "f5f1c1abfb3d18a1ec624929a715773978c4445230a367303a3b145df0c0687a"
+    },
+    "hippocampus_333": {
+      "native_shape": [
+        33,
+        46,
+        38
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -8.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -12.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "49016f1c13c8c04d59ee41994b7f70689020498a1948378da246038da055b577"
+    },
+    "hippocampus_334": {
+      "native_shape": [
+        34,
+        47,
+        36
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -7.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -13.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "639019c13de3cd7246ccdb05b4d4a349ce3c0abdb6faf6ecb5947c35eb8d927b"
+    },
+    "hippocampus_335": {
+      "native_shape": [
+        32,
+        47,
+        41
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -15.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -7.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -10.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "0f05a8ca14017ec99c68b29c87909c14d8e24677d2cb55746290ba963e8e083c"
+    },
+    "hippocampus_336": {
+      "native_shape": [
+        34,
+        47,
+        43
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -7.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -9.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "c2a2ac5788e605db4872ac65bb3454be4fb75e2ee16dc1627cd6b741c0e30648"
+    },
+    "hippocampus_337": {
+      "native_shape": [
+        33,
+        44,
+        41
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -9.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -10.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "b9a2d9b932bf7325c1e06309a633cda1201f1bcd5bbc6d4fcb15768344ada6cc"
+    },
+    "hippocampus_338": {
+      "native_shape": [
+        37,
+        43,
+        43
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -12.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -9.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -9.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "67a7c71fa4614102f647ba21fc7c423fd370b6f7f1a2b0351cce8315aeb47bf2"
+    },
+    "hippocampus_340": {
+      "native_shape": [
+        35,
+        46,
+        38
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -8.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -12.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "5ae79f11c55ef7aa09894a654a2f7143cd94577382046f0f09a42c1960acde03"
+    },
+    "hippocampus_341": {
+      "native_shape": [
+        34,
+        48,
+        35
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -7.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -13.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "f388a497873f994d99bb5315ca04712f8e15377575933df0e5e3e5137039e3ec"
+    },
+    "hippocampus_343": {
+      "native_shape": [
+        32,
+        45,
+        38
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -15.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -8.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -12.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "e996b37daa88b2ac48c3f8040d96330aa8269809973753d61e4689b0f77b8a01"
+    },
+    "hippocampus_345": {
+      "native_shape": [
+        32,
+        49,
+        30
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -15.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -6.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -16.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "d59406f25d4a1f657fa6cd3ce7aeaf24d21a192c2b53349bfb6782bda5ec9294"
+    },
+    "hippocampus_349": {
+      "native_shape": [
+        34,
+        50,
+        34
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -6.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -14.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "f6a852ce76e30fd587005674e14b3d2c6f4eca567d1fb42b3afc080908350382"
+    },
+    "hippocampus_350": {
+      "native_shape": [
+        35,
+        49,
+        34
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -6.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -14.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "3017719d8917e2f7865a13dc965332848a80a7c363c578634dec297164f3aa1d"
+    },
+    "hippocampus_351": {
+      "native_shape": [
+        35,
+        51,
+        35
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -13.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "71839721d98002f22c8c6db78ac2fa567cab5672f8932bc98ea007c0d13833f9"
+    },
+    "hippocampus_352": {
+      "native_shape": [
+        38,
+        51,
+        35
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -12.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -13.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "5987303aedde6f337d81ad3231e01f081958bbcab00fe14767627a756761d5ab"
+    },
+    "hippocampus_353": {
+      "native_shape": [
+        32,
+        51,
+        31
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -15.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -15.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "2d47d2500104e6db3663841fa43b49c830f8c6950cf4d9ae78de156c2e75e3aa"
+    },
+    "hippocampus_354": {
+      "native_shape": [
+        36,
+        50,
+        32
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -6.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -15.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "8129ee93808dcca549137df5f1c63d1db611d3bd6f0920fe7787f9e1455a0d11"
+    },
+    "hippocampus_355": {
+      "native_shape": [
+        33,
+        47,
+        38
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -7.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -12.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "d1863dea559c474e8494c507cf69536450e89d07482ad67ec51db9e909289a07"
+    },
+    "hippocampus_356": {
+      "native_shape": [
+        36,
+        51,
+        37
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -12.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "ea88f8e231b6512f29b87866759130c4440d3a4a9695524cdd65e99f7d6543f3"
+    },
+    "hippocampus_358": {
+      "native_shape": [
+        35,
+        50,
+        34
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -6.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -14.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "df3eee46d5b57cdad463bdfec561d0ec0c83e41be082dd3547f86441337bae51"
+    },
+    "hippocampus_359": {
+      "native_shape": [
+        35,
+        49,
+        35
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -6.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -13.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "e896bbfeba155ce15cab8857ab9a598a137f9e6cfa402cc090e157e69ba523d5"
+    },
+    "hippocampus_360": {
+      "native_shape": [
+        34,
+        49,
+        37
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -6.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -12.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "f430de4294a7558905de15920847a988953455b9031ee11a93af1f2063ad1a86"
+    },
+    "hippocampus_361": {
+      "native_shape": [
+        36,
+        50,
+        33
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -7.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -15.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "6081a029c9a5d5748579a957bea029e979fe96c17f5c93f52d1edb0cec730525"
+    },
+    "hippocampus_363": {
+      "native_shape": [
+        38,
+        52,
+        35
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -12.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -13.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "dda7c27b8a331a8b2564490b88a9e7fc736d36a6810eabc685d843686372e306"
+    },
+    "hippocampus_366": {
+      "native_shape": [
+        37,
+        47,
+        34
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -12.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -7.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -14.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "64a3592a2648d5084c1d1fba5adc0815fa86a6debbc420b1fee3e6cbc6d5a144"
+    },
+    "hippocampus_367": {
+      "native_shape": [
+        36,
+        57,
+        37
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -2.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -12.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "468c887e4974ead7413145288c475202d11a252742949c27c033e428bd77004d"
+    },
+    "hippocampus_368": {
+      "native_shape": [
+        38,
+        55,
+        40
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -12.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -3.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -11.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "432d35d8e9759cd37ecfa504e8a394f7bb2b9bd63c4579d63441b5bf8cce8933"
+    },
+    "hippocampus_370": {
+      "native_shape": [
+        35,
+        50,
+        36
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -6.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -13.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "5569f21a425a2cdeab23ec1dbe3f00313adb31daddf99c347f542f6619e9a4e5"
+    },
+    "hippocampus_372": {
+      "native_shape": [
+        36,
+        50,
+        34
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -6.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -14.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "f1049cc160303de08379df9880618f4f4d617425f4d62b085ba3a5a1c35ff1bf"
+    },
+    "hippocampus_373": {
+      "native_shape": [
+        34,
+        49,
+        35
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -6.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -13.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "fcec98dd8c0ffc5b5d1ab864d8ed818ff18d992b2770c7170c16c51f08bc6fc9"
+    },
+    "hippocampus_374": {
+      "native_shape": [
+        38,
+        48,
+        39
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -12.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -7.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -11.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "1f304485ada9f7fb9ba1abc97c7ea54d845472c57762214b4b08ffb5dad79c6a"
+    },
+    "hippocampus_375": {
+      "native_shape": [
+        32,
+        54,
+        34
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -16.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -15.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "32a77bd3e5dea198ce756fbf2e706349a9f4fcbe6391ba177358baccd2eb81d1"
+    },
+    "hippocampus_376": {
+      "native_shape": [
+        35,
+        55,
+        37
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -4.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -13.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "6219ebe1598850271ad7aa48529923a4ff1dad1c02a999307f89c370c21b4517"
+    },
+    "hippocampus_378": {
+      "native_shape": [
+        35,
+        52,
+        34
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -14.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "519832d4a7d5ebc1f18d5bd2a14fe989c1a82840ddc11a1dc5807608272070fd"
+    },
+    "hippocampus_380": {
+      "native_shape": [
+        35,
+        46,
+        42
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -8.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -10.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "0e647dfd05db78f4af5de28b54ec381792242964b25cd796e8d22a036a280ecd"
+    },
+    "hippocampus_381": {
+      "native_shape": [
+        33,
+        49,
+        37
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -6.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -12.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "4d1e40e692c7684fb83ba1f64c9eacc49abbb3402e927683c06af62b2776670c"
+    },
+    "hippocampus_383": {
+      "native_shape": [
+        33,
+        55,
+        29
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -3.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -16.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "d870e9dd68e9f3133d4be4210f9f18376c2bfe65e572746e9e5a1df14fb650d6"
+    },
+    "hippocampus_385": {
+      "native_shape": [
+        35,
+        48,
+        40
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -7.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -11.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "58ec6e50961be139cd510e14b44559de97d9d9f0bbe11a138f805d50c8618cb0"
+    },
+    "hippocampus_386": {
+      "native_shape": [
+        37,
+        45,
+        40
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -12.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -8.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -11.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "1cfcc7767df243a5ec230123223c42b071cb6ad3fd55ba1dd2d57a8be8225402"
+    },
+    "hippocampus_387": {
+      "native_shape": [
+        33,
+        51,
+        32
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -15.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "044746d1f748551321966db268dae5e26d493ceb395f2d237579353615200e87"
+    },
+    "hippocampus_389": {
+      "native_shape": [
+        34,
+        49,
+        32
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -14.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -6.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -15.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "b44f3cd7aa77d23464034be0159b40b51a0881cffe161ac40484722417059262"
+    },
+    "hippocampus_390": {
+      "native_shape": [
+        38,
+        51,
+        33
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -12.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -14.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "5e26572ecde18cc0ca94d5714b2af07736525a1796237a501fcfaa16027ca6a4"
+    },
+    "hippocampus_393": {
+      "native_shape": [
+        36,
+        51,
+        31
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -15.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "7a64230cec75ec4d03f8bc2fca93d61df6de4fa419879b084cd1e765c76a1bbe"
+    },
+    "hippocampus_394": {
+      "native_shape": [
+        36,
+        52,
+        32
+      ],
+      "model_affine": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -13.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -5.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -15.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "label_array_sha256": "cf8e7bde3fee4a2bf83b940a053214013d982998789a0ac6899aae2dd455e046"
+    }
+  },
+  "pkl": "/home/3160552/hippo/datasets/Dataset101_MSD/msd_hippocampus_full.pkl",
+  "name": "tissue_profiles_fold0_seed0_20261007_01",
+  "seed": 0,
+  "prior_root": "/mnt/beegfsstudents/home/3160552/unwrapped_swin_fold0_seed0_20261006_02",
+  "prior_protocol_sha256": "7c2463217b51e39399a32f580e6b3dc7f4907a6460cdc20c23626221115c9fa0",
+  "atlas_protocol_sha256": "95fee3d5eacfa62ec2b956c0ad71760304bd0489f8fb3a84158d5b0cc48a5bd6",
+  "main_runs": 36,
+  "runs": [
+    {
+      "id": "5pct_dice_profile_s0",
+      "fraction": "5pct",
+      "seed": 0,
+      "profile_variant": "pooled",
+      "arm": "native"
+    },
+    {
+      "id": "5pct_dice_multiscale_s0",
+      "fraction": "5pct",
+      "seed": 0,
+      "profile_variant": "multiscale",
+      "arm": "native"
+    },
+    {
+      "id": "5pct_dice_profile_s0_plane_position",
+      "fraction": "5pct",
+      "seed": 0,
+      "profile_variant": "pooled",
+      "arm": "plane_position"
+    },
+    {
+      "id": "5pct_dice_multiscale_s0_plane_position",
+      "fraction": "5pct",
+      "seed": 0,
+      "profile_variant": "multiscale",
+      "arm": "plane_position"
+    },
+    {
+      "id": "5pct_dice_profile_s0_unfold_position",
+      "fraction": "5pct",
+      "seed": 0,
+      "profile_variant": "pooled",
+      "arm": "unfold_position"
+    },
+    {
+      "id": "5pct_dice_multiscale_s0_unfold_position",
+      "fraction": "5pct",
+      "seed": 0,
+      "profile_variant": "multiscale",
+      "arm": "unfold_position"
+    },
+    {
+      "id": "full_dice_profile_s0",
+      "fraction": "full",
+      "seed": 0,
+      "profile_variant": "pooled",
+      "arm": "native"
+    },
+    {
+      "id": "full_dice_multiscale_s0",
+      "fraction": "full",
+      "seed": 0,
+      "profile_variant": "multiscale",
+      "arm": "native"
+    },
+    {
+      "id": "full_dice_profile_s0_plane_attention",
+      "fraction": "full",
+      "seed": 0,
+      "profile_variant": "pooled",
+      "arm": "plane_attention"
+    },
+    {
+      "id": "full_dice_multiscale_s0_plane_attention",
+      "fraction": "full",
+      "seed": 0,
+      "profile_variant": "multiscale",
+      "arm": "plane_attention"
+    },
+    {
+      "id": "full_dice_profile_s0_unfold_attention",
+      "fraction": "full",
+      "seed": 0,
+      "profile_variant": "pooled",
+      "arm": "unfold_attention"
+    },
+    {
+      "id": "full_dice_multiscale_s0_unfold_attention",
+      "fraction": "full",
+      "seed": 0,
+      "profile_variant": "multiscale",
+      "arm": "unfold_attention"
+    },
+    {
+      "id": "5pct_dice_s0_informed",
+      "fraction": "5pct",
+      "seed": 0,
+      "profile_variant": "none",
+      "arm": "informed"
+    },
+    {
+      "id": "5pct_dice_profile_s0_informed",
+      "fraction": "5pct",
+      "seed": 0,
+      "profile_variant": "pooled",
+      "arm": "informed"
+    },
+    {
+      "id": "5pct_dice_multiscale_s0_informed",
+      "fraction": "5pct",
+      "seed": 0,
+      "profile_variant": "multiscale",
+      "arm": "informed"
+    },
+    {
+      "id": "full_dice_s0_informed",
+      "fraction": "full",
+      "seed": 0,
+      "profile_variant": "none",
+      "arm": "informed"
+    },
+    {
+      "id": "full_dice_profile_s0_informed",
+      "fraction": "full",
+      "seed": 0,
+      "profile_variant": "pooled",
+      "arm": "informed"
+    },
+    {
+      "id": "full_dice_multiscale_s0_informed",
+      "fraction": "full",
+      "seed": 0,
+      "profile_variant": "multiscale",
+      "arm": "informed"
+    },
+    {
+      "id": "5pct_dice_s0_plane_mri_context",
+      "fraction": "5pct",
+      "seed": 0,
+      "profile_variant": "none",
+      "arm": "plane_mri_context"
+    },
+    {
+      "id": "5pct_dice_s0_unfold_mri_context",
+      "fraction": "5pct",
+      "seed": 0,
+      "profile_variant": "none",
+      "arm": "unfold_mri_context"
+    },
+    {
+      "id": "full_dice_s0_plane_mri_attention",
+      "fraction": "full",
+      "seed": 0,
+      "profile_variant": "none",
+      "arm": "plane_mri_attention"
+    },
+    {
+      "id": "full_dice_s0_unfold_mri_attention",
+      "fraction": "full",
+      "seed": 0,
+      "profile_variant": "none",
+      "arm": "unfold_mri_attention"
+    },
+    {
+      "id": "5pct_dice_profile_s0_plane_mri_context",
+      "fraction": "5pct",
+      "seed": 0,
+      "profile_variant": "pooled",
+      "arm": "plane_mri_context"
+    },
+    {
+      "id": "5pct_dice_multiscale_s0_plane_mri_context",
+      "fraction": "5pct",
+      "seed": 0,
+      "profile_variant": "multiscale",
+      "arm": "plane_mri_context"
+    },
+    {
+      "id": "5pct_dice_profile_s0_unfold_mri_context",
+      "fraction": "5pct",
+      "seed": 0,
+      "profile_variant": "pooled",
+      "arm": "unfold_mri_context"
+    },
+    {
+      "id": "5pct_dice_multiscale_s0_unfold_mri_context",
+      "fraction": "5pct",
+      "seed": 0,
+      "profile_variant": "multiscale",
+      "arm": "unfold_mri_context"
+    },
+    {
+      "id": "full_dice_profile_s0_plane_mri_attention",
+      "fraction": "full",
+      "seed": 0,
+      "profile_variant": "pooled",
+      "arm": "plane_mri_attention"
+    },
+    {
+      "id": "full_dice_multiscale_s0_plane_mri_attention",
+      "fraction": "full",
+      "seed": 0,
+      "profile_variant": "multiscale",
+      "arm": "plane_mri_attention"
+    },
+    {
+      "id": "full_dice_profile_s0_unfold_mri_attention",
+      "fraction": "full",
+      "seed": 0,
+      "profile_variant": "pooled",
+      "arm": "unfold_mri_attention"
+    },
+    {
+      "id": "full_dice_multiscale_s0_unfold_mri_attention",
+      "fraction": "full",
+      "seed": 0,
+      "profile_variant": "multiscale",
+      "arm": "unfold_mri_attention"
+    },
+    {
+      "id": "5pct_dice_s0_native_mri_context",
+      "fraction": "5pct",
+      "seed": 0,
+      "profile_variant": "none",
+      "arm": "native_mri_context"
+    },
+    {
+      "id": "5pct_dice_profile_s0_native_mri_context",
+      "fraction": "5pct",
+      "seed": 0,
+      "profile_variant": "pooled",
+      "arm": "native_mri_context"
+    },
+    {
+      "id": "5pct_dice_multiscale_s0_native_mri_context",
+      "fraction": "5pct",
+      "seed": 0,
+      "profile_variant": "multiscale",
+      "arm": "native_mri_context"
+    },
+    {
+      "id": "full_dice_s0_native_mri_attention",
+      "fraction": "full",
+      "seed": 0,
+      "profile_variant": "none",
+      "arm": "native_mri_attention"
+    },
+    {
+      "id": "full_dice_profile_s0_native_mri_attention",
+      "fraction": "full",
+      "seed": 0,
+      "profile_variant": "pooled",
+      "arm": "native_mri_attention"
+    },
+    {
+      "id": "full_dice_multiscale_s0_native_mri_attention",
+      "fraction": "full",
+      "seed": 0,
+      "profile_variant": "multiscale",
+      "arm": "native_mri_attention"
+    }
+  ],
+  "view_pairs": {
+    "5pct": [
+      "plane_position",
+      "unfold_position"
+    ],
+    "full": [
+      "plane_attention",
+      "unfold_attention"
+    ]
+  },
+  "mri_view_pairs": {
+    "5pct": [
+      "plane_mri_context",
+      "unfold_mri_context"
+    ],
+    "full": [
+      "plane_mri_attention",
+      "unfold_mri_attention"
+    ]
+  },
+  "native_mri_arms": {
+    "5pct": "native_mri_context",
+    "full": "native_mri_attention"
+  },
+  "mri_view_input": {
+    "channels": [
+      "MRI intensity"
+    ],
+    "objectives": [
+      "Dice only",
+      "Dice + pooled profiles",
+      "Dice + multiscale profiles"
+    ],
+    "architecture": "Match existing plane/unwrapped context branches at 5% and attention branches at full data. Both auxiliary input convolutions have one MRI channel; no longitudinal, depth or support channel is learned.",
+    "bookkeeping": "Keep chart valid-sample masks for masked global pooling and native return indices/support for mapping and the unchanged fusion. These are geometric operations, not extra auxiliary convolution input channels.",
+    "initialization": "Retain the seed-matched original branch weights throughout; slice the input convolution weights to their MRI channel. All parameters train jointly.",
+    "interpretation": "Compare with existing Dice-only position-enabled branches and native MRI controls. Different-view processing, extra capacity, sampling and geometric routing remain bundled; MRI-only branches still require the frozen guide geometry."
+  },
+  "native_mri_input": {
+    "channels": [
+      "MRI intensity"
+    ],
+    "architecture": "Same MRI-only auxiliary encoder, context, attention and fusion as its fraction-matched plane/unwrapped controls. Identical parameter count and seed-matched initial state.",
+    "sampling": "Keep the exact same guide ROI source voxels and chart memberships. For each chart, sample original MRI voxel centers in the original axis orientation; crop to the chart bounding box, add one empty-voxel margin, pad dimensions to multiples of eight, and preserve separate chart support. Map back using native indices and identity-coordinate grid sampling.",
+    "precision": "Match alternative-view input storage by casting MRI samples to float16 before encoding; no interpolation is applied to native MRI samples.",
+    "differences": "Native and alternative-view grids differ in orientation, spacing, tensor shape, empty-cell layout and interpolation. Native pooling groups the same source membership but the raster support and effective convolution footprint differ. This controls branch capacity and chart partitions, not all sampling effects.",
+    "labels": "No annotations are used to construct these inputs; use only native MRI and frozen guide chart membership."
+  },
+  "analysis_plan": {
+    "metrics": [
+      "macro_dice",
+      "anterior_dice",
+      "posterior_dice",
+      "foreground_dice",
+      "missed",
+      "extra",
+      "swaps",
+      "surface_distance_mean_mm",
+      "hd95_mm",
+      "parameter_count",
+      "runtime"
+    ],
+    "comparisons": [
+      "native MRI auxiliary versus ordinary SwinUNETR at each loss",
+      "plane/unwrapped MRI auxiliary versus native MRI auxiliary at each loss",
+      "position-enabled versus MRI-only auxiliary at each view and loss",
+      "directly informed SwinUNETR versus auxiliary architectures at each loss",
+      "each constrained architecture versus its own Dice control"
+    ],
+    "replication": "Single-seed results are preliminary. Prioritize matched native-aux versus ordinary, alternative-view versus native-aux, position-enabled versus MRI-only at the winning view, and constraint versus own Dice comparisons for seeds 1 and 2 on the same split. Replicate both fractions before reliability claims; selection on this validation set requires held-out confirmation."
+  },
+  "informed_input": {
+    "channels": [
+      "native MRI",
+      "longitudinal position / 32 mm",
+      "signed plane depth / 16 mm",
+      "guide ROI support"
+    ],
+    "source": "Same fraction-specific frozen OOF guide-derived center, basis and native ROI indices as the auxiliary branches; no annotation or UV input.",
+    "support": "Guide foreground plus 8 mm context, intersected with original MRI FOV. Position channels and support are zero outside this ROI. MRI remains unchanged across the full padded native grid.",
+    "architecture": "One four-input-channel SwinUNETR, no auxiliary encoder, view resampling, or feature fusion. All parameters train jointly.",
+    "initialization": "Keep the seed-matched one-channel model weights, expand its three input convolutions to four channels, initialize additional channel weights to zero and train them from the first update. No frozen parameters.",
+    "interpretation": "Tests direct input of the same anatomical descriptors against MRI only and existing view branches. Native coordinates are exact before chart rasterization. Branch comparisons still differ in capacity, interpolation, chart neighborhoods and fusion; they cannot by themselves isolate unfolding."
+  },
+  "branch_policy": "Retain all four native-only tests and add the matched plane and unwrapped input branches for both losses and both fractions. Reuse previously selected position/context branches at 5% and attention branches at full data, with ordinary fusion, no entropy gates. Train all native/branch/fusion parameters jointly from scratch. The anatomical loss is applied to the final native-grid logits identically for all views; only the input branch changes.",
+  "branch_baseline_root": "/mnt/beegfsstudents/home/3160552/unwrapped_followup_fold0_20261007_01",
+  "branch_baseline_identity": "cbc7fe400e9ffa5761c316f9637d16c6f34b0f632d474ed4a17a912b0c0378d3",
+  "required_dependencies": {
+    "monai": "1.6.0"
+  },
+  "profile_geometry": {
+    "band_mm": 2.0,
+    "longitudinal_mm": 2.0
+  },
+  "multiscale_geometry": [
+    {
+      "band_mm": 2.0,
+      "longitudinal_mm": 4.0,
+      "transverse_mm": 4.0
+    },
+    {
+      "band_mm": 2.0,
+      "longitudinal_mm": 2.0,
+      "transverse_mm": 2.0
+    }
+  ],
+  "multiscale_definition": "Within each signed 2 mm depth layer retain transverse strips and longitudinal bins at two resolutions: 4 mm and 2 mm. Compute the same symmetric cumulative discrepancy separately for every depth/strip/class row. Average the two scale losses equally; each has one global GT foreground volume denominator and longitudinal-extent normalization. No strip or depth balancing. Native probabilities and GT use identical fixed voxel-to-cell maps. Finite cells can still hide within-cell cancellation; Dice remains.",
+  "calibration": {
+    "prefix_epochs": 5,
+    "ramp_epochs": 5,
+    "target_ratio": 0.1,
+    "cap_ratio": 0.5,
+    "max_cases": 32
+  },
+  "permitted_losses": [
+    "Dice",
+    "symmetric cumulative anterior/posterior tissue-profile distance"
+  ],
+  "profile_definition": "Sum native voxel probability times physical voxel volume in separate signed-depth and longitudinal bins. Compare forward and reverse longitudinal cumulative sums, sum absolute differences over both foreground labels and all depth bins, divide by 2 * number of longitudinal bins * max(total GT foreground mm3, 1 mm3). No per-bin reweighting, independent mass normalization, CE, SDF, focal or topology terms.",
+  "coordinate_policy": "The loss reuses only the frozen guide-derived atlas center and orthonormal basis. Same fixed frame for probabilities and targets. Training guides are out-of-fold. All native MRI field-of-view voxels contribute, including background; artificial zero padding does not. Native controls have no branch; plane/unwrapped variants also use the existing view inputs and native return indices for feature fusion. Neither view rendering defines the loss correspondence.",
+  "calibration_policy": "After five Dice-only epochs, compute one fixed coefficient per run on at most 32 training cases using median logit-gradient RMS ratio 0.1 capped at p95 ratio 0.5; ramp linearly in epochs 6-10. For multiscale calibrate the mean of both scales as a single term. No validation-based weight selection.",
+  "baseline_policy": "Reuse completed native Dice-only controls for these exact case splits, seed, preprocessing, optimizer and stopping protocol; do not rerun them.",
+  "evaluation": "Native A/P macro Dice, foreground Dice, false positives, false negatives, A/P swaps, mean surface distance and HD95; paired per-case changes versus existing Dice controls. Existing GT-depth diagnostic fields are used only during evaluation.",
+  "resources": {
+    "partition": "stud",
+    "gpu": "4g.40gb:1",
+    "cpus": 4,
+    "memory": "24G",
+    "time": "23:50:00"
+  },
+  "expected_predecessor": "687700",
+  "minimum_free_gib": 6.0,
+  "amendment": {
+    "job_id": "688228",
+    "original_identity": "3a94effb137683b28793a379f7a7adc0d2c08c060c2feb5d45908daa7881cef9",
+    "previous_identity": "e263d78cf7d0f21a75766ada354fea393374a36712c319a215cea4c9fb8270c1",
+    "reason": "Replace the held, unstarted job with the unchanged original twelve, preserve the next ten planned input controls, then append eight constrained MRI-only view runs and six native-view MRI-only auxiliary controls."
+  },
+  "storage_budget": "Reserve 6 GiB for thirty-six best checkpoints (about 2.2 GiB), one active optimizer checkpoint and atomic write overlap, predictions, diagnostics and remaining predecessor output. Frozen atlas inputs are shared, not duplicated.",
+  "source_sha256": {
+    "scripts/unwrapped_swin/__init__.py": "62a2e09e9fdd06ce53ada4273f9ac508a4e0b30a941aeddb82e7b0f7770a3362",
+    "scripts/unwrapped_swin/evaluate.py": "17e58e93f7925e57e343877f6008ad6ae0973b0138ac712e0669686888c121be",
+    "scripts/unwrapped_swin/models.py": "7ce416a1459eafea56001fa1fe7e3c88cf7622912fca6158b9b07717d3fd3585",
+    "scripts/depth_supervision/__init__.py": "e737f5b5896a7496bfd910411cb7b686ffda976226ddebc3a5dd8d0d1a095ef5",
+    "scripts/depth_supervision/train.py": "4e2f97fe8e92008eef4c8580ee9ca713ac1a78f3c48c6d601b90c4d03f349f2c",
+    "scripts/depth_supervision/utils.py": "5832aaebe82c83835ded0d06ee7b2aad68a84b2dee03a575746be2d23de0afc7",
+    "scripts/depth_supervision/losses.py": "91718d27f0a599034637b67677a9bf366e8e730b1aa2d93ad76dd1c7c322929a",
+    "scripts/depth_supervision/geometry.py": "6d6efdbd976d53252110e63e854ef645808dde22c59e196deff0372bed0fc94e",
+    "baselines/swin_unetr/swin_unetr.py": "c413e10d2370f813f6eff195151d133227a00fdd50b3e8471e988727f5685c28",
+    "scripts/tissue_profiles/__init__.py": "ce04f3315261d26fda778b16e446394f311bdb0a45eec4d0f9603b1fe5e7b86a",
+    "scripts/tissue_profiles/amend_pending.py": "f68634e7c5c2e3671a8d47daac9f6d4ac271f19c73d006e833a3cbe2934bc2cc",
+    "scripts/tissue_profiles/amend_views.py": "6d223ecefb90b7263715fd462c4ec8abf3fbb45045ab17704e7959b39be65817",
+    "scripts/tissue_profiles/informed.py": "a5ccd5d02fb9038abe352963b4190943e8daca8e50613e4e93158884a46bf21f",
+    "scripts/tissue_profiles/mri_views.py": "889e1069b8796e2b306d5cc29897ec7200838b1e4c83f233e0e33dac2732fb22",
+    "scripts/tissue_profiles/multiscale.py": "25a5910834c5310961a53ebd390ac6ec16e8e4effb9bca05354b32436dcdb6d1",
+    "scripts/tissue_profiles/package.py": "af6ddce1bd073e942423eb9a8d0a101a087de08649707a9e79887ad7a339e9ed",
+    "scripts/tissue_profiles/prepare.py": "799d98069ba3142ac66ce113cd0f084701a091b6a03e68e756c8fb2bc99e4f53",
+    "scripts/tissue_profiles/profiles.py": "a80a10dac42272b9051b54e974eb7422785a9492d9b3f14bd81251629d05ee93",
+    "scripts/tissue_profiles/replace_pending.py": "24953b044bc6c7bb85be75f96721a412945568ce209f2ca5f7367e5bbb620b8a",
+    "scripts/tissue_profiles/report.py": "2dbe1ed6d3da431593875299079681b27a943ff12b5477522956e239d789cd09",
+    "scripts/tissue_profiles/run.sh": "26f1691cb5c49b82ee3d082d69a085ae338cdb771554a51c4cfe909d5bddffb0",
+    "scripts/tissue_profiles/stage.py": "f7e33efe6ace3ef0bb3bea5f24c6c941001d4de0ef142099614c7c99178f418e",
+    "scripts/tissue_profiles/submit.py": "b1a3e29dc244e2cb2d2a028c99ab458ced001c6bd11590c1adf6e9df7be96105",
+    "scripts/tissue_profiles/tests.py": "443087461e3a395a2c78f38949e69dfdc65c59ce434ce03ab342d701c35e4c0a",
+    "scripts/tissue_profiles/train.py": "9994659740687c8a7fcaa4c0b1d8d775cdd5ae24e6d6ff79785b094b0bb5ca31",
+    "scripts/tissue_profiles/views.py": "b1e899181a3bcf54e03daffd5b82fbfba05fef4f20954eb717836ac71c5e1080",
+    "scripts/tissue_profiles/worker.py": "7c7b300ee9e13df80415090ecf914ede7173c76877409a3896b9c44d41c93782"
+  },
+  "identity_sha": "f9a90cfcca58400646a29030bfefaa8adce293df2f122636b06f52985172e177"
+}

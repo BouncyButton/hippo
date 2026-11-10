@@ -1,0 +1,331 @@
+{
+  "identity": {
+    "protocol_sha256": "c397eae8da6e3253d03bc64f25ab8335a10f665b163776b4a126b36349e368c7",
+    "run": {
+      "id": "score_1and3mm_pairs_outer",
+      "kind": "cross",
+      "form": "score",
+      "distances_mm": [
+        1.0,
+        3.0
+      ],
+      "reduction": "pairs",
+      "ap": false,
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr"
+    },
+    "train": [
+      "hippocampus_093",
+      "hippocampus_097",
+      "hippocampus_197",
+      "hippocampus_287",
+      "hippocampus_311",
+      "hippocampus_314",
+      "hippocampus_353",
+      "hippocampus_361",
+      "hippocampus_373",
+      "hippocampus_390"
+    ],
+    "val": [
+      "hippocampus_017",
+      "hippocampus_019",
+      "hippocampus_033",
+      "hippocampus_035",
+      "hippocampus_037",
+      "hippocampus_049",
+      "hippocampus_052",
+      "hippocampus_065",
+      "hippocampus_083",
+      "hippocampus_088",
+      "hippocampus_090",
+      "hippocampus_092",
+      "hippocampus_095",
+      "hippocampus_107",
+      "hippocampus_108",
+      "hippocampus_123",
+      "hippocampus_125",
+      "hippocampus_157",
+      "hippocampus_164",
+      "hippocampus_169",
+      "hippocampus_175",
+      "hippocampus_185",
+      "hippocampus_190",
+      "hippocampus_194",
+      "hippocampus_204",
+      "hippocampus_205",
+      "hippocampus_210",
+      "hippocampus_217",
+      "hippocampus_219",
+      "hippocampus_229",
+      "hippocampus_244",
+      "hippocampus_261",
+      "hippocampus_264",
+      "hippocampus_277",
+      "hippocampus_280",
+      "hippocampus_286",
+      "hippocampus_288",
+      "hippocampus_289",
+      "hippocampus_296",
+      "hippocampus_305",
+      "hippocampus_308",
+      "hippocampus_317",
+      "hippocampus_327",
+      "hippocampus_330",
+      "hippocampus_332",
+      "hippocampus_338",
+      "hippocampus_349",
+      "hippocampus_350",
+      "hippocampus_356",
+      "hippocampus_358",
+      "hippocampus_374",
+      "hippocampus_394"
+    ]
+  },
+  "objective": {
+    "id": "score_1and3mm_pairs_outer",
+    "kind": "cross",
+    "form": "score",
+    "distances_mm": [
+      1.0,
+      3.0
+    ],
+    "reduction": "pairs",
+    "ap": false,
+    "fraction": "5pct",
+    "seed": 0,
+    "arm": "ordinary_swinunetr"
+  },
+  "depth_balancing": false,
+  "parameters": 15703029,
+  "all_parameters_trainable": true,
+  "auxiliary_branch": false,
+  "input_channels": 1,
+  "calibration": {
+    "coefficients": {
+      "bands": 0.0021464975081461886,
+      "edge": 0.001114817159194587
+    },
+    "statistics": {
+      "bands": {
+        "median_raw_ratio": 46.58752205417861,
+        "p95_raw_ratio": 51.899629894807,
+        "weighted_median_ratio": 0.09999999999999999,
+        "weighted_p95_ratio": 0.11140242624291266
+      },
+      "edge": {
+        "median_raw_ratio": 89.70080804303929,
+        "p95_raw_ratio": 106.9927925957614,
+        "weighted_median_ratio": 0.10000000000000002,
+        "weighted_p95_ratio": 0.11927740109590236
+      }
+    },
+    "cases": [
+      {
+        "case_name": "hippocampus_093",
+        "gradient_gram": {
+          "dice:dice": 5.312655697309321e-14,
+          "dice:bands": 2.102905387801543e-13,
+          "dice:edge": 5.533339628507883e-13,
+          "bands:dice": 2.102905387801543e-13,
+          "bands:bands": 9.279066404133118e-11,
+          "bands:edge": 9.425651231742549e-11,
+          "edge:dice": 5.533339628507883e-13,
+          "edge:bands": 9.425651231742549e-11,
+          "edge:edge": 3.217270339028744e-10
+        },
+        "losses": {
+          "dice": 0.7241026759147644,
+          "bands": 1.3027856349945068,
+          "edge": 0.571272611618042
+        }
+      },
+      {
+        "case_name": "hippocampus_097",
+        "gradient_gram": {
+          "dice:dice": 4.654639846300712e-14,
+          "dice:bands": 1.6329639192496498e-13,
+          "dice:edge": 6.098167760690276e-13,
+          "bands:dice": 1.6329639192496498e-13,
+          "bands:bands": 1.4074058585222815e-10,
+          "bands:edge": 1.640988733786486e-10,
+          "edge:dice": 6.098167760690276e-13,
+          "edge:bands": 1.640988733786486e-10,
+          "edge:edge": 6.282586673123092e-10
+        },
+        "losses": {
+          "dice": 0.7331118583679199,
+          "bands": 1.6989988088607788,
+          "edge": 0.8430383205413818
+        }
+      },
+      {
+        "case_name": "hippocampus_197",
+        "gradient_gram": {
+          "dice:dice": 5.072279266526633e-14,
+          "dice:bands": 1.8236700669548023e-13,
+          "dice:edge": 5.255543179469302e-13,
+          "bands:dice": 1.8236700669548023e-13,
+          "bands:bands": 9.912289739011371e-11,
+          "bands:edge": 1.0473620581930021e-10,
+          "edge:dice": 5.255543179469302e-13,
+          "edge:bands": 1.0473620581930021e-10,
+          "edge:edge": 3.498807354951339e-10
+        },
+        "losses": {
+          "dice": 0.7280205488204956,
+          "bands": 1.229051947593689,
+          "edge": 0.5372827053070068
+        }
+      },
+      {
+        "case_name": "hippocampus_287",
+        "gradient_gram": {
+          "dice:dice": 5.1443461849317446e-14,
+          "dice:bands": 1.6928210948893158e-13,
+          "dice:edge": 5.439789244054971e-13,
+          "bands:dice": 1.6928210948893158e-13,
+          "bands:bands": 1.1152996581831331e-10,
+          "bands:edge": 1.0600580829800421e-10,
+          "edge:dice": 5.439789244054971e-13,
+          "edge:bands": 1.0600580829800421e-10,
+          "edge:edge": 3.3978814206747643e-10
+        },
+        "losses": {
+          "dice": 0.7217098474502563,
+          "bands": 1.4471076726913452,
+          "edge": 0.5709108114242554
+        }
+      },
+      {
+        "case_name": "hippocampus_311",
+        "gradient_gram": {
+          "dice:dice": 4.910599311620627e-14,
+          "dice:bands": 1.7763682235230616e-13,
+          "dice:edge": 4.593130346550178e-13,
+          "bands:dice": 1.7763682235230616e-13,
+          "bands:bands": 1.077639505409067e-10,
+          "bands:edge": 9.803809153385856e-11,
+          "edge:dice": 4.593130346550178e-13,
+          "edge:bands": 9.803809153385856e-11,
+          "edge:edge": 3.0816738050276626e-10
+        },
+        "losses": {
+          "dice": 0.7288545370101929,
+          "bands": 1.3288733959197998,
+          "edge": 0.48902225494384766
+        }
+      },
+      {
+        "case_name": "hippocampus_314",
+        "gradient_gram": {
+          "dice:dice": 4.774885998745648e-14,
+          "dice:bands": 1.9059848642942467e-13,
+          "dice:edge": 6.717635887658335e-13,
+          "bands:dice": 1.9059848642942467e-13,
+          "bands:bands": 1.105878166818286e-10,
+          "bands:edge": 1.2536292837150853e-10,
+          "edge:dice": 6.717635887658335e-13,
+          "edge:bands": 1.2536292837150853e-10,
+          "edge:edge": 4.437153700020957e-10
+        },
+        "losses": {
+          "dice": 0.7308434247970581,
+          "bands": 1.4180482625961304,
+          "edge": 0.6544618010520935
+        }
+      },
+      {
+        "case_name": "hippocampus_353",
+        "gradient_gram": {
+          "dice:dice": 4.953604190792264e-14,
+          "dice:bands": 1.7109390618684495e-13,
+          "dice:edge": 5.763159047211808e-13,
+          "bands:dice": 1.7109390618684495e-13,
+          "bands:bands": 1.1260150450942419e-10,
+          "bands:edge": 1.2414322347886753e-10,
+          "edge:dice": 5.763159047211808e-13,
+          "edge:bands": 1.2414322347886753e-10,
+          "edge:edge": 4.6054021707320203e-10
+        },
+        "losses": {
+          "dice": 0.7369940280914307,
+          "bands": 1.5138294696807861,
+          "edge": 0.6794567108154297
+        }
+      },
+      {
+        "case_name": "hippocampus_361",
+        "gradient_gram": {
+          "dice:dice": 5.0729152188634316e-14,
+          "dice:bands": 1.6642820476787945e-13,
+          "dice:edge": 6.460564505247901e-13,
+          "bands:dice": 1.6642820476787945e-13,
+          "bands:bands": 1.1022355250744909e-10,
+          "bands:edge": 1.335977717342729e-10,
+          "edge:dice": 6.460564505247901e-13,
+          "edge:bands": 1.335977717342729e-10,
+          "edge:edge": 4.967080635687182e-10
+        },
+        "losses": {
+          "dice": 0.7335009574890137,
+          "bands": 1.569530963897705,
+          "edge": 0.804329514503479
+        }
+      },
+      {
+        "case_name": "hippocampus_373",
+        "gradient_gram": {
+          "dice:dice": 5.4381405791264353e-14,
+          "dice:bands": 1.8920443282856997e-13,
+          "dice:edge": 6.218349945207036e-13,
+          "bands:dice": 1.8920443282856997e-13,
+          "bands:bands": 1.0570979508406353e-10,
+          "bands:edge": 1.2017141448605884e-10,
+          "edge:dice": 6.218349945207036e-13,
+          "edge:bands": 1.2017141448605884e-10,
+          "edge:edge": 4.046290802417474e-10
+        },
+        "losses": {
+          "dice": 0.7246861457824707,
+          "bands": 1.4854592084884644,
+          "edge": 0.6903377771377563
+        }
+      },
+      {
+        "case_name": "hippocampus_390",
+        "gradient_gram": {
+          "dice:dice": 5.098560327187682e-14,
+          "dice:bands": 1.9186896808767034e-13,
+          "dice:edge": 7.429995746259521e-13,
+          "bands:dice": 1.9186896808767034e-13,
+          "bands:bands": 1.06803531296773e-10,
+          "bands:edge": 1.2792492065649697e-10,
+          "edge:dice": 7.429995746259521e-13,
+          "edge:bands": 1.2792492065649697e-10,
+          "edge:edge": 4.6366230299632605e-10
+        },
+        "losses": {
+          "dice": 0.7302432060241699,
+          "bands": 1.4366251230239868,
+          "edge": 0.7399609088897705
+        }
+      }
+    ],
+    "basis": "Training-only final-logit gradient RMS, sequential combined-base calibration",
+    "checkpoint_epoch": 5
+  },
+  "loss_definitions": {
+    "dice": "Original MONAI three-class Dice including background",
+    "bands": "Original two-step balanced foreground/background BCE, no focal/degree weights",
+    "legacy_edge": "Unmodified original foreground residual face-difference loss",
+    "same_only": "Original same-GT-foreground-class face subset in the two-step band",
+    "split_equal": "Equal mean of separately normalized legacy cross and same subsets",
+    "probability": "Squared [1-(sigmoid(score_inside)-sigmoid(score_outside))]",
+    "score": "softplus(score_outside-score_inside), zero ranking margin",
+    "outer": "score = logaddexp(z_anterior,z_posterior)-z_background",
+    "ap": "score = z_anterior-z_posterior; only annotated A/P crossings",
+    "outer_ap": "Equal raw mean of outer and AP terms, jointly calibrated to ONE edge budget"
+  },
+  "initialization": "Entire ordinary SwinUNETR trained from scratch"
+}

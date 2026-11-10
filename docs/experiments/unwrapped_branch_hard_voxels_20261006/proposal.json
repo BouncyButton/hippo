@@ -1,0 +1,64 @@
+{
+  "status": "proposed design, not implemented or submitted for training",
+  "objective": "Determine whether actual two-part unwrapping gives complementary features for missed tissue, extra tissue, and anterior/posterior swaps.",
+  "representation": {
+    "operation": "Cut along the longitudinal plane and open both sides into surface-coordinate charts with retained depth. Do not substitute centreline straightening.",
+    "inputs": ["MRI intensity including surrounding context", "physical depth from cutting plane", "anatomically oriented longitudinal position", "sampling validity"],
+    "coordinate_policy": "Coordinates derive from the image affine and a training-only coarse predictor, never validation annotation. Scale coordinates by fixed training-derived or physical scales; do not use the A/P label boundary.",
+    "halves": "Keep opposite sides identifiable and process with shared encoder weights. Preserve small additional chart pieces; do not silently discard them to enforce exactly two connected charts.",
+    "support": "Start with the predicted region plus 8 mm context, verify coverage, and audit missed tissue. All available context remains an input; predicted foreground is not an intensity mask.",
+    "sampling": "Choose chart resolution using original-space sampling footprints. Preserve source-resolution detail where possible, retain depth samples, and quantify any loss. Display UV units are not assumed to be millimetres.",
+    "seams": "Prevent convolution across unrelated packed charts; retain overlap and correspondence at genuine seams. Mark padding and invalid sampling explicitly."
+  },
+  "encoder": {
+    "fine_path": "A small residual CNN that retains full chart and depth resolution. Begin with within-layer kernels, followed by kernels spanning neighbouring depth layers.",
+    "context_path": "A small parallel path with reduced surface resolution, retained depth resolution, and a whole-half pooled summary. Combine its context with the fine features.",
+    "purpose": {
+      "missed_and_extra_tissue": "Retain weak intensity transitions, thin structures, neighbouring depth evidence, and surrounding background.",
+      "AP_swaps": "Combine local appearance with longitudinal position and the wider organisation of each half."
+    },
+    "sizing": "Finalize channels and chart dimensions after coverage and memory profiling; no fixed 64-cube compression requirement.",
+    "shared_weights": true
+  },
+  "fusion": {
+    "site": "One native decoder stage near the segmentation output.",
+    "mapping": "For each native feature-grid centre, sample corresponding fine/context features from the correct chart and depth. Handle scale, voxel centres, and validity explicitly.",
+    "operation": "Normalize branch features, concatenate with native decoder features and validity, then use a learned channel projection and local convolution block.",
+    "interpretation": "The network may learn to use or ignore unfolded evidence. This is not an oracle selector of hard voxels and does not require channel-wise feature agreement."
+  },
+  "learning": {
+    "loss": "Original Dice plus original depth-balanced cross-entropy on native voxels, with the existing per-regime coefficient and schedule.",
+    "no_new_terms": ["focal weighting", "class weighting", "SDF", "topology constraint", "feature agreement", "auxiliary branch loss"],
+    "coverage": "All supported voxels are processed densely initially; do not select only uncertain or high-depth points.",
+    "guides": "Use cross-fitted training predictions. For 5% data, guide models use only that subset; validation guides use only training data.",
+    "geometry_in_training": "Freeze the precomputed guide geometry for this first architecture experiment. Gradients train feature encoders and fusion through sampling, not the guide construction.",
+    "native_loss_measure": "Each native voxel contributes once to the objective; chart area distortion and duplicate seam samples do not multiply supervision."
+  },
+  "acceptance_checks_before_training": [
+    "Show actual two-part MRI unwrapping alongside its native correspondences on case 164 and additional cases.",
+    "Report sampling coverage for all native tissue, false negatives, false positives, and each depth band; record uncovered voxels rather than dropping them from evaluation.",
+    "Measure collisions, local distortion, seam errors, interpolation, and depth preservation; visual separation alone is insufficient.",
+    "Check feature return using known coordinate-valued fields and verify gradient flow through both halves and fusion.",
+    "Verify all input channels and guide provenance exclude validation labels.",
+    "Verify controlled changes to one chart affect the intended native locations and do not mix opposite halves."
+  ],
+  "evaluation": {
+    "comparison": ["Native SwinUNETR with original depth loss", "Same added encoder and fusion receiving ordinary plane-aligned MRI parts", "Same encoder and fusion receiving genuinely unwrapped parts"],
+    "control_matching": "Match parameters, auxiliary input channels, sample count, context coverage, training schedule, and guide information as closely as geometry permits; report compute and residual differences.",
+    "regimes": ["5% MSD training data, fold 0 seed 0", "Full MSD training data, fold 0 seed 0"],
+    "schedule": "Existing maximum 75 epochs and early-stopping policy.",
+    "metrics": ["Per-class and macro Dice", "Missed and extra voxel counts separately", "A/P swaps", "Surface distance and HD95", "Per-depth counts and rates with denominators", "Per-case paired changes"],
+    "error_accounting": "Report how many baseline errors are corrected and how many previously correct voxels become wrong, by error type and depth. Evaluate the complete native output.",
+    "branch_diagnostics": "Monitor gradient flow, feature scale, and fusion use. Suppressed or shuffled branch features at validation are sensitivity checks with distribution-shift caveats, not substitutes for trained controls.",
+    "interpretation": "Improvement is unproven. One reused validation fold supports an exploratory comparison, not a generalization claim."
+  },
+  "later_only_if_needed": {
+    "adaptive_refinement": "If dense high-resolution processing is too costly, test extra fine sampling using a mixture of uncertainty, spatial/depth coverage, and training-only observed errors. Retain uniform coverage to include confidently wrong voxels. This is a separate ablation.",
+    "branch_supervision": "If fusion ignores a useful branch, investigate training dynamics before adding an auxiliary objective; do not silently add constraints."
+  },
+  "references": {
+    "high_resolution_context": "https://arxiv.org/abs/1908.07919",
+    "adaptive_point_refinement": "https://arxiv.org/abs/1912.08193",
+    "transfer_limit": "These papers motivate architecture principles; neither validates two-part hippocampal unwrapping."
+  }
+}

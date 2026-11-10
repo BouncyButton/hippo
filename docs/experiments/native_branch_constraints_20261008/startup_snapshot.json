@@ -1,0 +1,64 @@
+{
+  "queue": "689899|RUNNING|4:05|gnode01",
+  "status.json": {
+    "job_id": "689899",
+    "state": "running",
+    "stages": [
+      {
+        "stage": "cuda_preflight",
+        "returncode": 0,
+        "seconds": 87.95970726013184
+      }
+    ],
+    "started_unix": 1791456162.2932334,
+    "current_stage": "5pct_dice_s0_native_mri_context"
+  },
+  "environment.json": {
+    "job_id": "689899",
+    "torch": "2.12.1+cu130",
+    "gpu": "NVIDIA A100 80GB PCIe MIG 4g.40gb",
+    "monai": "1.6.0",
+    "protocol_identity": "5c506c93a6f32586f8627ed47284398b3f1088f66b413e30ff8011c839c13c9b"
+  },
+  "cuda_preflight.json": {
+    "passed": true,
+    "device": "cuda",
+    "real_training_cases_checked": 10,
+    "parameters": 15724013,
+    "group_gradient_l1": {
+      "native": 112.21868896484375,
+      "encoder": 2.8926632404327393,
+      "fusion": 34.97765350341797
+    },
+    "losses": {
+      "dice": 0.7935265302658081,
+      "bands": 0.8802779912948608,
+      "edge": 0.2224428504705429,
+      "sdf": 0.2814209461212158,
+      "depth": 1.3373184204101562
+    },
+    "coefficients": {
+      "bands": 0.0029168370385047803,
+      "edge": 0.006827073308417729,
+      "sdf": 0.09132705732779922,
+      "depth": 0.00352682933022101
+    },
+    "native_mri_only": true,
+    "all_three_groups_updated": true,
+    "tested_sources": {
+      "scripts/native_branch_constraints/objectives.py": "baf35e6c80a5cee76c6c0c8560faa926eac1e6a3c726fe677286e63057e17409",
+      "scripts/native_branch_constraints/train.py": "0bbe2b36e08c1446756aca15238eeae40f2f4f8f7c629714c38d267e6b1ad5f9",
+      "scripts/native_branch_constraints/tests.py": "298227abd71ad8e34e75857aeee598f9cc5dbc0ce73f1c2451dab991efda7f36",
+      "scripts/native_branch_constraints/report.py": "7d6aab94776fb60e68df3baf5f852a1f3b01ad720814a485d451f39fa4d0383e",
+      "scripts/native_branch_constraints/submit.py": "be1731b0c821566e34ca200159f3e1a95a13bd73dc4728aa076488efec46bd5a",
+      "scripts/native_branch_constraints/__init__.py": "eeecb01e67af41bf9fda822008fb19d6b1bfca8c40c20ae83c65f49c8e94fa36",
+      "scripts/native_branch_constraints/worker.py": "d4b548e8752662bc6610fc6f131ddf84e57b9e4a2afdda4eb8790ed0a9c36744",
+      "scripts/native_branch_constraints/prepare.py": "590002526fc0f74241755aea97e98c5e4ca53bbee644d9ddc17ac74d85f669ff",
+      "scripts/native_branch_constraints/stage.py": "86c32984ef06e00e69c7ba84bd54ba58c79919704ad01f96df7ceb8bf8de4dee",
+      "scripts/native_branch_constraints/package.py": "a28c721b7ab685582d5df34b6485d6dd03d05ecdb48c8600b8219b10137665df"
+    }
+  },
+  "slurm-689899.err": "",
+  "logs/cuda_preflight.log": "{\"passed\": true, \"device\": \"cuda\", \"real_training_cases_checked\": 10, \"parameters\": 15724013, \"group_gradient_l1\": {\"native\": 112.21868896484375, \"encoder\": 2.8926632404327393, \"fusion\": 34.97765350341797}, \"losses\": {\"dice\": 0.7935265302658081, \"bands\": 0.8802779912948608, \"edge\": 0.2224428504705429, \"sdf\": 0.2814209461212158, \"depth\": 1.3373184204101562}, \"coefficients\": {\"bands\": 0.0029168370385047803, \"edge\": 0.006827073308417729, \"sdf\": 0.09132705732779922, \"depth\": 0.00352682933022101}, \"native_mri_only\": true, \"all_three_groups_updated\": true, \"tested_sources\": {\"scripts/native_branch_constraints/objectives.py\": \"baf35e6c80a5cee76c6c0c8560faa926eac1e6a3c726fe677286e63057e17409\", \"scripts/native_branch_constraints/train.py\": \"0bbe2b36e08c1446756aca15238eeae40f2f4f8f7c629714c38d267e6b1ad5f9\", \"scripts/native_branch_constraints/tests.py\": \"298227abd71ad8e34e75857aeee598f9cc5dbc0ce73f1c2451dab991efda7f36\", \"scripts/native_branch_constraints/report.py\": \"7d6aab94776fb60e68df3baf5f852a1f3b01ad720814a485d451f39fa4d0383e\", \"scripts/native_branch_constraints/submit.py\": \"be1731b0c821566e34ca200159f3e1a95a13bd73dc4728aa076488efec46bd5a\", \"scripts/native_branch_constraints/__init__.py\": \"eeecb01e67af41bf9fda822008fb19d6b1bfca8c40c20ae83c65f49c8e94fa36\", \"scripts/native_branch_constraints/worker.py\": \"d4b548e8752662bc6610fc6f131ddf84e57b9e4a2afdda4eb8790ed0a9c36744\", \"scripts/native_branch_constraints/prepare.py\": \"590002526fc0f74241755aea97e98c5e4ca53bbee644d9ddc17ac74d85f669ff\", \"scripts/native_branch_constraints/stage.py\": \"86c32984ef06e00e69c7ba84bd54ba58c79919704ad01f96df7ceb8bf8de4dee\", \"scripts/native_branch_constraints/package.py\": \"a28c721b7ab685582d5df34b6485d6dd03d05ecdb48c8600b8219b10137665df\"}}",
+  "logs/5pct_dice_s0_native_mri_context.log": ""
+}

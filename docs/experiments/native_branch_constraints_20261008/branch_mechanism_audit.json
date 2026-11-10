@@ -1,0 +1,146 @@
+{
+  "scope": "Read-only implementation and archived-input audit; no new training or inference experiments.",
+  "protocol_identity": "5c506c93a6f32586f8627ed47284398b3f1088f66b413e30ff8011c839c13c9b",
+  "atlas_protocol_identity": "95fee3d5eacfa62ec2b956c0ad71760304bd0489f8fb3a84158d5b0cc48a5bd6",
+  "atlas_manifest_sha256": "506c516991a179f012f70d385ec8d95bfa0796684ac75e37f9a3a219a1ee6e11",
+  "parameter_counts": {
+    "native": 15703029,
+    "MRI_encoder": 4272,
+    "fusion": 16680,
+    "mapped_feature_norm": 32,
+    "total": 15724013
+  },
+  "input_audit": {
+    "train": {
+      "cases": 10,
+      "roi_fraction_of_original_MRI_FOV": {
+        "min": 0.9507754147043825,
+        "mean": 0.9675536228755769,
+        "max": 0.9840686274509803
+      },
+      "roi_fraction_of_padded_64cube": {
+        "min": 0.18991851806640625,
+        "mean": 0.22995758056640625,
+        "max": 0.2630767822265625
+      },
+      "patch_count": {
+        "min": 33,
+        "mean": 66.6,
+        "max": 146
+      },
+      "annotated_tissue_coverage_diagnostic_only": {
+        "min": 1.0,
+        "mean": 1.0,
+        "max": 1.0
+      },
+      "guide_training_case_counts": [
+        5
+      ]
+    },
+    "val": {
+      "cases": 52,
+      "roi_fraction_of_original_MRI_FOV": {
+        "min": 0.5254732993863429,
+        "mean": 0.6511522780245311,
+        "max": 0.8310724289715886
+      },
+      "roi_fraction_of_padded_64cube": {
+        "min": 0.1210479736328125,
+        "mean": 0.1565553958599384,
+        "max": 0.2052154541015625
+      },
+      "patch_count": {
+        "min": 4,
+        "mean": 22.923076923076923,
+        "max": 75
+      },
+      "annotated_tissue_coverage_diagnostic_only": {
+        "min": 1.0,
+        "mean": 1.0,
+        "max": 1.0
+      },
+      "guide_training_case_counts": [
+        10
+      ]
+    }
+  },
+  "prior_checkpoint_ablation": {
+    "plane_position": {
+      "normal": {
+        "anterior_dice": 0.8210666851362887,
+        "posterior_dice": 0.8150743809020421,
+        "foreground_dice": 0.8420853169726334,
+        "macro_dice": 0.8180705330191655,
+        "missed": 24380,
+        "extra": 31669,
+        "swaps": 4269,
+        "surface_distance_mean_mm": 0.6685060026011608,
+        "hd95_mm": 1.5955650549069036,
+        "undefined_surface_cases": 0
+      },
+      "zero_mapped": {
+        "anterior_dice": 0.8171049006972708,
+        "posterior_dice": 0.8107791622322852,
+        "foreground_dice": 0.8380827958052033,
+        "macro_dice": 0.8139420314647781,
+        "missed": 23837,
+        "extra": 34101,
+        "swaps": 4328,
+        "surface_distance_mean_mm": 0.6853470861351963,
+        "hd95_mm": 1.6246376934053104,
+        "undefined_surface_cases": 0
+      },
+      "native_only": {
+        "anterior_dice": 0.8120701092398706,
+        "posterior_dice": 0.7149415875441274,
+        "foreground_dice": 0.7875703903813958,
+        "macro_dice": 0.7635058483919989,
+        "missed": 10403,
+        "extra": 77483,
+        "swaps": 5550,
+        "surface_distance_mean_mm": 1.0338456830609901,
+        "hd95_mm": 2.367551899724028,
+        "undefined_surface_cases": 0
+      }
+    },
+    "unfold_position": {
+      "normal": {
+        "anterior_dice": 0.8212143702054905,
+        "posterior_dice": 0.8166351685933051,
+        "foreground_dice": 0.8447978013281152,
+        "macro_dice": 0.8189247693993978,
+        "missed": 25800,
+        "extra": 28661,
+        "swaps": 4562,
+        "surface_distance_mean_mm": 0.6581973620339407,
+        "hd95_mm": 1.6034501321203687,
+        "undefined_surface_cases": 0
+      },
+      "zero_mapped": {
+        "anterior_dice": 0.821622688476293,
+        "posterior_dice": 0.8116225514970423,
+        "foreground_dice": 0.8424557950947317,
+        "macro_dice": 0.8166226199866677,
+        "missed": 22003,
+        "extra": 34712,
+        "swaps": 4659,
+        "surface_distance_mean_mm": 0.6729169350865821,
+        "hd95_mm": 1.6223487986092773,
+        "undefined_surface_cases": 0
+      },
+      "native_only": {
+        "anterior_dice": 0.8175984603352633,
+        "posterior_dice": 0.7456271539554987,
+        "foreground_dice": 0.8076622817722908,
+        "macro_dice": 0.7816128071453812,
+        "missed": 11141,
+        "extra": 66010,
+        "swaps": 5434,
+        "surface_distance_mean_mm": 0.9118228296019008,
+        "hd95_mm": 2.0384910027456162,
+        "undefined_surface_cases": 0
+      }
+    }
+  },
+  "prior_checkpoint_ablation_scope": "Earlier position-enabled plane/unwrapped branches with depth loss, not the current native-MRI Dice checkpoints. Evaluation-only interventions retain weights trained with the complete branch; they do not substitute for retraining controls."
+}

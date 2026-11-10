@@ -1,0 +1,171 @@
+{
+  "identity": {
+    "protocol_sha256": "f9a90cfcca58400646a29030bfefaa8adce293df2f122636b06f52985172e177",
+    "run": {
+      "id": "5pct_dice_profile_s0_informed",
+      "fraction": "5pct",
+      "seed": 0,
+      "profile_variant": "pooled",
+      "arm": "informed"
+    },
+    "train": [
+      "hippocampus_093",
+      "hippocampus_097",
+      "hippocampus_197",
+      "hippocampus_287",
+      "hippocampus_311",
+      "hippocampus_314",
+      "hippocampus_353",
+      "hippocampus_361",
+      "hippocampus_373",
+      "hippocampus_390"
+    ],
+    "val": [
+      "hippocampus_017",
+      "hippocampus_019",
+      "hippocampus_033",
+      "hippocampus_035",
+      "hippocampus_037",
+      "hippocampus_049",
+      "hippocampus_052",
+      "hippocampus_065",
+      "hippocampus_083",
+      "hippocampus_088",
+      "hippocampus_090",
+      "hippocampus_092",
+      "hippocampus_095",
+      "hippocampus_107",
+      "hippocampus_108",
+      "hippocampus_123",
+      "hippocampus_125",
+      "hippocampus_157",
+      "hippocampus_164",
+      "hippocampus_169",
+      "hippocampus_175",
+      "hippocampus_185",
+      "hippocampus_190",
+      "hippocampus_194",
+      "hippocampus_204",
+      "hippocampus_205",
+      "hippocampus_210",
+      "hippocampus_217",
+      "hippocampus_219",
+      "hippocampus_229",
+      "hippocampus_244",
+      "hippocampus_261",
+      "hippocampus_264",
+      "hippocampus_277",
+      "hippocampus_280",
+      "hippocampus_286",
+      "hippocampus_288",
+      "hippocampus_289",
+      "hippocampus_296",
+      "hippocampus_305",
+      "hippocampus_308",
+      "hippocampus_317",
+      "hippocampus_327",
+      "hippocampus_330",
+      "hippocampus_332",
+      "hippocampus_338",
+      "hippocampus_349",
+      "hippocampus_350",
+      "hippocampus_356",
+      "hippocampus_358",
+      "hippocampus_374",
+      "hippocampus_394"
+    ]
+  },
+  "objective": "Dice + pooled tissue profile",
+  "depth_balancing": false,
+  "parameters": 15705621,
+  "all_parameters_trainable": true,
+  "auxiliary_branch": false,
+  "arm": "informed",
+  "profile_variant": "pooled",
+  "input_channels": 4,
+  "auxiliary_input_channels": 0,
+  "input_policy": {
+    "channels": [
+      "native MRI",
+      "longitudinal position / 32 mm",
+      "signed plane depth / 16 mm",
+      "guide ROI support"
+    ],
+    "source": "Same fraction-specific frozen OOF guide-derived center, basis and native ROI indices as the auxiliary branches; no annotation or UV input.",
+    "support": "Guide foreground plus 8 mm context, intersected with original MRI FOV. Position channels and support are zero outside this ROI. MRI remains unchanged across the full padded native grid.",
+    "architecture": "One four-input-channel SwinUNETR, no auxiliary encoder, view resampling, or feature fusion. All parameters train jointly.",
+    "initialization": "Keep the seed-matched one-channel model weights, expand its three input convolutions to four channels, initialize additional channel weights to zero and train them from the first update. No frozen parameters.",
+    "interpretation": "Tests direct input of the same anatomical descriptors against MRI only and existing view branches. Native coordinates are exact before chart rasterization. Branch comparisons still differ in capacity, interpolation, chart neighborhoods and fusion; they cannot by themselves isolate unfolding."
+  },
+  "profile_geometry": {
+    "band_mm": 2.0,
+    "longitudinal_mm": 2.0
+  },
+  "calibration": {
+    "cases": [
+      {
+        "case_name": "hippocampus_093",
+        "dice": 2.2617695094595547e-07,
+        "profile": 8.615644219389651e-06
+      },
+      {
+        "case_name": "hippocampus_097",
+        "dice": 2.1276356676480646e-07,
+        "profile": 1.1039587661798578e-05
+      },
+      {
+        "case_name": "hippocampus_197",
+        "dice": 2.2231058949273574e-07,
+        "profile": 8.99333826964721e-06
+      },
+      {
+        "case_name": "hippocampus_287",
+        "dice": 2.2292175572147244e-07,
+        "profile": 9.306542779086158e-06
+      },
+      {
+        "case_name": "hippocampus_311",
+        "dice": 2.1938767247320357e-07,
+        "profile": 1.0337058483855799e-05
+      },
+      {
+        "case_name": "hippocampus_314",
+        "dice": 2.1457073273722926e-07,
+        "profile": 1.0894639672187623e-05
+      },
+      {
+        "case_name": "hippocampus_353",
+        "dice": 2.1942737760127784e-07,
+        "profile": 9.98045925371116e-06
+      },
+      {
+        "case_name": "hippocampus_361",
+        "dice": 2.2092017104569095e-07,
+        "profile": 9.946864338417072e-06
+      },
+      {
+        "case_name": "hippocampus_373",
+        "dice": 2.2942637656342413e-07,
+        "profile": 8.114053343888372e-06
+      },
+      {
+        "case_name": "hippocampus_390",
+        "dice": 2.2142916122902534e-07,
+        "profile": 9.999471330957022e-06
+      }
+    ],
+    "statistics": {
+      "coefficient": 0.0022177010171835205,
+      "target_ratio": 0.1,
+      "cap_ratio": 0.5,
+      "raw_ratio_median": 45.09174105308387,
+      "raw_ratio_p95": 51.386007795353315,
+      "weighted_ratio_median": 0.10000000000000002,
+      "weighted_ratio_p95": 0.11395880175675537,
+      "cases": 10
+    },
+    "coefficient": 0.0022177010171835205,
+    "checkpoint_epoch": 5,
+    "basis": "training-only logit-gradient RMS"
+  }
+}

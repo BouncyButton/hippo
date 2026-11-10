@@ -1,0 +1,167 @@
+{
+  "identity": {
+    "protocol_sha256": "f9a90cfcca58400646a29030bfefaa8adce293df2f122636b06f52985172e177",
+    "run": {
+      "id": "5pct_dice_multiscale_s0_plane_position",
+      "fraction": "5pct",
+      "seed": 0,
+      "profile_variant": "multiscale",
+      "arm": "plane_position"
+    },
+    "train": [
+      "hippocampus_093",
+      "hippocampus_097",
+      "hippocampus_197",
+      "hippocampus_287",
+      "hippocampus_311",
+      "hippocampus_314",
+      "hippocampus_353",
+      "hippocampus_361",
+      "hippocampus_373",
+      "hippocampus_390"
+    ],
+    "val": [
+      "hippocampus_017",
+      "hippocampus_019",
+      "hippocampus_033",
+      "hippocampus_035",
+      "hippocampus_037",
+      "hippocampus_049",
+      "hippocampus_052",
+      "hippocampus_065",
+      "hippocampus_083",
+      "hippocampus_088",
+      "hippocampus_090",
+      "hippocampus_092",
+      "hippocampus_095",
+      "hippocampus_107",
+      "hippocampus_108",
+      "hippocampus_123",
+      "hippocampus_125",
+      "hippocampus_157",
+      "hippocampus_164",
+      "hippocampus_169",
+      "hippocampus_175",
+      "hippocampus_185",
+      "hippocampus_190",
+      "hippocampus_194",
+      "hippocampus_204",
+      "hippocampus_205",
+      "hippocampus_210",
+      "hippocampus_217",
+      "hippocampus_219",
+      "hippocampus_229",
+      "hippocampus_244",
+      "hippocampus_261",
+      "hippocampus_264",
+      "hippocampus_277",
+      "hippocampus_280",
+      "hippocampus_286",
+      "hippocampus_288",
+      "hippocampus_289",
+      "hippocampus_296",
+      "hippocampus_305",
+      "hippocampus_308",
+      "hippocampus_317",
+      "hippocampus_327",
+      "hippocampus_330",
+      "hippocampus_332",
+      "hippocampus_338",
+      "hippocampus_349",
+      "hippocampus_350",
+      "hippocampus_356",
+      "hippocampus_358",
+      "hippocampus_374",
+      "hippocampus_394"
+    ]
+  },
+  "objective": "Dice + multiscale tissue profile",
+  "depth_balancing": false,
+  "parameters": 15724877,
+  "all_parameters_trainable": true,
+  "auxiliary_branch": true,
+  "arm": "plane_position",
+  "profile_variant": "multiscale",
+  "input_channels": 1,
+  "auxiliary_input_channels": 4,
+  "input_policy": null,
+  "profile_geometry": [
+    {
+      "band_mm": 2.0,
+      "longitudinal_mm": 4.0,
+      "transverse_mm": 4.0
+    },
+    {
+      "band_mm": 2.0,
+      "longitudinal_mm": 2.0,
+      "transverse_mm": 2.0
+    }
+  ],
+  "calibration": {
+    "cases": [
+      {
+        "case_name": "hippocampus_093",
+        "dice": 2.4021167632781726e-07,
+        "profile": 7.114113032002933e-06
+      },
+      {
+        "case_name": "hippocampus_097",
+        "dice": 2.0486177731982025e-07,
+        "profile": 8.972363502834924e-06
+      },
+      {
+        "case_name": "hippocampus_197",
+        "dice": 2.3935191961754754e-07,
+        "profile": 7.389710845018271e-06
+      },
+      {
+        "case_name": "hippocampus_287",
+        "dice": 2.3760794931604323e-07,
+        "profile": 7.469472620869055e-06
+      },
+      {
+        "case_name": "hippocampus_311",
+        "dice": 2.339715479138249e-07,
+        "profile": 8.581115253036842e-06
+      },
+      {
+        "case_name": "hippocampus_314",
+        "dice": 2.167919461726342e-07,
+        "profile": 8.812367923383135e-06
+      },
+      {
+        "case_name": "hippocampus_353",
+        "dice": 2.13254935488294e-07,
+        "profile": 8.195182999770623e-06
+      },
+      {
+        "case_name": "hippocampus_361",
+        "dice": 2.2399045462861977e-07,
+        "profile": 8.006523785297759e-06
+      },
+      {
+        "case_name": "hippocampus_373",
+        "dice": 2.4656483788021433e-07,
+        "profile": 6.523667252622545e-06
+      },
+      {
+        "case_name": "hippocampus_390",
+        "dice": 2.3545986493900273e-07,
+        "profile": 8.205786798498593e-06
+      }
+    ],
+    "statistics": {
+      "coefficient": 0.0028330627312957383,
+      "target_ratio": 0.1,
+      "cap_ratio": 0.5,
+      "raw_ratio_median": 35.29748879025481,
+      "raw_ratio_p95": 42.38047016897791,
+      "weighted_ratio_median": 0.09999999999999999,
+      "weighted_ratio_p95": 0.1200665305705221,
+      "cases": 10
+    },
+    "coefficient": 0.0028330627312957383,
+    "checkpoint_epoch": 5,
+    "basis": "training-only logit-gradient RMS"
+  }
+}

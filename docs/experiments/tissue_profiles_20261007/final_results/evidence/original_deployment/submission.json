@@ -1,0 +1,43 @@
+{
+  "command": [
+    "sbatch",
+    "--parsable",
+    "--output=/mnt/beegfsstudents/home/3160552/tissue_profiles_fold0_seed0_20261007_01/slurm-%j.out",
+    "--error=/mnt/beegfsstudents/home/3160552/tissue_profiles_fold0_seed0_20261007_01/slurm-%j.err",
+    "--dependency=afterany:687700",
+    "/mnt/beegfsstudents/home/3160552/tissue_profiles_fold0_seed0_20261007_01/source/scripts/tissue_profiles/run.sh",
+    "/mnt/beegfsstudents/home/3160552/tissue_profiles_fold0_seed0_20261007_01"
+  ],
+  "root": "/mnt/beegfsstudents/home/3160552/tissue_profiles_fold0_seed0_20261007_01",
+  "requested_at_unix": 1791382415.8456168,
+  "protocol_sha256": "c2e7a350d8b9f3adb146ef0c91e2d3ac7c8ad87062e49884378b8da7a47bfb08",
+  "protocol_identity": "3a94effb137683b28793a379f7a7adc0d2c08c060c2feb5d45908daa7881cef9",
+  "runs": 2,
+  "objective": "Dice + tissue profiles",
+  "depth_balancing": false,
+  "fractions": [
+    "5pct",
+    "full"
+  ],
+  "fold": 0,
+  "seeds": [
+    0
+  ],
+  "max_epochs": 75,
+  "queue_before_submission": [
+    "687700|RUNNING|hippo-unfold-followup"
+  ],
+  "dependencies": [
+    "687700"
+  ],
+  "quota_before_submission": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  83.79GiB/93.13GiB  168.77k/\u221e  \n\n",
+  "free_gib": 9.33999999999999,
+  "minimum_free_gib": 3.0,
+  "cleanup_required": false,
+  "completed_runs_retrained": 0,
+  "guide_fits_retrained": 0,
+  "returncode": 0,
+  "stdout": "688228\n",
+  "stderr": "",
+  "job_id": "688228"
+}

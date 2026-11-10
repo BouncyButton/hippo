@@ -1,0 +1,39 @@
+{
+  "command": [
+    "sbatch",
+    "--parsable",
+    "--output=/mnt/beegfsstudents/home/3160552/tissue_profiles_fold0_seed0_20261007_01/slurm-%j.out",
+    "--error=/mnt/beegfsstudents/home/3160552/tissue_profiles_fold0_seed0_20261007_01/slurm-%j.err",
+    "--dependency=afterany:687700",
+    "/mnt/beegfsstudents/home/3160552/tissue_profiles_fold0_seed0_20261007_01/source/scripts/tissue_profiles/run.sh",
+    "/mnt/beegfsstudents/home/3160552/tissue_profiles_fold0_seed0_20261007_01"
+  ],
+  "root": "/mnt/beegfsstudents/home/3160552/tissue_profiles_fold0_seed0_20261007_01",
+  "requested_at_unix": 1791386088.055309,
+  "protocol_sha256": "942360aab1fa9f90c75dace63ae06ab3dd2ed11629d00c05724e4627ec2fae8a",
+  "protocol_identity": "f9a90cfcca58400646a29030bfefaa8adce293df2f122636b06f52985172e177",
+  "runs": 36,
+  "objective": "Matched anatomical-input, auxiliary-view, branch-capacity and anatomical-supervision controls",
+  "depth_balancing": false,
+  "fractions": [
+    "5pct",
+    "full"
+  ],
+  "fold": 0,
+  "seeds": [
+    0
+  ],
+  "max_epochs": 75,
+  "queue_before_submission": [
+    "687700|RUNNING|hippo-unfold-followup"
+  ],
+  "dependencies": [
+    "687700"
+  ],
+  "quota_before_submission": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  84.32GiB/93.13GiB  169.08k/\u221e  \n\n",
+  "free_gib": 8.810000000000002,
+  "minimum_free_gib": 6.0,
+  "cleanup_required": false,
+  "completed_runs_retrained": 0,
+  "guide_fits_retrained": 0
+}

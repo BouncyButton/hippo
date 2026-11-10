@@ -1,0 +1,47 @@
+{
+  "command": [
+    "sbatch",
+    "--parsable",
+    "--output=/mnt/beegfsstudents/home/3160552/unwrapped_followup_fold0_20261007_01/slurm-%j.out",
+    "--error=/mnt/beegfsstudents/home/3160552/unwrapped_followup_fold0_20261007_01/slurm-%j.err",
+    "--dependency=afterany:687658",
+    "/mnt/beegfsstudents/home/3160552/unwrapped_followup_fold0_20261007_01/source/scripts/unwrapped_followup/run.sh",
+    "/mnt/beegfsstudents/home/3160552/unwrapped_followup_fold0_20261007_01"
+  ],
+  "root": "/mnt/beegfsstudents/home/3160552/unwrapped_followup_fold0_20261007_01",
+  "requested_at_unix": 1791366203.843289,
+  "protocol_sha256": "4a6416337ce5435868553fc1eb772f8764e4ac746e24aa84c798563d47b6f526",
+  "protocol_identity": "cbc7fe400e9ffa5761c316f9637d16c6f34b0f632d474ed4a17a912b0c0378d3",
+  "runs": 24,
+  "groups": {
+    "dice_ablation": 4,
+    "replication": 12,
+    "uncertainty": 8
+  },
+  "fractions": [
+    "5pct",
+    "full"
+  ],
+  "fold": 0,
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "max_epochs": 75,
+  "queue_before_submission": [
+    "687658|RUNNING|hippo-cap-depth-retry"
+  ],
+  "dependencies": [
+    "687658"
+  ],
+  "quota_before_submission": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  62.51GiB/93.13GiB  167.29k/\u221e  \n\n",
+  "free_gib": 30.619999999999997,
+  "minimum_free_gib": 6.0,
+  "cleanup_required": false,
+  "completed_runs_retrained": 0,
+  "guide_fits_retrained": 0,
+  "returncode": 0,
+  "stdout": "687700\n",
+  "stderr": ""
+}

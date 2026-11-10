@@ -1,0 +1,56 @@
+{
+  "sha256": "54f04e4c01332254c7a5d8125270e0c22d3a2549fd637c363d6f0b930347d24b",
+  "identity": {
+    "protocol": "1e31aa104366a211c7bcabc59e4fe5e001bbe7717c8a97e6cda599e4946138b3",
+    "train": [
+      "hippocampus_093",
+      "hippocampus_097",
+      "hippocampus_197",
+      "hippocampus_287",
+      "hippocampus_311",
+      "hippocampus_314",
+      "hippocampus_353",
+      "hippocampus_361",
+      "hippocampus_373",
+      "hippocampus_390"
+    ],
+    "settings": {
+      "seed": 0,
+      "steps": 1000,
+      "lr": 0.001,
+      "channels": [
+        8,
+        12,
+        16
+      ],
+      "inputs": [
+        "candidate_probabilities",
+        "guide_roi",
+        "original_fov"
+      ],
+      "training_tasks": [
+        "candidate reconstruction",
+        "clean reconstruction",
+        "typed corruption detection"
+      ],
+      "task_weights": [
+        1,
+        1,
+        1
+      ],
+      "clean_fraction": 0.25,
+      "corruption_radii_mm": [
+        1.5,
+        3.0,
+        4.5
+      ],
+      "confidence_range": [
+        0.6,
+        0.99
+      ],
+      "selection": "fixed final step; no validation selection"
+    }
+  },
+  "completed_steps_repeated": 0,
+  "from_job": "689618"
+}

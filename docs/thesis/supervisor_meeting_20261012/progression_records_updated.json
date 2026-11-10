@@ -1,0 +1,271 @@
+{
+  "metric": "Validation anterior/posterior macro Dice (%)",
+  "fold": 0,
+  "seed": 0,
+  "training_cases": 10,
+  "validation_cases": 52,
+  "max_epochs": 75,
+  "ordering": "Matched Dice reference, then new records in archived campaign execution order; repeated controls omitted.",
+  "interpretation": "Exploratory records on one reused validation split. Successive records are not cumulative additions of every earlier loss.",
+  "records": [
+    {
+      "step": 1,
+      "objective": "dice",
+      "description": "Dice only",
+      "dice_percent": 74.30360294644139,
+      "gain_pp": null,
+      "campaign": "Matched Dice-only reference",
+      "source": "band_focus_20261011_recovery/progression_live_20261012.json",
+      "best_epoch": 73
+    },
+    {
+      "step": 2,
+      "objective": "bands",
+      "description": "Original inner/outer bands; balanced BCE",
+      "dice_percent": 76.72721636543834,
+      "gain_pp": 2.4236134189969505,
+      "campaign": "Original edge study",
+      "source": "edge_ablation_20261008/final_results/results.json",
+      "best_epoch": 75
+    },
+    {
+      "step": 3,
+      "objective": "legacy_edge",
+      "description": "Original bands + original edge constraint",
+      "dice_percent": 77.30308932634819,
+      "gain_pp": 0.5758729609098481,
+      "campaign": "Original edge study",
+      "source": "edge_ablation_20261008/final_results/results.json",
+      "best_epoch": 69
+    },
+    {
+      "step": 4,
+      "objective": "split_equal",
+      "description": "Original bands + equal weighting of same-side and crossing edges",
+      "dice_percent": 77.31742332900365,
+      "gain_pp": 0.014334002655459699,
+      "campaign": "Original edge study",
+      "source": "edge_ablation_20261008/final_results/results.json",
+      "best_epoch": 68
+    },
+    {
+      "step": 5,
+      "objective": "probability_1mm_anchors_outer",
+      "description": "Original bands + 1 mm probability comparisons, balanced per anchor",
+      "dice_percent": 77.39276605397887,
+      "gain_pp": 0.0753427249752292,
+      "campaign": "Original edge study",
+      "source": "edge_ablation_20261008/final_results/results.json",
+      "best_epoch": 73
+    },
+    {
+      "step": 6,
+      "objective": "probability_1and3mm_pairs_outer",
+      "description": "Original bands + 1+3 mm probability comparisons",
+      "dice_percent": 77.64665938124249,
+      "gain_pp": 0.25389332726361147,
+      "campaign": "Original edge study",
+      "source": "edge_ablation_20261008/final_results/results.json",
+      "best_epoch": 65
+    },
+    {
+      "step": 7,
+      "objective": "pair_common_3",
+      "description": "Original bands + 3 mm comparisons on common eligible support",
+      "dice_percent": 77.85549028203135,
+      "gain_pp": 0.20883090078886823,
+      "campaign": "Band / Chamfer study",
+      "source": "band_chamfer_20261008/results.json",
+      "best_epoch": 69
+    },
+    {
+      "step": 8,
+      "objective": "pair_independent13",
+      "description": "Original bands + separate inside/outside targets at 1+3 mm",
+      "dice_percent": 78.13164853998511,
+      "gain_pp": 0.27615825795375315,
+      "campaign": "Band / Chamfer study",
+      "source": "band_chamfer_20261008/results.json",
+      "best_epoch": 65
+    },
+    {
+      "step": 9,
+      "objective": "combo_sdf8_in50",
+      "description": "Independent 1+3 mm targets + original bands + signed-distance term",
+      "dice_percent": 78.2864471537342,
+      "gain_pp": 0.15479861374909376,
+      "campaign": "Independent endpoints / bands study",
+      "source": "band_evolution_20261010_recovery/final_results/aggregate_summary.json",
+      "best_epoch": 69
+    },
+    {
+      "step": 10,
+      "objective": "band_bce1_pairs_in50",
+      "description": "Independent 1+3 mm targets + 1/1 mm BCE bands",
+      "dice_percent": 78.35556437323028,
+      "gain_pp": 0.06911721949607852,
+      "campaign": "Independent endpoints / bands study",
+      "source": "band_evolution_20261010_recovery/final_results/aggregate_summary.json",
+      "best_epoch": 60
+    },
+    {
+      "step": 11,
+      "objective": "band_focus_top25_in50",
+      "description": "3/3 mm Brier bands; hardest 25%, emphasis 50%; independent 1+3 mm targets",
+      "dice_percent": 78.93686425645826,
+      "gain_pp": 0.5812998832279845,
+      "campaign": "Independent endpoints / bands study",
+      "source": "band_evolution_20261010_recovery/final_results/aggregate_summary.json",
+      "best_epoch": 53
+    },
+    {
+      "step": 12,
+      "objective": "hard_q20_mix50",
+      "description": "3/3 mm bands; hardest 20%, emphasis 50%",
+      "dice_percent": 78.97630501659555,
+      "gain_pp": 0.03944076013728193,
+      "campaign": "Focus / width study",
+      "source": "band_focus_20261011_recovery/progression_live_20261012.json",
+      "best_epoch": 60
+    },
+    {
+      "step": 13,
+      "objective": "hard_q35_mix75",
+      "description": "3/3 mm bands; hardest 35%, emphasis 75%",
+      "dice_percent": 79.02097859612488,
+      "gain_pp": 0.04467357952933071,
+      "campaign": "Focus / width study",
+      "source": "band_focus_20261011_recovery/progression_live_20261012.json",
+      "best_epoch": 42
+    },
+    {
+      "step": 14,
+      "objective": "width_i2_o2_q25",
+      "description": "2/2 mm bands; hardest 25%, emphasis 50%",
+      "dice_percent": 79.06826810520789,
+      "gain_pp": 0.04728950908301499,
+      "campaign": "Focus / width study",
+      "source": "band_focus_20261011_recovery/progression_live_20261012.json",
+      "best_epoch": 59
+    },
+    {
+      "step": 15,
+      "objective": "width_i3_o2_q25",
+      "description": "3/2 mm bands; hardest 25%, emphasis 50%",
+      "dice_percent": 79.26300142864604,
+      "gain_pp": 0.1947333234381432,
+      "campaign": "Focus / width study",
+      "source": "band_focus_20261011_recovery/progression_live_20261012.json",
+      "best_epoch": 42
+    },
+    {
+      "step": 16,
+      "objective": "a32_hard_q35_mix75",
+      "description": "3/2 mm bands; hardest 35%, emphasis 75%",
+      "dice_percent": 79.59593811554515,
+      "gain_pp": 0.33293668689911726,
+      "campaign": "Asymmetric-band combinations",
+      "source": "band_focus_20261011_recovery/progression_live_20261012.json",
+      "best_epoch": 53
+    },
+    {
+      "step": 17,
+      "objective": "a32_neighbor_k3_q35_mix75_point50",
+      "description": "3/2 mm bands; 35%/75% focus + mixed point and 3\u00d73\u00d73 neighborhood ranking",
+      "dice_percent": 79.60593551254203,
+      "gain_pp": 0.00999739699688007,
+      "campaign": "Asymmetric-band combinations",
+      "source": "band_focus_20261011_recovery/progression_live_20261012.json",
+      "best_epoch": 42
+    },
+    {
+      "step": 18,
+      "objective": "a32_budget_b1p0_p1p5",
+      "description": "3/2 mm bands; 25%/50% focus; endpoint gradient-budget target \u00d71.5",
+      "dice_percent": 79.65943658547432,
+      "gain_pp": 0.053501072932292004,
+      "campaign": "Asymmetric-band combinations",
+      "source": "band_focus_20261011_recovery/progression_live_20261012.json",
+      "best_epoch": 42
+    },
+    {
+      "step": 19,
+      "objective": "a32_side_qi40_qo15_mix75",
+      "description": "3/2 mm bands; hardest 40% inside / 15% outside; emphasis 75%",
+      "dice_percent": 79.9532906138977,
+      "gain_pp": 0.2938540284233824,
+      "campaign": "Asymmetric-band combinations",
+      "source": "band_focus_20261011_recovery/progression_live_20261012.json",
+      "best_epoch": 47
+    },
+    {
+      "step": 20,
+      "objective": "a32_side_qi40_qo25_mix75",
+      "description": "3/2 mm bands; hardest 40% inside / 25% outside; emphasis 75%",
+      "dice_percent": 80.11910554142567,
+      "gain_pp": 0.16581492752796123,
+      "campaign": "Asymmetric-band combinations",
+      "source": "band_focus_20261011_recovery/progression_live_20261012.json",
+      "best_epoch": 42
+    },
+    {
+      "step": 21,
+      "objective": "a32_side_qi60_qo15_mix75",
+      "description": "3/2 mm bands; hardest 60% inside / 15% outside; emphasis 75%",
+      "dice_percent": 80.72518839502469,
+      "gain_pp": 0.6060828535990197,
+      "campaign": "Asymmetric-band combinations",
+      "source": "band_focus_20261011_recovery/progression_live_20261012.json",
+      "best_epoch": 42
+    },
+    {
+      "step": 22,
+      "objective": "w81_fractions_qi70_qo15_mi75_mo75",
+      "description": "3/2 mm bands; hardest 70% inside / 15% outside; emphasis 75% inside / 75% outside",
+      "dice_percent": 80.8216627257361,
+      "gain_pp": 0.0964743307114162,
+      "campaign": "Winner refinement",
+      "best_epoch": 44,
+      "source": "band_status_snapshot_update.json"
+    },
+    {
+      "step": 23,
+      "objective": "w81_emphasis_qi60_qo15_mi75_mo85",
+      "description": "3/2 mm bands; hardest 60% inside / 15% outside; emphasis 75% inside / 85% outside",
+      "dice_percent": 80.84808006652182,
+      "gain_pp": 0.026417340785712895,
+      "campaign": "Winner refinement",
+      "best_epoch": 39,
+      "source": "band_status_snapshot_update.json"
+    },
+    {
+      "step": 24,
+      "objective": "w81_fractions_qi80_qo15_mi75_mo75",
+      "description": "3/2 mm bands; hardest 80% inside / 15% outside; emphasis 75% inside / 75% outside",
+      "dice_percent": 80.85874981084415,
+      "gain_pp": 0.010669744322328256,
+      "campaign": "Winner refinement",
+      "best_epoch": 42,
+      "source": "band_status_snapshot_update.json"
+    },
+    {
+      "step": 25,
+      "objective": "w81_emphasis_qi70_qo10_mi65_mo85",
+      "description": "3/2 mm bands; hardest 70% inside / 10% outside; emphasis 65% inside / 85% outside",
+      "dice_percent": 81.11168455421898,
+      "gain_pp": 0.252934743374837,
+      "campaign": "Winner refinement",
+      "best_epoch": 47,
+      "source": "band_status_snapshot_update.json"
+    }
+  ],
+  "branch_reference": {
+    "objective": "dice_bands_edge",
+    "dice_percent": 82.25303246535083,
+    "separate_architecture": true
+  },
+  "gain_over_dice_pp": 6.808081607777595,
+  "gain_over_original_bands_pp": 4.3844681887806445,
+  "gap_to_branch_pp": 1.1413479111318452,
+  "retrieved_at_utc": "2026-10-12T13:10:02.767358+00:00"
+}

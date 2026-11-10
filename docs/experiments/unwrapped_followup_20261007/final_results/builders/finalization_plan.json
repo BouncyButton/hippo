@@ -1,0 +1,40 @@
+{
+  "requested_action": "After all 24 new runs complete, preserve the experiment results in a verified PDF report and supporting local evidence, delete the experiment's bulky cluster outputs, and deliver a five-question comparison table for 5% and full data.",
+  "job_id": "687700",
+  "remote_host": "bocconi-cluster",
+  "remote_roots": [
+    "/mnt/beegfsstudents/home/3160552/unwrapped_followup_fold0_20261007_01",
+    "/mnt/beegfsstudents/home/3160552/unwrapped_swin_fold0_seed0_20261006_02",
+    "/mnt/beegfsstudents/home/3160552/unwrapped_swin_fold0_seed0_20261006_01"
+  ],
+  "local_report_directory": "/Users/filippofocaccia/Desktop/hippo/docs/experiments/unwrapped_followup_20261007/final_results",
+  "questions": [
+    "Does unfolding itself help?",
+    "Is depth balancing still useful?",
+    "Are the improvements repeatable?",
+    "Does uncertainty identify useful correction locations?",
+    "Are we improving anatomical errors?"
+  ],
+  "completion_requirements": [
+    "Successful Slurm terminal state, campaign status complete, 24 matching per-run completion records, and no missing requested conditions.",
+    "Verify recorded artifact hashes remotely before any deletion, including checkpoints needed to verify provenance.",
+    "Verify all four checkpoint audits and production GPU preflights completed."
+  ],
+  "preserve_before_cleanup": [
+    "Full original 20-run and new 24-run metrics, with original completed seed-0 copies deduplicated.",
+    "Per-case metrics, training histories, configuration and split identities, calibration coefficients, diagnostic results, source snapshots, environment, Slurm receipts/logs, completion records, and hashes.",
+    "Recomputed matched comparisons, per-seed values and mean/spread, case-bootstrap uncertainty with its limitations, and FP/FN/A-P swap and surface/depth error trade-offs.",
+    "A readable PDF with the five-question table, complete results tables and method/limitations, plus machine-readable JSON/CSV evidence.",
+    "Verify transferred files against remote hashes and render/inspect the final PDF; create a preservation manifest and an exact cleanup manifest."
+  ],
+  "cleanup_scope": "Only generated outputs in the three listed experiment roots after preservation. Preserve raw MRI/labels, shared datasets, shared runtime dependencies used elsewhere, unrelated campaigns including capped_depth_delay_31976_687658, repository source, the local report and preserved evidence. Check active-job and external dependencies before removing shared outputs; do not follow symlinks outside the allowlist. No deletion while any required run or analysis remains unfinished.",
+  "report_caveats": [
+    "Single reused validation fold; 10 training cases at 5%, 208 at full data, 52 validation cases.",
+    "Three segmentor seeds with fixed seed-0 guide geometry and depth coefficients for replication.",
+    "Dice-only and gating tests have seed 0 only.",
+    "Selected branches differ by regime: position at 5%, attention at full data.",
+    "75-epoch maximum and validation-selected checkpoints; do not claim independent-test or asymptotic generalization.",
+    "Aggregate FN-count reductions do not identify exact recovered voxels without paired voxel-level analysis."
+  ],
+  "after_cleanup": "Save a deletion receipt and refreshed quota. Deliver the PDF link and the table with question, 5% answer, and full-data answer. State what was deleted and freed. Pause the completion heartbeat after successful delivery."
+}

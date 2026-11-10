@@ -1,0 +1,2151 @@
+{
+  "created_unix": 1791822663.2826192,
+  "base_scope_sha256": "3e08bcdf6a8db8f73daee5a6fee4e58fd82924d9708209aa9c8f0788edbb0c04",
+  "evidence_sha256": "636f6adb98bdb791de66d06f226b7d7da55fb7197341ba74d24810f636d67255",
+  "selection_rule": {
+    "shared_swap_delta": "< 0",
+    "mean_case_shared_error_rate_delta": "< 0",
+    "delta_foreground_dice": ">= 0",
+    "delta_outer_errors": "<= 0",
+    "delta_ap_interface_chamfer_mm": "< 0",
+    "delta_ap_interface_hd95_mm": "<= 0",
+    "scope": "Mixed bands/endpoints on the frozen outer winner; same 52 development cases.",
+    "ranking": "Lowest mean paired common-tissue error-rate delta, then interface Chamfer delta, then identifier.",
+    "fallback": "No qualifying parent means no targeted A/P runs; preserve the outer sweep."
+  },
+  "parent_id": "ap82_s1_winner_b25_g100",
+  "entries": [
+    {
+      "id": "ap82_s2_winner_target_strength_low",
+      "family": "ap82_targeted",
+      "band": {
+        "kind": "regional",
+        "inner": 3,
+        "outer": 2,
+        "penalty": "brier",
+        "inside_weight": 0.5,
+        "hard_fraction": 0.25,
+        "hard_mix": 0.75,
+        "inside_fraction": 0.7,
+        "outside_fraction": 0.1,
+        "inside_hard_mix": 0.65,
+        "outside_hard_mix": 0.85
+      },
+      "pair": {
+        "distances": [
+          1,
+          3
+        ],
+        "weights": [
+          0.5,
+          0.5
+        ],
+        "support": "all",
+        "form": "independent"
+      },
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "w81_emphasis_qi70_qo10_mi65_mo85",
+      "idea": "One-block refinement of shared-tissue A/P improvement with preserved foreground Dice and total outer errors.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "winner",
+      "base_objective": {
+        "id": "w81_emphasis_qi70_qo10_mi65_mo85",
+        "family": "w81_side_emphasis",
+        "band": {
+          "kind": "regional",
+          "inner": 3,
+          "outer": 2,
+          "penalty": "brier",
+          "inside_weight": 0.5,
+          "hard_fraction": 0.25,
+          "hard_mix": 0.75,
+          "inside_fraction": 0.7,
+          "outside_fraction": 0.1,
+          "inside_hard_mix": 0.65,
+          "outside_hard_mix": 0.85
+        },
+        "pair": {
+          "distances": [
+            1,
+            3
+          ],
+          "weights": [
+            0.5,
+            0.5
+          ],
+          "support": "all",
+          "form": "independent"
+        },
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "a32_side_qi60_qo15_mix75",
+        "idea": "Separate inside/outside emphasis and cross it with supported nearby selection fractions.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr",
+        "objective_version": "winner_v1"
+      },
+      "base_coefficients": {
+        "bands": 0.032323425078637294,
+        "pair": 0.008503534232521521
+      },
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.25,
+        "gradient_ratio": 0.07500000000000001
+      },
+      "ap82_changes": {
+        "strength_low": {
+          "gradient_ratio": 0.07500000000000001
+        }
+      },
+      "ap82_phase": 2,
+      "ap82_parent": "ap82_s1_winner_b25_g100"
+    },
+    {
+      "id": "ap82_s2_dice_target_strength_low",
+      "family": "ap82_targeted",
+      "band": {
+        "kind": "none"
+      },
+      "pair": null,
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "dice",
+      "idea": "One-block refinement of shared-tissue A/P improvement with preserved foreground Dice and total outer errors.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "dice",
+      "base_objective": {
+        "id": "dice",
+        "family": "control",
+        "band": {
+          "kind": "none"
+        },
+        "pair": null,
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "focus25",
+        "idea": "Fresh Dice-only control from the common prefix.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr"
+      },
+      "base_coefficients": {},
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.25,
+        "gradient_ratio": 0.07500000000000001
+      },
+      "ap82_changes": {
+        "strength_low": {
+          "gradient_ratio": 0.07500000000000001
+        }
+      },
+      "ap82_phase": 2,
+      "ap82_parent": "ap82_s1_winner_b25_g100"
+    },
+    {
+      "id": "ap82_s2_winner_target_strength_high",
+      "family": "ap82_targeted",
+      "band": {
+        "kind": "regional",
+        "inner": 3,
+        "outer": 2,
+        "penalty": "brier",
+        "inside_weight": 0.5,
+        "hard_fraction": 0.25,
+        "hard_mix": 0.75,
+        "inside_fraction": 0.7,
+        "outside_fraction": 0.1,
+        "inside_hard_mix": 0.65,
+        "outside_hard_mix": 0.85
+      },
+      "pair": {
+        "distances": [
+          1,
+          3
+        ],
+        "weights": [
+          0.5,
+          0.5
+        ],
+        "support": "all",
+        "form": "independent"
+      },
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "w81_emphasis_qi70_qo10_mi65_mo85",
+      "idea": "One-block refinement of shared-tissue A/P improvement with preserved foreground Dice and total outer errors.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "winner",
+      "base_objective": {
+        "id": "w81_emphasis_qi70_qo10_mi65_mo85",
+        "family": "w81_side_emphasis",
+        "band": {
+          "kind": "regional",
+          "inner": 3,
+          "outer": 2,
+          "penalty": "brier",
+          "inside_weight": 0.5,
+          "hard_fraction": 0.25,
+          "hard_mix": 0.75,
+          "inside_fraction": 0.7,
+          "outside_fraction": 0.1,
+          "inside_hard_mix": 0.65,
+          "outside_hard_mix": 0.85
+        },
+        "pair": {
+          "distances": [
+            1,
+            3
+          ],
+          "weights": [
+            0.5,
+            0.5
+          ],
+          "support": "all",
+          "form": "independent"
+        },
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "a32_side_qi60_qo15_mix75",
+        "idea": "Separate inside/outside emphasis and cross it with supported nearby selection fractions.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr",
+        "objective_version": "winner_v1"
+      },
+      "base_coefficients": {
+        "bands": 0.032323425078637294,
+        "pair": 0.008503534232521521
+      },
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.25,
+        "gradient_ratio": 0.125
+      },
+      "ap82_changes": {
+        "strength_high": {
+          "gradient_ratio": 0.125
+        }
+      },
+      "ap82_phase": 2,
+      "ap82_parent": "ap82_s1_winner_b25_g100"
+    },
+    {
+      "id": "ap82_s2_dice_target_strength_high",
+      "family": "ap82_targeted",
+      "band": {
+        "kind": "none"
+      },
+      "pair": null,
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "dice",
+      "idea": "One-block refinement of shared-tissue A/P improvement with preserved foreground Dice and total outer errors.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "dice",
+      "base_objective": {
+        "id": "dice",
+        "family": "control",
+        "band": {
+          "kind": "none"
+        },
+        "pair": null,
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "focus25",
+        "idea": "Fresh Dice-only control from the common prefix.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr"
+      },
+      "base_coefficients": {},
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.25,
+        "gradient_ratio": 0.125
+      },
+      "ap82_changes": {
+        "strength_high": {
+          "gradient_ratio": 0.125
+        }
+      },
+      "ap82_phase": 2,
+      "ap82_parent": "ap82_s1_winner_b25_g100"
+    },
+    {
+      "id": "ap82_s2_winner_target_band_lower",
+      "family": "ap82_targeted",
+      "band": {
+        "kind": "regional",
+        "inner": 3,
+        "outer": 2,
+        "penalty": "brier",
+        "inside_weight": 0.5,
+        "hard_fraction": 0.25,
+        "hard_mix": 0.75,
+        "inside_fraction": 0.7,
+        "outside_fraction": 0.1,
+        "inside_hard_mix": 0.65,
+        "outside_hard_mix": 0.85
+      },
+      "pair": {
+        "distances": [
+          1,
+          3
+        ],
+        "weights": [
+          0.5,
+          0.5
+        ],
+        "support": "all",
+        "form": "independent"
+      },
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "w81_emphasis_qi70_qo10_mi65_mo85",
+      "idea": "One-block refinement of shared-tissue A/P improvement with preserved foreground Dice and total outer errors.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "winner",
+      "base_objective": {
+        "id": "w81_emphasis_qi70_qo10_mi65_mo85",
+        "family": "w81_side_emphasis",
+        "band": {
+          "kind": "regional",
+          "inner": 3,
+          "outer": 2,
+          "penalty": "brier",
+          "inside_weight": 0.5,
+          "hard_fraction": 0.25,
+          "hard_mix": 0.75,
+          "inside_fraction": 0.7,
+          "outside_fraction": 0.1,
+          "inside_hard_mix": 0.65,
+          "outside_hard_mix": 0.85
+        },
+        "pair": {
+          "distances": [
+            1,
+            3
+          ],
+          "weights": [
+            0.5,
+            0.5
+          ],
+          "support": "all",
+          "form": "independent"
+        },
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "a32_side_qi60_qo15_mix75",
+        "idea": "Separate inside/outside emphasis and cross it with supported nearby selection fractions.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr",
+        "objective_version": "winner_v1"
+      },
+      "base_coefficients": {
+        "bands": 0.032323425078637294,
+        "pair": 0.008503534232521521
+      },
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.125,
+        "gradient_ratio": 0.1
+      },
+      "ap82_changes": {
+        "band_lower": {
+          "band_share": 0.125
+        }
+      },
+      "ap82_phase": 2,
+      "ap82_parent": "ap82_s1_winner_b25_g100"
+    },
+    {
+      "id": "ap82_s2_dice_target_band_lower",
+      "family": "ap82_targeted",
+      "band": {
+        "kind": "none"
+      },
+      "pair": null,
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "dice",
+      "idea": "One-block refinement of shared-tissue A/P improvement with preserved foreground Dice and total outer errors.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "dice",
+      "base_objective": {
+        "id": "dice",
+        "family": "control",
+        "band": {
+          "kind": "none"
+        },
+        "pair": null,
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "focus25",
+        "idea": "Fresh Dice-only control from the common prefix.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr"
+      },
+      "base_coefficients": {},
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.125,
+        "gradient_ratio": 0.1
+      },
+      "ap82_changes": {
+        "band_lower": {
+          "band_share": 0.125
+        }
+      },
+      "ap82_phase": 2,
+      "ap82_parent": "ap82_s1_winner_b25_g100"
+    },
+    {
+      "id": "ap82_s2_winner_target_band_higher",
+      "family": "ap82_targeted",
+      "band": {
+        "kind": "regional",
+        "inner": 3,
+        "outer": 2,
+        "penalty": "brier",
+        "inside_weight": 0.5,
+        "hard_fraction": 0.25,
+        "hard_mix": 0.75,
+        "inside_fraction": 0.7,
+        "outside_fraction": 0.1,
+        "inside_hard_mix": 0.65,
+        "outside_hard_mix": 0.85
+      },
+      "pair": {
+        "distances": [
+          1,
+          3
+        ],
+        "weights": [
+          0.5,
+          0.5
+        ],
+        "support": "all",
+        "form": "independent"
+      },
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "w81_emphasis_qi70_qo10_mi65_mo85",
+      "idea": "One-block refinement of shared-tissue A/P improvement with preserved foreground Dice and total outer errors.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "winner",
+      "base_objective": {
+        "id": "w81_emphasis_qi70_qo10_mi65_mo85",
+        "family": "w81_side_emphasis",
+        "band": {
+          "kind": "regional",
+          "inner": 3,
+          "outer": 2,
+          "penalty": "brier",
+          "inside_weight": 0.5,
+          "hard_fraction": 0.25,
+          "hard_mix": 0.75,
+          "inside_fraction": 0.7,
+          "outside_fraction": 0.1,
+          "inside_hard_mix": 0.65,
+          "outside_hard_mix": 0.85
+        },
+        "pair": {
+          "distances": [
+            1,
+            3
+          ],
+          "weights": [
+            0.5,
+            0.5
+          ],
+          "support": "all",
+          "form": "independent"
+        },
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "a32_side_qi60_qo15_mix75",
+        "idea": "Separate inside/outside emphasis and cross it with supported nearby selection fractions.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr",
+        "objective_version": "winner_v1"
+      },
+      "base_coefficients": {
+        "bands": 0.032323425078637294,
+        "pair": 0.008503534232521521
+      },
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.375,
+        "gradient_ratio": 0.1
+      },
+      "ap82_changes": {
+        "band_higher": {
+          "band_share": 0.375
+        }
+      },
+      "ap82_phase": 2,
+      "ap82_parent": "ap82_s1_winner_b25_g100"
+    },
+    {
+      "id": "ap82_s2_dice_target_band_higher",
+      "family": "ap82_targeted",
+      "band": {
+        "kind": "none"
+      },
+      "pair": null,
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "dice",
+      "idea": "One-block refinement of shared-tissue A/P improvement with preserved foreground Dice and total outer errors.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "dice",
+      "base_objective": {
+        "id": "dice",
+        "family": "control",
+        "band": {
+          "kind": "none"
+        },
+        "pair": null,
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "focus25",
+        "idea": "Fresh Dice-only control from the common prefix.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr"
+      },
+      "base_coefficients": {},
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.375,
+        "gradient_ratio": 0.1
+      },
+      "ap82_changes": {
+        "band_higher": {
+          "band_share": 0.375
+        }
+      },
+      "ap82_phase": 2,
+      "ap82_parent": "ap82_s1_winner_b25_g100"
+    },
+    {
+      "id": "ap82_s2_winner_target_width2",
+      "family": "ap82_targeted",
+      "band": {
+        "kind": "regional",
+        "inner": 3,
+        "outer": 2,
+        "penalty": "brier",
+        "inside_weight": 0.5,
+        "hard_fraction": 0.25,
+        "hard_mix": 0.75,
+        "inside_fraction": 0.7,
+        "outside_fraction": 0.1,
+        "inside_hard_mix": 0.65,
+        "outside_hard_mix": 0.85
+      },
+      "pair": {
+        "distances": [
+          1,
+          3
+        ],
+        "weights": [
+          0.5,
+          0.5
+        ],
+        "support": "all",
+        "form": "independent"
+      },
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "w81_emphasis_qi70_qo10_mi65_mo85",
+      "idea": "One-block refinement of shared-tissue A/P improvement with preserved foreground Dice and total outer errors.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "winner",
+      "base_objective": {
+        "id": "w81_emphasis_qi70_qo10_mi65_mo85",
+        "family": "w81_side_emphasis",
+        "band": {
+          "kind": "regional",
+          "inner": 3,
+          "outer": 2,
+          "penalty": "brier",
+          "inside_weight": 0.5,
+          "hard_fraction": 0.25,
+          "hard_mix": 0.75,
+          "inside_fraction": 0.7,
+          "outside_fraction": 0.1,
+          "inside_hard_mix": 0.65,
+          "outside_hard_mix": 0.85
+        },
+        "pair": {
+          "distances": [
+            1,
+            3
+          ],
+          "weights": [
+            0.5,
+            0.5
+          ],
+          "support": "all",
+          "form": "independent"
+        },
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "a32_side_qi60_qo15_mix75",
+        "idea": "Separate inside/outside emphasis and cross it with supported nearby selection fractions.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr",
+        "objective_version": "winner_v1"
+      },
+      "base_coefficients": {
+        "bands": 0.032323425078637294,
+        "pair": 0.008503534232521521
+      },
+      "ap82": {
+        "width": 2.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.25,
+        "gradient_ratio": 0.1
+      },
+      "ap82_changes": {
+        "width2": {
+          "width": 2.0
+        }
+      },
+      "ap82_phase": 2,
+      "ap82_parent": "ap82_s1_winner_b25_g100"
+    },
+    {
+      "id": "ap82_s2_dice_target_width2",
+      "family": "ap82_targeted",
+      "band": {
+        "kind": "none"
+      },
+      "pair": null,
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "dice",
+      "idea": "One-block refinement of shared-tissue A/P improvement with preserved foreground Dice and total outer errors.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "dice",
+      "base_objective": {
+        "id": "dice",
+        "family": "control",
+        "band": {
+          "kind": "none"
+        },
+        "pair": null,
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "focus25",
+        "idea": "Fresh Dice-only control from the common prefix.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr"
+      },
+      "base_coefficients": {},
+      "ap82": {
+        "width": 2.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.25,
+        "gradient_ratio": 0.1
+      },
+      "ap82_changes": {
+        "width2": {
+          "width": 2.0
+        }
+      },
+      "ap82_phase": 2,
+      "ap82_parent": "ap82_s1_winner_b25_g100"
+    },
+    {
+      "id": "ap82_s2_winner_target_width1",
+      "family": "ap82_targeted",
+      "band": {
+        "kind": "regional",
+        "inner": 3,
+        "outer": 2,
+        "penalty": "brier",
+        "inside_weight": 0.5,
+        "hard_fraction": 0.25,
+        "hard_mix": 0.75,
+        "inside_fraction": 0.7,
+        "outside_fraction": 0.1,
+        "inside_hard_mix": 0.65,
+        "outside_hard_mix": 0.85
+      },
+      "pair": {
+        "distances": [
+          1,
+          3
+        ],
+        "weights": [
+          0.5,
+          0.5
+        ],
+        "support": "all",
+        "form": "independent"
+      },
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "w81_emphasis_qi70_qo10_mi65_mo85",
+      "idea": "One-block refinement of shared-tissue A/P improvement with preserved foreground Dice and total outer errors.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "winner",
+      "base_objective": {
+        "id": "w81_emphasis_qi70_qo10_mi65_mo85",
+        "family": "w81_side_emphasis",
+        "band": {
+          "kind": "regional",
+          "inner": 3,
+          "outer": 2,
+          "penalty": "brier",
+          "inside_weight": 0.5,
+          "hard_fraction": 0.25,
+          "hard_mix": 0.75,
+          "inside_fraction": 0.7,
+          "outside_fraction": 0.1,
+          "inside_hard_mix": 0.65,
+          "outside_hard_mix": 0.85
+        },
+        "pair": {
+          "distances": [
+            1,
+            3
+          ],
+          "weights": [
+            0.5,
+            0.5
+          ],
+          "support": "all",
+          "form": "independent"
+        },
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "a32_side_qi60_qo15_mix75",
+        "idea": "Separate inside/outside emphasis and cross it with supported nearby selection fractions.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr",
+        "objective_version": "winner_v1"
+      },
+      "base_coefficients": {
+        "bands": 0.032323425078637294,
+        "pair": 0.008503534232521521
+      },
+      "ap82": {
+        "width": 1.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.25,
+        "gradient_ratio": 0.1
+      },
+      "ap82_changes": {
+        "width1": {
+          "width": 1.0
+        }
+      },
+      "ap82_phase": 2,
+      "ap82_parent": "ap82_s1_winner_b25_g100"
+    },
+    {
+      "id": "ap82_s2_dice_target_width1",
+      "family": "ap82_targeted",
+      "band": {
+        "kind": "none"
+      },
+      "pair": null,
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "dice",
+      "idea": "One-block refinement of shared-tissue A/P improvement with preserved foreground Dice and total outer errors.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "dice",
+      "base_objective": {
+        "id": "dice",
+        "family": "control",
+        "band": {
+          "kind": "none"
+        },
+        "pair": null,
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "focus25",
+        "idea": "Fresh Dice-only control from the common prefix.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr"
+      },
+      "base_coefficients": {},
+      "ap82": {
+        "width": 1.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.25,
+        "gradient_ratio": 0.1
+      },
+      "ap82_changes": {
+        "width1": {
+          "width": 1.0
+        }
+      },
+      "ap82_phase": 2,
+      "ap82_parent": "ap82_s1_winner_b25_g100"
+    },
+    {
+      "id": "ap82_s2_winner_target_hard25",
+      "family": "ap82_targeted",
+      "band": {
+        "kind": "regional",
+        "inner": 3,
+        "outer": 2,
+        "penalty": "brier",
+        "inside_weight": 0.5,
+        "hard_fraction": 0.25,
+        "hard_mix": 0.75,
+        "inside_fraction": 0.7,
+        "outside_fraction": 0.1,
+        "inside_hard_mix": 0.65,
+        "outside_hard_mix": 0.85
+      },
+      "pair": {
+        "distances": [
+          1,
+          3
+        ],
+        "weights": [
+          0.5,
+          0.5
+        ],
+        "support": "all",
+        "form": "independent"
+      },
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "w81_emphasis_qi70_qo10_mi65_mo85",
+      "idea": "One-block refinement of shared-tissue A/P improvement with preserved foreground Dice and total outer errors.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "winner",
+      "base_objective": {
+        "id": "w81_emphasis_qi70_qo10_mi65_mo85",
+        "family": "w81_side_emphasis",
+        "band": {
+          "kind": "regional",
+          "inner": 3,
+          "outer": 2,
+          "penalty": "brier",
+          "inside_weight": 0.5,
+          "hard_fraction": 0.25,
+          "hard_mix": 0.75,
+          "inside_fraction": 0.7,
+          "outside_fraction": 0.1,
+          "inside_hard_mix": 0.65,
+          "outside_hard_mix": 0.85
+        },
+        "pair": {
+          "distances": [
+            1,
+            3
+          ],
+          "weights": [
+            0.5,
+            0.5
+          ],
+          "support": "all",
+          "form": "independent"
+        },
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "a32_side_qi60_qo15_mix75",
+        "idea": "Separate inside/outside emphasis and cross it with supported nearby selection fractions.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr",
+        "objective_version": "winner_v1"
+      },
+      "base_coefficients": {
+        "bands": 0.032323425078637294,
+        "pair": 0.008503534232521521
+      },
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.25,
+        "posterior_fraction": 0.25,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.25,
+        "gradient_ratio": 0.1
+      },
+      "ap82_changes": {
+        "hard25": {
+          "anterior_fraction": 0.25,
+          "posterior_fraction": 0.25
+        }
+      },
+      "ap82_phase": 2,
+      "ap82_parent": "ap82_s1_winner_b25_g100"
+    },
+    {
+      "id": "ap82_s2_dice_target_hard25",
+      "family": "ap82_targeted",
+      "band": {
+        "kind": "none"
+      },
+      "pair": null,
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "dice",
+      "idea": "One-block refinement of shared-tissue A/P improvement with preserved foreground Dice and total outer errors.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "dice",
+      "base_objective": {
+        "id": "dice",
+        "family": "control",
+        "band": {
+          "kind": "none"
+        },
+        "pair": null,
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "focus25",
+        "idea": "Fresh Dice-only control from the common prefix.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr"
+      },
+      "base_coefficients": {},
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.25,
+        "posterior_fraction": 0.25,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.25,
+        "gradient_ratio": 0.1
+      },
+      "ap82_changes": {
+        "hard25": {
+          "anterior_fraction": 0.25,
+          "posterior_fraction": 0.25
+        }
+      },
+      "ap82_phase": 2,
+      "ap82_parent": "ap82_s1_winner_b25_g100"
+    },
+    {
+      "id": "ap82_s2_winner_target_emphasis75",
+      "family": "ap82_targeted",
+      "band": {
+        "kind": "regional",
+        "inner": 3,
+        "outer": 2,
+        "penalty": "brier",
+        "inside_weight": 0.5,
+        "hard_fraction": 0.25,
+        "hard_mix": 0.75,
+        "inside_fraction": 0.7,
+        "outside_fraction": 0.1,
+        "inside_hard_mix": 0.65,
+        "outside_hard_mix": 0.85
+      },
+      "pair": {
+        "distances": [
+          1,
+          3
+        ],
+        "weights": [
+          0.5,
+          0.5
+        ],
+        "support": "all",
+        "form": "independent"
+      },
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "w81_emphasis_qi70_qo10_mi65_mo85",
+      "idea": "One-block refinement of shared-tissue A/P improvement with preserved foreground Dice and total outer errors.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "winner",
+      "base_objective": {
+        "id": "w81_emphasis_qi70_qo10_mi65_mo85",
+        "family": "w81_side_emphasis",
+        "band": {
+          "kind": "regional",
+          "inner": 3,
+          "outer": 2,
+          "penalty": "brier",
+          "inside_weight": 0.5,
+          "hard_fraction": 0.25,
+          "hard_mix": 0.75,
+          "inside_fraction": 0.7,
+          "outside_fraction": 0.1,
+          "inside_hard_mix": 0.65,
+          "outside_hard_mix": 0.85
+        },
+        "pair": {
+          "distances": [
+            1,
+            3
+          ],
+          "weights": [
+            0.5,
+            0.5
+          ],
+          "support": "all",
+          "form": "independent"
+        },
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "a32_side_qi60_qo15_mix75",
+        "idea": "Separate inside/outside emphasis and cross it with supported nearby selection fractions.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr",
+        "objective_version": "winner_v1"
+      },
+      "base_coefficients": {
+        "bands": 0.032323425078637294,
+        "pair": 0.008503534232521521
+      },
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.75,
+        "posterior_emphasis": 0.75,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.25,
+        "gradient_ratio": 0.1
+      },
+      "ap82_changes": {
+        "emphasis75": {
+          "anterior_emphasis": 0.75,
+          "posterior_emphasis": 0.75
+        }
+      },
+      "ap82_phase": 2,
+      "ap82_parent": "ap82_s1_winner_b25_g100"
+    },
+    {
+      "id": "ap82_s2_dice_target_emphasis75",
+      "family": "ap82_targeted",
+      "band": {
+        "kind": "none"
+      },
+      "pair": null,
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "dice",
+      "idea": "One-block refinement of shared-tissue A/P improvement with preserved foreground Dice and total outer errors.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "dice",
+      "base_objective": {
+        "id": "dice",
+        "family": "control",
+        "band": {
+          "kind": "none"
+        },
+        "pair": null,
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "focus25",
+        "idea": "Fresh Dice-only control from the common prefix.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr"
+      },
+      "base_coefficients": {},
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.75,
+        "posterior_emphasis": 0.75,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.25,
+        "gradient_ratio": 0.1
+      },
+      "ap82_changes": {
+        "emphasis75": {
+          "anterior_emphasis": 0.75,
+          "posterior_emphasis": 0.75
+        }
+      },
+      "ap82_phase": 2,
+      "ap82_parent": "ap82_s1_winner_b25_g100"
+    },
+    {
+      "id": "ap82_s2_winner_target_anterior40",
+      "family": "ap82_targeted",
+      "band": {
+        "kind": "regional",
+        "inner": 3,
+        "outer": 2,
+        "penalty": "brier",
+        "inside_weight": 0.5,
+        "hard_fraction": 0.25,
+        "hard_mix": 0.75,
+        "inside_fraction": 0.7,
+        "outside_fraction": 0.1,
+        "inside_hard_mix": 0.65,
+        "outside_hard_mix": 0.85
+      },
+      "pair": {
+        "distances": [
+          1,
+          3
+        ],
+        "weights": [
+          0.5,
+          0.5
+        ],
+        "support": "all",
+        "form": "independent"
+      },
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "w81_emphasis_qi70_qo10_mi65_mo85",
+      "idea": "One-block refinement of shared-tissue A/P improvement with preserved foreground Dice and total outer errors.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "winner",
+      "base_objective": {
+        "id": "w81_emphasis_qi70_qo10_mi65_mo85",
+        "family": "w81_side_emphasis",
+        "band": {
+          "kind": "regional",
+          "inner": 3,
+          "outer": 2,
+          "penalty": "brier",
+          "inside_weight": 0.5,
+          "hard_fraction": 0.25,
+          "hard_mix": 0.75,
+          "inside_fraction": 0.7,
+          "outside_fraction": 0.1,
+          "inside_hard_mix": 0.65,
+          "outside_hard_mix": 0.85
+        },
+        "pair": {
+          "distances": [
+            1,
+            3
+          ],
+          "weights": [
+            0.5,
+            0.5
+          ],
+          "support": "all",
+          "form": "independent"
+        },
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "a32_side_qi60_qo15_mix75",
+        "idea": "Separate inside/outside emphasis and cross it with supported nearby selection fractions.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr",
+        "objective_version": "winner_v1"
+      },
+      "base_coefficients": {
+        "bands": 0.032323425078637294,
+        "pair": 0.008503534232521521
+      },
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.4,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.25,
+        "gradient_ratio": 0.1
+      },
+      "ap82_changes": {
+        "anterior40": {
+          "anterior_mass": 0.4
+        }
+      },
+      "ap82_phase": 2,
+      "ap82_parent": "ap82_s1_winner_b25_g100"
+    },
+    {
+      "id": "ap82_s2_dice_target_anterior40",
+      "family": "ap82_targeted",
+      "band": {
+        "kind": "none"
+      },
+      "pair": null,
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "dice",
+      "idea": "One-block refinement of shared-tissue A/P improvement with preserved foreground Dice and total outer errors.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "dice",
+      "base_objective": {
+        "id": "dice",
+        "family": "control",
+        "band": {
+          "kind": "none"
+        },
+        "pair": null,
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "focus25",
+        "idea": "Fresh Dice-only control from the common prefix.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr"
+      },
+      "base_coefficients": {},
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.4,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.25,
+        "gradient_ratio": 0.1
+      },
+      "ap82_changes": {
+        "anterior40": {
+          "anterior_mass": 0.4
+        }
+      },
+      "ap82_phase": 2,
+      "ap82_parent": "ap82_s1_winner_b25_g100"
+    },
+    {
+      "id": "ap82_s2_winner_target_anterior60",
+      "family": "ap82_targeted",
+      "band": {
+        "kind": "regional",
+        "inner": 3,
+        "outer": 2,
+        "penalty": "brier",
+        "inside_weight": 0.5,
+        "hard_fraction": 0.25,
+        "hard_mix": 0.75,
+        "inside_fraction": 0.7,
+        "outside_fraction": 0.1,
+        "inside_hard_mix": 0.65,
+        "outside_hard_mix": 0.85
+      },
+      "pair": {
+        "distances": [
+          1,
+          3
+        ],
+        "weights": [
+          0.5,
+          0.5
+        ],
+        "support": "all",
+        "form": "independent"
+      },
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "w81_emphasis_qi70_qo10_mi65_mo85",
+      "idea": "One-block refinement of shared-tissue A/P improvement with preserved foreground Dice and total outer errors.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "winner",
+      "base_objective": {
+        "id": "w81_emphasis_qi70_qo10_mi65_mo85",
+        "family": "w81_side_emphasis",
+        "band": {
+          "kind": "regional",
+          "inner": 3,
+          "outer": 2,
+          "penalty": "brier",
+          "inside_weight": 0.5,
+          "hard_fraction": 0.25,
+          "hard_mix": 0.75,
+          "inside_fraction": 0.7,
+          "outside_fraction": 0.1,
+          "inside_hard_mix": 0.65,
+          "outside_hard_mix": 0.85
+        },
+        "pair": {
+          "distances": [
+            1,
+            3
+          ],
+          "weights": [
+            0.5,
+            0.5
+          ],
+          "support": "all",
+          "form": "independent"
+        },
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "a32_side_qi60_qo15_mix75",
+        "idea": "Separate inside/outside emphasis and cross it with supported nearby selection fractions.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr",
+        "objective_version": "winner_v1"
+      },
+      "base_coefficients": {
+        "bands": 0.032323425078637294,
+        "pair": 0.008503534232521521
+      },
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.6,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.25,
+        "gradient_ratio": 0.1
+      },
+      "ap82_changes": {
+        "anterior60": {
+          "anterior_mass": 0.6
+        }
+      },
+      "ap82_phase": 2,
+      "ap82_parent": "ap82_s1_winner_b25_g100"
+    },
+    {
+      "id": "ap82_s2_dice_target_anterior60",
+      "family": "ap82_targeted",
+      "band": {
+        "kind": "none"
+      },
+      "pair": null,
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "dice",
+      "idea": "One-block refinement of shared-tissue A/P improvement with preserved foreground Dice and total outer errors.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "dice",
+      "base_objective": {
+        "id": "dice",
+        "family": "control",
+        "band": {
+          "kind": "none"
+        },
+        "pair": null,
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "focus25",
+        "idea": "Fresh Dice-only control from the common prefix.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr"
+      },
+      "base_coefficients": {},
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.6,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.25,
+        "gradient_ratio": 0.1
+      },
+      "ap82_changes": {
+        "anterior60": {
+          "anterior_mass": 0.6
+        }
+      },
+      "ap82_phase": 2,
+      "ap82_parent": "ap82_s1_winner_b25_g100"
+    }
+  ],
+  "replaced_jobs": [
+    "697547",
+    "697548"
+  ],
+  "completed_preserved": {
+    "a32_hard_q35_mix75": "5534bd5fee14d5fe0a377b122809f7f7876e8e81ab66ffb31f5651f818cf703a",
+    "a32_neighbor_k3_q25_mix50_point50": "b5648d46aac2de5243c262aef360dcbf0897b3753139a7878d6f2cb01db4a261",
+    "a32_side_qi25_qo40_mix50": "2817a234567b6ada07635eceb55c8550b4e0f8e3ee45b7d6468163defcc199c6",
+    "a32_mass45_q25_mix50": "e9297d162e82a936cb117f7f141acf78e47a6ac59f967ed3d53ba5f3504f4978",
+    "a32_hard_q40_mix75": "f3bae00e1645887942165589ee5c6606c33f5770faa2a7e7a03a5c7af9f6f235",
+    "a32_neighbor_k3_q35_mix75_point50": "357576fff848b5daa69cce8e59d9f4e6d37958ed4d33cbb445c091a36de8ffbd",
+    "a32_neighbor_k5_q25_mix50_point50": "bd455338d666a3fef966f50a8452a32509cb5bc48e9baa1592d6621105ee9512",
+    "a32_neighbor_k3_qi25_qo40_mix50": "8a9ba34b987ffe1891cb57e7001e29f96bb926d87c096c0db6a4e3168823dcbd",
+    "a32_mass55_q25_mix50": "70796ac7ccb7b075262664717a3223e1dc038d10a415993ee8d9d4e9fabbac86",
+    "a32_budget_b1p0_p1p5": "d76e75d559041b9bdd35919b51bc16cc2f5adbbb74402fa27646179674bf66b0",
+    "a32_hard_q10_mix25": "df7c3d8fa3e0973426cb66ed49bbd2e180bd61eb420c1487e225d0ef9c31bd47",
+    "a32_hard_q10_mix50": "72702eecc08e90cc086cdfce08f4a10eaa9a677678d066538af9b1d29e444a0b",
+    "a32_hard_q10_mix75": "ab1b6c1e2a99ccd4740eee9fe7b1bca26d2ddc1a8e9a357a8c4c0b96ea2c7895",
+    "a32_hard_q15_mix25": "435ad01ac2e43f6d05f4697d0c03e7de92cf1d81cd5cf4f7fd7804471f557aa5",
+    "a32_hard_q15_mix75": "29943100ecf029a506160d5c02ba1d98391b97c5180871d3aabf09d5c1beba99",
+    "a32_hard_q20_mix25": "135272bc4b3b5550e9e588b9a61e160668814162ce69335921f2be4fa0cff879",
+    "a32_hard_q20_mix50": "1356aef302e2945b952eada5459bb69c95f602e602e9081fca7079d61bfbfcda",
+    "a32_hard_q20_mix75": "73c200f40731f87a2a302d396179b82c083e2cbdc0263c17311073ae246fc75d",
+    "a32_hard_q25_mix25": "27ebc566ed85c32481ea468771cb88b5265c48c1ccc419aed628a42cec49d54a",
+    "a32_hard_q25_mix75": "d19fb6e57aac551b879075339a77ac6606ffa45c86bb9843c47d4cd3479f8710",
+    "a32_hard_q35_mix25": "fa946770e60c29866b1481ebf891386b83f00d631cb90fb2b0e9ddbae4ab9f7c",
+    "a32_hard_q35_mix50": "c032d7a4bea9836830b93e8d421dfc42d25fe90014a87aabb31befe2a931be7b",
+    "a32_hard_q40_mix25": "8833f8741d99fde7dcb7828b569d963c137b1030946564f84573188611106c56",
+    "a32_hard_q50_mix25": "a66280c184dd2d577908babd255a27db9006cfc8fc2cebccd206a8a471ce7a2b",
+    "a32_hard_q50_mix50": "4e84092376246ffe9ba6d65b5dc732167536a62ed6364929d580c28c8338bd3f",
+    "a32_hard_q50_mix75": "9eddd1d6a1eab7d7e726ccd82ba5fcdeda5c1f5d21fe8bd7ed9886872251ee0b",
+    "a32_side_qi15_qo25_mix50": "4c5455428e8b67e1ebd28db1cd049ba62ac3360bb95848157b6a98642315474f",
+    "a32_side_qi15_qo25_mix75": "a59f5bb1cb8be8d45b6b8fdb2d048e920b3b663e2fa6b169ca3eb90bb9b36a68",
+    "a32_side_qi15_qo40_mix50": "26d4a717ab1bb523ad05c692dbd816fbbb0be92a86081a40ee15235e14328d52",
+    "a32_side_qi15_qo40_mix75": "65bae57a0b8dada2fde204c0936fee8a9c429f8df49acfc168d0c5da8c8eccc8",
+    "a32_side_qi15_qo60_mix50": "8724d84fdb0c1ce5cd9f8d100c1c281bb0cfe7df11a99252178d0fadec234828",
+    "a32_side_qi15_qo60_mix75": "99fe08d14b17cd6f8355f24c4cfaacaec6d4201724bcadc34d9bc848ee8bbef3",
+    "a32_side_qi25_qo15_mix50": "1d0c116980b34c9244df924d654e05f22c224bea0b55f104447310a6d2cbe0af",
+    "a32_side_qi25_qo15_mix75": "a2c9b171ecd0b9dd6e781b9f7da5c2bb437961a1ec9805eac07234120c28c6b5",
+    "a32_side_qi25_qo40_mix75": "0ec32f517ad714e510a81cd00583c8d4df92279e687295190bbdd8c2d7609f10",
+    "a32_side_qi25_qo60_mix50": "315bc829c533ace3f5d58684b5c8003acabeba42f16f638da3654edc0a52b27d",
+    "a32_side_qi25_qo60_mix75": "6a66d5fdf4d3e98aaca72bf65baa45bd7dfd655519333a03ba2ff1cae5c59c4d",
+    "a32_side_qi40_qo15_mix50": "87111ae66aa58b6ec10a59563e251371134f9caad3bb6e071140c2a7aadea7e4",
+    "a32_side_qi40_qo15_mix75": "c80b5c5d712f09a5413b8537b08747ff516e80a10d230a38bb9964bb78f13ac9",
+    "a32_side_qi40_qo25_mix50": "aeb095c4ca2da09e30af9f544344fcc8e76fe92f57ebb26000ab9e37ad58831f",
+    "a32_side_qi40_qo25_mix75": "5f7b1361cc4da683f8ba5079da6624fd2e88c69b12a8bfbd9c521fda7545c8a2",
+    "a32_side_qi40_qo60_mix50": "2685b6291a4a69a693b031286c09718ec791fa640f2615b404a0c1e0cc1d8cbd",
+    "a32_side_qi40_qo60_mix75": "dc49a88fff52f2bab13a26c861e4e0cf67e76634ffd8f030379d66467465269b",
+    "a32_side_qi60_qo15_mix50": "e77f6a7d5832c5ee5c8eed8e2b864d8908ce5e24fd4b62ee7344743bd050003d",
+    "a32_side_qi60_qo15_mix75": "4cdc5faa72df305b90736c27aa63e4fafb145615bafd9ccec2d0650393f3f0c2",
+    "a32_side_qi60_qo25_mix50": "a60f0a04f5a5236b00fe2da1eb50b3dfb29e867bd2071aa6f23823a1f56f89c5",
+    "a32_side_qi60_qo25_mix75": "c5f73e46f199ccb3b7f8d690eb370dd1e6fa4d00047a13503bb115af38efeab8",
+    "a32_side_qi60_qo40_mix50": "0cfb88e97f5dfa0e7cce4e6035abef3008e4747104e641cd943cd64d3aeb0575",
+    "a32_side_qi60_qo40_mix75": "ec6c47e9bfbb47544f370cea7805adbfa3943bcc6510b99095e443789e9e22f9",
+    "a32_side_qi60_qo60_mix50": "fd8f0ffb0da515f0ccb0ea23b61ddd31c4e54cecffec625dc129e3b4f63ef4c3",
+    "a32_side_qi60_qo60_mix75": "c20c7ec0b3a41052ade6caff34ff239c41697ff997449ce7539d7307cfa74b8f",
+    "a32_mass40_q25_mix50": "ac257fdc783727418292000549ac26c28b2a5ef86c276001fcbab65c59ab3d29",
+    "a32_mass40_q35_mix75": "234c09316d8eb93dc6b8a49113ed797f7f6f7c9fd114ff7fea869b59f0b9dd54",
+    "a32_mass40_q40_mix50": "d435328de6428d832d60fb92ffdb2d153092263fbde0258ff3cd41fdcc02cd96",
+    "a32_mass45_q35_mix75": "9798e07e05a63d38e3bc9ba16e667bad73d4d6c84b2568a481d197e124516fc0",
+    "a32_mass45_q40_mix50": "c8fe1bdb394bc7e73ad811a485fdbef2da424a9c9b5d1de19fd8f01d1f1b749f",
+    "a32_mass55_q35_mix75": "366d914970b8300869f6953acfa119e471c1ae86287b5ed6319187d63d664fcc",
+    "a32_mass55_q40_mix50": "d310a58adadefeb6b60339834cde6b794ed7f3b12e99ec4d497d280b4b4fcfef",
+    "a32_mass60_q25_mix50": "aa25b9af95b2f67909718ada8689443fe63c65413b59c2be0209c9cea64cc8ac",
+    "a32_mass60_q35_mix75": "e9ce46ea0572674d6bfb301267a6d8e61e33f0d8447733cd347514a6a628648d",
+    "a32_mass60_q40_mix50": "50987ac5520173b86874dda8e82d3f9d3254dd0e03a070b39988179b13f19e7e",
+    "a32_neighbor_k3_q15_mix50_point0": "7cc9f3ac79c262015e661bb4069392e0ddcec075e703a18919d22b22891c2d8f",
+    "a32_neighbor_k3_q15_mix50_point50": "61c81d2a3baab1be14c7fa40c0bf081761d8447b7171650b9b6672ce46102a22",
+    "a32_neighbor_k3_q15_mix75_point0": "626eba8cb26a8c3914c1616a449295a71ad8b4795d3a7183785f81533dcd2d22",
+    "a32_neighbor_k3_q15_mix75_point50": "5985c8bcd0677193fca952654d17811bc5306b05bdc7c9cf1c5da641a9ca6759",
+    "a32_neighbor_k3_q25_mix50_point0": "78f7651080a570801e60d989599b32b63d7e5082dd2ca504c15cad079e50869d",
+    "a32_neighbor_k3_q25_mix75_point0": "70d8c4baa7c22ec5407a3fab89b71fbe657245c4c745d36d105271741a883aae",
+    "a32_neighbor_k3_q25_mix75_point50": "4383435b4461075fa434ddf2cf5ea7fa114683ac48d1edeb972a920a673affbc",
+    "a32_neighbor_k3_q35_mix50_point0": "5e9f162d6ee282db2fad3fbeb81fcbcba41c1b9144ea305893e7690054406da4",
+    "a32_neighbor_k3_q35_mix50_point50": "115f42a98a3691a937972b76a4e9e2e73139c8d6ff40cb94775111fb69c85794",
+    "a32_neighbor_k3_q35_mix75_point0": "ce1db15a4b4621d5a2078dfaf426b89b0da8aed8aa0f1114d58a944f8687a426",
+    "a32_neighbor_k3_q40_mix50_point0": "ecbf07e268cfa914585ad4e4b116351ca5756816b4175017f58173f898fd9d2d",
+    "a32_neighbor_k3_q40_mix50_point50": "ea7595713dcaaaa4cbb5045701c3576bd2403db57b6798e1dba0411066e489bf",
+    "a32_neighbor_k3_q40_mix75_point0": "f2bd08f1cc90ba0607d6e95889dfb748cf11953bb9927a67e960cc9322b6f293",
+    "a32_neighbor_k3_q40_mix75_point50": "3fcbc3731bc7188f84bc99fc1bb7713ffeb4cec8fb5bdc43e2f680130459db09",
+    "a32_neighbor_k3_q50_mix50_point0": "99f6e2a8926ec94b0fb583144c850b34afe4b2ca5ee9c41a28c262cba4b7a49d",
+    "a32_neighbor_k3_q50_mix50_point50": "152c99951271e541ed3467170928737dc7e763bac7c2d590ec8e1e68f821d2bc",
+    "a32_neighbor_k3_q50_mix75_point0": "41a870eb123ce0e9f53da38b9a389f50f697db8150370029f17a2435a283af32",
+    "a32_neighbor_k3_q50_mix75_point50": "ce95f9d79b4644605f07358f03c20e6695f92abe20b7409f250ee522b545e217",
+    "a32_neighbor_k5_q15_mix50_point0": "877b3f1f99411805faed0483ec1021f0ae6244a1d0a737fd56651259cc7caf9a",
+    "a32_neighbor_k5_q15_mix50_point50": "97e2a32b9025801d9df51ffe729a4fbe17568c0e8c0db0543312fb24681b04f4",
+    "a32_neighbor_k5_q15_mix75_point0": "f50652ec1495f653b5979dcbf683fa2af9723639390d9fc11e3db046fd93e471",
+    "a32_neighbor_k5_q15_mix75_point50": "4e07e9695ae20396f2ce1ac80874f1138f58d0042a0bd6576f4db7858a63d7eb",
+    "a32_neighbor_k5_q25_mix50_point0": "28ac22efd216ead12e9388da02eaca9bda5b4598334f659ea342b056846ac6d6",
+    "a32_neighbor_k5_q25_mix75_point0": "c649724794d2edfda86890ce3edde28986955b96e0d46d7ac48bea1f54409bd5",
+    "a32_neighbor_k5_q25_mix75_point50": "335cbdfe64a955e518db2c6267f18fb4f0506b6311ec6f88d9e4787fc00aa1b9",
+    "a32_neighbor_k5_q35_mix50_point0": "05cd6cf4ad59a8c611d3bf98c584442f6b40015ded93d99cbd5bfa2529418b32",
+    "a32_neighbor_k5_q35_mix50_point50": "2c7d13f51f8f03326e09885bc335dfe5cceb1e8841ad76be2b07034b06eda952",
+    "a32_neighbor_k5_q35_mix75_point0": "ab8a764be6805a6c83aca6ee5d29dc4726a29719bd75cfef754bc537426031c5",
+    "a32_neighbor_k5_q35_mix75_point50": "72931c115b19857e09a2dceae95c65ba08e4e0752595690057b7a0b9510071dd",
+    "a32_neighbor_k5_q40_mix50_point0": "66a6ab7d50a8a575fafc6a9522ac69f4e60754b651042e4c9fc944909e71e872",
+    "a32_neighbor_k5_q40_mix50_point50": "427de831d4d877e9b0ff681ff1562536287882a1116d7de8844c62fffab79bae",
+    "a32_neighbor_k5_q40_mix75_point0": "31a1b5256ce7a26b3d65ae58ea0594431c016c75102f838fe0e256d7e99838ef",
+    "a32_neighbor_k5_q40_mix75_point50": "dae656732f2ea1a4a437a7a6c839bfcd3560dc5fee209161ea629a1f910b4e6f",
+    "a32_neighbor_k5_q50_mix50_point0": "757a8c404bed4b1f3da4c5f40f449a92293651e3c0d6e05a86e885f54a8eb451",
+    "a32_neighbor_k5_q50_mix50_point50": "f1ee8937e52b6d73fb79c93b60bd05fa35f2ec9449d459ba5695966e3ac292c4",
+    "a32_neighbor_k5_q50_mix75_point0": "4f9eb14fa006aab2baa15f6812c85794dcf535cea865da6b91003a5f079a61a5",
+    "a32_neighbor_k5_q50_mix75_point50": "8732d396d44e824e75ab340c8ac3f61647c71e02936675c45dd9654e9dcb45ca",
+    "a32_neighbor_k7_q15_mix50_point0": "20bb9029c55434e1a8cd25bab98b513344e612cf4132ff440f6fc01405394d09",
+    "a32_neighbor_k7_q15_mix50_point50": "4ae03da94f5781d7994b44c3bdf6cc1af448935e03739af07da97a6e638d0a6f",
+    "a32_neighbor_k7_q15_mix75_point0": "038c0d6211798125fe7738e3a6d54064b7119fb4dbe4b52046cc8f6cd105b2ec",
+    "a32_neighbor_k7_q15_mix75_point50": "1177df8636ccd0931680ee6613c31976f5ddebf20aebf2d483447decced236c7",
+    "a32_neighbor_k7_q25_mix50_point0": "831c07b859fa300b1c9fcb20d4b2d899a7853b40c603f20c28a3013f6e0a3e9b",
+    "a32_neighbor_k7_q25_mix50_point50": "347106d85ae7da19b22e3c6f0bb4ed892d4924dfb9585d1f83b6bc26f3c4b2a6",
+    "a32_neighbor_k7_q25_mix75_point0": "09d7e48420fdac9d382c2d8d9848f65a024777144967288757854bcec31c1582",
+    "a32_neighbor_k7_q25_mix75_point50": "7694a38f93c0fde4376f30f1f1f5d3cd4f5ab5219acfceed251b6a8e3d97652d",
+    "a32_neighbor_k7_q35_mix50_point0": "005e955e3e5ecda32cf4e83bd0ec6218003d2190aaeea1960f156c355149bcff",
+    "a32_neighbor_k7_q35_mix50_point50": "a5ae4b261ff905e8256403b625b44e426d73a049bb54c0fd02bd081c2a0f7f3f",
+    "a32_neighbor_k7_q35_mix75_point0": "f546d9f8e82b483d01b792ab9a07dbf8a122ff8fe6acc0c8d207603c6a98c61f",
+    "a32_neighbor_k7_q35_mix75_point50": "eb8278eca990d3277351b3c2c0468a5bb41a936465f5ccda9f9206c9d6a51bbe",
+    "a32_neighbor_k7_q40_mix50_point0": "730bcaf0e901fa9401fa67a00b852e54172d5739c6ff804b77692a993d517196",
+    "a32_neighbor_k7_q40_mix50_point50": "53f0c986d2f9d0822ffa60f3084c1038be0ac5dd0978673b9a4a8273a5fd26bd",
+    "a32_neighbor_k7_q40_mix75_point0": "58ebd44e2c4eb97148d9e84670fd9d22192f92281caa4db8ab859eb41f256e27",
+    "a32_neighbor_k7_q40_mix75_point50": "9edadfe7661bf705c4b37f47d876faa6cf1e11ac6da602d3a8ea787dd4812791",
+    "a32_neighbor_k7_q50_mix50_point0": "1a7ea7e51299047b45b988345bc5bb76c572afa75e21fb4f94d74f36fd2c9023",
+    "a32_neighbor_k7_q50_mix50_point50": "2ff3efdd4b9c4414a92269bd280149e54eec281ecb5fc677a1887770925b40ba",
+    "a32_neighbor_k7_q50_mix75_point0": "ee44ff297d1bc960d38b7563df1bff4ceb5e42af36ee0850e7078ef252a2af10",
+    "a32_neighbor_k7_q50_mix75_point50": "dc346b3c3fde18556dfbee24efac1a495cd5cc1c8d7b6ca218bd9c0187ecff7b",
+    "a32_neighbor_multi35_q25_mix50": "7536f51eb618e6815d425c9aa56e2833f5bd979f77e69aaa8ea0aedc4f482df0",
+    "a32_neighbor_multi35_q25_mix75": "22a2eefc131aa9788bae3f38fa5f146f0ac9ca652b06534c03c5a6312dd307c8",
+    "a32_neighbor_multi35_q35_mix50": "c77a1fd4e45845ec3c14c21555fdd4b4912b34088a40d1172866f4f37ca8e397",
+    "a32_neighbor_multi35_q35_mix75": "890ccf36c8a27f7d7980d6b7971f303d393823a6fb84cdc25c70417dce4a9c7e",
+    "a32_neighbor_multi35_q40_mix50": "b20b9bc44bf27c8b5088c398dd4ff8c3d3f70be515fb95f97a2c338449b46cb3",
+    "a32_neighbor_multi35_q40_mix75": "add1c29326b667b29b6d31ae0cc9dc785518325eccc5b6785bb653e19225cf68",
+    "a32_neighbor_multi37_q25_mix50": "c352272d8ea024e3b9021dc8e4fdfe84427adb76de178eb1b0f18f3413a96775",
+    "a32_neighbor_multi37_q25_mix75": "8b303593623c9931918b5b06083448b0212650e86ea00936db02cb5214fca4c5",
+    "a32_neighbor_multi37_q35_mix50": "a01b535b15a9cd1129a44fdd93cb840d96fe5f5d33fec6f5c57b5225bbf688fe",
+    "a32_neighbor_multi37_q35_mix75": "68641902482439e09e4e1cf584a3d7c040e714d37b7dfbf0c574640390ed8d1a",
+    "a32_neighbor_multi37_q40_mix50": "47cd0f747214aa9c49abec1cb8d697c712cb7dada0ef182bf3f4909e33658f2b",
+    "a32_neighbor_multi37_q40_mix75": "fe35f0ae17e7fa03487b5051b4eb2a01f02ae332412fe7fc67e50511d8770a1d",
+    "a32_neighbor_multi357_q25_mix50": "4abdbf18f4d04831689f30efc10a2e00e6f8181839520af9f16512d705a236dc",
+    "a32_neighbor_multi357_q25_mix75": "a0a095063ea77f8fcde2515218bbf11b2d1b535bfffc9ea45729bcaf83b00ecd",
+    "a32_neighbor_multi357_q35_mix50": "2fdde22b736f1587e6c62cdee6e8bba2f4f501eb5ab000a3fcc07e174cc3a1ef",
+    "a32_neighbor_multi357_q35_mix75": "8c9923900a369ebeba758dae9c890aaa10b7aea70f254ddbf3e740a021aff0f6",
+    "a32_neighbor_multi357_q40_mix50": "dee3adb433dac4a1445f6845f2b31251bcbe7ebf24002393895f60c112852394",
+    "a32_neighbor_multi357_q40_mix75": "10106fb1cdc52793d36e739ef91a2203f55f8acbe81276580feb575a8d0ef94a",
+    "a32_neighbor_k3_qi15_qo25_mix50": "0a53fe3e64f1f47989683dc82d05878316991563462a628a5f731ef7ea5eeaff",
+    "a32_neighbor_k3_qi15_qo25_mix75": "756c35325bd8031c172e6264e8056ddf7e9930f66b602fa59c23f9d99f2682e7",
+    "a32_neighbor_k3_qi25_qo15_mix50": "498aa0446804d7a6fbf928a3d6fbbd46f4f101827fcf008fc4cdfa384ee18137",
+    "a32_neighbor_k3_qi25_qo15_mix75": "7c311c59f1f5a84d1d1df9065f9af9233f58133d74d9a659debec46e4dd7ace2",
+    "a32_neighbor_k3_qi25_qo40_mix75": "5ceee32e3a3f9d0f42cc93e294f2b198d8ead0258a218aef3f80ef8cec840e3e",
+    "a32_neighbor_k3_qi40_qo25_mix50": "b603a192686c167dcb3adc83a1e0a4254c7cc1da34b8a4de51ffe180e322d985",
+    "a32_neighbor_k3_qi40_qo25_mix75": "7502dfc005f15d642e69376c69e07d5531137f70abf271773161696c789386a1",
+    "a32_neighbor_k5_qi15_qo25_mix50": "36bbb796e00abe5d1500583ac56f2b5f18d1c2b4df9d535aa591b8fa4c4336a0",
+    "a32_neighbor_k5_qi15_qo25_mix75": "8f62aeaf094c0361cb68b5c2c1dc14cdebcdbe14922fd76f76f5f3d07396a00e",
+    "a32_neighbor_k5_qi25_qo15_mix50": "793cb4762740c79a35496356ba3384075f5e20d9486c7608087dbc84919e56da",
+    "a32_neighbor_k5_qi25_qo15_mix75": "14ac7be7a0f84f1963b50cde8a7bf5dd738492a4745066b573beb0c2792cfb57",
+    "a32_neighbor_k5_qi25_qo40_mix50": "29fc8b20755693c0cfc21c64c222d7c5240c480fde3161692c665c0c0197a55d",
+    "a32_neighbor_k5_qi25_qo40_mix75": "8e14ecbdce62d4ebc66355bafd287cf3fff73bf62dffabd49062f136b30456aa",
+    "a32_neighbor_k5_qi40_qo25_mix50": "98e45b5643fdf4f071ebc7049b53c44dd079405df70f32c1362755558e7e1b34",
+    "a32_neighbor_k5_qi40_qo25_mix75": "d536ba0503370a7c34110d326527fbd35a791575f088e89dd0d0f821b948dd31",
+    "a32_neighbor_k3_mass45_q25_mix50": "209ff7ee9ad05a00bb1b37c6bc495f354501e19e61e504f991b8406bd5efb598",
+    "a32_neighbor_k3_mass45_q35_mix75": "c11f69c2ef8f82b7b6dbfaa306d9f7130c558ba73775e01c5ce5acdea56e76bd",
+    "a32_neighbor_k3_mass55_q25_mix50": "2e45536817ea4bbc52fb4a143de24a2197b9b6cecfed4b3026a3faf48bf56db1",
+    "a32_neighbor_k3_mass55_q35_mix75": "a08dea0c45e1f0b01d40f72116f971db01d0a6299c1fdaa6cb22c2db580f0e51",
+    "a32_neighbor_k5_mass45_q25_mix50": "a73b04abb3df4de7e193bc772c3e0892624118ebba721be08d729f6fe0ec830a",
+    "a32_neighbor_k5_mass45_q35_mix75": "8ac89617986179fba7d4e629d8c54099f2aadba80708bf9519313612471a583c",
+    "a32_neighbor_k5_mass55_q25_mix50": "5df62af69a53df3aa6a1d022ae4ffb23048c201936d795a69706709e28e40b00",
+    "a32_neighbor_k5_mass55_q35_mix75": "5b56a058d49349b5f70129d9ff8cdbd71aabc72c7ca04f3543ed9ec148063d51",
+    "a32_budget_b0p75_p0p75": "19a13296925c3c54acceb11ef7f5740d93f951c5e19bb0323aa9a886e9b347d5",
+    "dice": "2c03dee83d1021ef23e911fb4639183782cb0149bab44d0f1623773bf1545c27",
+    "bands": "560c89d9ed169875879facbd2aece4db941f73a1ae34539412c9cd48db76d20d",
+    "independent13": "219b17d27f5515a889d204e5ee30ec904902d8e05c50282656da67c9d7e315a7",
+    "focus25": "324fbe61678a7eb6140efcac49fceb067893752a68c6903ed7d07873229a6133",
+    "strong_inside": "9b2d5d5952bb066afe13ba65c6b0e910a29fff180b5f31de66941898a9c277a0",
+    "budget_band1p0_pair1p5": "ee33e6844ef8619fa91b05cd72bfc9406ff70df35603026ff99b2d6121c02a91",
+    "band_only_strength1p0": "0101a01d4350351c584cc6fe075edb04372b77a6be6069c235eab91ac180e499",
+    "neighbor_k3_q25_point50": "1ac12d0285d4dba1d4a64121509243b5483d74efb33f57817ef66620fa1902df",
+    "tile8_q25": "0045a5fee5b541b0fba18e3fe6e04adba27587e2cdb2ff6ebb83aba5e132473f",
+    "smooth_power1p0_mix50": "17f62e681e3af714f1c37312ef85ca2f8fb92f7e77d8493683ad19e7a10cdaef",
+    "ap_bce_w3_share10": "eed934de8c3ccd484479ac2bd9af34cee0f238d4b6dee6524959451ccac59224",
+    "hard_q10_mix25": "e8c55cf1621c1399499b557b8bcfc120f6e083e3a871dc469e8a38f599b7570d",
+    "hard_q10_mix50": "1bd6e0cfdd1d03c99557c8d8c1765749bf3d1ff369a43ac7600a567bf887dbcc",
+    "hard_q10_mix75": "815abf71372ca7539c75d114e9d75f758c01f17d0f55627f85cef7a8f69b6343",
+    "hard_q15_mix25": "e922dd146a25be21e3220704a0f49caf877447717cb0628898907240d63d8bf2",
+    "hard_q15_mix50": "0fd26d73904984f65cefb71d42ad2111b4ad2b2dfbbf04da9e4b7a07f19a0de8",
+    "hard_q15_mix75": "897cacea9f8c819689f00366bba9d1641fc854cf87f86a0f8a7c0f25635671ec",
+    "hard_q20_mix25": "130d75c11551b2b57db9c22b3123057594bf2af51b32324ad1f5d98cfc43efb9",
+    "hard_q20_mix50": "cb5f3ad06aaef2e74b191b598b4be90b92ebf1448d332856db36182e14c764ab",
+    "hard_q20_mix75": "4b8382c8a98e7b5a7bbc3ed9c7ac445c0cfc09dcead723c44cf7f2c5612f4914",
+    "hard_q25_mix25": "00d0856236947f14fd43b4b9d6d47a65efcda024ad160207491d7c5cce8147f3",
+    "hard_q25_mix75": "c805e6120036ae4280acdcede3e17ece1b15100eb77b304f29b6603adba983d2",
+    "hard_q35_mix25": "36617c8288b1946c46f54c2f8d9820d2bf5971da90f79e48ef3b724d0148ab17",
+    "hard_q35_mix50": "a687d2f0e8cde774c018b76d2262e74a32ccfc5bdba2d3a44610d620abfd3044",
+    "hard_q35_mix75": "c92aab63024879a16abc4963edfd9f29e0cbf1347cfa6346d4ac30cc877bf480",
+    "hard_q50_mix25": "4f08885d7896bc35780a042e386765cd42a6501d730ccd6270c5528611ca5b29",
+    "hard_q50_mix50": "5d7ba3dd27b6c4b3954caab18c1d0e37ee8d61b07933f4506c668d203093ca88",
+    "hard_q50_mix75": "7d7903f9785ef15137eb426262cb7596307eb352f904e963009b5252c3ca674d",
+    "width_i1_o1_q15": "1f201615e0cd6692143e9dffd515cabc839cd7df6373424ac592d4f943a6b9f2",
+    "width_i1_o1_q25": "bb777c54efc2a37b51032cddd94f7409391e399174a60edaadf18530ad646514",
+    "width_i1_o1_q40": "7de38864eb74d45a6c2cacae76d8b52da732d74af696ac1e7c188831aa049b83",
+    "width_i2_o2_q15": "f0d8aab8a02e725b2df533db49f0e6539235861b6157506f18b88a3cfcd1bd20",
+    "width_i2_o2_q25": "440fa4fb1b48dee45f692811c11a9101ccd787ea3e017810527a42a44dcfae8d",
+    "width_i2_o2_q40": "05d15657158a3e27d5a3620a9eec4ac34c075b63074af6a8f6c32b7002f70948",
+    "width_i4_o4_q15": "c9a76c97f75ca80c4d9641d971db0b36aec806ed21e719d5e09298200d56787a",
+    "width_i4_o4_q25": "a14b51e73babc7ad613eec036da9f6f603742c4dd683e502588011f5b5e4fd2d",
+    "width_i4_o4_q40": "80807884aa2ad2963dc3e4e2cdf283008ac474a907f89fd01f0e1fd5bb59bf32",
+    "width_i5_o5_q15": "ae15e18479ac5b7da2458aa9c0336e0638e3178b6593eca6f6c73f587f53315c",
+    "width_i5_o5_q25": "8a1b02b02289e88cbefe4acddce7004f02a8bc048aeab924baf14563b84a5697",
+    "width_i5_o5_q40": "91ab40d40a4ab4aa2a890c4f84de04842f2ca46fbea8cc70996973448c5342a3",
+    "width_i1_o3_q15": "4deaf1bf88407a140e7f93ad6a6cd1ef05fa999304c3fb69e301a0a07735b2a9",
+    "width_i1_o3_q25": "223e4489941e6590f2ed761610707ba6b70fff480d4aedcec805d4bb865d28f2",
+    "width_i1_o3_q40": "c1194d94f0d2ffd554f89391ac45f04a9d380545ff0ccbfc5954ed6f73f3ad3d",
+    "width_i3_o1_q15": "6e7623db40924116a329dbbd1d77542fa363766f342aab57fcb03f14a8f37556",
+    "width_i3_o1_q25": "7dfe144282b8f838ad29e927460f1210aab46c3c4f0b7e190196ddfdc2298108",
+    "width_i3_o1_q40": "ab687774ba4d279f5aa4022ef93e53f4d98c9b38ae4f3266c93638d0676749a4",
+    "width_i2_o3_q15": "080326bf82ed8cf4027edd2d9326a47d6f3a7c42be19bb27a0355bd6171054a1",
+    "width_i2_o3_q25": "8705af5df5f93eef52c5bf55aa9a8e021ba15723f22374d841cad4b9dab6df4a",
+    "width_i2_o3_q40": "2c6ad8e5ec480302f31c39fa7ff9136763f9cfcd02584f189f7011d5891ab0b5",
+    "width_i3_o2_q15": "1fa6460f658152b36fe4d9473b62fb2177851c933fc7b6c416e04506dc688918",
+    "width_i3_o2_q25": "352ca88e52ddb11d082729177fc79d9e3cee6273d3872c0cb8816fddec973629",
+    "width_i3_o2_q40": "c87be78a7d4d56431d6c0554cbf83bb06f88168ecc8e1681c2427ac2dedcfa7c",
+    "side_qi15_qo15": "fb9f9acf5d28b5612b2d60d7c31db557eca941958c2af93e8aa07a50199661ef",
+    "side_qi15_qo25": "7ab6c3ae455170e3ec422b8cf709f823cbc3f2a3707407f00ae92fc2e0db0fbc",
+    "side_qi15_qo40": "e0475ed0cdde79360295058d72d2941bb94b3c5789ea7589cd19864fed409b6c",
+    "side_qi15_qo60": "ca01e741ec54cb3717ccafffe328556b882c96d589c28cab86feb334fd9656ef",
+    "side_qi25_qo15": "01fa92d22744bf84493221d284eb46f3cf4e455ac1c132a70b0a357eeda46e70",
+    "a32_budget_b0p75_p1p0": "8a15ce26aa5bfb4477d121df5ab2efec1fdd2e710040e53eebdb3854e08fe0fd",
+    "a32_budget_b0p75_p1p25": "8c61a34724f031ebfabea493f2b28b3bb0b75c91b21e84e56c44ee0e3c1de249",
+    "a32_budget_b0p75_p1p5": "86998407c5ed586a80fc97b90dcfb36016aa9bb2c7e11efb29b2233c264712f2",
+    "a32_budget_b1p0_p0p75": "4c712b63b13450575bd466ce0f4c4466457b458874d6538e6f5d36edbdba5ac6",
+    "a32_budget_b1p0_p1p25": "9f8c8dbaf201503eba8df07322e5bb61b0d7871cc8a441e1e98e7f887f237f61",
+    "a32_budget_b1p25_p0p75": "9385ec50cb195c427ee254af4402bd1492c07c7480e57233ddff3784e8a7dd3b",
+    "a32_budget_b1p25_p1p0": "142fcb07217dc6e359e5bc99898da8d210b5a181a727f36f2466f80b244f31a7",
+    "a32_budget_b1p25_p1p25": "2ee1fe1a5851030a54909a26108b6334411309129e3c98df9c4954d9ee4c4a99",
+    "a32_budget_b1p25_p1p5": "de5e4de839847cf86756099aa6b661dcf7ad872d4853208d8c12eff1d194fdcb",
+    "a32_band_only_strength0p5": "93d2ad9251df6161efdeca566d5bbfa9c60fd35fd6e2722a7bd7a9b05056c6a8",
+    "a32_band_only_strength1p0": "357e06ebe70810440162a7756f68dff1cc36d99cc9ab18826fab70b8eef8b359",
+    "a32_band_only_strength1p5": "ccb9aec7f75c1871b2d9df2529fd27879cd0bade453964cd17292c87ed935eb0",
+    "w81_fractions_qi60_qo10_mi75_mo75": "820955b55ad65c42464e66a6cc12db1231aaae49b4ab54c81b27683e810f82b9",
+    "w81_fractions_qi70_qo15_mi75_mo75": "281deb5f3ce1ad6267d66b2765bc97222e195881f7d06c871ad602816ac92d45",
+    "w81_fractions_qi70_qo10_mi75_mo75": "b733230b4a8d052c84bc29b69206b895787f6b283470569494753c08a925008f",
+    "w81_strength_qi60_qo15_mi75_mo75_b100_p150": "a8be0491482134caa50db9e70832b12551599c18efa7ab018d325de1f5eab682",
+    "w81_strength_qi60_qo15_mi75_mo75_b100_p125": "4d2fdcef0e0d332228db4bc2adf7d84979f8f246a90a743409452530a6e5cf35",
+    "w81_emphasis_qi60_qo15_mi65_mo75": "1c72f3de369ec917ca2b98fbec59440679dacf82ac83efc0c30e42b11cdee6f2",
+    "w81_emphasis_qi60_qo15_mi75_mo85": "46d4511ddee81352b31621013000a5bfd2222872cfc86c6d1841b20d5db6919f",
+    "w81_emphasis_qi60_qo15_mi65_mo85": "aa4bfbce447faa7c983c987b7133c5e56a0d70667fda3c61c5deb506b6eab20a",
+    "w81_insidece_qi60_qo15_mi75_mo75_ce10_mass50_p100": "9bdf2825e026460ff5eb7c5ac0ab66099f94998aeae4c4f43e4caaa29ac7963b",
+    "w81_insidece_qi60_qo15_mi75_mo75_ce25_mass50_p100": "fa0f40008f9030088ca0158cbfcbafc64176e1d681a6c7b056ea2237363c1312",
+    "w81_fractions_qi80_qo15_mi75_mo75": "c8210acdcda3cc48edb35ab004f3b7018b7d0d8e437c399f1f9dd1ad15fa02cc",
+    "w81_emphasis_qi70_qo10_mi65_mo85": "913bd687465134fb0369dfacc2167816cc098d3b144fdf4b0f7f071ac05df7ba",
+    "w81_insidece_qi60_qo15_mi75_mo75_ce10_mass50_p150": "6ae6bdb5e2e45844d2d96d0bc1c423439cac42aabfe7dc1b94ac0eb43e6ec8c2",
+    "w81_mass_qi60_qo15_mi75_mo75_mass45_p100": "b2a61ed09d41bc64a48a8c30f6ea5675b0e74f15ff6fed927aa043316e129921",
+    "w81_mass_qi60_qo15_mi75_mo75_mass55_p100": "602e54c2e79e38125707103b3b843222f85de5ccbc217d2f9dccb69f6f09b4a7",
+    "w81_fractions_qi60_qo5_mi75_mo75": "ff6b61412251f3b1ad843663ca5254ac0dbbb16c5eb439a264470449037e3cda",
+    "pair_inside60_strength1p0": "7694626e40ee71c5dd746f3d56c9312b21b539fada1d99c2e360e9eca76551ca",
+    "pair_inside60_strength1p5": "f4742bde13b551aa06b66362c5a0aa72caff638ef562c27a72637423c85ec2a0",
+    "pair_inside40_strength1p0": "8fc7cecd3d651b0fe722b325ba7c57e12ebd64b22d4f16f076eae6c503ac793c",
+    "pair_inside40_strength1p5": "53614dd0ad80985e3c4e487f54f32a6c1b247d38eda536ba1670b3917ef53049",
+    "pair_inside_far_strength1p0": "21944a7ebeca7d27a35aaa101b4cb670831cd65a4f183f9d7ef653b97b8bf6e6",
+    "pair_inside_far_strength1p5": "a642d0e39120182dea5643af476acc6a5f4396aa612180091ba466881e7230de",
+    "pair_near60_30_10_strength1p0": "7dfe909f1f2d6a657dda8367293bbf352724d48820583ff6e0ac7f33f7f7a7be",
+    "pair_near60_30_10_strength1p5": "16985c34c67082b245463a79c1cb643f056cd080ff29e4063107dd55027c6069",
+    "pair_far75_strength1p0": "e8249bd80e7f50d602f4d8851ea11d8c33e38a94fec0c464f12d437253437e7c",
+    "pair_far75_strength1p5": "3e302a4610954efbe5f9ce42421580fc474585e313d4dbae7920f020dddb6bc8",
+    "pair_separate_strength1p0": "5ba4f27059a8540911212be0a189e85ba60281767eef1c0774b3f8f6121557f5",
+    "pair_separate_strength1p5": "dc60936ca957b182d8a9c7e6ff5a3f89a968ba7945e837be0ab8a029156de896",
+    "penalty_bce_q15": "7ff56bd0ad05007eb0c72ad4b354e8e84c1abae356a8b0bcc566a8ac8e63e909",
+    "penalty_bce_q25": "de1d0af0c7f6b67c526e0a2a0a87c86ba7b2878ce41f52f5edda67fe36ce490d",
+    "penalty_hybrid25_q15": "a2ff55b40041798600155d94ab93b289294f8c46469a7de4f21fcd74ae203f36",
+    "penalty_hybrid25_q25": "718590764193128741734193193d1ef744a58e168ad7057e36cda4d4a1415fd9",
+    "penalty_hybrid50_q15": "092b2a4578d6f87567d4df83f6874fad88f75b5ed48ad1f0d0a38a7962526c6e",
+    "penalty_hybrid50_q25": "1af9db9e23442504643e8fd01d52e68dced1dedca3f54c03341eb5084bb4468c",
+    "shell123_50_35_15": "4f3abafa807f5cd9af5679ac34d899f9516f7a1c8f9ad32a8e29ce858356246e",
+    "shell123_33_33_33": "322e9f653b9fcaf3decd286850fd162a3beebbaa6159fa1e2981cfa8451456a1",
+    "shell123_20_50_30": "0ef45e4b83228c889048b1bc2b8e469929c3f7f0347f1b6d5e66f458d1a65b8a",
+    "w81_fractions_qi50_qo5_mi75_mo75": "8420e7a903c959874a14c5976866ebbc09dfe2e1fd8b6653c8ef8e6011df3521",
+    "w81_fractions_qi50_qo10_mi75_mo75": "4af525d918d95fba35a4939b8696fe71261416c1ccba449b4c6d079b13e00447",
+    "w81_fractions_qi50_qo15_mi75_mo75": "1a2891c8f2f42b1f44d67a6d2bcb97e76979a409a70aa27249292823de586264",
+    "w81_fractions_qi50_qo20_mi75_mo75": "d129af83fa0fe7be5c5f1ee53f01b4f2fbabbd48c9411e4aae43aae76d513713",
+    "w81_fractions_qi60_qo20_mi75_mo75": "7e635bb57df067835a139115dd4991450f9e1b5071072744faf526a6abec15a4",
+    "w81_fractions_qi70_qo5_mi75_mo75": "dce87e63a2a790e6fda396e959d5fb0a47c3fb5a256fd34069ebb532c1d3dcd2",
+    "w81_fractions_qi70_qo20_mi75_mo75": "e99c9f1b06e64b15d03fce6fe548a96fa56a12c1cff6e2191e6543ead0fd0d62",
+    "w81_fractions_qi80_qo5_mi75_mo75": "9092279205e23d7f3840b7c996b805f503925938383e1fdaf6dee37097231ccd",
+    "w81_fractions_qi80_qo10_mi75_mo75": "9e27c78aaf410e7ab3134d3f167b479840b78028caa42482d48e1461e3820c85",
+    "w81_fractions_qi80_qo20_mi75_mo75": "250ad4cd849bb38aefb0cc36c6ff01ebac00d2db0544054115005443c04766a7",
+    "ap82_s1_winner_b50_g050": "f87b03572bddd0d97dd604e102ac1a09568d8d13b97d833b92522c6109d23a3f",
+    "ap82_s1_dice_b50_g050": "b7236aea3c58b0db59f2cefdf595bb3d0611d070390bbdefb8ddef3532d8e140",
+    "ap82_s1_winner_b25_g050": "36d928f25ef8c0f0388df236fbce16728caecefbce915fa20b82f6a28a745c7b",
+    "ap82_s1_dice_b25_g050": "7680aaa5f1154d75c3a3edd0b1624147f694c8d2e04f4d5adfadd7b3db24f06b",
+    "ap82_s1_winner_b75_g050": "25f22d0ea8c3bd4623cbc017b9c07c8515e406f06fe2723b29dfd94b1c072dd2",
+    "ap82_s1_dice_b75_g050": "3b5439204fd91c9f76c58ed3a4f02d8ed5270320669d30c1dc9ac7fe9a5154e4",
+    "ap82_s1_winner_b0_g050": "fcf28e279e8dfa8f2c59c805e86b963447c802dc3d8971f9315eb3f01306819c",
+    "ap82_s1_dice_b0_g050": "13b991c685a183930ec30aa16856f14552967735ffa127e5732f81ea1cfd9aef",
+    "ap82_s1_winner_b100_g050": "090edfbc20948678c6c60ed000248daf8bafaa42f11e5d39abbacb16ee2ac570",
+    "ap82_s1_dice_b100_g050": "d92f507511be8b29c289bcd0f735696b07b18377f94eb3397c4f5feb8d208b5b",
+    "ap82_s1_winner_b50_g025": "a79fc696b4aadb5206edd9c1947865051fb7dff731bab2342e546cb79c623263",
+    "ap82_s1_dice_b50_g025": "09a738ab0116e583ab7d2fa9f7e4e8cad47752eab7c3916056381446e851093a",
+    "ap82_s1_winner_b25_g025": "24ac043ed7dfccdd4cca7506e8e2b1a575b144ecacb29b2f70fb0980ed8ec315",
+    "ap82_s1_dice_b25_g025": "eae7b815fc32bc28700a5ebcf4ea8f0318e6357978db8fe10a1ae8721a03ef24",
+    "ap82_s1_winner_b75_g025": "66e37d9a36f134ecdaec971328727faeed4de828f9f62ece92afcf4a50c0bd97",
+    "ap82_s1_dice_b75_g025": "d805e960dd99c46d50cf4dffec99555084b9240f109f89003191653c70bf5d88",
+    "ap82_s1_winner_b0_g025": "755b8f2a5b808a05c6eeb8cffa65c695dc986ba563fd36f35be331928000526b",
+    "ap82_s1_dice_b0_g025": "c72e66cac7c28e48ef61ad124a6d3b06a15246f99e1b19a7baf74fd8c1690bfd",
+    "ap82_s1_winner_b100_g025": "1d464973642e7f99f2f93f9773e7a644d78816c6417db916c9e762e67a95de5c",
+    "ap82_s1_dice_b100_g025": "9ec382992f573abf12f91c8d318ca1515564c7993189865314059fde764b9c61",
+    "ap82_s1_winner_b50_g100": "bdf193917fe5068434d4b1a63d1a1677933630762ebb781633955f162cb43178",
+    "ap82_s1_dice_b50_g100": "1216dff030dd713968a4d7b6ee6a1c24d0c0aa2737259b75173150e1c40916ff",
+    "ap82_s1_winner_b25_g100": "bb5364217aa2cb52915994a18391446979f98614e12ca0c13bcba52d2612a445",
+    "ap82_s1_dice_b25_g100": "c721a06e342305a5b6af3b3362c0d7f7b6cab05f99c076fce0bfd41744e53bfb",
+    "ap82_s1_winner_b75_g100": "01344b1fa7539d6a6331f913cce72c2efa830ea6e8fd45231d831fd9a996a2ca",
+    "ap82_s1_dice_b75_g100": "e2c7235264994adf66d7373ea0f472145690b182c180d62cd02fb17ec249f3cc",
+    "ap82_s1_winner_b0_g100": "7e6a6e095b2d75b9f3dad090474334083830b80790a0d93052e8aa390ea22136",
+    "ap82_s1_dice_b0_g100": "c98692e2d810793ac77f573fa72f7b1a60c1eef749277672d3c6fe5b71ae3942",
+    "ap82_s1_winner_b100_g100": "38ab62b9f3c8a2dac1204bfc708da7591432379b2938036e777df0c61ce1c4ad",
+    "ap82_s1_dice_b100_g100": "6c411071715c9d849e2f078faf9cb30b73dee3035f266b52d9a7e39aa63d69a8",
+    "w81_emphasis_qi70_qo10_mi50_mo75": "e0d59d56f95f4a6c031c9632034c9d2a3d8383a2cc9db577790c3cbbc614e5ee",
+    "w81_emphasis_qi70_qo10_mi50_mo85": "0c774a96132ca07a39bec65a5ecdb153430a06aae096b2034213095cac5b44ee"
+  },
+  "resumes": {
+    "w81_insidece_qi60_qo15_mi75_mo75_ce10_mass45_p100": {
+      "epoch": 5,
+      "latest_sha256": "054d7a49b395cd5ebdd2cf420bd3f831d7001fdb792ee18653cd1120495efd1a",
+      "best_sha256": "9da38d66e12b03f8b7ab3050807beb7a6293b018e179252c77212dcc6ee4e637"
+    },
+    "w81_emphasis_qi70_qo10_mi50_mo90": {
+      "epoch": 37,
+      "latest_sha256": "893783af2d47c4fad69d43085016d3ef389aca4806124f0fe64098fed5447793",
+      "best_sha256": "8f24aca5d5046bcd7440987b7096b34cd4e3f9065554afac4c760e2de0572fbc"
+    },
+    "side_qi25_qo40": {
+      "epoch": 41,
+      "latest_sha256": "3eb11d4c50eb138b8a3c5b0f489a52cc13259ade986353df0feb722b6efa8c68",
+      "best_sha256": "bf26a1e9b3c4ab702c62721eb5bd03d7b30175da49245be52affebde9425d0aa"
+    }
+  },
+  "replaced_stage2_count": 44,
+  "removed_optional_stage3_max": 32,
+  "sources": {
+    "source/scripts/band_focus/ap82_shared_tissue.py": "81bbb0f50daeaabfed6d2345d23f19de09ced86d8544d44de6a3101ad488dc9a",
+    "source/scripts/band_focus/ap82_targeted_matrix.py": "892cf37e5182df985aafe0f2d1540d44aa8bb908268c6862cedf4dfcb5d363ad",
+    "source/scripts/band_focus/ap82_targeted_resume.py": "1509f5617167d0f2f7c3d054ed89d475f7004fad99bccb0401a79f3837d1f02a",
+    "source/scripts/band_focus/ap82_targeted_tests.py": "919cbd0425bc8da8b61fb4c5d6cd643ade5be2668908a156191671e69cd9faa3",
+    "source/scripts/band_focus/run_ap82_targeted.sh": "0e8fa54f2026c903a8f9be86534deda145799555ba45d459c6f4d56719c684fd"
+  },
+  "source_hashes": {
+    "ap82_shared_tissue.py": "81bbb0f50daeaabfed6d2345d23f19de09ced86d8544d44de6a3101ad488dc9a",
+    "ap82_targeted_matrix.py": "892cf37e5182df985aafe0f2d1540d44aa8bb908268c6862cedf4dfcb5d363ad",
+    "ap82_targeted_resume.py": "1509f5617167d0f2f7c3d054ed89d475f7004fad99bccb0401a79f3837d1f02a",
+    "ap82_targeted_tests.py": "919cbd0425bc8da8b61fb4c5d6cd643ade5be2668908a156191671e69cd9faa3",
+    "run_ap82_targeted.sh": "0e8fa54f2026c903a8f9be86534deda145799555ba45d459c6f4d56719c684fd"
+  },
+  "local_checks_sha256": "4228566b443f5f726b9af77c4b63fcb96a3baac7f9ef3e4f4400a52a89936779"
+}

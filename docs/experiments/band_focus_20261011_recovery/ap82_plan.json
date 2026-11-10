@@ -1,0 +1,6504 @@
+{
+  "fixed_outer_reference": "w81_emphasis_qi70_qo10_mi65_mo85",
+  "fixed_outer_validation_dice": 0.8111168455421899,
+  "retained_ids": [
+    "w81_emphasis_qi70_qo10_mi50_mo75",
+    "w81_emphasis_qi70_qo10_mi50_mo85",
+    "w81_emphasis_qi70_qo10_mi50_mo90",
+    "w81_emphasis_qi70_qo10_mi65_mo75",
+    "w81_emphasis_qi70_qo10_mi65_mo90",
+    "w81_emphasis_qi70_qo10_mi75_mo85",
+    "w81_emphasis_qi70_qo10_mi75_mo90",
+    "w81_emphasis_qi70_qo15_mi65_mo85",
+    "w81_emphasis_qi80_qo15_mi65_mo85",
+    "w81_strength_qi70_qo10_mi65_mo85_b75_p75",
+    "w81_strength_qi70_qo10_mi65_mo85_b75_p100",
+    "w81_strength_qi70_qo10_mi65_mo85_b75_p125",
+    "w81_strength_qi70_qo10_mi65_mo85_b75_p150",
+    "w81_strength_qi70_qo10_mi65_mo85_b100_p75",
+    "w81_strength_qi70_qo10_mi65_mo85_b100_p125",
+    "w81_strength_qi70_qo10_mi65_mo85_b100_p150",
+    "w81_strength_qi70_qo10_mi65_mo85_b125_p75",
+    "w81_strength_qi70_qo10_mi65_mo85_b125_p100",
+    "w81_strength_qi70_qo10_mi65_mo85_b125_p125",
+    "w81_strength_qi70_qo10_mi65_mo85_b125_p150",
+    "w81_mass_qi70_qo10_mi65_mo85_mass45_p100",
+    "w81_mass_qi70_qo10_mi65_mo85_mass45_p150",
+    "w81_mass_qi70_qo10_mi65_mo85_mass55_p100",
+    "w81_mass_qi70_qo10_mi65_mo85_mass55_p150",
+    "w81_width_qi70_qo10_mi65_mo85_i2_o2",
+    "w81_width_qi70_qo10_mi65_mo85_i3_o1",
+    "w81_width_qi70_qo10_mi65_mo85_i3_o3",
+    "w81_width_qi70_qo10_mi65_mo85_i4_o2",
+    "w81_shell_qi70_qo10_mi65_mo85_503515_p100",
+    "w81_shell_qi70_qo10_mi65_mo85_333333_p100",
+    "w81_shell_qi70_qo10_mi65_mo85_205030_p100",
+    "w81_insidece_qi70_qo10_mi65_mo85_ce10_mass50_p100",
+    "w81_insidece_qi70_qo10_mi65_mo85_ce10_mass50_p150",
+    "w81_fractions_qi80_qo10_mi75_mo75",
+    "w81_fractions_qi80_qo20_mi75_mo75",
+    "w81_endpoint_far75_p100",
+    "w81_endpoint_near60_30_10_p100",
+    "w81_endpoint_separate_p100"
+  ],
+  "stage1": [
+    {
+      "id": "ap82_s1_winner_b50_g050",
+      "family": "ap82_stage1",
+      "band": {
+        "kind": "regional",
+        "inner": 3,
+        "outer": 2,
+        "penalty": "brier",
+        "inside_weight": 0.5,
+        "hard_fraction": 0.25,
+        "hard_mix": 0.75,
+        "inside_fraction": 0.7,
+        "outside_fraction": 0.1,
+        "inside_hard_mix": 0.65,
+        "outside_hard_mix": 0.85
+      },
+      "pair": {
+        "distances": [
+          1,
+          3
+        ],
+        "weights": [
+          0.5,
+          0.5
+        ],
+        "support": "all",
+        "form": "independent"
+      },
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "w81_emphasis_qi70_qo10_mi65_mo85",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "winner",
+      "base_objective": {
+        "id": "w81_emphasis_qi70_qo10_mi65_mo85",
+        "family": "w81_side_emphasis",
+        "band": {
+          "kind": "regional",
+          "inner": 3,
+          "outer": 2,
+          "penalty": "brier",
+          "inside_weight": 0.5,
+          "hard_fraction": 0.25,
+          "hard_mix": 0.75,
+          "inside_fraction": 0.7,
+          "outside_fraction": 0.1,
+          "inside_hard_mix": 0.65,
+          "outside_hard_mix": 0.85
+        },
+        "pair": {
+          "distances": [
+            1,
+            3
+          ],
+          "weights": [
+            0.5,
+            0.5
+          ],
+          "support": "all",
+          "form": "independent"
+        },
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "a32_side_qi60_qo15_mix75",
+        "idea": "Separate inside/outside emphasis and cross it with supported nearby selection fractions.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr",
+        "objective_version": "winner_v1"
+      },
+      "base_coefficients": {
+        "bands": 0.032323425078637294,
+        "pair": 0.008503534232521521
+      },
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.5,
+        "gradient_ratio": 0.05
+      },
+      "ap82_changes": {},
+      "ap82_phase": 1
+    },
+    {
+      "id": "ap82_s1_dice_b50_g050",
+      "family": "ap82_stage1",
+      "band": {
+        "kind": "none"
+      },
+      "pair": null,
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "dice",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "dice",
+      "base_objective": {
+        "id": "dice",
+        "family": "control",
+        "band": {
+          "kind": "none"
+        },
+        "pair": null,
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "focus25",
+        "idea": "Fresh Dice-only control from the common prefix.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr"
+      },
+      "base_coefficients": {},
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.5,
+        "gradient_ratio": 0.05
+      },
+      "ap82_changes": {},
+      "ap82_phase": 1
+    },
+    {
+      "id": "ap82_s1_winner_b25_g050",
+      "family": "ap82_stage1",
+      "band": {
+        "kind": "regional",
+        "inner": 3,
+        "outer": 2,
+        "penalty": "brier",
+        "inside_weight": 0.5,
+        "hard_fraction": 0.25,
+        "hard_mix": 0.75,
+        "inside_fraction": 0.7,
+        "outside_fraction": 0.1,
+        "inside_hard_mix": 0.65,
+        "outside_hard_mix": 0.85
+      },
+      "pair": {
+        "distances": [
+          1,
+          3
+        ],
+        "weights": [
+          0.5,
+          0.5
+        ],
+        "support": "all",
+        "form": "independent"
+      },
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "w81_emphasis_qi70_qo10_mi65_mo85",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "winner",
+      "base_objective": {
+        "id": "w81_emphasis_qi70_qo10_mi65_mo85",
+        "family": "w81_side_emphasis",
+        "band": {
+          "kind": "regional",
+          "inner": 3,
+          "outer": 2,
+          "penalty": "brier",
+          "inside_weight": 0.5,
+          "hard_fraction": 0.25,
+          "hard_mix": 0.75,
+          "inside_fraction": 0.7,
+          "outside_fraction": 0.1,
+          "inside_hard_mix": 0.65,
+          "outside_hard_mix": 0.85
+        },
+        "pair": {
+          "distances": [
+            1,
+            3
+          ],
+          "weights": [
+            0.5,
+            0.5
+          ],
+          "support": "all",
+          "form": "independent"
+        },
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "a32_side_qi60_qo15_mix75",
+        "idea": "Separate inside/outside emphasis and cross it with supported nearby selection fractions.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr",
+        "objective_version": "winner_v1"
+      },
+      "base_coefficients": {
+        "bands": 0.032323425078637294,
+        "pair": 0.008503534232521521
+      },
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.25,
+        "gradient_ratio": 0.05
+      },
+      "ap82_changes": {},
+      "ap82_phase": 1
+    },
+    {
+      "id": "ap82_s1_dice_b25_g050",
+      "family": "ap82_stage1",
+      "band": {
+        "kind": "none"
+      },
+      "pair": null,
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "dice",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "dice",
+      "base_objective": {
+        "id": "dice",
+        "family": "control",
+        "band": {
+          "kind": "none"
+        },
+        "pair": null,
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "focus25",
+        "idea": "Fresh Dice-only control from the common prefix.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr"
+      },
+      "base_coefficients": {},
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.25,
+        "gradient_ratio": 0.05
+      },
+      "ap82_changes": {},
+      "ap82_phase": 1
+    },
+    {
+      "id": "ap82_s1_winner_b75_g050",
+      "family": "ap82_stage1",
+      "band": {
+        "kind": "regional",
+        "inner": 3,
+        "outer": 2,
+        "penalty": "brier",
+        "inside_weight": 0.5,
+        "hard_fraction": 0.25,
+        "hard_mix": 0.75,
+        "inside_fraction": 0.7,
+        "outside_fraction": 0.1,
+        "inside_hard_mix": 0.65,
+        "outside_hard_mix": 0.85
+      },
+      "pair": {
+        "distances": [
+          1,
+          3
+        ],
+        "weights": [
+          0.5,
+          0.5
+        ],
+        "support": "all",
+        "form": "independent"
+      },
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "w81_emphasis_qi70_qo10_mi65_mo85",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "winner",
+      "base_objective": {
+        "id": "w81_emphasis_qi70_qo10_mi65_mo85",
+        "family": "w81_side_emphasis",
+        "band": {
+          "kind": "regional",
+          "inner": 3,
+          "outer": 2,
+          "penalty": "brier",
+          "inside_weight": 0.5,
+          "hard_fraction": 0.25,
+          "hard_mix": 0.75,
+          "inside_fraction": 0.7,
+          "outside_fraction": 0.1,
+          "inside_hard_mix": 0.65,
+          "outside_hard_mix": 0.85
+        },
+        "pair": {
+          "distances": [
+            1,
+            3
+          ],
+          "weights": [
+            0.5,
+            0.5
+          ],
+          "support": "all",
+          "form": "independent"
+        },
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "a32_side_qi60_qo15_mix75",
+        "idea": "Separate inside/outside emphasis and cross it with supported nearby selection fractions.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr",
+        "objective_version": "winner_v1"
+      },
+      "base_coefficients": {
+        "bands": 0.032323425078637294,
+        "pair": 0.008503534232521521
+      },
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.75,
+        "gradient_ratio": 0.05
+      },
+      "ap82_changes": {},
+      "ap82_phase": 1
+    },
+    {
+      "id": "ap82_s1_dice_b75_g050",
+      "family": "ap82_stage1",
+      "band": {
+        "kind": "none"
+      },
+      "pair": null,
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "dice",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "dice",
+      "base_objective": {
+        "id": "dice",
+        "family": "control",
+        "band": {
+          "kind": "none"
+        },
+        "pair": null,
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "focus25",
+        "idea": "Fresh Dice-only control from the common prefix.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr"
+      },
+      "base_coefficients": {},
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.75,
+        "gradient_ratio": 0.05
+      },
+      "ap82_changes": {},
+      "ap82_phase": 1
+    },
+    {
+      "id": "ap82_s1_winner_b0_g050",
+      "family": "ap82_stage1",
+      "band": {
+        "kind": "regional",
+        "inner": 3,
+        "outer": 2,
+        "penalty": "brier",
+        "inside_weight": 0.5,
+        "hard_fraction": 0.25,
+        "hard_mix": 0.75,
+        "inside_fraction": 0.7,
+        "outside_fraction": 0.1,
+        "inside_hard_mix": 0.65,
+        "outside_hard_mix": 0.85
+      },
+      "pair": {
+        "distances": [
+          1,
+          3
+        ],
+        "weights": [
+          0.5,
+          0.5
+        ],
+        "support": "all",
+        "form": "independent"
+      },
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "w81_emphasis_qi70_qo10_mi65_mo85",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "winner",
+      "base_objective": {
+        "id": "w81_emphasis_qi70_qo10_mi65_mo85",
+        "family": "w81_side_emphasis",
+        "band": {
+          "kind": "regional",
+          "inner": 3,
+          "outer": 2,
+          "penalty": "brier",
+          "inside_weight": 0.5,
+          "hard_fraction": 0.25,
+          "hard_mix": 0.75,
+          "inside_fraction": 0.7,
+          "outside_fraction": 0.1,
+          "inside_hard_mix": 0.65,
+          "outside_hard_mix": 0.85
+        },
+        "pair": {
+          "distances": [
+            1,
+            3
+          ],
+          "weights": [
+            0.5,
+            0.5
+          ],
+          "support": "all",
+          "form": "independent"
+        },
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "a32_side_qi60_qo15_mix75",
+        "idea": "Separate inside/outside emphasis and cross it with supported nearby selection fractions.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr",
+        "objective_version": "winner_v1"
+      },
+      "base_coefficients": {
+        "bands": 0.032323425078637294,
+        "pair": 0.008503534232521521
+      },
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.0,
+        "gradient_ratio": 0.05
+      },
+      "ap82_changes": {},
+      "ap82_phase": 1
+    },
+    {
+      "id": "ap82_s1_dice_b0_g050",
+      "family": "ap82_stage1",
+      "band": {
+        "kind": "none"
+      },
+      "pair": null,
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "dice",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "dice",
+      "base_objective": {
+        "id": "dice",
+        "family": "control",
+        "band": {
+          "kind": "none"
+        },
+        "pair": null,
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "focus25",
+        "idea": "Fresh Dice-only control from the common prefix.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr"
+      },
+      "base_coefficients": {},
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.0,
+        "gradient_ratio": 0.05
+      },
+      "ap82_changes": {},
+      "ap82_phase": 1
+    },
+    {
+      "id": "ap82_s1_winner_b100_g050",
+      "family": "ap82_stage1",
+      "band": {
+        "kind": "regional",
+        "inner": 3,
+        "outer": 2,
+        "penalty": "brier",
+        "inside_weight": 0.5,
+        "hard_fraction": 0.25,
+        "hard_mix": 0.75,
+        "inside_fraction": 0.7,
+        "outside_fraction": 0.1,
+        "inside_hard_mix": 0.65,
+        "outside_hard_mix": 0.85
+      },
+      "pair": {
+        "distances": [
+          1,
+          3
+        ],
+        "weights": [
+          0.5,
+          0.5
+        ],
+        "support": "all",
+        "form": "independent"
+      },
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "w81_emphasis_qi70_qo10_mi65_mo85",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "winner",
+      "base_objective": {
+        "id": "w81_emphasis_qi70_qo10_mi65_mo85",
+        "family": "w81_side_emphasis",
+        "band": {
+          "kind": "regional",
+          "inner": 3,
+          "outer": 2,
+          "penalty": "brier",
+          "inside_weight": 0.5,
+          "hard_fraction": 0.25,
+          "hard_mix": 0.75,
+          "inside_fraction": 0.7,
+          "outside_fraction": 0.1,
+          "inside_hard_mix": 0.65,
+          "outside_hard_mix": 0.85
+        },
+        "pair": {
+          "distances": [
+            1,
+            3
+          ],
+          "weights": [
+            0.5,
+            0.5
+          ],
+          "support": "all",
+          "form": "independent"
+        },
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "a32_side_qi60_qo15_mix75",
+        "idea": "Separate inside/outside emphasis and cross it with supported nearby selection fractions.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr",
+        "objective_version": "winner_v1"
+      },
+      "base_coefficients": {
+        "bands": 0.032323425078637294,
+        "pair": 0.008503534232521521
+      },
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 1.0,
+        "gradient_ratio": 0.05
+      },
+      "ap82_changes": {},
+      "ap82_phase": 1
+    },
+    {
+      "id": "ap82_s1_dice_b100_g050",
+      "family": "ap82_stage1",
+      "band": {
+        "kind": "none"
+      },
+      "pair": null,
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "dice",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "dice",
+      "base_objective": {
+        "id": "dice",
+        "family": "control",
+        "band": {
+          "kind": "none"
+        },
+        "pair": null,
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "focus25",
+        "idea": "Fresh Dice-only control from the common prefix.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr"
+      },
+      "base_coefficients": {},
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 1.0,
+        "gradient_ratio": 0.05
+      },
+      "ap82_changes": {},
+      "ap82_phase": 1
+    },
+    {
+      "id": "ap82_s1_winner_b50_g025",
+      "family": "ap82_stage1",
+      "band": {
+        "kind": "regional",
+        "inner": 3,
+        "outer": 2,
+        "penalty": "brier",
+        "inside_weight": 0.5,
+        "hard_fraction": 0.25,
+        "hard_mix": 0.75,
+        "inside_fraction": 0.7,
+        "outside_fraction": 0.1,
+        "inside_hard_mix": 0.65,
+        "outside_hard_mix": 0.85
+      },
+      "pair": {
+        "distances": [
+          1,
+          3
+        ],
+        "weights": [
+          0.5,
+          0.5
+        ],
+        "support": "all",
+        "form": "independent"
+      },
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "w81_emphasis_qi70_qo10_mi65_mo85",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "winner",
+      "base_objective": {
+        "id": "w81_emphasis_qi70_qo10_mi65_mo85",
+        "family": "w81_side_emphasis",
+        "band": {
+          "kind": "regional",
+          "inner": 3,
+          "outer": 2,
+          "penalty": "brier",
+          "inside_weight": 0.5,
+          "hard_fraction": 0.25,
+          "hard_mix": 0.75,
+          "inside_fraction": 0.7,
+          "outside_fraction": 0.1,
+          "inside_hard_mix": 0.65,
+          "outside_hard_mix": 0.85
+        },
+        "pair": {
+          "distances": [
+            1,
+            3
+          ],
+          "weights": [
+            0.5,
+            0.5
+          ],
+          "support": "all",
+          "form": "independent"
+        },
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "a32_side_qi60_qo15_mix75",
+        "idea": "Separate inside/outside emphasis and cross it with supported nearby selection fractions.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr",
+        "objective_version": "winner_v1"
+      },
+      "base_coefficients": {
+        "bands": 0.032323425078637294,
+        "pair": 0.008503534232521521
+      },
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.5,
+        "gradient_ratio": 0.025
+      },
+      "ap82_changes": {},
+      "ap82_phase": 1
+    },
+    {
+      "id": "ap82_s1_dice_b50_g025",
+      "family": "ap82_stage1",
+      "band": {
+        "kind": "none"
+      },
+      "pair": null,
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "dice",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "dice",
+      "base_objective": {
+        "id": "dice",
+        "family": "control",
+        "band": {
+          "kind": "none"
+        },
+        "pair": null,
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "focus25",
+        "idea": "Fresh Dice-only control from the common prefix.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr"
+      },
+      "base_coefficients": {},
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.5,
+        "gradient_ratio": 0.025
+      },
+      "ap82_changes": {},
+      "ap82_phase": 1
+    },
+    {
+      "id": "ap82_s1_winner_b25_g025",
+      "family": "ap82_stage1",
+      "band": {
+        "kind": "regional",
+        "inner": 3,
+        "outer": 2,
+        "penalty": "brier",
+        "inside_weight": 0.5,
+        "hard_fraction": 0.25,
+        "hard_mix": 0.75,
+        "inside_fraction": 0.7,
+        "outside_fraction": 0.1,
+        "inside_hard_mix": 0.65,
+        "outside_hard_mix": 0.85
+      },
+      "pair": {
+        "distances": [
+          1,
+          3
+        ],
+        "weights": [
+          0.5,
+          0.5
+        ],
+        "support": "all",
+        "form": "independent"
+      },
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "w81_emphasis_qi70_qo10_mi65_mo85",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "winner",
+      "base_objective": {
+        "id": "w81_emphasis_qi70_qo10_mi65_mo85",
+        "family": "w81_side_emphasis",
+        "band": {
+          "kind": "regional",
+          "inner": 3,
+          "outer": 2,
+          "penalty": "brier",
+          "inside_weight": 0.5,
+          "hard_fraction": 0.25,
+          "hard_mix": 0.75,
+          "inside_fraction": 0.7,
+          "outside_fraction": 0.1,
+          "inside_hard_mix": 0.65,
+          "outside_hard_mix": 0.85
+        },
+        "pair": {
+          "distances": [
+            1,
+            3
+          ],
+          "weights": [
+            0.5,
+            0.5
+          ],
+          "support": "all",
+          "form": "independent"
+        },
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "a32_side_qi60_qo15_mix75",
+        "idea": "Separate inside/outside emphasis and cross it with supported nearby selection fractions.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr",
+        "objective_version": "winner_v1"
+      },
+      "base_coefficients": {
+        "bands": 0.032323425078637294,
+        "pair": 0.008503534232521521
+      },
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.25,
+        "gradient_ratio": 0.025
+      },
+      "ap82_changes": {},
+      "ap82_phase": 1
+    },
+    {
+      "id": "ap82_s1_dice_b25_g025",
+      "family": "ap82_stage1",
+      "band": {
+        "kind": "none"
+      },
+      "pair": null,
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "dice",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "dice",
+      "base_objective": {
+        "id": "dice",
+        "family": "control",
+        "band": {
+          "kind": "none"
+        },
+        "pair": null,
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "focus25",
+        "idea": "Fresh Dice-only control from the common prefix.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr"
+      },
+      "base_coefficients": {},
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.25,
+        "gradient_ratio": 0.025
+      },
+      "ap82_changes": {},
+      "ap82_phase": 1
+    },
+    {
+      "id": "ap82_s1_winner_b75_g025",
+      "family": "ap82_stage1",
+      "band": {
+        "kind": "regional",
+        "inner": 3,
+        "outer": 2,
+        "penalty": "brier",
+        "inside_weight": 0.5,
+        "hard_fraction": 0.25,
+        "hard_mix": 0.75,
+        "inside_fraction": 0.7,
+        "outside_fraction": 0.1,
+        "inside_hard_mix": 0.65,
+        "outside_hard_mix": 0.85
+      },
+      "pair": {
+        "distances": [
+          1,
+          3
+        ],
+        "weights": [
+          0.5,
+          0.5
+        ],
+        "support": "all",
+        "form": "independent"
+      },
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "w81_emphasis_qi70_qo10_mi65_mo85",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "winner",
+      "base_objective": {
+        "id": "w81_emphasis_qi70_qo10_mi65_mo85",
+        "family": "w81_side_emphasis",
+        "band": {
+          "kind": "regional",
+          "inner": 3,
+          "outer": 2,
+          "penalty": "brier",
+          "inside_weight": 0.5,
+          "hard_fraction": 0.25,
+          "hard_mix": 0.75,
+          "inside_fraction": 0.7,
+          "outside_fraction": 0.1,
+          "inside_hard_mix": 0.65,
+          "outside_hard_mix": 0.85
+        },
+        "pair": {
+          "distances": [
+            1,
+            3
+          ],
+          "weights": [
+            0.5,
+            0.5
+          ],
+          "support": "all",
+          "form": "independent"
+        },
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "a32_side_qi60_qo15_mix75",
+        "idea": "Separate inside/outside emphasis and cross it with supported nearby selection fractions.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr",
+        "objective_version": "winner_v1"
+      },
+      "base_coefficients": {
+        "bands": 0.032323425078637294,
+        "pair": 0.008503534232521521
+      },
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.75,
+        "gradient_ratio": 0.025
+      },
+      "ap82_changes": {},
+      "ap82_phase": 1
+    },
+    {
+      "id": "ap82_s1_dice_b75_g025",
+      "family": "ap82_stage1",
+      "band": {
+        "kind": "none"
+      },
+      "pair": null,
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "dice",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "dice",
+      "base_objective": {
+        "id": "dice",
+        "family": "control",
+        "band": {
+          "kind": "none"
+        },
+        "pair": null,
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "focus25",
+        "idea": "Fresh Dice-only control from the common prefix.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr"
+      },
+      "base_coefficients": {},
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.75,
+        "gradient_ratio": 0.025
+      },
+      "ap82_changes": {},
+      "ap82_phase": 1
+    },
+    {
+      "id": "ap82_s1_winner_b0_g025",
+      "family": "ap82_stage1",
+      "band": {
+        "kind": "regional",
+        "inner": 3,
+        "outer": 2,
+        "penalty": "brier",
+        "inside_weight": 0.5,
+        "hard_fraction": 0.25,
+        "hard_mix": 0.75,
+        "inside_fraction": 0.7,
+        "outside_fraction": 0.1,
+        "inside_hard_mix": 0.65,
+        "outside_hard_mix": 0.85
+      },
+      "pair": {
+        "distances": [
+          1,
+          3
+        ],
+        "weights": [
+          0.5,
+          0.5
+        ],
+        "support": "all",
+        "form": "independent"
+      },
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "w81_emphasis_qi70_qo10_mi65_mo85",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "winner",
+      "base_objective": {
+        "id": "w81_emphasis_qi70_qo10_mi65_mo85",
+        "family": "w81_side_emphasis",
+        "band": {
+          "kind": "regional",
+          "inner": 3,
+          "outer": 2,
+          "penalty": "brier",
+          "inside_weight": 0.5,
+          "hard_fraction": 0.25,
+          "hard_mix": 0.75,
+          "inside_fraction": 0.7,
+          "outside_fraction": 0.1,
+          "inside_hard_mix": 0.65,
+          "outside_hard_mix": 0.85
+        },
+        "pair": {
+          "distances": [
+            1,
+            3
+          ],
+          "weights": [
+            0.5,
+            0.5
+          ],
+          "support": "all",
+          "form": "independent"
+        },
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "a32_side_qi60_qo15_mix75",
+        "idea": "Separate inside/outside emphasis and cross it with supported nearby selection fractions.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr",
+        "objective_version": "winner_v1"
+      },
+      "base_coefficients": {
+        "bands": 0.032323425078637294,
+        "pair": 0.008503534232521521
+      },
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.0,
+        "gradient_ratio": 0.025
+      },
+      "ap82_changes": {},
+      "ap82_phase": 1
+    },
+    {
+      "id": "ap82_s1_dice_b0_g025",
+      "family": "ap82_stage1",
+      "band": {
+        "kind": "none"
+      },
+      "pair": null,
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "dice",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "dice",
+      "base_objective": {
+        "id": "dice",
+        "family": "control",
+        "band": {
+          "kind": "none"
+        },
+        "pair": null,
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "focus25",
+        "idea": "Fresh Dice-only control from the common prefix.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr"
+      },
+      "base_coefficients": {},
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.0,
+        "gradient_ratio": 0.025
+      },
+      "ap82_changes": {},
+      "ap82_phase": 1
+    },
+    {
+      "id": "ap82_s1_winner_b100_g025",
+      "family": "ap82_stage1",
+      "band": {
+        "kind": "regional",
+        "inner": 3,
+        "outer": 2,
+        "penalty": "brier",
+        "inside_weight": 0.5,
+        "hard_fraction": 0.25,
+        "hard_mix": 0.75,
+        "inside_fraction": 0.7,
+        "outside_fraction": 0.1,
+        "inside_hard_mix": 0.65,
+        "outside_hard_mix": 0.85
+      },
+      "pair": {
+        "distances": [
+          1,
+          3
+        ],
+        "weights": [
+          0.5,
+          0.5
+        ],
+        "support": "all",
+        "form": "independent"
+      },
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "w81_emphasis_qi70_qo10_mi65_mo85",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "winner",
+      "base_objective": {
+        "id": "w81_emphasis_qi70_qo10_mi65_mo85",
+        "family": "w81_side_emphasis",
+        "band": {
+          "kind": "regional",
+          "inner": 3,
+          "outer": 2,
+          "penalty": "brier",
+          "inside_weight": 0.5,
+          "hard_fraction": 0.25,
+          "hard_mix": 0.75,
+          "inside_fraction": 0.7,
+          "outside_fraction": 0.1,
+          "inside_hard_mix": 0.65,
+          "outside_hard_mix": 0.85
+        },
+        "pair": {
+          "distances": [
+            1,
+            3
+          ],
+          "weights": [
+            0.5,
+            0.5
+          ],
+          "support": "all",
+          "form": "independent"
+        },
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "a32_side_qi60_qo15_mix75",
+        "idea": "Separate inside/outside emphasis and cross it with supported nearby selection fractions.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr",
+        "objective_version": "winner_v1"
+      },
+      "base_coefficients": {
+        "bands": 0.032323425078637294,
+        "pair": 0.008503534232521521
+      },
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 1.0,
+        "gradient_ratio": 0.025
+      },
+      "ap82_changes": {},
+      "ap82_phase": 1
+    },
+    {
+      "id": "ap82_s1_dice_b100_g025",
+      "family": "ap82_stage1",
+      "band": {
+        "kind": "none"
+      },
+      "pair": null,
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "dice",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "dice",
+      "base_objective": {
+        "id": "dice",
+        "family": "control",
+        "band": {
+          "kind": "none"
+        },
+        "pair": null,
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "focus25",
+        "idea": "Fresh Dice-only control from the common prefix.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr"
+      },
+      "base_coefficients": {},
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 1.0,
+        "gradient_ratio": 0.025
+      },
+      "ap82_changes": {},
+      "ap82_phase": 1
+    },
+    {
+      "id": "ap82_s1_winner_b50_g100",
+      "family": "ap82_stage1",
+      "band": {
+        "kind": "regional",
+        "inner": 3,
+        "outer": 2,
+        "penalty": "brier",
+        "inside_weight": 0.5,
+        "hard_fraction": 0.25,
+        "hard_mix": 0.75,
+        "inside_fraction": 0.7,
+        "outside_fraction": 0.1,
+        "inside_hard_mix": 0.65,
+        "outside_hard_mix": 0.85
+      },
+      "pair": {
+        "distances": [
+          1,
+          3
+        ],
+        "weights": [
+          0.5,
+          0.5
+        ],
+        "support": "all",
+        "form": "independent"
+      },
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "w81_emphasis_qi70_qo10_mi65_mo85",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "winner",
+      "base_objective": {
+        "id": "w81_emphasis_qi70_qo10_mi65_mo85",
+        "family": "w81_side_emphasis",
+        "band": {
+          "kind": "regional",
+          "inner": 3,
+          "outer": 2,
+          "penalty": "brier",
+          "inside_weight": 0.5,
+          "hard_fraction": 0.25,
+          "hard_mix": 0.75,
+          "inside_fraction": 0.7,
+          "outside_fraction": 0.1,
+          "inside_hard_mix": 0.65,
+          "outside_hard_mix": 0.85
+        },
+        "pair": {
+          "distances": [
+            1,
+            3
+          ],
+          "weights": [
+            0.5,
+            0.5
+          ],
+          "support": "all",
+          "form": "independent"
+        },
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "a32_side_qi60_qo15_mix75",
+        "idea": "Separate inside/outside emphasis and cross it with supported nearby selection fractions.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr",
+        "objective_version": "winner_v1"
+      },
+      "base_coefficients": {
+        "bands": 0.032323425078637294,
+        "pair": 0.008503534232521521
+      },
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.5,
+        "gradient_ratio": 0.1
+      },
+      "ap82_changes": {},
+      "ap82_phase": 1
+    },
+    {
+      "id": "ap82_s1_dice_b50_g100",
+      "family": "ap82_stage1",
+      "band": {
+        "kind": "none"
+      },
+      "pair": null,
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "dice",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "dice",
+      "base_objective": {
+        "id": "dice",
+        "family": "control",
+        "band": {
+          "kind": "none"
+        },
+        "pair": null,
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "focus25",
+        "idea": "Fresh Dice-only control from the common prefix.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr"
+      },
+      "base_coefficients": {},
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.5,
+        "gradient_ratio": 0.1
+      },
+      "ap82_changes": {},
+      "ap82_phase": 1
+    },
+    {
+      "id": "ap82_s1_winner_b25_g100",
+      "family": "ap82_stage1",
+      "band": {
+        "kind": "regional",
+        "inner": 3,
+        "outer": 2,
+        "penalty": "brier",
+        "inside_weight": 0.5,
+        "hard_fraction": 0.25,
+        "hard_mix": 0.75,
+        "inside_fraction": 0.7,
+        "outside_fraction": 0.1,
+        "inside_hard_mix": 0.65,
+        "outside_hard_mix": 0.85
+      },
+      "pair": {
+        "distances": [
+          1,
+          3
+        ],
+        "weights": [
+          0.5,
+          0.5
+        ],
+        "support": "all",
+        "form": "independent"
+      },
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "w81_emphasis_qi70_qo10_mi65_mo85",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "winner",
+      "base_objective": {
+        "id": "w81_emphasis_qi70_qo10_mi65_mo85",
+        "family": "w81_side_emphasis",
+        "band": {
+          "kind": "regional",
+          "inner": 3,
+          "outer": 2,
+          "penalty": "brier",
+          "inside_weight": 0.5,
+          "hard_fraction": 0.25,
+          "hard_mix": 0.75,
+          "inside_fraction": 0.7,
+          "outside_fraction": 0.1,
+          "inside_hard_mix": 0.65,
+          "outside_hard_mix": 0.85
+        },
+        "pair": {
+          "distances": [
+            1,
+            3
+          ],
+          "weights": [
+            0.5,
+            0.5
+          ],
+          "support": "all",
+          "form": "independent"
+        },
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "a32_side_qi60_qo15_mix75",
+        "idea": "Separate inside/outside emphasis and cross it with supported nearby selection fractions.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr",
+        "objective_version": "winner_v1"
+      },
+      "base_coefficients": {
+        "bands": 0.032323425078637294,
+        "pair": 0.008503534232521521
+      },
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.25,
+        "gradient_ratio": 0.1
+      },
+      "ap82_changes": {},
+      "ap82_phase": 1
+    },
+    {
+      "id": "ap82_s1_dice_b25_g100",
+      "family": "ap82_stage1",
+      "band": {
+        "kind": "none"
+      },
+      "pair": null,
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "dice",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "dice",
+      "base_objective": {
+        "id": "dice",
+        "family": "control",
+        "band": {
+          "kind": "none"
+        },
+        "pair": null,
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "focus25",
+        "idea": "Fresh Dice-only control from the common prefix.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr"
+      },
+      "base_coefficients": {},
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.25,
+        "gradient_ratio": 0.1
+      },
+      "ap82_changes": {},
+      "ap82_phase": 1
+    },
+    {
+      "id": "ap82_s1_winner_b75_g100",
+      "family": "ap82_stage1",
+      "band": {
+        "kind": "regional",
+        "inner": 3,
+        "outer": 2,
+        "penalty": "brier",
+        "inside_weight": 0.5,
+        "hard_fraction": 0.25,
+        "hard_mix": 0.75,
+        "inside_fraction": 0.7,
+        "outside_fraction": 0.1,
+        "inside_hard_mix": 0.65,
+        "outside_hard_mix": 0.85
+      },
+      "pair": {
+        "distances": [
+          1,
+          3
+        ],
+        "weights": [
+          0.5,
+          0.5
+        ],
+        "support": "all",
+        "form": "independent"
+      },
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "w81_emphasis_qi70_qo10_mi65_mo85",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "winner",
+      "base_objective": {
+        "id": "w81_emphasis_qi70_qo10_mi65_mo85",
+        "family": "w81_side_emphasis",
+        "band": {
+          "kind": "regional",
+          "inner": 3,
+          "outer": 2,
+          "penalty": "brier",
+          "inside_weight": 0.5,
+          "hard_fraction": 0.25,
+          "hard_mix": 0.75,
+          "inside_fraction": 0.7,
+          "outside_fraction": 0.1,
+          "inside_hard_mix": 0.65,
+          "outside_hard_mix": 0.85
+        },
+        "pair": {
+          "distances": [
+            1,
+            3
+          ],
+          "weights": [
+            0.5,
+            0.5
+          ],
+          "support": "all",
+          "form": "independent"
+        },
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "a32_side_qi60_qo15_mix75",
+        "idea": "Separate inside/outside emphasis and cross it with supported nearby selection fractions.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr",
+        "objective_version": "winner_v1"
+      },
+      "base_coefficients": {
+        "bands": 0.032323425078637294,
+        "pair": 0.008503534232521521
+      },
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.75,
+        "gradient_ratio": 0.1
+      },
+      "ap82_changes": {},
+      "ap82_phase": 1
+    },
+    {
+      "id": "ap82_s1_dice_b75_g100",
+      "family": "ap82_stage1",
+      "band": {
+        "kind": "none"
+      },
+      "pair": null,
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "dice",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "dice",
+      "base_objective": {
+        "id": "dice",
+        "family": "control",
+        "band": {
+          "kind": "none"
+        },
+        "pair": null,
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "focus25",
+        "idea": "Fresh Dice-only control from the common prefix.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr"
+      },
+      "base_coefficients": {},
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.75,
+        "gradient_ratio": 0.1
+      },
+      "ap82_changes": {},
+      "ap82_phase": 1
+    },
+    {
+      "id": "ap82_s1_winner_b0_g100",
+      "family": "ap82_stage1",
+      "band": {
+        "kind": "regional",
+        "inner": 3,
+        "outer": 2,
+        "penalty": "brier",
+        "inside_weight": 0.5,
+        "hard_fraction": 0.25,
+        "hard_mix": 0.75,
+        "inside_fraction": 0.7,
+        "outside_fraction": 0.1,
+        "inside_hard_mix": 0.65,
+        "outside_hard_mix": 0.85
+      },
+      "pair": {
+        "distances": [
+          1,
+          3
+        ],
+        "weights": [
+          0.5,
+          0.5
+        ],
+        "support": "all",
+        "form": "independent"
+      },
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "w81_emphasis_qi70_qo10_mi65_mo85",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "winner",
+      "base_objective": {
+        "id": "w81_emphasis_qi70_qo10_mi65_mo85",
+        "family": "w81_side_emphasis",
+        "band": {
+          "kind": "regional",
+          "inner": 3,
+          "outer": 2,
+          "penalty": "brier",
+          "inside_weight": 0.5,
+          "hard_fraction": 0.25,
+          "hard_mix": 0.75,
+          "inside_fraction": 0.7,
+          "outside_fraction": 0.1,
+          "inside_hard_mix": 0.65,
+          "outside_hard_mix": 0.85
+        },
+        "pair": {
+          "distances": [
+            1,
+            3
+          ],
+          "weights": [
+            0.5,
+            0.5
+          ],
+          "support": "all",
+          "form": "independent"
+        },
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "a32_side_qi60_qo15_mix75",
+        "idea": "Separate inside/outside emphasis and cross it with supported nearby selection fractions.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr",
+        "objective_version": "winner_v1"
+      },
+      "base_coefficients": {
+        "bands": 0.032323425078637294,
+        "pair": 0.008503534232521521
+      },
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.0,
+        "gradient_ratio": 0.1
+      },
+      "ap82_changes": {},
+      "ap82_phase": 1
+    },
+    {
+      "id": "ap82_s1_dice_b0_g100",
+      "family": "ap82_stage1",
+      "band": {
+        "kind": "none"
+      },
+      "pair": null,
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "dice",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "dice",
+      "base_objective": {
+        "id": "dice",
+        "family": "control",
+        "band": {
+          "kind": "none"
+        },
+        "pair": null,
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "focus25",
+        "idea": "Fresh Dice-only control from the common prefix.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr"
+      },
+      "base_coefficients": {},
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.0,
+        "gradient_ratio": 0.1
+      },
+      "ap82_changes": {},
+      "ap82_phase": 1
+    },
+    {
+      "id": "ap82_s1_winner_b100_g100",
+      "family": "ap82_stage1",
+      "band": {
+        "kind": "regional",
+        "inner": 3,
+        "outer": 2,
+        "penalty": "brier",
+        "inside_weight": 0.5,
+        "hard_fraction": 0.25,
+        "hard_mix": 0.75,
+        "inside_fraction": 0.7,
+        "outside_fraction": 0.1,
+        "inside_hard_mix": 0.65,
+        "outside_hard_mix": 0.85
+      },
+      "pair": {
+        "distances": [
+          1,
+          3
+        ],
+        "weights": [
+          0.5,
+          0.5
+        ],
+        "support": "all",
+        "form": "independent"
+      },
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "w81_emphasis_qi70_qo10_mi65_mo85",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "winner",
+      "base_objective": {
+        "id": "w81_emphasis_qi70_qo10_mi65_mo85",
+        "family": "w81_side_emphasis",
+        "band": {
+          "kind": "regional",
+          "inner": 3,
+          "outer": 2,
+          "penalty": "brier",
+          "inside_weight": 0.5,
+          "hard_fraction": 0.25,
+          "hard_mix": 0.75,
+          "inside_fraction": 0.7,
+          "outside_fraction": 0.1,
+          "inside_hard_mix": 0.65,
+          "outside_hard_mix": 0.85
+        },
+        "pair": {
+          "distances": [
+            1,
+            3
+          ],
+          "weights": [
+            0.5,
+            0.5
+          ],
+          "support": "all",
+          "form": "independent"
+        },
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "a32_side_qi60_qo15_mix75",
+        "idea": "Separate inside/outside emphasis and cross it with supported nearby selection fractions.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr",
+        "objective_version": "winner_v1"
+      },
+      "base_coefficients": {
+        "bands": 0.032323425078637294,
+        "pair": 0.008503534232521521
+      },
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 1.0,
+        "gradient_ratio": 0.1
+      },
+      "ap82_changes": {},
+      "ap82_phase": 1
+    },
+    {
+      "id": "ap82_s1_dice_b100_g100",
+      "family": "ap82_stage1",
+      "band": {
+        "kind": "none"
+      },
+      "pair": null,
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "dice",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "dice",
+      "base_objective": {
+        "id": "dice",
+        "family": "control",
+        "band": {
+          "kind": "none"
+        },
+        "pair": null,
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "focus25",
+        "idea": "Fresh Dice-only control from the common prefix.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr"
+      },
+      "base_coefficients": {},
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 1.0,
+        "gradient_ratio": 0.1
+      },
+      "ap82_changes": {},
+      "ap82_phase": 1
+    }
+  ],
+  "stage2_count": 44,
+  "stage2_example_only": [
+    {
+      "id": "ap82_s2_winner_q25_25",
+      "family": "ap82_stage2",
+      "band": {
+        "kind": "regional",
+        "inner": 3,
+        "outer": 2,
+        "penalty": "brier",
+        "inside_weight": 0.5,
+        "hard_fraction": 0.25,
+        "hard_mix": 0.75,
+        "inside_fraction": 0.7,
+        "outside_fraction": 0.1,
+        "inside_hard_mix": 0.65,
+        "outside_hard_mix": 0.85
+      },
+      "pair": {
+        "distances": [
+          1,
+          3
+        ],
+        "weights": [
+          0.5,
+          0.5
+        ],
+        "support": "all",
+        "form": "independent"
+      },
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "w81_emphasis_qi70_qo10_mi65_mo85",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "winner",
+      "base_objective": {
+        "id": "w81_emphasis_qi70_qo10_mi65_mo85",
+        "family": "w81_side_emphasis",
+        "band": {
+          "kind": "regional",
+          "inner": 3,
+          "outer": 2,
+          "penalty": "brier",
+          "inside_weight": 0.5,
+          "hard_fraction": 0.25,
+          "hard_mix": 0.75,
+          "inside_fraction": 0.7,
+          "outside_fraction": 0.1,
+          "inside_hard_mix": 0.65,
+          "outside_hard_mix": 0.85
+        },
+        "pair": {
+          "distances": [
+            1,
+            3
+          ],
+          "weights": [
+            0.5,
+            0.5
+          ],
+          "support": "all",
+          "form": "independent"
+        },
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "a32_side_qi60_qo15_mix75",
+        "idea": "Separate inside/outside emphasis and cross it with supported nearby selection fractions.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr",
+        "objective_version": "winner_v1"
+      },
+      "base_coefficients": {
+        "bands": 0.032323425078637294,
+        "pair": 0.008503534232521521
+      },
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.25,
+        "posterior_fraction": 0.25,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.5,
+        "gradient_ratio": 0.05
+      },
+      "ap82_changes": {
+        "selection": {
+          "anterior_fraction": 0.25,
+          "posterior_fraction": 0.25
+        }
+      },
+      "ap82_phase": 2
+    },
+    {
+      "id": "ap82_s2_dice_q25_25",
+      "family": "ap82_stage2",
+      "band": {
+        "kind": "none"
+      },
+      "pair": null,
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "dice",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "dice",
+      "base_objective": {
+        "id": "dice",
+        "family": "control",
+        "band": {
+          "kind": "none"
+        },
+        "pair": null,
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "focus25",
+        "idea": "Fresh Dice-only control from the common prefix.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr"
+      },
+      "base_coefficients": {},
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.25,
+        "posterior_fraction": 0.25,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.5,
+        "gradient_ratio": 0.05
+      },
+      "ap82_changes": {
+        "selection": {
+          "anterior_fraction": 0.25,
+          "posterior_fraction": 0.25
+        }
+      },
+      "ap82_phase": 2
+    },
+    {
+      "id": "ap82_s2_winner_q25_50",
+      "family": "ap82_stage2",
+      "band": {
+        "kind": "regional",
+        "inner": 3,
+        "outer": 2,
+        "penalty": "brier",
+        "inside_weight": 0.5,
+        "hard_fraction": 0.25,
+        "hard_mix": 0.75,
+        "inside_fraction": 0.7,
+        "outside_fraction": 0.1,
+        "inside_hard_mix": 0.65,
+        "outside_hard_mix": 0.85
+      },
+      "pair": {
+        "distances": [
+          1,
+          3
+        ],
+        "weights": [
+          0.5,
+          0.5
+        ],
+        "support": "all",
+        "form": "independent"
+      },
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "w81_emphasis_qi70_qo10_mi65_mo85",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "winner",
+      "base_objective": {
+        "id": "w81_emphasis_qi70_qo10_mi65_mo85",
+        "family": "w81_side_emphasis",
+        "band": {
+          "kind": "regional",
+          "inner": 3,
+          "outer": 2,
+          "penalty": "brier",
+          "inside_weight": 0.5,
+          "hard_fraction": 0.25,
+          "hard_mix": 0.75,
+          "inside_fraction": 0.7,
+          "outside_fraction": 0.1,
+          "inside_hard_mix": 0.65,
+          "outside_hard_mix": 0.85
+        },
+        "pair": {
+          "distances": [
+            1,
+            3
+          ],
+          "weights": [
+            0.5,
+            0.5
+          ],
+          "support": "all",
+          "form": "independent"
+        },
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "a32_side_qi60_qo15_mix75",
+        "idea": "Separate inside/outside emphasis and cross it with supported nearby selection fractions.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr",
+        "objective_version": "winner_v1"
+      },
+      "base_coefficients": {
+        "bands": 0.032323425078637294,
+        "pair": 0.008503534232521521
+      },
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.25,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.5,
+        "gradient_ratio": 0.05
+      },
+      "ap82_changes": {
+        "selection": {
+          "anterior_fraction": 0.25,
+          "posterior_fraction": 0.5
+        }
+      },
+      "ap82_phase": 2
+    },
+    {
+      "id": "ap82_s2_dice_q25_50",
+      "family": "ap82_stage2",
+      "band": {
+        "kind": "none"
+      },
+      "pair": null,
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "dice",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "dice",
+      "base_objective": {
+        "id": "dice",
+        "family": "control",
+        "band": {
+          "kind": "none"
+        },
+        "pair": null,
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "focus25",
+        "idea": "Fresh Dice-only control from the common prefix.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr"
+      },
+      "base_coefficients": {},
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.25,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.5,
+        "gradient_ratio": 0.05
+      },
+      "ap82_changes": {
+        "selection": {
+          "anterior_fraction": 0.25,
+          "posterior_fraction": 0.5
+        }
+      },
+      "ap82_phase": 2
+    },
+    {
+      "id": "ap82_s2_winner_q25_75",
+      "family": "ap82_stage2",
+      "band": {
+        "kind": "regional",
+        "inner": 3,
+        "outer": 2,
+        "penalty": "brier",
+        "inside_weight": 0.5,
+        "hard_fraction": 0.25,
+        "hard_mix": 0.75,
+        "inside_fraction": 0.7,
+        "outside_fraction": 0.1,
+        "inside_hard_mix": 0.65,
+        "outside_hard_mix": 0.85
+      },
+      "pair": {
+        "distances": [
+          1,
+          3
+        ],
+        "weights": [
+          0.5,
+          0.5
+        ],
+        "support": "all",
+        "form": "independent"
+      },
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "w81_emphasis_qi70_qo10_mi65_mo85",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "winner",
+      "base_objective": {
+        "id": "w81_emphasis_qi70_qo10_mi65_mo85",
+        "family": "w81_side_emphasis",
+        "band": {
+          "kind": "regional",
+          "inner": 3,
+          "outer": 2,
+          "penalty": "brier",
+          "inside_weight": 0.5,
+          "hard_fraction": 0.25,
+          "hard_mix": 0.75,
+          "inside_fraction": 0.7,
+          "outside_fraction": 0.1,
+          "inside_hard_mix": 0.65,
+          "outside_hard_mix": 0.85
+        },
+        "pair": {
+          "distances": [
+            1,
+            3
+          ],
+          "weights": [
+            0.5,
+            0.5
+          ],
+          "support": "all",
+          "form": "independent"
+        },
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "a32_side_qi60_qo15_mix75",
+        "idea": "Separate inside/outside emphasis and cross it with supported nearby selection fractions.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr",
+        "objective_version": "winner_v1"
+      },
+      "base_coefficients": {
+        "bands": 0.032323425078637294,
+        "pair": 0.008503534232521521
+      },
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.25,
+        "posterior_fraction": 0.75,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.5,
+        "gradient_ratio": 0.05
+      },
+      "ap82_changes": {
+        "selection": {
+          "anterior_fraction": 0.25,
+          "posterior_fraction": 0.75
+        }
+      },
+      "ap82_phase": 2
+    },
+    {
+      "id": "ap82_s2_dice_q25_75",
+      "family": "ap82_stage2",
+      "band": {
+        "kind": "none"
+      },
+      "pair": null,
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "dice",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "dice",
+      "base_objective": {
+        "id": "dice",
+        "family": "control",
+        "band": {
+          "kind": "none"
+        },
+        "pair": null,
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "focus25",
+        "idea": "Fresh Dice-only control from the common prefix.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr"
+      },
+      "base_coefficients": {},
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.25,
+        "posterior_fraction": 0.75,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.5,
+        "gradient_ratio": 0.05
+      },
+      "ap82_changes": {
+        "selection": {
+          "anterior_fraction": 0.25,
+          "posterior_fraction": 0.75
+        }
+      },
+      "ap82_phase": 2
+    },
+    {
+      "id": "ap82_s2_winner_q50_25",
+      "family": "ap82_stage2",
+      "band": {
+        "kind": "regional",
+        "inner": 3,
+        "outer": 2,
+        "penalty": "brier",
+        "inside_weight": 0.5,
+        "hard_fraction": 0.25,
+        "hard_mix": 0.75,
+        "inside_fraction": 0.7,
+        "outside_fraction": 0.1,
+        "inside_hard_mix": 0.65,
+        "outside_hard_mix": 0.85
+      },
+      "pair": {
+        "distances": [
+          1,
+          3
+        ],
+        "weights": [
+          0.5,
+          0.5
+        ],
+        "support": "all",
+        "form": "independent"
+      },
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "w81_emphasis_qi70_qo10_mi65_mo85",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "winner",
+      "base_objective": {
+        "id": "w81_emphasis_qi70_qo10_mi65_mo85",
+        "family": "w81_side_emphasis",
+        "band": {
+          "kind": "regional",
+          "inner": 3,
+          "outer": 2,
+          "penalty": "brier",
+          "inside_weight": 0.5,
+          "hard_fraction": 0.25,
+          "hard_mix": 0.75,
+          "inside_fraction": 0.7,
+          "outside_fraction": 0.1,
+          "inside_hard_mix": 0.65,
+          "outside_hard_mix": 0.85
+        },
+        "pair": {
+          "distances": [
+            1,
+            3
+          ],
+          "weights": [
+            0.5,
+            0.5
+          ],
+          "support": "all",
+          "form": "independent"
+        },
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "a32_side_qi60_qo15_mix75",
+        "idea": "Separate inside/outside emphasis and cross it with supported nearby selection fractions.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr",
+        "objective_version": "winner_v1"
+      },
+      "base_coefficients": {
+        "bands": 0.032323425078637294,
+        "pair": 0.008503534232521521
+      },
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.25,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.5,
+        "gradient_ratio": 0.05
+      },
+      "ap82_changes": {
+        "selection": {
+          "anterior_fraction": 0.5,
+          "posterior_fraction": 0.25
+        }
+      },
+      "ap82_phase": 2
+    },
+    {
+      "id": "ap82_s2_dice_q50_25",
+      "family": "ap82_stage2",
+      "band": {
+        "kind": "none"
+      },
+      "pair": null,
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "dice",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "dice",
+      "base_objective": {
+        "id": "dice",
+        "family": "control",
+        "band": {
+          "kind": "none"
+        },
+        "pair": null,
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "focus25",
+        "idea": "Fresh Dice-only control from the common prefix.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr"
+      },
+      "base_coefficients": {},
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.25,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.5,
+        "gradient_ratio": 0.05
+      },
+      "ap82_changes": {
+        "selection": {
+          "anterior_fraction": 0.5,
+          "posterior_fraction": 0.25
+        }
+      },
+      "ap82_phase": 2
+    },
+    {
+      "id": "ap82_s2_winner_q50_75",
+      "family": "ap82_stage2",
+      "band": {
+        "kind": "regional",
+        "inner": 3,
+        "outer": 2,
+        "penalty": "brier",
+        "inside_weight": 0.5,
+        "hard_fraction": 0.25,
+        "hard_mix": 0.75,
+        "inside_fraction": 0.7,
+        "outside_fraction": 0.1,
+        "inside_hard_mix": 0.65,
+        "outside_hard_mix": 0.85
+      },
+      "pair": {
+        "distances": [
+          1,
+          3
+        ],
+        "weights": [
+          0.5,
+          0.5
+        ],
+        "support": "all",
+        "form": "independent"
+      },
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "w81_emphasis_qi70_qo10_mi65_mo85",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "winner",
+      "base_objective": {
+        "id": "w81_emphasis_qi70_qo10_mi65_mo85",
+        "family": "w81_side_emphasis",
+        "band": {
+          "kind": "regional",
+          "inner": 3,
+          "outer": 2,
+          "penalty": "brier",
+          "inside_weight": 0.5,
+          "hard_fraction": 0.25,
+          "hard_mix": 0.75,
+          "inside_fraction": 0.7,
+          "outside_fraction": 0.1,
+          "inside_hard_mix": 0.65,
+          "outside_hard_mix": 0.85
+        },
+        "pair": {
+          "distances": [
+            1,
+            3
+          ],
+          "weights": [
+            0.5,
+            0.5
+          ],
+          "support": "all",
+          "form": "independent"
+        },
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "a32_side_qi60_qo15_mix75",
+        "idea": "Separate inside/outside emphasis and cross it with supported nearby selection fractions.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr",
+        "objective_version": "winner_v1"
+      },
+      "base_coefficients": {
+        "bands": 0.032323425078637294,
+        "pair": 0.008503534232521521
+      },
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.75,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.5,
+        "gradient_ratio": 0.05
+      },
+      "ap82_changes": {
+        "selection": {
+          "anterior_fraction": 0.5,
+          "posterior_fraction": 0.75
+        }
+      },
+      "ap82_phase": 2
+    },
+    {
+      "id": "ap82_s2_dice_q50_75",
+      "family": "ap82_stage2",
+      "band": {
+        "kind": "none"
+      },
+      "pair": null,
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "dice",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "dice",
+      "base_objective": {
+        "id": "dice",
+        "family": "control",
+        "band": {
+          "kind": "none"
+        },
+        "pair": null,
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "focus25",
+        "idea": "Fresh Dice-only control from the common prefix.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr"
+      },
+      "base_coefficients": {},
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.75,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.5,
+        "gradient_ratio": 0.05
+      },
+      "ap82_changes": {
+        "selection": {
+          "anterior_fraction": 0.5,
+          "posterior_fraction": 0.75
+        }
+      },
+      "ap82_phase": 2
+    },
+    {
+      "id": "ap82_s2_winner_q75_25",
+      "family": "ap82_stage2",
+      "band": {
+        "kind": "regional",
+        "inner": 3,
+        "outer": 2,
+        "penalty": "brier",
+        "inside_weight": 0.5,
+        "hard_fraction": 0.25,
+        "hard_mix": 0.75,
+        "inside_fraction": 0.7,
+        "outside_fraction": 0.1,
+        "inside_hard_mix": 0.65,
+        "outside_hard_mix": 0.85
+      },
+      "pair": {
+        "distances": [
+          1,
+          3
+        ],
+        "weights": [
+          0.5,
+          0.5
+        ],
+        "support": "all",
+        "form": "independent"
+      },
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "w81_emphasis_qi70_qo10_mi65_mo85",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "winner",
+      "base_objective": {
+        "id": "w81_emphasis_qi70_qo10_mi65_mo85",
+        "family": "w81_side_emphasis",
+        "band": {
+          "kind": "regional",
+          "inner": 3,
+          "outer": 2,
+          "penalty": "brier",
+          "inside_weight": 0.5,
+          "hard_fraction": 0.25,
+          "hard_mix": 0.75,
+          "inside_fraction": 0.7,
+          "outside_fraction": 0.1,
+          "inside_hard_mix": 0.65,
+          "outside_hard_mix": 0.85
+        },
+        "pair": {
+          "distances": [
+            1,
+            3
+          ],
+          "weights": [
+            0.5,
+            0.5
+          ],
+          "support": "all",
+          "form": "independent"
+        },
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "a32_side_qi60_qo15_mix75",
+        "idea": "Separate inside/outside emphasis and cross it with supported nearby selection fractions.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr",
+        "objective_version": "winner_v1"
+      },
+      "base_coefficients": {
+        "bands": 0.032323425078637294,
+        "pair": 0.008503534232521521
+      },
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.75,
+        "posterior_fraction": 0.25,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.5,
+        "gradient_ratio": 0.05
+      },
+      "ap82_changes": {
+        "selection": {
+          "anterior_fraction": 0.75,
+          "posterior_fraction": 0.25
+        }
+      },
+      "ap82_phase": 2
+    },
+    {
+      "id": "ap82_s2_dice_q75_25",
+      "family": "ap82_stage2",
+      "band": {
+        "kind": "none"
+      },
+      "pair": null,
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "dice",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "dice",
+      "base_objective": {
+        "id": "dice",
+        "family": "control",
+        "band": {
+          "kind": "none"
+        },
+        "pair": null,
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "focus25",
+        "idea": "Fresh Dice-only control from the common prefix.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr"
+      },
+      "base_coefficients": {},
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.75,
+        "posterior_fraction": 0.25,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.5,
+        "gradient_ratio": 0.05
+      },
+      "ap82_changes": {
+        "selection": {
+          "anterior_fraction": 0.75,
+          "posterior_fraction": 0.25
+        }
+      },
+      "ap82_phase": 2
+    },
+    {
+      "id": "ap82_s2_winner_q75_50",
+      "family": "ap82_stage2",
+      "band": {
+        "kind": "regional",
+        "inner": 3,
+        "outer": 2,
+        "penalty": "brier",
+        "inside_weight": 0.5,
+        "hard_fraction": 0.25,
+        "hard_mix": 0.75,
+        "inside_fraction": 0.7,
+        "outside_fraction": 0.1,
+        "inside_hard_mix": 0.65,
+        "outside_hard_mix": 0.85
+      },
+      "pair": {
+        "distances": [
+          1,
+          3
+        ],
+        "weights": [
+          0.5,
+          0.5
+        ],
+        "support": "all",
+        "form": "independent"
+      },
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "w81_emphasis_qi70_qo10_mi65_mo85",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "winner",
+      "base_objective": {
+        "id": "w81_emphasis_qi70_qo10_mi65_mo85",
+        "family": "w81_side_emphasis",
+        "band": {
+          "kind": "regional",
+          "inner": 3,
+          "outer": 2,
+          "penalty": "brier",
+          "inside_weight": 0.5,
+          "hard_fraction": 0.25,
+          "hard_mix": 0.75,
+          "inside_fraction": 0.7,
+          "outside_fraction": 0.1,
+          "inside_hard_mix": 0.65,
+          "outside_hard_mix": 0.85
+        },
+        "pair": {
+          "distances": [
+            1,
+            3
+          ],
+          "weights": [
+            0.5,
+            0.5
+          ],
+          "support": "all",
+          "form": "independent"
+        },
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "a32_side_qi60_qo15_mix75",
+        "idea": "Separate inside/outside emphasis and cross it with supported nearby selection fractions.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr",
+        "objective_version": "winner_v1"
+      },
+      "base_coefficients": {
+        "bands": 0.032323425078637294,
+        "pair": 0.008503534232521521
+      },
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.75,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.5,
+        "gradient_ratio": 0.05
+      },
+      "ap82_changes": {
+        "selection": {
+          "anterior_fraction": 0.75,
+          "posterior_fraction": 0.5
+        }
+      },
+      "ap82_phase": 2
+    },
+    {
+      "id": "ap82_s2_dice_q75_50",
+      "family": "ap82_stage2",
+      "band": {
+        "kind": "none"
+      },
+      "pair": null,
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "dice",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "dice",
+      "base_objective": {
+        "id": "dice",
+        "family": "control",
+        "band": {
+          "kind": "none"
+        },
+        "pair": null,
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "focus25",
+        "idea": "Fresh Dice-only control from the common prefix.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr"
+      },
+      "base_coefficients": {},
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.75,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.5,
+        "gradient_ratio": 0.05
+      },
+      "ap82_changes": {
+        "selection": {
+          "anterior_fraction": 0.75,
+          "posterior_fraction": 0.5
+        }
+      },
+      "ap82_phase": 2
+    },
+    {
+      "id": "ap82_s2_winner_q75_75",
+      "family": "ap82_stage2",
+      "band": {
+        "kind": "regional",
+        "inner": 3,
+        "outer": 2,
+        "penalty": "brier",
+        "inside_weight": 0.5,
+        "hard_fraction": 0.25,
+        "hard_mix": 0.75,
+        "inside_fraction": 0.7,
+        "outside_fraction": 0.1,
+        "inside_hard_mix": 0.65,
+        "outside_hard_mix": 0.85
+      },
+      "pair": {
+        "distances": [
+          1,
+          3
+        ],
+        "weights": [
+          0.5,
+          0.5
+        ],
+        "support": "all",
+        "form": "independent"
+      },
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "w81_emphasis_qi70_qo10_mi65_mo85",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "winner",
+      "base_objective": {
+        "id": "w81_emphasis_qi70_qo10_mi65_mo85",
+        "family": "w81_side_emphasis",
+        "band": {
+          "kind": "regional",
+          "inner": 3,
+          "outer": 2,
+          "penalty": "brier",
+          "inside_weight": 0.5,
+          "hard_fraction": 0.25,
+          "hard_mix": 0.75,
+          "inside_fraction": 0.7,
+          "outside_fraction": 0.1,
+          "inside_hard_mix": 0.65,
+          "outside_hard_mix": 0.85
+        },
+        "pair": {
+          "distances": [
+            1,
+            3
+          ],
+          "weights": [
+            0.5,
+            0.5
+          ],
+          "support": "all",
+          "form": "independent"
+        },
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "a32_side_qi60_qo15_mix75",
+        "idea": "Separate inside/outside emphasis and cross it with supported nearby selection fractions.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr",
+        "objective_version": "winner_v1"
+      },
+      "base_coefficients": {
+        "bands": 0.032323425078637294,
+        "pair": 0.008503534232521521
+      },
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.75,
+        "posterior_fraction": 0.75,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.5,
+        "gradient_ratio": 0.05
+      },
+      "ap82_changes": {
+        "selection": {
+          "anterior_fraction": 0.75,
+          "posterior_fraction": 0.75
+        }
+      },
+      "ap82_phase": 2
+    },
+    {
+      "id": "ap82_s2_dice_q75_75",
+      "family": "ap82_stage2",
+      "band": {
+        "kind": "none"
+      },
+      "pair": null,
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "dice",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "dice",
+      "base_objective": {
+        "id": "dice",
+        "family": "control",
+        "band": {
+          "kind": "none"
+        },
+        "pair": null,
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "focus25",
+        "idea": "Fresh Dice-only control from the common prefix.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr"
+      },
+      "base_coefficients": {},
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.75,
+        "posterior_fraction": 0.75,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.5,
+        "gradient_ratio": 0.05
+      },
+      "ap82_changes": {
+        "selection": {
+          "anterior_fraction": 0.75,
+          "posterior_fraction": 0.75
+        }
+      },
+      "ap82_phase": 2
+    },
+    {
+      "id": "ap82_s2_winner_e50_75",
+      "family": "ap82_stage2",
+      "band": {
+        "kind": "regional",
+        "inner": 3,
+        "outer": 2,
+        "penalty": "brier",
+        "inside_weight": 0.5,
+        "hard_fraction": 0.25,
+        "hard_mix": 0.75,
+        "inside_fraction": 0.7,
+        "outside_fraction": 0.1,
+        "inside_hard_mix": 0.65,
+        "outside_hard_mix": 0.85
+      },
+      "pair": {
+        "distances": [
+          1,
+          3
+        ],
+        "weights": [
+          0.5,
+          0.5
+        ],
+        "support": "all",
+        "form": "independent"
+      },
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "w81_emphasis_qi70_qo10_mi65_mo85",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "winner",
+      "base_objective": {
+        "id": "w81_emphasis_qi70_qo10_mi65_mo85",
+        "family": "w81_side_emphasis",
+        "band": {
+          "kind": "regional",
+          "inner": 3,
+          "outer": 2,
+          "penalty": "brier",
+          "inside_weight": 0.5,
+          "hard_fraction": 0.25,
+          "hard_mix": 0.75,
+          "inside_fraction": 0.7,
+          "outside_fraction": 0.1,
+          "inside_hard_mix": 0.65,
+          "outside_hard_mix": 0.85
+        },
+        "pair": {
+          "distances": [
+            1,
+            3
+          ],
+          "weights": [
+            0.5,
+            0.5
+          ],
+          "support": "all",
+          "form": "independent"
+        },
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "a32_side_qi60_qo15_mix75",
+        "idea": "Separate inside/outside emphasis and cross it with supported nearby selection fractions.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr",
+        "objective_version": "winner_v1"
+      },
+      "base_coefficients": {
+        "bands": 0.032323425078637294,
+        "pair": 0.008503534232521521
+      },
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.75,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.5,
+        "gradient_ratio": 0.05
+      },
+      "ap82_changes": {
+        "emphasis": {
+          "anterior_emphasis": 0.5,
+          "posterior_emphasis": 0.75
+        }
+      },
+      "ap82_phase": 2
+    },
+    {
+      "id": "ap82_s2_dice_e50_75",
+      "family": "ap82_stage2",
+      "band": {
+        "kind": "none"
+      },
+      "pair": null,
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "dice",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "dice",
+      "base_objective": {
+        "id": "dice",
+        "family": "control",
+        "band": {
+          "kind": "none"
+        },
+        "pair": null,
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "focus25",
+        "idea": "Fresh Dice-only control from the common prefix.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr"
+      },
+      "base_coefficients": {},
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.75,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.5,
+        "gradient_ratio": 0.05
+      },
+      "ap82_changes": {
+        "emphasis": {
+          "anterior_emphasis": 0.5,
+          "posterior_emphasis": 0.75
+        }
+      },
+      "ap82_phase": 2
+    },
+    {
+      "id": "ap82_s2_winner_e50_90",
+      "family": "ap82_stage2",
+      "band": {
+        "kind": "regional",
+        "inner": 3,
+        "outer": 2,
+        "penalty": "brier",
+        "inside_weight": 0.5,
+        "hard_fraction": 0.25,
+        "hard_mix": 0.75,
+        "inside_fraction": 0.7,
+        "outside_fraction": 0.1,
+        "inside_hard_mix": 0.65,
+        "outside_hard_mix": 0.85
+      },
+      "pair": {
+        "distances": [
+          1,
+          3
+        ],
+        "weights": [
+          0.5,
+          0.5
+        ],
+        "support": "all",
+        "form": "independent"
+      },
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "w81_emphasis_qi70_qo10_mi65_mo85",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "winner",
+      "base_objective": {
+        "id": "w81_emphasis_qi70_qo10_mi65_mo85",
+        "family": "w81_side_emphasis",
+        "band": {
+          "kind": "regional",
+          "inner": 3,
+          "outer": 2,
+          "penalty": "brier",
+          "inside_weight": 0.5,
+          "hard_fraction": 0.25,
+          "hard_mix": 0.75,
+          "inside_fraction": 0.7,
+          "outside_fraction": 0.1,
+          "inside_hard_mix": 0.65,
+          "outside_hard_mix": 0.85
+        },
+        "pair": {
+          "distances": [
+            1,
+            3
+          ],
+          "weights": [
+            0.5,
+            0.5
+          ],
+          "support": "all",
+          "form": "independent"
+        },
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "a32_side_qi60_qo15_mix75",
+        "idea": "Separate inside/outside emphasis and cross it with supported nearby selection fractions.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr",
+        "objective_version": "winner_v1"
+      },
+      "base_coefficients": {
+        "bands": 0.032323425078637294,
+        "pair": 0.008503534232521521
+      },
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.9,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.5,
+        "gradient_ratio": 0.05
+      },
+      "ap82_changes": {
+        "emphasis": {
+          "anterior_emphasis": 0.5,
+          "posterior_emphasis": 0.9
+        }
+      },
+      "ap82_phase": 2
+    },
+    {
+      "id": "ap82_s2_dice_e50_90",
+      "family": "ap82_stage2",
+      "band": {
+        "kind": "none"
+      },
+      "pair": null,
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "dice",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "dice",
+      "base_objective": {
+        "id": "dice",
+        "family": "control",
+        "band": {
+          "kind": "none"
+        },
+        "pair": null,
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "focus25",
+        "idea": "Fresh Dice-only control from the common prefix.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr"
+      },
+      "base_coefficients": {},
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.9,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.5,
+        "gradient_ratio": 0.05
+      },
+      "ap82_changes": {
+        "emphasis": {
+          "anterior_emphasis": 0.5,
+          "posterior_emphasis": 0.9
+        }
+      },
+      "ap82_phase": 2
+    },
+    {
+      "id": "ap82_s2_winner_e75_50",
+      "family": "ap82_stage2",
+      "band": {
+        "kind": "regional",
+        "inner": 3,
+        "outer": 2,
+        "penalty": "brier",
+        "inside_weight": 0.5,
+        "hard_fraction": 0.25,
+        "hard_mix": 0.75,
+        "inside_fraction": 0.7,
+        "outside_fraction": 0.1,
+        "inside_hard_mix": 0.65,
+        "outside_hard_mix": 0.85
+      },
+      "pair": {
+        "distances": [
+          1,
+          3
+        ],
+        "weights": [
+          0.5,
+          0.5
+        ],
+        "support": "all",
+        "form": "independent"
+      },
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "w81_emphasis_qi70_qo10_mi65_mo85",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "winner",
+      "base_objective": {
+        "id": "w81_emphasis_qi70_qo10_mi65_mo85",
+        "family": "w81_side_emphasis",
+        "band": {
+          "kind": "regional",
+          "inner": 3,
+          "outer": 2,
+          "penalty": "brier",
+          "inside_weight": 0.5,
+          "hard_fraction": 0.25,
+          "hard_mix": 0.75,
+          "inside_fraction": 0.7,
+          "outside_fraction": 0.1,
+          "inside_hard_mix": 0.65,
+          "outside_hard_mix": 0.85
+        },
+        "pair": {
+          "distances": [
+            1,
+            3
+          ],
+          "weights": [
+            0.5,
+            0.5
+          ],
+          "support": "all",
+          "form": "independent"
+        },
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "a32_side_qi60_qo15_mix75",
+        "idea": "Separate inside/outside emphasis and cross it with supported nearby selection fractions.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr",
+        "objective_version": "winner_v1"
+      },
+      "base_coefficients": {
+        "bands": 0.032323425078637294,
+        "pair": 0.008503534232521521
+      },
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.75,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.5,
+        "gradient_ratio": 0.05
+      },
+      "ap82_changes": {
+        "emphasis": {
+          "anterior_emphasis": 0.75,
+          "posterior_emphasis": 0.5
+        }
+      },
+      "ap82_phase": 2
+    },
+    {
+      "id": "ap82_s2_dice_e75_50",
+      "family": "ap82_stage2",
+      "band": {
+        "kind": "none"
+      },
+      "pair": null,
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "dice",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "dice",
+      "base_objective": {
+        "id": "dice",
+        "family": "control",
+        "band": {
+          "kind": "none"
+        },
+        "pair": null,
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "focus25",
+        "idea": "Fresh Dice-only control from the common prefix.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr"
+      },
+      "base_coefficients": {},
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.75,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.5,
+        "gradient_ratio": 0.05
+      },
+      "ap82_changes": {
+        "emphasis": {
+          "anterior_emphasis": 0.75,
+          "posterior_emphasis": 0.5
+        }
+      },
+      "ap82_phase": 2
+    },
+    {
+      "id": "ap82_s2_winner_e75_75",
+      "family": "ap82_stage2",
+      "band": {
+        "kind": "regional",
+        "inner": 3,
+        "outer": 2,
+        "penalty": "brier",
+        "inside_weight": 0.5,
+        "hard_fraction": 0.25,
+        "hard_mix": 0.75,
+        "inside_fraction": 0.7,
+        "outside_fraction": 0.1,
+        "inside_hard_mix": 0.65,
+        "outside_hard_mix": 0.85
+      },
+      "pair": {
+        "distances": [
+          1,
+          3
+        ],
+        "weights": [
+          0.5,
+          0.5
+        ],
+        "support": "all",
+        "form": "independent"
+      },
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "w81_emphasis_qi70_qo10_mi65_mo85",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "winner",
+      "base_objective": {
+        "id": "w81_emphasis_qi70_qo10_mi65_mo85",
+        "family": "w81_side_emphasis",
+        "band": {
+          "kind": "regional",
+          "inner": 3,
+          "outer": 2,
+          "penalty": "brier",
+          "inside_weight": 0.5,
+          "hard_fraction": 0.25,
+          "hard_mix": 0.75,
+          "inside_fraction": 0.7,
+          "outside_fraction": 0.1,
+          "inside_hard_mix": 0.65,
+          "outside_hard_mix": 0.85
+        },
+        "pair": {
+          "distances": [
+            1,
+            3
+          ],
+          "weights": [
+            0.5,
+            0.5
+          ],
+          "support": "all",
+          "form": "independent"
+        },
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "a32_side_qi60_qo15_mix75",
+        "idea": "Separate inside/outside emphasis and cross it with supported nearby selection fractions.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr",
+        "objective_version": "winner_v1"
+      },
+      "base_coefficients": {
+        "bands": 0.032323425078637294,
+        "pair": 0.008503534232521521
+      },
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.75,
+        "posterior_emphasis": 0.75,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.5,
+        "gradient_ratio": 0.05
+      },
+      "ap82_changes": {
+        "emphasis": {
+          "anterior_emphasis": 0.75,
+          "posterior_emphasis": 0.75
+        }
+      },
+      "ap82_phase": 2
+    },
+    {
+      "id": "ap82_s2_dice_e75_75",
+      "family": "ap82_stage2",
+      "band": {
+        "kind": "none"
+      },
+      "pair": null,
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "dice",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "dice",
+      "base_objective": {
+        "id": "dice",
+        "family": "control",
+        "band": {
+          "kind": "none"
+        },
+        "pair": null,
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "focus25",
+        "idea": "Fresh Dice-only control from the common prefix.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr"
+      },
+      "base_coefficients": {},
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.75,
+        "posterior_emphasis": 0.75,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.5,
+        "gradient_ratio": 0.05
+      },
+      "ap82_changes": {
+        "emphasis": {
+          "anterior_emphasis": 0.75,
+          "posterior_emphasis": 0.75
+        }
+      },
+      "ap82_phase": 2
+    },
+    {
+      "id": "ap82_s2_winner_e75_90",
+      "family": "ap82_stage2",
+      "band": {
+        "kind": "regional",
+        "inner": 3,
+        "outer": 2,
+        "penalty": "brier",
+        "inside_weight": 0.5,
+        "hard_fraction": 0.25,
+        "hard_mix": 0.75,
+        "inside_fraction": 0.7,
+        "outside_fraction": 0.1,
+        "inside_hard_mix": 0.65,
+        "outside_hard_mix": 0.85
+      },
+      "pair": {
+        "distances": [
+          1,
+          3
+        ],
+        "weights": [
+          0.5,
+          0.5
+        ],
+        "support": "all",
+        "form": "independent"
+      },
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "w81_emphasis_qi70_qo10_mi65_mo85",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "winner",
+      "base_objective": {
+        "id": "w81_emphasis_qi70_qo10_mi65_mo85",
+        "family": "w81_side_emphasis",
+        "band": {
+          "kind": "regional",
+          "inner": 3,
+          "outer": 2,
+          "penalty": "brier",
+          "inside_weight": 0.5,
+          "hard_fraction": 0.25,
+          "hard_mix": 0.75,
+          "inside_fraction": 0.7,
+          "outside_fraction": 0.1,
+          "inside_hard_mix": 0.65,
+          "outside_hard_mix": 0.85
+        },
+        "pair": {
+          "distances": [
+            1,
+            3
+          ],
+          "weights": [
+            0.5,
+            0.5
+          ],
+          "support": "all",
+          "form": "independent"
+        },
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "a32_side_qi60_qo15_mix75",
+        "idea": "Separate inside/outside emphasis and cross it with supported nearby selection fractions.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr",
+        "objective_version": "winner_v1"
+      },
+      "base_coefficients": {
+        "bands": 0.032323425078637294,
+        "pair": 0.008503534232521521
+      },
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.75,
+        "posterior_emphasis": 0.9,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.5,
+        "gradient_ratio": 0.05
+      },
+      "ap82_changes": {
+        "emphasis": {
+          "anterior_emphasis": 0.75,
+          "posterior_emphasis": 0.9
+        }
+      },
+      "ap82_phase": 2
+    },
+    {
+      "id": "ap82_s2_dice_e75_90",
+      "family": "ap82_stage2",
+      "band": {
+        "kind": "none"
+      },
+      "pair": null,
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "dice",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "dice",
+      "base_objective": {
+        "id": "dice",
+        "family": "control",
+        "band": {
+          "kind": "none"
+        },
+        "pair": null,
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "focus25",
+        "idea": "Fresh Dice-only control from the common prefix.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr"
+      },
+      "base_coefficients": {},
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.75,
+        "posterior_emphasis": 0.9,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.5,
+        "gradient_ratio": 0.05
+      },
+      "ap82_changes": {
+        "emphasis": {
+          "anterior_emphasis": 0.75,
+          "posterior_emphasis": 0.9
+        }
+      },
+      "ap82_phase": 2
+    },
+    {
+      "id": "ap82_s2_winner_e90_50",
+      "family": "ap82_stage2",
+      "band": {
+        "kind": "regional",
+        "inner": 3,
+        "outer": 2,
+        "penalty": "brier",
+        "inside_weight": 0.5,
+        "hard_fraction": 0.25,
+        "hard_mix": 0.75,
+        "inside_fraction": 0.7,
+        "outside_fraction": 0.1,
+        "inside_hard_mix": 0.65,
+        "outside_hard_mix": 0.85
+      },
+      "pair": {
+        "distances": [
+          1,
+          3
+        ],
+        "weights": [
+          0.5,
+          0.5
+        ],
+        "support": "all",
+        "form": "independent"
+      },
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "w81_emphasis_qi70_qo10_mi65_mo85",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "winner",
+      "base_objective": {
+        "id": "w81_emphasis_qi70_qo10_mi65_mo85",
+        "family": "w81_side_emphasis",
+        "band": {
+          "kind": "regional",
+          "inner": 3,
+          "outer": 2,
+          "penalty": "brier",
+          "inside_weight": 0.5,
+          "hard_fraction": 0.25,
+          "hard_mix": 0.75,
+          "inside_fraction": 0.7,
+          "outside_fraction": 0.1,
+          "inside_hard_mix": 0.65,
+          "outside_hard_mix": 0.85
+        },
+        "pair": {
+          "distances": [
+            1,
+            3
+          ],
+          "weights": [
+            0.5,
+            0.5
+          ],
+          "support": "all",
+          "form": "independent"
+        },
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "a32_side_qi60_qo15_mix75",
+        "idea": "Separate inside/outside emphasis and cross it with supported nearby selection fractions.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr",
+        "objective_version": "winner_v1"
+      },
+      "base_coefficients": {
+        "bands": 0.032323425078637294,
+        "pair": 0.008503534232521521
+      },
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.9,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.5,
+        "gradient_ratio": 0.05
+      },
+      "ap82_changes": {
+        "emphasis": {
+          "anterior_emphasis": 0.9,
+          "posterior_emphasis": 0.5
+        }
+      },
+      "ap82_phase": 2
+    },
+    {
+      "id": "ap82_s2_dice_e90_50",
+      "family": "ap82_stage2",
+      "band": {
+        "kind": "none"
+      },
+      "pair": null,
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "dice",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "dice",
+      "base_objective": {
+        "id": "dice",
+        "family": "control",
+        "band": {
+          "kind": "none"
+        },
+        "pair": null,
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "focus25",
+        "idea": "Fresh Dice-only control from the common prefix.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr"
+      },
+      "base_coefficients": {},
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.9,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.5,
+        "gradient_ratio": 0.05
+      },
+      "ap82_changes": {
+        "emphasis": {
+          "anterior_emphasis": 0.9,
+          "posterior_emphasis": 0.5
+        }
+      },
+      "ap82_phase": 2
+    },
+    {
+      "id": "ap82_s2_winner_e90_75",
+      "family": "ap82_stage2",
+      "band": {
+        "kind": "regional",
+        "inner": 3,
+        "outer": 2,
+        "penalty": "brier",
+        "inside_weight": 0.5,
+        "hard_fraction": 0.25,
+        "hard_mix": 0.75,
+        "inside_fraction": 0.7,
+        "outside_fraction": 0.1,
+        "inside_hard_mix": 0.65,
+        "outside_hard_mix": 0.85
+      },
+      "pair": {
+        "distances": [
+          1,
+          3
+        ],
+        "weights": [
+          0.5,
+          0.5
+        ],
+        "support": "all",
+        "form": "independent"
+      },
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "w81_emphasis_qi70_qo10_mi65_mo85",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "winner",
+      "base_objective": {
+        "id": "w81_emphasis_qi70_qo10_mi65_mo85",
+        "family": "w81_side_emphasis",
+        "band": {
+          "kind": "regional",
+          "inner": 3,
+          "outer": 2,
+          "penalty": "brier",
+          "inside_weight": 0.5,
+          "hard_fraction": 0.25,
+          "hard_mix": 0.75,
+          "inside_fraction": 0.7,
+          "outside_fraction": 0.1,
+          "inside_hard_mix": 0.65,
+          "outside_hard_mix": 0.85
+        },
+        "pair": {
+          "distances": [
+            1,
+            3
+          ],
+          "weights": [
+            0.5,
+            0.5
+          ],
+          "support": "all",
+          "form": "independent"
+        },
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "a32_side_qi60_qo15_mix75",
+        "idea": "Separate inside/outside emphasis and cross it with supported nearby selection fractions.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr",
+        "objective_version": "winner_v1"
+      },
+      "base_coefficients": {
+        "bands": 0.032323425078637294,
+        "pair": 0.008503534232521521
+      },
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.9,
+        "posterior_emphasis": 0.75,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.5,
+        "gradient_ratio": 0.05
+      },
+      "ap82_changes": {
+        "emphasis": {
+          "anterior_emphasis": 0.9,
+          "posterior_emphasis": 0.75
+        }
+      },
+      "ap82_phase": 2
+    },
+    {
+      "id": "ap82_s2_dice_e90_75",
+      "family": "ap82_stage2",
+      "band": {
+        "kind": "none"
+      },
+      "pair": null,
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "dice",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "dice",
+      "base_objective": {
+        "id": "dice",
+        "family": "control",
+        "band": {
+          "kind": "none"
+        },
+        "pair": null,
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "focus25",
+        "idea": "Fresh Dice-only control from the common prefix.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr"
+      },
+      "base_coefficients": {},
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.9,
+        "posterior_emphasis": 0.75,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.5,
+        "gradient_ratio": 0.05
+      },
+      "ap82_changes": {
+        "emphasis": {
+          "anterior_emphasis": 0.9,
+          "posterior_emphasis": 0.75
+        }
+      },
+      "ap82_phase": 2
+    },
+    {
+      "id": "ap82_s2_winner_e90_90",
+      "family": "ap82_stage2",
+      "band": {
+        "kind": "regional",
+        "inner": 3,
+        "outer": 2,
+        "penalty": "brier",
+        "inside_weight": 0.5,
+        "hard_fraction": 0.25,
+        "hard_mix": 0.75,
+        "inside_fraction": 0.7,
+        "outside_fraction": 0.1,
+        "inside_hard_mix": 0.65,
+        "outside_hard_mix": 0.85
+      },
+      "pair": {
+        "distances": [
+          1,
+          3
+        ],
+        "weights": [
+          0.5,
+          0.5
+        ],
+        "support": "all",
+        "form": "independent"
+      },
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "w81_emphasis_qi70_qo10_mi65_mo85",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "winner",
+      "base_objective": {
+        "id": "w81_emphasis_qi70_qo10_mi65_mo85",
+        "family": "w81_side_emphasis",
+        "band": {
+          "kind": "regional",
+          "inner": 3,
+          "outer": 2,
+          "penalty": "brier",
+          "inside_weight": 0.5,
+          "hard_fraction": 0.25,
+          "hard_mix": 0.75,
+          "inside_fraction": 0.7,
+          "outside_fraction": 0.1,
+          "inside_hard_mix": 0.65,
+          "outside_hard_mix": 0.85
+        },
+        "pair": {
+          "distances": [
+            1,
+            3
+          ],
+          "weights": [
+            0.5,
+            0.5
+          ],
+          "support": "all",
+          "form": "independent"
+        },
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "a32_side_qi60_qo15_mix75",
+        "idea": "Separate inside/outside emphasis and cross it with supported nearby selection fractions.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr",
+        "objective_version": "winner_v1"
+      },
+      "base_coefficients": {
+        "bands": 0.032323425078637294,
+        "pair": 0.008503534232521521
+      },
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.9,
+        "posterior_emphasis": 0.9,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.5,
+        "gradient_ratio": 0.05
+      },
+      "ap82_changes": {
+        "emphasis": {
+          "anterior_emphasis": 0.9,
+          "posterior_emphasis": 0.9
+        }
+      },
+      "ap82_phase": 2
+    },
+    {
+      "id": "ap82_s2_dice_e90_90",
+      "family": "ap82_stage2",
+      "band": {
+        "kind": "none"
+      },
+      "pair": null,
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "dice",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "dice",
+      "base_objective": {
+        "id": "dice",
+        "family": "control",
+        "band": {
+          "kind": "none"
+        },
+        "pair": null,
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "focus25",
+        "idea": "Fresh Dice-only control from the common prefix.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr"
+      },
+      "base_coefficients": {},
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.9,
+        "posterior_emphasis": 0.9,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.5,
+        "gradient_ratio": 0.05
+      },
+      "ap82_changes": {
+        "emphasis": {
+          "anterior_emphasis": 0.9,
+          "posterior_emphasis": 0.9
+        }
+      },
+      "ap82_phase": 2
+    },
+    {
+      "id": "ap82_s2_winner_m40",
+      "family": "ap82_stage2",
+      "band": {
+        "kind": "regional",
+        "inner": 3,
+        "outer": 2,
+        "penalty": "brier",
+        "inside_weight": 0.5,
+        "hard_fraction": 0.25,
+        "hard_mix": 0.75,
+        "inside_fraction": 0.7,
+        "outside_fraction": 0.1,
+        "inside_hard_mix": 0.65,
+        "outside_hard_mix": 0.85
+      },
+      "pair": {
+        "distances": [
+          1,
+          3
+        ],
+        "weights": [
+          0.5,
+          0.5
+        ],
+        "support": "all",
+        "form": "independent"
+      },
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "w81_emphasis_qi70_qo10_mi65_mo85",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "winner",
+      "base_objective": {
+        "id": "w81_emphasis_qi70_qo10_mi65_mo85",
+        "family": "w81_side_emphasis",
+        "band": {
+          "kind": "regional",
+          "inner": 3,
+          "outer": 2,
+          "penalty": "brier",
+          "inside_weight": 0.5,
+          "hard_fraction": 0.25,
+          "hard_mix": 0.75,
+          "inside_fraction": 0.7,
+          "outside_fraction": 0.1,
+          "inside_hard_mix": 0.65,
+          "outside_hard_mix": 0.85
+        },
+        "pair": {
+          "distances": [
+            1,
+            3
+          ],
+          "weights": [
+            0.5,
+            0.5
+          ],
+          "support": "all",
+          "form": "independent"
+        },
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "a32_side_qi60_qo15_mix75",
+        "idea": "Separate inside/outside emphasis and cross it with supported nearby selection fractions.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr",
+        "objective_version": "winner_v1"
+      },
+      "base_coefficients": {
+        "bands": 0.032323425078637294,
+        "pair": 0.008503534232521521
+      },
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.4,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.5,
+        "gradient_ratio": 0.05
+      },
+      "ap82_changes": {
+        "mass": {
+          "anterior_mass": 0.4
+        }
+      },
+      "ap82_phase": 2
+    },
+    {
+      "id": "ap82_s2_dice_m40",
+      "family": "ap82_stage2",
+      "band": {
+        "kind": "none"
+      },
+      "pair": null,
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "dice",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "dice",
+      "base_objective": {
+        "id": "dice",
+        "family": "control",
+        "band": {
+          "kind": "none"
+        },
+        "pair": null,
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "focus25",
+        "idea": "Fresh Dice-only control from the common prefix.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr"
+      },
+      "base_coefficients": {},
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.4,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.5,
+        "gradient_ratio": 0.05
+      },
+      "ap82_changes": {
+        "mass": {
+          "anterior_mass": 0.4
+        }
+      },
+      "ap82_phase": 2
+    },
+    {
+      "id": "ap82_s2_winner_m60",
+      "family": "ap82_stage2",
+      "band": {
+        "kind": "regional",
+        "inner": 3,
+        "outer": 2,
+        "penalty": "brier",
+        "inside_weight": 0.5,
+        "hard_fraction": 0.25,
+        "hard_mix": 0.75,
+        "inside_fraction": 0.7,
+        "outside_fraction": 0.1,
+        "inside_hard_mix": 0.65,
+        "outside_hard_mix": 0.85
+      },
+      "pair": {
+        "distances": [
+          1,
+          3
+        ],
+        "weights": [
+          0.5,
+          0.5
+        ],
+        "support": "all",
+        "form": "independent"
+      },
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "w81_emphasis_qi70_qo10_mi65_mo85",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "winner",
+      "base_objective": {
+        "id": "w81_emphasis_qi70_qo10_mi65_mo85",
+        "family": "w81_side_emphasis",
+        "band": {
+          "kind": "regional",
+          "inner": 3,
+          "outer": 2,
+          "penalty": "brier",
+          "inside_weight": 0.5,
+          "hard_fraction": 0.25,
+          "hard_mix": 0.75,
+          "inside_fraction": 0.7,
+          "outside_fraction": 0.1,
+          "inside_hard_mix": 0.65,
+          "outside_hard_mix": 0.85
+        },
+        "pair": {
+          "distances": [
+            1,
+            3
+          ],
+          "weights": [
+            0.5,
+            0.5
+          ],
+          "support": "all",
+          "form": "independent"
+        },
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "a32_side_qi60_qo15_mix75",
+        "idea": "Separate inside/outside emphasis and cross it with supported nearby selection fractions.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr",
+        "objective_version": "winner_v1"
+      },
+      "base_coefficients": {
+        "bands": 0.032323425078637294,
+        "pair": 0.008503534232521521
+      },
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.6,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.5,
+        "gradient_ratio": 0.05
+      },
+      "ap82_changes": {
+        "mass": {
+          "anterior_mass": 0.6
+        }
+      },
+      "ap82_phase": 2
+    },
+    {
+      "id": "ap82_s2_dice_m60",
+      "family": "ap82_stage2",
+      "band": {
+        "kind": "none"
+      },
+      "pair": null,
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "dice",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "dice",
+      "base_objective": {
+        "id": "dice",
+        "family": "control",
+        "band": {
+          "kind": "none"
+        },
+        "pair": null,
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "focus25",
+        "idea": "Fresh Dice-only control from the common prefix.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr"
+      },
+      "base_coefficients": {},
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.6,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.5,
+        "gradient_ratio": 0.05
+      },
+      "ap82_changes": {
+        "mass": {
+          "anterior_mass": 0.6
+        }
+      },
+      "ap82_phase": 2
+    },
+    {
+      "id": "ap82_s2_winner_d25",
+      "family": "ap82_stage2",
+      "band": {
+        "kind": "regional",
+        "inner": 3,
+        "outer": 2,
+        "penalty": "brier",
+        "inside_weight": 0.5,
+        "hard_fraction": 0.25,
+        "hard_mix": 0.75,
+        "inside_fraction": 0.7,
+        "outside_fraction": 0.1,
+        "inside_hard_mix": 0.65,
+        "outside_hard_mix": 0.85
+      },
+      "pair": {
+        "distances": [
+          1,
+          3
+        ],
+        "weights": [
+          0.5,
+          0.5
+        ],
+        "support": "all",
+        "form": "independent"
+      },
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "w81_emphasis_qi70_qo10_mi65_mo85",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "winner",
+      "base_objective": {
+        "id": "w81_emphasis_qi70_qo10_mi65_mo85",
+        "family": "w81_side_emphasis",
+        "band": {
+          "kind": "regional",
+          "inner": 3,
+          "outer": 2,
+          "penalty": "brier",
+          "inside_weight": 0.5,
+          "hard_fraction": 0.25,
+          "hard_mix": 0.75,
+          "inside_fraction": 0.7,
+          "outside_fraction": 0.1,
+          "inside_hard_mix": 0.65,
+          "outside_hard_mix": 0.85
+        },
+        "pair": {
+          "distances": [
+            1,
+            3
+          ],
+          "weights": [
+            0.5,
+            0.5
+          ],
+          "support": "all",
+          "form": "independent"
+        },
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "a32_side_qi60_qo15_mix75",
+        "idea": "Separate inside/outside emphasis and cross it with supported nearby selection fractions.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr",
+        "objective_version": "winner_v1"
+      },
+      "base_coefficients": {
+        "bands": 0.032323425078637294,
+        "pair": 0.008503534232521521
+      },
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.25,
+          0.75
+        ],
+        "band_share": 0.5,
+        "gradient_ratio": 0.05
+      },
+      "ap82_changes": {
+        "distance": {
+          "endpoint_weights": [
+            0.25,
+            0.75
+          ]
+        }
+      },
+      "ap82_phase": 2
+    },
+    {
+      "id": "ap82_s2_dice_d25",
+      "family": "ap82_stage2",
+      "band": {
+        "kind": "none"
+      },
+      "pair": null,
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "dice",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "dice",
+      "base_objective": {
+        "id": "dice",
+        "family": "control",
+        "band": {
+          "kind": "none"
+        },
+        "pair": null,
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "focus25",
+        "idea": "Fresh Dice-only control from the common prefix.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr"
+      },
+      "base_coefficients": {},
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.25,
+          0.75
+        ],
+        "band_share": 0.5,
+        "gradient_ratio": 0.05
+      },
+      "ap82_changes": {
+        "distance": {
+          "endpoint_weights": [
+            0.25,
+            0.75
+          ]
+        }
+      },
+      "ap82_phase": 2
+    },
+    {
+      "id": "ap82_s2_winner_d75",
+      "family": "ap82_stage2",
+      "band": {
+        "kind": "regional",
+        "inner": 3,
+        "outer": 2,
+        "penalty": "brier",
+        "inside_weight": 0.5,
+        "hard_fraction": 0.25,
+        "hard_mix": 0.75,
+        "inside_fraction": 0.7,
+        "outside_fraction": 0.1,
+        "inside_hard_mix": 0.65,
+        "outside_hard_mix": 0.85
+      },
+      "pair": {
+        "distances": [
+          1,
+          3
+        ],
+        "weights": [
+          0.5,
+          0.5
+        ],
+        "support": "all",
+        "form": "independent"
+      },
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "w81_emphasis_qi70_qo10_mi65_mo85",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "winner",
+      "base_objective": {
+        "id": "w81_emphasis_qi70_qo10_mi65_mo85",
+        "family": "w81_side_emphasis",
+        "band": {
+          "kind": "regional",
+          "inner": 3,
+          "outer": 2,
+          "penalty": "brier",
+          "inside_weight": 0.5,
+          "hard_fraction": 0.25,
+          "hard_mix": 0.75,
+          "inside_fraction": 0.7,
+          "outside_fraction": 0.1,
+          "inside_hard_mix": 0.65,
+          "outside_hard_mix": 0.85
+        },
+        "pair": {
+          "distances": [
+            1,
+            3
+          ],
+          "weights": [
+            0.5,
+            0.5
+          ],
+          "support": "all",
+          "form": "independent"
+        },
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "a32_side_qi60_qo15_mix75",
+        "idea": "Separate inside/outside emphasis and cross it with supported nearby selection fractions.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr",
+        "objective_version": "winner_v1"
+      },
+      "base_coefficients": {
+        "bands": 0.032323425078637294,
+        "pair": 0.008503534232521521
+      },
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.75,
+          0.25
+        ],
+        "band_share": 0.5,
+        "gradient_ratio": 0.05
+      },
+      "ap82_changes": {
+        "distance": {
+          "endpoint_weights": [
+            0.75,
+            0.25
+          ]
+        }
+      },
+      "ap82_phase": 2
+    },
+    {
+      "id": "ap82_s2_dice_d75",
+      "family": "ap82_stage2",
+      "band": {
+        "kind": "none"
+      },
+      "pair": null,
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "dice",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "dice",
+      "base_objective": {
+        "id": "dice",
+        "family": "control",
+        "band": {
+          "kind": "none"
+        },
+        "pair": null,
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "focus25",
+        "idea": "Fresh Dice-only control from the common prefix.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr"
+      },
+      "base_coefficients": {},
+      "ap82": {
+        "width": 3.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.75,
+          0.25
+        ],
+        "band_share": 0.5,
+        "gradient_ratio": 0.05
+      },
+      "ap82_changes": {
+        "distance": {
+          "endpoint_weights": [
+            0.75,
+            0.25
+          ]
+        }
+      },
+      "ap82_phase": 2
+    },
+    {
+      "id": "ap82_s2_winner_w1",
+      "family": "ap82_stage2",
+      "band": {
+        "kind": "regional",
+        "inner": 3,
+        "outer": 2,
+        "penalty": "brier",
+        "inside_weight": 0.5,
+        "hard_fraction": 0.25,
+        "hard_mix": 0.75,
+        "inside_fraction": 0.7,
+        "outside_fraction": 0.1,
+        "inside_hard_mix": 0.65,
+        "outside_hard_mix": 0.85
+      },
+      "pair": {
+        "distances": [
+          1,
+          3
+        ],
+        "weights": [
+          0.5,
+          0.5
+        ],
+        "support": "all",
+        "form": "independent"
+      },
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "w81_emphasis_qi70_qo10_mi65_mo85",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "winner",
+      "base_objective": {
+        "id": "w81_emphasis_qi70_qo10_mi65_mo85",
+        "family": "w81_side_emphasis",
+        "band": {
+          "kind": "regional",
+          "inner": 3,
+          "outer": 2,
+          "penalty": "brier",
+          "inside_weight": 0.5,
+          "hard_fraction": 0.25,
+          "hard_mix": 0.75,
+          "inside_fraction": 0.7,
+          "outside_fraction": 0.1,
+          "inside_hard_mix": 0.65,
+          "outside_hard_mix": 0.85
+        },
+        "pair": {
+          "distances": [
+            1,
+            3
+          ],
+          "weights": [
+            0.5,
+            0.5
+          ],
+          "support": "all",
+          "form": "independent"
+        },
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "a32_side_qi60_qo15_mix75",
+        "idea": "Separate inside/outside emphasis and cross it with supported nearby selection fractions.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr",
+        "objective_version": "winner_v1"
+      },
+      "base_coefficients": {
+        "bands": 0.032323425078637294,
+        "pair": 0.008503534232521521
+      },
+      "ap82": {
+        "width": 1.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.5,
+        "gradient_ratio": 0.05
+      },
+      "ap82_changes": {
+        "width": {
+          "width": 1.0
+        }
+      },
+      "ap82_phase": 2
+    },
+    {
+      "id": "ap82_s2_dice_w1",
+      "family": "ap82_stage2",
+      "band": {
+        "kind": "none"
+      },
+      "pair": null,
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "dice",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "dice",
+      "base_objective": {
+        "id": "dice",
+        "family": "control",
+        "band": {
+          "kind": "none"
+        },
+        "pair": null,
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "focus25",
+        "idea": "Fresh Dice-only control from the common prefix.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr"
+      },
+      "base_coefficients": {},
+      "ap82": {
+        "width": 1.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.5,
+        "gradient_ratio": 0.05
+      },
+      "ap82_changes": {
+        "width": {
+          "width": 1.0
+        }
+      },
+      "ap82_phase": 2
+    },
+    {
+      "id": "ap82_s2_winner_w2",
+      "family": "ap82_stage2",
+      "band": {
+        "kind": "regional",
+        "inner": 3,
+        "outer": 2,
+        "penalty": "brier",
+        "inside_weight": 0.5,
+        "hard_fraction": 0.25,
+        "hard_mix": 0.75,
+        "inside_fraction": 0.7,
+        "outside_fraction": 0.1,
+        "inside_hard_mix": 0.65,
+        "outside_hard_mix": 0.85
+      },
+      "pair": {
+        "distances": [
+          1,
+          3
+        ],
+        "weights": [
+          0.5,
+          0.5
+        ],
+        "support": "all",
+        "form": "independent"
+      },
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "w81_emphasis_qi70_qo10_mi65_mo85",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "winner",
+      "base_objective": {
+        "id": "w81_emphasis_qi70_qo10_mi65_mo85",
+        "family": "w81_side_emphasis",
+        "band": {
+          "kind": "regional",
+          "inner": 3,
+          "outer": 2,
+          "penalty": "brier",
+          "inside_weight": 0.5,
+          "hard_fraction": 0.25,
+          "hard_mix": 0.75,
+          "inside_fraction": 0.7,
+          "outside_fraction": 0.1,
+          "inside_hard_mix": 0.65,
+          "outside_hard_mix": 0.85
+        },
+        "pair": {
+          "distances": [
+            1,
+            3
+          ],
+          "weights": [
+            0.5,
+            0.5
+          ],
+          "support": "all",
+          "form": "independent"
+        },
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "a32_side_qi60_qo15_mix75",
+        "idea": "Separate inside/outside emphasis and cross it with supported nearby selection fractions.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr",
+        "objective_version": "winner_v1"
+      },
+      "base_coefficients": {
+        "bands": 0.032323425078637294,
+        "pair": 0.008503534232521521
+      },
+      "ap82": {
+        "width": 2.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.5,
+        "gradient_ratio": 0.05
+      },
+      "ap82_changes": {
+        "width": {
+          "width": 2.0
+        }
+      },
+      "ap82_phase": 2
+    },
+    {
+      "id": "ap82_s2_dice_w2",
+      "family": "ap82_stage2",
+      "band": {
+        "kind": "none"
+      },
+      "pair": null,
+      "surface": null,
+      "ap": null,
+      "ap_ce": null,
+      "band_budget": 1.0,
+      "extra_budget": 1.0,
+      "extra_shares": null,
+      "focus_schedule": null,
+      "training": null,
+      "compare": "dice",
+      "idea": "Training-label A/P bands and independent endpoints; fixed background objective.",
+      "fraction": "5pct",
+      "seed": 0,
+      "arm": "ordinary_swinunetr",
+      "objective_version": "ap_boundary_v1",
+      "background": "dice",
+      "base_objective": {
+        "id": "dice",
+        "family": "control",
+        "band": {
+          "kind": "none"
+        },
+        "pair": null,
+        "surface": null,
+        "ap": null,
+        "ap_ce": null,
+        "band_budget": 1.0,
+        "extra_budget": 1.0,
+        "extra_shares": null,
+        "focus_schedule": null,
+        "training": null,
+        "compare": "focus25",
+        "idea": "Fresh Dice-only control from the common prefix.",
+        "fraction": "5pct",
+        "seed": 0,
+        "arm": "ordinary_swinunetr"
+      },
+      "base_coefficients": {},
+      "ap82": {
+        "width": 2.0,
+        "anterior_fraction": 0.5,
+        "posterior_fraction": 0.5,
+        "anterior_emphasis": 0.5,
+        "posterior_emphasis": 0.5,
+        "anterior_mass": 0.5,
+        "endpoint_weights": [
+          0.5,
+          0.5
+        ],
+        "band_share": 0.5,
+        "gradient_ratio": 0.05
+      },
+      "ap82_changes": {
+        "width": {
+          "width": 2.0
+        }
+      },
+      "ap82_phase": 2
+    }
+  ],
+  "stage2_parent_rule": "Best mixed stage-one arm on the winner background, macro Dice then HD95 then ID; mirror exact AP settings across backgrounds.",
+  "stage3_max": 32,
+  "stage3_rule": "Best change per factor must improve the stage-one mixed parent by >=0.0005 macro Dice; require >=2 factors; at most 16 joint configurations mirrored on both backgrounds.",
+  "fixed_training": {
+    "fold": 0,
+    "seed": 0,
+    "fraction": "5pct",
+    "max_epochs": 75,
+    "step_size": 20,
+    "warmup_epochs": 5,
+    "ramp_epochs": [
+      6,
+      10
+    ],
+    "auxiliary_branch": false
+  },
+  "geometry": "Use existing original A/P labels. Native foreground only. Independent endpoints at 1 and 3 mm pair separations, preserving the class along each path. No fitted plane and no validation-label model input.",
+  "calibration": "Freeze background coefficients; independently normalize AP band and pair gradients, apply shares, jointly calibrate the AP sum at 0.025/0.05/0.10 relative to full background loss with p95 cap 0.5. Training data only.",
+  "queue_order": "Thirty AP mechanism/strength runs first, selected unfinished outer-loss runs, forty-four AP block refinements, then supported bounded interactions."
+}

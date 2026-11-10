@@ -1,0 +1,39 @@
+{
+  "command": [
+    "sbatch",
+    "--parsable",
+    "--output=/mnt/beegfsstudents/home/3160552/depth_swinunetr_fold0_seed0_20261006_01/slurm-%j.out",
+    "--error=/mnt/beegfsstudents/home/3160552/depth_swinunetr_fold0_seed0_20261006_01/slurm-%j.err",
+    "--dependency=afterany:685757",
+    "/mnt/beegfsstudents/home/3160552/depth_swinunetr_fold0_seed0_20261006_01/source/scripts/depth_supervision/run.sh",
+    "/mnt/beegfsstudents/home/3160552/depth_swinunetr_fold0_seed0_20261006_01"
+  ],
+  "queue_before_submission": [
+    "685757|RUNNING|hippo-four-six-31976"
+  ],
+  "quota_before_submission": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  55.09GiB/93.13GiB  155.70k/\u221e  \n\n",
+  "requested_at_unix": 1791282801.0669932,
+  "protocol_sha256": "6703dcf343c8a061f9b218c92194c086da8bdbdba9f0ed4dab5c18d273db8bc4",
+  "root": "/mnt/beegfsstudents/home/3160552/depth_swinunetr_fold0_seed0_20261006_01",
+  "runs": 8,
+  "arms": [
+    "dice",
+    "depth",
+    "depth_sdf3d",
+    "depth_sdf_layer"
+  ],
+  "fractions": [
+    "5pct",
+    "full"
+  ],
+  "fold": 0,
+  "seed": 0,
+  "max_epochs": 75,
+  "dependencies": [
+    "685757"
+  ],
+  "returncode": 0,
+  "stdout": "685816\n",
+  "stderr": "",
+  "job_id": "685816"
+}

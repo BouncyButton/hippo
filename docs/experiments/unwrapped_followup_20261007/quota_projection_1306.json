@@ -1,0 +1,147 @@
+{
+  "checked_unix": 1791371170.8158393,
+  "progress": {
+    "status": "training",
+    "completed": 35,
+    "failed": 0,
+    "total": 44,
+    "current_index": 36,
+    "model": "basic_unet16",
+    "objective": "dice_bands_edge_sdf"
+  },
+  "completed": 35,
+  "remaining_by_model": {
+    "basic_unet16": 9
+  },
+  "first_job_total_du_kib": 13735986,
+  "per_model": {
+    "nnunet": {
+      "exports": 11,
+      "retained_gib": 4.024882691912353,
+      "max_per_run_mib": 374.6897382736206,
+      "max_allocated_per_run_mib": 374.693359375,
+      "estimated_all_11_gib": 4.025026321411133
+    },
+    "swinunetr": {
+      "exports": 11,
+      "retained_gib": 1.4429665729403496,
+      "max_per_run_mib": 134.33690547943115,
+      "max_allocated_per_run_mib": 134.34033203125,
+      "estimated_all_11_gib": 1.4431090354919434
+    },
+    "unetr_vit_b16": {
+      "exports": 11,
+      "retained_gib": 7.5981223583221436,
+      "max_per_run_mib": 707.325758934021,
+      "max_allocated_per_run_mib": 707.3291015625,
+      "estimated_all_11_gib": 7.598261833190918
+    },
+    "basic_unet16": {
+      "exports": 2,
+      "retained_gib": 0.02164727170020342,
+      "max_per_run_mib": 11.084258079528809,
+      "max_allocated_per_run_mib": 11.08837890625,
+      "estimated_all_11_gib": 0.11911344528198242
+    }
+  },
+  "first_job_projected_export_total_gib": 13.185510635375977,
+  "first_job_remaining_estimate_gib": 0.09745645523071289,
+  "followup_previous_run_measurements": [
+    {
+      "fraction": "5pct",
+      "arm": "depth",
+      "best_bytes": 70413313,
+      "total_bytes": 70614528,
+      "allocated": 70616576,
+      "predictions_bytes": 74845
+    },
+    {
+      "fraction": "full",
+      "arm": "depth",
+      "best_bytes": 70420161,
+      "total_bytes": 70610357,
+      "allocated": 70611968,
+      "predictions_bytes": 65561
+    },
+    {
+      "fraction": "5pct",
+      "arm": "plane_position",
+      "best_bytes": 70510661,
+      "total_bytes": 70696085,
+      "allocated": 70697984,
+      "predictions_bytes": 65730
+    },
+    {
+      "fraction": "full",
+      "arm": "plane_position",
+      "best_bytes": 70517893,
+      "total_bytes": 70710284,
+      "allocated": 70711296,
+      "predictions_bytes": 66484
+    },
+    {
+      "fraction": "5pct",
+      "arm": "unfold_position",
+      "best_bytes": 70510661,
+      "total_bytes": 70695676,
+      "allocated": 70696960,
+      "predictions_bytes": 65371
+    },
+    {
+      "fraction": "full",
+      "arm": "unfold_position",
+      "best_bytes": 70517893,
+      "total_bytes": 70710233,
+      "allocated": 70711296,
+      "predictions_bytes": 66150
+    },
+    {
+      "fraction": "5pct",
+      "arm": "plane_attention",
+      "best_bytes": 70515769,
+      "total_bytes": 70700988,
+      "allocated": 70702592,
+      "predictions_bytes": 65441
+    },
+    {
+      "fraction": "full",
+      "arm": "plane_attention",
+      "best_bytes": 70523065,
+      "total_bytes": 70714378,
+      "allocated": 70715904,
+      "predictions_bytes": 66086
+    },
+    {
+      "fraction": "5pct",
+      "arm": "unfold_attention",
+      "best_bytes": 70515769,
+      "total_bytes": 70700467,
+      "allocated": 70702080,
+      "predictions_bytes": 64984
+    },
+    {
+      "fraction": "full",
+      "arm": "unfold_attention",
+      "best_bytes": 70523065,
+      "total_bytes": 70715218,
+      "allocated": 70716416,
+      "predictions_bytes": 65591
+    }
+  ],
+  "followup_24_retained_run_upper_gib": 1.5806350708007812,
+  "quota": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  81.25GiB/93.13GiB  168.10k/∞  \n\n",
+  "queue": "687700|PENDING|hippo-unfold-followup|(Dependency)\n687658|RUNNING|hippo-cap-depth-retry|gnode01\n",
+  "assessment": {
+    "free_gib": 11.88,
+    "first_job_expected_final_gib": 13.2,
+    "first_job_remaining_allowance_gib": 0.2,
+    "followup_expected_peak_additional_gib": [
+      2,
+      3
+    ],
+    "followup_conservative_allowance_gib": 6,
+    "free_after_both_using_conservative_allowances_gib": 5.68,
+    "cleanup_needed": false,
+    "basis": "Measured current retained files and unchanged saving policies; excludes unrelated future storage growth."
+  }
+}

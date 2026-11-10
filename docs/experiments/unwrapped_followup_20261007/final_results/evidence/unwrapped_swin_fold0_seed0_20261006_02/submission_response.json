@@ -1,0 +1,47 @@
+{
+  "command": [
+    "sbatch",
+    "--parsable",
+    "--output=/mnt/beegfsstudents/home/3160552/unwrapped_swin_fold0_seed0_20261006_02/slurm-%j.out",
+    "--error=/mnt/beegfsstudents/home/3160552/unwrapped_swin_fold0_seed0_20261006_02/slurm-%j.err",
+    "/mnt/beegfsstudents/home/3160552/unwrapped_swin_fold0_seed0_20261006_02/source/scripts/unwrapped_swin/run.sh",
+    "/mnt/beegfsstudents/home/3160552/unwrapped_swin_fold0_seed0_20261006_02"
+  ],
+  "queue_before_submission": [],
+  "quota_before_submission": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  89.22GiB/93.13GiB  166.04k/\u221e  \n\n",
+  "requested_at_unix": 1791304736.9439023,
+  "protocol_sha256": "7c2463217b51e39399a32f580e6b3dc7f4907a6460cdc20c23626221115c9fa0",
+  "root": "/mnt/beegfsstudents/home/3160552/unwrapped_swin_fold0_seed0_20261006_02",
+  "runs": 20,
+  "preparation_runs": 4,
+  "arms": [
+    "dice",
+    "depth",
+    "plane_local",
+    "unfold_local",
+    "plane_context",
+    "unfold_context",
+    "plane_position",
+    "unfold_position",
+    "plane_attention",
+    "unfold_attention"
+  ],
+  "fractions": [
+    "5pct",
+    "full"
+  ],
+  "completed_main_runs_reused": 3,
+  "completed_guides_reused": 2,
+  "interrupted_runs_resumed": [
+    "runs/full/depth"
+  ],
+  "remaining_main_runs": 17,
+  "minimum_free_gib": 3.5,
+  "fold": 0,
+  "seed": 0,
+  "max_epochs": 75,
+  "dependencies": [],
+  "returncode": 0,
+  "stdout": "686515\n",
+  "stderr": ""
+}
