@@ -54,7 +54,7 @@ def notebook(package_sha, summary, seed_sha):
         ('e0b87c00231bb355aa66531f6684c361a632b3f8e393f6afbfb4939a37d0caeb', derivation.PARENT_SHA),
     ]
     # Apply seed1 exclusion before translating seed4 to seed20 (avoid prefix matches).
-    substitutions = [x for x in substitutions if x[0] not in ('seed 2','Seed 2','seed2')] 
+    substitutions = [x for x in substitutions if x[0] not in ('seed 2','Seed 2','seed2')]
     for cell in book['cells']:
         s = cell['source'].replace('seed 2', 'seed 1').replace('Seed 2', 'Seed 1').replace('seed2', 'seed1').replace('Seed2 ', 'Seed1 ')
         for old, new in substitutions:

@@ -211,4 +211,3 @@ class EvaluationAudit:
         if self.slice == self.depth:
             self.save()
         return result
-

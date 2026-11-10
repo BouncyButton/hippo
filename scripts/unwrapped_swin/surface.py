@@ -170,4 +170,3 @@ def flatten(mesh, long_axis):
         area_ratio_p05=float(np.percentile(ratio, 5)), area_ratio_p95=float(np.percentile(ratio, 95)),
         original_area_mm2=float(mesh.area), flat_area=float(signed.sum()),
     )
-

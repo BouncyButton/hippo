@@ -59,7 +59,7 @@ def report():
     complete=len(rows)==plan['num_runs'] and all(r['cleanup_status']=='complete' for r in rows)
     result=dict(status='complete' if complete else 'partial',completed=len(rows),total=plan['num_runs'],runs=rows,
         released_bytes=sum(r['released_bytes'] for r in rows),primary_checkpoint='final_update',augmentation='none',folds=[0,1,3],seeds=[0,1,2])
-    
+
     from statistics import mean, stdev
     aggregates=[]
     for arm in dict.fromkeys(t['arm'] for t in plan['tasks']):

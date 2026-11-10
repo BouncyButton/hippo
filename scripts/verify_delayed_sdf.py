@@ -111,4 +111,3 @@ def verify_run(root, identity, arm, directory):
             'completion_sha256': digest(output / 'completion.json'),
             'validation_latest_sha256': digest(output / 'validation_latest.json'),
             'runtime_recipe_sha256': digest(output / 'runtime_recipe.json')}
-

@@ -62,4 +62,3 @@ def evaluate(model, patients, device, *, geometry_cache=None, atlas_cache=None, 
         with Path(predictions_path).open('wb') as stream:
             np.savez_compressed(stream, **exported)
     return {'summary': summary, 'cases': rows}
-

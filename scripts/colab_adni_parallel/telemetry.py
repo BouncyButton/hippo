@@ -128,4 +128,3 @@ def directories(path):
             return {e.name for e in entries if e.is_dir(follow_symlinks=False) or e.is_symlink()}
     except FileNotFoundError:
         return set()
-
