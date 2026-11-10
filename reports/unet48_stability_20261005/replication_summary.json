@@ -1,0 +1,51 @@
+{
+  "status": "all_seeds_complete",
+  "results": [
+    {
+      "seed": 0,
+      "first_both_foreground_70_updates": 200,
+      "final_macro_dice": 0.8472691648281537,
+      "final_anterior_dice": 0.8541726080270914,
+      "final_posterior_dice": 0.8403657216292161,
+      "maximum_late_macro_regression": 0.005218911056335096,
+      "completion_sha256": "223a4bad454f5f2098d02d6f4607b0602bafad759ead1832fdbd9dec0d432568"
+    },
+    {
+      "seed": 1,
+      "first_both_foreground_70_updates": 300,
+      "final_macro_dice": 0.8469403437696971,
+      "final_anterior_dice": 0.8544516001756375,
+      "final_posterior_dice": 0.8394290873637567,
+      "maximum_late_macro_regression": 0.004038730492958553,
+      "completion_sha256": "28fb440cd581e679a68bca4f16a81f7d6022c0d2b5eab58b50e1cb0aad2360da"
+    },
+    {
+      "seed": 2,
+      "first_both_foreground_70_updates": 200,
+      "final_macro_dice": 0.8427545519975514,
+      "final_anterior_dice": 0.8518301294400141,
+      "final_posterior_dice": 0.8336789745550889,
+      "maximum_late_macro_regression": 0.009349566239577167,
+      "completion_sha256": "073841342b05c7c9f16b93b89327c06e20fee560a6687e4496cc10ab463a45e6"
+    }
+  ],
+  "mean_final_macro_dice": 0.8456546868651341,
+  "sample_sd_final_macro_dice": 0.002516965933370483,
+  "minimum_updates_both_classes_70_all_seeds": 300,
+  "cost_flops_per_update": 78836480841,
+  "parameters": 43234201,
+  "recipe": {
+    "learning_rate": 0.0001,
+    "warmup_updates": 100,
+    "decay": "none",
+    "optimizer": "AdamW",
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "weight_decay": 1e-05,
+    "include_background": true,
+    "output_head": "final InstanceNorm and PReLU omitted; residual layers preserved"
+  },
+  "interpretation": "Linear output block resolves the prolonged weak-class plateau across all tested seeds on this fixed fold; attribution to InstanceNorm versus PReLU separately is not established."
+}

@@ -1,0 +1,47 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "model": "nnunet",
+      "parameters": 16548076,
+      "architecture_forward_passed": true,
+      "all_objective_schedules_verified": true,
+      "all_lr_values_match_baseline_horizon": true,
+      "existing_bands_loss_gradient_calibration_identical": true,
+      "all_auxiliary_gradients_finite": true,
+      "lower_resolution_native_heads_unchanged": true,
+      "all_weight_calibrations_passed": true
+    },
+    {
+      "model": "swinunetr",
+      "parameters": 15703029,
+      "architecture_forward_passed": true,
+      "all_objective_schedules_verified": true,
+      "all_lr_values_match_baseline_horizon": true
+    },
+    {
+      "model": "unetr_vit_b16",
+      "parameters": 92685555,
+      "architecture_forward_passed": true,
+      "all_objective_schedules_verified": true,
+      "all_lr_values_match_baseline_horizon": true
+    },
+    {
+      "model": "basic_unet16",
+      "parameters": 1438819,
+      "architecture_forward_passed": true,
+      "all_objective_schedules_verified": true,
+      "all_lr_values_match_baseline_horizon": true
+    }
+  ],
+  "torch": "2.12.1+cu130",
+  "monai": "1.6.0",
+  "plan_sha256": "fb7a2a4bed0876c2925556937615de66678d1e5c5741ccc693e1e71b97343cbc",
+  "source_manifest_sha256": "a0b304187eeedea55406a5c04f3825e355b74c7b1ce99ec66d4d383ee03414ac",
+  "cluster_resume_smoke_sha256": "89fd130d46dc3b0b34a9ee9eb80f5f7d9df0914c25cb7eed9f17100abb0d701d",
+  "budget_scope": "optimization_only",
+  "budget_flops_per_run": 31976450667090,
+  "models": 4,
+  "arms": 6,
+  "total_runs": 24
+}

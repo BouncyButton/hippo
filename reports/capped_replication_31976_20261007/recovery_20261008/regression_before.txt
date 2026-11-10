@@ -1,0 +1,21 @@
+{"condition_complete": {"model": "nnunet", "objective": "dice", "fold": 0, "seed": 1, "updates": 90, "epochs": 9.0, "final_dice": 0.65, "best_dice": 0.65, "anterior_dice": 0.7, "posterior_dice": 0.6, "optimization_gflops": 31976.45, "calibration_gflops": 0.0, "sdf_policy": "not_applicable", "storage_policy": "verified_metadata_only", "gain_vs_paired_baseline_pp": 0.0}, "completed": 1, "total": 448}
+test_two_consecutive_conditions_and_resume (__main__.ReplicationPathTest) ... ERROR
+
+======================================================================
+ERROR: test_two_consecutive_conditions_and_resume (__main__.ReplicationPathTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/filippofocaccia/Desktop/hippo/scripts/test_capped_replication_paths.py", line 68, in test_two_consecutive_conditions_and_resume
+    worker.main()
+  File "experiments/capped_replication_31976_20261007/source/scripts/capped_replication_worker.py", line 285, in main
+    row = store_metadata(output, destination, row, checkpoint_proofs)
+  File "experiments/capped_replication_31976_20261007/source/scripts/capped_replication_worker.py", line 155, in store_metadata
+    temporary.replace(destination)
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/pathlib.py", line 1385, in replace
+    self._accessor.replace(self, target)
+OSError: [Errno 66] Directory not empty: '/var/folders/9d/sqxp5kj56832p1mf59mk01gc0000gn/T/hippo-path-regression-r7uk4b5n/results/basic_unet16/dice/fold2/seed2/run.pending' -> '/var/folders/9d/sqxp5kj56832p1mf59mk01gc0000gn/T/hippo-path-regression-r7uk4b5n/results/basic_unet16/dice/fold2/seed2/run'
+
+----------------------------------------------------------------------
+Ran 1 test in 0.088s
+
+FAILED (errors=1)

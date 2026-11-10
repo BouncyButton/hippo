@@ -1,0 +1,21 @@
+{
+  "job_id": "700231",
+  "previous_job": "700218",
+  "previous_state": "FAILED|1:0",
+  "reason": "Use original SHA-verified width-48 linear U-Net factory and original budget node gnode02. Resume verified outputs; no training.",
+  "command": [
+    "sbatch",
+    "--parsable",
+    "--job-name=hippo-storage-audit",
+    "--partition=stud",
+    "--gres=gpu:4g.40gb:1",
+    "--cpus-per-task=4",
+    "--mem=24G",
+    "--time=02:00:00",
+    "--output=/mnt/beegfsstudents/home/3160552/storage_retirement_audit_20261014/slurm-%j.out",
+    "--error=/mnt/beegfsstudents/home/3160552/storage_retirement_audit_20261014/slurm-%j.err",
+    "--nodelist=gnode02",
+    "/mnt/beegfsstudents/home/3160552/storage_retirement_audit_20261014/run.sh"
+  ],
+  "local_worker_sha256": "b64d516f080845b91c2a5dbb85cd12095d0e8431d2f6731ac9b0705d843b6261"
+}

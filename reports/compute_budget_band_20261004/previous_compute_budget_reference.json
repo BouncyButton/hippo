@@ -1,0 +1,34 @@
+{
+  "status": "official_reference",
+  "adopted_on": "2026-10-04",
+  "budget_flops": 8138082968869,
+  "budget_gflops": 8138.082968869,
+  "definition": "floor(40690414844347 / 5): 20% of the previous official B_ref; round down by 0.4 FLOPs to preserve a hard integer cap",
+  "parent_budget_flops": 40690414844347,
+  "parent_fraction": {
+    "numerator": 1,
+    "denominator": 5
+  },
+  "parent_reference_sha256": "4fd9868280262bb826a25432b42e533f8941a4d838898a9e4401e623d9e89ea6",
+  "parent_reference_snapshot": "reports/compute_matched_constraints_20pct_20261004/previous_compute_budget_reference.json",
+  "anchor_model": "unet",
+  "anchor_flops_per_update": 9580978301,
+  "baseline_max_updates": 849,
+  "baseline_patient_pass_epochs": 84.9,
+  "training_patients": 10,
+  "input_shape": [
+    1,
+    1,
+    64,
+    64,
+    64
+  ],
+  "accounting": "Declared arithmetic per training update, forward/loss/backward/optimizer, dense MAC=2; excludes validation, preprocessing/augmentation, I/O and precision housekeeping",
+  "constraint_preset": "Original balanced two-step BCE bands, no focal/degree weighting; original pooled edge consistency; scalar weighted sum with one backward",
+  "calibration_policy": "Charge model/run-specific training-only calibration within B_ref before deriving each arm maximum; 50 Dice prefix updates are part of the trajectory.",
+  "signed_distance_policy": "Authorized full-volume anterior/posterior SDF boundary loss; clipped at +/-8 model-grid voxels, normalized by 8, no extra prediction head; calibrated after bands and original edge when present.",
+  "budget_selection": "Exploratory, pilot-informed choice after examining baseline and bands validation curves from fold 0 seed 0; not a preregistered confirmatory budget.",
+  "pilot_report": "reports/compute_matched_constraints_682338/README.md",
+  "campaign_draft": "experiments/compute_matched_constraints_20pct_20261004/draft_protocol.json",
+  "constraints_schedule": "experiments/compute_matched_constraints_20pct_20261004/protocol.json"
+}

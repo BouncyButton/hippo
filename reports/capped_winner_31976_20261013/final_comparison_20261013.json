@@ -1,0 +1,84 @@
+{
+  "capped_runs_verified": 36,
+  "standard_replication": {
+    "n": 9,
+    "mean_percent": 80.21746347412932,
+    "sd_pp": 1.0688812661656435,
+    "maximum_percent": 81.50157184588936
+  },
+  "models": [
+    {
+      "model": "basic_unet16",
+      "n": 9,
+      "baseline_mean_percent": 65.08416526146934,
+      "original_bands_mean_percent": 74.78004983729787,
+      "previous_best_objective": "dice_bands_edge_depth",
+      "previous_best_mean_percent": 76.1046281355059,
+      "new_mean_percent": 82.1566913754512,
+      "new_sd_pp": 3.181167007106913,
+      "gain_vs_previous_best_pp": 6.052063239945305,
+      "gain_vs_baseline_pp": 17.072526113981866,
+      "gain_vs_original_bands_pp": 7.376641538153339,
+      "paired_wins_vs_previous_best": 9,
+      "mean_best_checkpoint_percent": 82.75573931188664
+    },
+    {
+      "model": "swinunetr",
+      "n": 9,
+      "baseline_mean_percent": 51.79260019292561,
+      "original_bands_mean_percent": 54.70057111233473,
+      "previous_best_objective": "dice_bands_edge_sdf_depth",
+      "previous_best_mean_percent": 63.65945983009461,
+      "new_mean_percent": 63.905267824984,
+      "new_sd_pp": 10.485232269078097,
+      "gain_vs_previous_best_pp": 0.24580799488939098,
+      "gain_vs_baseline_pp": 12.112667632058393,
+      "gain_vs_original_bands_pp": 9.204696712649273,
+      "paired_wins_vs_previous_best": 2,
+      "mean_best_checkpoint_percent": 64.59071967973668
+    },
+    {
+      "model": "nnunet",
+      "n": 9,
+      "baseline_mean_percent": 63.95601168447512,
+      "original_bands_mean_percent": 65.21722862196482,
+      "previous_best_objective": "dice_bands_sdf_depth",
+      "previous_best_mean_percent": 65.64904139919453,
+      "new_mean_percent": 64.6576527207861,
+      "new_sd_pp": 10.398855599132533,
+      "gain_vs_previous_best_pp": -0.9913886784084336,
+      "gain_vs_baseline_pp": 0.7016410363109737,
+      "gain_vs_original_bands_pp": -0.5595759011787216,
+      "paired_wins_vs_previous_best": 1,
+      "mean_best_checkpoint_percent": 64.6576527207861
+    },
+    {
+      "model": "unetr_vit_b16",
+      "n": 9,
+      "baseline_mean_percent": 38.160637033800796,
+      "original_bands_mean_percent": 40.55956447035329,
+      "previous_best_objective": "dice_bands_edge_sdf_depth",
+      "previous_best_mean_percent": 43.35215098630542,
+      "new_mean_percent": 41.69652656389353,
+      "new_sd_pp": 19.40455289554523,
+      "gain_vs_previous_best_pp": -1.6556244224118888,
+      "gain_vs_baseline_pp": 3.535889530092734,
+      "gain_vs_original_bands_pp": 1.1369620935402391,
+      "paired_wins_vs_previous_best": 3,
+      "mean_best_checkpoint_percent": 42.230172362974564
+    }
+  ],
+  "metric": "Capped: final-budget validation macro Dice; standard: best-checkpoint validation macro Dice. Means over three folds and three seeds; descriptive development results.",
+  "provenance": {
+    "reports/capped_winner_31976_20261013/final_results_20261013.json": "03bd0c632ef9123c2df9342fae3f94e7ae02792a2bfeca9b80745577c71609c9",
+    "reports/capped_replication_31976_20261007/final_summary_20261010.json": "44e33f06fe66b3d5548d1e689cc1a494cdd3f197fd9bd68137edd150b26e2e49",
+    "docs/experiments/outer_combo_20261012/replication_results_20261013.json": "7420a3ec013c699dca19a5c663c01b0af58ea4ec22b8c7831fad96c3221a2f46"
+  },
+  "verification": {
+    "remote_metadata_manifests_verified": 36,
+    "remaining_active_capped_checkpoints": 0,
+    "queue_empty": true,
+    "beegfs_used_gib": 74.64,
+    "beegfs_quota_gib": 93.13
+  }
+}

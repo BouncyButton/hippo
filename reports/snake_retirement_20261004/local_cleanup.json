@@ -1,0 +1,78 @@
+{
+  "deleted_utc": "2026-10-04T10:45:31.007433+00:00",
+  "authorization": "User requested deletion of all snake work.",
+  "removed_paths": [
+    "/Users/filippofocaccia/Desktop/hippo/datasets/Dataset201_PARTIMAGENET",
+    "/Users/filippofocaccia/Desktop/hippo/reports/snakes_swinunetr_20261004_100e",
+    "/Users/filippofocaccia/Desktop/hippo/docs/experiments/snakes_swinunetr_20261003",
+    "/Users/filippofocaccia/Desktop/hippo/docs/experiments/snakes_swinunetr_20261004_100e",
+    "/Users/filippofocaccia/Desktop/hippo/scripts/prepare_snake_swinunetr.py",
+    "/Users/filippofocaccia/Desktop/hippo/scripts/train_snake_swinunetr.py",
+    "/Users/filippofocaccia/Desktop/hippo/scripts/run_snake_swinunetr.sbatch",
+    "/Users/filippofocaccia/Desktop/hippo/scripts/test_snake_swinunetr.py"
+  ],
+  "former_submissions": {
+    "snakes_swinunetr_20261003": {
+      "job_id": "681383",
+      "state": "submitted",
+      "dependency": "afterany:681342",
+      "root": "/mnt/beegfsstudents/home/3160552/snakes_swinunetr_fold0_seed0_20261003_01",
+      "submitted_utc": "2026-10-03T17:59:53.672062+00:00",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--dependency=afterany:681342",
+        "--output=/mnt/beegfsstudents/home/3160552/snakes_swinunetr_fold0_seed0_20261003_01/logs/%j.out",
+        "--error=/mnt/beegfsstudents/home/3160552/snakes_swinunetr_fold0_seed0_20261003_01/logs/%j.err",
+        "/mnt/beegfsstudents/home/3160552/snakes_swinunetr_fold0_seed0_20261003_01/source/scripts/run_snake_swinunetr.sbatch",
+        "/mnt/beegfsstudents/home/3160552/snakes_swinunetr_fold0_seed0_20261003_01"
+      ],
+      "queue_before": "JOBID NAME STATE NODELIST(REASON)\n681342 hippo-compute-baselines RUNNING gnode01\n",
+      "fold": 0,
+      "seed": 0,
+      "epoch_cap_per_arm": 20,
+      "early_stopping": {
+        "patience": 5,
+        "min_delta": 0.0005,
+        "min_epochs": 5
+      },
+      "training_images": {
+        "100pct": 2399,
+        "5pct": 120,
+        "25pct": 600
+      },
+      "validation_images": 141,
+      "protocol_sha256": "76973c18a8fdca407ca998ba6da944bc1b81c79dbb82632bcd81d1e5a4f70cbb"
+    },
+    "snakes_swinunetr_20261004_100e": {
+      "job_id": "682190",
+      "state": "submitted",
+      "root": "/mnt/beegfsstudents/home/3160552/snakes_swinunetr_fold0_seed0_20261004_100e_01",
+      "submitted_utc": "2026-10-04T09:14:28.072308+00:00",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--job-name=snakes-swin-100e-f0-s0",
+        "--output=/mnt/beegfsstudents/home/3160552/snakes_swinunetr_fold0_seed0_20261004_100e_01/logs/%j.out",
+        "--error=/mnt/beegfsstudents/home/3160552/snakes_swinunetr_fold0_seed0_20261004_100e_01/logs/%j.err",
+        "/mnt/beegfsstudents/home/3160552/snakes_swinunetr_fold0_seed0_20261004_100e_01/source/scripts/run_snake_swinunetr.sbatch",
+        "/mnt/beegfsstudents/home/3160552/snakes_swinunetr_fold0_seed0_20261004_100e_01"
+      ],
+      "dependency": null,
+      "queue_before": "",
+      "fold": 0,
+      "seed": 0,
+      "max_epochs": 100,
+      "early_stopping": {
+        "patience": 20,
+        "min_delta": 0.0005,
+        "min_epochs": 50
+      },
+      "training_images": 2399,
+      "validation_images": 141,
+      "protocol_sha256": "1efa36137ce9a0e0586bd5374050aacc0b90e41cd7e081c881e9c51d367c4dc1",
+      "retired_job_id": "681383"
+    }
+  },
+  "snake_heartbeat_status": "PAUSED"
+}

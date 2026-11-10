@@ -1,0 +1,21 @@
+Pretrained SAM3 / MedSAM3 paths checked on 14 October 2026
+
+Local durable inputs (outside the deletion scope):
+/Users/filippofocaccia/Desktop/hippo/MedSam3_weights/sam3.pt
+/Users/filippofocaccia/Desktop/hippo/MedSam3_weights/best_lora_weights.pt
+
+Current cross-dataset fine-tuning configuration:
+The controller receives the staged SAM3 base on each compute node at
+/tmp/hippo-sam3-1395-<job-id>.pt and passes that path as --base-weights.
+SAM3 base staging: /tmp/hippo-cross-dataset-3160552/sam3.pt
+  Existence verified; 3,450,062,241 bytes. Login-node temporary storage, outside BeeGFS.
+Medical pretrained LoRA: /mnt/beegfsstudents/home/3160552/medsam3_runtime_20260928/weights/best_lora_weights.pt
+  Existence verified; 74,350,491 bytes.
+
+Code: scripts/cross_dataset_campaign/prepare.py foundation_protocol and base_staging;
+scripts/cross_dataset_campaign/foundation.py load_foundation;
+evaluation/medsam3_zero_shot.py load_model.
+MedSAM3 loads the SAM3 base and medical LoRA adapter. GeoFWI3D initializes fresh LoRA on SAM3.
+Historical staging path /tmp/medsam3-3160552-staging/sam3.cdn.pt no longer exists.
+Older multiclass jobs broadcast the base to temporary /dev/shm/medsam3-ap-*/sam3.pt.
+These are pretrained inputs, distinct from the completed experiment checkpoints selected for retirement.

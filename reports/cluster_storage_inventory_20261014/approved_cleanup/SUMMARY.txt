@@ -1,0 +1,51 @@
+Completed experiment retirement — 14 October 2026
+
+User-approved policy: preserve results and predictions; delete checkpoint weights.
+All 16 selected experiment directories were removed only after local archive verification and a fresh comparison with the original file hashes.
+Pretrained SAM3 and MedSAM3 inputs, datasets, source repositories, the active cross-dataset campaign, and unrelated experiments were retained.
+
+Original non-checkpoint files preserved: 13,306
+Checkpoint files excluded and deleted: 204
+Additional audit files preserved: 225
+Additional evaluation: 100 hippocampus checkpoint endpoints with predictions, Dice, FN/FP counts and directional A/P swaps; 9 GeoFWI3D runs with exact FN/FP reconstruction from saved voxel counts.
+Largest per-case Dice difference versus original evaluation: 2.979592018e-08
+
+Selected groups:
+1. GeoFWI3D experiment outputs: 4 directories; 773 preserved files; 18 checkpoint files deleted.
+2. Outer-combination experiments: 1 directories; 1,247 preserved files; 8 checkpoint files deleted.
+3. 94,603-budget baseline and bands campaigns: 2 directories; 790 preserved files; 12 checkpoint files deleted.
+4. Depth-supervision and depth-weight experiments: 2 directories; 687 preserved files; 24 checkpoint files deleted.
+5. Band-focus, evolution, Chamfer and native-branch experiments: 6 directories; 8,833 preserved files; 54 checkpoint files deleted.
+6. Capped-depth / delayed-SDF campaign: 1 directories; 976 preserved files; 88 checkpoint files deleted.
+
+Archive guide:
+results_archives/ contains portable tar.gz archives with original paths and ARCHIVE_MANIFEST.json checksums.
+results_catalog.json indexes original result paths; results_manifests/ lists every retained and excluded file.
+evaluation_retention/results_archives/ contains supplemental predictions, voxel metrics, evaluation source and logs.
+evaluation_gate.json provides searchable summaries of the 100 supplemental checkpoint evaluations.
+geofwi3d_voxel_metrics.json contains the nine GeoFWI3D error-count audits.
+deletion_receipt.json and evaluation_retention/deletion_receipt.json record exact deletions.
+checkpoint_locations.txt documents the separate pretrained SAM3 and MedSAM3 files.
+
+To inspect an archive: tar -tzf results_archives/EXPERIMENT.tar.gz
+To restore its preserved files into an existing destination: tar -xzf results_archives/EXPERIMENT.tar.gz -C DESTINATION
+Checkpoint weights are deliberately not recoverable from these result archives.
+The native-branch archive preserves one external atlas symlink; its BeeGFS target was retained.
+
+Final personal quota snapshot:
+NAME     ID    TYPE  POOL       SPACE              INODE      
+3160552  1395  user  pool_home  24.08GiB/93.13GiB  182.85k/∞
+
+Largest remaining directories (allocated GiB before BeeGFS mirroring):
+5.923 GiB  /mnt/beegfsstudents/home/3160552/.conda
+2.309 GiB  /mnt/beegfsstudents/home/3160552/adni_baselines_5pct_fold0_seed0_20261013_results
+1.473 GiB  /mnt/beegfsstudents/home/3160552/Dataset203_GeoFWI3D
+0.437 GiB  /mnt/beegfsstudents/home/3160552/hippo
+0.365 GiB  /mnt/beegfsstudents/home/3160552/unwrapped_swin_fold0_seed0_20261006_02
+0.307 GiB  /mnt/beegfsstudents/home/3160552/lego_swinunetr_pin2780_fold0_seed0_20261004_01
+0.273 GiB  /mnt/beegfsstudents/home/3160552/.codex
+0.207 GiB  /mnt/beegfsstudents/home/3160552/medsam3_runtime_20260928
+
+BeeGFS reports 24.08 GiB used of 93.13 GiB: 69.05 GiB free. Mirroring means quota usage is approximately twice allocated file bytes.
+Pretrained SAM3 staging and the MedSAM3 adapter were confirmed present after cleanup.
+All 16 selected folders and the temporary audit folder have successful deletion receipts.

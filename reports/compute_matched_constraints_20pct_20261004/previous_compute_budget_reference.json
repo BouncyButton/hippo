@@ -1,0 +1,21 @@
+{
+  "status": "official_reference",
+  "adopted_on": "2026-10-04",
+  "budget_flops": 40690414844347,
+  "budget_gflops": 40690.414844347,
+  "definition": "4247 * 9580978301 FLOPs; use the exact integer, not the rounded GFLOP display",
+  "anchor_model": "unet",
+  "anchor_updates": 4247,
+  "anchor_patient_pass_epochs": 424.7,
+  "anchor_flops_per_update": 9580978301,
+  "training_patients": 10,
+  "input_shape": [1, 1, 64, 64, 64],
+  "pilot_basis": "Mean best-so-far validation Dice at update 4247 was within 0.005 of the mean eventual best over nine U-Net runs; budget selected after inspecting pilot curves",
+  "pilot_report": "reports/unet_diagnostics_681342/RESULTS.md",
+  "constraints_schedule": "reports/unet_constraint_budget_20261004/training_schedules.json",
+  "accounting": "Declared arithmetic per training update, forward/loss/backward/optimizer, dense MAC=2; excludes validation, preprocessing/augmentation, I/O and precision housekeeping",
+  "constraint_preset": "Original balanced two-step BCE bands, no focal/degree weighting; original pooled edge consistency; scalar weighted sum with one backward",
+  "calibration_policy": "Reported schedules contain training-update compute only. Additional model-specific calibration or gradient probes require separately profiled costs deducted before setting the final maximum updates.",
+  "historical_larger_budget_protocol": "experiments/compute_matched_baselines_20261003/protocol.json",
+  "historical_runs_preserved": true
+}

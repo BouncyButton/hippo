@@ -1,0 +1,20 @@
+{
+  "diagnostic_job": 683804,
+  "status": "complete",
+  "training_macro_hard_dice": 0.528379563614726,
+  "training_anterior_hard_dice": 0.9892491102218628,
+  "training_posterior_hard_dice": 0.06751001700758934,
+  "validation_macro_hard_dice": 0.4553605496811752,
+  "background_false_positive_posterior_range": [
+    42872,
+    43279
+  ],
+  "precision_forward_comparison": {
+    "case_name": "hippocampus_093",
+    "mean_abs_logit_difference": 0.00872710719704628,
+    "max_abs_logit_difference": 0.1060791015625,
+    "argmax_disagreement_fraction": 3.814697265625e-06
+  },
+  "runtime_and_fp32_loss_derivatives_match_for_tested_case": true,
+  "interpretation": "Posterior segmentation detects its true voxels on the training set but has many background false positives. This also occurs in training, so validation-only generalization does not explain the plateau. The tested precision comparison does not explain it. Causation of the false positives is not yet established. Continue an explicitly bounded search using the unchanged recipe; no production trainer or objective changes."
+}

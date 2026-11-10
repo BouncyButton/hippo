@@ -1,0 +1,13 @@
+{
+  "scope": "synthetic illustration, not measured real checkpoint",
+  "probabilities": [
+    0.20000000298023224,
+    0.7999899983406067,
+    9.999999747378752e-06
+  ],
+  "pooled_band_posterior_to_anterior_logit_gradient_ratio_on_gt_posterior": 1.250015884579625e-05,
+  "posterior_ce_gradient": -0.00024413818027824163,
+  "posterior_band_gradient": -2.7901791987972047e-09,
+  "posterior_sdf_gradient": -1.3732760761886453e-10,
+  "interpretation": "A pooled foreground band allocates its foreground logit gradient in proportion to current anterior/posterior probabilities. A low posterior probability can leave very little corrective band gradient on that class, even when the true label is posterior. CE avoids this particular softmax-saturation suppression on a wrong true class."
+}

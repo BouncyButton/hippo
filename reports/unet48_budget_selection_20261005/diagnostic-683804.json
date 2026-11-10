@@ -1,0 +1,1062 @@
+{
+  "checkpoint_sha256": "5d900d516dc704ff3bbf8cfef66913a5a517aed0717c8fa4d0070369cf410825",
+  "completion_sha256": "1d09e7e8d4b2c9f3995bfc86ade60748dafc1174baa02408ac6a9a7358562afe",
+  "dataset_sha256": "3311d2233b99e09080c40ca80f1035781d9c1dc9c5b109dc266c73eb52a3df01",
+  "checkpoint_updates": 3200,
+  "diagnostic_source_sha256": "0d58d2f72fa151e918cdaa51422699354e1291e146b9db3774366202c411473d",
+  "torch": "2.12.1+cu130",
+  "purpose": "Read-only evaluation; diagnostic compute is separate from candidate training budgets.",
+  "training_updates_performed": 0,
+  "model_structure": "UNet(\n  (model): Sequential(\n    (0): ResidualUnit(\n      (conv): Sequential(\n        (unit0): Convolution(\n          (conv): Conv3d(1, 48, kernel_size=(3, 3, 3), stride=(2, 2, 2), padding=(1, 1, 1))\n          (adn): ADN(\n            (N): InstanceNorm3d(48, eps=1e-05, momentum=0.1, affine=False, bias=False, track_running_stats=False)\n            (D): Dropout(p=0.0, inplace=False)\n            (A): PReLU(num_parameters=1)\n          )\n        )\n        (unit1): Convolution(\n          (conv): Conv3d(48, 48, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1))\n          (adn): ADN(\n            (N): InstanceNorm3d(48, eps=1e-05, momentum=0.1, affine=False, bias=False, track_running_stats=False)\n            (D): Dropout(p=0.0, inplace=False)\n            (A): PReLU(num_parameters=1)\n          )\n        )\n      )\n      (residual): Conv3d(1, 48, kernel_size=(3, 3, 3), stride=(2, 2, 2), padding=(1, 1, 1))\n    )\n    (1): SkipConnection(\n      (submodule): Sequential(\n        (0): ResidualUnit(\n          (conv): Sequential(\n            (unit0): Convolution(\n              (conv): Conv3d(48, 96, kernel_size=(3, 3, 3), stride=(2, 2, 2), padding=(1, 1, 1))\n              (adn): ADN(\n                (N): InstanceNorm3d(96, eps=1e-05, momentum=0.1, affine=False, bias=False, track_running_stats=False)\n                (D): Dropout(p=0.0, inplace=False)\n                (A): PReLU(num_parameters=1)\n              )\n            )\n            (unit1): Convolution(\n              (conv): Conv3d(96, 96, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1))\n              (adn): ADN(\n                (N): InstanceNorm3d(96, eps=1e-05, momentum=0.1, affine=False, bias=False, track_running_stats=False)\n                (D): Dropout(p=0.0, inplace=False)\n                (A): PReLU(num_parameters=1)\n              )\n            )\n          )\n          (residual): Conv3d(48, 96, kernel_size=(3, 3, 3), stride=(2, 2, 2), padding=(1, 1, 1))\n        )\n        (1): SkipConnection(\n          (submodule): Sequential(\n            (0): ResidualUnit(\n              (conv): Sequential(\n                (unit0): Convolution(\n                  (conv): Conv3d(96, 192, kernel_size=(3, 3, 3), stride=(2, 2, 2), padding=(1, 1, 1))\n                  (adn): ADN(\n                    (N): InstanceNorm3d(192, eps=1e-05, momentum=0.1, affine=False, bias=False, track_running_stats=False)\n                    (D): Dropout(p=0.0, inplace=False)\n                    (A): PReLU(num_parameters=1)\n                  )\n                )\n                (unit1): Convolution(\n                  (conv): Conv3d(192, 192, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1))\n                  (adn): ADN(\n                    (N): InstanceNorm3d(192, eps=1e-05, momentum=0.1, affine=False, bias=False, track_running_stats=False)\n                    (D): Dropout(p=0.0, inplace=False)\n                    (A): PReLU(num_parameters=1)\n                  )\n                )\n              )\n              (residual): Conv3d(96, 192, kernel_size=(3, 3, 3), stride=(2, 2, 2), padding=(1, 1, 1))\n            )\n            (1): SkipConnection(\n              (submodule): Sequential(\n                (0): ResidualUnit(\n                  (conv): Sequential(\n                    (unit0): Convolution(\n                      (conv): Conv3d(192, 384, kernel_size=(3, 3, 3), stride=(2, 2, 2), padding=(1, 1, 1))\n                      (adn): ADN(\n                        (N): InstanceNorm3d(384, eps=1e-05, momentum=0.1, affine=False, bias=False, track_running_stats=False)\n                        (D): Dropout(p=0.0, inplace=False)\n                        (A): PReLU(num_parameters=1)\n                      )\n                    )\n                    (unit1): Convolution(\n                      (conv): Conv3d(384, 384, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1))\n                      (adn): ADN(\n                        (N): InstanceNorm3d(384, eps=1e-05, momentum=0.1, affine=False, bias=False, track_running_stats=False)\n                        (D): Dropout(p=0.0, inplace=False)\n                        (A): PReLU(num_parameters=1)\n                      )\n                    )\n                  )\n                  (residual): Conv3d(192, 384, kernel_size=(3, 3, 3), stride=(2, 2, 2), padding=(1, 1, 1))\n                )\n                (1): SkipConnection(\n                  (submodule): ResidualUnit(\n                    (conv): Sequential(\n                      (unit0): Convolution(\n                        (conv): Conv3d(384, 768, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1))\n                        (adn): ADN(\n                          (N): InstanceNorm3d(768, eps=1e-05, momentum=0.1, affine=False, bias=False, track_running_stats=False)\n                          (D): Dropout(p=0.0, inplace=False)\n                          (A): PReLU(num_parameters=1)\n                        )\n                      )\n                      (unit1): Convolution(\n                        (conv): Conv3d(768, 768, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1))\n                        (adn): ADN(\n                          (N): InstanceNorm3d(768, eps=1e-05, momentum=0.1, affine=False, bias=False, track_running_stats=False)\n                          (D): Dropout(p=0.0, inplace=False)\n                          (A): PReLU(num_parameters=1)\n                        )\n                      )\n                    )\n                    (residual): Conv3d(384, 768, kernel_size=(1, 1, 1), stride=(1, 1, 1))\n                  )\n                )\n                (2): Sequential(\n                  (0): Convolution(\n                    (conv): ConvTranspose3d(1152, 192, kernel_size=(3, 3, 3), stride=(2, 2, 2), padding=(1, 1, 1), output_padding=(1, 1, 1))\n                    (adn): ADN(\n                      (N): InstanceNorm3d(192, eps=1e-05, momentum=0.1, affine=False, bias=False, track_running_stats=False)\n                      (D): Dropout(p=0.0, inplace=False)\n                      (A): PReLU(num_parameters=1)\n                    )\n                  )\n                  (1): ResidualUnit(\n                    (conv): Sequential(\n                      (unit0): Convolution(\n                        (conv): Conv3d(192, 192, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1))\n                        (adn): ADN(\n                          (N): InstanceNorm3d(192, eps=1e-05, momentum=0.1, affine=False, bias=False, track_running_stats=False)\n                          (D): Dropout(p=0.0, inplace=False)\n                          (A): PReLU(num_parameters=1)\n                        )\n                      )\n                    )\n                    (residual): Identity()\n                  )\n                )\n              )\n            )\n            (2): Sequential(\n              (0): Convolution(\n                (conv): ConvTranspose3d(384, 96, kernel_size=(3, 3, 3), stride=(2, 2, 2), padding=(1, 1, 1), output_padding=(1, 1, 1))\n                (adn): ADN(\n                  (N): InstanceNorm3d(96, eps=1e-05, momentum=0.1, affine=False, bias=False, track_running_stats=False)\n                  (D): Dropout(p=0.0, inplace=False)\n                  (A): PReLU(num_parameters=1)\n                )\n              )\n              (1): ResidualUnit(\n                (conv): Sequential(\n                  (unit0): Convolution(\n                    (conv): Conv3d(96, 96, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1))\n                    (adn): ADN(\n                      (N): InstanceNorm3d(96, eps=1e-05, momentum=0.1, affine=False, bias=False, track_running_stats=False)\n                      (D): Dropout(p=0.0, inplace=False)\n                      (A): PReLU(num_parameters=1)\n                    )\n                  )\n                )\n                (residual): Identity()\n              )\n            )\n          )\n        )\n        (2): Sequential(\n          (0): Convolution(\n            (conv): ConvTranspose3d(192, 48, kernel_size=(3, 3, 3), stride=(2, 2, 2), padding=(1, 1, 1), output_padding=(1, 1, 1))\n            (adn): ADN(\n              (N): InstanceNorm3d(48, eps=1e-05, momentum=0.1, affine=False, bias=False, track_running_stats=False)\n              (D): Dropout(p=0.0, inplace=False)\n              (A): PReLU(num_parameters=1)\n            )\n          )\n          (1): ResidualUnit(\n            (conv): Sequential(\n              (unit0): Convolution(\n                (conv): Conv3d(48, 48, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1))\n                (adn): ADN(\n                  (N): InstanceNorm3d(48, eps=1e-05, momentum=0.1, affine=False, bias=False, track_running_stats=False)\n                  (D): Dropout(p=0.0, inplace=False)\n                  (A): PReLU(num_parameters=1)\n                )\n              )\n            )\n            (residual): Identity()\n          )\n        )\n      )\n    )\n    (2): Sequential(\n      (0): Convolution(\n        (conv): ConvTranspose3d(96, 3, kernel_size=(3, 3, 3), stride=(2, 2, 2), padding=(1, 1, 1), output_padding=(1, 1, 1))\n        (adn): ADN(\n          (N): InstanceNorm3d(3, eps=1e-05, momentum=0.1, affine=False, bias=False, track_running_stats=False)\n          (D): Dropout(p=0.0, inplace=False)\n          (A): PReLU(num_parameters=1)\n        )\n      )\n      (1): ResidualUnit(\n        (conv): Sequential(\n          (unit0): Convolution(\n            (conv): Conv3d(3, 3, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1))\n          )\n        )\n        (residual): Identity()\n      )\n    )\n  )\n)",
+  "train_evaluation": {
+    "summary": {
+      "anterior_hard_dice": 0.9892491102218628,
+      "anterior_soft_dice": 0.9415377914905548,
+      "posterior_hard_dice": 0.06751001700758934,
+      "posterior_soft_dice": 0.06298261061310768,
+      "macro_hard_dice": 0.528379563614726,
+      "macro_soft_dice": 0.5022602010518312
+    },
+    "cases": [
+      {
+        "case_name": "hippocampus_093",
+        "anterior_hard_dice": 0.9931972622871399,
+        "anterior_soft_dice": 0.9452349543571472,
+        "posterior_hard_dice": 0.08450944721698761,
+        "posterior_soft_dice": 0.07893303036689758
+      },
+      {
+        "case_name": "hippocampus_097",
+        "anterior_hard_dice": 0.991899847984314,
+        "anterior_soft_dice": 0.9382572174072266,
+        "posterior_hard_dice": 0.06071265786886215,
+        "posterior_soft_dice": 0.056735560297966
+      },
+      {
+        "case_name": "hippocampus_197",
+        "anterior_hard_dice": 0.9893854856491089,
+        "anterior_soft_dice": 0.9447255730628967,
+        "posterior_hard_dice": 0.06880266964435577,
+        "posterior_soft_dice": 0.06431695073843002
+      },
+      {
+        "case_name": "hippocampus_287",
+        "anterior_hard_dice": 0.994350254535675,
+        "anterior_soft_dice": 0.9483029246330261,
+        "posterior_hard_dice": 0.08238466084003448,
+        "posterior_soft_dice": 0.07704135030508041
+      },
+      {
+        "case_name": "hippocampus_311",
+        "anterior_hard_dice": 0.9907673001289368,
+        "anterior_soft_dice": 0.9396829605102539,
+        "posterior_hard_dice": 0.07051365077495575,
+        "posterior_soft_dice": 0.0658130794763565
+      },
+      {
+        "case_name": "hippocampus_314",
+        "anterior_hard_dice": 0.9818075299263,
+        "anterior_soft_dice": 0.9362522959709167,
+        "posterior_hard_dice": 0.05437445268034935,
+        "posterior_soft_dice": 0.050630200654268265
+      },
+      {
+        "case_name": "hippocampus_353",
+        "anterior_hard_dice": 0.9904829263687134,
+        "anterior_soft_dice": 0.9381766319274902,
+        "posterior_hard_dice": 0.057969752699136734,
+        "posterior_soft_dice": 0.05390974134206772
+      },
+      {
+        "case_name": "hippocampus_361",
+        "anterior_hard_dice": 0.982486367225647,
+        "anterior_soft_dice": 0.9346057772636414,
+        "posterior_hard_dice": 0.058873552829027176,
+        "posterior_soft_dice": 0.05474216863512993
+      },
+      {
+        "case_name": "hippocampus_373",
+        "anterior_hard_dice": 0.9931180477142334,
+        "anterior_soft_dice": 0.9490854740142822,
+        "posterior_hard_dice": 0.07745266705751419,
+        "posterior_soft_dice": 0.07221074402332306
+      },
+      {
+        "case_name": "hippocampus_390",
+        "anterior_hard_dice": 0.9849960803985596,
+        "anterior_soft_dice": 0.941054105758667,
+        "posterior_hard_dice": 0.05950665846467018,
+        "posterior_soft_dice": 0.05549328029155731
+      }
+    ]
+  },
+  "validation_evaluation": {
+    "summary": {
+      "anterior_hard_dice": 0.8464636699511454,
+      "anterior_soft_dice": 0.8127095928558936,
+      "posterior_hard_dice": 0.06425742941120496,
+      "posterior_soft_dice": 0.05973442350156032,
+      "macro_hard_dice": 0.4553605496811752,
+      "macro_soft_dice": 0.43622200817872697
+    },
+    "cases": [
+      {
+        "case_name": "hippocampus_017",
+        "anterior_hard_dice": 0.8653940558433533,
+        "anterior_soft_dice": 0.8333901762962341,
+        "posterior_hard_dice": 0.057845454663038254,
+        "posterior_soft_dice": 0.05333342403173447
+      },
+      {
+        "case_name": "hippocampus_019",
+        "anterior_hard_dice": 0.838760495185852,
+        "anterior_soft_dice": 0.8089379072189331,
+        "posterior_hard_dice": 0.061811015009880066,
+        "posterior_soft_dice": 0.05781538411974907
+      },
+      {
+        "case_name": "hippocampus_033",
+        "anterior_hard_dice": 0.8996464610099792,
+        "anterior_soft_dice": 0.8656987547874451,
+        "posterior_hard_dice": 0.06431746482849121,
+        "posterior_soft_dice": 0.059215690940618515
+      },
+      {
+        "case_name": "hippocampus_035",
+        "anterior_hard_dice": 0.8801082372665405,
+        "anterior_soft_dice": 0.8445751070976257,
+        "posterior_hard_dice": 0.06562703102827072,
+        "posterior_soft_dice": 0.06127963587641716
+      },
+      {
+        "case_name": "hippocampus_037",
+        "anterior_hard_dice": 0.7998741269111633,
+        "anterior_soft_dice": 0.7688086628913879,
+        "posterior_hard_dice": 0.06759005039930344,
+        "posterior_soft_dice": 0.06307944655418396
+      },
+      {
+        "case_name": "hippocampus_049",
+        "anterior_hard_dice": 0.8931478261947632,
+        "anterior_soft_dice": 0.8596872091293335,
+        "posterior_hard_dice": 0.07428276538848877,
+        "posterior_soft_dice": 0.06935438513755798
+      },
+      {
+        "case_name": "hippocampus_052",
+        "anterior_hard_dice": 0.8351033926010132,
+        "anterior_soft_dice": 0.800127387046814,
+        "posterior_hard_dice": 0.06490249186754227,
+        "posterior_soft_dice": 0.059854984283447266
+      },
+      {
+        "case_name": "hippocampus_065",
+        "anterior_hard_dice": 0.8546910881996155,
+        "anterior_soft_dice": 0.8191341757774353,
+        "posterior_hard_dice": 0.08015373349189758,
+        "posterior_soft_dice": 0.07453109323978424
+      },
+      {
+        "case_name": "hippocampus_083",
+        "anterior_hard_dice": 0.8702243566513062,
+        "anterior_soft_dice": 0.8332096338272095,
+        "posterior_hard_dice": 0.07125788182020187,
+        "posterior_soft_dice": 0.06606787443161011
+      },
+      {
+        "case_name": "hippocampus_088",
+        "anterior_hard_dice": 0.837574303150177,
+        "anterior_soft_dice": 0.8107635378837585,
+        "posterior_hard_dice": 0.06741524487733841,
+        "posterior_soft_dice": 0.06290179491043091
+      },
+      {
+        "case_name": "hippocampus_090",
+        "anterior_hard_dice": 0.8425443172454834,
+        "anterior_soft_dice": 0.8108572959899902,
+        "posterior_hard_dice": 0.07909870147705078,
+        "posterior_soft_dice": 0.07367019355297089
+      },
+      {
+        "case_name": "hippocampus_092",
+        "anterior_hard_dice": 0.8514918088912964,
+        "anterior_soft_dice": 0.811526358127594,
+        "posterior_hard_dice": 0.06379302591085434,
+        "posterior_soft_dice": 0.059042103588581085
+      },
+      {
+        "case_name": "hippocampus_095",
+        "anterior_hard_dice": 0.8508580923080444,
+        "anterior_soft_dice": 0.8218916058540344,
+        "posterior_hard_dice": 0.06713414192199707,
+        "posterior_soft_dice": 0.06215343251824379
+      },
+      {
+        "case_name": "hippocampus_107",
+        "anterior_hard_dice": 0.8181818127632141,
+        "anterior_soft_dice": 0.7900292873382568,
+        "posterior_hard_dice": 0.0766557976603508,
+        "posterior_soft_dice": 0.07104452699422836
+      },
+      {
+        "case_name": "hippocampus_108",
+        "anterior_hard_dice": 0.8814907073974609,
+        "anterior_soft_dice": 0.8531559705734253,
+        "posterior_hard_dice": 0.07484032213687897,
+        "posterior_soft_dice": 0.06971929222345352
+      },
+      {
+        "case_name": "hippocampus_123",
+        "anterior_hard_dice": 0.8599255084991455,
+        "anterior_soft_dice": 0.8247103691101074,
+        "posterior_hard_dice": 0.06532338261604309,
+        "posterior_soft_dice": 0.06139775365591049
+      },
+      {
+        "case_name": "hippocampus_125",
+        "anterior_hard_dice": 0.7862350344657898,
+        "anterior_soft_dice": 0.7530915141105652,
+        "posterior_hard_dice": 0.04621517285704613,
+        "posterior_soft_dice": 0.04274873435497284
+      },
+      {
+        "case_name": "hippocampus_157",
+        "anterior_hard_dice": 0.8937561511993408,
+        "anterior_soft_dice": 0.8516359925270081,
+        "posterior_hard_dice": 0.07875195145606995,
+        "posterior_soft_dice": 0.07291406393051147
+      },
+      {
+        "case_name": "hippocampus_164",
+        "anterior_hard_dice": 0.6801314949989319,
+        "anterior_soft_dice": 0.6567871570587158,
+        "posterior_hard_dice": 0.06427757441997528,
+        "posterior_soft_dice": 0.058794621378183365
+      },
+      {
+        "case_name": "hippocampus_169",
+        "anterior_hard_dice": 0.8866758346557617,
+        "anterior_soft_dice": 0.8408397436141968,
+        "posterior_hard_dice": 0.06291484087705612,
+        "posterior_soft_dice": 0.05859198048710823
+      },
+      {
+        "case_name": "hippocampus_175",
+        "anterior_hard_dice": 0.876899242401123,
+        "anterior_soft_dice": 0.8428054451942444,
+        "posterior_hard_dice": 0.04847290739417076,
+        "posterior_soft_dice": 0.045548513531684875
+      },
+      {
+        "case_name": "hippocampus_185",
+        "anterior_hard_dice": 0.8884026408195496,
+        "anterior_soft_dice": 0.8573586344718933,
+        "posterior_hard_dice": 0.052255284041166306,
+        "posterior_soft_dice": 0.04877495393157005
+      },
+      {
+        "case_name": "hippocampus_190",
+        "anterior_hard_dice": 0.884353756904602,
+        "anterior_soft_dice": 0.848466157913208,
+        "posterior_hard_dice": 0.06539227068424225,
+        "posterior_soft_dice": 0.060591962188482285
+      },
+      {
+        "case_name": "hippocampus_194",
+        "anterior_hard_dice": 0.8577509522438049,
+        "anterior_soft_dice": 0.8174065947532654,
+        "posterior_hard_dice": 0.06043551489710808,
+        "posterior_soft_dice": 0.05641453340649605
+      },
+      {
+        "case_name": "hippocampus_204",
+        "anterior_hard_dice": 0.864815354347229,
+        "anterior_soft_dice": 0.8293865919113159,
+        "posterior_hard_dice": 0.05359514057636261,
+        "posterior_soft_dice": 0.05034189671278
+      },
+      {
+        "case_name": "hippocampus_205",
+        "anterior_hard_dice": 0.7691256999969482,
+        "anterior_soft_dice": 0.734627902507782,
+        "posterior_hard_dice": 0.04901468753814697,
+        "posterior_soft_dice": 0.0456329882144928
+      },
+      {
+        "case_name": "hippocampus_210",
+        "anterior_hard_dice": 0.8824766874313354,
+        "anterior_soft_dice": 0.8484983444213867,
+        "posterior_hard_dice": 0.05797038599848747,
+        "posterior_soft_dice": 0.05396868661046028
+      },
+      {
+        "case_name": "hippocampus_217",
+        "anterior_hard_dice": 0.8185285925865173,
+        "anterior_soft_dice": 0.7844014167785645,
+        "posterior_hard_dice": 0.04703821241855621,
+        "posterior_soft_dice": 0.044269073754549026
+      },
+      {
+        "case_name": "hippocampus_219",
+        "anterior_hard_dice": 0.8429021835327148,
+        "anterior_soft_dice": 0.8089999556541443,
+        "posterior_hard_dice": 0.05269002169370651,
+        "posterior_soft_dice": 0.04919463023543358
+      },
+      {
+        "case_name": "hippocampus_229",
+        "anterior_hard_dice": 0.8904382586479187,
+        "anterior_soft_dice": 0.848112165927887,
+        "posterior_hard_dice": 0.0723331943154335,
+        "posterior_soft_dice": 0.06716101616621017
+      },
+      {
+        "case_name": "hippocampus_244",
+        "anterior_hard_dice": 0.8042939901351929,
+        "anterior_soft_dice": 0.7754941582679749,
+        "posterior_hard_dice": 0.056357625871896744,
+        "posterior_soft_dice": 0.052593231201171875
+      },
+      {
+        "case_name": "hippocampus_261",
+        "anterior_hard_dice": 0.8342529535293579,
+        "anterior_soft_dice": 0.8096855878829956,
+        "posterior_hard_dice": 0.0669548287987709,
+        "posterior_soft_dice": 0.062231194227933884
+      },
+      {
+        "case_name": "hippocampus_264",
+        "anterior_hard_dice": 0.8649897575378418,
+        "anterior_soft_dice": 0.8315815925598145,
+        "posterior_hard_dice": 0.07420144975185394,
+        "posterior_soft_dice": 0.06834940612316132
+      },
+      {
+        "case_name": "hippocampus_277",
+        "anterior_hard_dice": 0.8260073065757751,
+        "anterior_soft_dice": 0.789395809173584,
+        "posterior_hard_dice": 0.06746365129947662,
+        "posterior_soft_dice": 0.0621652714908123
+      },
+      {
+        "case_name": "hippocampus_280",
+        "anterior_hard_dice": 0.7623381018638611,
+        "anterior_soft_dice": 0.730154275894165,
+        "posterior_hard_dice": 0.049212899059057236,
+        "posterior_soft_dice": 0.046007417142391205
+      },
+      {
+        "case_name": "hippocampus_286",
+        "anterior_hard_dice": 0.8841049671173096,
+        "anterior_soft_dice": 0.8455423712730408,
+        "posterior_hard_dice": 0.06820829212665558,
+        "posterior_soft_dice": 0.0632128119468689
+      },
+      {
+        "case_name": "hippocampus_288",
+        "anterior_hard_dice": 0.8552809953689575,
+        "anterior_soft_dice": 0.8246585130691528,
+        "posterior_hard_dice": 0.07705974578857422,
+        "posterior_soft_dice": 0.07216758280992508
+      },
+      {
+        "case_name": "hippocampus_289",
+        "anterior_hard_dice": 0.858146071434021,
+        "anterior_soft_dice": 0.8147751092910767,
+        "posterior_hard_dice": 0.05745459347963333,
+        "posterior_soft_dice": 0.054398369044065475
+      },
+      {
+        "case_name": "hippocampus_296",
+        "anterior_hard_dice": 0.8502246737480164,
+        "anterior_soft_dice": 0.8185880780220032,
+        "posterior_hard_dice": 0.07356292009353638,
+        "posterior_soft_dice": 0.06838181614875793
+      },
+      {
+        "case_name": "hippocampus_305",
+        "anterior_hard_dice": 0.8603561520576477,
+        "anterior_soft_dice": 0.8246231079101562,
+        "posterior_hard_dice": 0.05390188470482826,
+        "posterior_soft_dice": 0.050274282693862915
+      },
+      {
+        "case_name": "hippocampus_308",
+        "anterior_hard_dice": 0.8854379057884216,
+        "anterior_soft_dice": 0.8539071679115295,
+        "posterior_hard_dice": 0.06724286824464798,
+        "posterior_soft_dice": 0.061756644397974014
+      },
+      {
+        "case_name": "hippocampus_317",
+        "anterior_hard_dice": 0.7623372673988342,
+        "anterior_soft_dice": 0.7353438138961792,
+        "posterior_hard_dice": 0.06733280420303345,
+        "posterior_soft_dice": 0.06261856108903885
+      },
+      {
+        "case_name": "hippocampus_327",
+        "anterior_hard_dice": 0.8527528643608093,
+        "anterior_soft_dice": 0.819399893283844,
+        "posterior_hard_dice": 0.06609886884689331,
+        "posterior_soft_dice": 0.06186266615986824
+      },
+      {
+        "case_name": "hippocampus_330",
+        "anterior_hard_dice": 0.8152095079421997,
+        "anterior_soft_dice": 0.7877737283706665,
+        "posterior_hard_dice": 0.06940457969903946,
+        "posterior_soft_dice": 0.06433552503585815
+      },
+      {
+        "case_name": "hippocampus_332",
+        "anterior_hard_dice": 0.8873318433761597,
+        "anterior_soft_dice": 0.8510546088218689,
+        "posterior_hard_dice": 0.06319855898618698,
+        "posterior_soft_dice": 0.05888122692704201
+      },
+      {
+        "case_name": "hippocampus_338",
+        "anterior_hard_dice": 0.8608804941177368,
+        "anterior_soft_dice": 0.831807017326355,
+        "posterior_hard_dice": 0.06267917901277542,
+        "posterior_soft_dice": 0.057850390672683716
+      },
+      {
+        "case_name": "hippocampus_349",
+        "anterior_hard_dice": 0.8171539902687073,
+        "anterior_soft_dice": 0.7781934142112732,
+        "posterior_hard_dice": 0.05709335207939148,
+        "posterior_soft_dice": 0.05315703526139259
+      },
+      {
+        "case_name": "hippocampus_350",
+        "anterior_hard_dice": 0.8477193117141724,
+        "anterior_soft_dice": 0.8082050681114197,
+        "posterior_hard_dice": 0.06208224222064018,
+        "posterior_soft_dice": 0.057730671018362045
+      },
+      {
+        "case_name": "hippocampus_356",
+        "anterior_hard_dice": 0.8848881721496582,
+        "anterior_soft_dice": 0.8483086228370667,
+        "posterior_hard_dice": 0.06907553970813751,
+        "posterior_soft_dice": 0.063939668238163
+      },
+      {
+        "case_name": "hippocampus_358",
+        "anterior_hard_dice": 0.7561885118484497,
+        "anterior_soft_dice": 0.7216073274612427,
+        "posterior_hard_dice": 0.056747134774923325,
+        "posterior_soft_dice": 0.05241181328892708
+      },
+      {
+        "case_name": "hippocampus_374",
+        "anterior_hard_dice": 0.9045273065567017,
+        "anterior_soft_dice": 0.870527446269989,
+        "posterior_hard_dice": 0.07173086702823639,
+        "posterior_soft_dice": 0.06633799523115158
+      },
+      {
+        "case_name": "hippocampus_394",
+        "anterior_hard_dice": 0.8401802182197571,
+        "anterior_soft_dice": 0.8113510608673096,
+        "posterior_hard_dice": 0.07091677933931351,
+        "posterior_soft_dice": 0.0661177709698677
+      }
+    ]
+  },
+  "training_case_details": [
+    {
+      "case_name": "hippocampus_093",
+      "truth_by_prediction_confusion": [
+        [
+          215516,
+          14,
+          42872
+        ],
+        [
+          6,
+          1752,
+          4
+        ],
+        [
+          1,
+          0,
+          1979
+        ]
+      ],
+      "probabilities_by_true_class": [
+        [
+          0.8267250657081604,
+          0.0006386502645909786,
+          0.17263630032539368
+        ],
+        [
+          0.007105941418558359,
+          0.9805198311805725,
+          0.012374240905046463
+        ],
+        [
+          0.03231433779001236,
+          0.00042621479951776564,
+          0.9672594666481018
+        ]
+      ],
+      "logit_min": [
+        -14.9375,
+        -11.125,
+        -7.71875
+      ],
+      "logit_max": [
+        10.1875,
+        11.4375,
+        13.0
+      ]
+    },
+    {
+      "case_name": "hippocampus_097",
+      "truth_by_prediction_confusion": [
+        [
+          216123,
+          15,
+          43253
+        ],
+        [
+          4,
+          1347,
+          3
+        ],
+        [
+          1,
+          0,
+          1398
+        ]
+      ],
+      "probabilities_by_true_class": [
+        [
+          0.8257793188095093,
+          0.0005829435540363193,
+          0.1736377328634262
+        ],
+        [
+          0.007062120828777552,
+          0.982775866985321,
+          0.010161920450627804
+        ],
+        [
+          0.030137093737721443,
+          0.00042975536780431867,
+          0.9694332480430603
+        ]
+      ],
+      "logit_min": [
+        -15.3125,
+        -10.25,
+        -8.0
+      ],
+      "logit_max": [
+        10.875,
+        12.6875,
+        13.5
+      ]
+    },
+    {
+      "case_name": "hippocampus_197",
+      "truth_by_prediction_confusion": [
+        [
+          215770,
+          25,
+          42972
+        ],
+        [
+          5,
+          1771,
+          8
+        ],
+        [
+          5,
+          0,
+          1588
+        ]
+      ],
+      "probabilities_by_true_class": [
+        [
+          0.8264918923377991,
+          0.0006447386695072055,
+          0.17286333441734314
+        ],
+        [
+          0.006955703254789114,
+          0.9794158935546875,
+          0.013628464192152023
+        ],
+        [
+          0.032687798142433167,
+          0.0005659774760715663,
+          0.9667462110519409
+        ]
+      ],
+      "logit_min": [
+        -14.75,
+        -8.5,
+        -8.125
+      ],
+      "logit_max": [
+        10.5,
+        12.875,
+        12.5625
+      ]
+    },
+    {
+      "case_name": "hippocampus_287",
+      "truth_by_prediction_confusion": [
+        [
+          215558,
+          14,
+          42872
+        ],
+        [
+          5,
+          1760,
+          1
+        ],
+        [
+          9,
+          0,
+          1925
+        ]
+      ],
+      "probabilities_by_true_class": [
+        [
+          0.8268396854400635,
+          0.0006245869444683194,
+          0.1725357472896576
+        ],
+        [
+          0.005922423209995031,
+          0.9845455884933472,
+          0.009531955234706402
+        ],
+        [
+          0.035417310893535614,
+          0.00044442739454098046,
+          0.9641382694244385
+        ]
+      ],
+      "logit_min": [
+        -13.125,
+        -8.0625,
+        -7.0
+      ],
+      "logit_max": [
+        9.875,
+        10.625,
+        13.125
+      ]
+    },
+    {
+      "case_name": "hippocampus_311",
+      "truth_by_prediction_confusion": [
+        [
+          215822,
+          20,
+          43101
+        ],
+        [
+          7,
+          1556,
+          2
+        ],
+        [
+          1,
+          0,
+          1635
+        ]
+      ],
+      "probabilities_by_true_class": [
+        [
+          0.8262006044387817,
+          0.0006376814562827349,
+          0.17316168546676636
+        ],
+        [
+          0.007745323237031698,
+          0.9804456233978271,
+          0.011809035204350948
+        ],
+        [
+          0.03224069997668266,
+          0.0007678854162804782,
+          0.9669914245605469
+        ]
+      ],
+      "logit_min": [
+        -14.3125,
+        -8.0,
+        -7.3125
+      ],
+      "logit_max": [
+        9.8125,
+        12.4375,
+        12.125
+      ]
+    },
+    {
+      "case_name": "hippocampus_314",
+      "truth_by_prediction_confusion": [
+        [
+          215947,
+          38,
+          43216
+        ],
+        [
+          9,
+          1673,
+          15
+        ],
+        [
+          3,
+          0,
+          1243
+        ]
+      ],
+      "probabilities_by_true_class": [
+        [
+          0.8256794214248657,
+          0.0006889583310112357,
+          0.17363162338733673
+        ],
+        [
+          0.008388245478272438,
+          0.9731552004814148,
+          0.01845664158463478
+        ],
+        [
+          0.034640587866306305,
+          0.0006042521563358605,
+          0.9647550582885742
+        ]
+      ],
+      "logit_min": [
+        -14.4375,
+        -8.25,
+        -7.34375
+      ],
+      "logit_max": [
+        10.5625,
+        12.3125,
+        14.125
+      ]
+    },
+    {
+      "case_name": "hippocampus_353",
+      "truth_by_prediction_confusion": [
+        [
+          216093,
+          17,
+          43279
+        ],
+        [
+          6,
+          1405,
+          4
+        ],
+        [
+          8,
+          0,
+          1332
+        ]
+      ],
+      "probabilities_by_true_class": [
+        [
+          0.8255910873413086,
+          0.000592274940572679,
+          0.17381665110588074
+        ],
+        [
+          0.007725710514932871,
+          0.9798169732093811,
+          0.01245724968612194
+        ],
+        [
+          0.03947632759809494,
+          0.0004008206306025386,
+          0.9601229429244995
+        ]
+      ],
+      "logit_min": [
+        -13.6875,
+        -9.375,
+        -7.1875
+      ],
+      "logit_max": [
+        10.125,
+        12.125,
+        13.9375
+      ]
+    },
+    {
+      "case_name": "hippocampus_361",
+      "truth_by_prediction_confusion": [
+        [
+          215871,
+          39,
+          43129
+        ],
+        [
+          12,
+          1711,
+          10
+        ],
+        [
+          22,
+          0,
+          1350
+        ]
+      ],
+      "probabilities_by_true_class": [
+        [
+          0.8259268403053284,
+          0.0007149921730160713,
+          0.17335815727710724
+        ],
+        [
+          0.011134016327559948,
+          0.9715678095817566,
+          0.0172981396317482
+        ],
+        [
+          0.04932950809597969,
+          0.0008283396600745618,
+          0.9498421549797058
+        ]
+      ],
+      "logit_min": [
+        -13.6875,
+        -8.125,
+        -7.1875
+      ],
+      "logit_max": [
+        11.0,
+        11.5625,
+        14.0
+      ]
+    },
+    {
+      "case_name": "hippocampus_373",
+      "truth_by_prediction_confusion": [
+        [
+          215563,
+          20,
+          42872
+        ],
+        [
+          5,
+          1876,
+          1
+        ],
+        [
+          7,
+          0,
+          1800
+        ]
+      ],
+      "probabilities_by_true_class": [
+        [
+          0.8267784714698792,
+          0.0006447986233979464,
+          0.17257675528526306
+        ],
+        [
+          0.00603221170604229,
+          0.983365535736084,
+          0.01060221903026104
+        ],
+        [
+          0.037198107689619064,
+          0.00033590843668207526,
+          0.9624660015106201
+        ]
+      ],
+      "logit_min": [
+        -12.875,
+        -9.1875,
+        -7.53125
+      ],
+      "logit_max": [
+        10.375,
+        11.3125,
+        13.1875
+      ]
+    },
+    {
+      "case_name": "hippocampus_390",
+      "truth_by_prediction_confusion": [
+        [
+          215776,
+          42,
+          43074
+        ],
+        [
+          8,
+          1871,
+          7
+        ],
+        [
+          3,
+          0,
+          1363
+        ]
+      ],
+      "probabilities_by_true_class": [
+        [
+          0.8260731101036072,
+          0.000727696402464062,
+          0.17319919168949127
+        ],
+        [
+          0.007486979942768812,
+          0.977777361869812,
+          0.014735755510628223
+        ],
+        [
+          0.03356299176812172,
+          0.0005224959459155798,
+          0.9659144878387451
+        ]
+      ],
+      "logit_min": [
+        -13.375,
+        -9.375,
+        -7.46875
+      ],
+      "logit_max": [
+        10.6875,
+        12.125,
+        13.3125
+      ]
+    }
+  ],
+  "precision_forward_comparison": {
+    "case_name": "hippocampus_093",
+    "mean_abs_logit_difference": 0.00872710719704628,
+    "max_abs_logit_difference": 0.1060791015625,
+    "argmax_disagreement_fraction": 3.814697265625e-06
+  },
+  "loss_precision_comparison": [
+    {
+      "precision": "runtime",
+      "loss": 0.3569447696208954,
+      "per_class_loss": [
+        0.0950021743774414,
+        0.05476510524749756,
+        0.9210669994354248
+      ],
+      "gradient_abs_sum_per_class": [
+        0.014248386025428772,
+        0.015564916655421257,
+        0.00806597713381052
+      ],
+      "gradient_zero_fraction_per_class": [
+        0.0,
+        3.814697265625e-06,
+        0.0
+      ],
+      "gradient_positive_sum_per_class": [
+        0.001569810090586543,
+        0.01322321966290474,
+        0.004146758466959
+      ],
+      "gradient_negative_sum_per_class": [
+        -0.01267857663333416,
+        -0.002341697458177805,
+        -0.003919219132512808
+      ]
+    },
+    {
+      "precision": "float32",
+      "loss": 0.3569447696208954,
+      "per_class_loss": [
+        0.0950021743774414,
+        0.05476510524749756,
+        0.9210669994354248
+      ],
+      "gradient_abs_sum_per_class": [
+        0.014248386025428772,
+        0.015564916655421257,
+        0.00806597713381052
+      ],
+      "gradient_zero_fraction_per_class": [
+        0.0,
+        3.814697265625e-06,
+        0.0
+      ],
+      "gradient_positive_sum_per_class": [
+        0.001569810090586543,
+        0.01322321966290474,
+        0.004146758466959
+      ],
+      "gradient_negative_sum_per_class": [
+        -0.01267857663333416,
+        -0.002341697458177805,
+        -0.003919219132512808
+      ]
+    }
+  ],
+  "weight_statistics": [
+    {
+      "name": "model.2.0.conv.weight",
+      "shape": [
+        96,
+        3,
+        3,
+        3,
+        3
+      ],
+      "minimum": -0.15493382513523102,
+      "maximum": 0.17648816108703613,
+      "norm": 5.607326507568359
+    },
+    {
+      "name": "model.2.0.conv.bias",
+      "shape": [
+        3
+      ],
+      "minimum": -0.0593985915184021,
+      "maximum": 0.03860706090927124,
+      "norm": 0.07416962832212448
+    },
+    {
+      "name": "model.2.0.adn.A.weight",
+      "shape": [
+        1
+      ],
+      "minimum": 0.06087258458137512,
+      "maximum": 0.06087258458137512,
+      "norm": 0.06087258458137512
+    },
+    {
+      "name": "model.2.1.conv.unit0.conv.weight",
+      "shape": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "minimum": -0.24497757852077484,
+      "maximum": 0.2728980481624603,
+      "norm": 2.128424882888794
+    },
+    {
+      "name": "model.2.1.conv.unit0.conv.bias",
+      "shape": [
+        3
+      ],
+      "minimum": -0.13447140157222748,
+      "maximum": 0.188338041305542,
+      "norm": 0.23318183422088623
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "state": "passed",
+  "model_check": {
+    "state": "passed",
+    "input_shape": [
+      1,
+      1,
+      64,
+      64,
+      64
+    ],
+    "output_shape": [
+      1,
+      2,
+      64,
+      64,
+      64
+    ],
+    "loss": 1.542144536972046,
+    "foreground_voxels": 23893,
+    "backward": "finite gradients",
+    "torch": "2.12.1+cu130",
+    "smoke_roi": 64,
+    "training_roi": 128
+  },
+  "pipeline_check": {
+    "state": "passed",
+    "native_128_cubed_loader": "4 spawned-worker patches",
+    "patch_target_voxels": [
+      23316,
+      93864,
+      64664,
+      0
+    ],
+    "deterministic_validation_rois": true,
+    "independent_source_label_alignment_checks": 14,
+    "streamed_boundary_metrics": "exact dense counts at tile seams and image edges"
+  },
+  "target_instance_total": 2074,
+  "native_voxel_data_lossless_readback": true
+}

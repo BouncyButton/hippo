@@ -1,0 +1,54 @@
+{
+  "candidate": "unetr_vit_b16",
+  "architecture": {
+    "class": "monai.networks.nets.UNETR",
+    "kwargs": {
+      "in_channels": 1,
+      "out_channels": 3,
+      "img_size": [
+        64,
+        64,
+        64
+      ],
+      "feature_size": 16,
+      "hidden_size": 768,
+      "mlp_dim": 3072,
+      "num_heads": 12,
+      "proj_type": "perceptron",
+      "norm_name": "instance",
+      "conv_block": true,
+      "res_block": true,
+      "dropout_rate": 0.0,
+      "spatial_dims": 3,
+      "qkv_bias": false
+    },
+    "source": "https://github.com/Project-MONAI/research-contributions/tree/main/UNETR/BTCV",
+    "rationale": "Published feature16/ViT-B16 UNETR preset in MONAI 1.6.0, adapted to 64 cubed inputs and three labels; twelve global-attention layers, no pretrained weights."
+  },
+  "protocol_sha256": "3432cbda4ee3d7b0ee2c920dc0a77250dd801077151a2a06809053be224511bf",
+  "adapter_sha256": "f797378014be8ecc7ca2bf2bfead419e0738f106ca0e3599852e5e9aabec1d68",
+  "validation_updates": [
+    23,
+    47,
+    71,
+    95,
+    119,
+    143,
+    167,
+    191,
+    215,
+    238,
+    262,
+    286,
+    310,
+    334,
+    358,
+    382,
+    406,
+    430,
+    454,
+    477
+  ],
+  "learning_rate_policy": "AdamW 1e-4 (published initial rate), 5% linear warmup (24 updates), cosine decay to 1% initial LR (1e-6) over 477 updates.",
+  "internal_trainer_alias": "unet"
+}

@@ -1,0 +1,47 @@
+{
+  "candidate": "segresnet12",
+  "architecture": {
+    "class": "monai.networks.nets.SegResNet",
+    "kwargs": {
+      "spatial_dims": 3,
+      "in_channels": 1,
+      "out_channels": 3,
+      "init_filters": 12,
+      "norm": [
+        "GROUP",
+        {
+          "num_groups": 4
+        }
+      ],
+      "upsample_mode": "deconv"
+    },
+    "source": "https://arxiv.org/abs/1810.11654",
+    "rationale": "Segmentation-only residual encoder-decoder with twelve initial filters, four GroupNorm groups and trainable deconvolution; no autoencoder branch or deep supervision."
+  },
+  "protocol_sha256": "6fe35b7d53d0b9e500b75eca5e96065e3a010c9809a0e5c318e6d6a98dee3ba4",
+  "adapter_sha256": "f797378014be8ecc7ca2bf2bfead419e0738f106ca0e3599852e5e9aabec1d68",
+  "validation_updates": [
+    50,
+    100,
+    150,
+    200,
+    250,
+    300,
+    350,
+    400,
+    450,
+    500,
+    550,
+    600,
+    650,
+    700,
+    750,
+    800,
+    850,
+    900,
+    950,
+    1000
+  ],
+  "learning_rate_policy": "AdamW1e-3, 5% linear warmup (50 updates), cosine decay to1% initial LR (1e-5) over1000 updates.",
+  "internal_trainer_alias": "unet"
+}

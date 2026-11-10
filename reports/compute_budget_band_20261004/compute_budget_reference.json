@@ -1,0 +1,31 @@
+{
+  "status": "official_reference",
+  "adopted_on": "2026-10-04",
+  "budget_flops": 12207124453303,
+  "budget_gflops": 12207.124453303,
+  "parent_budget_flops": 8138082968869,
+  "anchor_model": "unet",
+  "anchor_flops_per_update": 9580978301,
+  "baseline_max_updates": 1274,
+  "baseline_patient_pass_epochs": 127.4,
+  "baseline_final_dice": 0.7692238740049875,
+  "training_patients": 10,
+  "input_shape": [
+    1,
+    1,
+    64,
+    64,
+    64
+  ],
+  "selection_plan_sha256": "f122ea367456c714a38e6fd01e94c4e0328983b829361dec681e5588df999b81",
+  "reference_definition_sha256": "81bd6eb57725ecf6e5298610a84a2605e7079b064ddd40da6a5b57f196b89749",
+  "selected_protocol_sha256": "60205f2af7cfd5ef17d042a26dbe5e0d63650187d67b5c4b09579e96e9f97f5b",
+  "accounting": "fixed declared arithmetic cost per training update; excludes augmentation/preprocessing, validation, checkpoint I/O and precision-management overhead",
+  "budget_selection": [
+    "Budget selection uses baseline final scores only; all pilot costs are reported separately.",
+    "Selected pilot is reused as the comparison baseline; count it once when totaling actual compute.",
+    "Fold 0, seed 0 is exploratory. Freeze before additional folds/seeds; use untouched test data for confirmatory claims.",
+    "Every objective starts from the same seeded initialization, not the selected baseline checkpoint."
+  ],
+  "learning_rate_policy": "5% linear warmup, cosine decay to 1% initial LR over allotted updates"
+}

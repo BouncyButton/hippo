@@ -1,0 +1,509 @@
+{
+  "name": "four_models_six_optimization_31976_20261006",
+  "status": "ready",
+  "budget_flops_per_run": 31976450667090,
+  "budget_gflops_per_run": 31976.45066709,
+  "fold": 0,
+  "seed": 0,
+  "model_order": [
+    "nnunet",
+    "swinunetr",
+    "unetr_vit_b16",
+    "basic_unet16"
+  ],
+  "arm_order": [
+    "dice",
+    "dice_bands",
+    "dice_sdf",
+    "dice_bands_sdf",
+    "dice_bands_edge",
+    "dice_bands_edge_sdf"
+  ],
+  "runs": 24,
+  "run_order": [
+    [
+      "nnunet",
+      "dice"
+    ],
+    [
+      "swinunetr",
+      "dice"
+    ],
+    [
+      "unetr_vit_b16",
+      "dice"
+    ],
+    [
+      "basic_unet16",
+      "dice"
+    ],
+    [
+      "nnunet",
+      "dice_bands"
+    ],
+    [
+      "swinunetr",
+      "dice_bands"
+    ],
+    [
+      "unetr_vit_b16",
+      "dice_bands"
+    ],
+    [
+      "basic_unet16",
+      "dice_bands"
+    ],
+    [
+      "nnunet",
+      "dice_sdf"
+    ],
+    [
+      "swinunetr",
+      "dice_sdf"
+    ],
+    [
+      "unetr_vit_b16",
+      "dice_sdf"
+    ],
+    [
+      "basic_unet16",
+      "dice_sdf"
+    ],
+    [
+      "nnunet",
+      "dice_bands_sdf"
+    ],
+    [
+      "swinunetr",
+      "dice_bands_sdf"
+    ],
+    [
+      "unetr_vit_b16",
+      "dice_bands_sdf"
+    ],
+    [
+      "basic_unet16",
+      "dice_bands_sdf"
+    ],
+    [
+      "nnunet",
+      "dice_bands_edge"
+    ],
+    [
+      "swinunetr",
+      "dice_bands_edge"
+    ],
+    [
+      "unetr_vit_b16",
+      "dice_bands_edge"
+    ],
+    [
+      "basic_unet16",
+      "dice_bands_edge"
+    ],
+    [
+      "nnunet",
+      "dice_bands_edge_sdf"
+    ],
+    [
+      "swinunetr",
+      "dice_bands_edge_sdf"
+    ],
+    [
+      "unetr_vit_b16",
+      "dice_bands_edge_sdf"
+    ],
+    [
+      "basic_unet16",
+      "dice_bands_edge_sdf"
+    ]
+  ],
+  "single_allocation": true,
+  "protocol_sha256": {
+    "nnunet": "1c9e7418d3cf82379780f5af0d1d0135abe67ba1b42bfb3c5b0bd393ac0cbbb8",
+    "swinunetr": "4eb0e780d1783dcbdee54f0f861d848f46f64cde6c657b45f4f1cae4362ef647",
+    "unetr_vit_b16": "0057a9f1051109dd3432dfb6272aee18af29aced4bac794d5b9814a936ed3045",
+    "basic_unet16": "dc4c6d099517ee64a80088db983465fc49f6c8d9e465d90501057e8ef92bb17e"
+  },
+  "schedules": {
+    "nnunet": {
+      "dice": {
+        "max_steps": 90,
+        "prefix_updates": 0,
+        "baseline_flops_per_update": 355293896301,
+        "flops_per_update": 355293896301,
+        "calibration_flops": 0,
+        "consumed_flops": 31976450667090,
+        "consumed_training_flops": 31976450667090,
+        "consumed_total_flops": 31976450667090,
+        "unused_flops": 0,
+        "patient_pass_epochs": 9.0,
+        "budget_scope": "optimization_only"
+      },
+      "dice_bands": {
+        "max_steps": 89,
+        "prefix_updates": 50,
+        "baseline_flops_per_update": 355293896301,
+        "flops_per_update": 355363888771,
+        "calibration_flops": 1186803780354,
+        "consumed_flops": 31623886477119,
+        "consumed_training_flops": 31623886477119,
+        "consumed_total_flops": 32810690257473,
+        "unused_flops": 352564189971,
+        "patient_pass_epochs": 8.9,
+        "budget_scope": "optimization_only"
+      },
+      "dice_sdf": {
+        "max_steps": 89,
+        "prefix_updates": 50,
+        "baseline_flops_per_update": 355293896301,
+        "flops_per_update": 355303857781,
+        "calibration_flops": 1186203470444,
+        "consumed_flops": 31621545268509,
+        "consumed_training_flops": 31621545268509,
+        "consumed_total_flops": 32807748738953,
+        "unused_flops": 354905398581,
+        "patient_pass_epochs": 8.9,
+        "budget_scope": "optimization_only"
+      },
+      "dice_bands_sdf": {
+        "max_steps": 89,
+        "prefix_updates": 50,
+        "baseline_flops_per_update": 355293896301,
+        "flops_per_update": 355373063814,
+        "calibration_flops": 1186919123724,
+        "consumed_flops": 31624244303796,
+        "consumed_training_flops": 31624244303796,
+        "consumed_total_flops": 32811163427520,
+        "unused_flops": 352206363294,
+        "patient_pass_epochs": 8.9,
+        "budget_scope": "optimization_only"
+      },
+      "dice_bands_edge": {
+        "max_steps": 89,
+        "prefix_updates": 50,
+        "baseline_flops_per_update": 355293896301,
+        "flops_per_update": 355436392077,
+        "calibration_flops": 1187552406354,
+        "consumed_flops": 31626714106053,
+        "consumed_training_flops": 31626714106053,
+        "consumed_total_flops": 32814266512407,
+        "unused_flops": 349736561037,
+        "patient_pass_epochs": 8.9,
+        "budget_scope": "optimization_only"
+      },
+      "dice_bands_edge_sdf": {
+        "max_steps": 89,
+        "prefix_updates": 50,
+        "baseline_flops_per_update": 355293896301,
+        "flops_per_update": 355445567120,
+        "calibration_flops": 1187683478364,
+        "consumed_flops": 31627071932730,
+        "consumed_training_flops": 31627071932730,
+        "consumed_total_flops": 32814755411094,
+        "unused_flops": 349378734360,
+        "patient_pass_epochs": 8.9,
+        "budget_scope": "optimization_only"
+      }
+    },
+    "swinunetr": {
+      "dice": {
+        "max_steps": 206,
+        "prefix_updates": 0,
+        "baseline_flops_per_update": 155012136022,
+        "flops_per_update": 155012136022,
+        "calibration_flops": 0,
+        "consumed_flops": 31932500020532,
+        "consumed_training_flops": 31932500020532,
+        "consumed_total_flops": 31932500020532,
+        "unused_flops": 43950646558,
+        "patient_pass_epochs": 20.6,
+        "budget_scope": "optimization_only"
+      },
+      "dice_bands": {
+        "max_steps": 206,
+        "prefix_updates": 50,
+        "baseline_flops_per_update": 155012136022,
+        "flops_per_update": 155081342055,
+        "calibration_flops": 521568187624,
+        "consumed_flops": 31943296161680,
+        "consumed_training_flops": 31943296161680,
+        "consumed_total_flops": 32464864349304,
+        "unused_flops": 33154505410,
+        "patient_pass_epochs": 20.6,
+        "budget_scope": "optimization_only"
+      },
+      "dice_sdf": {
+        "max_steps": 206,
+        "prefix_updates": 50,
+        "baseline_flops_per_update": 155012136022,
+        "flops_per_update": 155021311065,
+        "calibration_flops": 520967877714,
+        "consumed_flops": 31933931327240,
+        "consumed_training_flops": 31933931327240,
+        "consumed_total_flops": 32454899204954,
+        "unused_flops": 42519339850,
+        "patient_pass_epochs": 20.6,
+        "budget_scope": "optimization_only"
+      },
+      "dice_bands_sdf": {
+        "max_steps": 206,
+        "prefix_updates": 50,
+        "baseline_flops_per_update": 155012136022,
+        "flops_per_update": 155090517098,
+        "calibration_flops": 521683530994,
+        "consumed_flops": 31944727468388,
+        "consumed_training_flops": 31944727468388,
+        "consumed_total_flops": 32466410999382,
+        "unused_flops": 31723198702,
+        "patient_pass_epochs": 20.6,
+        "budget_scope": "optimization_only"
+      },
+      "dice_bands_edge": {
+        "max_steps": 206,
+        "prefix_updates": 50,
+        "baseline_flops_per_update": 155012136022,
+        "flops_per_update": 155153845361,
+        "calibration_flops": 522316813624,
+        "consumed_flops": 31954606677416,
+        "consumed_training_flops": 31954606677416,
+        "consumed_total_flops": 32476923491040,
+        "unused_flops": 21843989674,
+        "patient_pass_epochs": 20.6,
+        "budget_scope": "optimization_only"
+      },
+      "dice_bands_edge_sdf": {
+        "max_steps": 206,
+        "prefix_updates": 50,
+        "baseline_flops_per_update": 155012136022,
+        "flops_per_update": 155163020404,
+        "calibration_flops": 522447885634,
+        "consumed_flops": 31956037984124,
+        "consumed_training_flops": 31956037984124,
+        "consumed_total_flops": 32478485869758,
+        "unused_flops": 20412682966,
+        "patient_pass_epochs": 20.6,
+        "budget_scope": "optimization_only"
+      }
+    },
+    "unetr_vit_b16": {
+      "dice": {
+        "max_steps": 245,
+        "prefix_updates": 0,
+        "baseline_flops_per_update": 130061273028,
+        "flops_per_update": 130061273028,
+        "calibration_flops": 0,
+        "consumed_flops": 31865011891860,
+        "consumed_training_flops": 31865011891860,
+        "consumed_total_flops": 31865011891860,
+        "unused_flops": 111438775230,
+        "patient_pass_epochs": 24.5,
+        "budget_scope": "optimization_only"
+      },
+      "dice_bands": {
+        "max_steps": 245,
+        "prefix_updates": 50,
+        "baseline_flops_per_update": 130061273028,
+        "flops_per_update": 130130479061,
+        "calibration_flops": 432467930294,
+        "consumed_flops": 31878507068295,
+        "consumed_training_flops": 31878507068295,
+        "consumed_total_flops": 32310974998589,
+        "unused_flops": 97943598795,
+        "patient_pass_epochs": 24.5,
+        "budget_scope": "optimization_only"
+      },
+      "dice_sdf": {
+        "max_steps": 245,
+        "prefix_updates": 50,
+        "baseline_flops_per_update": 130061273028,
+        "flops_per_update": 130070448071,
+        "calibration_flops": 431867620384,
+        "consumed_flops": 31866801025245,
+        "consumed_training_flops": 31866801025245,
+        "consumed_total_flops": 32298668645629,
+        "unused_flops": 109649641845,
+        "patient_pass_epochs": 24.5,
+        "budget_scope": "optimization_only"
+      },
+      "dice_bands_sdf": {
+        "max_steps": 245,
+        "prefix_updates": 50,
+        "baseline_flops_per_update": 130061273028,
+        "flops_per_update": 130139654104,
+        "calibration_flops": 432583273664,
+        "consumed_flops": 31880296201680,
+        "consumed_training_flops": 31880296201680,
+        "consumed_total_flops": 32312879475344,
+        "unused_flops": 96154465410,
+        "patient_pass_epochs": 24.5,
+        "budget_scope": "optimization_only"
+      },
+      "dice_bands_edge": {
+        "max_steps": 245,
+        "prefix_updates": 50,
+        "baseline_flops_per_update": 130061273028,
+        "flops_per_update": 130202982367,
+        "calibration_flops": 433216556294,
+        "consumed_flops": 31892645212965,
+        "consumed_training_flops": 31892645212965,
+        "consumed_total_flops": 32325861769259,
+        "unused_flops": 83805454125,
+        "patient_pass_epochs": 24.5,
+        "budget_scope": "optimization_only"
+      },
+      "dice_bands_edge_sdf": {
+        "max_steps": 245,
+        "prefix_updates": 50,
+        "baseline_flops_per_update": 130061273028,
+        "flops_per_update": 130212157410,
+        "calibration_flops": 433347628304,
+        "consumed_flops": 31894434346350,
+        "consumed_training_flops": 31894434346350,
+        "consumed_total_flops": 32327781974654,
+        "unused_flops": 82016320740,
+        "patient_pass_epochs": 24.5,
+        "budget_scope": "optimization_only"
+      }
+    },
+    "basic_unet16": {
+      "dice": {
+        "max_steps": 563,
+        "prefix_updates": 0,
+        "baseline_flops_per_update": 56727085196,
+        "flops_per_update": 56727085196,
+        "calibration_flops": 0,
+        "consumed_flops": 31937348965348,
+        "consumed_training_flops": 31937348965348,
+        "consumed_total_flops": 31937348965348,
+        "unused_flops": 39101701742,
+        "patient_pass_epochs": 56.3,
+        "budget_scope": "optimization_only"
+      },
+      "dice_bands": {
+        "max_steps": 563,
+        "prefix_updates": 50,
+        "baseline_flops_per_update": 56727085196,
+        "flops_per_update": 56796291229,
+        "calibration_flops": 190824301494,
+        "consumed_flops": 31972851660277,
+        "consumed_training_flops": 31972851660277,
+        "consumed_total_flops": 32163675961771,
+        "unused_flops": 3599006813,
+        "patient_pass_epochs": 56.3,
+        "budget_scope": "optimization_only"
+      },
+      "dice_sdf": {
+        "max_steps": 563,
+        "prefix_updates": 50,
+        "baseline_flops_per_update": 56727085196,
+        "flops_per_update": 56736260239,
+        "calibration_flops": 190223991584,
+        "consumed_flops": 31942055762407,
+        "consumed_training_flops": 31942055762407,
+        "consumed_total_flops": 32132279753991,
+        "unused_flops": 34394904683,
+        "patient_pass_epochs": 56.3,
+        "budget_scope": "optimization_only"
+      },
+      "dice_bands_sdf": {
+        "max_steps": 562,
+        "prefix_updates": 50,
+        "baseline_flops_per_update": 56727085196,
+        "flops_per_update": 56805466272,
+        "calibration_flops": 190939644864,
+        "consumed_flops": 31920752991064,
+        "consumed_training_flops": 31920752991064,
+        "consumed_total_flops": 32111692635928,
+        "unused_flops": 55697676026,
+        "patient_pass_epochs": 56.2,
+        "budget_scope": "optimization_only"
+      },
+      "dice_bands_edge": {
+        "max_steps": 562,
+        "prefix_updates": 50,
+        "baseline_flops_per_update": 56727085196,
+        "flops_per_update": 56868794535,
+        "calibration_flops": 191572927494,
+        "consumed_flops": 31953177061720,
+        "consumed_training_flops": 31953177061720,
+        "consumed_total_flops": 32144749989214,
+        "unused_flops": 23273605370,
+        "patient_pass_epochs": 56.2,
+        "budget_scope": "optimization_only"
+      },
+      "dice_bands_edge_sdf": {
+        "max_steps": 562,
+        "prefix_updates": 50,
+        "baseline_flops_per_update": 56727085196,
+        "flops_per_update": 56877969578,
+        "calibration_flops": 191703999504,
+        "consumed_flops": 31957874683736,
+        "consumed_training_flops": 31957874683736,
+        "consumed_total_flops": 32149578683240,
+        "unused_flops": 18575983354,
+        "patient_pass_epochs": 56.2,
+        "budget_scope": "optimization_only"
+      }
+    }
+  },
+  "pkl_sha256": "3311d2233b99e09080c40ca80f1035781d9c1dc9c5b109dc266c73eb52a3df01",
+  "training_volumes": 10,
+  "validation_volumes": 52,
+  "initial_lrs": {
+    "nnunet": 0.01,
+    "swinunetr": 0.0001,
+    "unetr_vit_b16": 0.0001,
+    "basic_unet16": 0.0003
+  },
+  "lr_horizons": {
+    "nnunet": 174,
+    "swinunetr": 610,
+    "unetr_vit_b16": 477,
+    "basic_unet16": 1095
+  },
+  "budget_origin": "User selected90 times the measured native nnU-Net baseline training-update cost, following exploratory learning curves. No outcome filtering; all24 runs reported.",
+  "development_only": true,
+  "pretrained_weights": false,
+  "prior_reference_sha256": "85a873cdc97c08799a69fea345f0201446cbd21d4ce542433dfe643858b88857",
+  "budget_scope": "optimization_only",
+  "replaced_job_id": 685757,
+  "all_runs_fresh_initialization": true,
+  "parent_plan_sha256": "1342e24eefe68ee273368c309b00cc1efa5949d444caf103cbc0eaabaafb09f0",
+  "previous_max_steps": {
+    "nnunet": {
+      "dice": 90,
+      "dice_bands": 86,
+      "dice_sdf": 86,
+      "dice_bands_sdf": 86,
+      "dice_bands_edge": 86,
+      "dice_bands_edge_sdf": 86
+    },
+    "swinunetr": {
+      "dice": 206,
+      "dice_bands": 202,
+      "dice_sdf": 202,
+      "dice_bands_sdf": 202,
+      "dice_bands_edge": 202,
+      "dice_bands_edge_sdf": 202
+    },
+    "unetr_vit_b16": {
+      "dice": 245,
+      "dice_bands": 242,
+      "dice_sdf": 242,
+      "dice_bands_sdf": 242,
+      "dice_bands_edge": 242,
+      "dice_bands_edge_sdf": 242
+    },
+    "basic_unet16": {
+      "dice": 563,
+      "dice_bands": 559,
+      "dice_sdf": 560,
+      "dice_bands_sdf": 559,
+      "dice_bands_edge": 559,
+      "dice_bands_edge_sdf": 558
+    }
+  },
+  "additional_training_updates": 67,
+  "policy_selection": "User revised accounting after observing calibration displaced updates. Exploratory results retained; use final optimization-budget endpoint and report calibration/total compute separately."
+}

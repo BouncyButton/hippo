@@ -1,0 +1,54 @@
+{
+  "rows": [
+    {
+      "model": "nnunet",
+      "baseline_best_dice_percent": 84.45375962899281,
+      "constrained_best_dice_percent": 84.58820409499683,
+      "gain_pp": 0.13444446600400228,
+      "baseline_epochs": 29,
+      "constrained_epochs": 29,
+      "baseline_best_epoch": 21,
+      "constrained_best_epoch": 26,
+      "baseline_final_dice_percent": 84.3069572861378,
+      "constrained_final_dice_percent": 84.47378999911821,
+      "capped_baseline_best_dice_percent": 67.06904132778828,
+      "capped_constrained_best_dice_percent": 67.66073142106717,
+      "baseline_gain_over_capped_pp": 17.384718301204536,
+      "constrained_gain_over_capped_pp": 16.927472673929657
+    },
+    {
+      "model": "unetr_vit_b16",
+      "baseline_best_dice_percent": 65.63279677468996,
+      "constrained_best_dice_percent": 68.7984980069674,
+      "gain_pp": 3.1657012322774403,
+      "baseline_epochs": 75,
+      "constrained_epochs": 75,
+      "baseline_best_epoch": 74,
+      "constrained_best_epoch": 75,
+      "baseline_final_dice_percent": 65.61195727151174,
+      "constrained_final_dice_percent": 68.7984980069674,
+      "capped_baseline_best_dice_percent": 43.668171362235,
+      "capped_constrained_best_dice_percent": 45.67498119118122,
+      "baseline_gain_over_capped_pp": 21.964625412454964,
+      "constrained_gain_over_capped_pp": 23.123516815786182
+    },
+    {
+      "model": "basic_unet16",
+      "baseline_best_dice_percent": 72.73300957794373,
+      "constrained_best_dice_percent": 83.00741200263684,
+      "gain_pp": 10.274402424693108,
+      "baseline_epochs": 75,
+      "constrained_epochs": 51,
+      "baseline_best_epoch": 75,
+      "constrained_best_epoch": 43,
+      "baseline_final_dice_percent": 72.73300957794373,
+      "constrained_final_dice_percent": 83.00028930489833,
+      "capped_baseline_best_dice_percent": 70.00941768861735,
+      "capped_constrained_best_dice_percent": 86.23166135870494,
+      "baseline_gain_over_capped_pp": 2.723591889326382,
+      "constrained_gain_over_capped_pp": -3.2242493560680985
+    }
+  ],
+  "interpretation": "Both loss arms share the same protocol within each model. Comparisons with previous capped runs also change augmentation, LR policy, evaluation frequency and stopping; they do not isolate extra epochs.",
+  "audit": "final_audit.json"
+}

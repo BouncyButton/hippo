@@ -1,0 +1,102 @@
+{
+  "scope": "SwinUNETR, 5% training data, fold 0, seed 0; retrospective validation analysis",
+  "sources_sha256": {
+    "reports/swin_contenders75_20261013/final_audit.json": "af548a6ea7fe8d59797f32762dd22d479fe9e7adb3ed9ae59460d26e78e67e99",
+    "reports/capped_replication_31976_20261007/final_summary_20261010.json": "44e33f06fe66b3d5548d1e689cc1a494cdd3f197fd9bd68137edd150b26e2e49",
+    "reports/capped_winner_31976_20261013/final_results_20261013.json": "03bd0c632ef9123c2df9342fae3f94e7ae02792a2bfeca9b80745577c71609c9"
+  },
+  "old_capped_recipe_leads_focused_at_epochs": [
+    10,
+    11,
+    12,
+    13
+  ],
+  "focused_sustained_lead_from_epoch": 14,
+  "max_early_old_lead_pp": 4.046930017937456,
+  "focused_exceeds_all_original_contenders_final_bests_at_epoch": 18,
+  "cap_update_equivalent_epochs": 20.6,
+  "cap_bracketing_epochs": [
+    20,
+    21
+  ],
+  "exact_206_update_validation_in_long_run": false,
+  "best_and_stop": {
+    "winning_constraint": {
+      "best_dice_percent": 81.50157184588936,
+      "best_epoch": 41,
+      "completed_epochs": 49,
+      "early_stopping": {
+        "epoch": 49,
+        "reference_score": 0.8150157184588936,
+        "reference_epoch": 41,
+        "epochs_without_improvement": 8,
+        "patience": 8,
+        "min_epochs": 25,
+        "min_delta": 0.0005,
+        "triggered": true
+      }
+    },
+    "dice_bands_edge_sdf_depth": {
+      "best_dice_percent": 77.20419044445548,
+      "best_epoch": 58,
+      "completed_epochs": 66,
+      "early_stopping": {
+        "epoch": 66,
+        "reference_score": 0.7720419044445548,
+        "reference_epoch": 58,
+        "epochs_without_improvement": 8,
+        "patience": 8,
+        "min_epochs": 25,
+        "min_delta": 0.0005,
+        "triggered": true
+      }
+    },
+    "dice_bands_edge": {
+      "best_dice_percent": 77.30308932634819,
+      "best_epoch": 69,
+      "completed_epochs": 75,
+      "early_stopping": {
+        "epoch": 75,
+        "reference_score": 0.7730308932634818,
+        "reference_epoch": 69,
+        "epochs_without_improvement": 6,
+        "patience": 8,
+        "min_epochs": 25,
+        "min_delta": 0.0005,
+        "triggered": false
+      }
+    },
+    "dice": {
+      "best_dice_percent": 74.30360294644139,
+      "best_epoch": 73,
+      "completed_epochs": 75,
+      "early_stopping": {
+        "epoch": 75,
+        "reference_score": 0.7426994672054537,
+        "reference_epoch": 72,
+        "epochs_without_improvement": 3,
+        "patience": 8,
+        "min_epochs": 25,
+        "min_delta": 0.0005,
+        "triggered": false
+      }
+    }
+  },
+  "actual_capped_comparison": {
+    "fold0_seed0_old_final_percent": 65.29832998147378,
+    "fold0_seed0_new_final_percent": 70.57593648250287,
+    "fold0_seed0_old_best_percent": 67.17475870480905,
+    "fold0_seed0_new_best_percent": 70.57593648250287,
+    "old_nine_run_mean_percent": 63.65945983009461,
+    "new_nine_run_mean_percent": 63.905267824984,
+    "new_paired_wins_of_nine": 2
+  },
+  "limitations": [
+    "Equal update count is not exactly equal FLOPs: objective arithmetic differs.",
+    "Capped runs used mild_v1 augmentation and 31-update LR warmup then a 610-update cosine horizon; long runs used no augmentation and StepLR every 20 epochs.",
+    "The old capped all-four recipe activated SDF at update 116; the long-run contender included SDF in the common update-51-to-100 constraint ramp. Recalibrated coefficients also differ.",
+    "Capped headline comparisons use final-budget checkpoints; long-run headline comparisons select best validation checkpoints.",
+    "This exploratory fold/seed was used to select the focused constraint. Results do not establish ranking on independent data.",
+    "Early stopping does not establish what would happen if training were continued beyond stopping."
+  ]
+}

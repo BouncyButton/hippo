@@ -1,0 +1,40 @@
+{
+  "job_id": 688523,
+  "slurm_state": "FAILED",
+  "cause": "The training loop reused the destination left over from the resume scan.",
+  "recovery_status": "prepared_not_submitted",
+  "completed_new_runs": 2,
+  "total_new_runs": 448,
+  "remaining_new_runs": 446,
+  "replacement_submitted": false,
+  "submission_on_hold_by_user": true,
+  "regression_test": "passed",
+  "frozen_training_and_protocols_unchanged": true,
+  "metadata_archive_sha256": "bc967f66ce9886f49b70cb2efd4e62ae53841d143ed6fed1014d9e6d9136ee23",
+  "updated_at_utc": "2026-10-08T07:52:29.069244+00:00",
+  "results": [
+    {
+      "model": "nnunet",
+      "objective": "dice",
+      "fold": 0,
+      "seed": 1,
+      "updates": 90,
+      "final_dice": 0.6859285570681095,
+      "anterior_dice": 0.6255620265236268,
+      "posterior_dice": 0.7462950876125922
+    },
+    {
+      "model": "nnunet",
+      "objective": "dice_bands",
+      "fold": 0,
+      "seed": 1,
+      "updates": 89,
+      "final_dice": 0.6907195517650018,
+      "anterior_dice": 0.6347246227356104,
+      "posterior_dice": 0.7467144807943931
+    }
+  ],
+  "fix": "Recompute the per-condition output destination inside the training loop.",
+  "verification": "Original worker reproduced the saving collision; fixed worker passed consecutive saves and resume. Recovered metadata hashes and 52-case final Dice means verified.",
+  "replacement_sbatch": "/Users/filippofocaccia/Desktop/hippo/experiments/capped_replication_31976_20261007/run_capped_replication_31976_recovery.sbatch"
+}

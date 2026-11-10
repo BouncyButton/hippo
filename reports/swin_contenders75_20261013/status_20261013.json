@@ -1,0 +1,98 @@
+{
+  "checked_utc": "2026-10-13T09:43:29.417103+00:00",
+  "queue": [
+    "698711|RUNNING|hippo-swin-contenders75|6:52"
+  ],
+  "results.json": {
+    "state": "training",
+    "current": "winning_constraint",
+    "completed": 1,
+    "planned": 15,
+    "job_id": "698711",
+    "runs": [
+      {
+        "id": "dice",
+        "best_epoch": 73,
+        "completed_epochs": 75,
+        "training_seconds": 129.84761026513297,
+        "anterior_dice": 0.7806094203847762,
+        "posterior_dice": 0.705462638544052,
+        "foreground_dice": 0.76842785423901,
+        "macro_dice": 0.7430360294644139,
+        "missed": 15758,
+        "extra": 79384,
+        "swaps": 5577,
+        "surface_distance_mean_mm": 1.0253627736709037,
+        "hd95_mm": 2.3178029992462377,
+        "undefined_surface_cases": 0,
+        "anterior_to_posterior": 2750,
+        "posterior_to_anterior": 2827,
+        "ap_best_plane_error_mm": 1.2884615384615385,
+        "ap_best_plane_error_mm_undefined_cases": 0,
+        "ap_interface_chamfer_mm": 1.6024759774918302,
+        "ap_interface_chamfer_mm_undefined_cases": 0,
+        "ap_interface_hd95_mm": 4.334184816683498,
+        "ap_interface_hd95_mm_undefined_cases": 0,
+        "ap_swaps_near3mm": 5137,
+        "ap_swaps_far3mm": 440,
+        "paired": {}
+      }
+    ],
+    "ranking": [
+      {
+        "id": "dice",
+        "dice": 0.7430360294644139
+      }
+    ]
+  },
+  "gpu_preflight.json": {
+    "status": "passed",
+    "objectives": [
+      "dice",
+      "winning_constraint",
+      "dice_bands",
+      "dice_sdf",
+      "dice_bands_sdf",
+      "dice_bands_edge",
+      "dice_bands_edge_sdf",
+      "dice_depth",
+      "dice_bands_depth",
+      "dice_edge_depth",
+      "dice_sdf_depth",
+      "dice_bands_edge_depth",
+      "dice_bands_sdf_depth",
+      "dice_edge_sdf_depth",
+      "dice_bands_edge_sdf_depth"
+    ],
+    "finite_gradients": true,
+    "actual_optimizer_steps": 15,
+    "calibration": "training volume only"
+  },
+  "current_progress": {
+    "epoch": "38",
+    "validation_dice": "0.8124555956784754",
+    "validation_missed": "24945",
+    "validation_extra": "32435",
+    "validation_swaps": "4843"
+  },
+  "current_best": 0.8142468322462679,
+  "storage": {
+    "retired_runs": [
+      "dice"
+    ],
+    "remaining_checkpoints": [
+      {
+        "run": "winning_constraint",
+        "file": "latest.pt",
+        "bytes": 196208881
+      },
+      {
+        "run": "winning_constraint",
+        "file": "best.pt",
+        "bytes": 70411265
+      }
+    ],
+    "quota": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  75.56GiB/93.13GiB  202.38k/∞  \n\n"
+  },
+  "stderr_tail": []
+}

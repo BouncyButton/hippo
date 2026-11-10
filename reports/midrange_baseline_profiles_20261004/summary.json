@@ -1,0 +1,107 @@
+[
+  {
+    "model": "segresnet_filters12_deconv",
+    "class": "SegResNet",
+    "kwargs": {
+      "spatial_dims": 3,
+      "in_channels": 1,
+      "out_channels": 3,
+      "init_filters": 12,
+      "norm": [
+        "GROUP",
+        {
+          "num_groups": 4
+        }
+      ],
+      "upsample_mode": "deconv"
+    },
+    "parameters": 2669271,
+    "schedule": {
+      "flops_per_update": 62166546655,
+      "gflops_per_update": 62.166546655,
+      "max_updates": 196,
+      "patient_pass_epochs": 19.6,
+      "complete_epochs": 19,
+      "additional_updates": 6,
+      "loop_epochs": 20,
+      "lr_warmup_updates": 10,
+      "consumed_flops": 12184643144380,
+      "unused_flops": 22481308923,
+      "next_update_exceeds_budget": true
+    }
+  },
+  {
+    "model": "unet_width40",
+    "class": "UNet",
+    "kwargs": {
+      "spatial_dims": 3,
+      "in_channels": 1,
+      "out_channels": 3,
+      "channels": [
+        40,
+        80,
+        160,
+        320,
+        640
+      ],
+      "strides": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "num_res_units": 2
+    },
+    "parameters": 30025986,
+    "schedule": {
+      "flops_per_update": 55166375333,
+      "gflops_per_update": 55.166375333,
+      "max_updates": 221,
+      "patient_pass_epochs": 22.1,
+      "complete_epochs": 22,
+      "additional_updates": 1,
+      "loop_epochs": 23,
+      "lr_warmup_updates": 12,
+      "consumed_flops": 12191768948593,
+      "unused_flops": 15355504710,
+      "next_update_exceeds_budget": true
+    }
+  },
+  {
+    "model": "unet_width48",
+    "class": "UNet",
+    "kwargs": {
+      "spatial_dims": 3,
+      "in_channels": 1,
+      "out_channels": 3,
+      "channels": [
+        48,
+        96,
+        192,
+        384,
+        768
+      ],
+      "strides": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "num_res_units": 2
+    },
+    "parameters": 43234202,
+    "schedule": {
+      "flops_per_update": 78849850205,
+      "gflops_per_update": 78.849850205,
+      "max_updates": 154,
+      "patient_pass_epochs": 15.4,
+      "complete_epochs": 15,
+      "additional_updates": 4,
+      "loop_epochs": 16,
+      "lr_warmup_updates": 8,
+      "consumed_flops": 12142876931570,
+      "unused_flops": 64247521733,
+      "next_update_exceeds_budget": true
+    }
+  }
+]

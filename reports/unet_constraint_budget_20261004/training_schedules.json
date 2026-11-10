@@ -1,0 +1,103 @@
+{
+  "official_budget_flops": 40690414844347,
+  "official_budget_gflops": 40690.414844347,
+  "budget_origin": "4247 times the frozen U-Net baseline update cost; pilot-derived",
+  "runtime": {
+    "torch": "2.2.2",
+    "monai": "1.6.0",
+    "device": "cpu"
+  },
+  "input_shape": [
+    1,
+    1,
+    64,
+    64,
+    64
+  ],
+  "training_patients": 10,
+  "constraint_preset": "Original two-step balanced BCE bands, gamma=0, degree_alpha=0; original pooled edge consistency; weighted sum, one backward, no additional network forward",
+  "calibration_included": false,
+  "exclusions": [
+    "validation",
+    "preprocessing/augmentation",
+    "checkpoint I/O",
+    "precision housekeeping",
+    "integer/boolean/comparison and memory operations"
+  ],
+  "notes": [
+    "Declared arithmetic estimates, not GPU instruction measurements.",
+    "Counts match the original baseline exactly; dense MAC=2.",
+    "Morphology convolutions are charged as dense 3x3x3 kernels, including zero entries.",
+    "Bands and edge rebuild their masks independently, as in existing code; no unimplemented caching discount.",
+    "Two valid synthetic geometries verify fixed-shape counts; actual patient data are not used.",
+    "Positive weights and warmup scale do not affect arithmetic counts if losses are still computed.",
+    "If calibration is performed, deduct its separately measured compute before deriving the final run allowance.",
+    "Focal/degree bands, extra gradient probes, or multiple-backward methods require new profiling."
+  ],
+  "source_sha256": {
+    "scripts/profile_unet_constraint_budget.py": "d77a9adc5eb0168a302fd4612bdca3c69b00c1b0978fedfeee1b6bcf3f2aaf34",
+    "reports/compute_budget_5pct_fold0_seed0_20261003/profile_reference.py": "003f81a45744e6f5eafa61f828f80acb3dbfd8b1c786ecddedbe10a1fdd2a707",
+    "reports/compute_budget_5pct_fold0_seed0_20261003/profile_matched_models.py": "3cd7c29d002f5e321c3861b402ad829fc1526fb271624e333669520b6c68963b",
+    "thesis/new_constraints/bands/outer_boundary.py": "bdaf5b99d4c07bae80191292b2161740886086faeb7b79b54ffabbadfa7bb68a",
+    "thesis/new_constraints/edge_consistency.py": "eed72308a29b75e76ff51a36c7b056886ee6581be34b26e8c87ba34cc4085b1a",
+    "thesis/new_constraints/constraint_result.py": "b15b3c8a06aee1b60ea33026e3d15434aca1067810b150f274244a5e074431e3"
+  },
+  "schedules": {
+    "dice": {
+      "flops_per_update": 9580978301,
+      "gflops_per_update": 9.580978301,
+      "max_updates": 4247,
+      "patient_pass_epochs": 424.7,
+      "complete_epochs": 424,
+      "additional_updates": 7,
+      "loop_epochs": 425,
+      "lr_warmup_updates": 213,
+      "consumed_flops": 40690414844347,
+      "unused_flops": 0,
+      "next_update_exceeds_budget": true,
+      "overhead_percent": 0.0
+    },
+    "dice_bands": {
+      "flops_per_update": 9650184334,
+      "gflops_per_update": 9.650184334,
+      "max_updates": 4216,
+      "patient_pass_epochs": 421.6,
+      "complete_epochs": 421,
+      "additional_updates": 6,
+      "loop_epochs": 422,
+      "lr_warmup_updates": 211,
+      "consumed_flops": 40685177152144,
+      "unused_flops": 5237692203,
+      "next_update_exceeds_budget": true,
+      "overhead_percent": 0.7223274161134219
+    },
+    "dice_edge": {
+      "flops_per_update": 9653481607,
+      "gflops_per_update": 9.653481607,
+      "max_updates": 4215,
+      "patient_pass_epochs": 421.5,
+      "complete_epochs": 421,
+      "additional_updates": 5,
+      "loop_epochs": 422,
+      "lr_warmup_updates": 211,
+      "consumed_flops": 40689424973505,
+      "unused_flops": 989870842,
+      "next_update_exceeds_budget": true,
+      "overhead_percent": 0.7567422002451751
+    },
+    "dice_bands_edge": {
+      "flops_per_update": 9722687640,
+      "gflops_per_update": 9.72268764,
+      "max_updates": 4185,
+      "patient_pass_epochs": 418.5,
+      "complete_epochs": 418,
+      "additional_updates": 5,
+      "loop_epochs": 419,
+      "lr_warmup_updates": 210,
+      "consumed_flops": 40689447773400,
+      "unused_flops": 967070947,
+      "next_update_exceeds_budget": true,
+      "overhead_percent": 1.4790696163585748
+    }
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "candidate": 6,
+  "updates": 171,
+  "budget_flops": 13481038223811,
+  "final_dice": 0.7337283196930702,
+  "best_dice": 0.7337283196930702,
+  "output": "/mnt/beegfsstudents/home/3160552/unet48_stable_budget_684168/pilots/candidate06/run",
+  "protocol_dir": "/mnt/beegfsstudents/home/3160552/unet48_stable_budget_684168/source/experiments/unet48_budget_candidates/candidate06",
+  "completion_sha256": "5ad9c459c39631597b00d217293914a4e667e324dbbae84dfb95e2d786952bd0",
+  "status": "selected",
+  "target_band": [
+    0.7,
+    0.75
+  ],
+  "selection_plan_sha256": "43ba509ea951642987a26baf1a51b2a2347b35af08d71b6b702b1e274f2fb05d",
+  "baseline_allowances": {
+    "unet_width48": {
+      "flops_per_update": 78836480841,
+      "gflops_per_update": 78.836480841,
+      "max_updates": 171,
+      "patient_pass_epochs": 17.1,
+      "consumed_flops": 13481038223811,
+      "unused_flops": 0
+    },
+    "swinunetr": {
+      "flops_per_update": 155012136022,
+      "gflops_per_update": 155.012136022,
+      "max_updates": 86,
+      "patient_pass_epochs": 8.6,
+      "consumed_flops": 13331043697892,
+      "unused_flops": 149994525919
+    },
+    "nnunet": {
+      "flops_per_update": 355293896301,
+      "gflops_per_update": 355.293896301,
+      "max_updates": 37,
+      "patient_pass_epochs": 3.7,
+      "consumed_flops": 13145874163137,
+      "unused_flops": 335164060674
+    }
+  },
+  "pilot_total_flops": 84749216904075,
+  "additional_search_flops": 71268178680264,
+  "selection_metric": "Final macro foreground hard Dice across52 validation cases; complete seed0 baseline; no best-checkpoint or constraint-score selection.",
+  "notes": [
+    "Only final validation Dice of from-scratch width-48 Dice baselines enters budget selection.",
+    "Baseline allowances for the other models are calculated, not measured performance.",
+    "Exploratory fold 0, seed 0; freeze budget for subsequent comparisons."
+  ]
+}

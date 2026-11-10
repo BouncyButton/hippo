@@ -1,0 +1,1071 @@
+{
+  "model": "nnunet",
+  "recipe": "matched",
+  "device": "cpu",
+  "torch": "2.2.2",
+  "monai": "1.6.0",
+  "parameters": 16548076,
+  "input_shape": [
+    1,
+    1,
+    64,
+    64,
+    64
+  ],
+  "training_patients": 10,
+  "configuration": {
+    "class": "dynamic_network_architectures.architectures.unet.PlainConvUNet",
+    "kwargs": {
+      "input_channels": 1,
+      "num_classes": 3,
+      "n_stages": 5,
+      "features_per_stage": [
+        32,
+        64,
+        128,
+        256,
+        320
+      ],
+      "conv_op": "torch.nn.modules.conv.Conv3d",
+      "kernel_sizes": [
+        [
+          3,
+          3,
+          3
+        ],
+        [
+          3,
+          3,
+          3
+        ],
+        [
+          3,
+          3,
+          3
+        ],
+        [
+          3,
+          3,
+          3
+        ],
+        [
+          3,
+          3,
+          3
+        ]
+      ],
+      "strides": [
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          2,
+          2,
+          2
+        ],
+        [
+          2,
+          2,
+          2
+        ],
+        [
+          2,
+          2,
+          2
+        ],
+        [
+          2,
+          2,
+          2
+        ]
+      ],
+      "n_conv_per_stage": [
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "n_conv_per_stage_decoder": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "conv_bias": true,
+      "norm_op": "torch.nn.modules.instancenorm.InstanceNorm3d",
+      "norm_op_kwargs": {
+        "eps": 1e-05,
+        "affine": true
+      },
+      "dropout_op": null,
+      "dropout_op_kwargs": null,
+      "nonlin": "torch.nn.modules.activation.LeakyReLU",
+      "nonlin_kwargs": {
+        "inplace": true
+      },
+      "deep_supervision": false
+    },
+    "topology_rule": "Repository default planner: isotropic spacing, fixed 64^3 patch, min bottleneck edge 4, base features 32, max features 320, two convs per stage",
+    "plan_origin": "New explicit matched-input configuration; historical plan was not retained",
+    "spacing_assumption": [
+      1,
+      1,
+      1
+    ],
+    "shape": [
+      64,
+      64,
+      64
+    ]
+  },
+  "loss": "MONAI softmax Dice, including background",
+  "optimizer": "AdamW",
+  "core_flops_per_stage": {
+    "forward": 118161408000,
+    "loss": 0,
+    "backward": 235869831168,
+    "optimizer": 0
+  },
+  "supplementary_estimate_per_stage": {
+    "forward": 413381632,
+    "loss": 6029345,
+    "backward": 652784719,
+    "optimizer": 231654204
+  },
+  "flops_per_update": 355335089068,
+  "budget_flops": 116259102016500,
+  "max_updates": 327,
+  "complete_patient_pass_epochs": 32,
+  "additional_updates": 7,
+  "patient_pass_equivalents": 32.7,
+  "consumed_flops": 116194574125236,
+  "unused_flops": 64527891264,
+  "next_update_exceeds_budget": true,
+  "operator_audit": {
+    "forward:aten.convolution.default": {
+      "calls": 23,
+      "input_float_elements": 83691427,
+      "output_float_elements": 56532992,
+      "example_shapes": [
+        [
+          1,
+          1,
+          64,
+          64,
+          64
+        ],
+        [
+          32,
+          1,
+          3,
+          3,
+          3
+        ],
+        [
+          32
+        ]
+      ],
+      "supplementary_flops": 56532992,
+      "supplementary_category": "bias"
+    },
+    "forward:aten.repeat.default": {
+      "calls": 36,
+      "input_float_elements": 5120,
+      "output_float_elements": 5120,
+      "example_shapes": [
+        [
+          32
+        ]
+      ],
+      "supplementary_flops": 0,
+      "supplementary_category": "no_supplement"
+    },
+    "forward:aten.view.default": {
+      "calls": 36,
+      "input_float_elements": 89210880,
+      "output_float_elements": 89210880,
+      "example_shapes": [
+        [
+          1,
+          32,
+          64,
+          64,
+          64
+        ]
+      ],
+      "supplementary_flops": 0,
+      "supplementary_category": "no_supplement"
+    },
+    "forward:aten.empty.memory_format": {
+      "calls": 18,
+      "input_float_elements": 0,
+      "output_float_elements": 0,
+      "example_shapes": [],
+      "supplementary_flops": 0,
+      "supplementary_category": "no_supplement"
+    },
+    "forward:aten.native_batch_norm.default": {
+      "calls": 18,
+      "input_float_elements": 44610560,
+      "output_float_elements": 44610560,
+      "example_shapes": [
+        [
+          1,
+          32,
+          64,
+          64,
+          64
+        ],
+        [
+          32
+        ],
+        [
+          32
+        ]
+      ],
+      "supplementary_flops": 312243200,
+      "supplementary_category": "normalization_estimate"
+    },
+    "forward:aten.leaky_relu_.default": {
+      "calls": 18,
+      "input_float_elements": 44605440,
+      "output_float_elements": 44605440,
+      "example_shapes": [
+        [
+          1,
+          32,
+          64,
+          64,
+          64
+        ]
+      ],
+      "supplementary_flops": 44605440,
+      "supplementary_category": "activation_estimate"
+    },
+    "forward:aten.detach.default": {
+      "calls": 36,
+      "input_float_elements": 89210880,
+      "output_float_elements": 89210880,
+      "example_shapes": [
+        [
+          1,
+          32,
+          64,
+          64,
+          64
+        ]
+      ],
+      "supplementary_flops": 0,
+      "supplementary_category": "no_supplement"
+    },
+    "forward:aten.cat.default": {
+      "calls": 4,
+      "input_float_elements": 22282240,
+      "output_float_elements": 22282240,
+      "example_shapes": [
+        [
+          1,
+          256,
+          8,
+          8,
+          8
+        ],
+        [
+          1,
+          256,
+          8,
+          8,
+          8
+        ]
+      ],
+      "supplementary_flops": 0,
+      "supplementary_category": "no_supplement"
+    },
+    "loss:aten._softmax.default": {
+      "calls": 1,
+      "input_float_elements": 786432,
+      "output_float_elements": 786432,
+      "example_shapes": [
+        [
+          1,
+          3,
+          64,
+          64,
+          64
+        ]
+      ],
+      "supplementary_flops": 2883584,
+      "supplementary_category": "softmax"
+    },
+    "loss:aten.detach.default": {
+      "calls": 2,
+      "input_float_elements": 1572864,
+      "output_float_elements": 1572864,
+      "example_shapes": [
+        [
+          1,
+          3,
+          64,
+          64,
+          64
+        ]
+      ],
+      "supplementary_flops": 0,
+      "supplementary_category": "no_supplement"
+    },
+    "loss:aten.zeros.default": {
+      "calls": 1,
+      "input_float_elements": 0,
+      "output_float_elements": 786432,
+      "example_shapes": [],
+      "supplementary_flops": 0,
+      "supplementary_category": "no_supplement"
+    },
+    "loss:aten.scatter_.value": {
+      "calls": 1,
+      "input_float_elements": 786432,
+      "output_float_elements": 786432,
+      "example_shapes": [
+        [
+          1,
+          3,
+          64,
+          64,
+          64
+        ],
+        [
+          1,
+          1,
+          64,
+          64,
+          64
+        ]
+      ],
+      "supplementary_flops": 0,
+      "supplementary_category": "no_supplement"
+    },
+    "loss:aten.arange.start": {
+      "calls": 1,
+      "input_float_elements": 0,
+      "output_float_elements": 0,
+      "example_shapes": [],
+      "supplementary_flops": 0,
+      "supplementary_category": "no_supplement"
+    },
+    "loss:aten.mul.Tensor": {
+      "calls": 5,
+      "input_float_elements": 1572872,
+      "output_float_elements": 786440,
+      "example_shapes": [
+        [
+          1,
+          3,
+          64,
+          64,
+          64
+        ],
+        [
+          1,
+          3,
+          64,
+          64,
+          64
+        ]
+      ],
+      "supplementary_flops": 786440,
+      "supplementary_category": "scalar_arithmetic"
+    },
+    "loss:aten.sum.dim_IntList": {
+      "calls": 3,
+      "input_float_elements": 2359296,
+      "output_float_elements": 9,
+      "example_shapes": [
+        [
+          1,
+          3,
+          64,
+          64,
+          64
+        ]
+      ],
+      "supplementary_flops": 2359287,
+      "supplementary_category": "reductions"
+    },
+    "loss:aten.sub.Tensor": {
+      "calls": 2,
+      "input_float_elements": 12,
+      "output_float_elements": 6,
+      "example_shapes": [
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          3
+        ]
+      ],
+      "supplementary_flops": 6,
+      "supplementary_category": "scalar_arithmetic"
+    },
+    "loss:aten.mul_.Tensor": {
+      "calls": 2,
+      "input_float_elements": 6,
+      "output_float_elements": 6,
+      "example_shapes": [
+        [
+          1,
+          3
+        ]
+      ],
+      "supplementary_flops": 6,
+      "supplementary_category": "scalar_arithmetic"
+    },
+    "loss:aten.add.Tensor": {
+      "calls": 5,
+      "input_float_elements": 20,
+      "output_float_elements": 13,
+      "example_shapes": [
+        [
+          1,
+          3
+        ]
+      ],
+      "supplementary_flops": 13,
+      "supplementary_category": "scalar_arithmetic"
+    },
+    "loss:aten.div.Tensor": {
+      "calls": 1,
+      "input_float_elements": 6,
+      "output_float_elements": 3,
+      "example_shapes": [
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          3
+        ]
+      ],
+      "supplementary_flops": 3,
+      "supplementary_category": "scalar_arithmetic"
+    },
+    "loss:aten.rsub.Scalar": {
+      "calls": 1,
+      "input_float_elements": 3,
+      "output_float_elements": 3,
+      "example_shapes": [
+        [
+          1,
+          3
+        ]
+      ],
+      "supplementary_flops": 3,
+      "supplementary_category": "scalar_arithmetic"
+    },
+    "loss:aten.mean.default": {
+      "calls": 1,
+      "input_float_elements": 3,
+      "output_float_elements": 1,
+      "example_shapes": [
+        [
+          1,
+          3
+        ]
+      ],
+      "supplementary_flops": 3,
+      "supplementary_category": "reductions"
+    },
+    "loss:aten.view.default": {
+      "calls": 1,
+      "input_float_elements": 786432,
+      "output_float_elements": 786432,
+      "example_shapes": [
+        [
+          1,
+          3,
+          64,
+          64,
+          64
+        ]
+      ],
+      "supplementary_flops": 0,
+      "supplementary_category": "no_supplement"
+    },
+    "loss:aten.select.int": {
+      "calls": 1,
+      "input_float_elements": 786432,
+      "output_float_elements": 1,
+      "example_shapes": [
+        [
+          786432
+        ]
+      ],
+      "supplementary_flops": 0,
+      "supplementary_category": "no_supplement"
+    },
+    "backward:aten.ones_like.default": {
+      "calls": 1,
+      "input_float_elements": 1,
+      "output_float_elements": 1,
+      "example_shapes": [
+        []
+      ],
+      "supplementary_flops": 0,
+      "supplementary_category": "no_supplement"
+    },
+    "backward:aten.mul.Tensor": {
+      "calls": 8,
+      "input_float_elements": 1572884,
+      "output_float_elements": 786449,
+      "example_shapes": [
+        []
+      ],
+      "supplementary_flops": 786449,
+      "supplementary_category": "scalar_arithmetic"
+    },
+    "backward:aten.select_backward.default": {
+      "calls": 1,
+      "input_float_elements": 1,
+      "output_float_elements": 786432,
+      "example_shapes": [
+        []
+      ],
+      "supplementary_flops": 0,
+      "supplementary_category": "no_supplement"
+    },
+    "backward:aten.view.default": {
+      "calls": 19,
+      "input_float_elements": 45391872,
+      "output_float_elements": 45391872,
+      "example_shapes": [
+        [
+          786432
+        ]
+      ],
+      "supplementary_flops": 0,
+      "supplementary_category": "no_supplement"
+    },
+    "backward:aten.expand.default": {
+      "calls": 3,
+      "input_float_elements": 7,
+      "output_float_elements": 1572867,
+      "example_shapes": [
+        []
+      ],
+      "supplementary_flops": 0,
+      "supplementary_category": "no_supplement"
+    },
+    "backward:aten.div.Scalar": {
+      "calls": 1,
+      "input_float_elements": 3,
+      "output_float_elements": 3,
+      "example_shapes": [
+        [
+          1,
+          3
+        ]
+      ],
+      "supplementary_flops": 3,
+      "supplementary_category": "scalar_arithmetic"
+    },
+    "backward:aten.neg.default": {
+      "calls": 4,
+      "input_float_elements": 12,
+      "output_float_elements": 12,
+      "example_shapes": [
+        [
+          1,
+          3
+        ]
+      ],
+      "supplementary_flops": 12,
+      "supplementary_category": "scalar_arithmetic"
+    },
+    "backward:aten.div.Tensor": {
+      "calls": 3,
+      "input_float_elements": 18,
+      "output_float_elements": 9,
+      "example_shapes": [
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          3
+        ]
+      ],
+      "supplementary_flops": 9,
+      "supplementary_category": "scalar_arithmetic"
+    },
+    "backward:aten.add.Tensor": {
+      "calls": 9,
+      "input_float_elements": 25427986,
+      "output_float_elements": 12713993,
+      "example_shapes": [
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          3
+        ]
+      ],
+      "supplementary_flops": 12713993,
+      "supplementary_category": "scalar_arithmetic"
+    },
+    "backward:aten.unsqueeze.default": {
+      "calls": 6,
+      "input_float_elements": 18,
+      "output_float_elements": 18,
+      "example_shapes": [
+        [
+          1,
+          3
+        ]
+      ],
+      "supplementary_flops": 0,
+      "supplementary_category": "no_supplement"
+    },
+    "backward:aten.detach.default": {
+      "calls": 284,
+      "input_float_elements": 140423913,
+      "output_float_elements": 140423913,
+      "example_shapes": [
+        [
+          1,
+          3,
+          64,
+          64,
+          64
+        ]
+      ],
+      "supplementary_flops": 0,
+      "supplementary_category": "no_supplement"
+    },
+    "backward:aten._softmax_backward_data.default": {
+      "calls": 1,
+      "input_float_elements": 1572864,
+      "output_float_elements": 786432,
+      "example_shapes": [
+        [
+          1,
+          3,
+          64,
+          64,
+          64
+        ],
+        [
+          1,
+          3,
+          64,
+          64,
+          64
+        ]
+      ],
+      "supplementary_flops": 2883584,
+      "supplementary_category": "softmax"
+    },
+    "backward:aten.convolution_backward.default": {
+      "calls": 23,
+      "input_float_elements": 140221376,
+      "output_float_elements": 83429283,
+      "example_shapes": [
+        [
+          1,
+          3,
+          64,
+          64,
+          64
+        ],
+        [
+          1,
+          32,
+          64,
+          64,
+          64
+        ],
+        [
+          3,
+          32,
+          1,
+          1,
+          1
+        ]
+      ],
+      "supplementary_flops": 56529949,
+      "supplementary_category": "bias"
+    },
+    "backward:aten.squeeze.dim": {
+      "calls": 18,
+      "input_float_elements": 44605440,
+      "output_float_elements": 44605440,
+      "example_shapes": [
+        [
+          1,
+          32,
+          64,
+          64,
+          64
+        ]
+      ],
+      "supplementary_flops": 0,
+      "supplementary_category": "no_supplement"
+    },
+    "backward:aten.new_zeros.default": {
+      "calls": 18,
+      "input_float_elements": 44605440,
+      "output_float_elements": 44605440,
+      "example_shapes": [
+        [
+          32,
+          64,
+          64,
+          64
+        ]
+      ],
+      "supplementary_flops": 0,
+      "supplementary_category": "no_supplement"
+    },
+    "backward:aten.as_strided.default": {
+      "calls": 54,
+      "input_float_elements": 133816320,
+      "output_float_elements": 133816320,
+      "example_shapes": [
+        [
+          8388608
+        ]
+      ],
+      "supplementary_flops": 0,
+      "supplementary_category": "no_supplement"
+    },
+    "backward:aten.copy_.default": {
+      "calls": 54,
+      "input_float_elements": 267632640,
+      "output_float_elements": 133816320,
+      "example_shapes": [
+        [
+          32,
+          64,
+          64,
+          64
+        ],
+        [
+          32,
+          64,
+          64,
+          64
+        ]
+      ],
+      "supplementary_flops": 0,
+      "supplementary_category": "no_supplement"
+    },
+    "backward:aten.new_empty_strided.default": {
+      "calls": 18,
+      "input_float_elements": 44605440,
+      "output_float_elements": 44605440,
+      "example_shapes": [
+        [
+          1,
+          32,
+          64,
+          64,
+          64
+        ]
+      ],
+      "supplementary_flops": 0,
+      "supplementary_category": "no_supplement"
+    },
+    "backward:aten.clone.default": {
+      "calls": 18,
+      "input_float_elements": 44605440,
+      "output_float_elements": 44605440,
+      "example_shapes": [
+        [
+          1,
+          32,
+          64,
+          64,
+          64
+        ]
+      ],
+      "supplementary_flops": 0,
+      "supplementary_category": "no_supplement"
+    },
+    "backward:aten.leaky_relu_backward.default": {
+      "calls": 18,
+      "input_float_elements": 89210880,
+      "output_float_elements": 44605440,
+      "example_shapes": [
+        [
+          1,
+          32,
+          64,
+          64,
+          64
+        ],
+        [
+          1,
+          32,
+          64,
+          64,
+          64
+        ]
+      ],
+      "supplementary_flops": 44605440,
+      "supplementary_category": "activation_estimate"
+    },
+    "backward:aten.native_batch_norm_backward.default": {
+      "calls": 18,
+      "input_float_elements": 89218560,
+      "output_float_elements": 44610560,
+      "example_shapes": [
+        [
+          1,
+          32,
+          64,
+          64,
+          64
+        ],
+        [
+          1,
+          32,
+          64,
+          64,
+          64
+        ],
+        [
+          32
+        ],
+        [
+          32
+        ],
+        [
+          32
+        ]
+      ],
+      "supplementary_flops": 535265280,
+      "supplementary_category": "normalization_estimate"
+    },
+    "backward:aten.slice.Tensor": {
+      "calls": 8,
+      "input_float_elements": 44564480,
+      "output_float_elements": 22282240,
+      "example_shapes": [
+        [
+          1,
+          64,
+          64,
+          64,
+          64
+        ]
+      ],
+      "supplementary_flops": 0,
+      "supplementary_category": "no_supplement"
+    },
+    "optimizer:profiler._record_function_enter_new.default": {
+      "calls": 1,
+      "input_float_elements": 0,
+      "output_float_elements": 0,
+      "example_shapes": [],
+      "supplementary_flops": 0,
+      "supplementary_category": "no_supplement"
+    },
+    "optimizer:aten.lift_fresh.default": {
+      "calls": 82,
+      "input_float_elements": 82,
+      "output_float_elements": 82,
+      "example_shapes": [
+        []
+      ],
+      "supplementary_flops": 0,
+      "supplementary_category": "no_supplement"
+    },
+    "optimizer:aten.zeros_like.default": {
+      "calls": 164,
+      "input_float_elements": 33093446,
+      "output_float_elements": 33093446,
+      "example_shapes": [
+        [
+          32,
+          1,
+          3,
+          3,
+          3
+        ]
+      ],
+      "supplementary_flops": 0,
+      "supplementary_category": "no_supplement"
+    },
+    "optimizer:aten.add_.Tensor": {
+      "calls": 164,
+      "input_float_elements": 16546805,
+      "output_float_elements": 16546805,
+      "example_shapes": [
+        []
+      ],
+      "supplementary_flops": 16546805,
+      "supplementary_category": "scalar_arithmetic"
+    },
+    "optimizer:aten.mul_.Tensor": {
+      "calls": 164,
+      "input_float_elements": 33093446,
+      "output_float_elements": 33093446,
+      "example_shapes": [
+        [
+          32,
+          1,
+          3,
+          3,
+          3
+        ]
+      ],
+      "supplementary_flops": 33093446,
+      "supplementary_category": "scalar_arithmetic"
+    },
+    "optimizer:aten.lerp_.Scalar": {
+      "calls": 82,
+      "input_float_elements": 33093446,
+      "output_float_elements": 16546723,
+      "example_shapes": [
+        [
+          32,
+          1,
+          3,
+          3,
+          3
+        ],
+        [
+          32,
+          1,
+          3,
+          3,
+          3
+        ]
+      ],
+      "supplementary_flops": 49640169,
+      "supplementary_category": "scalar_arithmetic"
+    },
+    "optimizer:aten.addcmul_.default": {
+      "calls": 82,
+      "input_float_elements": 49640169,
+      "output_float_elements": 16546723,
+      "example_shapes": [
+        [
+          32,
+          1,
+          3,
+          3,
+          3
+        ],
+        [
+          32,
+          1,
+          3,
+          3,
+          3
+        ],
+        [
+          32,
+          1,
+          3,
+          3,
+          3
+        ]
+      ],
+      "supplementary_flops": 49640169,
+      "supplementary_category": "scalar_arithmetic"
+    },
+    "optimizer:aten._local_scalar_dense.default": {
+      "calls": 82,
+      "input_float_elements": 82,
+      "output_float_elements": 0,
+      "example_shapes": [
+        []
+      ],
+      "supplementary_flops": 0,
+      "supplementary_category": "no_supplement"
+    },
+    "optimizer:aten.sqrt.default": {
+      "calls": 82,
+      "input_float_elements": 16546723,
+      "output_float_elements": 16546723,
+      "example_shapes": [
+        [
+          32,
+          1,
+          3,
+          3,
+          3
+        ]
+      ],
+      "supplementary_flops": 16546723,
+      "supplementary_category": "scalar_arithmetic"
+    },
+    "optimizer:aten.div.Tensor": {
+      "calls": 82,
+      "input_float_elements": 16546723,
+      "output_float_elements": 16546723,
+      "example_shapes": [
+        [
+          32,
+          1,
+          3,
+          3,
+          3
+        ]
+      ],
+      "supplementary_flops": 16546723,
+      "supplementary_category": "scalar_arithmetic"
+    },
+    "optimizer:aten.addcdiv_.default": {
+      "calls": 82,
+      "input_float_elements": 49640169,
+      "output_float_elements": 16546723,
+      "example_shapes": [
+        [
+          32,
+          1,
+          3,
+          3,
+          3
+        ],
+        [
+          32,
+          1,
+          3,
+          3,
+          3
+        ],
+        [
+          32,
+          1,
+          3,
+          3,
+          3
+        ]
+      ],
+      "supplementary_flops": 49640169,
+      "supplementary_category": "scalar_arithmetic"
+    },
+    "optimizer:profiler._record_function_exit._RecordFunction": {
+      "calls": 1,
+      "input_float_elements": 0,
+      "output_float_elements": 0,
+      "example_shapes": [],
+      "supplementary_flops": 0,
+      "supplementary_category": "no_supplement"
+    }
+  },
+  "limitations": [
+    "Same declared arithmetic-estimate convention as reference; excludes CUDA GradScaler, data processing and validation.",
+    "Patient-pass epochs mean 10 explicitly scheduled patient visits, not nnU-Net's native 250-iteration epochs or a guarantee under random patch sampling.",
+    "Schedule applies to unconstrained baseline; constraints need their own step-cost accounting."
+  ]
+}

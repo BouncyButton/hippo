@@ -1,0 +1,58 @@
+{
+  "job_id": 682338,
+  "investigated_date": "2026-10-04",
+  "conclusion": "BeeGFS storage quota exhaustion during concurrent LEGO archive extraction is the best-supported cause, but the U-Net process left no direct exception record.",
+  "confidence": "strong circumstantial evidence, not a confirmed U-Net traceback",
+  "slurm": {
+    "state": "FAILED",
+    "exit_code": "1:0",
+    "elapsed": "00:16:51",
+    "time_limit": "02:00:00",
+    "max_rss_kib": 2776104,
+    "end_local": "2026-10-04T13:09:30+02:00"
+  },
+  "timeline_local": {
+    "lego_archive_download_log_last_write": "2026-10-04T13:05:08+02:00",
+    "dice_edge_completion": "2026-10-04T13:08:03+02:00",
+    "combined_directory_created": "2026-10-04T13:09:27+02:00"
+  },
+  "evidence": {
+    "combined_run_directory": "empty; no run.lock, config, budget ledger, or checkpoint",
+    "stderr": "empty",
+    "frozen_source_manifest": "all hashes match",
+    "startup_reproduction": "frozen trainer --help succeeds on the login node with CUDA hidden; no training performed",
+    "concurrent_archive_bytes": 39384022358,
+    "concurrent_download_extraction_errors": [
+      {
+        "command": "/bin/zsh -lc \"rtk proxy ssh bocconi-cluster 'bash -s' <<'REMOTE'\nmkdir -p /mnt/beegfsstudents/home/3160552/lego_swinunetr_pin2780_fold0_seed0_20261004_01/source\ncp /mnt/beegfsstudents/home/3160552/{download_lego_ct.py,inspect_lego_catalogue.py,prepare_lego_swinunetr.py,train_lego_swinunetr.py,check_lego_pipeline.py,submit_lego_swinunetr.py,run_lego_swinunetr.sbatch} /mnt/beegfsstudents/home/3160552/lego_swinunetr_pin2780_fold0_seed0_20261004_01/source/\ncp /mnt/beegfsstudents/home/3160552/protocol.json /mnt/beegfsstudents/home/3160552/lego_swinunetr_pin2780_fold0_seed0_20261004_01/protocol.json\npython3 - <<'PY'\nimport json\nfrom pathlib import Path\nroot=Path('/mnt/beegfsstudents/home/3160552/datasets/Dataset202_LEGOCT')\np=root/'download_large_status.json'\nprint(p.read_text())\nPY\nREMOTE\"",
+        "output": "cp: cannot create regular file '/mnt/beegfsstudents/home/3160552/lego_swinunetr_pin2780_fold0_seed0_20261004_01/source/download_lego_ct.py': Disk quota exceeded\ncp: cannot create regular file '/mnt/beegfsstudents/home/3160552/lego_swinunetr_pin2780_fold0_seed0_20261004_01/source/inspect_lego_catalogue.py': Disk quota exceeded\ncp: cannot create regular file '/mnt/beegfsstudents/home/3160552/lego_swinunetr_pin2780_fold0_seed0_20261004_01/source/prepare_lego_swinunetr.py': Disk quota exceeded\ncp: cannot create regular file '/mnt/beegfsstudents/home/3160552/lego_swinunetr_pin2780_fold0_seed0_20261004_01/source/train_lego_swinunetr.py': Disk quota exceeded\ncp: cannot create regular file '/mnt/beegfsstudents/home/3160552/lego_swinunetr_pin2780_fold0_seed0_20261004_01/source/check_lego_pipeline.py': Disk quota exceeded\ncp: cannot create regular file '/mnt/beegfsstudents/home/3160552/lego_swinunetr_pin2780_fold0_seed0_20261004_01/source/submit_lego_swinunetr.py': Disk quota exceeded\ncp: cannot create regular file '/mnt/beegfsstudents/home/3160552/lego_swinunetr_pin2780_fold0_seed0_20261004_01/source/run_lego_swinunetr.sbatch': Disk quota exceeded\ncp: cannot create regular file '/mnt/beegfsstudents/home/3160552/lego_swinunetr_pin2780_fold0_seed0_20261004_01/protocol.json': Disk quota exceeded\n{\n  \"state\": \"extracting\",\n  \"current_file\": \"bugatti_full/bugatti_full_x10y5z5/bugatti_full_x10y5z5_dataset.h5\",\n  \"verified_md5\": \"80bd41ed187597fcd70c307a9c8870e5\",\n  \"selected_files\": 1110\n}\n\n",
+        "source_thread_id": "01a1029c-829b-7090-9087-83d51dda3689"
+      },
+      {
+        "command": "/bin/zsh -lc \"rtk proxy ssh bocconi-cluster 'bash -s' <<'REMOTE'\nexport MPLCONFIGDIR=/mnt/beegfsstudents/home/3160552/datasets/Dataset202_LEGOCT/preflight/matplotlib\n/mnt/beegfsstudents/home/3160552/lego_ct_env/bin/python /mnt/beegfsstudents/home/3160552/preview_lego_target.py --manifest /mnt/beegfsstudents/home/3160552/datasets/Dataset202_LEGOCT/prepared/demo_manifest.json --output /mnt/beegfsstudents/home/3160552/datasets/Dataset202_LEGOCT/preflight/pin2780_ground_truth.png\nREMOTE\"",
+        "output": "Could not save font_manager cache [Errno 122] Disk quota exceeded: '/mnt/beegfsstudents/home/3160552/datasets/Dataset202_LEGOCT/preflight/matplotlib/fontlist-v3.11.0.json.matplotlib-lock'\nTraceback (most recent call last):\n  File \"/mnt/beegfsstudents/home/3160552/preview_lego_target.py\", line 49, in <module>\n    main()\n  File \"/mnt/beegfsstudents/home/3160552/preview_lego_target.py\", line 44, in main\n    fig.savefig(args.output, dpi=160)\n  File \"/home/3160552/.conda/envs/hippocampus/lib/python3.11/site-packages/matplotlib/figure.py\", line 3515, in savefig\n    self.canvas.print_figure(fname, **kwargs)\n  File \"/home/3160552/.conda/envs/hippocampus/lib/python3.11/site-packages/matplotlib/backend_bases.py\", line 2289, in print_figure\n    result = print_method(\n             ^^^^^^^^^^^^^\n  File \"/home/3160552/.conda/envs/hippocampus/lib/python3.11/site-packages/matplotlib/backend_bases.py\", line 2146, in <lambda>\n    print_method = functools.wraps(meth)(lambda *args, **kwargs: meth(\n                                                                 ^^^^^\n  File \"/home/3160552/.conda/envs/hippocampus/lib/python3.11/site-packages/matplotlib/backends/backend_agg.py\", line 537, in print_png\n    self._print_pil(filename_or_obj, \"png\", pil_kwargs, metadata)\n  File \"/home/3160552/.conda/envs/hippocampus/lib/python3.11/site-packages/matplotlib/backends/backend_agg.py\", line 486, in _print_pil\n    mpl.image.imsave(\n  File \"/home/3160552/.conda/envs/hippocampus/lib/python3.11/site-packages/matplotlib/image.py\", line 1722, in imsave\n    image.save(fname, **pil_kwargs)\n  File \"/home/3160552/.conda/envs/hippocampus/lib/python3.11/site-packages/PIL/Image.py\", line 2706, in save\n    fp = builtins.open(filename, \"w+b\")\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nOSError: [Errno 122] Disk quota exceeded: '/mnt/beegfsstudents/home/3160552/datasets/Dataset202_LEGOCT/preflight/pin2780_ground_truth.png'\n",
+        "source_thread_id": "01a1029c-829b-7090-9087-83d51dda3689"
+      },
+      {
+        "command": "/bin/zsh -lc \"rtk proxy ssh bocconi-cluster 'bash -s' <<'REMOTE'\nexport OMP_NUM_THREADS=2\nexport MKL_NUM_THREADS=2\n/mnt/beegfsstudents/home/3160552/lego_ct_env/bin/python /mnt/beegfsstudents/home/3160552/check_lego_pipeline.py --manifest /mnt/beegfsstudents/home/3160552/datasets/Dataset202_LEGOCT/prepared/demo_manifest.json --output /mnt/beegfsstudents/home/3160552/datasets/Dataset202_LEGOCT/preflight/pipeline_check.json\ncat /mnt/beegfsstudents/home/3160552/datasets/Dataset202_LEGOCT/download_large_status.json\nREMOTE\"",
+        "output": "Traceback (most recent call last):\n  File \"/mnt/beegfsstudents/home/3160552/check_lego_pipeline.py\", line 79, in <module>\n    main()\n  File \"/mnt/beegfsstudents/home/3160552/check_lego_pipeline.py\", line 71, in main\n    write_json(args.output, {'state': 'passed', 'native_128_cubed_loader': '4 spawned-worker patches',\n  File \"/mnt/beegfsstudents/home/3160552/train_lego_swinunetr.py\", line 26, in write_json\n    temporary.write_text(json.dumps(value, indent=2) + '\\n')\n  File \"/home/3160552/.conda/envs/hippocampus/lib/python3.11/pathlib.py\", line 1078, in write_text\n    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/3160552/.conda/envs/hippocampus/lib/python3.11/pathlib.py\", line 1044, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nOSError: [Errno 122] Disk quota exceeded: '/mnt/beegfsstudents/home/3160552/datasets/Dataset202_LEGOCT/preflight/pipeline_check.json.tmp'\n{\n  \"state\": \"extracting\",\n  \"current_file\": \"bugatti_full/bugatti_full_x10y5z5/bugatti_full_x10y5z5_dataset.h5\",\n  \"verified_md5\": \"80bd41ed187597fcd70c307a9c8870e5\",\n  \"selected_files\": 1110\n}\n",
+        "source_thread_id": "01a1029c-829b-7090-9087-83d51dda3689"
+      },
+      {
+        "command": "/bin/zsh -lc \"rtk proxy ssh bocconi-cluster 'bash -s' <<'REMOTE'\npython3 - <<'PY'\nfrom pathlib import Path\nimport os,subprocess,json\nroot=Path('/mnt/beegfsstudents/home/3160552/datasets/Dataset202_LEGOCT')\npartial=root/'raw/bugatti_full/bugatti_full_x10y5z5/bugatti_full_x10y5z5_dataset.h5'\nif partial.exists() and partial.stat().st_size<10071630832:\n print('Removing only failed truncated extraction:',partial,partial.stat().st_size)\n partial.unlink()\nprobe=root/'quota_probe.bin'\nwith probe.open('wb') as f: f.write(b'x'*16777216)\nprint('before',probe.stat().st_size,probe.stat().st_blocks*512)\nresult=subprocess.run(['fallocate','--punch-hole','--keep-size','--offset','0','--length','16777216',str(probe)],capture_output=True,text=True)\nprint('punch_test',result.returncode,result.stderr.strip(),'afterblocks',probe.stat().st_blocks*512)\nprobe.unlink()\nprint('free rootfs',os.statvfs('/tmp').f_bavail*os.statvfs('/tmp').f_frsize)\nPY\nREMOTE\"",
+        "output": "Removing only failed truncated extraction: /mnt/beegfsstudents/home/3160552/datasets/Dataset202_LEGOCT/raw/bugatti_full/bugatti_full_x10y5z5/bugatti_full_x10y5z5_dataset.h5 2240282624\nTraceback (most recent call last):\n  File \"<stdin>\", line 9, in <module>\n  File \"/software/miniconda3/lib/python3.13/pathlib/_local.py\", line 537, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nOSError: [Errno 122] Disk quota exceeded: '/mnt/beegfsstudents/home/3160552/datasets/Dataset202_LEGOCT/quota_probe.bin'\n",
+        "source_thread_id": "01a1029c-829b-7090-9087-83d51dda3689"
+      }
+    ],
+    "current_quota_gib": {
+      "used": 90.31,
+      "limit": 93.13,
+      "remaining": 2.82
+    }
+  },
+  "limitations": [
+    "Concurrent quota errors prove account quota exhaustion during the LEGO task, but their exact individual timestamps are not retained in thread summaries.",
+    "The actual combined-run exception was not captured; a quota-blocked lock-file creation and quota-blocked stderr are plausible mechanisms, not directly observed."
+  ],
+  "changes": "No training code changes, deletions, or new jobs submitted during this investigation."
+}

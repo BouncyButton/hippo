@@ -1,0 +1,78 @@
+{
+  "runs": [
+    {
+      "model": "nnunet",
+      "fold": 0,
+      "seed": 0,
+      "updates": 327,
+      "charged_attempts": 327,
+      "discarded_attempts": 0,
+      "patient_passes": 32.7,
+      "selected_step": 278,
+      "consumed_gflops": 116181.104090427,
+      "anterior_hard_dice": 0.8583461607878025,
+      "anterior_soft_dice": 0.8506568716122553,
+      "posterior_hard_dice": 0.8450963439849707,
+      "posterior_soft_dice": 0.8306520122748154,
+      "macro_hard_dice": 0.8517212523863866,
+      "macro_soft_dice": 0.8406544419435353
+    },
+    {
+      "model": "nnunet",
+      "fold": 0,
+      "seed": 1,
+      "updates": 327,
+      "charged_attempts": 327,
+      "discarded_attempts": 0,
+      "patient_passes": 32.7,
+      "selected_step": 295,
+      "consumed_gflops": 116181.104090427,
+      "anterior_hard_dice": 0.8593347714497492,
+      "anterior_soft_dice": 0.8476345069133319,
+      "posterior_hard_dice": 0.8452314528135153,
+      "posterior_soft_dice": 0.8322082471389037,
+      "macro_hard_dice": 0.8522831121316323,
+      "macro_soft_dice": 0.8399213770261178
+    },
+    {
+      "model": "nnunet",
+      "fold": 0,
+      "seed": 2,
+      "updates": 327,
+      "charged_attempts": 327,
+      "discarded_attempts": 0,
+      "patient_passes": 32.7,
+      "selected_step": 327,
+      "consumed_gflops": 116181.104090427,
+      "anterior_hard_dice": 0.8530015773498095,
+      "anterior_soft_dice": 0.8407854988024785,
+      "posterior_hard_dice": 0.8460052001934785,
+      "posterior_soft_dice": 0.8351857559039042,
+      "macro_hard_dice": 0.849503388771644,
+      "macro_soft_dice": 0.8379856273531914
+    }
+  ],
+  "models": {
+    "nnunet": {
+      "selected_validation_macro_hard_dice": {
+        "mean": 0.8511692510965543,
+        "sample_std": 0.0014697770434656417,
+        "n": 3
+      },
+      "folds": {
+        "0": {
+          "mean": 0.8511692510965543,
+          "sample_std": 0.0014697770434656417,
+          "n": 3
+        }
+      },
+      "runs_with_discarded_attempts": 0
+    }
+  },
+  "budget_gflops_per_run": 116259.0,
+  "notes": [
+    "Dice is selected on validation data; this is not independent held-out test performance.",
+    "Standard deviations describe runs; overlapping folds and repeated seeds are not independent datasets.",
+    "Interrupted attempts consume allowance; inspect discarded_attempts before comparing trajectories."
+  ]
+}

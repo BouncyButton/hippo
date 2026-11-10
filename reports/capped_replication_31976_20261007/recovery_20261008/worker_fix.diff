@@ -1,0 +1,11 @@
+--- frozen original worker
++++ operational fixed worker
+@@ -247,6 +247,8 @@
+         complete = {(r['model'], r['objective'], r['fold'], r['seed']) for r in rows}
+         for index, entry in enumerate(plan['runs'], 1):
+             model, arm, fold, seed = [entry[k] for k in ('model', 'objective', 'fold', 'seed')]
++            relative = Path(model) / arm / f'fold{fold}/seed{seed}/run'
++            destination = root / relative
+             if (model, arm, fold, seed) in complete:
+                 continue
+             if STOP or time.monotonic() - start >= args.safe_runtime_seconds:

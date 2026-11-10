@@ -1,0 +1,52 @@
+{
+  "verified_schedule_exposure": [
+    {
+      "model": "nnunet",
+      "updates": 89,
+      "dice_prefix_updates": 50,
+      "constraint_updates": 39,
+      "ramp_updates": 50,
+      "full_strength_updates": 0,
+      "final_constraint_scale": 0.78
+    },
+    {
+      "model": "swinunetr",
+      "updates": 206,
+      "dice_prefix_updates": 50,
+      "constraint_updates": 156,
+      "ramp_updates": 50,
+      "full_strength_updates": 107,
+      "final_constraint_scale": 1
+    },
+    {
+      "model": "unetr_vit_b16",
+      "updates": 245,
+      "dice_prefix_updates": 50,
+      "constraint_updates": 195,
+      "ramp_updates": 50,
+      "full_strength_updates": 146,
+      "final_constraint_scale": 1
+    },
+    {
+      "model": "basic_unet16",
+      "updates": 563,
+      "dice_prefix_updates": 50,
+      "constraint_updates": 513,
+      "ramp_updates": 50,
+      "full_strength_updates": 464,
+      "final_constraint_scale": 1
+    }
+  ],
+  "band_edge_class_scope": "pooled labels1+2 versus background; class swap invariant",
+  "nnunet_native_objective": "Dice+crossentropy at full/half/quarter resolution with weights4/7,2/7,1/7; last head0",
+  "other_models_objective": "single-output background-including Dice",
+  "calibration": "median weighted full-resolution logit gradient norm ratio0.1 at update50, p95 ceiling0.5; parameter gradients and other native heads not directly balanced",
+  "hypotheses_requiring_probes": [
+    "ramp/prefix mismatch limits effective constraint exposure",
+    "full-resolution logit calibration differs from parameter-gradient influence",
+    "pooled foreground penalties inadequately target posterior/anterior confusion",
+    "sharp posterior transition makes endpoint sensitive to one update"
+  ],
+  "calibration_changed_after_previous_campaign": false,
+  "official_cap_changed": false
+}

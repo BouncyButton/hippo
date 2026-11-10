@@ -1,0 +1,48 @@
+{
+  "status": "passed",
+  "plan_sha256": "6ebc923231368a30e23475329a6dd19cd98f9f64c5122a1ef413a10f824d1ced",
+  "source_manifest_sha256": "6b7f4aa1f4910337b4aca38e836ab2af762ecb526d50df6d019ae5032468dc6e",
+  "max_updates": 96,
+  "lr_horizon_updates": 174,
+  "all96_lr_values_match_baseline": true,
+  "validation_updates": [
+    5,
+    10,
+    15,
+    20,
+    25,
+    30,
+    35,
+    40,
+    45,
+    50,
+    51,
+    56,
+    61,
+    66,
+    71,
+    76,
+    81,
+    86,
+    91,
+    96
+  ],
+  "schedule": {
+    "max_steps": 96,
+    "prefix_updates": 50,
+    "constraint_updates": 46,
+    "calibration_flops": 1186803780354,
+    "consumed_flops": 35298237478870,
+    "unused_flops": 231152151230,
+    "patient_pass_epochs": 9.6,
+    "flops_per_update": 355363888771,
+    "baseline_flops_per_update": 355293896301
+  },
+  "versions": {
+    "torch": "2.12.1",
+    "monai": "1.6.0",
+    "dynamic-network-architectures": "0.4.4"
+  },
+  "parent_bands_smoke_certificate_sha256": "5b2f8c76d2fe24a693393ab733c88a22ef534e59f060771671fb0ba4bf7e2085",
+  "basis": "Reuse passed native bands calibration/training/resume smoke with all inherited runtime files unchanged; exact schedule adapter checked at every update; calibration and band costs verified against source-bound profile."
+}

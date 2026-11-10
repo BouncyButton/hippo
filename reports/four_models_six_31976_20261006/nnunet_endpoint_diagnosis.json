@@ -1,0 +1,43 @@
+{
+  "status": "diagnosed",
+  "job_id": 685757,
+  "model": "nnunet",
+  "fold": 0,
+  "seed": 0,
+  "budget_flops": 31976450667090,
+  "baseline_updates": 90,
+  "bands_updates": 86,
+  "calibration_flops": 1186803780354,
+  "calibration_in_baseline_update_equivalents": 3.3403438469107742,
+  "calibration_budget_percent": 3.7114931632341936,
+  "bands_update_overhead_percent": 0.019699879657020247,
+  "matched85_delta_percentage_points": 1.1212281372326494,
+  "current_bands86_exactly_matches_prior_bands86": true,
+  "fixed_lr_horizon_updates": 174,
+  "momentum": 0.95,
+  "bands_weight": 0.013940805726151492,
+  "no_discarded_updates_or_calibration_retries": true,
+  "rows": [
+    {
+      "updates": 85,
+      "baseline_dice": 0.4216943965383017,
+      "bands_dice": 0.4329066779106282,
+      "baseline_posterior_dice": 0.09132998445644401,
+      "bands_posterior_dice": 0.1136472485243128
+    },
+    {
+      "updates": 86,
+      "baseline_dice": null,
+      "bands_dice": 0.49382256630521554,
+      "bands_posterior_dice": 0.23708502776347673
+    },
+    {
+      "updates": 90,
+      "baseline_dice": 0.6706904132778828,
+      "baseline_posterior_dice": 0.5609091153511634,
+      "previous_longer_bands_dice": 0.6869999643128651,
+      "previous_longer_bands_posterior_dice": 0.5923105896665499
+    }
+  ],
+  "interpretation": "Current same-cap endpoint disadvantage occurs because calibration reduces optimization allowance by4updates during a steep posterior hard-Dice rise. The shared85-update comparison favors bands. This remains a worse result for bands under the present total-compute accounting; equal-update benefits do not offset full-volume calibration overhead."
+}

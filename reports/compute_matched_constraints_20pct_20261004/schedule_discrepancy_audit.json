@@ -1,0 +1,64 @@
+{
+  "old_job": 682338,
+  "new_job": 682721,
+  "finding": "Learning-rate schedule horizon changed together with the compute cap; new run is not a truncation of the old trajectory.",
+  "old_reference_updates": 4247,
+  "new_reference_updates": 849,
+  "old_warmup_updates": 213,
+  "new_warmup_updates": 43,
+  "old_20pct_validation_row": {
+    "step": "850",
+    "charged_attempts": "850",
+    "patient_passes": "85.0",
+    "estimated_training_flops": "8143831555850",
+    "calibration_flops": "0",
+    "total_flops": "8143831555850",
+    "compute_fraction": "0.20014127619496114",
+    "mean_train_loss": "0.46020277603617255",
+    "learning_rate": "9.404843095275921e-05",
+    "anterior_hard_dice": "0.782507157096496",
+    "anterior_soft_dice": "0.5454894785697644",
+    "posterior_hard_dice": "0.7587777593961129",
+    "posterior_soft_dice": "0.410633951998674",
+    "macro_hard_dice": "0.7706424582463045",
+    "macro_soft_dice": "0.47806171528421915"
+  },
+  "new_final_validation_row": {
+    "step": "849",
+    "charged_attempts": "849",
+    "patient_passes": "84.9",
+    "estimated_training_flops": "8134250577549",
+    "calibration_flops": "0",
+    "total_flops": "8134250577549",
+    "compute_fraction": "0.9995290793501787",
+    "mean_train_loss": "0.6243286558559963",
+    "learning_rate": "1.0000000000000002e-06",
+    "anterior_hard_dice": "0.6710268963988011",
+    "anterior_soft_dice": "0.17128295021561477",
+    "posterior_hard_dice": "0.17182089073153642",
+    "posterior_soft_dice": "0.057857259176671505",
+    "macro_hard_dice": "0.42142389356516874",
+    "macro_soft_dice": "0.11457010469614314"
+  },
+  "lr_at_update_849": {
+    "old": 9.406674898144437e-05,
+    "new": 1.0000000000000002e-06
+  },
+  "sum_lr_first_849": {
+    "old": 0.07303082743720078,
+    "new": 0.04290299999999998
+  },
+  "checked_equal": [
+    "dataset SHA256",
+    "ten training patients",
+    "52 validation patients",
+    "seed and fold",
+    "shared model/preprocessing/evaluation/augmentation source SHA256",
+    "Torch and MONAI versions",
+    "initial learning rate",
+    "Dice and original band/edge loss expressions"
+  ],
+  "other_protocol_change": "Validation now every approximately 42 updates instead of 212; same score definition.",
+  "causal_limit": "Schedule drift is established; a controlled run preserving the old schedule is needed to quantify how much of the performance drop it explains.",
+  "intended_comparison": "Preserve the original per-update learning-rate schedule for each objective and truncate at the new FLOP cap; recalibrate within that cap."
+}

@@ -1,0 +1,421 @@
+{
+  "name": "four_models_six_31976_20261006",
+  "status": "ready",
+  "budget_flops_per_run": 31976450667090,
+  "budget_gflops_per_run": 31976.45066709,
+  "fold": 0,
+  "seed": 0,
+  "model_order": [
+    "nnunet",
+    "swinunetr",
+    "unetr_vit_b16",
+    "basic_unet16"
+  ],
+  "arm_order": [
+    "dice",
+    "dice_bands",
+    "dice_sdf",
+    "dice_bands_sdf",
+    "dice_bands_edge",
+    "dice_bands_edge_sdf"
+  ],
+  "runs": 24,
+  "run_order": [
+    [
+      "nnunet",
+      "dice"
+    ],
+    [
+      "swinunetr",
+      "dice"
+    ],
+    [
+      "unetr_vit_b16",
+      "dice"
+    ],
+    [
+      "basic_unet16",
+      "dice"
+    ],
+    [
+      "nnunet",
+      "dice_bands"
+    ],
+    [
+      "swinunetr",
+      "dice_bands"
+    ],
+    [
+      "unetr_vit_b16",
+      "dice_bands"
+    ],
+    [
+      "basic_unet16",
+      "dice_bands"
+    ],
+    [
+      "nnunet",
+      "dice_sdf"
+    ],
+    [
+      "swinunetr",
+      "dice_sdf"
+    ],
+    [
+      "unetr_vit_b16",
+      "dice_sdf"
+    ],
+    [
+      "basic_unet16",
+      "dice_sdf"
+    ],
+    [
+      "nnunet",
+      "dice_bands_sdf"
+    ],
+    [
+      "swinunetr",
+      "dice_bands_sdf"
+    ],
+    [
+      "unetr_vit_b16",
+      "dice_bands_sdf"
+    ],
+    [
+      "basic_unet16",
+      "dice_bands_sdf"
+    ],
+    [
+      "nnunet",
+      "dice_bands_edge"
+    ],
+    [
+      "swinunetr",
+      "dice_bands_edge"
+    ],
+    [
+      "unetr_vit_b16",
+      "dice_bands_edge"
+    ],
+    [
+      "basic_unet16",
+      "dice_bands_edge"
+    ],
+    [
+      "nnunet",
+      "dice_bands_edge_sdf"
+    ],
+    [
+      "swinunetr",
+      "dice_bands_edge_sdf"
+    ],
+    [
+      "unetr_vit_b16",
+      "dice_bands_edge_sdf"
+    ],
+    [
+      "basic_unet16",
+      "dice_bands_edge_sdf"
+    ]
+  ],
+  "single_allocation": true,
+  "protocol_sha256": {
+    "nnunet": "25680f3262915abb6c542906dbd05f3019a9c9826ccfab620b139ecb866cec14",
+    "swinunetr": "d77f582d3aca2286508f4ef131be59fb89ac8c294d32c87fc5d07a23d64154dc",
+    "unetr_vit_b16": "f43e9565d93166c7aa999f27a384fbcd6b197dd3bf35289fdb451f0403f21e8c",
+    "basic_unet16": "52a6e28994e449c4adb6efb84736178b9dba20ac07a9142d64da50d0da4576d5"
+  },
+  "schedules": {
+    "nnunet": {
+      "dice": {
+        "max_steps": 90,
+        "prefix_updates": 0,
+        "constraint_updates": 90,
+        "calibration_flops": 0,
+        "consumed_flops": 31976450667090,
+        "unused_flops": 0,
+        "patient_pass_epochs": 9.0,
+        "flops_per_update": 355293896301,
+        "baseline_flops_per_update": 355293896301
+      },
+      "dice_bands": {
+        "max_steps": 86,
+        "prefix_updates": 50,
+        "constraint_updates": 36,
+        "calibration_flops": 1186803780354,
+        "consumed_flops": 31744598591160,
+        "unused_flops": 231852075930,
+        "patient_pass_epochs": 8.6,
+        "flops_per_update": 355363888771,
+        "baseline_flops_per_update": 355293896301
+      },
+      "dice_sdf": {
+        "max_steps": 86,
+        "prefix_updates": 50,
+        "constraint_updates": 36,
+        "calibration_flops": 1186203470444,
+        "consumed_flops": 31741837165610,
+        "unused_flops": 234613501480,
+        "patient_pass_epochs": 8.6,
+        "flops_per_update": 355303857781,
+        "baseline_flops_per_update": 355293896301
+      },
+      "dice_bands_sdf": {
+        "max_steps": 86,
+        "prefix_updates": 50,
+        "constraint_updates": 36,
+        "calibration_flops": 1186919123724,
+        "consumed_flops": 31745044236078,
+        "unused_flops": 231406431012,
+        "patient_pass_epochs": 8.6,
+        "flops_per_update": 355373063814,
+        "baseline_flops_per_update": 355293896301
+      },
+      "dice_bands_edge": {
+        "max_steps": 86,
+        "prefix_updates": 50,
+        "constraint_updates": 36,
+        "calibration_flops": 1187552406354,
+        "consumed_flops": 31747957336176,
+        "unused_flops": 228493330914,
+        "patient_pass_epochs": 8.6,
+        "flops_per_update": 355436392077,
+        "baseline_flops_per_update": 355293896301
+      },
+      "dice_bands_edge_sdf": {
+        "max_steps": 86,
+        "prefix_updates": 50,
+        "constraint_updates": 36,
+        "calibration_flops": 1187683478364,
+        "consumed_flops": 31748418709734,
+        "unused_flops": 228031957356,
+        "patient_pass_epochs": 8.6,
+        "flops_per_update": 355445567120,
+        "baseline_flops_per_update": 355293896301
+      }
+    },
+    "swinunetr": {
+      "dice": {
+        "max_steps": 206,
+        "prefix_updates": 0,
+        "constraint_updates": 206,
+        "calibration_flops": 0,
+        "consumed_flops": 31932500020532,
+        "unused_flops": 43950646558,
+        "patient_pass_epochs": 20.6,
+        "flops_per_update": 155012136022,
+        "baseline_flops_per_update": 155012136022
+      },
+      "dice_bands": {
+        "max_steps": 202,
+        "prefix_updates": 50,
+        "constraint_updates": 152,
+        "calibration_flops": 521568187624,
+        "consumed_flops": 31844538981084,
+        "unused_flops": 131911686006,
+        "patient_pass_epochs": 20.2,
+        "flops_per_update": 155081342055,
+        "baseline_flops_per_update": 155012136022
+      },
+      "dice_sdf": {
+        "max_steps": 202,
+        "prefix_updates": 50,
+        "constraint_updates": 152,
+        "calibration_flops": 520967877714,
+        "consumed_flops": 31834813960694,
+        "unused_flops": 141636706396,
+        "patient_pass_epochs": 20.2,
+        "flops_per_update": 155021311065,
+        "baseline_flops_per_update": 155012136022
+      },
+      "dice_bands_sdf": {
+        "max_steps": 202,
+        "prefix_updates": 50,
+        "constraint_updates": 152,
+        "calibration_flops": 521683530994,
+        "consumed_flops": 31846048930990,
+        "unused_flops": 130401736100,
+        "patient_pass_epochs": 20.2,
+        "flops_per_update": 155090517098,
+        "baseline_flops_per_update": 155012136022
+      },
+      "dice_bands_edge": {
+        "max_steps": 202,
+        "prefix_updates": 50,
+        "constraint_updates": 152,
+        "calibration_flops": 522316813624,
+        "consumed_flops": 31856308109596,
+        "unused_flops": 120142557494,
+        "patient_pass_epochs": 20.2,
+        "flops_per_update": 155153845361,
+        "baseline_flops_per_update": 155012136022
+      },
+      "dice_bands_edge_sdf": {
+        "max_steps": 202,
+        "prefix_updates": 50,
+        "constraint_updates": 152,
+        "calibration_flops": 522447885634,
+        "consumed_flops": 31857833788142,
+        "unused_flops": 118616878948,
+        "patient_pass_epochs": 20.2,
+        "flops_per_update": 155163020404,
+        "baseline_flops_per_update": 155012136022
+      }
+    },
+    "unetr_vit_b16": {
+      "dice": {
+        "max_steps": 245,
+        "prefix_updates": 0,
+        "constraint_updates": 245,
+        "calibration_flops": 0,
+        "consumed_flops": 31865011891860,
+        "unused_flops": 111438775230,
+        "patient_pass_epochs": 24.5,
+        "flops_per_update": 130061273028,
+        "baseline_flops_per_update": 130061273028
+      },
+      "dice_bands": {
+        "max_steps": 242,
+        "prefix_updates": 50,
+        "constraint_updates": 192,
+        "calibration_flops": 432467930294,
+        "consumed_flops": 31920583561406,
+        "unused_flops": 55867105684,
+        "patient_pass_epochs": 24.2,
+        "flops_per_update": 130130479061,
+        "baseline_flops_per_update": 130061273028
+      },
+      "dice_sdf": {
+        "max_steps": 242,
+        "prefix_updates": 50,
+        "constraint_updates": 192,
+        "calibration_flops": 431867620384,
+        "consumed_flops": 31908457301416,
+        "unused_flops": 67993365674,
+        "patient_pass_epochs": 24.2,
+        "flops_per_update": 130070448071,
+        "baseline_flops_per_update": 130061273028
+      },
+      "dice_bands_sdf": {
+        "max_steps": 242,
+        "prefix_updates": 50,
+        "constraint_updates": 192,
+        "calibration_flops": 432583273664,
+        "consumed_flops": 31922460513032,
+        "unused_flops": 53990154058,
+        "patient_pass_epochs": 24.2,
+        "flops_per_update": 130139654104,
+        "baseline_flops_per_update": 130061273028
+      },
+      "dice_bands_edge": {
+        "max_steps": 242,
+        "prefix_updates": 50,
+        "constraint_updates": 192,
+        "calibration_flops": 433216556294,
+        "consumed_flops": 31935252822158,
+        "unused_flops": 41197844932,
+        "patient_pass_epochs": 24.2,
+        "flops_per_update": 130202982367,
+        "baseline_flops_per_update": 130061273028
+      },
+      "dice_bands_edge_sdf": {
+        "max_steps": 242,
+        "prefix_updates": 50,
+        "constraint_updates": 192,
+        "calibration_flops": 433347628304,
+        "consumed_flops": 31937145502424,
+        "unused_flops": 39305164666,
+        "patient_pass_epochs": 24.2,
+        "flops_per_update": 130212157410,
+        "baseline_flops_per_update": 130061273028
+      }
+    },
+    "basic_unet16": {
+      "dice": {
+        "max_steps": 563,
+        "prefix_updates": 0,
+        "constraint_updates": 563,
+        "calibration_flops": 0,
+        "consumed_flops": 31937348965348,
+        "unused_flops": 39101701742,
+        "patient_pass_epochs": 56.3,
+        "flops_per_update": 56727085196,
+        "baseline_flops_per_update": 56727085196
+      },
+      "dice_bands": {
+        "max_steps": 559,
+        "prefix_updates": 50,
+        "constraint_updates": 509,
+        "calibration_flops": 190824301494,
+        "consumed_flops": 31936490796855,
+        "unused_flops": 39959870235,
+        "patient_pass_epochs": 55.9,
+        "flops_per_update": 56796291229,
+        "baseline_flops_per_update": 56727085196
+      },
+      "dice_sdf": {
+        "max_steps": 560,
+        "prefix_updates": 50,
+        "constraint_updates": 510,
+        "calibration_flops": 190223991584,
+        "consumed_flops": 31962070973274,
+        "unused_flops": 14379693816,
+        "patient_pass_epochs": 56.0,
+        "flops_per_update": 56736260239,
+        "baseline_flops_per_update": 56727085196
+      },
+      "dice_bands_sdf": {
+        "max_steps": 559,
+        "prefix_updates": 50,
+        "constraint_updates": 509,
+        "calibration_flops": 190939644864,
+        "consumed_flops": 31941276237112,
+        "unused_flops": 35174429978,
+        "patient_pass_epochs": 55.9,
+        "flops_per_update": 56805466272,
+        "baseline_flops_per_update": 56727085196
+      },
+      "dice_bands_edge": {
+        "max_steps": 559,
+        "prefix_updates": 50,
+        "constraint_updates": 509,
+        "calibration_flops": 191572927494,
+        "consumed_flops": 31974143605609,
+        "unused_flops": 2307061481,
+        "patient_pass_epochs": 55.9,
+        "flops_per_update": 56868794535,
+        "baseline_flops_per_update": 56727085196
+      },
+      "dice_bands_edge_sdf": {
+        "max_steps": 558,
+        "prefix_updates": 50,
+        "constraint_updates": 508,
+        "calibration_flops": 191703999504,
+        "consumed_flops": 31922066804928,
+        "unused_flops": 54383862162,
+        "patient_pass_epochs": 55.8,
+        "flops_per_update": 56877969578,
+        "baseline_flops_per_update": 56727085196
+      }
+    }
+  },
+  "pkl_sha256": "3311d2233b99e09080c40ca80f1035781d9c1dc9c5b109dc266c73eb52a3df01",
+  "training_volumes": 10,
+  "validation_volumes": 52,
+  "initial_lrs": {
+    "nnunet": 0.01,
+    "swinunetr": 0.0001,
+    "unetr_vit_b16": 0.0001,
+    "basic_unet16": 0.0003
+  },
+  "lr_horizons": {
+    "nnunet": 174,
+    "swinunetr": 610,
+    "unetr_vit_b16": 477,
+    "basic_unet16": 1095
+  },
+  "budget_origin": "User selected90 times the measured native nnU-Net baseline training-update cost, following exploratory learning curves. No outcome filtering; all24 runs reported.",
+  "development_only": true,
+  "pretrained_weights": false,
+  "prior_reference_sha256": "85a873cdc97c08799a69fea345f0201446cbd21d4ce542433dfe643858b88857"
+}

@@ -1,0 +1,156 @@
+{
+  "runs": [
+    {
+      "model": "swinunetr",
+      "objective": "dice",
+      "fold": 0,
+      "seed": 0,
+      "updates": 78,
+      "patient_pass_epochs": 7.8,
+      "selected_step": 78,
+      "total_gflops": 12090.946609716,
+      "calibration_gflops": 0.0,
+      "discarded_attempts": 0,
+      "calibration_retries": 0,
+      "anterior_hard_dice": 0.11957515776157379,
+      "anterior_soft_dice": 0.040671692408907875,
+      "posterior_hard_dice": 0.16292406475314727,
+      "posterior_soft_dice": 0.04294992399473603,
+      "macro_hard_dice": 0.14124961125736052,
+      "macro_soft_dice": 0.04181080820182195
+    },
+    {
+      "model": "swinunetr",
+      "objective": "dice_bands",
+      "fold": 0,
+      "seed": 0,
+      "updates": 75,
+      "patient_pass_epochs": 7.5,
+      "selected_step": 75,
+      "total_gflops": 12152.46122365,
+      "calibration_gflops": 521.568187624,
+      "discarded_attempts": 0,
+      "calibration_retries": 0,
+      "anterior_hard_dice": 0.11551266464476402,
+      "anterior_soft_dice": 0.036793924115884766,
+      "posterior_hard_dice": 0.16161260510293338,
+      "posterior_soft_dice": 0.04155047588910048,
+      "macro_hard_dice": 0.1385626348738487,
+      "macro_soft_dice": 0.03917220000249262
+    },
+    {
+      "model": "swinunetr",
+      "objective": "dice_sdf",
+      "fold": 0,
+      "seed": 0,
+      "updates": 75,
+      "patient_pass_epochs": 7.5,
+      "selected_step": 75,
+      "total_gflops": 12147.53868246,
+      "calibration_gflops": 520.967877714,
+      "discarded_attempts": 0,
+      "calibration_retries": 0,
+      "anterior_hard_dice": 0.11681794633085911,
+      "anterior_soft_dice": 0.03745520695184286,
+      "posterior_hard_dice": 0.15880369280393308,
+      "posterior_soft_dice": 0.041715953463258654,
+      "macro_hard_dice": 0.1378108195673961,
+      "macro_soft_dice": 0.039585580207550757
+    },
+    {
+      "model": "swinunetr",
+      "objective": "dice_bands_sdf",
+      "fold": 0,
+      "seed": 0,
+      "updates": 75,
+      "patient_pass_epochs": 7.5,
+      "selected_step": 75,
+      "total_gflops": 12153.237170116,
+      "calibration_gflops": 521.683530994,
+      "discarded_attempts": 0,
+      "calibration_retries": 0,
+      "anterior_hard_dice": 0.11583853613298672,
+      "anterior_soft_dice": 0.03577704448252916,
+      "posterior_hard_dice": 0.16031904719196832,
+      "posterior_soft_dice": 0.04095974424853921,
+      "macro_hard_dice": 0.13807879166247752,
+      "macro_soft_dice": 0.038368394365534186
+    },
+    {
+      "model": "swinunetr",
+      "objective": "dice_bands_edge",
+      "fold": 0,
+      "seed": 0,
+      "updates": 75,
+      "patient_pass_epochs": 7.5,
+      "selected_step": 75,
+      "total_gflops": 12158.430087682,
+      "calibration_gflops": 522.316813624,
+      "discarded_attempts": 0,
+      "calibration_retries": 0,
+      "anterior_hard_dice": 0.11602194850834516,
+      "anterior_soft_dice": 0.03672463873114724,
+      "posterior_hard_dice": 0.15903289974308932,
+      "posterior_soft_dice": 0.0413925415263153,
+      "macro_hard_dice": 0.13752742412571722,
+      "macro_soft_dice": 0.039058590128731266
+    },
+    {
+      "model": "swinunetr",
+      "objective": "dice_bands_edge_sdf",
+      "fold": 0,
+      "seed": 0,
+      "updates": 75,
+      "patient_pass_epochs": 7.5,
+      "selected_step": 75,
+      "total_gflops": 12159.221762788,
+      "calibration_gflops": 522.447885634,
+      "discarded_attempts": 0,
+      "calibration_retries": 0,
+      "anterior_hard_dice": 0.11624061674452744,
+      "anterior_soft_dice": 0.035761653982962556,
+      "posterior_hard_dice": 0.15858912396316344,
+      "posterior_soft_dice": 0.0409375735415289,
+      "macro_hard_dice": 0.13741487035384545,
+      "macro_soft_dice": 0.03834961376224573
+    }
+  ],
+  "groups": {
+    "swinunetr/dice": {
+      "mean": 0.14124961125736052,
+      "sample_std": 0,
+      "n": 1
+    },
+    "swinunetr/dice_bands": {
+      "mean": 0.1385626348738487,
+      "sample_std": 0,
+      "n": 1
+    },
+    "swinunetr/dice_sdf": {
+      "mean": 0.1378108195673961,
+      "sample_std": 0,
+      "n": 1
+    },
+    "swinunetr/dice_bands_sdf": {
+      "mean": 0.13807879166247752,
+      "sample_std": 0,
+      "n": 1
+    },
+    "swinunetr/dice_bands_edge": {
+      "mean": 0.13752742412571722,
+      "sample_std": 0,
+      "n": 1
+    },
+    "swinunetr/dice_bands_edge_sdf": {
+      "mean": 0.13741487035384545,
+      "sample_std": 0,
+      "n": 1
+    }
+  },
+  "budget_gflops_per_run": 12207.124453303,
+  "notes": [
+    "Selected validation scores, not independent held-out test performance.",
+    "Fold/seed standard deviations are descriptive; runs are not independent datasets.",
+    "Warm-start training, calibration and all attempted updates are charged to each run."
+  ]
+}

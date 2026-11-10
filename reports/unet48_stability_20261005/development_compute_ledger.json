@@ -1,0 +1,79 @@
+{
+  "scope": "Width48 baseline-development training only; legacy width16, SwinUNETR, nnU-Net and unrelated experiments excluded",
+  "completed_stability_runs": [
+    {
+      "phase": "screen_history.json",
+      "recipe": "constant_bg",
+      "seed": 0,
+      "charged_training_flops": 236549550615000,
+      "updates": 3000,
+      "completion_sha256": "39cea9d688ca5d7d999826f45d491fbb9f737d33149baa3f317997d549910fa5"
+    },
+    {
+      "phase": "screen_history.json",
+      "recipe": "constant_fg",
+      "seed": 0,
+      "charged_training_flops": 236544831945000,
+      "updates": 3000,
+      "completion_sha256": "64711c687e49d121e541458ed34cf5ed588c5fdc8d1467c27b0d87ac2f582d72"
+    },
+    {
+      "phase": "screen_history.json",
+      "recipe": "constant_beta2_099",
+      "seed": 0,
+      "charged_training_flops": 236549550615000,
+      "updates": 3000,
+      "completion_sha256": "0182fdebb2eea2659817128e5f9a4c84966a182046de1c2fff77d7967374083c"
+    },
+    {
+      "phase": "resize_history.json",
+      "recipe": "resize_bg",
+      "seed": 0,
+      "charged_training_flops": 268654850583000,
+      "updates": 3000,
+      "completion_sha256": "256f9832b34fc7a2a7e66391ec1342cdec2216b3c6f7ffe2ddd62cd024fba780"
+    },
+    {
+      "phase": "linear_history.json",
+      "recipe": "linear_bg",
+      "seed": 0,
+      "charged_training_flops": 236509442523000,
+      "updates": 3000,
+      "completion_sha256": "223a4bad454f5f2098d02d6f4607b0602bafad759ead1832fdbd9dec0d432568"
+    },
+    {
+      "phase": "replication_history.json",
+      "recipe": "linear_bg",
+      "seed": 1,
+      "charged_training_flops": 236509442523000,
+      "updates": 3000,
+      "completion_sha256": "28fb440cd581e679a68bca4f16a81f7d6022c0d2b5eab58b50e1cb0aad2360da"
+    },
+    {
+      "phase": "replication_history.json",
+      "recipe": "linear_bg",
+      "seed": 2,
+      "charged_training_flops": 236509442523000,
+      "updates": 3000,
+      "completion_sha256": "073841342b05c7c9f16b93b89327c06e20fee560a6687e4496cc10ab463a45e6"
+    }
+  ],
+  "stability_training_flops_total": 1687827111327000,
+  "retired_width48_budget_search_training_flops_total": 2673009921949500,
+  "completed_development_training_flops_total": 4445586250180575,
+  "note": "Development and tuning compute is separate from each frozen final-run allowance. Fixed B_ref comparison is per-run training compute, not equal total study compute. Aborted attempts are conservatively charged from their persistent ledger. Final budget-selection compute is recorded separately after completion.",
+  "aborted_training_runs": [
+    {
+      "job": 684095,
+      "recipe": "resize_bg",
+      "seed": 0,
+      "charged_attempts": 351,
+      "charged_training_flops": 31432617518211,
+      "note": "Canceled to enforce one running allocation; charged attempts include the reserved in-flight update, not a claim of351 completed optimizer steps."
+    }
+  ],
+  "charged_aborted_training_flops_total": 31432617518211,
+  "stable_budget_selection_training_flops_total": 84749216904075,
+  "stable_budget_selection_selected_run_flops": 13481038223811,
+  "all_development_charged_training_flops_total": 4477018867698786
+}

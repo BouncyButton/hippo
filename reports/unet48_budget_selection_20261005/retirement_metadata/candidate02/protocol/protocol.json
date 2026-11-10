@@ -1,0 +1,134 @@
+{
+  "training_patients_per_fold": 10,
+  "validation_patients_per_fold": 52,
+  "batch_size": 1,
+  "spatial_size": [
+    64,
+    64,
+    64
+  ],
+  "num_classes": 3,
+  "pkl_sha256": "3311d2233b99e09080c40ca80f1035781d9c1dc9c5b109dc266c73eb52a3df01",
+  "splits_sha256": "6b51236d64ce7d43b0568cb4d3276fd3791755f1b1f29463c55e052683a5c1dc",
+  "nnunet_architecture_sha256": "2e7104969b4c25f75943d58a9e1c6d83b6cf93e15ebc34b0f6c50c641b0d6ece",
+  "required_versions": {
+    "monai": "1.6.0",
+    "dynamic-network-architectures": ">=0.4.1,<0.5.0"
+  },
+  "profiled_versions": {
+    "torch": "2.2.2",
+    "monai": "1.6.0",
+    "dynamic-network-architectures": "0.4.1"
+  },
+  "augmentation": "mild_v1",
+  "validation_milestones": 20,
+  "initial_lrs": {
+    "unet": 0.0001,
+    "swinunetr": 0.0001,
+    "nnunet": 0.01
+  },
+  "adamw_weight_decay": 1e-05,
+  "sgd_weight_decay": 3e-05,
+  "adamw_schedule": "5% linear warmup, cosine decay to 1% initial LR over allotted updates",
+  "early_stopping": false,
+  "accounting": "fixed declared arithmetic cost per training update; excludes augmentation/preprocessing, validation, checkpoint I/O and precision-management overhead",
+  "precision": "CUDA bfloat16 autocast, FP32 parameters/optimizer; CPU smoke tests FP32",
+  "checkpoint_selection": "maximum validation macro hard Dice over classes 1 and 2 at fixed compute milestones",
+  "name": "unet48_budget_candidate02",
+  "budget_flops": 126159760328000,
+  "folds": [
+    0
+  ],
+  "seeds": [
+    0
+  ],
+  "constraint_warmup_updates": 1,
+  "pilot_scope": "Dice-only width-48 residual U-Net, fold 0 seed 0; no constraints",
+  "calibration_policy": "No calibration for Dice-only budget selection.",
+  "budget_accounting": "Dice prefix, all calibration attempts, and all subsequent training attempts charged within the exact reference budget.",
+  "training_loss": "Dice + ramp * (connected_zero + band_weight*bands + edge_weight*original_edge + sdf_weight*SDF); absent terms omitted",
+  "constraint_scale": "No auxiliary losses.",
+  "sources": "Canonical two-step balanced BCE bands and original pooled edge consistency; full-volume classwise clipped signed-distance boundary loss.",
+  "status": "ready",
+  "models": {
+    "unet": {
+      "parameters": 43234202,
+      "model_kwargs": {
+        "spatial_dims": 3,
+        "in_channels": 1,
+        "out_channels": 3,
+        "channels": [
+          48,
+          96,
+          192,
+          384,
+          768
+        ],
+        "strides": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "num_res_units": 2
+      },
+      "objectives": {
+        "dice": {
+          "max_steps": 1600,
+          "prefix_updates": 0,
+          "constraint_updates": 1600,
+          "calibration_flops": 0,
+          "consumed_flops": 126159760328000,
+          "unused_flops": 0,
+          "patient_pass_epochs": 160.0,
+          "flops_per_update": 78849850205,
+          "baseline_flops_per_update": 78849850205
+        }
+      }
+    }
+  },
+  "reference_sha256": "12b22634ab8f217935ff76f4c17d6a0c29a41456e09b0b65613cb3915a54e1c9",
+  "requested_arm_order": [
+    "dice",
+    "dice_bands",
+    "dice_sdf",
+    "dice_bands_sdf",
+    "dice_bands_edge",
+    "dice_bands_edge_sdf"
+  ],
+  "signed_distance": {
+    "status": "authorized_and_implemented",
+    "recommended": "full-volume classwise signed-distance boundary loss using existing softmax logits",
+    "classes": [
+      1,
+      2
+    ],
+    "distance_units": "voxels on the training 64-cubed grid",
+    "distance_clip": 8,
+    "normalization": "divide clipped signed distance by 8",
+    "formula": "mean over classes and voxels of (p_c - y_c) * clip(phi_c, -8, 8) / 8",
+    "sign": "negative inside each class, positive outside; half-voxel convention as in existing spline SDF helper",
+    "geometry": "compute ground-truth distance maps after spatial augmentation, not by warping a cached distance map",
+    "extra_prediction_head": false,
+    "existing_code": "semantic_constraints/spline_refinement/train.py:signed_distance; old refinement loss is prediction-band-gated and needs a separate refiner",
+    "source": "https://proceedings.mlr.press/v102/kervadec19a.html",
+    "modification_notice": "Clipping, class selection and the constant subtraction are explicit experiment choices; subtracting y*phi changes values but not parameter gradients.",
+    "empty_class": "constant +1 normalized distance",
+    "full_class": "constant -1 normalized distance",
+    "implementation": "thesis/new_constraints/signed_distance.py",
+    "loss": "Full-volume mean (p_c-y_c)*phi_c over classes 1 and 2; no band mask",
+    "computation": "Recompute from transformed training labels before the training forward; cache neither augmented geometry nor validation labels."
+  },
+  "profile_evidence": {
+    "width48_dice_profile": "reports/midrange_baseline_profiles_20261004/unet_width48.json",
+    "width48_dice_profile_sha256": "e08086669ac51d2bf9d543022f40d4649f6968823109c494b1c5671af5eda1d1",
+    "geometries": [
+      "ellipsoid",
+      "box"
+    ]
+  },
+  "budget_selection": "Select only full-schedule final validation macro foreground Dice in [0.70,0.75]; fresh seeded run per candidate.",
+  "budget_selection_completion_sha256": "01e94ddb79f652812bf6fb4e3f401ab3d7e37ffef7eafd27a6e4b3cfa3f79375",
+  "architecture_adapter_sha256": "05cac654e179166e9a5e7e6483ddd5e0e262ceea7a2991589e45ce353525f66c",
+  "selection_plan_sha256": "fd580dc33eabe2d90e379111a02fb2213683e35f615576d1e2c3f4f65a4a5d37"
+}

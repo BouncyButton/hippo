@@ -1,0 +1,37 @@
+{
+  "status": "official_reference",
+  "adopted_on": "2026-10-04",
+  "budget_flops": 12207124453303,
+  "budget_gflops": 12207.124453303,
+  "definition": "floor(3 * 8138082968869 / 2): baseline-only pilot selected 1.5 times the previous reference with final Dice inside 70\u201377%",
+  "parent_budget_flops": 8138082968869,
+  "parent_fraction": {
+    "numerator": 3,
+    "denominator": 2
+  },
+  "parent_reference_sha256": "f10d1065fc0761d6346dc6678b03f40bfbfe3a650994243a89ee1d224761c19c",
+  "parent_reference_snapshot": "reports/compute_matched_constraints_band_20261004/previous_compute_budget_reference.json",
+  "anchor_model": "unet",
+  "anchor_flops_per_update": 9580978301,
+  "baseline_max_updates": 1274,
+  "baseline_patient_pass_epochs": 127.4,
+  "training_patients": 10,
+  "input_shape": [
+    1,
+    1,
+    64,
+    64,
+    64
+  ],
+  "accounting": "Declared arithmetic per training update, forward/loss/backward/optimizer, dense MAC=2; excludes validation, preprocessing/augmentation, I/O and precision housekeeping",
+  "constraint_preset": "Original balanced two-step BCE bands, no focal/degree weighting; original pooled edge consistency; scalar weighted sum with one backward",
+  "calibration_policy": "Charge model/run-specific training-only calibration within B_ref before deriving each arm maximum; 50 Dice prefix updates are part of the trajectory.",
+  "signed_distance_policy": "Authorized full-volume anterior/posterior SDF boundary loss; clipped at +/-8 model-grid voxels, normalized by 8, no extra prediction head; calibrated after bands and original edge when present.",
+  "budget_selection": "Exploratory baseline-only final-Dice target band, 70\u201377%; freeze common cap before six objectives. Constraints did not enter selection.",
+  "pilot_report": "reports/compute_budget_band_20261004/budget_selection.json",
+  "constraints_schedule": "experiments/compute_matched_constraints_band_20261004/protocol.json",
+  "baseline_final_dice": 0.7692238740049875,
+  "baseline_pilot_job": 682773,
+  "baseline_pilot_completion_sha256": "01e94ddb79f652812bf6fb4e3f401ab3d7e37ffef7eafd27a6e4b3cfa3f79375",
+  "learning_rate_policy": "5% linear warmup, cosine decay to 1% initial LR over allotted updates; each final objective starts from scratch."
+}

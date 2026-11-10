@@ -1,0 +1,81 @@
+{
+  "status": "selected_reference",
+  "adopted_on": "2026-10-05",
+  "budget_flops": 13481038223811,
+  "budget_gflops": 13481.038223811,
+  "anchor_model": "unet_width48",
+  "anchor_model_kwargs": {
+    "spatial_dims": 3,
+    "in_channels": 1,
+    "out_channels": 3,
+    "channels": [
+      48,
+      96,
+      192,
+      384,
+      768
+    ],
+    "strides": [
+      2,
+      2,
+      2,
+      2
+    ],
+    "num_res_units": 2
+  },
+  "anchor_parameters": 43234201,
+  "unet_output_head": "linear",
+  "anchor_flops_per_update": 78836480841,
+  "baseline_max_updates": 171,
+  "baseline_patient_pass_epochs": 17.1,
+  "baseline_final_dice": 0.7337283196930702,
+  "baseline_best_dice": 0.7337283196930702,
+  "training_patients": 10,
+  "validation_patients": 52,
+  "fold": 0,
+  "seed": 0,
+  "input_shape": [
+    1,
+    1,
+    64,
+    64,
+    64
+  ],
+  "selection_plan_sha256": "43ba509ea951642987a26baf1a51b2a2347b35af08d71b6b702b1e274f2fb05d",
+  "selected_completion_sha256": "5ad9c459c39631597b00d217293914a4e667e324dbbae84dfb95e2d786952bd0",
+  "selected_protocol_sha256": "1febac1167d43cf72dcbaebc48e06bb6cfde3409364be6a27258ee327279c50a",
+  "parent_reference_sha256": "12b22634ab8f217935ff76f4c17d6a0c29a41456e09b0b65613cb3915a54e1c9",
+  "accounting": "fixed declared arithmetic cost per training update; excludes augmentation/preprocessing, validation, checkpoint I/O and precision-management overhead",
+  "learning_rate_policy": "100 absolute update linear warmup, then constant learning rate; independent of stopping budget",
+  "budget_selection": [
+    "Only final validation Dice of from-scratch width-48 Dice baselines enters budget selection.",
+    "Baseline allowances for the other models are calculated, not measured performance.",
+    "Exploratory fold 0, seed 0; freeze budget for subsequent comparisons."
+  ],
+  "baseline_allowances": {
+    "unet_width48": {
+      "flops_per_update": 78836480841,
+      "gflops_per_update": 78.836480841,
+      "max_updates": 171,
+      "patient_pass_epochs": 17.1,
+      "consumed_flops": 13481038223811,
+      "unused_flops": 0
+    },
+    "swinunetr": {
+      "flops_per_update": 155012136022,
+      "gflops_per_update": 155.012136022,
+      "max_updates": 86,
+      "patient_pass_epochs": 8.6,
+      "consumed_flops": 13331043697892,
+      "unused_flops": 149994525919
+    },
+    "nnunet": {
+      "flops_per_update": 355293896301,
+      "gflops_per_update": 355.293896301,
+      "max_updates": 37,
+      "patient_pass_epochs": 3.7,
+      "consumed_flops": 13145874163137,
+      "unused_flops": 335164060674
+    }
+  }
+}

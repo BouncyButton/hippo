@@ -1,0 +1,43 @@
+{
+  "name": "nnunet_delayed_sdf_only_31976_20261006",
+  "model": "nnunet",
+  "objective": "dice_sdf",
+  "fold": 0,
+  "seed": 0,
+  "total_runs": 1,
+  "budget_flops": 31976450667090,
+  "budget_scope": "optimization_only",
+  "schedule": {
+    "prefix_updates": 9,
+    "sdf_prefix_updates": 50,
+    "baseline_flops_per_update": 355293896301,
+    "early_flops_per_update": 355293896301,
+    "flops_per_update": 355303857783,
+    "sdf_weight_selection_flops_per_update": 2,
+    "calibration_flops": 1186203470444,
+    "constraint_warmup_updates": 9,
+    "sdf_warmup_updates": 9,
+    "budget_scope": "optimization_only",
+    "max_steps": 89,
+    "consumed_flops": 31621545268587,
+    "consumed_training_flops": 31621545268587,
+    "consumed_total_flops": 32807748739031,
+    "unused_flops": 354905398503,
+    "patient_pass_epochs": 8.9,
+    "sdf_full_strength_updates": 31
+  },
+  "protocol_sha256": "f6974b455b01b0e9b5461425f2cdeb67823ab3a617fa27e59065d96d7cb53dc2",
+  "parent_protocol_sha256": "67d17cde0d2388713c9bd3d113881bd6945298b47fa254901c6c68701ffc532f",
+  "all_runs_fresh_initialization": true,
+  "pkl_sha256": "3311d2233b99e09080c40ca80f1035781d9c1dc9c5b109dc266c73eb52a3df01",
+  "parent_run_root": "/mnt/beegfsstudents/home/3160552/nnunet_early_calibration_31976_686327",
+  "baseline_run_root": "/mnt/beegfsstudents/home/3160552/four_models_six_optimization_31976_685853",
+  "primary_endpoint": "Final macro foreground validation Dice at the unchanged optimization cap.",
+  "controls": [
+    "native baseline90",
+    "early_sdf89"
+  ],
+  "only_intervention": "SDF activation: first update10 becomes51; calibrated weights and9-step ramp unchanged.",
+  "expected_control_trajectory": "All shared recorded Dice, class Dice and LR checkpoints through50 must equal the native baseline685853 exactly.",
+  "policy_selection": "Exploratory follow-up to completed686327. First SDF update51 uses the historical50-update prefix as a fixed timing anchor, selected before this run; no validation-triggered activation or weight search."
+}

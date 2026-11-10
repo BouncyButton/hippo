@@ -1,0 +1,60 @@
+{
+  "status": "passed",
+  "plan_sha256": "7a6a8cef35475c52c8977ff121d55042dfc008bdd8a18612c9a350a5751cbced",
+  "source_manifest_sha256": "2df29a449844dfff3524abdc577bda69509bb675895d0ec71581ece1e9880b16",
+  "max_updates": {
+    "baseline": 95,
+    "bands": 91
+  },
+  "lr_horizon_updates": 174,
+  "all95_lr_values_match_baseline": true,
+  "validation_updates": [
+    5,
+    10,
+    15,
+    20,
+    25,
+    30,
+    35,
+    40,
+    45,
+    50,
+    51,
+    55,
+    56,
+    60,
+    61,
+    65,
+    66,
+    70,
+    71,
+    75,
+    76,
+    80,
+    81,
+    85,
+    86,
+    90,
+    91
+  ],
+  "schedule": {
+    "max_steps": 91,
+    "prefix_updates": 50,
+    "constraint_updates": 41,
+    "calibration_flops": 1186803780354,
+    "consumed_flops": 33521418035015,
+    "unused_flops": 231502113580,
+    "patient_pass_epochs": 9.1,
+    "flops_per_update": 355363888771,
+    "baseline_flops_per_update": 355293896301
+  },
+  "baseline_budget_flops": 33752920148595,
+  "comparison_axis": "training_flops",
+  "versions": {
+    "torch": "2.12.1",
+    "monai": "1.6.0",
+    "dynamic-network-architectures": "0.4.4"
+  },
+  "parent_bands_smoke_certificate_sha256": "5b2f8c76d2fe24a693393ab733c88a22ef534e59f060771671fb0ba4bf7e2085",
+  "basis": "Reuse passed native bands calibration/training/resume smoke with all inherited runtime files unchanged; exact schedule adapter checked at every update; calibration and band costs verified against source-bound profile."
+}

@@ -1,0 +1,114 @@
+[
+  {
+    "model": "unet_width24",
+    "class": "UNet",
+    "kwargs": {
+      "spatial_dims": 3,
+      "in_channels": 1,
+      "out_channels": 3,
+      "channels": [
+        24,
+        48,
+        96,
+        192,
+        384
+      ],
+      "strides": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "num_res_units": 2
+    },
+    "parameters": 10812626,
+    "schedule": {
+      "flops_per_update": 20531939381,
+      "gflops_per_update": 20.531939381,
+      "max_updates": 594,
+      "patient_pass_epochs": 59.4,
+      "complete_epochs": 59,
+      "additional_updates": 4,
+      "loop_epochs": 60,
+      "lr_warmup_updates": 30,
+      "consumed_flops": 12195971992314,
+      "unused_flops": 11152460989,
+      "next_update_exceeds_budget": true
+    }
+  },
+  {
+    "model": "segresnet_filters8_deconv",
+    "class": "SegResNet",
+    "kwargs": {
+      "spatial_dims": 3,
+      "in_channels": 1,
+      "out_channels": 3,
+      "init_filters": 8,
+      "upsample_mode": "deconv"
+    },
+    "parameters": 1187003,
+    "schedule": {
+      "flops_per_update": 27825640507,
+      "gflops_per_update": 27.825640507,
+      "max_updates": 438,
+      "patient_pass_epochs": 43.8,
+      "complete_epochs": 43,
+      "additional_updates": 8,
+      "loop_epochs": 44,
+      "lr_warmup_updates": 22,
+      "consumed_flops": 12187630542066,
+      "unused_flops": 19493911237,
+      "next_update_exceeds_budget": true
+    }
+  },
+  {
+    "model": "segresnet_filters16_deconv",
+    "class": "SegResNet",
+    "kwargs": {
+      "spatial_dims": 3,
+      "in_channels": 1,
+      "out_channels": 3,
+      "init_filters": 16,
+      "upsample_mode": "deconv"
+    },
+    "parameters": 4744051,
+    "schedule": {
+      "flops_per_update": 110130459155,
+      "gflops_per_update": 110.130459155,
+      "max_updates": 110,
+      "patient_pass_epochs": 11.0,
+      "complete_epochs": 11,
+      "additional_updates": 0,
+      "loop_epochs": 11,
+      "lr_warmup_updates": 6,
+      "consumed_flops": 12114350507050,
+      "unused_flops": 92773946253,
+      "next_update_exceeds_budget": true
+    }
+  },
+  {
+    "model": "swinunetr_feature12",
+    "class": "SwinUNETR",
+    "kwargs": {
+      "in_channels": 1,
+      "out_channels": 3,
+      "feature_size": 12,
+      "use_checkpoint": false,
+      "drop_rate": 0.0
+    },
+    "parameters": 4078077,
+    "schedule": {
+      "flops_per_update": 43988272258,
+      "gflops_per_update": 43.988272258,
+      "max_updates": 277,
+      "patient_pass_epochs": 27.7,
+      "complete_epochs": 27,
+      "additional_updates": 7,
+      "loop_epochs": 28,
+      "lr_warmup_updates": 14,
+      "consumed_flops": 12184751415466,
+      "unused_flops": 22373037837,
+      "next_update_exceeds_budget": true
+    }
+  }
+]

@@ -1,0 +1,58 @@
+{
+  "sha256": "85a873cdc97c08799a69fea345f0201446cbd21d4ce542433dfe643858b88857",
+  "reference": {
+    "status": "official_reference",
+    "adopted_on": "2026-10-05",
+    "budget_flops": 62166546655000,
+    "budget_gflops": 62166.546655,
+    "definition": "100 volume-pass epochs * 10 batch-one updates/epoch * measured SegResNet-12 Dice-only update cost",
+    "anchor_model": "segresnet12",
+    "anchor_flops_per_update": 62166546655,
+    "baseline_max_updates": 1000,
+    "baseline_volume_pass_epochs": 100.0,
+    "training_volumes": 10,
+    "validation_volumes": 52,
+    "batch_size": 1,
+    "input_shape": [
+      1,
+      1,
+      64,
+      64,
+      64
+    ],
+    "model_class": "monai.networks.nets.SegResNet",
+    "model_kwargs": {
+      "spatial_dims": 3,
+      "in_channels": 1,
+      "out_channels": 3,
+      "init_filters": 12,
+      "norm": [
+        "GROUP",
+        {
+          "num_groups": 4
+        }
+      ],
+      "upsample_mode": "deconv"
+    },
+    "anchor_parameters": 2669271,
+    "anchor_profile_path": "reports/midrange_baseline_profiles_20261004/segresnet_filters12_deconv.json",
+    "anchor_profile_sha256": "9307c170dd045a19282e052124a87ae3a7e6b0c3a73cdec4bb0ff8852dd910a2",
+    "accounting": "Declared training arithmetic: forward, loss, backward and optimizer; dense MAC=2. Validation, preprocessing/augmentation, I/O and precision housekeeping excluded consistently.",
+    "selection_basis": "User selected SegResNet-12 and reduced its reference horizon to 100 epochs. The cap was not selected from constraint outcomes.",
+    "baseline_validation_status": "Measured on fold0 seed0: final85.95294%, best85.96393%; both exceed the desired70\u201380% range. Budget remains the user-selected cap; no target-achieving budget has been inferred.",
+    "supersedes_provisional_cap_gflops": 77506.068011,
+    "previous_reference_snapshot": "reports/segresnet12_100epochs_20261005/previous_compute_budget_reference.json",
+    "previous_reference_sha256": "12b22634ab8f217935ff76f4c17d6a0c29a41456e09b0b65613cb3915a54e1c9",
+    "schedules_path": "experiments/segresnet12_100epochs_20261005/training_schedules.json",
+    "constraints_accounting": "Profile each augmented objective and charge all training-only weight calibration within this same cap before deriving its maximum updates.",
+    "checkpoint_schedule_policy": "Learning-rate and validation schedules must use the new update limits; do not treat an intermediate checkpoint of a longer-horizon run as a newly trained endpoint.",
+    "baseline_final_dice": 0.859529425891546,
+    "baseline_best_dice": 0.8596392606313412,
+    "baseline_best_update": 950,
+    "baseline_job_id": 684566,
+    "baseline_completion_sha256": "9f49dff59755389c583b6073ec15ea13001b82aa1f2d0337ba3dd5097955edb3",
+    "baseline_report": "reports/segresnet12_100epochs_20261005/summary_final.json",
+    "pre_training_reference_snapshot": "reports/segresnet12_100epochs_20261005/pre_training_compute_budget_reference.json",
+    "pre_training_reference_sha256": "81162fa32fbda322c480f58aade8269e4a2ab1604be5b26adbfb9a91dd0a3cf1"
+  }
+}

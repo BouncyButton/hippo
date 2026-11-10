@@ -1,0 +1,23 @@
+{
+  "job_id": "700202",
+  "stage": "/mnt/beegfsstudents/home/3160552/storage_retirement_audit_20261014",
+  "queue_before": "",
+  "quota_before": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  79.61GiB/93.13GiB  206.02k/\u221e  \n\n",
+  "purpose": "Inference only: preserve missing Dice/FN/FP/A-P-swap metrics and hard predictions before approved deletion",
+  "expected_endpoints": 100,
+  "estimated_peak_output_gib": 0.5,
+  "command": [
+    "sbatch",
+    "--parsable",
+    "--job-name=hippo-storage-audit",
+    "--partition=stud",
+    "--gres=gpu:4g.40gb:1",
+    "--cpus-per-task=4",
+    "--mem=24G",
+    "--time=02:00:00",
+    "--output=/mnt/beegfsstudents/home/3160552/storage_retirement_audit_20261014/slurm-%j.out",
+    "--error=/mnt/beegfsstudents/home/3160552/storage_retirement_audit_20261014/slurm-%j.err",
+    "/mnt/beegfsstudents/home/3160552/storage_retirement_audit_20261014/run.sh"
+  ],
+  "local_worker_sha256": "6559d4902fbc6836e40a51f945694bec9ff1301de84900a7c074ed68017ad3ac"
+}

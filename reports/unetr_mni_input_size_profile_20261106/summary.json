@@ -1,0 +1,54 @@
+{
+  "budget_flops": 31976450667090,
+  "recipe": "Same Geo UNETR loss, dropout and architecture; input geometry only changed. Profiling only; no training runs changed.",
+  "profiles": [
+    {
+      "input_shape": [
+        64,
+        64,
+        64
+      ],
+      "flops_per_update": 130115750119,
+      "max_updates": 245,
+      "parameters": 92685572,
+      "native_mni_fits": true,
+      "same_xy_augmentation": true
+    },
+    {
+      "input_shape": [
+        64,
+        64,
+        48
+      ],
+      "flops_per_update": 97824589767,
+      "max_updates": 326,
+      "parameters": 92673284,
+      "native_mni_fits": true,
+      "same_xy_augmentation": true
+    },
+    {
+      "input_shape": [
+        48,
+        48,
+        48
+      ],
+      "flops_per_update": 55529826333,
+      "max_updates": 575,
+      "parameters": 92657156,
+      "native_mni_fits": false,
+      "same_xy_augmentation": true
+    },
+    {
+      "input_shape": [
+        32,
+        32,
+        32
+      ],
+      "flops_per_update": 17348608247,
+      "max_updates": 1843,
+      "parameters": 92642564,
+      "native_mni_fits": false,
+      "same_xy_augmentation": true
+    }
+  ]
+}

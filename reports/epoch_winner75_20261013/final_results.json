@@ -1,0 +1,167 @@
+{
+  "state": "complete",
+  "completed": 6,
+  "planned": 6,
+  "current": null,
+  "runs": [
+    {
+      "model": "nnunet",
+      "objective": "dice",
+      "fold": 0,
+      "seed": 0,
+      "best_dice": 0.8445375962899282,
+      "final_dice": 0.843069572861378,
+      "best_epoch": 21,
+      "completed_epochs": 29,
+      "optimizer_updates": 290,
+      "training_seconds": 21.01981011533644
+    },
+    {
+      "model": "nnunet",
+      "objective": "dice_focus_bands_pair_depth",
+      "fold": 0,
+      "seed": 0,
+      "best_dice": 0.8458820409499682,
+      "final_dice": 0.8447378999911821,
+      "best_epoch": 26,
+      "completed_epochs": 29,
+      "optimizer_updates": 290,
+      "training_seconds": 29.617826932109892
+    },
+    {
+      "model": "unetr_vit_b16",
+      "objective": "dice",
+      "fold": 0,
+      "seed": 0,
+      "best_dice": 0.6563279677468996,
+      "final_dice": 0.6561195727151174,
+      "best_epoch": 74,
+      "completed_epochs": 75,
+      "optimizer_updates": 750,
+      "training_seconds": 100.45083599654026
+    },
+    {
+      "model": "unetr_vit_b16",
+      "objective": "dice_focus_bands_pair_depth",
+      "fold": 0,
+      "seed": 0,
+      "best_dice": 0.687984980069674,
+      "final_dice": 0.687984980069674,
+      "best_epoch": 75,
+      "completed_epochs": 75,
+      "optimizer_updates": 750,
+      "training_seconds": 110.77890204952564
+    },
+    {
+      "model": "basic_unet16",
+      "objective": "dice",
+      "fold": 0,
+      "seed": 0,
+      "best_dice": 0.7273300957794373,
+      "final_dice": 0.7273300957794373,
+      "best_epoch": 75,
+      "completed_epochs": 75,
+      "optimizer_updates": 750,
+      "training_seconds": 42.642186133307405
+    },
+    {
+      "model": "basic_unet16",
+      "objective": "dice_focus_bands_pair_depth",
+      "fold": 0,
+      "seed": 0,
+      "best_dice": 0.8300741200263684,
+      "final_dice": 0.8300028930489833,
+      "best_epoch": 43,
+      "completed_epochs": 51,
+      "optimizer_updates": 510,
+      "training_seconds": 39.23268189653754
+    }
+  ],
+  "comparison": [
+    {
+      "model": "nnunet",
+      "baseline": {
+        "model": "nnunet",
+        "objective": "dice",
+        "fold": 0,
+        "seed": 0,
+        "best_dice": 0.8445375962899282,
+        "final_dice": 0.843069572861378,
+        "best_epoch": 21,
+        "completed_epochs": 29,
+        "optimizer_updates": 290,
+        "training_seconds": 21.01981011533644
+      },
+      "constrained": {
+        "model": "nnunet",
+        "objective": "dice_focus_bands_pair_depth",
+        "fold": 0,
+        "seed": 0,
+        "best_dice": 0.8458820409499682,
+        "final_dice": 0.8447378999911821,
+        "best_epoch": 26,
+        "completed_epochs": 29,
+        "optimizer_updates": 290,
+        "training_seconds": 29.617826932109892
+      },
+      "gain_pp": 0.13444446600400228
+    },
+    {
+      "model": "unetr_vit_b16",
+      "baseline": {
+        "model": "unetr_vit_b16",
+        "objective": "dice",
+        "fold": 0,
+        "seed": 0,
+        "best_dice": 0.6563279677468996,
+        "final_dice": 0.6561195727151174,
+        "best_epoch": 74,
+        "completed_epochs": 75,
+        "optimizer_updates": 750,
+        "training_seconds": 100.45083599654026
+      },
+      "constrained": {
+        "model": "unetr_vit_b16",
+        "objective": "dice_focus_bands_pair_depth",
+        "fold": 0,
+        "seed": 0,
+        "best_dice": 0.687984980069674,
+        "final_dice": 0.687984980069674,
+        "best_epoch": 75,
+        "completed_epochs": 75,
+        "optimizer_updates": 750,
+        "training_seconds": 110.77890204952564
+      },
+      "gain_pp": 3.1657012322774403
+    },
+    {
+      "model": "basic_unet16",
+      "baseline": {
+        "model": "basic_unet16",
+        "objective": "dice",
+        "fold": 0,
+        "seed": 0,
+        "best_dice": 0.7273300957794373,
+        "final_dice": 0.7273300957794373,
+        "best_epoch": 75,
+        "completed_epochs": 75,
+        "optimizer_updates": 750,
+        "training_seconds": 42.642186133307405
+      },
+      "constrained": {
+        "model": "basic_unet16",
+        "objective": "dice_focus_bands_pair_depth",
+        "fold": 0,
+        "seed": 0,
+        "best_dice": 0.8300741200263684,
+        "final_dice": 0.8300028930489833,
+        "best_epoch": 43,
+        "completed_epochs": 51,
+        "optimizer_updates": 510,
+        "training_seconds": 39.23268189653754
+      },
+      "gain_pp": 10.274402424693108
+    }
+  ],
+  "job_id": "698553"
+}

@@ -1,0 +1,151 @@
+{
+  "queue": "686327|RUNNING|6:00|gnode01",
+  "accounting": "686327          RUNNING   00:06:01      0:0 \n686327.batch    RUNNING   00:06:01      0:0",
+  "progress.json": {
+    "status": "running",
+    "objective": "dice_sdf",
+    "completed": 1,
+    "failed": 0,
+    "total": 5
+  },
+  "summary.json": {
+    "status": "in_progress",
+    "runs": [
+      {
+        "model": "nnunet",
+        "objective": "dice_bands",
+        "fold": 0,
+        "seed": 0,
+        "updates": 89,
+        "epochs": 8.9,
+        "calibration_gflops": 1186.803780354,
+        "budget_scope": "optimization_only",
+        "optimization_gflops": 31626.756168389,
+        "total_gflops": 32813.559948743,
+        "unused_optimization_gflops": 349.694498701,
+        "weights": {
+          "bands": 0.00554042433351307
+        },
+        "best_dice": 0.7038300200723684,
+        "final_dice": 0.7038300200723684,
+        "anterior_dice": 0.7798751947971491,
+        "posterior_dice": 0.6277848453475878,
+        "completion_sha256": "a200c11c1c42309d5081c5fc4196043e903ab4897ad0ceef9fd1f5482a37b45b",
+        "validation_latest_sha256": "e10fdde4ab25650783562c18b9cceab46afd9a6c0c43eb38874ff392ab676416",
+        "runtime_recipe_sha256": "29dfd4631c82a4aab66668f9f8040bae5c513cceb6ac5f5b5c5a1704752d3cc3",
+        "prefix_updates": 9,
+        "ramp_updates": 9,
+        "full_strength_updates": 72,
+        "gain_vs_baseline_at_cap_pp": 3.3139606794485577,
+        "gain_vs_baseline89_pp": 7.574360043956673,
+        "gain_vs_old_same_objective89_pp": 5.538968025491775
+      }
+    ],
+    "failures": [],
+    "total": 5,
+    "budget_scope": "optimization_only",
+    "budget_gflops": 31976.45066709,
+    "fold": 0,
+    "seed": 0,
+    "baseline90": {
+      "model": "nnunet",
+      "objective": "dice",
+      "fold": 0,
+      "seed": 0,
+      "updates": 90,
+      "epochs": 9,
+      "calibration_gflops": 0,
+      "budget_scope": "optimization_only",
+      "optimization_gflops": 31976.45066709,
+      "total_gflops": 31976.45066709,
+      "unused_optimization_gflops": 0,
+      "weights": {},
+      "best_dice": 0.6706904132778828,
+      "final_dice": 0.6706904132778828,
+      "anterior_dice": 0.7804717112046021,
+      "posterior_dice": 0.5609091153511634,
+      "completion_sha256": "da2ed85a0ae4fbfb9fcad2d08e3d0a387d349e01b38463ef593af0484dff64ba",
+      "validation_latest_sha256": "5be20375a7c4b182b207c4e58bac94397cb65ada0663a60509686cc4e88235e1",
+      "runtime_recipe_sha256": "fcba6a86f8ab8f34cf5c0519b4d2cea20e32a85e8ce052ea8b1a34ebca59672c"
+    },
+    "baseline89": {
+      "objective": "dice",
+      "updates": 89,
+      "dice": 0.6280864196328017,
+      "anterior": 0.7729799506755975,
+      "posterior": 0.48319288859000575,
+      "gain_pp": 0
+    },
+    "phase_policy": "compute_relative_10pct_prefix_10pct_ramp"
+  },
+  "arm_progress": [
+    {
+      "objective": "dice_bands",
+      "ledger": {
+        "config_sha256": "94eb5dfa60b3c6c5dcf9aa945c104363699663e297684c326fdaaa927e6bc3cf",
+        "charged_attempts": 89,
+        "training_flops": 31626756168389,
+        "calibration_flops": 1186803780354,
+        "calibration_attempts": 1,
+        "calibration_sha256": "6756686cf571828fb3a7bcda9807228393a2c1b9b07562b17392cc8b3a10e816"
+      },
+      "calibration": {
+        "status": "complete",
+        "anchor_successful_updates": 9,
+        "anchor_training_attempts": 9,
+        "weights": {
+          "bands": 0.00554042433351307
+        }
+      },
+      "validation": {
+        "summary": {
+          "anterior_hard_dice": 0.7798751947971491,
+          "anterior_soft_dice": 0.6825950959554086,
+          "posterior_hard_dice": 0.6277848453475878,
+          "posterior_soft_dice": 0.3998502498635879,
+          "macro_hard_dice": 0.7038300200723684,
+          "macro_soft_dice": 0.5412226729094982
+        }
+      }
+    },
+    {
+      "objective": "dice_sdf",
+      "ledger": {
+        "config_sha256": "126fbe14011f8d625003e331f078d91b27b547f412c3d7485251992dce53b6f8",
+        "charged_attempts": 18,
+        "training_flops": 6395379786738,
+        "calibration_flops": 1186203470444,
+        "calibration_attempts": 1,
+        "calibration_sha256": "67575f12b6392146c524a42903e44fdcd85cf2e05c13f497c5996d2717a58a81"
+      },
+      "calibration": {
+        "status": "complete",
+        "anchor_successful_updates": 9,
+        "anchor_training_attempts": 9,
+        "weights": {
+          "sdf": 0.23204731899778722
+        }
+      },
+      "validation": {
+        "summary": {
+          "anterior_hard_dice": 0.0482606108372028,
+          "anterior_soft_dice": 0.028716775660331432,
+          "posterior_hard_dice": 0.00007625956249494966,
+          "posterior_soft_dice": 0.013809446370802246,
+          "macro_hard_dice": 0.024168435199848876,
+          "macro_soft_dice": 0.02126311101556684
+        }
+      }
+    },
+    {
+      "objective": "dice_bands_sdf"
+    },
+    {
+      "objective": "dice_bands_edge"
+    },
+    {
+      "objective": "dice_bands_edge_sdf"
+    }
+  ],
+  "stderr_tail": ""
+}

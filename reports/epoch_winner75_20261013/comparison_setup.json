@@ -1,0 +1,120 @@
+{
+  "name": "epoch_winner75_20261013",
+  "runs": [
+    {
+      "id": "nnunet__dice",
+      "model": "nnunet",
+      "objective": "dice",
+      "fold": 0,
+      "seed": 0
+    },
+    {
+      "id": "nnunet__dice_focus_bands_pair_depth",
+      "model": "nnunet",
+      "objective": "dice_focus_bands_pair_depth",
+      "fold": 0,
+      "seed": 0
+    },
+    {
+      "id": "unetr_vit_b16__dice",
+      "model": "unetr_vit_b16",
+      "objective": "dice",
+      "fold": 0,
+      "seed": 0
+    },
+    {
+      "id": "unetr_vit_b16__dice_focus_bands_pair_depth",
+      "model": "unetr_vit_b16",
+      "objective": "dice_focus_bands_pair_depth",
+      "fold": 0,
+      "seed": 0
+    },
+    {
+      "id": "basic_unet16__dice",
+      "model": "basic_unet16",
+      "objective": "dice",
+      "fold": 0,
+      "seed": 0
+    },
+    {
+      "id": "basic_unet16__dice_focus_bands_pair_depth",
+      "model": "basic_unet16",
+      "objective": "dice_focus_bands_pair_depth",
+      "fold": 0,
+      "seed": 0
+    }
+  ],
+  "max_epochs": 75,
+  "early_stopping": {
+    "min_epochs": 25,
+    "patience": 8,
+    "min_delta": 0.0005
+  },
+  "augmentation": "none",
+  "learning_rate_policy": "StepLR: initial native model LR, halved after epochs 20, 40, 60; no LR warmup",
+  "calibration_policy": "Ten training volumes after epoch 5; linear ramp epochs 6-10; independent calibration per model",
+  "gradient_ratios": {
+    "bands": 0.125,
+    "pair": 0.075,
+    "depth": 0.1
+  },
+  "winner_objective": {
+    "band": {
+      "kind": "regional",
+      "inner": 3,
+      "outer": 2,
+      "penalty": "brier",
+      "inside_weight": 0.5,
+      "hard_fraction": 0.25,
+      "hard_mix": 0.75,
+      "inside_fraction": 0.7,
+      "outside_fraction": 0.1,
+      "inside_hard_mix": 0.65,
+      "outside_hard_mix": 0.85
+    },
+    "pair": {
+      "distances": [
+        1,
+        3
+      ],
+      "weights": [
+        0.5,
+        0.5
+      ],
+      "support": "all",
+      "form": "independent"
+    },
+    "surface": null,
+    "ap": null,
+    "band_budget": 1.25,
+    "extra_budget": 0.75,
+    "extra_shares": null
+  },
+  "native_region_losses": {
+    "nnunet": "Dice+CE with original deep supervision",
+    "unetr_vit_b16": "Dice",
+    "basic_unet16": "Dice"
+  },
+  "interpretation": "Paired loss comparison under a common epoch policy. Differences from capped experiments also include augmentation and LR schedule.",
+  "capped_baseline_reference": [
+    {
+      "model": "nnunet",
+      "final_dice": 0.6706904132778828,
+      "best_dice": 0.6706904132778828
+    },
+    {
+      "model": "unetr_vit_b16",
+      "final_dice": 0.431477198520532,
+      "best_dice": 0.43668171362235
+    },
+    {
+      "model": "basic_unet16",
+      "final_dice": 0.7000941768861735,
+      "best_dice": 0.7000941768861735
+    }
+  ],
+  "job_id": "698553",
+  "training_volumes": 10,
+  "validation_volumes": 52,
+  "source": "frozen existing capped-winner architecture/geometry plus the new epoch adapter"
+}

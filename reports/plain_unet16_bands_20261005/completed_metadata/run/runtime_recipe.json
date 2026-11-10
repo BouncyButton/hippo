@@ -1,0 +1,72 @@
+{
+  "adapter_sha256": "1c7e88e4777369a3cae2c35abae604ffbd9aefc80ef0271121d800ad6ffba301",
+  "protocol_sha256": "03e7b2c2119caa1e369c6b8ef79f841b71d216a43c9549998ac4e90ae267e314",
+  "model": "unet",
+  "objective": "dice_bands",
+  "validation_target_flops": [
+    3108327332750,
+    6216654665500,
+    9324981998250,
+    12433309331000,
+    15541636663750,
+    18649963996500,
+    21758291329250,
+    24866618662000,
+    27974945994750,
+    31083273327500,
+    34191600660250,
+    37299927993000,
+    40408255325750,
+    43516582658500,
+    46624909991250,
+    49733237324000,
+    52841564656750,
+    55949891989500,
+    59058219322250,
+    62166546655000
+  ],
+  "validation_updates": [
+    51,
+    106,
+    160,
+    215,
+    270,
+    325,
+    379,
+    434,
+    489,
+    543,
+    598,
+    653,
+    708,
+    762,
+    817,
+    872,
+    927,
+    981,
+    1036,
+    1091
+  ],
+  "learning_rate_policy": "Same AdamW initial LR3e-4 and 5% linear warmup (55 updates), cosine to1% initial (3e-6), scaled to1091 updates.",
+  "baseline_job_id": 684625,
+  "candidate": "basic_unet16",
+  "architecture": {
+    "class": "monai.networks.nets.BasicUNet",
+    "kwargs": {
+      "spatial_dims": 3,
+      "in_channels": 1,
+      "out_channels": 3,
+      "features": [
+        16,
+        16,
+        32,
+        64,
+        128,
+        16
+      ],
+      "upsample": "deconv"
+    },
+    "source": "https://arxiv.org/abs/1606.06650",
+    "rationale": "Plain 3D U-Net with sixteen initial channels, pooling and concatenated skips; no residual units, attention or deep supervision. Same BasicUNet topology as the width32 pilot, reduced channel capacity."
+  }
+}

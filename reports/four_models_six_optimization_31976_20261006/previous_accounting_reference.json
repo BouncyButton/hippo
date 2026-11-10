@@ -1,0 +1,34 @@
+{
+  "status": "official_reference",
+  "adopted_on": "2026-10-06",
+  "budget_flops": 31976450667090,
+  "budget_gflops": 31976.45066709,
+  "definition": "90 native nnU-Net baseline updates;10 batch-one training volumes gives9 volume-pass epochs.",
+  "anchor_model": "nnunet",
+  "anchor_flops_per_update": 355293896301,
+  "baseline_max_updates": 90,
+  "baseline_volume_pass_epochs": 9.0,
+  "training_volumes": 10,
+  "validation_volumes": 52,
+  "batch_size": 1,
+  "input_shape": [
+    1,
+    1,
+    64,
+    64,
+    64
+  ],
+  "selection_basis": "User selected90 times the measured native nnU-Net baseline training-update cost, following exploratory learning curves. No outcome filtering; all24 runs reported.",
+  "development_only": true,
+  "previous_reference_snapshot": "reports/four_models_six_31976_20261006/previous_compute_budget_reference.json",
+  "previous_reference_sha256": "85a873cdc97c08799a69fea345f0201446cbd21d4ce542433dfe643858b88857",
+  "schedules_path": "experiments/four_models_six_31976_20261006/plan.json",
+  "schedule_policy": "Keep each model baseline LR horizon fixed across every arm; stopping allowances are derived from measured objective and training-only calibration costs.",
+  "lr_horizons": {
+    "nnunet": 174,
+    "swinunetr": 610,
+    "unetr_vit_b16": 477,
+    "basic_unet16": 1095
+  },
+  "accounting": "Established dense arithmetic, MAC=2. Forward/loss/backward/optimizer and calibration included; validation, augmentation, SDF target preprocessing, I/O, integer/boolean/comparison operations and precision housekeeping excluded."
+}

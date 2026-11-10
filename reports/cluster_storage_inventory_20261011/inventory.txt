@@ -1,0 +1,386 @@
+BEEGFS STORAGE INVENTORY — 11 OCTOBER 2026
+Quota checked 11:22 Europe/Rome: 83.29 / 93.13 GiB; 9.84 GiB free.
+No queued/running jobs at the quota check. Concurrent work is preparing new staging folders.
+Remote root: /mnt/beegfsstudents/home/3160552
+Initial scan: 2026-10-11T09:17:10.874971+00:00; affected and new folders refreshed through 2026-10-11T09:22:51.804869+00:00
+Sizes below are allocated directory GiB, not promised quota savings. A representative checkpoint uses Buddy Mirror; quota usage is roughly twice folder sizes.
+This audit deleted nothing. A separate concurrent cleanup removed 56 Band/Chamfer checkpoints (3.67 GiB of files); quota fell from 90.62 to 83.29 GiB.
+
+GROUPED CHOICES (rows do not overlap)
+
+ 1.  13.197 GiB  Capped-depth / delayed-SDF campaign, job 687658
+    44 runs; 88 best/final model checkpoints; metadata preserved locally, model tensors retained on cluster.
+     13.197 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658
+
+ 2.   4.914 GiB  Synthetic and resume smoke tests
+    9 smoke-test folders under hippo; 26 checkpoint files, 4.894 GiB in weights/state.
+      0.766 GiB  /mnt/beegfsstudents/home/3160552/hippo/cluster_protocol_20261005/simple_baseline_screen/synthetic_smoke
+      0.022 GiB  /mnt/beegfsstudents/home/3160552/hippo/cluster_protocol_20261005/plain_unet16_lr3e4/synthetic_smoke
+      0.674 GiB  /mnt/beegfsstudents/home/3160552/hippo/cluster_protocol_20261005/nnunet_pair62166/synthetic_smoke
+      1.381 GiB  /mnt/beegfsstudents/home/3160552/hippo/cluster_protocol_20261005/unetr_dice/synthetic_smoke
+      0.040 GiB  /mnt/beegfsstudents/home/3160552/hippo/cluster_protocol_20261005/segresnet12_100epochs/synthetic_smoke
+      0.027 GiB  /mnt/beegfsstudents/home/3160552/hippo/cluster_protocol_20261005/plain_unet16_bands/synthetic_smoke_full
+      0.027 GiB  /mnt/beegfsstudents/home/3160552/hippo/cluster_protocol_20261005/plain_unet16_bands/synthetic_smoke
+      0.988 GiB  /mnt/beegfsstudents/home/3160552/hippo/cluster_protocol_20261006/optimization_only_31976/resume_smoke
+      0.988 GiB  /mnt/beegfsstudents/home/3160552/hippo/cluster_protocol_20261006/four_models_six_31976/resume_smoke
+
+ 3.   2.921 GiB  94,603-budget baseline and bands campaigns
+    Best and latest/resume checkpoints across both campaigns.
+      1.308 GiB  /mnt/beegfsstudents/home/3160552/budget_baselines_94603_684354
+      1.613 GiB  /mnt/beegfsstudents/home/3160552/budget_bands_94603_684431
+
+ 4.   2.591 GiB  nnU-Net pair / fixed-LR / diagnosis studies
+    Best/latest checkpoints and baseline snapshots.
+      0.742 GiB  /mnt/beegfsstudents/home/3160552/nnunet_constraint_diagnosis_686162
+      0.678 GiB  /mnt/beegfsstudents/home/3160552/nnunet_pair95_684980
+      0.678 GiB  /mnt/beegfsstudents/home/3160552/nnunet_pair62166_684716
+      0.493 GiB  /mnt/beegfsstudents/home/3160552/nnunet_bands35529_fixedlr_684869
+
+ 5.   2.245 GiB  GeoFWI3D SwinUNETR experiments
+    Four experiment directories; mostly model checkpoints. Dataset listed separately.
+      0.754 GiB  /mnt/beegfsstudents/home/3160552/geofwi3d_swinunetr_20261004_01
+      0.249 GiB  /mnt/beegfsstudents/home/3160552/geofwi3d_swinunetr_5pct_500updates_seed0_20261004_01
+      0.249 GiB  /mnt/beegfsstudents/home/3160552/geofwi3d_swinunetr_5pct_bands_500updates_seed0_20261004_01
+      0.994 GiB  /mnt/beegfsstudents/home/3160552/geofwi3d_swinunetr_5pct_four_losses_500updates_seed0_20261005_01
+
+ 6.   2.228 GiB  Depth-supervision SwinUNETR, 6 Oct
+    8 completion records, best/latest checkpoints and saved arrays.
+      2.228 GiB  /mnt/beegfsstudents/home/3160552/depth_swinunetr_fold0_seed0_20261006_01
+
+ 7.   1.207 GiB  Depth-weight variants, 6 Oct
+    4 completion records, best/latest checkpoints and saved arrays.
+      1.207 GiB  /mnt/beegfsstudents/home/3160552/depth_weight_variants_fold0_seed0_20261006_01
+
+ 8.   0.886 GiB  Band evolution, completed 189-arm recovery, 10 Oct
+    189 completion records; 8 retained arm checkpoints plus shared warmup; predictions and metadata preserved.
+      0.886 GiB  /mnt/beegfsstudents/home/3160552/band_evolution_fold0_seed0_5pct_20261010_01
+
+ 9.   0.843 GiB  Native-branch constraints, 8 Oct
+    12 best checkpoints; metrics and predictions.
+      0.843 GiB  /mnt/beegfsstudents/home/3160552/native_branch_constraints_fold0_seed0_5pct_20261008_01
+
+10.   0.842 GiB  Band / Chamfer 64-arm campaign, 8 Oct
+    64 completed arms; separate concurrent cleanup removed 56 arm checkpoints. 8 selected arm models plus 2 shared-warmup checkpoints remain; all metrics and predictions preserved.
+      0.842 GiB  /mnt/beegfsstudents/home/3160552/band_chamfer_fold0_seed0_5pct_20261008_01
+
+11.   0.420 GiB  Unwrapped Swin and follow-up
+    Mainly atlas arrays; may be shared inputs for later branch studies.
+      0.046 GiB  /mnt/beegfsstudents/home/3160552/unwrapped_swin_fold0_seed0_20261006_01
+      0.365 GiB  /mnt/beegfsstudents/home/3160552/unwrapped_swin_fold0_seed0_20261006_02
+      0.009 GiB  /mnt/beegfsstudents/home/3160552/unwrapped_followup_fold0_20261007_01
+
+12.   0.307 GiB  LEGO SwinUNETR pilot, 4 Oct
+    Mostly retained checkpoint plus logs.
+      0.307 GiB  /mnt/beegfsstudents/home/3160552/lego_swinunetr_pin2780_fold0_seed0_20261004_01
+
+13.   0.251 GiB  Band evolution first attempt, 9 Oct
+    Shared warmup best/latest checkpoints; no completion records found.
+      0.251 GiB  /mnt/beegfsstudents/home/3160552/band_evolution_fold0_seed0_5pct_20261009_01
+
+14.   0.112 GiB  Learned anatomy, 8 Oct
+    Two attempts; mostly checkpoint and atlas arrays in second attempt.
+      0.004 GiB  /mnt/beegfsstudents/home/3160552/learned_anatomy_fold0_seed0_5pct_20261008_01
+      0.109 GiB  /mnt/beegfsstudents/home/3160552/learned_anatomy_fold0_seed0_5pct_20261008_02
+
+NEW WORK IN PREPARATION (do not treat as completed experiments)
+2.95 MiB  /mnt/beegfsstudents/home/3160552/band_focus_fold0_seed0_5pct_20261011_01
+0.10 MiB  /mnt/beegfsstudents/home/3160552/geofwi3d_replication_staging_20261011_01
+
+ALL NON-HIDDEN RESEARCH / DATA FOLDERS
+GiB allocated | checkpoint GiB | arrays/images GiB | files | path
+  13.1972 |   13.1829 |    0.0000 |   1064 | /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658
+   5.2434 |    4.8938 |    0.0522 |  14593 | /mnt/beegfsstudents/home/3160552/hippo
+   2.2276 |    1.9864 |    0.2381 |    376 | /mnt/beegfsstudents/home/3160552/depth_swinunetr_fold0_seed0_20261006_01
+   1.6127 |    1.6086 |    0.0000 |    416 | /mnt/beegfsstudents/home/3160552/budget_bands_94603_684431
+   1.4732 |    0.0000 |    1.4728 |    964 | /mnt/beegfsstudents/home/3160552/Dataset203_GeoFWI3D
+   1.3079 |    1.3045 |    0.0000 |    386 | /mnt/beegfsstudents/home/3160552/budget_baselines_94603_684354
+   1.2066 |    0.9932 |    0.2117 |    335 | /mnt/beegfsstudents/home/3160552/depth_weight_variants_fold0_seed0_20261006_01
+   0.9939 |    0.9931 |    0.0000 |     75 | /mnt/beegfsstudents/home/3160552/geofwi3d_swinunetr_5pct_four_losses_500updates_seed0_20261005_01
+   0.8857 |    0.7729 |    0.0551 |   2327 | /mnt/beegfsstudents/home/3160552/band_evolution_fold0_seed0_5pct_20261010_01
+   0.8426 |    0.7880 |    0.0506 |    320 | /mnt/beegfsstudents/home/3160552/native_branch_constraints_fold0_seed0_5pct_20261008_01
+   0.8422 |    0.7729 |    0.0466 |   1036 | /mnt/beegfsstudents/home/3160552/band_chamfer_fold0_seed0_5pct_20261008_01
+   0.7537 |    0.7449 |    0.0000 |    631 | /mnt/beegfsstudents/home/3160552/geofwi3d_swinunetr_20261004_01
+   0.7418 |    0.7361 |    0.0000 |    403 | /mnt/beegfsstudents/home/3160552/nnunet_constraint_diagnosis_686162
+   0.6783 |    0.6744 |    0.0000 |    447 | /mnt/beegfsstudents/home/3160552/nnunet_pair95_684980
+   0.6781 |    0.6744 |    0.0000 |    399 | /mnt/beegfsstudents/home/3160552/nnunet_pair62166_684716
+   0.4930 |    0.4892 |    0.0000 |    422 | /mnt/beegfsstudents/home/3160552/nnunet_bands35529_fixedlr_684869
+   0.3649 |    0.0000 |    0.3558 |    686 | /mnt/beegfsstudents/home/3160552/unwrapped_swin_fold0_seed0_20261006_02
+   0.3067 |    0.2483 |    0.0000 |     64 | /mnt/beegfsstudents/home/3160552/lego_swinunetr_pin2780_fold0_seed0_20261004_01
+   0.2509 |    0.2483 |    0.0000 |    189 | /mnt/beegfsstudents/home/3160552/band_evolution_fold0_seed0_5pct_20261009_01
+   0.2489 |    0.2483 |    0.0000 |     44 | /mnt/beegfsstudents/home/3160552/geofwi3d_swinunetr_5pct_500updates_seed0_20261004_01
+   0.2488 |    0.2483 |    0.0000 |     41 | /mnt/beegfsstudents/home/3160552/geofwi3d_swinunetr_5pct_bands_500updates_seed0_20261004_01
+   0.1089 |    0.0656 |    0.0422 |    117 | /mnt/beegfsstudents/home/3160552/learned_anatomy_fold0_seed0_5pct_20261008_02
+   0.0892 |    0.0000 |    0.0791 |    165 | /mnt/beegfsstudents/home/3160552/tomographic_gradient_20261005_01
+   0.0461 |    0.0000 |    0.0000 |    828 | /mnt/beegfsstudents/home/3160552/unwrapped_swin_fold0_seed0_20261006_01
+   0.0306 |    0.0270 |    0.0000 |    391 | /mnt/beegfsstudents/home/3160552/plain_unet16_bands_684684
+   0.0304 |    0.0270 |    0.0000 |    380 | /mnt/beegfsstudents/home/3160552/plain_unet16_lr3e4_684625
+   0.0291 |    0.0000 |    0.0000 |      6 | /mnt/beegfsstudents/home/3160552/cap_selection_cleanup_20261005
+   0.0242 |    0.0000 |    0.0000 |   4939 | /mnt/beegfsstudents/home/3160552/capped_replication_31976_20261007_results
+   0.0089 |    0.0000 |    0.0002 |     61 | /mnt/beegfsstudents/home/3160552/unwrapped_followup_fold0_20261007_01
+   0.0071 |    0.0000 |    0.0000 |    316 | /mnt/beegfsstudents/home/3160552/edge_ablation_results_20261008
+   0.0039 |    0.0000 |    0.0000 |    212 | /mnt/beegfsstudents/home/3160552/compute_matched_swin_six_682845
+   0.0036 |    0.0009 |    0.0000 |    140 | /mnt/beegfsstudents/home/3160552/learned_anatomy_fold0_seed0_5pct_20261008_01
+   0.0030 |    0.0000 |    0.0000 |    222 | /mnt/beegfsstudents/home/3160552/tissue_profiles_fold0_seed0_20261007_01
+   0.0029 |    0.0000 |    0.0000 |    198 | /mnt/beegfsstudents/home/3160552/band_focus_fold0_seed0_5pct_20261011_01
+   0.0027 |    0.0000 |    0.0000 |    200 | /mnt/beegfsstudents/home/3160552/compute_matched_constraints20_682721
+   0.0026 |    0.0000 |    0.0000 |    195 | /mnt/beegfsstudents/home/3160552/compute_matched_constraints_band_682784
+   0.0014 |    0.0000 |    0.0000 |      3 | /mnt/beegfsstudents/home/3160552/failed_run_cleanup_20261006
+   0.0012 |    0.0000 |    0.0000 |    227 | /mnt/beegfsstudents/home/3160552/compute_matched_baselines_681342
+   0.0010 |    0.0000 |    0.0000 |    214 | /mnt/beegfsstudents/home/3160552/nnunet_momentum095_682319
+   0.0009 |    0.0000 |    0.0000 |      4 | /mnt/beegfsstudents/home/3160552/cancelled_685757_optimization_policy_20261006
+   0.0001 |    0.0000 |    0.0000 |      5 | /mnt/beegfsstudents/home/3160552/geofwi3d_replication_staging_20261011_01
+   0.0001 |    0.0000 |    0.0000 |      4 | /mnt/beegfsstudents/home/3160552/band_focus_cleanup_20261011
+   0.0001 |    0.0000 |    0.0000 |      3 | /mnt/beegfsstudents/home/3160552/__pycache__
+   0.0000 |    0.0000 |    0.0000 |      0 | /mnt/beegfsstudents/home/3160552/datasets
+
+ENVIRONMENTS / DATA / SUPPORT FOLDERS (dataset also appears in the table above)
+   5.9231 GiB  /mnt/beegfsstudents/home/3160552/.conda
+   1.4732 GiB  /mnt/beegfsstudents/home/3160552/Dataset203_GeoFWI3D
+   0.2731 GiB  /mnt/beegfsstudents/home/3160552/.codex
+   0.2070 GiB  /mnt/beegfsstudents/home/3160552/medsam3_runtime_20260928
+   0.0387 GiB  /mnt/beegfsstudents/home/3160552/lego_ct_env
+   0.0184 GiB  /mnt/beegfsstudents/home/3160552/.cache
+
+LARGE CHILD FOLDERS (nested rows overlap; do not add to parent totals)
+   7.5982 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/unetr_vit_b16
+   4.0249 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/nnunet
+   3.0066 GiB  /mnt/beegfsstudents/home/3160552/hippo/cluster_protocol_20261005
+   2.0308 GiB  /mnt/beegfsstudents/home/3160552/hippo/cluster_protocol_20261006
+   1.9896 GiB  /mnt/beegfsstudents/home/3160552/depth_swinunetr_fold0_seed0_20261006_01/runs
+   1.4430 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/swinunetr
+   1.3847 GiB  /mnt/beegfsstudents/home/3160552/hippo/cluster_protocol_20261005/unetr_dice
+   1.3813 GiB  /mnt/beegfsstudents/home/3160552/hippo/cluster_protocol_20261005/unetr_dice/synthetic_smoke
+   1.1706 GiB  /mnt/beegfsstudents/home/3160552/Dataset203_GeoFWI3D/imagesTr
+   0.9948 GiB  /mnt/beegfsstudents/home/3160552/depth_swinunetr_fold0_seed0_20261006_01/runs/5pct
+   0.9948 GiB  /mnt/beegfsstudents/home/3160552/depth_weight_variants_fold0_seed0_20261006_01/runs
+   0.9947 GiB  /mnt/beegfsstudents/home/3160552/depth_swinunetr_fold0_seed0_20261006_01/runs/full
+   0.9946 GiB  /mnt/beegfsstudents/home/3160552/hippo/cluster_protocol_20261006/optimization_only_31976
+   0.9941 GiB  /mnt/beegfsstudents/home/3160552/hippo/cluster_protocol_20261006/four_models_six_31976
+   0.9932 GiB  /mnt/beegfsstudents/home/3160552/geofwi3d_swinunetr_5pct_four_losses_500updates_seed0_20261005_01/results
+   0.9884 GiB  /mnt/beegfsstudents/home/3160552/hippo/cluster_protocol_20261006/optimization_only_31976/resume_smoke
+   0.9884 GiB  /mnt/beegfsstudents/home/3160552/hippo/cluster_protocol_20261006/four_models_six_31976/resume_smoke
+   0.8055 GiB  /mnt/beegfsstudents/home/3160552/budget_bands_94603_684431/unet
+   0.8055 GiB  /mnt/beegfsstudents/home/3160552/budget_bands_94603_684431/unet/dice_bands
+   0.8055 GiB  /mnt/beegfsstudents/home/3160552/budget_bands_94603_684431/unet/dice_bands/fold0
+   0.8055 GiB  /mnt/beegfsstudents/home/3160552/budget_baselines_94603_684354/unet
+   0.8055 GiB  /mnt/beegfsstudents/home/3160552/budget_baselines_94603_684354/unet/fold0
+   0.8055 GiB  /mnt/beegfsstudents/home/3160552/budget_baselines_94603_684354/unet/fold0/seed0
+   0.7902 GiB  /mnt/beegfsstudents/home/3160552/native_branch_constraints_fold0_seed0_5pct_20261008_01/runs
+   0.7692 GiB  /mnt/beegfsstudents/home/3160552/hippo/cluster_protocol_20261005/simple_baseline_screen
+   0.7657 GiB  /mnt/beegfsstudents/home/3160552/hippo/cluster_protocol_20261005/simple_baseline_screen/synthetic_smoke
+   0.7449 GiB  /mnt/beegfsstudents/home/3160552/geofwi3d_swinunetr_20261004_01/results
+   0.6908 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/unetr_vit_b16/dice_bands_edge_sdf_depth
+   0.6908 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/unetr_vit_b16/dice_bands_edge_sdf_depth/fold0
+   0.6907 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/unetr_vit_b16/dice_bands_sdf_depth
+   0.6907 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/unetr_vit_b16/dice_edge_sdf_depth
+   0.6907 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/unetr_vit_b16/dice_bands_edge_depth
+   0.6907 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/unetr_vit_b16/dice_bands_sdf_depth/fold0
+   0.6907 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/unetr_vit_b16/dice_edge_sdf_depth/fold0
+   0.6907 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/unetr_vit_b16/dice_bands_edge_depth/fold0
+   0.6907 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/unetr_vit_b16/dice_sdf_depth
+   0.6907 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/unetr_vit_b16/dice_edge_depth
+   0.6907 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/unetr_vit_b16/dice_bands_depth
+   0.6907 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/unetr_vit_b16/dice_sdf_depth/fold0
+   0.6907 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/unetr_vit_b16/dice_edge_depth/fold0
+   0.6907 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/unetr_vit_b16/dice_bands_depth/fold0
+   0.6907 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/unetr_vit_b16/dice_bands_edge_sdf
+   0.6907 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/unetr_vit_b16/dice_bands_edge_sdf/fold0
+   0.6907 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/unetr_vit_b16/dice_bands_sdf
+   0.6907 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/unetr_vit_b16/dice_bands_sdf/fold0
+   0.6907 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/unetr_vit_b16/dice_depth
+   0.6907 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/unetr_vit_b16/dice_depth/fold0
+   0.6907 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/unetr_vit_b16/dice_sdf
+   0.6907 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/unetr_vit_b16/dice_sdf/fold0
+   0.6780 GiB  /mnt/beegfsstudents/home/3160552/hippo/cluster_protocol_20261005/nnunet_pair62166
+   0.6745 GiB  /mnt/beegfsstudents/home/3160552/nnunet_pair95_684980/nnunet
+   0.6745 GiB  /mnt/beegfsstudents/home/3160552/nnunet_pair62166_684716/nnunet
+   0.6744 GiB  /mnt/beegfsstudents/home/3160552/hippo/cluster_protocol_20261005/nnunet_pair62166/synthetic_smoke
+   0.5683 GiB  /mnt/beegfsstudents/home/3160552/band_evolution_fold0_seed0_5pct_20261010_01/runs
+   0.5395 GiB  /mnt/beegfsstudents/home/3160552/band_chamfer_fold0_seed0_5pct_20261008_01/runs
+   0.4974 GiB  /mnt/beegfsstudents/home/3160552/depth_weight_variants_fold0_seed0_20261006_01/runs/5pct
+   0.4974 GiB  /mnt/beegfsstudents/home/3160552/depth_weight_variants_fold0_seed0_20261006_01/runs/full
+   0.4893 GiB  /mnt/beegfsstudents/home/3160552/budget_bands_94603_684431/nnunet
+   0.4893 GiB  /mnt/beegfsstudents/home/3160552/budget_bands_94603_684431/nnunet/dice_bands
+   0.4893 GiB  /mnt/beegfsstudents/home/3160552/budget_bands_94603_684431/nnunet/dice_bands/fold0
+   0.4893 GiB  /mnt/beegfsstudents/home/3160552/nnunet_constraint_diagnosis_686162/baseline_replay
+   0.4893 GiB  /mnt/beegfsstudents/home/3160552/nnunet_pair95_684980/nnunet/dice_bands
+   0.4893 GiB  /mnt/beegfsstudents/home/3160552/nnunet_pair95_684980/nnunet/dice_bands/fold0
+   0.4893 GiB  /mnt/beegfsstudents/home/3160552/nnunet_bands35529_fixedlr_684869/nnunet
+   0.4893 GiB  /mnt/beegfsstudents/home/3160552/nnunet_bands35529_fixedlr_684869/nnunet/dice_bands
+   0.4893 GiB  /mnt/beegfsstudents/home/3160552/nnunet_pair62166_684716/nnunet/dice_bands
+   0.4893 GiB  /mnt/beegfsstudents/home/3160552/nnunet_bands35529_fixedlr_684869/nnunet/dice_bands/fold0
+   0.4893 GiB  /mnt/beegfsstudents/home/3160552/nnunet_pair62166_684716/nnunet/dice_bands/fold0
+   0.3659 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/nnunet/dice_bands_edge_sdf_depth
+   0.3659 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/nnunet/dice_bands_edge_sdf_depth/fold0
+   0.3659 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/nnunet/dice_bands_sdf_depth
+   0.3659 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/nnunet/dice_edge_sdf_depth
+   0.3659 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/nnunet/dice_bands_edge_depth
+   0.3659 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/nnunet/dice_bands_sdf_depth/fold0
+   0.3659 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/nnunet/dice_edge_sdf_depth/fold0
+   0.3659 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/nnunet/dice_bands_edge_depth/fold0
+   0.3659 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/nnunet/dice_bands_depth
+   0.3659 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/nnunet/dice_edge_depth
+   0.3659 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/nnunet/dice_bands_depth/fold0
+   0.3659 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/nnunet/dice_sdf_depth
+   0.3659 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/nnunet/dice_edge_depth/fold0
+   0.3659 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/nnunet/dice_sdf_depth/fold0
+   0.3659 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/nnunet/dice_bands_edge_sdf
+   0.3659 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/nnunet/dice_bands_edge_sdf/fold0
+   0.3659 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/nnunet/dice_depth
+   0.3659 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/nnunet/dice_bands_sdf
+   0.3659 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/nnunet/dice_depth/fold0
+   0.3659 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/nnunet/dice_bands_sdf/fold0
+   0.3659 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/nnunet/dice_sdf
+   0.3659 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/nnunet/dice_sdf/fold0
+   0.3641 GiB  /mnt/beegfsstudents/home/3160552/unwrapped_swin_fold0_seed0_20261006_02/atlas
+   0.3139 GiB  /mnt/beegfsstudents/home/3160552/budget_baselines_94603_684354/swinunetr
+   0.3139 GiB  /mnt/beegfsstudents/home/3160552/budget_baselines_94603_684354/swinunetr/fold0
+   0.3139 GiB  /mnt/beegfsstudents/home/3160552/budget_baselines_94603_684354/swinunetr/fold0/seed0
+   0.3139 GiB  /mnt/beegfsstudents/home/3160552/budget_bands_94603_684431/swinunetr
+   0.3139 GiB  /mnt/beegfsstudents/home/3160552/budget_bands_94603_684431/swinunetr/dice_bands
+   0.3139 GiB  /mnt/beegfsstudents/home/3160552/budget_bands_94603_684431/swinunetr/dice_bands/fold0
+   0.2936 GiB  /mnt/beegfsstudents/home/3160552/Dataset203_GeoFWI3D/imagesVal
+   0.2549 GiB  /mnt/beegfsstudents/home/3160552/unwrapped_swin_fold0_seed0_20261006_02/atlas/full
+   0.2487 GiB  /mnt/beegfsstudents/home/3160552/depth_swinunetr_fold0_seed0_20261006_01/runs/5pct/depth_sdf3d
+   0.2487 GiB  /mnt/beegfsstudents/home/3160552/depth_swinunetr_fold0_seed0_20261006_01/runs/5pct/depth_sdf_layer
+   0.2487 GiB  /mnt/beegfsstudents/home/3160552/depth_swinunetr_fold0_seed0_20261006_01/runs/5pct/depth
+   0.2487 GiB  /mnt/beegfsstudents/home/3160552/depth_weight_variants_fold0_seed0_20261006_01/runs/5pct/depth_class
+   0.2487 GiB  /mnt/beegfsstudents/home/3160552/depth_swinunetr_fold0_seed0_20261006_01/runs/5pct/dice
+   0.2487 GiB  /mnt/beegfsstudents/home/3160552/depth_weight_variants_fold0_seed0_20261006_01/runs/5pct/depth_focal
+   0.2487 GiB  /mnt/beegfsstudents/home/3160552/depth_swinunetr_fold0_seed0_20261006_01/runs/full/depth_sdf3d
+   0.2487 GiB  /mnt/beegfsstudents/home/3160552/depth_swinunetr_fold0_seed0_20261006_01/runs/full/depth_sdf_layer
+   0.2487 GiB  /mnt/beegfsstudents/home/3160552/depth_weight_variants_fold0_seed0_20261006_01/runs/full/depth_class
+   0.2487 GiB  /mnt/beegfsstudents/home/3160552/depth_weight_variants_fold0_seed0_20261006_01/runs/full/depth_focal
+   0.2487 GiB  /mnt/beegfsstudents/home/3160552/depth_swinunetr_fold0_seed0_20261006_01/runs/full/depth
+   0.2487 GiB  /mnt/beegfsstudents/home/3160552/depth_swinunetr_fold0_seed0_20261006_01/runs/full/dice
+   0.2483 GiB  /mnt/beegfsstudents/home/3160552/geofwi3d_swinunetr_20261004_01/results/100pct_baseline
+   0.2483 GiB  /mnt/beegfsstudents/home/3160552/lego_swinunetr_pin2780_fold0_seed0_20261004_01/results
+   0.2483 GiB  /mnt/beegfsstudents/home/3160552/geofwi3d_swinunetr_20261004_01/results/20pct_baseline
+   0.2483 GiB  /mnt/beegfsstudents/home/3160552/geofwi3d_swinunetr_20261004_01/results/5pct_baseline
+   0.2483 GiB  /mnt/beegfsstudents/home/3160552/geofwi3d_swinunetr_5pct_500updates_seed0_20261004_01/results
+   0.2483 GiB  /mnt/beegfsstudents/home/3160552/geofwi3d_swinunetr_5pct_bands_500updates_seed0_20261004_01/results
+   0.2483 GiB  /mnt/beegfsstudents/home/3160552/geofwi3d_swinunetr_5pct_four_losses_500updates_seed0_20261005_01/results/5pct_bands_edge
+   0.2483 GiB  /mnt/beegfsstudents/home/3160552/geofwi3d_swinunetr_5pct_four_losses_500updates_seed0_20261005_01/results/5pct_sdf
+   0.2483 GiB  /mnt/beegfsstudents/home/3160552/geofwi3d_swinunetr_5pct_four_losses_500updates_seed0_20261005_01/results/5pct_bands_sdf
+   0.2483 GiB  /mnt/beegfsstudents/home/3160552/geofwi3d_swinunetr_5pct_four_losses_500updates_seed0_20261005_01/results/5pct_bands_sdf_edge
+   0.2483 GiB  /mnt/beegfsstudents/home/3160552/geofwi3d_swinunetr_5pct_500updates_seed0_20261004_01/results/5pct_baseline
+   0.2483 GiB  /mnt/beegfsstudents/home/3160552/geofwi3d_swinunetr_5pct_bands_500updates_seed0_20261004_01/results/5pct_bands
+   0.2483 GiB  /mnt/beegfsstudents/home/3160552/band_chamfer_fold0_seed0_5pct_20261008_01/shared_warmup
+   0.2483 GiB  /mnt/beegfsstudents/home/3160552/band_evolution_fold0_seed0_5pct_20261009_01/shared_warmup
+   0.2483 GiB  /mnt/beegfsstudents/home/3160552/band_evolution_fold0_seed0_5pct_20261010_01/shared_warmup
+   0.2468 GiB  /mnt/beegfsstudents/home/3160552/nnunet_constraint_diagnosis_686162/baseline_snapshots
+   0.2376 GiB  /mnt/beegfsstudents/home/3160552/depth_swinunetr_fold0_seed0_20261006_01/geometry_cache
+   0.2114 GiB  /mnt/beegfsstudents/home/3160552/depth_weight_variants_fold0_seed0_20261006_01/geometry_cache
+   0.1852 GiB  /mnt/beegfsstudents/home/3160552/budget_baselines_94603_684354/nnunet
+   0.1852 GiB  /mnt/beegfsstudents/home/3160552/budget_baselines_94603_684354/nnunet/fold0
+   0.1852 GiB  /mnt/beegfsstudents/home/3160552/budget_baselines_94603_684354/nnunet/fold0/seed0
+   0.1852 GiB  /mnt/beegfsstudents/home/3160552/nnunet_pair62166_684716/nnunet/fold0
+   0.1852 GiB  /mnt/beegfsstudents/home/3160552/nnunet_pair62166_684716/nnunet/fold0/seed0
+   0.1852 GiB  /mnt/beegfsstudents/home/3160552/nnunet_pair95_684980/nnunet/fold0
+   0.1852 GiB  /mnt/beegfsstudents/home/3160552/nnunet_pair95_684980/nnunet/fold0/seed0
+   0.1312 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/swinunetr/dice_bands_edge_sdf_depth
+   0.1312 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/swinunetr/dice_bands_edge_sdf_depth/fold0
+   0.1312 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/swinunetr/dice_bands_sdf_depth
+   0.1312 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/swinunetr/dice_edge_sdf_depth
+   0.1312 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/swinunetr/dice_bands_edge_depth
+   0.1312 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/swinunetr/dice_bands_sdf_depth/fold0
+   0.1312 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/swinunetr/dice_edge_sdf_depth/fold0
+   0.1312 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/swinunetr/dice_bands_edge_depth/fold0
+   0.1312 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/swinunetr/dice_sdf_depth
+   0.1312 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/swinunetr/dice_edge_depth
+   0.1312 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/swinunetr/dice_bands_depth
+   0.1312 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/swinunetr/dice_sdf_depth/fold0
+   0.1312 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/swinunetr/dice_edge_depth/fold0
+   0.1312 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/swinunetr/dice_bands_depth/fold0
+   0.1312 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/swinunetr/dice_bands_edge_sdf
+   0.1312 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/swinunetr/dice_bands_edge_sdf/fold0
+   0.1312 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/swinunetr/dice_bands_sdf
+   0.1312 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/swinunetr/dice_bands_sdf/fold0
+   0.1312 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/swinunetr/dice_depth
+   0.1312 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/swinunetr/dice_depth/fold0
+   0.1312 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/swinunetr/dice_sdf
+   0.1312 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/swinunetr/dice_sdf/fold0
+   0.1192 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/basic_unet16
+   0.1092 GiB  /mnt/beegfsstudents/home/3160552/unwrapped_swin_fold0_seed0_20261006_02/atlas/5pct
+
+LARGEST FILES (first 80; complete >=8 MiB listing is in research_inventory.json)
+   1.0360 GiB  /mnt/beegfsstudents/home/3160552/hippo/cluster_protocol_20261005/unetr_dice/synthetic_smoke/unetr_vit_b16/checkpoint_latest.pt
+   0.6444 GiB  /mnt/beegfsstudents/home/3160552/budget_bands_94603_684431/unet/dice_bands/fold0/seed0/run/checkpoint_latest.pt
+   0.6444 GiB  /mnt/beegfsstudents/home/3160552/budget_baselines_94603_684354/unet/fold0/seed0/run/checkpoint_latest.pt
+   0.5099 GiB  /mnt/beegfsstudents/home/3160552/hippo/cluster_protocol_20261005/simple_baseline_screen/synthetic_smoke/vnet/checkpoint_latest.pt
+   0.3454 GiB  /mnt/beegfsstudents/home/3160552/hippo/cluster_protocol_20261005/unetr_dice/synthetic_smoke/unetr_vit_b16/checkpoint_best.pt
+   0.3453 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/unetr_vit_b16/dice_bands_edge_sdf_depth/fold0/seed0/run/checkpoint_final_model.pt
+   0.3453 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/unetr_vit_b16/dice_bands_edge_sdf_depth/fold0/seed0/run/checkpoint_best_model.pt
+   0.3453 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/unetr_vit_b16/dice_sdf/fold0/seed0/run/checkpoint_final_model.pt
+   0.3453 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/unetr_vit_b16/dice_sdf/fold0/seed0/run/checkpoint_best_model.pt
+   0.3453 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/unetr_vit_b16/dice_bands_sdf_depth/fold0/seed0/run/checkpoint_final_model.pt
+   0.3453 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/unetr_vit_b16/dice_bands_sdf_depth/fold0/seed0/run/checkpoint_best_model.pt
+   0.3453 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/unetr_vit_b16/dice_bands_edge_sdf/fold0/seed0/run/checkpoint_final_model.pt
+   0.3453 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/unetr_vit_b16/dice_bands_edge_sdf/fold0/seed0/run/checkpoint_best_model.pt
+   0.3453 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/unetr_vit_b16/dice_edge_sdf_depth/fold0/seed0/run/checkpoint_final_model.pt
+   0.3453 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/unetr_vit_b16/dice_edge_sdf_depth/fold0/seed0/run/checkpoint_best_model.pt
+   0.3453 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/unetr_vit_b16/dice_edge_depth/fold0/seed0/run/checkpoint_final_model.pt
+   0.3453 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/unetr_vit_b16/dice_edge_depth/fold0/seed0/run/checkpoint_best_model.pt
+   0.3453 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/unetr_vit_b16/dice_bands_sdf/fold0/seed0/run/checkpoint_final_model.pt
+   0.3453 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/unetr_vit_b16/dice_bands_sdf/fold0/seed0/run/checkpoint_best_model.pt
+   0.3453 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/unetr_vit_b16/dice_bands_depth/fold0/seed0/run/checkpoint_final_model.pt
+   0.3453 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/unetr_vit_b16/dice_bands_depth/fold0/seed0/run/checkpoint_best_model.pt
+   0.3453 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/unetr_vit_b16/dice_sdf_depth/fold0/seed0/run/checkpoint_final_model.pt
+   0.3453 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/unetr_vit_b16/dice_sdf_depth/fold0/seed0/run/checkpoint_best_model.pt
+   0.3453 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/unetr_vit_b16/dice_depth/fold0/seed0/run/checkpoint_final_model.pt
+   0.3453 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/unetr_vit_b16/dice_depth/fold0/seed0/run/checkpoint_best_model.pt
+   0.3453 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/unetr_vit_b16/dice_bands_edge_depth/fold0/seed0/run/checkpoint_final_model.pt
+   0.3453 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/unetr_vit_b16/dice_bands_edge_depth/fold0/seed0/run/checkpoint_best_model.pt
+   0.3063 GiB  /mnt/beegfsstudents/home/3160552/budget_bands_94603_684431/nnunet/dice_bands/fold0/seed0/run/checkpoint_latest.pt
+   0.3063 GiB  /mnt/beegfsstudents/home/3160552/nnunet_constraint_diagnosis_686162/baseline_replay/checkpoint_latest.pt
+   0.3063 GiB  /mnt/beegfsstudents/home/3160552/nnunet_pair95_684980/nnunet/dice_bands/fold0/seed0/run/checkpoint_latest.pt
+   0.3063 GiB  /mnt/beegfsstudents/home/3160552/nnunet_bands35529_fixedlr_684869/nnunet/dice_bands/fold0/seed0/run/checkpoint_latest.pt
+   0.3063 GiB  /mnt/beegfsstudents/home/3160552/nnunet_pair62166_684716/nnunet/dice_bands/fold0/seed0/run/checkpoint_latest.pt
+   0.3063 GiB  /mnt/beegfsstudents/home/3160552/hippo/cluster_protocol_20261006/optimization_only_31976/resume_smoke/interrupted/checkpoint_latest.pt
+   0.3063 GiB  /mnt/beegfsstudents/home/3160552/hippo/cluster_protocol_20261006/four_models_six_31976/resume_smoke/interrupted/checkpoint_latest.pt
+   0.3063 GiB  /mnt/beegfsstudents/home/3160552/hippo/cluster_protocol_20261005/nnunet_pair62166/synthetic_smoke/bands/checkpoint_latest.pt
+   0.3063 GiB  /mnt/beegfsstudents/home/3160552/hippo/cluster_protocol_20261006/optimization_only_31976/resume_smoke/uninterrupted/checkpoint_latest.pt
+   0.3063 GiB  /mnt/beegfsstudents/home/3160552/hippo/cluster_protocol_20261006/four_models_six_31976/resume_smoke/uninterrupted/checkpoint_latest.pt
+   0.2483 GiB  /mnt/beegfsstudents/home/3160552/budget_baselines_94603_684354/swinunetr/fold0/seed0/run/checkpoint_latest.pt
+   0.2483 GiB  /mnt/beegfsstudents/home/3160552/budget_bands_94603_684431/swinunetr/dice_bands/fold0/seed0/run/checkpoint_latest.pt
+   0.1829 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/nnunet/dice_bands_edge_sdf_depth/fold0/seed0/run/checkpoint_final_model.pt
+   0.1829 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/nnunet/dice_bands_edge_sdf_depth/fold0/seed0/run/checkpoint_best_model.pt
+   0.1829 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/nnunet/dice_sdf/fold0/seed0/run/checkpoint_final_model.pt
+   0.1829 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/nnunet/dice_sdf/fold0/seed0/run/checkpoint_best_model.pt
+   0.1829 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/nnunet/dice_bands_sdf_depth/fold0/seed0/run/checkpoint_final_model.pt
+   0.1829 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/nnunet/dice_bands_sdf_depth/fold0/seed0/run/checkpoint_best_model.pt
+   0.1829 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/nnunet/dice_bands_edge_sdf/fold0/seed0/run/checkpoint_final_model.pt
+   0.1829 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/nnunet/dice_bands_edge_sdf/fold0/seed0/run/checkpoint_best_model.pt
+   0.1829 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/nnunet/dice_edge_sdf_depth/fold0/seed0/run/checkpoint_final_model.pt
+   0.1829 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/nnunet/dice_edge_sdf_depth/fold0/seed0/run/checkpoint_best_model.pt
+   0.1829 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/nnunet/dice_edge_depth/fold0/seed0/run/checkpoint_final_model.pt
+   0.1829 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/nnunet/dice_edge_depth/fold0/seed0/run/checkpoint_best_model.pt
+   0.1829 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/nnunet/dice_bands_sdf/fold0/seed0/run/checkpoint_final_model.pt
+   0.1829 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/nnunet/dice_bands_sdf/fold0/seed0/run/checkpoint_best_model.pt
+   0.1829 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/nnunet/dice_bands_depth/fold0/seed0/run/checkpoint_final_model.pt
+   0.1829 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/nnunet/dice_bands_depth/fold0/seed0/run/checkpoint_best_model.pt
+   0.1829 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/nnunet/dice_sdf_depth/fold0/seed0/run/checkpoint_final_model.pt
+   0.1829 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/nnunet/dice_sdf_depth/fold0/seed0/run/checkpoint_best_model.pt
+   0.1829 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/nnunet/dice_depth/fold0/seed0/run/checkpoint_final_model.pt
+   0.1829 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/nnunet/dice_depth/fold0/seed0/run/checkpoint_best_model.pt
+   0.1829 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/nnunet/dice_bands_edge_depth/fold0/seed0/run/checkpoint_final_model.pt
+   0.1829 GiB  /mnt/beegfsstudents/home/3160552/capped_depth_delay_31976_687658/nnunet/dice_bands_edge_depth/fold0/seed0/run/checkpoint_best_model.pt
+   0.1829 GiB  /mnt/beegfsstudents/home/3160552/budget_bands_94603_684431/nnunet/dice_bands/fold0/seed0/run/checkpoint_best.pt
+   0.1829 GiB  /mnt/beegfsstudents/home/3160552/nnunet_constraint_diagnosis_686162/baseline_replay/checkpoint_best.pt
+   0.1829 GiB  /mnt/beegfsstudents/home/3160552/hippo/cluster_protocol_20261005/nnunet_pair62166/synthetic_smoke/bands/checkpoint_best.pt
+   0.1829 GiB  /mnt/beegfsstudents/home/3160552/nnunet_bands35529_fixedlr_684869/nnunet/dice_bands/fold0/seed0/run/checkpoint_best.pt
+   0.1829 GiB  /mnt/beegfsstudents/home/3160552/nnunet_pair62166_684716/nnunet/dice_bands/fold0/seed0/run/checkpoint_best.pt
+   0.1829 GiB  /mnt/beegfsstudents/home/3160552/nnunet_pair95_684980/nnunet/dice_bands/fold0/seed0/run/checkpoint_best.pt
+   0.1829 GiB  /mnt/beegfsstudents/home/3160552/hippo/cluster_protocol_20261006/optimization_only_31976/resume_smoke/uninterrupted/checkpoint_best.pt
+   0.1829 GiB  /mnt/beegfsstudents/home/3160552/hippo/cluster_protocol_20261006/optimization_only_31976/resume_smoke/interrupted/checkpoint_best.pt
+   0.1829 GiB  /mnt/beegfsstudents/home/3160552/hippo/cluster_protocol_20261006/four_models_six_31976/resume_smoke/uninterrupted/checkpoint_best.pt
+   0.1829 GiB  /mnt/beegfsstudents/home/3160552/hippo/cluster_protocol_20261006/four_models_six_31976/resume_smoke/interrupted/checkpoint_best.pt
+   0.1827 GiB  /mnt/beegfsstudents/home/3160552/depth_swinunetr_fold0_seed0_20261006_01/runs/full/depth_sdf3d/checkpoint_latest.pt
+   0.1827 GiB  /mnt/beegfsstudents/home/3160552/depth_swinunetr_fold0_seed0_20261006_01/runs/full/depth_sdf_layer/checkpoint_latest.pt
+   0.1827 GiB  /mnt/beegfsstudents/home/3160552/depth_swinunetr_fold0_seed0_20261006_01/runs/full/depth/checkpoint_latest.pt
+   0.1827 GiB  /mnt/beegfsstudents/home/3160552/depth_weight_variants_fold0_seed0_20261006_01/runs/full/depth_class/checkpoint_latest.pt
+   0.1827 GiB  /mnt/beegfsstudents/home/3160552/depth_weight_variants_fold0_seed0_20261006_01/runs/full/depth_focal/checkpoint_latest.pt
+   0.1827 GiB  /mnt/beegfsstudents/home/3160552/depth_swinunetr_fold0_seed0_20261006_01/runs/5pct/depth_sdf_layer/checkpoint_latest.pt
+   0.1827 GiB  /mnt/beegfsstudents/home/3160552/depth_swinunetr_fold0_seed0_20261006_01/runs/5pct/depth_sdf3d/checkpoint_latest.pt
+   0.1827 GiB  /mnt/beegfsstudents/home/3160552/depth_swinunetr_fold0_seed0_20261006_01/runs/5pct/depth/checkpoint_latest.pt
+   0.1827 GiB  /mnt/beegfsstudents/home/3160552/depth_swinunetr_fold0_seed0_20261006_01/runs/full/dice/checkpoint_latest.pt

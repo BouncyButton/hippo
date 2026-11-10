@@ -1,0 +1,108 @@
+{
+  "class": "dynamic_network_architectures.architectures.unet.PlainConvUNet",
+  "kwargs": {
+    "input_channels": 1,
+    "num_classes": 3,
+    "n_stages": 5,
+    "features_per_stage": [
+      32,
+      64,
+      128,
+      256,
+      320
+    ],
+    "conv_op": "torch.nn.modules.conv.Conv3d",
+    "kernel_sizes": [
+      [
+        3,
+        3,
+        3
+      ],
+      [
+        3,
+        3,
+        3
+      ],
+      [
+        3,
+        3,
+        3
+      ],
+      [
+        3,
+        3,
+        3
+      ],
+      [
+        3,
+        3,
+        3
+      ]
+    ],
+    "strides": [
+      [
+        1,
+        1,
+        1
+      ],
+      [
+        2,
+        2,
+        2
+      ],
+      [
+        2,
+        2,
+        2
+      ],
+      [
+        2,
+        2,
+        2
+      ],
+      [
+        2,
+        2,
+        2
+      ]
+    ],
+    "n_conv_per_stage": [
+      2,
+      2,
+      2,
+      2,
+      2
+    ],
+    "n_conv_per_stage_decoder": [
+      2,
+      2,
+      2,
+      2
+    ],
+    "conv_bias": true,
+    "norm_op": "torch.nn.modules.instancenorm.InstanceNorm3d",
+    "norm_op_kwargs": {
+      "eps": 1e-05,
+      "affine": true
+    },
+    "dropout_op": null,
+    "dropout_op_kwargs": null,
+    "nonlin": "torch.nn.modules.activation.LeakyReLU",
+    "nonlin_kwargs": {
+      "inplace": true
+    },
+    "deep_supervision": true
+  },
+  "topology_rule": "Repository default planner: isotropic spacing, fixed 64^3 patch, min bottleneck edge 4, base features 32, max features 320, two convs per stage",
+  "plan_origin": "New explicit matched-input configuration; historical plan was not retained",
+  "spacing_assumption": [
+    1,
+    1,
+    1
+  ],
+  "shape": [
+    64,
+    64,
+    64
+  ]
+}
