@@ -13,6 +13,7 @@ import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument('--target', type=str, default='Dataset105_COBRA', help='Target folder name')
 parser.add_argument('--rebuild', action='store_true', help='Force download from COBRA and rebuild pkl', default=False)
+parser.add_argument('--no-upload', action='store_true', help='Skip W&B upload after rebuilding locally')
 args = parser.parse_args()
 
 TARGET_FOLDER = args.target
@@ -67,7 +68,9 @@ if not os.path.exists('brains_t2'):
     file = tarfile.open('brains_t2.tar.bz2')
     file.extractall('./')
 
-os.system('git clone https://github.com/CoBrALab/atlases/')
+if not os.path.isdir('atlases/hippocampus-subfields/labels'):
+    import subprocess
+    subprocess.run(['git', 'clone', 'https://github.com/CoBrALab/atlases/'], check=True)
 
 # Configuration
 INPUT_LABELS_DIR = "atlases/hippocampus-subfields/labels"  # Current folder for .mnc labels
@@ -132,6 +135,8 @@ def crop_and_save(data, affine, center_coords, output_path):
     # The new origin is the old origin + the start index in world space
     new_affine = affine.copy()
     new_affine[:3, 3] = nib.affines.apply_affine(affine, start)
+    # Every output voxel spans two source voxels after the stride above.
+    new_affine[:3, :3] = affine[:3, :3] * 2
 
     new_img = nib.Nifti1Image(padded_crop.astype(data.dtype), new_affine)
     nib.save(new_img, output_path)
@@ -158,9 +163,19 @@ for i in range(1, 6):
     lbl_img = nib.load(label_path)
     img_img = nib.load(image_path)
 
-    lbl_data = lbl_img.get_fdata()
-    img_data = img_img.get_fdata()
+    # Full-resolution MINC volumes are large; avoid cached float64 copies.
+    lbl_data = lbl_img.get_fdata(dtype=np.float32, caching='unchanged')
+    img_data = img_img.get_fdata(dtype=np.float32, caching='unchanged')
     affine = img_img.affine
+
+    # The published image and annotation have different extents/origins.
+    # Their voxel lattices differ by an integer translation, so align crops
+    # in physical space without interpolating either intensities or labels.
+    label_to_image = np.linalg.inv(affine) @ lbl_img.affine
+    voxel_offset = np.rint(label_to_image[:3, 3])
+    if not (np.allclose(label_to_image[:3, :3], np.eye(3), atol=1e-5)
+            and np.allclose(label_to_image[:3, 3], voxel_offset, atol=1e-5)):
+        raise ValueError(f'brain{i}: image/label grids require resampling')
 
     original_lbl_data = lbl_data.copy()
 
@@ -191,9 +206,11 @@ for i in range(1, 6):
         lbl_out = os.path.join(TARGET_FOLDER, OUTPUT_LABELS_DIR, f"hippocampus_cobra_{i}_{side_code}.nii.gz")
 
         # Crop and save Image
-        cropped_image_data = crop_and_save(img_data, affine, center, img_out)
+        cropped_image_data = crop_and_save(img_data, affine, center + voxel_offset, img_out)
         # Crop and save Labels
-        cropped_label_data = crop_and_save(lbl_data, affine, center, lbl_out)
+        cropped_label_data = crop_and_save(lbl_data, lbl_img.affine, center, lbl_out)
+        if not np.allclose(nib.load(img_out).affine, nib.load(lbl_out).affine, atol=1e-5):
+            raise ValueError(f'brain{i} {side_code}: output image/label grids do not align')
 
         # 2. Append metadata and paths to your list
         data_records.append({
@@ -211,6 +228,10 @@ df = pd.DataFrame(data_records)
 pkl_filename = "cobra_hippocampus_full.pkl"
 df.to_pickle(os.path.join(TARGET_FOLDER, pkl_filename), compression='gzip')
 print(f"DataFrame saved to {pkl_filename}")
+
+# A local rebuild does not require W&B staging or an account.
+if args.no_upload:
+    sys.exit(0)
 
 # save all into a private wandb to avoid re-downloading
 wandb.init(project="hippopotamus-project", entity='hippopotamus')

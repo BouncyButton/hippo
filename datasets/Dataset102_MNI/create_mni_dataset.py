@@ -13,6 +13,7 @@ import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument('--target', type=str, default='Dataset102_MNI', help='Target folder name')
 parser.add_argument('--rebuild', action='store_true', help='Force download from MNI and rebuild pkl', default=False)
+parser.add_argument('--no-upload', action='store_true', help='Skip W&B upload after rebuilding locally')
 args = parser.parse_args()
 
 TARGET_FOLDER = args.target
@@ -224,6 +225,10 @@ for index, row in df.iterrows():
     nib.save(label_nifti, label_filename_dataset)
 
 print(f"Successfully saved {len(df)} image and label files.")
+
+# A local rebuild does not require W&B staging or an account.
+if args.no_upload:
+    sys.exit(0)
 
 # save all into a private wandb to avoid re-downloading
 wandb.init(project="hippopotamus-project", entity='hippopotamus')
