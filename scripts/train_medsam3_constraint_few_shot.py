@@ -89,12 +89,12 @@ def squared_norm(grads):
     return sum(float(g.detach().double().square().sum()) for g in grads if g is not None)
 
 
-def calibrate(model, criterion, parameters, slabs, protocol, output):
+def calibrate(model, criterion, parameters, slabs, protocol, output, forward_fn=forward_slab):
     """Freeze coefficients using support-only LoRA gradient magnitudes."""
     reset_seed(protocol.get('calibration_seed', protocol['seed']))
     rows = []
     for case, anchor in slabs.calibration_schedule(protocol['calibration_slabs_per_volume']):
-        losses = forward_slab(model, criterion, slabs, case, anchor)
+        losses = forward_fn(model, criterion, slabs, case, anchor)
         if not all(torch.isfinite(loss) for loss in losses):
             raise RuntimeError('Nonfinite calibration loss.')
         grads = [torch.autograd.grad(loss, parameters, retain_graph=i < 2, allow_unused=True)
@@ -135,7 +135,8 @@ def calibrate(model, criterion, parameters, slabs, protocol, output):
     return report
 
 
-def train_arm(model, criterion, parameters, slabs, protocol, calibration, arm, output, schedule):
+def train_arm(model, criterion, parameters, slabs, protocol, calibration, arm, output, schedule,
+              forward_fn=forward_slab):
     reset_seed(protocol['seed'])
     model.train()
     frozen_before, adapter_before = parameter_digest(model, False), parameter_digest(model, True)
@@ -157,7 +158,7 @@ def train_arm(model, criterion, parameters, slabs, protocol, calibration, arm, o
             for micro in range(protocol['accumulation']):
                 case, anchor = schedule[update*protocol['accumulation']+micro]
                 exposures[case] += 2
-                native, bands, edge = forward_slab(model, criterion, slabs, case, anchor)
+                native, bands, edge = forward_fn(model, criterion, slabs, case, anchor)
                 total = native + ramp*(wb*bands + we*edge)
                 if not all(torch.isfinite(v) for v in (native, bands, edge, total)):
                     raise RuntimeError('Nonfinite training objective.')
