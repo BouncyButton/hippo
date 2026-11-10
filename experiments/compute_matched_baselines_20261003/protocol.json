@@ -1,0 +1,137 @@
+{
+  "name": "compute_matched_baselines_20261003",
+  "budget_flops": 116259000000000,
+  "models": {
+    "unet": {
+      "model": "unet",
+      "recipe": "matched",
+      "batch_size": 1,
+      "input_shape": [
+        64,
+        64,
+        64
+      ],
+      "training_patients": 10,
+      "classes": 3,
+      "parameters": 4807482,
+      "flops_per_update": 9580978301,
+      "gflops_per_update": 9.580978301,
+      "max_steps": 12134,
+      "complete_patient_pass_epochs": 1213,
+      "additional_updates": 4,
+      "patient_pass_equivalents": 1213.4,
+      "loop_epochs_if_10_steps_per_epoch": 1214,
+      "stop_in_last_epoch_after_updates": 4,
+      "consumed_gflops": 116255.590704334,
+      "unused_gflops": 3.409295666,
+      "max_steps_if_literal_116259_gflops": 12134,
+      "max_steps_if_unrounded_original_reference": 12134,
+      "nnunet_native_250_update_blocks": null,
+      "nnunet_remaining_updates_after_250_blocks": null,
+      "architecture_file": null
+    },
+    "nnunet": {
+      "model": "nnunet",
+      "recipe": "native",
+      "batch_size": 1,
+      "input_shape": [
+        64,
+        64,
+        64
+      ],
+      "training_patients": 10,
+      "classes": 3,
+      "parameters": 16548076,
+      "flops_per_update": 355293896301,
+      "gflops_per_update": 355.293896301,
+      "max_steps": 327,
+      "complete_patient_pass_epochs": 32,
+      "additional_updates": 7,
+      "patient_pass_equivalents": 32.7,
+      "loop_epochs_if_10_steps_per_epoch": 33,
+      "stop_in_last_epoch_after_updates": 7,
+      "consumed_gflops": 116181.104090427,
+      "unused_gflops": 77.895909573,
+      "max_steps_if_literal_116259_gflops": 327,
+      "max_steps_if_unrounded_original_reference": 327,
+      "nnunet_native_250_update_blocks": 1,
+      "nnunet_remaining_updates_after_250_blocks": 77,
+      "architecture_file": "nnunet_matched64_architecture_native.json"
+    },
+    "swinunetr": {
+      "model": "swinunetr",
+      "recipe": "matched",
+      "batch_size": 1,
+      "input_shape": [
+        64,
+        64,
+        64
+      ],
+      "training_patients": 10,
+      "classes": 3,
+      "parameters": 15703029,
+      "flops_per_update": 155012136022,
+      "gflops_per_update": 155.012136022,
+      "max_steps": 749,
+      "complete_patient_pass_epochs": 74,
+      "additional_updates": 9,
+      "patient_pass_equivalents": 74.9,
+      "loop_epochs_if_10_steps_per_epoch": 75,
+      "stop_in_last_epoch_after_updates": 9,
+      "consumed_gflops": 116104.089880478,
+      "unused_gflops": 154.910119522,
+      "max_steps_if_literal_116259_gflops": 749,
+      "max_steps_if_unrounded_original_reference": 750,
+      "nnunet_native_250_update_blocks": null,
+      "nnunet_remaining_updates_after_250_blocks": null,
+      "architecture_file": null
+    }
+  },
+  "folds": [
+    0,
+    1,
+    2
+  ],
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "training_patients_per_fold": 10,
+  "validation_patients_per_fold": 52,
+  "batch_size": 1,
+  "spatial_size": [
+    64,
+    64,
+    64
+  ],
+  "num_classes": 3,
+  "pkl_sha256": "3311d2233b99e09080c40ca80f1035781d9c1dc9c5b109dc266c73eb52a3df01",
+  "splits_sha256": "6b51236d64ce7d43b0568cb4d3276fd3791755f1b1f29463c55e052683a5c1dc",
+  "nnunet_architecture_sha256": "2e7104969b4c25f75943d58a9e1c6d83b6cf93e15ebc34b0f6c50c641b0d6ece",
+  "required_versions": {
+    "monai": "1.6.0",
+    "dynamic-network-architectures": ">=0.4.1,<0.5.0"
+  },
+  "profiled_versions": {
+    "torch": "2.2.2",
+    "monai": "1.6.0",
+    "dynamic-network-architectures": "0.4.1"
+  },
+  "augmentation": "mild_v1",
+  "validation_milestones": 20,
+  "initial_lrs": {
+    "unet": 0.0001,
+    "swinunetr": 0.0001,
+    "nnunet": 0.01
+  },
+  "adamw_weight_decay": 1e-05,
+  "sgd_weight_decay": 3e-05,
+  "adamw_schedule": "5% linear warmup, cosine decay to 1% initial LR over allotted updates",
+  "nnunet_schedule": "polynomial decay exponent 0.9 over allotted updates",
+  "early_stopping": false,
+  "accounting": "fixed declared arithmetic cost per training update; excludes augmentation/preprocessing, validation, checkpoint I/O and precision-management overhead",
+  "precision": "CUDA bfloat16 autocast, FP32 parameters/optimizer; CPU smoke tests FP32",
+  "checkpoint_selection": "maximum validation macro hard Dice over classes 1 and 2 at fixed compute milestones",
+  "nnunet_scope": "explicit default-planner-derived 64^3 topology with batch-one shared preprocessing; not an unrestricted native automatic pipeline"
+}

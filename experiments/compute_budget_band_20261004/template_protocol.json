@@ -1,0 +1,192 @@
+{
+  "training_patients_per_fold": 10,
+  "validation_patients_per_fold": 52,
+  "batch_size": 1,
+  "spatial_size": [
+    64,
+    64,
+    64
+  ],
+  "num_classes": 3,
+  "pkl_sha256": "3311d2233b99e09080c40ca80f1035781d9c1dc9c5b109dc266c73eb52a3df01",
+  "splits_sha256": "6b51236d64ce7d43b0568cb4d3276fd3791755f1b1f29463c55e052683a5c1dc",
+  "nnunet_architecture_sha256": "2e7104969b4c25f75943d58a9e1c6d83b6cf93e15ebc34b0f6c50c641b0d6ece",
+  "required_versions": {
+    "monai": "1.6.0",
+    "dynamic-network-architectures": ">=0.4.1,<0.5.0"
+  },
+  "profiled_versions": {
+    "torch": "2.2.2",
+    "monai": "1.6.0",
+    "dynamic-network-architectures": "0.4.1"
+  },
+  "augmentation": "mild_v1",
+  "validation_milestones": 20,
+  "initial_lrs": {
+    "unet": 0.0001,
+    "swinunetr": 0.0001,
+    "nnunet": 0.01
+  },
+  "adamw_weight_decay": 1e-05,
+  "sgd_weight_decay": 3e-05,
+  "adamw_schedule": "5% linear warmup, cosine decay to 1% initial LR over allotted updates",
+  "early_stopping": false,
+  "accounting": "fixed declared arithmetic cost per training update; excludes augmentation/preprocessing, validation, checkpoint I/O and precision-management overhead",
+  "precision": "CUDA bfloat16 autocast, FP32 parameters/optimizer; CPU smoke tests FP32",
+  "checkpoint_selection": "maximum validation macro hard Dice over classes 1 and 2 at fixed compute milestones",
+  "name": "compute_matched_constraints20_unet_fold0_seed0",
+  "budget_flops": 8138082968869,
+  "folds": [
+    0
+  ],
+  "seeds": [
+    0
+  ],
+  "constraint_warmup_updates": 50,
+  "pilot_scope": "All eight subsets of bands/original edge/full-volume classwise SDF; U-Net, fold 0, seed 0 only.",
+  "calibration_policy": "50 Dice-only updates; ten training cases with no augmentation or validation. Sequential calibration in fixed order: bands relative to Dice; edge relative to Dice plus weighted bands; SDF relative to Dice plus all preceding weighted terms. Each coefficient targets median gradient RMS ratio .1 and caps p95 at .5. All forwards/logit gradients and cross moments charged within B_ref.",
+  "budget_accounting": "Dice prefix, all calibration attempts, and all subsequent training attempts charged within the exact reference budget.",
+  "training_loss": "Dice + ramp * (connected_zero + band_weight*bands + edge_weight*original_edge + sdf_weight*SDF); absent terms omitted",
+  "constraint_scale": "After 50 Dice prefix updates, ramp from 1/50 to 1 over 50 constrained updates. Constraint losses are computed and charged throughout this ramp.",
+  "sources": "Canonical two-step balanced BCE bands and original pooled edge consistency; full-volume classwise clipped signed-distance boundary loss.",
+  "status": "ready",
+  "models": {
+    "unet": {
+      "parameters": 4807482,
+      "objectives": {
+        "dice": {
+          "max_steps": 849,
+          "prefix_updates": 0,
+          "constraint_updates": 849,
+          "calibration_flops": 0,
+          "consumed_flops": 8134250577549,
+          "unused_flops": 3832391320,
+          "patient_pass_epochs": 84.9,
+          "flops_per_update": 9580978301,
+          "baseline_flops_per_update": 9580978301
+        },
+        "dice_bands": {
+          "max_steps": 840,
+          "prefix_updates": 50,
+          "constraint_updates": 790,
+          "calibration_flops": 32717891314,
+          "consumed_flops": 8135412430224,
+          "unused_flops": 2670538645,
+          "patient_pass_epochs": 84.0,
+          "flops_per_update": 9650184334,
+          "baseline_flops_per_update": 9580978301
+        },
+        "dice_bands_edge": {
+          "max_steps": 834,
+          "prefix_updates": 50,
+          "constraint_updates": 784,
+          "calibration_flops": 33466517314,
+          "consumed_flops": 8135102542124,
+          "unused_flops": 2980426745,
+          "patient_pass_epochs": 83.4,
+          "flops_per_update": 9722687640,
+          "baseline_flops_per_update": 9580978301
+        },
+        "dice_edge": {
+          "max_steps": 840,
+          "prefix_updates": 50,
+          "constraint_updates": 790,
+          "calibration_flops": 32750864044,
+          "consumed_flops": 8138050248624,
+          "unused_flops": 32720245,
+          "patient_pass_epochs": 84.0,
+          "flops_per_update": 9653481607,
+          "baseline_flops_per_update": 9580978301
+        },
+        "dice_sdf": {
+          "max_steps": 845,
+          "prefix_updates": 50,
+          "constraint_updates": 795,
+          "calibration_flops": 32117581404,
+          "consumed_flops": 8135338404934,
+          "unused_flops": 2744563935,
+          "patient_pass_epochs": 84.5,
+          "flops_per_update": 9590153344,
+          "baseline_flops_per_update": 9580978301
+        },
+        "dice_bands_sdf": {
+          "max_steps": 839,
+          "prefix_updates": 50,
+          "constraint_updates": 789,
+          "calibration_flops": 32833234684,
+          "consumed_flops": 8133116698187,
+          "unused_flops": 4966270682,
+          "patient_pass_epochs": 83.9,
+          "flops_per_update": 9659359377,
+          "baseline_flops_per_update": 9580978301
+        },
+        "dice_bands_edge_sdf": {
+          "max_steps": 833,
+          "prefix_updates": 50,
+          "constraint_updates": 783,
+          "calibration_flops": 33597589324,
+          "consumed_flops": 8132694985163,
+          "unused_flops": 5387983706,
+          "patient_pass_epochs": 83.3,
+          "flops_per_update": 9731862683,
+          "baseline_flops_per_update": 9580978301
+        },
+        "dice_edge_sdf": {
+          "max_steps": 839,
+          "prefix_updates": 50,
+          "constraint_updates": 789,
+          "calibration_flops": 32866207414,
+          "consumed_flops": 8135751219314,
+          "unused_flops": 2331749555,
+          "patient_pass_epochs": 83.9,
+          "flops_per_update": 9662656650,
+          "baseline_flops_per_update": 9580978301
+        }
+      }
+    }
+  },
+  "reference_sha256": "f10d1065fc0761d6346dc6678b03f40bfbfe3a650994243a89ee1d224761c19c",
+  "requested_arm_order": [
+    "dice",
+    "dice_bands",
+    "dice_bands_edge",
+    "dice_edge",
+    "dice_sdf",
+    "dice_bands_sdf",
+    "dice_bands_edge_sdf",
+    "dice_edge_sdf"
+  ],
+  "signed_distance": {
+    "status": "authorized_and_implemented",
+    "recommended": "full-volume classwise signed-distance boundary loss using existing softmax logits",
+    "classes": [
+      1,
+      2
+    ],
+    "distance_units": "voxels on the training 64-cubed grid",
+    "distance_clip": 8,
+    "normalization": "divide clipped signed distance by 8",
+    "formula": "mean over classes and voxels of (p_c - y_c) * clip(phi_c, -8, 8) / 8",
+    "sign": "negative inside each class, positive outside; half-voxel convention as in existing spline SDF helper",
+    "geometry": "compute ground-truth distance maps after spatial augmentation, not by warping a cached distance map",
+    "extra_prediction_head": false,
+    "existing_code": "semantic_constraints/spline_refinement/train.py:signed_distance; old refinement loss is prediction-band-gated and needs a separate refiner",
+    "source": "https://proceedings.mlr.press/v102/kervadec19a.html",
+    "modification_notice": "Clipping, class selection and the constant subtraction are explicit experiment choices; subtracting y*phi changes values but not parameter gradients.",
+    "empty_class": "constant +1 normalized distance",
+    "full_class": "constant -1 normalized distance",
+    "implementation": "thesis/new_constraints/signed_distance.py",
+    "loss": "Full-volume mean (p_c-y_c)*phi_c over classes 1 and 2; no band mask",
+    "computation": "Recompute from transformed training labels before the training forward; cache neither augmented geometry nor validation labels."
+  },
+  "profile_evidence": {
+    "update_profiles_sha256": "fe65085ca186280c7f43fbed91e7a524f0126f9fcc0b60bd685a9a205115d99f",
+    "calibration_profiles_sha256": "8b7cd3deeb6cdf8aef6cc7afcab02333dcf875f59072d5423f27b03e17abece7",
+    "geometries": [
+      "ellipsoid",
+      "box"
+    ],
+    "postprocessing_scalar_flop_allowance": 1024,
+    "distance_preprocessing": "CPU Euclidean distance transforms excluded by the established preprocessing convention; included in reported run wall time."
+  }
+}

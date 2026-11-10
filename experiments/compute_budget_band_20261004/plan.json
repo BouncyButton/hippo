@@ -1,0 +1,50 @@
+{
+  "name": "unet_budget70_77_then_constraints_fold0_seed0",
+  "client_date": "2026-10-04",
+  "base_budget_flops": 8138082968869,
+  "base_final_dice": 0.42142389356516874,
+  "base_job": 682721,
+  "target_min": 0.7,
+  "target_max": 0.77,
+  "first_multiplier": [
+    3,
+    2
+  ],
+  "escalation_multipliers": [
+    [
+      2,
+      1
+    ],
+    [
+      5,
+      2
+    ],
+    [
+      3,
+      1
+    ],
+    [
+      4,
+      1
+    ],
+    [
+      5,
+      1
+    ]
+  ],
+  "max_pilot_runs": 8,
+  "selection_metric": "Final validation macro hard Dice after the full cosine schedule; not the best intermediate checkpoint",
+  "overshoot_policy": "Bisect baseline budget bracket, requiring a measured final Dice inside the inclusive target band; abort if curve is not bracketable",
+  "baseline_costs": {
+    "unet": 9580978301,
+    "nnunet": 355293896301,
+    "swinunetr": 155012136022
+  },
+  "baseline_profile_protocol_sha256": "b8770f281c62c921dde20d35d5f58c2f7630ef5ab770a0a313b7946e00ad8d2a",
+  "baseline_profile_scope": "U-Net matched; SwinUNETR matched; default-planner-derived nnU-Net 64-cubed native recipe, all batch 1",
+  "template_protocol_sha256": "139b55e0355bce4e444d99a978d7781721aa12cefa2db9f130dd35248c3c171a",
+  "comparison": "Freeze the common budget before constraints; reuse the selected completed baseline and train seven auxiliary arms from the same seeded initialization",
+  "execution": "One sbatch allocation; all pilots and objectives sequential, U-Net fold 0 seed 0 only. Other model schedules computed, other models not launched.",
+  "compute_accounting": "Report all budget-selection pilot compute separately. Every final arm includes its own calibration inside the selected reference.",
+  "inference_scope": "Exploratory pilot, not independent test evidence. Predefine the budget for subsequent folds/seeds; final confirmation needs untouched test data."
+}

@@ -1,0 +1,27 @@
+{
+  "name": "unet48_dice_budget70_75_fold0_seed0",
+  "client_date": "2026-10-05",
+  "initial_updates": 400,
+  "min_updates": 50,
+  "max_updates": 3200,
+  "max_pilot_runs": 10,
+  "target_min": 0.7,
+  "target_max": 0.75,
+  "fold": 0,
+  "seed": 0,
+  "training_patients": 10,
+  "validation_patients": 52,
+  "baseline_costs": {
+    "unet_width48": 78849850205,
+    "swinunetr": 155012136022,
+    "nnunet": 355293896301
+  },
+  "template_protocol_sha256": "0214b090cc3ff387747628ce880cee815f1b8b4c2f8dbdb9458da908ed9df17a",
+  "previous_reference_sha256": "12b22634ab8f217935ff76f4c17d6a0c29a41456e09b0b65613cb3915a54e1c9",
+  "selection_metric": "Final validation macro hard Dice over classes 1 and 2, averaged across the 52 validation patients, after the complete candidate-specific cosine schedule. Best intermediate checkpoint does not select the budget.",
+  "search_policy": "Start at 400 updates. Double if below target, halve if above with no measured lower bracket, then bisect measured below/above brackets at integer updates; abort contradictory or exhausted brackets. No monotonicity guarantee.",
+  "execution": "One sbatch allocation, sequential fresh Dice-only U-Net-48 candidates. Calculate SwinUNETR and nnU-Net allowances after selection; do not train those models or constraints.",
+  "lr_policy": "Same initial 1e-4 AdamW, weight decay 1e-5, 5% warmup and cosine to 1e-6 over each full candidate schedule; no early stopping.",
+  "compute_accounting": "Exact per-candidate update cap using declared arithmetic cost; record all search compute separately.",
+  "inference_scope": "Exploratory fold 0 seed 0 budget selection; freeze before subsequent folds/seeds and constraints."
+}

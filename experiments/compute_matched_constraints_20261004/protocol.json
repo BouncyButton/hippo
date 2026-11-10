@@ -1,0 +1,103 @@
+{
+  "training_patients_per_fold": 10,
+  "validation_patients_per_fold": 52,
+  "batch_size": 1,
+  "spatial_size": [
+    64,
+    64,
+    64
+  ],
+  "num_classes": 3,
+  "pkl_sha256": "3311d2233b99e09080c40ca80f1035781d9c1dc9c5b109dc266c73eb52a3df01",
+  "splits_sha256": "6b51236d64ce7d43b0568cb4d3276fd3791755f1b1f29463c55e052683a5c1dc",
+  "nnunet_architecture_sha256": "2e7104969b4c25f75943d58a9e1c6d83b6cf93e15ebc34b0f6c50c641b0d6ece",
+  "required_versions": {
+    "monai": "1.6.0",
+    "dynamic-network-architectures": ">=0.4.1,<0.5.0"
+  },
+  "profiled_versions": {
+    "torch": "2.2.2",
+    "monai": "1.6.0",
+    "dynamic-network-architectures": "0.4.1"
+  },
+  "augmentation": "mild_v1",
+  "validation_milestones": 20,
+  "initial_lrs": {
+    "unet": 0.0001,
+    "swinunetr": 0.0001,
+    "nnunet": 0.01
+  },
+  "adamw_weight_decay": 1e-05,
+  "sgd_weight_decay": 3e-05,
+  "adamw_schedule": "5% linear warmup, cosine decay to 1% initial LR over allotted updates",
+  "early_stopping": false,
+  "accounting": "fixed declared arithmetic cost per training update; excludes augmentation/preprocessing, validation, checkpoint I/O and precision-management overhead",
+  "precision": "CUDA bfloat16 autocast, FP32 parameters/optimizer; CPU smoke tests FP32",
+  "checkpoint_selection": "maximum validation macro hard Dice over classes 1 and 2 at fixed compute milestones",
+  "name": "compute_matched_constraints_20261004_unet_pilot",
+  "budget_flops": 40690414844347,
+  "models": {
+    "unet": {
+      "parameters": 4807482,
+      "objectives": {
+        "dice": {
+          "max_steps": 4247,
+          "prefix_updates": 0,
+          "constraint_updates": 4247,
+          "calibration_flops": 0,
+          "consumed_flops": 40690414844347,
+          "unused_flops": 0,
+          "patient_pass_epochs": 424.7,
+          "flops_per_update": 9580978301,
+          "baseline_flops_per_update": 9580978301
+        },
+        "dice_bands": {
+          "max_steps": 4213,
+          "prefix_updates": 50,
+          "constraint_updates": 4163,
+          "calibration_flops": 32717891314,
+          "consumed_flops": 40685484188806,
+          "unused_flops": 4930655541,
+          "patient_pass_epochs": 421.3,
+          "flops_per_update": 9650184334,
+          "baseline_flops_per_update": 9580978301
+        },
+        "dice_edge": {
+          "max_steps": 4212,
+          "prefix_updates": 50,
+          "constraint_updates": 4162,
+          "calibration_flops": 32750864044,
+          "consumed_flops": 40689590227428,
+          "unused_flops": 824616919,
+          "patient_pass_epochs": 421.2,
+          "flops_per_update": 9653481607,
+          "baseline_flops_per_update": 9580978301
+        },
+        "dice_bands_edge": {
+          "max_steps": 4182,
+          "prefix_updates": 50,
+          "constraint_updates": 4132,
+          "calibration_flops": 33466517314,
+          "consumed_flops": 40686660760844,
+          "unused_flops": 3754083503,
+          "patient_pass_epochs": 418.2,
+          "flops_per_update": 9722687640,
+          "baseline_flops_per_update": 9580978301
+        }
+      }
+    }
+  },
+  "folds": [
+    0
+  ],
+  "seeds": [
+    0
+  ],
+  "constraint_warmup_updates": 50,
+  "pilot_scope": "Four U-Net objectives, fold 0, seed 0. Expansion requires a later user request.",
+  "calibration_policy": "50 Dice-only training updates remain part of each constrained run. Calibrate on all ten training patients, no augmentation or validation; target median logit-gradient RMS ratio .1 with p95 cap .5. Edge is calibrated against Dice plus weighted bands when applicable.",
+  "budget_accounting": "Dice prefix, all calibration attempts, and all subsequent training attempts charged within the exact reference budget.",
+  "training_loss": "Dice + constraint_scale * (connected_zero + band_weight * bands + edge_weight * original_edge); missing terms omitted",
+  "constraint_scale": "After 50 Dice prefix updates, ramp from 1/50 to 1 over 50 constrained updates. Constraint losses are computed and charged throughout this ramp.",
+  "sources": "Original edge consistency only; canonical two-step BCE bands with gamma=0 and degree_alpha=0"
+}
