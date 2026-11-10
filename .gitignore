@@ -124,6 +124,19 @@ semantic_constraints/*
 semantic_constraints/cst_teacher/runs/
 !semantic_constraints/ap_cut_head/
 !semantic_constraints/ap_cut_head/**
+!semantic_constraints/spline_refinement/
+!semantic_constraints/spline_refinement/**
+semantic_constraints/spline_refinement/runs/
+!semantic_constraints/spectral_shape/
+!semantic_constraints/spectral_shape/**
+semantic_constraints/spectral_shape/runs/
+!semantic_constraints/pca_refiner/
+!semantic_constraints/pca_refiner/**
+semantic_constraints/pca_refiner/runs/
+!semantic_constraints/tomographic/
+!semantic_constraints/tomographic/**
+semantic_constraints/tomographic/runs/
+semantic_constraints/tomographic/__pycache__/
 
 # Keep centralized project documentation trackable.
 !/docs/
@@ -195,5 +208,118 @@ semantic_constraints/cst_teacher/runs/
 
 # Per-case runtime output remains local; curated summaries stay versioned.
 /docs/experiments/**/results_*/
+/docs/experiments/**/validation_*/
 /docs/experiments/**/case_metrics/
 /docs/experiments/**/registrations/
+
+# Downloaded GeoFWI3D archives and prepared volumetric data.
+/datasets/Dataset203_GeoFWI3D/
+
+# Fixed-compute baseline protocol and its single Slurm entry point are sources.
+!/scripts/run_compute_matched_baselines.sbatch
+!/experiments/
+/experiments/*
+!/experiments/compute_matched_baselines_20261003/
+!/experiments/compute_matched_baselines_20261003/**
+
+# GeoFWI3D study launcher is reproducibility source.
+!/scripts/run_geofwi3d_swinunetr.sbatch
+
+# Curated experiment tables and source launchers are reproducibility inputs.
+!/scripts/**/*.sbatch
+!/scripts/**/*.md
+!/reports/**/*.csv
+!/docs/experiments/**/*.csv
+
+# Local exports, downloaded data, and duplicate experiment deployment trees.
+/outputs/
+node_modules/
+/datasets/**/raw/
+*.whl
+*.zip.part*
+/reports/**/initialization_reference.json
+/reports/**/*_initialization_reference.json
+/reports/**/*.lock
+/reports/**/frozen/
+/reports/**/source_versions/
+/reports/**/preflight_versions/
+/reports/**/package/
+/reports/**/bundle/
+/reports/**/*_bundle/
+/reports/**/stage/
+/reports/**/runs/
+/reports/**/reused_runs/
+/reports/**/known_runs/
+/reports/**/preserved/
+/reports/**/cloud_backup/
+/reports/**/extracted/
+/reports/**/remote/
+/reports/**/upstream/
+/reports/**/archives/
+/reports/**/completed_evidence/
+/reports/**/prior_evidence/
+/reports/**/parent_frozen/
+/reports/**/split_cluster_*/
+/reports/**/cluster_results/
+# Snapshot source trees remain in durable local archives; active source is above.
+/reports/**/source/
+/reports/**/source_archive/
+/docs/experiments/**/*.log
+
+# Canonical thesis source and required figures; export copies stay local.
+/Template_tesi/thesis-overleaf-fast*/
+/Template_tesi/thesis-revision.pdf
+/Template_tesi/build/
+/Template_tesi/output/
+*.aux
+*.fdb_latexmk
+*.fls
+*.toc
+!/Template_tesi/figures/qualitative/*.png
+
+# Additional generated snapshots and raw seismic preview volumes.
+/reports/**/frozen_*/
+/reports/**/failed_launches/
+/reports/**/retained_dataset_metadata/
+/reports/geofwi3d_preview/model_*/
+
+# Small immutable protocols used by the compute-budget regression tests.
+!/experiments/compute_budget_band_20261004/
+/experiments/compute_budget_band_20261004/*
+!/experiments/compute_budget_band_20261004/template_protocol.json
+!/experiments/compute_budget_band_20261004/plan.json
+!/experiments/compute_budget_band_20261004/splits_10patients.json
+!/experiments/compute_budget_band_20261004/split_provenance.json
+!/experiments/compute_budget_band_20261004/nnunet_architecture.json
+!/experiments/unet48_budget_selection_20261005/
+/experiments/unet48_budget_selection_20261005/*
+!/experiments/unet48_budget_selection_20261005/template_protocol.json
+!/experiments/unet48_budget_selection_20261005/plan.json
+!/experiments/unet48_budget_selection_20261005/splits_10patients.json
+!/experiments/unet48_budget_selection_20261005/split_provenance.json
+!/experiments/unet48_budget_selection_20261005/nnunet_architecture.json
+!/experiments/compute_matched_constraints_20261004/
+/experiments/compute_matched_constraints_20261004/*
+!/experiments/compute_matched_constraints_20261004/protocol.json
+!/experiments/compute_matched_constraints_20261004/splits_10patients.json
+!/experiments/compute_matched_constraints_20261004/split_provenance.json
+!/experiments/compute_matched_constraints_20261004/nnunet_architecture.json
+!/experiments/nnunet_momentum095_20261004/
+/experiments/nnunet_momentum095_20261004/*
+!/experiments/nnunet_momentum095_20261004/protocol.json
+!/experiments/nnunet_momentum095_20261004/splits_10patients.json
+!/experiments/nnunet_momentum095_20261004/split_provenance.json
+!/experiments/nnunet_momentum095_20261004/nnunet_architecture.json
+!/experiments/nnunet_warmup_20261004/
+/experiments/nnunet_warmup_20261004/*
+!/experiments/nnunet_warmup_20261004/protocol.json
+!/experiments/nnunet_warmup_20261004/splits_10patients.json
+!/experiments/nnunet_warmup_20261004/split_provenance.json
+!/experiments/nnunet_warmup_20261004/nnunet_architecture.json
+/reports/**/pre_optimization_source_*/
+/reports/**/preparation_revisions/
+
+# Historical source copies are retained locally alongside their evidence.
+/docs/experiments/**/source/
+/reports/hippocampus_dataset_inventory_20261106/build_mni/
+/reports/lego_swinunetr_20261004/visual3d/
