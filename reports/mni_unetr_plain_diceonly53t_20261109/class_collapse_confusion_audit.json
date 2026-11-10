@@ -1,0 +1,150 @@
+{
+  "created_at": 1794193681.553254,
+  "rows": [
+    {
+      "seed": 5,
+      "fold": 0,
+      "arm": "dice",
+      "confusion": [
+        [
+          1263514,
+          3418,
+          1874,
+          1304839
+        ],
+        [
+          7656,
+          21268,
+          931,
+          5
+        ],
+        [
+          2525,
+          1473,
+          9304,
+          2
+        ],
+        [
+          3322,
+          1094,
+          203,
+          12
+        ]
+      ],
+      "true_ca4": 4631,
+      "predicted_ca4": 1304858,
+      "background_as_ca4": 1304839,
+      "ca4_true_positive": 12,
+      "union_dice_percent": 4.9239614787443085
+    },
+    {
+      "seed": 5,
+      "fold": 0,
+      "arm": "dice_bands",
+      "confusion": [
+        [
+          1262220,
+          3267,
+          1838,
+          1306320
+        ],
+        [
+          7609,
+          21323,
+          921,
+          7
+        ],
+        [
+          2491,
+          1482,
+          9323,
+          8
+        ],
+        [
+          3309,
+          1095,
+          202,
+          25
+        ]
+      ],
+      "true_ca4": 4631,
+      "predicted_ca4": 1306360,
+      "background_as_ca4": 1306320,
+      "ca4_true_positive": 25,
+      "union_dice_percent": 4.93268031797104
+    },
+    {
+      "seed": 19,
+      "fold": 0,
+      "arm": "dice",
+      "confusion": [
+        [
+          917057,
+          3605,
+          2366,
+          1650617
+        ],
+        [
+          0,
+          22052,
+          938,
+          6870
+        ],
+        [
+          0,
+          1729,
+          9601,
+          1974
+        ],
+        [
+          0,
+          1054,
+          243,
+          3334
+        ]
+      ],
+      "true_ca4": 4631,
+      "predicted_ca4": 1662795,
+      "background_as_ca4": 1650617,
+      "ca4_true_positive": 3334,
+      "union_dice_percent": 5.454254694971812
+    },
+    {
+      "seed": 19,
+      "fold": 0,
+      "arm": "dice_bands",
+      "confusion": [
+        [
+          980302,
+          4421,
+          2300,
+          1586622
+        ],
+        [
+          1657,
+          23094,
+          964,
+          4145
+        ],
+        [
+          990,
+          1758,
+          9688,
+          868
+        ],
+        [
+          51,
+          1191,
+          273,
+          3116
+        ]
+      ],
+      "true_ca4": 4631,
+      "predicted_ca4": 1594751,
+      "background_as_ca4": 1586622,
+      "ca4_true_positive": 3116,
+      "union_dice_percent": 5.347588872922173
+    }
+  ],
+  "interpretation": "Massive background-to-CA4 false positives are the dominant collapse mechanism. Seed5 additionally misses nearly all true CA4 voxels; seed19 retains many true positives but predicts CA4 across much of the background. Earlier near-zero-class-probability synthetic example is insufficient to characterize both failures. No metric bug: union Dice recomputed from per-case confusion by core.evaluate."
+}

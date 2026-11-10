@@ -1,0 +1,99 @@
+{
+  "status.json": {
+    "status": "complete",
+    "active": null,
+    "completed": 2,
+    "total": 2,
+    "runs": [
+      {
+        "id": "MNI_unetr_probe_bands_f0s0",
+        "kind": "conventional",
+        "dataset": "MNI",
+        "model": "unetr_vit_b16",
+        "arm": "dice_bands",
+        "protocol": "delayed_t05",
+        "seed": 0,
+        "fold": 0,
+        "augmentation": "xy_d4_v1",
+        "reference": "f0s0",
+        "final_dice": 0.7130146755191062,
+        "best_dice": 0.7130146755191062,
+        "released_bytes": 1853961246
+      },
+      {
+        "id": "MNI_unetr_probe_bands_f1s0",
+        "kind": "conventional",
+        "dataset": "MNI",
+        "model": "unetr_vit_b16",
+        "arm": "dice_bands",
+        "protocol": "delayed_t05",
+        "seed": 0,
+        "fold": 1,
+        "augmentation": "xy_d4_v1",
+        "reference": "f1s0",
+        "final_dice": 0.6951471602611292,
+        "best_dice": 0.6951471602611292,
+        "released_bytes": 1853961246
+      }
+    ],
+    "job_id": "747960",
+    "updated_at": 1794173752.0158453,
+    "quota": {
+      "used_gib": 50.04,
+      "limit_gib": 93.13,
+      "free_gib": 43.089999999999996,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  50.04GiB/93.13GiB  428.50k/\u221e  \n\n",
+      "checked_at": 1794173752.0543628
+    }
+  },
+  "submission.json": {
+    "job_id": "747960",
+    "dependency": null,
+    "quota": {
+      "used_gib": 46.34,
+      "limit_gib": 93.13,
+      "free_gib": 46.78999999999999,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  46.34GiB/93.13GiB  428.40k/\u221e  \n\n",
+      "checked_at": 1794173177.1490228
+    },
+    "submitted_at": 1794173177.3647475,
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--chdir=/mnt/beegfsstudents/home/3160552/mni_unetr_adam_probe53t_20261108",
+      "--output=/mnt/beegfsstudents/home/3160552/mni_unetr_adam_probe53t_20261108/slurm-%j.out",
+      "--error=/mnt/beegfsstudents/home/3160552/mni_unetr_adam_probe53t_20261108/slurm-%j.err",
+      "/mnt/beegfsstudents/home/3160552/mni_unetr_adam_probe53t_20261108/run.sbatch",
+      "/mnt/beegfsstudents/home/3160552/mni_unetr_adam_probe53t_20261108"
+    ],
+    "manifest_sha256": "8667147a1d03005f3a07e106feb58edc3e5a63573d07b27abe5d0ef58d10c82b"
+  },
+  "successor.json": {
+    "job_id": "747966",
+    "dependency": "747960",
+    "quota": {
+      "used_gib": 46.34,
+      "limit_gib": 93.13,
+      "free_gib": 46.78999999999999,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  46.34GiB/93.13GiB  428.41k/\u221e  \n\n",
+      "checked_at": 1794173272.4424646
+    },
+    "submitted_at": 1794173272.5697358,
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--chdir=/mnt/beegfsstudents/home/3160552/mni_unetr_adam_probe53t_20261108",
+      "--output=/mnt/beegfsstudents/home/3160552/mni_unetr_adam_probe53t_20261108/slurm-%j.out",
+      "--error=/mnt/beegfsstudents/home/3160552/mni_unetr_adam_probe53t_20261108/slurm-%j.err",
+      "--dependency=afterany:747960",
+      "/mnt/beegfsstudents/home/3160552/mni_unetr_adam_probe53t_20261108/run.sbatch",
+      "/mnt/beegfsstudents/home/3160552/mni_unetr_adam_probe53t_20261108"
+    ],
+    "manifest_sha256": "8667147a1d03005f3a07e106feb58edc3e5a63573d07b27abe5d0ef58d10c82b"
+  },
+  "ready": [],
+  "cleanup": [
+    "runs/MNI_unetr_probe_bands_f1s0/cleanup.json",
+    "runs/MNI_unetr_probe_bands_f0s0/cleanup.json"
+  ]
+}

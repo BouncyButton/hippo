@@ -1,0 +1,53 @@
+{
+  "status": "passed",
+  "manifest_sha256": "c3432405975bd41dea9fa31370e0e21baa565228d96d2c6b3e80d2f2fa8665f2",
+  "checks": [
+    {
+      "model": "nnunet",
+      "target": 0.1,
+      "updates": 179,
+      "prefix": 18,
+      "ramp": 18,
+      "calibration_flops": 1187183078306,
+      "weights_for_synthetic_check_only": {
+        "bands": 0.013848160545767837
+      }
+    },
+    {
+      "model": "swinunetr",
+      "target": 0.1,
+      "updates": 412,
+      "prefix": 42,
+      "ramp": 42,
+      "calibration_flops": 521877520206,
+      "weights_for_synthetic_check_only": {
+        "bands": 0.13997382935207364
+      }
+    },
+    {
+      "model": "unetr_vit_b16",
+      "target": 0.05,
+      "updates": 491,
+      "prefix": 50,
+      "ramp": 50,
+      "calibration_flops": 432816585446,
+      "weights_for_synthetic_check_only": {
+        "bands": 0.012540807727068259
+      }
+    },
+    {
+      "model": "basic_unet16",
+      "target": 0.1,
+      "updates": 1125,
+      "prefix": 113,
+      "ramp": 113,
+      "calibration_flops": 191049748686,
+      "weights_for_synthetic_check_only": {
+        "bands": 0.002185322276674426
+      }
+    }
+  ],
+  "optimizer_updates": 0,
+  "verified_fresh_runs": 8,
+  "paired_recipe_differences": "Only cap and derived schedule fields; exact protocol comparison passed."
+}

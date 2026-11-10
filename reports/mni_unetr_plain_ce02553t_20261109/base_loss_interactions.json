@@ -1,0 +1,92 @@
+{
+  "rows": [
+    {
+      "candidate": "plain_ce025_full",
+      "seed": 0,
+      "fold": 1,
+      "previous_constraint_gain_pp": 0.20614777284470165,
+      "new_constraint_gain_pp": 0.3507234949300164,
+      "constraint_interaction_pp": 0.14457572208531477,
+      "baseline_loss_change_pp": -0.00148716058875209,
+      "constrained_loss_change_pp": 0.1430885614965689,
+      "previous_constraint_archive_sha256": "211daebea73b0cca0a61b8fa5079ae8425947a861d6f724812088773b290d051",
+      "previous_baseline_archive_sha256": "2aff60ced1a86c99bd5312fb27f08b4a371a1d20c7a0ef48a30631beac739716"
+    },
+    {
+      "candidate": "plain_ce025_full",
+      "seed": 0,
+      "fold": 2,
+      "previous_constraint_gain_pp": 0.32165027407563684,
+      "new_constraint_gain_pp": 0.10786263424037434,
+      "constraint_interaction_pp": -0.2137876398352625,
+      "baseline_loss_change_pp": 0.3478087729221073,
+      "constrained_loss_change_pp": 0.13402113308684704,
+      "previous_constraint_archive_sha256": "d778a3daf15ac4a3b0087a94ecaf6d9561d8a146e59080d7a5c0ea2cfe3d0f14",
+      "previous_baseline_archive_sha256": "dfc3f5faff02493328d2abb7044258aa3e371d587c27fa76d0dfcde221fee96a"
+    },
+    {
+      "candidate": "plain_ce025_full",
+      "seed": 5,
+      "fold": 0,
+      "previous_constraint_gain_pp": -0.2640689230189537,
+      "new_constraint_gain_pp": -0.29590022118597403,
+      "constraint_interaction_pp": -0.03183129816702035,
+      "baseline_loss_change_pp": -0.23465869377302795,
+      "constrained_loss_change_pp": -0.2664899919400483,
+      "previous_constraint_archive_sha256": "2973dab968a08dfffecdc953f95d914dbbf5d0752df55766f273b81d4badbfd4",
+      "previous_baseline_archive_sha256": "ac9eddd6103ffa9b59812412e9003d35d0ed39612b1f9a2d42084454f5354007"
+    },
+    {
+      "candidate": "plain_ce025_depth",
+      "seed": 0,
+      "fold": 1,
+      "previous_constraint_gain_pp": -0.12031681579252052,
+      "new_constraint_gain_pp": 0.15814520083079486,
+      "constraint_interaction_pp": 0.2784620166233154,
+      "baseline_loss_change_pp": -0.00148716058875209,
+      "constrained_loss_change_pp": 0.2769748560345704,
+      "previous_constraint_archive_sha256": "07004288fad1ceb08fefd45ad1a947522eeb6a22eeb7e7a10abf169ca74acd9d",
+      "previous_baseline_archive_sha256": "2aff60ced1a86c99bd5312fb27f08b4a371a1d20c7a0ef48a30631beac739716"
+    },
+    {
+      "candidate": "plain_ce025_sdf_depth",
+      "seed": 0,
+      "fold": 1,
+      "previous_constraint_gain_pp": -0.1756738828447908,
+      "new_constraint_gain_pp": -0.19947592180079576,
+      "constraint_interaction_pp": -0.023802038956004967,
+      "baseline_loss_change_pp": -0.00148716058875209,
+      "constrained_loss_change_pp": -0.02528919954475839,
+      "previous_constraint_archive_sha256": "bc3fa245d79a56ec7fad1f1409ed0d9121f3f71df6d109d72f1ed6ee5d9c626e",
+      "previous_baseline_archive_sha256": "2aff60ced1a86c99bd5312fb27f08b4a371a1d20c7a0ef48a30631beac739716"
+    },
+    {
+      "candidate": "plain_ce025_bands",
+      "seed": 0,
+      "fold": 1,
+      "previous_constraint_gain_pp": -0.022214399030630716,
+      "new_constraint_gain_pp": 0.08577692151507943,
+      "constraint_interaction_pp": 0.10799132054571015,
+      "baseline_loss_change_pp": -0.00148716058875209,
+      "constrained_loss_change_pp": 0.1065041599569696,
+      "previous_constraint_archive_sha256": "f88f7ba63ce7ace51da2b5e7b85b16d6256d358a5f20d2c2ca077d0b3f8fb566",
+      "previous_baseline_archive_sha256": "2aff60ced1a86c99bd5312fb27f08b4a371a1d20c7a0ef48a30631beac739716"
+    }
+  ],
+  "missing_previous_cells": [
+    {
+      "arm": "dice_depth",
+      "seed": 0,
+      "fold": 2
+    },
+    {
+      "arm": "dice_bands",
+      "seed": 0,
+      "fold": 2
+    }
+  ],
+  "input_result_sha256": "f0b39a28857619e72c1c06f5e1e27c933f4d034a7cd509382087eb4db5d15a6a",
+  "analysis_source_sha256": "c4691848c5d58fc475e3976b3928bf9363d29d809261b0c3d1dd22319375b27a",
+  "scope": "Same architecture/dropout,seed/fold,data,hold-half LR and original auxiliaries. Dense CE reduced from1.0to0.25 in base; each loss recipe has fresh training-only5% calibration. Profiles account for loss arithmetic; both have409updates under samecap.",
+  "caveat": "Development comparisons on overlapping folds, only available exact matched historical cells. Positive constraint interaction alone does not establish higher absolute Dice."
+}

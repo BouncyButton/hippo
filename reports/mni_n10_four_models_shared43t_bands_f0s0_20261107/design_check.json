@@ -1,0 +1,87 @@
+{
+  "status": "passed",
+  "cap": 43006868505381,
+  "new_runs": 6,
+  "reused_runs": 2,
+  "comparison_runs": 8,
+  "comparison_models": [
+    "nnunet",
+    "swinunetr",
+    "unetr_vit_b16",
+    "basic_unet16"
+  ],
+  "new_conditions": [
+    {
+      "model": "swinunetr",
+      "condition": "baseline",
+      "updates": 277,
+      "passes": 13.85,
+      "target": null,
+      "initial_lr": {
+        "swinunetr": 0.0003
+      },
+      "augmentation": "xy_d4_v1",
+      "loss": "Mean negative log squared softmax Dice over all4 classes; no CE; AdamW"
+    },
+    {
+      "model": "unetr_vit_b16",
+      "condition": "baseline",
+      "updates": 330,
+      "passes": 16.5,
+      "target": null,
+      "initial_lr": {
+        "unet": 0.0006
+      },
+      "augmentation": "xy_d4_v1",
+      "loss": "Geo recipe: foreground-only squared softmax Dice + mean CE, weights 1:1, smooth_nr=0, smooth_dr=1e-6; FP32 loss."
+    },
+    {
+      "model": "basic_unet16",
+      "condition": "baseline",
+      "updates": 757,
+      "passes": 37.85,
+      "target": null,
+      "initial_lr": {
+        "unet": 0.00016
+      },
+      "augmentation": "none",
+      "loss": "MONAI softmax Dice, including background; AdamW"
+    },
+    {
+      "model": "swinunetr",
+      "condition": "original_bands",
+      "updates": 277,
+      "passes": 13.85,
+      "target": 0.1,
+      "initial_lr": {
+        "swinunetr": 0.0003
+      },
+      "augmentation": "xy_d4_v1",
+      "loss": "Mean negative log squared softmax Dice over all4 classes; no CE; AdamW"
+    },
+    {
+      "model": "unetr_vit_b16",
+      "condition": "original_bands",
+      "updates": 330,
+      "passes": 16.5,
+      "target": 0.05,
+      "initial_lr": {
+        "unet": 0.0006
+      },
+      "augmentation": "xy_d4_v1",
+      "loss": "Geo recipe: foreground-only squared softmax Dice + mean CE, weights 1:1, smooth_nr=0, smooth_dr=1e-6; FP32 loss."
+    },
+    {
+      "model": "basic_unet16",
+      "condition": "original_bands",
+      "updates": 756,
+      "passes": 37.8,
+      "target": 0.1,
+      "initial_lr": {
+        "unet": 0.00016
+      },
+      "augmentation": "none",
+      "loss": "MONAI softmax Dice, including background; AdamW"
+    }
+  ]
+}

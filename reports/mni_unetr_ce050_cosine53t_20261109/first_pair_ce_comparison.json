@@ -1,0 +1,74 @@
+{
+  "status": "single_pair_development_evidence",
+  "rows": [
+    {
+      "ce_weight": 1.0,
+      "seed": 0,
+      "fold": 1,
+      "arms": {
+        "dice": {
+          "dice": 73.02998136510091,
+          "archive_sha256": "e1682585cb12dfb317c75e1148fac7e3242bd0bd7a0596a87e75c385d14563e0",
+          "matched_gain_pp": 0.0
+        },
+        "dice_bands": {
+          "dice": 72.89602916160345,
+          "archive_sha256": "a65196a3f3474eac2cc4af40f720856d532e6ad2bfa8ecd4fb1548396eba3173",
+          "matched_gain_pp": -0.13395220349745784
+        },
+        "dice_bands_edge_sdf_depth": {
+          "dice": 73.2363342576484,
+          "archive_sha256": "b6100eb572a66ff5be02ecd492705fc4769dc8713af42f5affa7d9a8a0e75a2b",
+          "matched_gain_pp": 0.20635289254748557
+        }
+      }
+    },
+    {
+      "ce_weight": 0.25,
+      "seed": 0,
+      "fold": 1,
+      "arms": {
+        "dice": {
+          "dice": 72.92158711505728,
+          "archive_sha256": "af7c3ec3b05adbfa55051d692eb9aa4cb6469984b992a7b811d2b5cceeec0c68",
+          "matched_gain_pp": 0.0
+        },
+        "dice_bands": {
+          "dice": 73.38237771871489,
+          "archive_sha256": "48ce41a2e682f206c218e3e856759f6286da4df263c20ac76a4d5e3d34b02fa4",
+          "matched_gain_pp": 0.46079060365761393
+        },
+        "dice_bands_edge_sdf_depth": {
+          "dice": 72.90949301868925,
+          "archive_sha256": "361430e2dbb942c6a9e34730148958a332a3ef25aefcd66dbb42aeb9c01336d0",
+          "matched_gain_pp": -0.01209409636803116
+        }
+      }
+    },
+    {
+      "ce_weight": 0.5,
+      "seed": 0,
+      "fold": 1,
+      "arms": {
+        "dice": {
+          "dice": 73.31909999489126,
+          "archive_sha256": "c99644b3926d0540675fa5275dcf0809e40067f534aab4a2aa87277117608b53",
+          "matched_gain_pp": 0.0
+        },
+        "dice_bands": {
+          "dice": 73.71944161495698,
+          "archive_sha256": "71749790358897d1217a9c9f2bb4862927513b18a88b02f9182fbbf087e5bf96",
+          "matched_gain_pp": 0.40034162006571705
+        },
+        "dice_bands_edge_sdf_depth": {
+          "dice": 73.75923707149902,
+          "archive_sha256": "242b121ce42bb1b7553cad8d6b3352fb9090d535b32da596a7fd93b3aff32b07",
+          "matched_gain_pp": 0.4401370766077548
+        }
+      }
+    }
+  ],
+  "finding": "Atseed0fold1,halfCE improves absolute constrained Dice and matched constraint gain comparedwithfullCEcosine inboth arms. QuarterCE andhalfCE rankdifferently forbands andfull. This doesnotestablishallfold/seedconsistency.",
+  "scope": "Same seed/fold,data,model/dropout/noaug,optimizer,cosineLR,originalconstraint definitions andcap; eachCEweight hasitsownfreshtraining-onlycalibration. Baserecipe gains andconstraint gainsreportedseparately.",
+  "acceptance": "BothhalfCEcandidates1/9positive; remainingpairsrequired."
+}

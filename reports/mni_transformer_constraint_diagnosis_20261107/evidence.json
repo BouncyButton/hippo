@@ -1,0 +1,1793 @@
+{
+  "status": "archive_verified",
+  "metadata_files_verified": 104,
+  "current_scope": "MNI 2x historical optimization FLOP cap, fold 0 seed 0, paired fresh runs",
+  "current": {
+    "swinunetr": {
+      "dice": {
+        "validation": {
+          "summary": {
+            "macro_hard_dice": 0.7607466683054581,
+            "CA1_3_hard_dice": 0.7716861015771981,
+            "CA1_3_soft_dice": 0.3350216805934906,
+            "subiculum_hard_dice": 0.7452611897513262,
+            "subiculum_soft_dice": 0.17151753455400467,
+            "CA4_DG_hard_dice": 0.7652927135878502,
+            "CA4_DG_soft_dice": 0.13221272006630896,
+            "macro_soft_dice": 0.21291731173793474,
+            "whole_hippocampus_hard_dice": 0.8574380457345596
+          },
+          "confusion": [
+            [
+              2566158,
+              4694,
+              2641,
+              152
+            ],
+            [
+              4883,
+              23163,
+              1029,
+              785
+            ],
+            [
+              1406,
+              1516,
+              10211,
+              171
+            ],
+            [
+              35,
+              827,
+              204,
+              3565
+            ]
+          ],
+          "fn": 6324,
+          "fp": 7487,
+          "swaps": 4532,
+          "internal_error_pct": 24.706972687128605,
+          "fp_pct_of_external": 54.2104119904424
+        },
+        "training": {
+          "summary": {
+            "macro_hard_dice": 0.8180872077667131,
+            "CA1_3_hard_dice": 0.8208133720800344,
+            "CA1_3_soft_dice": 0.3453024089336395,
+            "subiculum_hard_dice": 0.7868693894182058,
+            "subiculum_soft_dice": 0.18238605111837386,
+            "CA4_DG_hard_dice": 0.8465788618018995,
+            "CA4_DG_soft_dice": 0.15414794385433198,
+            "macro_soft_dice": 0.2272788013021151,
+            "whole_hippocampus_hard_dice": 0.8845067604832888
+          },
+          "confusion": [
+            [
+              2568630,
+              4805,
+              2709,
+              87
+            ],
+            [
+              2355,
+              23428,
+              1226,
+              665
+            ],
+            [
+              949,
+              698,
+              10913,
+              192
+            ],
+            [
+              6,
+              432,
+              142,
+              4203
+            ]
+          ],
+          "fn": 3310,
+          "fp": 7601,
+          "swaps": 3355,
+          "internal_error_pct": 23.517454086639564,
+          "fp_pct_of_external": 69.66364219594904
+        },
+        "config": {
+          "budget_scope": "optimization_only",
+          "model": "swinunetr",
+          "model_identity": "swinunetr",
+          "objective": "dice",
+          "fold": 0,
+          "seed": 0,
+          "lr_horizon_updates": 412,
+          "budget_flops": 63952901334180,
+          "schedule": {
+            "prefix_updates": 0,
+            "sdf_prefix_updates": 0,
+            "constraint_warmup_updates": 1,
+            "sdf_warmup_updates": 1,
+            "baseline_flops_per_update": 155058535816,
+            "early_flops_per_update": 155058535816,
+            "flops_per_update": 155058535816,
+            "calibration_flops": 0,
+            "budget_scope": "optimization_only",
+            "max_steps": 412,
+            "consumed_training_flops": 63884116756192,
+            "consumed_flops": 63884116756192,
+            "consumed_total_flops": 63884116756192,
+            "unused_flops": 68784577988,
+            "patient_pass_epochs": 41.2
+          },
+          "max_steps": 412,
+          "smoke_test": false,
+          "protocol_sha256": "cc70a061ed37711e457882408eadede28c893d13e949b9ed9554ac1ad20d6e41",
+          "dataset_sha256": "8ef22df6e7c7964791bb582d160a847ccbeffa8628ce4bce41449d3b2fed2930",
+          "train_cases": [
+            "hippocampus_mni_s03_L",
+            "hippocampus_mni_s03_R",
+            "hippocampus_mni_s11_L",
+            "hippocampus_mni_s11_R",
+            "hippocampus_mni_s14_L",
+            "hippocampus_mni_s14_R",
+            "hippocampus_mni_s23_L",
+            "hippocampus_mni_s23_R",
+            "hippocampus_mni_s25_L",
+            "hippocampus_mni_s25_R"
+          ],
+          "validation_cases": [
+            "hippocampus_mni_s01_L",
+            "hippocampus_mni_s01_R",
+            "hippocampus_mni_s09_L",
+            "hippocampus_mni_s09_R",
+            "hippocampus_mni_s12_L",
+            "hippocampus_mni_s12_R",
+            "hippocampus_mni_s17_L",
+            "hippocampus_mni_s17_R",
+            "hippocampus_mni_s24_L",
+            "hippocampus_mni_s24_R"
+          ],
+          "torch": "2.12.1+cu130",
+          "monai": "1.6.0",
+          "augmentation": "xy_d4_v1",
+          "script_sha256": "ca74786c104bdbeda331ca084155b1c016753ceb0b5c786f19785adbdf24cba8",
+          "objective_source_sha256": "e2553ec4c3611523ef5dad2c32336a4c8ad22f37baf80907f729d7980967952e",
+          "shared_source_sha256": "ba79364c37a403bb9c62601916dfe9d060ca64846af5e2e7c5591b50337babc7",
+          "sdf_source_sha256": "171aae6757bbc9fc3ac09bb77a3a2f6e235f33ef6f86b1fd971f5bdfc8863d5d",
+          "precision": "CUDA bfloat16 autocast, FP32 parameters/optimizer; CPU smoke tests FP32",
+          "initial_lr": 0.0003,
+          "constraint_warmup_updates": 1,
+          "sdf_prefix_updates": 0,
+          "sdf_timing_sha256": "141af6057d3c07c611e3225259469ba839a9b4dca5da65c063638c873621bc39",
+          "combined_objective_sha256": "89d3de62d8f819b081fc55172e079f80f92fdb1734bc6cc0744cf9f12db2ff92",
+          "depth_geometry_sha256": "6d6efdbd976d53252110e63e854ef645808dde22c59e196deff0372bed0fc94e",
+          "selection": "Final-budget checkpoint primary. Fresh runs with cap-matched schedules; no per-model or validation-selected stopping."
+        },
+        "recipe": {
+          "model": "swinunetr",
+          "base_loss": "Mean negative log squared softmax Dice over all4 classes; no CE; AdamW",
+          "constraints": [],
+          "augmentation": "xy_d4_v1",
+          "protocol_sha256": "cc70a061ed37711e457882408eadede28c893d13e949b9ed9554ac1ad20d6e41",
+          "objective_sha256": "413e4776302c4c0a729c9e4fe00129b7a8325c2ed49910ea542fdb3488960ab4",
+          "initialization": "fresh_from_fixed_seed",
+          "lr_horizon_updates": 412,
+          "primary_checkpoint": "final_budget",
+          "baseline_only": false
+        }
+      },
+      "dice_bands": {
+        "validation": {
+          "summary": {
+            "macro_hard_dice": 0.7653004725361172,
+            "CA1_3_hard_dice": 0.7758326802861188,
+            "CA1_3_soft_dice": 0.3355946481227875,
+            "subiculum_hard_dice": 0.753854004139596,
+            "subiculum_soft_dice": 0.1719297632575035,
+            "CA4_DG_hard_dice": 0.7662147331826368,
+            "CA4_DG_soft_dice": 0.13161463290452957,
+            "macro_soft_dice": 0.2130463480949402,
+            "whole_hippocampus_hard_dice": 0.8618883266501788
+          },
+          "confusion": [
+            [
+              2567135,
+              4053,
+              2330,
+              127
+            ],
+            [
+              5168,
+              22929,
+              1004,
+              759
+            ],
+            [
+              1486,
+              1460,
+              10195,
+              163
+            ],
+            [
+              43,
+              853,
+              201,
+              3534
+            ]
+          ],
+          "fn": 6697,
+          "fp": 6510,
+          "swaps": 4440,
+          "internal_error_pct": 25.160083866946223,
+          "fp_pct_of_external": 49.29204209888695
+        },
+        "training": {
+          "summary": {
+            "macro_hard_dice": 0.8257500976188679,
+            "CA1_3_hard_dice": 0.8328568119335623,
+            "CA1_3_soft_dice": 0.34744273126125336,
+            "subiculum_hard_dice": 0.7971177425635829,
+            "subiculum_soft_dice": 0.1825794443488121,
+            "CA4_DG_hard_dice": 0.8472757383594587,
+            "CA4_DG_soft_dice": 0.15423604100942612,
+            "macro_soft_dice": 0.22808607220649724,
+            "whole_hippocampus_hard_dice": 0.8947978984038878
+          },
+          "confusion": [
+            [
+              2570035,
+              3849,
+              2261,
+              86
+            ],
+            [
+              2517,
+              23306,
+              1226,
+              625
+            ],
+            [
+              1045,
+              663,
+              10855,
+              189
+            ],
+            [
+              16,
+              446,
+              144,
+              4177
+            ]
+          ],
+          "fn": 3578,
+          "fp": 6196,
+          "swaps": 3293,
+          "internal_error_pct": 25.200887732455804,
+          "fp_pct_of_external": 63.392674442398196
+        },
+        "config": {
+          "budget_scope": "optimization_only",
+          "model": "swinunetr",
+          "model_identity": "swinunetr",
+          "objective": "dice_bands",
+          "fold": 0,
+          "seed": 0,
+          "lr_horizon_updates": 412,
+          "budget_flops": 63952901334180,
+          "schedule": {
+            "prefix_updates": 42,
+            "sdf_prefix_updates": 42,
+            "baseline_flops_per_update": 155058535816,
+            "early_flops_per_update": 155131936154,
+            "flops_per_update": 155131936154,
+            "calibration_flops": 521877520206,
+            "constraint_warmup_updates": 42,
+            "sdf_warmup_updates": 42,
+            "budget_scope": "optimization_only",
+            "max_steps": 412,
+            "consumed_training_flops": 63911274881252,
+            "consumed_flops": 63911274881252,
+            "consumed_total_flops": 64433152401458,
+            "unused_flops": 41626452928,
+            "patient_pass_epochs": 41.2
+          },
+          "max_steps": 412,
+          "smoke_test": false,
+          "protocol_sha256": "287428d3dc838f9abe61a7c8c550e3d00d963045df0a61aec6339e1983ba156b",
+          "dataset_sha256": "8ef22df6e7c7964791bb582d160a847ccbeffa8628ce4bce41449d3b2fed2930",
+          "train_cases": [
+            "hippocampus_mni_s03_L",
+            "hippocampus_mni_s03_R",
+            "hippocampus_mni_s11_L",
+            "hippocampus_mni_s11_R",
+            "hippocampus_mni_s14_L",
+            "hippocampus_mni_s14_R",
+            "hippocampus_mni_s23_L",
+            "hippocampus_mni_s23_R",
+            "hippocampus_mni_s25_L",
+            "hippocampus_mni_s25_R"
+          ],
+          "validation_cases": [
+            "hippocampus_mni_s01_L",
+            "hippocampus_mni_s01_R",
+            "hippocampus_mni_s09_L",
+            "hippocampus_mni_s09_R",
+            "hippocampus_mni_s12_L",
+            "hippocampus_mni_s12_R",
+            "hippocampus_mni_s17_L",
+            "hippocampus_mni_s17_R",
+            "hippocampus_mni_s24_L",
+            "hippocampus_mni_s24_R"
+          ],
+          "torch": "2.12.1+cu130",
+          "monai": "1.6.0",
+          "augmentation": "xy_d4_v1",
+          "script_sha256": "ca74786c104bdbeda331ca084155b1c016753ceb0b5c786f19785adbdf24cba8",
+          "objective_source_sha256": "e2553ec4c3611523ef5dad2c32336a4c8ad22f37baf80907f729d7980967952e",
+          "shared_source_sha256": "ba79364c37a403bb9c62601916dfe9d060ca64846af5e2e7c5591b50337babc7",
+          "sdf_source_sha256": "171aae6757bbc9fc3ac09bb77a3a2f6e235f33ef6f86b1fd971f5bdfc8863d5d",
+          "precision": "CUDA bfloat16 autocast, FP32 parameters/optimizer; CPU smoke tests FP32",
+          "initial_lr": 0.0003,
+          "constraint_warmup_updates": 42,
+          "sdf_prefix_updates": 42,
+          "sdf_timing_sha256": "141af6057d3c07c611e3225259469ba839a9b4dca5da65c063638c873621bc39",
+          "combined_objective_sha256": "89d3de62d8f819b081fc55172e079f80f92fdb1734bc6cc0744cf9f12db2ff92",
+          "depth_geometry_sha256": "6d6efdbd976d53252110e63e854ef645808dde22c59e196deff0372bed0fc94e",
+          "selection": "Final-budget checkpoint primary. Fresh runs with cap-matched schedules; no per-model or validation-selected stopping."
+        },
+        "recipe": {
+          "model": "swinunetr",
+          "base_loss": "Mean negative log squared softmax Dice over all4 classes; no CE; AdamW",
+          "constraints": [
+            "bands"
+          ],
+          "augmentation": "xy_d4_v1",
+          "protocol_sha256": "287428d3dc838f9abe61a7c8c550e3d00d963045df0a61aec6339e1983ba156b",
+          "objective_sha256": "413e4776302c4c0a729c9e4fe00129b7a8325c2ed49910ea542fdb3488960ab4",
+          "initialization": "fresh_from_fixed_seed",
+          "lr_horizon_updates": 412,
+          "primary_checkpoint": "final_budget",
+          "baseline_only": false
+        },
+        "calibration": {
+          "weights": {
+            "bands": 0.06858096894865306
+          },
+          "statistics": {
+            "bands": {
+              "median_raw_ratio": 1.4581304629112273,
+              "p95_raw_ratio": 1.6652570313730382,
+              "weighted_median_ratio": 0.09999999999999999,
+              "weighted_p95_ratio": 0.11420494076012051
+            }
+          },
+          "anchor_updates": 42,
+          "logit_cosine_median": 0.02950812767906569,
+          "logit_cosine_range": [
+            0.02429279550538437,
+            0.033927151639645436
+          ],
+          "limitation": "Full-volume logit gradients at one early anchor; not parameter/update gradients or later behavior."
+        }
+      },
+      "delta": {
+        "dice_pp": {
+          "macro_hard_dice": 0.45538042306590976,
+          "CA1_3_hard_dice": 0.41465787089207673,
+          "subiculum_hard_dice": 0.8592814388269865,
+          "CA4_DG_hard_dice": 0.09220195947865495,
+          "whole_hippocampus_hard_dice": 0.4450280915619165
+        },
+        "errors": {
+          "fn": 373,
+          "fp": -977,
+          "swaps": -92
+        }
+      }
+    },
+    "unetr_vit_b16": {
+      "dice": {
+        "validation": {
+          "summary": {
+            "macro_hard_dice": 0.6941245820093485,
+            "CA1_3_hard_dice": 0.6680049177156094,
+            "CA1_3_soft_dice": 0.33031735122203826,
+            "subiculum_hard_dice": 0.6974237927091937,
+            "subiculum_soft_dice": 0.2982407346367836,
+            "CA4_DG_hard_dice": 0.7169450356032421,
+            "CA4_DG_soft_dice": 0.23417827039957045,
+            "macro_soft_dice": 0.28757878541946413,
+            "whole_hippocampus_hard_dice": 0.7928550242879219
+          },
+          "confusion": [
+            [
+              2566118,
+              5576,
+              1792,
+              159
+            ],
+            [
+              8330,
+              18894,
+              1573,
+              1063
+            ],
+            [
+              2926,
+              1209,
+              9024,
+              145
+            ],
+            [
+              167,
+              970,
+              155,
+              3339
+            ]
+          ],
+          "fn": 11423,
+          "fp": 7527,
+          "swaps": 5115,
+          "internal_error_pct": 21.254934552254312,
+          "fp_pct_of_external": 39.72031662269129
+        },
+        "training": {
+          "summary": {
+            "macro_hard_dice": 0.7911990134438429,
+            "CA1_3_hard_dice": 0.7882577576350767,
+            "CA1_3_soft_dice": 0.38412339985370636,
+            "subiculum_hard_dice": 0.78135683882091,
+            "subiculum_soft_dice": 0.33241601288318634,
+            "CA4_DG_hard_dice": 0.8039824438755423,
+            "CA4_DG_soft_dice": 0.26891048699617387,
+            "macro_soft_dice": 0.3284832999110222,
+            "whole_hippocampus_hard_dice": 0.8742774262289854
+          },
+          "confusion": [
+            [
+              2569501,
+              4738,
+              1877,
+              115
+            ],
+            [
+              3487,
+              22143,
+              1324,
+              720
+            ],
+            [
+              1318,
+              921,
+              10309,
+              204
+            ],
+            [
+              59,
+              677,
+              129,
+              3918
+            ]
+          ],
+          "fn": 4864,
+          "fp": 6730,
+          "swaps": 3975,
+          "internal_error_pct": 25.53150491361038,
+          "fp_pct_of_external": 58.047265827151975
+        },
+        "config": {
+          "budget_scope": "optimization_only",
+          "model": "unet",
+          "model_identity": "unetr_vit_b16",
+          "objective": "dice",
+          "fold": 0,
+          "seed": 0,
+          "lr_horizon_updates": 491,
+          "budget_flops": 63952901334180,
+          "schedule": {
+            "prefix_updates": 0,
+            "sdf_prefix_updates": 0,
+            "constraint_warmup_updates": 1,
+            "sdf_warmup_updates": 1,
+            "baseline_flops_per_update": 130115750119,
+            "early_flops_per_update": 130115750119,
+            "flops_per_update": 130115750119,
+            "calibration_flops": 0,
+            "budget_scope": "optimization_only",
+            "max_steps": 491,
+            "consumed_training_flops": 63886833308429,
+            "consumed_flops": 63886833308429,
+            "consumed_total_flops": 63886833308429,
+            "unused_flops": 66068025751,
+            "patient_pass_epochs": 49.1
+          },
+          "max_steps": 491,
+          "smoke_test": false,
+          "protocol_sha256": "3d08f6489794e2711002d1d5b66a75abc70add1adb5bbe5828b30b2b18027b37",
+          "dataset_sha256": "8ef22df6e7c7964791bb582d160a847ccbeffa8628ce4bce41449d3b2fed2930",
+          "train_cases": [
+            "hippocampus_mni_s03_L",
+            "hippocampus_mni_s03_R",
+            "hippocampus_mni_s11_L",
+            "hippocampus_mni_s11_R",
+            "hippocampus_mni_s14_L",
+            "hippocampus_mni_s14_R",
+            "hippocampus_mni_s23_L",
+            "hippocampus_mni_s23_R",
+            "hippocampus_mni_s25_L",
+            "hippocampus_mni_s25_R"
+          ],
+          "validation_cases": [
+            "hippocampus_mni_s01_L",
+            "hippocampus_mni_s01_R",
+            "hippocampus_mni_s09_L",
+            "hippocampus_mni_s09_R",
+            "hippocampus_mni_s12_L",
+            "hippocampus_mni_s12_R",
+            "hippocampus_mni_s17_L",
+            "hippocampus_mni_s17_R",
+            "hippocampus_mni_s24_L",
+            "hippocampus_mni_s24_R"
+          ],
+          "torch": "2.12.1+cu130",
+          "monai": "1.6.0",
+          "augmentation": "xy_d4_v1",
+          "script_sha256": "ca74786c104bdbeda331ca084155b1c016753ceb0b5c786f19785adbdf24cba8",
+          "objective_source_sha256": "e2553ec4c3611523ef5dad2c32336a4c8ad22f37baf80907f729d7980967952e",
+          "shared_source_sha256": "ba79364c37a403bb9c62601916dfe9d060ca64846af5e2e7c5591b50337babc7",
+          "sdf_source_sha256": "171aae6757bbc9fc3ac09bb77a3a2f6e235f33ef6f86b1fd971f5bdfc8863d5d",
+          "precision": "CUDA bfloat16 autocast, FP32 parameters/optimizer; CPU smoke tests FP32",
+          "initial_lr": 0.0006,
+          "constraint_warmup_updates": 1,
+          "sdf_prefix_updates": 0,
+          "sdf_timing_sha256": "141af6057d3c07c611e3225259469ba839a9b4dca5da65c063638c873621bc39",
+          "combined_objective_sha256": "89d3de62d8f819b081fc55172e079f80f92fdb1734bc6cc0744cf9f12db2ff92",
+          "depth_geometry_sha256": "6d6efdbd976d53252110e63e854ef645808dde22c59e196deff0372bed0fc94e",
+          "selection": "Final-budget checkpoint primary. Fresh runs with cap-matched schedules; no per-model or validation-selected stopping."
+        },
+        "recipe": {
+          "model": "unetr_vit_b16",
+          "base_loss": "Geo recipe: foreground-only squared softmax Dice + mean CE, weights 1:1, smooth_nr=0, smooth_dr=1e-6; FP32 loss.",
+          "constraints": [],
+          "augmentation": "xy_d4_v1",
+          "protocol_sha256": "3d08f6489794e2711002d1d5b66a75abc70add1adb5bbe5828b30b2b18027b37",
+          "objective_sha256": "413e4776302c4c0a729c9e4fe00129b7a8325c2ed49910ea542fdb3488960ab4",
+          "initialization": "fresh_from_fixed_seed",
+          "lr_horizon_updates": 491,
+          "primary_checkpoint": "final_budget",
+          "baseline_only": false
+        }
+      },
+      "dice_bands": {
+        "validation": {
+          "summary": {
+            "macro_hard_dice": 0.6948158215325149,
+            "CA1_3_hard_dice": 0.6822839650249677,
+            "CA1_3_soft_dice": 0.33683123588562014,
+            "subiculum_hard_dice": 0.6940044932077558,
+            "subiculum_soft_dice": 0.29211536794900894,
+            "CA4_DG_hard_dice": 0.7081590063648214,
+            "CA4_DG_soft_dice": 0.23252670019865035,
+            "macro_soft_dice": 0.28715776801109316,
+            "whole_hippocampus_hard_dice": 0.802886574703012
+          },
+          "confusion": [
+            [
+              2566614,
+              5200,
+              1657,
+              174
+            ],
+            [
+              7872,
+              19373,
+              1479,
+              1136
+            ],
+            [
+              2952,
+              1387,
+              8809,
+              156
+            ],
+            [
+              204,
+              937,
+              143,
+              3347
+            ]
+          ],
+          "fn": 11028,
+          "fp": 7031,
+          "swaps": 5238,
+          "internal_error_pct": 22.483581577027085,
+          "fp_pct_of_external": 38.93349576388504
+        },
+        "training": {
+          "summary": {
+            "macro_hard_dice": 0.7923519778547846,
+            "CA1_3_hard_dice": 0.7895118897518816,
+            "CA1_3_soft_dice": 0.3823914021253586,
+            "subiculum_hard_dice": 0.780416615395229,
+            "subiculum_soft_dice": 0.3276307910680771,
+            "CA4_DG_hard_dice": 0.8071274284172436,
+            "CA4_DG_soft_dice": 0.27059399485588076,
+            "macro_soft_dice": 0.3268720626831055,
+            "whole_hippocampus_hard_dice": 0.8742373321170789
+          },
+          "confusion": [
+            [
+              2569756,
+              4595,
+              1762,
+              118
+            ],
+            [
+              3570,
+              22114,
+              1253,
+              737
+            ],
+            [
+              1435,
+              952,
+              10154,
+              211
+            ],
+            [
+              60,
+              650,
+              106,
+              3967
+            ]
+          ],
+          "fn": 5065,
+          "fp": 6475,
+          "swaps": 3909,
+          "internal_error_pct": 25.30260858307981,
+          "fp_pct_of_external": 56.10918544194107
+        },
+        "config": {
+          "budget_scope": "optimization_only",
+          "model": "unet",
+          "model_identity": "unetr_vit_b16",
+          "objective": "dice_bands",
+          "fold": 0,
+          "seed": 0,
+          "lr_horizon_updates": 491,
+          "budget_flops": 63952901334180,
+          "schedule": {
+            "prefix_updates": 50,
+            "sdf_prefix_updates": 50,
+            "baseline_flops_per_update": 130115750119,
+            "early_flops_per_update": 130189150457,
+            "flops_per_update": 130189150457,
+            "calibration_flops": 432816585446,
+            "constraint_warmup_updates": 50,
+            "sdf_warmup_updates": 50,
+            "budget_scope": "optimization_only",
+            "max_steps": 491,
+            "consumed_training_flops": 63919202857487,
+            "consumed_flops": 63919202857487,
+            "consumed_total_flops": 64352019442933,
+            "unused_flops": 33698476693,
+            "patient_pass_epochs": 49.1
+          },
+          "max_steps": 491,
+          "smoke_test": false,
+          "protocol_sha256": "3084b6d75f045e5de750033fff23bcf7c97d21e4ba83ad9940ea3ef42a725466",
+          "dataset_sha256": "8ef22df6e7c7964791bb582d160a847ccbeffa8628ce4bce41449d3b2fed2930",
+          "train_cases": [
+            "hippocampus_mni_s03_L",
+            "hippocampus_mni_s03_R",
+            "hippocampus_mni_s11_L",
+            "hippocampus_mni_s11_R",
+            "hippocampus_mni_s14_L",
+            "hippocampus_mni_s14_R",
+            "hippocampus_mni_s23_L",
+            "hippocampus_mni_s23_R",
+            "hippocampus_mni_s25_L",
+            "hippocampus_mni_s25_R"
+          ],
+          "validation_cases": [
+            "hippocampus_mni_s01_L",
+            "hippocampus_mni_s01_R",
+            "hippocampus_mni_s09_L",
+            "hippocampus_mni_s09_R",
+            "hippocampus_mni_s12_L",
+            "hippocampus_mni_s12_R",
+            "hippocampus_mni_s17_L",
+            "hippocampus_mni_s17_R",
+            "hippocampus_mni_s24_L",
+            "hippocampus_mni_s24_R"
+          ],
+          "torch": "2.12.1+cu130",
+          "monai": "1.6.0",
+          "augmentation": "xy_d4_v1",
+          "script_sha256": "ca74786c104bdbeda331ca084155b1c016753ceb0b5c786f19785adbdf24cba8",
+          "objective_source_sha256": "e2553ec4c3611523ef5dad2c32336a4c8ad22f37baf80907f729d7980967952e",
+          "shared_source_sha256": "ba79364c37a403bb9c62601916dfe9d060ca64846af5e2e7c5591b50337babc7",
+          "sdf_source_sha256": "171aae6757bbc9fc3ac09bb77a3a2f6e235f33ef6f86b1fd971f5bdfc8863d5d",
+          "precision": "CUDA bfloat16 autocast, FP32 parameters/optimizer; CPU smoke tests FP32",
+          "initial_lr": 0.0006,
+          "constraint_warmup_updates": 50,
+          "sdf_prefix_updates": 50,
+          "sdf_timing_sha256": "141af6057d3c07c611e3225259469ba839a9b4dca5da65c063638c873621bc39",
+          "combined_objective_sha256": "89d3de62d8f819b081fc55172e079f80f92fdb1734bc6cc0744cf9f12db2ff92",
+          "depth_geometry_sha256": "6d6efdbd976d53252110e63e854ef645808dde22c59e196deff0372bed0fc94e",
+          "selection": "Final-budget checkpoint primary. Fresh runs with cap-matched schedules; no per-model or validation-selected stopping."
+        },
+        "recipe": {
+          "model": "unetr_vit_b16",
+          "base_loss": "Geo recipe: foreground-only squared softmax Dice + mean CE, weights 1:1, smooth_nr=0, smooth_dr=1e-6; FP32 loss.",
+          "constraints": [
+            "bands"
+          ],
+          "augmentation": "xy_d4_v1",
+          "protocol_sha256": "3084b6d75f045e5de750033fff23bcf7c97d21e4ba83ad9940ea3ef42a725466",
+          "objective_sha256": "413e4776302c4c0a729c9e4fe00129b7a8325c2ed49910ea542fdb3488960ab4",
+          "initialization": "fresh_from_fixed_seed",
+          "lr_horizon_updates": 491,
+          "primary_checkpoint": "final_budget",
+          "baseline_only": false
+        },
+        "calibration": {
+          "weights": {
+            "bands": 0.019193085367044244
+          },
+          "statistics": {
+            "bands": {
+              "median_raw_ratio": 2.605104861663003,
+              "p95_raw_ratio": 2.7302848880182937,
+              "weighted_median_ratio": 0.05,
+              "weighted_p95_ratio": 0.05240259093208595
+            }
+          },
+          "anchor_updates": 50,
+          "logit_cosine_median": 0.34923797432898873,
+          "logit_cosine_range": [
+            0.32585024383061323,
+            0.3593125366314809
+          ],
+          "limitation": "Full-volume logit gradients at one early anchor; not parameter/update gradients or later behavior."
+        }
+      },
+      "delta": {
+        "dice_pp": {
+          "macro_hard_dice": 0.06912395231664092,
+          "CA1_3_hard_dice": 1.427904730935825,
+          "subiculum_hard_dice": -0.34192995014379335,
+          "CA4_DG_hard_dice": -0.8786029238420645,
+          "whole_hippocampus_hard_dice": 1.0031550415090074
+        },
+        "errors": {
+          "fn": -395,
+          "fp": -496,
+          "swaps": 123
+        }
+      }
+    },
+    "nnunet": {
+      "dice": {
+        "validation": {
+          "summary": {
+            "macro_hard_dice": 0.5412158843119759,
+            "CA1_3_hard_dice": 0.4725532286530362,
+            "CA1_3_soft_dice": 0.38492743074893954,
+            "subiculum_hard_dice": 0.6595760639823652,
+            "subiculum_soft_dice": 0.571125715970993,
+            "CA4_DG_hard_dice": 0.49151836030052626,
+            "CA4_DG_soft_dice": 0.3437764495611191,
+            "macro_soft_dice": 0.4332765320936839,
+            "whole_hippocampus_hard_dice": 0.7432127824645489
+          },
+          "confusion": [
+            [
+              2568943,
+              2084,
+              1567,
+              1051
+            ],
+            [
+              13840,
+              10816,
+              2366,
+              2838
+            ],
+            [
+              2935,
+              1580,
+              8599,
+              190
+            ],
+            [
+              55,
+              1490,
+              250,
+              2836
+            ]
+          ],
+          "fn": 16830,
+          "fp": 4702,
+          "swaps": 8714,
+          "internal_error_pct": 28.810421212722343,
+          "fp_pct_of_external": 21.83726546535389
+        },
+        "training": {
+          "summary": {
+            "macro_hard_dice": 0.600935599898787,
+            "CA1_3_hard_dice": 0.549096743809408,
+            "CA1_3_soft_dice": 0.4161142885684967,
+            "subiculum_hard_dice": 0.6905663489095935,
+            "subiculum_soft_dice": 0.604510498046875,
+            "CA4_DG_hard_dice": 0.5631437069773592,
+            "CA4_DG_soft_dice": 0.3873090296983719,
+            "macro_soft_dice": 0.46931127210458123,
+            "whole_hippocampus_hard_dice": 0.8003933814136609
+          },
+          "confusion": [
+            [
+              2571936,
+              1867,
+              1710,
+              718
+            ],
+            [
+              10142,
+              12068,
+              2812,
+              2652
+            ],
+            [
+              2025,
+              1206,
+              9255,
+              266
+            ],
+            [
+              28,
+              1169,
+              276,
+              3310
+            ]
+          ],
+          "fn": 12195,
+          "fp": 4295,
+          "swaps": 8381,
+          "internal_error_pct": 33.697881066302116,
+          "fp_pct_of_external": 26.046088538508187
+        },
+        "config": {
+          "budget_scope": "optimization_only",
+          "model": "nnunet",
+          "model_identity": "nnunet",
+          "objective": "dice",
+          "fold": 0,
+          "seed": 0,
+          "lr_horizon_updates": 179,
+          "budget_flops": 63952901334180,
+          "schedule": {
+            "prefix_updates": 0,
+            "sdf_prefix_updates": 0,
+            "constraint_warmup_updates": 1,
+            "sdf_warmup_updates": 1,
+            "baseline_flops_per_update": 355367397283,
+            "early_flops_per_update": 355367397283,
+            "flops_per_update": 355367397283,
+            "calibration_flops": 0,
+            "budget_scope": "optimization_only",
+            "max_steps": 179,
+            "consumed_training_flops": 63610764113657,
+            "consumed_flops": 63610764113657,
+            "consumed_total_flops": 63610764113657,
+            "unused_flops": 342137220523,
+            "patient_pass_epochs": 17.9
+          },
+          "max_steps": 179,
+          "smoke_test": false,
+          "protocol_sha256": "7371712aacfe464faab2b9403d7dde133e0486dab7f54d940990d7755da67e8b",
+          "dataset_sha256": "8ef22df6e7c7964791bb582d160a847ccbeffa8628ce4bce41449d3b2fed2930",
+          "train_cases": [
+            "hippocampus_mni_s03_L",
+            "hippocampus_mni_s03_R",
+            "hippocampus_mni_s11_L",
+            "hippocampus_mni_s11_R",
+            "hippocampus_mni_s14_L",
+            "hippocampus_mni_s14_R",
+            "hippocampus_mni_s23_L",
+            "hippocampus_mni_s23_R",
+            "hippocampus_mni_s25_L",
+            "hippocampus_mni_s25_R"
+          ],
+          "validation_cases": [
+            "hippocampus_mni_s01_L",
+            "hippocampus_mni_s01_R",
+            "hippocampus_mni_s09_L",
+            "hippocampus_mni_s09_R",
+            "hippocampus_mni_s12_L",
+            "hippocampus_mni_s12_R",
+            "hippocampus_mni_s17_L",
+            "hippocampus_mni_s17_R",
+            "hippocampus_mni_s24_L",
+            "hippocampus_mni_s24_R"
+          ],
+          "torch": "2.12.1+cu130",
+          "monai": "1.6.0",
+          "augmentation": "none",
+          "script_sha256": "ca74786c104bdbeda331ca084155b1c016753ceb0b5c786f19785adbdf24cba8",
+          "objective_source_sha256": "e2553ec4c3611523ef5dad2c32336a4c8ad22f37baf80907f729d7980967952e",
+          "shared_source_sha256": "ba79364c37a403bb9c62601916dfe9d060ca64846af5e2e7c5591b50337babc7",
+          "sdf_source_sha256": "171aae6757bbc9fc3ac09bb77a3a2f6e235f33ef6f86b1fd971f5bdfc8863d5d",
+          "precision": "CUDA bfloat16 autocast, FP32 parameters/optimizer; CPU smoke tests FP32",
+          "initial_lr": 0.0065,
+          "constraint_warmup_updates": 1,
+          "sdf_prefix_updates": 0,
+          "sdf_timing_sha256": "141af6057d3c07c611e3225259469ba839a9b4dca5da65c063638c873621bc39",
+          "combined_objective_sha256": "89d3de62d8f819b081fc55172e079f80f92fdb1734bc6cc0744cf9f12db2ff92",
+          "depth_geometry_sha256": "6d6efdbd976d53252110e63e854ef645808dde22c59e196deff0372bed0fc94e",
+          "selection": "Final-budget checkpoint primary. Fresh runs with cap-matched schedules; no per-model or validation-selected stopping.",
+          "native_loss": "Native foreground Dice+CE with deep supervision; SGD/Nesterov momentum0.95",
+          "native_objective_sha256": "b731fbdd97b3792e9124d197d1f877d22e62b3869464fab647577bb5d177b637",
+          "nnunet_sgd_momentum": 0.95,
+          "nnunet_warmup_fraction": 0.0
+        },
+        "recipe": {
+          "model": "nnunet",
+          "base_loss": "Native foreground Dice+CE with deep supervision; SGD/Nesterov momentum0.95",
+          "constraints": [],
+          "augmentation": "none",
+          "protocol_sha256": "7371712aacfe464faab2b9403d7dde133e0486dab7f54d940990d7755da67e8b",
+          "objective_sha256": "413e4776302c4c0a729c9e4fe00129b7a8325c2ed49910ea542fdb3488960ab4",
+          "initialization": "fresh_from_fixed_seed",
+          "lr_horizon_updates": 179,
+          "primary_checkpoint": "final_budget",
+          "baseline_only": false
+        }
+      },
+      "dice_bands": {
+        "validation": {
+          "summary": {
+            "macro_hard_dice": 0.5663421250683095,
+            "CA1_3_hard_dice": 0.5517837059625208,
+            "CA1_3_soft_dice": 0.4253439396619797,
+            "subiculum_hard_dice": 0.6591292532701172,
+            "subiculum_soft_dice": 0.5728659927845001,
+            "CA4_DG_hard_dice": 0.48811341597229063,
+            "CA4_DG_soft_dice": 0.33803334534168245,
+            "macro_soft_dice": 0.44541442592938746,
+            "whole_hippocampus_hard_dice": 0.7776754610274318
+          },
+          "confusion": [
+            [
+              2568160,
+              2869,
+              1549,
+              1067
+            ],
+            [
+              11268,
+              13830,
+              2331,
+              2431
+            ],
+            [
+              2687,
+              1888,
+              8557,
+              172
+            ],
+            [
+              16,
+              1707,
+              232,
+              2676
+            ]
+          ],
+          "fn": 13971,
+          "fp": 5485,
+          "swaps": 8761,
+          "internal_error_pct": 31.048658610057768,
+          "fp_pct_of_external": 28.191817434210527
+        },
+        "training": {
+          "summary": {
+            "macro_hard_dice": 0.6267839958599233,
+            "CA1_3_hard_dice": 0.6252787181287919,
+            "CA1_3_soft_dice": 0.4593928724527359,
+            "subiculum_hard_dice": 0.6903880309906794,
+            "subiculum_soft_dice": 0.6058797895908355,
+            "CA4_DG_hard_dice": 0.5646852384602984,
+            "CA4_DG_soft_dice": 0.38222663998603823,
+            "macro_soft_dice": 0.48249976734320327,
+            "whole_hippocampus_hard_dice": 0.8311097851339154
+          },
+          "confusion": [
+            [
+              2571072,
+              2730,
+              1694,
+              735
+            ],
+            [
+              7576,
+              15118,
+              2783,
+              2197
+            ],
+            [
+              1817,
+              1460,
+              9218,
+              257
+            ],
+            [
+              11,
+              1369,
+              256,
+              3147
+            ]
+          ],
+          "fn": 9404,
+          "fp": 5159,
+          "swaps": 8322,
+          "internal_error_pct": 36.36443084990168,
+          "fp_pct_of_external": 35.42539311954955
+        },
+        "config": {
+          "budget_scope": "optimization_only",
+          "model": "nnunet",
+          "model_identity": "nnunet",
+          "objective": "dice_bands",
+          "fold": 0,
+          "seed": 0,
+          "lr_horizon_updates": 179,
+          "budget_flops": 63952901334180,
+          "schedule": {
+            "prefix_updates": 18,
+            "sdf_prefix_updates": 18,
+            "baseline_flops_per_update": 355367397283,
+            "early_flops_per_update": 355440797621,
+            "flops_per_update": 355440797621,
+            "calibration_flops": 1187183078306,
+            "constraint_warmup_updates": 18,
+            "sdf_warmup_updates": 18,
+            "budget_scope": "optimization_only",
+            "max_steps": 179,
+            "consumed_training_flops": 63622581568075,
+            "consumed_flops": 63622581568075,
+            "consumed_total_flops": 64809764646381,
+            "unused_flops": 330319766105,
+            "patient_pass_epochs": 17.9
+          },
+          "max_steps": 179,
+          "smoke_test": false,
+          "protocol_sha256": "6a697eb66c58e662bbc2fbe3beaff69870787979a7e9953effc8f7feb846604c",
+          "dataset_sha256": "8ef22df6e7c7964791bb582d160a847ccbeffa8628ce4bce41449d3b2fed2930",
+          "train_cases": [
+            "hippocampus_mni_s03_L",
+            "hippocampus_mni_s03_R",
+            "hippocampus_mni_s11_L",
+            "hippocampus_mni_s11_R",
+            "hippocampus_mni_s14_L",
+            "hippocampus_mni_s14_R",
+            "hippocampus_mni_s23_L",
+            "hippocampus_mni_s23_R",
+            "hippocampus_mni_s25_L",
+            "hippocampus_mni_s25_R"
+          ],
+          "validation_cases": [
+            "hippocampus_mni_s01_L",
+            "hippocampus_mni_s01_R",
+            "hippocampus_mni_s09_L",
+            "hippocampus_mni_s09_R",
+            "hippocampus_mni_s12_L",
+            "hippocampus_mni_s12_R",
+            "hippocampus_mni_s17_L",
+            "hippocampus_mni_s17_R",
+            "hippocampus_mni_s24_L",
+            "hippocampus_mni_s24_R"
+          ],
+          "torch": "2.12.1+cu130",
+          "monai": "1.6.0",
+          "augmentation": "none",
+          "script_sha256": "ca74786c104bdbeda331ca084155b1c016753ceb0b5c786f19785adbdf24cba8",
+          "objective_source_sha256": "e2553ec4c3611523ef5dad2c32336a4c8ad22f37baf80907f729d7980967952e",
+          "shared_source_sha256": "ba79364c37a403bb9c62601916dfe9d060ca64846af5e2e7c5591b50337babc7",
+          "sdf_source_sha256": "171aae6757bbc9fc3ac09bb77a3a2f6e235f33ef6f86b1fd971f5bdfc8863d5d",
+          "precision": "CUDA bfloat16 autocast, FP32 parameters/optimizer; CPU smoke tests FP32",
+          "initial_lr": 0.0065,
+          "constraint_warmup_updates": 18,
+          "sdf_prefix_updates": 18,
+          "sdf_timing_sha256": "141af6057d3c07c611e3225259469ba839a9b4dca5da65c063638c873621bc39",
+          "combined_objective_sha256": "89d3de62d8f819b081fc55172e079f80f92fdb1734bc6cc0744cf9f12db2ff92",
+          "depth_geometry_sha256": "6d6efdbd976d53252110e63e854ef645808dde22c59e196deff0372bed0fc94e",
+          "selection": "Final-budget checkpoint primary. Fresh runs with cap-matched schedules; no per-model or validation-selected stopping.",
+          "native_loss": "Native foreground Dice+CE with deep supervision; SGD/Nesterov momentum0.95",
+          "native_objective_sha256": "b731fbdd97b3792e9124d197d1f877d22e62b3869464fab647577bb5d177b637",
+          "nnunet_sgd_momentum": 0.95,
+          "nnunet_warmup_fraction": 0.0
+        },
+        "recipe": {
+          "model": "nnunet",
+          "base_loss": "Native foreground Dice+CE with deep supervision; SGD/Nesterov momentum0.95",
+          "constraints": [
+            "bands"
+          ],
+          "augmentation": "none",
+          "protocol_sha256": "6a697eb66c58e662bbc2fbe3beaff69870787979a7e9953effc8f7feb846604c",
+          "objective_sha256": "413e4776302c4c0a729c9e4fe00129b7a8325c2ed49910ea542fdb3488960ab4",
+          "initialization": "fresh_from_fixed_seed",
+          "lr_horizon_updates": 179,
+          "primary_checkpoint": "final_budget",
+          "baseline_only": false
+        },
+        "calibration": {
+          "weights": {
+            "bands": 0.0063963421660512025
+          },
+          "statistics": {
+            "bands": {
+              "median_raw_ratio": 15.633935365552098,
+              "p95_raw_ratio": 16.758830143301694,
+              "weighted_median_ratio": 0.1,
+              "weighted_p95_ratio": 0.10719521189929054
+            }
+          },
+          "anchor_updates": 18,
+          "logit_cosine_median": 0.3914742693150994,
+          "logit_cosine_range": [
+            0.3799447973320481,
+            0.3997310221245802
+          ],
+          "limitation": "Full-volume logit gradients at one early anchor; not parameter/update gradients or later behavior."
+        }
+      },
+      "delta": {
+        "dice_pp": {
+          "macro_hard_dice": 2.512624075633363,
+          "CA1_3_hard_dice": 7.923047730948463,
+          "subiculum_hard_dice": -0.0446810712248058,
+          "CA4_DG_hard_dice": -0.3404944328235626,
+          "whole_hippocampus_hard_dice": 3.4462678562882876
+        },
+        "errors": {
+          "fn": -2859,
+          "fp": 783,
+          "swaps": 47
+        }
+      }
+    },
+    "basic_unet16": {
+      "dice": {
+        "validation": {
+          "summary": {
+            "macro_hard_dice": 0.6085804093446581,
+            "CA1_3_hard_dice": 0.6925121845102458,
+            "CA1_3_soft_dice": 0.12126840502023697,
+            "subiculum_hard_dice": 0.6258143953362487,
+            "subiculum_soft_dice": 0.06925386004149914,
+            "CA4_DG_hard_dice": 0.5074146481874798,
+            "CA4_DG_soft_dice": 0.019336050562560558,
+            "macro_soft_dice": 0.06995277187476556,
+            "whole_hippocampus_hard_dice": 0.768463914334518
+          },
+          "confusion": [
+            [
+              2547821,
+              15125,
+              7903,
+              2796
+            ],
+            [
+              1156,
+              25294,
+              1800,
+              1610
+            ],
+            [
+              602,
+              1690,
+              10733,
+              279
+            ],
+            [
+              0,
+              1038,
+              486,
+              3107
+            ]
+          ],
+          "fn": 1758,
+          "fp": 25824,
+          "swaps": 6903,
+          "internal_error_pct": 20.01739886907351,
+          "fp_pct_of_external": 93.62627800739612
+        },
+        "training": {
+          "summary": {
+            "macro_hard_dice": 0.7564021063251636,
+            "CA1_3_hard_dice": 0.7683731470855502,
+            "CA1_3_soft_dice": 0.13469416201114653,
+            "subiculum_hard_dice": 0.7451169241056738,
+            "subiculum_soft_dice": 0.08310990780591965,
+            "CA4_DG_hard_dice": 0.755716247784267,
+            "CA4_DG_soft_dice": 0.02775569390505552,
+            "macro_soft_dice": 0.08185325457404057,
+            "whole_hippocampus_hard_dice": 0.7722386654279567
+          },
+          "confusion": [
+            [
+              2549653,
+              15782,
+              8233,
+              2563
+            ],
+            [
+              1,
+              27309,
+              212,
+              152
+            ],
+            [
+              1,
+              77,
+              12613,
+              61
+            ],
+            [
+              0,
+              136,
+              48,
+              4599
+            ]
+          ],
+          "fn": 2,
+          "fp": 26578,
+          "swaps": 686,
+          "internal_error_pct": 2.515953935304042,
+          "fp_pct_of_external": 99.99247554552295
+        },
+        "config": {
+          "budget_scope": "optimization_only",
+          "model": "unet",
+          "model_identity": "basic_unet16",
+          "objective": "dice",
+          "fold": 0,
+          "seed": 0,
+          "lr_horizon_updates": 1126,
+          "budget_flops": 63952901334180,
+          "schedule": {
+            "prefix_updates": 0,
+            "sdf_prefix_updates": 0,
+            "constraint_warmup_updates": 1,
+            "sdf_warmup_updates": 1,
+            "baseline_flops_per_update": 56756707731,
+            "early_flops_per_update": 56756707731,
+            "flops_per_update": 56756707731,
+            "calibration_flops": 0,
+            "budget_scope": "optimization_only",
+            "max_steps": 1126,
+            "consumed_training_flops": 63908052905106,
+            "consumed_flops": 63908052905106,
+            "consumed_total_flops": 63908052905106,
+            "unused_flops": 44848429074,
+            "patient_pass_epochs": 112.6
+          },
+          "max_steps": 1126,
+          "smoke_test": false,
+          "protocol_sha256": "2a8c312d2e31d920e178ea200899df91148dbee98d3b1dfb75212bc27fa03b6b",
+          "dataset_sha256": "8ef22df6e7c7964791bb582d160a847ccbeffa8628ce4bce41449d3b2fed2930",
+          "train_cases": [
+            "hippocampus_mni_s03_L",
+            "hippocampus_mni_s03_R",
+            "hippocampus_mni_s11_L",
+            "hippocampus_mni_s11_R",
+            "hippocampus_mni_s14_L",
+            "hippocampus_mni_s14_R",
+            "hippocampus_mni_s23_L",
+            "hippocampus_mni_s23_R",
+            "hippocampus_mni_s25_L",
+            "hippocampus_mni_s25_R"
+          ],
+          "validation_cases": [
+            "hippocampus_mni_s01_L",
+            "hippocampus_mni_s01_R",
+            "hippocampus_mni_s09_L",
+            "hippocampus_mni_s09_R",
+            "hippocampus_mni_s12_L",
+            "hippocampus_mni_s12_R",
+            "hippocampus_mni_s17_L",
+            "hippocampus_mni_s17_R",
+            "hippocampus_mni_s24_L",
+            "hippocampus_mni_s24_R"
+          ],
+          "torch": "2.12.1+cu130",
+          "monai": "1.6.0",
+          "augmentation": "none",
+          "script_sha256": "ca74786c104bdbeda331ca084155b1c016753ceb0b5c786f19785adbdf24cba8",
+          "objective_source_sha256": "e2553ec4c3611523ef5dad2c32336a4c8ad22f37baf80907f729d7980967952e",
+          "shared_source_sha256": "ba79364c37a403bb9c62601916dfe9d060ca64846af5e2e7c5591b50337babc7",
+          "sdf_source_sha256": "171aae6757bbc9fc3ac09bb77a3a2f6e235f33ef6f86b1fd971f5bdfc8863d5d",
+          "precision": "CUDA bfloat16 autocast, FP32 parameters/optimizer; CPU smoke tests FP32",
+          "initial_lr": 0.00016,
+          "constraint_warmup_updates": 1,
+          "sdf_prefix_updates": 0,
+          "sdf_timing_sha256": "141af6057d3c07c611e3225259469ba839a9b4dca5da65c063638c873621bc39",
+          "combined_objective_sha256": "89d3de62d8f819b081fc55172e079f80f92fdb1734bc6cc0744cf9f12db2ff92",
+          "depth_geometry_sha256": "6d6efdbd976d53252110e63e854ef645808dde22c59e196deff0372bed0fc94e",
+          "selection": "Final-budget checkpoint primary. Fresh runs with cap-matched schedules; no per-model or validation-selected stopping."
+        },
+        "recipe": {
+          "model": "basic_unet16",
+          "base_loss": "MONAI softmax Dice, including background; AdamW",
+          "constraints": [],
+          "augmentation": "none",
+          "protocol_sha256": "2a8c312d2e31d920e178ea200899df91148dbee98d3b1dfb75212bc27fa03b6b",
+          "objective_sha256": "413e4776302c4c0a729c9e4fe00129b7a8325c2ed49910ea542fdb3488960ab4",
+          "initialization": "fresh_from_fixed_seed",
+          "lr_horizon_updates": 1126,
+          "primary_checkpoint": "final_budget",
+          "baseline_only": false
+        }
+      },
+      "dice_bands": {
+        "validation": {
+          "summary": {
+            "macro_hard_dice": 0.688105999624718,
+            "CA1_3_hard_dice": 0.7384411648122926,
+            "CA1_3_soft_dice": 0.11694298386573791,
+            "subiculum_hard_dice": 0.6681341338781163,
+            "subiculum_soft_dice": 0.07259062752127647,
+            "CA4_DG_hard_dice": 0.6577427001837445,
+            "CA4_DG_soft_dice": 0.017554160859435796,
+            "macro_soft_dice": 0.06902925741548341,
+            "whole_hippocampus_hard_dice": 0.8274119300292548
+          },
+          "confusion": [
+            [
+              2559151,
+              9006,
+              5151,
+              337
+            ],
+            [
+              2661,
+              24243,
+              1687,
+              1269
+            ],
+            [
+              1175,
+              1599,
+              10362,
+              168
+            ],
+            [
+              0,
+              998,
+              509,
+              3124
+            ]
+          ],
+          "fn": 3836,
+          "fp": 14494,
+          "swaps": 6230,
+          "internal_error_pct": 25.366449511400653,
+          "fp_pct_of_external": 79.07255864702674
+        },
+        "training": {
+          "summary": {
+            "macro_hard_dice": 0.8724010719298734,
+            "CA1_3_hard_dice": 0.8589905907832798,
+            "CA1_3_soft_dice": 0.13312503024935723,
+            "subiculum_hard_dice": 0.8279851973846432,
+            "subiculum_soft_dice": 0.08880813494324684,
+            "CA4_DG_hard_dice": 0.9302274276216973,
+            "CA4_DG_soft_dice": 0.024835157953202725,
+            "macro_soft_dice": 0.08225610771526892,
+            "whole_hippocampus_hard_dice": 0.8711861179110327
+          },
+          "confusion": [
+            [
+              2562941,
+              8237,
+              4820,
+              233
+            ],
+            [
+              22,
+              27262,
+              238,
+              152
+            ],
+            [
+              11,
+              71,
+              12619,
+              51
+            ],
+            [
+              0,
+              178,
+              58,
+              4547
+            ]
+          ],
+          "fn": 33,
+          "fp": 13290,
+          "swaps": 748,
+          "internal_error_pct": 5.315897946130339,
+          "fp_pct_of_external": 99.75230803873002
+        },
+        "config": {
+          "budget_scope": "optimization_only",
+          "model": "unet",
+          "model_identity": "basic_unet16",
+          "objective": "dice_bands",
+          "fold": 0,
+          "seed": 0,
+          "lr_horizon_updates": 1125,
+          "budget_flops": 63952901334180,
+          "schedule": {
+            "prefix_updates": 113,
+            "sdf_prefix_updates": 113,
+            "baseline_flops_per_update": 56756707731,
+            "early_flops_per_update": 56830108069,
+            "flops_per_update": 56830108069,
+            "calibration_flops": 191049748686,
+            "constraint_warmup_updates": 113,
+            "sdf_warmup_updates": 113,
+            "budget_scope": "optimization_only",
+            "max_steps": 1125,
+            "consumed_training_flops": 63925577339431,
+            "consumed_flops": 63925577339431,
+            "consumed_total_flops": 64116627088117,
+            "unused_flops": 27323994749,
+            "patient_pass_epochs": 112.5
+          },
+          "max_steps": 1125,
+          "smoke_test": false,
+          "protocol_sha256": "990b215d900db2b7020a247bf3e0b9aef9adb50af8933bbabfb2b45d7146ee45",
+          "dataset_sha256": "8ef22df6e7c7964791bb582d160a847ccbeffa8628ce4bce41449d3b2fed2930",
+          "train_cases": [
+            "hippocampus_mni_s03_L",
+            "hippocampus_mni_s03_R",
+            "hippocampus_mni_s11_L",
+            "hippocampus_mni_s11_R",
+            "hippocampus_mni_s14_L",
+            "hippocampus_mni_s14_R",
+            "hippocampus_mni_s23_L",
+            "hippocampus_mni_s23_R",
+            "hippocampus_mni_s25_L",
+            "hippocampus_mni_s25_R"
+          ],
+          "validation_cases": [
+            "hippocampus_mni_s01_L",
+            "hippocampus_mni_s01_R",
+            "hippocampus_mni_s09_L",
+            "hippocampus_mni_s09_R",
+            "hippocampus_mni_s12_L",
+            "hippocampus_mni_s12_R",
+            "hippocampus_mni_s17_L",
+            "hippocampus_mni_s17_R",
+            "hippocampus_mni_s24_L",
+            "hippocampus_mni_s24_R"
+          ],
+          "torch": "2.12.1+cu130",
+          "monai": "1.6.0",
+          "augmentation": "none",
+          "script_sha256": "ca74786c104bdbeda331ca084155b1c016753ceb0b5c786f19785adbdf24cba8",
+          "objective_source_sha256": "e2553ec4c3611523ef5dad2c32336a4c8ad22f37baf80907f729d7980967952e",
+          "shared_source_sha256": "ba79364c37a403bb9c62601916dfe9d060ca64846af5e2e7c5591b50337babc7",
+          "sdf_source_sha256": "171aae6757bbc9fc3ac09bb77a3a2f6e235f33ef6f86b1fd971f5bdfc8863d5d",
+          "precision": "CUDA bfloat16 autocast, FP32 parameters/optimizer; CPU smoke tests FP32",
+          "initial_lr": 0.00016,
+          "constraint_warmup_updates": 113,
+          "sdf_prefix_updates": 113,
+          "sdf_timing_sha256": "141af6057d3c07c611e3225259469ba839a9b4dca5da65c063638c873621bc39",
+          "combined_objective_sha256": "89d3de62d8f819b081fc55172e079f80f92fdb1734bc6cc0744cf9f12db2ff92",
+          "depth_geometry_sha256": "6d6efdbd976d53252110e63e854ef645808dde22c59e196deff0372bed0fc94e",
+          "selection": "Final-budget checkpoint primary. Fresh runs with cap-matched schedules; no per-model or validation-selected stopping."
+        },
+        "recipe": {
+          "model": "basic_unet16",
+          "base_loss": "MONAI softmax Dice, including background; AdamW",
+          "constraints": [
+            "bands"
+          ],
+          "augmentation": "none",
+          "protocol_sha256": "990b215d900db2b7020a247bf3e0b9aef9adb50af8933bbabfb2b45d7146ee45",
+          "objective_sha256": "413e4776302c4c0a729c9e4fe00129b7a8325c2ed49910ea542fdb3488960ab4",
+          "initialization": "fresh_from_fixed_seed",
+          "lr_horizon_updates": 1125,
+          "primary_checkpoint": "final_budget",
+          "baseline_only": false
+        },
+        "calibration": {
+          "weights": {
+            "bands": 0.002096011706841894
+          },
+          "statistics": {
+            "bands": {
+              "median_raw_ratio": 47.709657190165295,
+              "p95_raw_ratio": 51.23159062665405,
+              "weighted_median_ratio": 0.1,
+              "weighted_p95_ratio": 0.10738201371359833
+            }
+          },
+          "anchor_updates": 113,
+          "logit_cosine_median": 0.047508751028856905,
+          "logit_cosine_range": [
+            0.03726093344529422,
+            0.050545542163091824
+          ],
+          "limitation": "Full-volume logit gradients at one early anchor; not parameter/update gradients or later behavior."
+        }
+      },
+      "delta": {
+        "dice_pp": {
+          "macro_hard_dice": 7.9525590280059895,
+          "CA1_3_hard_dice": 4.592898030204684,
+          "subiculum_hard_dice": 4.231973854186755,
+          "CA4_DG_hard_dice": 15.032805199626464,
+          "whole_hippocampus_hard_dice": 5.894801569473684
+        },
+        "errors": {
+          "fn": 2078,
+          "fp": -11330,
+          "swaps": -673
+        }
+      }
+    }
+  },
+  "historical": [
+    {
+      "dataset": "MSD",
+      "model": "swinunetr",
+      "runs": 9,
+      "baseline_train": 57.07444937524078,
+      "baseline_val": 54.037134647540924,
+      "bands_val_gain_pp": 3.8524286226730715,
+      "internal_error_pct": 1.6052411872149448
+    },
+    {
+      "dataset": "MSD",
+      "model": "unetr_vit_b16",
+      "runs": 9,
+      "baseline_train": 62.071695948399835,
+      "baseline_val": 54.71382173109591,
+      "bands_val_gain_pp": 3.8891109410388336,
+      "internal_error_pct": 2.369274335175559
+    },
+    {
+      "dataset": "ADNI",
+      "model": "swinunetr",
+      "runs": 9,
+      "baseline_train": 75.06825625259073,
+      "baseline_val": 68.71913997209457,
+      "bands_val_gain_pp": 3.3383757392941473,
+      "internal_error_pct": 0.0
+    },
+    {
+      "dataset": "ADNI",
+      "model": "unetr_vit_b16",
+      "runs": 9,
+      "baseline_train": 68.27403751053639,
+      "baseline_val": 56.266801636503615,
+      "bands_val_gain_pp": 2.9892694489484635,
+      "internal_error_pct": 0.0
+    },
+    {
+      "dataset": "MNI",
+      "model": "swinunetr",
+      "runs": 9,
+      "baseline_train": 99.83776953047675,
+      "baseline_val": 71.24387090055606,
+      "bands_val_gain_pp": -0.09472939389174447,
+      "internal_error_pct": 26.39681048558456
+    },
+    {
+      "dataset": "MNI",
+      "model": "unetr_vit_b16",
+      "runs": 9,
+      "baseline_train": 88.05994001056538,
+      "baseline_val": 70.46256818928863,
+      "bands_val_gain_pp": 0.45062073011662246,
+      "internal_error_pct": 26.852729034341696
+    }
+  ],
+  "historical_errors": {
+    "MSD": {
+      "nnunet": {
+        "runs": 9,
+        "fn": 461225.0,
+        "fp": 260691.0,
+        "swaps": 127109.0,
+        "external_share": 0.8502882718412297,
+        "fn_share_of_external": 0.6388901201801872
+      },
+      "swinunetr": {
+        "runs": 9,
+        "fn": 13437.0,
+        "fp": 3495081.0,
+        "swaps": 57239.0,
+        "external_share": 0.9839475881278505,
+        "fn_share_of_external": 0.0038298221642300255
+      },
+      "unetr_vit_b16": {
+        "runs": 9,
+        "fn": 60668.0,
+        "fp": 2435447.0,
+        "swaps": 60575.0,
+        "external_share": 0.9763072566482444,
+        "fn_share_of_external": 0.02430496992326075
+      },
+      "basic_unet16": {
+        "runs": 9,
+        "fn": 44661.0,
+        "fp": 894889.0,
+        "swaps": 44935.0,
+        "external_share": 0.9543568464730291,
+        "fn_share_of_external": 0.04753445798520568
+      }
+    },
+    "ADNI": {
+      "nnunet": {
+        "runs": 9,
+        "fn": 332192.0,
+        "fp": 312088.0,
+        "swaps": 0,
+        "external_share": 1.0,
+        "fn_share_of_external": 0.5156019122120817
+      },
+      "swinunetr": {
+        "runs": 9,
+        "fn": 118507.0,
+        "fp": 969609.0,
+        "swaps": 0,
+        "external_share": 1.0,
+        "fn_share_of_external": 0.10891026324399238
+      },
+      "unetr_vit_b16": {
+        "runs": 9,
+        "fn": 155343.0,
+        "fp": 1736367.0,
+        "swaps": 0,
+        "external_share": 1.0,
+        "fn_share_of_external": 0.08211776646526159
+      },
+      "basic_unet16": {
+        "runs": 9,
+        "fn": 116152.0,
+        "fp": 929525.0,
+        "swaps": 0,
+        "external_share": 1.0,
+        "fn_share_of_external": 0.1110782775178186
+      }
+    }
+  },
+  "historical_protocols": {
+    "msd_swinunetr": {
+      "initial_lrs": {
+        "swinunetr": 0.0001
+      },
+      "lr_horizon_updates": 610,
+      "training_loss": "Established MONAI Dice including background",
+      "learning_rate_policy": "Preserve baseline LR trajectory with fixed 610-update horizon, irrespective of objective or stopping cap. AdamW0.0001, 5% horizon warmup, then cosine to1% initial LR.",
+      "augmentation": "none",
+      "training_volumes_per_fold": 10,
+      "validation_volumes_per_fold": 52,
+      "train_count": 10,
+      "calibration_target_ratio": 0.1,
+      "num_classes": 3,
+      "patient_identity_scope": "Ten volume IDs, disjoint from52 validation volume IDs; original-MRI patient mapping unavailable.",
+      "budget_flops": 31976450667090
+    },
+    "msd_unetr_vit_b16": {
+      "initial_lrs": {
+        "unet": 0.0001
+      },
+      "lr_horizon_updates": 477,
+      "training_loss": "Established MONAI Dice including background",
+      "learning_rate_policy": "Preserve baseline LR trajectory with fixed 477-update horizon, irrespective of objective or stopping cap. AdamW0.0001, 5% horizon warmup, then cosine to1% initial LR.",
+      "augmentation": "none",
+      "training_volumes_per_fold": 10,
+      "validation_volumes_per_fold": 52,
+      "train_count": 10,
+      "calibration_target_ratio": 0.1,
+      "num_classes": 3,
+      "patient_identity_scope": "Ten volume IDs, disjoint from52 validation volume IDs; original-MRI patient mapping unavailable.",
+      "budget_flops": 31976450667090
+    },
+    "adni_swinunetr": {
+      "initial_lrs": {
+        "swinunetr": 0.0001
+      },
+      "lr_horizon_updates": 610,
+      "training_loss": "Established MONAI Dice including background",
+      "learning_rate_policy": "Frozen MSD trajectory: original warmup/cosine or nnU-Net polynomial, with unchanged horizon",
+      "augmentation": "none",
+      "train_count": 10,
+      "validation_count": 54,
+      "calibration_target_ratio": 0.1,
+      "num_classes": 2,
+      "constraint_geometry": "Binary hippocampus; 2-step bands; original signed face edge; full-volume half-voxel SDF clipped at 8 voxels. Depth uses 2-voxel bins in an 8-voxel ROI; plane normal is array axis 0 projected off GT PC1. Source anatomical orientation and physical spacing are unavailable; no mm interpretation.",
+      "budget_flops": 31976450667090
+    },
+    "adni_unetr_vit_b16": {
+      "initial_lrs": {
+        "unet": 0.0001
+      },
+      "lr_horizon_updates": 477,
+      "training_loss": "Established MONAI Dice including background",
+      "learning_rate_policy": "Frozen MSD trajectory: original warmup/cosine or nnU-Net polynomial, with unchanged horizon",
+      "augmentation": "none",
+      "train_count": 10,
+      "validation_count": 54,
+      "calibration_target_ratio": 0.1,
+      "num_classes": 2,
+      "constraint_geometry": "Binary hippocampus; 2-step bands; original signed face edge; full-volume half-voxel SDF clipped at 8 voxels. Depth uses 2-voxel bins in an 8-voxel ROI; plane normal is array axis 0 projected off GT PC1. Source anatomical orientation and physical spacing are unavailable; no mm interpretation.",
+      "budget_flops": 31976450667090
+    }
+  },
+  "sources_sha256": {
+    "reports/mni_shared_cap2_baseline_bands_f0s0_20261107/runs/MNI_swinunetr_dice_f0s0/archive_manifest.json": "ba8d16569a6bf82938e72055576c437cc00ea0e62daa255a4a10fcab1bfcb0cc",
+    "reports/mni_shared_cap2_baseline_bands_f0s0_20261107/runs/MNI_swinunetr_dice_f0s0/validation_latest.json": "bdf45f8824ac9ab5e644fd7f70530dc2ec270e17e4ca8bd3b1e923396912e0f9",
+    "reports/mni_shared_cap2_baseline_bands_f0s0_20261107/runs/MNI_swinunetr_dice_f0s0/training_final.json": "f3e9d8e8e6a260e8d4b265f31071379512c657723be09f221f94cc936b26967f",
+    "reports/mni_shared_cap2_baseline_bands_f0s0_20261107/runs/MNI_swinunetr_dice_f0s0/config.json": "886a0bc3d0488fd502453fc7edc9e8312d536c7f0d40960e3c34866d75cbf8f5",
+    "reports/mni_shared_cap2_baseline_bands_f0s0_20261107/runs/MNI_swinunetr_dice_f0s0/runtime_recipe.json": "1d2602a0d0bd95447e1c682a599a41eb18066bebb764009966e14201ec36254a",
+    "reports/mni_shared_cap2_baseline_bands_f0s0_20261107/runs/MNI_swinunetr_dice_bands_f0s0/archive_manifest.json": "5f9465308a618c1074a12d37d7f362cd42a02acbbdda3683da0815cd627877f4",
+    "reports/mni_shared_cap2_baseline_bands_f0s0_20261107/runs/MNI_swinunetr_dice_bands_f0s0/validation_latest.json": "36d7daf9fe35bb1c018885fef962a744d97c91db2dcb0d9ff8249146004ee0c6",
+    "reports/mni_shared_cap2_baseline_bands_f0s0_20261107/runs/MNI_swinunetr_dice_bands_f0s0/training_final.json": "4b36a4eea8a1cb0e5d2528707908c296c4f687aa3b6a88699fe97cfbaf2823f4",
+    "reports/mni_shared_cap2_baseline_bands_f0s0_20261107/runs/MNI_swinunetr_dice_bands_f0s0/config.json": "7bf9c0c6ccc6e868249cd135cbc03cfebc2605a6bc12a8bd4bf8a5ec5892f2da",
+    "reports/mni_shared_cap2_baseline_bands_f0s0_20261107/runs/MNI_swinunetr_dice_bands_f0s0/runtime_recipe.json": "fb2ea603f1f6686d06595ecf22b48a7779750a54e66aff9788d33f61cc70b964",
+    "reports/mni_shared_cap2_baseline_bands_f0s0_20261107/runs/MNI_swinunetr_dice_bands_f0s0/calibration.json": "0bdddd4ae78f6dd9221f250379ca5362df47568f9ca2bb478b020c66d66af3f4",
+    "reports/mni_shared_cap2_baseline_bands_f0s0_20261107/runs/MNI_unetr_vit_b16_dice_f0s0/archive_manifest.json": "ec3381714c4c100170a693144c2a3c0a1d71e25a8502fec7d7ed33021d2a694f",
+    "reports/mni_shared_cap2_baseline_bands_f0s0_20261107/runs/MNI_unetr_vit_b16_dice_f0s0/validation_latest.json": "ef8459cbafa743dd97c6033e13d8f4ecc0a0a7df825ec249883fb4cfc16068d1",
+    "reports/mni_shared_cap2_baseline_bands_f0s0_20261107/runs/MNI_unetr_vit_b16_dice_f0s0/training_final.json": "91ce0d0a9573e8ccb87b695b752691d27fb45cdb3afc0c096f52c8f0df35cd17",
+    "reports/mni_shared_cap2_baseline_bands_f0s0_20261107/runs/MNI_unetr_vit_b16_dice_f0s0/config.json": "7518de43d9e5fbfe5a73da0cfcaf804e6b07f9b1c35d16ae3c38651308f25b3c",
+    "reports/mni_shared_cap2_baseline_bands_f0s0_20261107/runs/MNI_unetr_vit_b16_dice_f0s0/runtime_recipe.json": "f7ccbd647a5b31aebff2d09d91c06b27dbc306f1411163ecac48abc7a7bec642",
+    "reports/mni_shared_cap2_baseline_bands_f0s0_20261107/runs/MNI_unetr_vit_b16_dice_bands_f0s0/archive_manifest.json": "4258436ba2729461635fa72c892347b09a66050ad484c4d503c37307bca56fbf",
+    "reports/mni_shared_cap2_baseline_bands_f0s0_20261107/runs/MNI_unetr_vit_b16_dice_bands_f0s0/validation_latest.json": "cd1d16eee66603dd091050638ad0d9387fe344f63cd811e76ceaf482ac8d6150",
+    "reports/mni_shared_cap2_baseline_bands_f0s0_20261107/runs/MNI_unetr_vit_b16_dice_bands_f0s0/training_final.json": "e84a4606e26b3eff91202ae7476c304ff19e7f480cf98955129167dd02a22881",
+    "reports/mni_shared_cap2_baseline_bands_f0s0_20261107/runs/MNI_unetr_vit_b16_dice_bands_f0s0/config.json": "3cea07624f53bae5ac1fa484009b01027c7e7f4c763c21970744af3d630a1b90",
+    "reports/mni_shared_cap2_baseline_bands_f0s0_20261107/runs/MNI_unetr_vit_b16_dice_bands_f0s0/runtime_recipe.json": "1c051c4106d2fe9b5a0e235a833cf51c4e2bf33d8db06fa4717a1b7cbe2f1de9",
+    "reports/mni_shared_cap2_baseline_bands_f0s0_20261107/runs/MNI_unetr_vit_b16_dice_bands_f0s0/calibration.json": "099fafe0feb44d7b0ccf5563304b3e45e81579dca7af9b02676dd32403da6561",
+    "reports/mni_shared_cap2_baseline_bands_f0s0_20261107/runs/MNI_nnunet_dice_f0s0/archive_manifest.json": "f57785eb034517bb1c90416c87e6149f7776e36adf7dd4a2b07476a0a7eabb47",
+    "reports/mni_shared_cap2_baseline_bands_f0s0_20261107/runs/MNI_nnunet_dice_f0s0/validation_latest.json": "cab5f0a3f001d13d071ef8944a716c4f2c081dd1018959e5d6fd4d4fbad0e63d",
+    "reports/mni_shared_cap2_baseline_bands_f0s0_20261107/runs/MNI_nnunet_dice_f0s0/training_final.json": "cc725ef82c01bb7570e32ee00c71dda69498f6e17a678a237746e4e71c6f8da0",
+    "reports/mni_shared_cap2_baseline_bands_f0s0_20261107/runs/MNI_nnunet_dice_f0s0/config.json": "a64fe6788bce671010102991bfb09a2f24b936ec88968dcc4ffc8b6e0d776f0c",
+    "reports/mni_shared_cap2_baseline_bands_f0s0_20261107/runs/MNI_nnunet_dice_f0s0/runtime_recipe.json": "15d3e1c52af17bd39c68d9ce650bdd1a1351f6301caebc4e283b463dc37b727c",
+    "reports/mni_shared_cap2_baseline_bands_f0s0_20261107/runs/MNI_nnunet_dice_bands_f0s0/archive_manifest.json": "f02b6718e0130ffdcfe7779ce68955e7a0e595fc9ac66e4825b1dd3a287bd02d",
+    "reports/mni_shared_cap2_baseline_bands_f0s0_20261107/runs/MNI_nnunet_dice_bands_f0s0/validation_latest.json": "ebd9eda0730b2200126059d2fa139107dd8a17e49f29f6c09a8f2c80e6f33ee7",
+    "reports/mni_shared_cap2_baseline_bands_f0s0_20261107/runs/MNI_nnunet_dice_bands_f0s0/training_final.json": "face3eb9c6a6adabab768bb60616622e5e3ed9efd78531dd21b1e31cb0224f2a",
+    "reports/mni_shared_cap2_baseline_bands_f0s0_20261107/runs/MNI_nnunet_dice_bands_f0s0/config.json": "85ba0f5595e7e5702de3c570851ae0265ce3427255cbaf1c8182dd1fd6da3a2f",
+    "reports/mni_shared_cap2_baseline_bands_f0s0_20261107/runs/MNI_nnunet_dice_bands_f0s0/runtime_recipe.json": "647e82f9bba3f66fe5ee91e28e08510014b56b987e61fb65c51d7ee9a2e96605",
+    "reports/mni_shared_cap2_baseline_bands_f0s0_20261107/runs/MNI_nnunet_dice_bands_f0s0/calibration.json": "42d79823f8d354e7b697dff297b6e3ab678ab156f21f7dc2728fdd110dce38dd",
+    "reports/mni_shared_cap2_baseline_bands_f0s0_20261107/runs/MNI_basic_unet16_dice_f0s0/archive_manifest.json": "9042909e8ce671c18b47a21289bdbb8a0063ffd786508a16c8857654ef82ef2c",
+    "reports/mni_shared_cap2_baseline_bands_f0s0_20261107/runs/MNI_basic_unet16_dice_f0s0/validation_latest.json": "6067767b4e0adc08e801c71d7841165c5529f082833ff1b1917b2507bfc75f7f",
+    "reports/mni_shared_cap2_baseline_bands_f0s0_20261107/runs/MNI_basic_unet16_dice_f0s0/training_final.json": "b46421c04638a82b87b56c2dce34b99dbebba9e16fe9c623d85d4eb8c307f558",
+    "reports/mni_shared_cap2_baseline_bands_f0s0_20261107/runs/MNI_basic_unet16_dice_f0s0/config.json": "bdab3f52f4c21e870aad47ced1f9574dfb5ae366c9f7f9c7bc7cb21ca724da83",
+    "reports/mni_shared_cap2_baseline_bands_f0s0_20261107/runs/MNI_basic_unet16_dice_f0s0/runtime_recipe.json": "6a30a1ae1020d955b0d1d90baa28edc9687f2bb8db3640374e8dff27b3a7a683",
+    "reports/mni_shared_cap2_baseline_bands_f0s0_20261107/runs/MNI_basic_unet16_dice_bands_f0s0/archive_manifest.json": "759303994d8a212bb5061d76d1b3e65a57c5f3d2a0720af461ab5b8fd7eb0869",
+    "reports/mni_shared_cap2_baseline_bands_f0s0_20261107/runs/MNI_basic_unet16_dice_bands_f0s0/validation_latest.json": "607f6e6d898b2bdbc6e7be696e04daaece8de5f22dc41d06e409d57b634706b2",
+    "reports/mni_shared_cap2_baseline_bands_f0s0_20261107/runs/MNI_basic_unet16_dice_bands_f0s0/training_final.json": "dc2622a359caed592d8261acf26baea09f2b6e37c95171306fbdab3eec4ad09e",
+    "reports/mni_shared_cap2_baseline_bands_f0s0_20261107/runs/MNI_basic_unet16_dice_bands_f0s0/config.json": "797e50b4610d38814ce1474a04eaaf690fb3c95d932a4203d89aa1d55b3fddf9",
+    "reports/mni_shared_cap2_baseline_bands_f0s0_20261107/runs/MNI_basic_unet16_dice_bands_f0s0/runtime_recipe.json": "4f3135f8c15dfce34206a6b0c6e898bb66fd167dd6fd3470a87153ce4d468884",
+    "reports/mni_shared_cap2_baseline_bands_f0s0_20261107/runs/MNI_basic_unet16_dice_bands_f0s0/calibration.json": "bf4c195745061a103b1ee77f5f9af6e4777fc9840913a0e193a9f9e0d53b6acd",
+    "reports/mni_constraint_root_cause_20261107/cross_dataset_evidence.json": "e4d4825b9798e6a851e19b87e54ea5605531423419dd5c73667655ba9aef3573",
+    "reports/mni_bands_implementation_audit_20261107/audit.json": "5e624b9416eae2c081019143a798c64d37d02b2958d2178d33079ee8ccbdd42b",
+    "experiments/msd_mixed_losses_nnunet60_others10_20261014/protocols/swinunetr/protocol.json": "95f81bb2d77ee95a3dd76c76d1d93f58aaaa77de7162d72cf3fbf4111029d35a",
+    "experiments/msd_mixed_losses_nnunet60_others10_20261014/protocols/unetr_vit_b16/protocol.json": "499890621666bac491a06e225a767aeecce709064042bff59b9cf9e8236a2312",
+    "experiments/adni_mixed_losses_nnunet60_others10_20261014/protocols/swinunetr/protocol.json": "2e6740362e78a2edef765ff36569da1197806fd8dd52026013cec09ca2c087b0",
+    "experiments/adni_mixed_losses_nnunet60_others10_20261014/protocols/unetr_vit_b16/protocol.json": "124453880f5badb509c55ba0f0666a8b903aa3d4746ee8b045be74f8a535695a"
+  },
+  "limitations": [
+    "Current MNI pilot is one fold and seed; historical comparisons have nine runs per model.",
+    "External means foreground/background confusion, not measured distance to a boundary.",
+    "Voxel error shares are not additive contributions to macro Dice.",
+    "No spatial predictions/checkpoints retained; prior spatial probes used different interrupted 8x runs.",
+    "No new training, validation tuning, or causal ablation performed by this analysis.",
+    "MNI is the evaluated new dataset here; these results do not establish causes for COBRA."
+  ]
+}

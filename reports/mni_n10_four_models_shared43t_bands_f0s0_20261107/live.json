@@ -1,0 +1,175 @@
+{
+  "status.json": {
+    "status": "complete",
+    "active": null,
+    "completed": 6,
+    "total": 6,
+    "runs": [
+      {
+        "id": "MNI_swinunetr_n10_baseline_f0s0",
+        "kind": "conventional",
+        "dataset": "MNI",
+        "model": "swinunetr",
+        "arm": "dice",
+        "fold": 0,
+        "seed": 0,
+        "protocol": "swinunetr_n10_baseline",
+        "condition": "baseline",
+        "train_subjects": 10,
+        "augmentation": "xy_d4_v1",
+        "target": null,
+        "final_dice": 0.7506058653336319,
+        "best_dice": 0.7506058653336319,
+        "released_bytes": 336993300
+      },
+      {
+        "id": "MNI_unetr_vit_b16_n10_baseline_f0s0",
+        "kind": "conventional",
+        "dataset": "MNI",
+        "model": "unetr_vit_b16",
+        "arm": "dice",
+        "fold": 0,
+        "seed": 0,
+        "protocol": "unetr_vit_b16_n10_baseline",
+        "condition": "baseline",
+        "train_subjects": 10,
+        "augmentation": "xy_d4_v1",
+        "target": null,
+        "final_dice": 0.6823800966368646,
+        "best_dice": 0.6828318361775809,
+        "released_bytes": 1853966430
+      },
+      {
+        "id": "MNI_basic_unet16_n10_baseline_f0s0",
+        "kind": "conventional",
+        "dataset": "MNI",
+        "model": "basic_unet16",
+        "arm": "dice",
+        "fold": 0,
+        "seed": 0,
+        "protocol": "basic_unet16_n10_baseline",
+        "condition": "baseline",
+        "train_subjects": 10,
+        "augmentation": "none",
+        "target": null,
+        "final_dice": 0.5505574852982783,
+        "best_dice": 0.5505574852982783,
+        "released_bytes": 28974992
+      },
+      {
+        "id": "MNI_swinunetr_n10_original_bands_f0s0",
+        "kind": "conventional",
+        "dataset": "MNI",
+        "model": "swinunetr",
+        "arm": "dice_bands",
+        "fold": 0,
+        "seed": 0,
+        "protocol": "swinunetr_n10_original_bands",
+        "condition": "original_bands",
+        "train_subjects": 10,
+        "augmentation": "xy_d4_v1",
+        "target": 0.1,
+        "final_dice": 0.7581143127429808,
+        "best_dice": 0.7581143127429808,
+        "released_bytes": 336993428
+      },
+      {
+        "id": "MNI_unetr_vit_b16_n10_original_bands_f0s0",
+        "kind": "conventional",
+        "dataset": "MNI",
+        "model": "unetr_vit_b16",
+        "arm": "dice_bands",
+        "fold": 0,
+        "seed": 0,
+        "protocol": "unetr_vit_b16_n10_original_bands",
+        "condition": "original_bands",
+        "train_subjects": 10,
+        "augmentation": "xy_d4_v1",
+        "target": 0.05,
+        "final_dice": 0.689207011977351,
+        "best_dice": 0.689207011977351,
+        "released_bytes": 1853960542
+      },
+      {
+        "id": "MNI_basic_unet16_n10_original_bands_f0s0",
+        "kind": "conventional",
+        "dataset": "MNI",
+        "model": "basic_unet16",
+        "arm": "dice_bands",
+        "fold": 0,
+        "seed": 0,
+        "protocol": "basic_unet16_n10_original_bands",
+        "condition": "original_bands",
+        "train_subjects": 10,
+        "augmentation": "none",
+        "target": 0.1,
+        "final_dice": 0.6119511895808871,
+        "best_dice": 0.6120709487042058,
+        "released_bytes": 28981072
+      }
+    ],
+    "job_id": "745654",
+    "updated_at": 1794090420.3310108,
+    "quota": {
+      "used_gib": 48.02,
+      "limit_gib": 93.13,
+      "free_gib": 45.10999999999999,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  48.02GiB/93.13GiB  377.77k/\u221e  \n\n",
+      "checked_at": 1794090420.367998
+    }
+  },
+  "submission.json": {
+    "job_id": "745654",
+    "dependency": null,
+    "quota": {
+      "used_gib": 44.44,
+      "limit_gib": 93.13,
+      "free_gib": 48.69,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  44.44GiB/93.13GiB  377.51k/\u221e  \n\n",
+      "checked_at": 1794089654.0401242
+    },
+    "submitted_at": 1794089654.2721322,
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--chdir=/mnt/beegfsstudents/home/3160552/mni_n10_four_models_shared43t_bands_f0s0_20261107",
+      "--output=/mnt/beegfsstudents/home/3160552/mni_n10_four_models_shared43t_bands_f0s0_20261107/slurm-%j.out",
+      "--error=/mnt/beegfsstudents/home/3160552/mni_n10_four_models_shared43t_bands_f0s0_20261107/slurm-%j.err",
+      "/mnt/beegfsstudents/home/3160552/mni_n10_four_models_shared43t_bands_f0s0_20261107/run.sbatch",
+      "/mnt/beegfsstudents/home/3160552/mni_n10_four_models_shared43t_bands_f0s0_20261107"
+    ],
+    "manifest_sha256": "db1b8401f6043554ccc359e3242c696815a253badb8aaf4d13d52de9d72dba27"
+  },
+  "successor.json": {
+    "job_id": "745655",
+    "dependency": "745654",
+    "quota": {
+      "used_gib": 44.44,
+      "limit_gib": 93.13,
+      "free_gib": 48.69,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  44.44GiB/93.13GiB  377.51k/\u221e  \n\n",
+      "checked_at": 1794089667.0436587
+    },
+    "submitted_at": 1794089667.1637506,
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--chdir=/mnt/beegfsstudents/home/3160552/mni_n10_four_models_shared43t_bands_f0s0_20261107",
+      "--output=/mnt/beegfsstudents/home/3160552/mni_n10_four_models_shared43t_bands_f0s0_20261107/slurm-%j.out",
+      "--error=/mnt/beegfsstudents/home/3160552/mni_n10_four_models_shared43t_bands_f0s0_20261107/slurm-%j.err",
+      "--dependency=afterany:745654",
+      "/mnt/beegfsstudents/home/3160552/mni_n10_four_models_shared43t_bands_f0s0_20261107/run.sbatch",
+      "/mnt/beegfsstudents/home/3160552/mni_n10_four_models_shared43t_bands_f0s0_20261107"
+    ],
+    "manifest_sha256": "db1b8401f6043554ccc359e3242c696815a253badb8aaf4d13d52de9d72dba27"
+  },
+  "ready": [],
+  "cleanup": [
+    "runs/MNI_swinunetr_n10_original_bands_f0s0/cleanup.json",
+    "runs/MNI_unetr_vit_b16_n10_original_bands_f0s0/cleanup.json",
+    "runs/MNI_swinunetr_n10_baseline_f0s0/cleanup.json",
+    "runs/MNI_unetr_vit_b16_n10_baseline_f0s0/cleanup.json",
+    "runs/MNI_basic_unet16_n10_baseline_f0s0/cleanup.json",
+    "runs/MNI_basic_unet16_n10_original_bands_f0s0/cleanup.json"
+  ]
+}

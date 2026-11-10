@@ -1,0 +1,91 @@
+{
+  "parent_status": {
+    "status": "paused",
+    "active": "MNI_unetr_vit_b16_dice_ce_f1s0",
+    "completed": 2,
+    "total": 192,
+    "runs": [
+      {
+        "id": "MNI_unetr_vit_b16_dice_ce_f0s0",
+        "kind": "conventional",
+        "dataset": "MNI",
+        "model": "unetr_vit_b16",
+        "fold": 0,
+        "seed": 0,
+        "arm": "dice_ce",
+        "protocol": "MNI",
+        "final_dice": 0.3044141864982681,
+        "best_dice": 0.3044141864982681,
+        "released_bytes": 1853951518
+      },
+      {
+        "id": "COBRA_unetr_vit_b16_dice_ce_f0s0",
+        "kind": "conventional",
+        "dataset": "COBRA",
+        "model": "unetr_vit_b16",
+        "fold": 0,
+        "seed": 0,
+        "arm": "dice_ce",
+        "protocol": "COBRA",
+        "final_dice": 0.038480301948023765,
+        "best_dice": 0.038480301948023765,
+        "released_bytes": 1854441630
+      }
+    ],
+    "job_id": "742244",
+    "updated_at": 1793979350.276126,
+    "quota": {
+      "used_gib": 47.25,
+      "limit_gib": 93.13,
+      "free_gib": 45.879999999999995,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  47.25GiB/93.13GiB  304.00k/\u221e  \n\n",
+      "checked_at": 1793979350.316132
+    },
+    "seed_search": {
+      "threshold": 0.45,
+      "criterion": "Mean final-budget foreground-subfield Dice over folds 0,1,2",
+      "groups": {
+        "MNI": {
+          "qualifying_seeds": [],
+          "target": 3,
+          "target_met": false,
+          "attempted_seeds": [
+            {
+              "seed": 0,
+              "fold_dice": {
+                "0": 0.3044141864982681
+              },
+              "mean_dice": null,
+              "qualifies": false,
+              "rejected_by_upper_bound": false,
+              "best_possible_mean": 0.7681380621660893
+            }
+          ]
+        },
+        "COBRA": {
+          "qualifying_seeds": [],
+          "target": 3,
+          "target_met": false,
+          "attempted_seeds": [
+            {
+              "seed": 0,
+              "fold_dice": {
+                "0": 0.038480301948023765
+              },
+              "mean_dice": null,
+              "qualifies": false,
+              "rejected_by_upper_bound": false,
+              "best_possible_mean": 0.6794934339826746
+            }
+          ]
+        }
+      },
+      "target_met": false,
+      "inference": "Validation-selected exploratory seeds; these scores are not an unbiased baseline estimate."
+    },
+    "search_outcome": "searching",
+    "skipped_task_count": 0
+  },
+  "quota": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  45.50GiB/93.13GiB  304.01k/\u221e  \n\n",
+  "checked_at": 1793979918.465944
+}

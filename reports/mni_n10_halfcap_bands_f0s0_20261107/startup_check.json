@@ -1,0 +1,46 @@
+{
+  "queue": "745230|PENDING|hippo-mni-samples|\n745229|RUNNING|hippo-mni-samples|gnode01\n",
+  "runs": {},
+  "status.json": {
+    "status": "running",
+    "active": [
+      "MNI_swinunetr_n10_baseline_f0s0",
+      "MNI_unetr_vit_b16_n10_baseline_f0s0"
+    ],
+    "completed": 0,
+    "total": 6,
+    "runs": [],
+    "job_id": "745229",
+    "updated_at": 1794076234.6424732,
+    "quota": {
+      "used_gib": 44.14,
+      "limit_gib": 93.13,
+      "free_gib": 48.989999999999995,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  44.14GiB/93.13GiB  367.97k/\u221e  \n\n",
+      "checked_at": 1794076234.6794903
+    }
+  },
+  "successor.json": {
+    "job_id": "745230",
+    "dependency": "745229",
+    "quota": {
+      "used_gib": 44.14,
+      "limit_gib": 93.13,
+      "free_gib": 48.989999999999995,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  44.14GiB/93.13GiB  367.97k/\u221e  \n\n",
+      "checked_at": 1794076229.2908642
+    },
+    "submitted_at": 1794076229.4106786,
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--chdir=/mnt/beegfsstudents/home/3160552/mni_n10_halfcap_bands_f0s0_20261107",
+      "--output=/mnt/beegfsstudents/home/3160552/mni_n10_halfcap_bands_f0s0_20261107/slurm-%j.out",
+      "--error=/mnt/beegfsstudents/home/3160552/mni_n10_halfcap_bands_f0s0_20261107/slurm-%j.err",
+      "--dependency=afterany:745229",
+      "/mnt/beegfsstudents/home/3160552/mni_n10_halfcap_bands_f0s0_20261107/run.sbatch",
+      "/mnt/beegfsstudents/home/3160552/mni_n10_halfcap_bands_f0s0_20261107"
+    ],
+    "manifest_sha256": "e2197a15171ac4515ddeb61682f13cef5b7942a1b1f92faef217e4e9b93955af"
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "seed": 19,
+  "fold": 0,
+  "current": {
+    "validation_percent": 50.001817855032314,
+    "training_percent": 59.51488303623667,
+    "union_percent": 5.347588872922173,
+    "per_subfield_percent": {
+      "CA1_3_hard_dice": 76.51052772870112,
+      "subiculum_hard_dice": 73.1052786164066,
+      "CA4_DG_hard_dice": 0.389647219989216
+    },
+    "fn": 2698,
+    "fp": 1593343,
+    "swaps": 9199,
+    "updates": 409,
+    "optimization_flops": 53230567933608,
+    "archive_manifest_sha256": "030ed995c6a23a6d4fa76b4e49bf4307eaba6580a70a651e4bd449c43b5071ed"
+  },
+  "baseline": {
+    "validation_percent": 49.5498032358807,
+    "training_percent": 59.9073938992799,
+    "union_percent": 5.454254694971812,
+    "per_subfield_percent": {
+      "CA1_3_hard_dice": 75.62561447259093,
+      "subiculum_hard_dice": 72.62387827698048,
+      "CA4_DG_hard_dice": 0.3999169580706901
+    },
+    "fn": 0,
+    "fp": 1656588,
+    "swaps": 12808,
+    "updates": 409,
+    "optimization_flops": 53208034029842,
+    "archive_manifest_sha256": "33f88abbb99398b86df6c93204e98aeac50e6f3aa2c54d83bd4349efd0da935e"
+  },
+  "gain_pp": 0.4520146191516139,
+  "old_winning_baseline": {
+    "validation_percent": 68.39866263598401,
+    "training_percent": 71.65949491982028,
+    "union_percent": 82.07944643487942,
+    "per_subfield_percent": {
+      "CA1_3_hard_dice": 68.8804963311801,
+      "subiculum_hard_dice": 68.2843381786136,
+      "CA4_DG_hard_dice": 68.03115339815832
+    },
+    "fn": 8906,
+    "fp": 8091,
+    "swaps": 6356,
+    "updates": 409,
+    "optimization_flops": 53217341798671,
+    "archive_manifest_sha256": "6113d1cb88d4b2de563f223c2aa5cd25a3083307913473681b77b08d86ece639"
+  },
+  "absolute_gain_vs_old_baseline_pp": -18.396844780951696,
+  "subfield_gain_pp": {
+    "CA1_3_hard_dice": 0.8849132561101953,
+    "subiculum_hard_dice": 0.4814003394261164,
+    "CA4_DG_hard_dice": -0.010269738081474133
+  },
+  "error_delta": {
+    "fn": 2698,
+    "fp": -63245,
+    "swaps": -3609
+  },
+  "training_class_details": {
+    "dice": {
+      "macro_hard_dice": 0.599073938992799,
+      "CA1_3_hard_dice": 0.8927062041989771,
+      "CA1_3_soft_dice": 0.5262053713202477,
+      "subiculum_hard_dice": 0.9002641296607583,
+      "subiculum_soft_dice": 0.42430525869131086,
+      "CA4_DG_hard_dice": 0.004251483118661448,
+      "CA4_DG_soft_dice": 0.0032574665267020462,
+      "macro_soft_dice": 0.3179226988460869,
+      "whole_hippocampus_hard_dice": 0.052286433076565345
+    },
+    "dice_bands": {
+      "macro_hard_dice": 0.5951488303623667,
+      "CA1_3_hard_dice": 0.8860616548660513,
+      "CA1_3_soft_dice": 0.5236537456512451,
+      "subiculum_hard_dice": 0.8953598923285814,
+      "subiculum_soft_dice": 0.41965302079916,
+      "CA4_DG_hard_dice": 0.004024943892467545,
+      "CA4_DG_soft_dice": 0.0029801155673339964,
+      "macro_soft_dice": 0.3154289606725797,
+      "whole_hippocampus_hard_dice": 0.05234092259967427
+    }
+  },
+  "interpretation": "Second independent seed with poor CA4_DG fit on training and validation under Dice-only. Positive aggregate bands gain does not rescue absolute performance.",
+  "confusion_audit_correction": "See class_collapse_confusion_audit.json: low CA4 Dice is dominated by enormous background-to-CA4 false positives; do not describe it as simply absent CA4 predictions. Seed19 still has3334trueCA4positives in baseline. Dense background CE is a candidate recovery mechanism, not proven yet."
+}

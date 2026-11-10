@@ -1,0 +1,127 @@
+{
+  "status": "passed",
+  "scientific": {
+    "status": "passed",
+    "checks": [
+      "actual argmax union errors",
+      "detached 3x weights",
+      "original support A",
+      "anchor plus six-connected error halo B",
+      "side normalization",
+      "zero off-support gradient",
+      "D4 equivariance",
+      "batch averaging",
+      "internal swaps excluded",
+      "remote FP/deep FN included"
+    ]
+  },
+  "variants": [
+    {
+      "variant": "weighted",
+      "status": "passed",
+      "manifest_sha256": "b7d47295a0d8aebe2bfbbd8776c0402e550c886d86f0d65f1f3fcced3b21c9ff",
+      "checks": [
+        {
+          "model": "nnunet",
+          "target": 0.1,
+          "updates": 179,
+          "prefix": 18,
+          "ramp": 18,
+          "calibration_flops": 1187193564006,
+          "weights_for_synthetic_check_only": {
+            "bands": 0.010857681209209026
+          }
+        },
+        {
+          "model": "swinunetr",
+          "target": 0.1,
+          "updates": 412,
+          "prefix": 42,
+          "ramp": 42,
+          "calibration_flops": 521888005906,
+          "weights_for_synthetic_check_only": {
+            "bands": 0.10974679356974289
+          }
+        },
+        {
+          "model": "unetr_vit_b16",
+          "target": 0.05,
+          "updates": 491,
+          "prefix": 50,
+          "ramp": 50,
+          "calibration_flops": 432827071146,
+          "weights_for_synthetic_check_only": {
+            "bands": 0.009832648311410988
+          }
+        },
+        {
+          "model": "basic_unet16",
+          "target": 0.1,
+          "updates": 1125,
+          "prefix": 113,
+          "ramp": 113,
+          "calibration_flops": 191060234386,
+          "weights_for_synthetic_check_only": {
+            "bands": 0.001713406812485664
+          }
+        }
+      ],
+      "optimizer_updates": 0
+    },
+    {
+      "variant": "adaptive",
+      "status": "passed",
+      "manifest_sha256": "b7d47295a0d8aebe2bfbbd8776c0402e550c886d86f0d65f1f3fcced3b21c9ff",
+      "checks": [
+        {
+          "model": "nnunet",
+          "target": 0.1,
+          "updates": 179,
+          "prefix": 18,
+          "ramp": 18,
+          "calibration_flops": 1187335121766,
+          "weights_for_synthetic_check_only": {
+            "bands": 0.020956036926384928
+          }
+        },
+        {
+          "model": "swinunetr",
+          "target": 0.1,
+          "updates": 412,
+          "prefix": 42,
+          "ramp": 42,
+          "calibration_flops": 522029563666,
+          "weights_for_synthetic_check_only": {
+            "bands": 0.21181851025882337
+          }
+        },
+        {
+          "model": "unetr_vit_b16",
+          "target": 0.05,
+          "updates": 491,
+          "prefix": 50,
+          "ramp": 50,
+          "calibration_flops": 432968628906,
+          "weights_for_synthetic_check_only": {
+            "bands": 0.018977656198205503
+          }
+        },
+        {
+          "model": "basic_unet16",
+          "target": 0.1,
+          "updates": 1125,
+          "prefix": 113,
+          "ramp": 113,
+          "calibration_flops": 191201792146,
+          "weights_for_synthetic_check_only": {
+            "bands": 0.003306987536336482
+          }
+        }
+      ],
+      "optimizer_updates": 0
+    }
+  ],
+  "verified_runs": 12,
+  "optimizer_updates": 0,
+  "manifest_sha256": "b7d47295a0d8aebe2bfbbd8776c0402e550c886d86f0d65f1f3fcced3b21c9ff"
+}

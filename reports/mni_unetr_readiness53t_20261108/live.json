@@ -1,0 +1,77 @@
+{
+  "status.json": {
+    "status": "complete",
+    "active": [],
+    "selected": {
+      "candidate": null,
+      "winner": null
+    },
+    "job_id": "747820",
+    "completed": 16,
+    "total": 36
+  },
+  "submission.json": {
+    "job_id": "747820",
+    "dependency": null,
+    "quota": {
+      "used_gib": 46.28,
+      "limit_gib": 93.13,
+      "free_gib": 46.849999999999994,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  46.28GiB/93.13GiB  426.45k/\u221e  \n\n",
+      "checked_at": 1794169530.0157325
+    },
+    "submitted_at": 1794169530.248382,
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--chdir=/mnt/beegfsstudents/home/3160552/mni_unetr_readiness53t_20261108",
+      "--output=/mnt/beegfsstudents/home/3160552/mni_unetr_readiness53t_20261108/slurm-%j.out",
+      "--error=/mnt/beegfsstudents/home/3160552/mni_unetr_readiness53t_20261108/slurm-%j.err",
+      "/mnt/beegfsstudents/home/3160552/mni_unetr_readiness53t_20261108/run.sbatch",
+      "/mnt/beegfsstudents/home/3160552/mni_unetr_readiness53t_20261108"
+    ],
+    "manifest_sha256": "247c4cc13b0d7d2ba11472dceb80494669d7d8e2af576fe4c8f1b5773ec8162d"
+  },
+  "successor.json": {
+    "job_id": "747821",
+    "dependency": "747820",
+    "quota": {
+      "used_gib": 46.28,
+      "limit_gib": 93.13,
+      "free_gib": 46.849999999999994,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  46.28GiB/93.13GiB  426.45k/\u221e  \n\n",
+      "checked_at": 1794169551.4476483
+    },
+    "submitted_at": 1794169551.5734274,
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--chdir=/mnt/beegfsstudents/home/3160552/mni_unetr_readiness53t_20261108",
+      "--output=/mnt/beegfsstudents/home/3160552/mni_unetr_readiness53t_20261108/slurm-%j.out",
+      "--error=/mnt/beegfsstudents/home/3160552/mni_unetr_readiness53t_20261108/slurm-%j.err",
+      "--dependency=afterany:747820",
+      "/mnt/beegfsstudents/home/3160552/mni_unetr_readiness53t_20261108/run.sbatch",
+      "/mnt/beegfsstudents/home/3160552/mni_unetr_readiness53t_20261108"
+    ],
+    "manifest_sha256": "247c4cc13b0d7d2ba11472dceb80494669d7d8e2af576fe4c8f1b5773ec8162d"
+  },
+  "ready": [],
+  "cleanup": [
+    "runs/MNI_unetr_ready50_bands_f2s0/cleanup.json",
+    "runs/MNI_unetr_ready60_full_f1s0/cleanup.json",
+    "runs/MNI_unetr_ready50_bands_f1s0/cleanup.json",
+    "runs/MNI_unetr_ready60_full_f0s19/cleanup.json",
+    "runs/MNI_unetr_ready60_bands_f2s0/cleanup.json",
+    "runs/MNI_unetr_ready50_full_f0s5/cleanup.json",
+    "runs/MNI_unetr_ready50_full_f0s19/cleanup.json",
+    "runs/MNI_unetr_ready60_full_f0s5/cleanup.json",
+    "runs/MNI_unetr_ready60_full_f2s0/cleanup.json",
+    "runs/MNI_unetr_ready50_full_f1s0/cleanup.json",
+    "runs/MNI_unetr_ready60_bands_f0s19/cleanup.json",
+    "runs/MNI_unetr_ready60_bands_f1s0/cleanup.json",
+    "runs/MNI_unetr_ready50_bands_f0s19/cleanup.json",
+    "runs/MNI_unetr_ready50_full_f2s0/cleanup.json",
+    "runs/MNI_unetr_ready50_bands_f0s5/cleanup.json",
+    "runs/MNI_unetr_ready60_bands_f0s5/cleanup.json"
+  ]
+}

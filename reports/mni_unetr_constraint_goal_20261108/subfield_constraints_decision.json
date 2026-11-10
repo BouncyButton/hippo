@@ -1,0 +1,40 @@
+{
+  "approved_for_execution": true,
+  "candidates": [
+    {
+      "key": "sdf_t05",
+      "arm": "dice_sdf",
+      "target": 0.05,
+      "taper_start": 408,
+      "stop": 409
+    },
+    {
+      "key": "depth_t05",
+      "arm": "dice_depth",
+      "target": 0.05,
+      "taper_start": 408,
+      "stop": 409
+    },
+    {
+      "key": "sdf_depth_t05",
+      "arm": "dice_sdf_depth",
+      "target": 0.05,
+      "taper_start": 408,
+      "stop": 409
+    },
+    {
+      "key": "sdf_depth_t20",
+      "arm": "dice_sdf_depth",
+      "target": 0.2,
+      "taper_start": 408,
+      "stop": 409
+    }
+  ],
+  "reason": "Delay, training-readiness and finite auxiliary windows did not establish consistency. Exact Adam probes show modest comparable update effects in helped/harmed runs; original union bands can reinforce wrong subfield winners. Isolate unchanged original per-class SDF and depth-weighted CE, separately and jointly. Include one stronger joint target to test sufficient direct subfield guidance without another stronger-union-bands sweep.",
+  "recipe": "Original SDF only5%,depth only5%,SDF+depth5% each,SDF+depth20% each. Same409updates,53.305Tcap,baseAdamW/LR/dropout/XYD4; fresh102-update calibration,33ramp,SDF228; envelope1 throughout.",
+  "scope": "Original14-matrix losses and unchanged base recipe. Development-validation exploration; no class-aware bands or validation-driven calibration. New matched baselines are required only for subsequent simpler-base experiments.",
+  "prior_results_sha256": "b548c8910ae8b833566c1b9a5692ff66139c6cc3d319b946d656a372a742403e",
+  "prior_audit_sha256": "273dbb5523bc6977f5a480719dc9534a39c979bcb26d9e5ed1a9a6689ed9ac65",
+  "slurm_job_name": "hippo-unetr-subfields",
+  "created_at": 1794175981.786026
+}

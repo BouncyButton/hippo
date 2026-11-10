@@ -1,0 +1,44 @@
+{
+  "status": "passed",
+  "manifest_sha256": "73f0b3dd12ef9af682b13d7082ffa50eeb9a020f4dc56ed1991d741658cdcb26",
+  "checks": [
+    {
+      "model": "swinunetr",
+      "target": 0.1,
+      "updates": 412,
+      "prefix": 42,
+      "ramp": 42,
+      "calibration_flops": 521830334226,
+      "weights_for_synthetic_check_only": {
+        "bands": 0.10208337179033573
+      }
+    },
+    {
+      "model": "unetr_vit_b16",
+      "target": 0.05,
+      "updates": 491,
+      "prefix": 50,
+      "ramp": 50,
+      "calibration_flops": 432769399466,
+      "weights_for_synthetic_check_only": {
+        "bands": 0.009146052113308557
+      }
+    }
+  ],
+  "optimizer_updates": 0,
+  "scientific_checks": {
+    "status": "passed",
+    "checks": [
+      "exact original union-band support",
+      "equal inner/outer and case averaging",
+      "zero gradients off band",
+      "corrective true/wrong margin",
+      "categorical versus union distinction",
+      "all eight paired D4 transforms",
+      "empty-side differentiable zero",
+      "batch averaging"
+    ]
+  },
+  "compared_controls": 4,
+  "recipe_check": "Exact protocol difference allowlist passed; same updates, LR and prefix/ramp."
+}

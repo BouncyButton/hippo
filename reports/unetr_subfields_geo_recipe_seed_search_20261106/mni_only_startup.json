@@ -1,0 +1,73 @@
+{
+  "status": "running",
+  "active": "MNI_unetr_vit_b16_geo_recipe_f1s1",
+  "active_datasets": [
+    "MNI"
+  ],
+  "deferred_cobra_tasks": 96,
+  "pause": false,
+  "queue": "742405|PENDING|hippo-unetr-geo\n742401|RUNNING|hippo-unetr-geo\n",
+  "seed_search": {
+    "threshold": 0.45,
+    "criterion": "Mean final-budget foreground-subfield Dice over folds 0,1,2",
+    "groups": {
+      "MNI": {
+        "qualifying_seeds": [
+          0
+        ],
+        "target": 3,
+        "target_met": false,
+        "attempted_seeds": [
+          {
+            "seed": 0,
+            "fold_dice": {
+              "0": 0.618486978524162,
+              "1": 0.6219785986082242,
+              "2": 0.6065579278511982
+            },
+            "mean_dice": 0.6156745016611949,
+            "qualifies": true,
+            "rejected_by_upper_bound": false,
+            "best_possible_mean": 0.6156745016611946
+          },
+          {
+            "seed": 1,
+            "fold_dice": {
+              "0": 0.5547829077757529
+            },
+            "mean_dice": null,
+            "qualifies": false,
+            "rejected_by_upper_bound": false,
+            "best_possible_mean": 0.8515943025919176
+          }
+        ]
+      },
+      "COBRA": {
+        "qualifying_seeds": [],
+        "target": 3,
+        "target_met": false,
+        "attempted_seeds": [
+          {
+            "seed": 0,
+            "fold_dice": {
+              "0": 0.09715193949581784,
+              "1": 0.09268399066747388
+            },
+            "mean_dice": null,
+            "qualifies": false,
+            "rejected_by_upper_bound": true,
+            "best_possible_mean": 0.3966119767210972
+          }
+        ]
+      }
+    },
+    "active_datasets": [
+      "MNI"
+    ],
+    "deferred_datasets": [
+      "COBRA"
+    ],
+    "target_met": false,
+    "inference": "Validation-selected exploratory seeds; these scores are not an unbiased baseline estimate."
+  }
+}

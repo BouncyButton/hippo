@@ -1,0 +1,39 @@
+{
+  "status": "passed",
+  "manifest_sha256": "ccc4730904d6d2ba31cff84f264c2a1e807b2661aa7b478b596deffc757fc853",
+  "checks": [
+    {
+      "model": "nnunet",
+      "updates": 134,
+      "patient_passes": 13.4,
+      "cap": 47964676000635,
+      "last_lr": 0.00022726506296250594,
+      "loss": "Native foreground Dice+CE with deep supervision; SGD/Nesterov momentum0.95"
+    },
+    {
+      "model": "swinunetr",
+      "updates": 309,
+      "patient_passes": 30.9,
+      "cap": 47964676000635,
+      "last_lr": 2.9999999999999997e-06,
+      "loss": "Mean negative log squared softmax Dice over all4 classes; no CE; AdamW"
+    },
+    {
+      "model": "unetr_vit_b16",
+      "updates": 368,
+      "patient_passes": 36.8,
+      "cap": 47964676000635,
+      "last_lr": 5.999999999999999e-06,
+      "loss": "Geo recipe: foreground-only squared softmax Dice + mean CE, weights 1:1, smooth_nr=0, smooth_dr=1e-6; FP32 loss."
+    },
+    {
+      "model": "basic_unet16",
+      "updates": 845,
+      "patient_passes": 84.5,
+      "cap": 47964676000635,
+      "last_lr": 2.9999999999999997e-06,
+      "loss": "MONAI softmax Dice, including background; AdamW"
+    }
+  ],
+  "optimizer_updates": 0
+}

@@ -1,0 +1,54 @@
+{
+  "rows": [
+    {
+      "id": "MNI_nnunet_lr00900_f0s19",
+      "kind": "conventional",
+      "dataset": "MNI",
+      "model": "nnunet",
+      "arm": "dice",
+      "fold": 0,
+      "seed": 19,
+      "protocol": "nnunet_lr00900",
+      "initial_lr": 0.009,
+      "augmentation": "none",
+      "validation_dice": 0.423553991774539,
+      "gain_pp": -0.5464436915034843
+    },
+    {
+      "id": "MNI_nnunet_lr00800_f0s19",
+      "kind": "conventional",
+      "dataset": "MNI",
+      "model": "nnunet",
+      "arm": "dice",
+      "fold": 0,
+      "seed": 19,
+      "protocol": "nnunet_lr00800",
+      "initial_lr": 0.008,
+      "augmentation": "none",
+      "validation_dice": 0.40808446349506305,
+      "gain_pp": -2.0933965194510797
+    },
+    {
+      "id": "MNI_nnunet_lr00700_f0s19",
+      "kind": "conventional",
+      "dataset": "MNI",
+      "model": "nnunet",
+      "arm": "dice",
+      "fold": 0,
+      "seed": 19,
+      "protocol": "nnunet_lr00700",
+      "initial_lr": 0.007,
+      "augmentation": "none",
+      "validation_dice": 0.29973736760250835,
+      "gain_pp": -12.92810610870655
+    }
+  ],
+  "selected": {
+    "initial_lr": null
+  },
+  "complete": true,
+  "passes_every_fold50": false,
+  "improves_every_fold": false,
+  "rule": "3 lower initial learning rates on fold0 seed19 at the unchanged43T cap. Select the largest final-budget Dice improvement over the frozen0.01 control; ties prefer the larger learning rate. Confirm that one candidate on folds1,2. If no pilot improves, stop. Retain every attempted result. No other model or constraint run.",
+  "caveat": "Exploratory development-validation tuning on fold0. Folds overlap; this is not an independent test estimate. Changing LR creates a new recipe and does not validate the original recipe or other seeds."
+}

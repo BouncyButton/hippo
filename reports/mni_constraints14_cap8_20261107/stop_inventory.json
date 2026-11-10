@@ -1,0 +1,250 @@
+{
+  "control": {
+    "pause": true
+  },
+  "failure": {
+    "traceback": "Traceback (most recent call last):\n  File \"/mnt/beegfsstudents/home/3160552/mni_constraints14_cap8_20261107/source/scripts/unetr_subfields/cap_extension.py\", line 280, in run\n    write(stage/'failure.json',failed);controller.summarize(stage,plan,'failed');controller.cancel_successor(stage,job);raise RuntimeError(str(failed))\n                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: {'task': {'id': 'MNI_swinunetr_dice_bands_sdf_f0s0', 'kind': 'conventional', 'dataset': 'MNI', 'model': 'swinunetr', 'arm': 'dice_bands_sdf', 'fold': 0, 'seed': 0, 'protocol': 'swinunetr_dice_bands_sdf', 'augmentation': 'none'}, 'exit_code': 1}\n"
+  },
+  "retirements": [
+    {
+      "task": {
+        "id": "MNI_swinunetr_dice_bands_sdf_f0s0",
+        "kind": "conventional",
+        "dataset": "MNI",
+        "model": "swinunetr",
+        "arm": "dice_bands_sdf",
+        "fold": 0,
+        "seed": 0,
+        "protocol": "swinunetr_dice_bands_sdf",
+        "augmentation": "none"
+      },
+      "completed": false,
+      "config": {
+        "budget_scope": "optimization_only",
+        "model": "swinunetr",
+        "model_identity": "swinunetr",
+        "objective": "dice_bands_sdf",
+        "fold": 0,
+        "seed": 0,
+        "lr_horizon_updates": 1649,
+        "budget_flops": 255811605336720,
+        "schedule": {
+          "prefix_updates": 165,
+          "sdf_prefix_updates": 916,
+          "baseline_flops_per_update": 155058535816,
+          "early_flops_per_update": 155131936154,
+          "flops_per_update": 155144781215,
+          "calibration_flops": 522100342606,
+          "constraint_warmup_updates": 165,
+          "sdf_warmup_updates": 165,
+          "budget_scope": "optimization_only",
+          "max_steps": 1649,
+          "consumed_training_flops": 255809867091889,
+          "consumed_flops": 255809867091889,
+          "consumed_total_flops": 256331967434495,
+          "unused_flops": 1738244831,
+          "patient_pass_epochs": 164.9
+        },
+        "max_steps": 1649,
+        "smoke_test": false,
+        "protocol_sha256": "ded1c5f6d5aa74a08d690aea56e231dbb8e5b12ea4c7069da8f1f74d2cd4f4e5",
+        "dataset_sha256": "8ef22df6e7c7964791bb582d160a847ccbeffa8628ce4bce41449d3b2fed2930",
+        "train_cases": [
+          "hippocampus_mni_s03_L",
+          "hippocampus_mni_s03_R",
+          "hippocampus_mni_s11_L",
+          "hippocampus_mni_s11_R",
+          "hippocampus_mni_s14_L",
+          "hippocampus_mni_s14_R",
+          "hippocampus_mni_s23_L",
+          "hippocampus_mni_s23_R",
+          "hippocampus_mni_s25_L",
+          "hippocampus_mni_s25_R"
+        ],
+        "validation_cases": [
+          "hippocampus_mni_s01_L",
+          "hippocampus_mni_s01_R",
+          "hippocampus_mni_s09_L",
+          "hippocampus_mni_s09_R",
+          "hippocampus_mni_s12_L",
+          "hippocampus_mni_s12_R",
+          "hippocampus_mni_s17_L",
+          "hippocampus_mni_s17_R",
+          "hippocampus_mni_s24_L",
+          "hippocampus_mni_s24_R"
+        ],
+        "torch": "2.12.1+cu130",
+        "monai": "1.6.0",
+        "augmentation": "none",
+        "script_sha256": "a3ecb9a55c68e69dd30c7a6c3679339396ee28ab28e558315d91d3ce5161c5c0",
+        "objective_source_sha256": "e2553ec4c3611523ef5dad2c32336a4c8ad22f37baf80907f729d7980967952e",
+        "shared_source_sha256": "ba79364c37a403bb9c62601916dfe9d060ca64846af5e2e7c5591b50337babc7",
+        "sdf_source_sha256": "171aae6757bbc9fc3ac09bb77a3a2f6e235f33ef6f86b1fd971f5bdfc8863d5d",
+        "precision": "CUDA bfloat16 autocast, FP32 parameters/optimizer; CPU smoke tests FP32",
+        "initial_lr": 0.0003,
+        "constraint_warmup_updates": 165,
+        "sdf_prefix_updates": 916,
+        "sdf_timing_sha256": "141af6057d3c07c611e3225259469ba839a9b4dca5da65c063638c873621bc39",
+        "combined_objective_sha256": "89d3de62d8f819b081fc55172e079f80f92fdb1734bc6cc0744cf9f12db2ff92",
+        "depth_geometry_sha256": "6d6efdbd976d53252110e63e854ef645808dde22c59e196deff0372bed0fc94e",
+        "selection": "Final FLOP-budget checkpoint primary; best validation checkpoint secondary."
+      },
+      "files": {
+        "run.lock": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "runtime_recipe.json": {
+          "bytes": 509,
+          "sha256": "b09bcd180738b3be05eecd1596c3f68c077c271dfda2c7ac5a38e4588444d1dc"
+        },
+        "metrics.csv": {
+          "bytes": 4815,
+          "sha256": "790951b2be0bf098c58e98f3ad368bdeec3de5f92a5ddae286c8d9c736a789fb"
+        },
+        "budget_ledger.json": {
+          "bytes": 313,
+          "sha256": "6f096300e1d17fd8c1e39eac8e6e4a83ade8a043fd30225360bd720a8b2170b1"
+        },
+        "checkpoint_best.pt": {
+          "bytes": 70396521,
+          "sha256": "b1a4188c49dcd5b2c14b4ed32430f23b534cc49fc5d9e612da21916a1cef78ad"
+        },
+        "validation_latest.json": {
+          "bytes": 15175,
+          "sha256": "7ae0f92d7d303b2cab42247bf0b9d63f166da9480f0563414abbc670ea77e446"
+        },
+        "validation_best.json": {
+          "bytes": 15170,
+          "sha256": "7cdb84ac931abeb8df4e7014991601b3cd934b19ea4d5544e0d775c21f8aef56"
+        },
+        "train.log": {
+          "bytes": 11914,
+          "sha256": "46c4d504fbd24fd00ae3eaa0a2762c1ba8f22be2ef0ae1dd0a743cbb0a5864ed"
+        },
+        "calibration.json": {
+          "bytes": 8740,
+          "sha256": "0340c36dd4f40106d5bcabd6cbe475116c97e5e10ea8312c419653ea5f612d72"
+        },
+        "checkpoint_latest.pt": {
+          "bytes": 266592875,
+          "sha256": "46cefa9d4a385dcb84ab8497afb07658d08e466ae4af417ae8b96c11c3dd3baa"
+        },
+        "config.json": {
+          "bytes": 2652,
+          "sha256": "8e8d185fa1c61ca6a1de7691facc0daf93c105e71eba26b1b0f04527c2d835f9"
+        }
+      }
+    },
+    {
+      "task": {
+        "id": "MNI_unetr_vit_b16_dice_bands_sdf_f0s0",
+        "kind": "conventional",
+        "dataset": "MNI",
+        "model": "unetr_vit_b16",
+        "arm": "dice_bands_sdf",
+        "fold": 0,
+        "seed": 0,
+        "protocol": "unetr_vit_b16_dice_bands_sdf",
+        "augmentation": "xy_d4_v1"
+      },
+      "completed": false,
+      "config": {
+        "budget_scope": "optimization_only",
+        "model": "unet",
+        "model_identity": "unetr_vit_b16",
+        "objective": "dice_bands_sdf",
+        "fold": 0,
+        "seed": 0,
+        "lr_horizon_updates": 1964,
+        "budget_flops": 255811605336720,
+        "schedule": {
+          "prefix_updates": 197,
+          "sdf_prefix_updates": 1092,
+          "baseline_flops_per_update": 130115750119,
+          "early_flops_per_update": 130189150457,
+          "flops_per_update": 130201995518,
+          "calibration_flops": 433039407846,
+          "constraint_warmup_updates": 197,
+          "sdf_warmup_updates": 197,
+          "budget_scope": "optimization_only",
+          "max_steps": 1964,
+          "consumed_training_flops": 255688232524154,
+          "consumed_flops": 255688232524154,
+          "consumed_total_flops": 256121271932000,
+          "unused_flops": 123372812566,
+          "patient_pass_epochs": 196.4
+        },
+        "max_steps": 1964,
+        "smoke_test": false,
+        "protocol_sha256": "a3f1994b04570fa4ee5dfc71a1f60ea83bb80881d4871bc8cfdba9cdb72bb63e",
+        "dataset_sha256": "8ef22df6e7c7964791bb582d160a847ccbeffa8628ce4bce41449d3b2fed2930",
+        "train_cases": [
+          "hippocampus_mni_s03_L",
+          "hippocampus_mni_s03_R",
+          "hippocampus_mni_s11_L",
+          "hippocampus_mni_s11_R",
+          "hippocampus_mni_s14_L",
+          "hippocampus_mni_s14_R",
+          "hippocampus_mni_s23_L",
+          "hippocampus_mni_s23_R",
+          "hippocampus_mni_s25_L",
+          "hippocampus_mni_s25_R"
+        ],
+        "validation_cases": [
+          "hippocampus_mni_s01_L",
+          "hippocampus_mni_s01_R",
+          "hippocampus_mni_s09_L",
+          "hippocampus_mni_s09_R",
+          "hippocampus_mni_s12_L",
+          "hippocampus_mni_s12_R",
+          "hippocampus_mni_s17_L",
+          "hippocampus_mni_s17_R",
+          "hippocampus_mni_s24_L",
+          "hippocampus_mni_s24_R"
+        ],
+        "torch": "2.12.1+cu130",
+        "monai": "1.6.0",
+        "augmentation": "xy_d4_v1",
+        "script_sha256": "a3ecb9a55c68e69dd30c7a6c3679339396ee28ab28e558315d91d3ce5161c5c0",
+        "objective_source_sha256": "e2553ec4c3611523ef5dad2c32336a4c8ad22f37baf80907f729d7980967952e",
+        "shared_source_sha256": "ba79364c37a403bb9c62601916dfe9d060ca64846af5e2e7c5591b50337babc7",
+        "sdf_source_sha256": "171aae6757bbc9fc3ac09bb77a3a2f6e235f33ef6f86b1fd971f5bdfc8863d5d",
+        "precision": "CUDA bfloat16 autocast, FP32 parameters/optimizer; CPU smoke tests FP32",
+        "initial_lr": 0.0006,
+        "constraint_warmup_updates": 197,
+        "sdf_prefix_updates": 1092,
+        "sdf_timing_sha256": "141af6057d3c07c611e3225259469ba839a9b4dca5da65c063638c873621bc39",
+        "combined_objective_sha256": "89d3de62d8f819b081fc55172e079f80f92fdb1734bc6cc0744cf9f12db2ff92",
+        "depth_geometry_sha256": "6d6efdbd976d53252110e63e854ef645808dde22c59e196deff0372bed0fc94e",
+        "selection": "Final FLOP-budget checkpoint primary; best validation checkpoint secondary."
+      },
+      "files": {
+        "run.lock": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "runtime_recipe.json": {
+          "bytes": 559,
+          "sha256": "f7a14cb4bdd470e8ff32afc57b7f715c6087f074f1d30cfc3c4f7b451f508dd4"
+        },
+        "budget_ledger.json": {
+          "bytes": 206,
+          "sha256": "87bae2b3aee87ca46f145112a06138994b799be7d1cfdcb7296d3352483bf65f"
+        },
+        "train.log": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "checkpoint_latest.pt": {
+          "bytes": 1112326227,
+          "sha256": "1d7ac20a7d58a5ab332784732d079bff4d0fcb746c859ab110162d252a40eeaa"
+        },
+        "config.json": {
+          "bytes": 2659,
+          "sha256": "374ee2b0798c231491cf736510785620799736d143085a56d2c50470e31039c7"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,2329 @@
+{
+  "status": "verified",
+  "baseline_scope": "Final-budget validation; 3 folds x 3 seeds per model",
+  "error_definition": "Each wrong voxel counted once: FG->BG FN, BG->FG FP, or FG->different-FG internal swap. External_share is (FN+FP)/(FN+FP+swaps), not spatial distance or contribution to macro Dice.",
+  "spatial_limitation": "Archived confusion matrices do not establish distance to the contour or fraction of errors in the two-voxel band. Baseline predictions/checkpoints were retired under storage policy; no baseline replay performed.",
+  "class_ids": {
+    "0": "background",
+    "1": "CA1_3",
+    "2": "subiculum",
+    "3": "CA4_DG"
+  },
+  "models": {
+    "nnunet": {
+      "runs": [
+        {
+          "run": "MNI_nnunet_f0s0",
+          "source": "reports/mni_nnunet_cap8_full_20261106/runs/MNI_nnunet_f0s0/validation_latest.json",
+          "sha256": "5e30f0a5b40f931cdc14f8bcf39416ea32512cc86a0252db28d7225b7bc10a0a",
+          "cases": 10,
+          "fn": 7809,
+          "fp": 5403,
+          "swaps": 4477,
+          "external_share": 0.7469048561252756,
+          "macro_dice": 0.7560312210487452,
+          "union_dice": 0.8586177444804426,
+          "confusion": [
+            [
+              2568242,
+              3511,
+              1790,
+              102
+            ],
+            [
+              5623,
+              22407,
+              1022,
+              808
+            ],
+            [
+              2162,
+              1335,
+              9683,
+              124
+            ],
+            [
+              24,
+              917,
+              271,
+              3419
+            ]
+          ]
+        },
+        {
+          "run": "MNI_nnunet_f0s1",
+          "source": "reports/mni_nnunet_cap8_full_20261106/runs/MNI_nnunet_f0s1/validation_latest.json",
+          "sha256": "7f2e93d32084b825654c5ba7ddc6a887bc21f92cfc0d8d460e37af3707c18f47",
+          "cases": 10,
+          "fn": 7162,
+          "fp": 5988,
+          "swaps": 4642,
+          "external_share": 0.7390962230215827,
+          "macro_dice": 0.7534837387145445,
+          "union_dice": 0.8610651892040824,
+          "confusion": [
+            [
+              2567657,
+              3999,
+              1873,
+              116
+            ],
+            [
+              4907,
+              23011,
+              939,
+              1003
+            ],
+            [
+              2248,
+              1440,
+              9403,
+              213
+            ],
+            [
+              7,
+              872,
+              175,
+              3577
+            ]
+          ]
+        },
+        {
+          "run": "MNI_nnunet_f0s2",
+          "source": "reports/mni_nnunet_cap8_full_20261106/runs/MNI_nnunet_f0s2/validation_latest.json",
+          "sha256": "0e335f2d8a0d9156c2bcc0a0c5a28e97eb2df8b2b45e551d61297f98b1ccddec",
+          "cases": 10,
+          "fn": 7859,
+          "fp": 5483,
+          "swaps": 4409,
+          "external_share": 0.751619627063264,
+          "macro_dice": 0.7598698133071333,
+          "union_dice": 0.8574301410801652,
+          "confusion": [
+            [
+              2568162,
+              3653,
+              1671,
+              159
+            ],
+            [
+              5574,
+              22511,
+              927,
+              848
+            ],
+            [
+              2264,
+              1472,
+              9362,
+              206
+            ],
+            [
+              21,
+              807,
+              149,
+              3654
+            ]
+          ]
+        },
+        {
+          "run": "MNI_nnunet_f1s0",
+          "source": "reports/mni_nnunet_cap8_full_20261106/runs/MNI_nnunet_f1s0/validation_latest.json",
+          "sha256": "a71224e88e2c24d93fcd44049dd80107ea844e3802f6e75e5f6af3110022524f",
+          "cases": 10,
+          "fn": 6996,
+          "fp": 6094,
+          "swaps": 5350,
+          "external_share": 0.7098698481561823,
+          "macro_dice": 0.730647973055613,
+          "union_dice": 0.8569728958396171,
+          "confusion": [
+            [
+              2569141,
+              4309,
+              1699,
+              86
+            ],
+            [
+              4366,
+              20826,
+              2297,
+              683
+            ],
+            [
+              2545,
+              645,
+              9683,
+              128
+            ],
+            [
+              85,
+              1292,
+              305,
+              3350
+            ]
+          ]
+        },
+        {
+          "run": "MNI_nnunet_f1s1",
+          "source": "reports/mni_nnunet_cap8_full_20261106/runs/MNI_nnunet_f1s1/validation_latest.json",
+          "sha256": "4b9a4d947f221c3d2e3c6798e5c217b0ece8a2144fa2ff427280ab897494eee6",
+          "cases": 10,
+          "fn": 6953,
+          "fp": 7375,
+          "swaps": 5472,
+          "external_share": 0.7236363636363636,
+          "macro_dice": 0.7158090645094826,
+          "union_dice": 0.8456200668784957,
+          "confusion": [
+            [
+              2567860,
+              5441,
+              1768,
+              166
+            ],
+            [
+              4087,
+              21209,
+              2089,
+              787
+            ],
+            [
+              2854,
+              786,
+              9154,
+              207
+            ],
+            [
+              12,
+              1357,
+              246,
+              3417
+            ]
+          ]
+        },
+        {
+          "run": "MNI_nnunet_f1s2",
+          "source": "reports/mni_nnunet_cap8_full_20261106/runs/MNI_nnunet_f1s2/validation_latest.json",
+          "sha256": "ade3467943d1233c8ba3ae0c816645430ee53a877428bb8ae8d636384da8e561",
+          "cases": 10,
+          "fn": 7039,
+          "fp": 6441,
+          "swaps": 5144,
+          "external_share": 0.7237972508591065,
+          "macro_dice": 0.7337582659547693,
+          "union_dice": 0.8530568322391151,
+          "confusion": [
+            [
+              2568794,
+              4805,
+              1539,
+              97
+            ],
+            [
+              4312,
+              21352,
+              1848,
+              660
+            ],
+            [
+              2666,
+              957,
+              9173,
+              205
+            ],
+            [
+              61,
+              1233,
+              241,
+              3497
+            ]
+          ]
+        },
+        {
+          "run": "MNI_nnunet_f2s0",
+          "source": "reports/mni_nnunet_cap8_full_20261106/runs/MNI_nnunet_f2s0/validation_latest.json",
+          "sha256": "af3f97c161467b9b1d84c26197680960dacc36ce3010ccffe0e602e1b2070d62",
+          "cases": 10,
+          "fn": 6597,
+          "fp": 6989,
+          "swaps": 4838,
+          "external_share": 0.7374077290490665,
+          "macro_dice": 0.7330102925006925,
+          "union_dice": 0.8511605699437144,
+          "confusion": [
+            [
+              2569175,
+              4106,
+              2622,
+              261
+            ],
+            [
+              5028,
+              20846,
+              927,
+              550
+            ],
+            [
+              1538,
+              1403,
+              9640,
+              179
+            ],
+            [
+              31,
+              1626,
+              153,
+              3355
+            ]
+          ]
+        },
+        {
+          "run": "MNI_nnunet_f2s1",
+          "source": "reports/mni_nnunet_cap8_full_20261106/runs/MNI_nnunet_f2s1/validation_latest.json",
+          "sha256": "31f64b0837234c97a6972ffcfbc65c51c53ddf51435b15272402f2817d97d65f",
+          "cases": 10,
+          "fn": 5734,
+          "fp": 8385,
+          "swaps": 5100,
+          "external_share": 0.7346375982101045,
+          "macro_dice": 0.72463157618658,
+          "union_dice": 0.849717878741381,
+          "confusion": [
+            [
+              2567779,
+              5388,
+              2682,
+              315
+            ],
+            [
+              4246,
+              21697,
+              731,
+              677
+            ],
+            [
+              1480,
+              1662,
+              9307,
+              311
+            ],
+            [
+              8,
+              1606,
+              113,
+              3438
+            ]
+          ]
+        },
+        {
+          "run": "MNI_nnunet_f2s2",
+          "source": "reports/mni_nnunet_cap8_full_20261106/runs/MNI_nnunet_f2s2/validation_latest.json",
+          "sha256": "5bac3c9cdb2e7ab5c18b513e089e06ebfdd2159dccf2312215369ee51bc1ef77",
+          "cases": 10,
+          "fn": 6069,
+          "fp": 7386,
+          "swaps": 4869,
+          "external_share": 0.7342829076620825,
+          "macro_dice": 0.7403652812137234,
+          "union_dice": 0.854318334304508,
+          "confusion": [
+            [
+              2568778,
+              4895,
+              2212,
+              279
+            ],
+            [
+              4571,
+              21281,
+              764,
+              735
+            ],
+            [
+              1460,
+              1585,
+              9443,
+              272
+            ],
+            [
+              38,
+              1395,
+              118,
+              3614
+            ]
+          ]
+        }
+      ],
+      "fn": 62218,
+      "fp": 59544,
+      "swaps": 44301,
+      "external_share": 0.7332277509138099,
+      "fn_share_of_external": 0.5109804372464316,
+      "fp_share_of_external": 0.48901956275356845,
+      "external_share_range": [
+        0.7098698481561823,
+        0.751619627063264
+      ],
+      "mean_macro_dice": 0.7386230251656982,
+      "mean_union_dice": 0.8542177391901691,
+      "internal_pairs": {
+        "1<->2": 22829,
+        "1<->3": 17856,
+        "2<->3": 3616
+      },
+      "confusion": [
+        [
+          23115588,
+          40107,
+          17856,
+          1581
+        ],
+        [
+          42714,
+          195140,
+          11544,
+          6751
+        ],
+        [
+          19217,
+          11285,
+          84848,
+          1845
+        ],
+        [
+          287,
+          11105,
+          1771,
+          31321
+        ]
+      ],
+      "mean_training_final_dice": 0.985478897354826
+    },
+    "swinunetr": {
+      "runs": [
+        {
+          "run": "MNI_swinunetr_f0s0",
+          "source": "reports/mni_swin_log_dice_cap8_full_20261106/runs/MNI_swinunetr_f0s0/validation_latest.json",
+          "sha256": "43005dd9cdd51074a8aaa4498abd42a92fffb1cbadf081816df3f834e8b06832",
+          "cases": 10,
+          "fn": 9497,
+          "fp": 5433,
+          "swaps": 5069,
+          "external_share": 0.7465373268663433,
+          "macro_dice": 0.7166797728752743,
+          "union_dice": 0.8373112374371854,
+          "confusion": [
+            [
+              2568212,
+              3470,
+              1853,
+              110
+            ],
+            [
+              6763,
+              21105,
+              1069,
+              923
+            ],
+            [
+              2551,
+              1669,
+              8926,
+              158
+            ],
+            [
+              183,
+              961,
+              289,
+              3198
+            ]
+          ]
+        },
+        {
+          "run": "MNI_swinunetr_f0s1",
+          "source": "reports/mni_swin_log_dice_cap8_full_20261106/runs/MNI_swinunetr_f0s1/validation_latest.json",
+          "sha256": "a625bd6ae8679b846487546ec1cfe72f37631854ff8d70f468461b2eea886058",
+          "cases": 10,
+          "fn": 8881,
+          "fp": 5527,
+          "swaps": 5144,
+          "external_share": 0.7369067103109657,
+          "macro_dice": 0.7205206964118158,
+          "union_dice": 0.8442684233674675,
+          "confusion": [
+            [
+              2568118,
+              3770,
+              1664,
+              93
+            ],
+            [
+              6202,
+              21725,
+              1109,
+              824
+            ],
+            [
+              2608,
+              1636,
+              8905,
+              155
+            ],
+            [
+              71,
+              1082,
+              338,
+              3140
+            ]
+          ]
+        },
+        {
+          "run": "MNI_swinunetr_f0s2",
+          "source": "reports/mni_swin_log_dice_cap8_full_20261106/runs/MNI_swinunetr_f0s2/validation_latest.json",
+          "sha256": "a31244a04623c92c0b9f881c4cf7d08b772d7f781a248f030bdccf490292ed3e",
+          "cases": 10,
+          "fn": 9767,
+          "fp": 5213,
+          "swaps": 5005,
+          "external_share": 0.7495621716287215,
+          "macro_dice": 0.715732727658186,
+          "union_dice": 0.8357511600204284,
+          "confusion": [
+            [
+              2568432,
+              3402,
+              1713,
+              98
+            ],
+            [
+              6734,
+              20950,
+              1157,
+              1019
+            ],
+            [
+              2915,
+              1399,
+              8830,
+              160
+            ],
+            [
+              118,
+              948,
+              322,
+              3243
+            ]
+          ]
+        },
+        {
+          "run": "MNI_swinunetr_f1s0",
+          "source": "reports/mni_swin_log_dice_cap8_full_20261106/runs/MNI_swinunetr_f1s0/validation_latest.json",
+          "sha256": "74eb3626c0425facbddb418dfe4983ca484acb1ce959ee4bc8c08ca50978ccbb",
+          "cases": 10,
+          "fn": 8435,
+          "fp": 6432,
+          "swaps": 5649,
+          "external_share": 0.7246539286410606,
+          "macro_dice": 0.6998370927280031,
+          "union_dice": 0.8354900148177071,
+          "confusion": [
+            [
+              2568803,
+              4567,
+              1799,
+              66
+            ],
+            [
+              5093,
+              19954,
+              2214,
+              911
+            ],
+            [
+              3208,
+              756,
+              8887,
+              150
+            ],
+            [
+              134,
+              1241,
+              377,
+              3280
+            ]
+          ]
+        },
+        {
+          "run": "MNI_swinunetr_f1s1",
+          "source": "reports/mni_swin_log_dice_cap8_full_20261106/runs/MNI_swinunetr_f1s1/validation_latest.json",
+          "sha256": "ce9e435deba5dd95f46ed0323d51ba79c7a9efe56873e500cac3fd33515729e9",
+          "cases": 10,
+          "fn": 8149,
+          "fp": 6560,
+          "swaps": 5744,
+          "external_share": 0.719161003275803,
+          "macro_dice": 0.7000756400058407,
+          "union_dice": 0.8381817097325834,
+          "confusion": [
+            [
+              2568675,
+              4949,
+              1535,
+              76
+            ],
+            [
+              4729,
+              20309,
+              2324,
+              810
+            ],
+            [
+              3302,
+              790,
+              8788,
+              121
+            ],
+            [
+              118,
+              1275,
+              424,
+              3215
+            ]
+          ]
+        },
+        {
+          "run": "MNI_swinunetr_f1s2",
+          "source": "reports/mni_swin_log_dice_cap8_full_20261106/runs/MNI_swinunetr_f1s2/validation_latest.json",
+          "sha256": "85014b0f5f99adbf9cfb3197d8b6576daab8088815f3e733e405154f4bc442b6",
+          "cases": 10,
+          "fn": 9273,
+          "fp": 5737,
+          "swaps": 5946,
+          "external_share": 0.7162626455430425,
+          "macro_dice": 0.6835747585472451,
+          "union_dice": 0.8315488099345801,
+          "confusion": [
+            [
+              2569498,
+              4266,
+              1413,
+              58
+            ],
+            [
+              5699,
+              19236,
+              2223,
+              1014
+            ],
+            [
+              3423,
+              783,
+              8632,
+              163
+            ],
+            [
+              151,
+              1353,
+              410,
+              3118
+            ]
+          ]
+        },
+        {
+          "run": "MNI_swinunetr_f2s0",
+          "source": "reports/mni_swin_log_dice_cap8_full_20261106/runs/MNI_swinunetr_f2s0/validation_latest.json",
+          "sha256": "d3be2c3455b47326e588ec351fdac1cf8bd99f6de1f82fa9e526836abb3a2fcf",
+          "cases": 10,
+          "fn": 7672,
+          "fp": 7248,
+          "swaps": 4907,
+          "external_share": 0.7525092046199626,
+          "macro_dice": 0.719625187862483,
+          "union_dice": 0.8347975261487427,
+          "confusion": [
+            [
+              2568916,
+              4418,
+              2685,
+              145
+            ],
+            [
+              5779,
+              20015,
+              942,
+              615
+            ],
+            [
+              1750,
+              1476,
+              9289,
+              245
+            ],
+            [
+              143,
+              1483,
+              146,
+              3393
+            ]
+          ]
+        },
+        {
+          "run": "MNI_swinunetr_f2s1",
+          "source": "reports/mni_swin_log_dice_cap8_full_20261106/runs/MNI_swinunetr_f2s1/validation_latest.json",
+          "sha256": "c47a34fdb9eefc3b52f8cbbf8262dc4d182d206e2719296b8157c8f5b01c8579",
+          "cases": 10,
+          "fn": 7027,
+          "fp": 6741,
+          "swaps": 4750,
+          "external_share": 0.7434928177988984,
+          "macro_dice": 0.7334055581706704,
+          "union_dice": 0.8475494935426322,
+          "confusion": [
+            [
+              2569423,
+              4472,
+              2187,
+              82
+            ],
+            [
+              5027,
+              20874,
+              955,
+              495
+            ],
+            [
+              1878,
+              1412,
+              9319,
+              151
+            ],
+            [
+              122,
+              1499,
+              238,
+              3306
+            ]
+          ]
+        },
+        {
+          "run": "MNI_swinunetr_f2s2",
+          "source": "reports/mni_swin_log_dice_cap8_full_20261106/runs/MNI_swinunetr_f2s2/validation_latest.json",
+          "sha256": "1fd573bd4bef6624835f7c76edadd9d78b6a1d577f306e3f632f3445501c2930",
+          "cases": 10,
+          "fn": 8145,
+          "fp": 5892,
+          "swaps": 4993,
+          "external_share": 0.737624802942722,
+          "macro_dice": 0.7224969467905276,
+          "union_dice": 0.8411128708490004,
+          "confusion": [
+            [
+              2570272,
+              3734,
+              2060,
+              98
+            ],
+            [
+              6139,
+              19350,
+              1203,
+              659
+            ],
+            [
+              1855,
+              1229,
+              9451,
+              225
+            ],
+            [
+              151,
+              1496,
+              181,
+              3337
+            ]
+          ]
+        }
+      ],
+      "fn": 76846,
+      "fp": 54783,
+      "swaps": 47207,
+      "external_share": 0.7360318951441545,
+      "fn_share_of_external": 0.5838075196195367,
+      "fp_share_of_external": 0.41619248038046325,
+      "external_share_range": [
+        0.7162626455430425,
+        0.7525092046199626
+      ],
+      "mean_macro_dice": 0.7124387090055606,
+      "mean_union_dice": 0.8384456939833697,
+      "internal_pairs": {
+        "1<->2": 24346,
+        "1<->3": 18608,
+        "2<->3": 4253
+      },
+      "confusion": [
+        [
+          23120349,
+          37048,
+          16909,
+          826
+        ],
+        [
+          52165,
+          183518,
+          13196,
+          7270
+        ],
+        [
+          23490,
+          11150,
+          81027,
+          1528
+        ],
+        [
+          1191,
+          11338,
+          2725,
+          29230
+        ]
+      ],
+      "mean_training_final_dice": 0.9983776953047675
+    },
+    "unetr_vit_b16": {
+      "runs": [
+        {
+          "run": "MNI_unetr_vit_b16_f0s0",
+          "source": "reports/mni_unetr_geo_cap8_20261106/runs/MNI_unetr_vit_b16_f0s0/validation_latest.json",
+          "sha256": "b2efb21bee7227027cb7b49d2946e71f5abdeb4486f07d89d120648f510b558a",
+          "cases": 10,
+          "fn": 11115,
+          "fp": 5708,
+          "swaps": 5269,
+          "external_share": 0.7614973746152454,
+          "macro_dice": 0.6907874842051547,
+          "union_dice": 0.8142234094638929,
+          "confusion": [
+            [
+              2567937,
+              4232,
+              1325,
+              151
+            ],
+            [
+              7704,
+              19599,
+              1737,
+              820
+            ],
+            [
+              3095,
+              1253,
+              8802,
+              154
+            ],
+            [
+              316,
+              986,
+              319,
+              3010
+            ]
+          ]
+        },
+        {
+          "run": "MNI_unetr_vit_b16_f0s1",
+          "source": "reports/mni_unetr_geo_cap8_20261106/runs/MNI_unetr_vit_b16_f0s1/validation_latest.json",
+          "sha256": "69b323e7ebc447ff247410d6b5bfbb0e38c02d63123800d992a4d2a8443c515e",
+          "cases": 10,
+          "fn": 10016,
+          "fp": 5579,
+          "swaps": 5066,
+          "external_share": 0.7548037365083975,
+          "macro_dice": 0.7034013102393409,
+          "union_dice": 0.8281178466069896,
+          "confusion": [
+            [
+              2568066,
+              3902,
+              1543,
+              134
+            ],
+            [
+              7059,
+              20748,
+              1244,
+              809
+            ],
+            [
+              2698,
+              1463,
+              8998,
+              145
+            ],
+            [
+              259,
+              1068,
+              337,
+              2967
+            ]
+          ]
+        },
+        {
+          "run": "MNI_unetr_vit_b16_f0s2",
+          "source": "reports/mni_unetr_geo_cap8_20261106/runs/MNI_unetr_vit_b16_f0s2/validation_latest.json",
+          "sha256": "804d0e1ea8d66ea8f4048caafc8226b8de952bbfa50414eebaea7cc10597ec7a",
+          "cases": 10,
+          "fn": 10745,
+          "fp": 6014,
+          "swaps": 4791,
+          "external_share": 0.7776798143851508,
+          "macro_dice": 0.6866526637749325,
+          "union_dice": 0.8165418206598725,
+          "confusion": [
+            [
+              2567631,
+              4254,
+              1611,
+              149
+            ],
+            [
+              7311,
+              20851,
+              1252,
+              446
+            ],
+            [
+              3121,
+              1291,
+              8697,
+              195
+            ],
+            [
+              313,
+              1247,
+              360,
+              2711
+            ]
+          ]
+        },
+        {
+          "run": "MNI_unetr_vit_b16_f1s0",
+          "source": "reports/mni_unetr_geo_cap8_20261106/runs/MNI_unetr_vit_b16_f1s0/validation_latest.json",
+          "sha256": "17eb4bf9a2c16fd44dafcb81944d12966de1c9308331f8de002eb768b794edf1",
+          "cases": 10,
+          "fn": 7530,
+          "fp": 6807,
+          "swaps": 6212,
+          "external_share": 0.6976981848265122,
+          "macro_dice": 0.6996607768341396,
+          "union_dice": 0.8431207723877986,
+          "confusion": [
+            [
+              2568428,
+              4992,
+              1694,
+              121
+            ],
+            [
+              4663,
+              19695,
+              2838,
+              976
+            ],
+            [
+              2579,
+              833,
+              9441,
+              148
+            ],
+            [
+              288,
+              1059,
+              358,
+              3327
+            ]
+          ]
+        },
+        {
+          "run": "MNI_unetr_vit_b16_f1s1",
+          "source": "reports/mni_unetr_geo_cap8_20261106/runs/MNI_unetr_vit_b16_f1s1/validation_latest.json",
+          "sha256": "ce8910d5714a0148d8d0add0a608ae89ba175e6fe010b7472c69b66a7173e239",
+          "cases": 10,
+          "fn": 7675,
+          "fp": 7886,
+          "swaps": 6819,
+          "external_share": 0.6953083109919571,
+          "macro_dice": 0.6806181022671314,
+          "union_dice": 0.8321411449026707,
+          "confusion": [
+            [
+              2567349,
+              6022,
+              1706,
+              158
+            ],
+            [
+              4300,
+              19420,
+              3451,
+              1001
+            ],
+            [
+              3216,
+              698,
+              8956,
+              131
+            ],
+            [
+              159,
+              1097,
+              441,
+              3335
+            ]
+          ]
+        },
+        {
+          "run": "MNI_unetr_vit_b16_f1s2",
+          "source": "reports/mni_unetr_geo_cap8_20261106/runs/MNI_unetr_vit_b16_f1s2/validation_latest.json",
+          "sha256": "1a4f7c009c5bb17600f0208a2f22626b8c40c6fcdcfe2d8e1a184fedf1b1cbd9",
+          "cases": 10,
+          "fn": 7765,
+          "fp": 6961,
+          "swaps": 6330,
+          "external_share": 0.6993731003039514,
+          "macro_dice": 0.6940718161288892,
+          "union_dice": 0.839004383015973,
+          "confusion": [
+            [
+              2568274,
+              5304,
+              1552,
+              105
+            ],
+            [
+              4606,
+              19785,
+              2917,
+              864
+            ],
+            [
+              2991,
+              836,
+              9023,
+              151
+            ],
+            [
+              168,
+              1250,
+              312,
+              3302
+            ]
+          ]
+        },
+        {
+          "run": "MNI_unetr_vit_b16_f2s0",
+          "source": "reports/mni_unetr_geo_cap8_20261106/runs/MNI_unetr_vit_b16_f2s0/validation_latest.json",
+          "sha256": "8d476e08f5706677a2e96c4c0b6858efb16554e2739c174c3efdc06d0e937511",
+          "cases": 10,
+          "fn": 6857,
+          "fp": 7586,
+          "swaps": 5289,
+          "external_share": 0.7319582404216501,
+          "macro_dice": 0.7271734448228301,
+          "union_dice": 0.8427032005160984,
+          "confusion": [
+            [
+              2568578,
+              5441,
+              1947,
+              198
+            ],
+            [
+              4880,
+              20132,
+              1586,
+              753
+            ],
+            [
+              1826,
+              1391,
+              9352,
+              191
+            ],
+            [
+              151,
+              1179,
+              189,
+              3646
+            ]
+          ]
+        },
+        {
+          "run": "MNI_unetr_vit_b16_f2s1",
+          "source": "reports/mni_unetr_geo_cap8_20261106/runs/MNI_unetr_vit_b16_f2s1/validation_latest.json",
+          "sha256": "039ec7e58d95b0b6c52ccdc30457bcfdcdc8a3746ec6fc609b6b623d93d1d894",
+          "cases": 10,
+          "fn": 6847,
+          "fp": 6823,
+          "swaps": 5083,
+          "external_share": 0.7289500346611208,
+          "macro_dice": 0.7261031010173347,
+          "union_dice": 0.8486791493316043,
+          "confusion": [
+            [
+              2569341,
+              4609,
+              2093,
+              121
+            ],
+            [
+              4910,
+              20401,
+              1379,
+              661
+            ],
+            [
+              1685,
+              1275,
+              9584,
+              216
+            ],
+            [
+              252,
+              1373,
+              179,
+              3361
+            ]
+          ]
+        },
+        {
+          "run": "MNI_unetr_vit_b16_f2s2",
+          "source": "reports/mni_unetr_geo_cap8_20261106/runs/MNI_unetr_vit_b16_f2s2/validation_latest.json",
+          "sha256": "2814d27d161a868005ab9be3fc4eec88693b5a2c30181879bb6774054708d158",
+          "cases": 10,
+          "fn": 6672,
+          "fp": 7307,
+          "swaps": 5028,
+          "external_share": 0.7354658809912138,
+          "macro_dice": 0.7331624377462234,
+          "union_dice": 0.847069938721714,
+          "confusion": [
+            [
+              2568857,
+              5026,
+              2126,
+              155
+            ],
+            [
+              4958,
+              20432,
+              1206,
+              755
+            ],
+            [
+              1536,
+              1449,
+              9569,
+              206
+            ],
+            [
+              178,
+              1197,
+              215,
+              3575
+            ]
+          ]
+        }
+      ],
+      "fn": 75222,
+      "fp": 60671,
+      "swaps": 49887,
+      "external_share": 0.7314727096565831,
+      "fn_share_of_external": 0.5535384456888875,
+      "fp_share_of_external": 0.4464615543111124,
+      "external_share_range": [
+        0.6953083109919571,
+        0.7776798143851508
+      ],
+      "mean_macro_dice": 0.7046256818928863,
+      "mean_union_dice": 0.8346224072896238,
+      "internal_pairs": {
+        "1<->2": 28099,
+        "1<->3": 17541,
+        "2<->3": 4247
+      },
+      "confusion": [
+        [
+          23114461,
+          43782,
+          15597,
+          1292
+        ],
+        [
+          50391,
+          181063,
+          17610,
+          7085
+        ],
+        [
+          22747,
+          10489,
+          82422,
+          1537
+        ],
+        [
+          2084,
+          10456,
+          2710,
+          29234
+        ]
+      ],
+      "mean_training_final_dice": 0.8805994001056539
+    },
+    "basic_unet16": {
+      "runs": [
+        {
+          "run": "MNI_basic_unet16_f0s0",
+          "source": "reports/mni_unet_cap8_20261106/runs/MNI_basic_unet16_f0s0/validation_latest.json",
+          "sha256": "2513223f7b4b4707778f709cedddbf577ae26c12c4432c5158f189c3f0343328",
+          "cases": 10,
+          "fn": 7923,
+          "fp": 5997,
+          "swaps": 5434,
+          "external_share": 0.7192311666838896,
+          "macro_dice": 0.7199698674502775,
+          "union_dice": 0.8518170195999788,
+          "confusion": [
+            [
+              2567648,
+              3867,
+              1986,
+              144
+            ],
+            [
+              5335,
+              22137,
+              1237,
+              1151
+            ],
+            [
+              2534,
+              1609,
+              8965,
+              196
+            ],
+            [
+              54,
+              860,
+              381,
+              3336
+            ]
+          ]
+        },
+        {
+          "run": "MNI_basic_unet16_f0s1",
+          "source": "reports/mni_unet_cap8_20261106/runs/MNI_basic_unet16_f0s1/validation_latest.json",
+          "sha256": "e39805ace1edb412bf31c1ff9afc3f933708ab3bc3627e99530f52678c6535da",
+          "cases": 10,
+          "fn": 6894,
+          "fp": 6601,
+          "swaps": 5754,
+          "external_share": 0.7010753805392488,
+          "macro_dice": 0.7183596971399808,
+          "union_dice": 0.8585929883323798,
+          "confusion": [
+            [
+              2567044,
+              4388,
+              2061,
+              152
+            ],
+            [
+              4941,
+              22525,
+              1198,
+              1196
+            ],
+            [
+              1937,
+              1755,
+              9386,
+              226
+            ],
+            [
+              16,
+              1023,
+              356,
+              3236
+            ]
+          ]
+        },
+        {
+          "run": "MNI_basic_unet16_f0s2",
+          "source": "reports/mni_unet_cap8_20261106/runs/MNI_basic_unet16_f0s2/validation_latest.json",
+          "sha256": "d0987114aabf3ed0d653e0df77f8a7e0fc36759d50239d52afea56dae8529c6b",
+          "cases": 10,
+          "fn": 7524,
+          "fp": 6145,
+          "swaps": 5270,
+          "external_share": 0.7217382121548128,
+          "macro_dice": 0.7292671934747569,
+          "union_dice": 0.8550628203708712,
+          "confusion": [
+            [
+              2567500,
+              3866,
+              2139,
+              140
+            ],
+            [
+              5315,
+              22260,
+              1228,
+              1057
+            ],
+            [
+              2185,
+              1532,
+              9406,
+              181
+            ],
+            [
+              24,
+              949,
+              323,
+              3335
+            ]
+          ]
+        },
+        {
+          "run": "MNI_basic_unet16_f1s0",
+          "source": "reports/mni_unet_cap8_20261106/runs/MNI_basic_unet16_f1s0/validation_latest.json",
+          "sha256": "c351d405067da1516d78f7759c2ee69d2c8b30d5083782e90239afe4a0438a72",
+          "cases": 10,
+          "fn": 7101,
+          "fp": 7714,
+          "swaps": 5789,
+          "external_share": 0.7190351388079984,
+          "macro_dice": 0.7006969615911925,
+          "union_dice": 0.8406271941413026,
+          "confusion": [
+            [
+              2567521,
+              5819,
+              1824,
+              71
+            ],
+            [
+              4127,
+              21056,
+              2004,
+              985
+            ],
+            [
+              2893,
+              888,
+              9013,
+              207
+            ],
+            [
+              81,
+              1334,
+              371,
+              3246
+            ]
+          ]
+        },
+        {
+          "run": "MNI_basic_unet16_f1s1",
+          "source": "reports/mni_unet_cap8_20261106/runs/MNI_basic_unet16_f1s1/validation_latest.json",
+          "sha256": "fcbbe66b539ee6ba63e226281166c288642f3729c7dd11a9fc22c57829cedbf5",
+          "cases": 10,
+          "fn": 6288,
+          "fp": 8357,
+          "swaps": 6014,
+          "external_share": 0.7088920083256692,
+          "macro_dice": 0.7005117678671244,
+          "union_dice": 0.8449544536571547,
+          "confusion": [
+            [
+              2566878,
+              6283,
+              1954,
+              120
+            ],
+            [
+              3779,
+              21390,
+              2039,
+              964
+            ],
+            [
+              2425,
+              1055,
+              9361,
+              160
+            ],
+            [
+              84,
+              1412,
+              384,
+              3152
+            ]
+          ]
+        },
+        {
+          "run": "MNI_basic_unet16_f1s2",
+          "source": "reports/mni_unet_cap8_20261106/runs/MNI_basic_unet16_f1s2/validation_latest.json",
+          "sha256": "65b43830003fbe57e53cac49143800ff93f02222eee1abc760b9dccb033509f7",
+          "cases": 10,
+          "fn": 7344,
+          "fp": 7648,
+          "swaps": 5874,
+          "external_share": 0.7184894086073037,
+          "macro_dice": 0.6957112414738157,
+          "union_dice": 0.838324190266657,
+          "confusion": [
+            [
+              2567587,
+              5664,
+              1912,
+              72
+            ],
+            [
+              4394,
+              20745,
+              2034,
+              999
+            ],
+            [
+              2854,
+              913,
+              9064,
+              170
+            ],
+            [
+              96,
+              1307,
+              451,
+              3178
+            ]
+          ]
+        },
+        {
+          "run": "MNI_basic_unet16_f2s0",
+          "source": "reports/mni_unet_cap8_20261106/runs/MNI_basic_unet16_f2s0/validation_latest.json",
+          "sha256": "886cfe64e7af06d6598050f4b9abcf228b696db00161b15d323132d41b715ca0",
+          "cases": 10,
+          "fn": 7019,
+          "fp": 8095,
+          "swaps": 5230,
+          "external_share": 0.7429217459693276,
+          "macro_dice": 0.7115860556271917,
+          "union_dice": 0.835354237154268,
+          "confusion": [
+            [
+              2568069,
+              5227,
+              2776,
+              92
+            ],
+            [
+              5254,
+              20597,
+              842,
+              658
+            ],
+            [
+              1669,
+              1681,
+              9133,
+              277
+            ],
+            [
+              96,
+              1594,
+              178,
+              3297
+            ]
+          ]
+        },
+        {
+          "run": "MNI_basic_unet16_f2s1",
+          "source": "reports/mni_unet_cap8_20261106/runs/MNI_basic_unet16_f2s1/validation_latest.json",
+          "sha256": "6255918ffa3792dd213cdeedc111a6b90bfa970a583329b6cd9e6f0eb81b98b4",
+          "cases": 10,
+          "fn": 5965,
+          "fp": 9991,
+          "swaps": 5326,
+          "external_share": 0.7497415656423269,
+          "macro_dice": 0.707146317494084,
+          "union_dice": 0.8327477855578955,
+          "confusion": [
+            [
+              2566173,
+              6747,
+              2947,
+              297
+            ],
+            [
+              4585,
+              21091,
+              799,
+              876
+            ],
+            [
+              1330,
+              1600,
+              9629,
+              201
+            ],
+            [
+              50,
+              1598,
+              252,
+              3265
+            ]
+          ]
+        },
+        {
+          "run": "MNI_basic_unet16_f2s2",
+          "source": "reports/mni_unet_cap8_20261106/runs/MNI_basic_unet16_f2s2/validation_latest.json",
+          "sha256": "834f59945ff70a44f3591f6c5b5267e5f1939b08981a7e8c7a7a346b2a597653",
+          "cases": 10,
+          "fn": 7176,
+          "fp": 9568,
+          "swaps": 5209,
+          "external_share": 0.7627203571265886,
+          "macro_dice": 0.6997882928778876,
+          "union_dice": 0.820948536636638,
+          "confusion": [
+            [
+              2566596,
+              5986,
+              3325,
+              257
+            ],
+            [
+              5312,
+              20422,
+              843,
+              774
+            ],
+            [
+              1797,
+              1600,
+              9100,
+              263
+            ],
+            [
+              67,
+              1541,
+              188,
+              3369
+            ]
+          ]
+        }
+      ],
+      "fn": 63234,
+      "fp": 70116,
+      "swaps": 49900,
+      "external_share": 0.7276944065484311,
+      "fn_share_of_external": 0.4741957255343082,
+      "fp_share_of_external": 0.5258042744656918,
+      "external_share_range": [
+        0.7010753805392488,
+        0.7627203571265886
+      ],
+      "mean_macro_dice": 0.7092263772218124,
+      "mean_union_dice": 0.8420476917463495,
+      "internal_pairs": {
+        "1<->2": 24857,
+        "1<->3": 20278,
+        "2<->3": 4765
+      },
+      "confusion": [
+        [
+          23105016,
+          47847,
+          20924,
+          1345
+        ],
+        [
+          43042,
+          192223,
+          12224,
+          8660
+        ],
+        [
+          19624,
+          12633,
+          83057,
+          1881
+        ],
+        [
+          568,
+          11618,
+          2884,
+          29414
+        ]
+      ],
+      "mean_training_final_dice": 0.9872330846220544
+    }
+  },
+  "historical_baseline_errors": {
+    "MSD": {
+      "nnunet": {
+        "runs": 9,
+        "fn": 461225.0,
+        "fp": 260691.0,
+        "swaps": 127109.0,
+        "external_share": 0.8502882718412297,
+        "fn_share_of_external": 0.6388901201801872
+      },
+      "swinunetr": {
+        "runs": 9,
+        "fn": 13437.0,
+        "fp": 3495081.0,
+        "swaps": 57239.0,
+        "external_share": 0.9839475881278505,
+        "fn_share_of_external": 0.0038298221642300255
+      },
+      "unetr_vit_b16": {
+        "runs": 9,
+        "fn": 60668.0,
+        "fp": 2435447.0,
+        "swaps": 60575.0,
+        "external_share": 0.9763072566482444,
+        "fn_share_of_external": 0.02430496992326075
+      },
+      "basic_unet16": {
+        "runs": 9,
+        "fn": 44661.0,
+        "fp": 894889.0,
+        "swaps": 44935.0,
+        "external_share": 0.9543568464730291,
+        "fn_share_of_external": 0.04753445798520568
+      }
+    },
+    "ADNI": {
+      "nnunet": {
+        "runs": 9,
+        "fn": 332192.0,
+        "fp": 312088.0,
+        "swaps": 0,
+        "external_share": 1.0,
+        "fn_share_of_external": 0.5156019122120817
+      },
+      "swinunetr": {
+        "runs": 9,
+        "fn": 118507.0,
+        "fp": 969609.0,
+        "swaps": 0,
+        "external_share": 1.0,
+        "fn_share_of_external": 0.10891026324399238
+      },
+      "unetr_vit_b16": {
+        "runs": 9,
+        "fn": 155343.0,
+        "fp": 1736367.0,
+        "swaps": 0,
+        "external_share": 1.0,
+        "fn_share_of_external": 0.08211776646526159
+      },
+      "basic_unet16": {
+        "runs": 9,
+        "fn": 116152.0,
+        "fp": 929525.0,
+        "swaps": 0,
+        "external_share": 1.0,
+        "fn_share_of_external": 0.1110782775178186
+      }
+    }
+  },
+  "schedules": {
+    "MNI": {
+      "nnunet": {
+        "prefix": 72,
+        "ramp": 72,
+        "first_active_update": 73,
+        "first_full_update": 144,
+        "total_updates": 719,
+        "full_strength_updates": 576,
+        "full_strength_fraction": 0.8011126564673157,
+        "ramp_weighted_update_equivalent": 611.5,
+        "protocol": "experiments/mni_constraint_target_search_f0s0_20261107/protocols/nnunet_dice_bands_t60/protocol.json",
+        "protocol_sha256": "15f44761a08fc2bd9e9914d5d1c85f24cd416c68e810e0f3f94a218bea3b586a",
+        "gradient_target": 0.6,
+        "p95_cap": 0.75,
+        "lr_horizon": 719,
+        "budget": 255811605336720,
+        "lr_at_full_strength": 0.01,
+        "lr_fraction_of_initial_at_full_strength": 1.0
+      },
+      "swinunetr": {
+        "prefix": 165,
+        "ramp": 165,
+        "first_active_update": 166,
+        "first_full_update": 330,
+        "total_updates": 1649,
+        "full_strength_updates": 1320,
+        "full_strength_fraction": 0.8004851425106125,
+        "ramp_weighted_update_equivalent": 1402.0,
+        "protocol": "experiments/mni_constraint_target_search_f0s0_20261107/protocols/swinunetr_dice_bands_t20/protocol.json",
+        "protocol_sha256": "9badbf2e7c054566810f2f00be7e3ec2bcfc2d92c264ffea99349fee54663045",
+        "gradient_target": 0.2,
+        "p95_cap": 0.75,
+        "lr_horizon": 1649,
+        "budget": 255811605336720,
+        "lr_at_full_strength": 0.0003,
+        "lr_fraction_of_initial_at_full_strength": 1.0
+      },
+      "unetr_vit_b16": {
+        "prefix": 197,
+        "ramp": 197,
+        "first_active_update": 198,
+        "first_full_update": 394,
+        "total_updates": 1965,
+        "full_strength_updates": 1572,
+        "full_strength_fraction": 0.8,
+        "ramp_weighted_update_equivalent": 1670.0,
+        "protocol": "experiments/mni_constraint_target_search_f0s0_20261107/protocols/unetr_vit_b16_dice_bands_t20/protocol.json",
+        "protocol_sha256": "0cab243f225967bb8c44b5c72c1a2221505c56a857ab6e592dd29a035d69acec",
+        "gradient_target": 0.2,
+        "p95_cap": 0.75,
+        "lr_horizon": 1965,
+        "budget": 255811605336720,
+        "lr_at_full_strength": 0.0005485347442722358,
+        "lr_fraction_of_initial_at_full_strength": 0.9142245737870597
+      },
+      "basic_unet16": {
+        "prefix": 451,
+        "ramp": 451,
+        "first_active_update": 452,
+        "first_full_update": 902,
+        "total_updates": 4501,
+        "full_strength_updates": 3600,
+        "full_strength_fraction": 0.7998222617196179,
+        "ramp_weighted_update_equivalent": 3825.0,
+        "protocol": "experiments/mni_constraint_target_search_f0s0_20261107/protocols/basic_unet16_dice_bands_t20/protocol.json",
+        "protocol_sha256": "c0876b16d602e5224778abbe65b73d256a0a38f70b4435d7b6499199cb996bbd",
+        "gradient_target": 0.2,
+        "p95_cap": 0.75,
+        "lr_horizon": 4501,
+        "budget": 255811605336720,
+        "lr_at_full_strength": 0.0002820936482557419,
+        "lr_fraction_of_initial_at_full_strength": 0.9403121608524732
+      }
+    },
+    "MSD": {
+      "nnunet": {
+        "prefix": 9,
+        "ramp": 9,
+        "first_active_update": 10,
+        "first_full_update": 18,
+        "total_updates": 89,
+        "full_strength_updates": 72,
+        "full_strength_fraction": 0.8089887640449438,
+        "ramp_weighted_update_equivalent": 76.0,
+        "protocol": "experiments/msd_mixed_losses_nnunet60_others10_20261014/protocols/nnunet/protocol.json",
+        "protocol_sha256": "5583b0456de92aa75cb23b753039b4a94e117e1eb6d61ffca509f97153a4a4e6",
+        "gradient_target": 0.6,
+        "p95_cap": 0.75,
+        "lr_horizon": 174,
+        "budget": 31976450667090
+      },
+      "swinunetr": {
+        "prefix": 50,
+        "ramp": 50,
+        "first_active_update": 51,
+        "first_full_update": 100,
+        "total_updates": 206,
+        "full_strength_updates": 107,
+        "full_strength_fraction": 0.5194174757281553,
+        "ramp_weighted_update_equivalent": 131.5,
+        "protocol": "experiments/msd_mixed_losses_nnunet60_others10_20261014/protocols/swinunetr/protocol.json",
+        "protocol_sha256": "95f81bb2d77ee95a3dd76c76d1d93f58aaaa77de7162d72cf3fbf4111029d35a",
+        "gradient_target": 0.1,
+        "p95_cap": 0.5,
+        "lr_horizon": 610,
+        "budget": 31976450667090
+      },
+      "unetr_vit_b16": {
+        "prefix": 50,
+        "ramp": 50,
+        "first_active_update": 51,
+        "first_full_update": 100,
+        "total_updates": 245,
+        "full_strength_updates": 146,
+        "full_strength_fraction": 0.5959183673469388,
+        "ramp_weighted_update_equivalent": 170.5,
+        "protocol": "experiments/msd_mixed_losses_nnunet60_others10_20261014/protocols/unetr_vit_b16/protocol.json",
+        "protocol_sha256": "499890621666bac491a06e225a767aeecce709064042bff59b9cf9e8236a2312",
+        "gradient_target": 0.1,
+        "p95_cap": 0.5,
+        "lr_horizon": 477,
+        "budget": 31976450667090
+      },
+      "basic_unet16": {
+        "prefix": 50,
+        "ramp": 50,
+        "first_active_update": 51,
+        "first_full_update": 100,
+        "total_updates": 563,
+        "full_strength_updates": 464,
+        "full_strength_fraction": 0.8241563055062167,
+        "ramp_weighted_update_equivalent": 488.5,
+        "protocol": "experiments/msd_mixed_losses_nnunet60_others10_20261014/protocols/basic_unet16/protocol.json",
+        "protocol_sha256": "0dd3af248ca04533477a9aa961a9496bb564c6d1533a1f111f857031b459ad0f",
+        "gradient_target": 0.1,
+        "p95_cap": 0.5,
+        "lr_horizon": 1095,
+        "budget": 31976450667090
+      }
+    },
+    "ADNI": {
+      "nnunet": {
+        "prefix": 9,
+        "ramp": 9,
+        "first_active_update": 10,
+        "first_full_update": 18,
+        "total_updates": 90,
+        "full_strength_updates": 73,
+        "full_strength_fraction": 0.8111111111111111,
+        "ramp_weighted_update_equivalent": 77.0,
+        "protocol": "experiments/adni_mixed_losses_nnunet60_others10_20261014/protocols/nnunet/protocol.json",
+        "protocol_sha256": "fe399fbdeb4940ef25a6ea69aed76835650f10ed3de96644240567882614a24f",
+        "gradient_target": 0.6,
+        "p95_cap": 0.75,
+        "lr_horizon": 174,
+        "budget": 31976450667090
+      },
+      "swinunetr": {
+        "prefix": 50,
+        "ramp": 50,
+        "first_active_update": 51,
+        "first_full_update": 100,
+        "total_updates": 206,
+        "full_strength_updates": 107,
+        "full_strength_fraction": 0.5194174757281553,
+        "ramp_weighted_update_equivalent": 131.5,
+        "protocol": "experiments/adni_mixed_losses_nnunet60_others10_20261014/protocols/swinunetr/protocol.json",
+        "protocol_sha256": "2e6740362e78a2edef765ff36569da1197806fd8dd52026013cec09ca2c087b0",
+        "gradient_target": 0.1,
+        "p95_cap": 0.5,
+        "lr_horizon": 610,
+        "budget": 31976450667090
+      },
+      "unetr_vit_b16": {
+        "prefix": 50,
+        "ramp": 50,
+        "first_active_update": 51,
+        "first_full_update": 100,
+        "total_updates": 245,
+        "full_strength_updates": 146,
+        "full_strength_fraction": 0.5959183673469388,
+        "ramp_weighted_update_equivalent": 170.5,
+        "protocol": "experiments/adni_mixed_losses_nnunet60_others10_20261014/protocols/unetr_vit_b16/protocol.json",
+        "protocol_sha256": "124453880f5badb509c55ba0f0666a8b903aa3d4746ee8b045be74f8a535695a",
+        "gradient_target": 0.1,
+        "p95_cap": 0.5,
+        "lr_horizon": 477,
+        "budget": 31976450667090
+      },
+      "basic_unet16": {
+        "prefix": 50,
+        "ramp": 50,
+        "first_active_update": 51,
+        "first_full_update": 100,
+        "total_updates": 563,
+        "full_strength_updates": 464,
+        "full_strength_fraction": 0.8241563055062167,
+        "ramp_weighted_update_equivalent": 488.5,
+        "protocol": "experiments/adni_mixed_losses_nnunet60_others10_20261014/protocols/basic_unet16/protocol.json",
+        "protocol_sha256": "bc89332a45303fb253ce73f04e9b6d3bd303cdb321ed6a97ea6fa70b8ed3134b",
+        "gradient_target": 0.1,
+        "p95_cap": 0.5,
+        "lr_horizon": 1095,
+        "budget": 31976450667090
+      }
+    }
+  },
+  "completed_constrained_comparisons": [
+    {
+      "run": "MNI_basic_unet16_dice_bands_edge_t20_f0s0",
+      "source": "reports/mni_constraint_target_search_f0s0_20261107/runs/MNI_basic_unet16_dice_bands_edge_t20_f0s0/validation_latest.json",
+      "sha256": "a76ba21f7e210a44a9455b666e22162e859b50b1c1572742c0636e9f85cd5387",
+      "cases": 10,
+      "fn": 8783,
+      "fp": 5704,
+      "swaps": 5263,
+      "external_share": 0.7335189873417721,
+      "macro_dice": 0.7171571512826832,
+      "union_dice": 0.8440697110852575,
+      "confusion": [
+        [
+          2567941,
+          3668,
+          1901,
+          135
+        ],
+        [
+          6023,
+          21624,
+          1156,
+          1057
+        ],
+        [
+          2673,
+          1604,
+          8822,
+          205
+        ],
+        [
+          87,
+          904,
+          337,
+          3303
+        ]
+      ],
+      "model": "basic_unet16",
+      "objective": "dice_bands_edge",
+      "delta": {
+        "fn": 860,
+        "fp": -293,
+        "swaps": -171,
+        "macro_dice": -0.0028127161675942647,
+        "union_dice": -0.007747308514721274
+      }
+    },
+    {
+      "run": "MNI_basic_unet16_dice_bands_t20_f0s0",
+      "source": "reports/mni_constraint_target_search_f0s0_20261107/runs/MNI_basic_unet16_dice_bands_t20_f0s0/validation_latest.json",
+      "sha256": "58e963784a6ab7d54165d5fdb072ed4b9d8a2c06775a681deebe5dc7c862ad11",
+      "cases": 10,
+      "fn": 9235,
+      "fp": 5600,
+      "swaps": 5128,
+      "external_share": 0.7431247808445625,
+      "macro_dice": 0.7153370879972976,
+      "union_dice": 0.8390344060484418,
+      "confusion": [
+        [
+          2568045,
+          3558,
+          1925,
+          117
+        ],
+        [
+          6145,
+          21500,
+          1219,
+          996
+        ],
+        [
+          2978,
+          1512,
+          8644,
+          170
+        ],
+        [
+          112,
+          863,
+          368,
+          3288
+        ]
+      ],
+      "model": "basic_unet16",
+      "objective": "dice_bands",
+      "delta": {
+        "fn": 1312,
+        "fp": -397,
+        "swaps": -306,
+        "macro_dice": -0.004632779452979907,
+        "union_dice": -0.012782613551536981
+      }
+    },
+    {
+      "run": "MNI_nnunet_dice_bands_edge_t60_f0s0",
+      "source": "reports/mni_constraint_target_search_f0s0_20261107/runs/MNI_nnunet_dice_bands_edge_t60_f0s0/validation_latest.json",
+      "sha256": "205ea29a4ca9a1c5cdc0922fcad71c91f37b134312c9e6d6592710a17cf30ce3",
+      "cases": 10,
+      "fn": 7580,
+      "fp": 5257,
+      "swaps": 4547,
+      "external_share": 0.7384376438104003,
+      "macro_dice": 0.7578108239576246,
+      "union_dice": 0.8628151866806084,
+      "confusion": [
+        [
+          2568388,
+          3417,
+          1723,
+          117
+        ],
+        [
+          5373,
+          22599,
+          1056,
+          832
+        ],
+        [
+          2164,
+          1393,
+          9620,
+          127
+        ],
+        [
+          43,
+          893,
+          246,
+          3449
+        ]
+      ],
+      "model": "nnunet",
+      "objective": "dice_bands_edge",
+      "delta": {
+        "fn": -229,
+        "fp": -146,
+        "swaps": 70,
+        "macro_dice": 0.001779602908879352,
+        "union_dice": 0.004197442200165824
+      }
+    },
+    {
+      "run": "MNI_nnunet_dice_bands_t60_f0s0",
+      "source": "reports/mni_constraint_target_search_f0s0_20261107/runs/MNI_nnunet_dice_bands_t60_f0s0/validation_latest.json",
+      "sha256": "425a43e7063ce303b3dea1a061d4f7c51b5208f9fbc6edd1e4fb088eb68c2389",
+      "cases": 10,
+      "fn": 7806,
+      "fp": 5271,
+      "swaps": 4544,
+      "external_share": 0.7421258725384484,
+      "macro_dice": 0.7546861678583581,
+      "union_dice": 0.8599620835668225,
+      "confusion": [
+        [
+          2568374,
+          3420,
+          1741,
+          110
+        ],
+        [
+          5613,
+          22416,
+          1024,
+          807
+        ],
+        [
+          2147,
+          1400,
+          9637,
+          120
+        ],
+        [
+          46,
+          921,
+          272,
+          3392
+        ]
+      ],
+      "model": "nnunet",
+      "objective": "dice_bands",
+      "delta": {
+        "fn": -3,
+        "fp": -132,
+        "swaps": 67,
+        "macro_dice": -0.0013450531903871354,
+        "union_dice": 0.0013443390863798754
+      }
+    },
+    {
+      "run": "MNI_swinunetr_dice_bands_edge_t20_f0s0",
+      "source": "reports/mni_constraint_target_search_f0s0_20261107/runs/MNI_swinunetr_dice_bands_edge_t20_f0s0/validation_latest.json",
+      "sha256": "d9e38300a828c0cc640e997fb7ecabe7f4205787498491bcc498478f6525e0d2",
+      "cases": 10,
+      "fn": 9623,
+      "fp": 5698,
+      "swaps": 5021,
+      "external_share": 0.7531707796676826,
+      "macro_dice": 0.7137871342084392,
+      "union_dice": 0.8331407766345139,
+      "confusion": [
+        [
+          2567947,
+          3795,
+          1801,
+          102
+        ],
+        [
+          6740,
+          21206,
+          1087,
+          827
+        ],
+        [
+          2643,
+          1682,
+          8811,
+          168
+        ],
+        [
+          240,
+          1001,
+          256,
+          3134
+        ]
+      ],
+      "model": "swinunetr",
+      "objective": "dice_bands_edge",
+      "delta": {
+        "fn": 126,
+        "fp": 265,
+        "swaps": -48,
+        "macro_dice": -0.00289263866683509,
+        "union_dice": -0.004170460802671472
+      }
+    },
+    {
+      "run": "MNI_swinunetr_dice_bands_t20_f0s0",
+      "source": "reports/mni_constraint_target_search_f0s0_20261107/runs/MNI_swinunetr_dice_bands_t20_f0s0/validation_latest.json",
+      "sha256": "5f374013fd1e17d8358ceb6690e1bd8c1b103b5262ad3a26f164f1543da0b07f",
+      "cases": 10,
+      "fn": 9713,
+      "fp": 5623,
+      "swaps": 5134,
+      "external_share": 0.7491939423546654,
+      "macro_dice": 0.7101284021850857,
+      "union_dice": 0.8325916022025094,
+      "confusion": [
+        [
+          2568022,
+          3671,
+          1857,
+          95
+        ],
+        [
+          6834,
+          20995,
+          1140,
+          891
+        ],
+        [
+          2626,
+          1683,
+          8824,
+          171
+        ],
+        [
+          253,
+          980,
+          269,
+          3129
+        ]
+      ],
+      "model": "swinunetr",
+      "objective": "dice_bands",
+      "delta": {
+        "fn": 216,
+        "fp": 190,
+        "swaps": 65,
+        "macro_dice": -0.006551370690188629,
+        "union_dice": -0.004719635234676001
+      }
+    },
+    {
+      "run": "MNI_unetr_vit_b16_dice_bands_edge_t20_f0s0",
+      "source": "reports/mni_constraint_target_search_f0s0_20261107/runs/MNI_unetr_vit_b16_dice_bands_edge_t20_f0s0/validation_latest.json",
+      "sha256": "db3b47505840145f22f895bb330569c9074b258f1e7a4f08e6eb5d43fa3ef02b",
+      "cases": 10,
+      "fn": 9926,
+      "fp": 4972,
+      "swaps": 4938,
+      "external_share": 0.7510586811857229,
+      "macro_dice": 0.7178218058889042,
+      "union_dice": 0.8360526067929983,
+      "confusion": [
+        [
+          2568673,
+          3372,
+          1462,
+          138
+        ],
+        [
+          6995,
+          20678,
+          1309,
+          878
+        ],
+        [
+          2752,
+          1310,
+          9070,
+          172
+        ],
+        [
+          179,
+          989,
+          280,
+          3183
+        ]
+      ],
+      "model": "unetr_vit_b16",
+      "objective": "dice_bands_edge",
+      "delta": {
+        "fn": -1189,
+        "fp": -736,
+        "swaps": -331,
+        "macro_dice": 0.02703432168374953,
+        "union_dice": 0.021829197329105376
+      }
+    },
+    {
+      "run": "MNI_unetr_vit_b16_dice_bands_t20_f0s0",
+      "source": "reports/mni_constraint_target_search_f0s0_20261107/runs/MNI_unetr_vit_b16_dice_bands_t20_f0s0/validation_latest.json",
+      "sha256": "027fc3427eedc46d0e02d7632ceb3b2c60505f037533aa4aa9f7ddc271b912f2",
+      "cases": 10,
+      "fn": 9627,
+      "fp": 5268,
+      "swaps": 5437,
+      "external_share": 0.732589022230966,
+      "macro_dice": 0.7094068542175382,
+      "union_dice": 0.83717694992113,
+      "confusion": [
+        [
+          2568377,
+          3752,
+          1359,
+          157
+        ],
+        [
+          6750,
+          20875,
+          1530,
+          705
+        ],
+        [
+          2677,
+          1716,
+          8764,
+          147
+        ],
+        [
+          200,
+          1096,
+          243,
+          3092
+        ]
+      ],
+      "model": "unetr_vit_b16",
+      "objective": "dice_bands",
+      "delta": {
+        "fn": -1488,
+        "fp": -440,
+        "swaps": 168,
+        "macro_dice": 0.018619370012383563,
+        "union_dice": 0.022953540457237076
+      }
+    }
+  ],
+  "calibration_checks": [
+    {
+      "run": "MNI_basic_unet16_dice_bands_edge_t20_f0s0",
+      "target": 0.2,
+      "cap": 0.75,
+      "weight": 0.005108787415336045,
+      "actual_median_ratio": 0.2,
+      "actual_p95_ratio": 0.21685191350318161,
+      "anchor_update": 451,
+      "median_logit_cosine": 0.05034722840776543,
+      "ceiling_binding": false
+    },
+    {
+      "run": "MNI_basic_unet16_dice_bands_t20_f0s0",
+      "target": 0.2,
+      "cap": 0.75,
+      "weight": 0.0050291646575803305,
+      "actual_median_ratio": 0.2,
+      "actual_p95_ratio": 0.21666230719464072,
+      "anchor_update": 451,
+      "median_logit_cosine": 0.051659584832409296,
+      "ceiling_binding": false
+    },
+    {
+      "run": "MNI_nnunet_dice_bands_edge_t60_f0s0",
+      "target": 0.6,
+      "cap": 0.75,
+      "weight": 0.0872109402434461,
+      "actual_median_ratio": 0.6,
+      "actual_p95_ratio": 0.6253154097174508,
+      "anchor_update": 72,
+      "median_logit_cosine": 0.36777451427012237,
+      "ceiling_binding": false
+    },
+    {
+      "run": "MNI_nnunet_dice_bands_t60_f0s0",
+      "target": 0.6,
+      "cap": 0.75,
+      "weight": 0.0872109402434461,
+      "actual_median_ratio": 0.6,
+      "actual_p95_ratio": 0.6253154097174508,
+      "anchor_update": 72,
+      "median_logit_cosine": 0.36777451427012237,
+      "ceiling_binding": false
+    },
+    {
+      "run": "MNI_swinunetr_dice_bands_edge_t20_f0s0",
+      "target": 0.2,
+      "cap": 0.75,
+      "weight": 0.07683078566731236,
+      "actual_median_ratio": 0.2,
+      "actual_p95_ratio": 0.21185420005988756,
+      "anchor_update": 165,
+      "median_logit_cosine": 0.25321524672024875,
+      "ceiling_binding": false
+    },
+    {
+      "run": "MNI_swinunetr_dice_bands_t20_f0s0",
+      "target": 0.2,
+      "cap": 0.75,
+      "weight": 0.07683078566731236,
+      "actual_median_ratio": 0.2,
+      "actual_p95_ratio": 0.21185420005988756,
+      "anchor_update": 165,
+      "median_logit_cosine": 0.25321524672024875,
+      "ceiling_binding": false
+    },
+    {
+      "run": "MNI_unetr_vit_b16_dice_bands_edge_t20_f0s0",
+      "target": 0.2,
+      "cap": 0.75,
+      "weight": 0.14717610841832496,
+      "actual_median_ratio": 0.2,
+      "actual_p95_ratio": 0.21531101341344516,
+      "anchor_update": 197,
+      "median_logit_cosine": 0.2684477380380285,
+      "ceiling_binding": false
+    },
+    {
+      "run": "MNI_unetr_vit_b16_dice_bands_t20_f0s0",
+      "target": 0.2,
+      "cap": 0.75,
+      "weight": 0.17295514589852942,
+      "actual_median_ratio": 0.2,
+      "actual_p95_ratio": 0.2201736756913599,
+      "anchor_update": 197,
+      "median_logit_cosine": 0.23419656074079775,
+      "ceiling_binding": false
+    }
+  ],
+  "identical_band_source_sha256": {
+    "MNI": "bdaf5b99d4c07bae80191292b2161740886086faeb7b79b54ffabbadfa7bb68a",
+    "MSD": "bdaf5b99d4c07bae80191292b2161740886086faeb7b79b54ffabbadfa7bb68a",
+    "ADNI": "bdaf5b99d4c07bae80191292b2161740886086faeb7b79b54ffabbadfa7bb68a"
+  },
+  "calibration_limitation": "One-time training-only full-resolution logit-gradient calibration; static coefficients, not a maintained parameter-gradient or optimizer-update ratio.",
+  "metadata_issue": "MNI protocol calibration_policy is inherited as None: baseline only. Frozen executable and calibration receipts correctly use protocol target/cap; this is stale descriptive metadata, not disabled calibration.",
+  "numerical_checks_file": "numerical_checks.json",
+  "verified_band_loss_implementation": true
+}

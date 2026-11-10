@@ -1,0 +1,17 @@
+{
+  "job_id": "749430",
+  "dependency": "749383",
+  "submitted_at": 1794233300.2178123,
+  "command": [
+    "sbatch",
+    "--parsable",
+    "--chdir=/mnt/beegfsstudents/home/3160552/mni_unet_delayed10_confirm53t_0519_20261109",
+    "--output=/mnt/beegfsstudents/home/3160552/mni_unet_delayed10_confirm53t_0519_20261109/slurm-offline-%j.out",
+    "--error=/mnt/beegfsstudents/home/3160552/mni_unet_delayed10_confirm53t_0519_20261109/slurm-offline-%j.err",
+    "--dependency=afterany:749383",
+    "/mnt/beegfsstudents/home/3160552/mni_unet_delayed10_confirm53t_0519_20261109/run_offline.sbatch",
+    "/mnt/beegfsstudents/home/3160552/mni_unet_delayed10_confirm53t_0519_20261109"
+  ],
+  "source_sha256": "ffd43783d1b78ae500dd71675f18c10aefb453f84542e8e0d707687dbd248c05",
+  "policy": "Laptop-independent continuation; keep unarchived results/checkpoints, no fake archive acknowledgments or cleanup. Same frozen training, cap, seeds, folds, two GPUs. Full matrix remains paused."
+}

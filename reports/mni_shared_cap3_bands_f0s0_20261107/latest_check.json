@@ -1,0 +1,175 @@
+{
+  "queue": [],
+  "status": {
+    "status": "complete",
+    "active": null,
+    "completed": 4,
+    "total": 4,
+    "runs": [
+      {
+        "id": "MNI_nnunet_dice_bands_f0s0",
+        "kind": "conventional",
+        "dataset": "MNI",
+        "model": "nnunet",
+        "arm": "dice_bands",
+        "fold": 0,
+        "seed": 0,
+        "protocol": "nnunet",
+        "augmentation": "none",
+        "target": 0.1,
+        "final_dice": 0.7423046738735699,
+        "best_dice": 0.7424587267001777,
+        "released_bytes": 525344018
+      },
+      {
+        "id": "MNI_swinunetr_dice_bands_f0s0",
+        "kind": "conventional",
+        "dataset": "MNI",
+        "model": "swinunetr",
+        "arm": "dice_bands",
+        "fold": 0,
+        "seed": 0,
+        "protocol": "swinunetr",
+        "augmentation": "xy_d4_v1",
+        "target": 0.1,
+        "final_dice": 0.757622075527216,
+        "best_dice": 0.7646630123175425,
+        "released_bytes": 336998612
+      },
+      {
+        "id": "MNI_unetr_vit_b16_dice_bands_f0s0",
+        "kind": "conventional",
+        "dataset": "MNI",
+        "model": "unetr_vit_b16",
+        "arm": "dice_bands",
+        "fold": 0,
+        "seed": 0,
+        "protocol": "unetr_vit_b16",
+        "augmentation": "xy_d4_v1",
+        "target": 0.05,
+        "final_dice": 0.6955599418023785,
+        "best_dice": 0.6955599418023785,
+        "released_bytes": 1853959838
+      },
+      {
+        "id": "MNI_basic_unet16_dice_bands_f0s0",
+        "kind": "conventional",
+        "dataset": "MNI",
+        "model": "basic_unet16",
+        "arm": "dice_bands",
+        "fold": 0,
+        "seed": 0,
+        "protocol": "basic_unet16",
+        "augmentation": "none",
+        "target": 0.1,
+        "final_dice": 0.6959246945419281,
+        "best_dice": 0.7017958237489708,
+        "released_bytes": 28980368
+      }
+    ],
+    "job_id": "744414",
+    "updated_at": 1794058257.3312223,
+    "quota": {
+      "used_gib": 47.55,
+      "limit_gib": 93.13,
+      "free_gib": 45.58,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  47.55GiB/93.13GiB  358.72k/\u221e  \n\n",
+      "checked_at": 1794058257.368855
+    },
+    "bands_comparison": [
+      {
+        "model": "nnunet",
+        "target": 0.1,
+        "baseline_validation_dice": 0.7410936427380697,
+        "bands_validation_dice": 0.7423046738735699,
+        "delta_pp": 0.12110311355002512,
+        "baseline_training_dice": 0.8860964661104553,
+        "bands_training_dice": 0.8877122318995768
+      },
+      {
+        "model": "swinunetr",
+        "target": 0.1,
+        "baseline_validation_dice": 0.7556428304870717,
+        "bands_validation_dice": 0.757622075527216,
+        "delta_pp": 0.19792450401443507,
+        "baseline_training_dice": 0.8628334479556232,
+        "bands_training_dice": 0.8657870939650276
+      },
+      {
+        "model": "unetr_vit_b16",
+        "target": 0.05,
+        "baseline_validation_dice": 0.7017363508113498,
+        "bands_validation_dice": 0.6955599418023785,
+        "delta_pp": -0.6176409008971318,
+        "baseline_training_dice": 0.7957240302270256,
+        "bands_training_dice": 0.7943424605638081
+      },
+      {
+        "model": "basic_unet16",
+        "target": 0.1,
+        "baseline_validation_dice": 0.6764473018747913,
+        "bands_validation_dice": 0.6959246945419281,
+        "delta_pp": 1.9477392667136773,
+        "baseline_training_dice": 0.8748659403908572,
+        "bands_training_dice": 0.9189837652768615
+      }
+    ]
+  },
+  "runs": [
+    {
+      "id": "MNI_basic_unet16_dice_bands_f0s0",
+      "cleaned": true,
+      "charged_updates": 1688,
+      "latest": {
+        "step": "1688",
+        "compute_fraction": "0.9998693388659622",
+        "training_macro_hard_dice": "0.9189837652768615",
+        "macro_hard_dice": "0.6959246945419281",
+        "learning_rate": "1.6000000000000001e-06"
+      },
+      "final_training_dice": 0.9189837652768615
+    },
+    {
+      "id": "MNI_nnunet_dice_bands_f0s0",
+      "cleaned": true,
+      "charged_updates": 269,
+      "latest": {
+        "step": "269",
+        "compute_fraction": "0.9966875701365856",
+        "training_macro_hard_dice": "0.8877122318995768",
+        "macro_hard_dice": "0.7423046738735699",
+        "learning_rate": "7.863447018639829e-05"
+      },
+      "final_training_dice": 0.8877122318995768
+    },
+    {
+      "id": "MNI_swinunetr_dice_bands_f0s0",
+      "cleaned": true,
+      "charged_updates": 618,
+      "latest": {
+        "step": "618",
+        "compute_fraction": "0.9993498728204359",
+        "training_macro_hard_dice": "0.8657870939650276",
+        "macro_hard_dice": "0.757622075527216",
+        "learning_rate": "2.9999999999999997e-06"
+      },
+      "final_training_dice": 0.8657870939650276
+    },
+    {
+      "id": "MNI_unetr_vit_b16_dice_bands_f0s0",
+      "cleaned": true,
+      "charged_updates": 736,
+      "latest": {
+        "step": "736",
+        "compute_fraction": "0.9987952708162934",
+        "training_macro_hard_dice": "0.7943424605638081",
+        "macro_hard_dice": "0.6955599418023785",
+        "learning_rate": "5.999999999999999e-06"
+      },
+      "final_training_dice": 0.7943424605638081
+    }
+  ],
+  "slurm_errors": {
+    "slurm-744414.err": ""
+  }
+}

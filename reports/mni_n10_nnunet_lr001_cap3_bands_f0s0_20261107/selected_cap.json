@@ -1,0 +1,37 @@
+{
+  "status": "selected",
+  "shared_cap": 95929352001270,
+  "reference_stage": "mni_n10_halfcap_nnunet_lr001_bands_f0s0_20261107",
+  "reference_cap": 31976450667090,
+  "multiplier": 3,
+  "reference_manifest_sha256": "33710f3281b328d283a5c37cdb521049f24df6604c58325b0b4a7220f4b5e7a1",
+  "historical_evidence": [
+    {
+      "stage": "mni_nnunet_cap4_full_20261106",
+      "run": "MNI_nnunet_f0s0",
+      "curve_sha256": "a6626540f34188801a961f4c5e10a333c154839c0d0c7c04baf6153e1859a82a",
+      "first_recorded_50_update": 125,
+      "validation_dice": 0.6470826786271681,
+      "training_subjects": 5
+    },
+    {
+      "stage": "mni_shared_cap2_baseline_bands_f0s0_20261107",
+      "run": "MNI_nnunet_dice_f0s0",
+      "curve_sha256": "1d461b38701964ed51af3b95e2a4ba071c04fabb71569b2b8b3856963905d4e5",
+      "first_recorded_50_update": 171,
+      "validation_dice": 0.5309465029594462,
+      "training_subjects": 5
+    },
+    {
+      "stage": "mni_shared_cap2_baseline_bands_f0s0_20261107",
+      "run": "MNI_nnunet_dice_bands_f0s0",
+      "curve_sha256": "cd36d68039010409ecea6ff13d1d066a9830f25377ded0d981bd7214d67eed00",
+      "first_recorded_50_update": 162,
+      "validation_dice": 0.533714618849572,
+      "training_subjects": 5
+    }
+  ],
+  "rationale": "User authorizes increasing nnUNet-specific cap to reach50% validation. Test269updates atLR0.01 with134-update hold before decay, same10subjects/fold0seed0; baseline and original bands share cap. Earlier first50 observations used5subjects and different schedule/recipe, so are planning evidence only.",
+  "success_criterion": "Both baseline and original bands final-budget validation macro hard Dice >=0.50; inspect full unaugmented training/validation curves for divergence. No rigid training-Dice threshold.",
+  "limitations": "This establishes a tested sufficient cap if successful, not the minimum possible cap. First crossing measured only at recorded milestones, and occurs under the longer schedule. Validation remains development data."
+}

@@ -1,0 +1,1560 @@
+{
+  "generated_at": 1794252965.625532,
+  "status": "full_sweep_running_verified",
+  "job_id": "749737",
+  "scheduled_at": 1794252600,
+  "budget_flops": 53305109592450,
+  "seeds": [
+    0,
+    5,
+    19
+  ],
+  "folds": [
+    0,
+    1,
+    2
+  ],
+  "gpu_workers": 2,
+  "logical_cells": 504,
+  "reused": 97,
+  "remaining_at_launch": 407,
+  "manifest_sha256": "6eca5e6bbda2da06fea0a9714f6e3415fd9ae1cd928e5d1d7217a14c6f8aed0b",
+  "models": {
+    "basic_unet16": {
+      "label": "UNet",
+      "mean_baseline_dice": 62.14411261781708,
+      "mean_bands_dice": 67.36491839595656,
+      "mean_gain_pp": 5.220805778139484,
+      "minimum_gain_pp": 1.6978885767652718,
+      "positive_macro_pairs": 9,
+      "positive_ca4_pairs": 9,
+      "mean_ca4_gain_pp": 4.697651495401604,
+      "recipe": {
+        "initial_lr": 0.00016,
+        "calibration_target_ratio": 0.1,
+        "prefix_updates": 470,
+        "warmup_updates": 76,
+        "max_steps": 938
+      }
+    },
+    "unetr_vit_b16": {
+      "label": "UNETR",
+      "mean_baseline_dice": 65.66016037125236,
+      "mean_bands_dice": 66.42049836573081,
+      "mean_gain_pp": 0.7603379944784487,
+      "minimum_gain_pp": 0.034532338900883364,
+      "positive_macro_pairs": 9,
+      "positive_ca4_pairs": 7,
+      "mean_ca4_gain_pp": 1.6365784742724252,
+      "recipe": {
+        "initial_lr": 0.0003,
+        "calibration_target_ratio": 0.05,
+        "prefix_updates": 102,
+        "warmup_updates": 33,
+        "max_steps": 409
+      }
+    },
+    "nnunet": {
+      "label": "nnUNet",
+      "mean_baseline_dice": 75.98361447944447,
+      "mean_bands_dice": 76.48867102222474,
+      "mean_gain_pp": 0.5050565427802701,
+      "minimum_gain_pp": -0.19862155793414216,
+      "positive_macro_pairs": 7,
+      "positive_ca4_pairs": 7,
+      "mean_ca4_gain_pp": 0.5726472203371462,
+      "recipe": {
+        "initial_lr": 0.02,
+        "calibration_target_ratio": 0.6,
+        "prefix_updates": 20,
+        "warmup_updates": 20,
+        "max_steps": 149
+      }
+    },
+    "swinunetr": {
+      "label": "SwinUNETR",
+      "mean_baseline_dice": 74.33078923667395,
+      "mean_bands_dice": 75.73224205888674,
+      "mean_gain_pp": 1.401452822212791,
+      "minimum_gain_pp": 0.9568781360023593,
+      "positive_macro_pairs": 9,
+      "positive_ca4_pairs": 6,
+      "mean_ca4_gain_pp": 0.10678941932798194,
+      "recipe": {
+        "initial_lr": 0.0003,
+        "calibration_target_ratio": 0.3,
+        "prefix_updates": 28,
+        "warmup_updates": 28,
+        "max_steps": 343
+      }
+    }
+  },
+  "pairs": [
+    {
+      "model": "basic_unet16",
+      "seed": 0,
+      "fold": 0,
+      "baseline_dice": 56.532900456048566,
+      "bands_dice": 61.249943764042236,
+      "gain_pp": 4.7170433079936736,
+      "per_class_gain_pp": {
+        "CA1_3_hard_dice": 7.067687933475786,
+        "subiculum_hard_dice": 5.388973941553854,
+        "CA4_DG_hard_dice": 1.6944680489513697
+      },
+      "baseline_summary": {
+        "macro_hard_dice": 0.5653290045604856,
+        "CA1_3_hard_dice": 0.6714202191162079,
+        "CA1_3_soft_dice": 0.11078492105007172,
+        "subiculum_hard_dice": 0.6198041165656726,
+        "subiculum_soft_dice": 0.07112147025763989,
+        "CA4_DG_hard_dice": 0.40476267799957644,
+        "CA4_DG_soft_dice": 0.01601704815402627,
+        "macro_soft_dice": 0.06597447982057929,
+        "whole_hippocampus_hard_dice": 0.7039398184432674
+      },
+      "bands_summary": {
+        "macro_hard_dice": 0.6124994376404224,
+        "CA1_3_hard_dice": 0.7420970984509657,
+        "CA1_3_soft_dice": 0.10835770517587662,
+        "subiculum_hard_dice": 0.6736938559812111,
+        "subiculum_soft_dice": 0.07043110765516758,
+        "CA4_DG_hard_dice": 0.42170735848909013,
+        "CA4_DG_soft_dice": 0.01565296305343509,
+        "macro_soft_dice": 0.06481392529482644,
+        "whole_hippocampus_hard_dice": 0.7656943007612595
+      }
+    },
+    {
+      "model": "basic_unet16",
+      "seed": 0,
+      "fold": 1,
+      "baseline_dice": 57.70784317234927,
+      "bands_dice": 66.86779258708935,
+      "gain_pp": 9.159949414740076,
+      "per_class_gain_pp": {
+        "CA1_3_hard_dice": 7.730226449937183,
+        "subiculum_hard_dice": 5.120466287252445,
+        "CA4_DG_hard_dice": 14.6291555070306
+      },
+      "baseline_summary": {
+        "macro_hard_dice": 0.5770784317234927,
+        "CA1_3_hard_dice": 0.6293891126106687,
+        "CA1_3_soft_dice": 0.10139926075935364,
+        "subiculum_hard_dice": 0.6404972118201337,
+        "subiculum_soft_dice": 0.07434307709336281,
+        "CA4_DG_hard_dice": 0.46134897073967596,
+        "CA4_DG_soft_dice": 0.01418259022757411,
+        "macro_soft_dice": 0.06330830936009685,
+        "whole_hippocampus_hard_dice": 0.7140263276732441
+      },
+      "bands_summary": {
+        "macro_hard_dice": 0.6686779258708935,
+        "CA1_3_hard_dice": 0.7066913771100405,
+        "CA1_3_soft_dice": 0.09991093203425408,
+        "subiculum_hard_dice": 0.6917018746926582,
+        "subiculum_soft_dice": 0.07114782966673375,
+        "CA4_DG_hard_dice": 0.607640525809982,
+        "CA4_DG_soft_dice": 0.014363196026533843,
+        "macro_soft_dice": 0.06180731924250722,
+        "whole_hippocampus_hard_dice": 0.8004743821662463
+      }
+    },
+    {
+      "model": "basic_unet16",
+      "seed": 0,
+      "fold": 2,
+      "baseline_dice": 56.95780650019133,
+      "bands_dice": 66.50006359235476,
+      "gain_pp": 9.542257092163432,
+      "per_class_gain_pp": {
+        "CA1_3_hard_dice": 7.654523466107433,
+        "subiculum_hard_dice": 5.174289692536771,
+        "CA4_DG_hard_dice": 15.797958117846095
+      },
+      "baseline_summary": {
+        "macro_hard_dice": 0.5695780650019133,
+        "CA1_3_hard_dice": 0.6577195504455993,
+        "CA1_3_soft_dice": 0.10514788180589676,
+        "subiculum_hard_dice": 0.5973794084689346,
+        "subiculum_soft_dice": 0.06804642453789711,
+        "CA4_DG_hard_dice": 0.4536352360912062,
+        "CA4_DG_soft_dice": 0.015573963616043329,
+        "macro_soft_dice": 0.06292275665327907,
+        "whole_hippocampus_hard_dice": 0.6984134296434901
+      },
+      "bands_summary": {
+        "macro_hard_dice": 0.6650006359235476,
+        "CA1_3_hard_dice": 0.7342647851066736,
+        "CA1_3_soft_dice": 0.10205318555235862,
+        "subiculum_hard_dice": 0.6491223053943023,
+        "subiculum_soft_dice": 0.06665786877274513,
+        "CA4_DG_hard_dice": 0.6116148172696672,
+        "CA4_DG_soft_dice": 0.015566920302808285,
+        "macro_soft_dice": 0.06142599154263735,
+        "whole_hippocampus_hard_dice": 0.7885715047391939
+      }
+    },
+    {
+      "model": "basic_unet16",
+      "seed": 5,
+      "fold": 0,
+      "baseline_dice": 67.77004896282216,
+      "bands_dice": 70.03494860804821,
+      "gain_pp": 2.2648996452260484,
+      "per_class_gain_pp": {
+        "CA1_3_hard_dice": 2.0109177898051334,
+        "subiculum_hard_dice": 2.310460797638103,
+        "CA4_DG_hard_dice": 2.4733203482349198
+      },
+      "baseline_summary": {
+        "macro_hard_dice": 0.6777004896282216,
+        "CA1_3_hard_dice": 0.740821069318455,
+        "CA1_3_soft_dice": 0.14828601330518723,
+        "subiculum_hard_dice": 0.6734995908565296,
+        "subiculum_soft_dice": 0.0921373762190342,
+        "CA4_DG_hard_dice": 0.6187808087096801,
+        "CA4_DG_soft_dice": 0.012858502939343453,
+        "macro_soft_dice": 0.08442729748785496,
+        "whole_hippocampus_hard_dice": 0.8030501263792494
+      },
+      "bands_summary": {
+        "macro_hard_dice": 0.7003494860804821,
+        "CA1_3_hard_dice": 0.7609302472165064,
+        "CA1_3_soft_dice": 0.1454741135239601,
+        "subiculum_hard_dice": 0.6966041988329106,
+        "subiculum_soft_dice": 0.09149561822414398,
+        "CA4_DG_hard_dice": 0.6435140121920293,
+        "CA4_DG_soft_dice": 0.012421376444399357,
+        "macro_soft_dice": 0.08313036939750115,
+        "whole_hippocampus_hard_dice": 0.8287660464163311
+      }
+    },
+    {
+      "model": "basic_unet16",
+      "seed": 5,
+      "fold": 1,
+      "baseline_dice": 62.61520280281807,
+      "bands_dice": 64.31309137958334,
+      "gain_pp": 1.6978885767652718,
+      "per_class_gain_pp": {
+        "CA1_3_hard_dice": 2.666308719422772,
+        "subiculum_hard_dice": 1.8194198329614553,
+        "CA4_DG_hard_dice": 0.6079371779116383
+      },
+      "baseline_summary": {
+        "macro_hard_dice": 0.6261520280281807,
+        "CA1_3_hard_dice": 0.7002263892418278,
+        "CA1_3_soft_dice": 0.1404920756816864,
+        "subiculum_hard_dice": 0.6880477522136509,
+        "subiculum_soft_dice": 0.09283041805028916,
+        "CA4_DG_hard_dice": 0.49018194262906334,
+        "CA4_DG_soft_dice": 0.009268993185833097,
+        "macro_soft_dice": 0.08086382897260289,
+        "whole_hippocampus_hard_dice": 0.7922625787275182
+      },
+      "bands_summary": {
+        "macro_hard_dice": 0.6431309137958334,
+        "CA1_3_hard_dice": 0.7268894764360555,
+        "CA1_3_soft_dice": 0.13993824720382692,
+        "subiculum_hard_dice": 0.7062419505432654,
+        "subiculum_soft_dice": 0.09150314554572106,
+        "CA4_DG_hard_dice": 0.4962613144081797,
+        "CA4_DG_soft_dice": 0.008062474289909005,
+        "macro_soft_dice": 0.07983462234648564,
+        "whole_hippocampus_hard_dice": 0.8228899012150009
+      }
+    },
+    {
+      "model": "basic_unet16",
+      "seed": 5,
+      "fold": 2,
+      "baseline_dice": 62.987141013699976,
+      "bands_dice": 65.81040334188476,
+      "gain_pp": 2.8232623281847946,
+      "per_class_gain_pp": {
+        "CA1_3_hard_dice": 2.5792474833655543,
+        "subiculum_hard_dice": 2.739683440708074,
+        "CA4_DG_hard_dice": 3.1508560604807445
+      },
+      "baseline_summary": {
+        "macro_hard_dice": 0.6298714101369998,
+        "CA1_3_hard_dice": 0.7255773666306052,
+        "CA1_3_soft_dice": 0.14442671090364456,
+        "subiculum_hard_dice": 0.6421425582330531,
+        "subiculum_soft_dice": 0.08830713331699372,
+        "CA4_DG_hard_dice": 0.5218943055473411,
+        "CA4_DG_soft_dice": 0.012028641905635596,
+        "macro_soft_dice": 0.08158749537542462,
+        "whole_hippocampus_hard_dice": 0.7804793192316846
+      },
+      "bands_summary": {
+        "macro_hard_dice": 0.6581040334188477,
+        "CA1_3_hard_dice": 0.7513698414642608,
+        "CA1_3_soft_dice": 0.14185311198234557,
+        "subiculum_hard_dice": 0.6695393926401338,
+        "subiculum_soft_dice": 0.08763498291373253,
+        "CA4_DG_hard_dice": 0.5534028661521485,
+        "CA4_DG_soft_dice": 0.011498997081071138,
+        "macro_soft_dice": 0.08032903065904975,
+        "whole_hippocampus_hard_dice": 0.8131466771807713
+      }
+    },
+    {
+      "model": "basic_unet16",
+      "seed": 19,
+      "fold": 0,
+      "baseline_dice": 65.78361120120883,
+      "bands_dice": 71.32970615690508,
+      "gain_pp": 5.546094955696256,
+      "per_class_gain_pp": {
+        "CA1_3_hard_dice": 5.720344103611108,
+        "subiculum_hard_dice": 10.241023845058939,
+        "CA4_DG_hard_dice": 0.6769169184187129
+      },
+      "baseline_summary": {
+        "macro_hard_dice": 0.6578361120120882,
+        "CA1_3_hard_dice": 0.6928132795236006,
+        "CA1_3_soft_dice": 0.10317251235246658,
+        "subiculum_hard_dice": 0.574652383550015,
+        "subiculum_soft_dice": 0.06265172995626926,
+        "CA4_DG_hard_dice": 0.706042672962649,
+        "CA4_DG_soft_dice": 0.03832386359572411,
+        "macro_soft_dice": 0.06804936863482,
+        "whole_hippocampus_hard_dice": 0.739255319707776
+      },
+      "bands_summary": {
+        "macro_hard_dice": 0.7132970615690508,
+        "CA1_3_hard_dice": 0.7500167205597117,
+        "CA1_3_soft_dice": 0.10028728395700455,
+        "subiculum_hard_dice": 0.6770626220006044,
+        "subiculum_soft_dice": 0.0605386845767498,
+        "CA4_DG_hard_dice": 0.7128118421468361,
+        "CA4_DG_soft_dice": 0.03774997740983963,
+        "macro_soft_dice": 0.066191981981198,
+        "whole_hippocampus_hard_dice": 0.8175553686031349
+      }
+    },
+    {
+      "model": "basic_unet16",
+      "seed": 19,
+      "fold": 1,
+      "baseline_dice": 64.66716579313861,
+      "bands_dice": 69.92382431135087,
+      "gain_pp": 5.256658518212253,
+      "per_class_gain_pp": {
+        "CA1_3_hard_dice": 5.255147085026368,
+        "subiculum_hard_dice": 9.543446299133262,
+        "CA4_DG_hard_dice": 0.9713821704771752
+      },
+      "baseline_summary": {
+        "macro_hard_dice": 0.6466716579313861,
+        "CA1_3_hard_dice": 0.6444503143547987,
+        "CA1_3_soft_dice": 0.09520407021045685,
+        "subiculum_hard_dice": 0.5938737804483067,
+        "subiculum_soft_dice": 0.06496724970638752,
+        "CA4_DG_hard_dice": 0.7016908789910529,
+        "CA4_DG_soft_dice": 0.036817990243434906,
+        "macro_soft_dice": 0.06566310338675976,
+        "whole_hippocampus_hard_dice": 0.7274205983373039
+      },
+      "bands_summary": {
+        "macro_hard_dice": 0.6992382431135087,
+        "CA1_3_hard_dice": 0.6970017852050624,
+        "CA1_3_soft_dice": 0.09354003071784973,
+        "subiculum_hard_dice": 0.6893082434396394,
+        "subiculum_soft_dice": 0.061543431133031845,
+        "CA4_DG_hard_dice": 0.7114047006958246,
+        "CA4_DG_soft_dice": 0.03657305147498846,
+        "macro_soft_dice": 0.06388550444195666,
+        "whole_hippocampus_hard_dice": 0.7995404058611537
+      }
+    },
+    {
+      "model": "basic_unet16",
+      "seed": 19,
+      "fold": 2,
+      "baseline_dice": 64.27529365807689,
+      "bands_dice": 70.25449182235045,
+      "gain_pp": 5.979198164273547,
+      "per_class_gain_pp": {
+        "CA1_3_hard_dice": 5.017816482902004,
+        "subiculum_hard_dice": 10.642908900655435,
+        "CA4_DG_hard_dice": 2.27686910926318
+      },
+      "baseline_summary": {
+        "macro_hard_dice": 0.6427529365807689,
+        "CA1_3_hard_dice": 0.6868769673099963,
+        "CA1_3_soft_dice": 0.09879075363278389,
+        "subiculum_hard_dice": 0.5549948451530338,
+        "subiculum_soft_dice": 0.059308554977178574,
+        "CA4_DG_hard_dice": 0.686386997279277,
+        "CA4_DG_soft_dice": 0.036615853384137156,
+        "macro_soft_dice": 0.0649050539980332,
+        "whole_hippocampus_hard_dice": 0.7235407026688943
+      },
+      "bands_summary": {
+        "macro_hard_dice": 0.7025449182235044,
+        "CA1_3_hard_dice": 0.7370551321390163,
+        "CA1_3_soft_dice": 0.0960288405418396,
+        "subiculum_hard_dice": 0.6614239341595881,
+        "subiculum_soft_dice": 0.05755525641143322,
+        "CA4_DG_hard_dice": 0.7091556883719088,
+        "CA4_DG_soft_dice": 0.03647369649261236,
+        "macro_soft_dice": 0.06335259781529505,
+        "whole_hippocampus_hard_dice": 0.8026291528431331
+      }
+    },
+    {
+      "model": "unetr_vit_b16",
+      "seed": 0,
+      "fold": 0,
+      "baseline_dice": 69.75410742597548,
+      "bands_dice": 70.16010416016528,
+      "gain_pp": 0.4059967341898063,
+      "per_class_gain_pp": {
+        "CA1_3_hard_dice": 0.23607228003138525,
+        "subiculum_hard_dice": 0.5390366364441013,
+        "CA4_DG_hard_dice": 0.4428812860939768
+      },
+      "baseline_summary": {
+        "macro_hard_dice": 0.6975410742597548,
+        "CA1_3_hard_dice": 0.7113325671968601,
+        "CA1_3_soft_dice": 0.16729705035686493,
+        "subiculum_hard_dice": 0.6942091676678339,
+        "subiculum_soft_dice": 0.12699154689908027,
+        "CA4_DG_hard_dice": 0.6870814879145699,
+        "CA4_DG_soft_dice": 0.07957026660442353,
+        "macro_soft_dice": 0.12461962128678958,
+        "whole_hippocampus_hard_dice": 0.8238522212838898
+      },
+      "bands_summary": {
+        "macro_hard_dice": 0.7016010416016528,
+        "CA1_3_hard_dice": 0.713693289997174,
+        "CA1_3_soft_dice": 0.1667488232254982,
+        "subiculum_hard_dice": 0.6995995340322749,
+        "subiculum_soft_dice": 0.12694527506828307,
+        "CA4_DG_hard_dice": 0.6915103007755097,
+        "CA4_DG_soft_dice": 0.08024987652897835,
+        "macro_soft_dice": 0.12464799160758655,
+        "whole_hippocampus_hard_dice": 0.8265216350708107
+      }
+    },
+    {
+      "model": "unetr_vit_b16",
+      "seed": 0,
+      "fold": 1,
+      "baseline_dice": 70.58489395438899,
+      "bands_dice": 70.93237282222194,
+      "gain_pp": 0.3474788678329399,
+      "per_class_gain_pp": {
+        "CA1_3_hard_dice": 0.6104871745343465,
+        "subiculum_hard_dice": 0.2648064958106322,
+        "CA4_DG_hard_dice": 0.1671429331538632
+      },
+      "baseline_summary": {
+        "macro_hard_dice": 0.7058489395438899,
+        "CA1_3_hard_dice": 0.7032020758342142,
+        "CA1_3_soft_dice": 0.16302433758974075,
+        "subiculum_hard_dice": 0.7248883030274605,
+        "subiculum_soft_dice": 0.13313279598951339,
+        "CA4_DG_hard_dice": 0.6894564397699948,
+        "CA4_DG_soft_dice": 0.08334551900625228,
+        "macro_soft_dice": 0.1265008841951688,
+        "whole_hippocampus_hard_dice": 0.8263571194374247
+      },
+      "bands_summary": {
+        "macro_hard_dice": 0.7093237282222193,
+        "CA1_3_hard_dice": 0.7093069475795577,
+        "CA1_3_soft_dice": 0.16301096379756927,
+        "subiculum_hard_dice": 0.7275363679855669,
+        "subiculum_soft_dice": 0.1329025723040104,
+        "CA4_DG_hard_dice": 0.6911278691015335,
+        "CA4_DG_soft_dice": 0.08385099917650223,
+        "macro_soft_dice": 0.1265881784260273,
+        "whole_hippocampus_hard_dice": 0.8305818800912984
+      }
+    },
+    {
+      "model": "unetr_vit_b16",
+      "seed": 0,
+      "fold": 2,
+      "baseline_dice": 72.77530923903005,
+      "bands_dice": 72.9716429478812,
+      "gain_pp": 0.19633370885114854,
+      "per_class_gain_pp": {
+        "CA1_3_hard_dice": 0.18551530634181024,
+        "subiculum_hard_dice": 0.5572049248248057,
+        "CA4_DG_hard_dice": -0.15371910461315919
+      },
+      "baseline_summary": {
+        "macro_hard_dice": 0.7277530923903005,
+        "CA1_3_hard_dice": 0.7295441905448451,
+        "CA1_3_soft_dice": 0.16210006028413773,
+        "subiculum_hard_dice": 0.728189182301625,
+        "subiculum_soft_dice": 0.12824490144848824,
+        "CA4_DG_hard_dice": 0.7255259043244315,
+        "CA4_DG_soft_dice": 0.08452436812222004,
+        "macro_soft_dice": 0.12495644328494866,
+        "whole_hippocampus_hard_dice": 0.8348830038723289
+      },
+      "bands_summary": {
+        "macro_hard_dice": 0.729716429478812,
+        "CA1_3_hard_dice": 0.7313993436082632,
+        "CA1_3_soft_dice": 0.1619572103023529,
+        "subiculum_hard_dice": 0.733761231549873,
+        "subiculum_soft_dice": 0.12844580486416818,
+        "CA4_DG_hard_dice": 0.7239887132783,
+        "CA4_DG_soft_dice": 0.08371965624392033,
+        "macro_soft_dice": 0.12470755713681381,
+        "whole_hippocampus_hard_dice": 0.8362356445137044
+      }
+    },
+    {
+      "model": "unetr_vit_b16",
+      "seed": 5,
+      "fold": 0,
+      "baseline_dice": 68.07168514987538,
+      "bands_dice": 68.23526360031423,
+      "gain_pp": 0.16357845043885044,
+      "per_class_gain_pp": {
+        "CA1_3_hard_dice": 0.20816231576081812,
+        "subiculum_hard_dice": -0.048818092932745305,
+        "CA4_DG_hard_dice": 0.3313911284884896
+      },
+      "baseline_summary": {
+        "macro_hard_dice": 0.6807168514987537,
+        "CA1_3_hard_dice": 0.705808258500028,
+        "CA1_3_soft_dice": 0.16302098631858825,
+        "subiculum_hard_dice": 0.7079796883503795,
+        "subiculum_soft_dice": 0.14562139213085173,
+        "CA4_DG_hard_dice": 0.6283626076458537,
+        "CA4_DG_soft_dice": 0.0411016009747982,
+        "macro_soft_dice": 0.11658132647474606,
+        "whole_hippocampus_hard_dice": 0.8205033033330226
+      },
+      "bands_summary": {
+        "macro_hard_dice": 0.6823526360031422,
+        "CA1_3_hard_dice": 0.7078898816576362,
+        "CA1_3_soft_dice": 0.16292174756526948,
+        "subiculum_hard_dice": 0.707491507421052,
+        "subiculum_soft_dice": 0.14528227895498275,
+        "CA4_DG_hard_dice": 0.6316765189307386,
+        "CA4_DG_soft_dice": 0.04137660078704357,
+        "macro_soft_dice": 0.11652687576909859,
+        "whole_hippocampus_hard_dice": 0.823148535340685
+      }
+    },
+    {
+      "model": "unetr_vit_b16",
+      "seed": 5,
+      "fold": 1,
+      "baseline_dice": 69.4306092474824,
+      "bands_dice": 69.46514158638327,
+      "gain_pp": 0.034532338900883364,
+      "per_class_gain_pp": {
+        "CA1_3_hard_dice": 0.1600292996635111,
+        "subiculum_hard_dice": 0.00757001062711149,
+        "CA4_DG_hard_dice": -0.0640022935880058
+      },
+      "baseline_summary": {
+        "macro_hard_dice": 0.6943060924748239,
+        "CA1_3_hard_dice": 0.7103949662346137,
+        "CA1_3_soft_dice": 0.16703134328126906,
+        "subiculum_hard_dice": 0.7176730816351513,
+        "subiculum_soft_dice": 0.15240444093942643,
+        "CA4_DG_hard_dice": 0.6548502295547067,
+        "CA4_DG_soft_dice": 0.04263794664293528,
+        "macro_soft_dice": 0.12069124362121027,
+        "whole_hippocampus_hard_dice": 0.8312681638737776
+      },
+      "bands_summary": {
+        "macro_hard_dice": 0.6946514158638327,
+        "CA1_3_hard_dice": 0.7119952592312488,
+        "CA1_3_soft_dice": 0.16706952452659607,
+        "subiculum_hard_dice": 0.7177487817414224,
+        "subiculum_soft_dice": 0.1524210974574089,
+        "CA4_DG_hard_dice": 0.6542102066188267,
+        "CA4_DG_soft_dice": 0.04278915375471115,
+        "macro_soft_dice": 0.12075992524623871,
+        "whole_hippocampus_hard_dice": 0.8330410482103889
+      }
+    },
+    {
+      "model": "unetr_vit_b16",
+      "seed": 5,
+      "fold": 2,
+      "baseline_dice": 70.85795213903407,
+      "bands_dice": 71.40351286064576,
+      "gain_pp": 0.5455607216116931,
+      "per_class_gain_pp": {
+        "CA1_3_hard_dice": 0.44201463914086414,
+        "subiculum_hard_dice": 0.2801345640602859,
+        "CA4_DG_hard_dice": 0.9145329616339737
+      },
+      "baseline_summary": {
+        "macro_hard_dice": 0.7085795213903407,
+        "CA1_3_hard_dice": 0.7365508561305225,
+        "CA1_3_soft_dice": 0.1652380794286728,
+        "subiculum_hard_dice": 0.7321631854329094,
+        "subiculum_soft_dice": 0.14534719586372374,
+        "CA4_DG_hard_dice": 0.6570245226075901,
+        "CA4_DG_soft_dice": 0.042384056560695174,
+        "macro_soft_dice": 0.11765644395103059,
+        "whole_hippocampus_hard_dice": 0.8407477576191381
+      },
+      "bands_summary": {
+        "macro_hard_dice": 0.7140351286064577,
+        "CA1_3_hard_dice": 0.7409710025219312,
+        "CA1_3_soft_dice": 0.1659700632095337,
+        "subiculum_hard_dice": 0.7349645310735122,
+        "subiculum_soft_dice": 0.1457551136612892,
+        "CA4_DG_hard_dice": 0.6661698522239299,
+        "CA4_DG_soft_dice": 0.042571313306689264,
+        "macro_soft_dice": 0.11809883005917073,
+        "whole_hippocampus_hard_dice": 0.8434340951376104
+      }
+    },
+    {
+      "model": "unetr_vit_b16",
+      "seed": 19,
+      "fold": 0,
+      "baseline_dice": 55.818016051552355,
+      "bands_dice": 57.6268201515969,
+      "gain_pp": 1.8088041000445476,
+      "per_class_gain_pp": {
+        "CA1_3_hard_dice": 0.29858534427192884,
+        "subiculum_hard_dice": 0.41633465854077345,
+        "CA4_DG_hard_dice": 4.711492297320962
+      },
+      "baseline_summary": {
+        "macro_hard_dice": 0.5581801605155235,
+        "CA1_3_hard_dice": 0.6969253509436049,
+        "CA1_3_soft_dice": 0.1636455848813057,
+        "subiculum_hard_dice": 0.6563671538981141,
+        "subiculum_soft_dice": 0.07052728496491908,
+        "CA4_DG_hard_dice": 0.3212479767048516,
+        "CA4_DG_soft_dice": 0.008339921664446592,
+        "macro_soft_dice": 0.08083759717022379,
+        "whole_hippocampus_hard_dice": 0.7772152216978885
+      },
+      "bands_summary": {
+        "macro_hard_dice": 0.576268201515969,
+        "CA1_3_hard_dice": 0.6999112043863241,
+        "CA1_3_soft_dice": 0.16264066845178604,
+        "subiculum_hard_dice": 0.6605305004835218,
+        "subiculum_soft_dice": 0.07031944543123245,
+        "CA4_DG_hard_dice": 0.36836289967806124,
+        "CA4_DG_soft_dice": 0.008164697466418147,
+        "macro_soft_dice": 0.08037493711647888,
+        "whole_hippocampus_hard_dice": 0.7896906646441698
+      }
+    },
+    {
+      "model": "unetr_vit_b16",
+      "seed": 19,
+      "fold": 1,
+      "baseline_dice": 55.87898937503506,
+      "bands_dice": 57.58815832529767,
+      "gain_pp": 1.7091689502626073,
+      "per_class_gain_pp": {
+        "CA1_3_hard_dice": 0.42941080960776645,
+        "subiculum_hard_dice": 0.3054282761981941,
+        "CA4_DG_hard_dice": 4.392667764981867
+      },
+      "baseline_summary": {
+        "macro_hard_dice": 0.5587898937503506,
+        "CA1_3_hard_dice": 0.6853947935287025,
+        "CA1_3_soft_dice": 0.158947716653347,
+        "subiculum_hard_dice": 0.6967693513439579,
+        "subiculum_soft_dice": 0.0748223327100277,
+        "CA4_DG_hard_dice": 0.29420553637839125,
+        "CA4_DG_soft_dice": 0.007443967740982771,
+        "macro_soft_dice": 0.08040467236811917,
+        "whole_hippocampus_hard_dice": 0.778647950460081
+      },
+      "bands_summary": {
+        "macro_hard_dice": 0.5758815832529767,
+        "CA1_3_hard_dice": 0.6896889016247801,
+        "CA1_3_soft_dice": 0.15862254202365875,
+        "subiculum_hard_dice": 0.6998236341059398,
+        "subiculum_soft_dice": 0.07448412775993347,
+        "CA4_DG_hard_dice": 0.3381322140282099,
+        "CA4_DG_soft_dice": 0.007080287812277675,
+        "macro_soft_dice": 0.0800623191986233,
+        "whole_hippocampus_hard_dice": 0.7941970456678074
+      }
+    },
+    {
+      "model": "unetr_vit_b16",
+      "seed": 19,
+      "fold": 2,
+      "baseline_dice": 57.76988075889743,
+      "bands_dice": 59.40146883707099,
+      "gain_pp": 1.6315880781735626,
+      "per_class_gain_pp": {
+        "CA1_3_hard_dice": 0.16072428994902133,
+        "subiculum_hard_dice": 0.7472206495918066,
+        "CA4_DG_hard_dice": 3.9868192949798598
+      },
+      "baseline_summary": {
+        "macro_hard_dice": 0.5776988075889743,
+        "CA1_3_hard_dice": 0.7296587610427465,
+        "CA1_3_soft_dice": 0.15733131170272827,
+        "subiculum_hard_dice": 0.6808637252406258,
+        "subiculum_soft_dice": 0.07179326117038727,
+        "CA4_DG_hard_dice": 0.3225739364835502,
+        "CA4_DG_soft_dice": 0.008535123569890857,
+        "macro_soft_dice": 0.07921989881433547,
+        "whole_hippocampus_hard_dice": 0.7872091987600688
+      },
+      "bands_summary": {
+        "macro_hard_dice": 0.5940146883707099,
+        "CA1_3_hard_dice": 0.7312660039422367,
+        "CA1_3_soft_dice": 0.15603418797254562,
+        "subiculum_hard_dice": 0.6883359317365438,
+        "subiculum_soft_dice": 0.07157563343644142,
+        "CA4_DG_hard_dice": 0.3624421294333488,
+        "CA4_DG_soft_dice": 0.008288782648742199,
+        "macro_soft_dice": 0.07863286801924307,
+        "whole_hippocampus_hard_dice": 0.7989788488783749
+      }
+    },
+    {
+      "model": "nnunet",
+      "seed": 0,
+      "fold": 0,
+      "baseline_dice": 77.26881116913424,
+      "bands_dice": 77.70766188921765,
+      "gain_pp": 0.43885072008341686,
+      "per_class_gain_pp": {
+        "CA1_3_hard_dice": 0.570164794640915,
+        "subiculum_hard_dice": 0.5951607627614708,
+        "CA4_DG_hard_dice": 0.15122660284785372
+      },
+      "baseline_summary": {
+        "macro_hard_dice": 0.7726881116913423,
+        "CA1_3_hard_dice": 0.7790194647866345,
+        "CA1_3_soft_dice": 0.7644999504089356,
+        "subiculum_hard_dice": 0.7645607174454017,
+        "subiculum_soft_dice": 0.7534457325935364,
+        "CA4_DG_hard_dice": 0.7744841528419908,
+        "CA4_DG_soft_dice": 0.7636297106742859,
+        "macro_soft_dice": 0.760525131225586,
+        "whole_hippocampus_hard_dice": 0.8662378692481536
+      },
+      "bands_summary": {
+        "macro_hard_dice": 0.7770766188921765,
+        "CA1_3_hard_dice": 0.7847211127330437,
+        "CA1_3_soft_dice": 0.7667172193527222,
+        "subiculum_hard_dice": 0.7705123250730164,
+        "subiculum_soft_dice": 0.7568075358867645,
+        "CA4_DG_hard_dice": 0.7759964188704693,
+        "CA4_DG_soft_dice": 0.7643205463886261,
+        "macro_soft_dice": 0.7626151005427042,
+        "whole_hippocampus_hard_dice": 0.867603328338622
+      }
+    },
+    {
+      "model": "nnunet",
+      "seed": 0,
+      "fold": 1,
+      "baseline_dice": 75.75480002122428,
+      "bands_dice": 75.95056568533425,
+      "gain_pp": 0.19576566410997032,
+      "per_class_gain_pp": {
+        "CA1_3_hard_dice": 0.6726336937718624,
+        "subiculum_hard_dice": -0.1184486800508866,
+        "CA4_DG_hard_dice": 0.03311197860893511
+      },
+      "baseline_summary": {
+        "macro_hard_dice": 0.7575480002122429,
+        "CA1_3_hard_dice": 0.7704275617250016,
+        "CA1_3_soft_dice": 0.75645791888237,
+        "subiculum_hard_dice": 0.7530608378917862,
+        "subiculum_soft_dice": 0.74135063290596,
+        "CA4_DG_hard_dice": 0.749155601019941,
+        "CA4_DG_soft_dice": 0.7388612568378449,
+        "macro_soft_dice": 0.7455566028753916,
+        "whole_hippocampus_hard_dice": 0.8692609124426797
+      },
+      "bands_summary": {
+        "macro_hard_dice": 0.7595056568533426,
+        "CA1_3_hard_dice": 0.7771538986627202,
+        "CA1_3_soft_dice": 0.7580559134483338,
+        "subiculum_hard_dice": 0.7518763510912774,
+        "subiculum_soft_dice": 0.7362950682640076,
+        "CA4_DG_hard_dice": 0.7494867208060304,
+        "CA4_DG_soft_dice": 0.7409632086753846,
+        "macro_soft_dice": 0.7451047301292419,
+        "whole_hippocampus_hard_dice": 0.8753991282220133
+      }
+    },
+    {
+      "model": "nnunet",
+      "seed": 0,
+      "fold": 2,
+      "baseline_dice": 75.81779545727034,
+      "bands_dice": 75.61917389933619,
+      "gain_pp": -0.19862155793414216,
+      "per_class_gain_pp": {
+        "CA1_3_hard_dice": 0.2551361223491089,
+        "subiculum_hard_dice": -1.6015705273312975,
+        "CA4_DG_hard_dice": 0.7505697311797288
+      },
+      "baseline_summary": {
+        "macro_hard_dice": 0.7581779545727033,
+        "CA1_3_hard_dice": 0.7728434376917699,
+        "CA1_3_soft_dice": 0.754176265001297,
+        "subiculum_hard_dice": 0.7494942476118529,
+        "subiculum_soft_dice": 0.7366725981235505,
+        "CA4_DG_hard_dice": 0.7521961784144875,
+        "CA4_DG_soft_dice": 0.7396056175231933,
+        "macro_soft_dice": 0.7434848268826804,
+        "whole_hippocampus_hard_dice": 0.8562868083609947
+      },
+      "bands_summary": {
+        "macro_hard_dice": 0.7561917389933619,
+        "CA1_3_hard_dice": 0.775394798915261,
+        "CA1_3_soft_dice": 0.7547811567783356,
+        "subiculum_hard_dice": 0.7334785423385399,
+        "subiculum_soft_dice": 0.7179676711559295,
+        "CA4_DG_hard_dice": 0.7597018757262848,
+        "CA4_DG_soft_dice": 0.748477166891098,
+        "macro_soft_dice": 0.7404086649417877,
+        "whole_hippocampus_hard_dice": 0.85639855698834
+      }
+    },
+    {
+      "model": "nnunet",
+      "seed": 5,
+      "fold": 0,
+      "baseline_dice": 78.03421571195403,
+      "bands_dice": 78.28079307106482,
+      "gain_pp": 0.24657735911078893,
+      "per_class_gain_pp": {
+        "CA1_3_hard_dice": 0.5366481885117236,
+        "subiculum_hard_dice": 0.3789969653427705,
+        "CA4_DG_hard_dice": -0.1759130765221717
+      },
+      "baseline_summary": {
+        "macro_hard_dice": 0.7803421571195404,
+        "CA1_3_hard_dice": 0.7914347937813094,
+        "CA1_3_soft_dice": 0.7740538895130158,
+        "subiculum_hard_dice": 0.7676390813116358,
+        "subiculum_soft_dice": 0.7553432703018188,
+        "CA4_DG_hard_dice": 0.7819525962656761,
+        "CA4_DG_soft_dice": 0.7663683354854584,
+        "macro_soft_dice": 0.7652551651000976,
+        "whole_hippocampus_hard_dice": 0.8722583368654171
+      },
+      "bands_summary": {
+        "macro_hard_dice": 0.7828079307106482,
+        "CA1_3_hard_dice": 0.7968012756664267,
+        "CA1_3_soft_dice": 0.7766606271266937,
+        "subiculum_hard_dice": 0.7714290509650635,
+        "subiculum_soft_dice": 0.7553851544857025,
+        "CA4_DG_hard_dice": 0.7801934655004544,
+        "CA4_DG_soft_dice": 0.7645695567131042,
+        "macro_soft_dice": 0.7655384461085002,
+        "whole_hippocampus_hard_dice": 0.8744792445683391
+      }
+    },
+    {
+      "model": "nnunet",
+      "seed": 5,
+      "fold": 1,
+      "baseline_dice": 75.20672737568641,
+      "bands_dice": 75.14962211723429,
+      "gain_pp": -0.057105258452117,
+      "per_class_gain_pp": {
+        "CA1_3_hard_dice": -0.06124017630254608,
+        "subiculum_hard_dice": 0.03947798885330922,
+        "CA4_DG_hard_dice": -0.14955358790710305
+      },
+      "baseline_summary": {
+        "macro_hard_dice": 0.7520672737568641,
+        "CA1_3_hard_dice": 0.7684231501671003,
+        "CA1_3_soft_dice": 0.7531738102436065,
+        "subiculum_hard_dice": 0.744433193843488,
+        "subiculum_soft_dice": 0.7345020830631256,
+        "CA4_DG_hard_dice": 0.7433454772600042,
+        "CA4_DG_soft_dice": 0.7287718772888183,
+        "macro_soft_dice": 0.7388159235318501,
+        "whole_hippocampus_hard_dice": 0.8649937226120186
+      },
+      "bands_summary": {
+        "macro_hard_dice": 0.7514962211723429,
+        "CA1_3_hard_dice": 0.7678107484040748,
+        "CA1_3_soft_dice": 0.7485564589500427,
+        "subiculum_hard_dice": 0.7448279737320211,
+        "subiculum_soft_dice": 0.731760835647583,
+        "CA4_DG_hard_dice": 0.7418499413809332,
+        "CA4_DG_soft_dice": 0.7313120484352111,
+        "macro_soft_dice": 0.7372097810109456,
+        "whole_hippocampus_hard_dice": 0.8701739616434025
+      }
+    },
+    {
+      "model": "nnunet",
+      "seed": 5,
+      "fold": 2,
+      "baseline_dice": 76.80438049724344,
+      "bands_dice": 77.90452989460388,
+      "gain_pp": 1.1001493973604393,
+      "per_class_gain_pp": {
+        "CA1_3_hard_dice": 0.8385837224544002,
+        "subiculum_hard_dice": 0.8300891473679739,
+        "CA4_DG_hard_dice": 1.6317753222589326
+      },
+      "baseline_summary": {
+        "macro_hard_dice": 0.7680438049724344,
+        "CA1_3_hard_dice": 0.7817979140644498,
+        "CA1_3_soft_dice": 0.764258736371994,
+        "subiculum_hard_dice": 0.7724428360294648,
+        "subiculum_soft_dice": 0.7570158481597901,
+        "CA4_DG_hard_dice": 0.749890664823389,
+        "CA4_DG_soft_dice": 0.7388976693153382,
+        "macro_soft_dice": 0.753390751282374,
+        "whole_hippocampus_hard_dice": 0.8684002076659041
+      },
+      "bands_summary": {
+        "macro_hard_dice": 0.7790452989460388,
+        "CA1_3_hard_dice": 0.7901837512889938,
+        "CA1_3_soft_dice": 0.7687517881393433,
+        "subiculum_hard_dice": 0.7807437275031446,
+        "subiculum_soft_dice": 0.7625673532485961,
+        "CA4_DG_hard_dice": 0.7662084180459783,
+        "CA4_DG_soft_dice": 0.75342857837677,
+        "macro_soft_dice": 0.7615825732549031,
+        "whole_hippocampus_hard_dice": 0.8739192924858422
+      }
+    },
+    {
+      "model": "nnunet",
+      "seed": 19,
+      "fold": 0,
+      "baseline_dice": 76.35970070689537,
+      "bands_dice": 76.9982170851773,
+      "gain_pp": 0.6385163782819281,
+      "per_class_gain_pp": {
+        "CA1_3_hard_dice": 0.4277292676561517,
+        "subiculum_hard_dice": 1.4221412672150935,
+        "CA4_DG_hard_dice": 0.06567859997452796
+      },
+      "baseline_summary": {
+        "macro_hard_dice": 0.7635970070689537,
+        "CA1_3_hard_dice": 0.7780504608925968,
+        "CA1_3_soft_dice": 0.7601033985614777,
+        "subiculum_hard_dice": 0.7343041730431255,
+        "subiculum_soft_dice": 0.7197980761528016,
+        "CA4_DG_hard_dice": 0.7784363872711391,
+        "CA4_DG_soft_dice": 0.755119115114212,
+        "macro_soft_dice": 0.7450068632761637,
+        "whole_hippocampus_hard_dice": 0.8629245559223468
+      },
+      "bands_summary": {
+        "macro_hard_dice": 0.769982170851773,
+        "CA1_3_hard_dice": 0.7823277535691583,
+        "CA1_3_soft_dice": 0.7584789872169495,
+        "subiculum_hard_dice": 0.7485255857152764,
+        "subiculum_soft_dice": 0.7291883707046509,
+        "CA4_DG_hard_dice": 0.7790931732708843,
+        "CA4_DG_soft_dice": 0.7386808097362518,
+        "macro_soft_dice": 0.7421160558859506,
+        "whole_hippocampus_hard_dice": 0.8656079405206532
+      }
+    },
+    {
+      "model": "nnunet",
+      "seed": 19,
+      "fold": 1,
+      "baseline_dice": 74.42456435349715,
+      "bands_dice": 74.63971694110259,
+      "gain_pp": 0.21515258760543832,
+      "per_class_gain_pp": {
+        "CA1_3_hard_dice": 0.27074803088475985,
+        "subiculum_hard_dice": 0.35180836289261386,
+        "CA4_DG_hard_dice": 0.02290136903897455
+      },
+      "baseline_summary": {
+        "macro_hard_dice": 0.7442456435349715,
+        "CA1_3_hard_dice": 0.7675638287987253,
+        "CA1_3_soft_dice": 0.7505666136741638,
+        "subiculum_hard_dice": 0.737249554648891,
+        "subiculum_soft_dice": 0.7211448371410369,
+        "CA4_DG_hard_dice": 0.7279235471572976,
+        "CA4_DG_soft_dice": 0.713858675956726,
+        "macro_soft_dice": 0.7285233755906424,
+        "whole_hippocampus_hard_dice": 0.8648280302868432
+      },
+      "bands_summary": {
+        "macro_hard_dice": 0.7463971694110259,
+        "CA1_3_hard_dice": 0.7702713091075729,
+        "CA1_3_soft_dice": 0.7492837369441986,
+        "subiculum_hard_dice": 0.7407676382778171,
+        "subiculum_soft_dice": 0.724386316537857,
+        "CA4_DG_hard_dice": 0.7281525608476873,
+        "CA4_DG_soft_dice": 0.7077088475227356,
+        "macro_soft_dice": 0.7271263003349304,
+        "whole_hippocampus_hard_dice": 0.8673238075754452
+      }
+    },
+    {
+      "model": "nnunet",
+      "seed": 19,
+      "fold": 2,
+      "baseline_dice": 74.18153502209498,
+      "bands_dice": 76.14775861695169,
+      "gain_pp": 1.9662235948567086,
+      "per_class_gain_pp": {
+        "CA1_3_hard_dice": 0.9162791922171842,
+        "subiculum_hard_dice": 2.1583635487983144,
+        "CA4_DG_hard_dice": 2.8240280435546383
+      },
+      "baseline_summary": {
+        "macro_hard_dice": 0.7418153502209498,
+        "CA1_3_hard_dice": 0.7710130694508244,
+        "CA1_3_soft_dice": 0.7501378893852234,
+        "subiculum_hard_dice": 0.7333492596170166,
+        "subiculum_soft_dice": 0.7171668529510498,
+        "CA4_DG_hard_dice": 0.7210837215950082,
+        "CA4_DG_soft_dice": 0.7020284980535507,
+        "macro_soft_dice": 0.7231110801299413,
+        "whole_hippocampus_hard_dice": 0.8526451484531622
+      },
+      "bands_summary": {
+        "macro_hard_dice": 0.7614775861695169,
+        "CA1_3_hard_dice": 0.7801758613729962,
+        "CA1_3_soft_dice": 0.7555485248565674,
+        "subiculum_hard_dice": 0.7549328951049997,
+        "subiculum_soft_dice": 0.7371924817562103,
+        "CA4_DG_hard_dice": 0.7493240020305546,
+        "CA4_DG_soft_dice": 0.7240595281124115,
+        "macro_soft_dice": 0.7389335115750632,
+        "whole_hippocampus_hard_dice": 0.8618236093829112
+      }
+    },
+    {
+      "model": "swinunetr",
+      "seed": 0,
+      "fold": 0,
+      "baseline_dice": 76.17148184100911,
+      "bands_dice": 77.12835997701147,
+      "gain_pp": 0.9568781360023593,
+      "per_class_gain_pp": {
+        "CA1_3_hard_dice": 1.3258781953869092,
+        "subiculum_hard_dice": 1.9154688022536615,
+        "CA4_DG_hard_dice": -0.37071258963349285
+      },
+      "baseline_summary": {
+        "macro_hard_dice": 0.7617148184100911,
+        "CA1_3_hard_dice": 0.7724463951474955,
+        "CA1_3_soft_dice": 0.29039536118507386,
+        "subiculum_hard_dice": 0.74113013898553,
+        "subiculum_soft_dice": 0.14209871962666512,
+        "CA4_DG_hard_dice": 0.7715679210972481,
+        "CA4_DG_soft_dice": 0.11466338634490966,
+        "macro_soft_dice": 0.18238582238554954,
+        "whole_hippocampus_hard_dice": 0.8551155262383752
+      },
+      "bands_summary": {
+        "macro_hard_dice": 0.7712835997701147,
+        "CA1_3_hard_dice": 0.7857051771013646,
+        "CA1_3_soft_dice": 0.27891896665096283,
+        "subiculum_hard_dice": 0.7602848270080667,
+        "subiculum_soft_dice": 0.1348405234515667,
+        "CA4_DG_hard_dice": 0.7678607952009132,
+        "CA4_DG_soft_dice": 0.10695373117923737,
+        "macro_soft_dice": 0.17357107376058897,
+        "whole_hippocampus_hard_dice": 0.8704080363529094
+      }
+    },
+    {
+      "model": "swinunetr",
+      "seed": 0,
+      "fold": 1,
+      "baseline_dice": 72.99371527905555,
+      "bands_dice": 74.34647748697178,
+      "gain_pp": 1.352762207916236,
+      "per_class_gain_pp": {
+        "CA1_3_hard_dice": 2.240434675067249,
+        "subiculum_hard_dice": 1.2745712355300642,
+        "CA4_DG_hard_dice": 0.5432807131514061
+      },
+      "baseline_summary": {
+        "macro_hard_dice": 0.7299371527905555,
+        "CA1_3_hard_dice": 0.7340686819733443,
+        "CA1_3_soft_dice": 0.27332488596439364,
+        "subiculum_hard_dice": 0.6868788303683798,
+        "subiculum_soft_dice": 0.13429625183343888,
+        "CA4_DG_hard_dice": 0.7688639460299426,
+        "CA4_DG_soft_dice": 0.11011537536978722,
+        "macro_soft_dice": 0.17257883772253987,
+        "whole_hippocampus_hard_dice": 0.8395114478899279
+      },
+      "bands_summary": {
+        "macro_hard_dice": 0.7434647748697178,
+        "CA1_3_hard_dice": 0.7564730287240168,
+        "CA1_3_soft_dice": 0.2683779612183571,
+        "subiculum_hard_dice": 0.6996245427236805,
+        "subiculum_soft_dice": 0.13386732190847397,
+        "CA4_DG_hard_dice": 0.7742967531614566,
+        "CA4_DG_soft_dice": 0.112403766810894,
+        "macro_soft_dice": 0.171549683312575,
+        "whole_hippocampus_hard_dice": 0.8585372115076589
+      }
+    },
+    {
+      "model": "swinunetr",
+      "seed": 0,
+      "fold": 2,
+      "baseline_dice": 75.02637166480415,
+      "bands_dice": 76.15754251233895,
+      "gain_pp": 1.1311708475348015,
+      "per_class_gain_pp": {
+        "CA1_3_hard_dice": 1.0916158213422844,
+        "subiculum_hard_dice": 2.5449498561241346,
+        "CA4_DG_hard_dice": -0.24305313486201463
+      },
+      "baseline_summary": {
+        "macro_hard_dice": 0.7502637166480415,
+        "CA1_3_hard_dice": 0.7534077964933499,
+        "CA1_3_soft_dice": 0.27947214245796204,
+        "subiculum_hard_dice": 0.7074224477530558,
+        "subiculum_soft_dice": 0.1341402180492878,
+        "CA4_DG_hard_dice": 0.7899609056977189,
+        "CA4_DG_soft_dice": 0.1208732157945633,
+        "macro_soft_dice": 0.17816185876727103,
+        "whole_hippocampus_hard_dice": 0.8434147361950771
+      },
+      "bands_summary": {
+        "macro_hard_dice": 0.7615754251233895,
+        "CA1_3_hard_dice": 0.7643239547067727,
+        "CA1_3_soft_dice": 0.2638461649417877,
+        "subiculum_hard_dice": 0.7328719463142972,
+        "subiculum_soft_dice": 0.12916369661688804,
+        "CA4_DG_hard_dice": 0.7875303743490988,
+        "CA4_DG_soft_dice": 0.11644685715436935,
+        "macro_soft_dice": 0.1698189062376817,
+        "whole_hippocampus_hard_dice": 0.8570086298080882
+      }
+    },
+    {
+      "model": "swinunetr",
+      "seed": 5,
+      "fold": 0,
+      "baseline_dice": 74.63754560513006,
+      "bands_dice": 75.90389219383302,
+      "gain_pp": 1.2663465887029601,
+      "per_class_gain_pp": {
+        "CA1_3_hard_dice": 1.5573400662995618,
+        "subiculum_hard_dice": 2.557685672777954,
+        "CA4_DG_hard_dice": -0.315985972968702
+      },
+      "baseline_summary": {
+        "macro_hard_dice": 0.7463754560513005,
+        "CA1_3_hard_dice": 0.7602040793403605,
+        "CA1_3_soft_dice": 0.25542632639408114,
+        "subiculum_hard_dice": 0.7343022648065981,
+        "subiculum_soft_dice": 0.10779797658324242,
+        "CA4_DG_hard_dice": 0.7446200240069434,
+        "CA4_DG_soft_dice": 0.07477421388030052,
+        "macro_soft_dice": 0.14599950561920802,
+        "whole_hippocampus_hard_dice": 0.8477950695507278
+      },
+      "bands_summary": {
+        "macro_hard_dice": 0.7590389219383301,
+        "CA1_3_hard_dice": 0.7757774800033561,
+        "CA1_3_soft_dice": 0.24350704699754716,
+        "subiculum_hard_dice": 0.7598791215343776,
+        "subiculum_soft_dice": 0.10075872093439102,
+        "CA4_DG_hard_dice": 0.7414601642772564,
+        "CA4_DG_soft_dice": 0.07129589915275573,
+        "macro_soft_dice": 0.13852055569489796,
+        "whole_hippocampus_hard_dice": 0.86837890665097
+      }
+    },
+    {
+      "model": "swinunetr",
+      "seed": 5,
+      "fold": 1,
+      "baseline_dice": 73.02062574811539,
+      "bands_dice": 74.72675298228563,
+      "gain_pp": 1.7061272341702405,
+      "per_class_gain_pp": {
+        "CA1_3_hard_dice": 3.0153547402319347,
+        "subiculum_hard_dice": 2.0355675979788934,
+        "CA4_DG_hard_dice": 0.06745936429984889
+      },
+      "baseline_summary": {
+        "macro_hard_dice": 0.7302062574811539,
+        "CA1_3_hard_dice": 0.7195246408711763,
+        "CA1_3_soft_dice": 0.23173898011445998,
+        "subiculum_hard_dice": 0.6982470613104763,
+        "subiculum_soft_dice": 0.10029488503932953,
+        "CA4_DG_hard_dice": 0.772847070261809,
+        "CA4_DG_soft_dice": 0.06981977596879005,
+        "macro_soft_dice": 0.13395121370752655,
+        "whole_hippocampus_hard_dice": 0.8315698479673935
+      },
+      "bands_summary": {
+        "macro_hard_dice": 0.7472675298228563,
+        "CA1_3_hard_dice": 0.7496781882734956,
+        "CA1_3_soft_dice": 0.2292799785733223,
+        "subiculum_hard_dice": 0.7186027372902652,
+        "subiculum_soft_dice": 0.0946087323129177,
+        "CA4_DG_hard_dice": 0.7735216639048075,
+        "CA4_DG_soft_dice": 0.07009480856359004,
+        "macro_soft_dice": 0.13132783981661,
+        "whole_hippocampus_hard_dice": 0.8605357786897825
+      }
+    },
+    {
+      "model": "swinunetr",
+      "seed": 5,
+      "fold": 2,
+      "baseline_dice": 73.33533658436986,
+      "bands_dice": 75.68140152324094,
+      "gain_pp": 2.346064938871073,
+      "per_class_gain_pp": {
+        "CA1_3_hard_dice": 1.7528375937450602,
+        "subiculum_hard_dice": 4.4952562273520735,
+        "CA4_DG_hard_dice": 0.7901009955160854
+      },
+      "baseline_summary": {
+        "macro_hard_dice": 0.7333533658436986,
+        "CA1_3_hard_dice": 0.7416557398540496,
+        "CA1_3_soft_dice": 0.23480338156223296,
+        "subiculum_hard_dice": 0.6809801433325402,
+        "subiculum_soft_dice": 0.09303227066993713,
+        "CA4_DG_hard_dice": 0.777424214344506,
+        "CA4_DG_soft_dice": 0.07428825832903385,
+        "macro_soft_dice": 0.13404130352040128,
+        "whole_hippocampus_hard_dice": 0.8235448749906918
+      },
+      "bands_summary": {
+        "macro_hard_dice": 0.7568140152324093,
+        "CA1_3_hard_dice": 0.7591841157915002,
+        "CA1_3_soft_dice": 0.23254127502441407,
+        "subiculum_hard_dice": 0.7259327056060609,
+        "subiculum_soft_dice": 0.09305631071329117,
+        "CA4_DG_hard_dice": 0.7853252242996669,
+        "CA4_DG_soft_dice": 0.0750711552798748,
+        "macro_soft_dice": 0.13355624700586002,
+        "whole_hippocampus_hard_dice": 0.8489166162689425
+      }
+    },
+    {
+      "model": "swinunetr",
+      "seed": 19,
+      "fold": 0,
+      "baseline_dice": 75.46145877731301,
+      "bands_dice": 76.94727235229968,
+      "gain_pp": 1.4858135749866608,
+      "per_class_gain_pp": {
+        "CA1_3_hard_dice": 1.9222681927941743,
+        "subiculum_hard_dice": 2.1190342948720464,
+        "CA4_DG_hard_dice": 0.41613823729379495
+      },
+      "baseline_summary": {
+        "macro_hard_dice": 0.7546145877731302,
+        "CA1_3_hard_dice": 0.7682012350856792,
+        "CA1_3_soft_dice": 0.22594808489084245,
+        "subiculum_hard_dice": 0.7402912789202182,
+        "subiculum_soft_dice": 0.14380188435316085,
+        "CA4_DG_hard_dice": 0.7553512493134928,
+        "CA4_DG_soft_dice": 0.09046525433659554,
+        "macro_soft_dice": 0.15340507452686628,
+        "whole_hippocampus_hard_dice": 0.8522009127836105
+      },
+      "bands_summary": {
+        "macro_hard_dice": 0.7694727235229968,
+        "CA1_3_hard_dice": 0.7874239170136209,
+        "CA1_3_soft_dice": 0.22963133007287978,
+        "subiculum_hard_dice": 0.7614816218689386,
+        "subiculum_soft_dice": 0.14145804643630983,
+        "CA4_DG_hard_dice": 0.7595126316864308,
+        "CA4_DG_soft_dice": 0.08692866116762162,
+        "macro_soft_dice": 0.15267267922560374,
+        "whole_hippocampus_hard_dice": 0.87119523141054
+      }
+    },
+    {
+      "model": "swinunetr",
+      "seed": 19,
+      "fold": 1,
+      "baseline_dice": 73.83246718883633,
+      "bands_dice": 75.13427010126256,
+      "gain_pp": 1.301802912426231,
+      "per_class_gain_pp": {
+        "CA1_3_hard_dice": 2.733751025582809,
+        "subiculum_hard_dice": 1.0985734067839759,
+        "CA4_DG_hard_dice": 0.07308430491191897
+      },
+      "baseline_summary": {
+        "macro_hard_dice": 0.7383246718883633,
+        "CA1_3_hard_dice": 0.7370336919046611,
+        "CA1_3_soft_dice": 0.2316031977534294,
+        "subiculum_hard_dice": 0.7118571849695289,
+        "subiculum_soft_dice": 0.14293646067380905,
+        "CA4_DG_hard_dice": 0.7660831387909001,
+        "CA4_DG_soft_dice": 0.09674610421061516,
+        "macro_soft_dice": 0.15709525421261789,
+        "whole_hippocampus_hard_dice": 0.8372734301145828
+      },
+      "bands_summary": {
+        "macro_hard_dice": 0.7513427010126256,
+        "CA1_3_hard_dice": 0.7643712021604891,
+        "CA1_3_soft_dice": 0.2332460254430771,
+        "subiculum_hard_dice": 0.7228429190373686,
+        "subiculum_soft_dice": 0.14046553671360015,
+        "CA4_DG_hard_dice": 0.7668139818400193,
+        "CA4_DG_soft_dice": 0.09245608150959014,
+        "macro_soft_dice": 0.15538921455542248,
+        "whole_hippocampus_hard_dice": 0.8623513705476208
+      }
+    },
+    {
+      "model": "swinunetr",
+      "seed": 19,
+      "fold": 2,
+      "baseline_dice": 74.49810044143209,
+      "bands_dice": 75.56420940073664,
+      "gain_pp": 1.066108959304557,
+      "per_class_gain_pp": {
+        "CA1_3_hard_dice": 0.9332808422053418,
+        "subiculum_hard_dice": 2.264253179465392,
+        "CA4_DG_hard_dice": 0.0007928562429926345
+      },
+      "baseline_summary": {
+        "macro_hard_dice": 0.7449810044143208,
+        "CA1_3_hard_dice": 0.7497613882990228,
+        "CA1_3_soft_dice": 0.22503821849822997,
+        "subiculum_hard_dice": 0.7159798118492887,
+        "subiculum_soft_dice": 0.1370309054851532,
+        "CA4_DG_hard_dice": 0.7692018130946505,
+        "CA4_DG_soft_dice": 0.09675808250904083,
+        "macro_soft_dice": 0.15294240216414134,
+        "whole_hippocampus_hard_dice": 0.8362992581442891
+      },
+      "bands_summary": {
+        "macro_hard_dice": 0.7556420940073664,
+        "CA1_3_hard_dice": 0.7590941967210763,
+        "CA1_3_soft_dice": 0.22102910429239273,
+        "subiculum_hard_dice": 0.7386223436439426,
+        "subiculum_soft_dice": 0.13318197429180145,
+        "CA4_DG_hard_dice": 0.7692097416570804,
+        "CA4_DG_soft_dice": 0.09253773167729377,
+        "macro_soft_dice": 0.14891627008716268,
+        "whole_hippocampus_hard_dice": 0.8501871006432561
+      }
+    }
+  ],
+  "selection": {
+    "selected_at": 1794252812.047434,
+    "winners": {
+      "basic_unet16": {
+        "candidate": "late10",
+        "protocol": "/mnt/beegfsstudents/home/3160552/mni_unet_delayed10_confirm53t_0519_20261109/protocols/late10",
+        "protocol_sha256": "1b3f0a6cb5578b8bccf27f410948ced4d648b76a29f02e8f8a38bfcb8c5af448",
+        "rows": [
+          {
+            "seed": 0,
+            "fold": 0,
+            "gain_pp": 4.7170433079936736,
+            "source": "/mnt/beegfsstudents/home/3160552/mni_unet_delayed10_confirm53t_0519_20261109/runs/MNI_unet_late10_f0s0",
+            "archive_sha256": "f2cce5779de72d252994e72c17a60372a2bb3248b3460fa081b7c227a5528be2"
+          },
+          {
+            "seed": 0,
+            "fold": 1,
+            "gain_pp": 9.159949414740076,
+            "source": "/mnt/beegfsstudents/home/3160552/mni_unet_delayed10_confirm53t_0519_20261109/controls/MNI_unet_late10_f1s0",
+            "archive_sha256": "0f75f7179a0e956a0d540967724a607c315c6371ae753ac5d6a5341249f82bd1"
+          },
+          {
+            "seed": 0,
+            "fold": 2,
+            "gain_pp": 9.542257092163432,
+            "source": "/mnt/beegfsstudents/home/3160552/mni_unet_delayed10_confirm53t_0519_20261109/runs/MNI_unet_late10_f2s0",
+            "archive_sha256": "e2a3c860baf4961b8be56a775862400c77570e933c6c4f9448073d40746b6c1e"
+          },
+          {
+            "seed": 5,
+            "fold": 0,
+            "gain_pp": 2.2648996452260484,
+            "source": "/mnt/beegfsstudents/home/3160552/mni_unet_delayed10_confirm53t_0519_20261109/runs/MNI_unet_late10_f0s5",
+            "archive_sha256": "e9fe15246a754946c7a44beffd6cef52cfb2956dac50ac22c8a5e5256b39636d"
+          },
+          {
+            "seed": 5,
+            "fold": 1,
+            "gain_pp": 1.6978885767652718,
+            "source": "/mnt/beegfsstudents/home/3160552/mni_unet_delayed10_confirm53t_0519_20261109/controls/MNI_unet_late10_f1s5",
+            "archive_sha256": "11684462ce1ee4f970f0d6e8f64deb1df47560c4b0213b4f3e87ffc6519d1e25"
+          },
+          {
+            "seed": 5,
+            "fold": 2,
+            "gain_pp": 2.8232623281847946,
+            "source": "/mnt/beegfsstudents/home/3160552/mni_unet_delayed10_confirm53t_0519_20261109/runs/MNI_unet_late10_f2s5",
+            "archive_sha256": "04ea4b5beb4a66d38e9923a80167c2c86d639471f5671aab35297100f5e2ef38"
+          },
+          {
+            "seed": 19,
+            "fold": 0,
+            "gain_pp": 5.546094955696256,
+            "source": "/mnt/beegfsstudents/home/3160552/mni_unet_delayed10_confirm53t_0519_20261109/runs/MNI_unet_late10_f0s19",
+            "archive_sha256": "65a462aa4435cc4505552f924ad484fb27e9db498686fe3cafa8371ddfd9d429"
+          },
+          {
+            "seed": 19,
+            "fold": 1,
+            "gain_pp": 5.256658518212253,
+            "source": "/mnt/beegfsstudents/home/3160552/mni_unet_delayed10_confirm53t_0519_20261109/runs/MNI_unet_late10_f1s19",
+            "archive_sha256": "06180954c7fd660d11a456968c74ec113bfd649a6e2c0c1df0323208c76a5b68"
+          },
+          {
+            "seed": 19,
+            "fold": 2,
+            "gain_pp": 5.979198164273547,
+            "source": "/mnt/beegfsstudents/home/3160552/mni_unet_delayed10_confirm53t_0519_20261109/runs/MNI_unet_late10_f2s19",
+            "archive_sha256": "51bba0aee1c2e8e893db1fd32ab1fefd22a60d6332b8879a8c3c1a4bd91783b7"
+          }
+        ]
+      },
+      "nnunet": null,
+      "swinunetr": {
+        "candidate": "early30",
+        "stage": "/mnt/beegfsstudents/home/3160552/mni_nnunet_swin_refine2030_round2_53t_20261109",
+        "protocol": "/mnt/beegfsstudents/home/3160552/mni_nnunet_swin_refine2030_round2_53t_20261109/protocols/swinunetr_early30",
+        "stage_manifest_sha256": "0df296c8b4dafc9368a9645d8b7a2528edadd997b6547406e4b5b636c4358ed8",
+        "rows": [
+          {
+            "seed": 0,
+            "fold": 0,
+            "source": "/mnt/beegfsstudents/home/3160552/mni_nnunet_swin_refine2030_round2_53t_20261109/runs/MNI_swinunetr_early30_f0s0",
+            "archive_sha256": "175c981fd95ba464427ed38da7572d34bbcf2b040587481fc6fe4cf1a0a5789f",
+            "gain_pp": 0.9568781360023593,
+            "ca4_gain_pp": -0.37071258963349285,
+            "vs_original_pp": 0.33113816776827454,
+            "ca4_vs_original_pp": -0.49015050592237097
+          },
+          {
+            "seed": 0,
+            "fold": 1,
+            "source": "/mnt/beegfsstudents/home/3160552/mni_nnunet_swin_refine2030_round2_53t_20261109/runs/MNI_swinunetr_early30_f1s0",
+            "archive_sha256": "e712454e1c554f337e9bdc9ee58a5feafd7267247f9e5fed6f145f74dd7b7be8",
+            "gain_pp": 1.352762207916236,
+            "ca4_gain_pp": 0.5432807131514061,
+            "vs_original_pp": 0.6099008897503477,
+            "ca4_vs_original_pp": 0.28013117016632005
+          },
+          {
+            "seed": 0,
+            "fold": 2,
+            "source": "/mnt/beegfsstudents/home/3160552/mni_nnunet_swin_refine2030_round2_53t_20261109/runs/MNI_swinunetr_early30_f2s0",
+            "archive_sha256": "607b3d934682e99b3a0502b1dd9144d88c4dc69d0de42f3b8c0052cf3b5c30e1",
+            "gain_pp": 1.1311708475348015,
+            "ca4_gain_pp": -0.24305313486201463,
+            "vs_original_pp": 0.4184510486180182,
+            "ca4_vs_original_pp": 0.1006854167727167
+          },
+          {
+            "seed": 5,
+            "fold": 0,
+            "source": "/mnt/beegfsstudents/home/3160552/mni_nnunet_swin_refine2030_round2_53t_20261109/runs/MNI_swinunetr_early30_f0s5",
+            "archive_sha256": "96518f5172f74e6a3c42f6a89a55957ab4d0715a6c1536f0522c2dcd93551f93",
+            "gain_pp": 1.2663465887029601,
+            "ca4_gain_pp": -0.315985972968702,
+            "vs_original_pp": 0.3580172661252212,
+            "ca4_vs_original_pp": -0.4745678436070877
+          },
+          {
+            "seed": 5,
+            "fold": 1,
+            "source": "/mnt/beegfsstudents/home/3160552/mni_nnunet_swin_refine2030_round2_53t_20261109/runs/MNI_swinunetr_early30_f1s5",
+            "archive_sha256": "7bfd75abe3b3121e67dcc996d91283003052fb5f835ef5fcd7d81d64851b1eda",
+            "gain_pp": 1.7061272341702405,
+            "ca4_gain_pp": 0.06745936429984889,
+            "vs_original_pp": 0.7085164235409058,
+            "ca4_vs_original_pp": 0.23548936507591378
+          },
+          {
+            "seed": 5,
+            "fold": 2,
+            "source": "/mnt/beegfsstudents/home/3160552/mni_nnunet_swin_refine2030_round2_53t_20261109/runs/MNI_swinunetr_early30_f2s5",
+            "archive_sha256": "129ef01812c6c35c344c1a6ef61709c443004ad1d81c5317d26d97ad6d3d98c1",
+            "gain_pp": 2.346064938871073,
+            "ca4_gain_pp": 0.7901009955160854,
+            "vs_original_pp": 0.9040437445890448,
+            "ca4_vs_original_pp": 0.6023918255998129
+          },
+          {
+            "seed": 19,
+            "fold": 0,
+            "source": "/mnt/beegfsstudents/home/3160552/mni_nnunet_swin_refine2030_round2_53t_20261109/runs/MNI_swinunetr_early30_f0s19",
+            "archive_sha256": "bc1f79ab5506a6bb66f06198f120589294c52b0f877f5f741f413b3de7d18460",
+            "gain_pp": 1.4858135749866608,
+            "ca4_gain_pp": 0.41613823729379495,
+            "vs_original_pp": 0.5766840097540471,
+            "ca4_vs_original_pp": -0.05914307525490825
+          },
+          {
+            "seed": 19,
+            "fold": 1,
+            "source": "/mnt/beegfsstudents/home/3160552/mni_nnunet_swin_refine2030_round2_53t_20261109/runs/MNI_swinunetr_early30_f1s19",
+            "archive_sha256": "b725dd60f5dd909dc75a38d2ba9f09800bf62541286d62db685ee765831e1937",
+            "gain_pp": 1.301802912426231,
+            "ca4_gain_pp": 0.07308430491191897,
+            "vs_original_pp": 0.31332448273214686,
+            "ca4_vs_original_pp": 0.0035861051778773856
+          },
+          {
+            "seed": 19,
+            "fold": 2,
+            "source": "/mnt/beegfsstudents/home/3160552/mni_nnunet_swin_refine2030_round2_53t_20261109/runs/MNI_swinunetr_early30_f2s19",
+            "archive_sha256": "2369d4154933e88d64e8df8c38d0274bc814911c262ef74dbb657c03d5442b0d",
+            "gain_pp": 1.066108959304557,
+            "ca4_gain_pp": 0.0007928562429926345,
+            "vs_original_pp": 0.4567106026071577,
+            "ca4_vs_original_pp": 0.08769798706813603
+          }
+        ],
+        "score": [
+          0,
+          0.031791160564045545,
+          0.5196429594983516,
+          0.9568781360023593
+        ]
+      }
+    },
+    "unchanged_unetr": true,
+    "fallback_models": [
+      "nnunet"
+    ],
+    "extension_scope": "bands-containing combinations only; UNETR existing all-combination recipe unchanged"
+  },
+  "refinement_new_completed_archived_runs": 131,
+  "scope_note": "These scores compare the confirmed bands-only recipes against matched baselines. Other constraint combinations are the full sweep now being launched; their benefit is not yet established.",
+  "selection_note": "Adaptive development-validation search. No new nnUNet candidate met the nine-pair rule; its established recipe is retained. Swin target0.30 is the selected improvement.",
+  "updated_at": 1794253265.204969,
+  "handoff_status": "full_sweep_running_verified",
+  "full_stage": "mni_winning_recipes_matrix2030_53t_0519_20261109",
+  "active_job_id": "749737",
+  "continuation_job_id": "750092",
+  "started_at": 1794252940.79447,
+  "worker_progress_verified_at": 1794253202.9822977,
+  "worker_updates": {
+    "MNI_unetr_vit_b16_dice_sdf_f2s5": 342,
+    "MNI_basic_unet16_dice_sdf_f2s5": 934
+  },
+  "quota_free_gib": 34.88999999999999,
+  "production_preflight": {
+    "status": "passed",
+    "base_checks": 52,
+    "promoted_target_checks": 8
+  },
+  "completed_new_refinement_runs_archived_and_cleaned": 131
+}

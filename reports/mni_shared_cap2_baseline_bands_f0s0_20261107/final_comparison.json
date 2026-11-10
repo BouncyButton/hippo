@@ -1,0 +1,96 @@
+{
+  "status": "complete",
+  "fold": 0,
+  "seed": 0,
+  "cap": 63952901334180,
+  "runs": [
+    {
+      "model": "nnunet",
+      "dice": {
+        "training_dice": 0.600935599898787,
+        "validation_dice": 0.5412158843119759,
+        "gap_pp": 5.97197155868111,
+        "validation_peak_to_final_drop_pp": 0.0,
+        "above_validation_floor": true
+      },
+      "dice_bands": {
+        "training_dice": 0.6267839958599233,
+        "validation_dice": 0.5663421250683095,
+        "gap_pp": 6.044187079161379,
+        "validation_peak_to_final_drop_pp": 0.0,
+        "above_validation_floor": true
+      },
+      "delta_pp": 2.512624075633363,
+      "previous_3x_delta_pp": 0.12110311355002512,
+      "bands_validation_change_vs_3x_pp": -17.59625488052604,
+      "bands_training_change_vs_3x_pp": -26.092823603965353
+    },
+    {
+      "model": "swinunetr",
+      "dice": {
+        "training_dice": 0.8180872077667131,
+        "validation_dice": 0.7607466683054581,
+        "gap_pp": 5.734053946125495,
+        "validation_peak_to_final_drop_pp": 0.0,
+        "above_validation_floor": true
+      },
+      "dice_bands": {
+        "training_dice": 0.8257500976188679,
+        "validation_dice": 0.7653004725361172,
+        "gap_pp": 6.044962508275065,
+        "validation_peak_to_final_drop_pp": 0.05054218860741644,
+        "above_validation_floor": true
+      },
+      "delta_pp": 0.45538042306590976,
+      "previous_3x_delta_pp": 0.19792450401443507,
+      "bands_validation_change_vs_3x_pp": 0.7678397008901161,
+      "bands_training_change_vs_3x_pp": -4.003699634615976
+    },
+    {
+      "model": "unetr_vit_b16",
+      "dice": {
+        "training_dice": 0.7911990134438429,
+        "validation_dice": 0.6941245820093485,
+        "gap_pp": 9.707443143449446,
+        "validation_peak_to_final_drop_pp": 0.15015093908813393,
+        "above_validation_floor": true
+      },
+      "dice_bands": {
+        "training_dice": 0.7923519778547846,
+        "validation_dice": 0.6948158215325149,
+        "gap_pp": 9.753615632226975,
+        "validation_peak_to_final_drop_pp": 0.030685122053697444,
+        "above_validation_floor": true
+      },
+      "delta_pp": 0.06912395231664092,
+      "previous_3x_delta_pp": -0.6176409008971318,
+      "bands_validation_change_vs_3x_pp": -0.07441202698635907,
+      "bands_training_change_vs_3x_pp": -0.19904827090234667
+    },
+    {
+      "model": "basic_unet16",
+      "dice": {
+        "training_dice": 0.7564021063251636,
+        "validation_dice": 0.6085804093446581,
+        "gap_pp": 14.782169698050552,
+        "validation_peak_to_final_drop_pp": 0.0,
+        "above_validation_floor": true
+      },
+      "dice_bands": {
+        "training_dice": 0.8724010719298734,
+        "validation_dice": 0.688105999624718,
+        "gap_pp": 18.42950723051554,
+        "validation_peak_to_final_drop_pp": 0.09401567315711068,
+        "above_validation_floor": true
+      },
+      "delta_pp": 7.9525590280059895,
+      "previous_3x_delta_pp": 1.9477392667136773,
+      "bands_validation_change_vs_3x_pp": -0.7818694917210101,
+      "bands_training_change_vs_3x_pp": -4.658269334698817
+    }
+  ],
+  "all_eight_above_50": true,
+  "all_eight_archived_and_cleaned": true,
+  "deleted_checkpoint_gib": 5.113476850092411,
+  "interpretation": "Lower cap enlarges paired bands gains, particularly UNet and nnUNet. Absolute nnUNet accuracy falls sharply versus3x; Swin improves absolute validation. Singlefold/seed results do not establish cross-fold/seed robustness."
+}

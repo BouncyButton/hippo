@@ -1,0 +1,26 @@
+{
+  "status": "selected",
+  "shared_cap": 31976450667090,
+  "reference_cap": 63952901334180,
+  "multiplier": 0.5,
+  "training_subjects": 10,
+  "evidence": [
+    {
+      "model": "swinunetr",
+      "source": "/Users/filippofocaccia/Desktop/hippo/reports/mni_subjects10_20_bands_comparison_20261107/frozen/reused_baselines/MNI_swinunetr_n10_baseline_f0s0/metrics.csv",
+      "sha256": "a89034a5073f08fc69e0f38e4eb35e5098c9972375d4ca99fa59e97caf2b4f48",
+      "halfway_training_dice": 0.7297312395323011,
+      "halfway_validation_dice": 0.7292133845163263
+    },
+    {
+      "model": "unetr_vit_b16",
+      "source": "/Users/filippofocaccia/Desktop/hippo/reports/mni_subjects10_20_bands_comparison_20261107/frozen/reused_baselines/MNI_unetr_vit_b16_n10_baseline_f0s0/metrics.csv",
+      "sha256": "223c7e3a4eb7feb2290ad309c93d53372d344ff76f12be19501aa3828b1ed5ec",
+      "halfway_training_dice": 0.6468136856389429,
+      "halfway_validation_dice": 0.6303393701206979
+    }
+  ],
+  "rationale": "User requested fewer updates at 10 subjects. Half-cap checkpoint values provide a reasonable first lower-budget probe with validation above50% in both models; all six conditions are freshly trained with LR schedules matched to the half cap.",
+  "limitations": "Checkpoint values from the longer schedule are only planning evidence, not predictions of retrained results. Prior constrained outcomes informed this exploratory follow-up; validation is development data. A high baseline Dice is not itself evidence of overfitting.",
+  "comparison": "Both models, baseline/original/expanded bands, fold0 seed0, same exact20 training crops and10 validation crops; shared optimization cap; calibration/evaluation accounted separately."
+}

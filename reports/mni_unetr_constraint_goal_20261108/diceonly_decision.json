@@ -1,0 +1,53 @@
+{
+  "status": "preparing_after_cosine_exhausted",
+  "approved_for_execution": true,
+  "approved_scope": "User explicitly authorizes continued constraint research and simpler UNETR training recipes after prior approaches fail.",
+  "previous_stage": "mni_unetr_plain_cosine53t_20261109",
+  "previous_outcome": "exhausted",
+  "reason": "Removing augmentation/dropout improved absolute Dice but constraints remained inconsistent. Earlier cosine gave5/6positive full pairs then failed seed5fold1. Test whether the dense CE base makes original constraints redundant or changes their gradient interaction.",
+  "recipe": {
+    "key": "plain_diceonly",
+    "dropout_rate": 0.0,
+    "augmentation": "none",
+    "base_loss": "foreground squared Dice only, exactly the existing DiceCE Dice component",
+    "initial_lr": 0.0006,
+    "lr_policy": "hold_half",
+    "warmup_updates": 24
+  },
+  "lr_reason": "Use the stronger plain hold-half base as the reference for this one-factor loss ablation; same-recipe fresh Dice-only controls required. Earlier cosine did not preserve the stronger absolute Dice.",
+  "arms": [
+    "dice",
+    "dice_bands_edge_sdf_depth",
+    "dice_depth",
+    "dice_sdf_depth",
+    "dice_bands"
+  ],
+  "calibration_target_ratio": 0.05,
+  "calibration_p95_cap": 0.75,
+  "calibration_crops": 20,
+  "prefix_updates": 102,
+  "constraint_warmup_updates": 33,
+  "sdf_timing": "nearest5/9optimizationcap; profile-derived",
+  "budget_flops": 53305109592450,
+  "seeds": [
+    0,
+    5,
+    19
+  ],
+  "folds": [
+    0,
+    1,
+    2
+  ],
+  "gpu_workers": 2,
+  "selection": "One shared candidate must have strictly positive final-budget paired gain in all9pairs; reject after any nonpositive pair, retain already-started runs and every archive.",
+  "absolute_comparison": "Compare with old winning baseline and available stronger plain DiceCE baseline; do not describe gain over a weakened control as superior absolute performance.",
+  "training_status": "Fresh profile complete; Dice-only base130092992738FLOPs/update,409updates atcap; originalauxiliariesprofiled,20cropcalibration separate. Study validation/preflight pending.",
+  "recipes": [
+    {
+      "key": "plain_diceonly",
+      "dropout_rate": 0.0,
+      "augmentation": "none"
+    }
+  ]
+}

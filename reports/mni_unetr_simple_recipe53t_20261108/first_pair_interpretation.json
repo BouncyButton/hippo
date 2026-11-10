@@ -1,0 +1,77 @@
+{
+  "seed": 0,
+  "fold": 1,
+  "baseline_old": {
+    "validation_percent": 70.08334593194158,
+    "training_percent": 73.93952272295873,
+    "union_percent": 82.50973054446155,
+    "per_subfield_percent": {
+      "CA1_3_hard_dice": 67.31168712537348,
+      "subiculum_hard_dice": 69.16109811317142,
+      "CA4_DG_hard_dice": 73.77725255727981
+    },
+    "fn": 7300,
+    "fp": 9195,
+    "swaps": 6581,
+    "updates": 409,
+    "optimization_flops": 53217341798671,
+    "archive_manifest_sha256": "a3101e579592192798bbe98d4280276cfbe952a1d3a551d307f4cc7fd0698232"
+  },
+  "baseline_new": {
+    "validation_percent": 73.60292775545713,
+    "training_percent": 88.97659603920532,
+    "union_percent": 85.50717848794905,
+    "per_subfield_percent": {
+      "CA1_3_hard_dice": 74.96024306161709,
+      "subiculum_hard_dice": 74.43767704885978,
+      "CA4_DG_hard_dice": 71.41086315589448
+    },
+    "fn": 6037,
+    "fp": 7536,
+    "swaps": 5208,
+    "updates": 409,
+    "optimization_flops": 53217341798671,
+    "archive_manifest_sha256": "81639534a90338f5a5197f2d4edaff297e9b1823f8b02aa4a6510343ca9661e4"
+  },
+  "constrained_new": {
+    "validation_percent": 73.83282751104862,
+    "training_percent": 89.23559111369025,
+    "union_percent": 85.75257074254488,
+    "per_subfield_percent": {
+      "CA1_3_hard_dice": 75.2804146839156,
+      "subiculum_hard_dice": 75.10890223589442,
+      "CA4_DG_hard_dice": 71.10916561333582
+    },
+    "fn": 6102,
+    "fp": 7179,
+    "swaps": 5134,
+    "updates": 409,
+    "optimization_flops": 53239875702437,
+    "archive_manifest_sha256": "9a5774669a67750572d14fc06d380371e70a9d8d47e8208cba904003b5c2739c"
+  },
+  "constraint_gain_pp": 0.22989975559150055,
+  "constraint_interaction_pp": 0.7985296614201585,
+  "old_gap_pp": 3.8561767910171483,
+  "new_gap_pp": 15.373668283748188,
+  "constrained_gap_pp": 15.402763602641627,
+  "subfield_gain_pp": {
+    "CA1_3_hard_dice": 0.3201716222985027,
+    "subiculum_hard_dice": 0.6712251870346364,
+    "CA4_DG_hard_dice": -0.30169754255865655
+  },
+  "error_delta": {
+    "fn": 65,
+    "fp": -357,
+    "swaps": -74
+  },
+  "interpretation": "Removing XY-D4 alone substantially improves training fit and final validation on this one fixed pair. Bands switch from a negative to a modest positive macro gain. This supports a recipe interaction, pending the other folds/seeds. The larger train/validation gap does not mean worse validation here; bands do not narrow that gap. CA4/DG still loses0.302pp despite positive macro gain.",
+  "limits": "Single development pair; not9/9success or causal proof of a specific generalization mechanism. Finalbudget matched; first102updateprefix checks exact.",
+  "candidate_future_if_stage_fails": "Given faster training fit without augmentation and larger train/validation gap, consider original constraints with stronger/earlier calibration or a lower/less complex LR schedule only after current fixed candidates resolve. Any changed base requires fresh controls; never change current frozen recipes per pair.",
+  "result_sha256": "13bbe3fec5ee5cd88ef5866083e06df9d6164b1835277b9599952636230620c6",
+  "baseline_subfield_change_vs_old_pp": {
+    "CA1_3_hard_dice": 7.648555936243611,
+    "subiculum_hard_dice": 5.276578935688363,
+    "CA4_DG_hard_dice": -2.3663894013853337
+  },
+  "subfield_caveat": "Augmentation removal helps macro Dice through CA1/3 and subiculum, while CA4/DG decreases versus the old baseline; bands also decrease CA4/DG slightly. Do not describe this as uniform subfield improvement."
+}

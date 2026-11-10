@@ -1,0 +1,189 @@
+{
+  "checked_at": 1794042003.3276792,
+  "queue": [],
+  "status": {
+    "status": "failed",
+    "active": null,
+    "completed": 109,
+    "total": 468,
+    "job_id": "743323",
+    "updated_at": 1794041995.770337,
+    "quota": {
+      "used_gib": 46.46,
+      "limit_gib": 93.13,
+      "free_gib": 46.669999999999995,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  46.46GiB/93.13GiB  343.00k/\u221e  \n\n",
+      "checked_at": 1794041995.8062737
+    }
+  },
+  "failure": {
+    "traceback": "Traceback (most recent call last):\n  File \"/mnt/beegfsstudents/home/3160552/mni_constraints14_cap8_20261107/source/scripts/unetr_subfields/cap_extension.py\", line 280, in run\n    write(stage/'failure.json',failed);controller.summarize(stage,plan,'failed');controller.cancel_successor(stage,job);raise RuntimeError(str(failed))\n                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: {'task': {'id': 'MNI_swinunetr_dice_bands_sdf_f0s0', 'kind': 'conventional', 'dataset': 'MNI', 'model': 'swinunetr', 'arm': 'dice_bands_sdf', 'fold': 0, 'seed': 0, 'protocol': 'swinunetr_dice_bands_sdf', 'augmentation': 'none'}, 'exit_code': 1}\n"
+  },
+  "successor": {
+    "job_id": "743605",
+    "dependency": "743323",
+    "quota": {
+      "used_gib": 47.21,
+      "limit_gib": 93.13,
+      "free_gib": 45.919999999999995,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  47.21GiB/93.13GiB  342.22k/\u221e  \n\n",
+      "checked_at": 1794034290.344195
+    },
+    "submitted_at": 1794034290.472276,
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--chdir=/mnt/beegfsstudents/home/3160552/mni_constraints14_cap8_20261107",
+      "--output=/mnt/beegfsstudents/home/3160552/mni_constraints14_cap8_20261107/slurm-%j.out",
+      "--error=/mnt/beegfsstudents/home/3160552/mni_constraints14_cap8_20261107/slurm-%j.err",
+      "--dependency=afterany:743323",
+      "/mnt/beegfsstudents/home/3160552/mni_constraints14_cap8_20261107/run.sbatch",
+      "/mnt/beegfsstudents/home/3160552/mni_constraints14_cap8_20261107"
+    ],
+    "manifest_sha256": "b53aee95cb3457a33ec7c07c932ef14e51a6c8c6c27b4ffcd47d18a4fc068795"
+  },
+  "runs": [
+    {
+      "id": "MNI_basic_unet16_dice_bands_edge_sdf_depth_f0s0",
+      "remaining_checkpoints": [],
+      "budget_ledger": {
+        "charged_attempts": 4495,
+        "training_flops": 255790092706974
+      },
+      "calibration": {
+        "status": "complete",
+        "weights": {
+          "bands": 0.0025674051453120914,
+          "edge": 0.01617987581108848,
+          "sdf": 0.13564557104671837,
+          "depth": 0.00845248956937623
+        }
+      },
+      "completion": {
+        "status": "complete",
+        "updates": 4495,
+        "best_validation_hard_dice": 0.7334494512179048
+      },
+      "cleanup": {
+        "status": "complete",
+        "released_file_bytes": 28972304
+      },
+      "log_tail": "ttempts\": 4271, \"patient_passes\": 427.1, \"estimated_training_flops\": 243038094451614, \"calibration_flops\": 192443248906, \"total_flops\": 243230537700520, \"compute_fraction\": 0.9500667263774352, \"mean_train_loss\": 0.006827383287600242, \"learning_rate\": 5.013057920037373e-06, \"macro_hard_dice\": 0.719546604215115, \"CA1_3_hard_dice\": 0.7537040847851969, \"CA1_3_soft_dice\": 0.7496866106986999, \"subiculum_hard_dice\": 0.6925487703725267, \"subiculum_soft_dice\": 0.6885493576526642, \"CA4_DG_hard_dice\": 0.7123869574876213, \"CA4_DG_soft_dice\": 0.7043513357639313, \"macro_soft_dice\": 0.7141957680384319, \"whole_hippocampus_hard_dice\": 0.8466230620098548}\n{\"model\": \"unet\", \"objective\": \"dice_bands_edge_sdf_depth\", \"fold\": 0, \"seed\": 0, \"step\": 4495, \"charged_attempts\": 4495, \"patient_passes\": 449.5, \"estimated_training_flops\": 255790092706974, \"calibration_flops\": 192443248906, \"total_flops\": 255982535955880, \"compute_fraction\": 0.9999159044027042, \"mean_train_loss\": 0.006765483379630106, \"learning_rate\": 2.9999999999999997e-06, \"macro_hard_dice\": 0.7197109581302431, \"CA1_3_hard_dice\": 0.7537560299613639, \"CA1_3_soft_dice\": 0.7496726930141449, \"subiculum_hard_dice\": 0.6921829020160012, \"subiculum_soft_dice\": 0.6886449217796325, \"CA4_DG_hard_dice\": 0.7131939424133644, \"CA4_DG_soft_dice\": 0.7046813488006591, \"macro_soft_dice\": 0.7143329878648123, \"whole_hippocampus_hard_dice\": 0.8466732155947005}\n"
+    },
+    {
+      "id": "MNI_basic_unet16_dice_bands_edge_sdf_depth_f0s1",
+      "remaining_checkpoints": [],
+      "budget_ledger": {
+        "charged_attempts": 4495,
+        "training_flops": 255790092706974
+      },
+      "calibration": {
+        "status": "complete",
+        "weights": {
+          "bands": 0.0017528793718382717,
+          "edge": 0.019219692811327606,
+          "sdf": 0.09676540982651774,
+          "depth": 0.004449201698636942
+        }
+      },
+      "completion": {
+        "status": "complete",
+        "updates": 4495,
+        "best_validation_hard_dice": 0.7361966934602818
+      },
+      "cleanup": {
+        "status": "complete",
+        "released_file_bytes": 28972304
+      },
+      "log_tail": "attempts\": 4271, \"patient_passes\": 427.1, \"estimated_training_flops\": 243038094451614, \"calibration_flops\": 192443248906, \"total_flops\": 243230537700520, \"compute_fraction\": 0.9500667263774352, \"mean_train_loss\": 0.017336369608528912, \"learning_rate\": 5.013057920037373e-06, \"macro_hard_dice\": 0.7243285560970707, \"CA1_3_hard_dice\": 0.7550722952429498, \"CA1_3_soft_dice\": 0.748843252658844, \"subiculum_hard_dice\": 0.7128488214403743, \"subiculum_soft_dice\": 0.7012429773807526, \"CA4_DG_hard_dice\": 0.7050645516078876, \"CA4_DG_soft_dice\": 0.6922874629497529, \"macro_soft_dice\": 0.7141245643297831, \"whole_hippocampus_hard_dice\": 0.854664713565516}\n{\"model\": \"unet\", \"objective\": \"dice_bands_edge_sdf_depth\", \"fold\": 0, \"seed\": 1, \"step\": 4495, \"charged_attempts\": 4495, \"patient_passes\": 449.5, \"estimated_training_flops\": 255790092706974, \"calibration_flops\": 192443248906, \"total_flops\": 255982535955880, \"compute_fraction\": 0.9999159044027042, \"mean_train_loss\": 0.017264400700306787, \"learning_rate\": 2.9999999999999997e-06, \"macro_hard_dice\": 0.7245914383423624, \"CA1_3_hard_dice\": 0.7554984845942896, \"CA1_3_soft_dice\": 0.7489289104938507, \"subiculum_hard_dice\": 0.7130044668404911, \"subiculum_soft_dice\": 0.7012949705123901, \"CA4_DG_hard_dice\": 0.7052713635923062, \"CA4_DG_soft_dice\": 0.6925482869148254, \"macro_soft_dice\": 0.7142573893070221, \"whole_hippocampus_hard_dice\": 0.8548116754235903}\n"
+    },
+    {
+      "id": "MNI_basic_unet16_dice_bands_edge_sdf_depth_f0s2",
+      "remaining_checkpoints": [],
+      "budget_ledger": {
+        "charged_attempts": 4495,
+        "training_flops": 255790092706974
+      },
+      "calibration": {
+        "status": "complete",
+        "weights": {
+          "bands": 0.002263350452762306,
+          "edge": 0.03496366671389393,
+          "sdf": 0.1363264800014508,
+          "depth": 0.005686370438169813
+        }
+      },
+      "completion": {
+        "status": "complete",
+        "updates": 4495,
+        "best_validation_hard_dice": 0.736743471084566
+      },
+      "cleanup": {
+        "status": "complete",
+        "released_file_bytes": 28972304
+      },
+      "log_tail": "rged_attempts\": 4271, \"patient_passes\": 427.1, \"estimated_training_flops\": 243038094451614, \"calibration_flops\": 192443248906, \"total_flops\": 243230537700520, \"compute_fraction\": 0.9500667263774352, \"mean_train_loss\": 0.011370116167069812, \"learning_rate\": 5.013057920037373e-06, \"macro_hard_dice\": 0.722534987934697, \"CA1_3_hard_dice\": 0.7568334465870145, \"CA1_3_soft_dice\": 0.753405749797821, \"subiculum_hard_dice\": 0.7039213773289406, \"subiculum_soft_dice\": 0.6987987935543061, \"CA4_DG_hard_dice\": 0.7068501398881359, \"CA4_DG_soft_dice\": 0.7007504940032959, \"macro_soft_dice\": 0.7176516791184743, \"whole_hippocampus_hard_dice\": 0.8505818612724829}\n{\"model\": \"unet\", \"objective\": \"dice_bands_edge_sdf_depth\", \"fold\": 0, \"seed\": 2, \"step\": 4495, \"charged_attempts\": 4495, \"patient_passes\": 449.5, \"estimated_training_flops\": 255790092706974, \"calibration_flops\": 192443248906, \"total_flops\": 255982535955880, \"compute_fraction\": 0.9999159044027042, \"mean_train_loss\": 0.011317323107505217, \"learning_rate\": 2.9999999999999997e-06, \"macro_hard_dice\": 0.722106254521266, \"CA1_3_hard_dice\": 0.7565093827402638, \"CA1_3_soft_dice\": 0.7532311141490936, \"subiculum_hard_dice\": 0.703340275978637, \"subiculum_soft_dice\": 0.6987397849559784, \"CA4_DG_hard_dice\": 0.7064691048448972, \"CA4_DG_soft_dice\": 0.7005635201931, \"macro_soft_dice\": 0.7175114730993907, \"whole_hippocampus_hard_dice\": 0.8505485009947469}\n"
+    },
+    {
+      "id": "MNI_basic_unet16_dice_bands_edge_sdf_depth_f1s0",
+      "remaining_checkpoints": [],
+      "budget_ledger": {
+        "charged_attempts": 4495,
+        "training_flops": 255790092706974
+      },
+      "calibration": {
+        "status": "complete",
+        "weights": {
+          "bands": 0.0027580653738967275,
+          "edge": 0.015321825892293355,
+          "sdf": 0.14199307229151312,
+          "depth": 0.008619453625570544
+        }
+      },
+      "completion": {
+        "status": "complete",
+        "updates": 4495,
+        "best_validation_hard_dice": 0.7061076693615578
+      },
+      "cleanup": {
+        "status": "complete",
+        "released_file_bytes": 28972304
+      },
+      "log_tail": "attempts\": 4271, \"patient_passes\": 427.1, \"estimated_training_flops\": 243038094451614, \"calibration_flops\": 192443248906, \"total_flops\": 243230537700520, \"compute_fraction\": 0.9500667263774352, \"mean_train_loss\": 0.00789785259985365, \"learning_rate\": 5.013057920037373e-06, \"macro_hard_dice\": 0.7024189491565473, \"CA1_3_hard_dice\": 0.7320637857315075, \"CA1_3_soft_dice\": 0.7275614261627197, \"subiculum_hard_dice\": 0.6889521615772326, \"subiculum_soft_dice\": 0.6839021801948547, \"CA4_DG_hard_dice\": 0.6862409001609016, \"CA4_DG_soft_dice\": 0.6787273705005645, \"macro_soft_dice\": 0.6967303256193798, \"whole_hippocampus_hard_dice\": 0.837591617347741}\n{\"model\": \"unet\", \"objective\": \"dice_bands_edge_sdf_depth\", \"fold\": 1, \"seed\": 0, \"step\": 4495, \"charged_attempts\": 4495, \"patient_passes\": 449.5, \"estimated_training_flops\": 255790092706974, \"calibration_flops\": 192443248906, \"total_flops\": 255982535955880, \"compute_fraction\": 0.9999159044027042, \"mean_train_loss\": 0.007823035199960162, \"learning_rate\": 2.9999999999999997e-06, \"macro_hard_dice\": 0.7022900945788504, \"CA1_3_hard_dice\": 0.7319418216222336, \"CA1_3_soft_dice\": 0.7275362372398376, \"subiculum_hard_dice\": 0.6890652239485271, \"subiculum_soft_dice\": 0.6839022278785706, \"CA4_DG_hard_dice\": 0.6858632381657906, \"CA4_DG_soft_dice\": 0.6785973310470581, \"macro_soft_dice\": 0.6966785987218221, \"whole_hippocampus_hard_dice\": 0.8374526033173829}\n"
+    },
+    {
+      "id": "MNI_swinunetr_dice_bands_sdf_f0s0",
+      "remaining_checkpoints": [
+        "checkpoint_best.pt",
+        "checkpoint_latest.pt"
+      ],
+      "budget_ledger": {
+        "charged_attempts": 1366,
+        "training_flops": 211903894008044
+      },
+      "calibration": {
+        "status": "complete",
+        "weights": {
+          "bands": 0.03841539283365618,
+          "sdf": 1.8120397495234046
+        }
+      },
+      "log_tail": "37, \"charged_attempts\": 1237, \"patient_passes\": 123.7, \"estimated_training_flops\": 191890217231309, \"calibration_flops\": 522100342606, \"total_flops\": 192412317573915, \"compute_fraction\": 0.7501231892068677, \"mean_train_loss\": 0.017777187681597906, \"learning_rate\": 0.0001515, \"macro_hard_dice\": 0.7174364184477428, \"CA1_3_hard_dice\": 0.7433125575358781, \"CA1_3_soft_dice\": 0.5710750460624695, \"subiculum_hard_dice\": 0.702588333588537, \"subiculum_soft_dice\": 0.3982535570859909, \"CA4_DG_hard_dice\": 0.7064083642188133, \"CA4_DG_soft_dice\": 0.3130226269364357, \"macro_soft_dice\": 0.42745041002829876, \"whole_hippocampus_hard_dice\": 0.8374588110369053}\n{\"model\": \"swinunetr\", \"objective\": \"dice_bands_sdf\", \"fold\": 0, \"seed\": 0, \"step\": 1320, \"charged_attempts\": 1320, \"patient_passes\": 132.0, \"estimated_training_flops\": 204767234072154, \"calibration_flops\": 522100342606, \"total_flops\": 205289334414760, \"compute_fraction\": 0.8004610807340924, \"mean_train_loss\": 0.016049616151006824, \"learning_rate\": 0.00010528801920200652, \"macro_hard_dice\": 0.7160577242925752, \"CA1_3_hard_dice\": 0.7413126951669944, \"CA1_3_soft_dice\": 0.5776266276836395, \"subiculum_hard_dice\": 0.7013251134372134, \"subiculum_soft_dice\": 0.40537589192390444, \"CA4_DG_hard_dice\": 0.7055353642735177, \"CA4_DG_soft_dice\": 0.32090226709842684, \"macro_soft_dice\": 0.43463492890199024, \"whole_hippocampus_hard_dice\": 0.8357857365626294}\n"
+    },
+    {
+      "id": "MNI_unetr_vit_b16_dice_bands_sdf_f0s0",
+      "remaining_checkpoints": [
+        "checkpoint_latest.pt"
+      ],
+      "budget_ledger": {
+        "charged_attempts": 49,
+        "training_flops": 6375671755831
+      },
+      "log_tail": ""
+    }
+  ],
+  "slurm_errors": {
+    "slurm-743323.err": "s the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nTraceback (most recent call last):\n  File \"<frozen runpy>\", line 198, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/mnt/beegfsstudents/home/3160552/mni_constraints14_cap8_20261107/source/scripts/mni_constraints/campaign.py\", line 213, in <module>\n    if __name__=='__main__':main()\n                            ^^^^^^\n  File \"/mnt/beegfsstudents/home/3160552/mni_constraints14_cap8_20261107/source/scripts/mni_constraints/campaign.py\", line 207, in main\n    elif args.command=='run':batch.run(args.stage)\n                             ^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/beegfsstudents/home/3160552/mni_constraints14_cap8_20261107/source/scripts/unetr_subfields/cap_extension.py\", line 280, in run\n    write(stage/'failure.json',failed);controller.summarize(stage,plan,'failed');controller.cancel_successor(stage,job);raise RuntimeError(str(failed))\n                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: {'task': {'id': 'MNI_swinunetr_dice_bands_sdf_f0s0', 'kind': 'conventional', 'dataset': 'MNI', 'model': 'swinunetr', 'arm': 'dice_bands_sdf', 'fold': 0, 'seed': 0, 'protocol': 'swinunetr_dice_bands_sdf', 'augmentation': 'none'}, 'exit_code': 1}\n",
+    "slurm-743322.err": "ues might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\n"
+  }
+}

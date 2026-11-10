@@ -1,0 +1,42 @@
+{
+  "status": "specified_not_submitted",
+  "purpose": "Test generalization limitation before searching stronger constraint targets",
+  "primary_hypothesis": "With5 subjects and near-perfect training Dice, adding outer-label loss has little optimization headroom. Paired spatial augmentation may improve generalization and reveal whether bands have an additional effect.",
+  "design": {
+    "dataset": "MNI",
+    "fold": 0,
+    "seed": 0,
+    "models": [
+      "nnunet",
+      "swinunetr"
+    ],
+    "arms": [
+      "baseline",
+      "bands"
+    ],
+    "augmentation": "xy_d4_v1, the paired image/label permutation already verified and used by MNI UNETR",
+    "new_runs": 4,
+    "existing_controls": "Archived no-augmentation baseline and10% bands at the samefold/seed",
+    "optimization_flops_cap": 255811605336720,
+    "base_loss": "Keep each established winning model loss exactly unchanged",
+    "schedule": "Keep each established model schedule, matched to each arm cap",
+    "bands_target": 0.1,
+    "bands_p95_cap": 0.75,
+    "activation": "10% prefix;10% linear ramp; keep constant thereafter to isolate augmentation",
+    "training_subjects": 5,
+    "checkpoint_selection": "Final-budget primary; common-FLOP learning curves secondary; no post-hoc early-stop selection"
+  },
+  "diagnostics": [
+    "At10%,20%,50%,100% log train/validation macro and union Dice, FN/FP/internal swaps, band support coverage and training-only actual base/band gradient ratio.",
+    "Log base and bands losses separately; current total-loss curves hide which objective saturates.",
+    "Same training subjects, sampling, initial seed, augmentation sequence and preprocessing within each pair; calibration uses training only.",
+    "Report both augmentation-only gain and incremental bands gain; augmentation helping both is not evidence for bands."
+  ],
+  "decision": "Do not launch3fold3seed confirmation unless a fixed recipe improves final-budget validation without class collapse; development validation is not an unbiased held-out estimate.",
+  "secondary_hypothesis": "Class-aware boundary supervision addresses internal swaps. The zero-update categorical-gradient probe passes direction checks, but improved validation Dice requires a separate controlled training ablation; do not combine it with augmentation in the first experiment.",
+  "preflight_evidence": [
+    "reports/mni_bands_implementation_audit_20261107/numerical_checks.json",
+    "reports/mni_constraint_root_cause_20261107/probe_smoke.json"
+  ],
+  "authorization_note": "No new training was submitted during this investigation. Only zero-update interrupted-checkpoint evaluation ran."
+}

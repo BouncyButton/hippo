@@ -1,0 +1,10 @@
+{
+  "scope": "Read-only source check of existing XY-D4 geometry handling; current quarter-CE runs have augmentation disabled.",
+  "source": "experiments/mni_unetr_plain_ce02553t_20261109/source/scripts/cross_dataset_campaign/capped_core.py",
+  "sha256": "ee5bfe0f2b516bae6c39bc9c21772fd7ae401ff51f0e605880909cfa48a48b95",
+  "findings": [
+    "Native depth weights are computed before XY-D4 and passed through transform_depth with the same seed/update as image and label augmentation.",
+    "Signed-distance maps are computed from the label after augmentation."
+  ],
+  "conclusion": "No missing depth-map transform was found in the frozen XY-D4 path. This check does not establish equivalence for every augmentation policy or constraint, and no runtime was changed."
+}

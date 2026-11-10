@@ -1,0 +1,63 @@
+{
+  "status": {
+    "status": "running",
+    "active": [
+      "MNI_basic_unet16_dice_bands_f0s0",
+      "MNI_nnunet_dice_bands_f1s0"
+    ],
+    "completed": 18,
+    "total": 472,
+    "job_id": "748838",
+    "updated_at": 1794219478.2876372,
+    "quota": {
+      "used_gib": 47.91,
+      "limit_gib": 93.13,
+      "free_gib": 45.22,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  47.91GiB/93.13GiB  461.94k/\u221e  \n\n",
+      "checked_at": 1794219478.32158
+    }
+  },
+  "queue": "748839|PENDING|hippo-verified53|gres/gpu:4g.40gb:2|(Dependency)\n748838|RUNNING|hippo-verified53|gres/gpu:4g.40gb:2|gnode01\n",
+  "failure": null,
+  "runs": [
+    {
+      "id": "MNI_basic_unet16_dice_bands_f0s0",
+      "config": {
+        "model_identity": "basic_unet16",
+        "objective": "dice_bands",
+        "fold": 0,
+        "seed": 0,
+        "initial_lr": 0.00016,
+        "max_steps": 938,
+        "budget_flops": 53305109592450,
+        "protocol_sha256": "164d817a5ef98ffe71fb0c1b927e86f070c09a9c4dc0515cbc1fbb8a2774522f",
+        "augmentation": "none"
+      },
+      "last_metric": {
+        "step": "188",
+        "charged_attempts": "188",
+        "estimated_training_flops": "10678481891284",
+        "learning_rate": "0.00015052423185954884"
+      },
+      "log_tail": "\"model\": \"unet\", \"objective\": \"dice_bands\", \"fold\": 0, \"seed\": 0, \"step\": 188, \"charged_attempts\": 188, \"patient_passes\": 9.4, \"estimated_training_flops\": 10678481891284, \"calibration_flops\": 382099497372, \"total_flops\": 11060581388656, \"compute_fraction\": 0.20032754782660597, \"mean_train_loss\": 0.8324332972790333, \"learning_rate\": 0.00015052423185954884, \"macro_hard_dice\": 0.3912624657225722, \"CA1_3_hard_dice\": 0.6343302810182061, \"CA1_3_soft_dice\": 0.08024357482790948, \"subiculum_hard_dice\": 0.5367480965137817, \"subiculum_soft_dice\": 0.050308356806635854, \"CA4_DG_hard_dice\": 0.002709019635728553, \"CA4_DG_soft_dice\": 0.001733193697873503, \"macro_soft_dice\": 0.04409504177747295, \"whole_hippocampus_hard_dice\": 0.41165161184279686, \"training_macro_hard_dice\": 0.4019783773841765, \"training_CA1_3_hard_dice\": 0.6276648257919245, \"training_CA1_3_soft_dice\": 0.07750103101134301, \"training_subiculum_hard_dice\": 0.5730557353222878, \"training_subiculum_soft_dice\": 0.05242900215089321, \"training_CA4_DG_hard_dice\": 0.00521457103831738, \"training_CA4_DG_soft_dice\": 0.0020935524691594763, \"training_macro_soft_dice\": 0.0440078618771319, \"training_whole_hippocampus_hard_dice\": 0.3974881931429154}\n"
+    },
+    {
+      "id": "MNI_nnunet_dice_bands_f1s0",
+      "config": {
+        "model_identity": null,
+        "objective": null,
+        "fold": null,
+        "seed": null,
+        "initial_lr": null,
+        "max_steps": null,
+        "budget_flops": null,
+        "protocol_sha256": null,
+        "augmentation": null
+      },
+      "last_metric": null,
+      "log_tail": ""
+    }
+  ],
+  "allocation": "JobId=748838 JobName=hippo-verified53 UserId=3160552(1395) GroupId=grp_hpcclusterstudentsbocconiusers(1009) MCS_label=N/A Priority=2796 Nice=0 Account=3160552 QOS=stud JobState=RUNNING Reason=None Dependency=(null) Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:49:24 TimeLimit=06:00:00 TimeMin=N/A SubmitTime=2026-11-09T10:28:38 EligibleTime=2026-11-09T10:28:38 AccrueTime=2026-11-09T10:28:38 StartTime=2026-11-09T10:28:39 EndTime=2026-11-09T16:28:39 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-11-09T10:28:39 Scheduler=Main Partition=stud AllocNode:Sid=slnode01:1958532 ReqNodeList=(null) ExcNodeList=gnode04 NodeList=gnode01 BatchHost=gnode01 NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=48G,node=1,billing=16,gres/gpu=2 AllocTRES=cpu=8,mem=48G,node=1,billing=16,gres/gpu=2 Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=48G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) LicensesAlloc=(null) Network=(null) Command=/mnt/beegfsstudents/home/3160552/mni_verified_unetr_lower_lr_constraints14_53t_0519_20261109/run.sbatch WorkDir=/mnt/beegfsstudents/home/3160552/mni_verified_unetr_lower_lr_constraints14_53t_0519_20261109 StdErr=/mnt/beegfsstudents/home/3160552/mni_verified_unetr_lower_lr_constraints14_53t_0519_20261109/slurm-748838.err StdIn=/dev/null StdOut=/mnt/beegfsstudents/home/3160552/mni_verified_unetr_lower_lr_constraints14_53t_0519_20261109/slurm-748838.out TresPerNode=gres/gpu:4g.40gb:2 TresPerTask=cpu=8 \n",
+  "checked_at": 1794219483.735053
+}

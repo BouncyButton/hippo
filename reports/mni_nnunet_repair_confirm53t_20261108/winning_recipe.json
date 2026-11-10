@@ -1,0 +1,37 @@
+{
+  "model": "nnunet",
+  "status": "verified_all_nine_ge55",
+  "initial_lr": 0.02,
+  "lr_policy": "hold_half",
+  "lr_horizon_updates": 200,
+  "optimizer": "SGD",
+  "momentum": 0.95,
+  "nesterov": true,
+  "weight_decay": 3e-05,
+  "loss": "Original native foreground Dice+CE with deep supervision",
+  "dice_weight": 1.0,
+  "ce_weight": 1.0,
+  "augmentation": "none",
+  "gradient_clip_norm": 12.0,
+  "training_subjects": 10,
+  "training_crops": 20,
+  "seeds": [
+    0,
+    5,
+    19
+  ],
+  "folds": [
+    0,
+    1,
+    2
+  ],
+  "updates": 150,
+  "optimization_flops_cap": 53305109592450,
+  "protocol": "/Users/filippofocaccia/Desktop/hippo/reports/mni_nnunet_repair_confirm53t_20261108/frozen/protocols/lr002/protocol.json",
+  "protocol_sha256": "cfbcdbdb18fff0fc40db0c55e8a522186b008e2523c389f6f3e55564f8b164e9",
+  "core_source_sha256": "279be9dbb33758961d34fab2661e79de45852bd4df544584da03bcbf5824c160",
+  "validation_results": "/Users/filippofocaccia/Desktop/hippo/reports/mni_nnunet_repair_confirm53t_20261108/confirmation_results.json",
+  "minimum_validation_pct": 74.18153502209498,
+  "mean_validation_pct": 75.98361447944447,
+  "adoption": "Use this LR0.02 recipe for future nnUNet runs at the53.305T cap. Historical frozen campaigns remain unchanged and paused."
+}

@@ -1,0 +1,39 @@
+{
+  "cap": 95929352001270,
+  "models": {
+    "nnunet": {
+      "stage": "mni_shared_cap3_headroom_lr_refine_20261107",
+      "archive_manifest_sha256": "f910dc79d1abae6def899147e17ade3d5c8fd72c7d308036be587f1092885dac",
+      "training_dice": 0.8860964661104553,
+      "validation_dice": 0.7410936427380697,
+      "training_validation_gap_pp": 14.500282337238568
+    },
+    "swinunetr": {
+      "stage": "mni_shared_cap3_headroom_recipe_pilot_20261107",
+      "archive_manifest_sha256": "a062d29141b70add220d91053590b59a83893fefdec69bc5e98ab91b3db6833b",
+      "training_dice": 0.8628334479556232,
+      "validation_dice": 0.7556428304870717,
+      "training_validation_gap_pp": 10.719061746855152
+    },
+    "unetr_vit_b16": {
+      "stage": "mni_shared_cap3_headroom_recipe_pilot_20261107",
+      "archive_manifest_sha256": "06a1dec5cabd9a9e8411dcbde38bbea37a0959f68a5adc9110612044e6954a04",
+      "training_dice": 0.7957240302270256,
+      "validation_dice": 0.7017363508113498,
+      "training_validation_gap_pp": 9.398767941567588
+    },
+    "basic_unet16": {
+      "stage": "mni_shared_cap3_headroom_lr_refine_20261107",
+      "archive_manifest_sha256": "759c2435b172024ee0e78504a3684731f979ae590ca1da2b2e11decbb3a836c5",
+      "training_dice": 0.8748659403908572,
+      "validation_dice": 0.6764473018747913,
+      "training_validation_gap_pp": 19.84186385160659
+    }
+  },
+  "selection_uses_validation": true,
+  "validation_role": "minimum_floor_and_gap_diagnostics_not_maximization",
+  "validation_floor": 0.5,
+  "training_policy": "flexible_headroom_no_rigid_dice_band",
+  "user_clarification": "I mean do not stick to rigid margins i just need to have validation performance above 50% and training not overfitting",
+  "rationale": "Preserve reduced saturation with the lower common cap. Retain full paired augmentation for UNETR:79.57% training and70.17% validation, rather than weakening augmentation to force85\u201390% training. Confirm fixed recipes across all folds and seeds; assess curves and gaps, not training Dice alone."
+}

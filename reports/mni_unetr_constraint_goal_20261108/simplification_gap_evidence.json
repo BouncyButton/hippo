@@ -1,0 +1,38 @@
+{
+  "rows": [
+    {
+      "seed": 0,
+      "fold": 1,
+      "old_training_dice": 73.93952272295873,
+      "old_validation_dice": 70.08334593194158,
+      "plain_training_dice": 89.35640764073176,
+      "plain_validation_dice": 73.80486797844125,
+      "old_gap_pp": 3.8561767910171483,
+      "plain_gap_pp": 15.551539662290509
+    },
+    {
+      "seed": 0,
+      "fold": 2,
+      "old_training_dice": 72.65420587252002,
+      "old_validation_dice": 70.13751655096345,
+      "plain_training_dice": 88.7415049482864,
+      "plain_validation_dice": 76.1789539393954,
+      "old_gap_pp": 2.5166893215565693,
+      "plain_gap_pp": 12.562551008891006
+    },
+    {
+      "seed": 5,
+      "fold": 0,
+      "old_training_dice": 71.03019272619659,
+      "old_validation_dice": 69.21456446556068,
+      "plain_training_dice": 88.11869276643286,
+      "plain_validation_dice": 74.57989824449092,
+      "old_gap_pp": 1.8156282606359042,
+      "plain_gap_pp": 13.538794521941938
+    }
+  ],
+  "mean_validation_gain_pp": 5.042764404620617,
+  "scope": "Three completed exact seed/fold comparisons; jointly remove dropout and augmentation with original DiceCE1:1 and identical cap/LR. This is not a nine-pair result and does not attribute effects separately.",
+  "finding": "Plain UNETR has higher train and validation Dice and a wider gap in each available pair. Gap closure is not a sufficient selection criterion or demonstrated mechanism for constraints.",
+  "active_followup": "Half-CE plus post-warmup cosine, with fresh same-recipe baselines and original full/bands constraints; quarter-CE cosine exhausted."
+}

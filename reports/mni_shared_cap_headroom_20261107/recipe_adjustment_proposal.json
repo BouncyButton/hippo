@@ -1,0 +1,19 @@
+{
+  "status": "proposal_not_submitted",
+  "shared_cap": 95929352001270,
+  "historical_multiplier": 3,
+  "reduction_from_previous_8x_percent": 62.5,
+  "fold": 0,
+  "seed": 0,
+  "new_runs": 4,
+  "selection": "Training macro Dice only; report validation without selecting on it",
+  "recipes": {
+    "nnunet": "Keep native Dice+CE, SGD0.01, hold-half schedule; new shared3x cap gives more room than failed1.5x.",
+    "swinunetr": "Keep all-class logarithmic squared Dice and AdamW; introduce pairedxy_d4_v1 augmentation to reduce training memorization.",
+    "unetr_vit_b16": "Keep Geo Dice+CE, pairedD4, dropout and peakLR; test hold-half decay instead of immediate post-warmup cosine to improve learning within lower cap.",
+    "basic_unet16": "Keep original Dice and AdamW; introduce pairedxy_d4_v1 augmentation to reduce training memorization."
+  },
+  "rationale": "Budget-only pilots show undertrained nnUNet/UNETR while Swin/UNet still exceed target. Recipe changes are a separate experimental condition, never overwritten into the prior baseline result.",
+  "pending_user_preference": "Adjust recipes at lower sharedcap versus budget-only changes with unequal training Dice",
+  "full_study_not_submitted": true
+}

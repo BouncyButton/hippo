@@ -1,0 +1,868 @@
+{
+  "goal": "ACTIVE: one shared original-constraint UNETR recipe must improve final Dice in every seed0/5/19 x fold0/1/2 pair at53,305,109,592,450 optimizationFLOPs. Keep all attempts; othermodels paused. Automatically start authorized allmodel14arm3fold3seed matrix only after verified9/9, extending successful UNETR recipe toallcombinations,NNLR.02othersunchanged.",
+  "current_stage": "mni_unetr_lower_lr53t_20261109",
+  "job_id": "748615",
+  "monitor_exec_session": 7564,
+  "manifest_sha256": "aa79341c976c194418c35f75330773fe90af47744655a8069332936f008cad34",
+  "current_conditions": [
+    "lr030_cosine bands"
+  ],
+  "current_stage_helpers": [
+    "unetr_lower_lr_study.py",
+    "unetr_lower_lr_runtime.py",
+    "analyze_unetr_lower_lr_study.py",
+    "launch_unetr_lower_lr_study.py",
+    "monitor_unetr_lower_lr_study.py"
+  ],
+  "analysis": "scripts.mni_constraints.analyze_unetr_lower_lr_study; lower_lr_results.json",
+  "monitor": "scripts.mni_constraints.monitor_unetr_lower_lr_study",
+  "completed_recent": [
+    "Readiness16pilots exhausted;allcleaned",
+    "Adam diagnostic2exactreplays;noamplification;allcleaned;job747960done successor747966cancelled",
+    "Window6runs exhausted;latefull+0.0026,+0.3537,-0.2475 acrossfirst3pilots;allcleaned;job748006done748008cancelled;free46.71GiB",
+    "Original SDF/depth composition:5runs,allnegative,exhausted;job748088COMPLETED,748090CANCELLED;allarchived/cleaned8.633GiB;free46.65GiB before nextdeployment.",
+    "Simplification24runs exhausted;allarchivedcleaned41.439GiB;nodropbands3/4butseed19fold0-1.22475. Plainbaseline+5.04276mean across3pairs. Jobs748129done748132cancelled;free46.51.",
+    "PlainSDF/depth3newrunsallfailedseed0fold1:SDF-.409014,depth-.120317,joint-.175674;allarchivedcleaned5.179922GiB;3oldcontrolsreusednotdoublecounted;748288done748290cancelled;free46.44."
+  ],
+  "user_latest": {
+    "authorized": true,
+    "instruction": "If current/other constraint approaches fail, modify UNETR training recipe too; assess whether a simpler recipe creates training room for constraints.",
+    "received_at": 1794175352.8496482,
+    "condition": "After current timing and original-loss composition candidates fail to establish shared9/9 improvement. Continue current authorized runs.",
+    "plan": "Test removing/reducing XY-D4 augmentation and dropout, initially keeping base loss/optimizer/LR/data fixed; consider a simpler LR schedule if needed. Use controlled simplification rather than changing every factor at once.",
+    "mandatory_controls": "Every altered base recipe needs matched new unconstrained baselines at the same cap for its seeds/folds. Compare constrained vs that same simplified baseline; do not attribute a base-recipe gain to constraints. Compare training fit, validation, train/val gap and paired constraint gain.",
+    "constants": "Original constraint definitions, seeds0/5/19,folds0/1/2,53,305,109,592,450 optimization FLOPs,2GPUworkers,othermodels paused. Profile changed training graphs and adjust affordable update counts; calibrate only on training data.",
+    "goal_acceptance": "One shared recipe with positive constrained-vs-matched-baseline final Dice on all9pairs before fullmatrix startup. Preserve all failed attempts and archives.",
+    "status": "Conditional extension triggered after all prior composition candidates failed; simplified study now running.",
+    "absolute_performance_check": "Also compare every simplified constrained run against the CURRENT winning-recipe unconstrained baseline. Report all three values. A constraint gain over a substantially weakened new baseline alone is not evidence of improved absolute UNETR performance; do not silently promote such a recipe.",
+    "runtime_findings": "Dropout.1 is hardcoded in geo_recipe.model_kwargs; protocol-only edit would not change model. Need protocol-bound builder and runtime guards, matched baseline controls, and fresh network FLOPs profile for dropout0. Paired XY-D4 is stateless preprocessing; removing it keeps the optimizer graph cost unchanged, but must be explicitly recorded.",
+    "profiling_preparation": {
+      "status": "verified_current_control_and_dropout0_profile; eval/calibration forward exactly equal",
+      "current_update_flops": 130115750119,
+      "dropout0_update_flops": 130103216359,
+      "base_updates_both": 409,
+      "local_environment": "PYTHONPATH=/tmp/hippo_monai160_20261106:/tmp/hippo_mni_profile_deps:.:scripts:baselines/nnUNet .venv/bin/python; Torch2.2.2/MONAI1.6.0",
+      "script": "scripts/mni_constraints/profile_unetr_simplification.py",
+      "training_status": "No simplified recipe trained or submitted; conditional only."
+    },
+    "runtime_preparation": "Actual-model dropout adapter tested with all3meta models; captured ORIGINAL_TRAIN avoids delegation recursion; same-recipe pair verification includes actual dropout modules, source hash, augmentation and exact102-update prefix.",
+    "augmentation_exposure_audit": "augmentation_exposure_audit.json:150/151observed crop-transform combinations in409updates vs20unchangedcrops20-21times; sampler matched all32diagnosticcases; this is not a generalization result.",
+    "initial_factorial_options": [
+      {
+        "key": "noaug",
+        "dropout_rate": 0.1,
+        "augmentation": "none"
+      },
+      {
+        "key": "nodrop",
+        "dropout_rate": 0.0,
+        "augmentation": "xy_d4_v1"
+      },
+      {
+        "key": "plain",
+        "dropout_rate": 0.0,
+        "augmentation": "none"
+      }
+    ],
+    "remaining_implementation": "No current-stage implementation remains. Monitor/analyze/archive and inspect all9ifcandidate survives. Only update fullmatrix builder after actual shared9/9winner and absolute-performance assessment.",
+    "paired_scheduler_preparation": "unetr_recipe_pair_selection.py plus tests ready: matches each altered-recipe constraint to its own new baseline by recipe/seed/fold; unpaired scores cannot qualify/reject; share same-recipe baseline across arms; early rejection; require9/9."
+  },
+  "conditional_base_preparation_files": [
+    "scripts/mni_constraints/unetr_simple_recipe_runtime.py",
+    "scripts/mni_constraints/profile_unetr_simplification.py",
+    "scripts/mni_constraints/unetr_recipe_pair_selection.py",
+    "scripts/mni_constraints/test_unetr_recipe_pair_selection.py",
+    "scripts/mni_constraints/unetr_simple_recipe_study.py",
+    "scripts/mni_constraints/analyze_unetr_simple_recipe_study.py",
+    "scripts/mni_constraints/launch_unetr_simple_recipe_study.py",
+    "scripts/mni_constraints/monitor_unetr_simple_recipe_study.py"
+  ],
+  "simplification_status": "COMPLETE/exhausted: all6candidatesfailed;24runsarchivedcleaned;no9/9solution.",
+  "no_goal_success_yet": true,
+  "updated_at": 1794216968.374433,
+  "successor_job_id": "748616",
+  "active_stage": "mni_unetr_lower_lr53t_20261109",
+  "stage_status": "local_preflight",
+  "launch_exec_session": null,
+  "active_job": null,
+  "queued_successor": null,
+  "next_action": "Monitor7564 through finalseed19fold2. After verified9/9 and completedstage, audit_unetr_stage_completion --name mni_unetr_lower_lr53t_20261109 --jobs748615,748616 --result-file lower_lr_results.json (space between --jobs and IDs). Wait for emptyqueue. Then verified_lower_lr_full_matrix prepare (no --stage), launch_verified_lower_lr_full_matrix, verify2GPU running workers. No absolute-Dice veto: user explicitly resolved preference.",
+  "current_progress": {
+    "status": "running",
+    "active": [
+      "MNI_unetr_lr030_cosine_dice_f2s19",
+      "MNI_unetr_lr030_cosine_dice_bands_f2s19"
+    ],
+    "completed": 34,
+    "total": 54,
+    "selected": {
+      "candidate": null,
+      "winner": null
+    },
+    "job_id": "748615"
+  },
+  "first_simpler_recipe_result": {
+    "candidate": "noaug_bands",
+    "seed": 0,
+    "fold": 1,
+    "gain_pp": 0.22989975559150055,
+    "absolute_gain_vs_old_baseline_pp": 3.749481579107041,
+    "constraint_interaction_pp": 0.7985296614201585
+  },
+  "latest_simple_results": [
+    {
+      "candidate": "noaug_bands",
+      "seed": 0,
+      "fold": 1,
+      "gain_pp": 0.22989975559150055,
+      "absolute_gain_vs_old_baseline_pp": 3.749481579107041
+    },
+    {
+      "candidate": "noaug_bands",
+      "seed": 0,
+      "fold": 2,
+      "gain_pp": -0.16607534758041886,
+      "absolute_gain_vs_old_baseline_pp": 5.856966274324833
+    },
+    {
+      "candidate": "noaug_full",
+      "seed": 0,
+      "fold": 1,
+      "gain_pp": 0.35222641512535624,
+      "absolute_gain_vs_old_baseline_pp": 3.8718082386409094
+    },
+    {
+      "candidate": "noaug_full",
+      "seed": 0,
+      "fold": 2,
+      "gain_pp": -0.08228810378002605,
+      "absolute_gain_vs_old_baseline_pp": 5.940753518125234
+    },
+    {
+      "candidate": "nodrop_bands",
+      "seed": 0,
+      "fold": 1,
+      "gain_pp": 0.5861623494162749,
+      "absolute_gain_vs_old_baseline_pp": -0.34592951384692583
+    },
+    {
+      "candidate": "nodrop_bands",
+      "seed": 0,
+      "fold": 2,
+      "gain_pp": 0.6878830103241418,
+      "absolute_gain_vs_old_baseline_pp": 0.34008122692037546
+    },
+    {
+      "candidate": "nodrop_bands",
+      "seed": 5,
+      "fold": 0,
+      "gain_pp": 0.2251404609333929,
+      "absolute_gain_vs_old_baseline_pp": 0.8417923712171103
+    },
+    {
+      "candidate": "nodrop_bands",
+      "seed": 19,
+      "fold": 0,
+      "gain_pp": -1.2247496036313366,
+      "absolute_gain_vs_old_baseline_pp": 0.13614635888488635
+    },
+    {
+      "candidate": "nodrop_full",
+      "seed": 0,
+      "fold": 1,
+      "gain_pp": 0.13875507703233758,
+      "absolute_gain_vs_old_baseline_pp": -0.7933367862308671
+    },
+    {
+      "candidate": "nodrop_full",
+      "seed": 0,
+      "fold": 2,
+      "gain_pp": 0.6648953742970365,
+      "absolute_gain_vs_old_baseline_pp": 0.31709359089326483
+    },
+    {
+      "candidate": "nodrop_full",
+      "seed": 5,
+      "fold": 0,
+      "gain_pp": -1.3219397189215942,
+      "absolute_gain_vs_old_baseline_pp": -0.7052878086378769
+    },
+    {
+      "candidate": "plain_bands",
+      "seed": 0,
+      "fold": 1,
+      "gain_pp": -0.022214399030640042,
+      "absolute_gain_vs_old_baseline_pp": 3.699307647469041
+    },
+    {
+      "candidate": "plain_full",
+      "seed": 0,
+      "fold": 1,
+      "gain_pp": 0.20614777284470032,
+      "absolute_gain_vs_old_baseline_pp": 3.9276698193443735
+    },
+    {
+      "candidate": "plain_full",
+      "seed": 0,
+      "fold": 2,
+      "gain_pp": 0.3216502740756355,
+      "absolute_gain_vs_old_baseline_pp": 6.363087662507581
+    },
+    {
+      "candidate": "plain_full",
+      "seed": 5,
+      "fold": 0,
+      "gain_pp": -0.26406892301895635,
+      "absolute_gain_vs_old_baseline_pp": 5.101264855911282
+    }
+  ],
+  "additional_analysis": "analyze_unetr_lr_interactions.py comparesmatchedoldplainholdhalfconstraintgainsvsnewcosine;runafternewresults. calibration_accounting_audit.json confirmsall4armsbelowoptimizationcapand20calibrationcrops+8192hostFLOPs, archivedbaseline/bandsledgersmatch.",
+  "latest_simple_summary": [
+    {
+      "candidate": "noaug_bands",
+      "pairs": 2,
+      "rejected": true,
+      "mean_gain_pp": 0.031912204005540845,
+      "minimum_gain_pp": -0.16607534758041886,
+      "all_nine_improved": false,
+      "all_pairs": {
+        "pairs": 2,
+        "mean_gain_pp": 0.031912204005540845,
+        "minimum_gain_pp": -0.16607534758041886,
+        "improved_pairs": 1
+      },
+      "mean_absolute_gain_vs_old_baseline_pp": 4.803223926715937,
+      "minimum_absolute_gain_vs_old_baseline_pp": 3.749481579107041,
+      "mean_new_baseline_gain_vs_old_baseline_pp": 4.771311722710401
+    },
+    {
+      "candidate": "noaug_full",
+      "pairs": 2,
+      "rejected": true,
+      "mean_gain_pp": 0.1349691556726651,
+      "minimum_gain_pp": -0.08228810378002605,
+      "all_nine_improved": false,
+      "all_pairs": {
+        "pairs": 2,
+        "mean_gain_pp": 0.1349691556726651,
+        "minimum_gain_pp": -0.08228810378002605,
+        "improved_pairs": 1
+      },
+      "mean_absolute_gain_vs_old_baseline_pp": 4.906280878383072,
+      "minimum_absolute_gain_vs_old_baseline_pp": 3.8718082386409094,
+      "mean_new_baseline_gain_vs_old_baseline_pp": 4.771311722710401
+    },
+    {
+      "candidate": "nodrop_bands",
+      "pairs": 4,
+      "rejected": true,
+      "mean_gain_pp": 0.06860905426061825,
+      "minimum_gain_pp": -1.2247496036313366,
+      "all_nine_improved": false,
+      "all_pairs": {
+        "pairs": 4,
+        "mean_gain_pp": 0.06860905426061825,
+        "minimum_gain_pp": -1.2247496036313366,
+        "improved_pairs": 3
+      },
+      "mean_absolute_gain_vs_old_baseline_pp": 0.24302261079386156,
+      "minimum_absolute_gain_vs_old_baseline_pp": -0.34592951384692583,
+      "mean_new_baseline_gain_vs_old_baseline_pp": 0.17441355653323853
+    },
+    {
+      "candidate": "nodrop_full",
+      "pairs": 3,
+      "rejected": true,
+      "mean_gain_pp": -0.1727630891974067,
+      "minimum_gain_pp": -1.3219397189215942,
+      "all_nine_improved": false,
+      "all_pairs": {
+        "pairs": 3,
+        "mean_gain_pp": -0.1727630891974067,
+        "minimum_gain_pp": -1.3219397189215942,
+        "improved_pairs": 2
+      },
+      "mean_absolute_gain_vs_old_baseline_pp": -0.3938436679918264,
+      "minimum_absolute_gain_vs_old_baseline_pp": -0.7933367862308671,
+      "mean_new_baseline_gain_vs_old_baseline_pp": -0.22108057879441864
+    },
+    {
+      "candidate": "plain_bands",
+      "pairs": 1,
+      "rejected": true,
+      "mean_gain_pp": -0.022214399030640042,
+      "minimum_gain_pp": -0.022214399030640042,
+      "all_nine_improved": false,
+      "all_pairs": {
+        "pairs": 1,
+        "mean_gain_pp": -0.022214399030640042,
+        "minimum_gain_pp": -0.022214399030640042,
+        "improved_pairs": 0
+      },
+      "mean_absolute_gain_vs_old_baseline_pp": 3.699307647469041,
+      "minimum_absolute_gain_vs_old_baseline_pp": 3.699307647469041,
+      "mean_new_baseline_gain_vs_old_baseline_pp": 3.721522046499672
+    },
+    {
+      "candidate": "plain_full",
+      "pairs": 3,
+      "rejected": true,
+      "mean_gain_pp": 0.0879097079671265,
+      "minimum_gain_pp": -0.26406892301895635,
+      "all_nine_improved": false,
+      "all_pairs": {
+        "pairs": 3,
+        "mean_gain_pp": 0.0879097079671265,
+        "minimum_gain_pp": -0.26406892301895635,
+        "improved_pairs": 2
+      },
+      "mean_absolute_gain_vs_old_baseline_pp": 5.130674112587745,
+      "minimum_absolute_gain_vs_old_baseline_pp": 3.9276698193443735,
+      "mean_new_baseline_gain_vs_old_baseline_pp": 5.042764404620617
+    }
+  ],
+  "conditional_followup_note": "conditional_after_simple_recipe.json; only if currentremainingcandidatesfail. Fullmatrixintegrationnotes separate; do notlaunch before9/9andabsoluteassessment.",
+  "conditional_matrix_helpers": "New verified_unetr_full_matrix.py and launch_verified_unetr_full_matrix.py drafted. Real archive reuse test passed23cells including9NNcontrols, all56protocols/504cells; recovery route/copy/retirement guards passed. Need actual winning freeze and isolated+remote preflights after9/9; do not claim deployment-ready from component checks alone.",
+  "reuse_note": "Three plain baseline archives copied byte-for-byte into frozenruns and localreport/runs; identical priorplain_diceprotocol. Their historical cleanup bytes must not be counted as newly released in this stage.",
+  "conditional_lr_preparation": "unetr_plain_cosine_study plus analyzer/launcher/monitor and test added,notfrozenorsubmitted. Triggeronlyifcurrentstageexhausted. Threeconstraints(bands,full,SDF+depth)withnewplaincosinebaseline;LR6e-4,24warmupthenimmediatedecay;409updatesunchanged. No currentstagefilesmodified. Testpassed:onlynumericaldifferenceLRpolicy;all4arms409updates;freshcontrolsmandatory. Nextstageprepareguardrequirescurrentcomplete/exhausted. NeeddecisionJSONbeforeprepare.",
+  "last_goal_turn_classification": "Progress: verified eighth positive matched pair; reviewed actual final-audit, matrix preparation/deployment, exact archive reuse and protected recovery paths. Existing monitor/job live; no premature full-stage creation.",
+  "current_goal_turn_classification": "progress: confirmed3negativecandidatesandfirstpositiveDice-onlybands; independentarchiveproof5runs; firstbandsexceedsstrongerplainDiceCEbaselineonthispair. Continuedfixedconfirmationonfold2.",
+  "sdf_timing_precision": "Authoritative perarm schedules use nearest5/9optimizationcompute: fullcombinationprefix227(firstactive228),SDF+depthandsdf-onlyprefix228(firstactive229). Earlier shorthand228wasnotuniform. Profiles/runtimeunchanged;LRplotcorrectedtoderiveonsetsfromprotocols.",
+  "submission_recovery": "Originallauncher60212endedwith180sSSHobservationtimeoutduringimmutableverify;authoritativeremotecheckconfirmednosubmissionreceipt,noSlurmjobs,andnosurvivingsubmitprocess. Retryingonlysubmissionwith900stimeout(session30287);collectorandmonitorremainexisting,notduplicated. Sharedlocal launcher submit timeout fixedto900forfuturestudies.",
+  "audit_fix": "Liveauditdiscoveredconfig.jsonhasnoLRpolicykey: policy is inhashedprotocol. Correctedanalyze_unetr_plain_cosine_study tocheckfrozenpolicyandeveryrecordedLR,removedinvalidpaircfgkey. StoppedverifiedlocalmonitorPID35071only and restartedassession10933;GPUjobandcollectorcontinued. Reanalyzingallavailablearchiveswithnewsourcehash.",
+  "analysis_source_sha256": "02aef230c13a40429e2bd6bead5777861109b75a601fc59db092742df34ba5d3",
+  "latest_cosine_summary": [
+    {
+      "candidate": "plain_cosine_bands",
+      "pairs": 1,
+      "rejected": true,
+      "mean_gain_pp": -0.13395220349745607,
+      "minimum_gain_pp": -0.13395220349745607,
+      "all_nine_improved": false,
+      "all_pairs": {
+        "pairs": 1,
+        "mean_gain_pp": -0.13395220349745607,
+        "minimum_gain_pp": -0.13395220349745607,
+        "improved_pairs": 0
+      },
+      "prior_plain_comparison_pairs": 1,
+      "mean_absolute_gain_vs_prior_plain_baseline_pp": -0.9088388168378003,
+      "mean_absolute_gain_vs_old_baseline_pp": 2.8126832296618716,
+      "minimum_absolute_gain_vs_old_baseline_pp": 2.8126832296618716,
+      "mean_new_baseline_gain_vs_old_baseline_pp": 2.9466354331593294
+    },
+    {
+      "candidate": "plain_cosine_full",
+      "pairs": 6,
+      "rejected": true,
+      "mean_gain_pp": 0.2218567245373134,
+      "minimum_gain_pp": -0.45301327085987,
+      "all_nine_improved": false,
+      "all_pairs": {
+        "pairs": 6,
+        "mean_gain_pp": 0.2218567245373134,
+        "minimum_gain_pp": -0.45301327085987,
+        "improved_pairs": 5
+      },
+      "prior_plain_comparison_pairs": 3,
+      "mean_absolute_gain_vs_prior_plain_baseline_pp": -1.0700627355372443,
+      "mean_absolute_gain_vs_old_baseline_pp": 3.325491175673889,
+      "minimum_absolute_gain_vs_old_baseline_pp": -0.619598233306661,
+      "mean_new_baseline_gain_vs_old_baseline_pp": 3.1036344511365783
+    },
+    {
+      "candidate": "plain_cosine_sdf_depth",
+      "pairs": 1,
+      "rejected": true,
+      "mean_gain_pp": -0.05917409039101207,
+      "minimum_gain_pp": -0.05917409039101207,
+      "all_nine_improved": false,
+      "all_pairs": {
+        "pairs": 1,
+        "mean_gain_pp": -0.05917409039101207,
+        "minimum_gain_pp": -0.05917409039101207,
+        "improved_pairs": 0
+      },
+      "prior_plain_comparison_pairs": 1,
+      "mean_absolute_gain_vs_prior_plain_baseline_pp": -0.8340607037313532,
+      "mean_absolute_gain_vs_old_baseline_pp": 2.8874613427683187,
+      "minimum_absolute_gain_vs_old_baseline_pp": 2.8874613427683187,
+      "mean_new_baseline_gain_vs_old_baseline_pp": 2.9466354331593294
+    }
+  ],
+  "conditional_recovery_helpers": "verified_matrix_recovery.py, collect_verified_matrix.py and test_verified_matrix_recovery.py added and tested. Exact initial-copy/resume preservation, archive hash/durability/pause guards, narrow idempotent original retirement and durable receipt mirroring passed. Not wired/deployed; real protected checkpoint untouched.",
+  "conditional_matrix_runtime_preflight": "Passed local Torch2.2.2/MONAI1.6.0 on scratch56protocols: actualdropout0/cap_matchedLR,NNLR.02nativeDiceCE1:1,52originalconstraint calibration/loss/gradient checks,realcohortgeometry,modelshapes,0optimizerupdates. Report conditional_matrix_runtime_preflight.json. Does not bypass9gate; isolated frozen-source and remote checks still needed afteractualwinner.",
+  "conditional_diceonly_status": "Frozen manifest4be84ff28fe0a4fa47efca520f41c0ed746ecd6aa9d34eb24d555cd975da4829. Sourcecoreunchanged;adapter819beccee053519c0f42b98eebffcec307f3eacfe41c1e32fcec22437e0e9c14. FreshsameDice-only controls;originalauxiliaries;holdhalfLR.0006;409updates;45maxruns. Localandremote preflightpassed;notyetSlurmconfirmed.",
+  "additional_diceonly_analysis": "analyze_unetr_diceonly_interactions.py actualfirstrowpassed. base_loss_interactions.json saved; refresh as more exactmatchedhistoricalcells becomeavailable. No active source/monitor modified.",
+  "latest_diceonly_summary": [
+    {
+      "candidate": "plain_diceonly_full",
+      "pairs": 1,
+      "rejected": true,
+      "mean_gain_pp": -0.44594488223322903,
+      "minimum_gain_pp": -0.44594488223322903,
+      "all_nine_improved": false,
+      "all_pairs": {
+        "pairs": 1,
+        "mean_gain_pp": -0.44594488223322903,
+        "minimum_gain_pp": -0.44594488223322903,
+        "improved_pairs": 0
+      },
+      "prior_plain_comparison_pairs": 1,
+      "mean_absolute_gain_vs_prior_plain_baseline_pp": -0.3287972093073819,
+      "mean_absolute_gain_vs_old_baseline_pp": 3.39272483719229,
+      "minimum_absolute_gain_vs_old_baseline_pp": 3.39272483719229,
+      "mean_new_baseline_gain_vs_old_baseline_pp": 3.838669719425525
+    },
+    {
+      "candidate": "plain_diceonly_depth",
+      "pairs": 1,
+      "rejected": true,
+      "mean_gain_pp": -0.6645427371245738,
+      "minimum_gain_pp": -0.6645427371245738,
+      "all_nine_improved": false,
+      "all_pairs": {
+        "pairs": 1,
+        "mean_gain_pp": -0.6645427371245738,
+        "minimum_gain_pp": -0.6645427371245738,
+        "improved_pairs": 0
+      },
+      "prior_plain_comparison_pairs": 1,
+      "mean_absolute_gain_vs_prior_plain_baseline_pp": -0.5473950641987244,
+      "mean_absolute_gain_vs_old_baseline_pp": 3.1741269823009475,
+      "minimum_absolute_gain_vs_old_baseline_pp": 3.1741269823009475,
+      "mean_new_baseline_gain_vs_old_baseline_pp": 3.838669719425525
+    },
+    {
+      "candidate": "plain_diceonly_sdf_depth",
+      "pairs": 1,
+      "rejected": true,
+      "mean_gain_pp": -0.15107606941217044,
+      "minimum_gain_pp": -0.15107606941217044,
+      "all_nine_improved": false,
+      "all_pairs": {
+        "pairs": 1,
+        "mean_gain_pp": -0.15107606941217044,
+        "minimum_gain_pp": -0.15107606941217044,
+        "improved_pairs": 0
+      },
+      "prior_plain_comparison_pairs": 1,
+      "mean_absolute_gain_vs_prior_plain_baseline_pp": -0.03392839648631707,
+      "mean_absolute_gain_vs_old_baseline_pp": 3.687593650013355,
+      "minimum_absolute_gain_vs_old_baseline_pp": 3.687593650013355,
+      "mean_new_baseline_gain_vs_old_baseline_pp": 3.838669719425525
+    },
+    {
+      "candidate": "plain_diceonly_bands",
+      "pairs": 1,
+      "rejected": false,
+      "mean_gain_pp": 0.23489193786387919,
+      "minimum_gain_pp": 0.23489193786387919,
+      "all_nine_improved": false,
+      "all_pairs": {
+        "pairs": 1,
+        "mean_gain_pp": 0.23489193786387919,
+        "minimum_gain_pp": 0.23489193786387919,
+        "improved_pairs": 1
+      },
+      "prior_plain_comparison_pairs": 1,
+      "mean_absolute_gain_vs_prior_plain_baseline_pp": 0.3520396107897312,
+      "mean_absolute_gain_vs_old_baseline_pp": 4.073561657289403,
+      "minimum_absolute_gain_vs_old_baseline_pp": 4.073561657289403,
+      "mean_new_baseline_gain_vs_old_baseline_pp": 3.838669719425525
+    }
+  ],
+  "diceonly_interaction_evidence": "First full seed0fold1: removingbaseCE changesbaseline+.1171476729 andconstrained-.5349449822; pairedconstraintinteraction-.6520926551 versuspreviousplainDiceCEfull. Allarchivedsource/model/data/LR checks pass. Traininggain+.2221833451 butvalidationgain-.4459448822; all3subfieldsdecline,union-.0097246626,147moreswaps.",
+  "latest_storage_audit": {
+    "cleaned": 34,
+    "released_gib": 58.70578145608306,
+    "latest_quota_file": "reports/mni_unetr_lower_lr53t_20261109/latest_quota.json"
+  },
+  "soft_hard_diagnostic": "soft_hard_disagreement.json: Dice-onlyfullvalsoftDice+2.5242034098pp whilehard-.4459448822pp; DiceCEfullsoft+1.686052233/hard+.206147773. EvaluatorstandardunsquaredsoftDicevsargmaxhard; trainingbaseissquaredDice. Notaconfidencecalibrationclaim; hardmetricgateunchanged.",
+  "conditional_timing_diagnostic": "mni_unetr_plain_cosine53t_20261109/full_learning_deltas.json: failedseed5fold1positiveat123/144/164/185,nearzero205/226/246,negativefrom267. Otherpairs mixedincludingnegative226thenpositive409,so no universallate-harmclaim andno selectedcheckpoint/counterfactualwindowclaim. Couldinformfutureoriginalsubset/windowtestonlyifcurrentbandsfails.",
+  "diceonly_robustness_concern": {
+    "confirmed": true,
+    "seed": 5,
+    "fold": 0,
+    "training_ca4_dice_percent": 0.0049608604057895574,
+    "validation_ca4_dice_percent": 0.0018314628318832965,
+    "same_seed_dicece_validation_ca4_percent": 74.63477690906089,
+    "synthetic_gradient_check": "Near-zero predicted class probability suppresses actual Dice-only true-class recovery gradients; CE remains corrective. This synthetic check is not direct network-gradient evidence.",
+    "absolute_performance_assessment_required_before_promotion": true,
+    "confusion_audit": "Dominant massivebackground-to-CA4falsepositives, not absent predictions: seed5baseline1,304,839BGvoxelsCA4vs12TP;seed19baseline1,650,617BGvoxelsCA4vs3334TP. Seeclass_collapse_confusion_audit.json. Originaltrue-class-suppression syntheticchecknotcomplete explanation; newfalse-positive-saturation check addressesactualfailure direction."
+  },
+  "conditional_followup": "Half-CE cosine follow-up authorized and now deploying after quarter-CE cosine exhausted; no full matrix before nine positive matched pairs.",
+  "optional_absolute_performance_question": "Askedwhether9positivegainswithcatastrophicallyweakenedbasewouldcount;currentDice-onlyfailedpairedgateanywaysoanswerisnotneededfornextauthorizedrecipe.",
+  "conditional_full_matrix": "Both runtime preflights already passed. Latest surviving LR0.0003 reuse-only check passed504logical cells/56protocols and24actual archive reuse candidates incl13UNETR and9NNcontrols; receipt conditional_lr030_cosine_reuse_refresh.json. Partial gate rejected. No full matrix stage or job yet.",
+  "loss_balance_comparison": "reports/mni_unetr_plain_ce02553t_20261109/loss_balance_first_pair.{png,pdf,json}; all12 archived same-pair comparisons across CE1/.25/0, inspected; explicitly one-pair development evidence.",
+  "additional_cosine_analysis": "bands_paired_diagnostics.json andce025_cosine_bands_paired_cases.json refreshedthrough3pairs. Seed5train+.063916vsval+.290383; union+.374855; CA1+.306643,sub+.128107,CA4+.436399; FN-91,FP-282,swaps+32. Currentbandsmean-.929085ppvsstrongerplainCE1holdbaseline across3availablepairs, +4.113679vsoldwinningbaseline. Four-cellanalysis containsmissinghistoricalarms honestly; seed5onlycurrentcompletebands pair.",
+  "latest_ce025_cosine_summary": [
+    {
+      "candidate": "ce025_cosine_full",
+      "pairs": 1,
+      "rejected": true,
+      "mean_gain_pp": -0.012094096368020502,
+      "minimum_gain_pp": -0.012094096368020502,
+      "all_nine_improved": false,
+      "all_pairs": {
+        "pairs": 1,
+        "mean_gain_pp": -0.012094096368020502,
+        "minimum_gain_pp": -0.012094096368020502,
+        "improved_pairs": 0
+      },
+      "prior_plain_comparison_pairs": 1,
+      "mean_absolute_gain_vs_prior_plain_baseline_pp": -0.8953749597520044,
+      "mean_absolute_gain_vs_old_baseline_pp": 2.8261470867476675,
+      "minimum_absolute_gain_vs_old_baseline_pp": 2.8261470867476675,
+      "mean_new_baseline_gain_vs_old_baseline_pp": 2.8382411831156986
+    },
+    {
+      "candidate": "ce025_cosine_bands",
+      "pairs": 5,
+      "rejected": true,
+      "mean_gain_pp": 0.17588546686998718,
+      "minimum_gain_pp": -0.3910521662152222,
+      "all_nine_improved": false,
+      "all_pairs": {
+        "pairs": 5,
+        "mean_gain_pp": 0.17588546686998718,
+        "minimum_gain_pp": -0.3910521662152222,
+        "improved_pairs": 4
+      },
+      "prior_plain_comparison_pairs": 3,
+      "mean_absolute_gain_vs_prior_plain_baseline_pp": -0.9290852783453735,
+      "mean_absolute_gain_vs_old_baseline_pp": 3.2813521539356145,
+      "minimum_absolute_gain_vs_old_baseline_pp": 1.2574761898289495,
+      "mean_new_baseline_gain_vs_old_baseline_pp": 3.105466687065629
+    }
+  ],
+  "paired_case_analysis": "analyze_unetr_paired_cases.py --name mni_unetr_ce025_cosine53t_20261109 --result-file ce025_cosine_results.json --candidate ce025_cosine_bands. Verifiedmacroequalsmean10crops and5pairedL/Rsubjects. Firstfold9/10crops,4/5subjects improve;secondfold5/10crops,4/5subjects. Descriptive only, repeatedsubjectsnotindependent. Exact four newanalysishelper sources/hashmanifest retained inreport/analysis_source.",
+  "baseline_loss_comparison": "analyze_unetr_ce025_cosine_baselines.py +cosine_baseline_loss_comparison.json: samecosine/data/model/optimizer/cap, quarterCEbaselinevsCE1 changes[-.108394,+.776548,+.290407,+1.725891] on4pilots,mean+.671113pp,3/4positive. These are base-recipe effects, separatefrombandsmatchedgain. Source archived/hashverified.",
+  "metadata_clarification": "FrozenquarterCEprotocols retainlegacy loss_weightsCE1/loss_source fields. Actual loss_arguments.lambda_ce=.25, base_loss_recipe.json weight=.25 andvalidatedquarterCEadapter controloptimizationandcalibration. Runtimefunctions/numericalchecks confirm actual.25. Do notretroactivelyeditfrozenprotocols; metadata noteincosine_baseline_loss_comparison.json.",
+  "launcher_exec_session": null,
+  "current_phase": "Surviving LR0.0003 delayed bands8/9positive. Seed19/fold1 57.588158 vs55.878989 (+1.709169pp). Onlyseed19/fold2 remains and both matched runs active.34runs archived/cleaned. User explicitly prioritizes paired consistency over absolute Dice; automatic full matrix remains authorized after9/9.",
+  "collector_pid": 72770,
+  "submission": {
+    "job_id": "748615",
+    "dependency": null,
+    "quota": {
+      "used_gib": 47.36,
+      "limit_gib": 93.13,
+      "free_gib": 45.769999999999996,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  47.36GiB/93.13GiB  456.05k/\u221e  \n\n",
+      "checked_at": 1794207216.3533149
+    },
+    "submitted_at": 1794207216.5753262,
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--chdir=/mnt/beegfsstudents/home/3160552/mni_unetr_lower_lr53t_20261109",
+      "--output=/mnt/beegfsstudents/home/3160552/mni_unetr_lower_lr53t_20261109/slurm-%j.out",
+      "--error=/mnt/beegfsstudents/home/3160552/mni_unetr_lower_lr53t_20261109/slurm-%j.err",
+      "/mnt/beegfsstudents/home/3160552/mni_unetr_lower_lr53t_20261109/run.sbatch",
+      "/mnt/beegfsstudents/home/3160552/mni_unetr_lower_lr53t_20261109"
+    ],
+    "manifest_sha256": "aa79341c976c194418c35f75330773fe90af47744655a8069332936f008cad34"
+  },
+  "base_ce_comparison": "cosine_ce_baseline_comparison.json: CE1to.25 samecosinebaseline +.6320893183pp mean across5pairs,4positive; nohalfCEbaseline completedyet. This is not aconstraintgain.",
+  "runtime_audit": "mni_unetr_ce050_cosine53t_20261109/startup_metadata_audit.json: actualCE.5/dropout0/noaug/cosine409/source/protocolhashesverified; identical21/41/62/82prefix; training-only20cropcalibrationat102; bandweight.03075575960160575; anchor07b757fead3385feb70ca74684ae2fa098f7305a74d1d41b0acc374011fde580.",
+  "latest_half_ce_summary": [
+    {
+      "candidate": "ce050_cosine_bands",
+      "pairs": 3,
+      "rejected": true,
+      "mean_gain_pp": 0.026521216299505806,
+      "minimum_gain_pp": -0.46177321777680636,
+      "all_nine_improved": false,
+      "all_pairs": {
+        "pairs": 3,
+        "mean_gain_pp": 0.026521216299505806,
+        "minimum_gain_pp": -0.46177321777680636,
+        "improved_pairs": 2
+      },
+      "prior_plain_comparison_pairs": 3,
+      "mean_absolute_gain_vs_prior_plain_baseline_pp": -1.0706143325414434,
+      "mean_absolute_gain_vs_old_baseline_pp": 3.972150072079174,
+      "minimum_absolute_gain_vs_old_baseline_pp": 2.8525297948228427,
+      "mean_new_baseline_gain_vs_old_baseline_pp": 3.9456288557796646
+    },
+    {
+      "candidate": "ce050_cosine_full",
+      "pairs": 3,
+      "rejected": true,
+      "mean_gain_pp": 0.04792616485539414,
+      "minimum_gain_pp": -0.5115436030933451,
+      "all_nine_improved": false,
+      "all_pairs": {
+        "pairs": 3,
+        "mean_gain_pp": 0.04792616485539414,
+        "minimum_gain_pp": -0.5115436030933451,
+        "improved_pairs": 2
+      },
+      "prior_plain_comparison_pairs": 3,
+      "mean_absolute_gain_vs_prior_plain_baseline_pp": -1.0492093839855652,
+      "mean_absolute_gain_vs_old_baseline_pp": 3.993555020635052,
+      "minimum_absolute_gain_vs_old_baseline_pp": 2.8027594095062938,
+      "mean_new_baseline_gain_vs_old_baseline_pp": 3.9456288557796646
+    }
+  ],
+  "first_half_ce_pair": {
+    "candidate": "ce050_cosine_bands",
+    "seed": 0,
+    "fold": 1,
+    "gain_pp": 0.40034162006571394,
+    "training_gain_pp": 0.16944681562368658,
+    "subfield_gain_pp": {
+      "CA1_3_hard_dice": 0.5023145022399973,
+      "subiculum_hard_dice": 0.32425492605329964,
+      "CA4_DG_hard_dice": 0.3744554319038542
+    },
+    "error_delta": {
+      "fn": 25,
+      "fp": -327,
+      "swaps": -91
+    },
+    "absolute_gain_vs_old_baseline_pp": 3.636095683015398,
+    "absolute_gain_vs_prior_plain_baseline_pp": -0.08542636348427379,
+    "baseline_dice": 73.31909999489126,
+    "constrained_dice": 73.71944161495698
+  },
+  "first_full_calibration_audit": "Sameanchor07b757fead3385feb70ca74684ae2fa098f7305a74d1d41b0acc374011fde580andbandsweight.03075575960160575;20traincropsat102; exactpreconstraintprefix21/41/62/82; first_full_calibration_audit.json.",
+  "first_pair_ce_comparison": "first_pair_ce_comparison.json/.png/.pdf;9actualarchivesCE1/.25/.5 xbaseline/bands/full, sharedsettingsverified; plotsinspected. HalfCEvsCE1 improvesmatchedgain+.534294band/+.233784full andabsoluteconstrained+.823412/+.522903pp ononepair. Not9/9evidence.",
+  "first_full_diagnostics": "Full0f1CA1+.611614,sub-.014272,CA4+.723070; train+.352026,union+.225277,FN+206FP-519swaps-138;8/10cropsand5/5subjectspositive; strongerplainbaselinegap-.045631pp.",
+  "fold2_half_ce_diagnostics": {
+    "baseline": 75.42434604275311,
+    "bands": 75.56534128936273,
+    "bands_gain": 0.14099524660960983,
+    "full": 75.63953106380488,
+    "full_gain": 0.21518502105176696,
+    "bands_ca4_change": -0.1605816617866651,
+    "full_all_subfields_positive": true,
+    "bands_positive_subjects": 3,
+    "full_positive_subjects": 3,
+    "total_subjects": 5
+  },
+  "absolute_performance_context": "Across two available pairs, bands/full are +4.532/+4.589pp vs old winning baselines but -.350/-.293pp vs stronger plain CE1 hold-half baselines. Keep reporting both; current consistency is 2/9, not solved.",
+  "half_ce_bands_failure": {
+    "seed": 5,
+    "fold": 0,
+    "gain_pp": -0.46177321777680636,
+    "training_gain_pp": 0.05925608949326033,
+    "union_gain_pp": -0.3241880496434675,
+    "all_subfields_declined": true,
+    "fn_delta": 308,
+    "fp_delta": -82,
+    "swaps_delta": 22,
+    "improved_subjects": 1,
+    "subjects": 5,
+    "improved_crops": 2,
+    "crops": 10
+  },
+  "local_preflight_exec_session": null,
+  "quota_at_submission": {
+    "free_gib": 45.77,
+    "used_gib": 47.36,
+    "limit_gib": 93.13
+  },
+  "latest_lower_lr_summary": [
+    {
+      "candidate": "lr045_cosine_bands",
+      "pairs": 5,
+      "rejected": true,
+      "mean_gain_pp": 0.2946490158996018,
+      "minimum_gain_pp": -0.05088175971406095,
+      "all_nine_improved": false,
+      "all_pairs": {
+        "pairs": 5,
+        "mean_gain_pp": 0.2946490158996018,
+        "minimum_gain_pp": -0.05088175971406095,
+        "improved_pairs": 4
+      },
+      "prior_plain_comparison_pairs": 3,
+      "mean_absolute_gain_vs_prior_plain_baseline_pp": -2.7207275160596347,
+      "mean_absolute_gain_vs_old_baseline_pp": 0.600634758347887,
+      "minimum_absolute_gain_vs_old_baseline_pp": -4.488177014332784,
+      "mean_new_baseline_gain_vs_old_baseline_pp": 0.30598574244828425
+    },
+    {
+      "candidate": "lr045_cosine_full",
+      "pairs": 5,
+      "rejected": true,
+      "mean_gain_pp": 0.4361453523046288,
+      "minimum_gain_pp": -0.465937568501118,
+      "all_nine_improved": false,
+      "all_pairs": {
+        "pairs": 5,
+        "mean_gain_pp": 0.4361453523046288,
+        "minimum_gain_pp": -0.465937568501118,
+        "improved_pairs": 4
+      },
+      "prior_plain_comparison_pairs": 3,
+      "mean_absolute_gain_vs_prior_plain_baseline_pp": -2.6714104706251995,
+      "mean_absolute_gain_vs_old_baseline_pp": 0.742131094752915,
+      "minimum_absolute_gain_vs_old_baseline_pp": -3.5135906598238904,
+      "mean_new_baseline_gain_vs_old_baseline_pp": 0.30598574244828425
+    },
+    {
+      "candidate": "lr030_cosine_bands",
+      "pairs": 9,
+      "rejected": false,
+      "mean_gain_pp": 0.7603379944784487,
+      "minimum_gain_pp": 0.034532338900883364,
+      "all_nine_improved": true,
+      "all_pairs": {
+        "pairs": 9,
+        "mean_gain_pp": 0.7603379944784487,
+        "minimum_gain_pp": 0.034532338900883364,
+        "improved_pairs": 9
+      },
+      "prior_plain_comparison_pairs": 3,
+      "mean_absolute_gain_vs_prior_plain_baseline_pp": -4.141480263970071,
+      "mean_absolute_gain_vs_old_baseline_pp": -2.208242236771304,
+      "minimum_absolute_gain_vs_old_baseline_pp": -10.771842484387108,
+      "mean_new_baseline_gain_vs_old_baseline_pp": -2.968580231249751
+    },
+    {
+      "candidate": "lr030_cosine_full",
+      "pairs": 3,
+      "rejected": true,
+      "mean_gain_pp": 0.1127531618861366,
+      "minimum_gain_pp": -0.08796317349394345,
+      "all_nine_improved": false,
+      "all_pairs": {
+        "pairs": 3,
+        "mean_gain_pp": 0.1127531618861366,
+        "minimum_gain_pp": -0.08796317349394345,
+        "improved_pairs": 2
+      },
+      "prior_plain_comparison_pairs": 3,
+      "mean_absolute_gain_vs_prior_plain_baseline_pp": -4.2645241111249135,
+      "mean_absolute_gain_vs_old_baseline_pp": 0.7782402934957039,
+      "minimum_absolute_gain_vs_old_baseline_pp": -1.2308424891792527,
+      "mean_new_baseline_gain_vs_old_baseline_pp": 0.6654871316095665
+    }
+  ],
+  "lower_lr_runtime_audit": "startup_metadata_audit.json verifies LR0.00045; first_full_and_lr030_metadata_audit.json verifies actual LR0.0003 cosine baseline and LR0.00045 full training-only calibration, same preconstraint prefix/anchor as bands. Both verified.",
+  "lower_lr_first_interaction": "ComparedwithsamefullCEcosine peak.0006: newbaseline-.874211pp, constrained-.636369pp, matchedgainchange+.237842pp. Positivepairedgain doesnotmeanbetterabsoluteDice. Strongerplainholdbaselinegap-1.545208pp.",
+  "phase": "Goal achieved: nine-pair consistency confirmed; full matrix job748838 running on2GPUs with2progressing workers; successor748839 queued.",
+  "current_active_runs": [
+    {
+      "id": "MNI_unetr_lr030_cosine_dice_f2s19",
+      "step": 144,
+      "dice": 39.22444170740352
+    },
+    {
+      "id": "MNI_unetr_lr030_cosine_dice_bands_f2s19",
+      "step": 123,
+      "dice": 38.09004260622878
+    }
+  ],
+  "lower_lr_first_pair_interpretation": "reports/mni_unetr_lower_lr53t_20261109/first_pair_interpretation.json",
+  "lower_lr030_archive_audit": "reports/mni_unetr_lower_lr53t_20261109/lr030_first_pair_archive_audit.json",
+  "next": "Full matrix continues under persistent collector and automatic Slurm continuation. Inspect reports/mni_verified_unetr_lower_lr_constraints14_53t_0519_20261109 for progress; do not rerun launcher or resume old paused sweep.",
+  "matched_gap_evidence": "reports/mni_unetr_lower_lr53t_20261109/matched_gap_diagnostics.json",
+  "lower_lr_fold2_evidence": "LR0.00045 full improves only1/5 subject means, aggregate+0.042356pp; CA1 and CA4/DG decline. Versus LR0.0006 same full recipe, paired gain worsens0.649251pp and constrained absolute Dice worsens1.315568pp. Bands improves all3 subfields on this pair. No rate universally improves absolute Dice.",
+  "lower_lr030_fold2_diagnostics": "Both variants improve3/5 subject means and decrease CA4/DG despite higher macro Dice. Bands CA4-.153719pp; full CA4-.436388pp. All8 completed matched pairs widen train/validation gap. Cross-LR comparisons still show lower absolute Dice than LR0.0006 on available same-arm pairs.",
+  "lower_lr_seed5_bands_diagnostics": "LR0.00045 bands seed5/fold0 improves4/5 subject means and7/10 crops; CA1+.504250,subiculum+.296307,CA4-.297050pp;FN-291 FP-76 swaps+54. Training gain+.026147 vsvalidation+.167836, gap narrows. One narrowing among nine candidate-pair comparisons, not universal gap closure. Absolute score -4.595545pp versus stronger plain CE1 hold baseline.",
+  "matched_gap_analysis": "scripts.mni_constraints.analyze_unetr_matched_gaps --name mni_unetr_lower_lr53t_20261109 --result-file lower_lr_results.json; descriptive count separates candidates from unique seed/fold pairs, archived source in analysis_sources.",
+  "rejected_candidates": [
+    "lr045_cosine_bands",
+    "lr045_cosine_full",
+    "lr030_cosine_full"
+  ],
+  "lower_lr030_full_failure_evidence": "reports/mni_unetr_lower_lr53t_20261109/lr030_full_seed5_failure.json",
+  "lower_lr_seed19_tradeoff": "reports/mni_unetr_lower_lr53t_20261109/seed19_lr_tradeoff.json",
+  "lower_lr_baseline_analysis": "analyze_unetr_lower_lr_baselines --plot; actual current5 LR0.00045 controls and4 LR0.0003 controls all worse than matched LR0.0006 cosine. JSON/PNG/PDF and provenance receipt generated, PNG visually inspected; source archived.",
+  "lower_lr045_failure_evidence": "reports/mni_unetr_lower_lr53t_20261109/lr045_seed0_fold0_failures.json",
+  "lower_lr_baseline_plot": "reports/mni_unetr_lower_lr53t_20261109/peak_lr_baselines.png",
+  "conditional_next_hypothesis_if_exhausted": "Not applicable: goal achieved.",
+  "promotion_criterion_user_confirmed": {
+    "recorded_at": 1794214093.027617,
+    "user_answer": "Keep the most consistent positive one even though it isn't the absolute best ice score overall. I need something that works always and is consistent across folds and seeds",
+    "criterion": "One shared recipe with strictly positive final-budget constrained-minus-matched-baseline macro Dice in all9 fixed seed/fold pairs. Absolute Dice regression is reported but is not a promotion veto.",
+    "automatic_full_matrix_authorized": true,
+    "seeds": [
+      0,
+      5,
+      19
+    ],
+    "folds": [
+      0,
+      1,
+      2
+    ],
+    "optimization_flops_cap": 53305109592450,
+    "gpu_workers": 2,
+    "no_held_out_generalization_claim": "Consistency refers to these observed development pairs; no claim that gains are guaranteed on unseen data."
+  },
+  "absolute_performance_preference_question": "Resolved: user explicitly prioritizes all9 positive matched gains over best absolute Dice. Continue original automatic-launch criterion; do not add absolute-Dice veto.",
+  "actual_launch_instructions": {
+    "only_after_nine_pair_success": true,
+    "final_audit_module": "scripts.mni_constraints.audit_unetr_stage_completion --name mni_unetr_lower_lr53t_20261109 --jobs 748615,748616 --result-file lower_lr_results.json",
+    "prepare_module": "scripts.mni_constraints.verified_lower_lr_full_matrix prepare",
+    "launch_module": "scripts.mni_constraints.launch_verified_lower_lr_full_matrix",
+    "matrix_stage": "mni_verified_unetr_lower_lr_constraints14_53t_0519_20261109",
+    "notes": "Prepare has no --stage option. Actual stage must not exist before gate. Final audit requires completed results, matching verified archives, preserved Swin recovery; wait until queue empty. Launcher rechecks quota/recovery/empty queue, deploys, runs remote actual-model preflight, starts persistent collector then submits. Verify actual two-GPU running allocation and workers before goal completion."
+  },
+  "confirmation_evidence": "reports/mni_unetr_lower_lr53t_20261109/winning_recipe_confirmation.json",
+  "matrix_stage": "mni_verified_unetr_lower_lr_constraints14_53t_0519_20261109",
+  "matrix_collector_pid": 88404,
+  "matrix_submission": {
+    "job_id": "748838",
+    "dependency": null,
+    "quota": {
+      "used_gib": 47.78,
+      "limit_gib": 93.13,
+      "free_gib": 45.349999999999994,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  47.78GiB/93.13GiB  461.20k/\u221e  \n\n",
+      "checked_at": 1794216518.3036582
+    },
+    "submitted_at": 1794216518.506944,
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--chdir=/mnt/beegfsstudents/home/3160552/mni_verified_unetr_lower_lr_constraints14_53t_0519_20261109",
+      "--output=/mnt/beegfsstudents/home/3160552/mni_verified_unetr_lower_lr_constraints14_53t_0519_20261109/slurm-%j.out",
+      "--error=/mnt/beegfsstudents/home/3160552/mni_verified_unetr_lower_lr_constraints14_53t_0519_20261109/slurm-%j.err",
+      "/mnt/beegfsstudents/home/3160552/mni_verified_unetr_lower_lr_constraints14_53t_0519_20261109/run.sbatch",
+      "/mnt/beegfsstudents/home/3160552/mni_verified_unetr_lower_lr_constraints14_53t_0519_20261109"
+    ],
+    "manifest_sha256": "a3a907fdf4d99a733e506baaa61ade9f97ff3bcfeb62f15f4d653d410613ab97"
+  },
+  "status": "complete",
+  "goal_completion_audit": "/Users/filippofocaccia/Desktop/hippo/reports/mni_verified_unetr_lower_lr_constraints14_53t_0519_20261109/goal_completion_audit.json",
+  "matrix_runtime": {
+    "status": "passed",
+    "verified_at": 1794216968.364382,
+    "confirmation_positive_pairs": 9,
+    "mean_gain_pp": 0.7603379944784487,
+    "minimum_gain_pp": 0.034532338900883364,
+    "matrix_name": "mni_verified_unetr_lower_lr_constraints14_53t_0519_20261109",
+    "job_id": "748838",
+    "queued_successor": "748839",
+    "gpu_workers": 2,
+    "logical_cells": 504,
+    "exact_reuses": 32,
+    "new_or_resumed_runs": 472,
+    "active_workers_verified": [
+      {
+        "id": "MNI_swinunetr_dice_f0s0",
+        "step": 241,
+        "maximum": 343
+      },
+      {
+        "id": "MNI_basic_unet16_dice_f0s0",
+        "step": 939,
+        "maximum": 939
+      }
+    ],
+    "collector_lock_held": true,
+    "collector_pid": 88404,
+    "manifest_sha256": "a3a907fdf4d99a733e506baaa61ade9f97ff3bcfeb62f15f4d653d410613ab97",
+    "startup_snapshot_sha256": "675e4937dd0ea2458217303395480504e52c74aee680e86776955198652e289e",
+    "preflight_sha256": "f7003bcdbe6d6cf590a6180e65fe35da30b7f31e317e712f2097d8a8db3ee53d",
+    "confirmation_input_sha256": "970a91ec7f4541a5afd74f3c6f399c8ba88b7efaaff86986ff0d12e6a6465ed5",
+    "free_gib": 43.419999999999995,
+    "scope": "Goal satisfied: nine observed matched development pairs improved and authorized full matrix actually started. Full matrix outcomes remain pending; no guarantee of gains for other combinations or unseen data."
+  }
+}

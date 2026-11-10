@@ -1,0 +1,64 @@
+{
+  "approved_for_execution": true,
+  "authorization": "Standing user request to continue approaches and modifyUNETRbase recipe after failedconstraint candidates; this flag records that authorization,notnewuserapproval.",
+  "created_at": 1794202971.27833,
+  "recipes": [
+    {
+      "key": "ce050_cosine",
+      "dropout_rate": 0.0,
+      "augmentation": "none"
+    }
+  ],
+  "arms": [
+    "dice",
+    "dice_bands",
+    "dice_bands_edge_sdf_depth"
+  ],
+  "reason": "QuarterCEcosinebands improved4/5 thenfailed0f0(-.391052pp), withallsubfieldsdown andno subjectmean gain, while gradientnorms remainedsimilar to successfulruns. FullCEcosinefull previouslyimproved5/6; quarterCEcosinefullfailedfirstpair. Testtheintermediate baseCEcoefficient0.5, keepingcosine/model/optimizer/originalconstraintdefinitions, target5%andtiming unchanged. This tests a loss-balance hypothesis, not a proven fix.",
+  "changed": "Only effectivebaseCEcoefficient0.25to0.5 versuspreviousstage; effective loss_weights metadata also updatedto0.5.",
+  "fresh_controls": true,
+  "reuse_baselines": false,
+  "pairs": [
+    [
+      0,
+      1
+    ],
+    [
+      0,
+      2
+    ],
+    [
+      5,
+      0
+    ],
+    [
+      19,
+      0
+    ],
+    [
+      0,
+      0
+    ],
+    [
+      5,
+      1
+    ],
+    [
+      5,
+      2
+    ],
+    [
+      19,
+      1
+    ],
+    [
+      19,
+      2
+    ]
+  ],
+  "cap": 53305109592450,
+  "gpu_workers": 2,
+  "acceptance": "Strict9/9positivefinal-budgetpairedgains;retainallattempts;reportabsoluteperformanceagainstoldwinningandstrongerplainbaselines. Othermodelsremainpaused.",
+  "calibration": "All20trainingcrops at102updates,target.05,p95cap.75,33updateramp,originalSDFtiming.",
+  "profile": "FreshhalfCEfullnetwork/objective/calibrationprofilec391e493d381abd7e001119d9f2111c599c45f5d2232261588286c386a5d3348. Exactcosts matchquarterCE;409updates affordable,410not."
+}

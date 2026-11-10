@@ -1,0 +1,302 @@
+{
+  "status": "complete",
+  "baseline": {
+    "validation_percent": 68.39866263598401,
+    "training_percent": 71.65949491982028,
+    "union_percent": 82.07944643487942,
+    "per_subfield_percent": {
+      "CA1_3_hard_dice": 68.8804963311801,
+      "subiculum_hard_dice": 68.2843381786136,
+      "CA4_DG_hard_dice": 68.03115339815832
+    },
+    "fn": 8906,
+    "fp": 8091,
+    "swaps": 6356,
+    "updates": 409,
+    "optimization_flops": 53217341798671,
+    "archive_manifest_sha256": "6113d1cb88d4b2de563f223c2aa5cd25a3083307913473681b77b08d86ece639"
+  },
+  "rows": [
+    {
+      "condition": "original_t05",
+      "target": 0.05,
+      "prefix_updates": 33,
+      "validation_percent": 68.22731665665367,
+      "training_percent": 72.51383514516579,
+      "union_percent": 81.068909052796,
+      "per_subfield_percent": {
+        "CA1_3_hard_dice": 68.96680078229006,
+        "subiculum_hard_dice": 68.441761513678,
+        "CA4_DG_hard_dice": 67.27338767399299
+      },
+      "fn": 9464,
+      "fp": 8470,
+      "swaps": 5875,
+      "updates": 409,
+      "optimization_flops": 53244940325759,
+      "archive_manifest_sha256": "8658956e07c7e550c70060ba9f6805ba52ec6ade1fc4ba7c618435c11e82c6db",
+      "gain_vs_baseline_pp": -0.17134597933034001,
+      "error_delta_vs_baseline": {
+        "fn": 558,
+        "fp": 379,
+        "swaps": -481
+      },
+      "calibration_weight": 0.013996205030837748,
+      "calibration_statistics": {
+        "median_raw_ratio": 3.5723969383011553,
+        "p95_raw_ratio": 3.778894630521365,
+        "weighted_median_ratio": 0.05,
+        "weighted_p95_ratio": 0.05289018403870888
+      },
+      "calibration_anchor_sha256": "de0d1a620774a02574aed681177701b2984771d8915561cd3dbcdcab88bd878a",
+      "gradient_probes": [
+        {
+          "quarter": 25,
+          "updates": 103,
+          "full_coefficient_median_logit_ratio": 0.03818222881789139,
+          "ramp_at_last_training_update": 1.0,
+          "ramp_scaled_median_logit_ratio": 0.03818222881789139,
+          "scope": "Unaugmented eval-mode training crops; not parameter gradients or Adam updates."
+        },
+        {
+          "quarter": 50,
+          "updates": 205,
+          "full_coefficient_median_logit_ratio": 0.02791201070464202,
+          "ramp_at_last_training_update": 1.0,
+          "ramp_scaled_median_logit_ratio": 0.02791201070464202,
+          "scope": "Unaugmented eval-mode training crops; not parameter gradients or Adam updates."
+        },
+        {
+          "quarter": 75,
+          "updates": 308,
+          "full_coefficient_median_logit_ratio": 0.021715175805604604,
+          "ramp_at_last_training_update": 1.0,
+          "ramp_scaled_median_logit_ratio": 0.021715175805604604,
+          "scope": "Unaugmented eval-mode training crops; not parameter gradients or Adam updates."
+        },
+        {
+          "quarter": 100,
+          "updates": 409,
+          "full_coefficient_median_logit_ratio": 0.021271936365724747,
+          "ramp_at_last_training_update": 1.0,
+          "ramp_scaled_median_logit_ratio": 0.021271936365724747,
+          "scope": "Unaugmented eval-mode training crops; not parameter gradients or Adam updates."
+        }
+      ]
+    },
+    {
+      "condition": "original_t20",
+      "target": 0.2,
+      "prefix_updates": 33,
+      "validation_percent": 66.00511650249722,
+      "training_percent": 70.12911865477491,
+      "union_percent": 80.95805173223314,
+      "per_subfield_percent": {
+        "CA1_3_hard_dice": 66.25080558011469,
+        "subiculum_hard_dice": 66.7888595016142,
+        "CA4_DG_hard_dice": 64.97568442576275
+      },
+      "fn": 10216,
+      "fp": 7497,
+      "swaps": 6845,
+      "updates": 409,
+      "optimization_flops": 53244940325759,
+      "archive_manifest_sha256": "b567f8c7f41d2ae6348dc77639d1bfb48005f50e29fc3d5a938f7a2743e30239",
+      "gain_vs_baseline_pp": -2.393546133486794,
+      "error_delta_vs_baseline": {
+        "fn": 1310,
+        "fp": -594,
+        "swaps": 489
+      },
+      "calibration_weight": 0.055984820123350994,
+      "calibration_statistics": {
+        "median_raw_ratio": 3.5723969383011553,
+        "p95_raw_ratio": 3.778894630521365,
+        "weighted_median_ratio": 0.2,
+        "weighted_p95_ratio": 0.21156073615483553
+      },
+      "calibration_anchor_sha256": "de0d1a620774a02574aed681177701b2984771d8915561cd3dbcdcab88bd878a",
+      "gradient_probes": [
+        {
+          "quarter": 25,
+          "updates": 103,
+          "full_coefficient_median_logit_ratio": 0.14914641335140824,
+          "ramp_at_last_training_update": 1.0,
+          "ramp_scaled_median_logit_ratio": 0.14914641335140824,
+          "scope": "Unaugmented eval-mode training crops; not parameter gradients or Adam updates."
+        },
+        {
+          "quarter": 50,
+          "updates": 205,
+          "full_coefficient_median_logit_ratio": 0.1107078095386704,
+          "ramp_at_last_training_update": 1.0,
+          "ramp_scaled_median_logit_ratio": 0.1107078095386704,
+          "scope": "Unaugmented eval-mode training crops; not parameter gradients or Adam updates."
+        },
+        {
+          "quarter": 75,
+          "updates": 308,
+          "full_coefficient_median_logit_ratio": 0.06552604867280133,
+          "ramp_at_last_training_update": 1.0,
+          "ramp_scaled_median_logit_ratio": 0.06552604867280133,
+          "scope": "Unaugmented eval-mode training crops; not parameter gradients or Adam updates."
+        },
+        {
+          "quarter": 100,
+          "updates": 409,
+          "full_coefficient_median_logit_ratio": 0.0702130915567371,
+          "ramp_at_last_training_update": 1.0,
+          "ramp_scaled_median_logit_ratio": 0.0702130915567371,
+          "scope": "Unaugmented eval-mode training crops; not parameter gradients or Adam updates."
+        }
+      ]
+    },
+    {
+      "condition": "delayed_t05",
+      "target": 0.05,
+      "prefix_updates": 102,
+      "validation_percent": 69.1770559403696,
+      "training_percent": 72.64466033135639,
+      "union_percent": 82.05152779676959,
+      "per_subfield_percent": {
+        "CA1_3_hard_dice": 69.97182310772114,
+        "subiculum_hard_dice": 68.59748241569417,
+        "CA4_DG_hard_dice": 68.96186229769346
+      },
+      "fn": 8995,
+      "fp": 8009,
+      "swaps": 5940,
+      "updates": 409,
+      "optimization_flops": 53239875702437,
+      "archive_manifest_sha256": "a4e2891f42160b5d01e18e96fa69c0d5dafcb120612937c399be117ef1cd095c",
+      "gain_vs_baseline_pp": 0.7783933043855882,
+      "error_delta_vs_baseline": {
+        "fn": 89,
+        "fp": -82,
+        "swaps": -416
+      },
+      "calibration_weight": 0.017857787187241035,
+      "calibration_statistics": {
+        "median_raw_ratio": 2.7998989726859227,
+        "p95_raw_ratio": 2.9525066948600847,
+        "weighted_median_ratio": 0.05000000000000001,
+        "weighted_p95_ratio": 0.052725236225715795
+      },
+      "calibration_anchor_sha256": "d89c7caa5d35b15f93de4261e8a291817c7bbd653a075967b29e3016065b81cb",
+      "gradient_probes": [
+        {
+          "quarter": 25,
+          "updates": 103,
+          "full_coefficient_median_logit_ratio": 0.050595818974470984,
+          "ramp_at_last_training_update": 0.030303030303030304,
+          "ramp_scaled_median_logit_ratio": 0.0015332066355900299,
+          "scope": "Unaugmented eval-mode training crops; not parameter gradients or Adam updates."
+        },
+        {
+          "quarter": 50,
+          "updates": 205,
+          "full_coefficient_median_logit_ratio": 0.03707110176317478,
+          "ramp_at_last_training_update": 1.0,
+          "ramp_scaled_median_logit_ratio": 0.03707110176317478,
+          "scope": "Unaugmented eval-mode training crops; not parameter gradients or Adam updates."
+        },
+        {
+          "quarter": 75,
+          "updates": 308,
+          "full_coefficient_median_logit_ratio": 0.027270885636365948,
+          "ramp_at_last_training_update": 1.0,
+          "ramp_scaled_median_logit_ratio": 0.027270885636365948,
+          "scope": "Unaugmented eval-mode training crops; not parameter gradients or Adam updates."
+        },
+        {
+          "quarter": 100,
+          "updates": 409,
+          "full_coefficient_median_logit_ratio": 0.026443084938912544,
+          "ramp_at_last_training_update": 1.0,
+          "ramp_scaled_median_logit_ratio": 0.026443084938912544,
+          "scope": "Unaugmented eval-mode training crops; not parameter gradients or Adam updates."
+        }
+      ]
+    },
+    {
+      "condition": "delayed_t20",
+      "target": 0.2,
+      "prefix_updates": 102,
+      "validation_percent": 68.56837682077882,
+      "training_percent": 72.17690607710333,
+      "union_percent": 81.9960297622487,
+      "per_subfield_percent": {
+        "CA1_3_hard_dice": 69.38519486680455,
+        "subiculum_hard_dice": 69.35904099310736,
+        "CA4_DG_hard_dice": 66.96089460242456
+      },
+      "fn": 9455,
+      "fp": 7449,
+      "swaps": 6010,
+      "updates": 409,
+      "optimization_flops": 53239875702437,
+      "archive_manifest_sha256": "6f91b4ece5bd0f8b5c3c549d6d8ee21bf7ddefea92131be76166cfa975d83824",
+      "gain_vs_baseline_pp": 0.16971418479481315,
+      "error_delta_vs_baseline": {
+        "fn": 549,
+        "fp": -642,
+        "swaps": -346
+      },
+      "calibration_weight": 0.07143114874896414,
+      "calibration_statistics": {
+        "median_raw_ratio": 2.7998989726859227,
+        "p95_raw_ratio": 2.9525066948600847,
+        "weighted_median_ratio": 0.20000000000000004,
+        "weighted_p95_ratio": 0.21090094490286318
+      },
+      "calibration_anchor_sha256": "d89c7caa5d35b15f93de4261e8a291817c7bbd653a075967b29e3016065b81cb",
+      "gradient_probes": [
+        {
+          "quarter": 25,
+          "updates": 103,
+          "full_coefficient_median_logit_ratio": 0.20231799216385124,
+          "ramp_at_last_training_update": 0.030303030303030304,
+          "ramp_scaled_median_logit_ratio": 0.006130848247389431,
+          "scope": "Unaugmented eval-mode training crops; not parameter gradients or Adam updates."
+        },
+        {
+          "quarter": 50,
+          "updates": 205,
+          "full_coefficient_median_logit_ratio": 0.14070290370277067,
+          "ramp_at_last_training_update": 1.0,
+          "ramp_scaled_median_logit_ratio": 0.14070290370277067,
+          "scope": "Unaugmented eval-mode training crops; not parameter gradients or Adam updates."
+        },
+        {
+          "quarter": 75,
+          "updates": 308,
+          "full_coefficient_median_logit_ratio": 0.10364314924414758,
+          "ramp_at_last_training_update": 1.0,
+          "ramp_scaled_median_logit_ratio": 0.10364314924414758,
+          "scope": "Unaugmented eval-mode training crops; not parameter gradients or Adam updates."
+        },
+        {
+          "quarter": 100,
+          "updates": 409,
+          "full_coefficient_median_logit_ratio": 0.10221462614228655,
+          "ramp_at_last_training_update": 1.0,
+          "ramp_scaled_median_logit_ratio": 0.10221462614228655,
+          "scope": "Unaugmented eval-mode training crops; not parameter gradients or Adam updates."
+        }
+      ]
+    }
+  ],
+  "factorial_effects": {
+    "strength_effect_original_onset_pp": -2.2222001541564538,
+    "strength_effect_delayed_onset_pp": -0.608679119590775,
+    "delay_effect_target05_pp": 0.9497392837159282,
+    "delay_effect_target20_pp": 2.563260318281607,
+    "interaction_pp": 1.6135210345656787
+  },
+  "scope": "Seed19 fold0,n10,original union-band definition,409 updates,53.305T optimization cap. Calibration separately charged. Final-budget results, not best validation.",
+  "limitations": [
+    "Single development fold/seed; no generalization claim from selecting the best cell.",
+    "Delayed onset also delays calibration; cannot separate those effects.",
+    "Gradient probes measure logits in eval mode, not actual optimizer updates."
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "rows": [
+    {
+      "candidate": "ce050_cosine_bands",
+      "seed": 0,
+      "fold": 1,
+      "previous_constraint_gain_pp": -0.13395220349745784,
+      "new_constraint_gain_pp": 0.40034162006571394,
+      "constraint_interaction_pp": 0.5342938235631718,
+      "baseline_loss_change_pp": 0.28911862979035163,
+      "constrained_loss_change_pp": 0.8234124533535265,
+      "previous_constraint_archive_sha256": "a65196a3f3474eac2cc4af40f720856d532e6ad2bfa8ecd4fb1548396eba3173",
+      "previous_baseline_archive_sha256": "e1682585cb12dfb317c75e1148fac7e3242bd0bd7a0596a87e75c385d14563e0"
+    },
+    {
+      "candidate": "ce050_cosine_full",
+      "seed": 0,
+      "fold": 1,
+      "previous_constraint_gain_pp": 0.20635289254748557,
+      "new_constraint_gain_pp": 0.4401370766077606,
+      "constraint_interaction_pp": 0.233784184060275,
+      "baseline_loss_change_pp": 0.28911862979035163,
+      "constrained_loss_change_pp": 0.5229028138506209,
+      "previous_constraint_archive_sha256": "b6100eb572a66ff5be02ecd492705fc4769dc8713af42f5affa7d9a8a0e75a2b",
+      "previous_baseline_archive_sha256": "e1682585cb12dfb317c75e1148fac7e3242bd0bd7a0596a87e75c385d14563e0"
+    },
+    {
+      "candidate": "ce050_cosine_full",
+      "seed": 0,
+      "fold": 2,
+      "previous_constraint_gain_pp": 0.6916076551123211,
+      "new_constraint_gain_pp": 0.21518502105176696,
+      "constraint_interaction_pp": -0.4764226340605542,
+      "baseline_loss_change_pp": 0.810453291156179,
+      "constrained_loss_change_pp": 0.3340306570956244,
+      "previous_constraint_archive_sha256": "2392f5e018ab6185fc880f7cd5a95adf31759c0c4250fcce82239b7a61f6d915",
+      "previous_baseline_archive_sha256": "93472ba4ea1d4aae86f5decfd2d49bc0ed2b294341609512a7074d66c20a3e55"
+    },
+    {
+      "candidate": "ce050_cosine_full",
+      "seed": 5,
+      "fold": 0,
+      "previous_constraint_gain_pp": 0.44399295770303127,
+      "new_constraint_gain_pp": -0.5115436030933451,
+      "constraint_interaction_pp": -0.9555365607963764,
+      "baseline_loss_change_pp": 0.16116314450518132,
+      "constrained_loss_change_pp": -0.794373416291208,
+      "previous_constraint_archive_sha256": "4b3fac3c1ba4ac179a7a0fb38139c7630443ee1e943f1042737c1287ca5e6e7c",
+      "previous_baseline_archive_sha256": "6d18f6888e59e533b636b43fa9e4dad69cf83f23cfc414c37e197f3c1a3df2ef"
+    }
+  ],
+  "missing_previous_cells": [
+    {
+      "arm": "dice_bands",
+      "seed": 0,
+      "fold": 2
+    },
+    {
+      "arm": "dice_bands",
+      "seed": 5,
+      "fold": 0
+    }
+  ],
+  "input_result_sha256": "80dc0f3f02471b48d2060bc7fc053b2dd9fe2d8e8c2ab2a7044fdcc656eb007e",
+  "analysis_source_sha256": "313f24b60497256f102a72c642007bb953118f2d788eed9d8ff5a02aa6658d4e",
+  "scope": "Same architecture/dropout,seed/fold,data,post-warmup cosine LR and original auxiliaries. Dense CE reduced from1.0to0.5 in base; each loss recipe has fresh training-only5% calibration. Profiles account for loss arithmetic; both have409updates under samecap.",
+  "caveat": "Development comparisons on overlapping folds, only available exact matched historical cells. Positive constraint interaction alone does not establish higher absolute Dice."
+}

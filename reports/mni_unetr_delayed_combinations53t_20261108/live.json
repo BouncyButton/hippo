@@ -1,0 +1,73 @@
+{
+  "status.json": {
+    "status": "complete",
+    "active": [],
+    "selected": {
+      "arm": null,
+      "winner": null
+    },
+    "job_id": "747729",
+    "completed": 12,
+    "total": 27
+  },
+  "submission.json": {
+    "job_id": "747729",
+    "dependency": null,
+    "quota": {
+      "used_gib": 46.12,
+      "limit_gib": 93.13,
+      "free_gib": 47.01,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  46.12GiB/93.13GiB  423.95k/\u221e  \n\n",
+      "checked_at": 1794166922.5191777
+    },
+    "submitted_at": 1794166922.7592165,
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--chdir=/mnt/beegfsstudents/home/3160552/mni_unetr_delayed_combinations53t_20261108",
+      "--output=/mnt/beegfsstudents/home/3160552/mni_unetr_delayed_combinations53t_20261108/slurm-%j.out",
+      "--error=/mnt/beegfsstudents/home/3160552/mni_unetr_delayed_combinations53t_20261108/slurm-%j.err",
+      "/mnt/beegfsstudents/home/3160552/mni_unetr_delayed_combinations53t_20261108/run.sbatch",
+      "/mnt/beegfsstudents/home/3160552/mni_unetr_delayed_combinations53t_20261108"
+    ],
+    "manifest_sha256": "d2095e30e45b1462131ff248ca0bd85cc985ce579dda06e956a02e62000e5d04"
+  },
+  "successor.json": {
+    "job_id": "747731",
+    "dependency": "747729",
+    "quota": {
+      "used_gib": 46.12,
+      "limit_gib": 93.13,
+      "free_gib": 47.01,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  46.12GiB/93.13GiB  423.95k/\u221e  \n\n",
+      "checked_at": 1794166945.7973135
+    },
+    "submitted_at": 1794166945.9271564,
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--chdir=/mnt/beegfsstudents/home/3160552/mni_unetr_delayed_combinations53t_20261108",
+      "--output=/mnt/beegfsstudents/home/3160552/mni_unetr_delayed_combinations53t_20261108/slurm-%j.out",
+      "--error=/mnt/beegfsstudents/home/3160552/mni_unetr_delayed_combinations53t_20261108/slurm-%j.err",
+      "--dependency=afterany:747729",
+      "/mnt/beegfsstudents/home/3160552/mni_unetr_delayed_combinations53t_20261108/run.sbatch",
+      "/mnt/beegfsstudents/home/3160552/mni_unetr_delayed_combinations53t_20261108"
+    ],
+    "manifest_sha256": "d2095e30e45b1462131ff248ca0bd85cc985ce579dda06e956a02e62000e5d04"
+  },
+  "ready": [],
+  "cleanup": [
+    "runs/MNI_unetr_dice_bands_edge_sdf_f0s5/cleanup.json",
+    "runs/MNI_unetr_dice_bands_edge_f0s19/cleanup.json",
+    "runs/MNI_unetr_dice_bands_edge_sdf_depth_f0s5/cleanup.json",
+    "runs/MNI_unetr_dice_bands_edge_sdf_depth_f1s0/cleanup.json",
+    "runs/MNI_unetr_dice_bands_edge_f2s0/cleanup.json",
+    "runs/MNI_unetr_dice_bands_edge_sdf_depth_f2s0/cleanup.json",
+    "runs/MNI_unetr_dice_bands_edge_f1s0/cleanup.json",
+    "runs/MNI_unetr_dice_bands_edge_f0s5/cleanup.json",
+    "runs/MNI_unetr_dice_bands_edge_sdf_f1s0/cleanup.json",
+    "runs/MNI_unetr_dice_bands_edge_sdf_depth_f0s19/cleanup.json",
+    "runs/MNI_unetr_dice_bands_edge_sdf_f2s0/cleanup.json",
+    "runs/MNI_unetr_dice_bands_edge_sdf_f0s19/cleanup.json"
+  ]
+}

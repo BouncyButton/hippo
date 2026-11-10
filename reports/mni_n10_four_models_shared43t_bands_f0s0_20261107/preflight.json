@@ -1,0 +1,70 @@
+{
+  "status": "passed",
+  "manifest_sha256": "db1b8401f6043554ccc359e3242c696815a253badb8aaf4d13d52de9d72dba27",
+  "checks": [
+    {
+      "id": "MNI_swinunetr_n10_baseline_f0s0",
+      "train_subjects": 10,
+      "training_crops": 20,
+      "updates": 277,
+      "passes": 13.85,
+      "calibration_flops": 0
+    },
+    {
+      "id": "MNI_unetr_vit_b16_n10_baseline_f0s0",
+      "train_subjects": 10,
+      "training_crops": 20,
+      "updates": 330,
+      "passes": 16.5,
+      "calibration_flops": 0
+    },
+    {
+      "id": "MNI_basic_unet16_n10_baseline_f0s0",
+      "train_subjects": 10,
+      "training_crops": 20,
+      "updates": 757,
+      "passes": 37.85,
+      "calibration_flops": 0
+    },
+    {
+      "id": "MNI_swinunetr_n10_original_bands_f0s0",
+      "train_subjects": 10,
+      "training_crops": 20,
+      "updates": 277,
+      "passes": 13.85,
+      "calibration_flops": 1043755040412
+    },
+    {
+      "id": "MNI_unetr_vit_b16_n10_original_bands_f0s0",
+      "train_subjects": 10,
+      "training_crops": 20,
+      "updates": 330,
+      "passes": 16.5,
+      "calibration_flops": 865633170892
+    },
+    {
+      "id": "MNI_basic_unet16_n10_original_bands_f0s0",
+      "train_subjects": 10,
+      "training_crops": 20,
+      "updates": 756,
+      "passes": 37.8,
+      "calibration_flops": 382099497372
+    }
+  ],
+  "scientific": {
+    "status": "passed",
+    "checks": [
+      "actual argmax union errors",
+      "detached 3x weights",
+      "original support A",
+      "anchor plus six-connected error halo B",
+      "side normalization",
+      "zero off-support gradient",
+      "D4 equivariance",
+      "batch averaging",
+      "internal swaps excluded",
+      "remote FP/deep FN included"
+    ]
+  },
+  "optimizer_updates": 0
+}

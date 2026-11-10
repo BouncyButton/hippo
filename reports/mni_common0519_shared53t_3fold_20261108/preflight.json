@@ -1,0 +1,112 @@
+{
+  "status": "passed",
+  "manifest_sha256": "57c2264da65cc08648db1756c188d9a166d511de245c7963e241527cef3d716f",
+  "checks": [
+    {
+      "model": "nnunet",
+      "output_shapes": [
+        [
+          1,
+          4,
+          64,
+          64,
+          64
+        ],
+        [
+          1,
+          4,
+          32,
+          32,
+          32
+        ],
+        [
+          1,
+          4,
+          16,
+          16,
+          16
+        ],
+        [
+          1,
+          4,
+          8,
+          8,
+          8
+        ]
+      ],
+      "updates": 150
+    },
+    {
+      "model": "swinunetr",
+      "output_shapes": [
+        [
+          1,
+          4,
+          64,
+          64,
+          64
+        ]
+      ],
+      "updates": 343
+    },
+    {
+      "model": "unetr_vit_b16",
+      "output_shapes": [
+        [
+          1,
+          4,
+          64,
+          64,
+          64
+        ]
+      ],
+      "updates": 409
+    },
+    {
+      "model": "basic_unet16",
+      "output_shapes": [
+        [
+          1,
+          4,
+          64,
+          64,
+          64
+        ]
+      ],
+      "updates": 939
+    }
+  ],
+  "optimizer_updates": 0,
+  "torch": "2.12.1+cu130",
+  "monai": "1.6.0",
+  "lr_checks": [
+    {
+      "model": "nnunet",
+      "updates": 150,
+      "first_lr": 0.01,
+      "final_lr": 0.005455231164732058,
+      "horizon": 200
+    },
+    {
+      "model": "swinunetr",
+      "updates": 343,
+      "first_lr": 1.6666666666666664e-05,
+      "final_lr": 2.9999999999999997e-06,
+      "horizon": 343
+    },
+    {
+      "model": "unetr_vit_b16",
+      "updates": 409,
+      "first_lr": 2.4999999999999998e-05,
+      "final_lr": 5.999999999999999e-06,
+      "horizon": 409
+    },
+    {
+      "model": "basic_unet16",
+      "updates": 939,
+      "first_lr": 3.4042553191489363e-06,
+      "final_lr": 1.6000000000000001e-06,
+      "horizon": 939
+    }
+  ]
+}

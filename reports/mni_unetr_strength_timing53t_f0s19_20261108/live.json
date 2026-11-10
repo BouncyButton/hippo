@@ -1,0 +1,135 @@
+{
+  "status.json": {
+    "status": "complete",
+    "active": null,
+    "completed": 4,
+    "total": 4,
+    "runs": [
+      {
+        "id": "MNI_unetr_original_t05_f0s19",
+        "kind": "conventional",
+        "dataset": "MNI",
+        "model": "unetr_vit_b16",
+        "arm": "dice_bands",
+        "fold": 0,
+        "seed": 19,
+        "protocol": "original_t05",
+        "target": 0.05,
+        "prefix_updates": 33,
+        "augmentation": "xy_d4_v1",
+        "final_dice": 0.6822731665665367,
+        "best_dice": 0.6850183621849179,
+        "released_bytes": 1853967262
+      },
+      {
+        "id": "MNI_unetr_original_t20_f0s19",
+        "kind": "conventional",
+        "dataset": "MNI",
+        "model": "unetr_vit_b16",
+        "arm": "dice_bands",
+        "fold": 0,
+        "seed": 19,
+        "protocol": "original_t20",
+        "target": 0.2,
+        "prefix_updates": 33,
+        "augmentation": "xy_d4_v1",
+        "final_dice": 0.6600511650249722,
+        "best_dice": 0.6634962910444329,
+        "released_bytes": 1853967326
+      },
+      {
+        "id": "MNI_unetr_delayed_t05_f0s19",
+        "kind": "conventional",
+        "dataset": "MNI",
+        "model": "unetr_vit_b16",
+        "arm": "dice_bands",
+        "fold": 0,
+        "seed": 19,
+        "protocol": "delayed_t05",
+        "target": 0.05,
+        "prefix_updates": 102,
+        "augmentation": "xy_d4_v1",
+        "final_dice": 0.6917705594036959,
+        "best_dice": 0.6992118356667341,
+        "released_bytes": 1853967262
+      },
+      {
+        "id": "MNI_unetr_delayed_t20_f0s19",
+        "kind": "conventional",
+        "dataset": "MNI",
+        "model": "unetr_vit_b16",
+        "arm": "dice_bands",
+        "fold": 0,
+        "seed": 19,
+        "protocol": "delayed_t20",
+        "target": 0.2,
+        "prefix_updates": 102,
+        "augmentation": "xy_d4_v1",
+        "final_dice": 0.6856837682077882,
+        "best_dice": 0.6890966911929427,
+        "released_bytes": 1853967262
+      }
+    ],
+    "job_id": "747541",
+    "updated_at": 1794162581.9619665,
+    "quota": {
+      "used_gib": 49.71,
+      "limit_gib": 93.13,
+      "free_gib": 43.419999999999995,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  49.71GiB/93.13GiB  420.40k/\u221e  \n\n",
+      "checked_at": 1794162581.9988785
+    }
+  },
+  "submission.json": {
+    "job_id": "747541",
+    "dependency": null,
+    "quota": {
+      "used_gib": 46.0,
+      "limit_gib": 93.13,
+      "free_gib": 47.129999999999995,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  46.00GiB/93.13GiB  420.22k/\u221e  \n\n",
+      "checked_at": 1794161832.9911945
+    },
+    "submitted_at": 1794161833.2198565,
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--chdir=/mnt/beegfsstudents/home/3160552/mni_unetr_strength_timing53t_f0s19_20261108",
+      "--output=/mnt/beegfsstudents/home/3160552/mni_unetr_strength_timing53t_f0s19_20261108/slurm-%j.out",
+      "--error=/mnt/beegfsstudents/home/3160552/mni_unetr_strength_timing53t_f0s19_20261108/slurm-%j.err",
+      "/mnt/beegfsstudents/home/3160552/mni_unetr_strength_timing53t_f0s19_20261108/run.sbatch",
+      "/mnt/beegfsstudents/home/3160552/mni_unetr_strength_timing53t_f0s19_20261108"
+    ],
+    "manifest_sha256": "c7bf81551ab91e50aa3c55dd90a05d675fa7cbeabc6df8a5964fd39268794dbf"
+  },
+  "successor.json": {
+    "job_id": "747542",
+    "dependency": "747541",
+    "quota": {
+      "used_gib": 46.0,
+      "limit_gib": 93.13,
+      "free_gib": 47.129999999999995,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  46.00GiB/93.13GiB  420.23k/\u221e  \n\n",
+      "checked_at": 1794161847.9327102
+    },
+    "submitted_at": 1794161848.0385556,
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--chdir=/mnt/beegfsstudents/home/3160552/mni_unetr_strength_timing53t_f0s19_20261108",
+      "--output=/mnt/beegfsstudents/home/3160552/mni_unetr_strength_timing53t_f0s19_20261108/slurm-%j.out",
+      "--error=/mnt/beegfsstudents/home/3160552/mni_unetr_strength_timing53t_f0s19_20261108/slurm-%j.err",
+      "--dependency=afterany:747541",
+      "/mnt/beegfsstudents/home/3160552/mni_unetr_strength_timing53t_f0s19_20261108/run.sbatch",
+      "/mnt/beegfsstudents/home/3160552/mni_unetr_strength_timing53t_f0s19_20261108"
+    ],
+    "manifest_sha256": "c7bf81551ab91e50aa3c55dd90a05d675fa7cbeabc6df8a5964fd39268794dbf"
+  },
+  "ready": [],
+  "cleanup": [
+    "runs/MNI_unetr_original_t20_f0s19/cleanup.json",
+    "runs/MNI_unetr_delayed_t20_f0s19/cleanup.json",
+    "runs/MNI_unetr_original_t05_f0s19/cleanup.json",
+    "runs/MNI_unetr_delayed_t05_f0s19/cleanup.json"
+  ]
+}

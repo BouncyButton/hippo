@@ -1,0 +1,90 @@
+{
+  "control": {
+    "pause": true,
+    "reason": "Explicit user request: Break the job now; investigate nnUNet struggles.",
+    "requested_at": 1794156790.2497277
+  },
+  "canceled_queued_jobs": [
+    "747378"
+  ],
+  "queue_before": [
+    "747378|PENDING|hippo-common53",
+    "747374|RUNNING|hippo-common53"
+  ],
+  "status": {
+    "status": "running",
+    "active": [
+      "MNI_nnunet_dice_f1s19",
+      "MNI_swinunetr_dice_f1s19"
+    ],
+    "completed": 4,
+    "total": 36,
+    "runs": [
+      {
+        "id": "MNI_nnunet_dice_f0s19",
+        "kind": "conventional",
+        "dataset": "MNI",
+        "model": "nnunet",
+        "arm": "dice",
+        "fold": 0,
+        "seed": 19,
+        "protocol": "nnunet_dice",
+        "augmentation": "none",
+        "final_dice": 0.45478607418084344,
+        "best_dice": 0.45478607418084344,
+        "released_bytes": 525339346
+      },
+      {
+        "id": "MNI_swinunetr_dice_f0s19",
+        "kind": "conventional",
+        "dataset": "MNI",
+        "model": "swinunetr",
+        "arm": "dice",
+        "fold": 0,
+        "seed": 19,
+        "protocol": "swinunetr_dice",
+        "augmentation": "xy_d4_v1",
+        "final_dice": 0.7546145877731302,
+        "best_dice": 0.7546145877731302,
+        "released_bytes": 336994004
+      },
+      {
+        "id": "MNI_unetr_vit_b16_dice_f0s19",
+        "kind": "conventional",
+        "dataset": "MNI",
+        "model": "unetr_vit_b16",
+        "arm": "dice",
+        "fold": 0,
+        "seed": 19,
+        "protocol": "unetr_vit_b16_dice",
+        "augmentation": "xy_d4_v1",
+        "final_dice": 0.6839866263598401,
+        "best_dice": 0.6922491845913198,
+        "released_bytes": 1853967134
+      },
+      {
+        "id": "MNI_basic_unet16_dice_f0s19",
+        "kind": "conventional",
+        "dataset": "MNI",
+        "model": "basic_unet16",
+        "arm": "dice",
+        "fold": 0,
+        "seed": 19,
+        "protocol": "basic_unet16_dice",
+        "augmentation": "none",
+        "final_dice": 0.6578361120120882,
+        "best_dice": 0.6578361120120882,
+        "released_bytes": 28975696
+      }
+    ],
+    "job_id": "747374",
+    "updated_at": 1794156789.4723513,
+    "quota": {
+      "used_gib": 46.91,
+      "limit_gib": 93.13,
+      "free_gib": 46.22,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  46.91GiB/93.13GiB  414.76k/\u221e  \n\n",
+      "checked_at": 1794156789.5079567
+    }
+  }
+}

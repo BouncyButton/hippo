@@ -1,0 +1,11 @@
+{
+  "status": "selected",
+  "shared_cap": 43006868505381,
+  "maximum_updates": 121,
+  "reference_stage": "mni_n10_nnunet_lr001_200updates_bands_f0s0_20261107",
+  "reference_manifest_sha256": "c73dd0bcc41f572d2a90540e506b74932e9217d704017ec0e9bcfb0cdff79c04",
+  "rationale": "User requested cap approximately when nnUNet reaches60%. In200-update development runs first recorded >=60% was121updates: baseline62.5759%, original bands63.0089%. Freeze121updates for both; preserve LR horizon200 and original20-update bands prefix/ramp to reproduce that point.",
+  "stopping": "Fixed FLOP/update cutoff, no validation-dependent stopping.",
+  "target": "Approximately60% final validation macro hard Dice; singlefold0seed0,10subjects.",
+  "limitation": "Development-validation-based budget selection, not independent confirmation. This is not a cap-matched shorter LR schedule; LR remains approximately0.00818 at the intentional earlier stop. Calibration/evaluation FLOPs separate."
+}

@@ -1,0 +1,91 @@
+{
+  "status": "incomplete",
+  "groups": {
+    "MNI": {
+      "completed": 2,
+      "expected": 9,
+      "complete": false,
+      "mean": 0.2953726733237058,
+      "sd": 0.3100243531490983,
+      "minimum": 0.07615235087900543,
+      "maximum": 0.5145929957684062,
+      "runs_at_least_050": 1,
+      "mean_in_descriptive_045_055_band": false,
+      "fold_means": {
+        "0": 0.2953726733237058
+      }
+    },
+    "COBRA": {
+      "completed": 1,
+      "expected": 9,
+      "complete": false,
+      "mean": 0.11863965768923745,
+      "sd": null,
+      "minimum": 0.11863965768923745,
+      "maximum": 0.11863965768923745,
+      "runs_at_least_050": 0,
+      "mean_in_descriptive_045_055_band": false,
+      "fold_means": {
+        "0": 0.11863965768923745
+      }
+    }
+  },
+  "runs": [
+    {
+      "dataset": "MNI",
+      "fold": 0,
+      "seed": 0,
+      "foreground_subfield_dice": 0.5145929957684062,
+      "whole_hippocampus_dice": 0.6658866963603619,
+      "best_validation_dice": 0.5145929957684062,
+      "updates": 245,
+      "consumed_training_flops": 31872269412935,
+      "foreground_fn": 2670,
+      "foreground_fp": 42439
+    },
+    {
+      "dataset": "COBRA",
+      "fold": 0,
+      "seed": 0,
+      "foreground_subfield_dice": 0.11863965768923745,
+      "whole_hippocampus_dice": 0.17595144950405495,
+      "best_validation_dice": 0.11863965768923745,
+      "updates": 164,
+      "consumed_training_flops": 31967056126980,
+      "foreground_fn": 480,
+      "foreground_fp": 223254
+    },
+    {
+      "dataset": "MNI",
+      "fold": 0,
+      "seed": 1,
+      "foreground_subfield_dice": 0.07615235087900543,
+      "whole_hippocampus_dice": 0.13134951871405337,
+      "best_validation_dice": 0.07615235087900543,
+      "updates": 245,
+      "consumed_training_flops": 31872269412935,
+      "foreground_fn": 28,
+      "foreground_fp": 631831
+    }
+  ],
+  "missing_runs": [
+    "COBRA_unetr_vit_b16_dice_f0s1",
+    "MNI_unetr_vit_b16_dice_f0s2",
+    "COBRA_unetr_vit_b16_dice_f0s2",
+    "MNI_unetr_vit_b16_dice_f1s0",
+    "COBRA_unetr_vit_b16_dice_f1s0",
+    "MNI_unetr_vit_b16_dice_f1s1",
+    "COBRA_unetr_vit_b16_dice_f1s1",
+    "MNI_unetr_vit_b16_dice_f1s2",
+    "COBRA_unetr_vit_b16_dice_f1s2",
+    "MNI_unetr_vit_b16_dice_f2s0",
+    "COBRA_unetr_vit_b16_dice_f2s0",
+    "MNI_unetr_vit_b16_dice_f2s1",
+    "COBRA_unetr_vit_b16_dice_f2s1",
+    "MNI_unetr_vit_b16_dice_f2s2",
+    "COBRA_unetr_vit_b16_dice_f2s2"
+  ],
+  "primary": "Final-budget foreground-subfield macro hard Dice. Best validation is secondary.",
+  "inference": "Exploratory first-three-of-five folds; report all predeclared seeds. No independent test set.",
+  "source_sha256": "123be9b6da83f80a23b1f73e4179780a0e036fc0a81a07c9aba37a9abe72360b"
+}

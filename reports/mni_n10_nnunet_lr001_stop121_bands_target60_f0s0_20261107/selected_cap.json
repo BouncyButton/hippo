@@ -1,0 +1,11 @@
+{
+  "status": "selected",
+  "shared_cap": 43006868505381,
+  "maximum_updates": 121,
+  "reference_stage": "mni_n10_nnunet_lr001_stop121_bands_f0s0_20261107",
+  "reference_manifest_sha256": "6eb6c34ab8028a8842f51d44993daa6fabf150c789eade227661e3c4d2980bab",
+  "historical_stronger_recipe_sha256": "3297a46e3d8ff87efd45b9de6b1e9be61b43f3d8dc2204dbdcca172436549e47",
+  "rationale": "User requested6x recipe under current cap: raise original-bands median gradient target from10% to60%, retaining75% p95 guard. Fresh training-only calibration; fixed121updates and preservedLR200-horizon trajectory,20-update prefix/ramp.",
+  "comparison": "Concurrent fresh matched baseline and stronger original bands, same10subjects/fold0seed0; also compare to archived10% bands. Calibration/evaluation excluded from optimization cap and recorded separately.",
+  "limitations": "Sixfold target is not necessarily sixfold coefficient if p95 guard binds. Single development fold/seed. No architecture,optimizer,augmentation,base-loss or timing change."
+}

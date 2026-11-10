@@ -1,0 +1,64 @@
+[
+  {
+    "name": "mni_nnunet_cap8_full_20261106",
+    "model": "nnunet",
+    "pilot": false,
+    "updates": 719,
+    "lr": {
+      "nnunet": 0.01
+    },
+    "loss": "Native foreground Dice+CE with deep supervision; SGD/Nesterov momentum0.95",
+    "policy": "hold_half",
+    "budget": 255811605336720
+  },
+  {
+    "name": "mni_swin_log_dice_cap8_pilot_20261106",
+    "model": "swinunetr",
+    "pilot": true,
+    "updates": 1649,
+    "lr": {
+      "swinunetr": 0.0003
+    },
+    "loss": "Mean negative log squared softmax Dice over all4 classes; no CE",
+    "policy": "hold_half",
+    "budget": 255811605336720,
+    "profiled_update_flops": 155058535816
+  },
+  {
+    "name": "mni_swin_log_dice_cap8_full_20261106",
+    "model": "swinunetr",
+    "pilot": false,
+    "updates": 1649,
+    "lr": {
+      "swinunetr": 0.0003
+    },
+    "loss": "Mean negative log squared softmax Dice over all4 classes; no CE",
+    "policy": "hold_half",
+    "budget": 255811605336720,
+    "profiled_update_flops": 155058535816
+  },
+  {
+    "name": "mni_unetr_geo_cap8_20261106",
+    "model": "unetr_vit_b16",
+    "pilot": false,
+    "updates": 1966,
+    "lr": {
+      "unet": 0.0006
+    },
+    "loss": "Geo recipe: foreground-only squared softmax Dice + mean CE, weights 1:1, smooth_nr=0, smooth_dr=1e-6; FP32 loss.",
+    "policy": "cap_matched",
+    "budget": 255811605336720
+  },
+  {
+    "name": "mni_unet_cap8_20261106",
+    "model": "basic_unet16",
+    "pilot": false,
+    "updates": 4507,
+    "lr": {
+      "unet": 0.0003
+    },
+    "loss": "MONAI softmax Dice, including background; AdamW",
+    "policy": "cap_matched",
+    "budget": 255811605336720
+  }
+]

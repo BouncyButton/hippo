@@ -1,0 +1,44 @@
+{
+  "status": "submitted",
+  "job_id": "741921",
+  "manifest_sha256": "d19d7608fd2fc71342cad7708969558254f0e1a3cfbfe3cd17f03ce0afbac618",
+  "checks": {
+    "historical_flop_control": "exact match: 130061273028 FLOPs/update",
+    "data_and_model_preflight": {
+      "status": "local_passed_not_submission_ready",
+      "manifest_sha256": "d19d7608fd2fc71342cad7708969558254f0e1a3cfbfe3cd17f03ce0afbac618",
+      "optimizer_updates": 0,
+      "torch": "2.2.2",
+      "monai": "1.6.0",
+      "checks": [
+        {
+          "dataset": "MNI",
+          "prepared_cases": 50,
+          "output_shape": [
+            1,
+            4,
+            64,
+            64,
+            64
+          ]
+        },
+        {
+          "dataset": "COBRA",
+          "prepared_cases": 10,
+          "output_shape": [
+            1,
+            6,
+            64,
+            64,
+            96
+          ]
+        }
+      ]
+    },
+    "integration_tests": "4 passed; tiny-model isolated fixtures, not scientific UNETR results",
+    "cli": "All 18 frozen trainer commands parsed",
+    "shell": "bash -n passed"
+  },
+  "test_source_sha256": "eb23b4d5ba9c8789076276dc0a30c872324dedb5777e3caab4b4f7874050d46f",
+  "prepared_at": 1793965300.464185
+}

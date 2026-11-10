@@ -1,0 +1,31 @@
+{
+  "approved_for_execution": true,
+  "authorization": "User explicitly asked to modify the UNETR training recipe and try simpler training if current constraint approaches do not work; ongoing goal authorizes continued cross-fold/seed investigation.",
+  "recipes": [
+    {
+      "key": "noaug",
+      "dropout_rate": 0.1,
+      "augmentation": "none"
+    },
+    {
+      "key": "nodrop",
+      "dropout_rate": 0.0,
+      "augmentation": "xy_d4_v1"
+    },
+    {
+      "key": "plain",
+      "dropout_rate": 0.0,
+      "augmentation": "none"
+    }
+  ],
+  "arms": [
+    "dice",
+    "dice_bands",
+    "dice_bands_edge_sdf_depth"
+  ],
+  "reason": "Original fixed-delay bands/combinations, training-readiness timing, finite windows and SDF/depth composition have not produced one shared9/9 improvement. AdamW diagnostics reproduced exact trajectories without evidence of large auxiliary amplification. Test augmentation/dropout interaction, keeping loss,optimizer,LR,data,cap and original constraints fixed. Fresh same-recipe baselines mandatory; old baselines serve only absolute-performance comparison.",
+  "previous_result_sha256": "70eb7e08d97ebe332ac502da3f3824528aa6b9456d635df4ff2f44c4e7322ac9",
+  "previous_audit_sha256": "550b6676529d3d6bd2dfb002d014f9bc1325a2177b1d6c2aea23350912fdb707",
+  "gate": "One shared candidate must improve every one of nine matched pairs. Report absolute Dice against old baseline; do not claim a better model from weakening a control.",
+  "created_at": 1794177565.8950982
+}

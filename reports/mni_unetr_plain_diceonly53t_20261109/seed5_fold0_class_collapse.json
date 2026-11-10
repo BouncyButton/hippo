@@ -1,0 +1,66 @@
+{
+  "created_at": 1794192995.587137,
+  "seed": 5,
+  "fold": 0,
+  "rows": [
+    {
+      "recipe": "plain_dicece",
+      "archive": "reports/mni_unetr_plain_subfields53t_20261109/runs/MNI_unetr_plain_dice_f0s5",
+      "training": {
+        "macro_hard_dice": 88.11869276643286,
+        "CA1_3_hard_dice": 89.01090209221623,
+        "subiculum_hard_dice": 87.01277067709066,
+        "CA4_DG_hard_dice": 88.33240552999165,
+        "CA4_DG_soft_dice": 21.872682347893715
+      },
+      "validation": {
+        "macro_hard_dice": 74.57989824449092,
+        "CA1_3_hard_dice": 75.86479670999499,
+        "subiculum_hard_dice": 73.24012111441685,
+        "CA4_DG_hard_dice": 74.63477690906089,
+        "CA4_DG_soft_dice": 18.479700535535812
+      }
+    },
+    {
+      "recipe": "diceonly",
+      "archive": "reports/mni_unetr_plain_diceonly53t_20261109/runs/MNI_unetr_plain_diceonly_dice_f0s5",
+      "training": {
+        "macro_hard_dice": 61.12101386102344,
+        "CA1_3_hard_dice": 91.5994327422875,
+        "subiculum_hard_dice": 91.75864798037709,
+        "CA4_DG_hard_dice": 0.0049608604057895574,
+        "CA4_DG_soft_dice": 0.1768503081984818
+      },
+      "validation": {
+        "macro_hard_dice": 49.0477920492971,
+        "CA1_3_hard_dice": 74.40633689663517,
+        "subiculum_hard_dice": 72.73520778842426,
+        "CA4_DG_hard_dice": 0.0018314628318832965,
+        "CA4_DG_soft_dice": 0.15437918133102357
+      }
+    },
+    {
+      "recipe": "diceonly_bands",
+      "archive": "reports/mni_unetr_plain_diceonly53t_20261109/runs/MNI_unetr_plain_diceonly_dice_bands_f0s5",
+      "training": {
+        "macro_hard_dice": 61.221252045627914,
+        "CA1_3_hard_dice": 91.78131329011808,
+        "subiculum_hard_dice": 91.8734485417192,
+        "CA4_DG_hard_dice": 0.008994305046455868,
+        "CA4_DG_soft_dice": 0.1782841660315171
+      },
+      "validation": {
+        "macro_hard_dice": 49.227839511263184,
+        "CA1_3_hard_dice": 74.71158042197268,
+        "subiculum_hard_dice": 72.96812725653308,
+        "CA4_DG_hard_dice": 0.0038108552837837124,
+        "CA4_DG_soft_dice": 0.15732828178443015
+      }
+    }
+  ],
+  "observation": "Dice-only CA4_DG hard Dice is essentially zero on training and validation, with and without bands. The SAME-seed/fold plain DiceCE control learns this class. The issue is fitting the training data, not merely a larger validation gap.",
+  "interpretation": "Removing CE changes training stability for this seed. Bands preserve the union-level original definition and do not rescue the missing subfield. This is evidence against promoting Dice-only on paired gains alone.",
+  "conditional_next_hypothesis": "If Dice-only fails the shared confirmation/absolute-performance assessment, restore a smaller positive dense CE component while keeping architecture, dropout0/noaug, LR, cap and original delayed constraints fixed; use fresh same-loss baselines. No candidate weight selected or launched yet.",
+  "scope": "Final archived evidence, no checkpoint selection; freeze current confirmation and retain all results.",
+  "confusion_audit_correction": "See class_collapse_confusion_audit.json: low CA4 Dice is dominated by enormous background-to-CA4 false positives; do not describe it as simply absent CA4 predictions. Seed19 still has3334trueCA4positives in baseline. Dense background CE is a candidate recovery mechanism, not proven yet."
+}

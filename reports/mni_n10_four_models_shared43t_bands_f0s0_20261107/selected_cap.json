@@ -1,0 +1,11 @@
+{
+  "status": "selected",
+  "shared_cap": 43006868505381,
+  "training_subjects": 10,
+  "fold": 0,
+  "seed": 0,
+  "rationale": "User requested all four baselines and original bands at this shared cap. Reuse verified exact-match nnUNet baseline/60% bands pair. Run SwinUNETR,UNETR,UNet at the same cap with established recipes and model-specific targets10%,5%,10%.",
+  "scheduling": "nnUNet retains verified121-update cutoff with LR horizon200 and20-update bands prefix/ramp. Other model LR schedules and10% bands prefix/ramp are matched to this shared optimization cap.",
+  "comparison": "Eight conditions: two verified completed nnUNet runs plus six new runs. All same10training subjects and5validation subjects,fold0seed0. No expanded bands.",
+  "limitations": "Optimization FLOPs shared; calibration and evaluation FLOPs separately reported. Single development fold/seed; no guarantee of improvement or equal training fit across architectures."
+}

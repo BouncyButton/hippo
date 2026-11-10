@@ -1,0 +1,504 @@
+[
+  {
+    "stage": "mni_one_subject_diagnostic_20261106",
+    "result": "Both models passed the one-subject fit test, including each subfield in each crop.",
+    "nnunet_updates": 250,
+    "nnunet_train_dice": 0.9874606674480795,
+    "swinunetr_updates": 1400,
+    "swinunetr_train_dice": 0.9863228205279924,
+    "cleaned_bytes": 854002616
+  },
+  {
+    "stage": "mni_nnunet_cap4_pilot_20261106",
+    "decision": "First nnUNet cap test:4\u00d7 historical,359updates. Keep LR0.01 for firsthalf then polynomial decay. Fold0,seeds0and1. Fixed support subjects; fullbudgetmetric.",
+    "reason": "Native nnUNet fit rises sharply after the old89update allowance; prevent earlyLRdecay and allow enough usefulupdates."
+  },
+  {
+    "stage": "mni_nnunet_cap4_full_20261106",
+    "decision": "Launch all nine fixedfold/seed runs at4x historicalcap.",
+    "pilot_final_scores": [
+      0.7587252226516036,
+      0.7560452725820042
+    ],
+    "pilot_subfields": [
+      {
+        "CA1_3": 0.7734197236023787,
+        "subiculum": 0.7499702304244049,
+        "CA4_DG": 0.7527857139280274
+      },
+      {
+        "CA1_3": 0.7799917938476294,
+        "subiculum": 0.7379167008668129,
+        "CA4_DG": 0.7502273230315702
+      }
+    ],
+    "pilot_archives_verified": true,
+    "pilot_cleanup_bytes": 1050671396
+  },
+  {
+    "decision": "For remaining full batches, save recovery every25updates plus each validation/final/stop checkpoint. Source diff changes only commit cadence; all training and validation computations identical.",
+    "reason": "UNETR original245update run spent276seconds; large frequentcheckpoint IO dominates short GPUupdates.",
+    "superseded_unsubmitted_stages": [
+      "mni_swin_cap4_lr3e4_full_20261106",
+      "mni_unetr_geo_cap4_full_20261106",
+      "mni_unet_cap4_full_20261106"
+    ]
+  },
+  {
+    "stage": "mni_nnunet_cap4_full_20261106",
+    "decision": "nnUNet fixed3folds\u00d73seeds gate passed; extend the same4xcap to SwinUNETR Dice-only pilot.",
+    "mean_dice": 0.7428440671564969,
+    "seed_means": {
+      "0": 0.7433113270091672,
+      "1": 0.7362057731502833,
+      "2": 0.7490151013100401
+    },
+    "minimum_run": 0.7207021074161075,
+    "archived_and_cleaned_runs": 9,
+    "released_bytes": 4728021410
+  },
+  {
+    "decision": "Add foreground-class collapse guard before accepting Swin pilot or final baselines: each validation subfield Dice>=0.10 in eachrun, in addition to overall45%/seedmean50% targets.",
+    "evidence": "At371/824updates, Swinseed1 has49%macroDice butCA4_DG=0; a macro score alone can hide one missing class.",
+    "training_changed": false
+  },
+  {
+    "stage": "mni_swin_cap4_lr3e4_pilot_20261106",
+    "decision": "Reject ordinary Dice variant despite successful seed0; seed1 has persistent zeroCA4/DGDice. Bothpilot checkpoints archived andremoved.",
+    "runs": [
+      {
+        "model": "swinunetr",
+        "fold": 0,
+        "seed": 0,
+        "validation_dice": 0.7062193893870381,
+        "training_dice": 0.9736251656519418,
+        "subfields": {
+          "CA1_3": 0.7337894060432102,
+          "subiculum": 0.703841957465867,
+          "CA4_DG": 0.681026804652037
+        },
+        "whole_hippocampus_dice": 0.8379626711730432,
+        "updates": 824,
+        "released_bytes": 336990356
+      },
+      {
+        "model": "swinunetr",
+        "fold": 0,
+        "seed": 1,
+        "validation_dice": 0.4879725781126624,
+        "training_dice": 0.6459214639797151,
+        "subfields": {
+          "CA1_3": 0.7378419448128871,
+          "subiculum": 0.7260757895251003,
+          "CA4_DG": 0.0
+        },
+        "whole_hippocampus_dice": 0.7958766238245284,
+        "updates": 824,
+        "released_bytes": 336990356
+      }
+    ],
+    "next": "Fresh foreground-only squared Dice-only pilot; sameLR3e-4 andcommon4xcap. Reprofile exactupdatecost."
+  },
+  {
+    "stage": "mni_swin_foreground_squared_cap4_pilot_20261106",
+    "decision": "Reject unweightedforegroundsquaredDice; seed1 CA4DG remains0.0054 despite macro0.511.",
+    "runs": [
+      {
+        "model": "swinunetr",
+        "fold": 0,
+        "seed": 0,
+        "validation_dice": 0.7355742313235857,
+        "training_dice": 0.9730671943628666,
+        "subfields": {
+          "CA1_3": 0.7532682958969368,
+          "subiculum": 0.7171958629139348,
+          "CA4_DG": 0.7362585351598858
+        },
+        "whole_hippocampus_dice": 0.8546626790292102,
+        "updates": 824,
+        "released_bytes": 336990356
+      },
+      {
+        "model": "swinunetr",
+        "fold": 0,
+        "seed": 1,
+        "validation_dice": 0.510904551063833,
+        "training_dice": 0.6631553685052463,
+        "subfields": {
+          "CA1_3": 0.7753547764271989,
+          "subiculum": 0.7520000994260873,
+          "CA4_DG": 0.005358777338212829
+        },
+        "whole_hippocampus_dice": 0.061118327781690816,
+        "updates": 824,
+        "released_bytes": 336990548
+      }
+    ],
+    "next": "BalancedforegroundsquaredDice, inverse-training-volume weights, zero outputhead initialization. Samecap4andLR3e-4."
+  },
+  {
+    "stage": "mni_swin_balanced_dice_cap4_pilot_20261106",
+    "decision": "Reject foreground-only balancedDice: CA1_3 false positives are1,157,887/1,204,184 voxels acrossvalidation versus ~29,860groundtruth; backgroundclassifiedasCA1_3.",
+    "runs": [
+      {
+        "model": "swinunetr",
+        "fold": 0,
+        "seed": 0,
+        "validation_dice": 0.5007529595956326,
+        "training_dice": 0.6730354534973808,
+        "subfields": {
+          "CA1_3": 0.04626849542977419,
+          "subiculum": 0.7174196936111965,
+          "CA4_DG": 0.738570689745927
+        },
+        "whole_hippocampus_dice": 0.07642830521858007,
+        "updates": 824,
+        "released_bytes": 336990484
+      },
+      {
+        "model": "swinunetr",
+        "fold": 0,
+        "seed": 1,
+        "validation_dice": 0.5023908614009397,
+        "training_dice": 0.6744903373879428,
+        "subfields": {
+          "CA1_3": 0.044720090547884256,
+          "subiculum": 0.7181695962355011,
+          "CA4_DG": 0.7442828974194334
+        },
+        "whole_hippocampus_dice": 0.07362413605790259,
+        "updates": 824,
+        "released_bytes": 336990420
+      }
+    ],
+    "next": "Include backgroundDice(weight1) alongside3foregroundinverse-volumeweights; samezerohead,LR3e-4,cap4. StillpureDice,noCE."
+  },
+  {
+    "stage": "mni_swin_allclass_dice_cap4_pilot_20261106",
+    "decision": "Reject inverse-frequencyallclassweights; major/subiculumunderlearnedwhileCA4DGdominates. TestequalweightsandlongerpeakLRholdatcap4beforeincreasingcommoncap.",
+    "runs": [
+      {
+        "model": "swinunetr",
+        "fold": 0,
+        "seed": 0,
+        "validation_dice": 0.4806668741316237,
+        "training_dice": 0.641966966944408,
+        "subfields": {
+          "CA1_3": 0.07152185348578002,
+          "subiculum": 0.6703665451525598,
+          "CA4_DG": 0.7001122237565313
+        },
+        "whole_hippocampus_dice": 0.5579996931711438,
+        "updates": 824,
+        "released_bytes": 336984340
+      },
+      {
+        "model": "swinunetr",
+        "fold": 0,
+        "seed": 1,
+        "validation_dice": 0.27160680330106757,
+        "training_dice": 0.3745101658774638,
+        "subfields": {
+          "CA1_3": 0.005040324596433991,
+          "subiculum": 0.1330114496742739,
+          "CA4_DG": 0.6767686356324949
+        },
+        "whole_hippocampus_dice": 0.2715411958695507,
+        "updates": 824,
+        "released_bytes": 336984340
+      }
+    ],
+    "next": "All-class squaredDice, equalweights1, uniformzerohead, LR3e-4warmup42/holdto412/cosineending824."
+  },
+  {
+    "stage": "mni_swin_uniform_dice_hold_cap4_pilot_20261106",
+    "decision": "Cap4 uniform-head all-class Dice hold schedule failed consistency. Increase shared cap to8; preserve all attempts; use strongest earlier foreground squared Dice with random seeded head and peak-LR hold for Swin.",
+    "runs": [
+      {
+        "model": "swinunetr",
+        "fold": 0,
+        "seed": 0,
+        "validation_dice": 0.6035803159915831,
+        "training_dice": 0.7770400039641393,
+        "subfields": {
+          "CA1_3": 0.7139706338976419,
+          "subiculum": 0.3863859141828183,
+          "CA4_DG": 0.7103843998942889
+        },
+        "whole_hippocampus_dice": 0.8643450373947139,
+        "updates": 824,
+        "released_bytes": 336984404
+      },
+      {
+        "model": "swinunetr",
+        "fold": 0,
+        "seed": 1,
+        "validation_dice": 0.264633675248505,
+        "training_dice": 0.2873485515458057,
+        "subfields": {
+          "CA1_3": 0.22798910510636547,
+          "subiculum": 0.0,
+          "CA4_DG": 0.5659119206391497
+        },
+        "whole_hippocampus_dice": 0.5643295944727627,
+        "updates": 824,
+        "released_bytes": 336990292
+      }
+    ],
+    "next_cap": 255811605336720
+  },
+  {
+    "stage": "mni_swin_squared_hold_cap8_pilot_20261106",
+    "decision": "Accept pilot: both final-budget macro Dice above0.73 and all subfields above0.71. Advance unchanged recipe to fixed3folds\u00d73seeds.",
+    "runs": [
+      {
+        "model": "swinunetr",
+        "fold": 0,
+        "seed": 0,
+        "validation_dice": 0.730969444882261,
+        "training_dice": 0.99887327295717,
+        "subfields": {
+          "CA1_3": 0.7501555970047588,
+          "subiculum": 0.7141840437040974,
+          "CA4_DG": 0.728568693937927
+        },
+        "whole_hippocampus_dice": 0.8479996020423327,
+        "updates": 1649,
+        "released_bytes": 336990420
+      },
+      {
+        "model": "swinunetr",
+        "fold": 0,
+        "seed": 1,
+        "validation_dice": 0.7394779865930647,
+        "training_dice": 0.999061449429791,
+        "subfields": {
+          "CA1_3": 0.7626215058801795,
+          "subiculum": 0.7312808971332422,
+          "CA4_DG": 0.7245315567657727
+        },
+        "whole_hippocampus_dice": 0.8548440932273605,
+        "updates": 1649,
+        "released_bytes": 336990420
+      }
+    ]
+  },
+  {
+    "stage": "mni_swin_squared_hold_cap8_full_20261106",
+    "decision": "Reject full9 despite acceptable macro means: seed2 folds1/2 have background-to-subiculum leakage, Diceabout0.02. Keep NN cap8; test all-class logDice at samecap on all3 seeds of fold1.",
+    "runs": [
+      {
+        "model": "swinunetr",
+        "fold": 0,
+        "seed": 0,
+        "validation_dice": 0.730969444882261,
+        "training_dice": 0.99887327295717,
+        "subfields": {
+          "CA1_3": 0.7501555970047588,
+          "subiculum": 0.7141840437040974,
+          "CA4_DG": 0.728568693937927
+        },
+        "whole_hippocampus_dice": 0.8479996020423327,
+        "updates": 1649,
+        "released_bytes": 336990420
+      },
+      {
+        "model": "swinunetr",
+        "fold": 1,
+        "seed": 0,
+        "validation_dice": 0.7114181644155393,
+        "training_dice": 0.9988258796343917,
+        "subfields": {
+          "CA1_3": 0.7361199328785314,
+          "subiculum": 0.6905048369550643,
+          "CA4_DG": 0.707629723413022
+        },
+        "whole_hippocampus_dice": 0.8380452941266581,
+        "updates": 1649,
+        "released_bytes": 336990420
+      },
+      {
+        "model": "swinunetr",
+        "fold": 2,
+        "seed": 0,
+        "validation_dice": 0.7349026212249912,
+        "training_dice": 0.9987002902140073,
+        "subfields": {
+          "CA1_3": 0.7400125689019976,
+          "subiculum": 0.738022346220723,
+          "CA4_DG": 0.726672948552253
+        },
+        "whole_hippocampus_dice": 0.8415076227018344,
+        "updates": 1649,
+        "released_bytes": 336990420
+      },
+      {
+        "model": "swinunetr",
+        "fold": 0,
+        "seed": 1,
+        "validation_dice": 0.7394779865930647,
+        "training_dice": 0.999061449429791,
+        "subfields": {
+          "CA1_3": 0.7626215058801795,
+          "subiculum": 0.7312808971332422,
+          "CA4_DG": 0.7245315567657727
+        },
+        "whole_hippocampus_dice": 0.8548440932273605,
+        "updates": 1649,
+        "released_bytes": 336990420
+      },
+      {
+        "model": "swinunetr",
+        "fold": 1,
+        "seed": 1,
+        "validation_dice": 0.7019174045727922,
+        "training_dice": 0.9989732283296604,
+        "subfields": {
+          "CA1_3": 0.7358492528355648,
+          "subiculum": 0.681627777085767,
+          "CA4_DG": 0.6882751837970442
+        },
+        "whole_hippocampus_dice": 0.8377766515046379,
+        "updates": 1649,
+        "released_bytes": 336990420
+      },
+      {
+        "model": "swinunetr",
+        "fold": 2,
+        "seed": 1,
+        "validation_dice": 0.7441344674156495,
+        "training_dice": 0.9989675794504478,
+        "subfields": {
+          "CA1_3": 0.7537325431764526,
+          "subiculum": 0.7466348106398564,
+          "CA4_DG": 0.7320360484306399
+        },
+        "whole_hippocampus_dice": 0.8503983119836892,
+        "updates": 1649,
+        "released_bytes": 336990420
+      },
+      {
+        "model": "swinunetr",
+        "fold": 0,
+        "seed": 2,
+        "validation_dice": 0.7150748803342925,
+        "training_dice": 0.982250808949917,
+        "subfields": {
+          "CA1_3": 0.7439987218737328,
+          "subiculum": 0.6859549310187082,
+          "CA4_DG": 0.7152709881104363
+        },
+        "whole_hippocampus_dice": 0.8460784659612528,
+        "updates": 1649,
+        "released_bytes": 336990420
+      },
+      {
+        "model": "swinunetr",
+        "fold": 1,
+        "seed": 2,
+        "validation_dice": 0.48628745918519617,
+        "training_dice": 0.6745588185769782,
+        "subfields": {
+          "CA1_3": 0.7340268740042583,
+          "subiculum": 0.022265983100673896,
+          "CA4_DG": 0.7025695204506565
+        },
+        "whole_hippocampus_dice": 0.08164044952646192,
+        "updates": 1649,
+        "released_bytes": 336990484
+      },
+      {
+        "model": "swinunetr",
+        "fold": 2,
+        "seed": 2,
+        "validation_dice": 0.49162112582874895,
+        "training_dice": 0.6749588644328288,
+        "subfields": {
+          "CA1_3": 0.7337802762496707,
+          "subiculum": 0.021537416137739747,
+          "CA4_DG": 0.7195456850988363
+        },
+        "whole_hippocampus_dice": 0.08326329412204007,
+        "updates": 1649,
+        "released_bytes": 336990484
+      }
+    ]
+  },
+  {
+    "stage": "mni_swin_log_dice_cap8_pilot_20261106",
+    "decision": "All3 seeds on previously failing fold1 pass with all-class negative-log squared Dice atcap8. Confirm unchanged recipe across all9.",
+    "runs": [
+      {
+        "model": "swinunetr",
+        "fold": 1,
+        "seed": 0,
+        "validation_dice": 0.6998370927280031,
+        "training_dice": 0.998101019082674,
+        "subfields": {
+          "CA1_3": 0.7300023004580944,
+          "subiculum": 0.6765535632919134,
+          "CA4_DG": 0.6929554144340015
+        },
+        "whole_hippocampus_dice": 0.8354900148177071,
+        "updates": 1649,
+        "released_bytes": 336990420
+      },
+      {
+        "model": "swinunetr",
+        "fold": 1,
+        "seed": 1,
+        "validation_dice": 0.7000756400058407,
+        "training_dice": 0.9984207498404775,
+        "subfields": {
+          "CA1_3": 0.7323664786862988,
+          "subiculum": 0.6751321952005036,
+          "CA4_DG": 0.6927282461307201
+        },
+        "whole_hippocampus_dice": 0.8381817097325834,
+        "updates": 1649,
+        "released_bytes": 336990420
+      },
+      {
+        "model": "swinunetr",
+        "fold": 1,
+        "seed": 2,
+        "validation_dice": 0.6835747585472451,
+        "training_dice": 0.9981788902637605,
+        "subfields": {
+          "CA1_3": 0.7156370439341525,
+          "subiculum": 0.6732512302809558,
+          "CA4_DG": 0.6618360014266271
+        },
+        "whole_hippocampus_dice": 0.8315488099345801,
+        "updates": 1649,
+        "released_bytes": 336990420
+      }
+    ]
+  },
+  {
+    "stage": "mni_swin_log_dice_cap8_full_20261106",
+    "decision": "Accept final Swin recipe: all9 pass at sharedcap8; all3 pilot scores exactly reproduced.",
+    "mean_dice": 0.7124387090055606,
+    "seed_means": {
+      "0": 0.7120473511552534,
+      "1": 0.7180006315294423,
+      "2": 0.7072681443319863
+    },
+    "minimum_subfield_dice": 0.6618360014266271
+  },
+  {
+    "stage": "mni_unetr_geo_cap8_20261106",
+    "decision": "Accept unchanged Geo UNETR recipe atcap8: all9 pass.",
+    "mean_dice": 0.7046256818928863,
+    "seed_means": {
+      "0": 0.7058739019540414,
+      "1": 0.7033741711746023,
+      "2": 0.704628972550015
+    }
+  },
+  {
+    "stage": "mni_unet_cap8_20261106",
+    "decision": "Accept unchanged U-Net Dice baseline; all9 pass. All4 baselines complete at sharedcap8; all84 campaign archives and cleanup receipts verified; queue empty.",
+    "completed_at": 1794008924.0662808
+  }
+]

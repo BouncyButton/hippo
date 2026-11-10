@@ -1,0 +1,93 @@
+[
+  {
+    "id": "MNI_unetr_plain_diceonly_dice_f1s0",
+    "files": [
+      "run.lock",
+      "training_latest.json",
+      "runtime_recipe.json",
+      "metrics.csv",
+      "budget_ledger.json",
+      "base_loss_recipe.json",
+      "checkpoint_best.pt",
+      "validation_latest.json",
+      "validation_best.json",
+      "train.log",
+      "calibration.json",
+      "spatial_050.json",
+      "model_recipe.json",
+      "checkpoint_latest.pt",
+      "config.json",
+      "spatial_025.json"
+    ],
+    "base_loss_recipe.json": {
+      "recipe": "unetr_foreground_squared_dice",
+      "adapter_sha256": "819beccee053519c0f42b98eebffcec307f3eacfe41c1e32fcec22437e0e9c14",
+      "loss_source_sha256": "f04d74572dff2ad2727305de9e84d032f51fd9afb4d5d6bc9737cf84621d70f5",
+      "original_auxiliary_source_sha256": "413e4776302c4c0a729c9e4fe00129b7a8325c2ed49910ea542fdb3488960ab4",
+      "dense_cross_entropy_in_base": false
+    },
+    "model_recipe.json": {
+      "declared": {
+        "dropout_rate": 0.0,
+        "augmentation": "none"
+      },
+      "runtime_source_sha256": "819beccee053519c0f42b98eebffcec307f3eacfe41c1e32fcec22437e0e9c14"
+    },
+    "config.json": {
+      "model_identity": "unetr_vit_b16",
+      "fold": 1,
+      "seed": 0,
+      "budget_flops": 53305109592450,
+      "max_steps": 409,
+      "augmentation": "none",
+      "initial_lr": 0.0006
+    },
+    "log_tail": "hard_dice\": 0.8877290196251838}\n{\"model\": \"unet\", \"objective\": \"dice\", \"fold\": 1, \"seed\": 0, \"step\": 226, \"charged_attempts\": 226, \"patient_passes\": 11.3, \"estimated_training_flops\": 29401016358788, \"calibration_flops\": 0, \"total_flops\": 29401016358788, \"compute_fraction\": 0.55156094009705, \"mean_train_loss\": 0.18137816729999723, \"learning_rate\": 0.0005846037123345168, \"macro_hard_dice\": 0.7274597492120464, \"CA1_3_hard_dice\": 0.7331401851797026, \"CA1_3_soft_dice\": 0.3407815009355545, \"subiculum_hard_dice\": 0.729254706526439, \"subiculum_soft_dice\": 0.25996715277433396, \"CA4_DG_hard_dice\": 0.7199843559299977, \"CA4_DG_soft_dice\": 0.20121806114912033, \"macro_soft_dice\": 0.2673222382863363, \"whole_hippocampus_hard_dice\": 0.8444546870527727, \"training_macro_hard_dice\": 0.8336050843893199, \"training_CA1_3_hard_dice\": 0.8328144759215966, \"training_CA1_3_soft_dice\": 0.3851517587900162, \"training_subiculum_hard_dice\": 0.8179432585383998, \"training_subiculum_soft_dice\": 0.2865488357841969, \"training_CA4_DG_hard_dice\": 0.8500575187079633, \"training_CA4_DG_soft_dice\": 0.2348874717950821, \"training_macro_soft_dice\": 0.3021960221230984, \"training_whole_hippocampus_hard_dice\": 0.8950968526757366}\n"
+  },
+  {
+    "id": "MNI_unetr_plain_diceonly_dice_bands_edge_sdf_depth_f1s0",
+    "files": [
+      "run.lock",
+      "training_latest.json",
+      "checkpoint_latest.tmp",
+      "runtime_recipe.json",
+      "metrics.csv",
+      "budget_ledger.json",
+      "base_loss_recipe.json",
+      "checkpoint_best.pt",
+      "validation_latest.json",
+      "validation_best.json",
+      "train.log",
+      "calibration.json",
+      "spatial_050.json",
+      "model_recipe.json",
+      "checkpoint_latest.pt",
+      "config.json",
+      "spatial_025.json"
+    ],
+    "base_loss_recipe.json": {
+      "recipe": "unetr_foreground_squared_dice",
+      "adapter_sha256": "819beccee053519c0f42b98eebffcec307f3eacfe41c1e32fcec22437e0e9c14",
+      "loss_source_sha256": "f04d74572dff2ad2727305de9e84d032f51fd9afb4d5d6bc9737cf84621d70f5",
+      "original_auxiliary_source_sha256": "413e4776302c4c0a729c9e4fe00129b7a8325c2ed49910ea542fdb3488960ab4",
+      "dense_cross_entropy_in_base": false
+    },
+    "model_recipe.json": {
+      "declared": {
+        "dropout_rate": 0.0,
+        "augmentation": "none"
+      },
+      "runtime_source_sha256": "819beccee053519c0f42b98eebffcec307f3eacfe41c1e32fcec22437e0e9c14"
+    },
+    "config.json": {
+      "model_identity": "unetr_vit_b16",
+      "fold": 1,
+      "seed": 0,
+      "budget_flops": 53305109592450,
+      "max_steps": 409,
+      "augmentation": "none",
+      "initial_lr": 0.0006
+    },
+    "log_tail": "62417826}\n{\"model\": \"unet\", \"objective\": \"dice_bands_edge_sdf_depth\", \"fold\": 1, \"seed\": 0, \"step\": 185, \"charged_attempts\": 185, \"patient_passes\": 9.25, \"estimated_training_flops\": 24080401556914, \"calibration_flops\": 868215698912, \"total_flops\": 24948617255826, \"compute_fraction\": 0.45174659129346745, \"mean_train_loss\": 0.23359143237272897, \"learning_rate\": 0.0006, \"macro_hard_dice\": 0.7217235496260053, \"CA1_3_hard_dice\": 0.7106500868982818, \"CA1_3_soft_dice\": 0.30020610690116883, \"subiculum_hard_dice\": 0.733650254006742, \"subiculum_soft_dice\": 0.23713304102420807, \"CA4_DG_hard_dice\": 0.7208703079729923, \"CA4_DG_soft_dice\": 0.17797805219888688, \"macro_soft_dice\": 0.23843906670808793, \"whole_hippocampus_hard_dice\": 0.8370353615098768, \"training_macro_hard_dice\": 0.804421954775513, \"training_CA1_3_hard_dice\": 0.8052518409386664, \"training_CA1_3_soft_dice\": 0.3362777203321457, \"training_subiculum_hard_dice\": 0.7852662748853987, \"training_subiculum_soft_dice\": 0.2528914242982864, \"training_CA4_DG_hard_dice\": 0.8227477485024736, \"training_CA4_DG_soft_dice\": 0.20229421332478523, \"training_macro_soft_dice\": 0.2638211193184058, \"training_whole_hippocampus_hard_dice\": 0.8859774129688835}\n"
+  }
+]

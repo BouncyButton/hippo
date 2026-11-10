@@ -1,0 +1,57 @@
+{
+  "status": "selected",
+  "shared_cap": 63952901334180,
+  "pilot_stage": "mni_subjects10_20_cap_pilot_20261107",
+  "comparison_sha256": "45fc4660d66b06e887dfdb6a87d857814852ab4524cd426dae30f91f25f8aa51",
+  "evidence": [
+    {
+      "model": "swinunetr",
+      "subjects": 10,
+      "training_dice": 0.793979364490808,
+      "validation_dice": 0.7704101418023044,
+      "gap_pp": 2.356922268850359,
+      "last_quarter_train_change_pp": 2.286857125976194,
+      "last_quarter_validation_change_pp": 2.246099526457901,
+      "final_vs_best_validation_pp": -0.17383744644834387,
+      "archive_manifest_sha256": "8cfba00d266171343ba1f559528f720e2b557c7d67f80cc1ee0d0f74f8a3549a"
+    },
+    {
+      "model": "unetr_vit_b16",
+      "subjects": 10,
+      "training_dice": 0.7510060477161167,
+      "validation_dice": 0.7206587264399736,
+      "gap_pp": 3.0347321276143036,
+      "last_quarter_train_change_pp": 2.9187107242098276,
+      "last_quarter_validation_change_pp": 2.203377241436111,
+      "final_vs_best_validation_pp": -0.08956631533987292,
+      "archive_manifest_sha256": "ba26ee3ca69580694a3817450b7372c5f4e0a3abb8fd7e328d48a91e5f6ca94f"
+    },
+    {
+      "model": "swinunetr",
+      "subjects": 20,
+      "training_dice": 0.7771568305681535,
+      "validation_dice": 0.7716615067379535,
+      "gap_pp": 0.5495323830200016,
+      "last_quarter_train_change_pp": 2.9213791381544008,
+      "last_quarter_validation_change_pp": 2.337811145037283,
+      "final_vs_best_validation_pp": -0.017479877954285072,
+      "archive_manifest_sha256": "d85a014952058bbc2c9bfd822b94358def49ab43553ea13a09aecb2af1e05449"
+    },
+    {
+      "model": "unetr_vit_b16",
+      "subjects": 20,
+      "training_dice": 0.732596545206871,
+      "validation_dice": 0.7186606792390424,
+      "gap_pp": 1.3935865967828587,
+      "last_quarter_train_change_pp": 2.413526095199614,
+      "last_quarter_validation_change_pp": 1.9795807496381101,
+      "final_vs_best_validation_pp": 0.0,
+      "archive_manifest_sha256": "b61b89a1da2004e2a5e54c5aad94d428af5f29068d68b38ef25c35a2ffce440f"
+    }
+  ],
+  "rationale": "Retain the tested current cap after cohort-specific pilots: all four validation Dice scores exceed71%, training stays73\u201380%, gaps0.55\u20133.04pp, late validation improves with training and final scores stay close to best. No evidence warrants increasing compute or cutting to a premature stage. This is a validated conservative working cap, not a proven optimal cap.",
+  "selection_scope": "One shared cap across SwinUNETR/UNETR,10/20subjects,baseline/originalbands/expandedbands. Selected from baseline-only development pilots before new constrained results.",
+  "constraints": "Keep recipes,split,seed,augmentation and calibration targets fixed. No epoch-matching multiplier and no model-specific cap.",
+  "limitations": "Validation used for development diagnostics; no guarantee against overfitting. Existing headroom is a safeguard, and full train/validation curves remain reported.",
+  "baseline_reuse": "Four pilot baselines exactly match chosen cap/cohorts/recipes. Reuse their verified archives rather than duplicate training. Per-voxel baseline transition comparisons are omitted because prediction volumes were not retained."
+}

@@ -1,0 +1,368 @@
+{
+  "status": "complete",
+  "outcome": "diagnostic_replay_verified",
+  "winner": null,
+  "rows": [
+    {
+      "id": "MNI_unetr_probe_bands_f0s0",
+      "kind": "conventional",
+      "dataset": "MNI",
+      "model": "unetr_vit_b16",
+      "arm": "dice_bands",
+      "protocol": "delayed_t05",
+      "seed": 0,
+      "fold": 0,
+      "augmentation": "xy_d4_v1",
+      "reference": "f0s0",
+      "current": {
+        "validation_percent": 71.30146755191062,
+        "training_percent": 74.17250690100062,
+        "union_percent": 81.23396912629887,
+        "per_subfield_percent": {
+          "CA1_3_hard_dice": 69.45864210325945,
+          "subiculum_hard_dice": 70.69618476220339,
+          "CA4_DG_hard_dice": 73.74957579026906
+        },
+        "fn": 10051,
+        "fp": 7319,
+        "swaps": 5080,
+        "updates": 409,
+        "optimization_flops": 53239875702437,
+        "archive_manifest_sha256": "d5d24a1b7d926ba93c69083b608b55d6caa7e37abd6f27e0bf7dfa42e3640ccb"
+      },
+      "reference_evaluation": {
+        "validation_percent": 71.30146755191062,
+        "training_percent": 74.17250690100062,
+        "union_percent": 81.23396912629887,
+        "per_subfield_percent": {
+          "CA1_3_hard_dice": 69.45864210325945,
+          "subiculum_hard_dice": 70.69618476220339,
+          "CA4_DG_hard_dice": 73.74957579026906
+        },
+        "fn": 10051,
+        "fp": 7319,
+        "swaps": 5080,
+        "updates": 409,
+        "optimization_flops": 53239875702437,
+        "archive_manifest_sha256": "14cd5fb21a34e809e6aae2100b26cee312bb182c29258331b14ddd89355fb428"
+      },
+      "exact_replay": true,
+      "replay_metrics": {
+        "checkpoints": 21,
+        "maximum_numeric_error": 0.0
+      },
+      "final_model_sha256": "347aec3af1f5168cee5da2226912d5d15bdf1b3b0f302c69caaf4dc7296dcb3b",
+      "calibration_weights": {
+        "bands": 0.035393165437038965
+      },
+      "maximum_virtual_adam_relative_error": 0.0,
+      "summary": {
+        "full_strength_probe_steps": [
+          135,
+          144,
+          168,
+          205,
+          267,
+          328,
+          349,
+          369,
+          389,
+          409
+        ],
+        "logit_auxiliary_over_base": {
+          "observations": 10,
+          "minimum": 0.039808106461243394,
+          "median": 0.04740513708584573,
+          "maximum": 0.054985955984527254
+        },
+        "parameter_auxiliary_over_base": {
+          "observations": 10,
+          "minimum": 0.027152725881875738,
+          "median": 0.04883447467970087,
+          "maximum": 0.07693194855322633
+        },
+        "same_state_adam_perturbation_over_base": {
+          "observations": 10,
+          "minimum": 0.008036038427399566,
+          "median": 0.016564545743717886,
+          "maximum": 0.02650334772746597
+        },
+        "parameter_gradient_cosine": {
+          "observations": 10,
+          "minimum": -0.03701285585022406,
+          "median": 0.3959917929073474,
+          "maximum": 0.5618072690363113
+        },
+        "CA4_auxiliary_gradient_cosine": {
+          "observations": 10,
+          "minimum": -0.047862312569234726,
+          "median": 0.09221405399942394,
+          "maximum": 0.4302482428382455
+        },
+        "groups_median_adam_perturbation": {
+          "decoders": 0.0213008982549127,
+          "encoders": 0.02102808946341731,
+          "output_head": 0.004498936031100265,
+          "patch_embedding": 0.011175390021173463,
+          "transformer": 0.01627653835926089
+        },
+        "base_loss_predicted_ascent_steps": [],
+        "auxiliary_reduces_base_descent_steps": [],
+        "auxiliary_reduces_CA4_descent_steps": [
+          135,
+          328
+        ],
+        "caution": "Current-training-batch first-order directions and same-state virtual updates, not measured counterfactual validation performance."
+      },
+      "diagnostic_profiled_flops": 4093246439424,
+      "diagnostic_seconds": 8.006804410368204
+    },
+    {
+      "id": "MNI_unetr_probe_bands_f1s0",
+      "kind": "conventional",
+      "dataset": "MNI",
+      "model": "unetr_vit_b16",
+      "arm": "dice_bands",
+      "protocol": "delayed_t05",
+      "seed": 0,
+      "fold": 1,
+      "augmentation": "xy_d4_v1",
+      "reference": "f1s0",
+      "current": {
+        "validation_percent": 69.51471602611292,
+        "training_percent": 74.0214981408118,
+        "union_percent": 82.16069194374268,
+        "per_subfield_percent": {
+          "CA1_3_hard_dice": 67.13199342510143,
+          "subiculum_hard_dice": 68.74091542046553,
+          "CA4_DG_hard_dice": 72.67123923277181
+        },
+        "fn": 7817,
+        "fp": 8842,
+        "swaps": 6512,
+        "updates": 409,
+        "optimization_flops": 53239875702437,
+        "archive_manifest_sha256": "e5ea1796b56442bd19009f533b9235d79dd4d1a2c84e5680dcfa380e63d11a31"
+      },
+      "reference_evaluation": {
+        "validation_percent": 69.51471602611292,
+        "training_percent": 74.0214981408118,
+        "union_percent": 82.16069194374268,
+        "per_subfield_percent": {
+          "CA1_3_hard_dice": 67.13199342510143,
+          "subiculum_hard_dice": 68.74091542046553,
+          "CA4_DG_hard_dice": 72.67123923277181
+        },
+        "fn": 7817,
+        "fp": 8842,
+        "swaps": 6512,
+        "updates": 409,
+        "optimization_flops": 53239875702437,
+        "archive_manifest_sha256": "ed33dc291c729568c560d5a0017d93955199aad3654e905d2760afc0d31358be"
+      },
+      "exact_replay": true,
+      "replay_metrics": {
+        "checkpoints": 21,
+        "maximum_numeric_error": 0.0
+      },
+      "final_model_sha256": "6ec550e8b9b5506edf7f8623269ceb93e487d2efd350a558ff038dc91fcfe042",
+      "calibration_weights": {
+        "bands": 0.034828050182033915
+      },
+      "maximum_virtual_adam_relative_error": 0.0,
+      "summary": {
+        "full_strength_probe_steps": [
+          135,
+          144,
+          168,
+          205,
+          267,
+          328,
+          349,
+          369,
+          389,
+          409
+        ],
+        "logit_auxiliary_over_base": {
+          "observations": 10,
+          "minimum": 0.042574479563587654,
+          "median": 0.04874354869277095,
+          "maximum": 0.05474733875406518
+        },
+        "parameter_auxiliary_over_base": {
+          "observations": 10,
+          "minimum": 0.025618111155158926,
+          "median": 0.04135462546675468,
+          "maximum": 0.06623866151462061
+        },
+        "same_state_adam_perturbation_over_base": {
+          "observations": 10,
+          "minimum": 0.004933782361275355,
+          "median": 0.017156784833924507,
+          "maximum": 0.03341143237284005
+        },
+        "parameter_gradient_cosine": {
+          "observations": 10,
+          "minimum": 0.22985798523904374,
+          "median": 0.3182118314647573,
+          "maximum": 0.48979757724671874
+        },
+        "CA4_auxiliary_gradient_cosine": {
+          "observations": 10,
+          "minimum": -0.03294046736866482,
+          "median": 0.08806039734861335,
+          "maximum": 0.40725069239681977
+        },
+        "groups_median_adam_perturbation": {
+          "decoders": 0.030406209464823912,
+          "encoders": 0.023174908494888548,
+          "output_head": 0.004660043730790927,
+          "patch_embedding": 0.013523167665706017,
+          "transformer": 0.016757709858959843
+        },
+        "base_loss_predicted_ascent_steps": [],
+        "auxiliary_reduces_base_descent_steps": [
+          267
+        ],
+        "auxiliary_reduces_CA4_descent_steps": [
+          267,
+          328
+        ],
+        "caution": "Current-training-batch first-order directions and same-state virtual updates, not measured counterfactual validation performance."
+      },
+      "diagnostic_profiled_flops": 4093246439424,
+      "diagnostic_seconds": 7.898373176343739
+    }
+  ],
+  "summary": [
+    {
+      "seed": 0,
+      "fold": 0,
+      "full_strength_probe_steps": [
+        135,
+        144,
+        168,
+        205,
+        267,
+        328,
+        349,
+        369,
+        389,
+        409
+      ],
+      "logit_auxiliary_over_base": {
+        "observations": 10,
+        "minimum": 0.039808106461243394,
+        "median": 0.04740513708584573,
+        "maximum": 0.054985955984527254
+      },
+      "parameter_auxiliary_over_base": {
+        "observations": 10,
+        "minimum": 0.027152725881875738,
+        "median": 0.04883447467970087,
+        "maximum": 0.07693194855322633
+      },
+      "same_state_adam_perturbation_over_base": {
+        "observations": 10,
+        "minimum": 0.008036038427399566,
+        "median": 0.016564545743717886,
+        "maximum": 0.02650334772746597
+      },
+      "parameter_gradient_cosine": {
+        "observations": 10,
+        "minimum": -0.03701285585022406,
+        "median": 0.3959917929073474,
+        "maximum": 0.5618072690363113
+      },
+      "CA4_auxiliary_gradient_cosine": {
+        "observations": 10,
+        "minimum": -0.047862312569234726,
+        "median": 0.09221405399942394,
+        "maximum": 0.4302482428382455
+      },
+      "groups_median_adam_perturbation": {
+        "decoders": 0.0213008982549127,
+        "encoders": 0.02102808946341731,
+        "output_head": 0.004498936031100265,
+        "patch_embedding": 0.011175390021173463,
+        "transformer": 0.01627653835926089
+      },
+      "base_loss_predicted_ascent_steps": [],
+      "auxiliary_reduces_base_descent_steps": [],
+      "auxiliary_reduces_CA4_descent_steps": [
+        135,
+        328
+      ],
+      "caution": "Current-training-batch first-order directions and same-state virtual updates, not measured counterfactual validation performance."
+    },
+    {
+      "seed": 0,
+      "fold": 1,
+      "full_strength_probe_steps": [
+        135,
+        144,
+        168,
+        205,
+        267,
+        328,
+        349,
+        369,
+        389,
+        409
+      ],
+      "logit_auxiliary_over_base": {
+        "observations": 10,
+        "minimum": 0.042574479563587654,
+        "median": 0.04874354869277095,
+        "maximum": 0.05474733875406518
+      },
+      "parameter_auxiliary_over_base": {
+        "observations": 10,
+        "minimum": 0.025618111155158926,
+        "median": 0.04135462546675468,
+        "maximum": 0.06623866151462061
+      },
+      "same_state_adam_perturbation_over_base": {
+        "observations": 10,
+        "minimum": 0.004933782361275355,
+        "median": 0.017156784833924507,
+        "maximum": 0.03341143237284005
+      },
+      "parameter_gradient_cosine": {
+        "observations": 10,
+        "minimum": 0.22985798523904374,
+        "median": 0.3182118314647573,
+        "maximum": 0.48979757724671874
+      },
+      "CA4_auxiliary_gradient_cosine": {
+        "observations": 10,
+        "minimum": -0.03294046736866482,
+        "median": 0.08806039734861335,
+        "maximum": 0.40725069239681977
+      },
+      "groups_median_adam_perturbation": {
+        "decoders": 0.030406209464823912,
+        "encoders": 0.023174908494888548,
+        "output_head": 0.004660043730790927,
+        "patch_embedding": 0.013523167665706017,
+        "transformer": 0.016757709858959843
+      },
+      "base_loss_predicted_ascent_steps": [],
+      "auxiliary_reduces_base_descent_steps": [
+        267
+      ],
+      "auxiliary_reduces_CA4_descent_steps": [
+        267,
+        328
+      ],
+      "caution": "Current-training-batch first-order directions and same-state virtual updates, not measured counterfactual validation performance."
+    }
+  ],
+  "interpretation_limits": [
+    "No optimizer or constraint intervention was tested here.",
+    "Only exact reference replays are accepted as observational evidence.",
+    "Same-state virtual base-only updates retain constrained history and are not an unconstrained training run.",
+    "Diagnostics add separately reported compute; do not count these as new cap-matched performance candidates."
+  ],
+  "analysis_source_sha256": "0a60747724c8d99866802675255fc9c5775e953fa1d88a9f24083afa77ac96aa"
+}

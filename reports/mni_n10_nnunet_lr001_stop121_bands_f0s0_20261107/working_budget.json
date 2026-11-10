@@ -1,0 +1,47 @@
+{
+  "status": "verified",
+  "nnunet_optimization_flop_cap": 43006868505381,
+  "maximum_updates": 121,
+  "initial_lr": 0.01,
+  "lr_horizon_updates": 200,
+  "lr_hold_updates": 100,
+  "bands_prefix_updates": 20,
+  "bands_ramp_updates": 20,
+  "bands_gradient_target": 0.1,
+  "training_subjects": 10,
+  "fold": 0,
+  "seed": 0,
+  "rows": [
+    {
+      "condition": "baseline",
+      "updates": 121,
+      "validation_dice_pct": 62.57590341384677,
+      "training_dice_pct": 65.89904443007892,
+      "train_val_gap_pp": 3.323141016232145,
+      "exact_matching_previous_milestones": [
+        31,
+        61,
+        91,
+        121
+      ],
+      "archive_sha256": "2029f4184db01ae5552d2412a8c121e1526ebd49963ecdc06725678c9e912e1a"
+    },
+    {
+      "condition": "original_bands",
+      "updates": 121,
+      "validation_dice_pct": 63.008895980225745,
+      "training_dice_pct": 66.17250604939416,
+      "train_val_gap_pp": 3.163610069168421,
+      "exact_matching_previous_milestones": [
+        31,
+        61,
+        91,
+        121
+      ],
+      "archive_sha256": "befca11c3ec78745fb598090548fefc153bf9340c6c0df2e19b46750ed91d639"
+    }
+  ],
+  "bands_validation_gain_pp": 0.43299256637897576,
+  "comparison_sha256": "62cd1be4daa571b702777365a4c12e0c4decdff0040b20099d0dfe986fb2c963",
+  "interpretation": "Fixed stopping point selected near60% development-validation Dice. Preserves the successful200-update LR trajectory through121, not a compressed121-update decay. Fresh runs exactly reproduce common recorded train/validation/LR milestones. No validation-adaptive early stopping; other models unchanged."
+}

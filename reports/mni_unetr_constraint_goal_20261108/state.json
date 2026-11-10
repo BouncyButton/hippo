@@ -1,0 +1,1074 @@
+{
+  "goal": "One shared original-constraint UNETR recipe improves all nine matched final-budget seed/fold pairs, then automatically start established all-model14-arm matrix.",
+  "status": "complete",
+  "cap": 53305109592450,
+  "seeds": [
+    0,
+    5,
+    19
+  ],
+  "folds": [
+    0,
+    1,
+    2
+  ],
+  "gpu_workers": 2,
+  "active_stage": "mni_unetr_lower_lr53t_20261109",
+  "active_job": null,
+  "queued_successor": null,
+  "monitor_exec_session": 7564,
+  "current_band_recipe_failed_consistency": true,
+  "next_stage": null,
+  "next_candidates": [
+    "noaug_bands",
+    "noaug_full",
+    "nodrop_bands",
+    "nodrop_full",
+    "plain_bands",
+    "plain_full"
+  ],
+  "next_pilot_pairs": [
+    {
+      "seed": 0,
+      "fold": 1
+    },
+    {
+      "seed": 0,
+      "fold": 2
+    },
+    {
+      "seed": 5,
+      "fold": 0
+    },
+    {
+      "seed": 19,
+      "fold": 0
+    }
+  ],
+  "next_policy": "Fresh SAME-recipe controls; reject any nonpositivepairedgain;all9required; compareabsoluteoldbaseline; othermodels paused.",
+  "unchanged": "Original loss definitions,base recipe,data,splits,cap,seeds. Target.05,p95.75,prefix102,ramp33; SDF activation nearest5/9 cap.",
+  "other_model_sweep_paused": true,
+  "full_sweep_preparation": "final53_study.py remains safely gated on failed bands confirmation. Update only after a real new winner; eventual UNETR timing policy applies to all original constraint combinations as user requested. All other winning recipes unchanged.",
+  "latest_user": "Explicitly continue trying approaches until consistent improvement across folds and seeds; no token budget. Additional isolated weight tests had been withdrawn before this broader goal.",
+  "pilot_selection_note": "Before any combination run or stage freeze, replace the positive seed0/fold0 pilot with seed5/fold0 after observing the latter delayed-bands loss of2.5116pp. Pilot set spans all3seeds/all3folds and includes failures plus the original positive pilot.",
+  "later_hypothesis_if_combinations_fail": "Training-state-driven activation: original union bands can reinforce wrong foreground winners early. A common threshold on minimum per-subfield TRAINING Dice (e.g.50% or60%) could choose onset from each matched baseline training curve, reproducing an online trigger without runtime changes or validation input. This would be one shared training-only rule, not hand-tuned per-fold starts. Not yet implemented or tested.",
+  "latest_evidence": {
+    "verified_new_band_pairs": 7,
+    "mean_gain_pp": -0.3468013234680082,
+    "improved_pairs": 3,
+    "seed19_fold1_gain_pp": -0.5813474004391992,
+    "anchor_alignment": "All checked training-crop detached-logit cosines positive; no evidence of simple activation-time logit conflict. This does not establish parameter-level alignment or explain generalization.",
+    "combination_seed0_fold1_gains": {
+      "bands_edge": -0.28826294073813585,
+      "bands_edge_sdf": -0.1611819258785374,
+      "full": -0.03246483625457586
+    },
+    "combination_seed0_fold2_gains": {
+      "bands_edge": -1.3832554489411422,
+      "bands_edge_sdf": -1.339867770870626,
+      "full": 0.3682388345512777
+    },
+    "prefix_replay": "All6 archived combination runs initially checked have exact training-prefix metrics vs baseline through102 updates."
+  },
+  "stage_status": "local_preflight",
+  "completed_band_confirmation": {
+    "mean_gain_pp": -0.20610747915305674,
+    "improved_pairs": 4,
+    "total_pairs": 9,
+    "cleaned_runs": 16,
+    "released_gib": 27.62620833516121,
+    "free_gib": 47.07
+  },
+  "packaging_repair": "Missing scheduler module added before first job; no training code or settings changed.",
+  "further_candidates_if_needed": [
+    {
+      "idea": "Training-readiness activation",
+      "reason": "Uniform102-step onset precedes stable min-subfield TRAINING Dice50% in all9 baselines; observed stable2 threshold164..330. Same algorithm for every pair, using training metrics only.",
+      "status": "hypothesis only, not implemented"
+    },
+    {
+      "idea": "Maintain a controlled current logit-gradient ratio over training",
+      "reason": "A single early calibration can drift away from its intended target. Would preserve original loss definitions while adapting scalar weights and explicitly profile/charge extra computation.",
+      "status": "hypothesis only, not implemented; distinguish from historical adaptive_bands.py which changes definitions and is excluded"
+    }
+  ],
+  "readiness_followup": {
+    "status": "submitted_after_remote_preflight_passed",
+    "helper": "scripts/mni_constraints/unetr_readiness.py",
+    "audit": "training_readiness_regular_audit.json",
+    "thresholds": [
+      0.5,
+      0.6
+    ],
+    "definition": "All three training Dice values at two consecutive REGULAR5%-budget evaluations; exclude330 bridge. Compute onset from matched baseline training trajectory, then replay identical prefix. No validation fields read.",
+    "range50": [
+      164,
+      349
+    ],
+    "range60": [
+      267,
+      349
+    ],
+    "potential_candidates": [
+      "ready50_bands",
+      "ready60_bands",
+      "ready50_bands_edge_sdf_depth",
+      "ready60_bands_edge_sdf_depth"
+    ],
+    "run_condition": "Only if current combination study fails to produce all-nine improvement; not submitted.",
+    "selection_test": "passed: all16 pilots before confirmation, worst-gain ranking, failed pilot excluded,5 remaining pairs, all9 required, exhausted outcome preserves active goal",
+    "plan_check": "readiness_plan_check.json:36 protocols,16 pilots,all409 updates,unchangedLR.0006/target.05/augmentation/cap; starts164..349",
+    "deployment_gate_test": "passed: current incomplete combination study prevents readiness stage preparation",
+    "isolated_packaging_import_check": "passed with parent frozen source plus exactly unetr_readiness.py and unetr_readiness_study.py, imported outside working repo",
+    "manifest_sha256": "247c4cc13b0d7d2ba11472dceb80494669d7d8e2af576fe4c8f1b5773ec8162d",
+    "actual_manifest_files": 953,
+    "submission_free_gib": 46.85
+  },
+  "current_combination_consistency_failed": true,
+  "interpretation_limits": [
+    "Delayed activation also changes the calibration anchor; any improvement identifies the combined timing-and-fresh-calibration recipe, not the isolated causal effect of delay.",
+    "Repeated development selection on overlapping folds cannot establish untouched-test generalization.",
+    "Do not combine per-pair best candidates: choose one shared threshold/constraint recipe and require all9 paired gains positive."
+  ],
+  "completed_combination_study": {
+    "name": "mni_unetr_delayed_combinations53t_20261108",
+    "status": "exhausted",
+    "pilots": 12,
+    "mean_gain_pp": {
+      "bands_edge": -0.5411026705348263,
+      "bands_edge_sdf": -0.43537752921130846,
+      "full": 0.1983236908550694
+    },
+    "cleaned_runs": 12,
+    "released_gib": 20.719656564295292,
+    "free_gib": 47.0,
+    "all12_training_prefixes_exact": true
+  },
+  "launch_exec_session": null,
+  "future_hypothesis_if_readiness_fails": "Investigate late-trajectory oscillation and time-varying constraint gradient ratios; do not attribute averaging or base-recipe changes to constraints without matching baseline controls. No such changes implemented.",
+  "latest_readiness_results": {
+    "seed": 0,
+    "fold": 1,
+    "ready50_bands_gain_pp": -0.07799302919494266,
+    "ready50_full_gain_pp": -0.9671336338802377,
+    "both_training_prefixes_verified": true,
+    "ready60_bands_gain_pp": -0.9398749426773492,
+    "ready60_full_gain_pp": -0.9120948689175208,
+    "all4_candidates_fail_first_pilot": true
+  },
+  "optimizer_diagnostic_next_if_needed": {
+    "status": "submitted_after_preflight",
+    "reason": "Training-only logit-gradient calibration5% does not establish parameter-space or Adam-update effect. Later50% readiness did not fix seed0/fold1.",
+    "reference_implementation": "scripts/mni_constraints/optimizer_diagnostics.py (existing nnUNet SGD observational probes, tested earlier)",
+    "proposed_scope": "Paired unchanged UNETR replays on one failed and one helped pair, compare base vs summed-aux parameter gradients, actual AdamW delta, and same-state one-step base-only counterfactual. Preserve RNG/.grad/model trajectory, verify exact reference final model/curve replay, account extra diagnostic compute separately. No optimizer or loss change during diagnosis.",
+    "limitations": "Same-state virtual Adam step is not an alternative training trajectory; observational first-order alignment alone cannot prove validation benefit.",
+    "pairs": [
+      {
+        "seed": 0,
+        "fold": 0,
+        "reference_gain_pp": 0.6049565400564347
+      },
+      {
+        "seed": 0,
+        "fold": 1,
+        "reference_gain_pp": -0.5686299058286579
+      }
+    ],
+    "recipe": "Replay original delayed5% bands, prefix102,ramp33,409updates,unchanged base/optimizer. Extra diagnostic compute separately reported.",
+    "core_patch_check": "passed: one inserted observation block and before/after step hooks; original backward and optimizer calls untouched",
+    "acceptance": "Exact calibration anchor/weights/cases, every metric checkpoint, final model SHA, evaluation JSON; virtual Adam prediction relative error<0.0005.",
+    "isolated_import_check": "passed",
+    "deployment_gate_check": "passed; readiness completion required",
+    "late_probe_steps": [
+      328,
+      349,
+      369,
+      389,
+      409
+    ],
+    "CA4_probe": "Actual MONAI per-class foreground squared-Dice CA4/3 plus CE on trueCA4 voxels; compare parameter-gradient alignment and same-state Adam first-order contribution. Original loss unchanged.",
+    "wrong_foreground_probe": "Local negative auxiliary-logit-gradient effect on true-versus-best-wrong foreground class margin; explicitly not an Adam/network counterfactual.",
+    "extra_parameter_backward_calls_per_probe": 3,
+    "manifest_sha256": "8667147a1d03005f3a07e106feb58edc3e5a63573d07b27abe5d0ef58d10c82b"
+  },
+  "readiness_consistency_failed": true,
+  "calibration_coefficient_check": {
+    "seed": 0,
+    "fold": 1,
+    "bands_weight_at102": 0.034828050182033915,
+    "bands_weight_at185": 0.034647128005343586,
+    "bands_weight_at267": 0.03298754988456945,
+    "interpretation": "Weights are similar on this pair; no evidence that delay harms it simply by increasing the raw bands coefficient. Do not generalize without other pairs."
+  },
+  "future_intervention_hypotheses": [
+    {
+      "idea": "Finite constraint window followed by base-loss finishing",
+      "status": "not implemented or run; consider after Adam diagnostics",
+      "reason": "Later activation has not solved consistency. Some existing runs improve foreground union while losing subfield Dice, so persistent auxiliary pressure may interfere with late identity refinement. Keep original loss definitions and training-only calibration, then taper auxiliary weights to zero before the cap. Needs controlled evidence; do not call this the cause yet."
+    },
+    {
+      "idea": "Calibrate or bound effective optimizer perturbation",
+      "status": "not implemented or run; conditional on probe showing excessive or uneven Adam effect",
+      "reason": "Logit-norm calibration may differ from parameter/update effects. Any new dynamic gradient computation must be profiled and included in optimization cap; baseline controls required for changes shared with baseline."
+    },
+    {
+      "idea": "Isolate original per-class SDF/depth constraints if union-band window variants fail",
+      "status": "hypothesis only, no implementation or submission",
+      "reason": "Both current candidates include foreground-union bands. Original SDF and depth supply subfield-sensitive signals while preserving user-approved definitions; distinguish composition from timing. Would need matched fixed9-pair confirmation and retain every attempt."
+    }
+  ],
+  "late_phase_observation": {
+    "seed": 0,
+    "fold": 1,
+    "shared_update": 369,
+    "combination_gain_then_pp": {
+      "bands_edge": 0.28331515287013387,
+      "bands_edge_sdf": 0.3120296261386102,
+      "full": 0.040081786767642846
+    },
+    "final_gains_pp": {
+      "bands_edge": -0.28826294073813585,
+      "bands_edge_sdf": -0.1611819258785374,
+      "full": -0.03246483625457586
+    },
+    "limitation": "Only this pair and these combinations; delayed bands across all9 have mixed early/late effects. Does not establish a universal late-phase cause.",
+    "audit": "last_common_to_final_audit.json"
+  },
+  "future_scheduler_efficiency": "For future intervention stages, predeclare sequential rejection: once any completed matched pair has gain<=0, that shared candidate cannot meet the9/9 criterion, so skip its unstarted pairs while retaining every attempted result. Do not retroactively change the currently frozen16-pilot readiness plan.",
+  "coefficient_gain_audit": "Nine delayed-band cells show no clear coefficient/gain association (observational Pearson~0.049); helped seed0/fold0 and harmed seed0/fold1 use nearly identical raw coefficients. Avoid claiming raw coefficient alone explains inconsistency.",
+  "current_stage": "mni_unetr_lower_lr53t_20261109",
+  "completed_readiness_study": {
+    "status": "exhausted",
+    "cleaned_runs": 16,
+    "released_gib": 27.62620261311531,
+    "free_gib": 46.83,
+    "plot_reviewed": true,
+    "queue_empty_after_finish": true
+  },
+  "next_action": "Monitor7564 through finalseed19fold2. After verified9/9 and completedstage, audit_unetr_stage_completion --name mni_unetr_lower_lr53t_20261109 --jobs748615,748616 --result-file lower_lr_results.json (space between --jobs and IDs). Wait for emptyqueue. Then verified_lower_lr_full_matrix prepare (no --stage), launch_verified_lower_lr_full_matrix, verify2GPU running workers. No absolute-Dice veto: user explicitly resolved preference.",
+  "updated_at": 1794216968.367562,
+  "future_sequential_selector": "For FUTURE stages only: test distinct candidates concurrently; when one survivor remains, allow two remaining pilots in parallel while retaining any already-started trial after rejection. Never start confirmation until all4pilots pass. Current frozen window scheduler retains its original one-pilot-per-candidate policy.",
+  "job_id": "748615",
+  "successor_job_id": "748616",
+  "finite_window_preparation": {
+    "status": "submitted",
+    "study": "scripts/mni_constraints/unetr_window_study.py",
+    "helper": "scripts/mni_constraints/unetr_constraint_window.py",
+    "selector": "scripts/mni_constraints/unetr_sequential_selection.py",
+    "tests": "zero-weight base gradients exact; linear gradient scaling; added scalar FLOPs;409updates retained; sequential rejection; diagnostic completion gate",
+    "candidates": "bands/full crossed with taper205..307 or307..369; prefix102,target.05,ramp33; original definitions",
+    "pending": "Use diagnostic evidence before writing execution decision or freezing stage; remote preflight will repeat shape/data/gradient checks.",
+    "manifest_sha256": "35e02b0d9d2b168159cd15129a861a60f18bdb3dad1b53f1a59787e54e44af05",
+    "isolated_import": "passed",
+    "references": "Frozen13 persistent-constraint archives:9bands+4full. Verify calibration and identical training curve before taper where reference exists.",
+    "preflight_file": "reports/mni_unetr_window53t_20261108/preflight.json"
+  },
+  "completed_optimizer_diagnostic": {
+    "exact_replays": 2,
+    "metric_error": 0,
+    "model_hashes_identical": true,
+    "virtual_adam_relative_error": 0,
+    "cleaned_runs": 2,
+    "released_gib": 3.453271921724081,
+    "free_gib": 46.78999999999999,
+    "plot_reviewed": true,
+    "job": "747960",
+    "successor_cancelled": "747966"
+  },
+  "monitor_repair": "Completed generic campaign serializes active:null. Monitoring was patched to treat null as empty, verified on synthetic completed status. Diagnostic results independently verified and audited despite old monitor exit.",
+  "additional_hypothesis_after_timing_and_composition": {
+    "idea": "Restrict auxiliary gradients to a declared decoder/output parameter subset while keeping base gradients global",
+    "status": "unimplemented and unprofiled; not included in the current frozen study. User broad research goal remains authorized.",
+    "reason": "The sampled Adam update effect differs across parameter groups. Could test whether geometry guidance interferes with low-data feature learning while preserving original scalar loss definitions. Requires explicit gradient-routing semantics, full FLOPs profiling and matched controls; do not infer benefit from this hypothesis."
+  },
+  "latest_window_results": {
+    "window307_bands_seed0_fold1_gain_pp": -0.5663463791207448,
+    "window307_full_seed0_fold1_gain_pp": -0.38797070666949196,
+    "both_archived_and_cleaned": true,
+    "prefix_and_persistent_replay_verified": true,
+    "next": "window369 bands and full, same pair",
+    "window369_bands_seed0_fold1_gain_pp": -0.572601783881538,
+    "window369_full_seed0_fold1_gain_pp": 0.0025994607265071856,
+    "late_full_status": "2/2 positive so far,includingtiny0.0026ppfirstgain; nowseed5fold0. Both archived/cleaned/replayverified.",
+    "window369_full_seed0_fold2_gain_pp": 0.35372253067775716
+  },
+  "conditional_subfield_composition_study": {
+    "status": "submitted_after_preflight",
+    "name": "mni_unetr_subfield_losses53t_20261108",
+    "gate": "Only if current finite-window stage completes exhausted",
+    "candidates": [
+      "original SDF target.05",
+      "original depth target.05",
+      "original SDF+depth each target.05",
+      "original SDF+depth each target.20"
+    ],
+    "definition": "Original14-matrix losses, no union bands/edge, no class-aware bands; prefix102,33 ramp, SDF228,409updates53.305T,allonesauxiliaryenvelope. Targets shared across every pair.",
+    "reason": "Isolate direct subfield-sensitive signals after timing attempts. The diagnosed union loss can reinforce wrong subfield winners. Stronger joint candidate is a new composition-specific hypothesis, not another stronger-bands sweep.",
+    "tests": "4protocols retain409updates and cap; target matches; gate blocks while window running; active window manifest still verifies after generic helper refactor",
+    "files": [
+      "unetr_subfield_constraints_study.py",
+      "launch_unetr_subfield_constraints.py",
+      "analyze_unetr_subfield_constraints.py",
+      "monitor_unetr_subfield_constraints.py"
+    ],
+    "pending": "Write evidence decision only after window exhaustion; freeze; isolated package import; remote preflight; launch/monitor/audit.",
+    "manifest_sha256": "a11d902b85c808f0804e83fa686e7c09e0fe9a5e4fb136209639630c980179c0",
+    "isolated_import": "passed",
+    "synthetic_calibration_targets": "all4passed"
+  },
+  "user_recipe_extension": {
+    "authorized": true,
+    "instruction": "If current/other constraint approaches fail, modify UNETR training recipe too; assess whether a simpler recipe creates training room for constraints.",
+    "received_at": 1794175352.8496482,
+    "condition": "After current timing and original-loss composition candidates fail to establish shared9/9 improvement. Continue current authorized runs.",
+    "plan": "Test removing/reducing XY-D4 augmentation and dropout, initially keeping base loss/optimizer/LR/data fixed; consider a simpler LR schedule if needed. Use controlled simplification rather than changing every factor at once.",
+    "mandatory_controls": "Every altered base recipe needs matched new unconstrained baselines at the same cap for its seeds/folds. Compare constrained vs that same simplified baseline; do not attribute a base-recipe gain to constraints. Compare training fit, validation, train/val gap and paired constraint gain.",
+    "constants": "Original constraint definitions, seeds0/5/19,folds0/1/2,53,305,109,592,450 optimization FLOPs,2GPUworkers,othermodels paused. Profile changed training graphs and adjust affordable update counts; calibrate only on training data.",
+    "goal_acceptance": "One shared recipe with positive constrained-vs-matched-baseline final Dice on all9pairs before fullmatrix startup. Preserve all failed attempts and archives.",
+    "status": "authorized conditional extension; no changed-base experiment yet",
+    "absolute_performance_check": "Also compare every simplified constrained run against the CURRENT winning-recipe unconstrained baseline. Report all three values. A constraint gain over a substantially weakened new baseline alone is not evidence of improved absolute UNETR performance; do not silently promote such a recipe.",
+    "runtime_findings": "Dropout.1 is hardcoded in geo_recipe.model_kwargs; protocol-only edit would not change model. Need protocol-bound builder and runtime guards, matched baseline controls, and fresh network FLOPs profile for dropout0. Paired XY-D4 is stateless preprocessing; removing it keeps the optimizer graph cost unchanged, but must be explicitly recorded.",
+    "profiling_preparation": {
+      "status": "verified_current_control_and_dropout0_profile; eval/calibration forward exactly equal",
+      "current_update_flops": 130115750119,
+      "dropout0_update_flops": 130103216359,
+      "base_updates_both": 409,
+      "local_environment": "PYTHONPATH=/tmp/hippo_monai160_20261106:/tmp/hippo_mni_profile_deps:.:scripts:baselines/nnUNet .venv/bin/python; Torch2.2.2/MONAI1.6.0",
+      "script": "scripts/mni_constraints/profile_unetr_simplification.py",
+      "training_status": "No simplified recipe trained or submitted; conditional only."
+    },
+    "runtime_preparation": "unetr_simple_recipe_runtime.py supports declared augmentation/dropout with actual-module assertions; all3meta models and adapter success/error delegation checked. No changed-base study built or trained.",
+    "augmentation_exposure_audit": "augmentation_exposure_audit.json:150/151observed crop-transform combinations in409updates vs20unchangedcrops20-21times; sampler matched all32diagnosticcases; this is not a generalization result.",
+    "initial_factorial_options": [
+      {
+        "key": "noaug",
+        "dropout_rate": 0.1,
+        "augmentation": "none"
+      },
+      {
+        "key": "nodrop",
+        "dropout_rate": 0.0,
+        "augmentation": "xy_d4_v1"
+      },
+      {
+        "key": "plain",
+        "dropout_rate": 0.0,
+        "augmentation": "none"
+      }
+    ],
+    "remaining_implementation": "If needed: choose/freeze original constraint comparator(s), construct new paired baseline+constraint protocols and scheduler; new controls mandatory, existing9controls only absolute-performance reference. Profile and protocol-bound runtime helper are ready; no simplified study exists yet.",
+    "paired_scheduler_preparation": "unetr_recipe_pair_selection.py plus tests ready: matches each altered-recipe constraint to its own new baseline by recipe/seed/fold; unpaired scores cannot qualify/reject; share same-recipe baseline across arms; early rejection; require9/9.",
+    "current_gap_audit": "current_baseline_training_gap.json:meantraining71.5968%,validation68.6287%,gap2.9680pp;gaprange1.5232..5.2569pp across9pairs. Supports investigating training fit, not proof of underfitting.",
+    "proposed_fixed_comparators": {
+      "status": "planning_only_not_frozen",
+      "arms": [
+        "dice_bands",
+        "dice_bands_edge_sdf_depth"
+      ],
+      "timing": "Originaldelayed102updatecalibration,33ramp,5%targetperterm,p95.75,SDFnearest5/9cap; no added finite-window taper.",
+      "reason": "Keep the new training-recipe interaction test simple and hold the constraint recipe fixed across all3base simplifications. Existing old-recipe bands controls coverall9pairs; full combination covers4pilots.",
+      "potential_matrix": "3base simplifications x9pairs x(baseline,bands,full)=81maximumruns, with same-recipe baseline reused across2constraint candidates and early rejection. Start with the fixed hard pilotpair, not the full matrix blindly.",
+      "comparisons": "Newconstrained-newmatchedbaseline primary; compareagainstoldwinningbaselineabsoluteDice; report old/newconstraintgaininteraction wherever oldsamearmresults exist."
+    }
+  },
+  "completed_window_study": {
+    "name": "mni_unetr_window53t_20261108",
+    "outcome": "exhausted",
+    "cleaned_runs": 6,
+    "released_gib": 10.359817076474428,
+    "free_gib": 46.709999999999994,
+    "best_candidate": "window369_full",
+    "best_candidate_wins": 2,
+    "best_candidate_pairs": 3,
+    "all6_prefix_checks_passed": true,
+    "plot_reviewed": true
+  },
+  "subfield_stage_final": {
+    "name": "mni_unetr_subfield_losses53t_20261108",
+    "outcome": "exhausted",
+    "runs": 5,
+    "improvements": 0,
+    "all_archived_and_cleaned": true,
+    "free_gib": 46.65,
+    "released_gib": 8.633176228031516,
+    "jobs": [
+      "748088 COMPLETED",
+      "748090 CANCELLED"
+    ]
+  },
+  "simpler_recipe_stage": {
+    "name": "mni_unetr_simple_recipe53t_20261108",
+    "status": "submitted",
+    "manifest_sha256": "73ffef089ae63b559afd107a8409029a25ac1ce1308da0b239e94d4b9b0b3682",
+    "recipes": [
+      "noaug",
+      "nodrop",
+      "plain"
+    ],
+    "constraints": [
+      "dice_bands",
+      "dice_bands_edge_sdf_depth"
+    ],
+    "fresh_controls": true,
+    "maximum_runs": 81,
+    "goal_success": false
+  },
+  "current_active_runs": [
+    {
+      "id": "MNI_unetr_lr030_cosine_dice_f2s19",
+      "step": 144,
+      "dice": 39.22444170740352
+    },
+    {
+      "id": "MNI_unetr_lr030_cosine_dice_bands_f2s19",
+      "step": 123,
+      "dice": 38.09004260622878
+    }
+  ],
+  "current_progress": {
+    "status": "running",
+    "active": [
+      "MNI_unetr_lr030_cosine_dice_f2s19",
+      "MNI_unetr_lr030_cosine_dice_bands_f2s19"
+    ],
+    "completed": 34,
+    "total": 54,
+    "selected": {
+      "candidate": null,
+      "winner": null
+    },
+    "job_id": "748615"
+  },
+  "first_simpler_recipe_result": {
+    "candidate": "noaug_bands",
+    "seed": 0,
+    "fold": 1,
+    "gain_pp": 0.22989975559150055,
+    "absolute_gain_vs_old_baseline_pp": 3.749481579107041,
+    "constraint_interaction_pp": 0.7985296614201585
+  },
+  "latest_simple_results": [
+    {
+      "candidate": "noaug_bands",
+      "seed": 0,
+      "fold": 1,
+      "gain_pp": 0.22989975559150055,
+      "absolute_gain_vs_old_baseline_pp": 3.749481579107041,
+      "subfield_gain_pp": {
+        "CA1_3_hard_dice": 0.3201716222985027,
+        "subiculum_hard_dice": 0.6712251870346364,
+        "CA4_DG_hard_dice": -0.30169754255865655
+      }
+    },
+    {
+      "candidate": "noaug_full",
+      "seed": 0,
+      "fold": 1,
+      "gain_pp": 0.35222641512535624,
+      "absolute_gain_vs_old_baseline_pp": 3.8718082386409094,
+      "subfield_gain_pp": {
+        "CA1_3_hard_dice": 0.6011566371499413,
+        "subiculum_hard_dice": 0.36138436472216995,
+        "CA4_DG_hard_dice": 0.0941382435039344
+      }
+    }
+  ],
+  "latest_simple_summary": [
+    {
+      "candidate": "noaug_bands",
+      "pairs": 2,
+      "mean_gain_pp": 0.031912204005540845,
+      "minimum_gain_pp": -0.16607534758041886,
+      "rejected": true,
+      "all_nine_improved": false,
+      "mean_absolute_gain_vs_old_baseline_pp": 4.803223926715937
+    },
+    {
+      "candidate": "noaug_full",
+      "pairs": 2,
+      "mean_gain_pp": 0.1349691556726651,
+      "minimum_gain_pp": -0.08228810378002605,
+      "rejected": true,
+      "all_nine_improved": false,
+      "mean_absolute_gain_vs_old_baseline_pp": 4.906280878383072
+    },
+    {
+      "candidate": "nodrop_bands",
+      "pairs": 3,
+      "mean_gain_pp": 0.49972860689126986,
+      "minimum_gain_pp": 0.2251404609333929,
+      "rejected": false,
+      "all_nine_improved": false,
+      "mean_absolute_gain_vs_old_baseline_pp": 0.2786480280968533
+    },
+    {
+      "candidate": "nodrop_full",
+      "pairs": 3,
+      "mean_gain_pp": -0.1727630891974067,
+      "minimum_gain_pp": -1.3219397189215942,
+      "rejected": true,
+      "all_nine_improved": false,
+      "mean_absolute_gain_vs_old_baseline_pp": -0.3938436679918264
+    },
+    {
+      "candidate": "plain_bands",
+      "pairs": 1,
+      "mean_gain_pp": -0.022214399030640042,
+      "minimum_gain_pp": -0.022214399030640042,
+      "rejected": true,
+      "all_nine_improved": false,
+      "mean_absolute_gain_vs_old_baseline_pp": 3.699307647469041
+    },
+    {
+      "candidate": "plain_full",
+      "pairs": 2,
+      "mean_gain_pp": 0.2638990234601679,
+      "minimum_gain_pp": 0.20614777284470032,
+      "rejected": false,
+      "all_nine_improved": false,
+      "mean_absolute_gain_vs_old_baseline_pp": 5.1453787409259775
+    }
+  ],
+  "conditional_followup_note": "conditional_after_simple_recipe.json; only if currentremainingcandidatesfail. Fullmatrixintegrationnotes separate; do notlaunch before9/9andabsoluteassessment.",
+  "conditional_matrix_helpers": "New verified_unetr_full_matrix.py and launch_verified_unetr_full_matrix.py drafted. Real archive reuse test passed23cells including9NNcontrols, all56protocols/504cells; recovery route/copy/retirement guards passed. Need actual winning freeze and isolated+remote preflights after9/9; do not claim deployment-ready from component checks alone.",
+  "latest_active_stage": "mni_unetr_plain_cosine53t_20261109",
+  "latest_handoff": "active_handoff.json",
+  "latest_progress": "Earliercosinefull2/9positive(+.20635,+.69161);seed5fold0pairactivejob748333/queued748337,monitor10933.6runsarchivedcleaned. Goalactive;allmodelmatrixpaused.",
+  "latest_cosine_summary": [
+    {
+      "candidate": "plain_cosine_bands",
+      "pairs": 1,
+      "rejected": true,
+      "mean_gain_pp": -0.13395220349745607,
+      "minimum_gain_pp": -0.13395220349745607,
+      "all_nine_improved": false,
+      "all_pairs": {
+        "pairs": 1,
+        "mean_gain_pp": -0.13395220349745607,
+        "minimum_gain_pp": -0.13395220349745607,
+        "improved_pairs": 0
+      },
+      "prior_plain_comparison_pairs": 1,
+      "mean_absolute_gain_vs_prior_plain_baseline_pp": -0.9088388168378003,
+      "mean_absolute_gain_vs_old_baseline_pp": 2.8126832296618716,
+      "minimum_absolute_gain_vs_old_baseline_pp": 2.8126832296618716,
+      "mean_new_baseline_gain_vs_old_baseline_pp": 2.9466354331593294
+    },
+    {
+      "candidate": "plain_cosine_full",
+      "pairs": 6,
+      "rejected": true,
+      "mean_gain_pp": 0.2218567245373134,
+      "minimum_gain_pp": -0.45301327085987,
+      "all_nine_improved": false,
+      "all_pairs": {
+        "pairs": 6,
+        "mean_gain_pp": 0.2218567245373134,
+        "minimum_gain_pp": -0.45301327085987,
+        "improved_pairs": 5
+      },
+      "prior_plain_comparison_pairs": 3,
+      "mean_absolute_gain_vs_prior_plain_baseline_pp": -1.0700627355372443,
+      "mean_absolute_gain_vs_old_baseline_pp": 3.325491175673889,
+      "minimum_absolute_gain_vs_old_baseline_pp": -0.619598233306661,
+      "mean_new_baseline_gain_vs_old_baseline_pp": 3.1036344511365783
+    },
+    {
+      "candidate": "plain_cosine_sdf_depth",
+      "pairs": 1,
+      "rejected": true,
+      "mean_gain_pp": -0.05917409039101207,
+      "minimum_gain_pp": -0.05917409039101207,
+      "all_nine_improved": false,
+      "all_pairs": {
+        "pairs": 1,
+        "mean_gain_pp": -0.05917409039101207,
+        "minimum_gain_pp": -0.05917409039101207,
+        "improved_pairs": 0
+      },
+      "prior_plain_comparison_pairs": 1,
+      "mean_absolute_gain_vs_prior_plain_baseline_pp": -0.8340607037313532,
+      "mean_absolute_gain_vs_old_baseline_pp": 2.8874613427683187,
+      "minimum_absolute_gain_vs_old_baseline_pp": 2.8874613427683187,
+      "mean_new_baseline_gain_vs_old_baseline_pp": 2.9466354331593294
+    }
+  ],
+  "current_goal_turn_classification": "progress: confirmed3negativecandidatesandfirstpositiveDice-onlybands; independentarchiveproof5runs; firstbandsexceedsstrongerplainDiceCEbaselineonthispair. Continuedfixedconfirmationonfold2.",
+  "conditional_recovery_helpers": "verified_matrix_recovery.py, collect_verified_matrix.py and test_verified_matrix_recovery.py added and tested. Exact initial-copy/resume preservation, archive hash/durability/pause guards, narrow idempotent original retirement and durable receipt mirroring passed. Not wired/deployed; real protected checkpoint untouched.",
+  "conditional_matrix_runtime_preflight": "Passed local Torch2.2.2/MONAI1.6.0 on scratch56protocols: actualdropout0/cap_matchedLR,NNLR.02nativeDiceCE1:1,52originalconstraint calibration/loss/gradient checks,realcohortgeometry,modelshapes,0optimizerupdates. Report conditional_matrix_runtime_preflight.json. Does not bypass9gate; isolated frozen-source and remote checks still needed afteractualwinner.",
+  "conditional_diceonly_status": "Frozen manifest4be84ff28fe0a4fa47efca520f41c0ed746ecd6aa9d34eb24d555cd975da4829. Sourcecoreunchanged;adapter819beccee053519c0f42b98eebffcec307f3eacfe41c1e32fcec22437e0e9c14. FreshsameDice-only controls;originalauxiliaries;holdhalfLR.0006;409updates;45maxruns. Localandremote preflightpassed;notyetSlurmconfirmed.",
+  "manifest_sha256": "aa79341c976c194418c35f75330773fe90af47744655a8069332936f008cad34",
+  "current_conditions": [
+    "lr030_cosine bands"
+  ],
+  "current_stage_helpers": [
+    "unetr_lower_lr_study.py",
+    "unetr_lower_lr_runtime.py",
+    "analyze_unetr_lower_lr_study.py",
+    "launch_unetr_lower_lr_study.py",
+    "monitor_unetr_lower_lr_study.py"
+  ],
+  "analysis": "scripts.mni_constraints.analyze_unetr_lower_lr_study; lower_lr_results.json",
+  "monitor": "scripts.mni_constraints.monitor_unetr_lower_lr_study",
+  "analysis_source_sha256": "02aef230c13a40429e2bd6bead5777861109b75a601fc59db092742df34ba5d3",
+  "additional_diceonly_analysis": "analyze_unetr_diceonly_interactions.py actualfirstrowpassed. base_loss_interactions.json saved; refresh as more exactmatchedhistoricalcells becomeavailable. No active source/monitor modified.",
+  "latest_diceonly_summary": [
+    {
+      "candidate": "plain_diceonly_full",
+      "pairs": 1,
+      "rejected": true,
+      "mean_gain_pp": -0.44594488223322903,
+      "minimum_gain_pp": -0.44594488223322903,
+      "all_nine_improved": false,
+      "all_pairs": {
+        "pairs": 1,
+        "mean_gain_pp": -0.44594488223322903,
+        "minimum_gain_pp": -0.44594488223322903,
+        "improved_pairs": 0
+      },
+      "prior_plain_comparison_pairs": 1,
+      "mean_absolute_gain_vs_prior_plain_baseline_pp": -0.3287972093073819,
+      "mean_absolute_gain_vs_old_baseline_pp": 3.39272483719229,
+      "minimum_absolute_gain_vs_old_baseline_pp": 3.39272483719229,
+      "mean_new_baseline_gain_vs_old_baseline_pp": 3.838669719425525
+    },
+    {
+      "candidate": "plain_diceonly_depth",
+      "pairs": 1,
+      "rejected": true,
+      "mean_gain_pp": -0.6645427371245738,
+      "minimum_gain_pp": -0.6645427371245738,
+      "all_nine_improved": false,
+      "all_pairs": {
+        "pairs": 1,
+        "mean_gain_pp": -0.6645427371245738,
+        "minimum_gain_pp": -0.6645427371245738,
+        "improved_pairs": 0
+      },
+      "prior_plain_comparison_pairs": 1,
+      "mean_absolute_gain_vs_prior_plain_baseline_pp": -0.5473950641987244,
+      "mean_absolute_gain_vs_old_baseline_pp": 3.1741269823009475,
+      "minimum_absolute_gain_vs_old_baseline_pp": 3.1741269823009475,
+      "mean_new_baseline_gain_vs_old_baseline_pp": 3.838669719425525
+    },
+    {
+      "candidate": "plain_diceonly_sdf_depth",
+      "pairs": 1,
+      "rejected": true,
+      "mean_gain_pp": -0.15107606941217044,
+      "minimum_gain_pp": -0.15107606941217044,
+      "all_nine_improved": false,
+      "all_pairs": {
+        "pairs": 1,
+        "mean_gain_pp": -0.15107606941217044,
+        "minimum_gain_pp": -0.15107606941217044,
+        "improved_pairs": 0
+      },
+      "prior_plain_comparison_pairs": 1,
+      "mean_absolute_gain_vs_prior_plain_baseline_pp": -0.03392839648631707,
+      "mean_absolute_gain_vs_old_baseline_pp": 3.687593650013355,
+      "minimum_absolute_gain_vs_old_baseline_pp": 3.687593650013355,
+      "mean_new_baseline_gain_vs_old_baseline_pp": 3.838669719425525
+    },
+    {
+      "candidate": "plain_diceonly_bands",
+      "pairs": 1,
+      "rejected": false,
+      "mean_gain_pp": 0.23489193786387919,
+      "minimum_gain_pp": 0.23489193786387919,
+      "all_nine_improved": false,
+      "all_pairs": {
+        "pairs": 1,
+        "mean_gain_pp": 0.23489193786387919,
+        "minimum_gain_pp": 0.23489193786387919,
+        "improved_pairs": 1
+      },
+      "prior_plain_comparison_pairs": 1,
+      "mean_absolute_gain_vs_prior_plain_baseline_pp": 0.3520396107897312,
+      "mean_absolute_gain_vs_old_baseline_pp": 4.073561657289403,
+      "minimum_absolute_gain_vs_old_baseline_pp": 4.073561657289403,
+      "mean_new_baseline_gain_vs_old_baseline_pp": 3.838669719425525
+    }
+  ],
+  "diceonly_interaction_evidence": "First full seed0fold1: removingbaseCE changesbaseline+.1171476729 andconstrained-.5349449822; pairedconstraintinteraction-.6520926551 versuspreviousplainDiceCEfull. Allarchivedsource/model/data/LR checks pass. Traininggain+.2221833451 butvalidationgain-.4459448822; all3subfieldsdecline,union-.0097246626,147moreswaps.",
+  "latest_storage_audit": {
+    "cleaned": 34,
+    "released_gib": 58.70578145608306,
+    "latest_quota_file": "reports/mni_unetr_lower_lr53t_20261109/latest_quota.json"
+  },
+  "soft_hard_diagnostic": "soft_hard_disagreement.json: Dice-onlyfullvalsoftDice+2.5242034098pp whilehard-.4459448822pp; DiceCEfullsoft+1.686052233/hard+.206147773. EvaluatorstandardunsquaredsoftDicevsargmaxhard; trainingbaseissquaredDice. Notaconfidencecalibrationclaim; hardmetricgateunchanged.",
+  "conditional_timing_diagnostic": "mni_unetr_plain_cosine53t_20261109/full_learning_deltas.json: failedseed5fold1positiveat123/144/164/185,nearzero205/226/246,negativefrom267. Otherpairs mixedincludingnegative226thenpositive409,so no universallate-harmclaim andno selectedcheckpoint/counterfactualwindowclaim. Couldinformfutureoriginalsubset/windowtestonlyifcurrentbandsfails.",
+  "diceonly_robustness_concern": {
+    "confirmed": true,
+    "seed": 5,
+    "fold": 0,
+    "training_ca4_dice_percent": 0.0049608604057895574,
+    "validation_ca4_dice_percent": 0.0018314628318832965,
+    "same_seed_dicece_validation_ca4_percent": 74.63477690906089,
+    "synthetic_gradient_check": "Near-zero predicted class probability suppresses actual Dice-only true-class recovery gradients; CE remains corrective. This synthetic check is not direct network-gradient evidence.",
+    "absolute_performance_assessment_required_before_promotion": true,
+    "confusion_audit": "Dominant massivebackground-to-CA4falsepositives, not absent predictions: seed5baseline1,304,839BGvoxelsCA4vs12TP;seed19baseline1,650,617BGvoxelsCA4vs3334TP. Seeclass_collapse_confusion_audit.json. Originaltrue-class-suppression syntheticchecknotcomplete explanation; newfalse-positive-saturation check addressesactualfailure direction."
+  },
+  "conditional_followup": "Half-CE cosine follow-up authorized and now deploying after quarter-CE cosine exhausted; no full matrix before nine positive matched pairs.",
+  "optional_absolute_performance_question": "Askedwhether9positivegainswithcatastrophicallyweakenedbasewouldcount;currentDice-onlyfailedpairedgateanywaysoanswerisnotneededfornextauthorizedrecipe.",
+  "conditional_full_matrix": "Both runtime preflights already passed. Latest surviving LR0.0003 reuse-only check passed504logical cells/56protocols and24actual archive reuse candidates incl13UNETR and9NNcontrols; receipt conditional_lr030_cosine_reuse_refresh.json. Partial gate rejected. No full matrix stage or job yet.",
+  "loss_balance_comparison": "reports/mni_unetr_plain_ce02553t_20261109/loss_balance_first_pair.{png,pdf,json}; all12 archived same-pair comparisons across CE1/.25/0, inspected; explicitly one-pair development evidence.",
+  "additional_cosine_analysis": "bands_paired_diagnostics.json andce025_cosine_bands_paired_cases.json refreshedthrough3pairs. Seed5train+.063916vsval+.290383; union+.374855; CA1+.306643,sub+.128107,CA4+.436399; FN-91,FP-282,swaps+32. Currentbandsmean-.929085ppvsstrongerplainCE1holdbaseline across3availablepairs, +4.113679vsoldwinningbaseline. Four-cellanalysis containsmissinghistoricalarms honestly; seed5onlycurrentcompletebands pair.",
+  "latest_ce025_cosine_summary": [
+    {
+      "candidate": "ce025_cosine_full",
+      "pairs": 1,
+      "rejected": true,
+      "mean_gain_pp": -0.012094096368020502,
+      "minimum_gain_pp": -0.012094096368020502,
+      "all_nine_improved": false,
+      "all_pairs": {
+        "pairs": 1,
+        "mean_gain_pp": -0.012094096368020502,
+        "minimum_gain_pp": -0.012094096368020502,
+        "improved_pairs": 0
+      },
+      "prior_plain_comparison_pairs": 1,
+      "mean_absolute_gain_vs_prior_plain_baseline_pp": -0.8953749597520044,
+      "mean_absolute_gain_vs_old_baseline_pp": 2.8261470867476675,
+      "minimum_absolute_gain_vs_old_baseline_pp": 2.8261470867476675,
+      "mean_new_baseline_gain_vs_old_baseline_pp": 2.8382411831156986
+    },
+    {
+      "candidate": "ce025_cosine_bands",
+      "pairs": 5,
+      "rejected": true,
+      "mean_gain_pp": 0.17588546686998718,
+      "minimum_gain_pp": -0.3910521662152222,
+      "all_nine_improved": false,
+      "all_pairs": {
+        "pairs": 5,
+        "mean_gain_pp": 0.17588546686998718,
+        "minimum_gain_pp": -0.3910521662152222,
+        "improved_pairs": 4
+      },
+      "prior_plain_comparison_pairs": 3,
+      "mean_absolute_gain_vs_prior_plain_baseline_pp": -0.9290852783453735,
+      "mean_absolute_gain_vs_old_baseline_pp": 3.2813521539356145,
+      "minimum_absolute_gain_vs_old_baseline_pp": 1.2574761898289495,
+      "mean_new_baseline_gain_vs_old_baseline_pp": 3.105466687065629
+    }
+  ],
+  "paired_case_analysis": "analyze_unetr_paired_cases.py --name mni_unetr_ce025_cosine53t_20261109 --result-file ce025_cosine_results.json --candidate ce025_cosine_bands. Verifiedmacroequalsmean10crops and5pairedL/Rsubjects. Firstfold9/10crops,4/5subjects improve;secondfold5/10crops,4/5subjects. Descriptive only, repeatedsubjectsnotindependent. Exact four newanalysishelper sources/hashmanifest retained inreport/analysis_source.",
+  "baseline_loss_comparison": "analyze_unetr_ce025_cosine_baselines.py +cosine_baseline_loss_comparison.json: samecosine/data/model/optimizer/cap, quarterCEbaselinevsCE1 changes[-.108394,+.776548,+.290407,+1.725891] on4pilots,mean+.671113pp,3/4positive. These are base-recipe effects, separatefrombandsmatchedgain. Source archived/hashverified.",
+  "metadata_clarification": "FrozenquarterCEprotocols retainlegacy loss_weightsCE1/loss_source fields. Actual loss_arguments.lambda_ce=.25, base_loss_recipe.json weight=.25 andvalidatedquarterCEadapter controloptimizationandcalibration. Runtimefunctions/numericalchecks confirm actual.25. Do notretroactivelyeditfrozenprotocols; metadata noteincosine_baseline_loss_comparison.json.",
+  "launcher_exec_session": null,
+  "current_phase": "Surviving LR0.0003 delayed bands8/9positive. Seed19/fold1 57.588158 vs55.878989 (+1.709169pp). Onlyseed19/fold2 remains and both matched runs active.34runs archived/cleaned. User explicitly prioritizes paired consistency over absolute Dice; automatic full matrix remains authorized after9/9.",
+  "collector_pid": 72770,
+  "submission": {
+    "job_id": "748615",
+    "dependency": null,
+    "quota": {
+      "used_gib": 47.36,
+      "limit_gib": 93.13,
+      "free_gib": 45.769999999999996,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  47.36GiB/93.13GiB  456.05k/\u221e  \n\n",
+      "checked_at": 1794207216.3533149
+    },
+    "submitted_at": 1794207216.5753262,
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--chdir=/mnt/beegfsstudents/home/3160552/mni_unetr_lower_lr53t_20261109",
+      "--output=/mnt/beegfsstudents/home/3160552/mni_unetr_lower_lr53t_20261109/slurm-%j.out",
+      "--error=/mnt/beegfsstudents/home/3160552/mni_unetr_lower_lr53t_20261109/slurm-%j.err",
+      "/mnt/beegfsstudents/home/3160552/mni_unetr_lower_lr53t_20261109/run.sbatch",
+      "/mnt/beegfsstudents/home/3160552/mni_unetr_lower_lr53t_20261109"
+    ],
+    "manifest_sha256": "aa79341c976c194418c35f75330773fe90af47744655a8069332936f008cad34"
+  },
+  "last_goal_turn_classification": "Progress: verified eighth positive matched pair; reviewed actual final-audit, matrix preparation/deployment, exact archive reuse and protected recovery paths. Existing monitor/job live; no premature full-stage creation.",
+  "base_ce_comparison": "cosine_ce_baseline_comparison.json: CE1to.25 samecosinebaseline +.6320893183pp mean across5pairs,4positive; nohalfCEbaseline completedyet. This is not aconstraintgain.",
+  "runtime_audit": "mni_unetr_ce050_cosine53t_20261109/startup_metadata_audit.json: actualCE.5/dropout0/noaug/cosine409/source/protocolhashesverified; identical21/41/62/82prefix; training-only20cropcalibrationat102; bandweight.03075575960160575; anchor07b757fead3385feb70ca74684ae2fa098f7305a74d1d41b0acc374011fde580.",
+  "latest_half_ce_summary": [
+    {
+      "candidate": "ce050_cosine_bands",
+      "pairs": 3,
+      "rejected": true,
+      "mean_gain_pp": 0.026521216299505806,
+      "minimum_gain_pp": -0.46177321777680636,
+      "all_nine_improved": false,
+      "all_pairs": {
+        "pairs": 3,
+        "mean_gain_pp": 0.026521216299505806,
+        "minimum_gain_pp": -0.46177321777680636,
+        "improved_pairs": 2
+      },
+      "prior_plain_comparison_pairs": 3,
+      "mean_absolute_gain_vs_prior_plain_baseline_pp": -1.0706143325414434,
+      "mean_absolute_gain_vs_old_baseline_pp": 3.972150072079174,
+      "minimum_absolute_gain_vs_old_baseline_pp": 2.8525297948228427,
+      "mean_new_baseline_gain_vs_old_baseline_pp": 3.9456288557796646
+    },
+    {
+      "candidate": "ce050_cosine_full",
+      "pairs": 3,
+      "rejected": true,
+      "mean_gain_pp": 0.04792616485539414,
+      "minimum_gain_pp": -0.5115436030933451,
+      "all_nine_improved": false,
+      "all_pairs": {
+        "pairs": 3,
+        "mean_gain_pp": 0.04792616485539414,
+        "minimum_gain_pp": -0.5115436030933451,
+        "improved_pairs": 2
+      },
+      "prior_plain_comparison_pairs": 3,
+      "mean_absolute_gain_vs_prior_plain_baseline_pp": -1.0492093839855652,
+      "mean_absolute_gain_vs_old_baseline_pp": 3.993555020635052,
+      "minimum_absolute_gain_vs_old_baseline_pp": 2.8027594095062938,
+      "mean_new_baseline_gain_vs_old_baseline_pp": 3.9456288557796646
+    }
+  ],
+  "first_half_ce_pair": {
+    "candidate": "ce050_cosine_bands",
+    "seed": 0,
+    "fold": 1,
+    "gain_pp": 0.40034162006571394,
+    "training_gain_pp": 0.16944681562368658,
+    "subfield_gain_pp": {
+      "CA1_3_hard_dice": 0.5023145022399973,
+      "subiculum_hard_dice": 0.32425492605329964,
+      "CA4_DG_hard_dice": 0.3744554319038542
+    },
+    "error_delta": {
+      "fn": 25,
+      "fp": -327,
+      "swaps": -91
+    },
+    "absolute_gain_vs_old_baseline_pp": 3.636095683015398,
+    "absolute_gain_vs_prior_plain_baseline_pp": -0.08542636348427379,
+    "baseline_dice": 73.31909999489126,
+    "constrained_dice": 73.71944161495698
+  },
+  "first_full_calibration_audit": "Sameanchor07b757fead3385feb70ca74684ae2fa098f7305a74d1d41b0acc374011fde580andbandsweight.03075575960160575;20traincropsat102; exactpreconstraintprefix21/41/62/82; first_full_calibration_audit.json.",
+  "first_pair_ce_comparison": "first_pair_ce_comparison.json/.png/.pdf;9actualarchivesCE1/.25/.5 xbaseline/bands/full, sharedsettingsverified; plotsinspected. HalfCEvsCE1 improvesmatchedgain+.534294band/+.233784full andabsoluteconstrained+.823412/+.522903pp ononepair. Not9/9evidence.",
+  "first_full_diagnostics": "Full0f1CA1+.611614,sub-.014272,CA4+.723070; train+.352026,union+.225277,FN+206FP-519swaps-138;8/10cropsand5/5subjectspositive; strongerplainbaselinegap-.045631pp.",
+  "fold2_half_ce_diagnostics": {
+    "baseline": 75.42434604275311,
+    "bands": 75.56534128936273,
+    "bands_gain": 0.14099524660960983,
+    "full": 75.63953106380488,
+    "full_gain": 0.21518502105176696,
+    "bands_ca4_change": -0.1605816617866651,
+    "full_all_subfields_positive": true,
+    "bands_positive_subjects": 3,
+    "full_positive_subjects": 3,
+    "total_subjects": 5
+  },
+  "absolute_performance_context": "Across two available pairs, bands/full are +4.532/+4.589pp vs old winning baselines but -.350/-.293pp vs stronger plain CE1 hold-half baselines. Keep reporting both; current consistency is 2/9, not solved.",
+  "half_ce_bands_failure": {
+    "seed": 5,
+    "fold": 0,
+    "gain_pp": -0.46177321777680636,
+    "training_gain_pp": 0.05925608949326033,
+    "union_gain_pp": -0.3241880496434675,
+    "all_subfields_declined": true,
+    "fn_delta": 308,
+    "fp_delta": -82,
+    "swaps_delta": 22,
+    "improved_subjects": 1,
+    "subjects": 5,
+    "improved_crops": 2,
+    "crops": 10
+  },
+  "local_preflight_exec_session": null,
+  "quota_at_submission": {
+    "free_gib": 45.77,
+    "used_gib": 47.36,
+    "limit_gib": 93.13
+  },
+  "latest_lower_lr_summary": [
+    {
+      "candidate": "lr045_cosine_bands",
+      "pairs": 5,
+      "rejected": true,
+      "mean_gain_pp": 0.2946490158996018,
+      "minimum_gain_pp": -0.05088175971406095,
+      "all_nine_improved": false,
+      "all_pairs": {
+        "pairs": 5,
+        "mean_gain_pp": 0.2946490158996018,
+        "minimum_gain_pp": -0.05088175971406095,
+        "improved_pairs": 4
+      },
+      "prior_plain_comparison_pairs": 3,
+      "mean_absolute_gain_vs_prior_plain_baseline_pp": -2.7207275160596347,
+      "mean_absolute_gain_vs_old_baseline_pp": 0.600634758347887,
+      "minimum_absolute_gain_vs_old_baseline_pp": -4.488177014332784,
+      "mean_new_baseline_gain_vs_old_baseline_pp": 0.30598574244828425
+    },
+    {
+      "candidate": "lr045_cosine_full",
+      "pairs": 5,
+      "rejected": true,
+      "mean_gain_pp": 0.4361453523046288,
+      "minimum_gain_pp": -0.465937568501118,
+      "all_nine_improved": false,
+      "all_pairs": {
+        "pairs": 5,
+        "mean_gain_pp": 0.4361453523046288,
+        "minimum_gain_pp": -0.465937568501118,
+        "improved_pairs": 4
+      },
+      "prior_plain_comparison_pairs": 3,
+      "mean_absolute_gain_vs_prior_plain_baseline_pp": -2.6714104706251995,
+      "mean_absolute_gain_vs_old_baseline_pp": 0.742131094752915,
+      "minimum_absolute_gain_vs_old_baseline_pp": -3.5135906598238904,
+      "mean_new_baseline_gain_vs_old_baseline_pp": 0.30598574244828425
+    },
+    {
+      "candidate": "lr030_cosine_bands",
+      "pairs": 9,
+      "rejected": false,
+      "mean_gain_pp": 0.7603379944784487,
+      "minimum_gain_pp": 0.034532338900883364,
+      "all_nine_improved": true,
+      "all_pairs": {
+        "pairs": 9,
+        "mean_gain_pp": 0.7603379944784487,
+        "minimum_gain_pp": 0.034532338900883364,
+        "improved_pairs": 9
+      },
+      "prior_plain_comparison_pairs": 3,
+      "mean_absolute_gain_vs_prior_plain_baseline_pp": -4.141480263970071,
+      "mean_absolute_gain_vs_old_baseline_pp": -2.208242236771304,
+      "minimum_absolute_gain_vs_old_baseline_pp": -10.771842484387108,
+      "mean_new_baseline_gain_vs_old_baseline_pp": -2.968580231249751
+    },
+    {
+      "candidate": "lr030_cosine_full",
+      "pairs": 3,
+      "rejected": true,
+      "mean_gain_pp": 0.1127531618861366,
+      "minimum_gain_pp": -0.08796317349394345,
+      "all_nine_improved": false,
+      "all_pairs": {
+        "pairs": 3,
+        "mean_gain_pp": 0.1127531618861366,
+        "minimum_gain_pp": -0.08796317349394345,
+        "improved_pairs": 2
+      },
+      "prior_plain_comparison_pairs": 3,
+      "mean_absolute_gain_vs_prior_plain_baseline_pp": -4.2645241111249135,
+      "mean_absolute_gain_vs_old_baseline_pp": 0.7782402934957039,
+      "minimum_absolute_gain_vs_old_baseline_pp": -1.2308424891792527,
+      "mean_new_baseline_gain_vs_old_baseline_pp": 0.6654871316095665
+    }
+  ],
+  "lower_lr_runtime_audit": "startup_metadata_audit.json verifies LR0.00045; first_full_and_lr030_metadata_audit.json verifies actual LR0.0003 cosine baseline and LR0.00045 full training-only calibration, same preconstraint prefix/anchor as bands. Both verified.",
+  "lower_lr_first_interaction": "ComparedwithsamefullCEcosine peak.0006: newbaseline-.874211pp, constrained-.636369pp, matchedgainchange+.237842pp. Positivepairedgain doesnotmeanbetterabsoluteDice. Strongerplainholdbaselinegap-1.545208pp.",
+  "phase": "Goal achieved: nine-pair consistency confirmed; full matrix job748838 running on2GPUs with2progressing workers; successor748839 queued.",
+  "lower_lr_first_pair_interpretation": "reports/mni_unetr_lower_lr53t_20261109/first_pair_interpretation.json",
+  "lower_lr030_archive_audit": "reports/mni_unetr_lower_lr53t_20261109/lr030_first_pair_archive_audit.json",
+  "next": "Full matrix continues under persistent collector and automatic Slurm continuation. Inspect reports/mni_verified_unetr_lower_lr_constraints14_53t_0519_20261109 for progress; do not rerun launcher or resume old paused sweep.",
+  "matched_gap_evidence": "reports/mni_unetr_lower_lr53t_20261109/matched_gap_diagnostics.json",
+  "lower_lr_fold2_evidence": "LR0.00045 full improves only1/5 subject means, aggregate+0.042356pp; CA1 and CA4/DG decline. Versus LR0.0006 same full recipe, paired gain worsens0.649251pp and constrained absolute Dice worsens1.315568pp. Bands improves all3 subfields on this pair. No rate universally improves absolute Dice.",
+  "lower_lr030_fold2_diagnostics": "Both variants improve3/5 subject means and decrease CA4/DG despite higher macro Dice. Bands CA4-.153719pp; full CA4-.436388pp. All8 completed matched pairs widen train/validation gap. Cross-LR comparisons still show lower absolute Dice than LR0.0006 on available same-arm pairs.",
+  "lower_lr_seed5_bands_diagnostics": "LR0.00045 bands seed5/fold0 improves4/5 subject means and7/10 crops; CA1+.504250,subiculum+.296307,CA4-.297050pp;FN-291 FP-76 swaps+54. Training gain+.026147 vsvalidation+.167836, gap narrows. One narrowing among nine candidate-pair comparisons, not universal gap closure. Absolute score -4.595545pp versus stronger plain CE1 hold baseline.",
+  "matched_gap_analysis": "scripts.mni_constraints.analyze_unetr_matched_gaps --name mni_unetr_lower_lr53t_20261109 --result-file lower_lr_results.json; descriptive count separates candidates from unique seed/fold pairs, archived source in analysis_sources.",
+  "rejected_candidates": [
+    "lr045_cosine_bands",
+    "lr045_cosine_full",
+    "lr030_cosine_full"
+  ],
+  "lower_lr030_full_failure_evidence": "reports/mni_unetr_lower_lr53t_20261109/lr030_full_seed5_failure.json",
+  "lower_lr_seed19_tradeoff": "reports/mni_unetr_lower_lr53t_20261109/seed19_lr_tradeoff.json",
+  "lower_lr_baseline_analysis": "analyze_unetr_lower_lr_baselines --plot; actual current5 LR0.00045 controls and4 LR0.0003 controls all worse than matched LR0.0006 cosine. JSON/PNG/PDF and provenance receipt generated, PNG visually inspected; source archived.",
+  "lower_lr045_failure_evidence": "reports/mni_unetr_lower_lr53t_20261109/lr045_seed0_fold0_failures.json",
+  "lower_lr_baseline_plot": "reports/mni_unetr_lower_lr53t_20261109/peak_lr_baselines.png",
+  "conditional_next_hypothesis_if_exhausted": "Not applicable: goal achieved.",
+  "promotion_criterion_user_confirmed": {
+    "recorded_at": 1794214093.027617,
+    "user_answer": "Keep the most consistent positive one even though it isn't the absolute best ice score overall. I need something that works always and is consistent across folds and seeds",
+    "criterion": "One shared recipe with strictly positive final-budget constrained-minus-matched-baseline macro Dice in all9 fixed seed/fold pairs. Absolute Dice regression is reported but is not a promotion veto.",
+    "automatic_full_matrix_authorized": true,
+    "seeds": [
+      0,
+      5,
+      19
+    ],
+    "folds": [
+      0,
+      1,
+      2
+    ],
+    "optimization_flops_cap": 53305109592450,
+    "gpu_workers": 2,
+    "no_held_out_generalization_claim": "Consistency refers to these observed development pairs; no claim that gains are guaranteed on unseen data."
+  },
+  "absolute_performance_preference_question": "Resolved: user explicitly prioritizes all9 positive matched gains over best absolute Dice. Continue original automatic-launch criterion; do not add absolute-Dice veto.",
+  "actual_launch_instructions": {
+    "only_after_nine_pair_success": true,
+    "final_audit_module": "scripts.mni_constraints.audit_unetr_stage_completion --name mni_unetr_lower_lr53t_20261109 --jobs 748615,748616 --result-file lower_lr_results.json",
+    "prepare_module": "scripts.mni_constraints.verified_lower_lr_full_matrix prepare",
+    "launch_module": "scripts.mni_constraints.launch_verified_lower_lr_full_matrix",
+    "matrix_stage": "mni_verified_unetr_lower_lr_constraints14_53t_0519_20261109",
+    "notes": "Prepare has no --stage option. Actual stage must not exist before gate. Final audit requires completed results, matching verified archives, preserved Swin recovery; wait until queue empty. Launcher rechecks quota/recovery/empty queue, deploys, runs remote actual-model preflight, starts persistent collector then submits. Verify actual two-GPU running allocation and workers before goal completion."
+  },
+  "confirmation_evidence": "reports/mni_unetr_lower_lr53t_20261109/winning_recipe_confirmation.json",
+  "matrix_stage": "mni_verified_unetr_lower_lr_constraints14_53t_0519_20261109",
+  "matrix_collector_pid": 88404,
+  "matrix_submission": {
+    "job_id": "748838",
+    "dependency": null,
+    "quota": {
+      "used_gib": 47.78,
+      "limit_gib": 93.13,
+      "free_gib": 45.349999999999994,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  47.78GiB/93.13GiB  461.20k/\u221e  \n\n",
+      "checked_at": 1794216518.3036582
+    },
+    "submitted_at": 1794216518.506944,
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--chdir=/mnt/beegfsstudents/home/3160552/mni_verified_unetr_lower_lr_constraints14_53t_0519_20261109",
+      "--output=/mnt/beegfsstudents/home/3160552/mni_verified_unetr_lower_lr_constraints14_53t_0519_20261109/slurm-%j.out",
+      "--error=/mnt/beegfsstudents/home/3160552/mni_verified_unetr_lower_lr_constraints14_53t_0519_20261109/slurm-%j.err",
+      "/mnt/beegfsstudents/home/3160552/mni_verified_unetr_lower_lr_constraints14_53t_0519_20261109/run.sbatch",
+      "/mnt/beegfsstudents/home/3160552/mni_verified_unetr_lower_lr_constraints14_53t_0519_20261109"
+    ],
+    "manifest_sha256": "a3a907fdf4d99a733e506baaa61ade9f97ff3bcfeb62f15f4d653d410613ab97"
+  },
+  "goal_completion_audit": "/Users/filippofocaccia/Desktop/hippo/reports/mni_verified_unetr_lower_lr_constraints14_53t_0519_20261109/goal_completion_audit.json",
+  "matrix_runtime": {
+    "status": "passed",
+    "verified_at": 1794216968.364382,
+    "confirmation_positive_pairs": 9,
+    "mean_gain_pp": 0.7603379944784487,
+    "minimum_gain_pp": 0.034532338900883364,
+    "matrix_name": "mni_verified_unetr_lower_lr_constraints14_53t_0519_20261109",
+    "job_id": "748838",
+    "queued_successor": "748839",
+    "gpu_workers": 2,
+    "logical_cells": 504,
+    "exact_reuses": 32,
+    "new_or_resumed_runs": 472,
+    "active_workers_verified": [
+      {
+        "id": "MNI_swinunetr_dice_f0s0",
+        "step": 241,
+        "maximum": 343
+      },
+      {
+        "id": "MNI_basic_unet16_dice_f0s0",
+        "step": 939,
+        "maximum": 939
+      }
+    ],
+    "collector_lock_held": true,
+    "collector_pid": 88404,
+    "manifest_sha256": "a3a907fdf4d99a733e506baaa61ade9f97ff3bcfeb62f15f4d653d410613ab97",
+    "startup_snapshot_sha256": "675e4937dd0ea2458217303395480504e52c74aee680e86776955198652e289e",
+    "preflight_sha256": "f7003bcdbe6d6cf590a6180e65fe35da30b7f31e317e712f2097d8a8db3ee53d",
+    "confirmation_input_sha256": "970a91ec7f4541a5afd74f3c6f399c8ba88b7efaaff86986ff0d12e6a6465ed5",
+    "free_gib": 43.419999999999995,
+    "scope": "Goal satisfied: nine observed matched development pairs improved and authorized full matrix actually started. Full matrix outcomes remain pending; no guarantee of gains for other combinations or unseen data."
+  }
+}

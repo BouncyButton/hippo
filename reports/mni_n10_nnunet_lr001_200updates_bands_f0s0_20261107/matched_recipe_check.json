@@ -1,0 +1,36 @@
+{
+  "status": "passed",
+  "reference_stage": "mni_n10_halfcap_nnunet_lr001_bands_f0s0_20261107",
+  "shared_cap": 71086691517440,
+  "hard_max_updates": 200,
+  "runs": [
+    {
+      "task": "MNI_nnunet_n10_baseline_f0s0",
+      "updates": 200,
+      "passes": 10.0,
+      "prefix": 0,
+      "ramp": 1,
+      "training_flops": 71073479456600,
+      "lr_schedule": {
+        "policy": "hold_half",
+        "horizon_updates": 200,
+        "warmup_updates": 0,
+        "decay_start_index": 100
+      }
+    },
+    {
+      "task": "MNI_nnunet_n10_original_bands_f0s0",
+      "updates": 200,
+      "passes": 10.0,
+      "prefix": 20,
+      "ramp": 20,
+      "training_flops": 71086691517440,
+      "lr_schedule": {
+        "policy": "hold_half",
+        "horizon_updates": 200,
+        "warmup_updates": 0,
+        "decay_start_index": 100
+      }
+    }
+  ]
+}

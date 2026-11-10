@@ -1,0 +1,23 @@
+{
+  "job_id": "744414",
+  "dependency": "744210",
+  "quota": {
+    "used_gib": 48.8,
+    "limit_gib": 93.13,
+    "free_gib": 44.33,
+    "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  48.80GiB/93.13GiB  358.46k/\u221e  \n\n",
+    "checked_at": 1794057079.2341425
+  },
+  "submitted_at": 1794057079.5574152,
+  "command": [
+    "sbatch",
+    "--parsable",
+    "--chdir=/mnt/beegfsstudents/home/3160552/mni_shared_cap3_bands_f0s0_20261107",
+    "--output=/mnt/beegfsstudents/home/3160552/mni_shared_cap3_bands_f0s0_20261107/slurm-%j.out",
+    "--error=/mnt/beegfsstudents/home/3160552/mni_shared_cap3_bands_f0s0_20261107/slurm-%j.err",
+    "--dependency=afterany:744210",
+    "/mnt/beegfsstudents/home/3160552/mni_shared_cap3_bands_f0s0_20261107/run.sbatch",
+    "/mnt/beegfsstudents/home/3160552/mni_shared_cap3_bands_f0s0_20261107"
+  ],
+  "manifest_sha256": "feecd313a347ac9267c656f38afbe140efc78640faa9dc813350be2e7bb451d4"
+}

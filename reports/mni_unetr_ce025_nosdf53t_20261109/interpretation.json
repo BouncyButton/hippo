@@ -1,0 +1,47 @@
+{
+  "outcome": "exhausted",
+  "winner": null,
+  "rows": [
+    {
+      "candidate": "plain_ce025_bands_edge_depth",
+      "seed": 0,
+      "fold": 1,
+      "gain_pp": -0.0526909576384238,
+      "training_gain_pp": 0.09183806346952395,
+      "union_gain_pp": 0.2128388053328223,
+      "subfield_gain_pp": {
+        "CA1_3_hard_dice": 0.336906079832076,
+        "subiculum_hard_dice": -0.12507189728414403,
+        "CA4_DG_hard_dice": -0.36990705546315894
+      },
+      "error_delta": {
+        "fn": 48,
+        "fp": -294,
+        "swaps": 19
+      }
+    },
+    {
+      "candidate": "plain_ce025_bands_edge",
+      "seed": 0,
+      "fold": 1,
+      "gain_pp": -0.161259504168354,
+      "training_gain_pp": 0.0608110173100016,
+      "union_gain_pp": 0.20461515868447577,
+      "subfield_gain_pp": {
+        "CA1_3_hard_dice": 0.061965667195991614,
+        "subiculum_hard_dice": -0.6463365487188781,
+        "CA4_DG_hard_dice": 0.10059236901778945
+      },
+      "error_delta": {
+        "fn": 21,
+        "fp": -247,
+        "swaps": 151
+      }
+    }
+  ],
+  "conclusion": "Both original no-SDF compositions failed on the first fixed pair. This does not support the hypothesis that removing SDF alone resolves inconsistency. Sequential depth calibration differs slightly, so this is not an isolated SDF-effect estimate.",
+  "absolute_performance": "Both remain above the old augmentation/dropout baseline but below their exact quarter-CE control and the stronger plain DiceCE1:1 control.",
+  "prior_full_gain_pp": 0.3507234949300164,
+  "tested_pairs": 1,
+  "next": "Test original full and bands under quarter-CE plus immediate post-warmup cosine; fresh controls mandatory."
+}

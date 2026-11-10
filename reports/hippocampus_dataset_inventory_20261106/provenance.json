@@ -1,0 +1,167 @@
+{
+  "date": "2026-11-06",
+  "sources": {
+    "MNI": "https://www.nature.com/articles/sdata201559",
+    "COBRA_images": "https://cobralab.net/files/brains_t2.tar.bz2",
+    "COBRA_labels": "https://github.com/CoBrALab/atlases/tree/master/hippocampus-subfields",
+    "HFH": "https://www.nitrc.org/projects/hippseg_2011/",
+    "HFH_paper": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4501402/",
+    "HFH_published_example": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/4d7f/4501402/d6b007e24335/nihms502920f7.jpg"
+  },
+  "HFH_status": "Raw data not downloaded: official download requires NITRC login; repo contains only an inspection script. Published figure is an external illustration, not a locally verified volume.",
+  "builder_changes": [
+    "Added --no-upload to MNI and COBRA.",
+    "Reuse downloaded COBRA atlas labels.",
+    "Correct COBRA affine voxel scaling for stride-2 downsampling (0.3 mm to 0.6 mm).",
+    "Use float32 without persistent NiBabel caches for full-resolution COBRA volumes to reduce RAM usage.",
+    "Align image and label crops in world space using the verified integer voxel-grid translation; use annotation affine for annotation output."
+  ],
+  "sha256": {
+    "datasets/Dataset102_MNI/create_mni_dataset.py": "cb3814c6b99276370cb34d8951fd8a0a94b15bc53a21128ce3ed7615e6d48f01",
+    "datasets/Dataset105_COBRA/create_cobra_dataset.py": "f150b44c0ea2cc25d033222e253db3905bfe0c8e6af6f5f9069f4ebef25b557c",
+    "datasets/Dataset102_MNI/splits_final.json": "8b86d9d3d97114f9ca224370dc0c861a0bcea64d8406a9eed59e4f314fe94e96",
+    "datasets/Dataset105_COBRA/splits_final.json": "9f80f6d534473c0ff0f38341b92ce29969d25798d09c5d071bbeaba31b8712fc"
+  },
+  "validation": [
+    "MNI five subject-disjoint folds verified; each case validated exactly once.",
+    "COBRA crop function world coordinates verified on a synthetic strided volume.",
+    "MNI builder completed successfully with --rebuild --no-upload.",
+    "Synthetic translated-grid crop check passes; all five raw pairs verified as integer-translated lattices.",
+    "Final corrected COBRA builder completed with exit code 0.",
+    "Verified all 50 MNI and 10 COBRA image/label pairs, expected labels, fold coverage, and subject separation.",
+    "All 10 corrected COBRA crops match original MINC voxel values at the physical locations encoded by their output affines.",
+    "Visually inspected MNI and corrected COBRA preview figures."
+  ],
+  "HFH_numeric_label_ids": "Unverified without original label files.",
+  "download_archive": {
+    "path": "datasets/Dataset105_COBRA/downloads/brains_t2.tar.bz2",
+    "bytes": 1877090240,
+    "sha256": "cf8b0b1ea7c4d3b7510aa80289351ba87d424794dca000aad6c4c79ed73f56c2"
+  },
+  "cobra_label_sources": [
+    {
+      "name": "brain1_labels.mnc",
+      "url": "https://raw.githubusercontent.com/CoBrALab/atlases/master/hippocampus-subfields/labels/brain1_labels.mnc",
+      "git_blob_sha": "dbeabfaf03b228ec1c98778599a4285861e68b18",
+      "sha256": "1cfe3187867ec089f7de41d1c7762577d870b3af87455f6897eecce29e7164f6"
+    },
+    {
+      "name": "brain2_labels.mnc",
+      "url": "https://raw.githubusercontent.com/CoBrALab/atlases/master/hippocampus-subfields/labels/brain2_labels.mnc",
+      "git_blob_sha": "143786a4de61441525798f836f8fc0dfd5870046",
+      "sha256": "3b3931d7b549021973cfa08ec03b51cd84d2f4d2333c4a0b22d473b3289c56df"
+    },
+    {
+      "name": "brain3_labels.mnc",
+      "url": "https://raw.githubusercontent.com/CoBrALab/atlases/master/hippocampus-subfields/labels/brain3_labels.mnc",
+      "git_blob_sha": "ee8bf49c09e95f1dc362583665067157bbe1cf81",
+      "sha256": "6efd482d91351ddbebf9badc080e0c765e15050dc541fe6d73f7e2e6afbfdfb5"
+    },
+    {
+      "name": "brain4_labels.mnc",
+      "url": "https://raw.githubusercontent.com/CoBrALab/atlases/master/hippocampus-subfields/labels/brain4_labels.mnc",
+      "git_blob_sha": "1572eae32c8db573bf85e85b1bce4eaf779be896",
+      "sha256": "77afdeb437d9d7887a56745e5359fabd4e5e5be6de6fb80b9a2ddaab0258bb26"
+    },
+    {
+      "name": "brain5_labels.mnc",
+      "url": "https://raw.githubusercontent.com/CoBrALab/atlases/master/hippocampus-subfields/labels/brain5_labels.mnc",
+      "git_blob_sha": "be1aa404855f4d3a14b3906a6f6b2fb9a568c985",
+      "sha256": "dacba56744ad3ddb884af965ccaa07a34485e4462bda1e2906fe072e3636a179"
+    }
+  ],
+  "cobra_raw_geometry": [
+    {
+      "subject": 1,
+      "image_shape": [
+        523,
+        540,
+        631
+      ],
+      "label_shape": [
+        489,
+        734,
+        734
+      ],
+      "label_to_image_voxel_offset": [
+        17,
+        -211,
+        -27
+      ]
+    },
+    {
+      "subject": 2,
+      "image_shape": [
+        534,
+        728,
+        768
+      ],
+      "label_shape": [
+        500,
+        551,
+        734
+      ],
+      "label_to_image_voxel_offset": [
+        17,
+        160,
+        17
+      ]
+    },
+    {
+      "subject": 3,
+      "image_shape": [
+        544,
+        621,
+        743
+      ],
+      "label_shape": [
+        509,
+        554,
+        734
+      ],
+      "label_to_image_voxel_offset": [
+        17,
+        69,
+        10
+      ]
+    },
+    {
+      "subject": 4,
+      "image_shape": [
+        534,
+        561,
+        696
+      ],
+      "label_shape": [
+        500,
+        734,
+        734
+      ],
+      "label_to_image_voxel_offset": [
+        17,
+        -136,
+        17
+      ]
+    },
+    {
+      "subject": 5,
+      "image_shape": [
+        514,
+        710,
+        768
+      ],
+      "label_shape": [
+        480,
+        734,
+        734
+      ],
+      "label_to_image_voxel_offset": [
+        17,
+        -41,
+        17
+      ]
+    }
+  ],
+  "final_cobra_build_log": "cobra_build_aligned.log",
+  "superseded_cobra_build_log": "cobra_build.log (superseded after detecting source-grid mismatch)"
+}

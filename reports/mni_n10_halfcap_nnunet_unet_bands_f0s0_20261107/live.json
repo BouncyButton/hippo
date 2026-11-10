@@ -1,0 +1,139 @@
+{
+  "status.json": {
+    "status": "complete",
+    "active": null,
+    "completed": 4,
+    "total": 4,
+    "runs": [
+      {
+        "id": "MNI_nnunet_n10_baseline_f0s0",
+        "kind": "conventional",
+        "dataset": "MNI",
+        "model": "nnunet",
+        "arm": "dice",
+        "fold": 0,
+        "seed": 0,
+        "protocol": "nnunet_n10_baseline",
+        "condition": "baseline",
+        "train_subjects": 10,
+        "augmentation": "none",
+        "target": null,
+        "final_dice": 0.13260231271554065,
+        "best_dice": 0.13260231271554065,
+        "released_bytes": 525338642
+      },
+      {
+        "id": "MNI_basic_unet16_n10_baseline_f0s0",
+        "kind": "conventional",
+        "dataset": "MNI",
+        "model": "basic_unet16",
+        "arm": "dice",
+        "fold": 0,
+        "seed": 0,
+        "protocol": "basic_unet16_n10_baseline",
+        "condition": "baseline",
+        "train_subjects": 10,
+        "augmentation": "none",
+        "target": null,
+        "final_dice": 0.47912730361122363,
+        "best_dice": 0.47912730361122363,
+        "released_bytes": 28974992
+      },
+      {
+        "id": "MNI_nnunet_n10_original_bands_f0s0",
+        "kind": "conventional",
+        "dataset": "MNI",
+        "model": "nnunet",
+        "arm": "dice_bands",
+        "fold": 0,
+        "seed": 0,
+        "protocol": "nnunet_n10_original_bands",
+        "condition": "original_bands",
+        "train_subjects": 10,
+        "augmentation": "none",
+        "target": 0.1,
+        "final_dice": 0.14103752491203797,
+        "best_dice": 0.14103752491203797,
+        "released_bytes": 525338770
+      },
+      {
+        "id": "MNI_basic_unet16_n10_original_bands_f0s0",
+        "kind": "conventional",
+        "dataset": "MNI",
+        "model": "basic_unet16",
+        "arm": "dice_bands",
+        "fold": 0,
+        "seed": 0,
+        "protocol": "basic_unet16_n10_original_bands",
+        "condition": "original_bands",
+        "train_subjects": 10,
+        "augmentation": "none",
+        "target": 0.1,
+        "final_dice": 0.49578752883904886,
+        "best_dice": 0.49578752883904886,
+        "released_bytes": 28975120
+      }
+    ],
+    "job_id": "745293",
+    "updated_at": 1794078326.7437315,
+    "quota": {
+      "used_gib": 44.49,
+      "limit_gib": 93.13,
+      "free_gib": 48.63999999999999,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  44.49GiB/93.13GiB  369.92k/\u221e  \n\n",
+      "checked_at": 1794078326.7804751
+    }
+  },
+  "submission.json": {
+    "job_id": "745293",
+    "dependency": null,
+    "quota": {
+      "used_gib": 44.18,
+      "limit_gib": 93.13,
+      "free_gib": 48.949999999999996,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  44.18GiB/93.13GiB  369.50k/\u221e  \n\n",
+      "checked_at": 1794077914.1699083
+    },
+    "submitted_at": 1794077914.7553003,
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--chdir=/mnt/beegfsstudents/home/3160552/mni_n10_halfcap_nnunet_unet_bands_f0s0_20261107",
+      "--output=/mnt/beegfsstudents/home/3160552/mni_n10_halfcap_nnunet_unet_bands_f0s0_20261107/slurm-%j.out",
+      "--error=/mnt/beegfsstudents/home/3160552/mni_n10_halfcap_nnunet_unet_bands_f0s0_20261107/slurm-%j.err",
+      "/mnt/beegfsstudents/home/3160552/mni_n10_halfcap_nnunet_unet_bands_f0s0_20261107/run.sbatch",
+      "/mnt/beegfsstudents/home/3160552/mni_n10_halfcap_nnunet_unet_bands_f0s0_20261107"
+    ],
+    "manifest_sha256": "8e1287a7cff5ddb95e2faac112201820a4fab4f7d9e8ab3741fc8f7fd4057e27"
+  },
+  "successor.json": {
+    "job_id": "745294",
+    "dependency": "745293",
+    "quota": {
+      "used_gib": 44.18,
+      "limit_gib": 93.13,
+      "free_gib": 48.949999999999996,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  44.18GiB/93.13GiB  369.50k/\u221e  \n\n",
+      "checked_at": 1794077924.3412628
+    },
+    "submitted_at": 1794077924.4706378,
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--chdir=/mnt/beegfsstudents/home/3160552/mni_n10_halfcap_nnunet_unet_bands_f0s0_20261107",
+      "--output=/mnt/beegfsstudents/home/3160552/mni_n10_halfcap_nnunet_unet_bands_f0s0_20261107/slurm-%j.out",
+      "--error=/mnt/beegfsstudents/home/3160552/mni_n10_halfcap_nnunet_unet_bands_f0s0_20261107/slurm-%j.err",
+      "--dependency=afterany:745293",
+      "/mnt/beegfsstudents/home/3160552/mni_n10_halfcap_nnunet_unet_bands_f0s0_20261107/run.sbatch",
+      "/mnt/beegfsstudents/home/3160552/mni_n10_halfcap_nnunet_unet_bands_f0s0_20261107"
+    ],
+    "manifest_sha256": "8e1287a7cff5ddb95e2faac112201820a4fab4f7d9e8ab3741fc8f7fd4057e27"
+  },
+  "ready": [],
+  "cleanup": [
+    "runs/MNI_nnunet_n10_baseline_f0s0/cleanup.json",
+    "runs/MNI_basic_unet16_n10_baseline_f0s0/cleanup.json",
+    "runs/MNI_nnunet_n10_original_bands_f0s0/cleanup.json",
+    "runs/MNI_basic_unet16_n10_original_bands_f0s0/cleanup.json"
+  ]
+}

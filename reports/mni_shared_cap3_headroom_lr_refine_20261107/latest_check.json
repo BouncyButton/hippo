@@ -1,0 +1,97 @@
+{
+  "queue": [
+    "744149|PENDING|0:00|(Dependency)",
+    "744148|RUNNING|6:32|gnode01"
+  ],
+  "status": {
+    "status": "running",
+    "active": [
+      "MNI_basic_unet16_f0s0"
+    ],
+    "completed": 2,
+    "total": 3,
+    "runs": [
+      {
+        "id": "MNI_nnunet_f0s0",
+        "model": "nnunet",
+        "dataset": "MNI",
+        "kind": "conventional",
+        "protocol": "nnunet",
+        "arm": "dice",
+        "fold": 0,
+        "seed": 0,
+        "augmentation": "none",
+        "final_dice": 0.7410936427380697,
+        "best_dice": 0.7411634103525293,
+        "released_bytes": 525343890
+      },
+      {
+        "id": "MNI_unetr_vit_b16_f0s0",
+        "model": "unetr_vit_b16",
+        "dataset": "MNI",
+        "kind": "conventional",
+        "protocol": "unetr_vit_b16",
+        "arm": "dice",
+        "fold": 0,
+        "seed": 0,
+        "augmentation": "xy_d4_half_v1",
+        "final_dice": 0.7190360542319679,
+        "best_dice": 0.7254991255664281,
+        "released_bytes": 1853965726
+      }
+    ],
+    "job_id": "744148",
+    "updated_at": 1794052072.904784,
+    "quota": {
+      "used_gib": 47.44,
+      "limit_gib": 93.13,
+      "free_gib": 45.69,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  47.44GiB/93.13GiB  352.92k/\u221e  \n\n",
+      "checked_at": 1794052072.9422362
+    }
+  },
+  "runs": [
+    {
+      "id": "MNI_basic_unet16_f0s0",
+      "cleaned": false,
+      "charged_updates": 1690,
+      "latest": {
+        "step": "1690",
+        "compute_fraction": "0.9998903783288366",
+        "training_macro_hard_dice": "0.8748659403908572",
+        "macro_hard_dice": "0.6764473018747913",
+        "learning_rate": "1.6000000000000001e-06"
+      },
+      "final_training_dice": 0.8748659403908572
+    },
+    {
+      "id": "MNI_nnunet_f0s0",
+      "cleaned": true,
+      "charged_updates": 269,
+      "latest": {
+        "step": "269",
+        "compute_fraction": "0.996502403850924",
+        "training_macro_hard_dice": "0.8860964661104553",
+        "macro_hard_dice": "0.7410936427380697",
+        "learning_rate": "7.863447018639829e-05"
+      },
+      "final_training_dice": 0.8860964661104553
+    },
+    {
+      "id": "MNI_unetr_vit_b16_f0s0",
+      "cleaned": true,
+      "charged_updates": 737,
+      "latest": {
+        "step": "737",
+        "compute_fraction": "0.9996451121282822",
+        "training_macro_hard_dice": "0.9025713918331084",
+        "macro_hard_dice": "0.7190360542319679",
+        "learning_rate": "5.500000000000001e-06"
+      },
+      "final_training_dice": 0.9025713918331084
+    }
+  ],
+  "slurm_errors": {
+    "slurm-744148.err": ""
+  }
+}

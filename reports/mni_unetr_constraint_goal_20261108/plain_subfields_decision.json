@@ -1,0 +1,23 @@
+{
+  "approved_for_execution": true,
+  "recorded_at": 1794183640.018146,
+  "recipes": [
+    {
+      "key": "plain",
+      "dropout_rate": 0.0,
+      "augmentation": "none"
+    }
+  ],
+  "arms": [
+    "dice",
+    "dice_sdf",
+    "dice_depth",
+    "dice_sdf_depth"
+  ],
+  "reason": "All six simplification candidates failed strict nine-pair improvement. Plain baseline improves the first three tested pairs by mean5.0427644 Dice points vs old baseline. Test original subfield-sensitive SDF and depth CE separately and jointly under this stronger simpler base; previous such tests used augmented dropout.1. Preserve definitions and fixed5% calibration; no union bands/edge in this stage.",
+  "prior_stage": "mni_unetr_simple_recipe53t_20261108",
+  "prior_status": "complete_exhausted_archived_cleaned",
+  "controls": "Reuse the three exact plain baseline protocols and verified archives; fresh same-recipe controls for remaining pairs.",
+  "invariants": "53,305,109,592,450optimizationFLOPs,409updates,2GPUworkers,seed0/5/19,fold0/1/2,training-only calibration102,ramp33,SDF228,AdamW6e-4,allattemptsretained,othermodelspaused.",
+  "criterion": "One shared candidate must improve all9 final-budget matchedpairs. No fullmatrix launch before success."
+}

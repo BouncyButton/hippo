@@ -1,0 +1,45 @@
+{
+  "verified": true,
+  "checked_at": 1794208773.4533591,
+  "seed": 0,
+  "fold": 1,
+  "peak_lr": 0.0003,
+  "calibration_training_crops": 20,
+  "anchor_updates": 102,
+  "rows": [
+    {
+      "arm": "dice_bands",
+      "anchor": "db50621280eb7620f399739e1abc79440fd2a08f2a3c36d336a18af444582b78",
+      "weights": {
+        "bands": 0.026846750382759445
+      },
+      "identical_preconstraint_steps": [
+        21,
+        41,
+        62,
+        82
+      ],
+      "calibration_sha256": "e7d33cb206d93b88b0a687cc613b13fa6e571c44dc4ec26d05e22d1622e03028",
+      "archive_manifest_sha256": "1cfbc923490a0abb7b23558e6706e0b4bbcabb5848aea5039ff982682ddd22c1"
+    },
+    {
+      "arm": "dice_bands_edge_sdf_depth",
+      "anchor": "db50621280eb7620f399739e1abc79440fd2a08f2a3c36d336a18af444582b78",
+      "weights": {
+        "bands": 0.026846750382759445,
+        "edge": 0.050620218729741887,
+        "sdf": 1.0854789233745292,
+        "depth": 0.04750058552766338
+      },
+      "identical_preconstraint_steps": [
+        21,
+        41,
+        62,
+        82
+      ],
+      "calibration_sha256": "41e8477c157a045a2b64f9dbf7e151656042d672f5deca8b22e914a09e8d93af",
+      "archive_manifest_sha256": "b427e4834d2dc232d09242a1d0c1cef14763d7475365479968dcb93673ffdda1"
+    }
+  ],
+  "audit_note": "Per-arm compute schedules correctly differ in auxiliary costs; shared update horizon, optimization cap and observed preconstraint LR/metrics verified."
+}

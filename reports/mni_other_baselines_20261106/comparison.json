@@ -1,0 +1,385 @@
+{
+  "status": "incomplete",
+  "completed": 11,
+  "total": 27,
+  "groups": [
+    {
+      "seed": 0,
+      "dataset": "MNI",
+      "model": "basic_unet16",
+      "complete": true,
+      "completed_folds": [
+        0,
+        1,
+        2
+      ],
+      "fold_validation_dice": [
+        0.6858254370839332,
+        0.667478591637866,
+        0.6884691692072178
+      ],
+      "mean_validation_dice": 0.680591065976339,
+      "sd_validation_dice": 0.011432413014878162
+    },
+    {
+      "seed": 0,
+      "dataset": "MNI",
+      "model": "nnunet",
+      "complete": true,
+      "completed_folds": [
+        0,
+        1,
+        2
+      ],
+      "fold_validation_dice": [
+        0.17820051373813647,
+        0.1579146938170346,
+        0.176489411180125
+      ],
+      "mean_validation_dice": 0.17086820624509869,
+      "sd_validation_dice": 0.011250648032847555
+    },
+    {
+      "seed": 0,
+      "dataset": "MNI",
+      "model": "swinunetr",
+      "complete": true,
+      "completed_folds": [
+        0,
+        1,
+        2
+      ],
+      "fold_validation_dice": [
+        0.26140416089495405,
+        0.2432970406202751,
+        0.2511253956754679
+      ],
+      "mean_validation_dice": 0.2519421990635657,
+      "sd_validation_dice": 0.00908115229425916
+    },
+    {
+      "seed": 1,
+      "dataset": "MNI",
+      "model": "basic_unet16",
+      "complete": false,
+      "completed_folds": [],
+      "fold_validation_dice": [],
+      "mean_validation_dice": null,
+      "sd_validation_dice": null
+    },
+    {
+      "seed": 1,
+      "dataset": "MNI",
+      "model": "nnunet",
+      "complete": false,
+      "completed_folds": [
+        0
+      ],
+      "fold_validation_dice": [
+        0.0
+      ],
+      "mean_validation_dice": 0.0,
+      "sd_validation_dice": null
+    },
+    {
+      "seed": 1,
+      "dataset": "MNI",
+      "model": "swinunetr",
+      "complete": false,
+      "completed_folds": [
+        0
+      ],
+      "fold_validation_dice": [
+        0.42846121090777933
+      ],
+      "mean_validation_dice": 0.42846121090777933,
+      "sd_validation_dice": null
+    },
+    {
+      "seed": 2,
+      "dataset": "MNI",
+      "model": "basic_unet16",
+      "complete": false,
+      "completed_folds": [],
+      "fold_validation_dice": [],
+      "mean_validation_dice": null,
+      "sd_validation_dice": null
+    },
+    {
+      "seed": 2,
+      "dataset": "MNI",
+      "model": "nnunet",
+      "complete": false,
+      "completed_folds": [],
+      "fold_validation_dice": [],
+      "mean_validation_dice": null,
+      "sd_validation_dice": null
+    },
+    {
+      "seed": 2,
+      "dataset": "MNI",
+      "model": "swinunetr",
+      "complete": false,
+      "completed_folds": [],
+      "fold_validation_dice": [],
+      "mean_validation_dice": null,
+      "sd_validation_dice": null
+    }
+  ],
+  "seed_summary": [
+    {
+      "seed": 0,
+      "complete": true,
+      "mean_across_model_dataset_means": 0.36780049042833446,
+      "lowest_model_dataset_mean": 0.17086820624509869,
+      "lowest_single_fold": 0.1579146938170346
+    },
+    {
+      "seed": 1,
+      "complete": false,
+      "mean_across_model_dataset_means": null,
+      "lowest_model_dataset_mean": null,
+      "lowest_single_fold": null
+    },
+    {
+      "seed": 2,
+      "complete": false,
+      "mean_across_model_dataset_means": null,
+      "lowest_model_dataset_mean": null,
+      "lowest_single_fold": null
+    }
+  ],
+  "runs": [
+    {
+      "id": "MNI_nnunet_baseline_f0s0",
+      "kind": "conventional",
+      "dataset": "MNI",
+      "model": "nnunet",
+      "fold": 0,
+      "seed": 0,
+      "arm": "dice",
+      "protocol": "nnunet",
+      "validation_dice": 0.17820051373813647,
+      "training_dice": 0.17897966304041427,
+      "best_validation_dice": 0.17820051373813647,
+      "foreground_fn": 36925,
+      "foreground_fp": 3610,
+      "ap_swaps": null,
+      "updates": 89,
+      "consumed_flops": 31627698358187,
+      "cleanup": "complete",
+      "released_file_bytes": 525329682
+    },
+    {
+      "id": "MNI_swinunetr_baseline_f0s0",
+      "kind": "conventional",
+      "dataset": "MNI",
+      "model": "swinunetr",
+      "fold": 0,
+      "seed": 0,
+      "arm": "dice",
+      "protocol": "swinunetr",
+      "validation_dice": 0.26140416089495405,
+      "training_dice": 0.28034116451537305,
+      "best_validation_dice": 0.26140416089495405,
+      "foreground_fn": 357,
+      "foreground_fp": 435958,
+      "ap_swaps": null,
+      "updates": 206,
+      "consumed_flops": 31941194365686,
+      "cleanup": "complete",
+      "released_file_bytes": 336984340
+    },
+    {
+      "id": "MNI_basic_unet16_baseline_f0s0",
+      "kind": "conventional",
+      "dataset": "MNI",
+      "model": "basic_unet16",
+      "fold": 0,
+      "seed": 0,
+      "arm": "dice",
+      "protocol": "basic_unet16",
+      "validation_dice": 0.6858254370839332,
+      "training_dice": 0.810168778083902,
+      "best_validation_dice": 0.6858254370839332,
+      "foreground_fn": 1930,
+      "foreground_fp": 19423,
+      "ap_swaps": null,
+      "updates": 563,
+      "consumed_flops": 31954026452553,
+      "cleanup": "complete",
+      "released_file_bytes": 28966096
+    },
+    {
+      "id": "MNI_nnunet_baseline_f1s0",
+      "kind": "conventional",
+      "dataset": "MNI",
+      "model": "nnunet",
+      "fold": 1,
+      "seed": 0,
+      "arm": "dice",
+      "protocol": "nnunet",
+      "validation_dice": 0.1579146938170346,
+      "training_dice": 0.1892181861185788,
+      "best_validation_dice": 0.1579146938170346,
+      "foreground_fn": 34919,
+      "foreground_fp": 4013,
+      "ap_swaps": null,
+      "updates": 89,
+      "consumed_flops": 31627698358187,
+      "cleanup": "complete",
+      "released_file_bytes": 525329682
+    },
+    {
+      "id": "MNI_swinunetr_baseline_f1s0",
+      "kind": "conventional",
+      "dataset": "MNI",
+      "model": "swinunetr",
+      "fold": 1,
+      "seed": 0,
+      "arm": "dice",
+      "protocol": "swinunetr",
+      "validation_dice": 0.2432970406202751,
+      "training_dice": 0.2755260809907852,
+      "best_validation_dice": 0.2432970406202751,
+      "foreground_fn": 356,
+      "foreground_fp": 437418,
+      "ap_swaps": null,
+      "updates": 206,
+      "consumed_flops": 31941194365686,
+      "cleanup": "complete",
+      "released_file_bytes": 336984340
+    },
+    {
+      "id": "MNI_basic_unet16_baseline_f1s0",
+      "kind": "conventional",
+      "dataset": "MNI",
+      "model": "basic_unet16",
+      "fold": 1,
+      "seed": 0,
+      "arm": "dice",
+      "protocol": "basic_unet16",
+      "validation_dice": 0.667478591637866,
+      "training_dice": 0.8283514114737777,
+      "best_validation_dice": 0.667478591637866,
+      "foreground_fn": 2678,
+      "foreground_fp": 17726,
+      "ap_swaps": null,
+      "updates": 563,
+      "consumed_flops": 31954026452553,
+      "cleanup": "complete",
+      "released_file_bytes": 28966096
+    },
+    {
+      "id": "MNI_nnunet_baseline_f2s0",
+      "kind": "conventional",
+      "dataset": "MNI",
+      "model": "nnunet",
+      "fold": 2,
+      "seed": 0,
+      "arm": "dice",
+      "protocol": "nnunet",
+      "validation_dice": 0.176489411180125,
+      "training_dice": 0.18224911365251079,
+      "best_validation_dice": 0.176489411180125,
+      "foreground_fn": 34436,
+      "foreground_fp": 4886,
+      "ap_swaps": null,
+      "updates": 89,
+      "consumed_flops": 31627698358187,
+      "cleanup": "complete",
+      "released_file_bytes": 525329682
+    },
+    {
+      "id": "MNI_swinunetr_baseline_f2s0",
+      "kind": "conventional",
+      "dataset": "MNI",
+      "model": "swinunetr",
+      "fold": 2,
+      "seed": 0,
+      "arm": "dice",
+      "protocol": "swinunetr",
+      "validation_dice": 0.2511253956754679,
+      "training_dice": 0.28452283717190185,
+      "best_validation_dice": 0.2511253956754679,
+      "foreground_fn": 178,
+      "foreground_fp": 445411,
+      "ap_swaps": null,
+      "updates": 206,
+      "consumed_flops": 31941194365686,
+      "cleanup": "complete",
+      "released_file_bytes": 336984340
+    },
+    {
+      "id": "MNI_basic_unet16_baseline_f2s0",
+      "kind": "conventional",
+      "dataset": "MNI",
+      "model": "basic_unet16",
+      "fold": 2,
+      "seed": 0,
+      "arm": "dice",
+      "protocol": "basic_unet16",
+      "validation_dice": 0.6884691692072178,
+      "training_dice": 0.8207965440080758,
+      "best_validation_dice": 0.6884691692072178,
+      "foreground_fn": 1354,
+      "foreground_fp": 21129,
+      "ap_swaps": null,
+      "updates": 563,
+      "consumed_flops": 31954026452553,
+      "cleanup": "complete",
+      "released_file_bytes": 28966032
+    },
+    {
+      "id": "MNI_nnunet_baseline_f0s1",
+      "kind": "conventional",
+      "dataset": "MNI",
+      "model": "nnunet",
+      "fold": 0,
+      "seed": 1,
+      "arm": "dice",
+      "protocol": "nnunet",
+      "validation_dice": 0.0,
+      "training_dice": 0.0,
+      "best_validation_dice": 0.01055093844867871,
+      "foreground_fn": 47795,
+      "foreground_fp": 0,
+      "ap_swaps": null,
+      "updates": 89,
+      "consumed_flops": 31627698358187,
+      "cleanup": "complete",
+      "released_file_bytes": 525335634
+    },
+    {
+      "id": "MNI_swinunetr_baseline_f0s1",
+      "kind": "conventional",
+      "dataset": "MNI",
+      "model": "swinunetr",
+      "fold": 0,
+      "seed": 1,
+      "arm": "dice",
+      "protocol": "swinunetr",
+      "validation_dice": 0.42846121090777933,
+      "training_dice": 0.4662194219620959,
+      "best_validation_dice": 0.42846121090777933,
+      "foreground_fn": 1124,
+      "foreground_fp": 29939,
+      "ap_swaps": null,
+      "updates": 206,
+      "consumed_flops": 31941194365686,
+      "cleanup": "complete",
+      "released_file_bytes": 336984340
+    }
+  ],
+  "released_file_bytes": 3536160264,
+  "interpretation": "Final-budget hard Dice; equal-weight fold means. All requested seeds and folds retained. Seed summaries require all requested conditions. No numerical all-model success threshold or confirmatory seed selection is asserted.",
+  "live_status": "paused",
+  "active": null,
+  "last_observed_quota": {
+    "used_gib": 42.14,
+    "limit_gib": 93.13,
+    "free_gib": 50.989999999999995,
+    "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  42.14GiB/93.13GiB  307.07k/\u221e  \n\n",
+    "checked_at": 1793987557.8886776
+  }
+}

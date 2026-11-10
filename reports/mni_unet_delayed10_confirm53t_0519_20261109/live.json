@@ -1,0 +1,76 @@
+{
+  "status.json": {
+    "status": "complete",
+    "active": [],
+    "completed": 7,
+    "training_completed": 7,
+    "total": 7,
+    "pending_durable_archive": [],
+    "pending_cleanup": [],
+    "job_id": "749430",
+    "updated_at": 1794234887.712915,
+    "offline_policy": "Retain completed metadata/checkpoints until laptop reconnects and durable archive is verified; no fake acknowledgments.",
+    "quota": {
+      "used_gib": 51.4,
+      "limit_gib": 93.13,
+      "free_gib": 41.73,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  51.40GiB/93.13GiB  467.62k/\u221e  \n\n",
+      "checked_at": 1794234887.8421626
+    }
+  },
+  "submission.json": {
+    "job_id": "749383",
+    "dependency": null,
+    "quota": {
+      "used_gib": 51.28,
+      "limit_gib": 93.13,
+      "free_gib": 41.849999999999994,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  51.28GiB/93.13GiB  467.30k/\u221e  \n\n",
+      "checked_at": 1794232780.6391947
+    },
+    "submitted_at": 1794232780.8708317,
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--chdir=/mnt/beegfsstudents/home/3160552/mni_unet_delayed10_confirm53t_0519_20261109",
+      "--output=/mnt/beegfsstudents/home/3160552/mni_unet_delayed10_confirm53t_0519_20261109/slurm-%j.out",
+      "--error=/mnt/beegfsstudents/home/3160552/mni_unet_delayed10_confirm53t_0519_20261109/slurm-%j.err",
+      "/mnt/beegfsstudents/home/3160552/mni_unet_delayed10_confirm53t_0519_20261109/run.sbatch",
+      "/mnt/beegfsstudents/home/3160552/mni_unet_delayed10_confirm53t_0519_20261109"
+    ],
+    "manifest_sha256": "14aaa3b09d8b3222d4eb42f398bb819474876cf46d65c022b35137f53c0eaa2d"
+  },
+  "successor.json": {
+    "job_id": "749386",
+    "dependency": "749383",
+    "quota": {
+      "used_gib": 51.28,
+      "limit_gib": 93.13,
+      "free_gib": 41.849999999999994,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  51.28GiB/93.13GiB  467.31k/\u221e  \n\n",
+      "checked_at": 1794232805.8468928
+    },
+    "submitted_at": 1794232805.962716,
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--chdir=/mnt/beegfsstudents/home/3160552/mni_unet_delayed10_confirm53t_0519_20261109",
+      "--output=/mnt/beegfsstudents/home/3160552/mni_unet_delayed10_confirm53t_0519_20261109/slurm-%j.out",
+      "--error=/mnt/beegfsstudents/home/3160552/mni_unet_delayed10_confirm53t_0519_20261109/slurm-%j.err",
+      "--dependency=afterany:749383",
+      "/mnt/beegfsstudents/home/3160552/mni_unet_delayed10_confirm53t_0519_20261109/run.sbatch",
+      "/mnt/beegfsstudents/home/3160552/mni_unet_delayed10_confirm53t_0519_20261109"
+    ],
+    "manifest_sha256": "14aaa3b09d8b3222d4eb42f398bb819474876cf46d65c022b35137f53c0eaa2d"
+  },
+  "ready": [],
+  "cleanup": [
+    "runs/MNI_unet_late10_f2s19/cleanup.json",
+    "runs/MNI_unet_late10_f0s5/cleanup.json",
+    "runs/MNI_unet_late10_f2s0/cleanup.json",
+    "runs/MNI_unet_late10_f2s5/cleanup.json",
+    "runs/MNI_unet_late10_f0s19/cleanup.json",
+    "runs/MNI_unet_late10_f0s0/cleanup.json",
+    "runs/MNI_unet_late10_f1s19/cleanup.json"
+  ]
+}

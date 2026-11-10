@@ -1,0 +1,68 @@
+{
+  "rows": [
+    {
+      "id": "MNI_nnunet_lr00500_f0s19",
+      "kind": "conventional",
+      "dataset": "MNI",
+      "model": "nnunet",
+      "arm": "dice",
+      "fold": 0,
+      "seed": 19,
+      "protocol": "nnunet_lr00500",
+      "initial_lr": 0.005,
+      "augmentation": "none",
+      "validation_dice": 0.14313742971158244,
+      "gain_pp": -28.58809989779914
+    },
+    {
+      "id": "MNI_nnunet_lr00250_f0s19",
+      "kind": "conventional",
+      "dataset": "MNI",
+      "model": "nnunet",
+      "arm": "dice",
+      "fold": 0,
+      "seed": 19,
+      "protocol": "nnunet_lr00250",
+      "initial_lr": 0.0025,
+      "augmentation": "none",
+      "validation_dice": 0.0008602583450497255,
+      "gain_pp": -42.815817034452415
+    },
+    {
+      "id": "MNI_nnunet_lr00100_f0s19",
+      "kind": "conventional",
+      "dataset": "MNI",
+      "model": "nnunet",
+      "arm": "dice",
+      "fold": 0,
+      "seed": 19,
+      "protocol": "nnunet_lr00100",
+      "initial_lr": 0.001,
+      "augmentation": "none",
+      "validation_dice": 0.00017213192143760797,
+      "gain_pp": -42.884629676813624
+    },
+    {
+      "id": "MNI_nnunet_lr00050_f0s19",
+      "kind": "conventional",
+      "dataset": "MNI",
+      "model": "nnunet",
+      "arm": "dice",
+      "fold": 0,
+      "seed": 19,
+      "protocol": "nnunet_lr00050",
+      "initial_lr": 0.0005,
+      "augmentation": "none",
+      "validation_dice": 0.007270439700784945,
+      "gain_pp": -42.17479889887889
+    }
+  ],
+  "selected": {
+    "initial_lr": null
+  },
+  "complete": true,
+  "passes_every_fold50": false,
+  "improves_every_fold": false,
+  "rule": "Four lower initial learning rates on fold0 seed19 at the unchanged43T cap. Select the largest final-budget Dice improvement over the frozen0.01 control; ties prefer the larger learning rate. Confirm that one candidate on folds1,2. If no pilot improves, stop. Retain every attempted result. No other model or constraint run.",
+  "caveat": "Exploratory development-validation tuning on fold0. Folds overlap; this is not an independent test estimate. Changing LR creates a new recipe and does not validate the original recipe or other seeds."
+}

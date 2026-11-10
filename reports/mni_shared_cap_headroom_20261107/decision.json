@@ -1,0 +1,217 @@
+{
+  "status": "lower_cap_paired_pilot_complete",
+  "user_priority": "One shared FLOP cap for allfour models",
+  "target_training_dice": [
+    0.85,
+    0.9
+  ],
+  "old_cap": 255811605336720,
+  "pilot_cap": 63952901334180,
+  "pilot2_results": [
+    {
+      "model": "nnunet",
+      "fold": 0,
+      "seed": 0,
+      "training_dice": 0.8174411792841283,
+      "validation_dice": 0.7272012065620047,
+      "training_validation_gap_pp": 9.023997272212359,
+      "within_target": false,
+      "over_target": false,
+      "under_target": true,
+      "updates": 179,
+      "optimization_flops": 63610764113657,
+      "source_archive_sha256": "1cbc4f09b44c3da506990c65413d3c11f81b44f8eb530d97ce61589ffdd87acf",
+      "cleaned": true
+    },
+    {
+      "model": "swinunetr",
+      "fold": 0,
+      "seed": 0,
+      "training_dice": 0.9487226023917726,
+      "validation_dice": 0.7425480247591102,
+      "training_validation_gap_pp": 20.617457763266245,
+      "within_target": false,
+      "over_target": true,
+      "under_target": false,
+      "updates": 412,
+      "optimization_flops": 63884116756192,
+      "source_archive_sha256": "d03ac70572e6b3ef328603f30270aa1f9fafc619232ff4f86c4d89ea6c66047b",
+      "cleaned": true
+    },
+    {
+      "model": "unetr_vit_b16",
+      "fold": 0,
+      "seed": 0,
+      "training_dice": 0.7755777705166322,
+      "validation_dice": 0.6778065573651968,
+      "training_validation_gap_pp": 9.777121315143544,
+      "within_target": false,
+      "over_target": false,
+      "under_target": true,
+      "updates": 491,
+      "optimization_flops": 63886833308429,
+      "source_archive_sha256": "933487a91f660dc69c9bdbd9796f86b20224c443c80e2b9a0e786708fdb30f2e",
+      "cleaned": true
+    },
+    {
+      "model": "basic_unet16",
+      "fold": 0,
+      "seed": 0,
+      "training_dice": 0.9193103693236917,
+      "validation_dice": 0.7183110516253904,
+      "training_validation_gap_pp": 20.099931769830125,
+      "within_target": false,
+      "over_target": true,
+      "under_target": false,
+      "updates": 1126,
+      "optimization_flops": 63908052905106,
+      "source_archive_sha256": "0ee75be9a5c4dc40a240f2b31c26a1f2f30c6c4669ca6c5537bd604081fa924a",
+      "cleaned": true
+    }
+  ],
+  "followup_cap": 47964676000635,
+  "followup_multiplier": 1.5,
+  "reason": "2x leaves Swin94.87% and UNet91.93% training Dice; NN81.74% and UNETR77.56% are below target. Next common cap tests more headroom for faster-fitting models. It does not guarantee85\u201390% for every model.",
+  "validation_used_for_cap_selection": false,
+  "new_constraints_launched": true,
+  "full3fold3seed_launched": true,
+  "common_cap_user_confirmed": true,
+  "recipe_path_basis": "Explicit user confirmation to adjust recipes while retaining a lower shared cap",
+  "candidate_cap": 95929352001270,
+  "candidate_multiplier": 3,
+  "candidate_stage": "mni_shared_cap3_headroom_3fold3seed_20261107",
+  "pilot1p5_results": [
+    {
+      "model": "nnunet",
+      "fold": 0,
+      "seed": 0,
+      "training_dice": 0.41154204054068455,
+      "validation_dice": 0.3903254003131779,
+      "training_validation_gap_pp": 2.1216640227506636,
+      "within_target": false,
+      "over_target": false,
+      "under_target": true,
+      "updates": 134,
+      "optimization_flops": 47619231235922,
+      "source_archive_sha256": "79dd4106a752ca6cd377d22f9df29f2d15acc22a816e2bd926e12f3ff51f05f1",
+      "cleaned": true
+    },
+    {
+      "model": "swinunetr",
+      "fold": 0,
+      "seed": 0,
+      "training_dice": 0.9132894132753065,
+      "validation_dice": 0.7491543791332921,
+      "training_validation_gap_pp": 16.413503414201447,
+      "within_target": false,
+      "over_target": true,
+      "under_target": false,
+      "updates": 309,
+      "optimization_flops": 47913087567144,
+      "source_archive_sha256": "e8b5e5573f74375754969e1cd797d14f00929adc1d8777e6edcc603f077d8cc0",
+      "cleaned": true
+    },
+    {
+      "model": "unetr_vit_b16",
+      "fold": 0,
+      "seed": 0,
+      "training_dice": 0.7400987768984822,
+      "validation_dice": 0.6474238669699229,
+      "training_validation_gap_pp": 9.267490992855931,
+      "within_target": false,
+      "over_target": false,
+      "under_target": true,
+      "updates": 368,
+      "optimization_flops": 47882596043792,
+      "source_archive_sha256": "83053dfaddb8b85e4871068bbfe98bdbdcb7c23e70ce4c7d6929a2bf695585bf",
+      "cleaned": true
+    },
+    {
+      "model": "basic_unet16",
+      "fold": 0,
+      "seed": 0,
+      "training_dice": 0.8245822450388938,
+      "validation_dice": 0.6853685584379605,
+      "training_validation_gap_pp": 13.921368660093325,
+      "within_target": false,
+      "over_target": false,
+      "under_target": true,
+      "updates": 845,
+      "optimization_flops": 47959418032695,
+      "source_archive_sha256": "ce61cab875d1a022ab573e3ecfb224808aa25f2ca803ebec283bb6176f72fc21",
+      "cleaned": true
+    }
+  ],
+  "recipe_path_user_confirmed": true,
+  "user_reply": "Adjust recipes at a lower shared cap",
+  "refinement": {
+    "nnunet": 0.0065,
+    "unetr_vit_b16": 0.00055,
+    "basic_unet16": 0.00016
+  },
+  "accepted_swin_stage": "mni_shared_cap3_headroom_recipe_pilot_20261107",
+  "active_job": null,
+  "accepted_pilot_models": {
+    "swinunetr": {
+      "stage": "mni_shared_cap3_headroom_recipe_pilot_20261107",
+      "training_dice": 0.8628334479556232
+    },
+    "nnunet": {
+      "stage": "mni_shared_cap3_headroom_lr_refine_20261107",
+      "training_dice": 0.8860964661104553
+    },
+    "basic_unet16": {
+      "stage": "mni_shared_cap3_headroom_lr_refine_20261107",
+      "training_dice": 0.8748659403908572
+    }
+  },
+  "remaining_refinement": {
+    "unetr_vit_b16": {
+      "lr": 0.0006,
+      "augmentation": "xy_d4_three_quarters_v1"
+    }
+  },
+  "last_unetr_lr045_training_dice": 0.9126490651567039,
+  "training_policy": "flexible_headroom_no_rigid_dice_band",
+  "validation_floor": 0.5,
+  "user_clarification": "Validation above50%; avoid overfitting; do not enforce rigid training Dice margins.",
+  "selection_uses_validation": true,
+  "validation_role": "minimum_floor_and_gap_diagnostics",
+  "selected_recipes_file": "/Users/filippofocaccia/Desktop/hippo/reports/mni_shared_cap_headroom_20261107/selected_recipes.json",
+  "unused_augmentation_pilot": "abandoned_before_submission",
+  "confirmation_new_runs": 32,
+  "confirmation_reused_pilots": 4,
+  "submission": "reports/mni_shared_cap3_headroom_3fold3seed_20261107/submission.json",
+  "queued_continuation": null,
+  "gpu_workers": 2,
+  "latest_free_gib": 49.23,
+  "confirmation_checkpoint": "First nnUNet fold1seed0 exhausted269 updates at89.40% training and72.01% validation; Swin fold1seed0 actively training. Remaining cells pending. No absence-of-overfitting claim made from pilot training Dice alone.",
+  "completed_logical_cells": 26,
+  "below_validation_floor": [
+    {
+      "model": "basic_unet16",
+      "fold": 2,
+      "seed": 1,
+      "training_dice": 0.5487748343382816,
+      "validation_dice": 0.4450668303259871,
+      "training_CA4_DG": 0.15025582832125267,
+      "validation_CA4_DG": 0.06522508258795284,
+      "interpretation": "Low training Dice and weak CA4_DG learning; this cell fails the validation floor. An optimization/underlearning issue is indicated; causal recipe changes have not yet been tested."
+    }
+  ],
+  "baseline_fixes_on_hold": true,
+  "bands_pilot_job": "744414",
+  "bands_pilot_stage": "mni_shared_cap3_bands_f0s0_20261107",
+  "bands_scope": "Four models, bands only, fold0 seed0; unchanged baseline recipes and common cap.",
+  "bands_pilot_results": "reports/mni_shared_cap3_bands_f0s0_20261107/final_comparison.json",
+  "new_cap_test": 63952901334180,
+  "established_cap_retained": 95929352001270,
+  "lower_cap_stage": "mni_shared_cap2_baseline_bands_f0s0_20261107",
+  "baseline_recipes_changed": false,
+  "full3fold3seed_lower_cap_launched": false,
+  "basis": "User requested checking early improvements and overfitting, then testing a lower common cap. UNet has large early bands gains and mild late validation decline; Swin has smaller early gains and mild late decline. NN and UNETR show no clear late validation collapse.",
+  "curve_analysis": "reports/mni_shared_cap3_bands_f0s0_20261107/learning_curve_comparison.json",
+  "lower_cap_results": "reports/mni_shared_cap2_baseline_bands_f0s0_20261107/final_comparison.json",
+  "all_lower_cap_pilot_cells_above_50": true,
+  "lower_cap_adopted_for_full_study": false
+}

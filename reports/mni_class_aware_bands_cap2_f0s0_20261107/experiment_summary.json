@@ -1,0 +1,69 @@
+{
+  "status": "complete",
+  "cap": 63952901334180,
+  "fold": 0,
+  "seed": 0,
+  "rows": [
+    {
+      "model": "swinunetr",
+      "updates": 412,
+      "training_flops": 63909528999992,
+      "unused_flops": 43372334188,
+      "calibration_flops": 521830334226,
+      "target": 0.1,
+      "initial_lrs": {
+        "swinunetr": 0.0003
+      },
+      "lr_policy": "hold_half"
+    },
+    {
+      "model": "unetr_vit_b16",
+      "updates": 491,
+      "training_flops": 63917121955769,
+      "unused_flops": 35779378411,
+      "calibration_flops": 432769399466,
+      "target": 0.05,
+      "initial_lrs": {
+        "unet": 0.0006
+      },
+      "lr_policy": "hold_half"
+    }
+  ],
+  "change": "Categorical correct-class target on identical original bands; same side/case averaging; no new internal interface support.",
+  "controls": "Four hash-verified archived baseline/original-bands runs",
+  "estimated_peak_storage_gib": 12,
+  "submission": {
+    "job_id": "744931",
+    "dependency": null,
+    "quota": {
+      "used_gib": 43.94,
+      "limit_gib": 93.13,
+      "free_gib": 49.19,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  43.94GiB/93.13GiB  361.48k/\u221e  \n\n",
+      "checked_at": 1794066657.0667346
+    },
+    "submitted_at": 1794066659.6827261,
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--chdir=/mnt/beegfsstudents/home/3160552/mni_class_aware_bands_cap2_f0s0_20261107",
+      "--output=/mnt/beegfsstudents/home/3160552/mni_class_aware_bands_cap2_f0s0_20261107/slurm-%j.out",
+      "--error=/mnt/beegfsstudents/home/3160552/mni_class_aware_bands_cap2_f0s0_20261107/slurm-%j.err",
+      "/mnt/beegfsstudents/home/3160552/mni_class_aware_bands_cap2_f0s0_20261107/run.sbatch",
+      "/mnt/beegfsstudents/home/3160552/mni_class_aware_bands_cap2_f0s0_20261107"
+    ],
+    "manifest_sha256": "73f0b3dd12ef9af682b13d7082ffa50eeb9a020f4dc56ed1991d741658cdcb26"
+  },
+  "archive_files_verified": 26,
+  "released_bytes": 2190958706,
+  "released_gib": 2.0404893029481173,
+  "quota": {
+    "used_gib": 43.94,
+    "limit_gib": 93.13,
+    "free_gib": 49.19,
+    "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  43.94GiB/93.13GiB  361.55k/\u221e  \n\n",
+    "checked_at": 1794067028.7805493
+  },
+  "comparison": "comparison.json",
+  "queue": []
+}

@@ -1,0 +1,66 @@
+{
+  "status": "queued",
+  "fold": 0,
+  "seed": 0,
+  "new_runs": 4,
+  "optimization_flop_cap": 95929352001270,
+  "calibration": "Training only; separately accounted outside optimization cap, as in prior studies",
+  "targets": {
+    "nnunet": 0.1,
+    "swinunetr": 0.1,
+    "unetr_vit_b16": 0.05,
+    "basic_unet16": 0.1
+  },
+  "base_recipes_changed": false,
+  "baseline_controls": [
+    {
+      "model": "nnunet",
+      "fold": 0,
+      "seed": 0,
+      "archive": "/Users/filippofocaccia/Desktop/hippo/reports/mni_shared_cap3_headroom_lr_refine_20261107/runs/MNI_nnunet_f0s0",
+      "archive_manifest_sha256": "f910dc79d1abae6def899147e17ade3d5c8fd72c7d308036be587f1092885dac",
+      "training_dice": 0.8860964661104553,
+      "validation_dice": 0.7410936427380697,
+      "original_protocol_sha256": "370c1ddb33374dd3c678773464ba29b5780825b6db5ee777a691815eaac9d04a"
+    },
+    {
+      "model": "swinunetr",
+      "fold": 0,
+      "seed": 0,
+      "archive": "/Users/filippofocaccia/Desktop/hippo/reports/mni_shared_cap3_headroom_recipe_pilot_20261107/runs/MNI_swinunetr_f0s0",
+      "archive_manifest_sha256": "a062d29141b70add220d91053590b59a83893fefdec69bc5e98ab91b3db6833b",
+      "training_dice": 0.8628334479556232,
+      "validation_dice": 0.7556428304870717,
+      "original_protocol_sha256": "4b461d844222077524b7a1c39aa66f9db183b44aa7cd397c232c20e982267f50"
+    },
+    {
+      "model": "unetr_vit_b16",
+      "fold": 0,
+      "seed": 0,
+      "archive": "/Users/filippofocaccia/Desktop/hippo/reports/mni_shared_cap3_headroom_recipe_pilot_20261107/runs/MNI_unetr_vit_b16_f0s0",
+      "archive_manifest_sha256": "06a1dec5cabd9a9e8411dcbde38bbea37a0959f68a5adc9110612044e6954a04",
+      "training_dice": 0.7957240302270256,
+      "validation_dice": 0.7017363508113498,
+      "original_protocol_sha256": "7552b777d56a7bbb35e9664ccec8556598fc57837f5b8a9d47f6219382bf04d7"
+    },
+    {
+      "model": "basic_unet16",
+      "fold": 0,
+      "seed": 0,
+      "archive": "/Users/filippofocaccia/Desktop/hippo/reports/mni_shared_cap3_headroom_lr_refine_20261107/runs/MNI_basic_unet16_f0s0",
+      "archive_manifest_sha256": "759c2435b172024ee0e78504a3684731f979ae590ca1da2b2e11decbb3a836c5",
+      "training_dice": 0.8748659403908572,
+      "validation_dice": 0.6764473018747913,
+      "original_protocol_sha256": "327475b047c85a1310868061c6e503076b7d20ebf40280ea877071adcfcef208"
+    }
+  ],
+  "primary_result": "Final-budget bands validation Dice minus matching baseline Dice, in percentage points",
+  "secondary_results": [
+    "training Dice and train/validation gap",
+    "matched-FLOP curves",
+    "subfield Dice and FN/FP/confusion diagnostics"
+  ],
+  "cleanup": "Archive and verify metrics/source/config/logs before deleting each completed run\u2019s checkpoints",
+  "job_id": "744414",
+  "dependency": "744210"
+}

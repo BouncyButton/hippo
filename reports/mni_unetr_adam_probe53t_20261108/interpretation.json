@@ -1,0 +1,34 @@
+{
+  "status": "verified_observational_diagnosis",
+  "replays": [
+    {
+      "seed": 0,
+      "fold": 0,
+      "dice": 71.30146755191062,
+      "exact_replay": true,
+      "max_virtual_error": 0.0,
+      "median_adam_effect_percent": 1.6564545743717887
+    },
+    {
+      "seed": 0,
+      "fold": 1,
+      "dice": 69.51471602611292,
+      "exact_replay": true,
+      "max_virtual_error": 0.0,
+      "median_adam_effect_percent": 1.7156784833924508
+    }
+  ],
+  "findings": [
+    "Complete calibration, all metric checkpoints, final model SHA and final evaluation exactly match archived constrained runs.",
+    "No base-loss ascent predicted in sampled full-strength updates.",
+    "Logit gradients stay near5% target; median Adam update perturbation about1.7% in both helped and harmed folds.",
+    "CA4 conflicts occur at isolated probes in both runs; no universal late CA4 conflict or optimizer failure identified."
+  ],
+  "next": "Test finite constraint windows with unchanged definitions and base recipe; hypothesized effect on generalization, not proven root cause.",
+  "limits": [
+    "No optimizer or constraint intervention was tested here.",
+    "Only exact reference replays are accepted as observational evidence.",
+    "Same-state virtual base-only updates retain constrained history and are not an unconstrained training run.",
+    "Diagnostics add separately reported compute; do not count these as new cap-matched performance candidates."
+  ]
+}

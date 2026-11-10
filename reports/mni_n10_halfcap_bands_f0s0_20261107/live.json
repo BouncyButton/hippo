@@ -1,0 +1,175 @@
+{
+  "status.json": {
+    "status": "complete",
+    "active": null,
+    "completed": 6,
+    "total": 6,
+    "runs": [
+      {
+        "id": "MNI_swinunetr_n10_baseline_f0s0",
+        "kind": "conventional",
+        "dataset": "MNI",
+        "model": "swinunetr",
+        "arm": "dice",
+        "fold": 0,
+        "seed": 0,
+        "protocol": "swinunetr_n10_baseline",
+        "condition": "baseline",
+        "train_subjects": 10,
+        "augmentation": "xy_d4_v1",
+        "target": null,
+        "final_dice": 0.7057985783223228,
+        "best_dice": 0.7080353301855424,
+        "released_bytes": 336999252
+      },
+      {
+        "id": "MNI_unetr_vit_b16_n10_baseline_f0s0",
+        "kind": "conventional",
+        "dataset": "MNI",
+        "model": "unetr_vit_b16",
+        "arm": "dice",
+        "fold": 0,
+        "seed": 0,
+        "protocol": "unetr_vit_b16_n10_baseline",
+        "condition": "baseline",
+        "train_subjects": 10,
+        "augmentation": "xy_d4_v1",
+        "target": null,
+        "final_dice": 0.6333840888349285,
+        "best_dice": 0.6333840888349285,
+        "released_bytes": 1853960414
+      },
+      {
+        "id": "MNI_swinunetr_n10_original_bands_f0s0",
+        "kind": "conventional",
+        "dataset": "MNI",
+        "model": "swinunetr",
+        "arm": "dice_bands",
+        "fold": 0,
+        "seed": 0,
+        "protocol": "swinunetr_n10_original_bands",
+        "condition": "original_bands",
+        "train_subjects": 10,
+        "augmentation": "xy_d4_v1",
+        "target": 0.1,
+        "final_dice": 0.7374640577159661,
+        "best_dice": 0.7374640577159661,
+        "released_bytes": 336993428
+      },
+      {
+        "id": "MNI_unetr_vit_b16_n10_original_bands_f0s0",
+        "kind": "conventional",
+        "dataset": "MNI",
+        "model": "unetr_vit_b16",
+        "arm": "dice_bands",
+        "fold": 0,
+        "seed": 0,
+        "protocol": "unetr_vit_b16_n10_original_bands",
+        "condition": "original_bands",
+        "train_subjects": 10,
+        "augmentation": "xy_d4_v1",
+        "target": 0.05,
+        "final_dice": 0.6544693091761871,
+        "best_dice": 0.6544693091761871,
+        "released_bytes": 1853960542
+      },
+      {
+        "id": "MNI_swinunetr_n10_adaptive_f0s0",
+        "kind": "conventional",
+        "dataset": "MNI",
+        "model": "swinunetr",
+        "arm": "dice_bands",
+        "fold": 0,
+        "seed": 0,
+        "protocol": "swinunetr_n10_adaptive",
+        "condition": "adaptive",
+        "train_subjects": 10,
+        "augmentation": "xy_d4_v1",
+        "target": 0.1,
+        "final_dice": 0.7428099241336241,
+        "best_dice": 0.7428099241336241,
+        "released_bytes": 336993428
+      },
+      {
+        "id": "MNI_unetr_vit_b16_n10_adaptive_f0s0",
+        "kind": "conventional",
+        "dataset": "MNI",
+        "model": "unetr_vit_b16",
+        "arm": "dice_bands",
+        "fold": 0,
+        "seed": 0,
+        "protocol": "unetr_vit_b16_n10_adaptive",
+        "condition": "adaptive",
+        "train_subjects": 10,
+        "augmentation": "xy_d4_v1",
+        "target": 0.05,
+        "final_dice": 0.643291137965459,
+        "best_dice": 0.6434967731527996,
+        "released_bytes": 1853966494
+      }
+    ],
+    "job_id": "745229",
+    "updated_at": 1794077133.1679406,
+    "quota": {
+      "used_gib": 47.85,
+      "limit_gib": 93.13,
+      "free_gib": 45.279999999999994,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  47.85GiB/93.13GiB  368.47k/\u221e  \n\n",
+      "checked_at": 1794077133.2067852
+    }
+  },
+  "submission.json": {
+    "job_id": "745229",
+    "dependency": null,
+    "quota": {
+      "used_gib": 44.14,
+      "limit_gib": 93.13,
+      "free_gib": 48.989999999999995,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  44.14GiB/93.13GiB  367.97k/\u221e  \n\n",
+      "checked_at": 1794076216.620735
+    },
+    "submitted_at": 1794076216.836556,
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--chdir=/mnt/beegfsstudents/home/3160552/mni_n10_halfcap_bands_f0s0_20261107",
+      "--output=/mnt/beegfsstudents/home/3160552/mni_n10_halfcap_bands_f0s0_20261107/slurm-%j.out",
+      "--error=/mnt/beegfsstudents/home/3160552/mni_n10_halfcap_bands_f0s0_20261107/slurm-%j.err",
+      "/mnt/beegfsstudents/home/3160552/mni_n10_halfcap_bands_f0s0_20261107/run.sbatch",
+      "/mnt/beegfsstudents/home/3160552/mni_n10_halfcap_bands_f0s0_20261107"
+    ],
+    "manifest_sha256": "e2197a15171ac4515ddeb61682f13cef5b7942a1b1f92faef217e4e9b93955af"
+  },
+  "successor.json": {
+    "job_id": "745230",
+    "dependency": "745229",
+    "quota": {
+      "used_gib": 44.14,
+      "limit_gib": 93.13,
+      "free_gib": 48.989999999999995,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  44.14GiB/93.13GiB  367.97k/\u221e  \n\n",
+      "checked_at": 1794076229.2908642
+    },
+    "submitted_at": 1794076229.4106786,
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--chdir=/mnt/beegfsstudents/home/3160552/mni_n10_halfcap_bands_f0s0_20261107",
+      "--output=/mnt/beegfsstudents/home/3160552/mni_n10_halfcap_bands_f0s0_20261107/slurm-%j.out",
+      "--error=/mnt/beegfsstudents/home/3160552/mni_n10_halfcap_bands_f0s0_20261107/slurm-%j.err",
+      "--dependency=afterany:745229",
+      "/mnt/beegfsstudents/home/3160552/mni_n10_halfcap_bands_f0s0_20261107/run.sbatch",
+      "/mnt/beegfsstudents/home/3160552/mni_n10_halfcap_bands_f0s0_20261107"
+    ],
+    "manifest_sha256": "e2197a15171ac4515ddeb61682f13cef5b7942a1b1f92faef217e4e9b93955af"
+  },
+  "ready": [],
+  "cleanup": [
+    "runs/MNI_swinunetr_n10_original_bands_f0s0/cleanup.json",
+    "runs/MNI_unetr_vit_b16_n10_original_bands_f0s0/cleanup.json",
+    "runs/MNI_swinunetr_n10_baseline_f0s0/cleanup.json",
+    "runs/MNI_unetr_vit_b16_n10_baseline_f0s0/cleanup.json",
+    "runs/MNI_swinunetr_n10_adaptive_f0s0/cleanup.json",
+    "runs/MNI_unetr_vit_b16_n10_adaptive_f0s0/cleanup.json"
+  ]
+}

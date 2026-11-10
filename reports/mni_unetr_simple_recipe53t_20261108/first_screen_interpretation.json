@@ -1,0 +1,94 @@
+{
+  "status": "first_pair_complete_not_goal_complete",
+  "pair": [
+    0,
+    1
+  ],
+  "cell_values": [
+    {
+      "base": "original",
+      "arm": "dice",
+      "dice": 70.08334593194158,
+      "training": 73.93952272295873
+    },
+    {
+      "base": "original",
+      "arm": "dice_bands",
+      "dice": 69.51471602611292,
+      "training": 74.0214981408118
+    },
+    {
+      "base": "original",
+      "arm": "dice_bands_edge_sdf_depth",
+      "dice": 70.050881095687,
+      "training": 73.74898823304609
+    },
+    {
+      "base": "noaug",
+      "arm": "dice",
+      "dice": 73.60292775545713,
+      "training": 88.97659603920532
+    },
+    {
+      "base": "noaug",
+      "arm": "dice_bands",
+      "dice": 73.83282751104862,
+      "training": 89.23559111369025
+    },
+    {
+      "base": "noaug",
+      "arm": "dice_bands_edge_sdf_depth",
+      "dice": 73.95515417058249,
+      "training": 89.33668990868779
+    },
+    {
+      "base": "nodrop",
+      "arm": "dice",
+      "dice": 69.15125406867838,
+      "training": 74.21421366767828
+    },
+    {
+      "base": "nodrop",
+      "arm": "dice_bands",
+      "dice": 69.73741641809465,
+      "training": 73.81577710042902
+    },
+    {
+      "base": "nodrop",
+      "arm": "dice_bands_edge_sdf_depth",
+      "dice": 69.29000914571071,
+      "training": 74.13993752331625
+    },
+    {
+      "base": "plain",
+      "arm": "dice",
+      "dice": 73.80486797844125,
+      "training": 89.35640764073176
+    },
+    {
+      "base": "plain",
+      "arm": "dice_bands",
+      "dice": 73.78265357941062,
+      "training": 89.51599250784096
+    },
+    {
+      "base": "plain",
+      "arm": "dice_bands_edge_sdf_depth",
+      "dice": 74.01101575128595,
+      "training": 89.72717697188293
+    }
+  ],
+  "findings": [
+    "Augmentation removal improves first-pair baseline at both dropout settings by3.52and4.65pp. Removing dropout alone reduces its baseline by0.93pp.",
+    "Five of six changed-base constraint candidates improve their own first-pair controls; plain bands is down0.022pp and rejected under the predeclared strict rule.",
+    "Noaug and plain constrained models improve absolute Dice strongly on this pair. Nodrop constrained models improve a weaker control but remain below the old absolute baseline.",
+    "Saved eval-mode logit probes show modest late changes in the band/base gradient ratio, not a monotonic relation with validation gain. They are not actual Adam-update measurements.",
+    "Noaug baseline on seed0fold2 is76.160558173 versus old70.137516551; its constraint comparisons are still running."
+  ],
+  "caveats": [
+    "One completed factorial development pair; two noaug baselines. Consistency across9pairs is not established.",
+    "Macro gains need not improve every subfield; retain class-specific effects. A smaller train/validation gap was not associated with the better absolute baseline in the first pair.",
+    "Results concern this409-update53.305Tcap; do not infer that augmentation is generally harmful at longer budgets."
+  ],
+  "factorial_source_sha256": "48145dd7bba52cc6ea1a7c6f74d9c5aaeba720fad02a021c95f61a511dd5b8a5"
+}

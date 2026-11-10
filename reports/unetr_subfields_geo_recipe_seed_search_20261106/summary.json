@@ -1,0 +1,233 @@
+{
+  "status": "complete",
+  "outcome": "target_met",
+  "active": null,
+  "completed": 10,
+  "runs": [
+    {
+      "dataset": "COBRA",
+      "objective": "dice_ce",
+      "seed": 0,
+      "fold": 0,
+      "final_dice": 0.09715193949581784,
+      "whole_hippocampus_dice": 0.5080397885062082,
+      "best_dice": 0.09715193949581784,
+      "updates": 164,
+      "consumed_training_flops": 31975193644292,
+      "foreground_fn": 15581,
+      "foreground_fp": 1449,
+      "released_file_bytes": 1854441630
+    },
+    {
+      "dataset": "COBRA",
+      "objective": "dice_ce",
+      "seed": 0,
+      "fold": 1,
+      "final_dice": 0.09268399066747388,
+      "whole_hippocampus_dice": 0.4881418602608284,
+      "best_dice": 0.09268399066747388,
+      "updates": 164,
+      "consumed_training_flops": 31975193644292,
+      "foreground_fn": 15762,
+      "foreground_fp": 5424,
+      "released_file_bytes": 1854441630
+    },
+    {
+      "dataset": "MNI",
+      "objective": "dice_ce",
+      "seed": 0,
+      "fold": 0,
+      "final_dice": 0.618486978524162,
+      "whole_hippocampus_dice": 0.7297201172850822,
+      "best_dice": 0.6195242838553912,
+      "updates": 245,
+      "consumed_training_flops": 31878358779155,
+      "foreground_fn": 14124,
+      "foreground_fp": 10616,
+      "released_file_bytes": 1853957534
+    },
+    {
+      "dataset": "MNI",
+      "objective": "dice_ce",
+      "seed": 1,
+      "fold": 0,
+      "final_dice": 0.5547829077757529,
+      "whole_hippocampus_dice": 0.7066675545302653,
+      "best_dice": 0.5705523990969752,
+      "updates": 245,
+      "consumed_training_flops": 31878358779155,
+      "foreground_fn": 14893,
+      "foreground_fp": 12229,
+      "released_file_bytes": 1853957534
+    },
+    {
+      "dataset": "MNI",
+      "objective": "dice_ce",
+      "seed": 2,
+      "fold": 0,
+      "final_dice": 0.6660498939603477,
+      "whole_hippocampus_dice": 0.7805543273693093,
+      "best_dice": 0.6660498939603477,
+      "updates": 245,
+      "consumed_training_flops": 31878358779155,
+      "foreground_fn": 9768,
+      "foreground_fp": 11502,
+      "released_file_bytes": 1853951518
+    },
+    {
+      "dataset": "MNI",
+      "objective": "dice_ce",
+      "seed": 0,
+      "fold": 1,
+      "final_dice": 0.6219785986082242,
+      "whole_hippocampus_dice": 0.7484917560423392,
+      "best_dice": 0.6219785986082242,
+      "updates": 245,
+      "consumed_training_flops": 31878358779155,
+      "foreground_fn": 10495,
+      "foreground_fp": 13675,
+      "released_file_bytes": 1853951518
+    },
+    {
+      "dataset": "MNI",
+      "objective": "dice_ce",
+      "seed": 1,
+      "fold": 1,
+      "final_dice": 0.5937126724745794,
+      "whole_hippocampus_dice": 0.7577551575270917,
+      "best_dice": 0.5990768050076615,
+      "updates": 245,
+      "consumed_training_flops": 31878358779155,
+      "foreground_fn": 9199,
+      "foreground_fp": 14330,
+      "released_file_bytes": 1853957534
+    },
+    {
+      "dataset": "MNI",
+      "objective": "dice_ce",
+      "seed": 2,
+      "fold": 1,
+      "final_dice": 0.5857332161594815,
+      "whole_hippocampus_dice": 0.7809262704794631,
+      "best_dice": 0.6518968622431305,
+      "updates": 245,
+      "consumed_training_flops": 31878358779155,
+      "foreground_fn": 9683,
+      "foreground_fp": 10864,
+      "released_file_bytes": 1853957534
+    },
+    {
+      "dataset": "MNI",
+      "objective": "dice_ce",
+      "seed": 0,
+      "fold": 2,
+      "final_dice": 0.6065579278511982,
+      "whole_hippocampus_dice": 0.7567232350833907,
+      "best_dice": 0.6270855775387043,
+      "updates": 245,
+      "consumed_training_flops": 31878358779155,
+      "foreground_fn": 10488,
+      "foreground_fp": 11904,
+      "released_file_bytes": 1853957534
+    },
+    {
+      "dataset": "MNI",
+      "objective": "dice_ce",
+      "seed": 1,
+      "fold": 2,
+      "final_dice": 0.6146575109741633,
+      "whole_hippocampus_dice": 0.746630352145628,
+      "best_dice": 0.6146575109741633,
+      "updates": 245,
+      "consumed_training_flops": 31878358779155,
+      "foreground_fn": 7323,
+      "foreground_fp": 18520,
+      "released_file_bytes": 1853951518
+    }
+  ],
+  "threshold": 0.45,
+  "criterion": "Mean final-budget foreground-subfield Dice over folds 0,1,2",
+  "groups": {
+    "MNI": {
+      "qualifying_seeds": [
+        0,
+        1
+      ],
+      "target": 3,
+      "target_met": false,
+      "attempted_seeds": [
+        {
+          "seed": 0,
+          "fold_dice": {
+            "0": 0.618486978524162,
+            "1": 0.6219785986082242,
+            "2": 0.6065579278511982
+          },
+          "mean_dice": 0.6156745016611949,
+          "qualifies": true,
+          "rejected_by_upper_bound": false,
+          "best_possible_mean": 0.6156745016611946
+        },
+        {
+          "seed": 1,
+          "fold_dice": {
+            "0": 0.5547829077757529,
+            "1": 0.5937126724745794,
+            "2": 0.6146575109741633
+          },
+          "mean_dice": 0.5877176970748319,
+          "qualifies": true,
+          "rejected_by_upper_bound": false,
+          "best_possible_mean": 0.5877176970748318
+        },
+        {
+          "seed": 2,
+          "fold_dice": {
+            "0": 0.6660498939603477,
+            "1": 0.5857332161594815
+          },
+          "mean_dice": null,
+          "qualifies": false,
+          "rejected_by_upper_bound": false,
+          "best_possible_mean": 0.7505943700399431
+        }
+      ]
+    },
+    "COBRA": {
+      "qualifying_seeds": [],
+      "target": 3,
+      "target_met": false,
+      "attempted_seeds": [
+        {
+          "seed": 0,
+          "fold_dice": {
+            "0": 0.09715193949581784,
+            "1": 0.09268399066747388
+          },
+          "mean_dice": null,
+          "qualifies": false,
+          "rejected_by_upper_bound": true,
+          "best_possible_mean": 0.3966119767210972
+        }
+      ]
+    }
+  },
+  "active_datasets": [
+    "MNI"
+  ],
+  "deferred_datasets": [
+    "COBRA"
+  ],
+  "target_met": false,
+  "inference": "Validation-selected exploratory seeds; these scores are not an unbiased baseline estimate.",
+  "released_file_bytes": 18540525484,
+  "last_observed_quota": {
+    "used_gib": 45.56,
+    "limit_gib": 93.13,
+    "free_gib": 47.56999999999999,
+    "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  45.56GiB/93.13GiB  305.52k/\u221e  \n\n",
+    "checked_at": 1793985084.000528
+  },
+  "source_sha256": "0538c775450a75f9b863a2a9063eba34ca0dcd5f7f10c0282c6e89b9c2b06b35",
+  "updated_at": 1793985103.564085
+}

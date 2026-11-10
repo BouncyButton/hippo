@@ -1,0 +1,984 @@
+{
+  "status": "complete",
+  "phase": "pilot",
+  "budget_flops": 63952901334180,
+  "rows": [
+    {
+      "id": "MNI_swinunetr_n10_baseline_f0s0",
+      "kind": "conventional",
+      "dataset": "MNI",
+      "model": "swinunetr",
+      "arm": "dice",
+      "fold": 0,
+      "seed": 0,
+      "protocol": "swinunetr_n10_baseline",
+      "condition": "baseline",
+      "train_subjects": 10,
+      "augmentation": "xy_d4_v1",
+      "target": null,
+      "scores": {
+        "validation": {
+          "macro_hard_dice": 0.7704101418023044,
+          "CA1_3_hard_dice": 0.7813041387765062,
+          "CA1_3_soft_dice": 0.3275417387485504,
+          "subiculum_hard_dice": 0.7531960818016997,
+          "subiculum_soft_dice": 0.17379167824983596,
+          "CA4_DG_hard_dice": 0.7767302048287071,
+          "CA4_DG_soft_dice": 0.13958705365657806,
+          "macro_soft_dice": 0.2136401568849881,
+          "whole_hippocampus_hard_dice": 0.863640853848753
+        },
+        "training": {
+          "macro_hard_dice": 0.793979364490808,
+          "CA1_3_hard_dice": 0.7997667997942444,
+          "CA1_3_soft_dice": 0.32772969752550124,
+          "subiculum_hard_dice": 0.76625837636012,
+          "subiculum_soft_dice": 0.17921584621071815,
+          "CA4_DG_hard_dice": 0.8159129173180595,
+          "CA4_DG_soft_dice": 0.1518672738224268,
+          "macro_soft_dice": 0.21960427251954875,
+          "whole_hippocampus_hard_dice": 0.8765328806904835
+        },
+        "fn": 5830,
+        "fp": 7401,
+        "internal_swaps": 4420
+      },
+      "curve": [
+        {
+          "compute_fraction": 0.050916052035245025,
+          "estimated_training_flops": 3256229252136.0,
+          "training_macro_hard_dice": 0.07263005155599578,
+          "macro_hard_dice": 0.07326733852107725,
+          "patient_passes": 1.05,
+          "learning_rate": 0.0003
+        },
+        {
+          "compute_fraction": 0.10183210407049005,
+          "estimated_training_flops": 6512458504272.0,
+          "training_macro_hard_dice": 0.2038174724070409,
+          "macro_hard_dice": 0.19920301684927377,
+          "patient_passes": 2.1,
+          "learning_rate": 0.0003
+        },
+        {
+          "compute_fraction": 0.15032358219929484,
+          "estimated_training_flops": 9613629220592.0,
+          "training_macro_hard_dice": 0.36354960234323763,
+          "macro_hard_dice": 0.3751585326807286,
+          "patient_passes": 3.1,
+          "learning_rate": 0.0003
+        },
+        {
+          "compute_fraction": 0.20123963423453986,
+          "estimated_training_flops": 12869858472728.0,
+          "training_macro_hard_dice": 0.43568361734428346,
+          "macro_hard_dice": 0.43470107972287797,
+          "patient_passes": 4.15,
+          "learning_rate": 0.0003
+        },
+        {
+          "compute_fraction": 0.2521556862697849,
+          "estimated_training_flops": 16126087724864.0,
+          "training_macro_hard_dice": 0.5910276703074094,
+          "macro_hard_dice": 0.5938852838907841,
+          "patient_passes": 5.2,
+          "learning_rate": 0.0003
+        },
+        {
+          "compute_fraction": 0.3006471643985897,
+          "estimated_training_flops": 19227258441184.0,
+          "training_macro_hard_dice": 0.6618437991644845,
+          "macro_hard_dice": 0.6566537038725481,
+          "patient_passes": 6.2,
+          "learning_rate": 0.0003
+        },
+        {
+          "compute_fraction": 0.3515632164338347,
+          "estimated_training_flops": 22483487693320.0,
+          "training_macro_hard_dice": 0.6365499442177391,
+          "macro_hard_dice": 0.6365156428982627,
+          "patient_passes": 7.25,
+          "learning_rate": 0.0003
+        },
+        {
+          "compute_fraction": 0.4000546945626395,
+          "estimated_training_flops": 25584658409640.0,
+          "training_macro_hard_dice": 0.6900285510265253,
+          "macro_hard_dice": 0.6979140628527786,
+          "patient_passes": 8.25,
+          "learning_rate": 0.0003
+        },
+        {
+          "compute_fraction": 0.45097074659788455,
+          "estimated_training_flops": 28840887661776.0,
+          "training_macro_hard_dice": 0.6838982863644765,
+          "macro_hard_dice": 0.6721197342321105,
+          "patient_passes": 9.3,
+          "learning_rate": 0.0003
+        },
+        {
+          "compute_fraction": 0.5018867986331296,
+          "estimated_training_flops": 32097116913912.0,
+          "training_macro_hard_dice": 0.7297312395323011,
+          "macro_hard_dice": 0.7292133845163263,
+          "patient_passes": 10.35,
+          "learning_rate": 0.0003
+        },
+        {
+          "compute_fraction": 0.5503782767619343,
+          "estimated_training_flops": 35198287630232.0,
+          "training_macro_hard_dice": 0.7066354413673963,
+          "macro_hard_dice": 0.7030100363969412,
+          "patient_passes": 11.35,
+          "learning_rate": 0.00029307936422015714
+        },
+        {
+          "compute_fraction": 0.6012943287971794,
+          "estimated_training_flops": 38454516882368.0,
+          "training_macro_hard_dice": 0.7433599567951077,
+          "macro_hard_dice": 0.7486961004109279,
+          "patient_passes": 12.4,
+          "learning_rate": 0.00027163902366467965
+        },
+        {
+          "compute_fraction": 0.6522103808324244,
+          "estimated_training_flops": 41710746134504.0,
+          "training_macro_hard_dice": 0.7598865496507171,
+          "macro_hard_dice": 0.7525498068573703,
+          "patient_passes": 13.45,
+          "learning_rate": 0.0002378630007939021
+        },
+        {
+          "compute_fraction": 0.7007018589612292,
+          "estimated_training_flops": 44811916850824.0,
+          "training_macro_hard_dice": 0.7607387089825826,
+          "macro_hard_dice": 0.7433131504647259,
+          "patient_passes": 14.45,
+          "learning_rate": 0.00019738902366467966
+        },
+        {
+          "compute_fraction": 0.7516179109964742,
+          "estimated_training_flops": 48068146102960.0,
+          "training_macro_hard_dice": 0.771110793231046,
+          "macro_hard_dice": 0.7479491465377254,
+          "patient_passes": 15.5,
+          "learning_rate": 0.0001503621416002442
+        },
+        {
+          "compute_fraction": 0.800109389125279,
+          "estimated_training_flops": 51169316819280.0,
+          "training_macro_hard_dice": 0.777301513430858,
+          "macro_hard_dice": 0.7507687498282214,
+          "patient_passes": 16.5,
+          "learning_rate": 0.0001056109763353203
+        },
+        {
+          "compute_fraction": 0.851025441160524,
+          "estimated_training_flops": 54425546071416.0,
+          "training_macro_hard_dice": 0.7822546659614316,
+          "macro_hard_dice": 0.7556199792552574,
+          "patient_passes": 17.55,
+          "learning_rate": 6.32959056409085e-05
+        },
+        {
+          "compute_fraction": 0.9019414931957691,
+          "estimated_training_flops": 57681775323552.0,
+          "training_macro_hard_dice": 0.7906963773637832,
+          "macro_hard_dice": 0.7721485162667878,
+          "patient_passes": 18.6,
+          "learning_rate": 3.0037489926142424e-05
+        },
+        {
+          "compute_fraction": 0.9504329713245738,
+          "estimated_training_flops": 60782946039872.0,
+          "training_macro_hard_dice": 0.7940013449556227,
+          "macro_hard_dice": 0.7708359548942821,
+          "patient_passes": 19.6,
+          "learning_rate": 9.920635779842813e-06
+        },
+        {
+          "compute_fraction": 0.9989244494533787,
+          "estimated_training_flops": 63884116756192.0,
+          "training_macro_hard_dice": 0.793979364490808,
+          "macro_hard_dice": 0.7704101418023044,
+          "patient_passes": 20.6,
+          "learning_rate": 2.9999999999999997e-06
+        }
+      ],
+      "reused_pilot_baseline": false,
+      "train_val_gap_pp": 2.356922268850359,
+      "last_quarter_train_change_pp": 2.286857125976194,
+      "last_quarter_val_change_pp": 2.246099526457901,
+      "final_vs_best_val_pp": -0.17383744644834387,
+      "archive_manifest_sha256": "8cfba00d266171343ba1f559528f720e2b557c7d67f80cc1ee0d0f74f8a3549a"
+    },
+    {
+      "id": "MNI_unetr_vit_b16_n10_baseline_f0s0",
+      "kind": "conventional",
+      "dataset": "MNI",
+      "model": "unetr_vit_b16",
+      "arm": "dice",
+      "fold": 0,
+      "seed": 0,
+      "protocol": "unetr_vit_b16_n10_baseline",
+      "condition": "baseline",
+      "train_subjects": 10,
+      "augmentation": "xy_d4_v1",
+      "target": null,
+      "scores": {
+        "validation": {
+          "macro_hard_dice": 0.7206587264399736,
+          "CA1_3_hard_dice": 0.6991314659619016,
+          "CA1_3_soft_dice": 0.3380003869533539,
+          "subiculum_hard_dice": 0.7197584467458,
+          "subiculum_soft_dice": 0.29534909427165984,
+          "CA4_DG_hard_dice": 0.7430862666122197,
+          "CA4_DG_soft_dice": 0.2370579421520233,
+          "macro_soft_dice": 0.2901358077923457,
+          "whole_hippocampus_hard_dice": 0.8109759120078607
+        },
+        "training": {
+          "macro_hard_dice": 0.7510060477161167,
+          "CA1_3_hard_dice": 0.7425411623980928,
+          "CA1_3_soft_dice": 0.3492382675409317,
+          "subiculum_hard_dice": 0.7392964133009314,
+          "subiculum_soft_dice": 0.3118063986301422,
+          "CA4_DG_hard_dice": 0.7711805674493262,
+          "CA4_DG_soft_dice": 0.25549096539616584,
+          "macro_soft_dice": 0.3055118771890799,
+          "whole_hippocampus_hard_dice": 0.8555927875557572
+        },
+        "fn": 9925,
+        "fp": 7698,
+        "internal_swaps": 4725
+      },
+      "curve": [
+        {
+          "compute_fraction": 0.05086389647871178,
+          "estimated_training_flops": 3252893752975.0,
+          "training_macro_hard_dice": 0.0347022799341732,
+          "macro_hard_dice": 0.03435325458973635,
+          "patient_passes": 1.25,
+          "learning_rate": 0.0006
+        },
+        {
+          "compute_fraction": 0.10172779295742355,
+          "estimated_training_flops": 6505787505950.0,
+          "training_macro_hard_dice": 0.14233665090500952,
+          "macro_hard_dice": 0.1403690596977226,
+          "patient_passes": 2.5,
+          "learning_rate": 0.0006
+        },
+        {
+          "compute_fraction": 0.15055713357698686,
+          "estimated_training_flops": 9628565508806.0,
+          "training_macro_hard_dice": 0.32435488041380733,
+          "macro_hard_dice": 0.3118817563134212,
+          "patient_passes": 3.7,
+          "learning_rate": 0.0006
+        },
+        {
+          "compute_fraction": 0.20142103005569864,
+          "estimated_training_flops": 12881459261781.0,
+          "training_macro_hard_dice": 0.4780668608683835,
+          "macro_hard_dice": 0.46579390921041314,
+          "patient_passes": 4.95,
+          "learning_rate": 0.0006
+        },
+        {
+          "compute_fraction": 0.25025037067526196,
+          "estimated_training_flops": 16004237264637.0,
+          "training_macro_hard_dice": 0.49552796554285106,
+          "macro_hard_dice": 0.4909077593842673,
+          "patient_passes": 6.15,
+          "learning_rate": 0.0006
+        },
+        {
+          "compute_fraction": 0.3011142671539737,
+          "estimated_training_flops": 19257131017612.0,
+          "training_macro_hard_dice": 0.5433017409331884,
+          "macro_hard_dice": 0.5379775213734859,
+          "patient_passes": 7.4,
+          "learning_rate": 0.0006
+        },
+        {
+          "compute_fraction": 0.3519781636326855,
+          "estimated_training_flops": 22510024770587.0,
+          "training_macro_hard_dice": 0.6007342093332884,
+          "macro_hard_dice": 0.5825969804166609,
+          "patient_passes": 8.65,
+          "learning_rate": 0.0006
+        },
+        {
+          "compute_fraction": 0.4008075042522488,
+          "estimated_training_flops": 25632802773443.0,
+          "training_macro_hard_dice": 0.6429394924157932,
+          "macro_hard_dice": 0.6346961696209789,
+          "patient_passes": 9.85,
+          "learning_rate": 0.0006
+        },
+        {
+          "compute_fraction": 0.4516714007309606,
+          "estimated_training_flops": 28885696526418.0,
+          "training_macro_hard_dice": 0.6384289670635479,
+          "macro_hard_dice": 0.6162829608452159,
+          "patient_passes": 11.1,
+          "learning_rate": 0.0006
+        },
+        {
+          "compute_fraction": 0.5005007413505239,
+          "estimated_training_flops": 32008474529274.0,
+          "training_macro_hard_dice": 0.6468136856389429,
+          "macro_hard_dice": 0.6303393701206979,
+          "patient_passes": 12.3,
+          "learning_rate": 0.0006
+        },
+        {
+          "compute_fraction": 0.5513646378292357,
+          "estimated_training_flops": 35261368282249.0,
+          "training_macro_hard_dice": 0.6730170603556591,
+          "macro_hard_dice": 0.6490226030819656,
+          "patient_passes": 13.55,
+          "learning_rate": 0.0005848695568621685
+        },
+        {
+          "compute_fraction": 0.600193978448799,
+          "estimated_training_flops": 38384146285105.0,
+          "training_macro_hard_dice": 0.6846407445450933,
+          "macro_hard_dice": 0.6669382372662078,
+          "patient_passes": 14.75,
+          "learning_rate": 0.0005432780473293593
+        },
+        {
+          "compute_fraction": 0.6510578749275108,
+          "estimated_training_flops": 41637040038080.0,
+          "training_macro_hard_dice": 0.677365051360433,
+          "macro_hard_dice": 0.6736854178199714,
+          "patient_passes": 16.0,
+          "learning_rate": 0.00047602812055958757
+        },
+        {
+          "compute_fraction": 0.7019217714062226,
+          "estimated_training_flops": 44889933791055.0,
+          "training_macro_hard_dice": 0.7033839533957417,
+          "macro_hard_dice": 0.6679403713074749,
+          "patient_passes": 17.25,
+          "learning_rate": 0.00039114861709370357
+        },
+        {
+          "compute_fraction": 0.7507511120257859,
+          "estimated_training_flops": 48012711793911.0,
+          "training_macro_hard_dice": 0.7218189404740184,
+          "macro_hard_dice": 0.6986249540256125,
+          "patient_passes": 18.45,
+          "learning_rate": 0.0003010958232127586
+        },
+        {
+          "compute_fraction": 0.8016150085044976,
+          "estimated_training_flops": 51265605546886.0,
+          "training_macro_hard_dice": 0.7351378495517362,
+          "macro_hard_dice": 0.6973755388272009,
+          "patient_passes": 19.7,
+          "learning_rate": 0.00020760761282412926
+        },
+        {
+          "compute_fraction": 0.850444349124061,
+          "estimated_training_flops": 54388383549742.0,
+          "training_macro_hard_dice": 0.7339291587475868,
+          "macro_hard_dice": 0.7000557548185534,
+          "patient_passes": 20.9,
+          "learning_rate": 0.00012689085667806735
+        },
+        {
+          "compute_fraction": 0.9013082456027728,
+          "estimated_training_flops": 57641277302717.0,
+          "training_macro_hard_dice": 0.7458361080630214,
+          "macro_hard_dice": 0.7138715101929666,
+          "patient_passes": 22.15,
+          "learning_rate": 6.0503258187747976e-05
+        },
+        {
+          "compute_fraction": 0.950137586222336,
+          "estimated_training_flops": 60764055305573.0,
+          "training_macro_hard_dice": 0.7504509813010525,
+          "macro_hard_dice": 0.7215543895933724,
+          "patient_passes": 23.35,
+          "learning_rate": 1.9953597162727708e-05
+        },
+        {
+          "compute_fraction": 0.9989669268418994,
+          "estimated_training_flops": 63886833308429.0,
+          "training_macro_hard_dice": 0.7510060477161167,
+          "macro_hard_dice": 0.7206587264399736,
+          "patient_passes": 24.55,
+          "learning_rate": 5.999999999999999e-06
+        }
+      ],
+      "reused_pilot_baseline": false,
+      "train_val_gap_pp": 3.0347321276143036,
+      "last_quarter_train_change_pp": 2.9187107242098276,
+      "last_quarter_val_change_pp": 2.203377241436111,
+      "final_vs_best_val_pp": -0.08956631533987292,
+      "archive_manifest_sha256": "ba26ee3ca69580694a3817450b7372c5f4e0a3abb8fd7e328d48a91e5f6ca94f"
+    },
+    {
+      "id": "MNI_swinunetr_n20_baseline_f0s0",
+      "kind": "conventional",
+      "dataset": "MNI",
+      "model": "swinunetr",
+      "arm": "dice",
+      "fold": 0,
+      "seed": 0,
+      "protocol": "swinunetr_n20_baseline",
+      "condition": "baseline",
+      "train_subjects": 20,
+      "augmentation": "xy_d4_v1",
+      "target": null,
+      "scores": {
+        "validation": {
+          "macro_hard_dice": 0.7716615067379535,
+          "CA1_3_hard_dice": 0.7809069945719292,
+          "CA1_3_soft_dice": 0.3246277004480362,
+          "subiculum_hard_dice": 0.7566779821752718,
+          "subiculum_soft_dice": 0.16887772530317308,
+          "CA4_DG_hard_dice": 0.7773995434666603,
+          "CA4_DG_soft_dice": 0.13469404354691505,
+          "macro_soft_dice": 0.20939982309937477,
+          "whole_hippocampus_hard_dice": 0.8602304534444342
+        },
+        "training": {
+          "macro_hard_dice": 0.7771568305681535,
+          "CA1_3_hard_dice": 0.7808277582644451,
+          "CA1_3_soft_dice": 0.3181364193558693,
+          "subiculum_hard_dice": 0.7486243710746593,
+          "subiculum_soft_dice": 0.16827128678560258,
+          "CA4_DG_hard_dice": 0.8020183623653562,
+          "CA4_DG_soft_dice": 0.1423525447025895,
+          "macro_soft_dice": 0.20958675028135382,
+          "whole_hippocampus_hard_dice": 0.8621324182714536
+        },
+        "fn": 5610,
+        "fp": 8084,
+        "internal_swaps": 4240
+      },
+      "curve": [
+        {
+          "compute_fraction": 0.050916052035245025,
+          "estimated_training_flops": 3256229252136.0,
+          "training_macro_hard_dice": 0.07022895743945198,
+          "macro_hard_dice": 0.07050522667682126,
+          "patient_passes": 0.525,
+          "learning_rate": 0.0003
+        },
+        {
+          "compute_fraction": 0.10183210407049005,
+          "estimated_training_flops": 6512458504272.0,
+          "training_macro_hard_dice": 0.17857003095279228,
+          "macro_hard_dice": 0.17444545531291458,
+          "patient_passes": 1.05,
+          "learning_rate": 0.0003
+        },
+        {
+          "compute_fraction": 0.15032358219929484,
+          "estimated_training_flops": 9613629220592.0,
+          "training_macro_hard_dice": 0.3341700277537703,
+          "macro_hard_dice": 0.33175988450623717,
+          "patient_passes": 1.55,
+          "learning_rate": 0.0003
+        },
+        {
+          "compute_fraction": 0.20123963423453986,
+          "estimated_training_flops": 12869858472728.0,
+          "training_macro_hard_dice": 0.4929911572740918,
+          "macro_hard_dice": 0.49698350485893383,
+          "patient_passes": 2.075,
+          "learning_rate": 0.0003
+        },
+        {
+          "compute_fraction": 0.2521556862697849,
+          "estimated_training_flops": 16126087724864.0,
+          "training_macro_hard_dice": 0.5346879201818133,
+          "macro_hard_dice": 0.5379307711419358,
+          "patient_passes": 2.6,
+          "learning_rate": 0.0003
+        },
+        {
+          "compute_fraction": 0.3006471643985897,
+          "estimated_training_flops": 19227258441184.0,
+          "training_macro_hard_dice": 0.6343275251955175,
+          "macro_hard_dice": 0.6409895068726159,
+          "patient_passes": 3.1,
+          "learning_rate": 0.0003
+        },
+        {
+          "compute_fraction": 0.3515632164338347,
+          "estimated_training_flops": 22483487693320.0,
+          "training_macro_hard_dice": 0.6498399578648217,
+          "macro_hard_dice": 0.6669605021872458,
+          "patient_passes": 3.625,
+          "learning_rate": 0.0003
+        },
+        {
+          "compute_fraction": 0.4000546945626395,
+          "estimated_training_flops": 25584658409640.0,
+          "training_macro_hard_dice": 0.7021169143952812,
+          "macro_hard_dice": 0.7007995511075424,
+          "patient_passes": 4.125,
+          "learning_rate": 0.0003
+        },
+        {
+          "compute_fraction": 0.45097074659788455,
+          "estimated_training_flops": 28840887661776.0,
+          "training_macro_hard_dice": 0.706327948067293,
+          "macro_hard_dice": 0.7112274918829238,
+          "patient_passes": 4.65,
+          "learning_rate": 0.0003
+        },
+        {
+          "compute_fraction": 0.5018867986331296,
+          "estimated_training_flops": 32097116913912.0,
+          "training_macro_hard_dice": 0.7187770961398636,
+          "macro_hard_dice": 0.7152473718163335,
+          "patient_passes": 5.175,
+          "learning_rate": 0.0003
+        },
+        {
+          "compute_fraction": 0.5503782767619343,
+          "estimated_training_flops": 35198287630232.0,
+          "training_macro_hard_dice": 0.7151958654904632,
+          "macro_hard_dice": 0.709149778696348,
+          "patient_passes": 5.675,
+          "learning_rate": 0.00029307936422015714
+        },
+        {
+          "compute_fraction": 0.6012943287971794,
+          "estimated_training_flops": 38454516882368.0,
+          "training_macro_hard_dice": 0.7368975859320381,
+          "macro_hard_dice": 0.7319869174064667,
+          "patient_passes": 6.2,
+          "learning_rate": 0.00027163902366467965
+        },
+        {
+          "compute_fraction": 0.6522103808324244,
+          "estimated_training_flops": 41710746134504.0,
+          "training_macro_hard_dice": 0.7486657930805547,
+          "macro_hard_dice": 0.7473527061387969,
+          "patient_passes": 6.725,
+          "learning_rate": 0.0002378630007939021
+        },
+        {
+          "compute_fraction": 0.7007018589612292,
+          "estimated_training_flops": 44811916850824.0,
+          "training_macro_hard_dice": 0.7380723511624894,
+          "macro_hard_dice": 0.7419662145885468,
+          "patient_passes": 7.225,
+          "learning_rate": 0.00019738902366467966
+        },
+        {
+          "compute_fraction": 0.7516179109964742,
+          "estimated_training_flops": 48068146102960.0,
+          "training_macro_hard_dice": 0.7479430391866095,
+          "macro_hard_dice": 0.7482833952875807,
+          "patient_passes": 7.75,
+          "learning_rate": 0.0001503621416002442
+        },
+        {
+          "compute_fraction": 0.800109389125279,
+          "estimated_training_flops": 51169316819280.0,
+          "training_macro_hard_dice": 0.7661466159454479,
+          "macro_hard_dice": 0.7594709175574087,
+          "patient_passes": 8.25,
+          "learning_rate": 0.0001056109763353203
+        },
+        {
+          "compute_fraction": 0.851025441160524,
+          "estimated_training_flops": 54425546071416.0,
+          "training_macro_hard_dice": 0.7697499258566429,
+          "macro_hard_dice": 0.7683726240403745,
+          "patient_passes": 8.775,
+          "learning_rate": 6.32959056409085e-05
+        },
+        {
+          "compute_fraction": 0.9019414931957691,
+          "estimated_training_flops": 57681775323552.0,
+          "training_macro_hard_dice": 0.7772184921174905,
+          "macro_hard_dice": 0.7694941213945092,
+          "patient_passes": 9.3,
+          "learning_rate": 3.0037489926142424e-05
+        },
+        {
+          "compute_fraction": 0.9504329713245738,
+          "estimated_training_flops": 60782946039872.0,
+          "training_macro_hard_dice": 0.777059493959946,
+          "macro_hard_dice": 0.7718363055174964,
+          "patient_passes": 9.8,
+          "learning_rate": 9.920635779842813e-06
+        },
+        {
+          "compute_fraction": 0.9989244494533787,
+          "estimated_training_flops": 63884116756192.0,
+          "training_macro_hard_dice": 0.7771568305681535,
+          "macro_hard_dice": 0.7716615067379535,
+          "patient_passes": 10.3,
+          "learning_rate": 2.9999999999999997e-06
+        }
+      ],
+      "reused_pilot_baseline": false,
+      "train_val_gap_pp": 0.5495323830200016,
+      "last_quarter_train_change_pp": 2.9213791381544008,
+      "last_quarter_val_change_pp": 2.337811145037283,
+      "final_vs_best_val_pp": -0.017479877954285072,
+      "archive_manifest_sha256": "d85a014952058bbc2c9bfd822b94358def49ab43553ea13a09aecb2af1e05449"
+    },
+    {
+      "id": "MNI_unetr_vit_b16_n20_baseline_f0s0",
+      "kind": "conventional",
+      "dataset": "MNI",
+      "model": "unetr_vit_b16",
+      "arm": "dice",
+      "fold": 0,
+      "seed": 0,
+      "protocol": "unetr_vit_b16_n20_baseline",
+      "condition": "baseline",
+      "train_subjects": 20,
+      "augmentation": "xy_d4_v1",
+      "target": null,
+      "scores": {
+        "validation": {
+          "macro_hard_dice": 0.7186606792390424,
+          "CA1_3_hard_dice": 0.6968687279516145,
+          "CA1_3_soft_dice": 0.3396458327770233,
+          "subiculum_hard_dice": 0.7187478387881355,
+          "subiculum_soft_dice": 0.30339708030223844,
+          "CA4_DG_hard_dice": 0.7403654709773771,
+          "CA4_DG_soft_dice": 0.23859860897064208,
+          "macro_soft_dice": 0.29388050734996796,
+          "whole_hippocampus_hard_dice": 0.8165218689961289
+        },
+        "training": {
+          "macro_hard_dice": 0.732596545206871,
+          "CA1_3_hard_dice": 0.7152371210406149,
+          "CA1_3_soft_dice": 0.34421088472008704,
+          "subiculum_hard_dice": 0.7266975322146608,
+          "subiculum_soft_dice": 0.3093384116888046,
+          "CA4_DG_hard_dice": 0.7558549823653369,
+          "CA4_DG_soft_dice": 0.25049384832382204,
+          "macro_soft_dice": 0.3013477149109046,
+          "whole_hippocampus_hard_dice": 0.8374883810988791
+        },
+        "fn": 9727,
+        "fp": 7346,
+        "internal_swaps": 5046
+      },
+      "curve": [
+        {
+          "compute_fraction": 0.05086389647871178,
+          "estimated_training_flops": 3252893752975.0,
+          "training_macro_hard_dice": 0.030744281401707117,
+          "macro_hard_dice": 0.02548655089141013,
+          "patient_passes": 0.625,
+          "learning_rate": 0.0006
+        },
+        {
+          "compute_fraction": 0.10172779295742355,
+          "estimated_training_flops": 6505787505950.0,
+          "training_macro_hard_dice": 0.10561038715463958,
+          "macro_hard_dice": 0.10870212476312044,
+          "patient_passes": 1.25,
+          "learning_rate": 0.0006
+        },
+        {
+          "compute_fraction": 0.15055713357698686,
+          "estimated_training_flops": 9628565508806.0,
+          "training_macro_hard_dice": 0.2968678169719406,
+          "macro_hard_dice": 0.2782286761979322,
+          "patient_passes": 1.85,
+          "learning_rate": 0.0006
+        },
+        {
+          "compute_fraction": 0.20142103005569864,
+          "estimated_training_flops": 12881459261781.0,
+          "training_macro_hard_dice": 0.4258091244567506,
+          "macro_hard_dice": 0.40168212879918236,
+          "patient_passes": 2.475,
+          "learning_rate": 0.0006
+        },
+        {
+          "compute_fraction": 0.25025037067526196,
+          "estimated_training_flops": 16004237264637.0,
+          "training_macro_hard_dice": 0.5610913959802554,
+          "macro_hard_dice": 0.5360962463852587,
+          "patient_passes": 3.075,
+          "learning_rate": 0.0006
+        },
+        {
+          "compute_fraction": 0.3011142671539737,
+          "estimated_training_flops": 19257131017612.0,
+          "training_macro_hard_dice": 0.5562177556761002,
+          "macro_hard_dice": 0.546930859620465,
+          "patient_passes": 3.7,
+          "learning_rate": 0.0006
+        },
+        {
+          "compute_fraction": 0.3519781636326855,
+          "estimated_training_flops": 22510024770587.0,
+          "training_macro_hard_dice": 0.6123681678587344,
+          "macro_hard_dice": 0.593530366354482,
+          "patient_passes": 4.325,
+          "learning_rate": 0.0006
+        },
+        {
+          "compute_fraction": 0.4008075042522488,
+          "estimated_training_flops": 25632802773443.0,
+          "training_macro_hard_dice": 0.6244883931393764,
+          "macro_hard_dice": 0.6142499542726501,
+          "patient_passes": 4.925,
+          "learning_rate": 0.0006
+        },
+        {
+          "compute_fraction": 0.4516714007309606,
+          "estimated_training_flops": 28885696526418.0,
+          "training_macro_hard_dice": 0.6341837042701322,
+          "macro_hard_dice": 0.5913153144763004,
+          "patient_passes": 5.55,
+          "learning_rate": 0.0006
+        },
+        {
+          "compute_fraction": 0.5005007413505239,
+          "estimated_training_flops": 32008474529274.0,
+          "training_macro_hard_dice": 0.6476896632322114,
+          "macro_hard_dice": 0.6277963227783547,
+          "patient_passes": 6.15,
+          "learning_rate": 0.0006
+        },
+        {
+          "compute_fraction": 0.5513646378292357,
+          "estimated_training_flops": 35261368282249.0,
+          "training_macro_hard_dice": 0.6478927256746544,
+          "macro_hard_dice": 0.6206892125640141,
+          "patient_passes": 6.775,
+          "learning_rate": 0.0005848695568621685
+        },
+        {
+          "compute_fraction": 0.600193978448799,
+          "estimated_training_flops": 38384146285105.0,
+          "training_macro_hard_dice": 0.687523838289414,
+          "macro_hard_dice": 0.6732300405125267,
+          "patient_passes": 7.375,
+          "learning_rate": 0.0005432780473293593
+        },
+        {
+          "compute_fraction": 0.6510578749275108,
+          "estimated_training_flops": 41637040038080.0,
+          "training_macro_hard_dice": 0.6847903477223546,
+          "macro_hard_dice": 0.6579395620641468,
+          "patient_passes": 8.0,
+          "learning_rate": 0.00047602812055958757
+        },
+        {
+          "compute_fraction": 0.7019217714062226,
+          "estimated_training_flops": 44889933791055.0,
+          "training_macro_hard_dice": 0.6949039572675056,
+          "macro_hard_dice": 0.6652995945171252,
+          "patient_passes": 8.625,
+          "learning_rate": 0.00039114861709370357
+        },
+        {
+          "compute_fraction": 0.7507511120257859,
+          "estimated_training_flops": 48012711793911.0,
+          "training_macro_hard_dice": 0.7084612842548749,
+          "macro_hard_dice": 0.6988648717426613,
+          "patient_passes": 9.225,
+          "learning_rate": 0.0003010958232127586
+        },
+        {
+          "compute_fraction": 0.8016150085044976,
+          "estimated_training_flops": 51265605546886.0,
+          "training_macro_hard_dice": 0.7188100750515044,
+          "macro_hard_dice": 0.711676167996953,
+          "patient_passes": 9.85,
+          "learning_rate": 0.00020760761282412926
+        },
+        {
+          "compute_fraction": 0.850444349124061,
+          "estimated_training_flops": 54388383549742.0,
+          "training_macro_hard_dice": 0.7187501154747988,
+          "macro_hard_dice": 0.704476414558264,
+          "patient_passes": 10.45,
+          "learning_rate": 0.00012689085667806735
+        },
+        {
+          "compute_fraction": 0.9013082456027728,
+          "estimated_training_flops": 57641277302717.0,
+          "training_macro_hard_dice": 0.7292086000958525,
+          "macro_hard_dice": 0.7178948738871228,
+          "patient_passes": 11.075,
+          "learning_rate": 6.0503258187747976e-05
+        },
+        {
+          "compute_fraction": 0.950137586222336,
+          "estimated_training_flops": 60764055305573.0,
+          "training_macro_hard_dice": 0.7308123352054201,
+          "macro_hard_dice": 0.7179524176482055,
+          "patient_passes": 11.675,
+          "learning_rate": 1.9953597162727708e-05
+        },
+        {
+          "compute_fraction": 0.9989669268418994,
+          "estimated_training_flops": 63886833308429.0,
+          "training_macro_hard_dice": 0.732596545206871,
+          "macro_hard_dice": 0.7186606792390424,
+          "patient_passes": 12.275,
+          "learning_rate": 5.999999999999999e-06
+        }
+      ],
+      "reused_pilot_baseline": false,
+      "train_val_gap_pp": 1.3935865967828587,
+      "last_quarter_train_change_pp": 2.413526095199614,
+      "last_quarter_val_change_pp": 1.9795807496381101,
+      "final_vs_best_val_pp": 0.0,
+      "archive_manifest_sha256": "b61b89a1da2004e2a5e54c5aad94d428af5f29068d68b38ef25c35a2ffce440f"
+    }
+  ],
+  "references": [
+    {
+      "model": "swinunetr",
+      "train_subjects": 5,
+      "condition": "baseline",
+      "scores": {
+        "validation": {
+          "macro_hard_dice": 0.7607466683054581,
+          "CA1_3_hard_dice": 0.7716861015771981,
+          "CA1_3_soft_dice": 0.3350216805934906,
+          "subiculum_hard_dice": 0.7452611897513262,
+          "subiculum_soft_dice": 0.17151753455400467,
+          "CA4_DG_hard_dice": 0.7652927135878502,
+          "CA4_DG_soft_dice": 0.13221272006630896,
+          "macro_soft_dice": 0.21291731173793474,
+          "whole_hippocampus_hard_dice": 0.8574380457345596
+        },
+        "training": {
+          "macro_hard_dice": 0.8180872077667131,
+          "CA1_3_hard_dice": 0.8208133720800344,
+          "CA1_3_soft_dice": 0.3453024089336395,
+          "subiculum_hard_dice": 0.7868693894182058,
+          "subiculum_soft_dice": 0.18238605111837386,
+          "CA4_DG_hard_dice": 0.8465788618018995,
+          "CA4_DG_soft_dice": 0.15414794385433198,
+          "macro_soft_dice": 0.2272788013021151,
+          "whole_hippocampus_hard_dice": 0.8845067604832888
+        },
+        "fn": 6324,
+        "fp": 7487,
+        "internal_swaps": 4532
+      },
+      "budget_flops": 63952901334180,
+      "same_cap": true
+    },
+    {
+      "model": "swinunetr",
+      "train_subjects": 5,
+      "condition": "adaptive",
+      "scores": {
+        "validation": {
+          "macro_hard_dice": 0.7665494025427287,
+          "CA1_3_hard_dice": 0.7800072785464971,
+          "CA1_3_soft_dice": 0.31877727508544923,
+          "subiculum_hard_dice": 0.7556952038193375,
+          "subiculum_soft_dice": 0.16234705597162247,
+          "CA4_DG_hard_dice": 0.7639457252623518,
+          "CA4_DG_soft_dice": 0.128153195977211,
+          "macro_soft_dice": 0.20309250901142756,
+          "whole_hippocampus_hard_dice": 0.8690665423140385
+        },
+        "training": {
+          "macro_hard_dice": 0.8285612183818427,
+          "CA1_3_hard_dice": 0.844788022385548,
+          "CA1_3_soft_dice": 0.329385033249855,
+          "subiculum_hard_dice": 0.803496386849995,
+          "subiculum_soft_dice": 0.17316590398550033,
+          "CA4_DG_hard_dice": 0.8373992459099847,
+          "CA4_DG_soft_dice": 0.14830500558018683,
+          "macro_soft_dice": 0.21695198093851403,
+          "whole_hippocampus_hard_dice": 0.9077533032833026
+        },
+        "fn": 7139,
+        "fp": 5152,
+        "internal_swaps": 4546
+      },
+      "budget_flops": 63952901334180,
+      "same_cap": true
+    },
+    {
+      "model": "unetr_vit_b16",
+      "train_subjects": 5,
+      "condition": "baseline",
+      "scores": {
+        "validation": {
+          "macro_hard_dice": 0.6941245820093485,
+          "CA1_3_hard_dice": 0.6680049177156094,
+          "CA1_3_soft_dice": 0.33031735122203826,
+          "subiculum_hard_dice": 0.6974237927091937,
+          "subiculum_soft_dice": 0.2982407346367836,
+          "CA4_DG_hard_dice": 0.7169450356032421,
+          "CA4_DG_soft_dice": 0.23417827039957045,
+          "macro_soft_dice": 0.28757878541946413,
+          "whole_hippocampus_hard_dice": 0.7928550242879219
+        },
+        "training": {
+          "macro_hard_dice": 0.7911990134438429,
+          "CA1_3_hard_dice": 0.7882577576350767,
+          "CA1_3_soft_dice": 0.38412339985370636,
+          "subiculum_hard_dice": 0.78135683882091,
+          "subiculum_soft_dice": 0.33241601288318634,
+          "CA4_DG_hard_dice": 0.8039824438755423,
+          "CA4_DG_soft_dice": 0.26891048699617387,
+          "macro_soft_dice": 0.3284832999110222,
+          "whole_hippocampus_hard_dice": 0.8742774262289854
+        },
+        "fn": 11423,
+        "fp": 7527,
+        "internal_swaps": 5115
+      },
+      "budget_flops": 63952901334180,
+      "same_cap": true
+    },
+    {
+      "model": "unetr_vit_b16",
+      "train_subjects": 5,
+      "condition": "adaptive",
+      "scores": {
+        "validation": {
+          "macro_hard_dice": 0.7038757870357137,
+          "CA1_3_hard_dice": 0.6863932845320684,
+          "CA1_3_soft_dice": 0.33677658438682556,
+          "subiculum_hard_dice": 0.7020487995935223,
+          "subiculum_soft_dice": 0.2904540240764618,
+          "CA4_DG_hard_dice": 0.7231852769815507,
+          "CA4_DG_soft_dice": 0.23455774486064912,
+          "macro_soft_dice": 0.28726278444131215,
+          "whole_hippocampus_hard_dice": 0.8049882879866089
+        },
+        "training": {
+          "macro_hard_dice": 0.7797486861956467,
+          "CA1_3_hard_dice": 0.7762259091539252,
+          "CA1_3_soft_dice": 0.37377478182315826,
+          "subiculum_hard_dice": 0.769295983089202,
+          "subiculum_soft_dice": 0.320356947183609,
+          "CA4_DG_hard_dice": 0.7937241663438133,
+          "CA4_DG_soft_dice": 0.2654416456818581,
+          "macro_soft_dice": 0.31985779156287514,
+          "whole_hippocampus_hard_dice": 0.8697929435672037
+        },
+        "fn": 10475,
+        "fp": 7723,
+        "internal_swaps": 5093
+      },
+      "budget_flops": 63952901334180,
+      "same_cap": true
+    }
+  ],
+  "pairs": [],
+  "interpretation": "Pilot curves calibrate a single shared cap; no comparison arm is launched by this collector. Validation is development data, not an untouched test. Final-budget scores primary.",
+  "analysis_source_sha256": "4adef6773d36f230ce0cecd47bcff7b12b479c2841a5e9105dfba560c25d61d7"
+}

@@ -1,0 +1,24 @@
+{
+  "approved_for_execution": true,
+  "status": "selected_after_diceonly_exhaustion",
+  "recipes": [
+    {
+      "key": "plain_ce025",
+      "dropout_rate": 0.0,
+      "augmentation": "none"
+    }
+  ],
+  "arms": [
+    "dice",
+    "dice_bands_edge_sdf_depth",
+    "dice_depth",
+    "dice_sdf_depth",
+    "dice_bands"
+  ],
+  "reason": "Dice-only bands gains positive in first4pairs, but two seeds produce massivebackground-to-CA4falsepositives, lowtrainingandvalidationDice andlargeabsolute regression. Restore quarter-weight denseCE includingbackground supervision while retainingoriginalauxdefinitions/timing,dropout0/noaug,LR,cap andfresh SAME-loss controls. No nextGPUjobyet.",
+  "profile_status": "Complete: exactDiceCE1:1controlreproduced; quarterCE130103216359FLOPs/update; all14schedules409under53.305T; all16auxprofilesmeasured.",
+  "test_status": "Passed actualvalue/gradient/calibration,zeroauxidentities,model/dropout andschedule checks.",
+  "created_at": 1794193467.165013,
+  "previous_result": "Dice-only all4candidates rejected. Bands4/5positive thenseed0fold0-.215947pp; alsoseed5/19massivebackgroundfalsepositives.13runsdurablyarchivedcleaned;queueempty;46.23GiBfree.",
+  "selected_at": 1794193945.645331
+}

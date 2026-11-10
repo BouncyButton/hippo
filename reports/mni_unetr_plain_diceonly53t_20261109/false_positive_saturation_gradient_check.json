@@ -1,0 +1,70 @@
+{
+  "scope": "Synthetic actual-loss logit gradient check: background confidently mislabelled CA4; not measured network gradients.",
+  "rows": [
+    {
+      "wrong_ca4_logit_gap": 2.0,
+      "background_voxels": 3500,
+      "dice": {
+        "loss": 0.39273932576179504,
+        "mean_false_ca4_logit_gradient": -1.563437035656534e-05
+      },
+      "ce": {
+        "loss": 2.0497374534606934,
+        "mean_false_ca4_logit_gradient": 0.0001736412668833509
+      },
+      "dice_ce025": {
+        "loss": 0.905173659324646,
+        "mean_false_ca4_logit_gradient": 2.777594272629358e-05
+      }
+    },
+    {
+      "wrong_ca4_logit_gap": 8.0,
+      "background_voxels": 3500,
+      "dice": {
+        "loss": 0.2997308075428009,
+        "mean_false_ca4_logit_gradient": 1.6984998296720732e-08
+      },
+      "ce": {
+        "loss": 6.836944103240967,
+        "mean_false_ca4_logit_gradient": 0.00024389523605350405
+      },
+      "dice_ce025": {
+        "loss": 2.0089669227600098,
+        "mean_false_ca4_logit_gradient": 6.0990794736426324e-05
+      }
+    },
+    {
+      "wrong_ca4_logit_gap": 16.0,
+      "background_voxels": 3500,
+      "dice": {
+        "loss": 0.29976019263267517,
+        "mean_false_ca4_logit_gradient": 5.4569677769567004e-12
+      },
+      "ce": {
+        "loss": 13.671875,
+        "mean_false_ca4_logit_gradient": 0.00024414061044808477
+      },
+      "dice_ce025": {
+        "loss": 3.717728853225708,
+        "mean_false_ca4_logit_gradient": 6.103515261202119e-05
+      }
+    },
+    {
+      "wrong_ca4_logit_gap": 32.0,
+      "background_voxels": 3500,
+      "dice": {
+        "loss": 0.29976019263267517,
+        "mean_false_ca4_logit_gradient": 0.0
+      },
+      "ce": {
+        "loss": 27.34375,
+        "mean_false_ca4_logit_gradient": 0.000244140625
+      },
+      "dice_ce025": {
+        "loss": 7.135697841644287,
+        "mean_false_ca4_logit_gradient": 6.103515625e-05
+      }
+    }
+  ],
+  "interpretation": "In this synthetic scene, Dice-only gradient initially increases the wrong CA4 logits on background (negative derivative at gap2), then its corrective derivative shrinks toward zero as logits saturate. Dense CE, and Dice+0.25CE at all tested gaps, push the false CA4 logits down. Foreground-only multiclass Dice can trade off the sacrificial class against other foreground classes; this demonstrates a possible local loss failure, not proof of the full observed network trajectory."
+}

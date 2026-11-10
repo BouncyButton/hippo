@@ -1,0 +1,86 @@
+{
+  "status": "passed",
+  "manifest_sha256": "7e936a78c7ff5148d380cec30cf4459ab0255e88e7f57627769376c6cbc30309",
+  "checks": [
+    {
+      "id": "MNI_swinunetr_n10_original_bands_f0s0",
+      "train_subjects": 10,
+      "training_crops": 20,
+      "updates": 412,
+      "passes": 20.6,
+      "calibration_flops": 1043755040412
+    },
+    {
+      "id": "MNI_unetr_vit_b16_n10_original_bands_f0s0",
+      "train_subjects": 10,
+      "training_crops": 20,
+      "updates": 491,
+      "passes": 24.55,
+      "calibration_flops": 865633170892
+    },
+    {
+      "id": "MNI_swinunetr_n20_original_bands_f0s0",
+      "train_subjects": 20,
+      "training_crops": 40,
+      "updates": 412,
+      "passes": 10.3,
+      "calibration_flops": 2087510080824
+    },
+    {
+      "id": "MNI_unetr_vit_b16_n20_original_bands_f0s0",
+      "train_subjects": 20,
+      "training_crops": 40,
+      "updates": 491,
+      "passes": 12.275,
+      "calibration_flops": 1731266341784
+    },
+    {
+      "id": "MNI_swinunetr_n10_adaptive_f0s0",
+      "train_subjects": 10,
+      "training_crops": 20,
+      "updates": 412,
+      "passes": 20.6,
+      "calibration_flops": 1044059127332
+    },
+    {
+      "id": "MNI_unetr_vit_b16_n10_adaptive_f0s0",
+      "train_subjects": 10,
+      "training_crops": 20,
+      "updates": 491,
+      "passes": 24.55,
+      "calibration_flops": 865937257812
+    },
+    {
+      "id": "MNI_swinunetr_n20_adaptive_f0s0",
+      "train_subjects": 20,
+      "training_crops": 40,
+      "updates": 412,
+      "passes": 10.3,
+      "calibration_flops": 2088118254664
+    },
+    {
+      "id": "MNI_unetr_vit_b16_n20_adaptive_f0s0",
+      "train_subjects": 20,
+      "training_crops": 40,
+      "updates": 491,
+      "passes": 12.275,
+      "calibration_flops": 1731874515624
+    }
+  ],
+  "scientific": {
+    "status": "passed",
+    "checks": [
+      "actual argmax union errors",
+      "detached 3x weights",
+      "original support A",
+      "anchor plus six-connected error halo B",
+      "side normalization",
+      "zero off-support gradient",
+      "D4 equivariance",
+      "batch averaging",
+      "internal swaps excluded",
+      "remote FP/deep FN included"
+    ]
+  },
+  "optimizer_updates": 0
+}

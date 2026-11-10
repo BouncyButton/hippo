@@ -1,0 +1,105 @@
+{
+  "status": "complete",
+  "stage_state": {
+    "status": "complete",
+    "active": null,
+    "completed": 2,
+    "total": 2,
+    "runs": [
+      {
+        "id": "MNI_unetr_probe_bands_f0s0",
+        "kind": "conventional",
+        "dataset": "MNI",
+        "model": "unetr_vit_b16",
+        "arm": "dice_bands",
+        "protocol": "delayed_t05",
+        "seed": 0,
+        "fold": 0,
+        "augmentation": "xy_d4_v1",
+        "reference": "f0s0",
+        "final_dice": 0.7130146755191062,
+        "best_dice": 0.7130146755191062,
+        "released_bytes": 1853961246
+      },
+      {
+        "id": "MNI_unetr_probe_bands_f1s0",
+        "kind": "conventional",
+        "dataset": "MNI",
+        "model": "unetr_vit_b16",
+        "arm": "dice_bands",
+        "protocol": "delayed_t05",
+        "seed": 0,
+        "fold": 1,
+        "augmentation": "xy_d4_v1",
+        "reference": "f1s0",
+        "final_dice": 0.6951471602611292,
+        "best_dice": 0.6951471602611292,
+        "released_bytes": 1853961246
+      }
+    ],
+    "job_id": "747960",
+    "updated_at": 1794173752.0158453,
+    "quota": {
+      "used_gib": 50.04,
+      "limit_gib": 93.13,
+      "free_gib": 43.089999999999996,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  50.04GiB/93.13GiB  428.50k/\u221e  \n\n",
+      "checked_at": 1794173752.0543628
+    }
+  },
+  "queue": "",
+  "quota": {
+    "used_gib": 46.34,
+    "limit_gib": 93.13,
+    "free_gib": 46.78999999999999,
+    "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  46.34GiB/93.13GiB  428.50k/\u221e  \n\n",
+    "checked_at": 1794173863.2647018
+  },
+  "runs": [
+    {
+      "id": "MNI_unetr_probe_bands_f0s0",
+      "cleanup": {
+        "status": "complete",
+        "deleted": [
+          {
+            "name": "checkpoint_best.pt",
+            "bytes": 370807547,
+            "sha256": "9f956ed4454b799c796f8764eb8af62235849b55a8d79da7bd6e9e8d4711455c"
+          },
+          {
+            "name": "checkpoint_latest.pt",
+            "bytes": 1483153699,
+            "sha256": "1f132c025a371163a3f3012d85121668e4d75dd6b1d1ce47e70debd4db8da597"
+          }
+        ],
+        "durable_archive": "/Users/filippofocaccia/Desktop/hippo/reports/mni_unetr_adam_probe53t_20261108/runs/MNI_unetr_probe_bands_f0s0",
+        "released_file_bytes": 1853961246,
+        "time": 1794173741.4652088
+      }
+    },
+    {
+      "id": "MNI_unetr_probe_bands_f1s0",
+      "cleanup": {
+        "status": "complete",
+        "deleted": [
+          {
+            "name": "checkpoint_best.pt",
+            "bytes": 370807547,
+            "sha256": "98dc724fcc144d0a7563117509b8be3fdc2788d7e7ff0a84ea9dd4a38217dbb7"
+          },
+          {
+            "name": "checkpoint_latest.pt",
+            "bytes": 1483153699,
+            "sha256": "9646cb410a31d420369e4c4028df04be325fe4cd360aef14b2e302e1e05f0af2"
+          }
+        ],
+        "durable_archive": "/Users/filippofocaccia/Desktop/hippo/reports/mni_unetr_adam_probe53t_20261108/runs/MNI_unetr_probe_bands_f1s0",
+        "released_file_bytes": 1853961246,
+        "time": 1794173719.3550994
+      }
+    }
+  ],
+  "broader_sweep_paused": true,
+  "swin_recovery_sha256": "892147f16c4da309e50069af8f5370dbe7cd5cc53a13a93c435cd2faf795de4e",
+  "jobs": "747960|COMPLETED|billing=16,cpu=8,gres/gpu=2,mem=48G,node=1\n747966|CANCELLED by 1395|\n"
+}

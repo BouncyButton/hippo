@@ -1,0 +1,60 @@
+{
+  "time": 1794321118.8322082,
+  "previous_failure": {
+    "traceback": "Traceback (most recent call last):\n  File \"/mnt/beegfsstudents/home/3160552/mni_medsam3_n5_adaptive60_2gpu_20261110/source/scripts/cross_dataset_campaign/adni_foundation_full_pool.py\", line 252, in run\n    result = dispatch(stage, plan, base, publish)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/beegfsstudents/home/3160552/mni_medsam3_n5_adaptive60_2gpu_20261110/operations/offline_v1/offline_ops.py\", line 146, in dispatch\n    if failure:raise RuntimeError(failure)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: MNI_MedSAM3_n5_f0s2_native400: worker exited73\n",
+    "job_id": "751779",
+    "time": 1794316885.8626146
+  },
+  "accounting": "JobID|State|ExitCode\n751779|FAILED|1:0\n751779.batch|FAILED|1:0\n751779.0|COMPLETED|0:0\n751779.1|COMPLETED|0:0\n751779.2|COMPLETED|0:0\n751779.3|COMPLETED|0:0\n751779.4|FAILED|75:0\n",
+  "completed_results_verified": [
+    {
+      "id": "MNI_MedSAM3_n5_f0s0_native400",
+      "protocol": "MNI_MedSAM3_n5_f0s0_native400",
+      "kind": "foundation",
+      "dataset": "MNI",
+      "subjects": 5,
+      "fold": 0,
+      "seed": 0,
+      "updates": 400,
+      "arm": "dice",
+      "validation_dice": 0.7073945421731334,
+      "training_dice": 0.772249449596389,
+      "observed_at": 1794311228.7177837
+    },
+    {
+      "id": "MNI_MedSAM3_n5_f0s1_native400",
+      "protocol": "MNI_MedSAM3_n5_f0s1_native400",
+      "kind": "foundation",
+      "dataset": "MNI",
+      "subjects": 5,
+      "fold": 0,
+      "seed": 1,
+      "updates": 400,
+      "arm": "dice",
+      "validation_dice": 0.7234529283661724,
+      "training_dice": 0.7837914774400506,
+      "observed_at": 1794312479.5362341
+    },
+    {
+      "id": "MNI_MedSAM3_n5_f0s2_native400",
+      "protocol": "MNI_MedSAM3_n5_f0s2_native400",
+      "kind": "foundation",
+      "dataset": "MNI",
+      "subjects": 5,
+      "fold": 0,
+      "seed": 2,
+      "updates": 400,
+      "arm": "dice",
+      "validation_dice": 0.7144921566164857,
+      "training_dice": 0.7750749985697556,
+      "observed_at": 1794320994.1822703
+    }
+  ],
+  "resume": {
+    "fold": 1,
+    "seed": 0,
+    "update": 315,
+    "checkpoint_sha256": "e05ee1037639c786941895428807be0ad553066c4f83ed4695d083a6688a640a"
+  },
+  "reason": "Reconcile valid completed seed2 artifacts after srun exit73 conflicts with completed Slurm step exit0; preserve failure evidence and resume remaining authorized folds."
+}

@@ -1,0 +1,9 @@
+{
+  "status": "analytic_derivation_plus_sampled_diagnostic",
+  "definition": "Original inner-band BCE on q=sum of foreground probabilities, unchanged.",
+  "derivation": "For true foreground, negative dL/dz_i is proportional to p_i/q for each foreground class i. Therefore, if the best wrong foreground class has p_wrong>p_true, the isolated loss direction changes (z_true-z_wrong) proportionally to p_true-p_wrong<0. Positive patient/side/weight factors preserve this sign.",
+  "scope": "Local logit direction at inner-band voxels. Does not include network parameter Jacobian, Adam preconditioning/momentum, the base loss, or generalization.",
+  "empirical_evidence": "reports/mni_unetr_adam_probe53t_20261108/wrong_subfield_margin_audit.json",
+  "conclusion": "The original union objective is indifferent to subfield identity and can reinforce its current wrong winner. This is expected mathematics, not an implementation bug; it occurs in both helped/harmed runs and does not by itself explain final Dice.",
+  "permitted_actions": "Timing/strength/composition using original losses. Do not introduce class-aware bands; user explicitly kept original definitions."
+}

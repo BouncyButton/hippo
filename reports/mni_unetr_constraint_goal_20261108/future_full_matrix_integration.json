@@ -1,0 +1,84 @@
+{
+  "status": "cosine_gated_builder_unused_because_confirmation_failed;adaptation_needed_if_Dice_only_wins",
+  "trigger": "Only after one shared candidate has9/9archive-verifiedpositivegains and its absolute performance is assessed.",
+  "preserve": [
+    "Do not change final53_study.changed_protocol: frozen/current study verifiers use it.",
+    "Keep original constraints,seeds0/5/19,3folds,53.305T,2GPUworkers,NNLR.02."
+  ],
+  "implementation": [
+    "Use separate winner-gated final module, leaving historical final53_study unchanged.",
+    "UNETR matrix uses winning augmentation/dropout and fixed102/33delayed policy for every original constraint arm; use current dropout0profile if relevant.",
+    "Dispatch UNETR to the exact unetr_simple_recipe_runtime adapter; othermodels to established headroom_bands.train with no added per-step operations, preserving NN150-update cap.",
+    "Reuse all verified runs with the winning SAME base recipe:9baseline+9winning-arm minimum, plus completed other-arm cells matching recipe,profile,schedule,source. Never reuse old augmented UNETR baseline if winning base changed.",
+    "Retain old final builder NN reuse equivalence(default nativeDiceCE1:1 vs repaired logging-only source),9NNcontrols and basic/Swinseed19fold0controls.",
+    "New verification should derive tasks from frozen matrix minus frozen reused IDs, not depend on local report existence on cluster.",
+    "Generic check_stage builds UNETR with dropout.1 regardlessprotocol, so additionally verify actual bound winner model/dropouts and real original loss calibration."
+  ],
+  "recovery": "Protected paused Swinseed19fold1checkpoint must remain intact and should be resumed through an exact-config source/collector path if integrated. Existing final builder merely preserves it and starts a duplicate; inspect safe resume integration after winner. Do not delete or silently abandon recoveries.",
+  "launcher": "Require current confirmation stage complete/fullycleaned, no running/queuedjobs and sufficientquota beforedeploy; keep common53paused recoverycontrol until appropriate resume is arranged.",
+  "original_files": [
+    "scripts/mni_constraints/final53_study.py",
+    "scripts/mni_constraints/launch_final53_study.py",
+    "scripts/mni_constraints/verify.py",
+    "scripts/mni_constraints/headroom_bands.py"
+  ],
+  "helpers": [
+    "scripts/mni_constraints/verified_unetr_matrix_recipe.py",
+    "scripts/mni_constraints/test_verified_unetr_matrix_recipe.py",
+    "scripts/mni_constraints/verified_matrix_recovery.py",
+    "scripts/mni_constraints/collect_verified_matrix.py",
+    "scripts/mni_constraints/test_verified_matrix_recovery.py",
+    "scripts/mni_constraints/verified_unetr_full_matrix.py",
+    "scripts/mni_constraints/launch_verified_unetr_full_matrix.py",
+    "scripts/mni_constraints/verified_matrix_runner.py",
+    "scripts/mni_constraints/test_verified_matrix_runner.py",
+    "scripts/mni_constraints/test_verified_unetr_full_matrix.py"
+  ],
+  "tests": "504logicalcells/56protocols and23actualarchive reuse candidates verified includingall9NNLR.02controls; partial actual gate rejected. Earlier224recipeprotocol tests and recoveryguards/runnerordering pass. No actual freeze or fullpreflight until9/9.",
+  "recovery_evidence": {
+    "status": "zero_update_recovery_verified",
+    "step": 0,
+    "charged_attempts": 0,
+    "ledger_missing_valid_at_zero": true,
+    "remaining_updates": 343,
+    "schedule_matches_final": true,
+    "core_source_matches_final_parent": true,
+    "metadata_file": "reports/mni_unetr_constraint_goal_20261108/paused_swin_recovery_metadata.json"
+  },
+  "recovery_plan": "Protected Swin checkpoint is initialization-only:step0,charged0,noledger. Keep it intact throughUNETRconfirmation. For exact continuation, copy original config+checkpoint and byte-identical original protocol folder into finalstage recovery inputs, route this one canonical task to its legacy protocol, and use unchanged core/source/dataset/schedule. Preserve old checkpoint until resumed logical run is fully evaluated,archived,verified; then record resolution and retire old duplicate. No prior optimization work was spent.",
+  "current_gate_note": "Cosine full failed seed5fold1 after5positivepairs; strict gate correctly prevents matrix launch. Existing conditional builder/runtime preflight covers DiceCE cosine only. Dice-only next study cannot reuse that recipe without explicit loss/profile/runtime integration.",
+  "additional_implementation_notes": [
+    "Fullmatrix goal requires verified9/9 and actualmatrixstartup,notfinishing504cells in thisgoal. Stillensurepersistentper-runcollector/cleanup.",
+    "Reuse allverifiedsame-base/sameLR UNETR cells,includingfailedotherarms,viaexactnumericalprotocolcomparison;onlysame-newrecipecontrolsprovidepairedgains. IncludeNN9LR.02controlsand2othermodelseed19fold0controls.",
+    "ForSwinzero-steprecovery,copyoldprotocol/config/checkpoint at actualtaskstart,callold-compatibleprotocol withresume,samecore/data/LR. Archive recovery_provenance.json withnewcompletedrun. Deleteoldduplicateonlyafternewarchiveackandcleanup.",
+    "Recordoldrecoverydeletion in stage/recovery_resolution.json and mirroritdurably withcollector snapshot extension (genericservewriteslive.json); no deletionbeforenewrunevaluationanddurableack. Nevermodifyalreadyboundarchive.",
+    "Allmodelpreflight mustbindactualwinningUNETRdropout/LR; genericcheck_stage mayhardcodedropout.1. Runtimewrappermustcaptureoriginalbind/train beforeoverrides anddispatchonlyonceoutsideoptimizersteps,leavingNNexact150cap unchanged.",
+    "Do notmodifyhistorical final53_study.changed_protocol; currentandpriorverifiersdependonit. Newmatrixbuilderusesverified_unetr_matrix_recipe.changed_protocol."
+  ],
+  "recovery_helper_status": "Implemented and tested conditional exact-copy/advanced-resume preservation and original-checkpoint retirement only after evaluated archived cleaned completion. Future builder must freeze metadata and original protocol; runner must route this task with --resume and call retirement after cleanup. Collector wrapper mirrors receipt. No live stage modified.",
+  "reuse_equivalence_helper": "verified_unetr_matrix_recipe.assert_same_training_protocol compares all fields except six descriptive/relocation fields. Dataset hash remains mandatory. Verified all four frozen cosine protocols against prospective matrix; rejects LR, dropout, calibration and data changes.",
+  "remaining": "If Dice-only reaches9/9: adapt selected recipe helpers, profile selection, runtime dispatch, loss metadata/reuse and actual preflight for the verified Dice-only base. Preserve NNLR.02 and originalconstraints. Existing protected recovery helpers/runner/collector remain applicable. Do not launch the failed cosine builder.",
+  "runtime_preflight": "Passed conditional_matrix_runtime_preflight.json: all4models,52calibration/loss/gradientchecks,realtraininggeometry,actualUNETRdropout/LR and NNLR.02nativecoefficients,0optimizerupdates. Corrected invalid syntheticlongaxis fixture and MONAISwinCPUscalarconstruction beforemeta. Active training untouched.",
+  "diceonly": {
+    "status": "Conditional helpers verified; no stage built, no launch",
+    "builder": "scripts/mni_constraints/verified_diceonly_full_matrix.py",
+    "recipe": "scripts/mni_constraints/verified_diceonly_matrix_recipe.py",
+    "test_command": "test_verified_unetr_full_matrix --diceonly --runtime",
+    "result": "Passed56protocols/504cells/18real archives including9repaired NN controls; actual4model calibration/loss/gradient preflight passed; partial2/9gate rejected",
+    "runtime_evidence": "reports/mni_unetr_constraint_goal_20261108/conditional_diceonly_matrix_runtime_preflight.json",
+    "launch_integration": "Import verified_diceonly_full_matrix before launch_verified_unetr_full_matrix.main; shared module configured with Dice-only confirmation/profile/runtime. Must prepare and verify gated stage first.",
+    "time": 1794192642.8310862
+  },
+  "ce025": {
+    "status": "conditional_helpers_tested_not_built_or_submitted",
+    "builder": "scripts/mni_constraints/verified_ce025_full_matrix.py",
+    "recipe": "scripts/mni_constraints/verified_ce025_matrix_recipe.py",
+    "test": "test_verified_unetr_full_matrix --ce025 --runtime",
+    "scope": "56protocols/504cells;13actualreusablearchives including9NNcontrols;actual4modelcalibration/loss/gradientpreflight;partialgatecorrectlyrejected;protectedrecoverymetadata/source/data/protocolverified;Diceonlyreuse regression24archivespassed",
+    "evidence": "reports/mni_unetr_constraint_goal_20261108/conditional_ce025_matrix_runtime_preflight.json",
+    "launch": "After verified 9/9 and final archive/cluster audit, prepare/preflight via verified_ce025_full_matrix.matrix, then run python -m scripts.mni_constraints.launch_verified_ce025_full_matrix. Dedicated entry point checked to reject current partial confirmation.",
+    "time": 1794195494.814708,
+    "launcher_sha256": "9526ce2b4b35e2412163103eb6d8bb99ff6d6f565294880d959b20fa7753de77",
+    "updated_at": 1794196283.957559
+  }
+}

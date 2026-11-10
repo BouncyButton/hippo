@@ -1,0 +1,39 @@
+{
+  "checked_at": 1794043283.3923213,
+  "queue": [],
+  "runs": [
+    {
+      "id": "abandoned_MNI_swinunetr_dice_bands_sdf_f0s0",
+      "remaining_checkpoints": [
+        "checkpoint_best.pt",
+        "checkpoint_latest.pt"
+      ],
+      "budget_ledger": {
+        "charged_attempts": 1366,
+        "training_flops": 211903894008044
+      },
+      "calibration": {
+        "status": "complete",
+        "weights": {
+          "bands": 0.03841539283365618,
+          "sdf": 1.8120397495234046
+        }
+      },
+      "log_tail": "37, \"charged_attempts\": 1237, \"patient_passes\": 123.7, \"estimated_training_flops\": 191890217231309, \"calibration_flops\": 522100342606, \"total_flops\": 192412317573915, \"compute_fraction\": 0.7501231892068677, \"mean_train_loss\": 0.017777187681597906, \"learning_rate\": 0.0001515, \"macro_hard_dice\": 0.7174364184477428, \"CA1_3_hard_dice\": 0.7433125575358781, \"CA1_3_soft_dice\": 0.5710750460624695, \"subiculum_hard_dice\": 0.702588333588537, \"subiculum_soft_dice\": 0.3982535570859909, \"CA4_DG_hard_dice\": 0.7064083642188133, \"CA4_DG_soft_dice\": 0.3130226269364357, \"macro_soft_dice\": 0.42745041002829876, \"whole_hippocampus_hard_dice\": 0.8374588110369053}\n{\"model\": \"swinunetr\", \"objective\": \"dice_bands_sdf\", \"fold\": 0, \"seed\": 0, \"step\": 1320, \"charged_attempts\": 1320, \"patient_passes\": 132.0, \"estimated_training_flops\": 204767234072154, \"calibration_flops\": 522100342606, \"total_flops\": 205289334414760, \"compute_fraction\": 0.8004610807340924, \"mean_train_loss\": 0.016049616151006824, \"learning_rate\": 0.00010528801920200652, \"macro_hard_dice\": 0.7160577242925752, \"CA1_3_hard_dice\": 0.7413126951669944, \"CA1_3_soft_dice\": 0.5776266276836395, \"subiculum_hard_dice\": 0.7013251134372134, \"subiculum_soft_dice\": 0.40537589192390444, \"CA4_DG_hard_dice\": 0.7055353642735177, \"CA4_DG_soft_dice\": 0.32090226709842684, \"macro_soft_dice\": 0.43463492890199024, \"whole_hippocampus_hard_dice\": 0.8357857365626294}\n"
+    },
+    {
+      "id": "abandoned_MNI_unetr_vit_b16_dice_bands_sdf_f0s0",
+      "remaining_checkpoints": [
+        "checkpoint_latest.pt"
+      ],
+      "budget_ledger": {
+        "charged_attempts": 49,
+        "training_flops": 6375671755831
+      },
+      "log_tail": ""
+    }
+  ],
+  "slurm_errors": {
+    "slurm-743840.err": "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 198, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/mnt/beegfsstudents/home/3160552/mni_constraint_target_search_f0s0_20261107/source/scripts/mni_constraints/strong_pilot.py\", line 223, in <module>\n    if __name__=='__main__':main()\n                            ^^^^^^\n  File \"/mnt/beegfsstudents/home/3160552/mni_constraint_target_search_f0s0_20261107/source/scripts/mni_constraints/strong_pilot.py\", line 217, in main\n    elif args.command=='run':run(args.stage)\n                             ^^^^^^^^^^^^^^^\n  File \"/mnt/beegfsstudents/home/3160552/mni_constraint_target_search_f0s0_20261107/source/scripts/mni_constraints/strong_pilot.py\", line 180, in run\n    plan=verify(stage);install_signals()\n         ^^^^^^^^^^^^^\n  File \"/mnt/beegfsstudents/home/3160552/mni_constraint_target_search_f0s0_20261107/source/scripts/mni_constraints/strong_pilot.py\", line 74, in verify\n    plan=read(stage/'plan.json');assert plan['tasks']==tasks() and plan['num_runs']==8\n                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+  }
+}

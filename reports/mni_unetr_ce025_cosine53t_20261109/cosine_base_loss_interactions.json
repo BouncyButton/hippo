@@ -1,0 +1,54 @@
+{
+  "rows": [
+    {
+      "candidate": "ce025_cosine_full",
+      "seed": 0,
+      "fold": 1,
+      "previous_constraint_gain_pp": 0.20635289254748557,
+      "new_constraint_gain_pp": -0.012094096368020502,
+      "constraint_interaction_pp": -0.21844698891550607,
+      "baseline_loss_change_pp": -0.10839425004363079,
+      "constrained_loss_change_pp": -0.3268412389591475,
+      "previous_constraint_archive_sha256": "b6100eb572a66ff5be02ecd492705fc4769dc8713af42f5affa7d9a8a0e75a2b",
+      "previous_baseline_archive_sha256": "e1682585cb12dfb317c75e1148fac7e3242bd0bd7a0596a87e75c385d14563e0"
+    },
+    {
+      "candidate": "ce025_cosine_bands",
+      "seed": 0,
+      "fold": 1,
+      "previous_constraint_gain_pp": -0.13395220349745784,
+      "new_constraint_gain_pp": 0.4607906036576237,
+      "constraint_interaction_pp": 0.5947428071550815,
+      "baseline_loss_change_pp": -0.10839425004363079,
+      "constrained_loss_change_pp": 0.486348557111441,
+      "previous_constraint_archive_sha256": "a65196a3f3474eac2cc4af40f720856d532e6ad2bfa8ecd4fb1548396eba3173",
+      "previous_baseline_archive_sha256": "e1682585cb12dfb317c75e1148fac7e3242bd0bd7a0596a87e75c385d14563e0"
+    }
+  ],
+  "missing_previous_cells": [
+    {
+      "arm": "dice_bands",
+      "seed": 0,
+      "fold": 2
+    },
+    {
+      "arm": "dice_bands",
+      "seed": 5,
+      "fold": 0
+    },
+    {
+      "arm": "dice_bands",
+      "seed": 19,
+      "fold": 0
+    },
+    {
+      "arm": "dice_bands",
+      "seed": 0,
+      "fold": 0
+    }
+  ],
+  "input_result_sha256": "e9b753209598cfa7dbb012441a5f589ccdbcb8023ed71e2029173de062e7db56",
+  "analysis_source_sha256": "ef2b4eeaf882cf037f9be756c3c61d3bd331264bbe6908ea88353749ef7b6d21",
+  "scope": "Same architecture/dropout,seed/fold,data,post-warmup cosine LR and original auxiliaries. Dense CE reduced from1.0to0.25 in base; each loss recipe has fresh training-only5% calibration. Profiles account for loss arithmetic; both have409updates under samecap.",
+  "caveat": "Development comparisons on overlapping folds, only available exact matched historical cells. Positive constraint interaction alone does not establish higher absolute Dice."
+}

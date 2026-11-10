@@ -1,0 +1,67 @@
+{
+  "status.json": {
+    "status": "complete",
+    "active": [],
+    "selected": {
+      "candidate": null,
+      "winner": null
+    },
+    "job_id": "748006",
+    "completed": 6,
+    "total": 36
+  },
+  "submission.json": {
+    "job_id": "748006",
+    "dependency": null,
+    "quota": {
+      "used_gib": 46.41,
+      "limit_gib": 93.13,
+      "free_gib": 46.72,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  46.41GiB/93.13GiB  430.65k/\u221e  \n\n",
+      "checked_at": 1794174272.3992457
+    },
+    "submitted_at": 1794174272.6145456,
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--chdir=/mnt/beegfsstudents/home/3160552/mni_unetr_window53t_20261108",
+      "--output=/mnt/beegfsstudents/home/3160552/mni_unetr_window53t_20261108/slurm-%j.out",
+      "--error=/mnt/beegfsstudents/home/3160552/mni_unetr_window53t_20261108/slurm-%j.err",
+      "/mnt/beegfsstudents/home/3160552/mni_unetr_window53t_20261108/run.sbatch",
+      "/mnt/beegfsstudents/home/3160552/mni_unetr_window53t_20261108"
+    ],
+    "manifest_sha256": "35e02b0d9d2b168159cd15129a861a60f18bdb3dad1b53f1a59787e54e44af05"
+  },
+  "successor.json": {
+    "job_id": "748008",
+    "dependency": "748006",
+    "quota": {
+      "used_gib": 46.41,
+      "limit_gib": 93.13,
+      "free_gib": 46.72,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  46.41GiB/93.13GiB  430.66k/\u221e  \n\n",
+      "checked_at": 1794174298.3848681
+    },
+    "submitted_at": 1794174298.5180616,
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--chdir=/mnt/beegfsstudents/home/3160552/mni_unetr_window53t_20261108",
+      "--output=/mnt/beegfsstudents/home/3160552/mni_unetr_window53t_20261108/slurm-%j.out",
+      "--error=/mnt/beegfsstudents/home/3160552/mni_unetr_window53t_20261108/slurm-%j.err",
+      "--dependency=afterany:748006",
+      "/mnt/beegfsstudents/home/3160552/mni_unetr_window53t_20261108/run.sbatch",
+      "/mnt/beegfsstudents/home/3160552/mni_unetr_window53t_20261108"
+    ],
+    "manifest_sha256": "35e02b0d9d2b168159cd15129a861a60f18bdb3dad1b53f1a59787e54e44af05"
+  },
+  "ready": [],
+  "cleanup": [
+    "runs/MNI_unetr_window369_full_f1s0/cleanup.json",
+    "runs/MNI_unetr_window307_bands_f1s0/cleanup.json",
+    "runs/MNI_unetr_window369_full_f0s5/cleanup.json",
+    "runs/MNI_unetr_window369_bands_f1s0/cleanup.json",
+    "runs/MNI_unetr_window369_full_f2s0/cleanup.json",
+    "runs/MNI_unetr_window307_full_f1s0/cleanup.json"
+  ]
+}

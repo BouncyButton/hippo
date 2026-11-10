@@ -1,0 +1,92 @@
+{
+  "status.json": {
+    "status": "complete_pending_archive",
+    "active": [],
+    "completed": 17,
+    "training_completed": 19,
+    "total": 72,
+    "maximum_possible_runs": 72,
+    "screen_runs": 19,
+    "selection": {
+      "nnunet": {
+        "phase": "exhausted",
+        "winner": null,
+        "selected": null,
+        "ranking": [],
+        "rejected": []
+      },
+      "swinunetr": {
+        "phase": "exhausted",
+        "winner": null,
+        "selected": null,
+        "ranking": [],
+        "rejected": []
+      }
+    },
+    "pending_durable_archive": [
+      "MNI_swinunetr_early05_f2s0",
+      "MNI_swinunetr_early05_f0s19"
+    ],
+    "pending_cleanup": [
+      "MNI_swinunetr_early05_f2s0",
+      "MNI_swinunetr_early05_f0s19"
+    ],
+    "deadline": 1794248424.3988118,
+    "updated_at": 1794240548.6137514,
+    "job_id": "749551",
+    "reason": null,
+    "broad_sweep": "paused; never automatically modified or resumed"
+  },
+  "submission.json": {
+    "job_id": "749551",
+    "submitted_at": 1794239013.0900996,
+    "deadline": 1794248424.3988118,
+    "slurm_time_limit_minutes": 156,
+    "quota": {
+      "used_gib": 51.4,
+      "limit_gib": 93.13,
+      "free_gib": 41.73,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  51.40GiB/93.13GiB  470.47k/\u221e  \n\n",
+      "checked_at": 1794239012.9043398
+    },
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--time=156",
+      "--chdir=/mnt/beegfsstudents/home/3160552/mni_nnunet_swin_bands_refine3h_53t_20261109",
+      "--output=/mnt/beegfsstudents/home/3160552/mni_nnunet_swin_bands_refine3h_53t_20261109/slurm-%j.out",
+      "--error=/mnt/beegfsstudents/home/3160552/mni_nnunet_swin_bands_refine3h_53t_20261109/slurm-%j.err",
+      "/mnt/beegfsstudents/home/3160552/mni_nnunet_swin_bands_refine3h_53t_20261109/run.sbatch",
+      "/mnt/beegfsstudents/home/3160552/mni_nnunet_swin_bands_refine3h_53t_20261109"
+    ],
+    "manifest_sha256": "5549801e2791222d507c2c464045705a2d2d7a49947b923ef7b980978cad5bc5",
+    "laptop_required": false,
+    "automatic_successor": false,
+    "broader_sweep_control": {
+      "pause": true,
+      "pilot_pause_owner": "mni_unet_delayed10_confirm53t_0519_20261109"
+    }
+  },
+  "ready": [],
+  "cleanup": [
+    "runs/MNI_nnunet_late30_f2s19/cleanup.json",
+    "runs/MNI_nnunet_late60_f2s0/cleanup.json",
+    "runs/MNI_swinunetr_early05_f0s19/cleanup.json",
+    "runs/MNI_nnunet_late30_f2s0/cleanup.json",
+    "runs/MNI_swinunetr_quarter10_f2s0/cleanup.json",
+    "runs/MNI_swinunetr_quarter05_f0s19/cleanup.json",
+    "runs/MNI_nnunet_late60_f1s5/cleanup.json",
+    "runs/MNI_swinunetr_half05_f2s0/cleanup.json",
+    "runs/MNI_nnunet_late30_f1s5/cleanup.json",
+    "runs/MNI_nnunet_early30_f2s19/cleanup.json",
+    "runs/MNI_nnunet_late60_f2s19/cleanup.json",
+    "runs/MNI_swinunetr_half10_f2s0/cleanup.json",
+    "runs/MNI_swinunetr_half10_f0s19/cleanup.json",
+    "runs/MNI_swinunetr_early05_f2s0/cleanup.json",
+    "runs/MNI_nnunet_early30_f1s5/cleanup.json",
+    "runs/MNI_swinunetr_half05_f0s19/cleanup.json",
+    "runs/MNI_swinunetr_quarter05_f2s0/cleanup.json",
+    "runs/MNI_nnunet_early30_f2s0/cleanup.json",
+    "runs/MNI_swinunetr_quarter10_f0s19/cleanup.json"
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "scope": "Synthetic FP32 logit-space mechanism check using actual project Dice and DiceCE implementations; not observed network gradients, no training or candidate selection.",
+  "created_at": 1794193123.327152,
+  "rows": [
+    {
+      "wrong_class_logit_gap": 2.0,
+      "ca4_mean_probability": 0.0962551161646843,
+      "dice": {
+        "loss": 0.39540743827819824,
+        "mean_abs_true_class_logit_gradient": 6.492539978353307e-05,
+        "mean_true_class_logit_gradient": -6.492539978353307e-05
+      },
+      "ce_component": {
+        "loss": 0.8407527208328247,
+        "mean_abs_true_class_logit_gradient": 0.0002206408098572865,
+        "mean_true_class_logit_gradient": -0.0002206408098572865
+      },
+      "dicece": {
+        "loss": 1.236160159111023,
+        "mean_abs_true_class_logit_gradient": 0.00028556628967635334,
+        "mean_true_class_logit_gradient": -0.00028556628967635334
+      }
+    },
+    {
+      "wrong_class_logit_gap": 8.0,
+      "ca4_mean_probability": 0.000335125281708315,
+      "dice": {
+        "loss": 0.44414687156677246,
+        "mean_abs_true_class_logit_gradient": 2.6657559715204115e-07,
+        "mean_true_class_logit_gradient": -2.6657559715204115e-07
+      },
+      "ce_component": {
+        "loss": 2.0010054111480713,
+        "mean_abs_true_class_logit_gradient": 0.00024405887234024704,
+        "mean_true_class_logit_gradient": -0.00024405887234024704
+      },
+      "dicece": {
+        "loss": 2.4451522827148438,
+        "mean_abs_true_class_logit_gradient": 0.0002443254634272307,
+        "mean_true_class_logit_gradient": -0.0002443254634272307
+      }
+    },
+    {
+      "wrong_class_logit_gap": 16.0,
+      "ca4_mean_probability": 1.1253517584464134e-07,
+      "dice": {
+        "loss": 0.4444441497325897,
+        "mean_abs_true_class_logit_gradient": 8.954617602974224e-11,
+        "mean_true_class_logit_gradient": -8.954617602974224e-11
+      },
+      "ce_component": {
+        "loss": 4.0,
+        "mean_abs_true_class_logit_gradient": 0.00024414061044808477,
+        "mean_true_class_logit_gradient": -0.00024414061044808477
+      },
+      "dicece": {
+        "loss": 4.444444179534912,
+        "mean_abs_true_class_logit_gradient": 0.00024414065410383046,
+        "mean_true_class_logit_gradient": -0.00024414065410383046
+      }
+    },
+    {
+      "wrong_class_logit_gap": 32.0,
+      "ca4_mean_probability": 1.266416069505439e-14,
+      "dice": {
+        "loss": 0.4444444179534912,
+        "mean_abs_true_class_logit_gradient": 1.007709886110582e-17,
+        "mean_true_class_logit_gradient": -1.007709886110582e-17
+      },
+      "ce_component": {
+        "loss": 8.0,
+        "mean_abs_true_class_logit_gradient": 0.000244140625,
+        "mean_true_class_logit_gradient": -0.000244140625
+      },
+      "dicece": {
+        "loss": 8.44444465637207,
+        "mean_abs_true_class_logit_gradient": 0.000244140625,
+        "mean_true_class_logit_gradient": -0.000244140625
+      }
+    }
+  ],
+  "arguments": {
+    "include_background": false,
+    "to_onehot_y": true,
+    "softmax": true,
+    "squared_pred": true,
+    "smooth_nr": 0.0,
+    "smooth_dr": 1e-06,
+    "lambda_dice": 1.0,
+    "lambda_ce": 1.0
+  },
+  "runtime_sha256": "819beccee053519c0f42b98eebffcec307f3eacfe41c1e32fcec22437e0e9c14",
+  "loss_sha256": "f04d74572dff2ad2727305de9e84d032f51fd9afb4d5d6bc9737cf84621d70f5",
+  "interpretation": "As confidently wrong logits suppress CA4 probability, Dice-only recovery gradients shrink while the dense CE component retains a recovery gradient. This is consistent with, but does not establish the complete causal path of, observed seed5 CA4 collapse."
+}

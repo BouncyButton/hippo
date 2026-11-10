@@ -1,0 +1,52 @@
+{
+  "status": "passed",
+  "reference_stage": "mni_n10_halfcap_nnunet_lr001_bands_f0s0_20261107",
+  "training_change": "Optimization budget and its matched timing only; LR0.01,architecture,loss,cohort,seed,augmentation,gradient target and p95 guard unchanged.",
+  "runs": [
+    {
+      "task": "MNI_nnunet_n10_baseline_f0s0",
+      "changed_fields": [
+        "budget_flops",
+        "data",
+        "lr_horizon_updates",
+        "lr_schedule_details",
+        "models",
+        "name",
+        "validation_target_flops"
+      ],
+      "updates": 269,
+      "passes": 13.45,
+      "prefix": 0,
+      "ramp": 1,
+      "lr_schedule": {
+        "policy": "hold_half",
+        "horizon_updates": 269,
+        "warmup_updates": 0,
+        "decay_start_index": 134
+      }
+    },
+    {
+      "task": "MNI_nnunet_n10_original_bands_f0s0",
+      "changed_fields": [
+        "budget_flops",
+        "constraint_warmup_updates",
+        "data",
+        "lr_horizon_updates",
+        "lr_schedule_details",
+        "models",
+        "name",
+        "validation_target_flops"
+      ],
+      "updates": 269,
+      "passes": 13.45,
+      "prefix": 27,
+      "ramp": 27,
+      "lr_schedule": {
+        "policy": "hold_half",
+        "horizon_updates": 269,
+        "warmup_updates": 0,
+        "decay_start_index": 134
+      }
+    }
+  ]
+}

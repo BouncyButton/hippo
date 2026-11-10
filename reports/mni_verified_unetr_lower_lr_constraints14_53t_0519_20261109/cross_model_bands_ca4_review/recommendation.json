@@ -1,0 +1,66 @@
+{
+  "status": "proposal_only_no_training_or_queue_changes",
+  "original_constraints": true,
+  "cap": 53305109592450,
+  "priority": [
+    {
+      "model": "nnunet",
+      "reason": "Only remaining model with negative aggregate bands gains:7/9positive; no large CA4collapse. Worst macro pair seed0/fold2 loses subiculum1.602pp while CA4 gains0.751pp.",
+      "screen_pairs": [
+        {
+          "seed": 0,
+          "fold": 2,
+          "role": "aggregate_failure"
+        },
+        {
+          "seed": 5,
+          "fold": 1,
+          "role": "aggregate_and_CA4_failure"
+        },
+        {
+          "seed": 19,
+          "fold": 2,
+          "role": "strong_positive_control"
+        }
+      ],
+      "test": "Timing/strength factorial with fixed SGD.02 base: existing20-update onset versus nearest50%optimization cap; calibrated target0.60 versus0.30. Recompute piecewise FLOPs schedule before any execution."
+    },
+    {
+      "model": "unetr_vit_b16",
+      "reason": "Current recipe9/9 aggregatepositive, but seed19 CA4 baseline29-32% and constrained34-37%; weak learning predates constraints.",
+      "screen_pairs": [
+        {
+          "seed": 19,
+          "fold": 1,
+          "role": "weak_class"
+        },
+        {
+          "seed": 0,
+          "fold": 1,
+          "role": "strong_control"
+        }
+      ],
+      "test": "Keep confirmed LR.0003 recipe as reference. Test later activation at fixed5% target first. If baseline-learning limitation persists, assess a less aggressive LR decay only with fresh matched unconstrained controls. Older readiness/window searches are not evidence for this exact lowerLR recipe."
+    },
+    {
+      "model": "swinunetr",
+      "reason": "9/9aggregatepositive; CA4 regressions3/9 are small, worst-0.344pp. No persistent collapse.",
+      "screen_pairs": [
+        {
+          "seed": 0,
+          "fold": 2,
+          "role": "largest_CA4_regression"
+        },
+        {
+          "seed": 19,
+          "fold": 0,
+          "role": "positive_CA4_control"
+        }
+      ],
+      "test": "Lower-priority timing refinement; preserve existing recipe unless both overall consistency and per-class balance improve."
+    }
+  ],
+  "promotion": "One frozen recipe per model across all seeds/folds; retain9/9 overall gains and assessCA4/allotherclasses plusFNFP/swaps. Compare absolute constrained Dice and current winning constrained recipe, not just gain over a changed baseline.",
+  "scope": "Bands-only evidence; combined constraints require separate confirmation before broad matrix.",
+  "notes": "No architecture or original constraint definition changes proposed. Broad sweep remains paused."
+}

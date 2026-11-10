@@ -1,0 +1,85 @@
+{
+  "status.json": {
+    "status": "complete",
+    "active": [],
+    "selected": {
+      "candidate": null,
+      "winner": null
+    },
+    "job_id": "748129",
+    "completed": 24,
+    "total": 81
+  },
+  "submission.json": {
+    "job_id": "748129",
+    "dependency": null,
+    "quota": {
+      "used_gib": 46.59,
+      "limit_gib": 93.13,
+      "free_gib": 46.53999999999999,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  46.59GiB/93.13GiB  435.04k/\u221e  \n\n",
+      "checked_at": 1794178167.0650327
+    },
+    "submitted_at": 1794178167.2895658,
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--chdir=/mnt/beegfsstudents/home/3160552/mni_unetr_simple_recipe53t_20261108",
+      "--output=/mnt/beegfsstudents/home/3160552/mni_unetr_simple_recipe53t_20261108/slurm-%j.out",
+      "--error=/mnt/beegfsstudents/home/3160552/mni_unetr_simple_recipe53t_20261108/slurm-%j.err",
+      "/mnt/beegfsstudents/home/3160552/mni_unetr_simple_recipe53t_20261108/run.sbatch",
+      "/mnt/beegfsstudents/home/3160552/mni_unetr_simple_recipe53t_20261108"
+    ],
+    "manifest_sha256": "73ffef089ae63b559afd107a8409029a25ac1ce1308da0b239e94d4b9b0b3682"
+  },
+  "successor.json": {
+    "job_id": "748132",
+    "dependency": "748129",
+    "quota": {
+      "used_gib": 46.59,
+      "limit_gib": 93.13,
+      "free_gib": 46.53999999999999,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  46.59GiB/93.13GiB  435.04k/\u221e  \n\n",
+      "checked_at": 1794178281.623209
+    },
+    "submitted_at": 1794178281.743491,
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--chdir=/mnt/beegfsstudents/home/3160552/mni_unetr_simple_recipe53t_20261108",
+      "--output=/mnt/beegfsstudents/home/3160552/mni_unetr_simple_recipe53t_20261108/slurm-%j.out",
+      "--error=/mnt/beegfsstudents/home/3160552/mni_unetr_simple_recipe53t_20261108/slurm-%j.err",
+      "--dependency=afterany:748129",
+      "/mnt/beegfsstudents/home/3160552/mni_unetr_simple_recipe53t_20261108/run.sbatch",
+      "/mnt/beegfsstudents/home/3160552/mni_unetr_simple_recipe53t_20261108"
+    ],
+    "manifest_sha256": "73ffef089ae63b559afd107a8409029a25ac1ce1308da0b239e94d4b9b0b3682"
+  },
+  "ready": [],
+  "cleanup": [
+    "runs/MNI_unetr_plain_dice_bands_edge_sdf_depth_f1s0/cleanup.json",
+    "runs/MNI_unetr_nodrop_dice_f1s0/cleanup.json",
+    "runs/MNI_unetr_nodrop_dice_f2s0/cleanup.json",
+    "runs/MNI_unetr_plain_dice_f0s5/cleanup.json",
+    "runs/MNI_unetr_nodrop_dice_bands_f2s0/cleanup.json",
+    "runs/MNI_unetr_nodrop_dice_bands_f0s5/cleanup.json",
+    "runs/MNI_unetr_nodrop_dice_bands_edge_sdf_depth_f1s0/cleanup.json",
+    "runs/MNI_unetr_noaug_dice_bands_f1s0/cleanup.json",
+    "runs/MNI_unetr_noaug_dice_bands_edge_sdf_depth_f2s0/cleanup.json",
+    "runs/MNI_unetr_noaug_dice_bands_edge_sdf_depth_f1s0/cleanup.json",
+    "runs/MNI_unetr_plain_dice_f1s0/cleanup.json",
+    "runs/MNI_unetr_noaug_dice_bands_f2s0/cleanup.json",
+    "runs/MNI_unetr_plain_dice_bands_edge_sdf_depth_f2s0/cleanup.json",
+    "runs/MNI_unetr_plain_dice_bands_edge_sdf_depth_f0s5/cleanup.json",
+    "runs/MNI_unetr_nodrop_dice_bands_f0s19/cleanup.json",
+    "runs/MNI_unetr_nodrop_dice_f0s5/cleanup.json",
+    "runs/MNI_unetr_nodrop_dice_bands_edge_sdf_depth_f0s5/cleanup.json",
+    "runs/MNI_unetr_nodrop_dice_bands_f1s0/cleanup.json",
+    "runs/MNI_unetr_noaug_dice_f2s0/cleanup.json",
+    "runs/MNI_unetr_plain_dice_bands_f1s0/cleanup.json",
+    "runs/MNI_unetr_nodrop_dice_bands_edge_sdf_depth_f2s0/cleanup.json",
+    "runs/MNI_unetr_nodrop_dice_f0s19/cleanup.json",
+    "runs/MNI_unetr_noaug_dice_f1s0/cleanup.json",
+    "runs/MNI_unetr_plain_dice_f2s0/cleanup.json"
+  ]
+}

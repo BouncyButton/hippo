@@ -1,0 +1,26 @@
+{
+  "status": "submitted_after_prior_exhaustion",
+  "created_at": 1794193294.881181,
+  "base_loss": "foreground squared Dice +0.25 denseCE",
+  "rationale": "Dice-only yields positive bands gains in first3pairs but seed5fold0 loses CA4 on training and validation. Retain a smaller nonzero CE recovery signal while reducing its dominance versus prior DiceCE1:1. Quarter weight is one shared prespecified next hypothesis, not fitted per seed/fold.",
+  "constants": "Plain dropout0/noaugmentation; LR0.0006 hold-half; original delayed5% constraints; same53.305Toptimizationcap; seeds0/5/19 andall3folds; twoGPUworkers; fresh same-loss controls.",
+  "condition": "Only after current frozen Dice-only study resolves and its absolute-performance assessment is documented. No GPU training is launched by preparation.",
+  "next": "Measure actual optimizer/objective/calibration FLOPs and test loss/gradient identity before any future study.",
+  "profile_sha256": "3ec853212df8f44d4792aac547fed49f83139daae962486492ee0d31b368f710",
+  "update_flops": 130103216359,
+  "updates": 409,
+  "test": "test_unetr_ce025: exactbasevalue/gradient,13zeroauxidentities/calibrationbase,othermodelisolation,actualmodel,14schedules409,45tasks,partial-priorpreparationgaterejected",
+  "files_sha256": {
+    "unetr_ce025_runtime.py": "53abec04bfd15a7ce65e7b37f84dcb95d1999be4e3b63298b186604009738785",
+    "profile_unetr_ce025.py": "8546dfef30a535c11df25ac7a7dc684fee89f4ea9484d03051352fde26f4b432",
+    "test_unetr_ce025.py": "c8d924324aac1124847986b0cf713883e043c331751c706929af5a2e4f6e174f",
+    "unetr_plain_ce025_study.py": "75d8143b8260fd6090155cc37ddb79f9b03ab480650247fcd32b6dd650645a6b",
+    "analyze_unetr_plain_ce025_study.py": "246ec02f88e1873f80cfba1d029d7bf1314cffcf4e8d8e962969ec879fef32bc",
+    "launch_unetr_plain_ce025_study.py": "356a432dc2656d1a81d2f7d3b783afe57c92f8951f50e923c4ed5f8cadd99843",
+    "monitor_unetr_plain_ce025_study.py": "cb31ee623c0f927e7fda21893672a307742d3f9cd28009cb35318713e30018b1"
+  },
+  "job_id": "748459",
+  "monitor_exec_session": 13907,
+  "manifest_sha256": "6ff32681fb2032e6d890eae14d39b59cbbb588b16df38eea8f94d2037a4660f7",
+  "collector_pid": 51288
+}

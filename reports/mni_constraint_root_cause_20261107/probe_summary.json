@@ -1,0 +1,260 @@
+{
+  "MNI_swinunetr_dice_bands_edge_t05_f0s0": {
+    "model": "swinunetr",
+    "step": 973,
+    "scale": 1.0,
+    "parameter_probe": {
+      "case": "hippocampus_mni_s03_L",
+      "base_norm": 0.3306520980947804,
+      "weighted_bands_norm": 0.021199659170426124,
+      "ratio": 0.06411469726815194,
+      "cosine": 0.8717958757357918,
+      "mode": "eval, first fixed training crop; not Adam-preconditioned update influence"
+    },
+    "splits": {
+      "training": {
+        "cases": 10,
+        "errors": {
+          "fn": 341,
+          "fp": 360,
+          "swaps": 28
+        },
+        "in_band": {
+          "fn": 340,
+          "fp": 360,
+          "swaps": 16
+        },
+        "external_coverage": 0.9985734664764622,
+        "swap_coverage": 0.5714285714285714,
+        "bands_ratio_median": 0.082688432991912,
+        "bands_actual_ramped_ratio_median": 0.082688432991912,
+        "bands_cosine_median": 0.6926606989384567,
+        "losses_mean": {
+          "base": 0.013623416423797607,
+          "bands": 0.056678633019328115,
+          "edge": 0.024375182390213013
+        },
+        "base_corrective_direction_reversals": 0,
+        "swap_margin": {
+          "base": {
+            "improved": 16,
+            "worsened": 0,
+            "unchanged": 0,
+            "sum": 0.0010769941291073337
+          },
+          "bands": {
+            "improved": 0,
+            "worsened": 16,
+            "unchanged": 0,
+            "sum": -9.197042421860147e-06
+          },
+          "weighted_bands": {
+            "improved": 0,
+            "worsened": 16,
+            "unchanged": 0,
+            "sum": -1.7665399140720517e-07
+          },
+          "combined": {
+            "improved": 16,
+            "worsened": 0,
+            "unchanged": 0,
+            "sum": 0.0010767205318416018
+          },
+          "categorical_equal_norm": {
+            "improved": 16,
+            "worsened": 0,
+            "unchanged": 0,
+            "sum": 0.0030749574507353827
+          }
+        },
+        "union_positive_but_argmax_bg": 73
+      },
+      "validation": {
+        "cases": 10,
+        "errors": {
+          "fn": 9599,
+          "fp": 5237,
+          "swaps": 5031
+        },
+        "in_band": {
+          "fn": 9064,
+          "fp": 4797,
+          "swaps": 2924
+        },
+        "external_coverage": 0.9342814774871934,
+        "swap_coverage": 0.5811965811965812,
+        "bands_ratio_median": 0.050386997265043566,
+        "bands_actual_ramped_ratio_median": 0.050386997265043566,
+        "bands_cosine_median": 0.2499161404699516,
+        "losses_mean": {
+          "base": 0.2268013596534729,
+          "bands": 0.5692064166069031,
+          "edge": 0.1774762451648712
+        },
+        "base_corrective_direction_reversals": 0,
+        "swap_margin": {
+          "base": {
+            "improved": 2918,
+            "worsened": 6,
+            "unchanged": 0,
+            "sum": 0.158517868310744
+          },
+          "bands": {
+            "improved": 0,
+            "worsened": 2923,
+            "unchanged": 1,
+            "sum": -0.018983198619043906
+          },
+          "weighted_bands": {
+            "improved": 0,
+            "worsened": 2923,
+            "unchanged": 1,
+            "sum": -0.0003646234980563571
+          },
+          "combined": {
+            "improved": 2918,
+            "worsened": 6,
+            "unchanged": 0,
+            "sum": 0.15797816842478873
+          },
+          "categorical_equal_norm": {
+            "improved": 2924,
+            "worsened": 0,
+            "unchanged": 0,
+            "sum": 0.6336905495845713
+          }
+        },
+        "union_positive_but_argmax_bg": 438
+      }
+    }
+  },
+  "MNI_unetr_vit_b16_dice_bands_edge_t05_f0s0": {
+    "model": "unetr_vit_b16",
+    "step": 350,
+    "scale": 0.7766497461928934,
+    "parameter_probe": {
+      "case": "hippocampus_mni_s03_L",
+      "base_norm": 1.263129379327331,
+      "weighted_bands_norm": 0.0575699341532021,
+      "ratio": 0.045577226763469376,
+      "cosine": 0.6995195843290484,
+      "mode": "eval, first fixed training crop; not Adam-preconditioned update influence"
+    },
+    "splits": {
+      "training": {
+        "cases": 10,
+        "errors": {
+          "fn": 7895,
+          "fp": 5240,
+          "swaps": 5056
+        },
+        "in_band": {
+          "fn": 7805,
+          "fp": 4935,
+          "swaps": 3039
+        },
+        "external_coverage": 0.9699276741530263,
+        "swap_coverage": 0.6010680379746836,
+        "bands_ratio_median": 0.05402946600367574,
+        "bands_actual_ramped_ratio_median": 0.0419619736658219,
+        "bands_cosine_median": 0.37253485070318193,
+        "losses_mean": {
+          "base": 0.2928930908441544,
+          "bands": 0.36825391054153445,
+          "edge": 0.14339408576488494
+        },
+        "base_corrective_direction_reversals": 0,
+        "swap_margin": {
+          "base": {
+            "improved": 3035,
+            "worsened": 4,
+            "unchanged": 0,
+            "sum": 0.3394666342246637
+          },
+          "bands": {
+            "improved": 0,
+            "worsened": 3038,
+            "unchanged": 1,
+            "sum": -0.021650952045490612
+          },
+          "weighted_bands": {
+            "improved": 0,
+            "worsened": 3038,
+            "unchanged": 1,
+            "sum": -0.0006186991727172853
+          },
+          "combined": {
+            "improved": 3035,
+            "worsened": 4,
+            "unchanged": 0,
+            "sum": 0.3385777799576317
+          },
+          "categorical_equal_norm": {
+            "improved": 3039,
+            "worsened": 0,
+            "unchanged": 0,
+            "sum": 0.5399370767336222
+          }
+        },
+        "union_positive_but_argmax_bg": 1868
+      },
+      "validation": {
+        "cases": 10,
+        "errors": {
+          "fn": 13398,
+          "fp": 5653,
+          "swaps": 5161
+        },
+        "in_band": {
+          "fn": 12163,
+          "fp": 4697,
+          "swaps": 2820
+        },
+        "external_coverage": 0.884992913757808,
+        "swap_coverage": 0.5464057353226119,
+        "bands_ratio_median": 0.05540314550202691,
+        "bands_actual_ramped_ratio_median": 0.04302884160828688,
+        "bands_cosine_median": 0.35147147909227294,
+        "losses_mean": {
+          "base": 0.35360689759254454,
+          "bands": 0.4576787829399109,
+          "edge": 0.15022116154432297
+        },
+        "base_corrective_direction_reversals": 0,
+        "swap_margin": {
+          "base": {
+            "improved": 2818,
+            "worsened": 2,
+            "unchanged": 0,
+            "sum": 0.31905956325499574
+          },
+          "bands": {
+            "improved": 0,
+            "worsened": 2817,
+            "unchanged": 3,
+            "sum": -0.02232036317829511
+          },
+          "weighted_bands": {
+            "improved": 0,
+            "worsened": 2817,
+            "unchanged": 3,
+            "sum": -0.0006378283119596873
+          },
+          "combined": {
+            "improved": 2818,
+            "worsened": 2,
+            "unchanged": 0,
+            "sum": 0.3181272716483363
+          },
+          "categorical_equal_norm": {
+            "improved": 2820,
+            "worsened": 0,
+            "unchanged": 0,
+            "sum": 0.5231290528754471
+          }
+        },
+        "union_positive_but_argmax_bg": 2622
+      }
+    }
+  }
+}

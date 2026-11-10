@@ -1,0 +1,57 @@
+{
+  "recorded_at": 1794222948.9118028,
+  "pairs_analyzed": 8,
+  "finding": "Whole-hippocampus boundary improvements coexist with delayed CA4/DG learning and subfield misclassification. Seed5 failures are predominantly CA4/DG failures on both training and validation.",
+  "leading_mechanistic_hypothesis": "Early union-only bands interacts with the Dice-only base trajectory: union supervision cannot distinguish foreground subfields, and its inner-band logit gradients can reinforce an already dominant incorrect foreground class. The weak CA4/DG probability recovers late under the decaying learning rate.",
+  "verified_observations": {
+    "all_available_union_dice_gains_positive": true,
+    "seed5_ca4_dice_declines_all3folds": true,
+    "identical_first_logged_metrics_all_pairs": true,
+    "same_data_within_fold_across_seeds": true,
+    "training_only_calibration_after_updates": 76,
+    "calibration_target": 0.1,
+    "constraint_ramp_updates": 76,
+    "baseline_updates": 939,
+    "bands_updates": 938,
+    "fixed_optimization_flops_cap": 53305109592450,
+    "discarded_updates": 0
+  },
+  "limitations": [
+    "Archived logit probes do not measure parameter-gradient conflict or actual Adam update direction.",
+    "The invariant and gradient probes are synthetic CPU algebra checks of frozen loss code, not replays of the failed training trajectories.",
+    "Matched fixed-FLOPs arms have a one-update and slightly different cosine-horizon difference; they are not exactly update-matched counterfactuals.",
+    "A repaired recipe has not been demonstrated. Existing completed checkpoints were already cleaned under the storage policy."
+  ],
+  "next_controlled_test": {
+    "purpose": "Separate timing from constraint strength while preserving the original bands definition.",
+    "screen_pairs": [
+      {
+        "seed": 5,
+        "fold": 1,
+        "role": "failure"
+      },
+      {
+        "seed": 0,
+        "fold": 1,
+        "role": "positive control"
+      }
+    ],
+    "timing_levels": [
+      "existing76-update activation",
+      "activation near50% of the optimization budget"
+    ],
+    "target_levels": [
+      0.1,
+      0.05
+    ],
+    "controls": "Identical base recipe and fixed cap; fresh training-only calibration at each activation. Include schedule-matched no-bands control if isolating exact causal effect. Profile each schedule before launch.",
+    "fallback": "If timing/strength cannot restore CA4/DG, test a Dice+CE base with its own unconstrained control; do not compare the changed recipe only against the old Dice-only baseline.",
+    "status": "Recommendation only; no training job or live recipe modified."
+  },
+  "artifacts": {
+    "analysis.json": "ff5577ab99ab73828d2b75ad9159081fcfc0741cb68db21ac2590ec1e646d1e6",
+    "union_loss_probe.json": "f6a8ff43ea69e31711882bcb1fca754b13e4d289836694535d0e4b752c68446e",
+    "seed5_fold1_curves.png": "59b48e5a53f900f578177f3cec2a455b479ad97acdb72851bdb0062c6420fb8b",
+    "seed5_fold1_curves.pdf": "6365baca366e80f11764b38a39f86d3ff77eb656dadd0084317130a98cd0a51c"
+  }
+}

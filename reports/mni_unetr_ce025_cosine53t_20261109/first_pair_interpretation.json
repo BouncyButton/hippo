@@ -1,0 +1,45 @@
+{
+  "status": "partial",
+  "rows": [
+    {
+      "candidate": "ce025_cosine_full",
+      "gain_pp": -0.012094096368020502,
+      "training_gain_pp": 0.3096525272901829,
+      "union_gain_pp": 0.30162168748483964,
+      "subfield_gain_pp": {
+        "CA1_3_hard_dice": 0.36887296558155924,
+        "subiculum_hard_dice": -0.12529773159667457,
+        "CA4_DG_hard_dice": -0.2798575230889355
+      },
+      "error_delta": {
+        "fn": 108,
+        "fp": -488,
+        "swaps": 37
+      },
+      "absolute_gain_vs_prior_plain_baseline_pp": -0.8953749597520044,
+      "absolute_gain_vs_old_baseline_pp": 2.8261470867476675
+    },
+    {
+      "candidate": "ce025_cosine_bands",
+      "gain_pp": 0.4607906036576237,
+      "training_gain_pp": 0.020360088996085324,
+      "union_gain_pp": 0.3281521193120369,
+      "subfield_gain_pp": {
+        "CA1_3_hard_dice": 0.45338953795769044,
+        "subiculum_hard_dice": 0.18197408334576437,
+        "CA4_DG_hard_dice": 0.7470081896693728
+      },
+      "error_delta": {
+        "fn": -52,
+        "fp": -300,
+        "swaps": -52
+      },
+      "absolute_gain_vs_prior_plain_baseline_pp": -0.42249025972635934,
+      "absolute_gain_vs_old_baseline_pp": 3.2990317867733125
+    }
+  ],
+  "shared_anchor_sha256": "f27d3d2d66e02f7a1676e5b1b39be3e1657d644d862713be9f182c773bb58844",
+  "identical_bands_weight": 0.02830206609456087,
+  "interpretation": "Bands-only improves the first matched pair while full constraints do not. Same102-update model and band coefficient; adding original edge/SDF/depth changes the final trajectory. This is not an isolated effect of any one extra term. Bands still below stronger plain hold-half baseline on this pair; require all9positive gains and assess absolute performance.",
+  "next": "Seed0fold2 baseline andbands active; no fallback or fullmatrix launch."
+}

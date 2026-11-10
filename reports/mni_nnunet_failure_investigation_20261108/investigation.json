@@ -1,0 +1,429 @@
+{
+  "status": "investigation_complete_no_training_changes",
+  "stopped_campaign": "/Users/filippofocaccia/Desktop/hippo/reports/mni_common0519_shared53t_3fold_20261108",
+  "confirmed_findings": [
+    "Seed19 predicts zero CA4/DG voxels on both training and validation at121updates, while whole-hippocampus Dice is high.",
+    "Data and split are identical across seeds0,5,19; successful seeds learn CA4/DG.",
+    "CA4/DG is present in every training crop at every supervised resolution64/32/16. The8-resolution head has zero loss weight.",
+    "Native-loss CPU test gives gradients that increase the correct CA4/DG logit at all active scales; improving CA4/DG logits lowers the loss.",
+    "nnUNet gets121updates at43T or150 at53T; other architectures receive more updates and use AdamW rather than its SGD."
+  ],
+  "leading_hypothesis": "Seed-dependent delayed learning of the smallest subfield under a very short compute-limited SGD/Dice+CE recipe; strong voxel imbalance is a plausible contributor. Relative causal effects of initialization, sample order, CE weighting, optimizer and clipping are not isolated.",
+  "not_established": [
+    "No claim that SGD alone is responsible.",
+    "No complete proof that a larger cap alone rescues seed19.",
+    "No parameter-gradient or clipping-frequency measurements were retained from these training runs.",
+    "Local loss-routing check uses CPU torch2.2.2, not a reproduction of cluster BF16 torch2.12.1 training."
+  ],
+  "seed_comparison": [
+    {
+      "seed": 0,
+      "fold": 0,
+      "updates": 121,
+      "training_summary": {
+        "macro_hard_dice": 0.6589904443007891,
+        "CA1_3_hard_dice": 0.6508321761821584,
+        "CA1_3_soft_dice": 0.5113031819462777,
+        "subiculum_hard_dice": 0.6869636789593841,
+        "subiculum_soft_dice": 0.6210252463817596,
+        "CA4_DG_hard_dice": 0.6391754777608251,
+        "CA4_DG_soft_dice": 0.47997753173112867,
+        "macro_soft_dice": 0.537435320019722,
+        "whole_hippocampus_hard_dice": 0.8287890241817932
+      },
+      "validation_summary": {
+        "macro_hard_dice": 0.6257590341384677,
+        "CA1_3_hard_dice": 0.6333165230622212,
+        "CA1_3_soft_dice": 0.5038529306650161,
+        "subiculum_hard_dice": 0.6766993463497852,
+        "subiculum_soft_dice": 0.6104664921760559,
+        "CA4_DG_hard_dice": 0.5672612330033967,
+        "CA4_DG_soft_dice": 0.43189218640327454,
+        "macro_soft_dice": 0.5154038697481155,
+        "whole_hippocampus_hard_dice": 0.8070295851207614
+      },
+      "training_class_counts": [
+        5151436,
+        55321,
+        26380,
+        9743
+      ],
+      "validation_confusion": [
+        [
+          2566778,
+          4473,
+          1579,
+          815
+        ],
+        [
+          8538,
+          17798,
+          1660,
+          1864
+        ],
+        [
+          2279,
+          2353,
+          8512,
+          160
+        ],
+        [
+          9,
+          1556,
+          113,
+          2953
+        ]
+      ],
+      "predicted_CA4_DG_voxels": 5792,
+      "true_CA4_DG_voxels": 4631,
+      "CA4_DG_prediction_distribution_pct": [
+        0.19434247462751025,
+        33.59965450226733,
+        2.440077736989851,
+        63.76592528611531
+      ],
+      "source": "/Users/filippofocaccia/Desktop/hippo/reports/mni_seed19_all_models_shared43t_20261108/frozen/controls/MNI_nnunet_dice_f0s0"
+    },
+    {
+      "seed": 5,
+      "fold": 0,
+      "updates": 121,
+      "training_summary": {
+        "macro_hard_dice": 0.6937733297386367,
+        "CA1_3_hard_dice": 0.6661907758772337,
+        "CA1_3_soft_dice": 0.6280092865228653,
+        "subiculum_hard_dice": 0.6787834239727487,
+        "subiculum_soft_dice": 0.6330757737159729,
+        "CA4_DG_hard_dice": 0.7363457893659278,
+        "CA4_DG_soft_dice": 0.6572399437427521,
+        "macro_soft_dice": 0.6394416679938633,
+        "whole_hippocampus_hard_dice": 0.8463516911344184
+      },
+      "validation_summary": {
+        "macro_hard_dice": 0.6760167920506486,
+        "CA1_3_hard_dice": 0.644887734539869,
+        "CA1_3_soft_dice": 0.6080816388130188,
+        "subiculum_hard_dice": 0.6607052251961432,
+        "subiculum_soft_dice": 0.6158401250839234,
+        "CA4_DG_hard_dice": 0.7224574164159335,
+        "CA4_DG_soft_dice": 0.6290949165821076,
+        "macro_soft_dice": 0.6176722268263499,
+        "whole_hippocampus_hard_dice": 0.8122340390739066
+      },
+      "training_class_counts": [
+        5151436,
+        55321,
+        26380,
+        9743
+      ],
+      "validation_confusion": [
+        [
+          2565837,
+          5414,
+          2204,
+          190
+        ],
+        [
+          7352,
+          17905,
+          3407,
+          1196
+        ],
+        [
+          2332,
+          1417,
+          9409,
+          146
+        ],
+        [
+          111,
+          898,
+          125,
+          3497
+        ]
+      ],
+      "predicted_CA4_DG_voxels": 5029,
+      "true_CA4_DG_voxels": 4631,
+      "CA4_DG_prediction_distribution_pct": [
+        2.3968905204059596,
+        19.391060246167136,
+        2.699201036493198,
+        75.5128481969337
+      ],
+      "source": "/Users/filippofocaccia/Desktop/hippo/reports/mni_seed19_all_models_shared43t_20261108/frozen/controls/MNI_nnunet_dice_f0s5"
+    },
+    {
+      "seed": 19,
+      "fold": 0,
+      "updates": 121,
+      "training_summary": {
+        "macro_hard_dice": 0.43335209566995464,
+        "CA1_3_hard_dice": 0.6417928448602941,
+        "CA1_3_soft_dice": 0.5592986881732941,
+        "subiculum_hard_dice": 0.6582634421495696,
+        "subiculum_soft_dice": 0.5995854377746582,
+        "CA4_DG_hard_dice": 0.0,
+        "CA4_DG_soft_dice": 0.11224380992352963,
+        "macro_soft_dice": 0.42370931195716066,
+        "whole_hippocampus_hard_dice": 0.8449955975222739
+      },
+      "validation_summary": {
+        "macro_hard_dice": 0.42901842868957385,
+        "CA1_3_hard_dice": 0.6318509067350547,
+        "CA1_3_soft_dice": 0.5484532177448272,
+        "subiculum_hard_dice": 0.6552043793336668,
+        "subiculum_soft_dice": 0.5944836854934692,
+        "CA4_DG_hard_dice": 0.0,
+        "CA4_DG_soft_dice": 0.11265371069312095,
+        "macro_soft_dice": 0.4185302046438058,
+        "whole_hippocampus_hard_dice": 0.8184743526284075
+      },
+      "training_class_counts": [
+        5151436,
+        55321,
+        26380,
+        9743
+      ],
+      "validation_confusion": [
+        [
+          2565591,
+          5730,
+          2324,
+          0
+        ],
+        [
+          6935,
+          19121,
+          3804,
+          0
+        ],
+        [
+          2158,
+          1510,
+          9636,
+          0
+        ],
+        [
+          39,
+          4292,
+          300,
+          0
+        ]
+      ],
+      "predicted_CA4_DG_voxels": 0,
+      "true_CA4_DG_voxels": 4631,
+      "CA4_DG_prediction_distribution_pct": [
+        0.8421507233858778,
+        92.67976678903045,
+        6.478082487583675,
+        0.0
+      ],
+      "source": "/Users/filippofocaccia/Desktop/hippo/reports/mni_seed19_all_models_shared43t_20261108/runs/MNI_nnunet_dice_f0s19"
+    }
+  ],
+  "completed_53t_runs": [
+    {
+      "id": "MNI_basic_unet16_dice_f0s19",
+      "model": "basic_unet16",
+      "seed": 19,
+      "fold": 0,
+      "validation_pct": 65.78361120120883,
+      "old_validation_pct": 56.1152332070784,
+      "gain_pp": 9.668377994130427,
+      "training_summary": {
+        "macro_hard_dice": 0.7384765884048,
+        "CA1_3_hard_dice": 0.7217723238787219,
+        "CA1_3_soft_dice": 0.10586857050657272,
+        "subiculum_hard_dice": 0.6323588716959351,
+        "subiculum_soft_dice": 0.06929653063416481,
+        "CA4_DG_hard_dice": 0.861298569639743,
+        "CA4_DG_soft_dice": 0.045945961773395536,
+        "macro_soft_dice": 0.07370368763804436,
+        "whole_hippocampus_hard_dice": 0.732485856396887
+      },
+      "validation_summary": {
+        "macro_hard_dice": 0.6578361120120882,
+        "CA1_3_hard_dice": 0.6928132795236006,
+        "CA1_3_soft_dice": 0.10317251235246658,
+        "subiculum_hard_dice": 0.574652383550015,
+        "subiculum_soft_dice": 0.06265172995626926,
+        "CA4_DG_hard_dice": 0.706042672962649,
+        "CA4_DG_soft_dice": 0.03832386359572411,
+        "macro_soft_dice": 0.06804936863482,
+        "whole_hippocampus_hard_dice": 0.739255319707776
+      },
+      "released_bytes": 28975696
+    },
+    {
+      "id": "MNI_nnunet_dice_f0s19",
+      "model": "nnunet",
+      "seed": 19,
+      "fold": 0,
+      "validation_pct": 45.478607418084344,
+      "old_validation_pct": 42.90184286895739,
+      "gain_pp": 2.576764549126959,
+      "training_summary": {
+        "macro_hard_dice": 0.4666406294550093,
+        "CA1_3_hard_dice": 0.6739221010433407,
+        "CA1_3_soft_dice": 0.6018159598112106,
+        "subiculum_hard_dice": 0.704107134793025,
+        "subiculum_soft_dice": 0.6607206642627717,
+        "CA4_DG_hard_dice": 0.02189265252866226,
+        "CA4_DG_soft_dice": 0.3168042480945587,
+        "macro_soft_dice": 0.5264469573895136,
+        "whole_hippocampus_hard_dice": 0.8504700358349355
+      },
+      "validation_summary": {
+        "macro_hard_dice": 0.45478607418084344,
+        "CA1_3_hard_dice": 0.6516179140396543,
+        "CA1_3_soft_dice": 0.5779051065444947,
+        "subiculum_hard_dice": 0.6890099689817053,
+        "subiculum_soft_dice": 0.6440256834030151,
+        "CA4_DG_hard_dice": 0.023730339521170592,
+        "CA4_DG_soft_dice": 0.29661389291286466,
+        "macro_soft_dice": 0.5061815609534581,
+        "whole_hippocampus_hard_dice": 0.8119554350042038
+      },
+      "released_bytes": 525339346
+    },
+    {
+      "id": "MNI_nnunet_dice_f1s19",
+      "model": "nnunet",
+      "seed": 19,
+      "fold": 1,
+      "validation_pct": 48.40999628581204,
+      "old_validation_pct": 41.05419304351876,
+      "gain_pp": 7.355803242293285,
+      "training_summary": {
+        "macro_hard_dice": 0.5177462065263471,
+        "CA1_3_hard_dice": 0.6871473539928925,
+        "CA1_3_soft_dice": 0.609311866760254,
+        "subiculum_hard_dice": 0.7097429275398454,
+        "subiculum_soft_dice": 0.6662082880735397,
+        "CA4_DG_hard_dice": 0.15634833804630324,
+        "CA4_DG_soft_dice": 0.3265478491783142,
+        "macro_soft_dice": 0.534022668004036,
+        "whole_hippocampus_hard_dice": 0.8562559415101763
+      },
+      "validation_summary": {
+        "macro_hard_dice": 0.4840999628581204,
+        "CA1_3_hard_dice": 0.6518299192621508,
+        "CA1_3_soft_dice": 0.5748928546905517,
+        "subiculum_hard_dice": 0.638197592678831,
+        "subiculum_soft_dice": 0.605064594745636,
+        "CA4_DG_hard_dice": 0.16227237663337912,
+        "CA4_DG_soft_dice": 0.3083981335163116,
+        "macro_soft_dice": 0.49611852765083314,
+        "whole_hippocampus_hard_dice": 0.8353344879776966
+      },
+      "released_bytes": 525339346
+    },
+    {
+      "id": "MNI_swinunetr_dice_f0s19",
+      "model": "swinunetr",
+      "seed": 19,
+      "fold": 0,
+      "validation_pct": 75.46145877731301,
+      "old_validation_pct": 73.88177732117886,
+      "gain_pp": 1.5796814561341632,
+      "training_summary": {
+        "macro_hard_dice": 0.7658796870238842,
+        "CA1_3_hard_dice": 0.7683205123648752,
+        "CA1_3_soft_dice": 0.22308295369148254,
+        "subiculum_hard_dice": 0.7400446860026646,
+        "subiculum_soft_dice": 0.1457260623574257,
+        "CA4_DG_hard_dice": 0.7892738627041128,
+        "CA4_DG_soft_dice": 0.09679699987173081,
+        "macro_soft_dice": 0.15520200530687966,
+        "whole_hippocampus_hard_dice": 0.8559024284239134
+      },
+      "validation_summary": {
+        "macro_hard_dice": 0.7546145877731302,
+        "CA1_3_hard_dice": 0.7682012350856792,
+        "CA1_3_soft_dice": 0.22594808489084245,
+        "subiculum_hard_dice": 0.7402912789202182,
+        "subiculum_soft_dice": 0.14380188435316085,
+        "CA4_DG_hard_dice": 0.7553512493134928,
+        "CA4_DG_soft_dice": 0.09046525433659554,
+        "macro_soft_dice": 0.15340507452686628,
+        "whole_hippocampus_hard_dice": 0.8522009127836105
+      },
+      "released_bytes": 336994004
+    },
+    {
+      "id": "MNI_unetr_vit_b16_dice_f0s19",
+      "model": "unetr_vit_b16",
+      "seed": 19,
+      "fold": 0,
+      "validation_pct": 68.39866263598401,
+      "old_validation_pct": 63.56732027117291,
+      "gain_pp": 4.831342364811098,
+      "training_summary": {
+        "macro_hard_dice": 0.7165949491982028,
+        "CA1_3_hard_dice": 0.7249643703770541,
+        "CA1_3_soft_dice": 0.352815280854702,
+        "subiculum_hard_dice": 0.720827490149244,
+        "subiculum_soft_dice": 0.19610156565904618,
+        "CA4_DG_hard_dice": 0.7039929870683101,
+        "CA4_DG_soft_dice": 0.07183289732784033,
+        "macro_soft_dice": 0.2069165812805295,
+        "whole_hippocampus_hard_dice": 0.8529021415783203
+      },
+      "validation_summary": {
+        "macro_hard_dice": 0.6839866263598401,
+        "CA1_3_hard_dice": 0.688804963311801,
+        "CA1_3_soft_dice": 0.34205789864063263,
+        "subiculum_hard_dice": 0.682843381786136,
+        "subiculum_soft_dice": 0.18262783139944078,
+        "CA4_DG_hard_dice": 0.6803115339815833,
+        "CA4_DG_soft_dice": 0.0690493393689394,
+        "macro_soft_dice": 0.19791168980300428,
+        "whole_hippocampus_hard_dice": 0.8207944643487941
+      },
+      "released_bytes": 1853967134
+    }
+  ],
+  "training_class_distribution_pct": [
+    98.25584411621094,
+    1.0551643371582031,
+    0.5031585693359375,
+    0.18583297729492188
+  ],
+  "label_scale_audit_sha256": "c6686ebb1f5739e9aa0bc57f99e2a8be8406c5fce9623aeb2fc1608809859ced",
+  "loss_routing_check_sha256": "de2fcf2b78c3f405a9a7b1ea02145f1f2df1e9445b7bee5c774af809dd065c96",
+  "official_nnUNet_source": "https://github.com/MIC-DKFZ/nnUNet/blob/master/nnunetv2/training/nnUNetTrainer/nnUNetTrainer.py",
+  "next_diagnostic": "One fixed seed19/fold0 diagnostic with logged per-class Dice, separate Dice/CE gradients and clipping frequency, followed by one controlled optimizer-or-loss ablation; no new job submitted.",
+  "padding_effect": {
+    "native_shape": [
+      40,
+      56,
+      48
+    ],
+    "padded_shape": [
+      64,
+      64,
+      64
+    ],
+    "volume_multiplier": 2.4380952380952383,
+    "native_training_CA4_DG_pct": 0.45307849702380953,
+    "padded_training_CA4_DG_pct": 0.18583297729492188
+  },
+  "model_updates_at43T": {
+    "nnunet": 121,
+    "swinunetr": 277,
+    "unetr_vit_b16": 330,
+    "basic_unet16": 757
+  },
+  "model_patient_passes_at43T": {
+    "nnunet": 6.05,
+    "swinunetr": 13.85,
+    "unetr_vit_b16": 16.5,
+    "basic_unet16": 37.85
+  },
+  "comparison_loss_recipes": {
+    "nnunet": "Native foreground Dice+unweighted CE, deep supervision; SGD/Nesterov0.95",
+    "swinunetr": "Mean negative-log squared Dice over all4classes, no CE; AdamW",
+    "unetr_vit_b16": "Foreground squared Dice+CE; AdamW",
+    "basic_unet16": "MONAI Dice including background; AdamW"
+  }
+}

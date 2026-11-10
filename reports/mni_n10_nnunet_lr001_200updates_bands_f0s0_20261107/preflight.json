@@ -1,0 +1,38 @@
+{
+  "status": "passed",
+  "manifest_sha256": "c73dd0bcc41f572d2a90540e506b74932e9217d704017ec0e9bcfb0cdff79c04",
+  "checks": [
+    {
+      "id": "MNI_nnunet_n10_baseline_f0s0",
+      "train_subjects": 10,
+      "training_crops": 20,
+      "updates": 200,
+      "passes": 10.0,
+      "calibration_flops": 0
+    },
+    {
+      "id": "MNI_nnunet_n10_original_bands_f0s0",
+      "train_subjects": 10,
+      "training_crops": 20,
+      "updates": 200,
+      "passes": 10.0,
+      "calibration_flops": 2374366156612
+    }
+  ],
+  "scientific": {
+    "status": "passed",
+    "checks": [
+      "actual argmax union errors",
+      "detached 3x weights",
+      "original support A",
+      "anchor plus six-connected error halo B",
+      "side normalization",
+      "zero off-support gradient",
+      "D4 equivariance",
+      "batch averaging",
+      "internal swaps excluded",
+      "remote FP/deep FN included"
+    ]
+  },
+  "optimizer_updates": 0
+}

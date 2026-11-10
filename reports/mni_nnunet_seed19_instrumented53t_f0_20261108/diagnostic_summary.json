@@ -1,0 +1,154 @@
+{
+  "status": "complete",
+  "archives_verified": true,
+  "config_changes": [
+    "protocol_sha256",
+    "script_sha256"
+  ],
+  "exact_metric_reproduction": true,
+  "max_absolute_metric_difference": 0.0,
+  "matching_model_hashes": {
+    "025": true,
+    "050": true,
+    "075": true,
+    "100": true
+  },
+  "validation_dice_pct": 45.478607418084344,
+  "training_dice_pct": 46.66406294550093,
+  "optimization_flops": 53305109592450,
+  "extra_diagnostic_profiled_flops": 14156719718400,
+  "diagnostic_profiled_flops_fraction_of_optimization": 0.26557903785653453,
+  "extra_parameter_backward_calls": 60,
+  "extra_logit_backward_calls": 300,
+  "diagnostic_seconds": 9.888813755009323,
+  "training_invocation_seconds": 64.78861885797232,
+  "phases": {
+    "all": {
+      "updates": 150,
+      "clipped_updates": 0,
+      "preclip_norm_range": [
+        0.3558359742164612,
+        1.5588778257369995
+      ],
+      "median_update_vs_negative_current_gradient_cosine": 0.5069337697813988,
+      "updates_opposing_current_gradient": 0,
+      "median_ce_over_dice_parameter_gradient_norm": 0.2073478367524968,
+      "median_dice_ce_parameter_gradient_cosine": 0.43301455230678143,
+      "probes": 15,
+      "first_order_direction_counts": {
+        "dice": {
+          "actual_predicts_increase": 0,
+          "no_momentum_predicts_increase": 0
+        },
+        "ce": {
+          "actual_predicts_increase": 0,
+          "no_momentum_predicts_increase": 0
+        },
+        "ca4_dice": {
+          "actual_predicts_increase": 0,
+          "no_momentum_predicts_increase": 0
+        },
+        "ca4_ce": {
+          "actual_predicts_increase": 2,
+          "no_momentum_predicts_increase": 2
+        }
+      }
+    },
+    "early": {
+      "updates": 32,
+      "clipped_updates": 0,
+      "preclip_norm_range": [
+        0.3558359742164612,
+        1.5588778257369995
+      ],
+      "median_update_vs_negative_current_gradient_cosine": 0.72286624383016,
+      "updates_opposing_current_gradient": 0,
+      "median_ce_over_dice_parameter_gradient_norm": 7.962555739930228,
+      "median_dice_ce_parameter_gradient_cosine": 0.19388238486539794,
+      "probes": 4,
+      "first_order_direction_counts": {
+        "dice": {
+          "actual_predicts_increase": 0,
+          "no_momentum_predicts_increase": 0
+        },
+        "ce": {
+          "actual_predicts_increase": 0,
+          "no_momentum_predicts_increase": 0
+        },
+        "ca4_dice": {
+          "actual_predicts_increase": 0,
+          "no_momentum_predicts_increase": 0
+        },
+        "ca4_ce": {
+          "actual_predicts_increase": 1,
+          "no_momentum_predicts_increase": 0
+        }
+      }
+    },
+    "middle": {
+      "updates": 68,
+      "clipped_updates": 0,
+      "preclip_norm_range": [
+        0.44913482666015625,
+        1.1238911151885986
+      ],
+      "median_update_vs_negative_current_gradient_cosine": 0.5076654468107744,
+      "updates_opposing_current_gradient": 0,
+      "median_ce_over_dice_parameter_gradient_norm": 0.1246801336573085,
+      "median_dice_ce_parameter_gradient_cosine": 0.5225675963904837,
+      "probes": 4,
+      "first_order_direction_counts": {
+        "dice": {
+          "actual_predicts_increase": 0,
+          "no_momentum_predicts_increase": 0
+        },
+        "ce": {
+          "actual_predicts_increase": 0,
+          "no_momentum_predicts_increase": 0
+        },
+        "ca4_dice": {
+          "actual_predicts_increase": 0,
+          "no_momentum_predicts_increase": 0
+        },
+        "ca4_ce": {
+          "actual_predicts_increase": 0,
+          "no_momentum_predicts_increase": 0
+        }
+      }
+    },
+    "late": {
+      "updates": 50,
+      "clipped_updates": 0,
+      "preclip_norm_range": [
+        0.6067303419113159,
+        1.1179214715957642
+      ],
+      "median_update_vs_negative_current_gradient_cosine": 0.48382080560001833,
+      "updates_opposing_current_gradient": 0,
+      "median_ce_over_dice_parameter_gradient_norm": 0.17136172373193195,
+      "median_dice_ce_parameter_gradient_cosine": 0.3850208622842517,
+      "probes": 7,
+      "first_order_direction_counts": {
+        "dice": {
+          "actual_predicts_increase": 0,
+          "no_momentum_predicts_increase": 0
+        },
+        "ce": {
+          "actual_predicts_increase": 0,
+          "no_momentum_predicts_increase": 0
+        },
+        "ca4_dice": {
+          "actual_predicts_increase": 0,
+          "no_momentum_predicts_increase": 0
+        },
+        "ca4_ce": {
+          "actual_predicts_increase": 1,
+          "no_momentum_predicts_increase": 2
+        }
+      }
+    }
+  },
+  "released_gib": 0.4892603922635317,
+  "limitations": "One observed trajectory. Component gradients and same-batch first-order estimates do not establish outcomes of reweighting or a different optimizer. Diagnostic FLOPs cover supported operators, not all logging/reductions.",
+  "analysis_source_sha256": "7150e6db72daf55a9f74426b1936a6d4d6aa268f1a3b527673b403b870037945"
+}

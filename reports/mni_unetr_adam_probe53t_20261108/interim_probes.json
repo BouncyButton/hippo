@@ -1,0 +1,3145 @@
+{
+  "status": "interim_not_final_replay_verified",
+  "runs": [
+    {
+      "id": "MNI_unetr_probe_bands_f1s0",
+      "rows": [
+        {
+          "step": 1,
+          "case_name": "hippocampus_mni_s09_R",
+          "active_arm": "dice",
+          "scale": 0.2,
+          "sdf_scale": 0.0,
+          "base_loss": 2.076857566833496,
+          "auxiliary_loss": 0.0,
+          "weighted_term_losses": {},
+          "loss_decomposition_error": 0.0,
+          "logit_gradients": {
+            "base_norm": 0.0017570094414784015,
+            "auxiliary_norm": 0.0,
+            "auxiliary_over_base": 0.0,
+            "cosine": null,
+            "dtype": "torch.bfloat16"
+          },
+          "parameter_gradients": {
+            "base_norm": 2.8310039893377903,
+            "auxiliary_norm": 0.0,
+            "auxiliary_over_base": 0.0,
+            "cosine": null,
+            "CA4_component_norm": 0.11642147275097219,
+            "CA4_auxiliary_cosine": null
+          },
+          "diagnostic_profiled_flops": 255785435136,
+          "diagnostic_seconds": 0.8301851963624358,
+          "extra_parameter_gradient_calls": 3,
+          "extra_logit_gradient_calls": 2,
+          "wrong_foreground_margin_probe": {
+            "scope": "Direction from a hypothetical negative auxiliary LOGIT gradient, not a parameter/Adam step. Negative margin direction reinforces the best wrong class.",
+            "by_true_class": {
+              "1": {
+                "affected_wrong_foreground_voxels": 0,
+                "mean_true_vs_best_wrong_margin_direction": null,
+                "fraction_margin_worsening": null
+              },
+              "2": {
+                "affected_wrong_foreground_voxels": 0,
+                "mean_true_vs_best_wrong_margin_direction": null,
+                "fraction_margin_worsening": null
+              },
+              "3": {
+                "affected_wrong_foreground_voxels": 0,
+                "mean_true_vs_best_wrong_margin_direction": null,
+                "fraction_margin_worsening": null
+              }
+            }
+          },
+          "CA4_component_definition": "One-third of the actual foreground squared-Dice CA4 loss plus full-volume-normalized CE on true CA4 voxels; other-class CE gradients are not included.",
+          "CA4_target_voxels": 477,
+          "learning_rate": 2.4999999999999998e-05,
+          "actual_gradient_norm": 2.8310039893377903,
+          "reconstructed_vs_actual_gradient_cosine": 1.0000000000000002,
+          "adam": {
+            "betas": [
+              0.9,
+              0.999
+            ],
+            "eps": 1e-08,
+            "weight_decay": 1e-05,
+            "virtual_total_update_norm": 0.22780330197220283,
+            "virtual_base_update_norm": 0.22780330197220283,
+            "auxiliary_induced_update_norm": 0.0,
+            "auxiliary_induced_over_base_update": 0.0,
+            "total_vs_base_update_cosine": 1.0,
+            "actual_update_norm": 0.22780330197220283,
+            "virtual_vs_actual_relative_error": 0.0
+          },
+          "parameter_groups": {
+            "decoders": {
+              "base_gradient_norm": 1.9425221235471093,
+              "auxiliary_gradient_norm": 0.0,
+              "gradient_cosine": null,
+              "auxiliary_induced_over_base_update": 0.0
+            },
+            "encoders": {
+              "base_gradient_norm": 1.376254766319122,
+              "auxiliary_gradient_norm": 0.0,
+              "gradient_cosine": null,
+              "auxiliary_induced_over_base_update": 0.0
+            },
+            "output_head": {
+              "base_gradient_norm": 1.5314991806630862,
+              "auxiliary_gradient_norm": 0.0,
+              "gradient_cosine": null,
+              "auxiliary_induced_over_base_update": 0.0
+            },
+            "patch_embedding": {
+              "base_gradient_norm": 0.028857915288318277,
+              "auxiliary_gradient_norm": 0.0,
+              "gradient_cosine": null,
+              "auxiliary_induced_over_base_update": 0.0
+            },
+            "transformer": {
+              "base_gradient_norm": 0.028142969861157763,
+              "auxiliary_gradient_norm": 0.0,
+              "gradient_cosine": null,
+              "auxiliary_induced_over_base_update": 0.0
+            }
+          },
+          "first_order_loss_changes": {
+            "base": {
+              "actual_update": -0.011966651305556297,
+              "same_state_base_only_update": -0.011966651305556297,
+              "auxiliary_induced_change": 0.0
+            },
+            "auxiliary": {
+              "actual_update": 0.0,
+              "same_state_base_only_update": 0.0,
+              "auxiliary_induced_change": 0.0
+            },
+            "CA4_base_component": {
+              "actual_update": -0.0009076682617887855,
+              "same_state_base_only_update": -0.0009076682617887855,
+              "auxiliary_induced_change": 0.0
+            }
+          }
+        },
+        {
+          "step": 41,
+          "case_name": "hippocampus_mni_s09_R",
+          "active_arm": "dice",
+          "scale": 0.2,
+          "sdf_scale": 0.0,
+          "base_loss": 1.371216893196106,
+          "auxiliary_loss": 0.0,
+          "weighted_term_losses": {},
+          "loss_decomposition_error": 0.0,
+          "logit_gradients": {
+            "base_norm": 0.002147132862813356,
+            "auxiliary_norm": 0.0,
+            "auxiliary_over_base": 0.0,
+            "cosine": null,
+            "dtype": "torch.bfloat16"
+          },
+          "parameter_gradients": {
+            "base_norm": 1.307117050282429,
+            "auxiliary_norm": 0.0,
+            "auxiliary_over_base": 0.0,
+            "cosine": null,
+            "CA4_component_norm": 0.12227074761673941,
+            "CA4_auxiliary_cosine": null
+          },
+          "diagnostic_profiled_flops": 255785435136,
+          "diagnostic_seconds": 0.46471584727987647,
+          "extra_parameter_gradient_calls": 3,
+          "extra_logit_gradient_calls": 2,
+          "wrong_foreground_margin_probe": {
+            "scope": "Direction from a hypothetical negative auxiliary LOGIT gradient, not a parameter/Adam step. Negative margin direction reinforces the best wrong class.",
+            "by_true_class": {
+              "1": {
+                "affected_wrong_foreground_voxels": 0,
+                "mean_true_vs_best_wrong_margin_direction": null,
+                "fraction_margin_worsening": null
+              },
+              "2": {
+                "affected_wrong_foreground_voxels": 0,
+                "mean_true_vs_best_wrong_margin_direction": null,
+                "fraction_margin_worsening": null
+              },
+              "3": {
+                "affected_wrong_foreground_voxels": 0,
+                "mean_true_vs_best_wrong_margin_direction": null,
+                "fraction_margin_worsening": null
+              }
+            }
+          },
+          "CA4_component_definition": "One-third of the actual foreground squared-Dice CA4 loss plus full-volume-normalized CE on true CA4 voxels; other-class CE gradients are not included.",
+          "CA4_target_voxels": 477,
+          "learning_rate": 0.0006,
+          "actual_gradient_norm": 1.307117050282429,
+          "reconstructed_vs_actual_gradient_cosine": 1.0000000000000002,
+          "adam": {
+            "betas": [
+              0.9,
+              0.999
+            ],
+            "eps": 1e-08,
+            "weight_decay": 1e-05,
+            "virtual_total_update_norm": 0.8760532443400002,
+            "virtual_base_update_norm": 0.8760532443400002,
+            "auxiliary_induced_update_norm": 0.0,
+            "auxiliary_induced_over_base_update": 0.0,
+            "total_vs_base_update_cosine": 1.0,
+            "actual_update_norm": 0.8760532103211514,
+            "virtual_vs_actual_relative_error": 0.0
+          },
+          "parameter_groups": {
+            "decoders": {
+              "base_gradient_norm": 0.21565901653824213,
+              "auxiliary_gradient_norm": 0.0,
+              "gradient_cosine": null,
+              "auxiliary_induced_over_base_update": 0.0
+            },
+            "encoders": {
+              "base_gradient_norm": 0.11161482018222976,
+              "auxiliary_gradient_norm": 0.0,
+              "gradient_cosine": null,
+              "auxiliary_induced_over_base_update": 0.0
+            },
+            "output_head": {
+              "base_gradient_norm": 1.284136242729944,
+              "auxiliary_gradient_norm": 0.0,
+              "gradient_cosine": null,
+              "auxiliary_induced_over_base_update": 0.0
+            },
+            "patch_embedding": {
+              "base_gradient_norm": 0.015870882818983106,
+              "auxiliary_gradient_norm": 0.0,
+              "gradient_cosine": null,
+              "auxiliary_induced_over_base_update": 0.0
+            },
+            "transformer": {
+              "base_gradient_norm": 0.01817991227897054,
+              "auxiliary_gradient_norm": 0.0,
+              "gradient_cosine": null,
+              "auxiliary_induced_over_base_update": 0.0
+            }
+          },
+          "first_order_loss_changes": {
+            "base": {
+              "actual_update": -0.017357375472784042,
+              "same_state_base_only_update": -0.017357375472784042,
+              "auxiliary_induced_change": 0.0
+            },
+            "auxiliary": {
+              "actual_update": 0.0,
+              "same_state_base_only_update": 0.0,
+              "auxiliary_induced_change": 0.0
+            },
+            "CA4_base_component": {
+              "actual_update": -0.002826307201758027,
+              "same_state_base_only_update": -0.002826307201758027,
+              "auxiliary_induced_change": 0.0
+            }
+          }
+        },
+        {
+          "step": 82,
+          "case_name": "hippocampus_mni_s18_L",
+          "active_arm": "dice",
+          "scale": 0.2,
+          "sdf_scale": 0.0,
+          "base_loss": 1.0011537075042725,
+          "auxiliary_loss": -0.0,
+          "weighted_term_losses": {},
+          "loss_decomposition_error": 0.0,
+          "logit_gradients": {
+            "base_norm": 0.003322676866900968,
+            "auxiliary_norm": 0.0,
+            "auxiliary_over_base": 0.0,
+            "cosine": null,
+            "dtype": "torch.bfloat16"
+          },
+          "parameter_gradients": {
+            "base_norm": 1.4362449142591773,
+            "auxiliary_norm": 0.0,
+            "auxiliary_over_base": 0.0,
+            "cosine": null,
+            "CA4_component_norm": 0.36925175926471243,
+            "CA4_auxiliary_cosine": null
+          },
+          "diagnostic_profiled_flops": 255785435136,
+          "diagnostic_seconds": 0.45288043608888984,
+          "extra_parameter_gradient_calls": 3,
+          "extra_logit_gradient_calls": 2,
+          "wrong_foreground_margin_probe": {
+            "scope": "Direction from a hypothetical negative auxiliary LOGIT gradient, not a parameter/Adam step. Negative margin direction reinforces the best wrong class.",
+            "by_true_class": {
+              "1": {
+                "affected_wrong_foreground_voxels": 0,
+                "mean_true_vs_best_wrong_margin_direction": null,
+                "fraction_margin_worsening": null
+              },
+              "2": {
+                "affected_wrong_foreground_voxels": 0,
+                "mean_true_vs_best_wrong_margin_direction": null,
+                "fraction_margin_worsening": null
+              },
+              "3": {
+                "affected_wrong_foreground_voxels": 0,
+                "mean_true_vs_best_wrong_margin_direction": null,
+                "fraction_margin_worsening": null
+              }
+            }
+          },
+          "CA4_component_definition": "One-third of the actual foreground squared-Dice CA4 loss plus full-volume-normalized CE on true CA4 voxels; other-class CE gradients are not included.",
+          "CA4_target_voxels": 435,
+          "learning_rate": 0.0006,
+          "actual_gradient_norm": 1.4362449142591773,
+          "reconstructed_vs_actual_gradient_cosine": 1.0,
+          "adam": {
+            "betas": [
+              0.9,
+              0.999
+            ],
+            "eps": 1e-08,
+            "weight_decay": 1e-05,
+            "virtual_total_update_norm": 1.4167101610276136,
+            "virtual_base_update_norm": 1.4167101610276136,
+            "auxiliary_induced_update_norm": 0.0,
+            "auxiliary_induced_over_base_update": 0.0,
+            "total_vs_base_update_cosine": 1.0,
+            "actual_update_norm": 1.4167101610276136,
+            "virtual_vs_actual_relative_error": 0.0
+          },
+          "parameter_groups": {
+            "decoders": {
+              "base_gradient_norm": 0.3579445233049815,
+              "auxiliary_gradient_norm": 0.0,
+              "gradient_cosine": null,
+              "auxiliary_induced_over_base_update": 0.0
+            },
+            "encoders": {
+              "base_gradient_norm": 0.1543769206282797,
+              "auxiliary_gradient_norm": 0.0,
+              "gradient_cosine": null,
+              "auxiliary_induced_over_base_update": 0.0
+            },
+            "output_head": {
+              "base_gradient_norm": 1.3820026849756506,
+              "auxiliary_gradient_norm": 0.0,
+              "gradient_cosine": null,
+              "auxiliary_induced_over_base_update": 0.0
+            },
+            "patch_embedding": {
+              "base_gradient_norm": 0.021278005892784328,
+              "auxiliary_gradient_norm": 0.0,
+              "gradient_cosine": null,
+              "auxiliary_induced_over_base_update": 0.0
+            },
+            "transformer": {
+              "base_gradient_norm": 0.021417680900440685,
+              "auxiliary_gradient_norm": 0.0,
+              "gradient_cosine": null,
+              "auxiliary_induced_over_base_update": 0.0
+            }
+          },
+          "first_order_loss_changes": {
+            "base": {
+              "actual_update": -0.022743092849850655,
+              "same_state_base_only_update": -0.022743092849850655,
+              "auxiliary_induced_change": 0.0
+            },
+            "auxiliary": {
+              "actual_update": 0.0,
+              "same_state_base_only_update": 0.0,
+              "auxiliary_induced_change": 0.0
+            },
+            "CA4_base_component": {
+              "actual_update": -0.006102319806814194,
+              "same_state_base_only_update": -0.006102319806814194,
+              "auxiliary_induced_change": 0.0
+            }
+          }
+        },
+        {
+          "step": 102,
+          "case_name": "hippocampus_mni_s12_L",
+          "active_arm": "dice",
+          "scale": 0.2,
+          "sdf_scale": 0.0,
+          "base_loss": 0.927830696105957,
+          "auxiliary_loss": -0.0,
+          "weighted_term_losses": {},
+          "loss_decomposition_error": 0.0,
+          "logit_gradients": {
+            "base_norm": 0.0036911360434255143,
+            "auxiliary_norm": 0.0,
+            "auxiliary_over_base": 0.0,
+            "cosine": null,
+            "dtype": "torch.bfloat16"
+          },
+          "parameter_gradients": {
+            "base_norm": 1.4587093231884427,
+            "auxiliary_norm": 0.0,
+            "auxiliary_over_base": 0.0,
+            "cosine": null,
+            "CA4_component_norm": 0.5091330158249802,
+            "CA4_auxiliary_cosine": null
+          },
+          "diagnostic_profiled_flops": 255785435136,
+          "diagnostic_seconds": 0.4533555041998625,
+          "extra_parameter_gradient_calls": 3,
+          "extra_logit_gradient_calls": 2,
+          "wrong_foreground_margin_probe": {
+            "scope": "Direction from a hypothetical negative auxiliary LOGIT gradient, not a parameter/Adam step. Negative margin direction reinforces the best wrong class.",
+            "by_true_class": {
+              "1": {
+                "affected_wrong_foreground_voxels": 0,
+                "mean_true_vs_best_wrong_margin_direction": null,
+                "fraction_margin_worsening": null
+              },
+              "2": {
+                "affected_wrong_foreground_voxels": 0,
+                "mean_true_vs_best_wrong_margin_direction": null,
+                "fraction_margin_worsening": null
+              },
+              "3": {
+                "affected_wrong_foreground_voxels": 0,
+                "mean_true_vs_best_wrong_margin_direction": null,
+                "fraction_margin_worsening": null
+              }
+            }
+          },
+          "CA4_component_definition": "One-third of the actual foreground squared-Dice CA4 loss plus full-volume-normalized CE on true CA4 voxels; other-class CE gradients are not included.",
+          "CA4_target_voxels": 500,
+          "learning_rate": 0.0006,
+          "actual_gradient_norm": 1.4587093231884427,
+          "reconstructed_vs_actual_gradient_cosine": 1.0,
+          "adam": {
+            "betas": [
+              0.9,
+              0.999
+            ],
+            "eps": 1e-08,
+            "weight_decay": 1e-05,
+            "virtual_total_update_norm": 1.678693326332869,
+            "virtual_base_update_norm": 1.678693326332869,
+            "auxiliary_induced_update_norm": 0.0,
+            "auxiliary_induced_over_base_update": 0.0,
+            "total_vs_base_update_cosine": 0.9999999999999999,
+            "actual_update_norm": 1.678693326332869,
+            "virtual_vs_actual_relative_error": 0.0
+          },
+          "parameter_groups": {
+            "decoders": {
+              "base_gradient_norm": 0.879211915164005,
+              "auxiliary_gradient_norm": 0.0,
+              "gradient_cosine": null,
+              "auxiliary_induced_over_base_update": 0.0
+            },
+            "encoders": {
+              "base_gradient_norm": 0.35185704078714874,
+              "auxiliary_gradient_norm": 0.0,
+              "gradient_cosine": null,
+              "auxiliary_induced_over_base_update": 0.0
+            },
+            "output_head": {
+              "base_gradient_norm": 1.104430341127366,
+              "auxiliary_gradient_norm": 0.0,
+              "gradient_cosine": null,
+              "auxiliary_induced_over_base_update": 0.0
+            },
+            "patch_embedding": {
+              "base_gradient_norm": 0.06288685876219509,
+              "auxiliary_gradient_norm": 0.0,
+              "gradient_cosine": null,
+              "auxiliary_induced_over_base_update": 0.0
+            },
+            "transformer": {
+              "base_gradient_norm": 0.08540900237697334,
+              "auxiliary_gradient_norm": 0.0,
+              "gradient_cosine": null,
+              "auxiliary_induced_over_base_update": 0.0
+            }
+          },
+          "first_order_loss_changes": {
+            "base": {
+              "actual_update": -0.1281420886516571,
+              "same_state_base_only_update": -0.1281420886516571,
+              "auxiliary_induced_change": 0.0
+            },
+            "auxiliary": {
+              "actual_update": 0.0,
+              "same_state_base_only_update": 0.0,
+              "auxiliary_induced_change": 0.0
+            },
+            "CA4_base_component": {
+              "actual_update": -0.050951145589351654,
+              "same_state_base_only_update": -0.050951145589351654,
+              "auxiliary_induced_change": 0.0
+            }
+          }
+        },
+        {
+          "step": 103,
+          "case_name": "hippocampus_mni_s15_R",
+          "active_arm": "dice_bands",
+          "scale": 0.030303030303030304,
+          "sdf_scale": 0.0,
+          "base_loss": 0.8761775493621826,
+          "auxiliary_loss": 0.0005843948456458747,
+          "weighted_term_losses": {
+            "bands": 0.0005843948456458747
+          },
+          "loss_decomposition_error": 0.0,
+          "logit_gradients": {
+            "base_norm": 0.003944659362713215,
+            "auxiliary_norm": 6.039438977407177e-06,
+            "auxiliary_over_base": 0.0015310419537095672,
+            "cosine": 0.22225758044233052,
+            "dtype": "torch.bfloat16"
+          },
+          "parameter_gradients": {
+            "base_norm": 1.3363894763234176,
+            "auxiliary_norm": 0.001958796552510597,
+            "auxiliary_over_base": 0.0014657377861875286,
+            "cosine": 0.28774117556703893,
+            "CA4_component_norm": 0.5078815119872999,
+            "CA4_auxiliary_cosine": -0.014783417486017551
+          },
+          "diagnostic_profiled_flops": 255842058240,
+          "diagnostic_seconds": 0.4780178121291101,
+          "extra_parameter_gradient_calls": 3,
+          "extra_logit_gradient_calls": 2,
+          "wrong_foreground_margin_probe": {
+            "scope": "Direction from a hypothetical negative auxiliary LOGIT gradient, not a parameter/Adam step. Negative margin direction reinforces the best wrong class.",
+            "by_true_class": {
+              "1": {
+                "affected_wrong_foreground_voxels": 403,
+                "mean_true_vs_best_wrong_margin_direction": -1.0020316132397511e-08,
+                "fraction_margin_worsening": 1.0
+              },
+              "2": {
+                "affected_wrong_foreground_voxels": 69,
+                "mean_true_vs_best_wrong_margin_direction": -4.741604442415337e-09,
+                "fraction_margin_worsening": 1.0
+              },
+              "3": {
+                "affected_wrong_foreground_voxels": 46,
+                "mean_true_vs_best_wrong_margin_direction": -4.2308112568889555e-09,
+                "fraction_margin_worsening": 0.97826087474823
+              }
+            }
+          },
+          "CA4_component_definition": "One-third of the actual foreground squared-Dice CA4 loss plus full-volume-normalized CE on true CA4 voxels; other-class CE gradients are not included.",
+          "CA4_target_voxels": 432,
+          "learning_rate": 0.0006,
+          "actual_gradient_norm": 1.3368268984237197,
+          "reconstructed_vs_actual_gradient_cosine": 0.9999983704236258,
+          "adam": {
+            "betas": [
+              0.9,
+              0.999
+            ],
+            "eps": 1e-08,
+            "weight_decay": 1e-05,
+            "virtual_total_update_norm": 1.6068708325824979,
+            "virtual_base_update_norm": 1.6068769901104552,
+            "auxiliary_induced_update_norm": 0.004975246061845075,
+            "auxiliary_induced_over_base_update": 0.00309622086349191,
+            "total_vs_base_update_cosine": 0.9999951523066319,
+            "actual_update_norm": 1.6068707583952702,
+            "virtual_vs_actual_relative_error": 0.0
+          },
+          "parameter_groups": {
+            "decoders": {
+              "base_gradient_norm": 0.45133163463990345,
+              "auxiliary_gradient_norm": 0.0017994949893210782,
+              "gradient_cosine": 0.49651122586622937,
+              "auxiliary_induced_over_base_update": 0.002797717132210897
+            },
+            "encoders": {
+              "base_gradient_norm": 0.23168392194892642,
+              "auxiliary_gradient_norm": 0.0006772025934877956,
+              "gradient_cosine": 0.3328755435475393,
+              "auxiliary_induced_over_base_update": 0.0025867420985241866
+            },
+            "output_head": {
+              "base_gradient_norm": 1.2351406957815998,
+              "auxiliary_gradient_norm": 0.0003702084936557588,
+              "gradient_cosine": 0.6519321981152904,
+              "auxiliary_induced_over_base_update": 0.00012761352608851252
+            },
+            "patch_embedding": {
+              "base_gradient_norm": 0.029926744242593655,
+              "auxiliary_gradient_norm": 3.0551926780453724e-05,
+              "gradient_cosine": -0.09803210560161445,
+              "auxiliary_induced_over_base_update": 0.001698827129983847
+            },
+            "transformer": {
+              "base_gradient_norm": 0.0457270954719531,
+              "auxiliary_gradient_norm": 4.594126836630319e-05,
+              "gradient_cosine": -0.12679209000518557,
+              "auxiliary_induced_over_base_update": 0.003169553121171172
+            }
+          },
+          "first_order_loss_changes": {
+            "base": {
+              "actual_update": -0.036308497190475464,
+              "same_state_base_only_update": -0.036294274032115936,
+              "auxiliary_induced_change": -1.4221383025869727e-05
+            },
+            "auxiliary": {
+              "actual_update": 2.5618267045501852e-06,
+              "same_state_base_only_update": 2.6633983907231595e-06,
+              "auxiliary_induced_change": -1.0157201302263275e-07
+            },
+            "CA4_base_component": {
+              "actual_update": -0.00887005589902401,
+              "same_state_base_only_update": -0.008871272206306458,
+              "auxiliary_induced_change": 1.2172547485533869e-06
+            }
+          }
+        },
+        {
+          "step": 119,
+          "case_name": "hippocampus_mni_s03_L",
+          "active_arm": "dice_bands",
+          "scale": 0.5151515151515151,
+          "sdf_scale": 0.0,
+          "base_loss": 0.7530488967895508,
+          "auxiliary_loss": 0.00868569128215313,
+          "weighted_term_losses": {
+            "bands": 0.00868569128215313
+          },
+          "loss_decomposition_error": 0.0,
+          "logit_gradients": {
+            "base_norm": 0.004275898955103648,
+            "auxiliary_norm": 9.711854871425088e-05,
+            "auxiliary_over_base": 0.022713013037488093,
+            "cosine": 0.26843600233084014,
+            "dtype": "torch.bfloat16"
+          },
+          "parameter_gradients": {
+            "base_norm": 1.4992217588170857,
+            "auxiliary_norm": 0.017427088640022285,
+            "auxiliary_over_base": 0.0116240899903778,
+            "cosine": 0.36730925331105196,
+            "CA4_component_norm": 0.9797708831784717,
+            "CA4_auxiliary_cosine": 0.32351255006736834
+          },
+          "diagnostic_profiled_flops": 255842058240,
+          "diagnostic_seconds": 0.47048890916630626,
+          "extra_parameter_gradient_calls": 3,
+          "extra_logit_gradient_calls": 2,
+          "wrong_foreground_margin_probe": {
+            "scope": "Direction from a hypothetical negative auxiliary LOGIT gradient, not a parameter/Adam step. Negative margin direction reinforces the best wrong class.",
+            "by_true_class": {
+              "1": {
+                "affected_wrong_foreground_voxels": 322,
+                "mean_true_vs_best_wrong_margin_direction": -2.0195862759919692e-07,
+                "fraction_margin_worsening": 0.9937888383865356
+              },
+              "2": {
+                "affected_wrong_foreground_voxels": 24,
+                "mean_true_vs_best_wrong_margin_direction": -1.031451901667424e-07,
+                "fraction_margin_worsening": 0.9583333730697632
+              },
+              "3": {
+                "affected_wrong_foreground_voxels": 69,
+                "mean_true_vs_best_wrong_margin_direction": -1.3965959055894928e-07,
+                "fraction_margin_worsening": 0.9855072498321533
+              }
+            }
+          },
+          "CA4_component_definition": "One-third of the actual foreground squared-Dice CA4 loss plus full-volume-normalized CE on true CA4 voxels; other-class CE gradients are not included.",
+          "CA4_target_voxels": 604,
+          "learning_rate": 0.0006,
+          "actual_gradient_norm": 1.505999567257235,
+          "reconstructed_vs_actual_gradient_cosine": 0.9999959705350463,
+          "adam": {
+            "betas": [
+              0.9,
+              0.999
+            ],
+            "eps": 1e-08,
+            "weight_decay": 1e-05,
+            "virtual_total_update_norm": 1.592754876118089,
+            "virtual_base_update_norm": 1.5872801560892755,
+            "auxiliary_induced_update_norm": 0.01931723448127173,
+            "auxiliary_induced_over_base_update": 0.012170022038746665,
+            "total_vs_base_update_cosine": 0.9999320864705754,
+            "actual_update_norm": 1.592754876118089,
+            "virtual_vs_actual_relative_error": 0.0
+          },
+          "parameter_groups": {
+            "decoders": {
+              "base_gradient_norm": 0.8793057360344556,
+              "auxiliary_gradient_norm": 0.014772532261285203,
+              "gradient_cosine": 0.45310826056724274,
+              "auxiliary_induced_over_base_update": 0.01800915887682332
+            },
+            "encoders": {
+              "base_gradient_norm": 0.3549434217512174,
+              "auxiliary_gradient_norm": 0.008182611887372744,
+              "gradient_cosine": 0.474647108382971,
+              "auxiliary_induced_over_base_update": 0.01567752886757456
+            },
+            "output_head": {
+              "base_gradient_norm": 1.1593405170916407,
+              "auxiliary_gradient_norm": 0.004106519391687827,
+              "gradient_cosine": 0.47635115583949067,
+              "auxiliary_induced_over_base_update": 0.0005669617054932482
+            },
+            "patch_embedding": {
+              "base_gradient_norm": 0.03618951324446779,
+              "auxiliary_gradient_norm": 0.000666375855414647,
+              "gradient_cosine": 0.7828465006363226,
+              "auxiliary_induced_over_base_update": 0.006822713389480122
+            },
+            "transformer": {
+              "base_gradient_norm": 0.05587609797690761,
+              "auxiliary_gradient_norm": 0.0011013810711067305,
+              "gradient_cosine": 0.7436800020922546,
+              "auxiliary_induced_over_base_update": 0.012103679821298811
+            }
+          },
+          "first_order_loss_changes": {
+            "base": {
+              "actual_update": -0.06471552699804306,
+              "same_state_base_only_update": -0.06407767534255981,
+              "auxiliary_induced_change": -0.0006378463003784418
+            },
+            "auxiliary": {
+              "actual_update": -0.0008046061848290265,
+              "same_state_base_only_update": -0.0007832541596144438,
+              "auxiliary_induced_change": -2.1352027033572085e-05
+            },
+            "CA4_base_component": {
+              "actual_update": -0.041268765926361084,
+              "same_state_base_only_update": -0.040903590619564056,
+              "auxiliary_induced_change": -0.0003651757724583149
+            }
+          }
+        },
+        {
+          "step": 135,
+          "case_name": "hippocampus_mni_s09_L",
+          "active_arm": "dice_bands",
+          "scale": 1.0,
+          "sdf_scale": 0.0,
+          "base_loss": 0.7437012791633606,
+          "auxiliary_loss": 0.020776690915226936,
+          "weighted_term_losses": {
+            "bands": 0.020776690915226936
+          },
+          "loss_decomposition_error": 0.0,
+          "logit_gradients": {
+            "base_norm": 0.004223575378038487,
+            "auxiliary_norm": 0.00020598361451143539,
+            "auxiliary_over_base": 0.048769962904532865,
+            "cosine": 0.18896827831815355,
+            "dtype": "torch.bfloat16"
+          },
+          "parameter_gradients": {
+            "base_norm": 1.5224264849373104,
+            "auxiliary_norm": 0.09717842505854264,
+            "auxiliary_over_base": 0.0638312759400952,
+            "cosine": 0.48979757724671874,
+            "CA4_component_norm": 0.6239350783186356,
+            "CA4_auxiliary_cosine": 0.40725069239681977
+          },
+          "diagnostic_profiled_flops": 255842058240,
+          "diagnostic_seconds": 0.4712894968688488,
+          "extra_parameter_gradient_calls": 3,
+          "extra_logit_gradient_calls": 2,
+          "wrong_foreground_margin_probe": {
+            "scope": "Direction from a hypothetical negative auxiliary LOGIT gradient, not a parameter/Adam step. Negative margin direction reinforces the best wrong class.",
+            "by_true_class": {
+              "1": {
+                "affected_wrong_foreground_voxels": 314,
+                "mean_true_vs_best_wrong_margin_direction": -2.0008781120850472e-07,
+                "fraction_margin_worsening": 1.0
+              },
+              "2": {
+                "affected_wrong_foreground_voxels": 219,
+                "mean_true_vs_best_wrong_margin_direction": -2.2134896937586745e-07,
+                "fraction_margin_worsening": 0.990867555141449
+              },
+              "3": {
+                "affected_wrong_foreground_voxels": 50,
+                "mean_true_vs_best_wrong_margin_direction": -9.972136183478142e-08,
+                "fraction_margin_worsening": 1.0
+              }
+            }
+          },
+          "CA4_component_definition": "One-third of the actual foreground squared-Dice CA4 loss plus full-volume-normalized CE on true CA4 voxels; other-class CE gradients are not included.",
+          "CA4_target_voxels": 541,
+          "learning_rate": 0.0006,
+          "actual_gradient_norm": 1.5717015741435405,
+          "reconstructed_vs_actual_gradient_cosine": 0.9999953470749543,
+          "adam": {
+            "betas": [
+              0.9,
+              0.999
+            ],
+            "eps": 1e-08,
+            "weight_decay": 1e-05,
+            "virtual_total_update_norm": 1.6284745556837914,
+            "virtual_base_update_norm": 1.6271368795352321,
+            "auxiliary_induced_update_norm": 0.0276648620758164,
+            "auxiliary_induced_over_base_update": 0.017002172603769183,
+            "total_vs_base_update_cosine": 0.9998559233944173,
+            "actual_update_norm": 1.6284745556837914,
+            "virtual_vs_actual_relative_error": 0.0
+          },
+          "parameter_groups": {
+            "decoders": {
+              "base_gradient_norm": 1.1070407972011627,
+              "auxiliary_gradient_norm": 0.09083886110950871,
+              "gradient_cosine": 0.5754588774587379,
+              "auxiliary_induced_over_base_update": 0.028143461537418545
+            },
+            "encoders": {
+              "base_gradient_norm": 0.4129640656464292,
+              "auxiliary_gradient_norm": 0.024492714076184204,
+              "gradient_cosine": 0.6440407415751911,
+              "auxiliary_induced_over_base_update": 0.020371405674096624
+            },
+            "output_head": {
+              "base_gradient_norm": 0.9572645253404201,
+              "auxiliary_gradient_norm": 0.02399965360130415,
+              "gradient_cosine": 0.3443338291290431,
+              "auxiliary_induced_over_base_update": 0.00468099802538997
+            },
+            "patch_embedding": {
+              "base_gradient_norm": 0.03707687309826633,
+              "auxiliary_gradient_norm": 0.0023188013947774764,
+              "gradient_cosine": 0.6826842295338251,
+              "auxiliary_induced_over_base_update": 0.01880586147762859
+            },
+            "transformer": {
+              "base_gradient_norm": 0.06303460243966635,
+              "auxiliary_gradient_norm": 0.0032702759122744027,
+              "gradient_cosine": 0.5382716630186943,
+              "auxiliary_induced_over_base_update": 0.016606416878029634
+            }
+          },
+          "first_order_loss_changes": {
+            "base": {
+              "actual_update": -0.03199578821659088,
+              "same_state_base_only_update": -0.030739188194274902,
+              "auxiliary_induced_change": -0.0012566006043925881
+            },
+            "auxiliary": {
+              "actual_update": -0.0007819747552275658,
+              "same_state_base_only_update": -0.0006141078774817288,
+              "auxiliary_induced_change": -0.00016786687774583697
+            },
+            "CA4_base_component": {
+              "actual_update": -0.01155431941151619,
+              "same_state_base_only_update": -0.011002350598573685,
+              "auxiliary_induced_change": -0.000551970093511045
+            }
+          }
+        },
+        {
+          "step": 144,
+          "case_name": "hippocampus_mni_s18_L",
+          "active_arm": "dice_bands",
+          "scale": 1.0,
+          "sdf_scale": 0.0,
+          "base_loss": 0.6542485952377319,
+          "auxiliary_loss": 0.015124409459531307,
+          "weighted_term_losses": {
+            "bands": 0.015124409459531307
+          },
+          "loss_decomposition_error": 0.0,
+          "logit_gradients": {
+            "base_norm": 0.004071103739706763,
+            "auxiliary_norm": 0.0001793167574641084,
+            "auxiliary_over_base": 0.04404622650982221,
+            "cosine": 0.2495173868630002,
+            "dtype": "torch.bfloat16"
+          },
+          "parameter_gradients": {
+            "base_norm": 1.4454013281666591,
+            "auxiliary_norm": 0.03702845188878782,
+            "auxiliary_over_base": 0.025618111155158926,
+            "cosine": 0.3622693998891862,
+            "CA4_component_norm": 0.6792244923631663,
+            "CA4_auxiliary_cosine": 0.38498527412230676
+          },
+          "diagnostic_profiled_flops": 255842058240,
+          "diagnostic_seconds": 0.46857125917449594,
+          "extra_parameter_gradient_calls": 3,
+          "extra_logit_gradient_calls": 2,
+          "wrong_foreground_margin_probe": {
+            "scope": "Direction from a hypothetical negative auxiliary LOGIT gradient, not a parameter/Adam step. Negative margin direction reinforces the best wrong class.",
+            "by_true_class": {
+              "1": {
+                "affected_wrong_foreground_voxels": 632,
+                "mean_true_vs_best_wrong_margin_direction": -2.0104594966596778e-07,
+                "fraction_margin_worsening": 0.996835470199585
+              },
+              "2": {
+                "affected_wrong_foreground_voxels": 102,
+                "mean_true_vs_best_wrong_margin_direction": -1.2075535948952165e-07,
+                "fraction_margin_worsening": 0.9901961088180542
+              },
+              "3": {
+                "affected_wrong_foreground_voxels": 16,
+                "mean_true_vs_best_wrong_margin_direction": -7.942435331642628e-08,
+                "fraction_margin_worsening": 1.0
+              }
+            }
+          },
+          "CA4_component_definition": "One-third of the actual foreground squared-Dice CA4 loss plus full-volume-normalized CE on true CA4 voxels; other-class CE gradients are not included.",
+          "CA4_target_voxels": 435,
+          "learning_rate": 0.0006,
+          "actual_gradient_norm": 1.4596229391616786,
+          "reconstructed_vs_actual_gradient_cosine": 0.9999936009720152,
+          "adam": {
+            "betas": [
+              0.9,
+              0.999
+            ],
+            "eps": 1e-08,
+            "weight_decay": 1e-05,
+            "virtual_total_update_norm": 1.5885557914064237,
+            "virtual_base_update_norm": 1.588668801478463,
+            "auxiliary_induced_update_norm": 0.0078381461106429,
+            "auxiliary_induced_over_base_update": 0.004933782361275355,
+            "total_vs_base_update_cosine": 0.9999878156101013,
+            "actual_update_norm": 1.5885557914064237,
+            "virtual_vs_actual_relative_error": 0.0
+          },
+          "parameter_groups": {
+            "decoders": {
+              "base_gradient_norm": 0.9079445747776816,
+              "auxiliary_gradient_norm": 0.030899759920180604,
+              "gradient_cosine": 0.35034116713991537,
+              "auxiliary_induced_over_base_update": 0.009575093575781657
+            },
+            "encoders": {
+              "base_gradient_norm": 0.33017233909114696,
+              "auxiliary_gradient_norm": 0.017807680197359264,
+              "gradient_cosine": 0.47863887360608165,
+              "auxiliary_induced_over_base_update": 0.00801527675611856
+            },
+            "output_head": {
+              "base_gradient_norm": 1.0737514519820426,
+              "auxiliary_gradient_norm": 0.009902547789762605,
+              "gradient_cosine": 0.6360930844985194,
+              "auxiliary_induced_over_base_update": 0.0011661959015270098
+            },
+            "patch_embedding": {
+              "base_gradient_norm": 0.023403584011016106,
+              "auxiliary_gradient_norm": 0.00047371281825746525,
+              "gradient_cosine": -0.2246742974599499,
+              "auxiliary_induced_over_base_update": 0.003769346345398637
+            },
+            "transformer": {
+              "base_gradient_norm": 0.04814539196722924,
+              "auxiliary_gradient_norm": 0.000955414793154794,
+              "gradient_cosine": -0.3287224384923234,
+              "auxiliary_induced_over_base_update": 0.00480236552102157
+            }
+          },
+          "first_order_loss_changes": {
+            "base": {
+              "actual_update": -0.02860875241458416,
+              "same_state_base_only_update": -0.028524968773126602,
+              "auxiliary_induced_change": -8.378546044696122e-05
+            },
+            "auxiliary": {
+              "actual_update": -0.0001755452831275761,
+              "same_state_base_only_update": -0.0001511643931735307,
+              "auxiliary_induced_change": -2.4380879040108994e-05
+            },
+            "CA4_base_component": {
+              "actual_update": -0.004416474141180515,
+              "same_state_base_only_update": -0.0043732356280088425,
+              "auxiliary_induced_change": -4.323888060753234e-05
+            }
+          }
+        },
+        {
+          "step": 168,
+          "case_name": "hippocampus_mni_s07_L",
+          "active_arm": "dice_bands",
+          "scale": 1.0,
+          "sdf_scale": 0.0,
+          "base_loss": 0.5770506858825684,
+          "auxiliary_loss": 0.015208292752504349,
+          "weighted_term_losses": {
+            "bands": 0.015208292752504349
+          },
+          "loss_decomposition_error": 0.0,
+          "logit_gradients": {
+            "base_norm": 0.004360463458939696,
+            "auxiliary_norm": 0.00018564446242039885,
+            "auxiliary_over_base": 0.042574479563587654,
+            "cosine": 0.26820974671423997,
+            "dtype": "torch.bfloat16"
+          },
+          "parameter_gradients": {
+            "base_norm": 1.4033986748655276,
+            "auxiliary_norm": 0.04090259793624901,
+            "auxiliary_over_base": 0.029145387314954006,
+            "cosine": 0.27349288960470236,
+            "CA4_component_norm": 0.9446073061325919,
+            "CA4_auxiliary_cosine": 0.11680657128456072
+          },
+          "diagnostic_profiled_flops": 255842058240,
+          "diagnostic_seconds": 0.47499827900901437,
+          "extra_parameter_gradient_calls": 3,
+          "extra_logit_gradient_calls": 2,
+          "wrong_foreground_margin_probe": {
+            "scope": "Direction from a hypothetical negative auxiliary LOGIT gradient, not a parameter/Adam step. Negative margin direction reinforces the best wrong class.",
+            "by_true_class": {
+              "1": {
+                "affected_wrong_foreground_voxels": 372,
+                "mean_true_vs_best_wrong_margin_direction": -1.905176674199538e-07,
+                "fraction_margin_worsening": 0.9946236610412598
+              },
+              "2": {
+                "affected_wrong_foreground_voxels": 97,
+                "mean_true_vs_best_wrong_margin_direction": -3.182422858571954e-07,
+                "fraction_margin_worsening": 0.9999999403953552
+              },
+              "3": {
+                "affected_wrong_foreground_voxels": 48,
+                "mean_true_vs_best_wrong_margin_direction": -1.1523692222681348e-07,
+                "fraction_margin_worsening": 1.0
+              }
+            }
+          },
+          "CA4_component_definition": "One-third of the actual foreground squared-Dice CA4 loss plus full-volume-normalized CE on true CA4 voxels; other-class CE gradients are not included.",
+          "CA4_target_voxels": 593,
+          "learning_rate": 0.0006,
+          "actual_gradient_norm": 1.4152499950619852,
+          "reconstructed_vs_actual_gradient_cosine": 0.9999943488362893,
+          "adam": {
+            "betas": [
+              0.9,
+              0.999
+            ],
+            "eps": 1e-08,
+            "weight_decay": 1e-05,
+            "virtual_total_update_norm": 1.2983347020042038,
+            "virtual_base_update_norm": 1.2888535763755553,
+            "auxiliary_induced_update_norm": 0.023905855269850826,
+            "auxiliary_induced_over_base_update": 0.018548154505710096,
+            "total_vs_base_update_cosine": 0.9998560276771382,
+            "actual_update_norm": 1.2983347020042038,
+            "virtual_vs_actual_relative_error": 0.0
+          },
+          "parameter_groups": {
+            "decoders": {
+              "base_gradient_norm": 1.004024038566573,
+              "auxiliary_gradient_norm": 0.03569577889911077,
+              "gradient_cosine": 0.32318806501956515,
+              "auxiliary_induced_over_base_update": 0.039028825849340074
+            },
+            "encoders": {
+              "base_gradient_norm": 0.5695594623626576,
+              "auxiliary_gradient_norm": 0.01822531013978117,
+              "gradient_cosine": 0.3570191881309601,
+              "auxiliary_induced_over_base_update": 0.023626807688966377
+            },
+            "output_head": {
+              "base_gradient_norm": 0.7886115570204453,
+              "auxiliary_gradient_norm": 0.007737051994676748,
+              "gradient_cosine": 0.02765093713473471,
+              "auxiliary_induced_over_base_update": 0.0014964479790503932
+            },
+            "patch_embedding": {
+              "base_gradient_norm": 0.056415276059504374,
+              "auxiliary_gradient_norm": 0.0012197022414000545,
+              "gradient_cosine": 0.7631079459012683,
+              "auxiliary_induced_over_base_update": 0.010963143904363625
+            },
+            "transformer": {
+              "base_gradient_norm": 0.10942923529498756,
+              "auxiliary_gradient_norm": 0.0023070103167653904,
+              "gradient_cosine": 0.7491299897566142,
+              "auxiliary_induced_over_base_update": 0.01832578807921455
+            }
+          },
+          "first_order_loss_changes": {
+            "base": {
+              "actual_update": -0.07792095839977264,
+              "same_state_base_only_update": -0.07643752545118332,
+              "auxiliary_induced_change": -0.001483429572544992
+            },
+            "auxiliary": {
+              "actual_update": -0.0011683835182338953,
+              "same_state_base_only_update": -0.001105675706639886,
+              "auxiliary_induced_change": -6.270788435358554e-05
+            },
+            "CA4_base_component": {
+              "actual_update": -0.028782187029719353,
+              "same_state_base_only_update": -0.02839551866054535,
+              "auxiliary_induced_change": -0.0003866680199280381
+            }
+          }
+        },
+        {
+          "step": 205,
+          "case_name": "hippocampus_mni_s12_R",
+          "active_arm": "dice_bands",
+          "scale": 1.0,
+          "sdf_scale": 0.0,
+          "base_loss": 0.4878280758857727,
+          "auxiliary_loss": 0.017249394208192825,
+          "weighted_term_losses": {
+            "bands": 0.017249394208192825
+          },
+          "loss_decomposition_error": 0.0,
+          "logit_gradients": {
+            "base_norm": 0.00452739121127389,
+            "auxiliary_norm": 0.00019861501016305458,
+            "auxiliary_over_base": 0.043869637257870076,
+            "cosine": 0.309625333411278,
+            "dtype": "torch.bfloat16"
+          },
+          "parameter_gradients": {
+            "base_norm": 2.494922249601213,
+            "auxiliary_norm": 0.07843812835392282,
+            "auxiliary_over_base": 0.03143910731745662,
+            "cosine": 0.33618858273107255,
+            "CA4_component_norm": 2.0606733382771227,
+            "CA4_auxiliary_cosine": -0.009804275129751265
+          },
+          "diagnostic_profiled_flops": 255842058240,
+          "diagnostic_seconds": 0.4750451548025012,
+          "extra_parameter_gradient_calls": 3,
+          "extra_logit_gradient_calls": 2,
+          "wrong_foreground_margin_probe": {
+            "scope": "Direction from a hypothetical negative auxiliary LOGIT gradient, not a parameter/Adam step. Negative margin direction reinforces the best wrong class.",
+            "by_true_class": {
+              "1": {
+                "affected_wrong_foreground_voxels": 124,
+                "mean_true_vs_best_wrong_margin_direction": -4.1699766484271095e-07,
+                "fraction_margin_worsening": 1.0
+              },
+              "2": {
+                "affected_wrong_foreground_voxels": 34,
+                "mean_true_vs_best_wrong_margin_direction": -1.6600139929323632e-07,
+                "fraction_margin_worsening": 1.0
+              },
+              "3": {
+                "affected_wrong_foreground_voxels": 83,
+                "mean_true_vs_best_wrong_margin_direction": -2.484507888311782e-07,
+                "fraction_margin_worsening": 0.9999999403953552
+              }
+            }
+          },
+          "CA4_component_definition": "One-third of the actual foreground squared-Dice CA4 loss plus full-volume-normalized CE on true CA4 voxels; other-class CE gradients are not included.",
+          "CA4_target_voxels": 477,
+          "learning_rate": 0.0006,
+          "actual_gradient_norm": 2.521620246659968,
+          "reconstructed_vs_actual_gradient_cosine": 0.9999961463127678,
+          "adam": {
+            "betas": [
+              0.9,
+              0.999
+            ],
+            "eps": 1e-08,
+            "weight_decay": 1e-05,
+            "virtual_total_update_norm": 1.515729055077177,
+            "virtual_base_update_norm": 1.505236703501923,
+            "auxiliary_induced_update_norm": 0.02757337914337089,
+            "auxiliary_induced_over_base_update": 0.01831830108794292,
+            "total_vs_base_update_cosine": 0.9998576064563153,
+            "actual_update_norm": 1.5157291337253271,
+            "virtual_vs_actual_relative_error": 0.0
+          },
+          "parameter_groups": {
+            "decoders": {
+              "base_gradient_norm": 2.1139026792892106,
+              "auxiliary_gradient_norm": 0.06769984066715888,
+              "gradient_cosine": 0.33754864908285975,
+              "auxiliary_induced_over_base_update": 0.024048604072758873
+            },
+            "encoders": {
+              "base_gradient_norm": 1.0305579204023796,
+              "auxiliary_gradient_norm": 0.03487474936776359,
+              "gradient_cosine": 0.4748172452834753,
+              "auxiliary_induced_over_base_update": 0.020477243508491054
+            },
+            "output_head": {
+              "base_gradient_norm": 0.8024177762271257,
+              "auxiliary_gradient_norm": 0.017723729667428356,
+              "gradient_cosine": -0.01954141167778611,
+              "auxiliary_induced_over_base_update": 0.004740224062030883
+            },
+            "patch_embedding": {
+              "base_gradient_norm": 0.1169521591284244,
+              "auxiliary_gradient_norm": 0.0032573361601090276,
+              "gradient_cosine": 0.5144730492104438,
+              "auxiliary_induced_over_base_update": 0.018163638689624624
+            },
+            "transformer": {
+              "base_gradient_norm": 0.19092171511669537,
+              "auxiliary_gradient_norm": 0.005318114866967612,
+              "gradient_cosine": 0.4934362137136383,
+              "auxiliary_induced_over_base_update": 0.01814483864066857
+            }
+          },
+          "first_order_loss_changes": {
+            "base": {
+              "actual_update": -0.19243910908699036,
+              "same_state_base_only_update": -0.1889629364013672,
+              "auxiliary_induced_change": -0.003476145677268505
+            },
+            "auxiliary": {
+              "actual_update": -0.0038275117985904217,
+              "same_state_base_only_update": -0.0036413506604731083,
+              "auxiliary_induced_change": -0.00018616097804624587
+            },
+            "CA4_base_component": {
+              "actual_update": -0.09761006385087967,
+              "same_state_base_only_update": -0.09683476388454437,
+              "auxiliary_induced_change": -0.0007753104437142611
+            }
+          }
+        },
+        {
+          "step": 267,
+          "case_name": "hippocampus_mni_s09_L",
+          "active_arm": "dice_bands",
+          "scale": 1.0,
+          "sdf_scale": 0.0,
+          "base_loss": 0.46457695960998535,
+          "auxiliary_loss": 0.016919225454330444,
+          "weighted_term_losses": {
+            "bands": 0.016919225454330444
+          },
+          "loss_decomposition_error": 0.0,
+          "logit_gradients": {
+            "base_norm": 0.0036280468460382956,
+            "auxiliary_norm": 0.00019506594188789764,
+            "auxiliary_over_base": 0.05376610340654864,
+            "cosine": 0.2873310859466808,
+            "dtype": "torch.bfloat16"
+          },
+          "parameter_gradients": {
+            "base_norm": 1.3839830519680383,
+            "auxiliary_norm": 0.05372166093070565,
+            "auxiliary_over_base": 0.0388167043334186,
+            "cosine": 0.3002350801984421,
+            "CA4_component_norm": 0.8104649881570152,
+            "CA4_auxiliary_cosine": 0.151574358830838
+          },
+          "diagnostic_profiled_flops": 255842058240,
+          "diagnostic_seconds": 0.4856824050657451,
+          "extra_parameter_gradient_calls": 3,
+          "extra_logit_gradient_calls": 2,
+          "wrong_foreground_margin_probe": {
+            "scope": "Direction from a hypothetical negative auxiliary LOGIT gradient, not a parameter/Adam step. Negative margin direction reinforces the best wrong class.",
+            "by_true_class": {
+              "1": {
+                "affected_wrong_foreground_voxels": 231,
+                "mean_true_vs_best_wrong_margin_direction": -2.432089445392194e-07,
+                "fraction_margin_worsening": 1.0
+              },
+              "2": {
+                "affected_wrong_foreground_voxels": 174,
+                "mean_true_vs_best_wrong_margin_direction": -2.7148658432452066e-07,
+                "fraction_margin_worsening": 1.0
+              },
+              "3": {
+                "affected_wrong_foreground_voxels": 40,
+                "mean_true_vs_best_wrong_margin_direction": -2.170251747202201e-07,
+                "fraction_margin_worsening": 1.0
+              }
+            }
+          },
+          "CA4_component_definition": "One-third of the actual foreground squared-Dice CA4 loss plus full-volume-normalized CE on true CA4 voxels; other-class CE gradients are not included.",
+          "CA4_target_voxels": 541,
+          "learning_rate": 0.0004745988279282506,
+          "actual_gradient_norm": 1.4007707875207305,
+          "reconstructed_vs_actual_gradient_cosine": 0.9999940670891345,
+          "adam": {
+            "betas": [
+              0.9,
+              0.999
+            ],
+            "eps": 1e-08,
+            "weight_decay": 1e-05,
+            "virtual_total_update_norm": 1.482640427472728,
+            "virtual_base_update_norm": 1.481197852009476,
+            "auxiliary_induced_update_norm": 0.023831501657012973,
+            "auxiliary_induced_over_base_update": 0.016089343921665715,
+            "total_vs_base_update_cosine": 0.9998711182046457,
+            "actual_update_norm": 1.482640427472728,
+            "virtual_vs_actual_relative_error": 0.0
+          },
+          "parameter_groups": {
+            "decoders": {
+              "base_gradient_norm": 1.12330998531343,
+              "auxiliary_gradient_norm": 0.04851418661973802,
+              "gradient_cosine": 0.3440347953377609,
+              "auxiliary_induced_over_base_update": 0.029661308883867657
+            },
+            "encoders": {
+              "base_gradient_norm": 0.6396342967559683,
+              "auxiliary_gradient_norm": 0.020363889477080076,
+              "gradient_cosine": 0.3385220841355144,
+              "auxiliary_induced_over_base_update": 0.022723009300810722
+            },
+            "output_head": {
+              "base_gradient_norm": 0.4364248416162407,
+              "auxiliary_gradient_norm": 0.008959166357736073,
+              "gradient_cosine": -0.08900247277583892,
+              "auxiliary_induced_over_base_update": 0.003428219546379894
+            },
+            "patch_embedding": {
+              "base_gradient_norm": 0.10455881650516663,
+              "auxiliary_gradient_norm": 0.0027700312298424806,
+              "gradient_cosine": -0.5449461660175327,
+              "auxiliary_induced_over_base_update": 0.014322904627156864
+            },
+            "transformer": {
+              "base_gradient_norm": 0.20749095944450138,
+              "auxiliary_gradient_norm": 0.0054555465868080565,
+              "gradient_cosine": -0.29135758029372005,
+              "auxiliary_induced_over_base_update": 0.015896966685996813
+            }
+          },
+          "first_order_loss_changes": {
+            "base": {
+              "actual_update": -0.1433461606502533,
+              "same_state_base_only_update": -0.14353075623512268,
+              "auxiliary_induced_change": 0.00018458961858414114
+            },
+            "auxiliary": {
+              "actual_update": -0.00021929238573648036,
+              "same_state_base_only_update": -0.00011539158003870398,
+              "auxiliary_induced_change": -0.00010390082752564922
+            },
+            "CA4_base_component": {
+              "actual_update": -0.09295137971639633,
+              "same_state_base_only_update": -0.09322753548622131,
+              "auxiliary_induced_change": 0.0002761624346021563
+            }
+          }
+        },
+        {
+          "step": 328,
+          "case_name": "hippocampus_mni_s22_L",
+          "active_arm": "dice_bands",
+          "scale": 1.0,
+          "sdf_scale": 0.0,
+          "base_loss": 0.3683587312698364,
+          "auxiliary_loss": 0.015784261748194695,
+          "weighted_term_losses": {
+            "bands": 0.015784261748194695
+          },
+          "loss_decomposition_error": 0.0,
+          "logit_gradients": {
+            "base_norm": 0.0035621953228784672,
+            "auxiliary_norm": 0.00019502071404977402,
+            "auxiliary_over_base": 0.05474733875406518,
+            "cosine": 0.31046135441726097,
+            "dtype": "torch.bfloat16"
+          },
+          "parameter_gradients": {
+            "base_norm": 1.7040085206960487,
+            "auxiliary_norm": 0.07628774694059472,
+            "auxiliary_over_base": 0.04476958067641171,
+            "cosine": 0.4085853866483493,
+            "CA4_component_norm": 0.730481193558889,
+            "CA4_auxiliary_cosine": -0.03294046736866482
+          },
+          "diagnostic_profiled_flops": 255842058240,
+          "diagnostic_seconds": 0.4721788442693651,
+          "extra_parameter_gradient_calls": 3,
+          "extra_logit_gradient_calls": 2,
+          "wrong_foreground_margin_probe": {
+            "scope": "Direction from a hypothetical negative auxiliary LOGIT gradient, not a parameter/Adam step. Negative margin direction reinforces the best wrong class.",
+            "by_true_class": {
+              "1": {
+                "affected_wrong_foreground_voxels": 441,
+                "mean_true_vs_best_wrong_margin_direction": -1.7120414952387364e-07,
+                "fraction_margin_worsening": 1.0
+              },
+              "2": {
+                "affected_wrong_foreground_voxels": 89,
+                "mean_true_vs_best_wrong_margin_direction": -3.968003170484735e-07,
+                "fraction_margin_worsening": 1.0
+              },
+              "3": {
+                "affected_wrong_foreground_voxels": 40,
+                "mean_true_vs_best_wrong_margin_direction": -2.6075869641317695e-07,
+                "fraction_margin_worsening": 1.0
+              }
+            }
+          },
+          "CA4_component_definition": "One-third of the actual foreground squared-Dice CA4 loss plus full-volume-normalized CE on true CA4 voxels; other-class CE gradients are not included.",
+          "CA4_target_voxels": 510,
+          "learning_rate": 0.00020861594838417522,
+          "actual_gradient_norm": 1.737067392406794,
+          "reconstructed_vs_actual_gradient_cosine": 0.9999960093058679,
+          "adam": {
+            "betas": [
+              0.9,
+              0.999
+            ],
+            "eps": 1e-08,
+            "weight_decay": 1e-05,
+            "virtual_total_update_norm": 0.34985939335061683,
+            "virtual_base_update_norm": 0.34889415487669767,
+            "auxiliary_induced_update_norm": 0.006039845248407077,
+            "auxiliary_induced_over_base_update": 0.01731139706407983,
+            "total_vs_base_update_cosine": 0.9998543639493821,
+            "actual_update_norm": 0.34985937205468776,
+            "virtual_vs_actual_relative_error": 0.0
+          },
+          "parameter_groups": {
+            "decoders": {
+              "base_gradient_norm": 1.2724496016798887,
+              "auxiliary_gradient_norm": 0.06587329693032333,
+              "gradient_cosine": 0.4224708047945169,
+              "auxiliary_induced_over_base_update": 0.03676513636113819
+            },
+            "encoders": {
+              "base_gradient_norm": 0.8813642928225522,
+              "auxiliary_gradient_norm": 0.03206024093667871,
+              "gradient_cosine": 0.6132895303409392,
+              "auxiliary_induced_over_base_update": 0.024317908483717683
+            },
+            "output_head": {
+              "base_gradient_norm": 0.7066218418473869,
+              "auxiliary_gradient_norm": 0.02074686086108573,
+              "gradient_cosine": 0.037042232735181244,
+              "auxiliary_induced_over_base_update": 0.010066136522931635
+            },
+            "patch_embedding": {
+              "base_gradient_norm": 0.03754953456903633,
+              "auxiliary_gradient_norm": 0.0021431964733677256,
+              "gradient_cosine": -0.5810085868000505,
+              "auxiliary_induced_over_base_update": 0.01272343070425517
+            },
+            "transformer": {
+              "base_gradient_norm": 0.08360394544906462,
+              "auxiliary_gradient_norm": 0.004200530817512106,
+              "gradient_cosine": -0.3516867431217334,
+              "auxiliary_induced_over_base_update": 0.01690900283989005
+            }
+          },
+          "first_order_loss_changes": {
+            "base": {
+              "actual_update": -0.014520056545734406,
+              "same_state_base_only_update": -0.014361762441694736,
+              "auxiliary_induced_change": -0.0001582935656188056
+            },
+            "auxiliary": {
+              "actual_update": -3.9843638660386205e-05,
+              "same_state_base_only_update": -2.8586782718775794e-06,
+              "auxiliary_induced_change": -3.6984965845476836e-05
+            },
+            "CA4_base_component": {
+              "actual_update": -0.00509862694889307,
+              "same_state_base_only_update": -0.005131496116518974,
+              "auxiliary_induced_change": 3.286956052761525e-05
+            }
+          }
+        },
+        {
+          "step": 349,
+          "case_name": "hippocampus_mni_s07_R",
+          "active_arm": "dice_bands",
+          "scale": 1.0,
+          "sdf_scale": 0.0,
+          "base_loss": 0.32848039269447327,
+          "auxiliary_loss": 0.014358392916619778,
+          "weighted_term_losses": {
+            "bands": 0.014358392916619778
+          },
+          "loss_decomposition_error": 0.0,
+          "logit_gradients": {
+            "base_norm": 0.0034270639193487947,
+            "auxiliary_norm": 0.00018419482487713507,
+            "auxiliary_over_base": 0.05374712267174039,
+            "cosine": 0.3345181912916476,
+            "dtype": "torch.bfloat16"
+          },
+          "parameter_gradients": {
+            "base_norm": 1.3259096406036788,
+            "auxiliary_norm": 0.04686531821241628,
+            "auxiliary_over_base": 0.03534578584938773,
+            "cosine": 0.29666676751576404,
+            "CA4_component_norm": 0.6966808228180033,
+            "CA4_auxiliary_cosine": 0.07915036537753288
+          },
+          "diagnostic_profiled_flops": 255842058240,
+          "diagnostic_seconds": 0.46911258483305573,
+          "extra_parameter_gradient_calls": 3,
+          "extra_logit_gradient_calls": 2,
+          "wrong_foreground_margin_probe": {
+            "scope": "Direction from a hypothetical negative auxiliary LOGIT gradient, not a parameter/Adam step. Negative margin direction reinforces the best wrong class.",
+            "by_true_class": {
+              "1": {
+                "affected_wrong_foreground_voxels": 288,
+                "mean_true_vs_best_wrong_margin_direction": -1.5096672711933934e-07,
+                "fraction_margin_worsening": 1.0
+              },
+              "2": {
+                "affected_wrong_foreground_voxels": 77,
+                "mean_true_vs_best_wrong_margin_direction": -3.6462185448726814e-07,
+                "fraction_margin_worsening": 1.0
+              },
+              "3": {
+                "affected_wrong_foreground_voxels": 40,
+                "mean_true_vs_best_wrong_margin_direction": -2.6149390919272264e-07,
+                "fraction_margin_worsening": 1.0
+              }
+            }
+          },
+          "CA4_component_definition": "One-third of the actual foreground squared-Dice CA4 loss plus full-volume-normalized CE on true CA4 voxels; other-class CE gradients are not included.",
+          "CA4_target_voxels": 546,
+          "learning_rate": 0.00012401751299536087,
+          "actual_gradient_norm": 1.3402627006345962,
+          "reconstructed_vs_actual_gradient_cosine": 0.999993721495891,
+          "adam": {
+            "betas": [
+              0.9,
+              0.999
+            ],
+            "eps": 1e-08,
+            "weight_decay": 1e-05,
+            "virtual_total_update_norm": 0.37618424265525996,
+            "virtual_base_update_norm": 0.37101700641746815,
+            "auxiliary_induced_update_norm": 0.0123962096190908,
+            "auxiliary_induced_over_base_update": 0.03341143237284005,
+            "total_vs_base_update_cosine": 0.999545228705501,
+            "actual_update_norm": 0.37618424265525996,
+            "virtual_vs_actual_relative_error": 0.0
+          },
+          "parameter_groups": {
+            "decoders": {
+              "base_gradient_norm": 1.1150903291421288,
+              "auxiliary_gradient_norm": 0.039926944740159204,
+              "gradient_cosine": 0.3673363836469529,
+              "auxiliary_induced_over_base_update": 0.031151110045780167
+            },
+            "encoders": {
+              "base_gradient_norm": 0.528280316599958,
+              "auxiliary_gradient_norm": 0.01805368745786521,
+              "gradient_cosine": 0.08752764702861959,
+              "auxiliary_induced_over_base_update": 0.030741727862988018
+            },
+            "output_head": {
+              "base_gradient_norm": 0.45393517840281666,
+              "auxiliary_gradient_norm": 0.012711405869798308,
+              "gradient_cosine": 0.007481534751761105,
+              "auxiliary_induced_over_base_update": 0.00593896354432245
+            },
+            "patch_embedding": {
+              "base_gradient_norm": 0.0767015570110989,
+              "auxiliary_gradient_norm": 0.004259767579736747,
+              "gradient_cosine": 0.477835340307126,
+              "auxiliary_induced_over_base_update": 0.02762782205428196
+            },
+            "transformer": {
+              "base_gradient_norm": 0.1535891829866247,
+              "auxiliary_gradient_norm": 0.009825273232292757,
+              "gradient_cosine": 0.6931110160399896,
+              "auxiliary_induced_over_base_update": 0.033596724200465104
+            }
+          },
+          "first_order_loss_changes": {
+            "base": {
+              "actual_update": -0.0209353007376194,
+              "same_state_base_only_update": -0.02011227421462536,
+              "auxiliary_induced_change": -0.0008230262319557369
+            },
+            "auxiliary": {
+              "actual_update": -0.0010264174779877067,
+              "same_state_base_only_update": -0.0009499990846961737,
+              "auxiliary_induced_change": -7.641831325599924e-05
+            },
+            "CA4_base_component": {
+              "actual_update": -0.005962073337286711,
+              "same_state_base_only_update": -0.005829027853906155,
+              "auxiliary_induced_change": -0.00013304510503076017
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "MNI_unetr_probe_bands_f0s0",
+      "rows": [
+        {
+          "step": 1,
+          "case_name": "hippocampus_mni_s08_R",
+          "active_arm": "dice",
+          "scale": 0.2,
+          "sdf_scale": 0.0,
+          "base_loss": 2.0769872665405273,
+          "auxiliary_loss": 0.0,
+          "weighted_term_losses": {},
+          "loss_decomposition_error": 0.0,
+          "logit_gradients": {
+            "base_norm": 0.0017218222015983236,
+            "auxiliary_norm": 0.0,
+            "auxiliary_over_base": 0.0,
+            "cosine": null,
+            "dtype": "torch.bfloat16"
+          },
+          "parameter_gradients": {
+            "base_norm": 2.837876174795454,
+            "auxiliary_norm": 0.0,
+            "auxiliary_over_base": 0.0,
+            "cosine": null,
+            "CA4_component_norm": 0.10474820725447781,
+            "CA4_auxiliary_cosine": null
+          },
+          "diagnostic_profiled_flops": 255785435136,
+          "diagnostic_seconds": 0.8337957514449954,
+          "extra_parameter_gradient_calls": 3,
+          "extra_logit_gradient_calls": 2,
+          "wrong_foreground_margin_probe": {
+            "scope": "Direction from a hypothetical negative auxiliary LOGIT gradient, not a parameter/Adam step. Negative margin direction reinforces the best wrong class.",
+            "by_true_class": {
+              "1": {
+                "affected_wrong_foreground_voxels": 0,
+                "mean_true_vs_best_wrong_margin_direction": null,
+                "fraction_margin_worsening": null
+              },
+              "2": {
+                "affected_wrong_foreground_voxels": 0,
+                "mean_true_vs_best_wrong_margin_direction": null,
+                "fraction_margin_worsening": null
+              },
+              "3": {
+                "affected_wrong_foreground_voxels": 0,
+                "mean_true_vs_best_wrong_margin_direction": null,
+                "fraction_margin_worsening": null
+              }
+            }
+          },
+          "CA4_component_definition": "One-third of the actual foreground squared-Dice CA4 loss plus full-volume-normalized CE on true CA4 voxels; other-class CE gradients are not included.",
+          "CA4_target_voxels": 394,
+          "learning_rate": 2.4999999999999998e-05,
+          "actual_gradient_norm": 2.837876174795454,
+          "reconstructed_vs_actual_gradient_cosine": 1.0,
+          "adam": {
+            "betas": [
+              0.9,
+              0.999
+            ],
+            "eps": 1e-08,
+            "weight_decay": 1e-05,
+            "virtual_total_update_norm": 0.22748884375434356,
+            "virtual_base_update_norm": 0.22748884375434356,
+            "auxiliary_induced_update_norm": 0.0,
+            "auxiliary_induced_over_base_update": 0.0,
+            "total_vs_base_update_cosine": 1.0000000000000002,
+            "actual_update_norm": 0.22748884375434356,
+            "virtual_vs_actual_relative_error": 0.0
+          },
+          "parameter_groups": {
+            "decoders": {
+              "base_gradient_norm": 1.9455415521918136,
+              "auxiliary_gradient_norm": 0.0,
+              "gradient_cosine": null,
+              "auxiliary_induced_over_base_update": 0.0
+            },
+            "encoders": {
+              "base_gradient_norm": 1.3772108337350715,
+              "auxiliary_gradient_norm": 0.0,
+              "gradient_cosine": null,
+              "auxiliary_induced_over_base_update": 0.0
+            },
+            "output_head": {
+              "base_gradient_norm": 1.5395441995825458,
+              "auxiliary_gradient_norm": 0.0,
+              "gradient_cosine": null,
+              "auxiliary_induced_over_base_update": 0.0
+            },
+            "patch_embedding": {
+              "base_gradient_norm": 0.028231111376988197,
+              "auxiliary_gradient_norm": 0.0,
+              "gradient_cosine": null,
+              "auxiliary_induced_over_base_update": 0.0
+            },
+            "transformer": {
+              "base_gradient_norm": 0.0265864958524433,
+              "auxiliary_gradient_norm": 0.0,
+              "gradient_cosine": null,
+              "auxiliary_induced_over_base_update": 0.0
+            }
+          },
+          "first_order_loss_changes": {
+            "base": {
+              "actual_update": -0.011762681417167187,
+              "same_state_base_only_update": -0.011762681417167187,
+              "auxiliary_induced_change": 0.0
+            },
+            "auxiliary": {
+              "actual_update": 0.0,
+              "same_state_base_only_update": 0.0,
+              "auxiliary_induced_change": 0.0
+            },
+            "CA4_base_component": {
+              "actual_update": -0.000927735585719347,
+              "same_state_base_only_update": -0.000927735585719347,
+              "auxiliary_induced_change": 0.0
+            }
+          }
+        },
+        {
+          "step": 41,
+          "case_name": "hippocampus_mni_s08_R",
+          "active_arm": "dice",
+          "scale": 0.2,
+          "sdf_scale": 0.0,
+          "base_loss": 1.3793988227844238,
+          "auxiliary_loss": 0.0,
+          "weighted_term_losses": {},
+          "loss_decomposition_error": 0.0,
+          "logit_gradients": {
+            "base_norm": 0.0020376788906480547,
+            "auxiliary_norm": 0.0,
+            "auxiliary_over_base": 0.0,
+            "cosine": null,
+            "dtype": "torch.bfloat16"
+          },
+          "parameter_gradients": {
+            "base_norm": 1.2865055502850762,
+            "auxiliary_norm": 0.0,
+            "auxiliary_over_base": 0.0,
+            "cosine": null,
+            "CA4_component_norm": 0.09439618218728686,
+            "CA4_auxiliary_cosine": null
+          },
+          "diagnostic_profiled_flops": 255785435136,
+          "diagnostic_seconds": 0.4884440442547202,
+          "extra_parameter_gradient_calls": 3,
+          "extra_logit_gradient_calls": 2,
+          "wrong_foreground_margin_probe": {
+            "scope": "Direction from a hypothetical negative auxiliary LOGIT gradient, not a parameter/Adam step. Negative margin direction reinforces the best wrong class.",
+            "by_true_class": {
+              "1": {
+                "affected_wrong_foreground_voxels": 0,
+                "mean_true_vs_best_wrong_margin_direction": null,
+                "fraction_margin_worsening": null
+              },
+              "2": {
+                "affected_wrong_foreground_voxels": 0,
+                "mean_true_vs_best_wrong_margin_direction": null,
+                "fraction_margin_worsening": null
+              },
+              "3": {
+                "affected_wrong_foreground_voxels": 0,
+                "mean_true_vs_best_wrong_margin_direction": null,
+                "fraction_margin_worsening": null
+              }
+            }
+          },
+          "CA4_component_definition": "One-third of the actual foreground squared-Dice CA4 loss plus full-volume-normalized CE on true CA4 voxels; other-class CE gradients are not included.",
+          "CA4_target_voxels": 394,
+          "learning_rate": 0.0006,
+          "actual_gradient_norm": 1.2865055502850762,
+          "reconstructed_vs_actual_gradient_cosine": 1.0,
+          "adam": {
+            "betas": [
+              0.9,
+              0.999
+            ],
+            "eps": 1e-08,
+            "weight_decay": 1e-05,
+            "virtual_total_update_norm": 0.9918934544058593,
+            "virtual_base_update_norm": 0.9918934544058593,
+            "auxiliary_induced_update_norm": 0.0,
+            "auxiliary_induced_over_base_update": 0.0,
+            "total_vs_base_update_cosine": 1.0,
+            "actual_update_norm": 0.9918934844517496,
+            "virtual_vs_actual_relative_error": 0.0
+          },
+          "parameter_groups": {
+            "decoders": {
+              "base_gradient_norm": 0.1805643167163357,
+              "auxiliary_gradient_norm": 0.0,
+              "gradient_cosine": null,
+              "auxiliary_induced_over_base_update": 0.0
+            },
+            "encoders": {
+              "base_gradient_norm": 0.09871284146391737,
+              "auxiliary_gradient_norm": 0.0,
+              "gradient_cosine": null,
+              "auxiliary_induced_over_base_update": 0.0
+            },
+            "output_head": {
+              "base_gradient_norm": 1.2697899188101893,
+              "auxiliary_gradient_norm": 0.0,
+              "gradient_cosine": null,
+              "auxiliary_induced_over_base_update": 0.0
+            },
+            "patch_embedding": {
+              "base_gradient_norm": 0.015119920627219589,
+              "auxiliary_gradient_norm": 0.0,
+              "gradient_cosine": null,
+              "auxiliary_induced_over_base_update": 0.0
+            },
+            "transformer": {
+              "base_gradient_norm": 0.012403940863914508,
+              "auxiliary_gradient_norm": 0.0,
+              "gradient_cosine": null,
+              "auxiliary_induced_over_base_update": 0.0
+            }
+          },
+          "first_order_loss_changes": {
+            "base": {
+              "actual_update": -0.013619042932987213,
+              "same_state_base_only_update": -0.013619042932987213,
+              "auxiliary_induced_change": 0.0
+            },
+            "auxiliary": {
+              "actual_update": 0.0,
+              "same_state_base_only_update": 0.0,
+              "auxiliary_induced_change": 0.0
+            },
+            "CA4_base_component": {
+              "actual_update": -0.002116274321451783,
+              "same_state_base_only_update": -0.002116274321451783,
+              "auxiliary_induced_change": 0.0
+            }
+          }
+        },
+        {
+          "step": 82,
+          "case_name": "hippocampus_mni_s18_L",
+          "active_arm": "dice",
+          "scale": 0.2,
+          "sdf_scale": 0.0,
+          "base_loss": 0.99785315990448,
+          "auxiliary_loss": 0.0,
+          "weighted_term_losses": {},
+          "loss_decomposition_error": 0.0,
+          "logit_gradients": {
+            "base_norm": 0.003392239919906388,
+            "auxiliary_norm": 0.0,
+            "auxiliary_over_base": 0.0,
+            "cosine": null,
+            "dtype": "torch.bfloat16"
+          },
+          "parameter_gradients": {
+            "base_norm": 1.5228316447281443,
+            "auxiliary_norm": 0.0,
+            "auxiliary_over_base": 0.0,
+            "cosine": null,
+            "CA4_component_norm": 0.38834773977650133,
+            "CA4_auxiliary_cosine": null
+          },
+          "diagnostic_profiled_flops": 255785435136,
+          "diagnostic_seconds": 0.461120693013072,
+          "extra_parameter_gradient_calls": 3,
+          "extra_logit_gradient_calls": 2,
+          "wrong_foreground_margin_probe": {
+            "scope": "Direction from a hypothetical negative auxiliary LOGIT gradient, not a parameter/Adam step. Negative margin direction reinforces the best wrong class.",
+            "by_true_class": {
+              "1": {
+                "affected_wrong_foreground_voxels": 0,
+                "mean_true_vs_best_wrong_margin_direction": null,
+                "fraction_margin_worsening": null
+              },
+              "2": {
+                "affected_wrong_foreground_voxels": 0,
+                "mean_true_vs_best_wrong_margin_direction": null,
+                "fraction_margin_worsening": null
+              },
+              "3": {
+                "affected_wrong_foreground_voxels": 0,
+                "mean_true_vs_best_wrong_margin_direction": null,
+                "fraction_margin_worsening": null
+              }
+            }
+          },
+          "CA4_component_definition": "One-third of the actual foreground squared-Dice CA4 loss plus full-volume-normalized CE on true CA4 voxels; other-class CE gradients are not included.",
+          "CA4_target_voxels": 435,
+          "learning_rate": 0.0006,
+          "actual_gradient_norm": 1.5228316447281443,
+          "reconstructed_vs_actual_gradient_cosine": 1.0,
+          "adam": {
+            "betas": [
+              0.9,
+              0.999
+            ],
+            "eps": 1e-08,
+            "weight_decay": 1e-05,
+            "virtual_total_update_norm": 1.1658596017498983,
+            "virtual_base_update_norm": 1.1658596017498983,
+            "auxiliary_induced_update_norm": 0.0,
+            "auxiliary_induced_over_base_update": 0.0,
+            "total_vs_base_update_cosine": 1.0,
+            "actual_update_norm": 1.1658596017498983,
+            "virtual_vs_actual_relative_error": 0.0
+          },
+          "parameter_groups": {
+            "decoders": {
+              "base_gradient_norm": 0.6194307628207865,
+              "auxiliary_gradient_norm": 0.0,
+              "gradient_cosine": null,
+              "auxiliary_induced_over_base_update": 0.0
+            },
+            "encoders": {
+              "base_gradient_norm": 0.27398373675809107,
+              "auxiliary_gradient_norm": 0.0,
+              "gradient_cosine": null,
+              "auxiliary_induced_over_base_update": 0.0
+            },
+            "output_head": {
+              "base_gradient_norm": 1.3636828161766121,
+              "auxiliary_gradient_norm": 0.0,
+              "gradient_cosine": null,
+              "auxiliary_induced_over_base_update": 0.0
+            },
+            "patch_embedding": {
+              "base_gradient_norm": 0.0153235572468996,
+              "auxiliary_gradient_norm": 0.0,
+              "gradient_cosine": null,
+              "auxiliary_induced_over_base_update": 0.0
+            },
+            "transformer": {
+              "base_gradient_norm": 0.019723158013815155,
+              "auxiliary_gradient_norm": 0.0,
+              "gradient_cosine": null,
+              "auxiliary_induced_over_base_update": 0.0
+            }
+          },
+          "first_order_loss_changes": {
+            "base": {
+              "actual_update": -0.021986590698361397,
+              "same_state_base_only_update": -0.021986590698361397,
+              "auxiliary_induced_change": 0.0
+            },
+            "auxiliary": {
+              "actual_update": 0.0,
+              "same_state_base_only_update": 0.0,
+              "auxiliary_induced_change": 0.0
+            },
+            "CA4_base_component": {
+              "actual_update": -0.003494824515655637,
+              "same_state_base_only_update": -0.003494824515655637,
+              "auxiliary_induced_change": 0.0
+            }
+          }
+        },
+        {
+          "step": 102,
+          "case_name": "hippocampus_mni_s11_L",
+          "active_arm": "dice",
+          "scale": 0.2,
+          "sdf_scale": 0.0,
+          "base_loss": 0.8813353776931763,
+          "auxiliary_loss": -0.0,
+          "weighted_term_losses": {},
+          "loss_decomposition_error": 0.0,
+          "logit_gradients": {
+            "base_norm": 0.004106790469130132,
+            "auxiliary_norm": 0.0,
+            "auxiliary_over_base": 0.0,
+            "cosine": null,
+            "dtype": "torch.bfloat16"
+          },
+          "parameter_gradients": {
+            "base_norm": 1.5915077742645285,
+            "auxiliary_norm": 0.0,
+            "auxiliary_over_base": 0.0,
+            "cosine": null,
+            "CA4_component_norm": 0.8603831186904947,
+            "CA4_auxiliary_cosine": null
+          },
+          "diagnostic_profiled_flops": 255785435136,
+          "diagnostic_seconds": 0.46041312208399177,
+          "extra_parameter_gradient_calls": 3,
+          "extra_logit_gradient_calls": 2,
+          "wrong_foreground_margin_probe": {
+            "scope": "Direction from a hypothetical negative auxiliary LOGIT gradient, not a parameter/Adam step. Negative margin direction reinforces the best wrong class.",
+            "by_true_class": {
+              "1": {
+                "affected_wrong_foreground_voxels": 0,
+                "mean_true_vs_best_wrong_margin_direction": null,
+                "fraction_margin_worsening": null
+              },
+              "2": {
+                "affected_wrong_foreground_voxels": 0,
+                "mean_true_vs_best_wrong_margin_direction": null,
+                "fraction_margin_worsening": null
+              },
+              "3": {
+                "affected_wrong_foreground_voxels": 0,
+                "mean_true_vs_best_wrong_margin_direction": null,
+                "fraction_margin_worsening": null
+              }
+            }
+          },
+          "CA4_component_definition": "One-third of the actual foreground squared-Dice CA4 loss plus full-volume-normalized CE on true CA4 voxels; other-class CE gradients are not included.",
+          "CA4_target_voxels": 520,
+          "learning_rate": 0.0006,
+          "actual_gradient_norm": 1.5915077742645285,
+          "reconstructed_vs_actual_gradient_cosine": 1.0,
+          "adam": {
+            "betas": [
+              0.9,
+              0.999
+            ],
+            "eps": 1e-08,
+            "weight_decay": 1e-05,
+            "virtual_total_update_norm": 1.455693753470847,
+            "virtual_base_update_norm": 1.455693753470847,
+            "auxiliary_induced_update_norm": 0.0,
+            "auxiliary_induced_over_base_update": 0.0,
+            "total_vs_base_update_cosine": 1.0,
+            "actual_update_norm": 1.455693753470847,
+            "virtual_vs_actual_relative_error": 0.0
+          },
+          "parameter_groups": {
+            "decoders": {
+              "base_gradient_norm": 0.9347193488507809,
+              "auxiliary_gradient_norm": 0.0,
+              "gradient_cosine": null,
+              "auxiliary_induced_over_base_update": 0.0
+            },
+            "encoders": {
+              "base_gradient_norm": 0.2737063176432248,
+              "auxiliary_gradient_norm": 0.0,
+              "gradient_cosine": null,
+              "auxiliary_induced_over_base_update": 0.0
+            },
+            "output_head": {
+              "base_gradient_norm": 1.2583020128474278,
+              "auxiliary_gradient_norm": 0.0,
+              "gradient_cosine": null,
+              "auxiliary_induced_over_base_update": 0.0
+            },
+            "patch_embedding": {
+              "base_gradient_norm": 0.018621316444574976,
+              "auxiliary_gradient_norm": 0.0,
+              "gradient_cosine": null,
+              "auxiliary_induced_over_base_update": 0.0
+            },
+            "transformer": {
+              "base_gradient_norm": 0.02471827987885144,
+              "auxiliary_gradient_norm": 0.0,
+              "gradient_cosine": null,
+              "auxiliary_induced_over_base_update": 0.0
+            }
+          },
+          "first_order_loss_changes": {
+            "base": {
+              "actual_update": -0.040140554308891296,
+              "same_state_base_only_update": -0.040140554308891296,
+              "auxiliary_induced_change": 0.0
+            },
+            "auxiliary": {
+              "actual_update": 0.0,
+              "same_state_base_only_update": 0.0,
+              "auxiliary_induced_change": 0.0
+            },
+            "CA4_base_component": {
+              "actual_update": -0.006455281283706427,
+              "same_state_base_only_update": -0.006455281283706427,
+              "auxiliary_induced_change": 0.0
+            }
+          }
+        },
+        {
+          "step": 103,
+          "case_name": "hippocampus_mni_s14_R",
+          "active_arm": "dice_bands",
+          "scale": 0.030303030303030304,
+          "sdf_scale": 0.0,
+          "base_loss": 0.9429807662963867,
+          "auxiliary_loss": 0.0006005713366903365,
+          "weighted_term_losses": {
+            "bands": 0.0006005713366903365
+          },
+          "loss_decomposition_error": 0.0,
+          "logit_gradients": {
+            "base_norm": 0.004062841303565964,
+            "auxiliary_norm": 6.22285213378737e-06,
+            "auxiliary_over_base": 0.0015316503079570347,
+            "cosine": 0.2533427097021561,
+            "dtype": "torch.bfloat16"
+          },
+          "parameter_gradients": {
+            "base_norm": 1.4064715740695835,
+            "auxiliary_norm": 0.0012907590814366233,
+            "auxiliary_over_base": 0.0009177285237993475,
+            "cosine": 0.28872480652516175,
+            "CA4_component_norm": 0.5959165597246163,
+            "CA4_auxiliary_cosine": 0.28378060589774146
+          },
+          "diagnostic_profiled_flops": 255842058240,
+          "diagnostic_seconds": 0.4795049182139337,
+          "extra_parameter_gradient_calls": 3,
+          "extra_logit_gradient_calls": 2,
+          "wrong_foreground_margin_probe": {
+            "scope": "Direction from a hypothetical negative auxiliary LOGIT gradient, not a parameter/Adam step. Negative margin direction reinforces the best wrong class.",
+            "by_true_class": {
+              "1": {
+                "affected_wrong_foreground_voxels": 416,
+                "mean_true_vs_best_wrong_margin_direction": -1.1378373798720531e-08,
+                "fraction_margin_worsening": 0.9975962042808533
+              },
+              "2": {
+                "affected_wrong_foreground_voxels": 91,
+                "mean_true_vs_best_wrong_margin_direction": -4.944613163360145e-09,
+                "fraction_margin_worsening": 1.0
+              },
+              "3": {
+                "affected_wrong_foreground_voxels": 29,
+                "mean_true_vs_best_wrong_margin_direction": -2.0934687317009093e-09,
+                "fraction_margin_worsening": 1.0
+              }
+            }
+          },
+          "CA4_component_definition": "One-third of the actual foreground squared-Dice CA4 loss plus full-volume-normalized CE on true CA4 voxels; other-class CE gradients are not included.",
+          "CA4_target_voxels": 449,
+          "learning_rate": 0.0006,
+          "actual_gradient_norm": 1.4066615456145901,
+          "reconstructed_vs_actual_gradient_cosine": 0.999998080839999,
+          "adam": {
+            "betas": [
+              0.9,
+              0.999
+            ],
+            "eps": 1e-08,
+            "weight_decay": 1e-05,
+            "virtual_total_update_norm": 1.9043985349467234,
+            "virtual_base_update_norm": 1.9035448359787002,
+            "auxiliary_induced_update_norm": 0.010415572460392129,
+            "auxiliary_induced_over_base_update": 0.005471671727152674,
+            "total_vs_base_update_cosine": 0.9999852039146836,
+            "actual_update_norm": 1.9043985349467234,
+            "virtual_vs_actual_relative_error": 0.0
+          },
+          "parameter_groups": {
+            "decoders": {
+              "base_gradient_norm": 0.7337534282805694,
+              "auxiliary_gradient_norm": 0.0011480057349152327,
+              "gradient_cosine": 0.5152336203067593,
+              "auxiliary_induced_over_base_update": 0.003491041816550336
+            },
+            "encoders": {
+              "base_gradient_norm": 0.40999145830374845,
+              "auxiliary_gradient_norm": 0.0005163029609832471,
+              "gradient_cosine": 0.3367965118054533,
+              "auxiliary_induced_over_base_update": 0.0039005295150739343
+            },
+            "output_head": {
+              "base_gradient_norm": 1.1106603993112687,
+              "auxiliary_gradient_norm": 0.00019409132148988855,
+              "gradient_cosine": -0.08735943524455249,
+              "auxiliary_induced_over_base_update": 0.00012590764719479092
+            },
+            "patch_embedding": {
+              "base_gradient_norm": 0.12188774188998353,
+              "auxiliary_gradient_norm": 0.00012721091899818836,
+              "gradient_cosine": 0.926429248501666,
+              "auxiliary_induced_over_base_update": 0.00318792354308799
+            },
+            "transformer": {
+              "base_gradient_norm": 0.15248624544181869,
+              "auxiliary_gradient_norm": 0.00016648956906468315,
+              "gradient_cosine": 0.918616267081146,
+              "auxiliary_induced_over_base_update": 0.005687164649379928
+            }
+          },
+          "first_order_loss_changes": {
+            "base": {
+              "actual_update": -0.2205522656440735,
+              "same_state_base_only_update": -0.2204369455575943,
+              "auxiliary_induced_change": -0.0001153294142568484
+            },
+            "auxiliary": {
+              "actual_update": -0.00019632164912763983,
+              "same_state_base_only_update": -0.00019615390920080245,
+              "auxiliary_induced_change": -1.6773294930771954e-07
+            },
+            "CA4_base_component": {
+              "actual_update": -0.0871608555316925,
+              "same_state_base_only_update": -0.08710194379091263,
+              "auxiliary_induced_change": -5.8913810789817944e-05
+            }
+          }
+        },
+        {
+          "step": 119,
+          "case_name": "hippocampus_mni_s03_L",
+          "active_arm": "dice_bands",
+          "scale": 0.5151515151515151,
+          "sdf_scale": 0.0,
+          "base_loss": 0.7580537796020508,
+          "auxiliary_loss": 0.009430165402591228,
+          "weighted_term_losses": {
+            "bands": 0.009430165402591228
+          },
+          "loss_decomposition_error": 0.0,
+          "logit_gradients": {
+            "base_norm": 0.0042378655565725835,
+            "auxiliary_norm": 0.00010239131210516722,
+            "auxiliary_over_base": 0.02416105719691052,
+            "cosine": 0.24670692646109307,
+            "dtype": "torch.bfloat16"
+          },
+          "parameter_gradients": {
+            "base_norm": 1.2897696202843778,
+            "auxiliary_norm": 0.028472765465321643,
+            "auxiliary_over_base": 0.022075853716451904,
+            "cosine": 0.0770853363082402,
+            "CA4_component_norm": 0.5802845186339397,
+            "CA4_auxiliary_cosine": 0.0924273243227731
+          },
+          "diagnostic_profiled_flops": 255842058240,
+          "diagnostic_seconds": 0.47196016693487763,
+          "extra_parameter_gradient_calls": 3,
+          "extra_logit_gradient_calls": 2,
+          "wrong_foreground_margin_probe": {
+            "scope": "Direction from a hypothetical negative auxiliary LOGIT gradient, not a parameter/Adam step. Negative margin direction reinforces the best wrong class.",
+            "by_true_class": {
+              "1": {
+                "affected_wrong_foreground_voxels": 519,
+                "mean_true_vs_best_wrong_margin_direction": -1.3246807384348358e-07,
+                "fraction_margin_worsening": 1.0
+              },
+              "2": {
+                "affected_wrong_foreground_voxels": 47,
+                "mean_true_vs_best_wrong_margin_direction": -1.2459287290766952e-07,
+                "fraction_margin_worsening": 0.9999999403953552
+              },
+              "3": {
+                "affected_wrong_foreground_voxels": 61,
+                "mean_true_vs_best_wrong_margin_direction": -7.513940403214292e-08,
+                "fraction_margin_worsening": 0.9836065173149109
+              }
+            }
+          },
+          "CA4_component_definition": "One-third of the actual foreground squared-Dice CA4 loss plus full-volume-normalized CE on true CA4 voxels; other-class CE gradients are not included.",
+          "CA4_target_voxels": 604,
+          "learning_rate": 0.0006,
+          "actual_gradient_norm": 1.2924805148664753,
+          "reconstructed_vs_actual_gradient_cosine": 0.9999963724890546,
+          "adam": {
+            "betas": [
+              0.9,
+              0.999
+            ],
+            "eps": 1e-08,
+            "weight_decay": 1e-05,
+            "virtual_total_update_norm": 1.8678970584808852,
+            "virtual_base_update_norm": 1.864044289128256,
+            "auxiliary_induced_update_norm": 0.021721394046894254,
+            "auxiliary_induced_over_base_update": 0.011652831519927319,
+            "total_vs_base_update_cosine": 0.9999343072915778,
+            "actual_update_norm": 1.8678969946608308,
+            "virtual_vs_actual_relative_error": 0.0
+          },
+          "parameter_groups": {
+            "decoders": {
+              "base_gradient_norm": 0.520914115998785,
+              "auxiliary_gradient_norm": 0.025705553138679487,
+              "gradient_cosine": -0.08766725541848094,
+              "auxiliary_induced_over_base_update": 0.01290546550062922
+            },
+            "encoders": {
+              "base_gradient_norm": 0.25492688963502946,
+              "auxiliary_gradient_norm": 0.011295093790514157,
+              "gradient_cosine": 0.3323714836397659,
+              "auxiliary_induced_over_base_update": 0.01198281681913982
+            },
+            "output_head": {
+              "base_gradient_norm": 1.1510160912251473,
+              "auxiliary_gradient_norm": 0.004554651090004488,
+              "gradient_cosine": 0.573335739903097,
+              "auxiliary_induced_over_base_update": 0.0007197562813820645
+            },
+            "patch_embedding": {
+              "base_gradient_norm": 0.023935514290132603,
+              "auxiliary_gradient_norm": 0.0006102379072808093,
+              "gradient_cosine": 0.6533858695723154,
+              "auxiliary_induced_over_base_update": 0.0062281517895605674
+            },
+            "transformer": {
+              "base_gradient_norm": 0.04189907051606187,
+              "auxiliary_gradient_norm": 0.001107482196345642,
+              "gradient_cosine": 0.6992302185330173,
+              "auxiliary_induced_over_base_update": 0.011795560161835868
+            }
+          },
+          "first_order_loss_changes": {
+            "base": {
+              "actual_update": -0.027368903160095215,
+              "same_state_base_only_update": -0.02697649598121643,
+              "auxiliary_induced_change": -0.00039240869227796793
+            },
+            "auxiliary": {
+              "actual_update": -0.0004091689479537308,
+              "same_state_base_only_update": -0.0003729702439159155,
+              "auxiliary_induced_change": -3.6198674933984876e-05
+            },
+            "CA4_base_component": {
+              "actual_update": -0.010362648405134678,
+              "same_state_base_only_update": -0.010144861415028572,
+              "auxiliary_induced_change": -0.0002177872374886647
+            }
+          }
+        },
+        {
+          "step": 135,
+          "case_name": "hippocampus_mni_s08_L",
+          "active_arm": "dice_bands",
+          "scale": 1.0,
+          "sdf_scale": 0.0,
+          "base_loss": 0.7211428880691528,
+          "auxiliary_loss": 0.01689489185810089,
+          "weighted_term_losses": {
+            "bands": 0.01689489185810089
+          },
+          "loss_decomposition_error": 0.0,
+          "logit_gradients": {
+            "base_norm": 0.004586477484615203,
+            "auxiliary_norm": 0.0002042359567697823,
+            "auxiliary_over_base": 0.04453002493849969,
+            "cosine": 0.23358785291541959,
+            "dtype": "torch.bfloat16"
+          },
+          "parameter_gradients": {
+            "base_norm": 1.3230730800325474,
+            "auxiliary_norm": 0.0359250406638128,
+            "auxiliary_over_base": 0.027152725881875738,
+            "cosine": -0.03701285585022406,
+            "CA4_component_norm": 0.5938303039856089,
+            "CA4_auxiliary_cosine": 0.0329871703519818
+          },
+          "diagnostic_profiled_flops": 255842058240,
+          "diagnostic_seconds": 0.4703260469250381,
+          "extra_parameter_gradient_calls": 3,
+          "extra_logit_gradient_calls": 2,
+          "wrong_foreground_margin_probe": {
+            "scope": "Direction from a hypothetical negative auxiliary LOGIT gradient, not a parameter/Adam step. Negative margin direction reinforces the best wrong class.",
+            "by_true_class": {
+              "1": {
+                "affected_wrong_foreground_voxels": 447,
+                "mean_true_vs_best_wrong_margin_direction": -2.598121682240162e-07,
+                "fraction_margin_worsening": 0.9977628588676453
+              },
+              "2": {
+                "affected_wrong_foreground_voxels": 77,
+                "mean_true_vs_best_wrong_margin_direction": -2.9998187756064e-07,
+                "fraction_margin_worsening": 1.0
+              },
+              "3": {
+                "affected_wrong_foreground_voxels": 62,
+                "mean_true_vs_best_wrong_margin_direction": -1.9490177294301247e-07,
+                "fraction_margin_worsening": 1.0
+              }
+            }
+          },
+          "CA4_component_definition": "One-third of the actual foreground squared-Dice CA4 loss plus full-volume-normalized CE on true CA4 voxels; other-class CE gradients are not included.",
+          "CA4_target_voxels": 503,
+          "learning_rate": 0.0006,
+          "actual_gradient_norm": 1.3217363974771572,
+          "reconstructed_vs_actual_gradient_cosine": 0.9999944084319107,
+          "adam": {
+            "betas": [
+              0.9,
+              0.999
+            ],
+            "eps": 1e-08,
+            "weight_decay": 1e-05,
+            "virtual_total_update_norm": 1.2135711579020605,
+            "virtual_base_update_norm": 1.211284858351618,
+            "auxiliary_induced_update_norm": 0.029275362739508988,
+            "auxiliary_induced_over_base_update": 0.024168850570251893,
+            "total_vs_base_update_cosine": 0.9997102384342258,
+            "actual_update_norm": 1.2135711579020605,
+            "virtual_vs_actual_relative_error": 0.0
+          },
+          "parameter_groups": {
+            "decoders": {
+              "base_gradient_norm": 0.739547007747681,
+              "auxiliary_gradient_norm": 0.03085385443705522,
+              "gradient_cosine": -0.22196883062501954,
+              "auxiliary_induced_over_base_update": 0.021497819388634248
+            },
+            "encoders": {
+              "base_gradient_norm": 0.3109445604644136,
+              "auxiliary_gradient_norm": 0.01745971394578662,
+              "gradient_cosine": 0.055130654112700114,
+              "auxiliary_induced_over_base_update": 0.023731525985126126
+            },
+            "output_head": {
+              "base_gradient_norm": 1.0512226978435282,
+              "auxiliary_gradient_norm": 0.005482612184189006,
+              "gradient_cosine": 0.5151415521653491,
+              "auxiliary_induced_over_base_update": 0.0007363501125457625
+            },
+            "patch_embedding": {
+              "base_gradient_norm": 0.02355507575532773,
+              "auxiliary_gradient_norm": 0.0009631898436239884,
+              "gradient_cosine": 0.4278149318773034,
+              "auxiliary_induced_over_base_update": 0.01692373277121875
+            },
+            "transformer": {
+              "base_gradient_norm": 0.035807925818347595,
+              "auxiliary_gradient_norm": 0.0016792856868528825,
+              "gradient_cosine": 0.458674738177649,
+              "auxiliary_induced_over_base_update": 0.024458824813649
+            }
+          },
+          "first_order_loss_changes": {
+            "base": {
+              "actual_update": -0.02985997498035431,
+              "same_state_base_only_update": -0.02944311499595642,
+              "auxiliary_induced_change": -0.00041685905307531357
+            },
+            "auxiliary": {
+              "actual_update": -0.000324731576256454,
+              "same_state_base_only_update": -0.00025278370594605803,
+              "auxiliary_induced_change": -7.19478921382688e-05
+            },
+            "CA4_base_component": {
+              "actual_update": -0.0121017936617136,
+              "same_state_base_only_update": -0.012317391112446785,
+              "auxiliary_induced_change": 0.00021559721790254116
+            }
+          }
+        },
+        {
+          "step": 144,
+          "case_name": "hippocampus_mni_s18_L",
+          "active_arm": "dice_bands",
+          "scale": 1.0,
+          "sdf_scale": 0.0,
+          "base_loss": 0.6459598541259766,
+          "auxiliary_loss": 0.0165330171585083,
+          "weighted_term_losses": {
+            "bands": 0.0165330171585083
+          },
+          "loss_decomposition_error": 0.0,
+          "logit_gradients": {
+            "base_norm": 0.004829004084116265,
+            "auxiliary_norm": 0.00019223350868227942,
+            "auxiliary_over_base": 0.039808106461243394,
+            "cosine": 0.22100181489644588,
+            "dtype": "torch.bfloat16"
+          },
+          "parameter_gradients": {
+            "base_norm": 1.2690541471287686,
+            "auxiliary_norm": 0.0676180596132855,
+            "auxiliary_over_base": 0.053282249434566026,
+            "cosine": 0.2065445430260584,
+            "CA4_component_norm": 0.5653430562699602,
+            "CA4_auxiliary_cosine": 0.3235703827203295
+          },
+          "diagnostic_profiled_flops": 255842058240,
+          "diagnostic_seconds": 0.46982522774487734,
+          "extra_parameter_gradient_calls": 3,
+          "extra_logit_gradient_calls": 2,
+          "wrong_foreground_margin_probe": {
+            "scope": "Direction from a hypothetical negative auxiliary LOGIT gradient, not a parameter/Adam step. Negative margin direction reinforces the best wrong class.",
+            "by_true_class": {
+              "1": {
+                "affected_wrong_foreground_voxels": 375,
+                "mean_true_vs_best_wrong_margin_direction": -1.996188956354672e-07,
+                "fraction_margin_worsening": 0.9946666359901428
+              },
+              "2": {
+                "affected_wrong_foreground_voxels": 119,
+                "mean_true_vs_best_wrong_margin_direction": -1.5147021770189895e-07,
+                "fraction_margin_worsening": 1.0
+              },
+              "3": {
+                "affected_wrong_foreground_voxels": 34,
+                "mean_true_vs_best_wrong_margin_direction": -6.574041577778189e-08,
+                "fraction_margin_worsening": 1.0
+              }
+            }
+          },
+          "CA4_component_definition": "One-third of the actual foreground squared-Dice CA4 loss plus full-volume-normalized CE on true CA4 voxels; other-class CE gradients are not included.",
+          "CA4_target_voxels": 435,
+          "learning_rate": 0.0006,
+          "actual_gradient_norm": 1.2857786022478415,
+          "reconstructed_vs_actual_gradient_cosine": 0.9999939854180975,
+          "adam": {
+            "betas": [
+              0.9,
+              0.999
+            ],
+            "eps": 1e-08,
+            "weight_decay": 1e-05,
+            "virtual_total_update_norm": 1.7038197631434846,
+            "virtual_base_update_norm": 1.7022551668883963,
+            "auxiliary_induced_update_norm": 0.01612269422825923,
+            "auxiliary_induced_over_base_update": 0.009471373353344194,
+            "total_vs_base_update_cosine": 0.9999555387501038,
+            "actual_update_norm": 1.7038196232116714,
+            "virtual_vs_actual_relative_error": 0.0
+          },
+          "parameter_groups": {
+            "decoders": {
+              "base_gradient_norm": 0.6861619499571958,
+              "auxiliary_gradient_norm": 0.05979899381821506,
+              "gradient_cosine": 0.16623828174270955,
+              "auxiliary_induced_over_base_update": 0.01790830060131033
+            },
+            "encoders": {
+              "base_gradient_norm": 0.3764758275429838,
+              "auxiliary_gradient_norm": 0.02929964052498952,
+              "gradient_cosine": 0.4298497483939973,
+              "auxiliary_induced_over_base_update": 0.014457338280700564
+            },
+            "output_head": {
+              "base_gradient_norm": 0.9975732623948289,
+              "auxiliary_gradient_norm": 0.011682192584016699,
+              "gradient_cosine": 0.5265092226033689,
+              "auxiliary_induced_over_base_update": 0.002012450379943435
+            },
+            "patch_embedding": {
+              "base_gradient_norm": 0.023644073420134474,
+              "auxiliary_gradient_norm": 0.000550182732685483,
+              "gradient_cosine": 0.2849390347632835,
+              "auxiliary_induced_over_base_update": 0.005016138544863614
+            },
+            "transformer": {
+              "base_gradient_norm": 0.047273284906189275,
+              "auxiliary_gradient_norm": 0.0010185019574618555,
+              "gradient_cosine": 0.4500634012210892,
+              "auxiliary_induced_over_base_update": 0.009281675705514475
+            }
+          },
+          "first_order_loss_changes": {
+            "base": {
+              "actual_update": -0.02907637134194374,
+              "same_state_base_only_update": -0.02850380167365074,
+              "auxiliary_induced_change": -0.0005725679220631719
+            },
+            "auxiliary": {
+              "actual_update": -0.0009335423237644136,
+              "same_state_base_only_update": -0.0008517560781911016,
+              "auxiliary_induced_change": -8.178620191756636e-05
+            },
+            "CA4_base_component": {
+              "actual_update": -0.009108807891607285,
+              "same_state_base_only_update": -0.00887802243232727,
+              "auxiliary_induced_change": -0.00023078396043274552
+            }
+          }
+        },
+        {
+          "step": 168,
+          "case_name": "hippocampus_mni_s06_L",
+          "active_arm": "dice_bands",
+          "scale": 1.0,
+          "sdf_scale": 0.0,
+          "base_loss": 0.5878413915634155,
+          "auxiliary_loss": 0.017025696113705635,
+          "weighted_term_losses": {
+            "bands": 0.017025696113705635
+          },
+          "loss_decomposition_error": 0.0,
+          "logit_gradients": {
+            "base_norm": 0.004706572226408086,
+            "auxiliary_norm": 0.00018895059726006165,
+            "auxiliary_over_base": 0.0401461165728807,
+            "cosine": 0.20708725479595813,
+            "dtype": "torch.bfloat16"
+          },
+          "parameter_gradients": {
+            "base_norm": 1.4284466637897666,
+            "auxiliary_norm": 0.07049060490034591,
+            "auxiliary_over_base": 0.04934773323165565,
+            "cosine": 0.42691282400274894,
+            "CA4_component_norm": 0.7180064128174942,
+            "CA4_auxiliary_cosine": 0.4302482428382455
+          },
+          "diagnostic_profiled_flops": 255842058240,
+          "diagnostic_seconds": 0.47531496174633503,
+          "extra_parameter_gradient_calls": 3,
+          "extra_logit_gradient_calls": 2,
+          "wrong_foreground_margin_probe": {
+            "scope": "Direction from a hypothetical negative auxiliary LOGIT gradient, not a parameter/Adam step. Negative margin direction reinforces the best wrong class.",
+            "by_true_class": {
+              "1": {
+                "affected_wrong_foreground_voxels": 538,
+                "mean_true_vs_best_wrong_margin_direction": -1.6388767676289717e-07,
+                "fraction_margin_worsening": 0.9981412291526794
+              },
+              "2": {
+                "affected_wrong_foreground_voxels": 251,
+                "mean_true_vs_best_wrong_margin_direction": -2.494651027973305e-07,
+                "fraction_margin_worsening": 1.0
+              },
+              "3": {
+                "affected_wrong_foreground_voxels": 80,
+                "mean_true_vs_best_wrong_margin_direction": -8.994102529413794e-08,
+                "fraction_margin_worsening": 0.9750000238418579
+              }
+            }
+          },
+          "CA4_component_definition": "One-third of the actual foreground squared-Dice CA4 loss plus full-volume-normalized CE on true CA4 voxels; other-class CE gradients are not included.",
+          "CA4_target_voxels": 630,
+          "learning_rate": 0.0006,
+          "actual_gradient_norm": 1.4598250616119226,
+          "reconstructed_vs_actual_gradient_cosine": 0.999995751710357,
+          "adam": {
+            "betas": [
+              0.9,
+              0.999
+            ],
+            "eps": 1e-08,
+            "weight_decay": 1e-05,
+            "virtual_total_update_norm": 1.56195829538018,
+            "virtual_base_update_norm": 1.5585281243526514,
+            "auxiliary_induced_update_norm": 0.0335721396229094,
+            "auxiliary_induced_over_base_update": 0.021540926402501645,
+            "total_vs_base_update_cosine": 0.999770937656387,
+            "actual_update_norm": 1.56195829538018,
+            "virtual_vs_actual_relative_error": 0.0
+          },
+          "parameter_groups": {
+            "decoders": {
+              "base_gradient_norm": 0.9971153256589126,
+              "auxiliary_gradient_norm": 0.05739200562871011,
+              "gradient_cosine": 0.35188624667652313,
+              "auxiliary_induced_over_base_update": 0.02126803882998873
+            },
+            "encoders": {
+              "base_gradient_norm": 0.6876145614195073,
+              "auxiliary_gradient_norm": 0.03684353979550644,
+              "gradient_cosine": 0.6906564346885858,
+              "auxiliary_induced_over_base_update": 0.018717461956039655
+            },
+            "output_head": {
+              "base_gradient_norm": 0.7510071985074996,
+              "auxiliary_gradient_norm": 0.017687890280905557,
+              "gradient_cosine": 0.39431675339308364,
+              "auxiliary_induced_over_base_update": 0.003917902224820946
+            },
+            "patch_embedding": {
+              "base_gradient_norm": 0.05130018498608585,
+              "auxiliary_gradient_norm": 0.0009912972601868655,
+              "gradient_cosine": 0.6517326549719564,
+              "auxiliary_induced_over_base_update": 0.010497497209034055
+            },
+            "transformer": {
+              "base_gradient_norm": 0.08224119273711372,
+              "auxiliary_gradient_norm": 0.0019472588701588956,
+              "gradient_cosine": 0.5070237977438168,
+              "auxiliary_induced_over_base_update": 0.021904827596702005
+            }
+          },
+          "first_order_loss_changes": {
+            "base": {
+              "actual_update": -0.06290748715400696,
+              "same_state_base_only_update": -0.06200840324163437,
+              "auxiliary_induced_change": -0.0008990839123725891
+            },
+            "auxiliary": {
+              "actual_update": -0.0006464927573688328,
+              "same_state_base_only_update": -0.0005501022096723318,
+              "auxiliary_induced_change": -9.639054769650102e-05
+            },
+            "CA4_base_component": {
+              "actual_update": -0.018115846440196037,
+              "same_state_base_only_update": -0.01759372465312481,
+              "auxiliary_induced_change": -0.0005221214960329235
+            }
+          }
+        },
+        {
+          "step": 205,
+          "case_name": "hippocampus_mni_s11_R",
+          "active_arm": "dice_bands",
+          "scale": 1.0,
+          "sdf_scale": 0.0,
+          "base_loss": 0.44909560680389404,
+          "auxiliary_loss": 0.01421215571463108,
+          "weighted_term_losses": {
+            "bands": 0.01421215571463108
+          },
+          "loss_decomposition_error": 0.0,
+          "logit_gradients": {
+            "base_norm": 0.004009241608635351,
+            "auxiliary_norm": 0.00018025286200089159,
+            "auxiliary_over_base": 0.044959341340928896,
+            "cosine": 0.29119179173905724,
+            "dtype": "torch.bfloat16"
+          },
+          "parameter_gradients": {
+            "base_norm": 1.0474154657199237,
+            "auxiliary_norm": 0.03364007951623754,
+            "auxiliary_over_base": 0.03211722627478637,
+            "cosine": 0.2262525247062007,
+            "CA4_component_norm": 0.8506952822069122,
+            "CA4_auxiliary_cosine": 0.09327471191278928
+          },
+          "diagnostic_profiled_flops": 255842058240,
+          "diagnostic_seconds": 0.47921233251690865,
+          "extra_parameter_gradient_calls": 3,
+          "extra_logit_gradient_calls": 2,
+          "wrong_foreground_margin_probe": {
+            "scope": "Direction from a hypothetical negative auxiliary LOGIT gradient, not a parameter/Adam step. Negative margin direction reinforces the best wrong class.",
+            "by_true_class": {
+              "1": {
+                "affected_wrong_foreground_voxels": 384,
+                "mean_true_vs_best_wrong_margin_direction": -3.4377384849904047e-07,
+                "fraction_margin_worsening": 1.0
+              },
+              "2": {
+                "affected_wrong_foreground_voxels": 33,
+                "mean_true_vs_best_wrong_margin_direction": -1.727131575535168e-07,
+                "fraction_margin_worsening": 1.0
+              },
+              "3": {
+                "affected_wrong_foreground_voxels": 55,
+                "mean_true_vs_best_wrong_margin_direction": -1.7168753174701123e-07,
+                "fraction_margin_worsening": 0.9999999403953552
+              }
+            }
+          },
+          "CA4_component_definition": "One-third of the actual foreground squared-Dice CA4 loss plus full-volume-normalized CE on true CA4 voxels; other-class CE gradients are not included.",
+          "CA4_target_voxels": 490,
+          "learning_rate": 0.0006,
+          "actual_gradient_norm": 1.0556055665020099,
+          "reconstructed_vs_actual_gradient_cosine": 0.9999932084638318,
+          "adam": {
+            "betas": [
+              0.9,
+              0.999
+            ],
+            "eps": 1e-08,
+            "weight_decay": 1e-05,
+            "virtual_total_update_norm": 1.1778727334709267,
+            "virtual_base_update_norm": 1.1776268753410966,
+            "auxiliary_induced_update_norm": 0.014718245031290846,
+            "auxiliary_induced_over_base_update": 0.012498224471166,
+            "total_vs_base_update_cosine": 0.9999219007686044,
+            "actual_update_norm": 1.1778727334709267,
+            "virtual_vs_actual_relative_error": 0.0
+          },
+          "parameter_groups": {
+            "decoders": {
+              "base_gradient_norm": 0.7812949358414819,
+              "auxiliary_gradient_norm": 0.02768689510554413,
+              "gradient_cosine": 0.23512160910445157,
+              "auxiliary_induced_over_base_update": 0.021333757679836675
+            },
+            "encoders": {
+              "base_gradient_norm": 0.31307441847297207,
+              "auxiliary_gradient_norm": 0.018270104568715407,
+              "gradient_cosine": 0.29236688844504877,
+              "auxiliary_induced_over_base_update": 0.014609377976210924
+            },
+            "output_head": {
+              "base_gradient_norm": 0.6214864676852092,
+              "auxiliary_gradient_norm": 0.005348117476647999,
+              "gradient_cosine": 0.353292190714579,
+              "auxiliary_induced_over_base_update": 0.0013050339558183157
+            },
+            "patch_embedding": {
+              "base_gradient_norm": 0.02488152250602075,
+              "auxiliary_gradient_norm": 0.0007953526232442851,
+              "gradient_cosine": 0.5281114235775025,
+              "auxiliary_induced_over_base_update": 0.008849766295066393
+            },
+            "transformer": {
+              "base_gradient_norm": 0.04215776435300305,
+              "auxiliary_gradient_norm": 0.0014349601237418194,
+              "gradient_cosine": 0.4785198718501574,
+              "auxiliary_induced_over_base_update": 0.0124350848849747
+            }
+          },
+          "first_order_loss_changes": {
+            "base": {
+              "actual_update": -0.0215022973716259,
+              "same_state_base_only_update": -0.02119189128279686,
+              "auxiliary_induced_change": -0.00031040635076351464
+            },
+            "auxiliary": {
+              "actual_update": -0.00020902031974401325,
+              "same_state_base_only_update": -0.0001757362624630332,
+              "auxiliary_induced_change": -3.3284050005022436e-05
+            },
+            "CA4_base_component": {
+              "actual_update": -0.013045378029346466,
+              "same_state_base_only_update": -0.013025595806539059,
+              "auxiliary_induced_change": -1.978318323381245e-05
+            }
+          }
+        },
+        {
+          "step": 267,
+          "case_name": "hippocampus_mni_s08_L",
+          "active_arm": "dice_bands",
+          "scale": 1.0,
+          "sdf_scale": 0.0,
+          "base_loss": 0.3956979215145111,
+          "auxiliary_loss": 0.015385674312710762,
+          "weighted_term_losses": {
+            "bands": 0.015385674312710762
+          },
+          "loss_decomposition_error": 0.0,
+          "logit_gradients": {
+            "base_norm": 0.004113614662379481,
+            "auxiliary_norm": 0.00020504250774375498,
+            "auxiliary_over_base": 0.049844850471519396,
+            "cosine": 0.30389903457568707,
+            "dtype": "torch.bfloat16"
+          },
+          "parameter_gradients": {
+            "base_norm": 1.1248573106768875,
+            "auxiliary_norm": 0.05435447322209311,
+            "auxiliary_over_base": 0.048321216127746085,
+            "cosine": 0.39619643283989425,
+            "CA4_component_norm": 0.3704127638725299,
+            "CA4_auxiliary_cosine": 0.3265024570665616
+          },
+          "diagnostic_profiled_flops": 255842058240,
+          "diagnostic_seconds": 0.4859111891128123,
+          "extra_parameter_gradient_calls": 3,
+          "extra_logit_gradient_calls": 2,
+          "wrong_foreground_margin_probe": {
+            "scope": "Direction from a hypothetical negative auxiliary LOGIT gradient, not a parameter/Adam step. Negative margin direction reinforces the best wrong class.",
+            "by_true_class": {
+              "1": {
+                "affected_wrong_foreground_voxels": 234,
+                "mean_true_vs_best_wrong_margin_direction": -1.7196657609019894e-07,
+                "fraction_margin_worsening": 1.0
+              },
+              "2": {
+                "affected_wrong_foreground_voxels": 223,
+                "mean_true_vs_best_wrong_margin_direction": -3.3807950217124016e-07,
+                "fraction_margin_worsening": 1.0
+              },
+              "3": {
+                "affected_wrong_foreground_voxels": 43,
+                "mean_true_vs_best_wrong_margin_direction": -2.372950405060692e-07,
+                "fraction_margin_worsening": 1.0
+              }
+            }
+          },
+          "CA4_component_definition": "One-third of the actual foreground squared-Dice CA4 loss plus full-volume-normalized CE on true CA4 voxels; other-class CE gradients are not included.",
+          "CA4_target_voxels": 503,
+          "learning_rate": 0.0004745988279282506,
+          "actual_gradient_norm": 1.1477871045741705,
+          "reconstructed_vs_actual_gradient_cosine": 0.9999938814394264,
+          "adam": {
+            "betas": [
+              0.9,
+              0.999
+            ],
+            "eps": 1e-08,
+            "weight_decay": 1e-05,
+            "virtual_total_update_norm": 0.9699263967039152,
+            "virtual_base_update_norm": 0.9674988943285872,
+            "auxiliary_induced_update_norm": 0.01520435972926857,
+            "auxiliary_induced_over_base_update": 0.015715118454807022,
+            "total_vs_base_update_cosine": 0.9998799483178352,
+            "actual_update_norm": 0.9699263659775396,
+            "virtual_vs_actual_relative_error": 0.0
+          },
+          "parameter_groups": {
+            "decoders": {
+              "base_gradient_norm": 0.89303413612291,
+              "auxiliary_gradient_norm": 0.04823670800167546,
+              "gradient_cosine": 0.4035887330611821,
+              "auxiliary_induced_over_base_update": 0.040469039998781334
+            },
+            "encoders": {
+              "base_gradient_norm": 0.47285797606400143,
+              "auxiliary_gradient_norm": 0.022063455793048217,
+              "gradient_cosine": 0.5184318484876449,
+              "auxiliary_induced_over_base_update": 0.027034118044704288
+            },
+            "output_head": {
+              "base_gradient_norm": 0.4923137169929815,
+              "auxiliary_gradient_norm": 0.011688358166767738,
+              "gradient_cosine": 0.24041576344761312,
+              "auxiliary_induced_over_base_update": 0.005155574785324281
+            },
+            "patch_embedding": {
+              "base_gradient_norm": 0.01935990770199163,
+              "auxiliary_gradient_norm": 0.0008675241930444541,
+              "gradient_cosine": 0.554301482177435,
+              "auxiliary_induced_over_base_update": 0.010303169225021247
+            },
+            "transformer": {
+              "base_gradient_norm": 0.03810203346612922,
+              "auxiliary_gradient_norm": 0.0018608485636498054,
+              "gradient_cosine": 0.5214419678342046,
+              "auxiliary_induced_over_base_update": 0.015232974496501298
+            }
+          },
+          "first_order_loss_changes": {
+            "base": {
+              "actual_update": -0.024928970262408257,
+              "same_state_base_only_update": -0.024237658828496933,
+              "auxiliary_induced_change": -0.0006913123652338982
+            },
+            "auxiliary": {
+              "actual_update": -0.0008546913741156459,
+              "same_state_base_only_update": -0.0007912404253147542,
+              "auxiliary_induced_change": -6.34508760413155e-05
+            },
+            "CA4_base_component": {
+              "actual_update": -0.003918329253792763,
+              "same_state_base_only_update": -0.0038773573469370604,
+              "auxiliary_induced_change": -4.0972114220494404e-05
+            }
+          }
+        },
+        {
+          "step": 328,
+          "case_name": "hippocampus_mni_s22_L",
+          "active_arm": "dice_bands",
+          "scale": 1.0,
+          "sdf_scale": 0.0,
+          "base_loss": 0.35454487800598145,
+          "auxiliary_loss": 0.01555553637444973,
+          "weighted_term_losses": {
+            "bands": 0.01555553637444973
+          },
+          "loss_decomposition_error": 0.0,
+          "logit_gradients": {
+            "base_norm": 0.0037398457177384406,
+            "auxiliary_norm": 0.00019393457303820328,
+            "auxiliary_over_base": 0.0518563030871443,
+            "cosine": 0.2929683073666079,
+            "dtype": "torch.bfloat16"
+          },
+          "parameter_gradients": {
+            "base_norm": 1.4154012675884586,
+            "auxiliary_norm": 0.06780553299629122,
+            "auxiliary_over_base": 0.047905519479869735,
+            "cosine": 0.4113132749427024,
+            "CA4_component_norm": 0.7506410719955808,
+            "CA4_auxiliary_cosine": 0.1687538870146765
+          },
+          "diagnostic_profiled_flops": 255842058240,
+          "diagnostic_seconds": 0.47742010187357664,
+          "extra_parameter_gradient_calls": 3,
+          "extra_logit_gradient_calls": 2,
+          "wrong_foreground_margin_probe": {
+            "scope": "Direction from a hypothetical negative auxiliary LOGIT gradient, not a parameter/Adam step. Negative margin direction reinforces the best wrong class.",
+            "by_true_class": {
+              "1": {
+                "affected_wrong_foreground_voxels": 318,
+                "mean_true_vs_best_wrong_margin_direction": -1.3212367377946066e-07,
+                "fraction_margin_worsening": 0.9968553185462952
+              },
+              "2": {
+                "affected_wrong_foreground_voxels": 139,
+                "mean_true_vs_best_wrong_margin_direction": -2.858111258774443e-07,
+                "fraction_margin_worsening": 0.9928057789802551
+              },
+              "3": {
+                "affected_wrong_foreground_voxels": 32,
+                "mean_true_vs_best_wrong_margin_direction": -1.5244586393237114e-07,
+                "fraction_margin_worsening": 1.0
+              }
+            }
+          },
+          "CA4_component_definition": "One-third of the actual foreground squared-Dice CA4 loss plus full-volume-normalized CE on true CA4 voxels; other-class CE gradients are not included.",
+          "CA4_target_voxels": 510,
+          "learning_rate": 0.00020861594838417522,
+          "actual_gradient_norm": 1.4453781525418234,
+          "reconstructed_vs_actual_gradient_cosine": 0.999995686856465,
+          "adam": {
+            "betas": [
+              0.9,
+              0.999
+            ],
+            "eps": 1e-08,
+            "weight_decay": 1e-05,
+            "virtual_total_update_norm": 0.4128752908593036,
+            "virtual_base_update_norm": 0.41187272350509924,
+            "auxiliary_induced_update_norm": 0.007172340499993154,
+            "auxiliary_induced_over_base_update": 0.017413973032628746,
+            "total_vs_base_update_cosine": 0.9998516234782934,
+            "actual_update_norm": 0.4128752908593036,
+            "virtual_vs_actual_relative_error": 0.0
+          },
+          "parameter_groups": {
+            "decoders": {
+              "base_gradient_norm": 1.0291128844649953,
+              "auxiliary_gradient_norm": 0.05852678366355336,
+              "gradient_cosine": 0.41176489427304613,
+              "auxiliary_induced_over_base_update": 0.01933131768671647
+            },
+            "encoders": {
+              "base_gradient_norm": 0.7836330689200253,
+              "auxiliary_gradient_norm": 0.029210395133252166,
+              "gradient_cosine": 0.6126573388498835,
+              "auxiliary_induced_over_base_update": 0.021909883730362137
+            },
+            "output_head": {
+              "base_gradient_norm": 0.5674614909209996,
+              "auxiliary_gradient_norm": 0.017584921926791022,
+              "gradient_cosine": 0.0613455700562223,
+              "auxiliary_induced_over_base_update": 0.008882754618437317
+            },
+            "patch_embedding": {
+              "base_gradient_norm": 0.04919862373540448,
+              "auxiliary_gradient_norm": 0.0013897572562520347,
+              "gradient_cosine": 0.04612903121532926,
+              "auxiliary_induced_over_base_update": 0.01327231160158019
+            },
+            "transformer": {
+              "base_gradient_norm": 0.07598547258080511,
+              "auxiliary_gradient_norm": 0.002792461483256423,
+              "gradient_cosine": 0.1627083714226183,
+              "auxiliary_induced_over_base_update": 0.01732010222202048
+            }
+          },
+          "first_order_loss_changes": {
+            "base": {
+              "actual_update": -0.017263250425457954,
+              "same_state_base_only_update": -0.01698283478617668,
+              "auxiliary_induced_change": -0.00028041680343449116
+            },
+            "auxiliary": {
+              "actual_update": -0.0003510014503262937,
+              "same_state_base_only_update": -0.000311092211632058,
+              "auxiliary_induced_change": -3.99092459701933e-05
+            },
+            "CA4_base_component": {
+              "actual_update": -0.008752821944653988,
+              "same_state_base_only_update": -0.008789671584963799,
+              "auxiliary_induced_change": 3.685097908601165e-05
+            }
+          }
+        },
+        {
+          "step": 349,
+          "case_name": "hippocampus_mni_s06_R",
+          "active_arm": "dice_bands",
+          "scale": 1.0,
+          "sdf_scale": 0.0,
+          "base_loss": 0.32209789752960205,
+          "auxiliary_loss": 0.014714360237121582,
+          "weighted_term_losses": {
+            "bands": 0.014714360237121582
+          },
+          "loss_decomposition_error": 0.0,
+          "logit_gradients": {
+            "base_norm": 0.00346349618664229,
+            "auxiliary_norm": 0.00018634888645462802,
+            "auxiliary_over_base": 0.05380369326616329,
+            "cosine": 0.31826057187270224,
+            "dtype": "torch.bfloat16"
+          },
+          "parameter_gradients": {
+            "base_norm": 0.7907937574650569,
+            "auxiliary_norm": 0.05134260329047365,
+            "auxiliary_over_base": 0.06492540286996683,
+            "cosine": 0.3957871529748005,
+            "CA4_component_norm": 0.36209593977380844,
+            "CA4_auxiliary_cosine": 0.07256815115971076
+          },
+          "diagnostic_profiled_flops": 255842058240,
+          "diagnostic_seconds": 0.47645039204508066,
+          "extra_parameter_gradient_calls": 3,
+          "extra_logit_gradient_calls": 2,
+          "wrong_foreground_margin_probe": {
+            "scope": "Direction from a hypothetical negative auxiliary LOGIT gradient, not a parameter/Adam step. Negative margin direction reinforces the best wrong class.",
+            "by_true_class": {
+              "1": {
+                "affected_wrong_foreground_voxels": 310,
+                "mean_true_vs_best_wrong_margin_direction": -2.0113098742058355e-07,
+                "fraction_margin_worsening": 0.9967741966247559
+              },
+              "2": {
+                "affected_wrong_foreground_voxels": 40,
+                "mean_true_vs_best_wrong_margin_direction": -1.838488969951868e-07,
+                "fraction_margin_worsening": 1.0
+              },
+              "3": {
+                "affected_wrong_foreground_voxels": 64,
+                "mean_true_vs_best_wrong_margin_direction": -3.087816367042251e-07,
+                "fraction_margin_worsening": 1.0
+              }
+            }
+          },
+          "CA4_component_definition": "One-third of the actual foreground squared-Dice CA4 loss plus full-volume-normalized CE on true CA4 voxels; other-class CE gradients are not included.",
+          "CA4_target_voxels": 575,
+          "learning_rate": 0.00012401751299536087,
+          "actual_gradient_norm": 0.812744873999932,
+          "reconstructed_vs_actual_gradient_cosine": 0.9999833980647492,
+          "adam": {
+            "betas": [
+              0.9,
+              0.999
+            ],
+            "eps": 1e-08,
+            "weight_decay": 1e-05,
+            "virtual_total_update_norm": 0.29117103881552103,
+            "virtual_base_update_norm": 0.2899722012605207,
+            "auxiliary_induced_update_norm": 0.007304932862622707,
+            "auxiliary_induced_over_base_update": 0.025191838496476122,
+            "total_vs_base_update_cosine": 0.9996924649391237,
+            "actual_update_norm": 0.2911710260213558,
+            "virtual_vs_actual_relative_error": 0.0
+          },
+          "parameter_groups": {
+            "decoders": {
+              "base_gradient_norm": 0.5800646385397598,
+              "auxiliary_gradient_norm": 0.042760457939293756,
+              "gradient_cosine": 0.5238566274559525,
+              "auxiliary_induced_over_base_update": 0.03278051169656983
+            },
+            "encoders": {
+              "base_gradient_norm": 0.39227188084090203,
+              "auxiliary_gradient_norm": 0.022529687309685124,
+              "gradient_cosine": 0.38586489575689953,
+              "auxiliary_induced_over_base_update": 0.034033895996098
+            },
+            "output_head": {
+              "base_gradient_norm": 0.3536052274168707,
+              "auxiliary_gradient_norm": 0.015931937788934373,
+              "gradient_cosine": -0.16091080341014186,
+              "auxiliary_induced_over_base_update": 0.0072258584589198595
+            },
+            "patch_embedding": {
+              "base_gradient_norm": 0.04299260961726384,
+              "auxiliary_gradient_norm": 0.0029558635057600796,
+              "gradient_cosine": 0.8281951203981125,
+              "auxiliary_induced_over_base_update": 0.02244035184459039
+            },
+            "transformer": {
+              "base_gradient_norm": 0.09009723563171551,
+              "auxiliary_gradient_norm": 0.006120108461381392,
+              "gradient_cosine": 0.8468325164268743,
+              "auxiliary_induced_over_base_update": 0.024987520953101066
+            }
+          },
+          "first_order_loss_changes": {
+            "base": {
+              "actual_update": -0.008198022842407227,
+              "same_state_base_only_update": -0.00781111279502511,
+              "auxiliary_induced_change": -0.00038690975634381175
+            },
+            "auxiliary": {
+              "actual_update": -0.00042756920447573066,
+              "same_state_base_only_update": -0.0003909325459972024,
+              "auxiliary_induced_change": -3.663665120257065e-05
+            },
+            "CA4_base_component": {
+              "actual_update": -0.0024836668744683266,
+              "same_state_base_only_update": -0.0023980229161679745,
+              "auxiliary_induced_change": -8.564372546970844e-05
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "status": "verified_diagnostic_archives",
+  "runs": [
+    {
+      "run": "MNI_unetr_probe_bands_f0s0",
+      "by_ground_truth_class": {
+        "1": {
+          "sampled_voxel_observations": 3332,
+          "fraction_margin_worsening": 0.9981992635764136
+        },
+        "2": {
+          "sampled_voxel_observations": 1092,
+          "fraction_margin_worsening": 0.998168496913089
+        },
+        "3": {
+          "sampled_voxel_observations": 478,
+          "fraction_margin_worsening": 0.9895397505750217
+        }
+      }
+    },
+    {
+      "run": "MNI_unetr_probe_bands_f1s0",
+      "by_ground_truth_class": {
+        "1": {
+          "sampled_voxel_observations": 3015,
+          "fraction_margin_worsening": 0.9983416339058188
+        },
+        "2": {
+          "sampled_voxel_observations": 1083,
+          "fraction_margin_worsening": 0.9963065444157284
+        },
+        "3": {
+          "sampled_voxel_observations": 420,
+          "fraction_margin_worsening": 0.9976190381106876
+        }
+      }
+    }
+  ],
+  "scope": "Local negative auxiliary LOGIT-gradient direction at sampled wrongly-classified foreground voxels touched by original bands. Counts include repeated observations; this is not the Adam/network update or held-out performance.",
+  "finding": "98.95% to99.83% of observed touched wrong-foreground voxels have a worsened true-versus-best-wrong logit margin under the isolated bands direction. Occurs in both helped and harmed run, so does not alone explain their validation difference.",
+  "mechanism": "Original bands pool classes1/2/3 against background; they supervise hippocampus union, not subfield identity. More probable foreground logits receive greater inward foreground encouragement.",
+  "implication": "Preserve original definition as user requested. Test finite timing and consider original per-class SDF/depth composition if windows fail."
+}

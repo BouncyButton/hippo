@@ -1,0 +1,38 @@
+{
+  "approved_for_execution": true,
+  "recorded_at": 1794185261.959477,
+  "recipes": [
+    {
+      "key": "plain_cosine",
+      "dropout_rate": 0.0,
+      "augmentation": "none"
+    }
+  ],
+  "arms": [
+    "dice",
+    "dice_bands",
+    "dice_bands_edge_sdf_depth",
+    "dice_sdf_depth"
+  ],
+  "reason": "All original SDF/depth compositions under the stronger plain base failed firstpairedfinalDice; earlier augmentation/dropoutband/full candidates also failed. Isolate LR schedule: retain peak6e-4 and24warmup, start cosine immediately instead of holding peak until halfbudget. Test whether reduced later update size allows originalconstraints to add a reproducible benefit.",
+  "previous_result_sha256": "13d953b9d1cf8376b43088bc2e776d7033fc51fab97ec3a61d7bb55db6bfb3f4",
+  "previous_gains": [
+    {
+      "candidate": "plain_sdf",
+      "gain_pp": -0.40901389919039133
+    },
+    {
+      "candidate": "plain_depth",
+      "gain_pp": -0.12031681579252052
+    },
+    {
+      "candidate": "plain_sdf_depth",
+      "gain_pp": -0.17567388284479568
+    }
+  ],
+  "controls": "Allfresh SAME-LR plain baselines. No hold-half baseline reused for pairedgains. Report additionalabsolutecomparisonsagainst oldwinningbase and available strongplainholdhalf controls.",
+  "constants": "Originalconstraintdefinitions,target5%,p95cap75%,training-only20cropcalibration102,ramp33,SDFnearest5/9cap. AdamW6e-4,dropout0,noaugmentation,n10,409updates,53,305,109,592,450FLOPs,2GPUworkers,seed0/5/19,all3folds.",
+  "selection": "Sharedcandidate,firstfixedpilots0/1,0/2,5/0,19/0thenremaining5pairs;rejectanynonpositivefinalgain;require9/9;retainallattempts;othermodelspaused.",
+  "profiling": "Same model/loss/optimizer tensor graph and existingprofile. Existing cap_matchedLRfunction selected; test verifies it is the only numericalprotocolchange and all4armssatisfy409<=cap<410. ActualboundLRfunction alsochecked inpreflight.",
+  "caveat": "Adaptive development-validation exploration on overlappingfolds; positive9paircriterionisnotanuntouchedtestestimate."
+}

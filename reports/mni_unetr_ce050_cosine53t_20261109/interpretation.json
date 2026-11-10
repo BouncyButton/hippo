@@ -1,0 +1,54 @@
+{
+  "status": "complete",
+  "outcome": "exhausted",
+  "summary": [
+    {
+      "candidate": "ce050_cosine_bands",
+      "pairs": 3,
+      "rejected": true,
+      "mean_gain_pp": 0.026521216299505806,
+      "minimum_gain_pp": -0.46177321777680636,
+      "all_nine_improved": false,
+      "all_pairs": {
+        "pairs": 3,
+        "mean_gain_pp": 0.026521216299505806,
+        "minimum_gain_pp": -0.46177321777680636,
+        "improved_pairs": 2
+      },
+      "prior_plain_comparison_pairs": 3,
+      "mean_absolute_gain_vs_prior_plain_baseline_pp": -1.0706143325414434,
+      "mean_absolute_gain_vs_old_baseline_pp": 3.972150072079174,
+      "minimum_absolute_gain_vs_old_baseline_pp": 2.8525297948228427,
+      "mean_new_baseline_gain_vs_old_baseline_pp": 3.9456288557796646
+    },
+    {
+      "candidate": "ce050_cosine_full",
+      "pairs": 3,
+      "rejected": true,
+      "mean_gain_pp": 0.04792616485539414,
+      "minimum_gain_pp": -0.5115436030933451,
+      "all_nine_improved": false,
+      "all_pairs": {
+        "pairs": 3,
+        "mean_gain_pp": 0.04792616485539414,
+        "minimum_gain_pp": -0.5115436030933451,
+        "improved_pairs": 2
+      },
+      "prior_plain_comparison_pairs": 3,
+      "mean_absolute_gain_vs_prior_plain_baseline_pp": -1.0492093839855652,
+      "mean_absolute_gain_vs_old_baseline_pp": 3.993555020635052,
+      "minimum_absolute_gain_vs_old_baseline_pp": 2.8027594095062938,
+      "mean_new_baseline_gain_vs_old_baseline_pp": 3.9456288557796646
+    }
+  ],
+  "finding": "Both half-CE cosine candidates improved seed0 folds1/2 but failed seed5fold0. Band-only -0.461773pp; full -0.511544pp. All three subfields declined in both failed runs. No shared nine-pair recipe established.",
+  "numerical_check": "All409 optimizer updates completed. Full-arm95% FLOPs evaluation occurs at389 whilebaseline occurs at390, as expected from arm-specific costs. No skipped-update explanation.",
+  "gradient_check": "Failed band run final median weighted logit-gradient ratio3.867%, below successful runs around4.94-5.11%; no oversized detached-logit gradient observed. This is not an Adam-update diagnosis.",
+  "next": "Test shared lower peak LR0.00045/0.0003 with original fullCE1 cosine base and fresh controls. Keep original constraints and timing.",
+  "archive": {
+    "cleaned": 9,
+    "released_gib": 15.539767099544406,
+    "free_gib": 45.87,
+    "queue": ""
+  }
+}

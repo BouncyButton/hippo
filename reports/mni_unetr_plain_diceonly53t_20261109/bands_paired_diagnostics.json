@@ -1,0 +1,47 @@
+{
+  "created_at": 1794192748.843204,
+  "scope": "Only final-budget archived matched pairs; no intermediate checkpoint selection.",
+  "rows": [
+    {
+      "seed": 0,
+      "fold": 1,
+      "deltas": {
+        "validation_percent": 0.2348919378638783,
+        "training_percent": 0.559859938225955,
+        "union_percent": 0.21904097443484716,
+        "fn": 13,
+        "fp": -247,
+        "swaps": -32,
+        "training_validation_gap_pp": 0.32496800036207674,
+        "subfield_dice_pp": {
+          "CA1_3_hard_dice": 0.3381267401748147,
+          "subiculum_hard_dice": 0.06417048123519464,
+          "CA4_DG_hard_dice": 0.3023785921816682
+        }
+      },
+      "baseline_manifest_sha256": "5d9fac0af0b8d81366ea86489b64d87f0db08d4b74ce627083d747e33fc02adc",
+      "constraint_manifest_sha256": "2b39be02849b005cbef7b100b58e03feacc70ddf6418b89cc2409959503e3369"
+    },
+    {
+      "seed": 0,
+      "fold": 2,
+      "deltas": {
+        "validation_percent": 0.47803160724757277,
+        "training_percent": -0.2191442539171362,
+        "union_percent": 0.471365790076149,
+        "fn": -319,
+        "fp": -89,
+        "swaps": -51,
+        "training_validation_gap_pp": -0.697175861164709,
+        "subfield_dice_pp": {
+          "CA1_3_hard_dice": 0.6397547796262302,
+          "subiculum_hard_dice": 0.7137055488415882,
+          "CA4_DG_hard_dice": 0.08063449327491412
+        }
+      },
+      "baseline_manifest_sha256": "91270c19e2e01efb7927183b162fe82b339387e27e1323484171a7c4f4f3dc56",
+      "constraint_manifest_sha256": "0ec153374d2c78556f3eb1e00df9bcb7dac65d15dae6a24e80f4e7260f4b83d9"
+    }
+  ],
+  "interpretation": "Both completed pairs improve every subfield, union Dice, FP and swaps. Train/validation gap widens for fold1 and narrows for fold2; no consistent gap-closing mechanism established. Only two seed0 pairs verified; no cross-seed conclusion."
+}

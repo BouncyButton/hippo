@@ -1,0 +1,127 @@
+{
+  "status.json": {
+    "status": "complete",
+    "active": null,
+    "completed": 4,
+    "total": 4,
+    "runs": [
+      {
+        "id": "MNI_nnunet_f0s0",
+        "model": "nnunet",
+        "dataset": "MNI",
+        "kind": "conventional",
+        "protocol": "nnunet",
+        "arm": "dice",
+        "fold": 0,
+        "seed": 0,
+        "augmentation": "none",
+        "final_dice": 0.3903254003131779,
+        "best_dice": 0.3903254003131779,
+        "released_bytes": 525337874
+      },
+      {
+        "id": "MNI_swinunetr_f0s0",
+        "model": "swinunetr",
+        "dataset": "MNI",
+        "kind": "conventional",
+        "protocol": "swinunetr",
+        "arm": "dice",
+        "fold": 0,
+        "seed": 0,
+        "augmentation": "none",
+        "final_dice": 0.7491543791332921,
+        "best_dice": 0.7506102901523605,
+        "released_bytes": 336998548
+      },
+      {
+        "id": "MNI_unetr_vit_b16_f0s0",
+        "model": "unetr_vit_b16",
+        "dataset": "MNI",
+        "kind": "conventional",
+        "protocol": "unetr_vit_b16",
+        "arm": "dice",
+        "fold": 0,
+        "seed": 0,
+        "augmentation": "xy_d4_v1",
+        "final_dice": 0.6474238669699229,
+        "best_dice": 0.6497603611923718,
+        "released_bytes": 1853965726
+      },
+      {
+        "id": "MNI_basic_unet16_f0s0",
+        "model": "basic_unet16",
+        "dataset": "MNI",
+        "kind": "conventional",
+        "protocol": "basic_unet16",
+        "arm": "dice",
+        "fold": 0,
+        "seed": 0,
+        "augmentation": "none",
+        "final_dice": 0.6853685584379605,
+        "best_dice": 0.6853685584379605,
+        "released_bytes": 28974224
+      }
+    ],
+    "job_id": "744060",
+    "updated_at": 1794049714.7513874,
+    "quota": {
+      "used_gib": 47.28,
+      "limit_gib": 93.13,
+      "free_gib": 45.849999999999994,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  47.28GiB/93.13GiB  349.09k/\u221e  \n\n",
+      "checked_at": 1794049714.7886899
+    }
+  },
+  "submission.json": {
+    "job_id": "744060",
+    "dependency": null,
+    "quota": {
+      "used_gib": 43.57,
+      "limit_gib": 93.13,
+      "free_gib": 49.559999999999995,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  43.57GiB/93.13GiB  348.96k/\u221e  \n\n",
+      "checked_at": 1794049224.7948155
+    },
+    "submitted_at": 1794049225.0156841,
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--chdir=/mnt/beegfsstudents/home/3160552/mni_shared_cap1p5_train85_90_pilot_20261107",
+      "--output=/mnt/beegfsstudents/home/3160552/mni_shared_cap1p5_train85_90_pilot_20261107/slurm-%j.out",
+      "--error=/mnt/beegfsstudents/home/3160552/mni_shared_cap1p5_train85_90_pilot_20261107/slurm-%j.err",
+      "/mnt/beegfsstudents/home/3160552/mni_shared_cap1p5_train85_90_pilot_20261107/run.sbatch",
+      "/mnt/beegfsstudents/home/3160552/mni_shared_cap1p5_train85_90_pilot_20261107"
+    ],
+    "manifest_sha256": "ccc4730904d6d2ba31cff84f264c2a1e807b2661aa7b478b596deffc757fc853"
+  },
+  "successor.json": {
+    "job_id": "744061",
+    "dependency": "744060",
+    "quota": {
+      "used_gib": 43.57,
+      "limit_gib": 93.13,
+      "free_gib": 49.559999999999995,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  43.57GiB/93.13GiB  348.96k/\u221e  \n\n",
+      "checked_at": 1794049235.048781
+    },
+    "submitted_at": 1794049235.1879427,
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--chdir=/mnt/beegfsstudents/home/3160552/mni_shared_cap1p5_train85_90_pilot_20261107",
+      "--output=/mnt/beegfsstudents/home/3160552/mni_shared_cap1p5_train85_90_pilot_20261107/slurm-%j.out",
+      "--error=/mnt/beegfsstudents/home/3160552/mni_shared_cap1p5_train85_90_pilot_20261107/slurm-%j.err",
+      "--dependency=afterany:744060",
+      "/mnt/beegfsstudents/home/3160552/mni_shared_cap1p5_train85_90_pilot_20261107/run.sbatch",
+      "/mnt/beegfsstudents/home/3160552/mni_shared_cap1p5_train85_90_pilot_20261107"
+    ],
+    "manifest_sha256": "ccc4730904d6d2ba31cff84f264c2a1e807b2661aa7b478b596deffc757fc853"
+  },
+  "ready": [],
+  "cleanup": [
+    "runs/MNI_unetr_vit_b16_f0s0/cleanup.json",
+    "runs/MNI_swinunetr_f0s0/cleanup.json",
+    "runs/MNI_basic_unet16_f0s0/cleanup.json",
+    "runs/MNI_nnunet_f0s0/cleanup.json"
+  ]
+}

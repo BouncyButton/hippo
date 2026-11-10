@@ -1,0 +1,23 @@
+{
+  "job_id": "743323",
+  "dependency": "743322",
+  "quota": {
+    "used_gib": 43.23,
+    "limit_gib": 93.13,
+    "free_gib": 49.9,
+    "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  43.23GiB/93.13GiB  339.89k/\u221e  \n\n",
+    "checked_at": 1794013593.0684118
+  },
+  "submitted_at": 1794013593.18988,
+  "command": [
+    "sbatch",
+    "--parsable",
+    "--chdir=/mnt/beegfsstudents/home/3160552/mni_constraints14_cap8_20261107",
+    "--output=/mnt/beegfsstudents/home/3160552/mni_constraints14_cap8_20261107/slurm-%j.out",
+    "--error=/mnt/beegfsstudents/home/3160552/mni_constraints14_cap8_20261107/slurm-%j.err",
+    "--dependency=afterany:743322",
+    "/mnt/beegfsstudents/home/3160552/mni_constraints14_cap8_20261107/run.sbatch",
+    "/mnt/beegfsstudents/home/3160552/mni_constraints14_cap8_20261107"
+  ],
+  "manifest_sha256": "b53aee95cb3457a33ec7c07c932ef14e51a6c8c6c27b4ffcd47d18a4fc068795"
+}

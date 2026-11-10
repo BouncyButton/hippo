@@ -1,0 +1,70 @@
+{
+  "status.json": {
+    "status": "complete",
+    "active": [],
+    "selected": {
+      "candidate": null,
+      "winner": null
+    },
+    "job_id": "748573",
+    "completed": 9,
+    "total": 27
+  },
+  "submission.json": {
+    "job_id": "748573",
+    "dependency": null,
+    "quota": {
+      "used_gib": 47.25,
+      "limit_gib": 93.13,
+      "free_gib": 45.879999999999995,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  47.25GiB/93.13GiB  453.39k/\u221e  \n\n",
+      "checked_at": 1794203821.9805412
+    },
+    "submitted_at": 1794203822.2612941,
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--chdir=/mnt/beegfsstudents/home/3160552/mni_unetr_ce050_cosine53t_20261109",
+      "--output=/mnt/beegfsstudents/home/3160552/mni_unetr_ce050_cosine53t_20261109/slurm-%j.out",
+      "--error=/mnt/beegfsstudents/home/3160552/mni_unetr_ce050_cosine53t_20261109/slurm-%j.err",
+      "/mnt/beegfsstudents/home/3160552/mni_unetr_ce050_cosine53t_20261109/run.sbatch",
+      "/mnt/beegfsstudents/home/3160552/mni_unetr_ce050_cosine53t_20261109"
+    ],
+    "manifest_sha256": "d5344820058def418014640c2ca5d12859dae6bc34e1bf2de71ca8c682097edf"
+  },
+  "successor.json": {
+    "job_id": "748574",
+    "dependency": "748573",
+    "quota": {
+      "used_gib": 47.25,
+      "limit_gib": 93.13,
+      "free_gib": 45.879999999999995,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  47.25GiB/93.13GiB  453.39k/\u221e  \n\n",
+      "checked_at": 1794203937.7361913
+    },
+    "submitted_at": 1794203937.8660707,
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--chdir=/mnt/beegfsstudents/home/3160552/mni_unetr_ce050_cosine53t_20261109",
+      "--output=/mnt/beegfsstudents/home/3160552/mni_unetr_ce050_cosine53t_20261109/slurm-%j.out",
+      "--error=/mnt/beegfsstudents/home/3160552/mni_unetr_ce050_cosine53t_20261109/slurm-%j.err",
+      "--dependency=afterany:748573",
+      "/mnt/beegfsstudents/home/3160552/mni_unetr_ce050_cosine53t_20261109/run.sbatch",
+      "/mnt/beegfsstudents/home/3160552/mni_unetr_ce050_cosine53t_20261109"
+    ],
+    "manifest_sha256": "d5344820058def418014640c2ca5d12859dae6bc34e1bf2de71ca8c682097edf"
+  },
+  "ready": [],
+  "cleanup": [
+    "runs/MNI_unetr_ce050_cosine_dice_bands_f0s5/cleanup.json",
+    "runs/MNI_unetr_ce050_cosine_dice_bands_edge_sdf_depth_f2s0/cleanup.json",
+    "runs/MNI_unetr_ce050_cosine_dice_f0s5/cleanup.json",
+    "runs/MNI_unetr_ce050_cosine_dice_bands_edge_sdf_depth_f0s5/cleanup.json",
+    "runs/MNI_unetr_ce050_cosine_dice_bands_edge_sdf_depth_f1s0/cleanup.json",
+    "runs/MNI_unetr_ce050_cosine_dice_f2s0/cleanup.json",
+    "runs/MNI_unetr_ce050_cosine_dice_bands_f2s0/cleanup.json",
+    "runs/MNI_unetr_ce050_cosine_dice_bands_f1s0/cleanup.json",
+    "runs/MNI_unetr_ce050_cosine_dice_f1s0/cleanup.json"
+  ]
+}

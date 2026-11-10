@@ -1,0 +1,119 @@
+{
+  "status": "submitted",
+  "objective": "Improve final-budget validation macro subfield Dice across all four models. FN/FP tradeoffs are acceptable; spatial/error diagnostics explain outcomes, not independent success gates.",
+  "scope": {
+    "dataset": "MNI",
+    "fold": 0,
+    "seed": 0,
+    "budget_flops": 63952901334180,
+    "recipes": "Unchanged current 2x recipes",
+    "gpu_workers": 2,
+    "max_jobs": {
+      "running": 1,
+      "queued": 1
+    }
+  },
+  "evidence": [
+    {
+      "model": "nnunet",
+      "fn": 16830,
+      "fp": 4702,
+      "swaps": 8714,
+      "external_share_pct": 71.18957878727765,
+      "baseline_dice": 54.12158843119759,
+      "original_bands_dice": 56.63421250683095
+    },
+    {
+      "model": "swinunetr",
+      "fn": 6324,
+      "fp": 7487,
+      "swaps": 4532,
+      "external_share_pct": 75.2930273128714,
+      "baseline_dice": 76.07466683054581,
+      "original_bands_dice": 76.53004725361173
+    },
+    {
+      "model": "unetr_vit_b16",
+      "fn": 11423,
+      "fp": 7527,
+      "swaps": 5115,
+      "external_share_pct": 78.74506544774569,
+      "baseline_dice": 69.41245820093485,
+      "original_bands_dice": 69.48158215325148
+    },
+    {
+      "model": "basic_unet16",
+      "fn": 1758,
+      "fp": 25824,
+      "swaps": 6903,
+      "external_share_pct": 79.98260113092648,
+      "baseline_dice": 60.858040934465805,
+      "original_bands_dice": 68.8105999624718
+    }
+  ],
+  "correction": "The older 55-58% coverage was for internal subfield swaps, not foreground/background errors. Older external-error coverage was88.5-93.4%; current-run spatial coverage remains unmeasured.",
+  "proposal": {
+    "mask_definition": "G = (label>0); P = (argmax_c detached logits>0); E = G XOR P; B = original two-step GT union band.",
+    "arm_A": "Same B, bounded error emphasis w=1+2*E (3x weight on actual external mistakes). Same grouped BCE, normalize weights separately on GT foreground and background sides, average sides/cases as before.",
+    "arm_B": "Same weighting/loss as A; support S=B union one-step six-connected dilation(E), including E itself. Local additions cover every current training FN/FP by construction, including remote FP islands and missed regions. This is boundary supervision plus error regions, not a thin contour-only objective.",
+    "detach": "Mask/weights constructed without autograd from current augmented training predictions and labels; no validation input, no labels needed at inference.",
+    "defaults": "One-step halo and3x error weight are predeclared pilot choices, not established optima. No simultaneous gradient-target sweep.",
+    "calibration": {
+      "nnunet": 0.1,
+      "swinunetr": 0.1,
+      "unetr_vit_b16": 0.05,
+      "basic_unet16": 0.1
+    },
+    "safety_scope": "Preserve existing prefix/ramp, base losses, optimizer/LR family, augmentation, folds/seeds and common optimization cap. Profile dynamic mask/loss cost and adjust horizon to cap. Measure gradient-ratio drift; no automatic strength increase.",
+    "initialization": "Keep original band anchor active so corrected regions remain supervised; bounded weight ratio avoids unlimited emphasis on a few difficult voxels."
+  },
+  "execution_order": [
+    "Four exact baseline diagnostic replays, logging spatial error/distance/gradient allocation at25/50/75/100% budget; no recipe changes.",
+    "Eight new pilot runs: A and B for each model. Reuse current baseline/original-bands performance controls; include UNETR class-aware70.66% as an additional comparator.",
+    "Rank by absolute final-budget validation macro Dice, regardless of whether FN or FP individually increases. Recheck promising recipes across three folds and seeds before concluding a reliable gain."
+  ],
+  "diagnostics": [
+    "FN/FP/internal swaps inside/outside proposed masks",
+    "distance bins1,2,3,4,>4 morphology steps from GT outer contour",
+    "missed regions and disconnected false-positive regions",
+    "training gradient energy on actual mistakes versus correct voxels",
+    "per-class and union Dice, train/validation curves",
+    "paired corrected/introduced error counts where predictions remain temporarily available"
+  ],
+  "cleanup": "Archive counts, distance tables, curves, example overlays, calibration and source before deleting completed checkpoints/predictions. Retain temporary comparison dependencies only until paired analysis finishes.",
+  "limits": [
+    "Coverage by construction on training predictions does not imply better validation Dice.",
+    "Early poor predictions can make adaptive support broad; side-normalization and original warmup must be preserved and support size logged.",
+    "External errors remain a proxy target; macro subfield Dice is the optimization-selection criterion.",
+    "Existing folds are development folds."
+  ],
+  "sources": {
+    "geometry": "/Users/filippofocaccia/Desktop/hippo/reports/mni_outer_band_design_20261107/geometry_width_audit.json",
+    "historical_spatial": "/Users/filippofocaccia/Desktop/hippo/reports/mni_constraint_root_cause_20261107/probe_summary.json",
+    "prior_coverage_counterexample": "/Users/filippofocaccia/Desktop/hippo/docs/experiments/degree_bands_ab_20260924/BOUNDARY_AUDIT_REPORT.md",
+    "related_work": "https://arxiv.org/abs/2102.02696"
+  },
+  "experiment": "mni_adaptive_outer_bands_cap2_f0s0_20261107",
+  "submission": {
+    "job_id": "745110",
+    "dependency": null,
+    "quota": {
+      "used_gib": 43.98,
+      "limit_gib": 93.13,
+      "free_gib": 49.15,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  43.98GiB/93.13GiB  362.99k/\u221e  \n\n",
+      "checked_at": 1794070358.4631338
+    },
+    "submitted_at": 1794070358.689332,
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--chdir=/mnt/beegfsstudents/home/3160552/mni_adaptive_outer_bands_cap2_f0s0_20261107",
+      "--output=/mnt/beegfsstudents/home/3160552/mni_adaptive_outer_bands_cap2_f0s0_20261107/slurm-%j.out",
+      "--error=/mnt/beegfsstudents/home/3160552/mni_adaptive_outer_bands_cap2_f0s0_20261107/slurm-%j.err",
+      "/mnt/beegfsstudents/home/3160552/mni_adaptive_outer_bands_cap2_f0s0_20261107/run.sbatch",
+      "/mnt/beegfsstudents/home/3160552/mni_adaptive_outer_bands_cap2_f0s0_20261107"
+    ],
+    "manifest_sha256": "b7d47295a0d8aebe2bfbbd8776c0402e550c886d86f0d65f1f3fcced3b21c9ff"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "status": "Cosine exhausted5/6;Dice-only next branch preparing",
+  "trigger": "Triggered: all current cosine candidates failed strict9/9.",
+  "possible_next_branches": [
+    "Original SDF/depth/SDF+depth at5% under noaug dropout.1, using existing fresh noaug baselines and new same-base controls for missingpairs. Prior SDF/depth tests used the old augmentedbase and failed; this different base warrants a conditional retest, without redefining anyloss.",
+    "Revisit finite windows for original fullconstraints under noaug dropout.1 (e.g.oldshared307/369 windows), since mid-budget gains can vanishlate. Source/profile must charge extra operations; preserve baseline math/profile or proveequivalence when reusing2currentcontrols.",
+    "If necessary test lower peakLR or earlier cosine decay without the hold-half phase, with fresh SAME-LR unconstrainedcontrols. Do not reuse .0006hold-half baselines against changedLR."
+  ],
+  "invariant": "One sharedalgorithmforseeds0/5/19andfolds0/1/2; originalconstraintdefinitions;53.305T;2GPUs;allattemptsretained;training-onlycalibration;finalbudgetdecision;othermodelspaused.",
+  "source_dynamics_sha256": "26bc465c815665767ee4201aca2902a8a94d1f167ae00e2383fd8aa385207de3",
+  "additional_later_option": "If late checkpoint sensitivity persists after simpler timing/LR tests: fixed training-time weight averaging over predeclared late update indices, with fresh SAME-averaging controls. Charge all averaging arithmetic under the samecap; profile actual updates, handle normalization buffers and resume/final-model provenance explicitly. Single averaged model, no validation-selected checkpoint or inference ensemble. Not implemented or authorized as a separate launch before currentstage resolves.",
+  "current_stage": "mni_unetr_plain_diceonly53t_20261109",
+  "plain_dynamics_evidence": "/Users/filippofocaccia/Desktop/hippo/reports/mni_unetr_simple_recipe53t_20261108/plain_full_learning_deltas.json",
+  "conditional_lr_option": "The earlier-cosine option is now the current active stage, not a future proposal: plain dropout0/noaug, peak.0006,24warmup,cap_matched decay,409updates, original delayed5% constraints and fresh same-LR controls. Do not launch a duplicate or change it mid-study.",
+  "later_base_loss_hypothesis": "Only if currentcompositionandearliercosinefail: a Dice-only plain UNETR base is a further user-authorized simplification. Existingbase is squaredforegroundDice+CE1:1; originalconstraints may overlapitsdenseCE. Requires newloss adapter,newnetwork/objective FLOPs profile,training-onlycalibrationagainstactualDicebase,freshsame-losscontrols,all9pairedconfirmationandabsolutecomparisonagainstbotholdwinningandstrongerplainDiceCEbaseline. Do not weakenbaseline solelyto manufactureconstraintgains. Notimplemented,notprofiled,notfrozen,notsubmitted.",
+  "existing_dice_only_implementation": "scripts/unetr_subfields/foreground_squared_dice.py alreadyimplements exact foregroundsquaredDiceLoss matching DiceCE.dice settings. Reuse it if laterbase-losssimplificationneeded; do notduplicate lossdefinition. Existingbatch.bind restrictsloss_recipe=foreground_squared_dice toSwin,soUNETRadaptermustexplicitlyoverridebinding/validationandbase_loss;newprofilesandmatchedcontrolsrequired. No implementation/profile/trainingstartedforUNETRDiceonly.",
+  "historical_initial_observations": [
+    "Noaug dropout.1 baseline improves seed0fold1 by3.51958pp andseed0fold2 by6.02304pp versus oldwinningbase.",
+    "Noaug delayed5%bands andfull failfold2 by.16608/.08229pp despite firstfold gains; do not claim consistency.",
+    "Noaug fullfold2 ispositive at all5shared checks205-287,thennegative328/369/409. Finalbudget remains the criterion.",
+    "Nodrop bands currently2/2positive(+.58616,+.68788),but absolute mean acrossthose2essentiallytied witholdbaseline. Plainfullstilleligible."
+  ],
+  "updated_at": 1794189735.5094342,
+  "resolved_branches": [
+    "Augmentation/dropout factorial exhausted: all6shared candidates failed at least one fixed pair;24runs archived/cleaned.",
+    "Plain SDF,depth,andSDF+depth all failed seed0/fold1;3newruns archived/cleaned.",
+    "Earlier cosine: bands andSDF+depth rejected; full combination remains viable with5verifiedpositivepairs."
+  ],
+  "evidence": [
+    "Current full paired gains: +.2063528925,+.6916076551,+.4439929577,+.3129707898,+.1292293229. Four pairs remain: seed5fold1/2 and seed19fold1/2.",
+    "Absolute performance is mixed: current full mean +2.8302080924 vs old winning baseline across5pairs, but -.6195982333 onseed19fold0; -1.0700627355 vs stronger plain hold-half controls across3availablepairs.",
+    "A positive paired constraint effect does not establish superior absolute performance. Report both."
+  ]
+}

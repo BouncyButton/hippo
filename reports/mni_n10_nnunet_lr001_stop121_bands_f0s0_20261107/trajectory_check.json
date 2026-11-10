@@ -1,0 +1,43 @@
+{
+  "status": "passed",
+  "reference_stage": "mni_n10_nnunet_lr001_200updates_bands_f0s0_20261107",
+  "shared_cap": 43006868505381,
+  "runs": [
+    {
+      "task": "MNI_nnunet_n10_baseline_f0s0",
+      "changed_fields": [
+        "budget_flops",
+        "data",
+        "models",
+        "name",
+        "validation_target_flops"
+      ],
+      "updates": 121,
+      "lr_horizon": 200,
+      "last_lr": 0.008180521460508584,
+      "prefix": 0,
+      "ramp": 1
+    },
+    {
+      "task": "MNI_nnunet_n10_original_bands_f0s0",
+      "changed_fields": [
+        "budget_flops",
+        "data",
+        "models",
+        "name",
+        "validation_target_flops"
+      ],
+      "updates": 121,
+      "lr_horizon": 200,
+      "last_lr": 0.008180521460508584,
+      "prefix": 20,
+      "ramp": 20
+    }
+  ],
+  "assertions": [
+    "All121learning-rate values match previous trajectory",
+    "Constraint prefix/ramp and per-update/calibration costs match",
+    "Only stopping budget, evaluation cadence and run paths change",
+    "Trainer, model builder/scheduler, losses and diagnostics byte-identical"
+  ]
+}

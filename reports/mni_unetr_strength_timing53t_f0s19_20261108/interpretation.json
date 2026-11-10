@@ -1,0 +1,40 @@
+{
+  "status": "pilot_complete_candidate_not_adopted",
+  "candidate": {
+    "condition": "delayed_t05",
+    "calibration_target_ratio": 0.05,
+    "calibration_p95_cap": 0.75,
+    "prefix_updates": 102,
+    "ramp_updates": 33,
+    "cap": 53305109592450,
+    "updates": 409,
+    "definition": "Original balanced union bands unchanged; fresh calibration using all20 training crops at update102, then fixed coefficient.",
+    "seed": 19,
+    "fold": 0,
+    "validation_percent": 69.1770559403696,
+    "gain_vs_baseline_pp": 0.7783933043855882
+  },
+  "conclusions": [
+    "Constraint branch is active; increasing target changes coefficient and measured gradients.",
+    "Bands and baseline receive identical409 updates and LR trajectory; no update-count penalty.",
+    "Increasing target5% to20% lowers final Dice at either onset in this pilot.",
+    "Delaying calibration/onset33 to102 improves final Dice at either target.",
+    "Best candidate improves all three subfields; union Dice is effectively unchanged and internal swaps fall416,from6356 to5940.",
+    "This demonstrates a useful timing/calibration-policy change in one cell; it does not establish the exact optimizer-level mechanism or a robust multi-fold benefit."
+  ],
+  "limitations": [
+    "Onset and calibration anchor are changed together.",
+    "Single seed/fold selected for diagnosis; no independent test or statistical significance claim.",
+    "Band evidence does not automatically extend to SDF,edge,depth or their combinations."
+  ],
+  "recommended_next": "Confirm one frozen delayed5% recipe against matched baselines across seeds0,5,19 and folds0,1,2 before adopting it in the broad constrained sweep. Do not replace seeds or choose targets per fold.",
+  "all_results_retained": true,
+  "broader_sweep_paused": true,
+  "active_jobs": 0,
+  "storage": {
+    "released_file_bytes": 7415869112,
+    "released_file_gib": 6.906566314399242,
+    "free_gib": 47.129999999999995
+  },
+  "analysis_source_sha256": "d7bfdcb78bd1c4b4b1b3a306a2acd2c422a88070c5bd474145c790bde2ef0479"
+}

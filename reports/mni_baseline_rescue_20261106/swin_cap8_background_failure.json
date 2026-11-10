@@ -1,0 +1,38 @@
+{
+  "source": "reports/mni_swin_squared_hold_cap8_full_20261106/runs/MNI_swinunetr_f1s2/validation_latest.json",
+  "summary": {
+    "macro_hard_dice": 0.48628745918519617,
+    "CA1_3_hard_dice": 0.7340268740042583,
+    "CA1_3_soft_dice": 0.5577588200569152,
+    "subiculum_hard_dice": 0.022265983100673896,
+    "subiculum_soft_dice": 0.019972365722060202,
+    "CA4_DG_hard_dice": 0.7025695204506565,
+    "CA4_DG_soft_dice": 0.41778218150138857,
+    "macro_soft_dice": 0.3318377890934546,
+    "whole_hippocampus_hard_dice": 0.08164044952646192
+  },
+  "counts": {
+    "background": {
+      "tp": 1537697,
+      "fp": 78,
+      "fn": 1037538
+    },
+    "CA1_3": {
+      "tp": 20321,
+      "fp": 6924,
+      "fn": 7851
+    },
+    "subiculum": {
+      "tp": 11857,
+      "fp": 1040140,
+      "fn": 1144
+    },
+    "CA4_DG": {
+      "tp": 3331,
+      "fp": 1092,
+      "fn": 1701
+    }
+  },
+  "diagnosis": "Massive background-to-subiculum false positives; macro Dice alone hides the class failure.",
+  "next": "All-class negative-log squared Dice at cap8; all3 seeds on failing fold1 before full9."
+}

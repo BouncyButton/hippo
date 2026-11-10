@@ -1,0 +1,563 @@
+{
+  "service_start.json": {
+    "pid": 2787134,
+    "command": [
+      "/home/3160552/.conda/envs/hippocampus/bin/python",
+      "-u",
+      "-m",
+      "scripts.mni_medsam3_cluster.constraint_campaign",
+      "serve",
+      "--stage",
+      "/mnt/beegfsstudents/home/3160552/mni_medsam3_n5_f012_s01_constraints_20261110"
+    ],
+    "time": 1794325244.04909,
+    "laptop_required": false,
+    "manifest_sha256": "bd21dbc222562fd57999adccf6747b7a4c329bedbf68366e42c1f4061fe462ff",
+    "tests_passed": 24,
+    "preflight": "passed"
+  },
+  "service.json": {
+    "status": "running",
+    "pid": 2787134,
+    "active_jobs": [],
+    "baseline_gate_passed": false,
+    "last_check": 1794325402.4931948,
+    "laptop_required": false
+  },
+  "status.json": {
+    "status": "waiting_for_consistent_baselines",
+    "active": [],
+    "completed": 0,
+    "total": 78,
+    "folds": [
+      0,
+      1,
+      2
+    ],
+    "seeds": [
+      0,
+      1
+    ],
+    "pilot_complete": 0,
+    "pending_archive_or_cleanup": [],
+    "job_id": null,
+    "updated_at": 1794325402.3243597,
+    "laptop_required": false,
+    "quota": {
+      "used_gib": 52.88,
+      "limit_gib": 93.13,
+      "free_gib": 40.24999999999999,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  52.88GiB/93.13GiB  538.30k/\u221e  \n\n",
+      "checked_at": 1794325402.4554765
+    }
+  },
+  "baseline_gate.json": {
+    "status": "running",
+    "required": "Seeds 0 and 1 each >=60% on folds 0/1/2",
+    "cap_updates": 1000,
+    "observed": [
+      {
+        "id": "MNI_MedSAM3_n5_f0s0_native400",
+        "protocol": "MNI_MedSAM3_n5_f0s0_native400",
+        "kind": "foundation",
+        "dataset": "MNI",
+        "subjects": 5,
+        "fold": 0,
+        "seed": 0,
+        "updates": 400,
+        "arm": "dice",
+        "validation_dice": 0.7073945421731334,
+        "training_dice": 0.772249449596389,
+        "observed_at": 1794311228.7177837
+      },
+      {
+        "id": "MNI_MedSAM3_n5_f0s1_native400",
+        "protocol": "MNI_MedSAM3_n5_f0s1_native400",
+        "kind": "foundation",
+        "dataset": "MNI",
+        "subjects": 5,
+        "fold": 0,
+        "seed": 1,
+        "updates": 400,
+        "arm": "dice",
+        "validation_dice": 0.7234529283661724,
+        "training_dice": 0.7837914774400506,
+        "observed_at": 1794312479.5362341
+      },
+      {
+        "id": "MNI_MedSAM3_n5_f0s2_native400",
+        "protocol": "MNI_MedSAM3_n5_f0s2_native400",
+        "kind": "foundation",
+        "dataset": "MNI",
+        "subjects": 5,
+        "fold": 0,
+        "seed": 2,
+        "updates": 400,
+        "arm": "dice",
+        "validation_dice": 0.7144921566164857,
+        "training_dice": 0.7750749985697556,
+        "observed_at": 1794320994.1822703
+      },
+      {
+        "id": "MNI_MedSAM3_n5_f1s0_native400",
+        "protocol": "MNI_MedSAM3_n5_f1s0_native400",
+        "kind": "foundation",
+        "dataset": "MNI",
+        "subjects": 5,
+        "fold": 1,
+        "seed": 0,
+        "updates": 400,
+        "arm": "dice",
+        "validation_dice": 0.6995920990585469,
+        "training_dice": 0.793626047936951,
+        "observed_at": 1794322857.1073043
+      }
+    ],
+    "time": 1794325402.4749255
+  },
+  "preflight.json": {
+    "status": "passed",
+    "operational_manifest_sha256": "bd21dbc222562fd57999adccf6747b7a4c329bedbf68366e42c1f4061fe462ff",
+    "quota": {
+      "used_gib": 52.38,
+      "limit_gib": 93.13,
+      "free_gib": 40.74999999999999,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  52.38GiB/93.13GiB  538.29k/\u221e  \n\n",
+      "checked_at": 1794324703.1094942
+    },
+    "offline_peak_gib": 26,
+    "scheduler": "sbatch: Job 752399 to start at 2026-11-11T02:53:43 a using 8 processors on nodes gnode03 in partition stud\n",
+    "time": 1794324703.4629664,
+    "gpu_gate": "Full-loss finite backward and calibration on each fold, zero optimizer updates, before constraint training"
+  },
+  "geometry_preflight.json": {
+    "status": "passed",
+    "training_crops": [
+      {
+        "fold": 0,
+        "case": "hippocampus_mni_s03_L",
+        "labels": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "weight_sum": 0.9999999403953552
+      },
+      {
+        "fold": 0,
+        "case": "hippocampus_mni_s03_R",
+        "labels": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "weight_sum": 1.0
+      },
+      {
+        "fold": 0,
+        "case": "hippocampus_mni_s11_L",
+        "labels": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "weight_sum": 0.9999999403953552
+      },
+      {
+        "fold": 0,
+        "case": "hippocampus_mni_s11_R",
+        "labels": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "weight_sum": 1.0
+      },
+      {
+        "fold": 0,
+        "case": "hippocampus_mni_s14_L",
+        "labels": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "weight_sum": 1.0
+      },
+      {
+        "fold": 0,
+        "case": "hippocampus_mni_s14_R",
+        "labels": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "weight_sum": 1.0
+      },
+      {
+        "fold": 0,
+        "case": "hippocampus_mni_s23_L",
+        "labels": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "weight_sum": 1.0
+      },
+      {
+        "fold": 0,
+        "case": "hippocampus_mni_s23_R",
+        "labels": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "weight_sum": 1.0
+      },
+      {
+        "fold": 0,
+        "case": "hippocampus_mni_s25_L",
+        "labels": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "weight_sum": 1.0
+      },
+      {
+        "fold": 0,
+        "case": "hippocampus_mni_s25_R",
+        "labels": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "weight_sum": 1.0
+      },
+      {
+        "fold": 1,
+        "case": "hippocampus_mni_s03_L",
+        "labels": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "weight_sum": 0.9999999403953552
+      },
+      {
+        "fold": 1,
+        "case": "hippocampus_mni_s03_R",
+        "labels": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "weight_sum": 1.0
+      },
+      {
+        "fold": 1,
+        "case": "hippocampus_mni_s12_L",
+        "labels": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "weight_sum": 1.0
+      },
+      {
+        "fold": 1,
+        "case": "hippocampus_mni_s12_R",
+        "labels": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "weight_sum": 1.0
+      },
+      {
+        "fold": 1,
+        "case": "hippocampus_mni_s15_L",
+        "labels": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "weight_sum": 1.0
+      },
+      {
+        "fold": 1,
+        "case": "hippocampus_mni_s15_R",
+        "labels": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "weight_sum": 1.0
+      },
+      {
+        "fold": 1,
+        "case": "hippocampus_mni_s24_L",
+        "labels": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "weight_sum": 1.0
+      },
+      {
+        "fold": 1,
+        "case": "hippocampus_mni_s24_R",
+        "labels": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "weight_sum": 1.0
+      },
+      {
+        "fold": 1,
+        "case": "hippocampus_mni_s25_L",
+        "labels": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "weight_sum": 1.0
+      },
+      {
+        "fold": 1,
+        "case": "hippocampus_mni_s25_R",
+        "labels": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "weight_sum": 1.0
+      },
+      {
+        "fold": 2,
+        "case": "hippocampus_mni_s02_L",
+        "labels": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "weight_sum": 0.9999999403953552
+      },
+      {
+        "fold": 2,
+        "case": "hippocampus_mni_s02_R",
+        "labels": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "weight_sum": 1.0
+      },
+      {
+        "fold": 2,
+        "case": "hippocampus_mni_s12_L",
+        "labels": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "weight_sum": 1.0
+      },
+      {
+        "fold": 2,
+        "case": "hippocampus_mni_s12_R",
+        "labels": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "weight_sum": 1.0
+      },
+      {
+        "fold": 2,
+        "case": "hippocampus_mni_s15_L",
+        "labels": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "weight_sum": 1.0
+      },
+      {
+        "fold": 2,
+        "case": "hippocampus_mni_s15_R",
+        "labels": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "weight_sum": 1.0
+      },
+      {
+        "fold": 2,
+        "case": "hippocampus_mni_s24_L",
+        "labels": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "weight_sum": 1.0
+      },
+      {
+        "fold": 2,
+        "case": "hippocampus_mni_s24_R",
+        "labels": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "weight_sum": 1.0
+      },
+      {
+        "fold": 2,
+        "case": "hippocampus_mni_s25_L",
+        "labels": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "weight_sum": 1.0
+      },
+      {
+        "fold": 2,
+        "case": "hippocampus_mni_s25_R",
+        "labels": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "weight_sum": 1.0
+      }
+    ],
+    "verified_data_files": 36,
+    "labels_preserved": true,
+    "units": "Native array voxels; same identity geometry convention as the baseline and ADNI engine"
+  },
+  "queue": "752229 RUNNING hippo-medsam3-adaptive\n",
+  "process": "    PID    PPID     SID STAT COMMAND\n2787134       1 2787134 Ss   /home/3160552/.conda/envs/hippocampus/bin/python -u -m scripts.mni_medsam3_cluster.constraint_campaign serve --stage /mnt/beegfsstudents/home/3160552/mni_medsam3_n5_f012_s01_constraints_20261110\n",
+  "baseline_status": {
+    "status": "running",
+    "active": [
+      "MNI_MedSAM3_n5_f1s1_native400",
+      "MNI_MedSAM3_n5_f2s0_native400"
+    ],
+    "completed_milestones": 4,
+    "selected_seeds": [
+      0,
+      1
+    ],
+    "outcome": null,
+    "threshold": 0.6,
+    "maximum_updates": 1000,
+    "runs": [
+      {
+        "id": "MNI_MedSAM3_n5_f0s0_native400",
+        "protocol": "MNI_MedSAM3_n5_f0s0_native400",
+        "kind": "foundation",
+        "dataset": "MNI",
+        "subjects": 5,
+        "fold": 0,
+        "seed": 0,
+        "updates": 400,
+        "arm": "dice",
+        "validation_dice": 0.7073945421731334,
+        "training_dice": 0.772249449596389,
+        "observed_at": 1794311228.7177837
+      },
+      {
+        "id": "MNI_MedSAM3_n5_f0s1_native400",
+        "protocol": "MNI_MedSAM3_n5_f0s1_native400",
+        "kind": "foundation",
+        "dataset": "MNI",
+        "subjects": 5,
+        "fold": 0,
+        "seed": 1,
+        "updates": 400,
+        "arm": "dice",
+        "validation_dice": 0.7234529283661724,
+        "training_dice": 0.7837914774400506,
+        "observed_at": 1794312479.5362341
+      },
+      {
+        "id": "MNI_MedSAM3_n5_f0s2_native400",
+        "protocol": "MNI_MedSAM3_n5_f0s2_native400",
+        "kind": "foundation",
+        "dataset": "MNI",
+        "subjects": 5,
+        "fold": 0,
+        "seed": 2,
+        "updates": 400,
+        "arm": "dice",
+        "validation_dice": 0.7144921566164857,
+        "training_dice": 0.7750749985697556,
+        "observed_at": 1794320994.1822703
+      },
+      {
+        "id": "MNI_MedSAM3_n5_f1s0_native400",
+        "protocol": "MNI_MedSAM3_n5_f1s0_native400",
+        "kind": "foundation",
+        "dataset": "MNI",
+        "subjects": 5,
+        "fold": 1,
+        "seed": 0,
+        "updates": 400,
+        "arm": "dice",
+        "validation_dice": 0.6995920990585469,
+        "training_dice": 0.793626047936951,
+        "observed_at": 1794322857.1073043
+      }
+    ],
+    "job_id": "752229",
+    "updated_at": 1794322858.3536747,
+    "quota": {
+      "used_gib": 52.37,
+      "limit_gib": 93.13,
+      "free_gib": 40.76,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  52.37GiB/93.13GiB  537.30k/\u221e  \n\n",
+      "checked_at": 1794322858.425688
+    },
+    "pending_durable_archive": [
+      "MNI_MedSAM3_n5_f1s0_native400"
+    ],
+    "pending_cleanup": [
+      "MNI_MedSAM3_n5_f1s0_native400"
+    ],
+    "operational_manifest_sha256": "e45214117f863ae8e6f500798b2bf36058e3053d27f3cf71516641c4438da82c",
+    "offline_policy": "Training, selection, model delivery and continuation are cluster-owned. Retain artifacts until a real verified off-BeeGFS archive returns."
+  }
+}

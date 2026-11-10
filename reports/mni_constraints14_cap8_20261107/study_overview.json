@@ -1,0 +1,98 @@
+{
+  "name": "mni_constraints14_cap8_20261107",
+  "budget_flops": 255811605336720,
+  "logical_conditions": [
+    "dice",
+    "dice_bands",
+    "dice_sdf",
+    "dice_bands_sdf",
+    "dice_bands_edge",
+    "dice_bands_edge_sdf",
+    "dice_depth",
+    "dice_bands_depth",
+    "dice_edge_depth",
+    "dice_sdf_depth",
+    "dice_bands_edge_depth",
+    "dice_bands_sdf_depth",
+    "dice_edge_sdf_depth",
+    "dice_bands_edge_sdf_depth"
+  ],
+  "logical_cells": 504,
+  "reused_baselines": 36,
+  "num_runs": 468,
+  "models": [
+    "nnunet",
+    "swinunetr",
+    "unetr_vit_b16",
+    "basic_unet16"
+  ],
+  "folds": [
+    0,
+    1,
+    2
+  ],
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "augmentation": "model_specific",
+  "calibration_target_ratio": 0.1,
+  "conventional_python": "/mnt/beegfsstudents/home/3160552/.conda/envs/hippocampus/bin/python",
+  "graceful_stop_seconds": 20700,
+  "archive_wait_timeout_seconds": 600,
+  "archive_resume_module": "scripts.mni_constraints.campaign",
+  "gpu_workers": 2,
+  "storage": {
+    "minimum_free_gib": 12,
+    "estimated_peak_mirrored_gib": 10,
+    "archive": "/Users/filippofocaccia/Desktop/hippo/reports/mni_constraints14_cap8_20261107"
+  },
+  "authorization": "Submit14-condition constraint study on the winning MNI four-model recipes and fixed3folds\u00d73seeds; reuse36 completed baselines; two GPU workers with one running and one queued job maximum; archive and retire each completed run.",
+  "selection_caveat": "Same development-validation folds used to establish baseline recipes; exploratory comparisons, not untouched test estimates.",
+  "update_ranges": {
+    "nnunet": [
+      719,
+      719
+    ],
+    "swinunetr": [
+      1648,
+      1649
+    ],
+    "unetr_vit_b16": [
+      1963,
+      1965
+    ],
+    "basic_unet16": [
+      4495,
+      4506
+    ]
+  },
+  "full_graph_audit": "passed",
+  "status": "running",
+  "running_job": "743322",
+  "queued_continuation": "743323",
+  "excluded_nodes": [
+    "gnode04"
+  ],
+  "manifest_sha256": "b53aee95cb3457a33ec7c07c932ef14e51a6c8c6c27b4ffcd47d18a4fc068795",
+  "preflight": "passed_on_cluster",
+  "initial_workers_calibrated": [
+    "MNI_nnunet_dice_bands_edge_sdf_depth_f0s0",
+    "MNI_swinunetr_dice_bands_edge_sdf_depth_f0s0"
+  ],
+  "last_verified_at": 1794013917.1663544,
+  "free_gib": 48.769999999999996,
+  "completed_new_runs": 1,
+  "first_completed_run": {
+    "model": "nnunet",
+    "arm": "dice_bands_edge_sdf_depth",
+    "fold": 0,
+    "seed": 0,
+    "updates": 719,
+    "final_dice": 0.7553591854375906,
+    "archive_hash_verified": true,
+    "checkpoint_cleanup_verified": true,
+    "released_bytes": 525335954
+  }
+}

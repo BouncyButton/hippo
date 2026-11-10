@@ -1,0 +1,167 @@
+{
+  "previous_status": {
+    "status": "failed",
+    "active": "COBRA_unetr_vit_b16_geo_recipe_f0s1",
+    "completed": 6,
+    "total": 192,
+    "runs": [
+      {
+        "id": "MNI_unetr_vit_b16_geo_recipe_f0s0",
+        "kind": "conventional",
+        "dataset": "MNI",
+        "model": "unetr_vit_b16",
+        "fold": 0,
+        "seed": 0,
+        "arm": "dice_ce",
+        "protocol": "MNI",
+        "augmentation": "xy_d4_v1",
+        "final_dice": 0.618486978524162,
+        "best_dice": 0.6195242838553912,
+        "released_bytes": 1853957534
+      },
+      {
+        "id": "COBRA_unetr_vit_b16_geo_recipe_f0s0",
+        "kind": "conventional",
+        "dataset": "COBRA",
+        "model": "unetr_vit_b16",
+        "fold": 0,
+        "seed": 0,
+        "arm": "dice_ce",
+        "protocol": "COBRA",
+        "augmentation": "xy_d4_v1",
+        "final_dice": 0.09715193949581784,
+        "best_dice": 0.09715193949581784,
+        "released_bytes": 1854441630
+      },
+      {
+        "id": "MNI_unetr_vit_b16_geo_recipe_f1s0",
+        "kind": "conventional",
+        "dataset": "MNI",
+        "model": "unetr_vit_b16",
+        "fold": 1,
+        "seed": 0,
+        "arm": "dice_ce",
+        "protocol": "MNI",
+        "augmentation": "xy_d4_v1",
+        "final_dice": 0.6219785986082242,
+        "best_dice": 0.6219785986082242,
+        "released_bytes": 1853951518
+      },
+      {
+        "id": "COBRA_unetr_vit_b16_geo_recipe_f1s0",
+        "kind": "conventional",
+        "dataset": "COBRA",
+        "model": "unetr_vit_b16",
+        "fold": 1,
+        "seed": 0,
+        "arm": "dice_ce",
+        "protocol": "COBRA",
+        "augmentation": "xy_d4_v1",
+        "final_dice": 0.09268399066747388,
+        "best_dice": 0.09268399066747388,
+        "released_bytes": 1854441630
+      },
+      {
+        "id": "MNI_unetr_vit_b16_geo_recipe_f2s0",
+        "kind": "conventional",
+        "dataset": "MNI",
+        "model": "unetr_vit_b16",
+        "fold": 2,
+        "seed": 0,
+        "arm": "dice_ce",
+        "protocol": "MNI",
+        "augmentation": "xy_d4_v1",
+        "final_dice": 0.6065579278511982,
+        "best_dice": 0.6270855775387043,
+        "released_bytes": 1853957534
+      },
+      {
+        "id": "MNI_unetr_vit_b16_geo_recipe_f0s1",
+        "kind": "conventional",
+        "dataset": "MNI",
+        "model": "unetr_vit_b16",
+        "fold": 0,
+        "seed": 1,
+        "arm": "dice_ce",
+        "protocol": "MNI",
+        "augmentation": "xy_d4_v1",
+        "final_dice": 0.5547829077757529,
+        "best_dice": 0.5705523990969752,
+        "released_bytes": 1853957534
+      }
+    ],
+    "job_id": "742306",
+    "updated_at": 1793982542.848491,
+    "quota": {
+      "used_gib": 42.1,
+      "limit_gib": 93.13,
+      "free_gib": 51.029999999999994,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  42.10GiB/93.13GiB  305.33k/\u221e  \n\n",
+      "checked_at": 1793982542.8902805
+    },
+    "seed_search": {
+      "threshold": 0.45,
+      "criterion": "Mean final-budget foreground-subfield Dice over folds 0,1,2",
+      "groups": {
+        "MNI": {
+          "qualifying_seeds": [
+            0
+          ],
+          "target": 3,
+          "target_met": false,
+          "attempted_seeds": [
+            {
+              "seed": 0,
+              "fold_dice": {
+                "0": 0.618486978524162,
+                "1": 0.6219785986082242,
+                "2": 0.6065579278511982
+              },
+              "mean_dice": 0.6156745016611949,
+              "qualifies": true,
+              "rejected_by_upper_bound": false,
+              "best_possible_mean": 0.6156745016611946
+            },
+            {
+              "seed": 1,
+              "fold_dice": {
+                "0": 0.5547829077757529
+              },
+              "mean_dice": null,
+              "qualifies": false,
+              "rejected_by_upper_bound": false,
+              "best_possible_mean": 0.8515943025919176
+            }
+          ]
+        },
+        "COBRA": {
+          "qualifying_seeds": [],
+          "target": 3,
+          "target_met": false,
+          "attempted_seeds": [
+            {
+              "seed": 0,
+              "fold_dice": {
+                "0": 0.09715193949581784,
+                "1": 0.09268399066747388
+              },
+              "mean_dice": null,
+              "qualifies": false,
+              "rejected_by_upper_bound": true,
+              "best_possible_mean": 0.3966119767210972
+            }
+          ]
+        }
+      },
+      "target_met": false,
+      "inference": "Validation-selected exploratory seeds; these scores are not an unbiased baseline estimate."
+    },
+    "search_outcome": "searching",
+    "skipped_task_count": 3
+  },
+  "previous_failure": {
+    "active": "COBRA_unetr_vit_b16_geo_recipe_f0s1",
+    "traceback": "Traceback (most recent call last):\n  File \"/mnt/beegfsstudents/home/3160552/unetr_subfields_geo_recipe_seed_search_20261106/source/scripts/cross_dataset_campaign/controller.py\", line 160, in run\n    raise RuntimeError(f'{active}: trainer exited {process.returncode}')\nRuntimeError: COBRA_unetr_vit_b16_geo_recipe_f0s1: trainer exited -10\n",
+    "time": 1793982542.5590425
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "goal": "Continue NN/Swin refinement until20:30 CET and launch full sweep automatically then",
+  "deadline": 1794252600,
+  "refinement_job": "749737",
+  "refinement_stage": "mni_nnunet_swin_refine2030_round4_53t_20261109",
+  "full_stage": "mni_winning_recipes_matrix2030_53t_0519_20261109",
+  "handoff_bundle": "mni_matrix2030_handoff_bundle_20261109",
+  "handoff_status": "full_sweep_running_verified",
+  "remaining_full_cells_with_fallbacks": 407,
+  "reused_cells": 97,
+  "updated_at": 1794253265.2112541,
+  "handoff_bundle_sha256": "962267094feb98a7ebc5e3b50a600e6c1a91a41437c3007174df792bc24301e9",
+  "refinement_round3": "mni_nnunet_swin_refine2030_round3_53t_20261109",
+  "round3_manifest_sha256": "735e3cd3f7960c7838b12b0efbfe78f2e888c35631ce3628c7546d25d869c63b",
+  "round3_status": "Paused after NN candidates resolved and Swin2.5percent9-pair confirmation; all32new runs archived/cleaned,2reused",
+  "handoff_design": "Queue a combined two-GPU allocation after running job749648. It runs round3 and any further registered refinements, then switches to full matrix at20:30 in the same allocation. Full runner maintains at most one dependent continuation.",
+  "promotion_rule": "NN nine positive macro gains. Swin nine positive macro gains plus either macro improvement vs old bands with no meanCA4 loss, or nine positive CA4 gains and improved meanCA4 (explicit macro tradeoff). Prefer CA4 consistency, then meanCA4 gain, macro gain vs old, minimum macro gain. All outcomes recomputed from verified archive artifacts.",
+  "tests": "7 unit/CPU-subprocess tests passed; first full dry-run passed52 model/loss checks and97reuse/407remaining. Final preflight includes latest gate/handoff changes.",
+  "handoff_job": "749737",
+  "refinement_round4": "mni_nnunet_swin_refine2030_round4_53t_20261109",
+  "round4_manifest_sha256": "a992f20675227bd9dd9ff76a8218629b3f67b1ec6914ac5de4ed25ed6a799f14",
+  "round4_status": "All27completed new runs archived and cleaned; later15percent Swin candidate6/9complete and not eligible for promotion",
+  "round2_completed_new_runs": 53,
+  "round3_completed_new_runs": 32,
+  "latest_confirmed": {
+    "swinunetr": {
+      "stage": "mni_nnunet_swin_refine2030_round2_53t_20261109",
+      "candidate": "early30",
+      "macro_positive": 9,
+      "ca4_positive": 6,
+      "mean_gain_pp": 1.401452822212791,
+      "mean_vs_old_bands_pp": 0.5196429594983516
+    },
+    "nnunet": null
+  },
+  "latest_nn_failures": {
+    "tenth60": "seed0fold1 -0.07005pp",
+    "early30_r5": "seed19fold1 -0.2831pp;8of9positive"
+  },
+  "selected_swin_preflight": "passed52base+8promoted-targetchecks;97reuse407pending;testcheckpointduplicatesarchivedandremoved",
+  "archive_service_pid": 38304,
+  "archive_service_checks": "import-only collector; cleanup and quota resume use conventional_python; pause-preservation smoke passed",
+  "refinement_training_finished": true,
+  "completed_new_refinement_runs": 131,
+  "round4_completed_new_runs": 27,
+  "selected_nn_fallback": "Established SGD LR0.02, bands target0.6 onset20 ramp20; no new recipe satisfied9-pairrule",
+  "selected_swin_confirmed": "round2 early30: target0.3 onset28 ramp28;9/9macropositive;6/9CA4positive",
+  "quota_free_gib_at_pre_handoff": 39.55,
+  "full_manifest_sha256": "6eca5e6bbda2da06fea0a9714f6e3415fd9ae1cd928e5d1d7217a14c6f8aed0b",
+  "status": "full_sweep_running_verified",
+  "active_job_id": "749737",
+  "continuation_job_id": "750092",
+  "started_at": 1794252940.79447,
+  "worker_progress_verified_at": 1794253202.9822977,
+  "worker_updates": {
+    "MNI_unetr_vit_b16_dice_sdf_f2s5": 342,
+    "MNI_basic_unet16_dice_sdf_f2s5": 934
+  },
+  "quota_free_gib": 34.88999999999999,
+  "production_preflight": {
+    "status": "passed",
+    "base_checks": 52,
+    "promoted_target_checks": 8
+  },
+  "completed_new_refinement_runs_archived_and_cleaned": 131
+}

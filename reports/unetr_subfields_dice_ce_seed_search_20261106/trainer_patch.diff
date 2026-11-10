@@ -1,0 +1,29 @@
+--- dice_only/capped_core.py
++++ dice_ce/capped_core.py
+@@ -204,7 +204,7 @@
+         if "calibration_sha256" in ledger and ledger["calibration_sha256"] != base.digest(calibration_path):
+             raise ValueError("Calibration artifact changed")
+         weights = report["weights"]
+-    elif args.objective == "dice":
++    elif args.objective in ("dice", "dice_ce"):
+         base.atomic_json(calibration_path, {"status": "not_required", "weights": {},
+                                            "config_sha256": base.digest(config_path)})
+     if calibration_path.exists():
+@@ -307,7 +307,7 @@
+         ledger["charged_attempts"] += 1
+         ledger["training_flops"] += cost
+         base.atomic_json(ledger_path, ledger)
+-        scale = .2 if active_arm == "dice" else min(1., (charged - schedule["prefix_updates"] + 1) / protocol["constraint_warmup_updates"])
++        scale = .2 if active_arm in ("dice", "dice_ce") else min(1., (charged - schedule["prefix_updates"] + 1) / protocol["constraint_warmup_updates"])
+         with torch.autocast("cuda", dtype=torch.bfloat16) if amp else nullcontext():
+             logits = model(image)
+             loss = training_loss(logits, label, active_arm, weights, scale, sdf,
+@@ -333,7 +333,7 @@
+     base.atomic_json(args.output / "training_final.json", training_evaluation)
+     total = ledger["training_flops"] + ledger["calibration_flops"]
+     if not args.smoke_steps and (budget - ledger["training_flops"] >= schedule["flops_per_update"] or
+-                                args.objective != "dice" and not calibration_path.exists()):
++                                args.objective not in ("dice", "dice_ce") and not calibration_path.exists()):
+         raise ValueError("Production run ended before exhausting its allowance")
+     base.atomic_json(args.output / "completion.json", {
+         "status": "smoke_complete" if args.smoke_steps else "complete", "model": args.model,

@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "manifest_sha256": "4be84ff28fe0a4fa47efca520f41c0ed746ecd6aa9d34eb24d555cd975da4829",
+  "optimizer_updates": 0,
+  "model_checks": [
+    {
+      "recipe": "plain_diceonly",
+      "actual_dropout": 0.0,
+      "augmentation": "none",
+      "parameters": 92685572
+    }
+  ],
+  "all45schedules409updates": true,
+  "new_matched_controls_required": true,
+  "original_losses": true,
+  "runtime": "Torch2.2.2/MONAI1.6.0 isolated frozen source",
+  "original_losses_scope": "Original auxiliary definitions only; base loss intentionally changed from DiceCE to foreground squared Dice.",
+  "base_loss_test": "Exact DiceCE.dice value and gradient; zero-auxiliary replay exact; calibration Gram base matches actual Dice gradient; context restores original binding."
+}

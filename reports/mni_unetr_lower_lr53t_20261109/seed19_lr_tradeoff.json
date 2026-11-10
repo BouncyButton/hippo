@@ -1,0 +1,151 @@
+{
+  "checked_at": 1794212822.336281,
+  "baseline_comparisons": [
+    {
+      "recipe": "lr045_cosine",
+      "seed": 19,
+      "fold": 0,
+      "peak_lr": 0.00045,
+      "baseline_dice": 62.86803206635725,
+      "previous_baseline_dice": 67.46609361289423,
+      "baseline_subfields": {
+        "CA1_3_hard_dice": 69.48310395406709,
+        "subiculum_hard_dice": 67.28872244207149,
+        "CA4_DG_hard_dice": 51.83226980293314
+      },
+      "previous_baseline_subfields": {
+        "CA1_3_hard_dice": 69.90391085419728,
+        "subiculum_hard_dice": 68.87627631676361,
+        "CA4_DG_hard_dice": 63.61809366772182
+      },
+      "validation_change_pp": -4.598061546536975,
+      "training_change_pp": -3.8886864405905186,
+      "subfield_change_pp": {
+        "CA1_3_hard_dice": -0.42080690013018796,
+        "subiculum_hard_dice": -1.5875538746921194,
+        "CA4_DG_hard_dice": -11.785823864788682
+      },
+      "current_archive_sha256": "840e45906b1b9dec7b050eba6cf076d698ebf57b2443e87756c45b1d55c73872",
+      "previous_archive_sha256": "9e82e956c71911cedce25c4e2a9669d254be8c4859884cb46f22305b07a3ea42"
+    },
+    {
+      "recipe": "lr030_cosine",
+      "seed": 19,
+      "fold": 0,
+      "peak_lr": 0.0003,
+      "baseline_dice": 55.818016051552355,
+      "previous_baseline_dice": 67.46609361289423,
+      "baseline_subfields": {
+        "CA1_3_hard_dice": 69.69253509436048,
+        "subiculum_hard_dice": 65.6367153898114,
+        "CA4_DG_hard_dice": 32.12479767048516
+      },
+      "previous_baseline_subfields": {
+        "CA1_3_hard_dice": 69.90391085419728,
+        "subiculum_hard_dice": 68.87627631676361,
+        "CA4_DG_hard_dice": 63.61809366772182
+      },
+      "validation_change_pp": -11.648077561341871,
+      "training_change_pp": -13.028265203083066,
+      "subfield_change_pp": {
+        "CA1_3_hard_dice": -0.21137575983679824,
+        "subiculum_hard_dice": -3.2395609269522083,
+        "CA4_DG_hard_dice": -31.493295997236665
+      },
+      "current_archive_sha256": "47a4a05a92aaebc2382c6d670da9246af4616aa86fc89217435f7acc0722aa8a",
+      "previous_archive_sha256": "9e82e956c71911cedce25c4e2a9669d254be8c4859884cb46f22305b07a3ea42"
+    }
+  ],
+  "constraint_comparisons": [
+    {
+      "candidate": "lr045_cosine_bands",
+      "gain_pp": 1.0424535552939762,
+      "training_gain_pp": 1.3344622352060043,
+      "subfield_gain_pp": {
+        "CA1_3_hard_dice": 0.17118510809541476,
+        "subiculum_hard_dice": 0.030813533994773934,
+        "CA4_DG_hard_dice": 2.9253620237918128
+      },
+      "error_delta": {
+        "fn": 256,
+        "fp": -1032,
+        "swaps": -101
+      },
+      "absolute_gain_vs_old_baseline_pp": -4.488177014332784,
+      "prefix_replay": {
+        "shared_checks": [
+          21,
+          41,
+          62,
+          82
+        ],
+        "maximum_training_dice_error": 0.0
+      }
+    },
+    {
+      "candidate": "lr045_cosine_full",
+      "gain_pp": 2.0170399098028646,
+      "training_gain_pp": 2.3475343150317656,
+      "subfield_gain_pp": {
+        "CA1_3_hard_dice": 0.15060652935260066,
+        "subiculum_hard_dice": 0.10879393434444751,
+        "CA4_DG_hard_dice": 5.791719265711627
+      },
+      "error_delta": {
+        "fn": 429,
+        "fp": -1616,
+        "swaps": -222
+      },
+      "absolute_gain_vs_old_baseline_pp": -3.5135906598238904,
+      "prefix_replay": {
+        "shared_checks": [
+          21,
+          41,
+          62,
+          82
+        ],
+        "maximum_training_dice_error": 0.0
+      }
+    },
+    {
+      "candidate": "lr030_cosine_bands",
+      "gain_pp": 1.8088041000445476,
+      "training_gain_pp": 2.132488829820531,
+      "subfield_gain_pp": {
+        "CA1_3_hard_dice": 0.2985853442719417,
+        "subiculum_hard_dice": 0.41633465854077656,
+        "CA4_DG_hard_dice": 4.711492297320966
+      },
+      "error_delta": {
+        "fn": 482,
+        "fp": -2491,
+        "swaps": -335
+      },
+      "absolute_gain_vs_old_baseline_pp": -10.771842484387108,
+      "prefix_replay": {
+        "shared_checks": [
+          21,
+          41,
+          62,
+          82
+        ],
+        "maximum_training_dice_error": 0.0
+      }
+    }
+  ],
+  "baseline_updates_verified_409_attempts_409": [
+    "MNI_unetr_lr045_cosine_dice_f1s0",
+    "MNI_unetr_lr030_cosine_dice_f1s0",
+    "MNI_unetr_lr045_cosine_dice_f2s0",
+    "MNI_unetr_lr030_cosine_dice_f2s0",
+    "MNI_unetr_lr045_cosine_dice_f0s5",
+    "MNI_unetr_lr030_cosine_dice_f0s5",
+    "MNI_unetr_lr045_cosine_dice_f0s19",
+    "MNI_unetr_lr030_cosine_dice_f0s19",
+    "MNI_unetr_lr045_cosine_dice_f0s0"
+  ],
+  "same_fold5_19_cohorts_verified_equal": true,
+  "interpretation": "Lowering peak LR reduces both training and validation Dice under the fixed409-update cap, with the largest subfield deficit in CA4/DG. Constraints partially recover this deficit on seed19/fold0, but absolute Dice remains below the old winning recipe and plain LR0.0006 cosine controls. Positive matched gains do not establish an overall better training recipe. This does not establish a unique causal mechanism for the subfield deficit.",
+  "input_result_sha256": "0fcadbd0cb8573adb093d21398de2421426faf93178594e748616a704661192b",
+  "baseline_analysis_sha256": "f9b6a4f7c02219dc2f51937d2686972765170d3d4f27003f429ad7822be114c6"
+}

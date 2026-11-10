@@ -1,0 +1,50 @@
+{
+  "time": 1794239153.152079,
+  "queue": "749551|RUNNING|2:19|2:36:00|gres/gpu:4g.40gb:2|gnode02\n",
+  "job": "JobId=749551 JobName=hippo-bands-3h UserId=3160552(1395) GroupId=grp_hpcclusterstudentsbocconiusers(1009) MCS_label=N/A Priority=2796 Nice=0 Account=3160552 QOS=stud JobState=RUNNING Reason=None Dependency=(null) Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:02:19 TimeLimit=02:36:00 TimeMin=N/A SubmitTime=2026-11-09T16:43:33 EligibleTime=2026-11-09T16:43:33 AccrueTime=2026-11-09T16:43:33 StartTime=2026-11-09T16:43:34 EndTime=2026-11-09T19:19:34 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-11-09T16:43:34 Scheduler=Main Partition=stud AllocNode:Sid=slnode01:2097758 ReqNodeList=(null) ExcNodeList=gnode04 NodeList=gnode02 BatchHost=gnode02 NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=48G,node=1,billing=16,gres/gpu=2 AllocTRES=cpu=8,mem=48G,node=1,billing=16,gres/gpu=2 Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=48G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) LicensesAlloc=(null) Network=(null) Command=/mnt/beegfsstudents/home/3160552/mni_nnunet_swin_bands_refine3h_53t_20261109/run.sbatch WorkDir=/mnt/beegfsstudents/home/3160552/mni_nnunet_swin_bands_refine3h_53t_20261109 StdErr=/mnt/beegfsstudents/home/3160552/mni_nnunet_swin_bands_refine3h_53t_20261109/slurm-749551.err StdIn=/dev/null StdOut=/mnt/beegfsstudents/home/3160552/mni_nnunet_swin_bands_refine3h_53t_20261109/slurm-749551.out TresPerNode=gres/gpu:4g.40gb:2 TresPerTask=cpu=8 \n",
+  "parent_control": {
+    "pause": true,
+    "pilot_pause_owner": "mni_unet_delayed10_confirm53t_0519_20261109"
+  },
+  "status.json": {
+    "status": "running_offline",
+    "active": [
+      "MNI_nnunet_late60_f2s0",
+      "MNI_swinunetr_quarter10_f2s0"
+    ],
+    "completed": 0,
+    "training_completed": 0,
+    "total": 72,
+    "maximum_possible_runs": 72,
+    "screen_runs": 19,
+    "selection": {
+      "nnunet": {
+        "phase": "screen",
+        "pending": 9
+      },
+      "swinunetr": {
+        "phase": "screen",
+        "pending": 10
+      }
+    },
+    "pending_durable_archive": [],
+    "pending_cleanup": [],
+    "deadline": 1794248424.3988118,
+    "updated_at": 1794239150.8619173,
+    "job_id": "749551",
+    "reason": null,
+    "broad_sweep": "paused; never automatically modified or resumed"
+  },
+  "logs": {
+    "slurm-749551.out": "",
+    "slurm-749551.err": "INFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\n"
+  },
+  "runs": {
+    "MNI_nnunet_late60_f2s0": {
+      "train.log": "mean_train_loss\": -0.4399312990052359, \"learning_rate\": 0.02, \"macro_hard_dice\": 0.37945926299816535, \"CA1_3_hard_dice\": 0.0, \"CA1_3_soft_dice\": 0.09577162861824036, \"subiculum_hard_dice\": 0.6604122940559665, \"subiculum_soft_dice\": 0.5962514102458953, \"CA4_DG_hard_dice\": 0.47796549493852947, \"CA4_DG_soft_dice\": 0.3739711344242096, \"macro_soft_dice\": 0.3553313910961151, \"whole_hippocampus_hard_dice\": 0.5316524646274479, \"training_macro_hard_dice\": 0.38594581982664466, \"training_CA1_3_hard_dice\": 0.0, \"training_CA1_3_soft_dice\": 0.10219497382640838, \"training_subiculum_hard_dice\": 0.6538107453562237, \"training_subiculum_soft_dice\": 0.598492494225502, \"training_CA4_DG_hard_dice\": 0.50402671412371, \"training_CA4_DG_soft_dice\": 0.3832168087363243, \"training_macro_soft_dice\": 0.3613014255960783, \"training_whole_hippocampus_hard_dice\": 0.5718097073990774}\n{\"calibration\": \"complete\", \"model\": \"nnunet\", \"objective\": \"dice_bands\", \"fold\": 2, \"seed\": 0, \"weights\": {\"bands\": 0.13616701347948065}}\n"
+    },
+    "MNI_swinunetr_quarter10_f2s0": {
+      "train.log": "calibration_flops\": 1043755040412, \"total_flops\": 17171163971360, \"compute_fraction\": 0.3025490249293521, \"mean_train_loss\": 0.9542636838224199, \"learning_rate\": 0.0003, \"macro_hard_dice\": 0.5259925776233738, \"CA1_3_hard_dice\": 0.5388642650979971, \"CA1_3_soft_dice\": 0.11420603692531586, \"subiculum_hard_dice\": 0.4215325189778437, \"subiculum_soft_dice\": 0.0472909115254879, \"CA4_DG_hard_dice\": 0.6175809487942806, \"CA4_DG_soft_dice\": 0.04892522171139717, \"macro_soft_dice\": 0.07014072338740031, \"whole_hippocampus_hard_dice\": 0.6303734375588458, \"training_macro_hard_dice\": 0.5279544952867494, \"training_CA1_3_hard_dice\": 0.512699096432026, \"training_CA1_3_soft_dice\": 0.111825380474329, \"training_subiculum_hard_dice\": 0.4538358588556791, \"training_subiculum_soft_dice\": 0.048708245530724524, \"training_CA4_DG_hard_dice\": 0.617328530572543, \"training_CA4_DG_soft_dice\": 0.046536237187683585, \"training_macro_soft_dice\": 0.06902328773091236, \"training_whole_hippocampus_hard_dice\": 0.65096939133365}\n"
+    }
+  }
+}

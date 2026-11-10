@@ -1,0 +1,143 @@
+{
+  "control.json": {
+    "pause": false,
+    "handoff_started": 1794308873.9824512,
+    "controller_owner": "offline_v1",
+    "automatic_continuation_owner": "offline_v1",
+    "handoff_completed": 1794308981.5309858
+  },
+  "submission.json": {
+    "job_id": "751779",
+    "dependency": null,
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--chdir=/mnt/beegfsstudents/home/3160552/mni_medsam3_n5_adaptive60_2gpu_20261110",
+      "--output=/mnt/beegfsstudents/home/3160552/mni_medsam3_n5_adaptive60_2gpu_20261110/slurm-%j.out",
+      "--error=/mnt/beegfsstudents/home/3160552/mni_medsam3_n5_adaptive60_2gpu_20261110/slurm-%j.err",
+      "/mnt/beegfsstudents/home/3160552/mni_medsam3_n5_adaptive60_2gpu_20261110/operations/offline_v1/run.sbatch",
+      "/mnt/beegfsstudents/home/3160552/mni_medsam3_n5_adaptive60_2gpu_20261110"
+    ],
+    "submitted_at": 1794309006.3229575,
+    "manifest_sha256": "90b3987a624e1f246af9eb1b6842b70dc25384129c60d1f5929207149ae51457",
+    "operational_manifest_sha256": "e45214117f863ae8e6f500798b2bf36058e3053d27f3cf71516641c4438da82c",
+    "laptop_required": false
+  },
+  "status.json": {
+    "status": "running",
+    "active": [
+      "MNI_MedSAM3_n5_f0s0_native400",
+      "MNI_MedSAM3_n5_f0s1_native400"
+    ],
+    "completed_milestones": 0,
+    "selected_seeds": [],
+    "outcome": null,
+    "threshold": 0.6,
+    "maximum_updates": 1000,
+    "runs": [],
+    "job_id": "751779",
+    "updated_at": 1794309124.853559,
+    "quota": {
+      "used_gib": 53.03,
+      "limit_gib": 93.13,
+      "free_gib": 40.099999999999994,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  53.03GiB/93.13GiB  537.16k/\u221e  \n\n",
+      "checked_at": 1794309124.8865337
+    },
+    "pending_durable_archive": [],
+    "pending_cleanup": [],
+    "operational_manifest_sha256": "e45214117f863ae8e6f500798b2bf36058e3053d27f3cf71516641c4438da82c",
+    "offline_policy": "Training, selection, model delivery and continuation are cluster-owned. Retain artifacts until a real verified off-BeeGFS archive returns."
+  },
+  "offline_service.json": {
+    "status": "running",
+    "pid": 2723541,
+    "active_jobs": [
+      [
+        "751779",
+        "RUNNING",
+        "hippo-medsam3-adaptive"
+      ]
+    ],
+    "last_check": 1794309303.2272017,
+    "laptop_required": false,
+    "operational_manifest_sha256": "e45214117f863ae8e6f500798b2bf36058e3053d27f3cf71516641c4438da82c"
+  },
+  "base_ready_751779.json": {
+    "job_id": "751779",
+    "sha256": "9999e2341ceef5e136daa386eecb55cb414446a00ac2b55eb2dfd2f7c3cf8c9e",
+    "delivered_at": 1794309118.095662,
+    "delivered_by": "cluster_side_service",
+    "source": "/mnt/beegfsstudents/home/3160552/sam3_f013_s012_cluster_tail_20261022/bundle/weights/sam3.pt"
+  },
+  "gpu_allocation.json": {
+    "status": "passed",
+    "workers": [
+      {
+        "status": "passed",
+        "device_uuid": "c082c980-136b-223f-500e-0a77121aecd6",
+        "visible_devices": 1,
+        "cuda_visible_devices": "0",
+        "slurm_step_gpus": "2",
+        "slurm_job_id": "751779",
+        "slurm_step_id": "0",
+        "rank": "0",
+        "worker": null,
+        "gpu_name": "NVIDIA A100 80GB PCIe MIG 4g.40gb",
+        "total_memory": 42144366592,
+        "cpu_affinity": [
+          14,
+          15,
+          16,
+          17
+        ],
+        "host": "gnode03",
+        "time": 1794309049.1662722
+      },
+      {
+        "status": "passed",
+        "device_uuid": "5feefd25-58a5-61b5-c0f7-634a214f9e17",
+        "visible_devices": 1,
+        "cuda_visible_devices": "0",
+        "slurm_step_gpus": "2",
+        "slurm_job_id": "751779",
+        "slurm_step_id": "0",
+        "rank": "1",
+        "worker": null,
+        "gpu_name": "NVIDIA A100 80GB PCIe MIG 3g.40gb",
+        "total_memory": 42144366592,
+        "cpu_affinity": [
+          18,
+          19,
+          20,
+          21
+        ],
+        "host": "gnode03",
+        "time": 1794309049.166066
+      }
+    ],
+    "manifest_sha256": "90b3987a624e1f246af9eb1b6842b70dc25384129c60d1f5929207149ae51457",
+    "job_id": "751779"
+  },
+  "progress": {
+    "MNI_MedSAM3_n5_f0s0_native400": 280,
+    "MNI_MedSAM3_n5_f0s1_native400": 200
+  },
+  "checked_at": 1794309315.7154262,
+  "queue": "751779 RUNNING hippo-medsam3-adaptive\n",
+  "resume_verified": {
+    "job_id": "751779",
+    "seed0_update": 285,
+    "seed1_update": 205,
+    "observed_at": 1794309353.9938903,
+    "saved_steps": {
+      "seed0": 280,
+      "seed1": 200
+    },
+    "result": "Both workers advanced beyond their exact saved checkpoints"
+  },
+  "tests": {
+    "local_passed": 8,
+    "cluster_passed": 8
+  }
+}

@@ -1,0 +1,200 @@
+{
+  "checked_at": 1794268639.309428,
+  "queue": "750562|RUNNING|hippo-mni-medsam3-n5|2026-11-10T06:40:56|gres/gpu:4g.40gb:2\n",
+  "accounting": "JobID|State|Start|End|Elapsed|ExitCode\n749737|FAILED|2026-11-09T18:55:34|2026-11-10T00:40:47|05:45:13|1:0\n749737.batch|FAILED|2026-11-09T18:55:34|2026-11-10T00:40:47|05:45:13|1:0\n750092|CANCELLED by 1395|None|2026-11-10T00:40:44|00:00:00|0:0\n",
+  "control.json": {
+    "pause": false
+  },
+  "status.json": {
+    "status": "running_offline",
+    "active": [
+      "MNI_unetr_vit_b16_dice_depth_f0s19",
+      "MNI_basic_unet16_dice_depth_f0s19"
+    ],
+    "training_completed": 148,
+    "completed": 148,
+    "total": 407,
+    "logical_completed": 245,
+    "logical_total": 504,
+    "reused": 97,
+    "pending_durable_archive": [],
+    "quota": {
+      "used_gib": 54.67,
+      "limit_gib": 93.13,
+      "free_gib": 38.459999999999994,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  54.67GiB/93.13GiB  522.22k/\u221e  \n\n",
+      "checked_at": 1794267635.4352663
+    },
+    "job_id": "749737",
+    "updated_at": 1794267635.6677094
+  },
+  "failure.json": {
+    "time": 1794267644.8475575,
+    "traceback": "Traceback (most recent call last):\n  File \"/mnt/beegfsstudents/home/3160552/mni_winning_recipes_matrix2030_53t_0519_20261109/source/scripts/mni_constraints/winning_matrix_runner.py\", line 53, in run\n    if code not in (0,75) or (code==75 and not stopping()):raise RuntimeError(dict(task=task['id'],exit_code=code))\n                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: {'task': 'MNI_basic_unet16_dice_depth_f0s19', 'exit_code': -10}\n"
+  },
+  "runs": {
+    "MNI_basic_unet16_dice_depth_f0s19": {
+      "files": [
+        {
+          "name": "train.log",
+          "bytes": 0,
+          "mtime": 1794267568.0
+        }
+      ],
+      "log_tail": ""
+    },
+    "MNI_unetr_vit_b16_dice_depth_f0s19": {
+      "files": [
+        {
+          "name": "run.lock",
+          "bytes": 0,
+          "mtime": 1794267600.0
+        },
+        {
+          "name": "training_latest.json",
+          "bytes": 30282,
+          "mtime": 1794267634.0
+        },
+        {
+          "name": "runtime_recipe.json",
+          "bytes": 543,
+          "mtime": 1794267600.0
+        },
+        {
+          "name": "metrics.csv",
+          "bytes": 2414,
+          "mtime": 1794267642.0
+        },
+        {
+          "name": "budget_ledger.json",
+          "bytes": 207,
+          "mtime": 1794267634.0
+        },
+        {
+          "name": "checkpoint_best.pt",
+          "bytes": 370807547,
+          "mtime": 1794267642.0
+        },
+        {
+          "name": "validation_latest.json",
+          "bytes": 15378,
+          "mtime": 1794267642.0
+        },
+        {
+          "name": "validation_best.json",
+          "bytes": 15378,
+          "mtime": 1794267642.0
+        },
+        {
+          "name": "train.log",
+          "bytes": 4769,
+          "mtime": 1794267638.0
+        },
+        {
+          "name": "model_recipe.json",
+          "bytes": 2668,
+          "mtime": 1794267601.0
+        },
+        {
+          "name": "checkpoint_latest.pt",
+          "bytes": 1483140451,
+          "mtime": 1794267641.0
+        },
+        {
+          "name": "config.json",
+          "bytes": 2932,
+          "mtime": 1794267601.0
+        }
+      ],
+      "budget_ledger.json": {
+        "config_sha256": "f60d3b48ed5ca18a2e9bee0098071713f309b0243af9d493e246a260649a342e",
+        "charged_attempts": 82,
+        "training_flops": 10668463741438,
+        "calibration_flops": 0,
+        "calibration_attempts": 0
+      },
+      "config.json": {
+        "budget_scope": "optimization_only",
+        "model": "unet",
+        "model_identity": "unetr_vit_b16",
+        "objective": "dice_depth",
+        "fold": 0,
+        "seed": 19,
+        "lr_horizon_updates": 409,
+        "budget_flops": 53305109592450,
+        "schedule": {
+          "prefix_updates": 102,
+          "sdf_prefix_updates": 102,
+          "baseline_flops_per_update": 130103216359,
+          "early_flops_per_update": 130113702122,
+          "flops_per_update": 130113702122,
+          "calibration_flops": 864374879392,
+          "constraint_warmup_updates": 33,
+          "sdf_warmup_updates": 33,
+          "budget_scope": "optimization_only",
+          "max_steps": 409,
+          "consumed_training_flops": 53215434620072,
+          "consumed_flops": 53215434620072,
+          "consumed_total_flops": 54079809499464,
+          "unused_flops": 89674972378,
+          "patient_pass_epochs": 20.45
+        },
+        "max_steps": 409,
+        "smoke_test": false,
+        "protocol_sha256": "1620d2a37c4fc04c1f10894fd8d92b1069bfc5bed4e8e0f4ef8bbd27fb47ec27",
+        "dataset_sha256": "8ef22df6e7c7964791bb582d160a847ccbeffa8628ce4bce41449d3b2fed2930",
+        "train_cases": [
+          "hippocampus_mni_s03_L",
+          "hippocampus_mni_s03_R",
+          "hippocampus_mni_s04_L",
+          "hippocampus_mni_s04_R",
+          "hippocampus_mni_s06_L",
+          "hippocampus_mni_s06_R",
+          "hippocampus_mni_s08_L",
+          "hippocampus_mni_s08_R",
+          "hippocampus_mni_s11_L",
+          "hippocampus_mni_s11_R",
+          "hippocampus_mni_s14_L",
+          "hippocampus_mni_s14_R",
+          "hippocampus_mni_s18_L",
+          "hippocampus_mni_s18_R",
+          "hippocampus_mni_s22_L",
+          "hippocampus_mni_s22_R",
+          "hippocampus_mni_s23_L",
+          "hippocampus_mni_s23_R",
+          "hippocampus_mni_s25_L",
+          "hippocampus_mni_s25_R"
+        ],
+        "validation_cases": [
+          "hippocampus_mni_s01_L",
+          "hippocampus_mni_s01_R",
+          "hippocampus_mni_s09_L",
+          "hippocampus_mni_s09_R",
+          "hippocampus_mni_s12_L",
+          "hippocampus_mni_s12_R",
+          "hippocampus_mni_s17_L",
+          "hippocampus_mni_s17_R",
+          "hippocampus_mni_s24_L",
+          "hippocampus_mni_s24_R"
+        ],
+        "torch": "2.12.1+cu130",
+        "monai": "1.6.0",
+        "augmentation": "none",
+        "script_sha256": "ee5bfe0f2b516bae6c39bc9c21772fd7ae401ff51f0e605880909cfa48a48b95",
+        "objective_source_sha256": "e2553ec4c3611523ef5dad2c32336a4c8ad22f37baf80907f729d7980967952e",
+        "shared_source_sha256": "ba79364c37a403bb9c62601916dfe9d060ca64846af5e2e7c5591b50337babc7",
+        "sdf_source_sha256": "171aae6757bbc9fc3ac09bb77a3a2f6e235f33ef6f86b1fd971f5bdfc8863d5d",
+        "precision": "CUDA bfloat16 autocast, FP32 parameters/optimizer; CPU smoke tests FP32",
+        "initial_lr": 0.0003,
+        "constraint_warmup_updates": 33,
+        "sdf_prefix_updates": 102,
+        "sdf_timing_sha256": "141af6057d3c07c611e3225259469ba839a9b4dca5da65c063638c873621bc39",
+        "combined_objective_sha256": "89d3de62d8f819b081fc55172e079f80f92fdb1734bc6cc0744cf9f12db2ff92",
+        "depth_geometry_sha256": "6d6efdbd976d53252110e63e854ef645808dde22c59e196deff0372bed0fc94e",
+        "selection": "Final-budget checkpoint primary; best validation secondary; no early stopping."
+      },
+      "log_tail": "{\"model\": \"unet\", \"objective\": \"dice_depth\", \"fold\": 0, \"seed\": 19, \"step\": 21, \"charged_attempts\": 21, \"patient_passes\": 1.05, \"estimated_training_flops\": 2732167543539, \"calibration_flops\": 0, \"total_flops\": 2732167543539, \"compute_fraction\": 0.05125526547882714, \"mean_train_loss\": 2.44392762865339, \"learning_rate\": 0.0002625, \"macro_hard_dice\": 0.0371863701947331, \"CA1_3_hard_dice\": 0.03736778977720233, \"CA1_3_soft_dice\": 0.027027397789061068, \"subiculum_hard_dice\": 0.06822886165640818, \"subiculum_soft_dice\": 0.014283296000212432, \"CA4_DG_hard_dice\": 0.005962459150588788, \"CA4_DG_soft_dice\": 0.0032318978570401668, \"macro_soft_dice\": 0.014847530548771224, \"whole_hippocampus_hard_dice\": 0.06329861520484562, \"training_macro_hard_dice\": 0.034147712967091584, \"training_CA1_3_hard_dice\": 0.037868614405752885, \"training_CA1_3_soft_dice\": 0.02516578808426857, \"training_subiculum_hard_dice\": 0.058359705660470516, \"training_subiculum_soft_dice\": 0.01374451545998454, \"training_CA4_DG_hard_dice\": 0.006214818835051349, \"training_CA4_DG_soft_dice\": 0.0034371209098026157, \"training_macro_soft_dice\": 0.014115808151351907, \"training_whole_hippocampus_hard_dice\": 0.06085509854812721}\n{\"model\": \"unet\", \"objective\": \"dice_depth\", \"fold\": 0, \"seed\": 19, \"step\": 41, \"charged_attempts\": 41, \"patient_passes\": 2.05, \"estimated_training_flops\": 5334231870719, \"calibration_flops\": 0, \"total_flops\": 5334231870719, \"compute_fraction\": 0.10006980403009108, \"mean_train_loss\": 2.1025551915168763, \"learning_rate\": 0.00029872956191401084, \"macro_hard_dice\": 0.09110030937041749, \"CA1_3_hard_dice\": 0.1107119013426157, \"CA1_3_soft_dice\": 0.03155946917831898, \"subiculum_hard_dice\": 0.15453844235426215, \"subiculum_soft_dice\": 0.01677639652043581, \"CA4_DG_hard_dice\": 0.008050584414374659, \"CA4_DG_soft_dice\": 0.0032463340321555734, \"macro_soft_dice\": 0.01719406657697012, \"whole_hippocampus_hard_dice\": 0.0846066823539354, \"training_macro_hard_dice\": 0.0911667075134794, \"training_CA1_3_hard_dice\": 0.12369808496722157, \"training_CA1_3_soft_dice\": 0.029673681315034627, \"training_subiculum_hard_dice\": 0.14173182532012435, \"training_subiculum_soft_dice\": 0.01633750288747251, \"training_CA4_DG_hard_dice\": 0.0080702122530923, \"training_CA4_DG_soft_dice\": 0.0033838525880128143, \"training_macro_soft_dice\": 0.016465012263506648, \"training_whole_hippocampus_hard_dice\": 0.08163059798164217}\n{\"model\": \"unet\", \"objective\": \"dice_depth\", \"fold\": 0, \"seed\": 19, \"step\": 62, \"charged_attempts\": 62, \"patient_passes\": 3.1, \"estimated_training_flops\": 8066399414258, \"calibration_flops\": 0, \"total_flops\": 8066399414258, \"compute_fraction\": 0.15132506950891822, \"mean_train_loss\": 1.9635200500488281, \"learning_rate\": 0.00029324821750593066, \"macro_hard_dice\": 0.17461612472423088, \"CA1_3_hard_dice\": 0.2738473020575175, \"CA1_3_soft_dice\": 0.03976510725915432, \"subiculum_hard_dice\": 0.24840440792872398, \"subiculum_soft_dice\": 0.0284809285774827, \"CA4_DG_hard_dice\": 0.0015966641864512466, \"CA4_DG_soft_dice\": 0.002354567009024322, \"macro_soft_dice\": 0.023533534281887113, \"whole_hippocampus_hard_dice\": 0.09937759616628741, \"training_macro_hard_dice\": 0.17502713578951498, \"training_CA1_3_hard_dice\": 0.26839502002905896, \"training_CA1_3_soft_dice\": 0.0376847306266427, \"training_subiculum_hard_dice\": 0.2554871988994929, \"training_subiculum_soft_dice\": 0.028892924170941116, \"training_CA4_DG_hard_dice\": 0.0011991884399931312, \"training_CA4_DG_soft_dice\": 0.0023277695465367286, \"training_macro_soft_dice\": 0.022968474781373517, \"training_whole_hippocampus_hard_dice\": 0.09592030626950383}\n{\"model\": \"unet\", \"objective\": \"dice_depth\", \"fold\": 0, \"seed\": 19, \"step\": 82, \"charged_attempts\": 82, \"patient_passes\": 4.1, \"estimated_training_flops\": 10668463741438, \"calibration_flops\": 0, \"total_flops\": 10668463741438, \"compute_fraction\": 0.20013960806018216, \"mean_train_loss\": 1.8351823449134828, \"learning_rate\": 0.000284143808727534, \"macro_hard_dice\": 0.30018475693714813, \"CA1_3_hard_dice\": 0.5021583869637726, \"CA1_3_soft_dice\": 0.0601408813148737, \"subiculum_hard_dice\": 0.3959289502756166, \"subiculum_soft_dice\": 0.03630829732865095, \"CA4_DG_hard_dice\": 0.0024669335720550727, \"CA4_DG_soft_dice\": 0.002125538082327694, \"macro_soft_dice\": 0.03285823890861744, \"whole_hippocampus_hard_dice\": 0.13109711177629443, \"training_macro_hard_dice\": 0.3102062222648062, \"training_CA1_3_hard_dice\": 0.502372910525407, \"training_CA1_3_soft_dice\": 0.05798075534403324, \"training_subiculum_hard_dice\": 0.4257275934515426, \"training_subiculum_soft_dice\": 0.03739737924188376, \"training_CA4_DG_hard_dice\": 0.0025181628174690456, \"training_CA4_DG_soft_dice\": 0.0021530845784582197, \"training_macro_soft_dice\": 0.032510406388125065, \"training_whole_hippocampus_hard_dice\": 0.12691351474761853}\n"
+    }
+  },
+  "slurm_error": " Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nTraceback (most recent call last):\n  File \"<frozen runpy>\", line 198, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/mnt/beegfsstudents/home/3160552/mni_winning_recipes_matrix2030_53t_0519_20261109/source/scripts/mni_constraints/winning_matrix2030.py\", line 290, in <module>\n    if __name__=='__main__':main()\n                            ^^^^^^\n  File \"/mnt/beegfsstudents/home/3160552/mni_winning_recipes_matrix2030_53t_0519_20261109/source/scripts/mni_constraints/winning_matrix2030.py\", line 287, in main\n    campaign.main()\n  File \"/mnt/beegfsstudents/home/3160552/mni_winning_recipes_matrix2030_53t_0519_20261109/source/scripts/mni_constraints/campaign.py\", line 207, in main\n    elif args.command=='run':batch.run(args.stage)\n                             ^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/beegfsstudents/home/3160552/mni_winning_recipes_matrix2030_53t_0519_20261109/source/scripts/mni_constraints/winning_matrix_runner.py\", line 53, in run\n    if code not in (0,75) or (code==75 and not stopping()):raise RuntimeError(dict(task=task['id'],exit_code=code))\n                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: {'task': 'MNI_basic_unet16_dice_depth_f0s19', 'exit_code': -10}\n"
+}

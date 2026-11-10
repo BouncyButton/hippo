@@ -1,0 +1,54 @@
+{
+  "status": "passed",
+  "manifest_sha256": "8e1287a7cff5ddb95e2faac112201820a4fab4f7d9e8ab3741fc8f7fd4057e27",
+  "checks": [
+    {
+      "id": "MNI_nnunet_n10_baseline_f0s0",
+      "train_subjects": 10,
+      "training_crops": 20,
+      "updates": 89,
+      "passes": 4.45,
+      "calibration_flops": 0
+    },
+    {
+      "id": "MNI_basic_unet16_n10_baseline_f0s0",
+      "train_subjects": 10,
+      "training_crops": 20,
+      "updates": 563,
+      "passes": 28.15,
+      "calibration_flops": 0
+    },
+    {
+      "id": "MNI_nnunet_n10_original_bands_f0s0",
+      "train_subjects": 10,
+      "training_crops": 20,
+      "updates": 89,
+      "passes": 4.45,
+      "calibration_flops": 2374366156612
+    },
+    {
+      "id": "MNI_basic_unet16_n10_original_bands_f0s0",
+      "train_subjects": 10,
+      "training_crops": 20,
+      "updates": 562,
+      "passes": 28.1,
+      "calibration_flops": 382099497372
+    }
+  ],
+  "scientific": {
+    "status": "passed",
+    "checks": [
+      "actual argmax union errors",
+      "detached 3x weights",
+      "original support A",
+      "anchor plus six-connected error halo B",
+      "side normalization",
+      "zero off-support gradient",
+      "D4 equivariance",
+      "batch averaging",
+      "internal swaps excluded",
+      "remote FP/deep FN included"
+    ]
+  },
+  "optimizer_updates": 0
+}

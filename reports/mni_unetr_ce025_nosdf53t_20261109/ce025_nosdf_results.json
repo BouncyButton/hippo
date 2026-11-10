@@ -1,0 +1,2893 @@
+{
+  "status": "complete",
+  "outcome": "exhausted",
+  "winner": null,
+  "rows": [
+    {
+      "id": "MNI_unetr_plain_ce025_dice_bands_edge_depth_f1s0",
+      "recipe": "plain_ce025",
+      "role": "constraint",
+      "kind": "conventional",
+      "dataset": "MNI",
+      "model": "unetr_vit_b16",
+      "arm": "dice_bands_edge_depth",
+      "protocol": "plain_ce025_dice_bands_edge_depth",
+      "seed": 0,
+      "fold": 1,
+      "augmentation": "none",
+      "dropout_rate": 0.0,
+      "pilot": true,
+      "candidate": "plain_ce025_bands_edge_depth",
+      "baseline_id": "MNI_unetr_plain_ce025_dice_f1s0",
+      "current": {
+        "validation_percent": 73.75068986021408,
+        "training_percent": 91.18830724296124,
+        "union_percent": 85.43050789840663,
+        "per_subfield_percent": {
+          "CA1_3_hard_dice": 75.0327239236291,
+          "subiculum_hard_dice": 73.82223976228656,
+          "CA4_DG_hard_dice": 72.39710589472665
+        },
+        "fn": 6058,
+        "fp": 7592,
+        "swaps": 5176,
+        "updates": 409,
+        "optimization_flops": 53261031821167,
+        "archive_manifest_sha256": "65db4d90d37f616d7d4485b6b3ccf9fb68eed3bce2e6a7c635d07326f6144a90"
+      },
+      "calibration": {
+        "status": "complete",
+        "weights": {
+          "bands": 0.029211208442682372,
+          "edge": 0.05821468921949866,
+          "depth": 0.08485779371632382
+        },
+        "statistics": {
+          "bands": {
+            "median_raw_ratio": 1.7116717405960444,
+            "p95_raw_ratio": 1.841352188528636,
+            "weighted_median_ratio": 0.05,
+            "weighted_p95_ratio": 0.05378812259549935
+          },
+          "edge": {
+            "median_raw_ratio": 0.8588897522320329,
+            "p95_raw_ratio": 0.9754042610895782,
+            "weighted_median_ratio": 0.05,
+            "weighted_p95_ratio": 0.05678285592270453
+          },
+          "depth": {
+            "median_raw_ratio": 0.5892210698659923,
+            "p95_raw_ratio": 0.8257713563310441,
+            "weighted_median_ratio": 0.05,
+            "weighted_p95_ratio": 0.07007313541238867
+          }
+        },
+        "cases": [
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 1.1927080850737681e-11,
+              "base:bands": 4.325852176467748e-12,
+              "base:edge": 1.7388529852113699e-12,
+              "base:depth": 2.704009325477097e-12,
+              "bands:base": 4.325852176467748e-12,
+              "bands:bands": 3.038169368863031e-11,
+              "bands:edge": 1.0084606760774051e-11,
+              "bands:depth": 5.1984649224179336e-12,
+              "edge:base": 1.7388529852113699e-12,
+              "edge:bands": 1.0084606760774051e-11,
+              "edge:edge": 8.103290607963665e-12,
+              "edge:depth": 1.6284275360448075e-12,
+              "depth:base": 2.704009325477097e-12,
+              "depth:bands": 5.1984649224179336e-12,
+              "depth:edge": 1.6284275360448075e-12,
+              "depth:depth": 8.507414391012436e-12
+            },
+            "gradient_rms": {
+              "base": 3.4535606047581793e-06,
+              "bands": 5.511959151574901e-06,
+              "edge": 2.846627936342167e-06,
+              "depth": 2.9167472278228767e-06
+            },
+            "case_name": "hippocampus_mni_s03_L",
+            "bands_over_base": 1.5960221297349586,
+            "edge_over_base": 0.8147958153500204,
+            "depth_over_base": 0.825974263947837
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 9.872956618917073e-12,
+              "base:bands": 3.986551540269279e-12,
+              "base:edge": 1.41184546692541e-12,
+              "base:depth": 2.210282738085434e-12,
+              "bands:base": 3.986551540269279e-12,
+              "bands:bands": 3.2160302199102375e-11,
+              "bands:edge": 9.132744907547341e-12,
+              "bands:depth": 5.198495280078763e-12,
+              "edge:base": 1.41184546692541e-12,
+              "edge:bands": 9.132744907547341e-12,
+              "edge:edge": 6.816537785614418e-12,
+              "edge:depth": 1.4905874928458629e-12,
+              "depth:base": 2.210282738085434e-12,
+              "depth:bands": 5.198495280078763e-12,
+              "depth:edge": 1.4905874928458629e-12,
+              "depth:depth": 3.1068771687292607e-12
+            },
+            "gradient_rms": {
+              "base": 3.1421261303323064e-06,
+              "bands": 5.671005395792035e-06,
+              "edge": 2.610850012086948e-06,
+              "depth": 1.7626335889030542e-06
+            },
+            "case_name": "hippocampus_mni_s03_R",
+            "bands_over_base": 1.804830602135083,
+            "edge_over_base": 0.8201747838861968,
+            "depth_over_base": 0.5478392755829594
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 1.4185146113288027e-11,
+              "base:bands": 3.956139235650191e-12,
+              "base:edge": 1.775345495613756e-12,
+              "base:depth": 2.6014915048555576e-12,
+              "bands:base": 3.956139235650191e-12,
+              "bands:bands": 3.363295406066946e-11,
+              "bands:edge": 1.0749011056243596e-11,
+              "bands:depth": 5.259596577711356e-12,
+              "edge:base": 1.775345495613756e-12,
+              "edge:bands": 1.0749011056243596e-11,
+              "edge:edge": 8.947469501419114e-12,
+              "edge:depth": 1.5246148527686687e-12,
+              "depth:base": 2.6014915048555576e-12,
+              "depth:bands": 5.259596577711356e-12,
+              "depth:edge": 1.5246148527686687e-12,
+              "depth:depth": 4.382628374793862e-12
+            },
+            "gradient_rms": {
+              "base": 3.7663173144715286e-06,
+              "bands": 5.799392559628074e-06,
+              "edge": 2.9912321042371678e-06,
+              "depth": 2.0934728024968134e-06
+            },
+            "case_name": "hippocampus_mni_s04_L",
+            "bands_over_base": 1.5398045558574547,
+            "edge_over_base": 0.7870308550294225,
+            "depth_over_base": 0.5456758543520787
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 9.580791021646107e-12,
+              "base:bands": 3.309207291871119e-12,
+              "base:edge": 1.8189216409100761e-12,
+              "base:depth": 1.9433660410073106e-12,
+              "bands:base": 3.309207291871119e-12,
+              "bands:bands": 2.2870701860133735e-11,
+              "bands:edge": 9.909736226054733e-12,
+              "bands:depth": 3.789682109789361e-12,
+              "edge:base": 1.8189216409100761e-12,
+              "edge:bands": 9.909736226054733e-12,
+              "edge:edge": 8.720729867406352e-12,
+              "edge:depth": 1.6289979348077521e-12,
+              "depth:base": 1.9433660410073106e-12,
+              "depth:bands": 3.789682109789361e-12,
+              "depth:edge": 1.6289979348077521e-12,
+              "depth:depth": 2.57842228471028e-12
+            },
+            "gradient_rms": {
+              "base": 3.095285289217475e-06,
+              "bands": 4.782332261578417e-06,
+              "edge": 2.953088191606602e-06,
+              "depth": 1.6057466439978256e-06
+            },
+            "case_name": "hippocampus_mni_s04_R",
+            "bands_over_base": 1.54503763457211,
+            "edge_over_base": 0.9436357489313962,
+            "depth_over_base": 0.506047087884891
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 1.4806940396017154e-11,
+              "base:bands": 4.038664801891967e-12,
+              "base:edge": 1.5722426615835672e-12,
+              "base:depth": 2.7495438651575776e-12,
+              "bands:base": 4.038664801891967e-12,
+              "bands:bands": 3.192771394489036e-11,
+              "bands:edge": 9.932766414921801e-12,
+              "bands:depth": 5.0768534341771865e-12,
+              "edge:base": 1.5722426615835672e-12,
+              "edge:bands": 9.932766414921801e-12,
+              "edge:edge": 7.805625937273852e-12,
+              "edge:depth": 1.4835355166553654e-12,
+              "depth:base": 2.7495438651575776e-12,
+              "depth:bands": 5.0768534341771865e-12,
+              "depth:edge": 1.4835355166553654e-12,
+              "depth:depth": 4.463259189319002e-12
+            },
+            "gradient_rms": {
+              "base": 3.847978741627499e-06,
+              "bands": 5.65046139221306e-06,
+              "edge": 2.7938550315422333e-06,
+              "depth": 2.112642702711228e-06
+            },
+            "case_name": "hippocampus_mni_s07_L",
+            "bands_over_base": 1.4684232350574793,
+            "edge_over_base": 0.7196897696178126,
+            "depth_over_base": 0.5398709017915827
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 1.072212544445117e-11,
+              "base:bands": 3.650608461358562e-12,
+              "base:edge": 1.594145605451902e-12,
+              "base:depth": 2.167538067435193e-12,
+              "bands:base": 3.650608461358562e-12,
+              "bands:bands": 2.6144947318229583e-11,
+              "bands:edge": 9.634223974153144e-12,
+              "bands:depth": 3.9695829089081425e-12,
+              "edge:base": 1.594145605451902e-12,
+              "edge:bands": 9.634223974153144e-12,
+              "edge:edge": 7.810471019942256e-12,
+              "edge:depth": 1.4362044539750762e-12,
+              "depth:base": 2.167538067435193e-12,
+              "depth:bands": 3.9695829089081425e-12,
+              "depth:edge": 1.4362044539750762e-12,
+              "depth:depth": 3.2347700906765198e-12
+            },
+            "gradient_rms": {
+              "base": 3.27446567312152e-06,
+              "bands": 5.1132130131874595e-06,
+              "edge": 2.794721993319238e-06,
+              "depth": 1.7985466606892687e-06
+            },
+            "case_name": "hippocampus_mni_s07_R",
+            "bands_over_base": 1.5615411867527924,
+            "edge_over_base": 0.8442647729095325,
+            "depth_over_base": 0.5373573592784547
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 1.3647983784781381e-11,
+              "base:bands": 4.110373933580158e-12,
+              "base:edge": 1.6704734383948816e-12,
+              "base:depth": 2.6134034172842213e-12,
+              "bands:base": 4.110373933580158e-12,
+              "bands:bands": 2.889084110835327e-11,
+              "bands:edge": 9.76448956413467e-12,
+              "bands:depth": 4.819266947314604e-12,
+              "edge:base": 1.6704734383948816e-12,
+              "edge:bands": 9.76448956413467e-12,
+              "edge:edge": 8.011466490209784e-12,
+              "edge:depth": 1.5328799427699602e-12,
+              "depth:base": 2.6134034172842213e-12,
+              "depth:bands": 4.819266947314604e-12,
+              "depth:edge": 1.5328799427699602e-12,
+              "depth:depth": 7.158306933319203e-12
+            },
+            "gradient_rms": {
+              "base": 3.694317769870559e-06,
+              "bands": 5.375020103065036e-06,
+              "edge": 2.830453407178748e-06,
+              "depth": 2.675501248984796e-06
+            },
+            "case_name": "hippocampus_mni_s09_L",
+            "bands_over_base": 1.4549425463347092,
+            "edge_over_base": 0.7588381252480055,
+            "depth_over_base": 0.710815046313413
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 8.548267996233427e-12,
+              "base:bands": 3.821385916036313e-12,
+              "base:edge": 1.6859178983419376e-12,
+              "base:depth": 1.979097441484612e-12,
+              "bands:base": 3.821385916036313e-12,
+              "bands:bands": 2.6513274214989835e-11,
+              "bands:edge": 9.665583437790115e-12,
+              "bands:depth": 4.246733173451922e-12,
+              "edge:base": 1.6859178983419376e-12,
+              "edge:bands": 9.665583437790115e-12,
+              "edge:edge": 8.207360138734465e-12,
+              "edge:depth": 1.522953421359552e-12,
+              "depth:base": 1.979097441484612e-12,
+              "depth:bands": 4.246733173451922e-12,
+              "depth:edge": 1.522953421359552e-12,
+              "depth:depth": 3.0877488066405334e-12
+            },
+            "gradient_rms": {
+              "base": 2.923742122047262e-06,
+              "bands": 5.149104214811528e-06,
+              "edge": 2.864849060375514e-06,
+              "depth": 1.7571991368767893e-06
+            },
+            "case_name": "hippocampus_mni_s09_R",
+            "bands_over_base": 1.7611348743732649,
+            "edge_over_base": 0.9660617871936087,
+            "depth_over_base": 0.584076487658054
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 8.972296863807294e-12,
+              "base:bands": 3.670386477389043e-12,
+              "base:edge": 1.6272397925648496e-12,
+              "base:depth": 2.2094205805178735e-12,
+              "bands:base": 3.670386477389043e-12,
+              "bands:bands": 3.039013485306441e-11,
+              "bands:edge": 9.690741265000469e-12,
+              "bands:depth": 4.9386337033774375e-12,
+              "edge:base": 1.6272397925648496e-12,
+              "edge:bands": 9.690741265000469e-12,
+              "edge:edge": 8.069111351316494e-12,
+              "edge:depth": 1.5013298763910665e-12,
+              "depth:base": 2.2094205805178735e-12,
+              "depth:bands": 4.9386337033774375e-12,
+              "depth:edge": 1.5013298763910665e-12,
+              "depth:depth": 4.126139100529835e-12
+            },
+            "gradient_rms": {
+              "base": 2.995379252082663e-06,
+              "bands": 5.512724812020314e-06,
+              "edge": 2.840618128386231e-06,
+              "depth": 2.0312900089671673e-06
+            },
+            "case_name": "hippocampus_mni_s12_L",
+            "bands_over_base": 1.8404096269904255,
+            "edge_over_base": 0.9358802842744296,
+            "depth_over_base": 0.6603447368943228
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 7.972511539833249e-12,
+              "base:bands": 3.556890892930653e-12,
+              "base:edge": 1.5728948091903172e-12,
+              "base:depth": 2.2173543383352534e-12,
+              "bands:base": 3.556890892930653e-12,
+              "bands:bands": 2.6758642177049374e-11,
+              "bands:edge": 9.596460778804605e-12,
+              "bands:depth": 4.502364193276209e-12,
+              "edge:base": 1.5728948091903172e-12,
+              "edge:bands": 9.596460778804605e-12,
+              "edge:edge": 8.039790187763796e-12,
+              "edge:depth": 1.5702170466647125e-12,
+              "depth:base": 2.2173543383352534e-12,
+              "depth:bands": 4.502364193276209e-12,
+              "depth:edge": 1.5702170466647125e-12,
+              "depth:depth": 2.8539004926636524e-12
+            },
+            "gradient_rms": {
+              "base": 2.8235636241872164e-06,
+              "bands": 5.172875619715727e-06,
+              "edge": 2.8354523779749495e-06,
+              "depth": 1.6893491328507711e-06
+            },
+            "case_name": "hippocampus_mni_s12_R",
+            "bands_over_base": 1.8320379166964151,
+            "edge_over_base": 0.9899929872302988,
+            "depth_over_base": 0.5812857841845678
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 1.0887015247651455e-11,
+              "base:bands": 4.4218699882248025e-12,
+              "base:edge": 1.7551754320777047e-12,
+              "base:depth": 2.5075657696105313e-12,
+              "bands:base": 4.4218699882248025e-12,
+              "bands:bands": 3.5585399210669166e-11,
+              "bands:edge": 1.059179653706277e-11,
+              "bands:depth": 5.656696031725028e-12,
+              "edge:base": 1.7551754320777047e-12,
+              "edge:bands": 1.059179653706277e-11,
+              "edge:edge": 8.349257049622416e-12,
+              "edge:depth": 1.5375610940698836e-12,
+              "depth:base": 2.5075657696105313e-12,
+              "depth:bands": 5.656696031725028e-12,
+              "depth:edge": 1.5375610940698836e-12,
+              "depth:depth": 5.384443758915669e-12
+            },
+            "gradient_rms": {
+              "base": 3.299547733804052e-06,
+              "bands": 5.965349881664039e-06,
+              "edge": 2.8895080982102153e-06,
+              "depth": 2.3204404234790577e-06
+            },
+            "case_name": "hippocampus_mni_s15_L",
+            "bands_over_base": 1.8079295597238052,
+            "edge_over_base": 0.8643432196915233,
+            "depth_over_base": 0.6859210348052422
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 8.909544976787309e-12,
+              "base:bands": 3.672997669901257e-12,
+              "base:edge": 1.7186129906351932e-12,
+              "base:depth": 2.0361828542703186e-12,
+              "bands:base": 3.672997669901257e-12,
+              "bands:bands": 2.67965580280638e-11,
+              "bands:edge": 9.746553390754809e-12,
+              "bands:depth": 4.291747512930044e-12,
+              "edge:base": 1.7186129906351932e-12,
+              "edge:bands": 9.746553390754809e-12,
+              "edge:edge": 8.276557390829442e-12,
+              "edge:depth": 1.5326666802026323e-12,
+              "depth:base": 2.0361828542703186e-12,
+              "depth:bands": 4.291747512930044e-12,
+              "depth:edge": 1.5326666802026323e-12,
+              "depth:depth": 3.918608926928302e-12
+            },
+            "gradient_rms": {
+              "base": 2.984886091090799e-06,
+              "bands": 5.176539194100997e-06,
+              "edge": 2.876900657101222e-06,
+              "depth": 1.9795476571500627e-06
+            },
+            "case_name": "hippocampus_mni_s15_R",
+            "bands_over_base": 1.7342501643703523,
+            "edge_over_base": 0.9512301936032496,
+            "depth_over_base": 0.6453727328849724
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 9.747734737441949e-12,
+              "base:bands": 3.887268111568698e-12,
+              "base:edge": 1.4103958886207968e-12,
+              "base:depth": 2.3049179752321347e-12,
+              "bands:base": 3.887268111568698e-12,
+              "bands:bands": 3.222296734994856e-11,
+              "bands:edge": 9.258026636982386e-12,
+              "bands:depth": 5.2086390756045375e-12,
+              "edge:base": 1.4103958886207968e-12,
+              "edge:bands": 9.258026636982386e-12,
+              "edge:edge": 7.28523491533295e-12,
+              "edge:depth": 1.4104298241487956e-12,
+              "depth:base": 2.3049179752321347e-12,
+              "depth:bands": 5.2086390756045375e-12,
+              "depth:edge": 1.4104298241487956e-12,
+              "depth:depth": 6.9706766400723374e-12
+            },
+            "gradient_rms": {
+              "base": 3.122136245816628e-06,
+              "bands": 5.6765277547060895e-06,
+              "edge": 2.6991174326681212e-06,
+              "depth": 2.6402039012304216e-06
+            },
+            "case_name": "hippocampus_mni_s18_L",
+            "bands_over_base": 1.8181550412196483,
+            "edge_over_base": 0.8534362847725425,
+            "depth_over_base": 0.8257606769827919
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 8.657573789816464e-12,
+              "base:bands": 3.6248517208681275e-12,
+              "base:edge": 1.6250336579842761e-12,
+              "base:depth": 1.9818326667253583e-12,
+              "bands:base": 3.6248517208681275e-12,
+              "bands:bands": 2.9927942069019053e-11,
+              "bands:edge": 1.0076451825713484e-11,
+              "bands:depth": 4.822430649253917e-12,
+              "edge:base": 1.6250336579842761e-12,
+              "edge:bands": 1.0076451825713484e-11,
+              "edge:edge": 8.449393962273177e-12,
+              "edge:depth": 1.6089835627036697e-12,
+              "depth:base": 1.9818326667253583e-12,
+              "depth:bands": 4.822430649253917e-12,
+              "depth:edge": 1.6089835627036697e-12,
+              "depth:depth": 3.6193559000557984e-12
+            },
+            "gradient_rms": {
+              "base": 2.9423755351444287e-06,
+              "bands": 5.470643661308882e-06,
+              "edge": 2.906784127222587e-06,
+              "depth": 1.9024604858066825e-06
+            },
+            "case_name": "hippocampus_mni_s18_R",
+            "bands_over_base": 1.8592608577546343,
+            "edge_over_base": 0.9746364333979614,
+            "depth_over_base": 0.6290374948997883
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 1.1051852141785723e-11,
+              "base:bands": 4.1742902537333926e-12,
+              "base:edge": 1.7026843259979052e-12,
+              "base:depth": 2.5379221293975185e-12,
+              "bands:base": 4.1742902537333926e-12,
+              "bands:bands": 3.037456050569709e-11,
+              "bands:edge": 1.0032689956585017e-11,
+              "bands:depth": 5.169958211537207e-12,
+              "edge:base": 1.7026843259979052e-12,
+              "edge:bands": 1.0032689956585017e-11,
+              "edge:edge": 8.11840525360985e-12,
+              "edge:depth": 1.610992914589937e-12,
+              "depth:base": 2.5379221293975185e-12,
+              "depth:bands": 5.169958211537207e-12,
+              "depth:edge": 1.610992914589937e-12,
+              "depth:depth": 4.277613419728654e-12
+            },
+            "gradient_rms": {
+              "base": 3.3244326044884297e-06,
+              "bands": 5.511312049385073e-06,
+              "edge": 2.8492815328797978e-06,
+              "depth": 2.0682392075697275e-06
+            },
+            "case_name": "hippocampus_mni_s22_L",
+            "bands_over_base": 1.657820357658646,
+            "edge_over_base": 0.8467995927971006,
+            "depth_over_base": 0.6077402387630791
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 9.378183993269396e-12,
+              "base:bands": 3.423161060167601e-12,
+              "base:edge": 1.5929126507413516e-12,
+              "base:depth": 2.106826432063391e-12,
+              "bands:base": 3.423161060167601e-12,
+              "bands:bands": 2.679212060541225e-11,
+              "bands:edge": 9.825315040734584e-12,
+              "bands:depth": 4.327140208648661e-12,
+              "edge:base": 1.5929126507413516e-12,
+              "edge:bands": 9.825315040734584e-12,
+              "edge:edge": 8.378710919521026e-12,
+              "edge:depth": 1.5580796201841718e-12,
+              "depth:base": 2.106826432063391e-12,
+              "depth:bands": 4.327140208648661e-12,
+              "depth:edge": 1.5580796201841718e-12,
+              "depth:depth": 3.21260292673875e-12
+            },
+            "gradient_rms": {
+              "base": 3.0623820782634875e-06,
+              "bands": 5.17611056734806e-06,
+              "edge": 2.89460030393162e-06,
+              "depth": 1.792373545536407e-06
+            },
+            "case_name": "hippocampus_mni_s22_R",
+            "bands_over_base": 1.6902236347605437,
+            "edge_over_base": 0.9341778786176616,
+            "depth_over_base": 0.5711467529715234
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 1.1491699085375284e-11,
+              "base:bands": 4.133427541214152e-12,
+              "base:edge": 1.6482006731655119e-12,
+              "base:depth": 2.489334259558884e-12,
+              "bands:base": 4.133427541214152e-12,
+              "bands:bands": 3.0260821626271195e-11,
+              "bands:edge": 9.72881844529816e-12,
+              "bands:depth": 5.01779737552277e-12,
+              "edge:base": 1.6482006731655119e-12,
+              "edge:bands": 9.72881844529816e-12,
+              "edge:edge": 7.867295356844828e-12,
+              "edge:depth": 1.5217767367417534e-12,
+              "depth:base": 2.489334259558884e-12,
+              "depth:bands": 5.01779737552277e-12,
+              "depth:edge": 1.5217767367417534e-12,
+              "depth:depth": 4.194989407929617e-12
+            },
+            "gradient_rms": {
+              "base": 3.3899408675337223e-06,
+              "bands": 5.500983696237537e-06,
+              "edge": 2.804869935816067e-06,
+              "depth": 2.048167329084618e-06
+            },
+            "case_name": "hippocampus_mni_s24_L",
+            "bands_over_base": 1.6227373606784057,
+            "edge_over_base": 0.8179512759210804,
+            "depth_over_base": 0.5909926789583685
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 9.246031891507744e-12,
+              "base:bands": 3.6349491125409195e-12,
+              "base:edge": 1.5260136904116095e-12,
+              "base:depth": 2.0555055053883553e-12,
+              "bands:base": 3.6349491125409195e-12,
+              "bands:bands": 2.8665625428914154e-11,
+              "bands:edge": 9.570894424215659e-12,
+              "bands:depth": 4.681870776485075e-12,
+              "edge:base": 1.5260136904116095e-12,
+              "edge:bands": 9.570894424215659e-12,
+              "edge:edge": 7.854789735306511e-12,
+              "edge:depth": 1.5479301868071005e-12,
+              "depth:base": 2.0555055053883553e-12,
+              "depth:bands": 4.681870776485075e-12,
+              "depth:edge": 1.5479301868071005e-12,
+              "depth:depth": 2.72775530461844e-12
+            },
+            "gradient_rms": {
+              "base": 3.0407288421540886e-06,
+              "bands": 5.3540288969069035e-06,
+              "edge": 2.802639779798059e-06,
+              "depth": 1.6515917487740243e-06
+            },
+            "case_name": "hippocampus_mni_s24_R",
+            "bands_over_base": 1.7607715698562736,
+            "edge_over_base": 0.9101180664036543,
+            "depth_over_base": 0.5297565311190562
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 1.2430936488505573e-11,
+              "base:bands": 3.963800641881843e-12,
+              "base:edge": 1.7770664497221422e-12,
+              "base:depth": 2.6622510619633832e-12,
+              "bands:base": 3.963800641881843e-12,
+              "bands:bands": 2.907212665048675e-11,
+              "bands:edge": 1.0334616842855304e-11,
+              "bands:depth": 4.904208983358416e-12,
+              "edge:base": 1.7770664497221422e-12,
+              "edge:bands": 1.0334616842855304e-11,
+              "edge:edge": 8.594043879317503e-12,
+              "edge:depth": 1.6480392354620288e-12,
+              "depth:base": 2.6622510619633832e-12,
+              "depth:bands": 4.904208983358416e-12,
+              "depth:edge": 1.6480392354620288e-12,
+              "depth:depth": 4.471935842464969e-12
+            },
+            "gradient_rms": {
+              "base": 3.5257533221292683e-06,
+              "bands": 5.3918574397406645e-06,
+              "edge": 2.931559973685939e-06,
+              "depth": 2.1146952126642198e-06
+            },
+            "case_name": "hippocampus_mni_s25_L",
+            "bands_over_base": 1.5292781278539422,
+            "edge_over_base": 0.8230265853305819,
+            "depth_over_base": 0.587449460773616
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 9.411164555994667e-12,
+              "base:bands": 3.636524458297541e-12,
+              "base:edge": 1.6834903696777426e-12,
+              "base:depth": 2.0012745800823684e-12,
+              "bands:base": 3.636524458297541e-12,
+              "bands:bands": 2.8268356405680706e-11,
+              "bands:edge": 1.0357697338703176e-11,
+              "bands:depth": 4.514141664635485e-12,
+              "edge:base": 1.6834903696777426e-12,
+              "edge:bands": 1.0357697338703176e-11,
+              "edge:edge": 8.863227859978728e-12,
+              "edge:depth": 1.6377825744900987e-12,
+              "depth:base": 2.0012745800823684e-12,
+              "depth:bands": 4.514141664635485e-12,
+              "depth:edge": 1.6377825744900987e-12,
+              "depth:depth": 3.649485661588736e-12
+            },
+            "gradient_rms": {
+              "base": 3.0677621413653743e-06,
+              "bands": 5.316799451331666e-06,
+              "edge": 2.977117374236147e-06,
+              "depth": 1.910362704197487e-06
+            },
+            "case_name": "hippocampus_mni_s25_R",
+            "bands_over_base": 1.7331198464315454,
+            "edge_over_base": 0.9584802182041393,
+            "depth_over_base": 0.6068769625923759
+          }
+        ],
+        "anchor_model_sha256": "33c374a069f3f77689962c2eb091b760ab13c2055eb63c5d433a467eb8425af0",
+        "target_ratio": 0.05,
+        "p95_cap": 0.75,
+        "scope": "All training patients, no augmentation or validation; gradients with respect to detached FP32 logits",
+        "config_sha256": "62f741c76b736132ba1f5b063a9d0e241368fbcc3cf0b48808826a8d4e079dcd",
+        "anchor_successful_updates": 102,
+        "anchor_training_attempts": 102,
+        "charged_flops": 867806754372
+      },
+      "training_validation_gap_pp": 17.437617382747163,
+      "old_winning_baseline": {
+        "validation_percent": 70.08334593194158,
+        "training_percent": 73.93952272295873,
+        "union_percent": 82.50973054446155,
+        "per_subfield_percent": {
+          "CA1_3_hard_dice": 67.31168712537348,
+          "subiculum_hard_dice": 69.16109811317142,
+          "CA4_DG_hard_dice": 73.77725255727981
+        },
+        "fn": 7300,
+        "fp": 9195,
+        "swaps": 6581,
+        "updates": 409,
+        "optimization_flops": 53217341798671,
+        "archive_manifest_sha256": "a3101e579592192798bbe98d4280276cfbe952a1d3a551d307f4cc7fd0698232"
+      },
+      "absolute_gain_vs_old_baseline_pp": 3.6673439282725013,
+      "prior_plain_baseline": {
+        "metrics": {
+          "validation_percent": 73.80486797844125,
+          "training_percent": 89.35640764073176,
+          "union_percent": 85.63724639471167,
+          "per_subfield_percent": {
+            "CA1_3_hard_dice": 75.205373931314,
+            "subiculum_hard_dice": 74.65983769200504,
+            "CA4_DG_hard_dice": 71.54939231200468
+          },
+          "fn": 5850,
+          "fp": 7645,
+          "swaps": 5178,
+          "updates": 409,
+          "optimization_flops": 53212215490831,
+          "archive_manifest_sha256": "2aff60ced1a86c99bd5312fb27f08b4a371a1d20c7a0ef48a30631beac739716"
+        },
+        "manifest_sha256": "2aff60ced1a86c99bd5312fb27f08b4a371a1d20c7a0ef48a30631beac739716",
+        "archive": "/Users/filippofocaccia/Desktop/hippo/reports/mni_unetr_plain_subfields53t_20261109/runs/MNI_unetr_plain_dice_f1s0"
+      },
+      "absolute_gain_vs_prior_plain_baseline_pp": -0.05417811822717056,
+      "baseline": {
+        "validation_percent": 73.8033808178525,
+        "training_percent": 91.09646917949172,
+        "union_percent": 85.21766909307381,
+        "per_subfield_percent": {
+          "CA1_3_hard_dice": 74.69581784379703,
+          "subiculum_hard_dice": 73.9473116595707,
+          "CA4_DG_hard_dice": 72.76701295018981
+        },
+        "fn": 6010,
+        "fp": 7886,
+        "swaps": 5157,
+        "updates": 409,
+        "optimization_flops": 53212215490831,
+        "archive_manifest_sha256": "8680f244081156d14099f21120da1d7a0bb427e82e521b56e85ed09cfcf71f63"
+      },
+      "gain_pp": -0.0526909576384238,
+      "prefix_replay": {
+        "shared_checks": [
+          21,
+          41,
+          62,
+          82
+        ],
+        "maximum_training_dice_error": 0.0
+      },
+      "training_gain_pp": 0.09183806346952395,
+      "baseline_training_validation_gap_pp": 17.29308836163922,
+      "union_gain_pp": 0.2128388053328223,
+      "subfield_gain_pp": {
+        "CA1_3_hard_dice": 0.336906079832076,
+        "subiculum_hard_dice": -0.12507189728414403,
+        "CA4_DG_hard_dice": -0.36990705546315894
+      },
+      "error_delta": {
+        "fn": 48,
+        "fp": -294,
+        "swaps": 19
+      },
+      "old_recipe_constraint_gain_pp": null,
+      "constraint_interaction_pp": null
+    },
+    {
+      "id": "MNI_unetr_plain_ce025_dice_bands_edge_f1s0",
+      "recipe": "plain_ce025",
+      "role": "constraint",
+      "kind": "conventional",
+      "dataset": "MNI",
+      "model": "unetr_vit_b16",
+      "arm": "dice_bands_edge",
+      "protocol": "plain_ce025_dice_bands_edge",
+      "seed": 0,
+      "fold": 1,
+      "augmentation": "none",
+      "dropout_rate": 0.0,
+      "pilot": true,
+      "candidate": "plain_ce025_bands_edge",
+      "baseline_id": "MNI_unetr_plain_ce025_dice_f1s0",
+      "current": {
+        "validation_percent": 73.64212131368416,
+        "training_percent": 91.15728019680172,
+        "union_percent": 85.42228425175828,
+        "per_subfield_percent": {
+          "CA1_3_hard_dice": 74.75778351099302,
+          "subiculum_hard_dice": 73.30097511085182,
+          "CA4_DG_hard_dice": 72.8676053192076
+        },
+        "fn": 6031,
+        "fp": 7639,
+        "swaps": 5308,
+        "updates": 409,
+        "optimization_flops": 53257812691926,
+        "archive_manifest_sha256": "e3f7e3d20962a1cfa1c3ade2b131b9c64aa0833c03ba0cac973e2089fd38c453"
+      },
+      "calibration": {
+        "status": "complete",
+        "weights": {
+          "bands": 0.029211208442682372,
+          "edge": 0.05821468921949866
+        },
+        "statistics": {
+          "bands": {
+            "median_raw_ratio": 1.7116717405960444,
+            "p95_raw_ratio": 1.841352188528636,
+            "weighted_median_ratio": 0.05,
+            "weighted_p95_ratio": 0.05378812259549935
+          },
+          "edge": {
+            "median_raw_ratio": 0.8588897522320329,
+            "p95_raw_ratio": 0.9754042610895782,
+            "weighted_median_ratio": 0.05,
+            "weighted_p95_ratio": 0.05678285592270453
+          }
+        },
+        "cases": [
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 1.1927080850737681e-11,
+              "base:bands": 4.325852176467748e-12,
+              "base:edge": 1.7388529852113699e-12,
+              "bands:base": 4.325852176467748e-12,
+              "bands:bands": 3.038169368863031e-11,
+              "bands:edge": 1.0084606760774051e-11,
+              "edge:base": 1.7388529852113699e-12,
+              "edge:bands": 1.0084606760774051e-11,
+              "edge:edge": 8.103290607963665e-12
+            },
+            "gradient_rms": {
+              "base": 3.4535606047581793e-06,
+              "bands": 5.511959151574901e-06,
+              "edge": 2.846627936342167e-06
+            },
+            "case_name": "hippocampus_mni_s03_L",
+            "bands_over_base": 1.5960221297349586,
+            "edge_over_base": 0.8147958153500204
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 9.872956618917073e-12,
+              "base:bands": 3.986551540269279e-12,
+              "base:edge": 1.41184546692541e-12,
+              "bands:base": 3.986551540269279e-12,
+              "bands:bands": 3.2160302199102375e-11,
+              "bands:edge": 9.132744907547341e-12,
+              "edge:base": 1.41184546692541e-12,
+              "edge:bands": 9.132744907547341e-12,
+              "edge:edge": 6.816537785614418e-12
+            },
+            "gradient_rms": {
+              "base": 3.1421261303323064e-06,
+              "bands": 5.671005395792035e-06,
+              "edge": 2.610850012086948e-06
+            },
+            "case_name": "hippocampus_mni_s03_R",
+            "bands_over_base": 1.804830602135083,
+            "edge_over_base": 0.8201747838861968
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 1.4185146113288027e-11,
+              "base:bands": 3.956139235650191e-12,
+              "base:edge": 1.775345495613756e-12,
+              "bands:base": 3.956139235650191e-12,
+              "bands:bands": 3.363295406066946e-11,
+              "bands:edge": 1.0749011056243596e-11,
+              "edge:base": 1.775345495613756e-12,
+              "edge:bands": 1.0749011056243596e-11,
+              "edge:edge": 8.947469501419114e-12
+            },
+            "gradient_rms": {
+              "base": 3.7663173144715286e-06,
+              "bands": 5.799392559628074e-06,
+              "edge": 2.9912321042371678e-06
+            },
+            "case_name": "hippocampus_mni_s04_L",
+            "bands_over_base": 1.5398045558574547,
+            "edge_over_base": 0.7870308550294225
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 9.580791021646107e-12,
+              "base:bands": 3.309207291871119e-12,
+              "base:edge": 1.8189216409100761e-12,
+              "bands:base": 3.309207291871119e-12,
+              "bands:bands": 2.2870701860133735e-11,
+              "bands:edge": 9.909736226054733e-12,
+              "edge:base": 1.8189216409100761e-12,
+              "edge:bands": 9.909736226054733e-12,
+              "edge:edge": 8.720729867406352e-12
+            },
+            "gradient_rms": {
+              "base": 3.095285289217475e-06,
+              "bands": 4.782332261578417e-06,
+              "edge": 2.953088191606602e-06
+            },
+            "case_name": "hippocampus_mni_s04_R",
+            "bands_over_base": 1.54503763457211,
+            "edge_over_base": 0.9436357489313962
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 1.4806940396017154e-11,
+              "base:bands": 4.038664801891967e-12,
+              "base:edge": 1.5722426615835672e-12,
+              "bands:base": 4.038664801891967e-12,
+              "bands:bands": 3.192771394489036e-11,
+              "bands:edge": 9.932766414921801e-12,
+              "edge:base": 1.5722426615835672e-12,
+              "edge:bands": 9.932766414921801e-12,
+              "edge:edge": 7.805625937273852e-12
+            },
+            "gradient_rms": {
+              "base": 3.847978741627499e-06,
+              "bands": 5.65046139221306e-06,
+              "edge": 2.7938550315422333e-06
+            },
+            "case_name": "hippocampus_mni_s07_L",
+            "bands_over_base": 1.4684232350574793,
+            "edge_over_base": 0.7196897696178126
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 1.072212544445117e-11,
+              "base:bands": 3.650608461358562e-12,
+              "base:edge": 1.594145605451902e-12,
+              "bands:base": 3.650608461358562e-12,
+              "bands:bands": 2.6144947318229583e-11,
+              "bands:edge": 9.634223974153144e-12,
+              "edge:base": 1.594145605451902e-12,
+              "edge:bands": 9.634223974153144e-12,
+              "edge:edge": 7.810471019942256e-12
+            },
+            "gradient_rms": {
+              "base": 3.27446567312152e-06,
+              "bands": 5.1132130131874595e-06,
+              "edge": 2.794721993319238e-06
+            },
+            "case_name": "hippocampus_mni_s07_R",
+            "bands_over_base": 1.5615411867527924,
+            "edge_over_base": 0.8442647729095325
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 1.3647983784781381e-11,
+              "base:bands": 4.110373933580158e-12,
+              "base:edge": 1.6704734383948816e-12,
+              "bands:base": 4.110373933580158e-12,
+              "bands:bands": 2.889084110835327e-11,
+              "bands:edge": 9.76448956413467e-12,
+              "edge:base": 1.6704734383948816e-12,
+              "edge:bands": 9.76448956413467e-12,
+              "edge:edge": 8.011466490209784e-12
+            },
+            "gradient_rms": {
+              "base": 3.694317769870559e-06,
+              "bands": 5.375020103065036e-06,
+              "edge": 2.830453407178748e-06
+            },
+            "case_name": "hippocampus_mni_s09_L",
+            "bands_over_base": 1.4549425463347092,
+            "edge_over_base": 0.7588381252480055
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 8.548267996233427e-12,
+              "base:bands": 3.821385916036313e-12,
+              "base:edge": 1.6859178983419376e-12,
+              "bands:base": 3.821385916036313e-12,
+              "bands:bands": 2.6513274214989835e-11,
+              "bands:edge": 9.665583437790115e-12,
+              "edge:base": 1.6859178983419376e-12,
+              "edge:bands": 9.665583437790115e-12,
+              "edge:edge": 8.207360138734465e-12
+            },
+            "gradient_rms": {
+              "base": 2.923742122047262e-06,
+              "bands": 5.149104214811528e-06,
+              "edge": 2.864849060375514e-06
+            },
+            "case_name": "hippocampus_mni_s09_R",
+            "bands_over_base": 1.7611348743732649,
+            "edge_over_base": 0.9660617871936087
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 8.972296863807294e-12,
+              "base:bands": 3.670386477389043e-12,
+              "base:edge": 1.6272397925648496e-12,
+              "bands:base": 3.670386477389043e-12,
+              "bands:bands": 3.039013485306441e-11,
+              "bands:edge": 9.690741265000469e-12,
+              "edge:base": 1.6272397925648496e-12,
+              "edge:bands": 9.690741265000469e-12,
+              "edge:edge": 8.069111351316494e-12
+            },
+            "gradient_rms": {
+              "base": 2.995379252082663e-06,
+              "bands": 5.512724812020314e-06,
+              "edge": 2.840618128386231e-06
+            },
+            "case_name": "hippocampus_mni_s12_L",
+            "bands_over_base": 1.8404096269904255,
+            "edge_over_base": 0.9358802842744296
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 7.972511539833249e-12,
+              "base:bands": 3.556890892930653e-12,
+              "base:edge": 1.5728948091903172e-12,
+              "bands:base": 3.556890892930653e-12,
+              "bands:bands": 2.6758642177049374e-11,
+              "bands:edge": 9.596460778804605e-12,
+              "edge:base": 1.5728948091903172e-12,
+              "edge:bands": 9.596460778804605e-12,
+              "edge:edge": 8.039790187763796e-12
+            },
+            "gradient_rms": {
+              "base": 2.8235636241872164e-06,
+              "bands": 5.172875619715727e-06,
+              "edge": 2.8354523779749495e-06
+            },
+            "case_name": "hippocampus_mni_s12_R",
+            "bands_over_base": 1.8320379166964151,
+            "edge_over_base": 0.9899929872302988
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 1.0887015247651455e-11,
+              "base:bands": 4.4218699882248025e-12,
+              "base:edge": 1.7551754320777047e-12,
+              "bands:base": 4.4218699882248025e-12,
+              "bands:bands": 3.5585399210669166e-11,
+              "bands:edge": 1.059179653706277e-11,
+              "edge:base": 1.7551754320777047e-12,
+              "edge:bands": 1.059179653706277e-11,
+              "edge:edge": 8.349257049622416e-12
+            },
+            "gradient_rms": {
+              "base": 3.299547733804052e-06,
+              "bands": 5.965349881664039e-06,
+              "edge": 2.8895080982102153e-06
+            },
+            "case_name": "hippocampus_mni_s15_L",
+            "bands_over_base": 1.8079295597238052,
+            "edge_over_base": 0.8643432196915233
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 8.909544976787309e-12,
+              "base:bands": 3.672997669901257e-12,
+              "base:edge": 1.7186129906351932e-12,
+              "bands:base": 3.672997669901257e-12,
+              "bands:bands": 2.67965580280638e-11,
+              "bands:edge": 9.746553390754809e-12,
+              "edge:base": 1.7186129906351932e-12,
+              "edge:bands": 9.746553390754809e-12,
+              "edge:edge": 8.276557390829442e-12
+            },
+            "gradient_rms": {
+              "base": 2.984886091090799e-06,
+              "bands": 5.176539194100997e-06,
+              "edge": 2.876900657101222e-06
+            },
+            "case_name": "hippocampus_mni_s15_R",
+            "bands_over_base": 1.7342501643703523,
+            "edge_over_base": 0.9512301936032496
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 9.747734737441949e-12,
+              "base:bands": 3.887268111568698e-12,
+              "base:edge": 1.4103958886207968e-12,
+              "bands:base": 3.887268111568698e-12,
+              "bands:bands": 3.222296734994856e-11,
+              "bands:edge": 9.258026636982386e-12,
+              "edge:base": 1.4103958886207968e-12,
+              "edge:bands": 9.258026636982386e-12,
+              "edge:edge": 7.28523491533295e-12
+            },
+            "gradient_rms": {
+              "base": 3.122136245816628e-06,
+              "bands": 5.6765277547060895e-06,
+              "edge": 2.6991174326681212e-06
+            },
+            "case_name": "hippocampus_mni_s18_L",
+            "bands_over_base": 1.8181550412196483,
+            "edge_over_base": 0.8534362847725425
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 8.657573789816464e-12,
+              "base:bands": 3.6248517208681275e-12,
+              "base:edge": 1.6250336579842761e-12,
+              "bands:base": 3.6248517208681275e-12,
+              "bands:bands": 2.9927942069019053e-11,
+              "bands:edge": 1.0076451825713484e-11,
+              "edge:base": 1.6250336579842761e-12,
+              "edge:bands": 1.0076451825713484e-11,
+              "edge:edge": 8.449393962273177e-12
+            },
+            "gradient_rms": {
+              "base": 2.9423755351444287e-06,
+              "bands": 5.470643661308882e-06,
+              "edge": 2.906784127222587e-06
+            },
+            "case_name": "hippocampus_mni_s18_R",
+            "bands_over_base": 1.8592608577546343,
+            "edge_over_base": 0.9746364333979614
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 1.1051852141785723e-11,
+              "base:bands": 4.1742902537333926e-12,
+              "base:edge": 1.7026843259979052e-12,
+              "bands:base": 4.1742902537333926e-12,
+              "bands:bands": 3.037456050569709e-11,
+              "bands:edge": 1.0032689956585017e-11,
+              "edge:base": 1.7026843259979052e-12,
+              "edge:bands": 1.0032689956585017e-11,
+              "edge:edge": 8.11840525360985e-12
+            },
+            "gradient_rms": {
+              "base": 3.3244326044884297e-06,
+              "bands": 5.511312049385073e-06,
+              "edge": 2.8492815328797978e-06
+            },
+            "case_name": "hippocampus_mni_s22_L",
+            "bands_over_base": 1.657820357658646,
+            "edge_over_base": 0.8467995927971006
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 9.378183993269396e-12,
+              "base:bands": 3.423161060167601e-12,
+              "base:edge": 1.5929126507413516e-12,
+              "bands:base": 3.423161060167601e-12,
+              "bands:bands": 2.679212060541225e-11,
+              "bands:edge": 9.825315040734584e-12,
+              "edge:base": 1.5929126507413516e-12,
+              "edge:bands": 9.825315040734584e-12,
+              "edge:edge": 8.378710919521026e-12
+            },
+            "gradient_rms": {
+              "base": 3.0623820782634875e-06,
+              "bands": 5.17611056734806e-06,
+              "edge": 2.89460030393162e-06
+            },
+            "case_name": "hippocampus_mni_s22_R",
+            "bands_over_base": 1.6902236347605437,
+            "edge_over_base": 0.9341778786176616
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 1.1491699085375284e-11,
+              "base:bands": 4.133427541214152e-12,
+              "base:edge": 1.6482006731655119e-12,
+              "bands:base": 4.133427541214152e-12,
+              "bands:bands": 3.0260821626271195e-11,
+              "bands:edge": 9.72881844529816e-12,
+              "edge:base": 1.6482006731655119e-12,
+              "edge:bands": 9.72881844529816e-12,
+              "edge:edge": 7.867295356844828e-12
+            },
+            "gradient_rms": {
+              "base": 3.3899408675337223e-06,
+              "bands": 5.500983696237537e-06,
+              "edge": 2.804869935816067e-06
+            },
+            "case_name": "hippocampus_mni_s24_L",
+            "bands_over_base": 1.6227373606784057,
+            "edge_over_base": 0.8179512759210804
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 9.246031891507744e-12,
+              "base:bands": 3.6349491125409195e-12,
+              "base:edge": 1.5260136904116095e-12,
+              "bands:base": 3.6349491125409195e-12,
+              "bands:bands": 2.8665625428914154e-11,
+              "bands:edge": 9.570894424215659e-12,
+              "edge:base": 1.5260136904116095e-12,
+              "edge:bands": 9.570894424215659e-12,
+              "edge:edge": 7.854789735306511e-12
+            },
+            "gradient_rms": {
+              "base": 3.0407288421540886e-06,
+              "bands": 5.3540288969069035e-06,
+              "edge": 2.802639779798059e-06
+            },
+            "case_name": "hippocampus_mni_s24_R",
+            "bands_over_base": 1.7607715698562736,
+            "edge_over_base": 0.9101180664036543
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 1.2430936488505573e-11,
+              "base:bands": 3.963800641881843e-12,
+              "base:edge": 1.7770664497221422e-12,
+              "bands:base": 3.963800641881843e-12,
+              "bands:bands": 2.907212665048675e-11,
+              "bands:edge": 1.0334616842855304e-11,
+              "edge:base": 1.7770664497221422e-12,
+              "edge:bands": 1.0334616842855304e-11,
+              "edge:edge": 8.594043879317503e-12
+            },
+            "gradient_rms": {
+              "base": 3.5257533221292683e-06,
+              "bands": 5.3918574397406645e-06,
+              "edge": 2.931559973685939e-06
+            },
+            "case_name": "hippocampus_mni_s25_L",
+            "bands_over_base": 1.5292781278539422,
+            "edge_over_base": 0.8230265853305819
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 9.411164555994667e-12,
+              "base:bands": 3.636524458297541e-12,
+              "base:edge": 1.6834903696777426e-12,
+              "bands:base": 3.636524458297541e-12,
+              "bands:bands": 2.8268356405680706e-11,
+              "bands:edge": 1.0357697338703176e-11,
+              "edge:base": 1.6834903696777426e-12,
+              "edge:bands": 1.0357697338703176e-11,
+              "edge:edge": 8.863227859978728e-12
+            },
+            "gradient_rms": {
+              "base": 3.0677621413653743e-06,
+              "bands": 5.316799451331666e-06,
+              "edge": 2.977117374236147e-06
+            },
+            "case_name": "hippocampus_mni_s25_R",
+            "bands_over_base": 1.7331198464315454,
+            "edge_over_base": 0.9584802182041393
+          }
+        ],
+        "anchor_model_sha256": "33c374a069f3f77689962c2eb091b760ab13c2055eb63c5d433a467eb8425af0",
+        "target_ratio": 0.05,
+        "p95_cap": 0.75,
+        "scope": "All training patients, no augmentation or validation; gradients with respect to detached FP32 logits",
+        "config_sha256": "b94891f11bc708a51f10c114298ef80a4cc576aaeddb17a4247a6b6af96f307b",
+        "anchor_successful_updates": 102,
+        "anchor_training_attempts": 102,
+        "charged_flops": 867324409432
+      },
+      "training_validation_gap_pp": 17.515158883117564,
+      "old_winning_baseline": {
+        "validation_percent": 70.08334593194158,
+        "training_percent": 73.93952272295873,
+        "union_percent": 82.50973054446155,
+        "per_subfield_percent": {
+          "CA1_3_hard_dice": 67.31168712537348,
+          "subiculum_hard_dice": 69.16109811317142,
+          "CA4_DG_hard_dice": 73.77725255727981
+        },
+        "fn": 7300,
+        "fp": 9195,
+        "swaps": 6581,
+        "updates": 409,
+        "optimization_flops": 53217341798671,
+        "archive_manifest_sha256": "a3101e579592192798bbe98d4280276cfbe952a1d3a551d307f4cc7fd0698232"
+      },
+      "absolute_gain_vs_old_baseline_pp": 3.558775381742578,
+      "prior_plain_baseline": {
+        "metrics": {
+          "validation_percent": 73.80486797844125,
+          "training_percent": 89.35640764073176,
+          "union_percent": 85.63724639471167,
+          "per_subfield_percent": {
+            "CA1_3_hard_dice": 75.205373931314,
+            "subiculum_hard_dice": 74.65983769200504,
+            "CA4_DG_hard_dice": 71.54939231200468
+          },
+          "fn": 5850,
+          "fp": 7645,
+          "swaps": 5178,
+          "updates": 409,
+          "optimization_flops": 53212215490831,
+          "archive_manifest_sha256": "2aff60ced1a86c99bd5312fb27f08b4a371a1d20c7a0ef48a30631beac739716"
+        },
+        "manifest_sha256": "2aff60ced1a86c99bd5312fb27f08b4a371a1d20c7a0ef48a30631beac739716",
+        "archive": "/Users/filippofocaccia/Desktop/hippo/reports/mni_unetr_plain_subfields53t_20261109/runs/MNI_unetr_plain_dice_f1s0"
+      },
+      "absolute_gain_vs_prior_plain_baseline_pp": -0.1627466647570941,
+      "baseline": {
+        "validation_percent": 73.8033808178525,
+        "training_percent": 91.09646917949172,
+        "union_percent": 85.21766909307381,
+        "per_subfield_percent": {
+          "CA1_3_hard_dice": 74.69581784379703,
+          "subiculum_hard_dice": 73.9473116595707,
+          "CA4_DG_hard_dice": 72.76701295018981
+        },
+        "fn": 6010,
+        "fp": 7886,
+        "swaps": 5157,
+        "updates": 409,
+        "optimization_flops": 53212215490831,
+        "archive_manifest_sha256": "8680f244081156d14099f21120da1d7a0bb427e82e521b56e85ed09cfcf71f63"
+      },
+      "gain_pp": -0.161259504168354,
+      "prefix_replay": {
+        "shared_checks": [
+          21,
+          41,
+          62,
+          82
+        ],
+        "maximum_training_dice_error": 0.0
+      },
+      "training_gain_pp": 0.0608110173100016,
+      "baseline_training_validation_gap_pp": 17.29308836163922,
+      "union_gain_pp": 0.20461515868447577,
+      "subfield_gain_pp": {
+        "CA1_3_hard_dice": 0.061965667195991614,
+        "subiculum_hard_dice": -0.6463365487188781,
+        "CA4_DG_hard_dice": 0.10059236901778945
+      },
+      "error_delta": {
+        "fn": 21,
+        "fp": -247,
+        "swaps": 151
+      },
+      "old_recipe_constraint_gain_pp": -0.28826294073813585,
+      "constraint_interaction_pp": 0.12700343656978186
+    }
+  ],
+  "archived_runs": [
+    {
+      "id": "MNI_unetr_plain_ce025_dice_f1s0",
+      "recipe": "plain_ce025",
+      "role": "baseline",
+      "kind": "conventional",
+      "dataset": "MNI",
+      "model": "unetr_vit_b16",
+      "arm": "dice",
+      "protocol": "plain_ce025_dice",
+      "seed": 0,
+      "fold": 1,
+      "augmentation": "none",
+      "dropout_rate": 0.0,
+      "pilot": true,
+      "current": {
+        "validation_percent": 73.8033808178525,
+        "training_percent": 91.09646917949172,
+        "union_percent": 85.21766909307381,
+        "per_subfield_percent": {
+          "CA1_3_hard_dice": 74.69581784379703,
+          "subiculum_hard_dice": 73.9473116595707,
+          "CA4_DG_hard_dice": 72.76701295018981
+        },
+        "fn": 6010,
+        "fp": 7886,
+        "swaps": 5157,
+        "updates": 409,
+        "optimization_flops": 53212215490831,
+        "archive_manifest_sha256": "8680f244081156d14099f21120da1d7a0bb427e82e521b56e85ed09cfcf71f63"
+      },
+      "calibration": null,
+      "training_validation_gap_pp": 17.29308836163922,
+      "old_winning_baseline": {
+        "validation_percent": 70.08334593194158,
+        "training_percent": 73.93952272295873,
+        "union_percent": 82.50973054446155,
+        "per_subfield_percent": {
+          "CA1_3_hard_dice": 67.31168712537348,
+          "subiculum_hard_dice": 69.16109811317142,
+          "CA4_DG_hard_dice": 73.77725255727981
+        },
+        "fn": 7300,
+        "fp": 9195,
+        "swaps": 6581,
+        "updates": 409,
+        "optimization_flops": 53217341798671,
+        "archive_manifest_sha256": "a3101e579592192798bbe98d4280276cfbe952a1d3a551d307f4cc7fd0698232"
+      },
+      "absolute_gain_vs_old_baseline_pp": 3.72003488591092,
+      "prior_plain_baseline": {
+        "metrics": {
+          "validation_percent": 73.80486797844125,
+          "training_percent": 89.35640764073176,
+          "union_percent": 85.63724639471167,
+          "per_subfield_percent": {
+            "CA1_3_hard_dice": 75.205373931314,
+            "subiculum_hard_dice": 74.65983769200504,
+            "CA4_DG_hard_dice": 71.54939231200468
+          },
+          "fn": 5850,
+          "fp": 7645,
+          "swaps": 5178,
+          "updates": 409,
+          "optimization_flops": 53212215490831,
+          "archive_manifest_sha256": "2aff60ced1a86c99bd5312fb27f08b4a371a1d20c7a0ef48a30631beac739716"
+        },
+        "manifest_sha256": "2aff60ced1a86c99bd5312fb27f08b4a371a1d20c7a0ef48a30631beac739716",
+        "archive": "/Users/filippofocaccia/Desktop/hippo/reports/mni_unetr_plain_subfields53t_20261109/runs/MNI_unetr_plain_dice_f1s0"
+      },
+      "absolute_gain_vs_prior_plain_baseline_pp": -0.00148716058875209
+    },
+    {
+      "id": "MNI_unetr_plain_ce025_dice_bands_edge_depth_f1s0",
+      "recipe": "plain_ce025",
+      "role": "constraint",
+      "kind": "conventional",
+      "dataset": "MNI",
+      "model": "unetr_vit_b16",
+      "arm": "dice_bands_edge_depth",
+      "protocol": "plain_ce025_dice_bands_edge_depth",
+      "seed": 0,
+      "fold": 1,
+      "augmentation": "none",
+      "dropout_rate": 0.0,
+      "pilot": true,
+      "candidate": "plain_ce025_bands_edge_depth",
+      "baseline_id": "MNI_unetr_plain_ce025_dice_f1s0",
+      "current": {
+        "validation_percent": 73.75068986021408,
+        "training_percent": 91.18830724296124,
+        "union_percent": 85.43050789840663,
+        "per_subfield_percent": {
+          "CA1_3_hard_dice": 75.0327239236291,
+          "subiculum_hard_dice": 73.82223976228656,
+          "CA4_DG_hard_dice": 72.39710589472665
+        },
+        "fn": 6058,
+        "fp": 7592,
+        "swaps": 5176,
+        "updates": 409,
+        "optimization_flops": 53261031821167,
+        "archive_manifest_sha256": "65db4d90d37f616d7d4485b6b3ccf9fb68eed3bce2e6a7c635d07326f6144a90"
+      },
+      "calibration": {
+        "status": "complete",
+        "weights": {
+          "bands": 0.029211208442682372,
+          "edge": 0.05821468921949866,
+          "depth": 0.08485779371632382
+        },
+        "statistics": {
+          "bands": {
+            "median_raw_ratio": 1.7116717405960444,
+            "p95_raw_ratio": 1.841352188528636,
+            "weighted_median_ratio": 0.05,
+            "weighted_p95_ratio": 0.05378812259549935
+          },
+          "edge": {
+            "median_raw_ratio": 0.8588897522320329,
+            "p95_raw_ratio": 0.9754042610895782,
+            "weighted_median_ratio": 0.05,
+            "weighted_p95_ratio": 0.05678285592270453
+          },
+          "depth": {
+            "median_raw_ratio": 0.5892210698659923,
+            "p95_raw_ratio": 0.8257713563310441,
+            "weighted_median_ratio": 0.05,
+            "weighted_p95_ratio": 0.07007313541238867
+          }
+        },
+        "cases": [
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 1.1927080850737681e-11,
+              "base:bands": 4.325852176467748e-12,
+              "base:edge": 1.7388529852113699e-12,
+              "base:depth": 2.704009325477097e-12,
+              "bands:base": 4.325852176467748e-12,
+              "bands:bands": 3.038169368863031e-11,
+              "bands:edge": 1.0084606760774051e-11,
+              "bands:depth": 5.1984649224179336e-12,
+              "edge:base": 1.7388529852113699e-12,
+              "edge:bands": 1.0084606760774051e-11,
+              "edge:edge": 8.103290607963665e-12,
+              "edge:depth": 1.6284275360448075e-12,
+              "depth:base": 2.704009325477097e-12,
+              "depth:bands": 5.1984649224179336e-12,
+              "depth:edge": 1.6284275360448075e-12,
+              "depth:depth": 8.507414391012436e-12
+            },
+            "gradient_rms": {
+              "base": 3.4535606047581793e-06,
+              "bands": 5.511959151574901e-06,
+              "edge": 2.846627936342167e-06,
+              "depth": 2.9167472278228767e-06
+            },
+            "case_name": "hippocampus_mni_s03_L",
+            "bands_over_base": 1.5960221297349586,
+            "edge_over_base": 0.8147958153500204,
+            "depth_over_base": 0.825974263947837
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 9.872956618917073e-12,
+              "base:bands": 3.986551540269279e-12,
+              "base:edge": 1.41184546692541e-12,
+              "base:depth": 2.210282738085434e-12,
+              "bands:base": 3.986551540269279e-12,
+              "bands:bands": 3.2160302199102375e-11,
+              "bands:edge": 9.132744907547341e-12,
+              "bands:depth": 5.198495280078763e-12,
+              "edge:base": 1.41184546692541e-12,
+              "edge:bands": 9.132744907547341e-12,
+              "edge:edge": 6.816537785614418e-12,
+              "edge:depth": 1.4905874928458629e-12,
+              "depth:base": 2.210282738085434e-12,
+              "depth:bands": 5.198495280078763e-12,
+              "depth:edge": 1.4905874928458629e-12,
+              "depth:depth": 3.1068771687292607e-12
+            },
+            "gradient_rms": {
+              "base": 3.1421261303323064e-06,
+              "bands": 5.671005395792035e-06,
+              "edge": 2.610850012086948e-06,
+              "depth": 1.7626335889030542e-06
+            },
+            "case_name": "hippocampus_mni_s03_R",
+            "bands_over_base": 1.804830602135083,
+            "edge_over_base": 0.8201747838861968,
+            "depth_over_base": 0.5478392755829594
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 1.4185146113288027e-11,
+              "base:bands": 3.956139235650191e-12,
+              "base:edge": 1.775345495613756e-12,
+              "base:depth": 2.6014915048555576e-12,
+              "bands:base": 3.956139235650191e-12,
+              "bands:bands": 3.363295406066946e-11,
+              "bands:edge": 1.0749011056243596e-11,
+              "bands:depth": 5.259596577711356e-12,
+              "edge:base": 1.775345495613756e-12,
+              "edge:bands": 1.0749011056243596e-11,
+              "edge:edge": 8.947469501419114e-12,
+              "edge:depth": 1.5246148527686687e-12,
+              "depth:base": 2.6014915048555576e-12,
+              "depth:bands": 5.259596577711356e-12,
+              "depth:edge": 1.5246148527686687e-12,
+              "depth:depth": 4.382628374793862e-12
+            },
+            "gradient_rms": {
+              "base": 3.7663173144715286e-06,
+              "bands": 5.799392559628074e-06,
+              "edge": 2.9912321042371678e-06,
+              "depth": 2.0934728024968134e-06
+            },
+            "case_name": "hippocampus_mni_s04_L",
+            "bands_over_base": 1.5398045558574547,
+            "edge_over_base": 0.7870308550294225,
+            "depth_over_base": 0.5456758543520787
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 9.580791021646107e-12,
+              "base:bands": 3.309207291871119e-12,
+              "base:edge": 1.8189216409100761e-12,
+              "base:depth": 1.9433660410073106e-12,
+              "bands:base": 3.309207291871119e-12,
+              "bands:bands": 2.2870701860133735e-11,
+              "bands:edge": 9.909736226054733e-12,
+              "bands:depth": 3.789682109789361e-12,
+              "edge:base": 1.8189216409100761e-12,
+              "edge:bands": 9.909736226054733e-12,
+              "edge:edge": 8.720729867406352e-12,
+              "edge:depth": 1.6289979348077521e-12,
+              "depth:base": 1.9433660410073106e-12,
+              "depth:bands": 3.789682109789361e-12,
+              "depth:edge": 1.6289979348077521e-12,
+              "depth:depth": 2.57842228471028e-12
+            },
+            "gradient_rms": {
+              "base": 3.095285289217475e-06,
+              "bands": 4.782332261578417e-06,
+              "edge": 2.953088191606602e-06,
+              "depth": 1.6057466439978256e-06
+            },
+            "case_name": "hippocampus_mni_s04_R",
+            "bands_over_base": 1.54503763457211,
+            "edge_over_base": 0.9436357489313962,
+            "depth_over_base": 0.506047087884891
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 1.4806940396017154e-11,
+              "base:bands": 4.038664801891967e-12,
+              "base:edge": 1.5722426615835672e-12,
+              "base:depth": 2.7495438651575776e-12,
+              "bands:base": 4.038664801891967e-12,
+              "bands:bands": 3.192771394489036e-11,
+              "bands:edge": 9.932766414921801e-12,
+              "bands:depth": 5.0768534341771865e-12,
+              "edge:base": 1.5722426615835672e-12,
+              "edge:bands": 9.932766414921801e-12,
+              "edge:edge": 7.805625937273852e-12,
+              "edge:depth": 1.4835355166553654e-12,
+              "depth:base": 2.7495438651575776e-12,
+              "depth:bands": 5.0768534341771865e-12,
+              "depth:edge": 1.4835355166553654e-12,
+              "depth:depth": 4.463259189319002e-12
+            },
+            "gradient_rms": {
+              "base": 3.847978741627499e-06,
+              "bands": 5.65046139221306e-06,
+              "edge": 2.7938550315422333e-06,
+              "depth": 2.112642702711228e-06
+            },
+            "case_name": "hippocampus_mni_s07_L",
+            "bands_over_base": 1.4684232350574793,
+            "edge_over_base": 0.7196897696178126,
+            "depth_over_base": 0.5398709017915827
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 1.072212544445117e-11,
+              "base:bands": 3.650608461358562e-12,
+              "base:edge": 1.594145605451902e-12,
+              "base:depth": 2.167538067435193e-12,
+              "bands:base": 3.650608461358562e-12,
+              "bands:bands": 2.6144947318229583e-11,
+              "bands:edge": 9.634223974153144e-12,
+              "bands:depth": 3.9695829089081425e-12,
+              "edge:base": 1.594145605451902e-12,
+              "edge:bands": 9.634223974153144e-12,
+              "edge:edge": 7.810471019942256e-12,
+              "edge:depth": 1.4362044539750762e-12,
+              "depth:base": 2.167538067435193e-12,
+              "depth:bands": 3.9695829089081425e-12,
+              "depth:edge": 1.4362044539750762e-12,
+              "depth:depth": 3.2347700906765198e-12
+            },
+            "gradient_rms": {
+              "base": 3.27446567312152e-06,
+              "bands": 5.1132130131874595e-06,
+              "edge": 2.794721993319238e-06,
+              "depth": 1.7985466606892687e-06
+            },
+            "case_name": "hippocampus_mni_s07_R",
+            "bands_over_base": 1.5615411867527924,
+            "edge_over_base": 0.8442647729095325,
+            "depth_over_base": 0.5373573592784547
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 1.3647983784781381e-11,
+              "base:bands": 4.110373933580158e-12,
+              "base:edge": 1.6704734383948816e-12,
+              "base:depth": 2.6134034172842213e-12,
+              "bands:base": 4.110373933580158e-12,
+              "bands:bands": 2.889084110835327e-11,
+              "bands:edge": 9.76448956413467e-12,
+              "bands:depth": 4.819266947314604e-12,
+              "edge:base": 1.6704734383948816e-12,
+              "edge:bands": 9.76448956413467e-12,
+              "edge:edge": 8.011466490209784e-12,
+              "edge:depth": 1.5328799427699602e-12,
+              "depth:base": 2.6134034172842213e-12,
+              "depth:bands": 4.819266947314604e-12,
+              "depth:edge": 1.5328799427699602e-12,
+              "depth:depth": 7.158306933319203e-12
+            },
+            "gradient_rms": {
+              "base": 3.694317769870559e-06,
+              "bands": 5.375020103065036e-06,
+              "edge": 2.830453407178748e-06,
+              "depth": 2.675501248984796e-06
+            },
+            "case_name": "hippocampus_mni_s09_L",
+            "bands_over_base": 1.4549425463347092,
+            "edge_over_base": 0.7588381252480055,
+            "depth_over_base": 0.710815046313413
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 8.548267996233427e-12,
+              "base:bands": 3.821385916036313e-12,
+              "base:edge": 1.6859178983419376e-12,
+              "base:depth": 1.979097441484612e-12,
+              "bands:base": 3.821385916036313e-12,
+              "bands:bands": 2.6513274214989835e-11,
+              "bands:edge": 9.665583437790115e-12,
+              "bands:depth": 4.246733173451922e-12,
+              "edge:base": 1.6859178983419376e-12,
+              "edge:bands": 9.665583437790115e-12,
+              "edge:edge": 8.207360138734465e-12,
+              "edge:depth": 1.522953421359552e-12,
+              "depth:base": 1.979097441484612e-12,
+              "depth:bands": 4.246733173451922e-12,
+              "depth:edge": 1.522953421359552e-12,
+              "depth:depth": 3.0877488066405334e-12
+            },
+            "gradient_rms": {
+              "base": 2.923742122047262e-06,
+              "bands": 5.149104214811528e-06,
+              "edge": 2.864849060375514e-06,
+              "depth": 1.7571991368767893e-06
+            },
+            "case_name": "hippocampus_mni_s09_R",
+            "bands_over_base": 1.7611348743732649,
+            "edge_over_base": 0.9660617871936087,
+            "depth_over_base": 0.584076487658054
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 8.972296863807294e-12,
+              "base:bands": 3.670386477389043e-12,
+              "base:edge": 1.6272397925648496e-12,
+              "base:depth": 2.2094205805178735e-12,
+              "bands:base": 3.670386477389043e-12,
+              "bands:bands": 3.039013485306441e-11,
+              "bands:edge": 9.690741265000469e-12,
+              "bands:depth": 4.9386337033774375e-12,
+              "edge:base": 1.6272397925648496e-12,
+              "edge:bands": 9.690741265000469e-12,
+              "edge:edge": 8.069111351316494e-12,
+              "edge:depth": 1.5013298763910665e-12,
+              "depth:base": 2.2094205805178735e-12,
+              "depth:bands": 4.9386337033774375e-12,
+              "depth:edge": 1.5013298763910665e-12,
+              "depth:depth": 4.126139100529835e-12
+            },
+            "gradient_rms": {
+              "base": 2.995379252082663e-06,
+              "bands": 5.512724812020314e-06,
+              "edge": 2.840618128386231e-06,
+              "depth": 2.0312900089671673e-06
+            },
+            "case_name": "hippocampus_mni_s12_L",
+            "bands_over_base": 1.8404096269904255,
+            "edge_over_base": 0.9358802842744296,
+            "depth_over_base": 0.6603447368943228
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 7.972511539833249e-12,
+              "base:bands": 3.556890892930653e-12,
+              "base:edge": 1.5728948091903172e-12,
+              "base:depth": 2.2173543383352534e-12,
+              "bands:base": 3.556890892930653e-12,
+              "bands:bands": 2.6758642177049374e-11,
+              "bands:edge": 9.596460778804605e-12,
+              "bands:depth": 4.502364193276209e-12,
+              "edge:base": 1.5728948091903172e-12,
+              "edge:bands": 9.596460778804605e-12,
+              "edge:edge": 8.039790187763796e-12,
+              "edge:depth": 1.5702170466647125e-12,
+              "depth:base": 2.2173543383352534e-12,
+              "depth:bands": 4.502364193276209e-12,
+              "depth:edge": 1.5702170466647125e-12,
+              "depth:depth": 2.8539004926636524e-12
+            },
+            "gradient_rms": {
+              "base": 2.8235636241872164e-06,
+              "bands": 5.172875619715727e-06,
+              "edge": 2.8354523779749495e-06,
+              "depth": 1.6893491328507711e-06
+            },
+            "case_name": "hippocampus_mni_s12_R",
+            "bands_over_base": 1.8320379166964151,
+            "edge_over_base": 0.9899929872302988,
+            "depth_over_base": 0.5812857841845678
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 1.0887015247651455e-11,
+              "base:bands": 4.4218699882248025e-12,
+              "base:edge": 1.7551754320777047e-12,
+              "base:depth": 2.5075657696105313e-12,
+              "bands:base": 4.4218699882248025e-12,
+              "bands:bands": 3.5585399210669166e-11,
+              "bands:edge": 1.059179653706277e-11,
+              "bands:depth": 5.656696031725028e-12,
+              "edge:base": 1.7551754320777047e-12,
+              "edge:bands": 1.059179653706277e-11,
+              "edge:edge": 8.349257049622416e-12,
+              "edge:depth": 1.5375610940698836e-12,
+              "depth:base": 2.5075657696105313e-12,
+              "depth:bands": 5.656696031725028e-12,
+              "depth:edge": 1.5375610940698836e-12,
+              "depth:depth": 5.384443758915669e-12
+            },
+            "gradient_rms": {
+              "base": 3.299547733804052e-06,
+              "bands": 5.965349881664039e-06,
+              "edge": 2.8895080982102153e-06,
+              "depth": 2.3204404234790577e-06
+            },
+            "case_name": "hippocampus_mni_s15_L",
+            "bands_over_base": 1.8079295597238052,
+            "edge_over_base": 0.8643432196915233,
+            "depth_over_base": 0.6859210348052422
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 8.909544976787309e-12,
+              "base:bands": 3.672997669901257e-12,
+              "base:edge": 1.7186129906351932e-12,
+              "base:depth": 2.0361828542703186e-12,
+              "bands:base": 3.672997669901257e-12,
+              "bands:bands": 2.67965580280638e-11,
+              "bands:edge": 9.746553390754809e-12,
+              "bands:depth": 4.291747512930044e-12,
+              "edge:base": 1.7186129906351932e-12,
+              "edge:bands": 9.746553390754809e-12,
+              "edge:edge": 8.276557390829442e-12,
+              "edge:depth": 1.5326666802026323e-12,
+              "depth:base": 2.0361828542703186e-12,
+              "depth:bands": 4.291747512930044e-12,
+              "depth:edge": 1.5326666802026323e-12,
+              "depth:depth": 3.918608926928302e-12
+            },
+            "gradient_rms": {
+              "base": 2.984886091090799e-06,
+              "bands": 5.176539194100997e-06,
+              "edge": 2.876900657101222e-06,
+              "depth": 1.9795476571500627e-06
+            },
+            "case_name": "hippocampus_mni_s15_R",
+            "bands_over_base": 1.7342501643703523,
+            "edge_over_base": 0.9512301936032496,
+            "depth_over_base": 0.6453727328849724
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 9.747734737441949e-12,
+              "base:bands": 3.887268111568698e-12,
+              "base:edge": 1.4103958886207968e-12,
+              "base:depth": 2.3049179752321347e-12,
+              "bands:base": 3.887268111568698e-12,
+              "bands:bands": 3.222296734994856e-11,
+              "bands:edge": 9.258026636982386e-12,
+              "bands:depth": 5.2086390756045375e-12,
+              "edge:base": 1.4103958886207968e-12,
+              "edge:bands": 9.258026636982386e-12,
+              "edge:edge": 7.28523491533295e-12,
+              "edge:depth": 1.4104298241487956e-12,
+              "depth:base": 2.3049179752321347e-12,
+              "depth:bands": 5.2086390756045375e-12,
+              "depth:edge": 1.4104298241487956e-12,
+              "depth:depth": 6.9706766400723374e-12
+            },
+            "gradient_rms": {
+              "base": 3.122136245816628e-06,
+              "bands": 5.6765277547060895e-06,
+              "edge": 2.6991174326681212e-06,
+              "depth": 2.6402039012304216e-06
+            },
+            "case_name": "hippocampus_mni_s18_L",
+            "bands_over_base": 1.8181550412196483,
+            "edge_over_base": 0.8534362847725425,
+            "depth_over_base": 0.8257606769827919
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 8.657573789816464e-12,
+              "base:bands": 3.6248517208681275e-12,
+              "base:edge": 1.6250336579842761e-12,
+              "base:depth": 1.9818326667253583e-12,
+              "bands:base": 3.6248517208681275e-12,
+              "bands:bands": 2.9927942069019053e-11,
+              "bands:edge": 1.0076451825713484e-11,
+              "bands:depth": 4.822430649253917e-12,
+              "edge:base": 1.6250336579842761e-12,
+              "edge:bands": 1.0076451825713484e-11,
+              "edge:edge": 8.449393962273177e-12,
+              "edge:depth": 1.6089835627036697e-12,
+              "depth:base": 1.9818326667253583e-12,
+              "depth:bands": 4.822430649253917e-12,
+              "depth:edge": 1.6089835627036697e-12,
+              "depth:depth": 3.6193559000557984e-12
+            },
+            "gradient_rms": {
+              "base": 2.9423755351444287e-06,
+              "bands": 5.470643661308882e-06,
+              "edge": 2.906784127222587e-06,
+              "depth": 1.9024604858066825e-06
+            },
+            "case_name": "hippocampus_mni_s18_R",
+            "bands_over_base": 1.8592608577546343,
+            "edge_over_base": 0.9746364333979614,
+            "depth_over_base": 0.6290374948997883
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 1.1051852141785723e-11,
+              "base:bands": 4.1742902537333926e-12,
+              "base:edge": 1.7026843259979052e-12,
+              "base:depth": 2.5379221293975185e-12,
+              "bands:base": 4.1742902537333926e-12,
+              "bands:bands": 3.037456050569709e-11,
+              "bands:edge": 1.0032689956585017e-11,
+              "bands:depth": 5.169958211537207e-12,
+              "edge:base": 1.7026843259979052e-12,
+              "edge:bands": 1.0032689956585017e-11,
+              "edge:edge": 8.11840525360985e-12,
+              "edge:depth": 1.610992914589937e-12,
+              "depth:base": 2.5379221293975185e-12,
+              "depth:bands": 5.169958211537207e-12,
+              "depth:edge": 1.610992914589937e-12,
+              "depth:depth": 4.277613419728654e-12
+            },
+            "gradient_rms": {
+              "base": 3.3244326044884297e-06,
+              "bands": 5.511312049385073e-06,
+              "edge": 2.8492815328797978e-06,
+              "depth": 2.0682392075697275e-06
+            },
+            "case_name": "hippocampus_mni_s22_L",
+            "bands_over_base": 1.657820357658646,
+            "edge_over_base": 0.8467995927971006,
+            "depth_over_base": 0.6077402387630791
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 9.378183993269396e-12,
+              "base:bands": 3.423161060167601e-12,
+              "base:edge": 1.5929126507413516e-12,
+              "base:depth": 2.106826432063391e-12,
+              "bands:base": 3.423161060167601e-12,
+              "bands:bands": 2.679212060541225e-11,
+              "bands:edge": 9.825315040734584e-12,
+              "bands:depth": 4.327140208648661e-12,
+              "edge:base": 1.5929126507413516e-12,
+              "edge:bands": 9.825315040734584e-12,
+              "edge:edge": 8.378710919521026e-12,
+              "edge:depth": 1.5580796201841718e-12,
+              "depth:base": 2.106826432063391e-12,
+              "depth:bands": 4.327140208648661e-12,
+              "depth:edge": 1.5580796201841718e-12,
+              "depth:depth": 3.21260292673875e-12
+            },
+            "gradient_rms": {
+              "base": 3.0623820782634875e-06,
+              "bands": 5.17611056734806e-06,
+              "edge": 2.89460030393162e-06,
+              "depth": 1.792373545536407e-06
+            },
+            "case_name": "hippocampus_mni_s22_R",
+            "bands_over_base": 1.6902236347605437,
+            "edge_over_base": 0.9341778786176616,
+            "depth_over_base": 0.5711467529715234
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 1.1491699085375284e-11,
+              "base:bands": 4.133427541214152e-12,
+              "base:edge": 1.6482006731655119e-12,
+              "base:depth": 2.489334259558884e-12,
+              "bands:base": 4.133427541214152e-12,
+              "bands:bands": 3.0260821626271195e-11,
+              "bands:edge": 9.72881844529816e-12,
+              "bands:depth": 5.01779737552277e-12,
+              "edge:base": 1.6482006731655119e-12,
+              "edge:bands": 9.72881844529816e-12,
+              "edge:edge": 7.867295356844828e-12,
+              "edge:depth": 1.5217767367417534e-12,
+              "depth:base": 2.489334259558884e-12,
+              "depth:bands": 5.01779737552277e-12,
+              "depth:edge": 1.5217767367417534e-12,
+              "depth:depth": 4.194989407929617e-12
+            },
+            "gradient_rms": {
+              "base": 3.3899408675337223e-06,
+              "bands": 5.500983696237537e-06,
+              "edge": 2.804869935816067e-06,
+              "depth": 2.048167329084618e-06
+            },
+            "case_name": "hippocampus_mni_s24_L",
+            "bands_over_base": 1.6227373606784057,
+            "edge_over_base": 0.8179512759210804,
+            "depth_over_base": 0.5909926789583685
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 9.246031891507744e-12,
+              "base:bands": 3.6349491125409195e-12,
+              "base:edge": 1.5260136904116095e-12,
+              "base:depth": 2.0555055053883553e-12,
+              "bands:base": 3.6349491125409195e-12,
+              "bands:bands": 2.8665625428914154e-11,
+              "bands:edge": 9.570894424215659e-12,
+              "bands:depth": 4.681870776485075e-12,
+              "edge:base": 1.5260136904116095e-12,
+              "edge:bands": 9.570894424215659e-12,
+              "edge:edge": 7.854789735306511e-12,
+              "edge:depth": 1.5479301868071005e-12,
+              "depth:base": 2.0555055053883553e-12,
+              "depth:bands": 4.681870776485075e-12,
+              "depth:edge": 1.5479301868071005e-12,
+              "depth:depth": 2.72775530461844e-12
+            },
+            "gradient_rms": {
+              "base": 3.0407288421540886e-06,
+              "bands": 5.3540288969069035e-06,
+              "edge": 2.802639779798059e-06,
+              "depth": 1.6515917487740243e-06
+            },
+            "case_name": "hippocampus_mni_s24_R",
+            "bands_over_base": 1.7607715698562736,
+            "edge_over_base": 0.9101180664036543,
+            "depth_over_base": 0.5297565311190562
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 1.2430936488505573e-11,
+              "base:bands": 3.963800641881843e-12,
+              "base:edge": 1.7770664497221422e-12,
+              "base:depth": 2.6622510619633832e-12,
+              "bands:base": 3.963800641881843e-12,
+              "bands:bands": 2.907212665048675e-11,
+              "bands:edge": 1.0334616842855304e-11,
+              "bands:depth": 4.904208983358416e-12,
+              "edge:base": 1.7770664497221422e-12,
+              "edge:bands": 1.0334616842855304e-11,
+              "edge:edge": 8.594043879317503e-12,
+              "edge:depth": 1.6480392354620288e-12,
+              "depth:base": 2.6622510619633832e-12,
+              "depth:bands": 4.904208983358416e-12,
+              "depth:edge": 1.6480392354620288e-12,
+              "depth:depth": 4.471935842464969e-12
+            },
+            "gradient_rms": {
+              "base": 3.5257533221292683e-06,
+              "bands": 5.3918574397406645e-06,
+              "edge": 2.931559973685939e-06,
+              "depth": 2.1146952126642198e-06
+            },
+            "case_name": "hippocampus_mni_s25_L",
+            "bands_over_base": 1.5292781278539422,
+            "edge_over_base": 0.8230265853305819,
+            "depth_over_base": 0.587449460773616
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 9.411164555994667e-12,
+              "base:bands": 3.636524458297541e-12,
+              "base:edge": 1.6834903696777426e-12,
+              "base:depth": 2.0012745800823684e-12,
+              "bands:base": 3.636524458297541e-12,
+              "bands:bands": 2.8268356405680706e-11,
+              "bands:edge": 1.0357697338703176e-11,
+              "bands:depth": 4.514141664635485e-12,
+              "edge:base": 1.6834903696777426e-12,
+              "edge:bands": 1.0357697338703176e-11,
+              "edge:edge": 8.863227859978728e-12,
+              "edge:depth": 1.6377825744900987e-12,
+              "depth:base": 2.0012745800823684e-12,
+              "depth:bands": 4.514141664635485e-12,
+              "depth:edge": 1.6377825744900987e-12,
+              "depth:depth": 3.649485661588736e-12
+            },
+            "gradient_rms": {
+              "base": 3.0677621413653743e-06,
+              "bands": 5.316799451331666e-06,
+              "edge": 2.977117374236147e-06,
+              "depth": 1.910362704197487e-06
+            },
+            "case_name": "hippocampus_mni_s25_R",
+            "bands_over_base": 1.7331198464315454,
+            "edge_over_base": 0.9584802182041393,
+            "depth_over_base": 0.6068769625923759
+          }
+        ],
+        "anchor_model_sha256": "33c374a069f3f77689962c2eb091b760ab13c2055eb63c5d433a467eb8425af0",
+        "target_ratio": 0.05,
+        "p95_cap": 0.75,
+        "scope": "All training patients, no augmentation or validation; gradients with respect to detached FP32 logits",
+        "config_sha256": "62f741c76b736132ba1f5b063a9d0e241368fbcc3cf0b48808826a8d4e079dcd",
+        "anchor_successful_updates": 102,
+        "anchor_training_attempts": 102,
+        "charged_flops": 867806754372
+      },
+      "training_validation_gap_pp": 17.437617382747163,
+      "old_winning_baseline": {
+        "validation_percent": 70.08334593194158,
+        "training_percent": 73.93952272295873,
+        "union_percent": 82.50973054446155,
+        "per_subfield_percent": {
+          "CA1_3_hard_dice": 67.31168712537348,
+          "subiculum_hard_dice": 69.16109811317142,
+          "CA4_DG_hard_dice": 73.77725255727981
+        },
+        "fn": 7300,
+        "fp": 9195,
+        "swaps": 6581,
+        "updates": 409,
+        "optimization_flops": 53217341798671,
+        "archive_manifest_sha256": "a3101e579592192798bbe98d4280276cfbe952a1d3a551d307f4cc7fd0698232"
+      },
+      "absolute_gain_vs_old_baseline_pp": 3.6673439282725013,
+      "prior_plain_baseline": {
+        "metrics": {
+          "validation_percent": 73.80486797844125,
+          "training_percent": 89.35640764073176,
+          "union_percent": 85.63724639471167,
+          "per_subfield_percent": {
+            "CA1_3_hard_dice": 75.205373931314,
+            "subiculum_hard_dice": 74.65983769200504,
+            "CA4_DG_hard_dice": 71.54939231200468
+          },
+          "fn": 5850,
+          "fp": 7645,
+          "swaps": 5178,
+          "updates": 409,
+          "optimization_flops": 53212215490831,
+          "archive_manifest_sha256": "2aff60ced1a86c99bd5312fb27f08b4a371a1d20c7a0ef48a30631beac739716"
+        },
+        "manifest_sha256": "2aff60ced1a86c99bd5312fb27f08b4a371a1d20c7a0ef48a30631beac739716",
+        "archive": "/Users/filippofocaccia/Desktop/hippo/reports/mni_unetr_plain_subfields53t_20261109/runs/MNI_unetr_plain_dice_f1s0"
+      },
+      "absolute_gain_vs_prior_plain_baseline_pp": -0.05417811822717056
+    },
+    {
+      "id": "MNI_unetr_plain_ce025_dice_bands_edge_f1s0",
+      "recipe": "plain_ce025",
+      "role": "constraint",
+      "kind": "conventional",
+      "dataset": "MNI",
+      "model": "unetr_vit_b16",
+      "arm": "dice_bands_edge",
+      "protocol": "plain_ce025_dice_bands_edge",
+      "seed": 0,
+      "fold": 1,
+      "augmentation": "none",
+      "dropout_rate": 0.0,
+      "pilot": true,
+      "candidate": "plain_ce025_bands_edge",
+      "baseline_id": "MNI_unetr_plain_ce025_dice_f1s0",
+      "current": {
+        "validation_percent": 73.64212131368416,
+        "training_percent": 91.15728019680172,
+        "union_percent": 85.42228425175828,
+        "per_subfield_percent": {
+          "CA1_3_hard_dice": 74.75778351099302,
+          "subiculum_hard_dice": 73.30097511085182,
+          "CA4_DG_hard_dice": 72.8676053192076
+        },
+        "fn": 6031,
+        "fp": 7639,
+        "swaps": 5308,
+        "updates": 409,
+        "optimization_flops": 53257812691926,
+        "archive_manifest_sha256": "e3f7e3d20962a1cfa1c3ade2b131b9c64aa0833c03ba0cac973e2089fd38c453"
+      },
+      "calibration": {
+        "status": "complete",
+        "weights": {
+          "bands": 0.029211208442682372,
+          "edge": 0.05821468921949866
+        },
+        "statistics": {
+          "bands": {
+            "median_raw_ratio": 1.7116717405960444,
+            "p95_raw_ratio": 1.841352188528636,
+            "weighted_median_ratio": 0.05,
+            "weighted_p95_ratio": 0.05378812259549935
+          },
+          "edge": {
+            "median_raw_ratio": 0.8588897522320329,
+            "p95_raw_ratio": 0.9754042610895782,
+            "weighted_median_ratio": 0.05,
+            "weighted_p95_ratio": 0.05678285592270453
+          }
+        },
+        "cases": [
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 1.1927080850737681e-11,
+              "base:bands": 4.325852176467748e-12,
+              "base:edge": 1.7388529852113699e-12,
+              "bands:base": 4.325852176467748e-12,
+              "bands:bands": 3.038169368863031e-11,
+              "bands:edge": 1.0084606760774051e-11,
+              "edge:base": 1.7388529852113699e-12,
+              "edge:bands": 1.0084606760774051e-11,
+              "edge:edge": 8.103290607963665e-12
+            },
+            "gradient_rms": {
+              "base": 3.4535606047581793e-06,
+              "bands": 5.511959151574901e-06,
+              "edge": 2.846627936342167e-06
+            },
+            "case_name": "hippocampus_mni_s03_L",
+            "bands_over_base": 1.5960221297349586,
+            "edge_over_base": 0.8147958153500204
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 9.872956618917073e-12,
+              "base:bands": 3.986551540269279e-12,
+              "base:edge": 1.41184546692541e-12,
+              "bands:base": 3.986551540269279e-12,
+              "bands:bands": 3.2160302199102375e-11,
+              "bands:edge": 9.132744907547341e-12,
+              "edge:base": 1.41184546692541e-12,
+              "edge:bands": 9.132744907547341e-12,
+              "edge:edge": 6.816537785614418e-12
+            },
+            "gradient_rms": {
+              "base": 3.1421261303323064e-06,
+              "bands": 5.671005395792035e-06,
+              "edge": 2.610850012086948e-06
+            },
+            "case_name": "hippocampus_mni_s03_R",
+            "bands_over_base": 1.804830602135083,
+            "edge_over_base": 0.8201747838861968
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 1.4185146113288027e-11,
+              "base:bands": 3.956139235650191e-12,
+              "base:edge": 1.775345495613756e-12,
+              "bands:base": 3.956139235650191e-12,
+              "bands:bands": 3.363295406066946e-11,
+              "bands:edge": 1.0749011056243596e-11,
+              "edge:base": 1.775345495613756e-12,
+              "edge:bands": 1.0749011056243596e-11,
+              "edge:edge": 8.947469501419114e-12
+            },
+            "gradient_rms": {
+              "base": 3.7663173144715286e-06,
+              "bands": 5.799392559628074e-06,
+              "edge": 2.9912321042371678e-06
+            },
+            "case_name": "hippocampus_mni_s04_L",
+            "bands_over_base": 1.5398045558574547,
+            "edge_over_base": 0.7870308550294225
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 9.580791021646107e-12,
+              "base:bands": 3.309207291871119e-12,
+              "base:edge": 1.8189216409100761e-12,
+              "bands:base": 3.309207291871119e-12,
+              "bands:bands": 2.2870701860133735e-11,
+              "bands:edge": 9.909736226054733e-12,
+              "edge:base": 1.8189216409100761e-12,
+              "edge:bands": 9.909736226054733e-12,
+              "edge:edge": 8.720729867406352e-12
+            },
+            "gradient_rms": {
+              "base": 3.095285289217475e-06,
+              "bands": 4.782332261578417e-06,
+              "edge": 2.953088191606602e-06
+            },
+            "case_name": "hippocampus_mni_s04_R",
+            "bands_over_base": 1.54503763457211,
+            "edge_over_base": 0.9436357489313962
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 1.4806940396017154e-11,
+              "base:bands": 4.038664801891967e-12,
+              "base:edge": 1.5722426615835672e-12,
+              "bands:base": 4.038664801891967e-12,
+              "bands:bands": 3.192771394489036e-11,
+              "bands:edge": 9.932766414921801e-12,
+              "edge:base": 1.5722426615835672e-12,
+              "edge:bands": 9.932766414921801e-12,
+              "edge:edge": 7.805625937273852e-12
+            },
+            "gradient_rms": {
+              "base": 3.847978741627499e-06,
+              "bands": 5.65046139221306e-06,
+              "edge": 2.7938550315422333e-06
+            },
+            "case_name": "hippocampus_mni_s07_L",
+            "bands_over_base": 1.4684232350574793,
+            "edge_over_base": 0.7196897696178126
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 1.072212544445117e-11,
+              "base:bands": 3.650608461358562e-12,
+              "base:edge": 1.594145605451902e-12,
+              "bands:base": 3.650608461358562e-12,
+              "bands:bands": 2.6144947318229583e-11,
+              "bands:edge": 9.634223974153144e-12,
+              "edge:base": 1.594145605451902e-12,
+              "edge:bands": 9.634223974153144e-12,
+              "edge:edge": 7.810471019942256e-12
+            },
+            "gradient_rms": {
+              "base": 3.27446567312152e-06,
+              "bands": 5.1132130131874595e-06,
+              "edge": 2.794721993319238e-06
+            },
+            "case_name": "hippocampus_mni_s07_R",
+            "bands_over_base": 1.5615411867527924,
+            "edge_over_base": 0.8442647729095325
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 1.3647983784781381e-11,
+              "base:bands": 4.110373933580158e-12,
+              "base:edge": 1.6704734383948816e-12,
+              "bands:base": 4.110373933580158e-12,
+              "bands:bands": 2.889084110835327e-11,
+              "bands:edge": 9.76448956413467e-12,
+              "edge:base": 1.6704734383948816e-12,
+              "edge:bands": 9.76448956413467e-12,
+              "edge:edge": 8.011466490209784e-12
+            },
+            "gradient_rms": {
+              "base": 3.694317769870559e-06,
+              "bands": 5.375020103065036e-06,
+              "edge": 2.830453407178748e-06
+            },
+            "case_name": "hippocampus_mni_s09_L",
+            "bands_over_base": 1.4549425463347092,
+            "edge_over_base": 0.7588381252480055
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 8.548267996233427e-12,
+              "base:bands": 3.821385916036313e-12,
+              "base:edge": 1.6859178983419376e-12,
+              "bands:base": 3.821385916036313e-12,
+              "bands:bands": 2.6513274214989835e-11,
+              "bands:edge": 9.665583437790115e-12,
+              "edge:base": 1.6859178983419376e-12,
+              "edge:bands": 9.665583437790115e-12,
+              "edge:edge": 8.207360138734465e-12
+            },
+            "gradient_rms": {
+              "base": 2.923742122047262e-06,
+              "bands": 5.149104214811528e-06,
+              "edge": 2.864849060375514e-06
+            },
+            "case_name": "hippocampus_mni_s09_R",
+            "bands_over_base": 1.7611348743732649,
+            "edge_over_base": 0.9660617871936087
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 8.972296863807294e-12,
+              "base:bands": 3.670386477389043e-12,
+              "base:edge": 1.6272397925648496e-12,
+              "bands:base": 3.670386477389043e-12,
+              "bands:bands": 3.039013485306441e-11,
+              "bands:edge": 9.690741265000469e-12,
+              "edge:base": 1.6272397925648496e-12,
+              "edge:bands": 9.690741265000469e-12,
+              "edge:edge": 8.069111351316494e-12
+            },
+            "gradient_rms": {
+              "base": 2.995379252082663e-06,
+              "bands": 5.512724812020314e-06,
+              "edge": 2.840618128386231e-06
+            },
+            "case_name": "hippocampus_mni_s12_L",
+            "bands_over_base": 1.8404096269904255,
+            "edge_over_base": 0.9358802842744296
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 7.972511539833249e-12,
+              "base:bands": 3.556890892930653e-12,
+              "base:edge": 1.5728948091903172e-12,
+              "bands:base": 3.556890892930653e-12,
+              "bands:bands": 2.6758642177049374e-11,
+              "bands:edge": 9.596460778804605e-12,
+              "edge:base": 1.5728948091903172e-12,
+              "edge:bands": 9.596460778804605e-12,
+              "edge:edge": 8.039790187763796e-12
+            },
+            "gradient_rms": {
+              "base": 2.8235636241872164e-06,
+              "bands": 5.172875619715727e-06,
+              "edge": 2.8354523779749495e-06
+            },
+            "case_name": "hippocampus_mni_s12_R",
+            "bands_over_base": 1.8320379166964151,
+            "edge_over_base": 0.9899929872302988
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 1.0887015247651455e-11,
+              "base:bands": 4.4218699882248025e-12,
+              "base:edge": 1.7551754320777047e-12,
+              "bands:base": 4.4218699882248025e-12,
+              "bands:bands": 3.5585399210669166e-11,
+              "bands:edge": 1.059179653706277e-11,
+              "edge:base": 1.7551754320777047e-12,
+              "edge:bands": 1.059179653706277e-11,
+              "edge:edge": 8.349257049622416e-12
+            },
+            "gradient_rms": {
+              "base": 3.299547733804052e-06,
+              "bands": 5.965349881664039e-06,
+              "edge": 2.8895080982102153e-06
+            },
+            "case_name": "hippocampus_mni_s15_L",
+            "bands_over_base": 1.8079295597238052,
+            "edge_over_base": 0.8643432196915233
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 8.909544976787309e-12,
+              "base:bands": 3.672997669901257e-12,
+              "base:edge": 1.7186129906351932e-12,
+              "bands:base": 3.672997669901257e-12,
+              "bands:bands": 2.67965580280638e-11,
+              "bands:edge": 9.746553390754809e-12,
+              "edge:base": 1.7186129906351932e-12,
+              "edge:bands": 9.746553390754809e-12,
+              "edge:edge": 8.276557390829442e-12
+            },
+            "gradient_rms": {
+              "base": 2.984886091090799e-06,
+              "bands": 5.176539194100997e-06,
+              "edge": 2.876900657101222e-06
+            },
+            "case_name": "hippocampus_mni_s15_R",
+            "bands_over_base": 1.7342501643703523,
+            "edge_over_base": 0.9512301936032496
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 9.747734737441949e-12,
+              "base:bands": 3.887268111568698e-12,
+              "base:edge": 1.4103958886207968e-12,
+              "bands:base": 3.887268111568698e-12,
+              "bands:bands": 3.222296734994856e-11,
+              "bands:edge": 9.258026636982386e-12,
+              "edge:base": 1.4103958886207968e-12,
+              "edge:bands": 9.258026636982386e-12,
+              "edge:edge": 7.28523491533295e-12
+            },
+            "gradient_rms": {
+              "base": 3.122136245816628e-06,
+              "bands": 5.6765277547060895e-06,
+              "edge": 2.6991174326681212e-06
+            },
+            "case_name": "hippocampus_mni_s18_L",
+            "bands_over_base": 1.8181550412196483,
+            "edge_over_base": 0.8534362847725425
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 8.657573789816464e-12,
+              "base:bands": 3.6248517208681275e-12,
+              "base:edge": 1.6250336579842761e-12,
+              "bands:base": 3.6248517208681275e-12,
+              "bands:bands": 2.9927942069019053e-11,
+              "bands:edge": 1.0076451825713484e-11,
+              "edge:base": 1.6250336579842761e-12,
+              "edge:bands": 1.0076451825713484e-11,
+              "edge:edge": 8.449393962273177e-12
+            },
+            "gradient_rms": {
+              "base": 2.9423755351444287e-06,
+              "bands": 5.470643661308882e-06,
+              "edge": 2.906784127222587e-06
+            },
+            "case_name": "hippocampus_mni_s18_R",
+            "bands_over_base": 1.8592608577546343,
+            "edge_over_base": 0.9746364333979614
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 1.1051852141785723e-11,
+              "base:bands": 4.1742902537333926e-12,
+              "base:edge": 1.7026843259979052e-12,
+              "bands:base": 4.1742902537333926e-12,
+              "bands:bands": 3.037456050569709e-11,
+              "bands:edge": 1.0032689956585017e-11,
+              "edge:base": 1.7026843259979052e-12,
+              "edge:bands": 1.0032689956585017e-11,
+              "edge:edge": 8.11840525360985e-12
+            },
+            "gradient_rms": {
+              "base": 3.3244326044884297e-06,
+              "bands": 5.511312049385073e-06,
+              "edge": 2.8492815328797978e-06
+            },
+            "case_name": "hippocampus_mni_s22_L",
+            "bands_over_base": 1.657820357658646,
+            "edge_over_base": 0.8467995927971006
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 9.378183993269396e-12,
+              "base:bands": 3.423161060167601e-12,
+              "base:edge": 1.5929126507413516e-12,
+              "bands:base": 3.423161060167601e-12,
+              "bands:bands": 2.679212060541225e-11,
+              "bands:edge": 9.825315040734584e-12,
+              "edge:base": 1.5929126507413516e-12,
+              "edge:bands": 9.825315040734584e-12,
+              "edge:edge": 8.378710919521026e-12
+            },
+            "gradient_rms": {
+              "base": 3.0623820782634875e-06,
+              "bands": 5.17611056734806e-06,
+              "edge": 2.89460030393162e-06
+            },
+            "case_name": "hippocampus_mni_s22_R",
+            "bands_over_base": 1.6902236347605437,
+            "edge_over_base": 0.9341778786176616
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 1.1491699085375284e-11,
+              "base:bands": 4.133427541214152e-12,
+              "base:edge": 1.6482006731655119e-12,
+              "bands:base": 4.133427541214152e-12,
+              "bands:bands": 3.0260821626271195e-11,
+              "bands:edge": 9.72881844529816e-12,
+              "edge:base": 1.6482006731655119e-12,
+              "edge:bands": 9.72881844529816e-12,
+              "edge:edge": 7.867295356844828e-12
+            },
+            "gradient_rms": {
+              "base": 3.3899408675337223e-06,
+              "bands": 5.500983696237537e-06,
+              "edge": 2.804869935816067e-06
+            },
+            "case_name": "hippocampus_mni_s24_L",
+            "bands_over_base": 1.6227373606784057,
+            "edge_over_base": 0.8179512759210804
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 9.246031891507744e-12,
+              "base:bands": 3.6349491125409195e-12,
+              "base:edge": 1.5260136904116095e-12,
+              "bands:base": 3.6349491125409195e-12,
+              "bands:bands": 2.8665625428914154e-11,
+              "bands:edge": 9.570894424215659e-12,
+              "edge:base": 1.5260136904116095e-12,
+              "edge:bands": 9.570894424215659e-12,
+              "edge:edge": 7.854789735306511e-12
+            },
+            "gradient_rms": {
+              "base": 3.0407288421540886e-06,
+              "bands": 5.3540288969069035e-06,
+              "edge": 2.802639779798059e-06
+            },
+            "case_name": "hippocampus_mni_s24_R",
+            "bands_over_base": 1.7607715698562736,
+            "edge_over_base": 0.9101180664036543
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 1.2430936488505573e-11,
+              "base:bands": 3.963800641881843e-12,
+              "base:edge": 1.7770664497221422e-12,
+              "bands:base": 3.963800641881843e-12,
+              "bands:bands": 2.907212665048675e-11,
+              "bands:edge": 1.0334616842855304e-11,
+              "edge:base": 1.7770664497221422e-12,
+              "edge:bands": 1.0334616842855304e-11,
+              "edge:edge": 8.594043879317503e-12
+            },
+            "gradient_rms": {
+              "base": 3.5257533221292683e-06,
+              "bands": 5.3918574397406645e-06,
+              "edge": 2.931559973685939e-06
+            },
+            "case_name": "hippocampus_mni_s25_L",
+            "bands_over_base": 1.5292781278539422,
+            "edge_over_base": 0.8230265853305819
+          },
+          {
+            "base_loss_identity": "unetr_vit_b16",
+            "gradient_pair_means": {
+              "base:base": 9.411164555994667e-12,
+              "base:bands": 3.636524458297541e-12,
+              "base:edge": 1.6834903696777426e-12,
+              "bands:base": 3.636524458297541e-12,
+              "bands:bands": 2.8268356405680706e-11,
+              "bands:edge": 1.0357697338703176e-11,
+              "edge:base": 1.6834903696777426e-12,
+              "edge:bands": 1.0357697338703176e-11,
+              "edge:edge": 8.863227859978728e-12
+            },
+            "gradient_rms": {
+              "base": 3.0677621413653743e-06,
+              "bands": 5.316799451331666e-06,
+              "edge": 2.977117374236147e-06
+            },
+            "case_name": "hippocampus_mni_s25_R",
+            "bands_over_base": 1.7331198464315454,
+            "edge_over_base": 0.9584802182041393
+          }
+        ],
+        "anchor_model_sha256": "33c374a069f3f77689962c2eb091b760ab13c2055eb63c5d433a467eb8425af0",
+        "target_ratio": 0.05,
+        "p95_cap": 0.75,
+        "scope": "All training patients, no augmentation or validation; gradients with respect to detached FP32 logits",
+        "config_sha256": "b94891f11bc708a51f10c114298ef80a4cc576aaeddb17a4247a6b6af96f307b",
+        "anchor_successful_updates": 102,
+        "anchor_training_attempts": 102,
+        "charged_flops": 867324409432
+      },
+      "training_validation_gap_pp": 17.515158883117564,
+      "old_winning_baseline": {
+        "validation_percent": 70.08334593194158,
+        "training_percent": 73.93952272295873,
+        "union_percent": 82.50973054446155,
+        "per_subfield_percent": {
+          "CA1_3_hard_dice": 67.31168712537348,
+          "subiculum_hard_dice": 69.16109811317142,
+          "CA4_DG_hard_dice": 73.77725255727981
+        },
+        "fn": 7300,
+        "fp": 9195,
+        "swaps": 6581,
+        "updates": 409,
+        "optimization_flops": 53217341798671,
+        "archive_manifest_sha256": "a3101e579592192798bbe98d4280276cfbe952a1d3a551d307f4cc7fd0698232"
+      },
+      "absolute_gain_vs_old_baseline_pp": 3.558775381742578,
+      "prior_plain_baseline": {
+        "metrics": {
+          "validation_percent": 73.80486797844125,
+          "training_percent": 89.35640764073176,
+          "union_percent": 85.63724639471167,
+          "per_subfield_percent": {
+            "CA1_3_hard_dice": 75.205373931314,
+            "subiculum_hard_dice": 74.65983769200504,
+            "CA4_DG_hard_dice": 71.54939231200468
+          },
+          "fn": 5850,
+          "fp": 7645,
+          "swaps": 5178,
+          "updates": 409,
+          "optimization_flops": 53212215490831,
+          "archive_manifest_sha256": "2aff60ced1a86c99bd5312fb27f08b4a371a1d20c7a0ef48a30631beac739716"
+        },
+        "manifest_sha256": "2aff60ced1a86c99bd5312fb27f08b4a371a1d20c7a0ef48a30631beac739716",
+        "archive": "/Users/filippofocaccia/Desktop/hippo/reports/mni_unetr_plain_subfields53t_20261109/runs/MNI_unetr_plain_dice_f1s0"
+      },
+      "absolute_gain_vs_prior_plain_baseline_pp": -0.1627466647570941
+    },
+    {
+      "id": "MNI_unetr_plain_ce025_dice_f2s0",
+      "recipe": "plain_ce025",
+      "role": "baseline",
+      "kind": "conventional",
+      "dataset": "MNI",
+      "model": "unetr_vit_b16",
+      "arm": "dice",
+      "protocol": "plain_ce025_dice",
+      "seed": 0,
+      "fold": 2,
+      "augmentation": "none",
+      "dropout_rate": 0.0,
+      "pilot": true,
+      "current": {
+        "validation_percent": 76.5267627123175,
+        "training_percent": 90.01659380929736,
+        "union_percent": 86.3149426085289,
+        "per_subfield_percent": {
+          "CA1_3_hard_dice": 77.58002760364917,
+          "subiculum_hard_dice": 76.21488296597524,
+          "CA4_DG_hard_dice": 75.78537756732815
+        },
+        "fn": 5439,
+        "fp": 7211,
+        "swaps": 4288,
+        "updates": 409,
+        "optimization_flops": 53212215490831,
+        "archive_manifest_sha256": "0b9a077b2c187858791c6183d3c42d73c2259ce842a428fc47e2dd13df813e3e"
+      },
+      "calibration": null,
+      "training_validation_gap_pp": 13.489831096979856,
+      "old_winning_baseline": {
+        "validation_percent": 70.13751655096345,
+        "training_percent": 72.65420587252002,
+        "union_percent": 81.01702166488248,
+        "per_subfield_percent": {
+          "CA1_3_hard_dice": 67.97138249797415,
+          "subiculum_hard_dice": 68.70700373082353,
+          "CA4_DG_hard_dice": 73.73416342409269
+        },
+        "fn": 7870,
+        "fp": 9719,
+        "swaps": 5635,
+        "updates": 409,
+        "optimization_flops": 53217341798671,
+        "archive_manifest_sha256": "4a42d2eb8d73220c00e1a6006f20c35bf88aa00b881b2bc84d6fd1eab26e02b0"
+      },
+      "absolute_gain_vs_old_baseline_pp": 6.389246161354052,
+      "prior_plain_baseline": {
+        "metrics": {
+          "validation_percent": 76.1789539393954,
+          "training_percent": 88.7415049482864,
+          "union_percent": 86.02143320604424,
+          "per_subfield_percent": {
+            "CA1_3_hard_dice": 76.51705994534824,
+            "subiculum_hard_dice": 75.51365031436706,
+            "CA4_DG_hard_dice": 76.50615155847092
+          },
+          "fn": 6120,
+          "fp": 6615,
+          "swaps": 4448,
+          "updates": 409,
+          "optimization_flops": 53212215490831,
+          "archive_manifest_sha256": "dfc3f5faff02493328d2abb7044258aa3e371d587c27fa76d0dfcde221fee96a"
+        },
+        "manifest_sha256": "dfc3f5faff02493328d2abb7044258aa3e371d587c27fa76d0dfcde221fee96a",
+        "archive": "/Users/filippofocaccia/Desktop/hippo/reports/mni_unetr_plain_subfields53t_20261109/runs/MNI_unetr_plain_dice_f2s0"
+      },
+      "absolute_gain_vs_prior_plain_baseline_pp": 0.3478087729221073
+    },
+    {
+      "id": "MNI_unetr_plain_ce025_dice_f0s5",
+      "recipe": "plain_ce025",
+      "role": "baseline",
+      "kind": "conventional",
+      "dataset": "MNI",
+      "model": "unetr_vit_b16",
+      "arm": "dice",
+      "protocol": "plain_ce025_dice",
+      "seed": 5,
+      "fold": 0,
+      "augmentation": "none",
+      "dropout_rate": 0.0,
+      "pilot": true,
+      "current": {
+        "validation_percent": 74.34523955071789,
+        "training_percent": 90.01362455665446,
+        "union_percent": 85.49858944631298,
+        "per_subfield_percent": {
+          "CA1_3_hard_dice": 75.62282327765294,
+          "subiculum_hard_dice": 72.8049353760039,
+          "CA4_DG_hard_dice": 74.60795999849684
+        },
+        "fn": 8171,
+        "fp": 5293,
+        "swaps": 4992,
+        "updates": 409,
+        "optimization_flops": 53212215490831,
+        "archive_manifest_sha256": "bc423e39c0df3030143c744f687af54c830246aa28d5d8125bd010bf27eb7d3e"
+      },
+      "calibration": null,
+      "training_validation_gap_pp": 15.668385005936571,
+      "old_winning_baseline": {
+        "validation_percent": 69.21456446556068,
+        "training_percent": 71.03019272619659,
+        "union_percent": 79.86150069779512,
+        "per_subfield_percent": {
+          "CA1_3_hard_dice": 66.67958471041308,
+          "subiculum_hard_dice": 68.59541643280241,
+          "CA4_DG_hard_dice": 72.36869225346655
+        },
+        "fn": 11229,
+        "fp": 7389,
+        "swaps": 5460,
+        "updates": 409,
+        "optimization_flops": 53217341798671,
+        "archive_manifest_sha256": "d6e0e3b13af7b1d5e55c1e396643682123a44b08a78b75881123e1a81ec1bc4a"
+      },
+      "absolute_gain_vs_old_baseline_pp": 5.130675085157208,
+      "prior_plain_baseline": {
+        "metrics": {
+          "validation_percent": 74.57989824449092,
+          "training_percent": 88.11869276643286,
+          "union_percent": 85.51319650409962,
+          "per_subfield_percent": {
+            "CA1_3_hard_dice": 75.86479670999499,
+            "subiculum_hard_dice": 73.24012111441685,
+            "CA4_DG_hard_dice": 74.63477690906089
+          },
+          "fn": 7653,
+          "fp": 6000,
+          "swaps": 4951,
+          "updates": 409,
+          "optimization_flops": 53212215490831,
+          "archive_manifest_sha256": "ac9eddd6103ffa9b59812412e9003d35d0ed39612b1f9a2d42084454f5354007"
+        },
+        "manifest_sha256": "ac9eddd6103ffa9b59812412e9003d35d0ed39612b1f9a2d42084454f5354007",
+        "archive": "/Users/filippofocaccia/Desktop/hippo/reports/mni_unetr_plain_subfields53t_20261109/runs/MNI_unetr_plain_dice_f0s5"
+      },
+      "absolute_gain_vs_prior_plain_baseline_pp": -0.23465869377302795
+    }
+  ],
+  "summary": [
+    {
+      "candidate": "plain_ce025_bands_edge_depth",
+      "pairs": 1,
+      "rejected": true,
+      "mean_gain_pp": -0.0526909576384238,
+      "minimum_gain_pp": -0.0526909576384238,
+      "all_nine_improved": false,
+      "all_pairs": {
+        "pairs": 1,
+        "mean_gain_pp": -0.0526909576384238,
+        "minimum_gain_pp": -0.0526909576384238,
+        "improved_pairs": 0
+      },
+      "prior_plain_comparison_pairs": 1,
+      "mean_absolute_gain_vs_prior_plain_baseline_pp": -0.05417811822717056,
+      "mean_absolute_gain_vs_old_baseline_pp": 3.6673439282725013,
+      "minimum_absolute_gain_vs_old_baseline_pp": 3.6673439282725013,
+      "mean_new_baseline_gain_vs_old_baseline_pp": 3.72003488591092
+    },
+    {
+      "candidate": "plain_ce025_bands_edge",
+      "pairs": 1,
+      "rejected": true,
+      "mean_gain_pp": -0.161259504168354,
+      "minimum_gain_pp": -0.161259504168354,
+      "all_nine_improved": false,
+      "all_pairs": {
+        "pairs": 1,
+        "mean_gain_pp": -0.161259504168354,
+        "minimum_gain_pp": -0.161259504168354,
+        "improved_pairs": 0
+      },
+      "prior_plain_comparison_pairs": 1,
+      "mean_absolute_gain_vs_prior_plain_baseline_pp": -0.1627466647570941,
+      "mean_absolute_gain_vs_old_baseline_pp": 3.558775381742578,
+      "minimum_absolute_gain_vs_old_baseline_pp": 3.558775381742578,
+      "mean_new_baseline_gain_vs_old_baseline_pp": 3.72003488591092
+    }
+  ],
+  "scope": "Unchanged quarter-CE base, original bands+edge with/without depth, paired against an exact reused or new identical-loss/hold-half-LR baseline. Original delayed5% constraints;409updates;53.305T cap. Absolute comparison against old winning baseline reported separately.",
+  "caveat": "Adaptive development selection on overlapping folds. Gains from lowering a baseline alone do not establish improved absolute performance.",
+  "analysis_source_sha256": "8bf5c7227dd1fb1a8136d5df86f74675780e167db7c31dabb7b20ef6bd741784"
+}

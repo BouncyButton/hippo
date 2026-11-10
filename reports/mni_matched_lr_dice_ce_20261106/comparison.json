@@ -1,0 +1,331 @@
+{
+  "status": "incomplete",
+  "completed": 10,
+  "total": 18,
+  "groups": [
+    {
+      "seed": 0,
+      "dataset": "MNI",
+      "model": "nnunet",
+      "complete": true,
+      "completed_folds": [
+        0,
+        1,
+        2
+      ],
+      "fold_validation_dice": [
+        0.12732989339330017,
+        0.1145156728431719,
+        0.12814882307552555
+      ],
+      "mean_validation_dice": 0.12333146310399921,
+      "sd_validation_dice": 0.007645670663733862
+    },
+    {
+      "seed": 0,
+      "dataset": "MNI",
+      "model": "swinunetr",
+      "complete": true,
+      "completed_folds": [
+        0,
+        1,
+        2
+      ],
+      "fold_validation_dice": [
+        0.27814351537783594,
+        0.28834565329214396,
+        0.2732383501325734
+      ],
+      "mean_validation_dice": 0.27990917293418444,
+      "sd_validation_dice": 0.007706867855588963
+    },
+    {
+      "seed": 1,
+      "dataset": "MNI",
+      "model": "nnunet",
+      "complete": false,
+      "completed_folds": [
+        0,
+        1
+      ],
+      "fold_validation_dice": [
+        0.0,
+        0.0
+      ],
+      "mean_validation_dice": 0.0,
+      "sd_validation_dice": 0.0
+    },
+    {
+      "seed": 1,
+      "dataset": "MNI",
+      "model": "swinunetr",
+      "complete": false,
+      "completed_folds": [
+        0,
+        1
+      ],
+      "fold_validation_dice": [
+        0.3480903977490145,
+        0.34541469506796535
+      ],
+      "mean_validation_dice": 0.34675254640848996,
+      "sd_validation_dice": 0.0018920075102088895
+    },
+    {
+      "seed": 2,
+      "dataset": "MNI",
+      "model": "nnunet",
+      "complete": false,
+      "completed_folds": [],
+      "fold_validation_dice": [],
+      "mean_validation_dice": null,
+      "sd_validation_dice": null
+    },
+    {
+      "seed": 2,
+      "dataset": "MNI",
+      "model": "swinunetr",
+      "complete": false,
+      "completed_folds": [],
+      "fold_validation_dice": [],
+      "mean_validation_dice": null,
+      "sd_validation_dice": null
+    }
+  ],
+  "seed_summary": [
+    {
+      "seed": 0,
+      "complete": true,
+      "mean_across_model_dataset_means": 0.20162031801909183,
+      "lowest_model_dataset_mean": 0.12333146310399921,
+      "lowest_single_fold": 0.1145156728431719
+    },
+    {
+      "seed": 1,
+      "complete": false,
+      "mean_across_model_dataset_means": null,
+      "lowest_model_dataset_mean": null,
+      "lowest_single_fold": null
+    },
+    {
+      "seed": 2,
+      "complete": false,
+      "mean_across_model_dataset_means": null,
+      "lowest_model_dataset_mean": null,
+      "lowest_single_fold": null
+    }
+  ],
+  "runs": [
+    {
+      "id": "MNI_nnunet_dice_ce_caplr_f0s0",
+      "kind": "conventional",
+      "dataset": "MNI",
+      "model": "nnunet",
+      "fold": 0,
+      "seed": 0,
+      "arm": "dice",
+      "protocol": "nnunet",
+      "validation_dice": 0.12732989339330017,
+      "training_dice": 0.12338377675263978,
+      "best_validation_dice": 0.12732989339330017,
+      "foreground_fn": 40800,
+      "foreground_fp": 4866,
+      "ap_swaps": null,
+      "updates": 89,
+      "consumed_flops": 31627698358187,
+      "cleanup": "complete",
+      "released_file_bytes": 525329682
+    },
+    {
+      "id": "MNI_swinunetr_dice_ce_caplr_f0s0",
+      "kind": "conventional",
+      "dataset": "MNI",
+      "model": "swinunetr",
+      "fold": 0,
+      "seed": 0,
+      "arm": "dice",
+      "protocol": "swinunetr",
+      "validation_dice": 0.27814351537783594,
+      "training_dice": 0.2849925256759135,
+      "best_validation_dice": 0.27814351537783594,
+      "foreground_fn": 13135,
+      "foreground_fp": 14248,
+      "ap_swaps": null,
+      "updates": 206,
+      "consumed_flops": 31943300430788,
+      "cleanup": "complete",
+      "released_file_bytes": 336984404
+    },
+    {
+      "id": "MNI_nnunet_dice_ce_caplr_f1s0",
+      "kind": "conventional",
+      "dataset": "MNI",
+      "model": "nnunet",
+      "fold": 1,
+      "seed": 0,
+      "arm": "dice",
+      "protocol": "nnunet",
+      "validation_dice": 0.1145156728431719,
+      "training_dice": 0.14501512857027668,
+      "best_validation_dice": 0.1145156728431719,
+      "foreground_fn": 38137,
+      "foreground_fp": 7392,
+      "ap_swaps": null,
+      "updates": 89,
+      "consumed_flops": 31627698358187,
+      "cleanup": "complete",
+      "released_file_bytes": 525329682
+    },
+    {
+      "id": "MNI_swinunetr_dice_ce_caplr_f1s0",
+      "kind": "conventional",
+      "dataset": "MNI",
+      "model": "swinunetr",
+      "fold": 1,
+      "seed": 0,
+      "arm": "dice",
+      "protocol": "swinunetr",
+      "validation_dice": 0.28834565329214396,
+      "training_dice": 0.3111372286935347,
+      "best_validation_dice": 0.28834565329214396,
+      "foreground_fn": 7590,
+      "foreground_fp": 19661,
+      "ap_swaps": null,
+      "updates": 206,
+      "consumed_flops": 31943300430788,
+      "cleanup": "complete",
+      "released_file_bytes": 336984404
+    },
+    {
+      "id": "MNI_nnunet_dice_ce_caplr_f2s0",
+      "kind": "conventional",
+      "dataset": "MNI",
+      "model": "nnunet",
+      "fold": 2,
+      "seed": 0,
+      "arm": "dice",
+      "protocol": "nnunet",
+      "validation_dice": 0.12814882307552555,
+      "training_dice": 0.1359784543224646,
+      "best_validation_dice": 0.12814882307552555,
+      "foreground_fn": 37289,
+      "foreground_fp": 7898,
+      "ap_swaps": null,
+      "updates": 89,
+      "consumed_flops": 31627698358187,
+      "cleanup": "complete",
+      "released_file_bytes": 525329682
+    },
+    {
+      "id": "MNI_swinunetr_dice_ce_caplr_f2s0",
+      "kind": "conventional",
+      "dataset": "MNI",
+      "model": "swinunetr",
+      "fold": 2,
+      "seed": 0,
+      "arm": "dice",
+      "protocol": "swinunetr",
+      "validation_dice": 0.2732383501325734,
+      "training_dice": 0.3033608965189599,
+      "best_validation_dice": 0.27334641116024644,
+      "foreground_fn": 6876,
+      "foreground_fp": 20136,
+      "ap_swaps": null,
+      "updates": 206,
+      "consumed_flops": 31943300430788,
+      "cleanup": "complete",
+      "released_file_bytes": 336990420
+    },
+    {
+      "id": "MNI_nnunet_dice_ce_caplr_f0s1",
+      "kind": "conventional",
+      "dataset": "MNI",
+      "model": "nnunet",
+      "fold": 0,
+      "seed": 1,
+      "arm": "dice",
+      "protocol": "nnunet",
+      "validation_dice": 0.0,
+      "training_dice": 0.0,
+      "best_validation_dice": 0.010707874863740951,
+      "foreground_fn": 47795,
+      "foreground_fp": 0,
+      "ap_swaps": null,
+      "updates": 89,
+      "consumed_flops": 31627698358187,
+      "cleanup": "complete",
+      "released_file_bytes": 525335634
+    },
+    {
+      "id": "MNI_swinunetr_dice_ce_caplr_f0s1",
+      "kind": "conventional",
+      "dataset": "MNI",
+      "model": "swinunetr",
+      "fold": 0,
+      "seed": 1,
+      "arm": "dice",
+      "protocol": "swinunetr",
+      "validation_dice": 0.3480903977490145,
+      "training_dice": 0.3567539820078939,
+      "best_validation_dice": 0.3480903977490145,
+      "foreground_fn": 4424,
+      "foreground_fp": 15068,
+      "ap_swaps": null,
+      "updates": 206,
+      "consumed_flops": 31943300430788,
+      "cleanup": "complete",
+      "released_file_bytes": 336984340
+    },
+    {
+      "id": "MNI_nnunet_dice_ce_caplr_f1s1",
+      "kind": "conventional",
+      "dataset": "MNI",
+      "model": "nnunet",
+      "fold": 1,
+      "seed": 1,
+      "arm": "dice",
+      "protocol": "nnunet",
+      "validation_dice": 0.0,
+      "training_dice": 0.0,
+      "best_validation_dice": 0.011693324999533928,
+      "foreground_fn": 46205,
+      "foreground_fp": 0,
+      "ap_swaps": null,
+      "updates": 89,
+      "consumed_flops": 31627698358187,
+      "cleanup": "complete",
+      "released_file_bytes": 525335634
+    },
+    {
+      "id": "MNI_swinunetr_dice_ce_caplr_f1s1",
+      "kind": "conventional",
+      "dataset": "MNI",
+      "model": "swinunetr",
+      "fold": 1,
+      "seed": 1,
+      "arm": "dice",
+      "protocol": "swinunetr",
+      "validation_dice": 0.34541469506796535,
+      "training_dice": 0.38766927865148104,
+      "best_validation_dice": 0.34541469506796535,
+      "foreground_fn": 4691,
+      "foreground_fp": 17649,
+      "ap_swaps": null,
+      "updates": 206,
+      "consumed_flops": 31943300430788,
+      "cleanup": "complete",
+      "released_file_bytes": 336984340
+    }
+  ],
+  "released_file_bytes": 4311588222,
+  "interpretation": "Final-budget hard Dice; equal-weight fold means. All requested seeds and folds retained. Seed summaries require all requested conditions. No numerical all-model success threshold or confirmatory seed selection is asserted.",
+  "live_status": "paused",
+  "active": "MNI_nnunet_dice_ce_caplr_f2s1",
+  "last_observed_quota": {
+    "used_gib": 43.41,
+    "limit_gib": 93.13,
+    "free_gib": 49.72,
+    "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  43.41GiB/93.13GiB  308.52k/\u221e  \n\n",
+    "checked_at": 1793990557.9608722
+  }
+}

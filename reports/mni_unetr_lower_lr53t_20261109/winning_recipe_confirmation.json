@@ -1,0 +1,115 @@
+{
+  "verified_at": 1794215448.19606,
+  "candidate": "lr030_cosine_bands",
+  "pairs": [
+    {
+      "seed": 0,
+      "fold": 0,
+      "baseline_dice_percent": 69.75410742597548,
+      "constrained_dice_percent": 70.16010416016528,
+      "gain_pp": 0.4059967341898063,
+      "baseline_archive_sha256": "b2cecc77abaa594e5ab4899a2145a3aa9ed090365dc3b4008eaf71059b8a04a0",
+      "constraint_archive_sha256": "9de62de12f7a5a0ec0be51a7ab06043cfb75c2e2cc385918d5161b0f5f7ca6dc"
+    },
+    {
+      "seed": 0,
+      "fold": 1,
+      "baseline_dice_percent": 70.58489395438899,
+      "constrained_dice_percent": 70.93237282222194,
+      "gain_pp": 0.3474788678329399,
+      "baseline_archive_sha256": "4a67010ff0031d3a186e4ee9c048ea8bd23fa49bc319175c5b87ecef2b2d4a1a",
+      "constraint_archive_sha256": "1cfbc923490a0abb7b23558e6706e0b4bbcabb5848aea5039ff982682ddd22c1"
+    },
+    {
+      "seed": 0,
+      "fold": 2,
+      "baseline_dice_percent": 72.77530923903005,
+      "constrained_dice_percent": 72.9716429478812,
+      "gain_pp": 0.19633370885114854,
+      "baseline_archive_sha256": "847c98a017d7a95a6746964dadc2e2e308123d397c5dcf780f9d60c25cc47215",
+      "constraint_archive_sha256": "a066dbecdec3224698f0d7522071379d2603fd9e0e7f1178e66c43c440ca82b6"
+    },
+    {
+      "seed": 5,
+      "fold": 0,
+      "baseline_dice_percent": 68.07168514987538,
+      "constrained_dice_percent": 68.23526360031423,
+      "gain_pp": 0.16357845043885044,
+      "baseline_archive_sha256": "e9bee9506f8bf3a667c6d0668b170a49566e7df52c98e3937fbbb34aac4a8324",
+      "constraint_archive_sha256": "d928e81f84c2b2c249f2776bf5970bc6d7e43f6324a5b2cfbefcc39e978563ad"
+    },
+    {
+      "seed": 5,
+      "fold": 1,
+      "baseline_dice_percent": 69.4306092474824,
+      "constrained_dice_percent": 69.46514158638327,
+      "gain_pp": 0.034532338900883364,
+      "baseline_archive_sha256": "7df72fe89843c8033fb8739b2a04f4ada546f299bba1ee5dcf22c994c1b19620",
+      "constraint_archive_sha256": "04a837c8329a1b1c7c6c579a3823238181fcbc47463ea7b0098dd34123ba3ed0"
+    },
+    {
+      "seed": 5,
+      "fold": 2,
+      "baseline_dice_percent": 70.85795213903407,
+      "constrained_dice_percent": 71.40351286064576,
+      "gain_pp": 0.5455607216116931,
+      "baseline_archive_sha256": "4447f4cd7ab25ef473f6cf3f5cad5f434e86faa00072c760cade182c186b17fd",
+      "constraint_archive_sha256": "577e9f5aa1a6dcd491a42c3565b6b04c4b57aea8759ae4ab48976d0be1b53bc6"
+    },
+    {
+      "seed": 19,
+      "fold": 0,
+      "baseline_dice_percent": 55.818016051552355,
+      "constrained_dice_percent": 57.6268201515969,
+      "gain_pp": 1.8088041000445476,
+      "baseline_archive_sha256": "47a4a05a92aaebc2382c6d670da9246af4616aa86fc89217435f7acc0722aa8a",
+      "constraint_archive_sha256": "6a68bc8a1680e6fcee0448edae16f3a18465fad70af69af556dd31b35fba5331"
+    },
+    {
+      "seed": 19,
+      "fold": 1,
+      "baseline_dice_percent": 55.87898937503506,
+      "constrained_dice_percent": 57.58815832529767,
+      "gain_pp": 1.7091689502626073,
+      "baseline_archive_sha256": "36af4211bc16f94abcd819503fa043ef30a5adf485e4672dd160a75c1a9564a6",
+      "constraint_archive_sha256": "66e25596d92c6941c747985dc74d82dee338014fa5ca78798a500d18b1309d58"
+    },
+    {
+      "seed": 19,
+      "fold": 2,
+      "baseline_dice_percent": 57.76988075889743,
+      "constrained_dice_percent": 59.40146883707099,
+      "gain_pp": 1.6315880781735626,
+      "baseline_archive_sha256": "a373f812e90c86e810d73c0d5af202cb3e9adeed9df14eb2d160294cfdf23eea",
+      "constraint_archive_sha256": "4043b077c6fc0f11fd94cc2b36e1666030d087bcf6b4547e309369989b26900c"
+    }
+  ],
+  "positive_pairs": 9,
+  "mean_gain_pp": 0.7603379944784487,
+  "minimum_gain_pp": 0.034532338900883364,
+  "maximum_gain_pp": 1.8088041000445476,
+  "baseline_mean_dice_percent": 65.66016037125236,
+  "constrained_mean_dice_percent": 66.42049836573081,
+  "recipe": {
+    "peak_lr": 0.0003,
+    "dropout": 0,
+    "augmentation": "none",
+    "base_loss": "original foreground squared Dice + CE1",
+    "schedule": "24-update warmup then cosine to1%peak",
+    "updates": 409,
+    "constraint": "original bands",
+    "calibration_updates": 102,
+    "target_ratio": 0.05,
+    "p95_cap": 0.75,
+    "ramp_updates": 33,
+    "optimization_flops_cap": 53305109592450,
+    "training_subjects": 10,
+    "training_crops": 20
+  },
+  "constraint_protocol_sha256": "1b0108100346e6b0b23b87da97c659396935fdd0834b7bd96979b76417a25f6f",
+  "baseline_protocol_sha256": "953176fa8cac9ffe172569c7795e6cdf1ca99f1129bd118b24cb4ff2ed1f6ffa",
+  "input_result_sha256": "a7638b94507f2c900128e9506b899809bece621d4d4579f83b5bb718db27ad65",
+  "user_criterion_sha256": "1225d5a8f9d975375f1b6e68f09469b64f628488f6ffad09da7d69d3e43cc742",
+  "scope": "Nine observed development seed/fold pairs. Training-only calibration; shared protocol; all attempts retained. Other constraint combinations and unseen data are not confirmed by this result.",
+  "full_matrix_status": "Launched and startup verified: job748838 running on two GPUs; successor748839 queued. 504logical cells,32exact reuses,472new/resumed. Two workers have positive optimizer steps. See matrix goal_completion_audit.json."
+}

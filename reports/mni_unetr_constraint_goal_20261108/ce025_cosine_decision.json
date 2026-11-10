@@ -1,0 +1,64 @@
+{
+  "approved_for_execution": true,
+  "authorization": "Standing user request to continue original-constraint approaches and modify/simplify UNETR recipe after failures; not a new user approval.",
+  "created_at": 1794198991.179297,
+  "recipes": [
+    {
+      "key": "ce025_cosine",
+      "dropout_rate": 0.0,
+      "augmentation": "none"
+    }
+  ],
+  "arms": [
+    "dice",
+    "dice_bands_edge_sdf_depth",
+    "dice_bands"
+  ],
+  "reason": "All quarter-CE hold-half candidates failed, including both no-SDF subsets. Earlier cosine with full DiceCE1:1 improved5/6 pairs, while quarter-CE hold-half full improved2/3. Cross these already tested base factors: change only the LR schedule from hold-half to immediate post-warmup cosine while preserving quarter-CE, no dropout/augmentation, optimizer, original constraints and strength/timing. This tests an interaction; improvement is not assumed.",
+  "changed": "LR policy only versus quarter-CE hold-half; adapter metadata changes to enforce it.",
+  "fresh_controls": true,
+  "reuse_baselines": false,
+  "pairs": [
+    [
+      0,
+      1
+    ],
+    [
+      0,
+      2
+    ],
+    [
+      5,
+      0
+    ],
+    [
+      19,
+      0
+    ],
+    [
+      0,
+      0
+    ],
+    [
+      5,
+      1
+    ],
+    [
+      5,
+      2
+    ],
+    [
+      19,
+      1
+    ],
+    [
+      19,
+      2
+    ]
+  ],
+  "cap": 53305109592450,
+  "gpu_workers": 2,
+  "acceptance": "Strict9/9 positive final-budget paired gains, also assess absolute quality versus old winner and stronger plain/quarter-CE/CE1cosine controls. Keep all failed attempts. Other models remain paused.",
+  "calibration": "Training-only at102updates,target.05,p95cap.75,original sequential weights;33update ramp; original SDF timing.",
+  "profile_reuse": "Identical model/loss/optimizer operation graph; AST equality verifies all actual runtime functions except protocol guard. Existing measured quarter-CE profile and original adapter provenance retained.409updates affordable;410not."
+}

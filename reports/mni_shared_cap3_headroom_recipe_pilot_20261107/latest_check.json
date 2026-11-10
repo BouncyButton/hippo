@@ -1,0 +1,124 @@
+{
+  "queue": [
+    "744109|PENDING|0:00|(Dependency)",
+    "744108|RUNNING|8:43|gnode01"
+  ],
+  "status": {
+    "status": "running",
+    "active": [
+      "MNI_unetr_vit_b16_f0s0"
+    ],
+    "completed": 3,
+    "total": 4,
+    "runs": [
+      {
+        "id": "MNI_nnunet_f0s0",
+        "model": "nnunet",
+        "dataset": "MNI",
+        "kind": "conventional",
+        "protocol": "nnunet",
+        "arm": "dice",
+        "fold": 0,
+        "seed": 0,
+        "augmentation": "none",
+        "final_dice": 0.7555670345968551,
+        "best_dice": 0.7573482205643909,
+        "released_bytes": 525343890
+      },
+      {
+        "id": "MNI_swinunetr_f0s0",
+        "model": "swinunetr",
+        "dataset": "MNI",
+        "kind": "conventional",
+        "protocol": "swinunetr",
+        "arm": "dice",
+        "fold": 0,
+        "seed": 0,
+        "augmentation": "xy_d4_v1",
+        "final_dice": 0.7556428304870717,
+        "best_dice": 0.7657525614774168,
+        "released_bytes": 336998548
+      },
+      {
+        "id": "MNI_basic_unet16_f0s0",
+        "model": "basic_unet16",
+        "dataset": "MNI",
+        "kind": "conventional",
+        "protocol": "basic_unet16",
+        "arm": "dice",
+        "fold": 0,
+        "seed": 0,
+        "augmentation": "xy_d4_v1",
+        "final_dice": 0.509304664768435,
+        "best_dice": 0.5101724383951844,
+        "released_bytes": 28980240
+      }
+    ],
+    "job_id": "744108",
+    "updated_at": 1794050541.3775938,
+    "quota": {
+      "used_gib": 50.07,
+      "limit_gib": 93.13,
+      "free_gib": 43.059999999999995,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  50.07GiB/93.13GiB  350.40k/\u221e  \n\n",
+      "checked_at": 1794050541.416854
+    }
+  },
+  "runs": [
+    {
+      "id": "MNI_basic_unet16_f0s0",
+      "cleaned": true,
+      "charged_updates": 1690,
+      "latest": {
+        "step": "1690",
+        "compute_fraction": "0.9998903783288366",
+        "training_macro_hard_dice": "0.5548540636312046",
+        "macro_hard_dice": "0.509304664768435",
+        "learning_rate": "2.9999999999999997e-06"
+      },
+      "final_training_dice": 0.5548540636312046
+    },
+    {
+      "id": "MNI_nnunet_f0s0",
+      "cleaned": true,
+      "charged_updates": 269,
+      "latest": {
+        "step": "269",
+        "compute_fraction": "0.996502403850924",
+        "training_macro_hard_dice": "0.9281587075647216",
+        "macro_hard_dice": "0.7555670345968551",
+        "learning_rate": "0.00012097610797907429"
+      },
+      "final_training_dice": 0.9281587075647216
+    },
+    {
+      "id": "MNI_swinunetr_f0s0",
+      "cleaned": true,
+      "charged_updates": 618,
+      "latest": {
+        "step": "618",
+        "compute_fraction": "0.9989244494533787",
+        "training_macro_hard_dice": "0.8628334479556232",
+        "macro_hard_dice": "0.7556428304870717",
+        "learning_rate": "2.9999999999999997e-06"
+      },
+      "final_training_dice": 0.8628334479556232
+    },
+    {
+      "id": "MNI_unetr_vit_b16_f0s0",
+      "cleaned": false,
+      "charged_updates": 737,
+      "latest": {
+        "step": "737",
+        "compute_fraction": "0.9996451121282822",
+        "training_macro_hard_dice": "0.7957240302270256",
+        "macro_hard_dice": "0.7017363508113498",
+        "learning_rate": "5.999999999999999e-06"
+      },
+      "final_training_dice": 0.7957240302270256
+    }
+  ],
+  "slurm_errors": {
+    "slurm-744108.err": ""
+  }
+}

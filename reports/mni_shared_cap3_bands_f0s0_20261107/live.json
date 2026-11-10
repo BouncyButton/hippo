@@ -1,0 +1,170 @@
+{
+  "status.json": {
+    "status": "complete",
+    "active": null,
+    "completed": 4,
+    "total": 4,
+    "runs": [
+      {
+        "id": "MNI_nnunet_dice_bands_f0s0",
+        "kind": "conventional",
+        "dataset": "MNI",
+        "model": "nnunet",
+        "arm": "dice_bands",
+        "fold": 0,
+        "seed": 0,
+        "protocol": "nnunet",
+        "augmentation": "none",
+        "target": 0.1,
+        "final_dice": 0.7423046738735699,
+        "best_dice": 0.7424587267001777,
+        "released_bytes": 525344018
+      },
+      {
+        "id": "MNI_swinunetr_dice_bands_f0s0",
+        "kind": "conventional",
+        "dataset": "MNI",
+        "model": "swinunetr",
+        "arm": "dice_bands",
+        "fold": 0,
+        "seed": 0,
+        "protocol": "swinunetr",
+        "augmentation": "xy_d4_v1",
+        "target": 0.1,
+        "final_dice": 0.757622075527216,
+        "best_dice": 0.7646630123175425,
+        "released_bytes": 336998612
+      },
+      {
+        "id": "MNI_unetr_vit_b16_dice_bands_f0s0",
+        "kind": "conventional",
+        "dataset": "MNI",
+        "model": "unetr_vit_b16",
+        "arm": "dice_bands",
+        "fold": 0,
+        "seed": 0,
+        "protocol": "unetr_vit_b16",
+        "augmentation": "xy_d4_v1",
+        "target": 0.05,
+        "final_dice": 0.6955599418023785,
+        "best_dice": 0.6955599418023785,
+        "released_bytes": 1853959838
+      },
+      {
+        "id": "MNI_basic_unet16_dice_bands_f0s0",
+        "kind": "conventional",
+        "dataset": "MNI",
+        "model": "basic_unet16",
+        "arm": "dice_bands",
+        "fold": 0,
+        "seed": 0,
+        "protocol": "basic_unet16",
+        "augmentation": "none",
+        "target": 0.1,
+        "final_dice": 0.6959246945419281,
+        "best_dice": 0.7017958237489708,
+        "released_bytes": 28980368
+      }
+    ],
+    "job_id": "744414",
+    "updated_at": 1794058257.3312223,
+    "quota": {
+      "used_gib": 47.55,
+      "limit_gib": 93.13,
+      "free_gib": 45.58,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  47.55GiB/93.13GiB  358.72k/\u221e  \n\n",
+      "checked_at": 1794058257.368855
+    },
+    "bands_comparison": [
+      {
+        "model": "nnunet",
+        "target": 0.1,
+        "baseline_validation_dice": 0.7410936427380697,
+        "bands_validation_dice": 0.7423046738735699,
+        "delta_pp": 0.12110311355002512,
+        "baseline_training_dice": 0.8860964661104553,
+        "bands_training_dice": 0.8877122318995768
+      },
+      {
+        "model": "swinunetr",
+        "target": 0.1,
+        "baseline_validation_dice": 0.7556428304870717,
+        "bands_validation_dice": 0.757622075527216,
+        "delta_pp": 0.19792450401443507,
+        "baseline_training_dice": 0.8628334479556232,
+        "bands_training_dice": 0.8657870939650276
+      },
+      {
+        "model": "unetr_vit_b16",
+        "target": 0.05,
+        "baseline_validation_dice": 0.7017363508113498,
+        "bands_validation_dice": 0.6955599418023785,
+        "delta_pp": -0.6176409008971318,
+        "baseline_training_dice": 0.7957240302270256,
+        "bands_training_dice": 0.7943424605638081
+      },
+      {
+        "model": "basic_unet16",
+        "target": 0.1,
+        "baseline_validation_dice": 0.6764473018747913,
+        "bands_validation_dice": 0.6959246945419281,
+        "delta_pp": 1.9477392667136773,
+        "baseline_training_dice": 0.8748659403908572,
+        "bands_training_dice": 0.9189837652768615
+      }
+    ]
+  },
+  "submission.json": {
+    "job_id": "744414",
+    "dependency": "744210",
+    "quota": {
+      "used_gib": 48.8,
+      "limit_gib": 93.13,
+      "free_gib": 44.33,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  48.80GiB/93.13GiB  358.46k/\u221e  \n\n",
+      "checked_at": 1794057079.2341425
+    },
+    "submitted_at": 1794057079.5574152,
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--chdir=/mnt/beegfsstudents/home/3160552/mni_shared_cap3_bands_f0s0_20261107",
+      "--output=/mnt/beegfsstudents/home/3160552/mni_shared_cap3_bands_f0s0_20261107/slurm-%j.out",
+      "--error=/mnt/beegfsstudents/home/3160552/mni_shared_cap3_bands_f0s0_20261107/slurm-%j.err",
+      "--dependency=afterany:744210",
+      "/mnt/beegfsstudents/home/3160552/mni_shared_cap3_bands_f0s0_20261107/run.sbatch",
+      "/mnt/beegfsstudents/home/3160552/mni_shared_cap3_bands_f0s0_20261107"
+    ],
+    "manifest_sha256": "feecd313a347ac9267c656f38afbe140efc78640faa9dc813350be2e7bb451d4"
+  },
+  "successor.json": {
+    "job_id": "744464",
+    "dependency": "744414",
+    "quota": {
+      "used_gib": 43.85,
+      "limit_gib": 93.13,
+      "free_gib": 49.279999999999994,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  43.85GiB/93.13GiB  358.59k/\u221e  \n\n",
+      "checked_at": 1794057659.7477465
+    },
+    "submitted_at": 1794057659.8724318,
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--chdir=/mnt/beegfsstudents/home/3160552/mni_shared_cap3_bands_f0s0_20261107",
+      "--output=/mnt/beegfsstudents/home/3160552/mni_shared_cap3_bands_f0s0_20261107/slurm-%j.out",
+      "--error=/mnt/beegfsstudents/home/3160552/mni_shared_cap3_bands_f0s0_20261107/slurm-%j.err",
+      "--dependency=afterany:744414",
+      "/mnt/beegfsstudents/home/3160552/mni_shared_cap3_bands_f0s0_20261107/run.sbatch",
+      "/mnt/beegfsstudents/home/3160552/mni_shared_cap3_bands_f0s0_20261107"
+    ],
+    "manifest_sha256": "feecd313a347ac9267c656f38afbe140efc78640faa9dc813350be2e7bb451d4"
+  },
+  "ready": [],
+  "cleanup": [
+    "runs/MNI_basic_unet16_dice_bands_f0s0/cleanup.json",
+    "runs/MNI_nnunet_dice_bands_f0s0/cleanup.json",
+    "runs/MNI_swinunetr_dice_bands_f0s0/cleanup.json",
+    "runs/MNI_unetr_vit_b16_dice_bands_f0s0/cleanup.json"
+  ]
+}

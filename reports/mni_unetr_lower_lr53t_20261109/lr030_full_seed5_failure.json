@@ -1,0 +1,47 @@
+{
+  "candidate": "lr030_cosine_full",
+  "seed": 5,
+  "fold": 0,
+  "gain_pp": -0.08796317349394345,
+  "training_gain_pp": 0.31577739385217285,
+  "union_gain_pp": 0.0732980158401233,
+  "subfield_gain_pp": {
+    "CA1_3_hard_dice": 0.09803850287995886,
+    "subiculum_hard_dice": -0.34242878320304726,
+    "CA4_DG_hard_dice": -0.019499240158751263
+  },
+  "error_delta": {
+    "fn": 250,
+    "fp": -454,
+    "swaps": 15
+  },
+  "absolute_gain_vs_old_baseline_pp": -1.2308424891792527,
+  "absolute_gain_vs_prior_plain_baseline_pp": -6.596176268109488,
+  "prefix_replay": {
+    "shared_checks": [
+      21,
+      41,
+      62,
+      82
+    ],
+    "maximum_training_dice_error": 0.0
+  },
+  "checked_at": 1794211451.7077591,
+  "rejected": true,
+  "final_dice": 67.98372197638143,
+  "baseline_dice": 68.07168514987538,
+  "gap_change_pp": 0.4037405673461163,
+  "updates": 409,
+  "charged_attempts": 409,
+  "late_original_band_weighted_logit_norm_ratio": {
+    "training_median": 0.029911765616275503,
+    "training_maximum": 0.03174653430388492,
+    "training_cases": 20,
+    "scope": "Detached-logit original-band probe only; not combined auxiliary parameter gradients or Adam updates."
+  },
+  "interpretation": "Final macro Dice declines despite higher training and union Dice, chiefly through subiculum Dice. This rejects the candidate. Slower LR did not make the full combination consistently beneficial; no optimizer or combined-gradient failure is established by these diagnostics.",
+  "input_result_sha256": "04cd45ecfda1f830d9f8520e5aaf8fcfce81b686684ac25a86c6cf2f492b5dfc",
+  "spatial_sha256": "2389425389d5bb6d003ca47cd51937c7f1fe124dfcc42fb09d64923b678d78c0",
+  "metrics_sha256": "3434da0bbc8d6fdaf0223a816b59a5113a9760929d812d2c03f24608d025476b",
+  "archive_manifest_sha256": "d4971bd25e9cf5e055c26aa9d99a3008a1d9a05bdc243225d9a48c19bd2c3e0c"
+}

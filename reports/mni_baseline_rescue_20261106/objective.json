@@ -1,0 +1,42 @@
+{
+  "dataset": "MNI",
+  "training_subjects": 5,
+  "training_crops": 10,
+  "folds": [
+    0,
+    1,
+    2
+  ],
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "models_in_order": [
+    "nnunet",
+    "swinunetr",
+    "unetr_vit_b16",
+    "basic_unet16"
+  ],
+  "common_cap_required": true,
+  "losses": {
+    "nnunet": "native Dice+CE/deep supervision",
+    "swinunetr": "Dice only",
+    "unetr_vit_b16": "Geo foreground squared Dice+CE",
+    "basic_unet16": "Dice only"
+  },
+  "success": {
+    "minimum_each_run_dice": 0.45,
+    "minimum_each_seed_mean_dice": 0.5,
+    "minimum_each_foreground_class_dice": 0.1,
+    "class_guard_reason": "Reject complete foreground-class collapse that a two-class macro score could conceal. Added before Swin pilot completes, after inspecting its learning curve."
+  },
+  "compute": {
+    "gpu_workers": 2,
+    "max_running_jobs": 1,
+    "max_queued_jobs": 1,
+    "recurring_automation": false
+  },
+  "integrity": "Fixed subjects and seeds, no per-model seed selection. Development validation informs cap/recipe selection; report all attempts. Full-budget checkpoint primary.",
+  "storage": "Evaluate, archive locally with source/config/splits/hash checks, then remove completed GPU checkpoint artifacts."
+}

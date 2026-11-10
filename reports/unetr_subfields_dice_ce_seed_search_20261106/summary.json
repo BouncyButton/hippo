@@ -1,0 +1,86 @@
+{
+  "status": "paused",
+  "outcome": "searching",
+  "active": "MNI_unetr_vit_b16_dice_ce_f1s0",
+  "completed": 2,
+  "runs": [
+    {
+      "dataset": "COBRA",
+      "objective": "dice_ce",
+      "seed": 0,
+      "fold": 0,
+      "final_dice": 0.038480301948023765,
+      "whole_hippocampus_dice": 0.24917952628375611,
+      "best_dice": 0.038480301948023765,
+      "updates": 164,
+      "consumed_training_flops": 31970731910312,
+      "foreground_fn": 19761,
+      "foreground_fp": 8012,
+      "released_file_bytes": 1854441630
+    },
+    {
+      "dataset": "MNI",
+      "objective": "dice_ce",
+      "seed": 0,
+      "fold": 0,
+      "final_dice": 0.3044141864982681,
+      "whole_hippocampus_dice": 0.6446403777214086,
+      "best_dice": 0.3044141864982681,
+      "updates": 245,
+      "consumed_training_flops": 31874774199100,
+      "foreground_fn": 20671,
+      "foreground_fp": 8949,
+      "released_file_bytes": 1853951518
+    }
+  ],
+  "threshold": 0.45,
+  "criterion": "Mean final-budget foreground-subfield Dice over folds 0,1,2",
+  "groups": {
+    "MNI": {
+      "qualifying_seeds": [],
+      "target": 3,
+      "target_met": false,
+      "attempted_seeds": [
+        {
+          "seed": 0,
+          "fold_dice": {
+            "0": 0.3044141864982681
+          },
+          "mean_dice": null,
+          "qualifies": false,
+          "rejected_by_upper_bound": false,
+          "best_possible_mean": 0.7681380621660893
+        }
+      ]
+    },
+    "COBRA": {
+      "qualifying_seeds": [],
+      "target": 3,
+      "target_met": false,
+      "attempted_seeds": [
+        {
+          "seed": 0,
+          "fold_dice": {
+            "0": 0.038480301948023765
+          },
+          "mean_dice": null,
+          "qualifies": false,
+          "rejected_by_upper_bound": false,
+          "best_possible_mean": 0.6794934339826746
+        }
+      ]
+    }
+  },
+  "target_met": false,
+  "inference": "Validation-selected exploratory seeds; these scores are not an unbiased baseline estimate.",
+  "released_file_bytes": 3708393148,
+  "last_observed_quota": {
+    "used_gib": 47.25,
+    "limit_gib": 93.13,
+    "free_gib": 45.879999999999995,
+    "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  47.25GiB/93.13GiB  304.00k/\u221e  \n\n",
+    "checked_at": 1793979350.316132
+  },
+  "source_sha256": "dab75dcddeda5d4dadc1439ad7316fb46d40a9066501d8325cdf3b9a904b58f2",
+  "updated_at": 1793979393.336823
+}

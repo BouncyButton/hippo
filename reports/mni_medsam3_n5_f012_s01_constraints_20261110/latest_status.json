@@ -1,0 +1,264 @@
+{
+  "checked_at": 1794331216.6782463,
+  "queue": "752229 RUNNING hippo-medsam3-adaptive gnode02\n",
+  "mni_medsam3_n5_adaptive60_2gpu_20261110": {
+    "status.json": {
+      "status": "running",
+      "active": [
+        "MNI_MedSAM3_n5_f2s1_native400"
+      ],
+      "completed_milestones": 6,
+      "selected_seeds": [
+        0,
+        1
+      ],
+      "outcome": null,
+      "threshold": 0.6,
+      "maximum_updates": 1000,
+      "runs": [
+        {
+          "id": "MNI_MedSAM3_n5_f0s0_native400",
+          "protocol": "MNI_MedSAM3_n5_f0s0_native400",
+          "kind": "foundation",
+          "dataset": "MNI",
+          "subjects": 5,
+          "fold": 0,
+          "seed": 0,
+          "updates": 400,
+          "arm": "dice",
+          "validation_dice": 0.7073945421731334,
+          "training_dice": 0.772249449596389,
+          "observed_at": 1794311228.7177837
+        },
+        {
+          "id": "MNI_MedSAM3_n5_f0s1_native400",
+          "protocol": "MNI_MedSAM3_n5_f0s1_native400",
+          "kind": "foundation",
+          "dataset": "MNI",
+          "subjects": 5,
+          "fold": 0,
+          "seed": 1,
+          "updates": 400,
+          "arm": "dice",
+          "validation_dice": 0.7234529283661724,
+          "training_dice": 0.7837914774400506,
+          "observed_at": 1794312479.5362341
+        },
+        {
+          "id": "MNI_MedSAM3_n5_f0s2_native400",
+          "protocol": "MNI_MedSAM3_n5_f0s2_native400",
+          "kind": "foundation",
+          "dataset": "MNI",
+          "subjects": 5,
+          "fold": 0,
+          "seed": 2,
+          "updates": 400,
+          "arm": "dice",
+          "validation_dice": 0.7144921566164857,
+          "training_dice": 0.7750749985697556,
+          "observed_at": 1794320994.1822703
+        },
+        {
+          "id": "MNI_MedSAM3_n5_f1s0_native400",
+          "protocol": "MNI_MedSAM3_n5_f1s0_native400",
+          "kind": "foundation",
+          "dataset": "MNI",
+          "subjects": 5,
+          "fold": 1,
+          "seed": 0,
+          "updates": 400,
+          "arm": "dice",
+          "validation_dice": 0.6995920990585469,
+          "training_dice": 0.793626047936951,
+          "observed_at": 1794322857.1073043
+        },
+        {
+          "id": "MNI_MedSAM3_n5_f1s1_native400",
+          "protocol": "MNI_MedSAM3_n5_f1s1_native400",
+          "kind": "foundation",
+          "dataset": "MNI",
+          "subjects": 5,
+          "fold": 1,
+          "seed": 1,
+          "updates": 400,
+          "arm": "dice",
+          "validation_dice": 0.6660836739253095,
+          "training_dice": 0.7653994785851131,
+          "observed_at": 1794326687.7702484
+        },
+        {
+          "id": "MNI_MedSAM3_n5_f2s0_native400",
+          "protocol": "MNI_MedSAM3_n5_f2s0_native400",
+          "kind": "foundation",
+          "dataset": "MNI",
+          "subjects": 5,
+          "fold": 2,
+          "seed": 0,
+          "updates": 400,
+          "arm": "dice",
+          "validation_dice": 0.7230538759681682,
+          "training_dice": 0.7766463190989012,
+          "observed_at": 1794328318.9566545
+        }
+      ],
+      "job_id": "752229",
+      "updated_at": 1794328320.403929,
+      "quota": {
+        "used_gib": 52.38,
+        "limit_gib": 93.13,
+        "free_gib": 40.74999999999999,
+        "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  52.38GiB/93.13GiB  538.38k/\u221e  \n\n",
+        "checked_at": 1794328320.4425151
+      },
+      "pending_durable_archive": [
+        "MNI_MedSAM3_n5_f2s0_native400"
+      ],
+      "pending_cleanup": [
+        "MNI_MedSAM3_n5_f2s0_native400"
+      ],
+      "operational_manifest_sha256": "e45214117f863ae8e6f500798b2bf36058e3053d27f3cf71516641c4438da82c",
+      "offline_policy": "Training, selection, model delivery and continuation are cluster-owned. Retain artifacts until a real verified off-BeeGFS archive returns."
+    },
+    "offline_service.json": {
+      "status": "running",
+      "pid": 2766874,
+      "active_jobs": [
+        [
+          "752229",
+          "RUNNING",
+          "hippo-medsam3-adaptive"
+        ]
+      ],
+      "last_check": 1794331214.619985,
+      "laptop_required": false,
+      "operational_manifest_sha256": "e45214117f863ae8e6f500798b2bf36058e3053d27f3cf71516641c4438da82c"
+    },
+    "control.json": {
+      "pause": false,
+      "handoff_started": 1794308873.9824512,
+      "controller_owner": "offline_v1",
+      "automatic_continuation_owner": "offline_v1",
+      "handoff_completed": 1794308981.5309858
+    },
+    "submission.json": {
+      "job_id": "752229",
+      "dependency": null,
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--chdir=/mnt/beegfsstudents/home/3160552/mni_medsam3_n5_adaptive60_2gpu_20261110",
+        "--output=/mnt/beegfsstudents/home/3160552/mni_medsam3_n5_adaptive60_2gpu_20261110/slurm-%j.out",
+        "--error=/mnt/beegfsstudents/home/3160552/mni_medsam3_n5_adaptive60_2gpu_20261110/slurm-%j.err",
+        "/mnt/beegfsstudents/home/3160552/mni_medsam3_n5_adaptive60_2gpu_20261110/operations/offline_v1/run.sbatch",
+        "/mnt/beegfsstudents/home/3160552/mni_medsam3_n5_adaptive60_2gpu_20261110"
+      ],
+      "submitted_at": 1794321150.1416693,
+      "manifest_sha256": "90b3987a624e1f246af9eb1b6842b70dc25384129c60d1f5929207149ae51457",
+      "operational_manifest_sha256": "e45214117f863ae8e6f500798b2bf36058e3053d27f3cf71516641c4438da82c",
+      "laptop_required": false
+    },
+    "completed": [
+      {
+        "fold": 0,
+        "seed": 0,
+        "arm": "dice",
+        "updates": 400,
+        "validation_dice": 0.7073945421731334
+      },
+      {
+        "fold": 0,
+        "seed": 1,
+        "arm": "dice",
+        "updates": 400,
+        "validation_dice": 0.7234529283661724
+      },
+      {
+        "fold": 0,
+        "seed": 2,
+        "arm": "dice",
+        "updates": 400,
+        "validation_dice": 0.7144921566164857
+      },
+      {
+        "fold": 1,
+        "seed": 0,
+        "arm": "dice",
+        "updates": 400,
+        "validation_dice": 0.6995920990585469
+      },
+      {
+        "fold": 1,
+        "seed": 1,
+        "arm": "dice",
+        "updates": 400,
+        "validation_dice": 0.6660836739253095
+      },
+      {
+        "fold": 2,
+        "seed": 0,
+        "arm": "dice",
+        "updates": 400,
+        "validation_dice": 0.7230538759681682
+      }
+    ],
+    "progress": {
+      "MNI_MedSAM3_n5_f2s1_native400": {
+        "update": 360,
+        "tail": [
+          "{\"update\": 340, \"lr\": 7.725873403546406e-06, \"ramp\": 1.0, \"gradient_norm\": 345.9617919921875, \"native\": 58.309146881103516, \"bands\": 0.5914134383201599, \"edge\": 0.14599428325891495, \"sdf\": 0.0, \"depth\": 0.0, \"total\": 58.309146881103516}",
+          "{\"update\": 345, \"lr\": 7.2980732624248415e-06, \"ramp\": 1.0, \"gradient_norm\": 1294.348388671875, \"native\": 55.31057357788086, \"bands\": 0.31180134415626526, \"edge\": 0.09029798209667206, \"sdf\": 0.0, \"depth\": 0.0, \"total\": 55.31057357788086}",
+          "{\"update\": 350, \"lr\": 6.904970123803913e-06, \"ramp\": 1.0, \"gradient_norm\": 2544.253173828125, \"native\": 67.74109268188477, \"bands\": 0.42373351007699966, \"edge\": 0.10875479504466057, \"sdf\": 0.0, \"depth\": 0.0, \"total\": 67.74109268188477}",
+          "{\"update\": 355, \"lr\": 6.54723914608614e-06, \"ramp\": 1.0, \"gradient_norm\": 442.0987548828125, \"native\": 64.77937316894531, \"bands\": 0.8105615973472595, \"edge\": 0.21463311463594437, \"sdf\": 0.0, \"depth\": 0.0, \"total\": 64.77937316894531}",
+          "{\"update\": 360, \"lr\": 6.225494735649168e-06, \"ramp\": 1.0, \"gradient_norm\": 465.1190490722656, \"native\": 32.10422988049686, \"bands\": 0.3332330866369375, \"edge\": 0.09230814135801632, \"sdf\": 0.0, \"depth\": 0.0, \"total\": 32.10422988049686}"
+        ]
+      }
+    },
+    "gpu_preflight": {}
+  },
+  "mni_medsam3_n5_f012_s01_constraints_20261110": {
+    "status.json": {
+      "status": "waiting_for_consistent_baselines",
+      "active": [],
+      "completed": 0,
+      "total": 78,
+      "folds": [
+        0,
+        1,
+        2
+      ],
+      "seeds": [
+        0,
+        1
+      ],
+      "pilot_complete": 0,
+      "pending_archive_or_cleanup": [],
+      "job_id": null,
+      "updated_at": 1794331217.0544863,
+      "laptop_required": false,
+      "quota": {
+        "used_gib": 52.21,
+        "limit_gib": 93.13,
+        "free_gib": 40.919999999999995,
+        "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  52.21GiB/93.13GiB  538.39k/\u221e  \n\n",
+        "checked_at": 1794331217.1817172
+      }
+    },
+    "service.json": {
+      "status": "running",
+      "pid": 2793151,
+      "active_jobs": [],
+      "baseline_gate_passed": false,
+      "last_check": 1794331217.2221832,
+      "laptop_required": false
+    },
+    "control.json": {
+      "pause": false,
+      "controller_owner": "offline_v1",
+      "automatic_continuation_owner": "cluster_matrix_chain",
+      "revision": 2
+    },
+    "completed": [],
+    "progress": {},
+    "gpu_preflight": {}
+  }
+}

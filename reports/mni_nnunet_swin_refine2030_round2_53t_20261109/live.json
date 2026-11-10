@@ -1,0 +1,130 @@
+{
+  "status.json": {
+    "status": "complete_pending_archive",
+    "active": [],
+    "completed": 52,
+    "training_completed": 53,
+    "total": 153,
+    "maximum_possible_runs": 153,
+    "screen_runs": 43,
+    "selection": {
+      "nnunet": {
+        "phase": "exhausted",
+        "winner": null,
+        "selected": null,
+        "ranking": [
+          "tenth60"
+        ],
+        "rejected": [
+          "tenth60"
+        ]
+      },
+      "swinunetr": {
+        "phase": "confirmed",
+        "winner": "early30",
+        "selected": null,
+        "ranking": [
+          "early30"
+        ],
+        "rejected": []
+      }
+    },
+    "pending_durable_archive": [
+      "MNI_nnunet_tenth60_f0s5"
+    ],
+    "pending_cleanup": [
+      "MNI_nnunet_tenth60_f0s5"
+    ],
+    "deadline": 1794252600.0,
+    "updated_at": 1794246930.6608999,
+    "job_id": "749648",
+    "reason": null,
+    "broad_sweep": "paused; never automatically modified or resumed"
+  },
+  "submission.json": {
+    "job_id": "749648",
+    "submitted_at": 1794242037.9493504,
+    "deadline": 1794252600.0,
+    "slurm_time_limit_minutes": 176,
+    "quota": {
+      "used_gib": 51.58,
+      "limit_gib": 93.13,
+      "free_gib": 41.55,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  51.58GiB/93.13GiB  474.26k/\u221e  \n\n",
+      "checked_at": 1794242037.7650552
+    },
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--time=176",
+      "--chdir=/mnt/beegfsstudents/home/3160552/mni_nnunet_swin_refine2030_round2_53t_20261109",
+      "--output=/mnt/beegfsstudents/home/3160552/mni_nnunet_swin_refine2030_round2_53t_20261109/slurm-%j.out",
+      "--error=/mnt/beegfsstudents/home/3160552/mni_nnunet_swin_refine2030_round2_53t_20261109/slurm-%j.err",
+      "/mnt/beegfsstudents/home/3160552/mni_nnunet_swin_refine2030_round2_53t_20261109/run.sbatch",
+      "/mnt/beegfsstudents/home/3160552/mni_nnunet_swin_refine2030_round2_53t_20261109"
+    ],
+    "manifest_sha256": "0df296c8b4dafc9368a9645d8b7a2528edadd997b6547406e4b5b636c4358ed8",
+    "laptop_required": false,
+    "automatic_successor": false,
+    "broader_sweep_control": {
+      "pause": true,
+      "pilot_pause_owner": "mni_unet_delayed10_confirm53t_0519_20261109"
+    }
+  },
+  "ready": [],
+  "cleanup": [
+    "runs/MNI_nnunet_tenth60_f2s19/cleanup.json",
+    "runs/MNI_nnunet_start30_f2s0/cleanup.json",
+    "runs/MNI_swinunetr_halfearly20_f2s0/cleanup.json",
+    "runs/MNI_nnunet_early15_f1s5/cleanup.json",
+    "runs/MNI_swinunetr_early30_f1s0/cleanup.json",
+    "runs/MNI_nnunet_tenth60_f1s5/cleanup.json",
+    "runs/MNI_swinunetr_start10_f2s0/cleanup.json",
+    "runs/MNI_nnunet_early10_f1s5/cleanup.json",
+    "runs/MNI_swinunetr_sixth10_f0s19/cleanup.json",
+    "runs/MNI_nnunet_tenth60_f1s0/cleanup.json",
+    "runs/MNI_swinunetr_halfearly20_f0s19/cleanup.json",
+    "runs/MNI_nnunet_early10_f2s0/cleanup.json",
+    "runs/MNI_nnunet_tenth30_f1s5/cleanup.json",
+    "runs/MNI_swinunetr_sixth10_f2s0/cleanup.json",
+    "runs/MNI_swinunetr_early15_f2s0/cleanup.json",
+    "runs/MNI_nnunet_tenth60_f0s5/cleanup.json",
+    "runs/MNI_nnunet_tenth60_f2s0/cleanup.json",
+    "runs/MNI_swinunetr_early30_f1s19/cleanup.json",
+    "runs/MNI_nnunet_tenth15_f2s19/cleanup.json",
+    "runs/MNI_nnunet_early10_f2s19/cleanup.json",
+    "runs/MNI_nnunet_start60_f2s0/cleanup.json",
+    "runs/MNI_swinunetr_early20_f0s19/cleanup.json",
+    "runs/MNI_nnunet_start30_f2s19/cleanup.json",
+    "runs/MNI_swinunetr_early30_f0s5/cleanup.json",
+    "runs/MNI_nnunet_early90_f1s5/cleanup.json",
+    "runs/MNI_nnunet_quarter30_f1s5/cleanup.json",
+    "runs/MNI_swinunetr_start20_f2s0/cleanup.json",
+    "runs/MNI_nnunet_tenth15_f1s5/cleanup.json",
+    "runs/MNI_nnunet_start60_f2s19/cleanup.json",
+    "runs/MNI_nnunet_quarter30_f2s0/cleanup.json",
+    "runs/MNI_swinunetr_halfearly10_f2s0/cleanup.json",
+    "runs/MNI_swinunetr_early30_f2s5/cleanup.json",
+    "runs/MNI_nnunet_early90_f2s0/cleanup.json",
+    "runs/MNI_swinunetr_start10_f0s19/cleanup.json",
+    "runs/MNI_nnunet_tenth15_f2s0/cleanup.json",
+    "runs/MNI_nnunet_tenth60_f0s0/cleanup.json",
+    "runs/MNI_swinunetr_early20_f2s0/cleanup.json",
+    "runs/MNI_nnunet_start60_f1s5/cleanup.json",
+    "runs/MNI_swinunetr_early30_f2s19/cleanup.json",
+    "runs/MNI_nnunet_tenth30_f2s0/cleanup.json",
+    "runs/MNI_nnunet_early15_f2s0/cleanup.json",
+    "runs/MNI_swinunetr_early30_f0s0/cleanup.json",
+    "runs/MNI_swinunetr_early30_f1s5/cleanup.json",
+    "runs/MNI_swinunetr_early15_f0s19/cleanup.json",
+    "runs/MNI_nnunet_early90_f2s19/cleanup.json",
+    "runs/MNI_swinunetr_halfearly10_f0s19/cleanup.json",
+    "runs/MNI_nnunet_early15_f2s19/cleanup.json",
+    "runs/MNI_nnunet_tenth30_f2s19/cleanup.json",
+    "runs/MNI_nnunet_quarter30_f2s19/cleanup.json",
+    "runs/MNI_nnunet_start30_f1s5/cleanup.json",
+    "runs/MNI_swinunetr_early30_f0s19/cleanup.json",
+    "runs/MNI_swinunetr_start20_f0s19/cleanup.json",
+    "runs/MNI_swinunetr_early30_f2s0/cleanup.json"
+  ]
+}

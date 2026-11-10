@@ -1,0 +1,22 @@
+{
+  "approved_for_execution": true,
+  "status": "selected_after_verified_prior_exhaustion",
+  "created_at": 1794197552.7504609,
+  "recipes": [
+    {
+      "key": "plain_ce025",
+      "dropout_rate": 0.0,
+      "augmentation": "none"
+    }
+  ],
+  "arms": [
+    "dice",
+    "dice_bands_edge_depth",
+    "dice_bands_edge"
+  ],
+  "reason": "Quarter-CE restored seed5 background/CA4 fitting, but full constraints failed seed5/fold0 by-.295900pp, predominantly CA4(-.789742pp), despite a slight union gain. SDF+depth was negative on the first pair. Test original bands+edge with and without depth under the SAME stabilized base. Removing SDF is a hypothesis, not an established cause; both original combinations have not yet been tested under quarter-CE.",
+  "controls": "Reuse only three byte-verified identical baseline protocols/archives at seed0fold1,seed0fold2,seed5fold0. Train missing controls. No seed/fold-specific changes.",
+  "constants": "Original definitions,5%training-only calibration at102,ramp33,AdamW.0006/24warmup/hold-half/dropout0/noaug,Dice+0.25CE,53.305Tcap,409updates,2GPUworkers; seeds0/5/19 all3folds.",
+  "profile": "Existing quarter-CE profile measured both proposed arms. Same loss/runtime and operations; no new graph to reprofile.",
+  "previous_cleanup": "11runs archivedverifiedcleaned;18.9930486772GiBreleased;46.13GiBfree;748459completed748464cancelled;queueempty."
+}

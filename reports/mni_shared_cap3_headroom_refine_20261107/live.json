@@ -1,0 +1,112 @@
+{
+  "status.json": {
+    "status": "complete",
+    "active": null,
+    "completed": 3,
+    "total": 3,
+    "runs": [
+      {
+        "id": "MNI_nnunet_f0s0",
+        "model": "nnunet",
+        "dataset": "MNI",
+        "kind": "conventional",
+        "protocol": "nnunet",
+        "arm": "dice",
+        "fold": 0,
+        "seed": 0,
+        "augmentation": "none",
+        "final_dice": 0.751803532912865,
+        "best_dice": 0.7525516126558051,
+        "released_bytes": 525343890
+      },
+      {
+        "id": "MNI_unetr_vit_b16_f0s0",
+        "model": "unetr_vit_b16",
+        "dataset": "MNI",
+        "kind": "conventional",
+        "protocol": "unetr_vit_b16",
+        "arm": "dice",
+        "fold": 0,
+        "seed": 0,
+        "augmentation": "xy_d4_half_v1",
+        "final_dice": 0.7062806128705319,
+        "best_dice": 0.710575134469355,
+        "released_bytes": 1853965726
+      },
+      {
+        "id": "MNI_basic_unet16_f0s0",
+        "model": "basic_unet16",
+        "dataset": "MNI",
+        "kind": "conventional",
+        "protocol": "basic_unet16",
+        "arm": "dice",
+        "fold": 0,
+        "seed": 0,
+        "augmentation": "none",
+        "final_dice": 0.6918626126084747,
+        "best_dice": 0.692218453937617,
+        "released_bytes": 28980240
+      }
+    ],
+    "job_id": "744136",
+    "updated_at": 1794051449.501743,
+    "quota": {
+      "used_gib": 43.95,
+      "limit_gib": 93.13,
+      "free_gib": 49.17999999999999,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  43.95GiB/93.13GiB  351.66k/\u221e  \n\n",
+      "checked_at": 1794051449.539515
+    }
+  },
+  "submission.json": {
+    "job_id": "744136",
+    "dependency": null,
+    "quota": {
+      "used_gib": 43.65,
+      "limit_gib": 93.13,
+      "free_gib": 49.48,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  43.65GiB/93.13GiB  351.55k/\u221e  \n\n",
+      "checked_at": 1794051017.399415
+    },
+    "submitted_at": 1794051017.7433376,
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--chdir=/mnt/beegfsstudents/home/3160552/mni_shared_cap3_headroom_refine_20261107",
+      "--output=/mnt/beegfsstudents/home/3160552/mni_shared_cap3_headroom_refine_20261107/slurm-%j.out",
+      "--error=/mnt/beegfsstudents/home/3160552/mni_shared_cap3_headroom_refine_20261107/slurm-%j.err",
+      "/mnt/beegfsstudents/home/3160552/mni_shared_cap3_headroom_refine_20261107/run.sbatch",
+      "/mnt/beegfsstudents/home/3160552/mni_shared_cap3_headroom_refine_20261107"
+    ],
+    "manifest_sha256": "9964e413a48eaf0f27bd4b5a77d5bd1df71afbe1335107fd1222fb02bfa70833"
+  },
+  "successor.json": {
+    "job_id": "744137",
+    "dependency": "744136",
+    "quota": {
+      "used_gib": 43.65,
+      "limit_gib": 93.13,
+      "free_gib": 49.48,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  43.65GiB/93.13GiB  351.55k/\u221e  \n\n",
+      "checked_at": 1794051027.2574034
+    },
+    "submitted_at": 1794051027.3833234,
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--chdir=/mnt/beegfsstudents/home/3160552/mni_shared_cap3_headroom_refine_20261107",
+      "--output=/mnt/beegfsstudents/home/3160552/mni_shared_cap3_headroom_refine_20261107/slurm-%j.out",
+      "--error=/mnt/beegfsstudents/home/3160552/mni_shared_cap3_headroom_refine_20261107/slurm-%j.err",
+      "--dependency=afterany:744136",
+      "/mnt/beegfsstudents/home/3160552/mni_shared_cap3_headroom_refine_20261107/run.sbatch",
+      "/mnt/beegfsstudents/home/3160552/mni_shared_cap3_headroom_refine_20261107"
+    ],
+    "manifest_sha256": "9964e413a48eaf0f27bd4b5a77d5bd1df71afbe1335107fd1222fb02bfa70833"
+  },
+  "ready": [],
+  "cleanup": [
+    "runs/MNI_unetr_vit_b16_f0s0/cleanup.json",
+    "runs/MNI_basic_unet16_f0s0/cleanup.json",
+    "runs/MNI_nnunet_f0s0/cleanup.json"
+  ]
+}

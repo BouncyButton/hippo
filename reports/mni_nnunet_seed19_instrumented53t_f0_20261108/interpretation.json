@@ -1,0 +1,16 @@
+{
+  "confirmed": [
+    "Exact original metrics and four model hashes reproduced",
+    "No clipping in150 updates; preclip norms0.356-1.559 versus threshold12",
+    "Actual SGD updates aligned with negative current total gradient in150/150 steps",
+    "All15 sampled first-order updates reduce total Dice,totalCE,andCA4Dice components",
+    "CE/Dice parameter gradient norm ratio24.287 initially,0.159 at150"
+  ],
+  "hypothesis": "Budget-limited optimization and delayedCA4 hard predictions, rather than clipping or consistently uphill momentum. Early CE dominance alone does not prove changing loss weights will help.",
+  "next_tests": [
+    "Initial LR0.02 with unchanged native loss",
+    "Initial LR0.01 withCE coefficient0.1"
+  ],
+  "acceptance": "Final-budget Dice>=55% across common seeds0,5,19 and folds0,1,2",
+  "diagnostic_overhead_profiled_flops": 14156719718400
+}

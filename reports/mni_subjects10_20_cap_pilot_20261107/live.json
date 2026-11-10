@@ -1,0 +1,139 @@
+{
+  "status.json": {
+    "status": "complete",
+    "active": null,
+    "completed": 4,
+    "total": 4,
+    "runs": [
+      {
+        "id": "MNI_swinunetr_n10_baseline_f0s0",
+        "kind": "conventional",
+        "dataset": "MNI",
+        "model": "swinunetr",
+        "arm": "dice",
+        "fold": 0,
+        "seed": 0,
+        "protocol": "swinunetr_n10_baseline",
+        "condition": "baseline",
+        "train_subjects": 10,
+        "augmentation": "xy_d4_v1",
+        "target": null,
+        "final_dice": 0.7704101418023044,
+        "best_dice": 0.7721485162667878,
+        "released_bytes": 336999316
+      },
+      {
+        "id": "MNI_unetr_vit_b16_n10_baseline_f0s0",
+        "kind": "conventional",
+        "dataset": "MNI",
+        "model": "unetr_vit_b16",
+        "arm": "dice",
+        "fold": 0,
+        "seed": 0,
+        "protocol": "unetr_vit_b16_n10_baseline",
+        "condition": "baseline",
+        "train_subjects": 10,
+        "augmentation": "xy_d4_v1",
+        "target": null,
+        "final_dice": 0.7206587264399736,
+        "best_dice": 0.7215543895933724,
+        "released_bytes": 1853966366
+      },
+      {
+        "id": "MNI_swinunetr_n20_baseline_f0s0",
+        "kind": "conventional",
+        "dataset": "MNI",
+        "model": "swinunetr",
+        "arm": "dice",
+        "fold": 0,
+        "seed": 0,
+        "protocol": "swinunetr_n20_baseline",
+        "condition": "baseline",
+        "train_subjects": 20,
+        "augmentation": "xy_d4_v1",
+        "target": null,
+        "final_dice": 0.7716615067379535,
+        "best_dice": 0.7718363055174964,
+        "released_bytes": 337000532
+      },
+      {
+        "id": "MNI_unetr_vit_b16_n20_baseline_f0s0",
+        "kind": "conventional",
+        "dataset": "MNI",
+        "model": "unetr_vit_b16",
+        "arm": "dice",
+        "fold": 0,
+        "seed": 0,
+        "protocol": "unetr_vit_b16_n20_baseline",
+        "condition": "baseline",
+        "train_subjects": 20,
+        "augmentation": "xy_d4_v1",
+        "target": null,
+        "final_dice": 0.7186606792390424,
+        "best_dice": 0.7186606792390424,
+        "released_bytes": 1853961694
+      }
+    ],
+    "job_id": "745157",
+    "updated_at": 1794073788.3177097,
+    "quota": {
+      "used_gib": 47.73,
+      "limit_gib": 93.13,
+      "free_gib": 45.4,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  47.73GiB/93.13GiB  364.90k/\u221e  \n\n",
+      "checked_at": 1794073788.3540988
+    }
+  },
+  "submission.json": {
+    "job_id": "745157",
+    "dependency": null,
+    "quota": {
+      "used_gib": 44.03,
+      "limit_gib": 93.13,
+      "free_gib": 49.099999999999994,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  44.03GiB/93.13GiB  364.76k/\u221e  \n\n",
+      "checked_at": 1794073104.0812254
+    },
+    "submitted_at": 1794073104.3019192,
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--chdir=/mnt/beegfsstudents/home/3160552/mni_subjects10_20_cap_pilot_20261107",
+      "--output=/mnt/beegfsstudents/home/3160552/mni_subjects10_20_cap_pilot_20261107/slurm-%j.out",
+      "--error=/mnt/beegfsstudents/home/3160552/mni_subjects10_20_cap_pilot_20261107/slurm-%j.err",
+      "/mnt/beegfsstudents/home/3160552/mni_subjects10_20_cap_pilot_20261107/run.sbatch",
+      "/mnt/beegfsstudents/home/3160552/mni_subjects10_20_cap_pilot_20261107"
+    ],
+    "manifest_sha256": "90bc38397c10e8d42d7d2c06142828601e8c23018307e6704d07a665aba216b6"
+  },
+  "successor.json": {
+    "job_id": "745158",
+    "dependency": "745157",
+    "quota": {
+      "used_gib": 44.03,
+      "limit_gib": 93.13,
+      "free_gib": 49.099999999999994,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  44.03GiB/93.13GiB  364.76k/\u221e  \n\n",
+      "checked_at": 1794073114.4318712
+    },
+    "submitted_at": 1794073114.5622916,
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--chdir=/mnt/beegfsstudents/home/3160552/mni_subjects10_20_cap_pilot_20261107",
+      "--output=/mnt/beegfsstudents/home/3160552/mni_subjects10_20_cap_pilot_20261107/slurm-%j.out",
+      "--error=/mnt/beegfsstudents/home/3160552/mni_subjects10_20_cap_pilot_20261107/slurm-%j.err",
+      "--dependency=afterany:745157",
+      "/mnt/beegfsstudents/home/3160552/mni_subjects10_20_cap_pilot_20261107/run.sbatch",
+      "/mnt/beegfsstudents/home/3160552/mni_subjects10_20_cap_pilot_20261107"
+    ],
+    "manifest_sha256": "90bc38397c10e8d42d7d2c06142828601e8c23018307e6704d07a665aba216b6"
+  },
+  "ready": [],
+  "cleanup": [
+    "runs/MNI_swinunetr_n10_baseline_f0s0/cleanup.json",
+    "runs/MNI_unetr_vit_b16_n20_baseline_f0s0/cleanup.json",
+    "runs/MNI_unetr_vit_b16_n10_baseline_f0s0/cleanup.json",
+    "runs/MNI_swinunetr_n20_baseline_f0s0/cleanup.json"
+  ]
+}

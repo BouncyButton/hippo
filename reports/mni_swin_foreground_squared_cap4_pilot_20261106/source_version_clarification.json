@@ -1,0 +1,14 @@
+{
+  "applies_to_manifest_sha256": "036048b1ea765c0a7f072d41331a215336957e0852a667426857adaaba3fc3db",
+  "correction": "The generic source_version template says native recipes preserved. For this Swin variant the loss intentionally changes from background-including unsquared Dice to foreground-only squared Dice, with no CE. The frozen protocol, runtime loss adapter, and independently measured profile correctly specify this change.",
+  "training_artifacts_modified": false,
+  "loss_adapter": "foreground_squared_dice.py",
+  "loss_arguments": {
+    "include_background": false,
+    "to_onehot_y": true,
+    "softmax": true,
+    "squared_pred": true,
+    "smooth_nr": 0.0,
+    "smooth_dr": 1e-06
+  }
+}

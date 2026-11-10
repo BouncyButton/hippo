@@ -1,0 +1,87 @@
+{
+  "status": "training_confirmed",
+  "models": [
+    "nnunet",
+    "swinunetr",
+    "unetr_vit_b16",
+    "basic_unet16"
+  ],
+  "target_grid": {
+    "nnunet": [
+      0.05,
+      0.1,
+      0.2,
+      0.4,
+      0.6,
+      0.8
+    ],
+    "swinunetr": [
+      0.05,
+      0.1,
+      0.2,
+      0.4,
+      0.6
+    ],
+    "unetr_vit_b16": [
+      0.05,
+      0.1,
+      0.2,
+      0.4,
+      0.6
+    ],
+    "basic_unet16": [
+      0.05,
+      0.1,
+      0.2,
+      0.4,
+      0.6
+    ]
+  },
+  "arms": [
+    "dice_bands",
+    "dice_bands_edge"
+  ],
+  "fold": 0,
+  "seed": 0,
+  "new_runs": 38,
+  "reused_constraint_runs": 4,
+  "reused_baselines": 4,
+  "gpu_workers": 2,
+  "budget_flops": 255811605336720,
+  "selection_policy": "Best tested common target per model maximizes mean final-budget Dice across both arms on fold0seed0; ties choose the smaller target. Per-arm winners also reported. No expansion of folds or seeds.",
+  "p95_policy": "75% for targets5..60%;100% for nnUNet80%",
+  "manifest_sha256": "626b5fb2ec9a9b1bd98ecac571d2c0c0faf3365372e3d8e73730e98ca691eb43",
+  "job_id": "743858",
+  "quota_at_submission": {
+    "used_gib": 46.2,
+    "limit_gib": 93.13,
+    "free_gib": 46.92999999999999,
+    "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  46.20GiB/93.13GiB  346.01k/\u221e  \n\n",
+    "checked_at": 1794043833.7723577
+  },
+  "preflight": "passed",
+  "retirement": "Evaluation and archive before checkpoint deletion and new training",
+  "failed_launches": [
+    "743840",
+    "743853"
+  ],
+  "cleanup": "Both interrupted checkpoints evaluated, hash-verified in local durable archives and deleted",
+  "interrupted_released_bytes": 1449315623,
+  "queued_continuation": "743861",
+  "active_runs": [
+    "MNI_nnunet_dice_bands_t60_f0s0",
+    "MNI_swinunetr_dice_bands_t20_f0s0"
+  ],
+  "latest_quota": {
+    "used_gib": 43.75,
+    "limit_gib": 93.13,
+    "free_gib": 49.379999999999995,
+    "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  43.75GiB/93.13GiB  346.04k/\u221e  \n\n",
+    "checked_at": 1794044129.067605
+  },
+  "progress_checked_at": 1794044128.6219587,
+  "optimizer_progress": {
+    "MNI_nnunet_dice_bands_t60_f0s0": 144,
+    "MNI_swinunetr_dice_bands_t20_f0s0": 157
+  }
+}

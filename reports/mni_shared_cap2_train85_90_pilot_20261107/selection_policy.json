@@ -1,0 +1,15 @@
+{
+  "shared_cap_required": true,
+  "user_reply": "One shared cap across all four models",
+  "target_training_macro_dice": [
+    0.85,
+    0.9
+  ],
+  "training_metric": "Unaugmented foreground-subfield macro hard Dice, averaged across10 training hemispheres from5 subjects",
+  "pilot_scope": "All4 baselines, fold0seed0; this is cap calibration, not a3fold3seed confirmation",
+  "selection_inputs": "Training Dice and collapse checks only; validation reported descriptively",
+  "constraint_search_restarted": false,
+  "individual_training_early_stopping": false,
+  "compute_matching": "Same optimization FLOP allowance for every model; learning-rate horizons matched to allowable updates; evaluation FLOPs outside optimization cap",
+  "caveat": "A common cap may not place all models in the target interval; report every model, do not hide saturation in a cross-model mean."
+}

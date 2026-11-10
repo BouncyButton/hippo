@@ -1,0 +1,49 @@
+{
+  "nnunet": {
+    "stage": "mni_nnunet_cap4_full_20261106",
+    "budget_flops": 127905802668360,
+    "updates": 359,
+    "epochs": 35.9,
+    "loss": "Native foreground Dice+CE with deep supervision; SGD/Nesterov momentum0.95",
+    "initial_lr": 0.01,
+    "augmentation": "none",
+    "lr_policy": "hold_half",
+    "checkpoint_interval_updates": 5
+  },
+  "swinunetr": {
+    "stage": "mni_swin_uniform_dice_hold_cap4_full_20261106",
+    "budget_flops": 127905802668360,
+    "updates": 824,
+    "epochs": 82.4,
+    "loss": "All-class squared softmax Dice, equal weights; no CE",
+    "initial_lr": 0.0003,
+    "augmentation": "none",
+    "lr_policy": "hold_half",
+    "checkpoint_interval_updates": 25,
+    "profiled_update_flops": 155059584536,
+    "output_head_initialization": "zero weights and bias",
+    "class_weight_formula": "All four weights1"
+  },
+  "unetr_vit_b16": {
+    "stage": "mni_unetr_geo_cap4_checkpoints25_20261106",
+    "budget_flops": 127905802668360,
+    "updates": 983,
+    "epochs": 98.3,
+    "loss": "Geo recipe: foreground-only squared softmax Dice + mean CE, weights 1:1, smooth_nr=0, smooth_dr=1e-6; FP32 loss.",
+    "initial_lr": 0.0006,
+    "augmentation": "xy_d4_v1",
+    "lr_policy": "cap_matched",
+    "checkpoint_interval_updates": 25
+  },
+  "basic_unet16": {
+    "stage": "mni_unet_cap4_checkpoints25_20261106",
+    "budget_flops": 127905802668360,
+    "updates": 2253,
+    "epochs": 225.3,
+    "loss": "MONAI softmax Dice, including background; AdamW",
+    "initial_lr": 0.0003,
+    "augmentation": "none",
+    "lr_policy": "cap_matched",
+    "checkpoint_interval_updates": 25
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "status": {
+    "status": "running",
+    "active": [
+      "MNI_unetr_vit_b16_dice_sdf_f1s0",
+      "MNI_basic_unet16_dice_sdf_f1s0"
+    ],
+    "completed": 49,
+    "total": 472,
+    "job_id": "749245",
+    "updated_at": 1794229738.9380207,
+    "quota": {
+      "used_gib": 52.02,
+      "limit_gib": 93.13,
+      "free_gib": 41.10999999999999,
+      "raw": "NAME     ID    TYPE  POOL       SPACE              INODE      \n3160552  1395  user  pool_home  52.02GiB/93.13GiB  464.99k/\u221e  \n\n",
+      "checked_at": 1794229738.977395
+    }
+  },
+  "queue": "749248|PENDING|hippo-verified53|gres/gpu:4g.40gb:2|(Dependency)\n749245|RUNNING|hippo-verified53|gres/gpu:4g.40gb:2|gnode01\n",
+  "failure": null,
+  "runs": [
+    {
+      "id": "MNI_unetr_vit_b16_dice_sdf_f1s0",
+      "ledger": {
+        "config_sha256": "9e9aaf33cb7f0d534733cbf0ed5895c02a99c0e4b16f6e1330791d77f2f01d00",
+        "charged_attempts": 205,
+        "training_flops": 26671159353595,
+        "calibration_flops": 864422065332,
+        "calibration_attempts": 1,
+        "calibration_sha256": "1a89ced82f4557a2d9875e694291ec94d495466835ac5e676d10436d79f4e345"
+      },
+      "completion": null,
+      "last_metric": {
+        "step": "185",
+        "charged_attempts": "185",
+        "estimated_training_flops": "24069095026415",
+        "learning_rate": "0.0001899346281977243"
+      },
+      "log_tail": "\"training_CA1_3_hard_dice\": 0.7262419732560859, \"training_CA1_3_soft_dice\": 0.10580160245299339, \"training_subiculum_hard_dice\": 0.7247960925555714, \"training_subiculum_soft_dice\": 0.11554532796144486, \"training_CA4_DG_hard_dice\": 0.765827762674063, \"training_CA4_DG_soft_dice\": 0.05279454346746206, \"training_macro_soft_dice\": 0.09138049129396678, \"training_whole_hippocampus_hard_dice\": 0.8418595952237714}\n{\"model\": \"unet\", \"objective\": \"dice_sdf\", \"fold\": 1, \"seed\": 0, \"step\": 185, \"charged_attempts\": 185, \"patient_passes\": 9.25, \"estimated_training_flops\": 24069095026415, \"calibration_flops\": 864422065332, \"total_flops\": 24933517091747, \"compute_fraction\": 0.45153448159919146, \"mean_train_loss\": 0.6989782849947611, \"learning_rate\": 0.0001899346281977243, \"macro_hard_dice\": 0.6584352903002657, \"CA1_3_hard_dice\": 0.6260875149608306, \"CA1_3_soft_dice\": 0.10621259585022927, \"subiculum_hard_dice\": 0.6844031132594637, \"subiculum_soft_dice\": 0.10962799787521363, \"CA4_DG_hard_dice\": 0.6648152426805026, \"CA4_DG_soft_dice\": 0.06398710124194622, \"macro_soft_dice\": 0.09327589832246304, \"whole_hippocampus_hard_dice\": 0.8024082214143281, \"training_macro_hard_dice\": 0.7394341325380814, \"training_CA1_3_hard_dice\": 0.729579964582318, \"training_CA1_3_soft_dice\": 0.12190921120345592, \"training_subiculum_hard_dice\": 0.7498633969045743, \"training_subiculum_soft_dice\": 0.12328608930110932, \"training_CA4_DG_hard_dice\": 0.7388590361273522, \"training_CA4_DG_soft_dice\": 0.06957672536373138, \"training_macro_soft_dice\": 0.10492400862276555, \"training_whole_hippocampus_hard_dice\": 0.8485874850193232}\n"
+    },
+    {
+      "id": "MNI_basic_unet16_dice_sdf_f1s0",
+      "ledger": {
+        "config_sha256": "3a76c04922383eddd685c313b90cf3de8547994814bc0075ddc9ed1db51e1a2f",
+        "charged_attempts": 674,
+        "training_flops": 38255973459966,
+        "calibration_flops": 380888391812,
+        "calibration_attempts": 1,
+        "calibration_sha256": "da79376664aafb879550060a5bc4da5e372edafc44ae702bd3bbedb46123c1f9"
+      },
+      "completion": null,
+      "last_metric": {
+        "step": "658",
+        "charged_attempts": "658",
+        "estimated_training_flops": "37347660615294",
+        "learning_rate": "3.7395612614027923e-05"
+      },
+      "log_tail": " \"training_CA1_3_hard_dice\": 0.6770423691291079, \"training_CA1_3_soft_dice\": 0.11325176805257797, \"training_subiculum_hard_dice\": 0.6705294155107617, \"training_subiculum_soft_dice\": 0.079974727332592, \"training_CA4_DG_hard_dice\": 0.49588687095801626, \"training_CA4_DG_soft_dice\": 0.016532924305647612, \"training_macro_soft_dice\": 0.06991980656360586, \"training_whole_hippocampus_hard_dice\": 0.6836826131749781}\n{\"model\": \"unet\", \"objective\": \"dice_sdf\", \"fold\": 1, \"seed\": 0, \"step\": 658, \"charged_attempts\": 658, \"patient_passes\": 32.9, \"estimated_training_flops\": 37347660615294, \"calibration_flops\": 380888391812, \"total_flops\": 37728549007106, \"compute_fraction\": 0.7006394115093204, \"mean_train_loss\": 0.7852649612629667, \"learning_rate\": 3.7395612614027923e-05, \"macro_hard_dice\": 0.5524695509546211, \"CA1_3_hard_dice\": 0.6085468953724881, \"CA1_3_soft_dice\": 0.09969171807169915, \"subiculum_hard_dice\": 0.6310789607376683, \"subiculum_soft_dice\": 0.07224697209894657, \"CA4_DG_hard_dice\": 0.4177827967537068, \"CA4_DG_soft_dice\": 0.014105409570038318, \"macro_soft_dice\": 0.062014699913561344, \"whole_hippocampus_hard_dice\": 0.687022745789414, \"training_macro_hard_dice\": 0.633383734968698, \"training_CA1_3_hard_dice\": 0.6840165493872068, \"training_CA1_3_soft_dice\": 0.1152364231646061, \"training_subiculum_hard_dice\": 0.6840118119322718, \"training_subiculum_soft_dice\": 0.08078510165214539, \"training_CA4_DG_hard_dice\": 0.5321228435866157, \"training_CA4_DG_soft_dice\": 0.01797687029466033, \"training_macro_soft_dice\": 0.0713327983704706, \"training_whole_hippocampus_hard_dice\": 0.693597802855291}\n"
+    }
+  ],
+  "allocation": "JobId=749245 JobName=hippo-verified53 UserId=3160552(1395) GroupId=grp_hpcclusterstudentsbocconiusers(1009) MCS_label=N/A Priority=2796 Nice=0 Account=3160552 QOS=stud JobState=RUNNING Reason=None Dependency=(null) Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:05:47 TimeLimit=06:00:00 TimeMin=N/A SubmitTime=2026-11-09T14:03:15 EligibleTime=2026-11-09T14:03:15 AccrueTime=2026-11-09T14:03:15 StartTime=2026-11-09T14:03:16 EndTime=2026-11-09T20:03:16 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-11-09T14:03:16 Scheduler=Main Partition=stud AllocNode:Sid=slnode01:2038328 ReqNodeList=(null) ExcNodeList=gnode04 NodeList=gnode01 BatchHost=gnode01 NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=48G,node=1,billing=16,gres/gpu=2 AllocTRES=cpu=8,mem=48G,node=1,billing=16,gres/gpu=2 Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=48G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) LicensesAlloc=(null) Network=(null) Command=/mnt/beegfsstudents/home/3160552/mni_verified_unetr_lower_lr_constraints14_53t_0519_20261109/run.sbatch WorkDir=/mnt/beegfsstudents/home/3160552/mni_verified_unetr_lower_lr_constraints14_53t_0519_20261109 StdErr=/mnt/beegfsstudents/home/3160552/mni_verified_unetr_lower_lr_constraints14_53t_0519_20261109/slurm-749245.err StdIn=/dev/null StdOut=/mnt/beegfsstudents/home/3160552/mni_verified_unetr_lower_lr_constraints14_53t_0519_20261109/slurm-749245.out TresPerNode=gres/gpu:4g.40gb:2 TresPerTask=cpu=8 \n",
+  "slurm_tail": {
+    "slurm-749245.out": "",
+    "slurm-749245.err": "lightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\nINFO: Quota usage information is fetched every 30s from the server nodes, thus the displayed values might be slightly out of date.\n"
+  },
+  "checked_at": 1794229743.633628
+}

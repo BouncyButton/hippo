@@ -1,0 +1,39 @@
+{
+  "approved_for_execution": true,
+  "candidates": [
+    {
+      "key": "window307_bands",
+      "taper_start": 205,
+      "stop": 307,
+      "arm": "dice_bands"
+    },
+    {
+      "key": "window307_full",
+      "taper_start": 205,
+      "stop": 307,
+      "arm": "dice_bands_edge_sdf_depth"
+    },
+    {
+      "key": "window369_bands",
+      "taper_start": 307,
+      "stop": 369,
+      "arm": "dice_bands"
+    },
+    {
+      "key": "window369_full",
+      "taper_start": 307,
+      "stop": 369,
+      "arm": "dice_bands_edge_sdf_depth"
+    }
+  ],
+  "reason": "Exact replays find no AdamW amplification or consistent destructive base-loss update: median auxiliary-induced update1.66%/1.72% in helped/harmed pair, maximum2.65%/3.34%. Calibration remains near5% at logits. Persistent constraints can still alter generalization; prior seed0fold1 combinations had positive gains at369 but negative final gains. Test finite auxiliary windows as a timing intervention, not as a proven root-cause fix.",
+  "diagnostic_results_sha256": "503fc12aafc5becb57e533627d86b71ad979175638cc6474669f5278e7957b1a",
+  "diagnostic_audit_sha256": "965c68523ca6fe6208243c96c62a8423ce3e457faf6b9d6273a15c35853db23d",
+  "limits": [
+    "Two observational training trajectories cannot establish validation causality.",
+    "Same-state virtual baseline retains constrained optimizer history.",
+    "No universal late CA4 conflict was found.",
+    "All nine gains must be positive under one recipe; retain every attempt; no seed/fold replacement."
+  ],
+  "created_at": 1794173891.132153
+}
