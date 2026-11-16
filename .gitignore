@@ -49,6 +49,10 @@ weights/
 *.tar.bz2
 *.zip
 
+# HFH source archive and extracted originals stay local.
+/datasets/Dataset104_HFH/downloads/
+/datasets/Dataset104_HFH/raw/
+
 # ---------------------------------------------------------------
 # Datasets (large; keep out of git entirely)
 # ---------------------------------------------------------------
@@ -111,6 +115,7 @@ evaluation/
 semantic_constraints/
 allenamenti.md
 *.md
+!/datasets/Dataset104_HFH/README.md
 *.png
 *.csv
 *.sbatch
@@ -326,3 +331,9 @@ node_modules/
 
 # Small illustrations embedded in the experiment documentation.
 !/docs/experiments/**/*.png
+
+# Batch specifications for the full-fold controls and MNI runtime.
+!/reports/full_data_baselines_20261115/*.sbatch
+!/reports/full_data_baselines_20261115/mni_adapter/pair.sbatch
+!/reports/full_data_lr_20261116/cluster.sbatch
+!/reports/mni_medsam3_runtime_optimization_20261111/v6/run.sbatch
