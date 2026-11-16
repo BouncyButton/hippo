@@ -3,6 +3,7 @@ import tempfile
 import unittest
 from contextlib import ExitStack
 from unittest.mock import patch
+from types import SimpleNamespace
 import numpy as np
 
 from scripts.mni_medsam3_cluster import constraint_campaign as campaign
@@ -25,6 +26,30 @@ class MatrixTests(unittest.TestCase):
         self.assertEqual(campaign.cohort_rows(rows)[-1]['updates'],500)
         rows.append(dict(fold=2,seed=1,updates=600,validation_dice=.9))
         self.assertEqual(campaign.cohort_rows(rows)[-1]['updates'],500)
+
+    def test_third_seed_needs_each_baseline_and_first_qualified_budget(self):
+        rows=[dict(fold=f,seed=s,updates=400,validation_dice=.7) for f in range(3) for s in range(3)]
+        self.assertEqual(len(campaign.inventory(campaign.cohort_rows(rows,seeds=(0,1,2)))),117)
+        rows[-1]['validation_dice']=.59
+        self.assertIsNone(campaign.cohort_rows(rows,seeds=(0,1,2)))
+        rows.append(dict(fold=2,seed=2,updates=500,validation_dice=.61))
+        self.assertEqual(campaign.cohort_rows(rows,seeds=(0,1,2))[-1]['updates'],500)
+
+    def test_seed2_conditional_gate_uses_all_folds_and_only_seed2(self):
+        cohort=dict(baselines=[dict(fold=f,seed=s,validation_dice=.7) for f in range(3) for s in range(3)])
+        rows=[dict(fold=f,seed=s,arm=a,validation_dice=.9 if s<2 else .69)
+              for a in campaign.PILOT for f in range(3) for s in range(3)]
+        self.assertEqual(campaign.pilot_decision(cohort,rows,2)['status'],'not_improved')
+        self.assertEqual(campaign.pilot_decision(cohort,rows[:-1],2)['status'],'pending')
+        # One positive fold alone is insufficient if the whole-arm mean falls.
+        rows[-1]['validation_dice']=.71
+        self.assertEqual(campaign.pilot_decision(cohort,rows,2)['status'],'not_improved')
+        rows[-1]['validation_dice']=.74
+        proof=campaign.pilot_decision(cohort,rows,2)
+        self.assertEqual(proof['status'],'passed')
+        self.assertEqual(proof['improving_arms'],['dice_bands_edge'])
+        for r in rows:r['validation_dice']=.7
+        self.assertEqual(campaign.pilot_decision(cohort,rows,2)['status'],'not_improved')
 
     def test_baseline_watcher_does_not_write_verification_receipts(self):
         task=dict(id='baseline',fold=0,seed=0,updates=400)

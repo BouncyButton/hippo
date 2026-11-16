@@ -128,6 +128,9 @@ def dispatch(stage, plan, base_path, publish):
                 if code is None:
                     continue
                 w['stream'].close(); out=w['output']
+                if code==73 and (out/'completion.json').exists():
+                    from scripts.mni_medsam3_cluster.constraint_campaign import step_succeeded
+                    if step_succeeded(out):code=0
                 if code:
                     marker=out/'requested_stop.json'
                     if not (reason and marker.exists() and read(marker)['checkpoint_sha256']==digest(out/'checkpoint_latest.pt')):

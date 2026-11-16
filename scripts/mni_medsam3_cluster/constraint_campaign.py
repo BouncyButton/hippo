@@ -3,6 +3,7 @@ import argparse
 import fcntl
 import importlib.util
 import json
+import math
 import os
 from pathlib import Path
 import re
@@ -26,7 +27,9 @@ def verify(stage):
         if digest(stage/name) != sha:
             raise ValueError('Frozen matrix source changed: '+name)
     plan = read(stage/'plan.json')
-    if plan['seeds'] != [0, 1] or plan['folds'] != [0, 1, 2] or plan['arms'] != list(ARMS):
+    if (not plan['seeds'] or len(set(plan['seeds']))!=len(plan['seeds'])
+            or any(type(seed) is not int or seed<0 for seed in plan['seeds'])
+            or plan['folds'] != [0, 1, 2] or plan['arms'] != list(ARMS)):
         raise ValueError('Matrix differs from authorized folds/seeds/MSD-ADNI arms')
     parent = Path(plan['baseline_stage'])
     if digest(parent/'manifest.json') != plan['baseline_manifest_sha256']:
@@ -43,10 +46,10 @@ def baseline_module(plan):
     return module
 
 
-def cohort_rows(rows, threshold=.60):
+def cohort_rows(rows, threshold=.60, seeds=(0, 1)):
     result = []
     for fold in (0, 1, 2):
-        for seed in (0, 1):
+        for seed in seeds:
             eligible = [r for r in rows if (r['fold'], r['seed']) == (fold, seed)
                         and r['validation_dice'] >= threshold]
             if not eligible:
@@ -113,7 +116,7 @@ def resolve(stage, plan):
         cohort = read(target)
         if cohort['plan_sha256'] != digest(stage/'plan.json'):
             raise ValueError('Resolved cohort belongs to another plan')
-        if cohort['tasks']!=inventory(cohort['baselines']) or len(cohort['tasks'])!=78:
+        if cohort['tasks']!=inventory(cohort['baselines']) or len(cohort['tasks'])!=len(plan['folds'])*len(plan['seeds'])*(len(ARMS)-1):
             raise ValueError('Resolved task inventory changed')
         for name, sha in cohort['files'].items():
             if digest(stage/name) != sha: raise ValueError('Resolved protocol changed')
@@ -129,7 +132,7 @@ def resolve(stage, plan):
         return None
     if any(r[0] in {p.stem for p in (parent/'submissions').glob('*.json')} for r in controller.queue()):
         return None
-    rows = cohort_rows(baseline_records(parent, original), plan['threshold'])
+    rows = cohort_rows(baseline_records(parent, original), plan['threshold'], plan['seeds'])
     if rows is None: return None
     tasks = []; files = {}
     for row in rows:
@@ -166,6 +169,28 @@ def next_tasks(tasks, rows, active):
     return [t for t in tasks if t['phase']==phase and t['id'] not in done|active]
 
 
+def pilot_decision(cohort, rows, seed):
+    """Gate only the new seed using every fold, including negative deltas."""
+    baselines={r['fold']:r['validation_dice'] for r in cohort['baselines'] if r['seed']==seed}
+    if set(baselines)!={0,1,2}:
+        raise ValueError('Missing seed-specific baseline')
+    effects={}
+    for arm in PILOT:
+        cells=[r for r in rows if r['seed']==seed and r['arm']==arm]
+        if len(cells)!=3 or {r['fold'] for r in cells}!={0,1,2}:
+            return dict(status='pending',seed=seed)
+        paired=[dict(fold=r['fold'],baseline_dice=baselines[r['fold']],
+            validation_dice=r['validation_dice'],delta_dice=r['validation_dice']-baselines[r['fold']])
+            for r in sorted(cells,key=lambda r:r['fold'])]
+        if not all(math.isfinite(r['delta_dice']) for r in paired):
+            raise ValueError('Non-finite pilot comparison')
+        effects[arm]=dict(paired=paired,mean_paired_delta=sum(r['delta_dice'] for r in paired)/3)
+    improved=[arm for arm in PILOT if effects[arm]['mean_paired_delta']>0]
+    return dict(status='passed' if improved else 'not_improved',seed=seed,by_arm=effects,
+        improving_arms=improved,rule='Launch remaining33 cells only if either pilot arm has strictly positive mean paired validation Dice delta across all3 folds.',
+        caveat='Descriptive validation gate, not a statistical significance claim; no arm-specific retuning.')
+
+
 def report(stage, cohort, rows):
     reference={(r['fold'],r['seed']):r for r in cohort['baselines']}
     paired=[]
@@ -181,7 +206,7 @@ def report(stage, cohort, rows):
     grouped={}
     for arm in (a for a in ARMS if a!='dice'):
         cells=[r for r in paired if r['arm']==arm]
-        if cells:grouped[arm]=dict(completed=len(cells),expected=6,
+        if cells:grouped[arm]=dict(completed=len(cells),expected=len(cohort['baselines']),
             mean_dice=sum(r['validation_dice'] for r in cells)/len(cells),
             mean_paired_delta=sum(r['delta_dice'] for r in cells)/len(cells),
             improved=sum(r['delta_dice']>0 for r in cells),
@@ -190,10 +215,12 @@ def report(stage, cohort, rows):
     summary=dict(updated_at=time.time(),paired=paired,by_arm=grouped,
         caveat='Selected validation folds; paired descriptive evidence, not an untouched external test set. No selective omission of worse arms.')
     write(stage/'comparison.json',summary)
-    if all(grouped.get(a,{}).get('completed')==6 for a in PILOT):
+    if all(grouped.get(a,{}).get('completed')==len(cohort['baselines']) for a in PILOT):
+        conditional=(stage/'plan.json').exists() and read(stage/'plan.json').get('conditional_matrix_seed') is not None
         write(stage/'pilot_comparison.json',dict(updated_at=time.time(),by_arm={a:grouped[a] for a in PILOT},
             paired=[r for r in paired if r['arm'] in PILOT],
-            next_phase='Full predefined matrix proceeds irrespective of pilot direction; no outcome-driven retuning.'))
+            next_phase=('Remaining matrix requires positive mean paired Dice delta for at least one pilot arm; otherwise try next seed.'
+                if conditional else 'Full predefined matrix proceeds irrespective of pilot direction; no outcome-driven retuning.')))
 
 
 def finish(stage, task):
@@ -225,8 +252,8 @@ def summarize(stage, plan, status, active=None):
     rows=completed(stage,cohort['tasks']) if cohort else []
     pending=[r['id'] for r in rows if not (stage/'runs'/r['id']/'cleanup.json').exists()]
     if status=='complete' and pending:status='complete_pending_archive'
-    write(stage/'status.json',dict(status=status,active=active or [],completed=len(rows),total=78,
-        folds=[0,1,2],seeds=[0,1],pilot_complete=sum(r['phase']=='pilot' for r in rows),
+    write(stage/'status.json',dict(status=status,active=active or [],completed=len(rows),total=plan['new_training_runs'],
+        folds=plan['folds'],seeds=plan['seeds'],pilot_complete=sum(r['phase']=='pilot' for r in rows),
         pending_archive_or_cleanup=pending,job_id=os.environ.get('SLURM_JOB_ID'),updated_at=time.time(),
         laptop_required=False,quota=quota()))
 
@@ -268,7 +295,7 @@ def command(stage,plan,task,base,lane,preflight=False):
 
 
 def gpu_gate(stage,plan,base,publish):
-    tasks=[dict(id=f'preflight_f{f}',protocol=f'f{f}s0',output=stage/'gpu_preflight'/f'f{f}') for f in (0,1,2)]
+    tasks=[dict(id=f'preflight_f{f}',protocol=f"f{f}s{plan['seeds'][0]}",output=stage/'gpu_preflight'/f'f{f}') for f in (0,1,2)]
     workers={}
     try:
         while True:
@@ -325,6 +352,12 @@ def dispatch(stage,plan,base,publish):
                     ready=next_tasks(tasks,rows,{w['task']['id'] for w in workers.values()})
                     if not ready:continue
                     task=ready[0];out=stage/'runs'/task['id'];out.mkdir(parents=True,exist_ok=True)
+                    if task['phase']=='matrix' and plan.get('conditional_matrix_seed') is not None:
+                        decision=pilot_decision(cohort,rows,plan['conditional_matrix_seed'])
+                        write(stage/'pilot_decision.json',dict(**decision,decided_at=time.time()))
+                        if decision['status']=='pending':raise ValueError('Matrix admitted before pilot completed')
+                        if decision['status']=='not_improved':
+                            reason='complete_pilot_no_improvement';break
                     if (out/'completion.json').exists():finish(stage,task);rows=completed(stage,tasks);continue
                     if quota()['free_gib']<plan['storage']['minimum_free_gib']:reason='waiting_for_quota';break
                     if task['phase']=='matrix' and not (stage/'pilot_comparison.json').exists():report(stage,cohort,rows)
@@ -419,9 +452,10 @@ def preflight(stage):
     import numpy as np
     from scripts.depth_supervision.geometry import build_geometry, GeometryConfig, signed_distance
     from scripts.mni_medsam3_cluster.constraint_support import depth_geometry
-    parent=Path(plan['baseline_stage']);inventory=read(parent/'manifest.json');geometry=[];seen=set()
+    parent=Path(plan['baseline_stage']);reference=Path(plan.get('data_reference_stage',str(parent)))
+    inventory=read(reference/'manifest.json');geometry=[];seen=set()
     for fold in (0,1,2):
-        p=read(parent/'protocols'/f'MNI_MedSAM3_n5_f{fold}s0_native400'/'protocol.json')
+        p=read(parent/'protocols'/f"MNI_MedSAM3_n5_f{fold}s{plan['seeds'][0]}_native400"/'protocol.json')
         if digest(Path(p['lora_weights']))!=p['lora_sha256']:raise ValueError('Medical initialization changed')
         if {c.rsplit('_',1)[0] for c in p['train_cases']} & {c.rsplit('_',1)[0] for c in p['evaluation_cases']}:
             raise ValueError('Subject leakage')
@@ -441,7 +475,7 @@ def preflight(stage):
                 if not np.isfinite(sdf).all() or (sdf[labels==c]>=0).any() or (sdf[labels!=c]<=0).any():
                     raise ValueError('Invalid classwise MNI SDF signs')
             geometry.append(dict(fold=fold,case=case,labels=sorted(np.unique(labels).tolist()),weight_sum=float(weights.sum())))
-    for name,sha in read(parent/'upstream_manifest.json').items():
+    for name,sha in read(reference/'upstream_manifest.json').items():
         if digest(Path(p['upstream'])/name)!=sha:raise ValueError('Upstream source differs')
     write(stage/'geometry_preflight.json',dict(status='passed',training_crops=geometry,verified_data_files=len(seen),
         labels_preserved=True,units='Native array voxels; same identity geometry convention as the baseline and ADNI engine'))
