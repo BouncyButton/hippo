@@ -3,6 +3,10 @@
 This repository contains the code needed to run segmentation baselines, build
 datasets, and try the semantic constraint experiments.
 
+For the hippocampus experiments, start with the [reproduction guide](docs/experiments/REPRODUCING_CAMPAIGNS.md).
+It maps each comparison to its dataset, runner, and required inputs, and includes
+a CPU check that runs without medical images or a cluster account.
+
 The repository does not include raw medical images, checkpoints, W&B runs,
 virtual environments, or generated outputs. Those files are large and should be
 created or downloaded on the machine where the experiments run.
