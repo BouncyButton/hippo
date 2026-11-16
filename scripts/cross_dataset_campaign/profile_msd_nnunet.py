@@ -10,10 +10,11 @@ from profile_intermediate_baselines import audit, intermediate_supplement
 from scripts.capped_depth_delay.objectives import DEPTH_ARMS, training_loss, calibration_case, geometry_weights
 from thesis.new_constraints.signed_distance import signed_distance_maps
 import train_compute_matched_baselines as base
+from scripts.cross_dataset_campaign.profile_crop import center_crop_target
 from scripts.cross_dataset_campaign.conventional import dice_only_optimizer
 
 
-def profile(identity, arm, geometry, calibration, architecture, protocol):
+def profile(identity, arm, geometry, calibration, architecture, protocol, *, spatial_shape=(64, 64, 64)):
     base.build_loss_and_optimizer = dice_only_optimizer
     torch = audit.torch
     torch.manual_seed(0)
@@ -25,8 +26,9 @@ def profile(identity, arm, geometry, calibration, architecture, protocol):
         for parameter in model.parameters():
             optimizer.state[parameter]['momentum_buffer'] = torch.zeros_like(parameter)
     model.eval() if calibration else model.train()
-    image = torch.randn(1, 1, 64, 64, 64)
+    image = torch.randn(1, 1, *spatial_shape)
     target = audit.synthetic_target(geometry)
+    target = center_crop_target(target, spatial_shape)
     sdf = signed_distance_maps(target) if 'sdf' in arm else None
     # The audit ellipsoid/box have PC1 along array axis 0. Map that axis to
     # anatomical anterior, rather than the right axis excluded by the original

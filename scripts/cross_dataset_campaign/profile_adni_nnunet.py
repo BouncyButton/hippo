@@ -7,12 +7,13 @@ import numpy as np
 
 from scripts.adni_baselines.core import ROOT, MODELS, base, build_model
 from scripts.adni_constraints import objectives as obj
+from scripts.cross_dataset_campaign.profile_crop import center_crop_target
 from scripts.cross_dataset_campaign.conventional import dice_only_optimizer
 from scripts.adni_constraints.audit_correction import correct_row
 from profile_intermediate_baselines import audit, intermediate_supplement
 
 
-def measure(identity, architecture, protocol, arm, geometry, calibration):
+def measure(identity, architecture, protocol, arm, geometry, calibration, *, spatial_shape=(64, 64, 64)):
     base.build_loss_and_optimizer = dice_only_optimizer
     torch = audit.torch
     torch.manual_seed(0)
@@ -23,9 +24,10 @@ def measure(identity, architecture, protocol, arm, geometry, calibration):
         for p in model.parameters():
             optimizer.state[p]['momentum_buffer'] = torch.zeros_like(p)
     model.eval() if calibration else model.train()
-    image = torch.randn(1, 1, 64, 64, 64)
+    image = torch.randn(1, 1, *spatial_shape)
     # Rotate synthetic long axis off axis 0 so projected-axis depth is defined.
     target = (audit.synthetic_target(geometry) > 0).long().transpose(2, 3).contiguous()
+    target = center_crop_target(target, spatial_shape)
     sdf = obj.signed_distance_maps(target) if 'sdf' in arm else None
     depth = obj.geometry_weights(target, np.eye(4), obj.GEOMETRY) if 'depth' in arm else None
     operator = audit.reference.OperatorAudit()
