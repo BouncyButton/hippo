@@ -82,7 +82,8 @@ def source(is_native):
 if __name__ == '__main__':
     import sys
     import torch
-    torch.cuda.set_per_process_memory_fraction(float(os.environ.get('HFH_SEARCH_GPU_FRACTION','.06')))
+    if 'HFH_SEARCH_GPU_FRACTION' in os.environ:
+        torch.cuda.set_per_process_memory_fraction(float(os.environ['HFH_SEARCH_GPU_FRACTION']))
     path = Path(sys.argv[sys.argv.index('--protocol-dir')+1])
     is_native = read(path/'protocol.json')['active_objective'] == 'dice'
     exec(compile(source(is_native),__file__,'exec'),{'__name__':'__main__','__file__':__file__})

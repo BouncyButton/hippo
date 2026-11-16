@@ -1,99 +1,39 @@
-# Hippo project
+# Logic-guided spatial constraints for hippocampus segmentation
 
-This repository contains the code needed to run segmentation baselines, build
-datasets, and try the semantic constraint experiments.
+This release contains training code and final-checkpoint validation results for MSD, MNI-HISUB25, ADNI and HFH. The models are 3D U-Net, nnU-Net, UNETR, SwinUNETR and MedSAM3. Each model–dataset combination has a baseline and 13 spatial objectives, evaluated on three partitions with three seeds each.
 
-For the hippocampus experiments, start with the [reproduction guide](docs/experiments/REPRODUCING_CAMPAIGNS.md).
-It maps each comparison to its dataset, runner, and required inputs, and includes
-a CPU check that runs without medical images or a cluster account.
+## Reproduce the reported results
 
-The repository does not include raw medical images, checkpoints, W&B runs,
-virtual environments, or generated outputs. Those files are large and should be
-created or downloaded on the machine where the experiments run.
+From the repository root, use Python 3.11 or newer. The reporting commands use the standard library and the included per-run scores.
 
-## Documentation
-
-Project guides, research notes, and experiment protocols are collected in
-[`docs/`](docs/README.md). Start with the [repository guide](docs/REPO_GUIDE.md).
-
-## Folder Guide
-
-| Folder | What it is for |
-| --- | --- |
-| `docs/` | Project documentation, research notes, and experiment protocols. |
-| `baselines/` | Model code and helper scripts for nnUNet, UNETR++, SwinUNETR, 3D U-Net, and NCA baselines. |
-| `datasets/` | Scripts and metadata for building dataset folders in nnUNet-style format. |
-| `semantic_constraints/` | Experiments for discovering, selecting, and training with semantic constraints. |
-| `scripts/` | End-to-end launch scripts for baseline training and evaluation. |
-| `evaluation/` | Evaluation scripts used after baseline training. |
-
-## First Setup
-
-Create a Python environment before running anything:
-
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
-python -m pip install --upgrade pip
-python -m pip install -r requirements.txt
+```sh
+python evaluation/constraint_gap.py --output outputs/tables
+python evaluation/paper_tables.py --output outputs/tables/paper.csv
 ```
 
-For UNETR++, use the separate conda setup script:
+`objective_pairs.csv` contains every paired result, including decreases and ties. `constraint_gap.md` summarizes all 280 objectives by model and dataset. `paper.csv` reconstructs the selected rows of manuscript Tables 2 and 3 at full precision. Dice is expressed in percent and gains in percentage points. The SD is the sample SD of three seed-averaged fold means. The CSV retains the baseline from the same execution batch for both original MSD MedSAM3 objectives.
 
-```bash
-scripts/setup_unetrpp_env.sh
+The auxiliary full-data columns correspond to three different training protocols. Empty cells identify comparisons for which a matching score is unavailable. The archival input filenames and original SHA-256 digests are in [evaluation/data/provenance.json](evaluation/data/provenance.json).
+
+## Run an experiment
+
+The model definitions and workers are in `baselines/`, `scripts/` and `thesis/new_constraints/`. Data preparation is under `datasets/`. HFH scratch and all four MedSAM3 workflows run directly from this checkout with the study data and, for MedSAM3, the released weights. The other scratch workflows use the linked frozen protocol bundles. The release includes no patient volumes or model checkpoints. Instructions, dependencies and commands for each dataset and model family are in [the workflow guide](workflows/README.md).
+
+## Validation design
+
+The paper tables select the objective with the highest mean on the same validation folds used to report its gain. Earlier validation outcomes also informed the study design. In the scratch experiments, MSD seed 20 replaced seed 1, and ADNI seed 4 replaced seed 2 after observing performance. MNI used revised training recipes and a larger compute budget. The MNI MedSAM3 third-seed procedure used a baseline threshold and a positive pilot-gain criterion before completing the matrix. On HFH, recipe selection included objective-specific settings. For nnU-Net, timing and coefficient multipliers were chosen by objective and seed using validation across the three folds.
+
+For the reported HFH nnU-Net EDGE+DEPTH objective, the gain at the selected timing was 1.37 points with the unit multiplier across all seeds and 1.70 points with the selected multipliers. Both estimates use the development folds. The per-seed values are in [the weight comparison](evaluation/data/hfh_nnunet_weight_comparison.csv).
+
+The tables describe the recorded validation cohorts. A claim about the expected gain on unseen subjects would require an independent evaluation of the fixed procedure. MSD uses crop identifiers for the split. Subject-level separation on MSD cannot be verified from those identifiers. The complete development history is retained on `Filippo_dev` at `a003d5323df99dfdd10f666d60e41dafd93f69ac`.
+
+## Checks
+
+```sh
+python -m pytest -q evaluation workflows/test_portable.py
+python workflows/smoke_objectives.py MSD
+python workflows/smoke_objectives.py MNI
+python workflows/smoke_objectives.py binary
 ```
 
-If you use W&B artifacts, log in before running dataset or model scripts:
-
-```bash
-wandb login
-```
-
-## Common Workflows
-
-Build or sync a dataset:
-
-```bash
-python datasets/Dataset102_MNI/create_mni_dataset.py --target datasets/Dataset102_MNI
-```
-
-Run a short nnUNet sanity run:
-
-```bash
-scripts/run_nnunet_pipeline.sh --dataset Dataset102_MNI --mode sanity
-```
-
-Run a short UNETR++ sanity run:
-
-```bash
-scripts/run_unetrpp_pipeline.sh --dataset Dataset102_MNI --mode sanity
-```
-
-Run the semantic constraint pipeline:
-
-```bash
-python semantic_constraints/probe_model.py
-python semantic_constraints/evaluate_candidates.py --top-k 15
-python semantic_constraints/counterfactual_repair.py --top-k 5
-python semantic_constraints/select_constraints.py
-python semantic_constraints/train_with_constraints.py
-```
-
-Read the corresponding guide in [the documentation index](docs/README.md) before
-running a component. Those guides explain expected inputs and output locations.
-
-## 3D validation viewer
-
-View all fold 0 validation patients with native MRI slices, 3D masks, predictions,
-and separate foreground/A-P errors:
-
-```bash
-python utils/view_fold0_3d.py
-```
-
-The default uses the saved `baseline_seed0/error_maps` predictions and opens an
-offline HTML viewer. Use `--prediction-dir PATH` for another audited prediction
-folder or native-space NIfTI predictions, and `--ground-truth-only` to inspect
-annotations without predictions. See [viewer instructions](docs/utils/VIEW_FOLD0_3D.md)
-for input formats, controls, and portability to another PC.
+The reporting tests compare the reconstructed gains against all 2,520 archived paired differences. The portable-workflow tests check every released cell, HFH update counts and activation times against the score tables, and the two distinct MSD adapter controls. The CPU smoke checks exercise all four spatial terms and their gradients on synthetic labels. Run each smoke command in its own process because the archived dataset workers install dataset-specific losses in module state.

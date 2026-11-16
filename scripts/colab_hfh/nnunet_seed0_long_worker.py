@@ -58,6 +58,3 @@ def source():
         if value.count(old)!=1:raise ValueError('Long worker integration changed')
         value=value.replace(old,new)
     return value
-
-
-if __name__=='__main__':exec(compile(source(),__file__,'exec'),{'__name__':'__main__','__file__':__file__})

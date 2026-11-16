@@ -1,4 +1,0 @@
-"""
-Loss functions go here.
-
-"""

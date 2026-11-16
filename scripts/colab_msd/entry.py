@@ -10,12 +10,7 @@ from scripts.cross_dataset_campaign import msd_mixed_losses as scientific
 
 
 def main():
-    install_initialization(Path(__file__).parent, scientific.experiment)
-    if '--benchmark' in sys.argv:
-        sys.argv.remove('--benchmark')
-        from scripts.cross_dataset_campaign import benchmark_msd_runtime
-        benchmark_msd_runtime.main()
-        return
+    install_initialization(Path(os.environ['HIPPO_COLAB_BUNDLE']), scientific.experiment)
     parser = argparse.ArgumentParser(add_help=False)
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--protocol-dir', type=Path, required=True)

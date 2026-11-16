@@ -73,13 +73,3 @@ def source(is_native):
     if value.count(old) != 1:
         raise ValueError('Worker binding changed')
     return value.replace(old,new)
-
-
-if __name__ == '__main__':
-    import sys
-    import torch
-    # Three workers fit comfortably within the 40 GiB A100; reserve headroom.
-    torch.cuda.set_per_process_memory_fraction(.28)
-    protocol = Path(sys.argv[sys.argv.index('--protocol-dir')+1])
-    is_native = read(protocol/'protocol.json')['active_objective'] == 'dice'
-    exec(compile(source(is_native),__file__,'exec'),{'__name__':'__main__','__file__':__file__})

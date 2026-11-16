@@ -1,36 +1,12 @@
-"""Bounded f0/s0 search with an explicit nonzero gradient contribution rule."""
-from copy import deepcopy
+"""Runtime utilities for the archived HFH protocol."""
 import math
+
 import numpy as np
 
 from scripts.colab_hfh.constraint_calibration import components
-from scripts.colab_hfh.constraint_schedule import training_flops
 
-NAME = 'nnunet_search13_a100_f0s0_v1'
-CAP = 63952901334180
-ARMS = ('dice_bands', 'dice_sdf', 'dice_bands_sdf', 'dice_bands_edge',
-        'dice_bands_edge_sdf', 'dice_depth', 'dice_bands_depth', 'dice_edge_depth',
-        'dice_sdf_depth', 'dice_bands_edge_depth', 'dice_bands_sdf_depth',
-        'dice_edge_sdf_depth', 'dice_bands_edge_sdf_depth')
 ACTIVITY = dict(minimum_native_ratio=.01, minimum_component_share=.10,
                 maximum_sum_ratio=.50, maximum_anchor_multiplier=64.)
-
-
-def candidates():
-    # Recipe-major ordering covers every combination before deeper searches.
-    result = []
-    for label, target, ramp in [('standard', .10, 9), ('gentle', .05, 9),
-                                 ('strong', .20, 9), ('slow', .10, 30)]:
-        for arm in ARMS:
-            result.append(dict(id=arm+'__'+label, arm=arm, target=target, ramp=ramp,
-                               emphasis=None))
-    for arm in ARMS:
-        if len(components(arm)) > 1:
-            for name in components(arm):
-                result.append(dict(id=arm+'__emphasize_'+name, arm=arm, target=.10,
-                                   ramp=9, emphasis=name))
-    return result
-
 
 def probe_allowance(arm):
     # Detached full-resolution logits only: no additional model forward/backward.
@@ -38,38 +14,6 @@ def probe_allowance(arm):
     # morphology, BCE/CE, face differences, logit backwards and Gram reductions.
     # Intentionally conservative; included in EVERY active optimization charge.
     return 8192 * (2 * 64**3) * (len(components(arm)) + 1) + 1000000
-
-
-def make_protocol(reference, recipe, native_anchor):
-    p = deepcopy(reference)
-    arm = recipe['arm']
-    if p['active_objective'] != arm or p['budget_flops'] != CAP:
-        raise ValueError('Wrong canonical long-budget reference')
-    names = components(arm)
-    p.update(name=NAME+'__'+recipe['id'], folds=[0], seeds=[0],
-             a100_native_anchor=str(native_anchor), search_recipe=recipe,
-             activity_policy=deepcopy(ACTIVITY), constraint_warmup_updates=recipe['ramp'],
-             calibration_target_ratio=recipe['target'], constraint_joint_target=recipe['target'],
-             constraint_component_targets={n:recipe['target']*(2 if n == recipe['emphasis'] else 1)
-                                           for n in names},
-             endpoint='Final capped endpoint; exploratory selection on f0/s0 validation only',
-             constraint_definition='Unchanged canonical losses and native long recipe; frozen anchor weights plus per-batch activity floor and conservative combined cap; all components share ramp')
-    s = p['models']['nnunet']['objectives'][arm]
-    s.update(constraint_warmup_updates=recipe['ramp'], sdf_warmup_updates=recipe['ramp'],
-             activity_probe_flops_per_update=probe_allowance(arm))
-    s['early_flops_per_update'] += probe_allowance(arm)
-    s['flops_per_update'] += probe_allowance(arm)
-    steps = 0
-    while training_flops(steps+1,s) <= CAP:
-        steps += 1
-    used = training_flops(steps,s)
-    s.update(max_steps=steps, consumed_training_flops=used, consumed_flops=used,
-             consumed_total_flops=used+s['calibration_flops'], unused_flops=CAP-used,
-             patient_pass_epochs=steps/10)
-    if s['prefix_updates'] != 60 or s['sdf_prefix_updates'] != 60 or steps < 150:
-        raise ValueError('Long native prefix or useful constraint exposure changed')
-    return p
-
 
 def active_coefficients(gram, anchor, names, policy=ACTIVITY):
     """Keep anchor weights when feasible; otherwise project RMS contributions.

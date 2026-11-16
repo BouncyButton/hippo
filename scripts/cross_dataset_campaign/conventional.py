@@ -175,7 +175,3 @@ def main():
         protocol_sha256=digest(args.protocol_dir/'protocol.json'),
         evaluation='Per-volume class Dice, integer FN/FP, A/P swaps for MSD; best is secondary'))
     trainer.main()
-
-
-if __name__ == '__main__':
-    main()

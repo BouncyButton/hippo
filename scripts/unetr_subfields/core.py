@@ -12,7 +12,7 @@ from monai.transforms import Compose, EnsureChannelFirstd, EnsureTyped, Normaliz
 from torch.utils.data import Dataset
 
 from baselines.simple_segmentation import CANDIDATES
-from scripts.cross_dataset_campaign import capped_core as trainer
+from scripts.mni_constraints import capped_core as trainer
 from scripts.cross_dataset_campaign.conventional import evaluate as evaluate_classes
 from scripts.cross_dataset_campaign.common import read, write, digest
 from scripts.unetr_subfields.contracts import DATASETS
@@ -113,7 +113,3 @@ def main():
         secondary_metric='Whole-hippocampus union Dice and per-subfield Dice/FN/FP',
         protocol_sha256=digest(args.protocol_dir / 'protocol.json')))
     trainer.main()
-
-
-if __name__ == '__main__':
-    main()

@@ -126,6 +126,3 @@ def worker_source():
         if source.count(old)!=1:raise ValueError('Worker anchor changed: '+old)
         source=source.replace(old,new)
     return source
-
-
-if __name__=='__main__':exec(compile(worker_source(),__file__,'exec'),{'__name__':'__main__','__file__':__file__})

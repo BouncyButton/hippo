@@ -139,13 +139,3 @@ def source(is_native):
             raise ValueError('Loss binding changed')
         value = value.replace(old,'    from scripts.colab_hfh.nnunet_search13_worker import ActiveLoss\n    exp.trainer.training_loss = ActiveLoss(exp.trainer.training_loss,p,args.output)\n'+old)
     return value
-
-
-if __name__ == '__main__':
-    import os
-    import sys
-    import torch
-    torch.cuda.set_per_process_memory_fraction(float(os.environ.get('HFH_SEARCH_GPU_FRACTION','.06')))
-    path = Path(sys.argv[sys.argv.index('--protocol-dir')+1])
-    is_native = json.loads((path/'protocol.json').read_text())['active_objective'] == 'dice'
-    exec(compile(source(is_native),__file__,'exec'),{'__name__':'__main__','__file__':__file__})

@@ -48,10 +48,3 @@ def install(trainer, protocol, arm):
     expected={'original_prefix_updates':20,'plateau_lr':.07,'decay_start':60,'horizon':90,'power':.9}
     if protocol['seed0_plateau_schedule']!=expected:raise ValueError('Plateau schedule differs')
     trainer.base.learning_rate=lambda name,step,maximum,initial:plateau_lr(step)
-
-
-if __name__=='__main__':
-    source=worker_source().replace('from scripts.colab_hfh.nnunet_warm_ready_worker import ReadyLoss',
-        'from scripts.colab_hfh.nnunet_seed0_balance_worker import HeadProbeLoss as ReadyLoss')
-    source=source.replace('from scripts.colab_hfh.nnunet_warm_ready_worker import install','from scripts.colab_hfh.nnunet_seed0_balance_worker import install')
-    exec(compile(source,__file__,'exec'),{'__name__':'__main__','__file__':__file__})

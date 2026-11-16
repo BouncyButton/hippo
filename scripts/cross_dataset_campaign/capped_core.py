@@ -354,7 +354,7 @@ def main():
     parser.add_argument("--model", choices=("unet", "swinunetr", "nnunet"), required=True)
     parser.add_argument("--objective", choices=ARMS, required=True)
     parser.add_argument("--fold", type=int, choices=(0, 1, 2), required=True)
-    parser.add_argument("--seed", type=int, choices=(0, 1, 2), required=True)
+    parser.add_argument("--seed", type=int, required=True)
     parser.add_argument("--pkl", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--protocol-dir", type=Path, default=DEFAULT_PROTOCOL)

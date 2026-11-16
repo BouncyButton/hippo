@@ -10,7 +10,7 @@ from scripts.cross_dataset_campaign import adni_mixed_losses as scientific
 
 
 def main():
-    install_initialization(Path(__file__).parent, scientific.experiment)
+    install_initialization(Path(os.environ['HIPPO_COLAB_BUNDLE']), scientific.experiment)
     parser = argparse.ArgumentParser(add_help=False)
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--protocol-dir', type=Path, required=True)

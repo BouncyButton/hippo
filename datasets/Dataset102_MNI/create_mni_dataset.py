@@ -1,64 +1,13 @@
-import numpy as np
-import wget
-import tarfile
+"""Prepare aligned MNI hippocampus crops from local study files."""
+import argparse
+import glob
 import os
+from pathlib import Path
+
 import nibabel as nib
-import wandb
+import numpy as np
 import pandas as pd
 
-import sys
-import argparse
-
-# 1. Parse Arguments
-parser = argparse.ArgumentParser()
-parser.add_argument('--target', type=str, default='Dataset102_MNI', help='Target folder name')
-parser.add_argument('--rebuild', action='store_true', help='Force download from MNI and rebuild pkl', default=False)
-parser.add_argument('--no-upload', action='store_true', help='Skip W&B upload after rebuilding locally')
-args = parser.parse_args()
-
-TARGET_FOLDER = args.target
-WANDB_PROJECT = "hippopotamus-project"
-WANDB_ENTITY = "hippopotamus"
-ARTIFACT_NAME = f"{WANDB_ENTITY}/{WANDB_PROJECT}/Dataset102_MNI:latest"
-
-
-def download_from_wandb():
-    print(f"Checking for artifact {ARTIFACT_NAME}...")
-    try:
-        run = wandb.init(project=WANDB_PROJECT, entity=WANDB_ENTITY, job_type="dataset-download")
-        artifact = run.use_artifact(ARTIFACT_NAME, type='dataset')
-        artifact_dir = artifact.download(root=TARGET_FOLDER)
-        print(f"Successfully downloaded to {TARGET_FOLDER}")
-        run.finish()
-        return True
-    except Exception as e:
-        print(f"W&B download failed: {e}")
-        if 'run' in locals():
-            run.finish()
-        return False
-
-
-# 2. Orchestration Logic
-# We run the rebuild if --rebuild is passed
-should_rebuild = args.rebuild
-
-if not should_rebuild:
-    # If folder exists but we aren't rebuilding, try to sync from W&B if data is missing
-    # (e.g., folder exists but is empty)
-    print("Attempting to use existing data or download from W&B...")
-    if not download_from_wandb():
-        print("Falling back to full rebuild...")
-        should_rebuild = True
-
-if not should_rebuild:
-    print("Data downloaded from wandb successfully.")
-    sys.exit(0)
-
-# makedir
-if not os.path.exists(TARGET_FOLDER):
-    os.makedirs(TARGET_FOLDER)
-    os.makedirs(os.path.join(TARGET_FOLDER, 'imagesTr'))
-    os.makedirs(os.path.join(TARGET_FOLDER, 'labelsTr'))
 
 def get_data(dir, filename_structure='s*/',
              name='s*_hippolabels_hres_R_MNI.nii.gz',
@@ -183,58 +132,43 @@ def merge_image_data_to_label_data(df, dir, name='s*_t1w_standard_defaced_MNI.ni
     return df
 
 
-def simple_progress(current, total, width=80):
-    print(f"\rDownloaded {current}/{total} bytes ({current / total:.2%})", end="")
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--target', type=Path, required=True)
+    parser.add_argument('--source', type=Path, required=True, help='Extracted mri_dataset directory')
+    args = parser.parse_args()
+    for folder in ('imagesTr', 'labelsTr'):
+        (args.target / folder).mkdir(parents=True, exist_ok=True)
+    df_L = get_data(str(args.source), filename_structure='s*/', name='s*_hippolabels_t1w_standard_L_MNI.nii.gz',
+                    half=None)
+    df_R = get_data(str(args.source), filename_structure='s*/', name='s*_hippolabels_t1w_standard_R_MNI.nii.gz',
+                    half=None)
+
+    df = pd.concat([df_L, df_R], ignore_index=True)
+
+    merge_image_data_to_label_data(df, dir=str(args.source / 's*'))
+    df.to_pickle(os.path.join(args.target, 'mni_hippocampus_full.pkl'), compression="gzip")
+
+    identity_affine = np.eye(4)
+
+    for index, row in df.iterrows():
+        image_id = row['subject_id']
+        direction = row['direction']  # Get the direction (L or R)
+        image_data = row['image_data']
+        label_data = row['data']
+
+        # Create NIfTI image for image_data with direction in filename
+        image_nifti = nib.Nifti1Image(image_data, identity_affine)
+        image_filename_dataset = os.path.join(args.target, 'imagesTr', f'hippocampus_mni_{image_id}_{direction}_0000.nii.gz')
+        nib.save(image_nifti, image_filename_dataset)
+
+        # Create NIfTI image for label_data with direction in filename
+        label_nifti = nib.Nifti1Image(label_data, identity_affine)
+        label_filename_dataset = os.path.join(args.target, 'labelsTr', f'hippocampus_mni_{image_id}_{direction}.nii.gz')
+        nib.save(label_nifti, label_filename_dataset)
+
+    print(f"Successfully saved {len(df)} image and label files.")
 
 
-if not os.path.exists('mni-hisub25/'):
-    wget.download('https://mni-hisub25.projects.nitrc.org/downloads/mni-hisub25.tar', bar=simple_progress)
-
-    with tarfile.open('mni-hisub25.tar', 'r') as tar_ref:
-        tar_ref.extractall('./')
-
-    with tarfile.open('mni-hisub25/mri_dataset.tar.gz', 'r:gz') as tar_ref:
-        tar_ref.extractall('./')
-
-df_L = get_data('mri_dataset', filename_structure='s*/', name='s*_hippolabels_t1w_standard_L_MNI.nii.gz',
-                half=None)
-df_R = get_data('mri_dataset', filename_structure='s*/', name='s*_hippolabels_t1w_standard_R_MNI.nii.gz',
-                half=None)
-
-df = pd.concat([df_L, df_R], ignore_index=True)
-
-merge_image_data_to_label_data(df, dir='mri_dataset/s*/')
-df.to_pickle(os.path.join(TARGET_FOLDER, 'mni_hippocampus_full.pkl'), compression="gzip")
-
-identity_affine = np.eye(4)
-
-for index, row in df.iterrows():
-    image_id = row['subject_id']
-    direction = row['direction']  # Get the direction (L or R)
-    image_data = row['image_data']
-    label_data = row['data']
-
-    # Create NIfTI image for image_data with direction in filename
-    image_nifti = nib.Nifti1Image(image_data, identity_affine)
-    image_filename_dataset = os.path.join(TARGET_FOLDER, 'imagesTr', f'hippocampus_mni_{image_id}_{direction}_0000.nii.gz')
-    nib.save(image_nifti, image_filename_dataset)
-
-    # Create NIfTI image for label_data with direction in filename
-    label_nifti = nib.Nifti1Image(label_data, identity_affine)
-    label_filename_dataset = os.path.join(TARGET_FOLDER, 'labelsTr', f'hippocampus_mni_{image_id}_{direction}.nii.gz')
-    nib.save(label_nifti, label_filename_dataset)
-
-print(f"Successfully saved {len(df)} image and label files.")
-
-# A local rebuild does not require W&B staging or an account.
-if args.no_upload:
-    sys.exit(0)
-
-# save all into a private wandb to avoid re-downloading
-wandb.init(project="hippopotamus-project", entity='hippopotamus')
-
-artifact = wandb.Artifact("Dataset102_MNI", type="dataset")
-artifact.add_dir(TARGET_FOLDER)
-
-wandb.log_artifact(artifact)
-wandb.finish()
+if __name__ == "__main__":
+    main()

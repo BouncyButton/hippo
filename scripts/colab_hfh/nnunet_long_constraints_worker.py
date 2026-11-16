@@ -46,7 +46,3 @@ def source():
     if value.count(old) != 1:
         raise ValueError('Worker integration changed')
     return value.replace(old, 'from scripts.colab_hfh.nnunet_long_constraints_worker import install')
-
-
-if __name__ == '__main__':
-    exec(compile(source(), __file__, 'exec'), {'__name__': '__main__', '__file__': __file__})

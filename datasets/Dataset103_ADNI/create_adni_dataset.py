@@ -1,70 +1,13 @@
-# let's gather everything i did for Dataset003_ADNI
+"""Prepare aligned ADNI hippocampus crops from local study files."""
+import argparse
+import glob
+import os
+from pathlib import Path
+
 import nibabel as nib
 import numpy as np
-import glob
-
 import pandas as pd
-import wget
-import zipfile
-import os
 from tqdm import tqdm
-import sys
-import wandb
-import argparse
-
-# 1. Parse Arguments
-parser = argparse.ArgumentParser()
-parser.add_argument('--target', type=str, default='Dataset103_ADNI', help='Target folder name')
-parser.add_argument('--rebuild', action='store_true', help='Force download from ADNI and rebuild pkl', default=False)
-parser.add_argument(
-    '--skip-wandb-upload',
-    action='store_true',
-    help='Build the dataset locally without uploading it to W&B',
-)
-args = parser.parse_args()
-
-TARGET_FOLDER = args.target
-WANDB_PROJECT = "hippopotamus-project"
-WANDB_ENTITY = "hippopotamus"
-ARTIFACT_NAME = f"{WANDB_ENTITY}/{WANDB_PROJECT}/Dataset103_ADNI:latest"
-
-
-def download_from_wandb():
-    print(f"Checking for artifact {ARTIFACT_NAME}...")
-    try:
-        run = wandb.init(project=WANDB_PROJECT, entity=WANDB_ENTITY, job_type="dataset-download")
-        artifact = run.use_artifact(ARTIFACT_NAME, type='dataset')
-        artifact_dir = artifact.download(root=TARGET_FOLDER)
-        print(f"Successfully downloaded to {TARGET_FOLDER}")
-        run.finish()
-        return True
-    except Exception as e:
-        print(f"W&B download failed: {e}")
-        if 'run' in locals():
-            run.finish()
-        return False
-
-
-# 2. Orchestration Logic
-# We run the rebuild if --rebuild is passed
-should_rebuild = args.rebuild
-
-if not should_rebuild:
-    # If folder exists but we aren't rebuilding, try to sync from W&B if data is missing
-    # (e.g., folder exists but is empty)
-    print("Attempting to use existing data or download from W&B...")
-    if not download_from_wandb():
-        print("Falling back to full rebuild...")
-        should_rebuild = True
-
-if not should_rebuild:
-    print("Data downloaded from wandb successfully.")
-    sys.exit(0)
-
-# makedir
-os.makedirs(TARGET_FOLDER, exist_ok=True)
-os.makedirs(os.path.join(TARGET_FOLDER, 'imagesTr'), exist_ok=True)
-os.makedirs(os.path.join(TARGET_FOLDER, 'labelsTr'), exist_ok=True)
 
 
 def get_all_labels(dir, name=''):
@@ -220,43 +163,19 @@ def merge_image_data_to_label_data(df, dir):
     return df
 
 
-if __name__ == '__main__':
-    # check if file exists
-    if not os.path.exists('adni_hippocampus_labels.pkl'):
-        if not os.path.exists('Released_data_MNC_v1.3.zip'):
-            wget.download('http://hippocampal-protocol.net/SOPs/LINK_PAGE/FINAL_RELEASE/Released_data_MNC_v1.3.zip')
-            with zipfile.ZipFile('Released_data_MNC_v1.3.zip', 'r') as zip_ref:
-                zip_ref.extractall('./adni_data/')
-
-        df_L = get_all_labels(dir='adni_data/Labels*/', name='*_L.mnc')
-        df_R = get_all_labels(dir='adni_data/Labels*/', name='*_R.mnc')
-
-        # join
-        df = pd.concat([df_L, df_R], ignore_index=True)
-
-        # save to disk
-        df.to_pickle('adni_hippocampus_labels.pkl', compression="gzip")
-
-        del df_L
-        del df_R
-
-    else:
-        df = pd.read_pickle('adni_hippocampus_labels.pkl', compression="gzip")
-
-    print(len(df))
-
-    # print image ids to download the original MRI images
-    print(",".join(df['image_id'].unique()))
-
-    # http://hippocampal-protocol.net/SOPs/LINK_PAGE/FINAL_RELEASE/Released_ACPC_brainScans_MNC.zip
-    if not os.path.exists('Released_ACPC_brainScans_MNC.zip'):
-        wget.download(
-            'http://hippocampal-protocol.net/SOPs/LINK_PAGE/FINAL_RELEASE/Released_ACPC_brainScans_MNC.zip')
-        with zipfile.ZipFile('Released_ACPC_brainScans_MNC.zip', 'r') as zip_ref:
-            zip_ref.extractall('./Released_ACPC_brainScans_MNC/')
-
-    merge_image_data_to_label_data(df, dir='Released_ACPC_brainScans_MNC/')
-    df.to_pickle(os.path.join(TARGET_FOLDER, 'adni_hippocampus_full.pkl'), compression="gzip")
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--target', type=Path, required=True)
+    parser.add_argument('--labels', type=Path, required=True, help='Extracted directory containing Labels* folders')
+    parser.add_argument('--images', type=Path, required=True, help='Extracted ACPC MINC scan directory')
+    args = parser.parse_args()
+    for folder in ('imagesTr', 'labelsTr'):
+        (args.target / folder).mkdir(parents=True, exist_ok=True)
+    df_L = get_all_labels(str(args.labels / 'Labels*'), '*_L.mnc')
+    df_R = get_all_labels(str(args.labels / 'Labels*'), '*_R.mnc')
+    df = pd.concat([df_L, df_R], ignore_index=True)
+    merge_image_data_to_label_data(df, dir=str(args.images))
+    df.to_pickle(os.path.join(args.target, 'adni_hippocampus_full.pkl'), compression="gzip")
 
     identity_affine = np.eye(4)
 
@@ -268,67 +187,18 @@ if __name__ == '__main__':
 
         # Create NIfTI image for image_data with direction in filename
         image_nifti = nib.Nifti1Image(image_data, identity_affine)
-        image_filename_dataset = os.path.join(TARGET_FOLDER, 'imagesTr',
+        image_filename_dataset = os.path.join(args.target, 'imagesTr',
                                               f'hippocampus_adni_{image_id}_{direction}_0000.nii.gz')
         nib.save(image_nifti, image_filename_dataset)
 
         # Create NIfTI image for label_data with direction in filename
         label_nifti = nib.Nifti1Image(label_data, identity_affine)
-        label_filename_dataset = os.path.join(TARGET_FOLDER, 'labelsTr',
+        label_filename_dataset = os.path.join(args.target, 'labelsTr',
                                               f'hippocampus_adni_{image_id}_{direction}.nii.gz')
         nib.save(label_nifti, label_filename_dataset)
 
     print(f"Successfully saved {len(df)} image and label files.")
 
-    # Optionally save into a private W&B project to avoid re-downloading.
-    if not args.skip_wandb_upload:
-        wandb.init(project="hippopotamus-project", entity='hippopotamus')
 
-        artifact = wandb.Artifact("Dataset103_ADNI", type="dataset")
-        artifact.add_dir(TARGET_FOLDER)
-
-        wandb.log_artifact(artifact)
-        wandb.finish()
-
-    # ok ignore this
-
-    # refer to https://www.hippocampal-protocol.net/SOPs/screenshots/harp_final_release/search.png to find image data
-    # from http://www.hippocampal-protocol.net/SOPs/labels.php#final
-    # if not os.path.exists('HarP.zip'):
-    #     wget.download(
-    #         'https://ida.loni.usc.edu/download/files/ida1/cb159b77-4d79-4e9e-b543-b49574b63417/HarP.zip')
-    #     with zipfile.ZipFile('HarP.zip', 'r') as zip_ref:
-    #         zip_ref.extractall('./')
-
-    # download from Analysis Ready Cohort (ARC) Builder.
-    # https://ida.loni.usc.edu/explore/jsp/search_v2/search.jsp?project=ADNI
-    # after getting official access to the data, below there's "Create New Filter".
-    # add the image ids printed above
-    # (Image Filters > Choose images from a list of image IDs that you provide > Create new filter > Enter image IDs)
-
-    # # my generated link was this, but it will probably expire in the future
-    # if not os.path.exists('Data_for_Hippocampal-protocol.net_labels_MRI.zip'):
-    #     wget.download(
-    #         'https://ida.loni.usc.edu/download/files/ida1/'
-    #         '64a3f247-4d06-4212-a2dd-e898d94441e9/Data_for_Hippocampal-protocol.net_labels_MRI.zip')
-    #     with zipfile.ZipFile('Data_for_Hippocampal-protocol.net_labels_MRI.zip', 'r') as zip_ref:
-    #         zip_ref.extractall('./')
-    #
-    # # make output dir
-    # output_dir = 'ADNI_nii_image_data/'
-    # if not os.path.exists(output_dir):
-    #     os.makedirs(output_dir)
-    #
-    # # convert DCM to NII
-    # from nipype.interfaces.dcm2nii import Dcm2niix
-    #
-    # converter = Dcm2niix()
-    # converter.inputs.source_dir = 'Dataset003_ADNI/'
-    # converter.inputs.output_dir = output_dir
-    # converter.inputs.compress = 'y'
-    # converter.run()
-    #
-    # df = merge_image_data_to_label_data(df, dir='Dataset003_ADNI/')
-    #
-    # # save to disk
-    # df.to_pickle('adni_hippocampus_labels_with_images.pkl', compression="gzip")
+if __name__ == "__main__":
+    main()

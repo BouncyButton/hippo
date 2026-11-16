@@ -7,14 +7,11 @@ import signal
 import time
 
 CAP = 31976450667090
-SEISMIC_CAP = 182178126543160  # 152 Dice-only nnUNet updates; 19 volumes × 8 passes.
 ARMS = ('dice', 'dice_bands', 'dice_sdf', 'dice_bands_sdf', 'dice_bands_edge',
         'dice_bands_edge_sdf', 'dice_depth', 'dice_bands_depth', 'dice_edge_depth',
         'dice_sdf_depth', 'dice_bands_edge_depth', 'dice_bands_sdf_depth',
         'dice_edge_sdf_depth', 'dice_bands_edge_sdf_depth')
 MODELS = ('nnunet', 'swinunetr', 'unetr_vit_b16', 'basic_unet16')
-REMOTE = Path('/mnt/beegfsstudents/home/3160552')
-NAME = 'cross_dataset_exploration_20261014'
 STOP = False
 
 

@@ -115,11 +115,11 @@ def check_protocol(protocol):
 def install_calibration(original, protocol, output):
     """Reuse audited per-arm weights; do not mix an augmentation and weight ablation."""
     from pathlib import Path
-    from scripts.colab_hfh.medsam_constraints_campaign import zip_read
-    archive = Path(protocol['augmentation_control_archive'])
-    if original.digest(archive) != protocol['augmentation_control_sha256']:
-        raise ValueError('Unaugmented control archive differs')
-    calibration = zip_read(archive, 'calibration.json')
+    import json
+    saved = Path(protocol['paired_calibration'])
+    if original.digest(saved) != protocol['paired_calibration_sha256']:
+        raise ValueError('Paired training calibration changed')
+    calibration = json.loads(saved.read_bytes())
     def calibrate(model, criterion, parameters, slabs, current, arm, destination):
         from scripts.cross_dataset_campaign.adni_foundation_full_runtime import native_training_check
         native_training_check(model, criterion, parameters, slabs, current, destination)
